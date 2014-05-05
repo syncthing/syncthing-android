@@ -11,3 +11,7 @@ Then, apply `go_src_pkg_flag.diff` to `src/pkg/flag/flag.go`in your local golang
 For syncthing, use [my fork](https://github.com/Nutomic/syncthing/tree/android).
 
 To compile, run `./build.sh` (go cross compile) and `ant -f build.xml clean debug install run` (Android package).
+
+## License
+
+All code is licensed under the [MIT License](https://github.com/Nutomic/syncthing-android/blob/master/LICENSE).
