@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +15,13 @@ public class SyncthingService extends Service {
 
 	@Override
 	public void onCreate() {
+		PendingIntent pi = PendingIntent.getActivity(
+				this, 0, new Intent(this, WebGuiActivity.class),
+				PendingIntent.FLAG_UPDATE_CURRENT);
 		Notification n = new Notification.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentIntent(pi)
 				.build();
 		startForeground(NOTIFICATION_ID, n);
 
