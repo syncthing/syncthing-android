@@ -74,7 +74,6 @@ public class WebGuiActivity extends Activity {
 
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.setWebViewClient(new WebViewClient());
 		mWebView.setWebViewClient(mWebViewClient);
 		mWebView.loadUrl(SYNCTHING_URL);
 
