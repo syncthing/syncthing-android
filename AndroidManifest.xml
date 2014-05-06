@@ -17,7 +17,8 @@
 		<activity
 				android:name=".WebGuiActivity"
 				android:theme="@android:style/Theme.Holo.Light"
-				android:label="@string/app_name" >
+				android:label="@string/app_name"
+				android:launchMode="singleTop" >
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
