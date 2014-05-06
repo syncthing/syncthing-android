@@ -2,8 +2,11 @@ package com.nutomic.syncthingandroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -63,12 +66,29 @@ public class WebGuiActivity extends Activity {
 		mLoadingView = findViewById(R.id.loading);
 		ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
 		pb.setIndeterminate(true);
-		
+
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(new WebViewClient());
 		mWebView.setWebViewClient(mWebViewClient);
 		mWebView.loadUrl(SYNCTHING_URL);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.report_issue:
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.issue_tracker_url))));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 	
 }
