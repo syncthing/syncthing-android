@@ -3,6 +3,18 @@
 
 	<string name="app_name">Syncthing</string>
 
+	<!-- Title for dialog displayed on first start -->
+	<string name="welcome_title">First Start</string>
+
+	<!-- Text for dialog displayed on first start -->
+	<string name="welcome_text">Welcome to Syncthing for Android!\n\n\
+This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
+The Syncthing background service runs as long as the notification is shown, use the exit button in the app to stop it.\n\n\
+There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
+Please report any problems you encounter.
+	</string>
+
+
 	<!-- Text for WebGuiActivity loading view -->
 	<string name="web_gui_loading">Waiting for GUI</string>
 

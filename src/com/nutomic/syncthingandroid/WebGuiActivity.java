@@ -1,10 +1,13 @@
 package com.nutomic.syncthingandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,8 @@ import android.widget.ProgressBar;
 public class WebGuiActivity extends Activity {
 
 	private static final String TAG = "WebGuiActivity";
+
+	private static final String PREF_FIRST_START = "first_start";
 
 	/**
 	 * URL of the local syncthing web UI.
@@ -72,6 +77,18 @@ public class WebGuiActivity extends Activity {
 		mWebView.setWebViewClient(new WebViewClient());
 		mWebView.setWebViewClient(mWebViewClient);
 		mWebView.loadUrl(SYNCTHING_URL);
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		if (prefs.getBoolean(PREF_FIRST_START, true)) {
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.welcome_title)
+					.setMessage(R.string.welcome_text)
+					.setNeutralButton(android.R.string.ok, null)
+					.show();
+			prefs.edit()
+					.putBoolean(PREF_FIRST_START, false)
+					.commit();
+		}
 	}
 
 	@Override
