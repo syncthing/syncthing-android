@@ -6,7 +6,7 @@ A port of [syncthing](https://github.com/calmh/syncthing) to Android.
 
 Setup [goandroid](https://github.com/eliasnaur/goandroid).
 
-Then, apply `go_src_pkg_flag.diff` to `src/pkg/flag/flag.go`in your local golang source, and compile and install it.
+Then, apply `go.diff` to your local golang source, and compile it.
 
 For syncthing, use [my fork](https://github.com/Nutomic/syncthing/tree/android).
 
