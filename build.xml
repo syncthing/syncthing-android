@@ -97,7 +97,7 @@
             <arg value="-a"/>
             <arg value="android.intent.action.MAIN"/>
             <arg value="-n"/>
-            <arg value="com.nutomic.syncthingandroid/.MainActivity"/>
+            <arg value="com.nutomic.syncthingandroid/.WebGuiActivity"/>
         </exec>
     </target>
 </project>
