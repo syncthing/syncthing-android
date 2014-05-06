@@ -5,4 +5,8 @@
 			android:id="@+id/report_issue"
 			android:title="@string/report_issue" />
 
+	<item
+			android:id="@+id/exit"
+			android:title="@string/exit" />
+
 </menu>

@@ -6,8 +6,11 @@
 	<!-- Text for WebGuiActivity loading view -->
 	<string name="web_gui_loading">Waiting for GUI</string>
 
-	<!-- Menu item "report issue" that opens issue tracker -->
+	<!-- Menu item that opens issue tracker -->
 	<string name="report_issue">Report Issue</string>
+
+	<!-- Menu item that stops Activity and Service -->
+	<string name="exit">Exit</string>
 
 	<!-- URL of the issue tracker -->
 	<string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>

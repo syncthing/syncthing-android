@@ -86,6 +86,10 @@ public class WebGuiActivity extends Activity {
 			case R.id.report_issue:
 				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.issue_tracker_url))));
 				return true;
+			case R.id.exit:
+				stopService(new Intent(this, SyncthingService.class));
+				finish();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
