@@ -21,7 +21,7 @@ public class WebGuiActivity extends Activity {
 	private static final String SYNCTHING_URL = "http://127.0.0.1:8080";
 
 	private WebView mWebView;
-	private ProgressBar mLoadingView;
+	private View mLoadingView;
 
 	/**
 	 * Retries loading every second until the web UI becomes available.
@@ -60,8 +60,10 @@ public class WebGuiActivity extends Activity {
 
 		setContentView(R.layout.main);
 
-		mLoadingView = (ProgressBar) findViewById(R.id.loading);
-		mLoadingView.setIndeterminate(true);
+		mLoadingView = findViewById(R.id.loading);
+		ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
+		pb.setIndeterminate(true);
+		
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(new WebViewClient());
