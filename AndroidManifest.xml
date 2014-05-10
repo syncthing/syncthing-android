@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.nutomic.syncthingandroid"
 	android:versionCode="1"
-	android:versionName="0.1"
-    android:debuggable="true" >
+	android:versionName="0.1.0" >
 
 	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19" />
 
