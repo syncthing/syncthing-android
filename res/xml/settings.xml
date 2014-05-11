@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<Preference
+		android:key="report_issue"
+		android:title="@string/report_issue_title" />
+
+	<Preference
+		android:title="@string/syncthing_version_title"
+		android:enabled="false" />
+
+</PreferenceScreen>

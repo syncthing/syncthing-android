@@ -3,6 +3,9 @@
 
 	<string name="app_name">Syncthing</string>
 
+	<!-- Upstream version name of the included syncthing binary -->
+	<string name="syncthing_version_title">Syncthing Version: HEAD</string>
+
 	<!-- Title for dialog displayed on first start -->
 	<string name="welcome_title">First Start</string>
 
@@ -18,11 +21,14 @@ Please report any problems you encounter.
 	<!-- Text for WebGuiActivity loading view -->
 	<string name="web_gui_loading">Waiting for GUI</string>
 
-	<!-- Menu item that opens issue tracker -->
-	<string name="report_issue">Report Issue</string>
+	<!-- Menu item that opens app settings -->
+	<string name="settings_title">Settings</string>
 
 	<!-- Menu item that stops Activity and Service -->
 	<string name="exit">Exit</string>
+
+	<!-- Settings item that opens issue tracker -->
+	<string name="report_issue_title">Report Issue</string>
 
 	<!-- URL of the issue tracker -->
 	<string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>

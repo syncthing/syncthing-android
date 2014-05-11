@@ -24,6 +24,10 @@
 			</intent-filter>
 		</activity>
 
+		<activity
+			android:name=".SettingsActivity"
+			android:label="@string/settings_title" />
+
 		<service android:name=".SyncthingService" />
 
  	</application>
