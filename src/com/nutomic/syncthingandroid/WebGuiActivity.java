@@ -3,22 +3,21 @@ package com.nutomic.syncthingandroid;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.io.File;
 
 public class WebGuiActivity extends Activity {
 
 	private static final String TAG = "WebGuiActivity";
-
-	private static final String PREF_FIRST_START = "first_start";
 
 	/**
 	 * URL of the local syncthing web UI.
@@ -26,6 +25,18 @@ public class WebGuiActivity extends Activity {
 	 * TODO: read this out from native code.
 	 */
 	private static final String SYNCTHING_URL = "http://127.0.0.1:8080";
+
+	/**
+	 * Folder where syncthing config is stored.
+	 *
+	 * TODO: do this dynamically
+	 */
+	private static final String CONFIG_FOLDER = "/data/data/com.nutomic.syncthingandroid/";
+
+	/**
+	 * File in the config folder that contains the public key.
+	 */
+	private static final String CERT_FILE = "cert.pem";
 
 	private WebView mWebView;
 	private View mLoadingView;
@@ -76,16 +87,15 @@ public class WebGuiActivity extends Activity {
 		mWebView.setWebViewClient(mWebViewClient);
 		mWebView.loadUrl(SYNCTHING_URL);
 
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		if (prefs.getBoolean(PREF_FIRST_START, true)) {
+		if (!new File(CONFIG_FOLDER, CERT_FILE).exists()) {
+			// First start.
+			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
+			loadingText.setText(R.string.web_gui_creating_key);
 			new AlertDialog.Builder(this)
 					.setTitle(R.string.welcome_title)
 					.setMessage(R.string.welcome_text)
 					.setNeutralButton(android.R.string.ok, null)
 					.show();
-			prefs.edit()
-					.putBoolean(PREF_FIRST_START, false)
-					.commit();
 		}
 	}
 

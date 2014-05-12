@@ -12,22 +12,25 @@
 			android:visibility="gone" />
 
 	<RelativeLayout
-			android:layout_centerInParent="true"
 			android:id="@+id/loading"
+			android:layout_centerInParent="true"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" >
 
 		<ProgressBar
 				android:id="@+id/progress"
+				android:layout_centerInParent="true"
 				style="?android:attr/progressBarStyleLarge"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dip" />
 
 		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/progress"
-			android:text="@string/web_gui_loading" />
+				android:id="@+id/loading_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/progress"
+				android:text="@string/web_gui_loading" />
 
 	</RelativeLayout>
 
