@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.0+'
+        classpath 'com.alexvasilkov:android_sign:0.2'
+    }
+}
+
+apply plugin: 'android'
+apply plugin: 'android_sign'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+    sourceSets {
+		main {
+			jniLibs.srcDir file("libs/")
+			jniLibs.srcDir file("obj/")
+		}
+	}
+    signingConfigs {
+        release {
+            // Android Studio does not pass environment variables.
+            // This means you have to use the command line for release builds.
+            def ks = System.getenv("KEYSTORE")
+            def ka = System.getenv("KEY_ALIAS")
+            if (ks != null && ka != null) {
+                storeFile file(ks)
+                keyAlias ka
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+			// FIXME: We can't use this as long as the data folder is hardcoded.
+            // packageNameSuffix ".debug"
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+task buildNative(type: Exec) {
+    exec {
+		executable = './build.sh'
+    }
+}
+// FIXME: buildNative is also executed on clean
+assemble.dependsOn buildNative
+
+task cleanNative(type: Delete) {
+    delete "libs"
+    delete "obj"
+}
+clean.dependsOn cleanNative
+

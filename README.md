@@ -12,7 +12,7 @@ Then, apply `go.diff` to your local golang source, and compile it.
 
 For syncthing, use [my fork](https://github.com/Nutomic/syncthing/tree/android).
 
-To compile, run `./build.sh` (go cross compile) and `ant -f build.xml clean debug install run` (Android package).
+To compile, run `gradle assembleDebug`.
 
 ## License
 

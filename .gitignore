@@ -10,9 +10,11 @@
 
 # generated files
 bin/
+build/
 gen/
 libs/
 obj/
+.gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties

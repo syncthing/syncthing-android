@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Building native syncthing"
+
 set -e
 
 mkdir -p libs/armeabi-v7a
