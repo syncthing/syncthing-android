@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.IOException;
 
 public class WebGuiActivity extends Activity {
 
@@ -21,8 +25,6 @@ public class WebGuiActivity extends Activity {
 
 	/**
 	 * URL of the local syncthing web UI.
-	 *
-	 * TODO: read this out from native code.
 	 */
 	private static final String SYNCTHING_URL = "http://127.0.0.1:8080";
 
@@ -37,6 +39,11 @@ public class WebGuiActivity extends Activity {
 	 * File in the config folder that contains the public key.
 	 */
 	private static final String CERT_FILE = "cert.pem";
+
+	/**
+	 * File in the config folder that contains configuration.
+	 */
+	private static final String CONFIG_FILE = "config.xml";
 
 	private WebView mWebView;
 	private View mLoadingView;
@@ -87,8 +94,10 @@ public class WebGuiActivity extends Activity {
 		mWebView.setWebViewClient(mWebViewClient);
 		mWebView.loadUrl(SYNCTHING_URL);
 
+		// Handle first start.
 		if (!new File(CONFIG_FOLDER, CERT_FILE).exists()) {
-			// First start.
+			copyDefaultConfig();
+
 			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
 			loadingText.setText(R.string.web_gui_creating_key);
 			new AlertDialog.Builder(this)
@@ -117,6 +126,38 @@ public class WebGuiActivity extends Activity {
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * Copies the default config file from res/raw/config_default.xml to CONFIG_FOLDER/CONFIG_FILE.
+	 */
+	private void copyDefaultConfig() {
+		File config = new File(CONFIG_FOLDER, CONFIG_FILE);
+		InputStream in = null;
+		FileOutputStream out = null;
+		try {
+			in = getResources().openRawResource(R.raw.config_default);
+			out = new FileOutputStream(config);
+			byte[] buff = new byte[1024];
+			int read = 0;
+
+			while ((read = in.read(buff)) > 0) {
+				out.write(buff, 0, read);
+			}
+		}
+		catch (IOException e) {
+			Log.w(TAG, "Failed to write config file", e);
+			config.delete();
+		}
+		finally {
+			try {
+				in.close();
+				out.close();
+			}
+			catch (IOException e) {
+				Log.w(TAG, "Failed to close stream while copying config", e);
+			}
 		}
 	}
 	
