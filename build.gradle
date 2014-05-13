@@ -12,6 +12,18 @@ buildscript {
 apply plugin: 'android'
 apply plugin: 'android_sign'
 
+repositories {
+    mavenCentral()
+    maven {
+        url "http://4thline.org/m2"
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:13.0.+'
+}
+
+
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.3"

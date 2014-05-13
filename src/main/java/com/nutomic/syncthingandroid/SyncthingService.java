@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 
 public class SyncthingService extends Service {
 
@@ -18,7 +19,7 @@ public class SyncthingService extends Service {
 		PendingIntent pi = PendingIntent.getActivity(
 				this, 0, new Intent(this, WebGuiActivity.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
-		Notification n = new Notification.Builder(this)
+		Notification n = new NotificationCompat.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
