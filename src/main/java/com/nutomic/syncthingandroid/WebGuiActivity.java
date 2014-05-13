@@ -94,6 +94,8 @@ public class WebGuiActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getApplicationContext().startService(
+				new Intent(this, SyncthingService.class));
 		getApplicationContext().bindService(
 				new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);

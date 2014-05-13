@@ -28,6 +28,11 @@ public class SyncthingService extends Service {
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		return START_STICKY;
+	}
+
 	/**
 	 * Creates notification, starts native binary.
 	 */
@@ -41,6 +46,7 @@ public class SyncthingService extends Service {
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
 				.build();
+		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
 		new Thread(new Runnable() {
