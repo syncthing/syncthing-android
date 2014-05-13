@@ -2,9 +2,13 @@ package com.nutomic.syncthingandroid;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,11 +26,6 @@ import java.io.IOException;
 public class WebGuiActivity extends Activity {
 
 	private static final String TAG = "WebGuiActivity";
-
-	/**
-	 * URL of the local syncthing web UI.
-	 */
-	private static final String SYNCTHING_URL = "http://127.0.0.1:8080";
 
 	/**
 	 * Folder where syncthing config is stored.
@@ -48,6 +47,20 @@ public class WebGuiActivity extends Activity {
 	private WebView mWebView;
 	private View mLoadingView;
 
+	private SyncthingService mSyncthingService;
+
+	private ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
+
+		public void onServiceConnected(ComponentName className, IBinder service) {
+			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
+			mSyncthingService = binder.getService();
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			mSyncthingService = null;
+		}
+	};
+
 	/**
 	 * Retries loading every second until the web UI becomes available.
 	 */
@@ -63,7 +76,7 @@ public class WebGuiActivity extends Activity {
 				@Override
 				public void run() {
 					mError = 0;
-					mWebView.loadUrl(SYNCTHING_URL);
+					mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
 				}
 			}, 1000);
 
@@ -81,7 +94,9 @@ public class WebGuiActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		startService(new Intent(this, SyncthingService.class));
+		getApplicationContext().bindService(
+				new Intent(this, SyncthingService.class),
+				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 
 		setContentView(R.layout.main);
 
@@ -92,7 +107,7 @@ public class WebGuiActivity extends Activity {
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(mWebViewClient);
-		mWebView.loadUrl(SYNCTHING_URL);
+		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
 
 		// Handle first start.
 		if (!new File(CONFIG_FOLDER, CERT_FILE).exists()) {
@@ -109,6 +124,12 @@ public class WebGuiActivity extends Activity {
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getApplicationContext().unbindService(mSyncthingServiceConnection);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu, menu);
 		return true;
@@ -121,8 +142,9 @@ public class WebGuiActivity extends Activity {
 				startActivity(new Intent(this, SettingsActivity.class));
 				return true;
 			case R.id.exit:
-				stopService(new Intent(this, SyncthingService.class));
+				// Make sure we unbind first.
 				finish();
+				getApplicationContext().stopService(new Intent(this, SyncthingService.class));
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
