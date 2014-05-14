@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -90,7 +91,13 @@ public class WebGuiActivity extends Activity {
 		}
 	};
 
+	/**
+	 * Initialize WebView.
+	 *
+	 * Ignore lint javascript warning as js is loaded only from our known, local service.
+	 */
 	@Override
+	@SuppressLint("SetJavaScriptEnabled")
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getApplicationContext().startService(

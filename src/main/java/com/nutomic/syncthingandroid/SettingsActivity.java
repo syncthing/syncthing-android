@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -18,7 +20,13 @@ public class SettingsActivity extends PreferenceActivity {
 
 	private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
+	/**
+	 * Loads layout, sets version from Rest API.
+	 *
+	 * Manual target API as we manually check if ActionBar is available (for ActionBar back button).
+	 */
 	@Override
+	@TargetApi(11)
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
