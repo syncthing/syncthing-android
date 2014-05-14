@@ -20,19 +20,15 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
+/**
+ * Holds a WebView that shows the web ui of the local syncthing instance.
+ */
 public class WebGuiActivity extends Activity {
 
 	private static final String TAG = "WebGuiActivity";
-
-	/**
-	 * Folder where syncthing config is stored.
-	 *
-	 * TODO: do this dynamically
-	 */
-	private static final String CONFIG_FOLDER = "/data/data/com.nutomic.syncthingandroid/";
 
 	/**
 	 * File in the config folder that contains the public key.
@@ -112,8 +108,9 @@ public class WebGuiActivity extends Activity {
 		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
 
 		// Handle first start.
-		if (!new File(CONFIG_FOLDER, CERT_FILE).exists()) {
-			copyDefaultConfig();
+		File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
+		if (!config.exists()) {
+			copyDefaultConfig(config);
 
 			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
 			loadingText.setText(R.string.web_gui_creating_key);
@@ -154,10 +151,11 @@ public class WebGuiActivity extends Activity {
 	}
 
 	/**
-	 * Copies the default config file from res/raw/config_default.xml to CONFIG_FOLDER/CONFIG_FILE.
+	 * Copies the default config file from res/raw/config_default.xml to config.
+	 *
+	 * @param config: Destination file where the default config should be written.
 	 */
-	private void copyDefaultConfig() {
-		File config = new File(CONFIG_FOLDER, CONFIG_FILE);
+	private void copyDefaultConfig(File config) {
 		InputStream in = null;
 		FileOutputStream out = null;
 		try {

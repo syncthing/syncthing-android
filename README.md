@@ -6,13 +6,9 @@ A port of [syncthing](https://github.com/calmh/syncthing) to Android.
 
 ## Building
 
-Setup [goandroid](https://github.com/eliasnaur/goandroid).
+Download or execute syncthing for your target platform, put the binary in `libs/armeabi`, `libs/armeabi-v7a`, `libs/mips`, `libs/x86`, (depending on target platform) and rename it to `libsyncthing.so`.
 
-Then, apply `go.diff` to your local golang source, and compile it.
-
-For syncthing, use [my fork](https://github.com/Nutomic/syncthing/tree/android).
-
-To compile, run `gradle assembleDebug`.
+Then, run `gradle assembleDebug`.
 
 ## License
 

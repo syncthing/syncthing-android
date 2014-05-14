@@ -48,8 +48,7 @@ android {
 
     buildTypes {
         debug {
-			// FIXME: We can't use this as long as the data folder is hardcoded.
-            // packageNameSuffix ".debug"
+            packageNameSuffix ".debug"
             debuggable true
         }
         release {
@@ -57,18 +56,3 @@ android {
         }
     }
 }
-
-task buildNative(type: Exec) {
-    exec {
-		executable = './build.sh'
-    }
-}
-// FIXME: buildNative is also executed on clean
-assemble.dependsOn buildNative
-
-task cleanNative(type: Delete) {
-    delete "libs"
-    delete "obj"
-}
-clean.dependsOn cleanNative
-

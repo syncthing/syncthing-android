@@ -6,6 +6,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -15,6 +21,11 @@ public class SyncthingService extends Service {
 	private static final String TAG = "SyncthingService";
 
 	private static final int NOTIFICATION_ID = 1;
+
+	/**
+	 * Path to the native, integrated syncthing binary, relative to the data folder
+	 */
+	private static final String BINARY_NAME = "lib/libsyncthing.so";
 
 	/**
 	 * URL of the local syncthing web UI.
@@ -52,7 +63,51 @@ public class SyncthingService extends Service {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.loadLibrary("syncthing");
+				DataOutputStream dos = null;
+				InputStreamReader isr = null;
+				try	{
+					Process p = Runtime.getRuntime().exec("sh");
+					dos = new DataOutputStream(p.getOutputStream());
+					// Set home directory to data folder for syncthing to use.
+					dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+					// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
+					dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
+							"-home " + getApplicationInfo().dataDir + "\n");
+					dos.writeBytes("exit\n");
+					dos.flush();
+
+					int ret = p.waitFor();
+					Log.d(TAG, "Syncthing binary exited with code " + Integer.toString(ret));
+
+					// Write syncthing binary output to log.
+					// NOTE: This is only done on shutdown, not live.
+					isr = new InputStreamReader(p.getInputStream());
+					BufferedReader stdout = new BufferedReader(isr);
+					String line;
+					while((line = stdout.readLine()) != null) {
+						Log.w(TAG, "stderr: " + line);
+					}
+					isr = new InputStreamReader(p.getErrorStream());
+					BufferedReader stderr = new BufferedReader(isr);
+					while((line = stderr.readLine()) != null) {
+						Log.i(TAG, "stdout: " + line);
+					}
+				}
+				catch(IOException e) {
+					Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+				}
+				catch(InterruptedException e) {
+					Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+				}
+				finally {
+					try {
+						dos.close();
+						isr.close();
+					}
+					catch (IOException e) {
+						Log.w(TAG, "Failed to close stream", e);
+					}
+				}
 			}
 		}).start();
 	}
@@ -64,19 +119,10 @@ public class SyncthingService extends Service {
 
 	/**
 	 * Stops the native binary.
-	 *
-	 * NOTE: This stops all Activities and Services.
 	 */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		new RestTask() {
-			@Override
-			protected void onPostExecute(Void aVoid) {
-				// HACK: Android does not release the memory for the native binary, so we explicitly
-				// stop the VM and thus also all Activities/Services.
-				System.exit(0);
-			}
-		}.execute(SYNCTHING_URL + PATH_SHUTDOWN);
+		new RestTask().execute(SYNCTHING_URL + PATH_SHUTDOWN);
 	}
 }
