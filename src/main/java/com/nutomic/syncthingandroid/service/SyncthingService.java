@@ -16,8 +16,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.nutomic.syncthingandroid.PostTask;
-
 /**
  * Holds the native syncthing instance and provides an API to access it.
  */

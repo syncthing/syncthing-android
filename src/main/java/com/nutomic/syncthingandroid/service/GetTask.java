@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.service;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
 
