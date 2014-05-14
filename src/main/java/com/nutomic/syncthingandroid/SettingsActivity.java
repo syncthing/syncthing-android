@@ -2,13 +2,15 @@ package com.nutomic.syncthingandroid;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 
 import com.nutomic.syncthingandroid.service.GetTask;
-import com.nutomic.syncthingandroid.service.SyncthingService;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -19,6 +21,12 @@ public class SettingsActivity extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// There is currently no way to get ActionBar in PreferenceActivity on pre-honeycomb with
+		// compatibility library, so we'll have to do a version check.
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 
 		addPreferencesFromResource(R.xml.settings);
 		final PreferenceScreen screen = getPreferenceScreen();
@@ -46,4 +54,19 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
+
+	/**
+	 * Handles ActionBar back selected.
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
 }

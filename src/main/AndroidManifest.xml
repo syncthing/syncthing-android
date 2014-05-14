@@ -26,7 +26,13 @@
 
 		<activity
 			android:name=".SettingsActivity"
-			android:label="@string/settings_title" />
+			android:label="@string/settings_title" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".WebGuiActivity" />
+
+        </activity>
 
 		<service android:name=".service.SyncthingService" />
 
