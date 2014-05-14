@@ -18,6 +18,9 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

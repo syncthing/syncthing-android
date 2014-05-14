@@ -3,8 +3,11 @@
 
 	<string name="app_name">Syncthing</string>
 
-	<!-- Upstream version name of the included syncthing binary -->
-	<string name="syncthing_version_title">Syncthing Version: HEAD</string>
+	<!-- Title of the preference showing upstream version name -->
+	<string name="syncthing_version_title">Syncthing Version</string>
+
+    <!-- Displayed instead of the version string if it could not be read -->
+    <string name="syncthing_version_error">Could not read version</string>
 
 	<!-- Title for dialog displayed on first start -->
 	<string name="welcome_title">First Start</string>

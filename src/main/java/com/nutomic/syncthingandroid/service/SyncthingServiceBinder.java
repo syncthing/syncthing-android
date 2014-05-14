@@ -1,6 +1,8 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.service;
 
 import android.os.Binder;
+
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 public class SyncthingServiceBinder extends Binder {
 
