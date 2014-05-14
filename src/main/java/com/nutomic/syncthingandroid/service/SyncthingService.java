@@ -37,16 +37,6 @@ public class SyncthingService extends Service {
 	 */
 	public static final String SYNCTHING_URL = "http://127.0.0.1:8080";
 
-	/**
-	 * Path to call for shutdown (with POST).
-	 */
-	private static final String PATH_SHUTDOWN = "/rest/shutdown";
-
-	/**
-	 * Path to call to get version name (with GET).
-	 */
-	public static final String PATH_VERSION = "/rest/version";
-
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
 	@Override
@@ -133,7 +123,7 @@ public class SyncthingService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		new PostTask().execute(SYNCTHING_URL + PATH_SHUTDOWN);
+		new PostTask().execute(PostTask.URI_SHUTDOWN);
 	}
 
 }

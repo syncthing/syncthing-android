@@ -4,6 +4,8 @@ package com.nutomic.syncthingandroid;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.nutomic.syncthingandroid.service.SyncthingService;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -17,6 +19,11 @@ import java.io.IOException;
 public class PostTask extends AsyncTask<String, Void, Void> {
 
 	private static final String TAG = "PostTask";
+
+	/**
+	 * URI to call for shutdown.
+	 */
+	public static final String URI_SHUTDOWN = SyncthingService.SYNCTHING_URL + "/rest/shutdown";
 
 	@Override
 	protected Void doInBackground(String... uri) {

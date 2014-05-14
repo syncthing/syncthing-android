@@ -30,7 +30,7 @@ public class SettingsActivity extends PreferenceActivity {
 						? versionName
 						: getString(R.string.syncthing_version_error));
 			}
-		}.execute(SyncthingService.SYNCTHING_URL + SyncthingService.PATH_VERSION);
+		}.execute(GetTask.URI_VERSION);
 	}
 
 
