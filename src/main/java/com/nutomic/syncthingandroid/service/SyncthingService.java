@@ -43,6 +43,60 @@ public class SyncthingService extends Service {
 	}
 
 	/**
+	 * Runs the syncthing binary from command line, and prints its output to logcat.
+	 */
+	private class NativeSyncthingRunnable implements Runnable {
+		@Override
+		public void run() {
+			DataOutputStream dos = null;
+			InputStreamReader isr = null;
+			try	{
+				Process p = Runtime.getRuntime().exec("sh");
+				dos = new DataOutputStream(p.getOutputStream());
+				// Set home directory to data folder for syncthing to use.
+				dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
+				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
+						"-home " + getApplicationInfo().dataDir + "\n");
+				dos.writeBytes("exit\n");
+				dos.flush();
+
+				int ret = p.waitFor();
+				Log.d(TAG, "Syncthing binary exited with code " + Integer.toString(ret));
+
+				// Write syncthing binary output to log.
+				// NOTE: This is only done on shutdown, not live.
+				isr = new InputStreamReader(p.getInputStream());
+				BufferedReader stdout = new BufferedReader(isr);
+				String line;
+				while((line = stdout.readLine()) != null) {
+					Log.w(TAG, "stderr: " + line);
+				}
+				isr = new InputStreamReader(p.getErrorStream());
+				BufferedReader stderr = new BufferedReader(isr);
+				while((line = stderr.readLine()) != null) {
+					Log.i(TAG, "stdout: " + line);
+				}
+			}
+			catch(IOException e) {
+				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+			}
+			catch(InterruptedException e) {
+				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+			}
+			finally {
+				try {
+					dos.close();
+					isr.close();
+				}
+				catch (IOException e) {
+					Log.w(TAG, "Failed to close stream", e);
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Creates notification, starts native binary.
 	 */
 	@Override
@@ -58,56 +112,7 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				DataOutputStream dos = null;
-				InputStreamReader isr = null;
-				try	{
-					Process p = Runtime.getRuntime().exec("sh");
-					dos = new DataOutputStream(p.getOutputStream());
-					// Set home directory to data folder for syncthing to use.
-					dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
-					// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-					dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-							"-home " + getApplicationInfo().dataDir + "\n");
-					dos.writeBytes("exit\n");
-					dos.flush();
-
-					int ret = p.waitFor();
-					Log.d(TAG, "Syncthing binary exited with code " + Integer.toString(ret));
-
-					// Write syncthing binary output to log.
-					// NOTE: This is only done on shutdown, not live.
-					isr = new InputStreamReader(p.getInputStream());
-					BufferedReader stdout = new BufferedReader(isr);
-					String line;
-					while((line = stdout.readLine()) != null) {
-						Log.w(TAG, "stderr: " + line);
-					}
-					isr = new InputStreamReader(p.getErrorStream());
-					BufferedReader stderr = new BufferedReader(isr);
-					while((line = stderr.readLine()) != null) {
-						Log.i(TAG, "stdout: " + line);
-					}
-				}
-				catch(IOException e) {
-					Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-				}
-				catch(InterruptedException e) {
-					Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-				}
-				finally {
-					try {
-						dos.close();
-						isr.close();
-					}
-					catch (IOException e) {
-						Log.w(TAG, "Failed to close stream", e);
-					}
-				}
-			}
-		}).start();
+		new Thread(new NativeSyncthingRunnable()).start();
 	}
 
 	@Override
