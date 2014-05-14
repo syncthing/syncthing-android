@@ -36,6 +36,9 @@ Please report any problems you encounter.
 	<!-- Settings item that opens issue tracker -->
 	<string name="report_issue_title">Report Issue</string>
 
+    <!-- Summary for the issue tracker settings item -->
+    <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
+
 	<!-- URL of the issue tracker -->
 	<string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>
 

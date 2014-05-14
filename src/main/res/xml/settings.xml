@@ -3,7 +3,8 @@
 
 	<Preference
 		android:key="report_issue"
-		android:title="@string/report_issue_title" />
+		android:title="@string/report_issue_title"
+        android:summary="@string/report_issue_summary"/>
 
 	<Preference
         android:key="syncthing_version"
