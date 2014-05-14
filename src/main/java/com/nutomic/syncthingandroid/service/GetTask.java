@@ -28,8 +28,8 @@ public class GetTask extends AsyncTask<String, Void, String> {
 	 */
 	public static final String URI_VERSION = SyncthingService.SYNCTHING_URL + "/rest/version";
 
-    @Override
-	 protected String doInBackground(String... uri) {
+	@Override
+	protected String doInBackground(String... uri) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet get = new HttpGet(uri[0]);
 		String responseString = null;
@@ -57,4 +57,5 @@ public class GetTask extends AsyncTask<String, Void, String> {
 		}
 		return null;
 	}
+
 }

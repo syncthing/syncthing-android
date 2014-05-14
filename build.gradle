@@ -1,58 +1,54 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
+	repositories {
+		mavenCentral()
+	}
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.0+'
-        classpath 'com.alexvasilkov:android_sign:0.2'
-    }
+	dependencies {
+		classpath 'com.android.tools.build:gradle:0.9.0+'
+		classpath 'com.alexvasilkov:android_sign:0.2'
+	}
 }
 
 apply plugin: 'android'
 apply plugin: 'android_sign'
 
 repositories {
-    mavenCentral()
-    maven {
-        url "http://4thline.org/m2"
-    }
+	mavenCentral()
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:13.0.+'
+	compile 'com.android.support:support-v4:13.0.+'
 }
 
-
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
-    sourceSets {
+	compileSdkVersion 19
+	buildToolsVersion "19.0.3"
+	sourceSets {
 		main {
 			jniLibs.srcDir file("libs/")
 			jniLibs.srcDir file("obj/")
 		}
 	}
-    signingConfigs {
-        release {
-            // Android Studio does not pass environment variables.
-            // This means you have to use the command line for release builds.
-            def ks = System.getenv("KEYSTORE")
-            def ka = System.getenv("KEY_ALIAS")
-            if (ks != null && ka != null) {
-                storeFile file(ks)
-                keyAlias ka
-            }
-        }
-    }
+	signingConfigs {
+		release {
+			// Android Studio does not pass environment variables.
+			// This means you have to use the command line for release builds.
+			def ks = System.getenv("KEYSTORE")
+			def ka = System.getenv("KEY_ALIAS")
+			if (ks != null && ka != null) {
+				storeFile file(ks)
+				keyAlias ka
+			}
+		}
+	}
 
-    buildTypes {
-        debug {
-            packageNameSuffix ".debug"
-            debuggable true
-        }
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
+	buildTypes {
+		debug {
+			packageNameSuffix ".debug"
+			debuggable true
+		}
+		release {
+			signingConfig signingConfigs.release
+		}
+	}
 }
