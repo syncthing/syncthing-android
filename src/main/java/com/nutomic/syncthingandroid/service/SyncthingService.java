@@ -50,6 +50,7 @@ public class SyncthingService extends Service {
 		public void run() {
 			DataOutputStream dos = null;
 			InputStreamReader isr = null;
+			int ret = 1;
 			try	{
 				Process p = Runtime.getRuntime().exec("sh");
 				dos = new DataOutputStream(p.getOutputStream());
@@ -61,8 +62,7 @@ public class SyncthingService extends Service {
 				dos.writeBytes("exit\n");
 				dos.flush();
 
-				int ret = p.waitFor();
-				Log.d(TAG, "Syncthing binary exited with code " + Integer.toString(ret));
+				ret = p.waitFor();
 
 				// Write syncthing binary output to log.
 				// NOTE: This is only done on shutdown, not live.
@@ -85,6 +85,11 @@ public class SyncthingService extends Service {
 				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
 			}
 			finally {
+				if (ret != 0) {
+					stopSelf();
+					throw new RuntimeException("Syncthing binary returned error code " +
+							Integer.toString(ret));
+				}
 				try {
 					dos.close();
 					isr.close();
