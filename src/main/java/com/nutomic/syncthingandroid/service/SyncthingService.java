@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -11,10 +12,21 @@ import android.util.Log;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.WebGuiActivity;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.conn.HttpHostConnectException;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -35,7 +47,25 @@ public class SyncthingService extends Service {
 	 */
 	public static final String SYNCTHING_URL = "http://127.0.0.1:8080";
 
+	/**
+	 * Interval in ms, at which connections to the web gui are performed on first start
+	 * to find out if it's online.
+	 */
+	private static final long WEB_GUI_POLL_INTERVAL = 100;
+
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
+
+	/**
+	 * Callback for when the Syncthing web interface becomes first available after service start.
+	 */
+	public interface OnWebGuiAvailableListener {
+		public void onWebGuiAvailable();
+	}
+
+	private LinkedList<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
+			new LinkedList<OnWebGuiAvailableListener>();
+
+	private boolean mIsWebGuiAvailable = false;
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -100,6 +130,48 @@ public class SyncthingService extends Service {
 			}
 		}
 	}
+
+	/**
+	 * Polls SYNCTHING_URL until it returns HTTP status OK, then calls all listeners
+	 * in mOnWebGuiAvailableListeners and clears it.
+	 */
+	private class PollWebGuiAvailableTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... voids) {
+			int status = 0;
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpHead head = new HttpHead(SYNCTHING_URL);
+			do {
+				try {
+					Thread.sleep(WEB_GUI_POLL_INTERVAL);
+					HttpResponse response = httpclient.execute(head);
+					// NOTE: status is not really needed, as HttpHostConnectException is thrown
+					// earlier.
+					status = response.getStatusLine().getStatusCode();
+				}
+				catch (HttpHostConnectException e) {
+					// We catch this in every call, as long as the service is not online,
+					// so we ignore and continue.
+				}
+				catch (IOException e) {
+					Log.d(TAG, "Failed to poll for web interface", e);
+				}
+				catch (InterruptedException e) {
+					Log.d(TAG, "Failed to poll for web interface", e);
+				}
+			} while(status != HttpStatus.SC_OK);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			mIsWebGuiAvailable = true;
+			for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
+				listener.onWebGuiAvailable();
+			}
+			mOnWebGuiAvailableListeners.clear();
+		}
+	}
 	
 	/**
 	 * Creates notification, starts native binary.
@@ -118,6 +190,8 @@ public class SyncthingService extends Service {
 		startForeground(NOTIFICATION_ID, n);
 
 		new Thread(new NativeSyncthingRunnable()).start();
+
+		new PollWebGuiAvailableTask().execute();
 	}
 
 	@Override
@@ -132,6 +206,21 @@ public class SyncthingService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		new PostTask().execute(PostTask.URI_SHUTDOWN);
+	}
+
+	/**
+	 * Register a listener for the web gui becoming available..
+	 *
+	 * If the web gui is already available, listener will be called immediately.
+	 * Listeners are unregistered automatically after being called.
+	 */
+	public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
+		if (mIsWebGuiAvailable) {
+			listener.onWebGuiAvailable();
+		}
+		else {
+			mOnWebGuiAvailableListeners.addLast(listener);
+		}
 	}
 
 }

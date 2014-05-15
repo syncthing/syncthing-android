@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +29,7 @@ import java.io.InputStream;
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
-public class WebGuiActivity extends Activity {
+public class WebGuiActivity extends Activity implements SyncthingService.OnWebGuiAvailableListener {
 
 	private static final String TAG = "WebGuiActivity";
 
@@ -54,6 +53,7 @@ public class WebGuiActivity extends Activity {
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
+			mSyncthingService.registerOnWebGuiAvailableListener(WebGuiActivity.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
@@ -62,32 +62,14 @@ public class WebGuiActivity extends Activity {
 	};
 
 	/**
-	 * Retries loading every second until the web UI becomes available.
+	 * Hides the loading screen and shows the WebView once it is fully loaded.
 	 */
 	private WebViewClient mWebViewClient = new WebViewClient() {
 
-		private int mError = 0;
-
-		@Override
-		public void onReceivedError(WebView view, int errorCode, String description,
-				String failingUrl) {
-			mError = errorCode;
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					mError = 0;
-					mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
-				}
-			}, 1000);
-
-		}
-
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			if (mError == 0) {
-				mWebView.setVisibility(View.VISIBLE);
-				mLoadingView.setVisibility(View.GONE);
-			}
+			mWebView.setVisibility(View.VISIBLE);
+			mLoadingView.setVisibility(View.GONE);
 		}
 	};
 
@@ -100,11 +82,6 @@ public class WebGuiActivity extends Activity {
 	@SuppressLint("SetJavaScriptEnabled")
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getApplicationContext().startService(
-				new Intent(this, SyncthingService.class));
-		getApplicationContext().bindService(
-				new Intent(this, SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 
 		setContentView(R.layout.main);
 
@@ -115,7 +92,6 @@ public class WebGuiActivity extends Activity {
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(mWebViewClient);
-		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
 
 		// Handle first start.
 		File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
@@ -130,7 +106,22 @@ public class WebGuiActivity extends Activity {
 					.setNeutralButton(android.R.string.ok, null)
 					.show();
 		}
+
+		getApplicationContext().startService(
+				new Intent(this, SyncthingService.class));
+		getApplicationContext().bindService(
+				new Intent(this, SyncthingService.class),
+				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
+
+	/**
+	 * Loads and shows WebView, hides loading view.
+	 */
+	@Override
+	public void onWebGuiAvailable() {
+		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
+	}
+
 
 	@Override
 	public void onDestroy() {
