@@ -6,7 +6,9 @@ A port of [syncthing](https://github.com/calmh/syncthing) to Android.
 
 ## Building
 
-Download or execute syncthing for your target platform, put the binary in `libs/armeabi`, `libs/armeabi-v7a`, `libs/mips`, `libs/x86`, (depending on target platform) and rename it to `libsyncthing.so`.
+There are multiple ways to get the native syncthing binary:
+- Depending on your target architecture, download `syncthing-linux-386`, `syncthing-linux-armv5` or `syncthing-linux-armv7` from [syncthing releases](https://github.com/calmh/syncthing/releases), and extract the binary to `libs/x86/libsyncthing.so`, `libs/armeabi-v7a/libsyncthing.so` or `libs/armeabi/libsyncthing.so` respectively.
+- Set up a syncthing compile and run `gradle buildNative` in your syncthing-android directory.
 
 Then, run `gradle assembleDebug`.
 

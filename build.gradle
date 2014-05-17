@@ -9,6 +9,8 @@ buildscript {
 	}
 }
 
+import java.util.regex.Pattern
+
 apply plugin: 'android'
 apply plugin: 'android_sign'
 
@@ -23,12 +25,17 @@ dependencies {
 android {
 	compileSdkVersion 19
 	buildToolsVersion "19.0.3"
+
+	defaultConfig{
+		versionCode getVersionCodeFromManifest()
+	}
+
 	sourceSets {
 		main {
 			jniLibs.srcDir file("libs/")
-			jniLibs.srcDir file("obj/")
 		}
 	}
+
 	signingConfigs {
 		release {
 			// Android Studio does not pass environment variables.
@@ -51,4 +58,62 @@ android {
 			signingConfig signingConfigs.release
 		}
 	}
+
+	productFlavors {
+		x86 {
+			versionCode Integer.parseInt("4" + defaultConfig.versionCode)
+			ndk {
+				abiFilter "x86"
+			}
+		}
+		armeabi_v7a {
+			versionCode Integer.parseInt("3" + defaultConfig.versionCode)
+			ndk {
+				abiFilter "armeabi-v7a"
+			}
+		}
+		armeabi {
+			versionCode Integer.parseInt("2" + defaultConfig.versionCode)
+			ndk {
+				abiFilter "armeabi"
+			}
+		}
+		mips {
+			versionCode Integer.parseInt("1" + defaultConfig.versionCode)
+			ndk {
+				abiFilter "mips"
+			}
+		}
+	}
+}
+
+def getVersionCodeFromManifest() {
+	def manifestFile = file(android.sourceSets.main.manifest.srcFile)
+	def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+	def matcher = pattern.matcher(manifestFile.getText())
+	matcher.find()
+	return Integer.parseInt(matcher.group(1))
+}
+
+ext.st_dir = System.getenv("GOPATH") + "/src/github.com/calmh/syncthing/";
+task buildNative(type:Exec) {
+	outputs.upToDateWhen { false }
+	executable = st_dir + 'build.sh'
+	workingDir = st_dir;
+	args = ['android']
+}
+
+task copyNative(type: Copy) {
+	outputs.upToDateWhen { false }
+	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
+	into 'libs/'
+	rename('syncthing-x86', 'x86/libsyncthing.so')
+	rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
+	rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
+	rename('syncthing-mips', 'mips/libsyncthing.so')
+}
+buildNative.finalizedBy copyNative
+
+task cleanNative(type: Delete) {
+	delete 'libs/'
 }
