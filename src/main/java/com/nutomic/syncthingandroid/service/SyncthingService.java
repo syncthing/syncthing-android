@@ -74,14 +74,33 @@ public class SyncthingService extends Service {
 	}
 
 	/**
+	 * Thrown when execution of the native syncthing binary returns an error.
+	 * Prints the syncthing log.
+	 */
+	public static class NativeExecutionException extends RuntimeException {
+
+		private final String mLog;
+
+		public NativeExecutionException(String message, String log) {
+			super(message);
+			mLog = log;
+		}
+
+		@Override
+		public String getMessage() {
+			return super.getMessage() + "\n" + mLog;
+		}
+	}
+	/**
 	 * Runs the syncthing binary from command line, and prints its output to logcat.
 	 */
 	private class NativeSyncthingRunnable implements Runnable {
 		@Override
-		public void run() {
+		public void run() throws NativeExecutionException {
 			DataOutputStream dos = null;
 			InputStreamReader isr = null;
 			int ret = 1;
+			String log = "";
 			try	{
 				Process p = Runtime.getRuntime().exec("sh");
 				dos = new DataOutputStream(p.getOutputStream());
@@ -102,11 +121,13 @@ public class SyncthingService extends Service {
 				BufferedReader stdout = new BufferedReader(isr);
 				String line;
 				while((line = stdout.readLine()) != null) {
+					log += "stderr: " + line + "\n";
 					Log.w(TAG, "stderr: " + line);
 				}
 				isr = new InputStreamReader(p.getErrorStream());
 				BufferedReader stderr = new BufferedReader(isr);
 				while((line = stderr.readLine()) != null) {
+					log += "stdout: " + line + "\n";
 					Log.i(TAG, "stdout: " + line);
 				}
 			}
@@ -117,10 +138,11 @@ public class SyncthingService extends Service {
 				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
 			}
 			finally {
-				if (ret != 0) {
+				if (ret != 1) {
 					stopSelf();
-					throw new RuntimeException("Syncthing binary returned error code " +
-							Integer.toString(ret));
+					// Include the log for Play Store crash reports.
+					throw new NativeExecutionException("Syncthing binary returned error code " +
+							Integer.toString(ret), log);
 				}
 				try {
 					dos.close();
