@@ -95,16 +95,14 @@ def getVersionCodeFromManifest() {
 	return Integer.parseInt(matcher.group(1))
 }
 
-ext.st_dir = System.getenv("GOPATH") + "/src/github.com/calmh/syncthing/";
 task buildNative(type:Exec) {
 	outputs.upToDateWhen { false }
-	executable = st_dir + 'build.sh'
-	workingDir = st_dir;
-	args = ['android']
+	executable = './build-native.sh'
 }
 
 task copyNative(type: Copy) {
 	outputs.upToDateWhen { false }
+	def st_dir = System.getenv("GOPATH") + "/src/github.com/calmh/syncthing/";
 	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
 	into 'libs/'
 	rename('syncthing-x86', 'x86/libsyncthing.so')
