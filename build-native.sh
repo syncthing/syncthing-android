@@ -21,3 +21,7 @@ cp syncthing syncthing-armeabi-v7a
 export GOARM=5
 ./build.sh
 cp syncthing syncthing-armeabi
+
+#export GOARCH=mips
+#./build.sh
+#cp syncthing syncthing-mips
