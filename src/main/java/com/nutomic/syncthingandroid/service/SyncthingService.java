@@ -138,7 +138,7 @@ public class SyncthingService extends Service {
 				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
 			}
 			finally {
-				if (ret != 1) {
+				if (ret != 0) {
 					stopSelf();
 					// Include the log for Play Store crash reports.
 					throw new NativeExecutionException("Syncthing binary returned error code " +
