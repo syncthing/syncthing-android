@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.service;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -13,21 +14,33 @@ import android.util.Log;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.WebGuiActivity;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -53,6 +66,11 @@ public class SyncthingService extends Service {
 	 * to find out if it's online.
 	 */
 	private static final long WEB_GUI_POLL_INTERVAL = 100;
+
+	/**
+	 * File in the config folder that contains configuration.
+	 */
+	private static final String CONFIG_FILE = "config.xml";
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -97,6 +115,11 @@ public class SyncthingService extends Service {
 	private class NativeSyncthingRunnable implements Runnable {
 		@Override
 		public void run() throws NativeExecutionException {
+			if (isFirstStart(SyncthingService.this)) {
+				copyDefaultConfig();
+			}
+			updateConfig();
+
 			DataOutputStream dos = null;
 			InputStreamReader isr = null;
 			int ret = 1;
@@ -214,7 +237,6 @@ public class SyncthingService extends Service {
 		startForeground(NOTIFICATION_ID, n);
 
 		new Thread(new NativeSyncthingRunnable()).start();
-
 		new PollWebGuiAvailableTask().execute();
 	}
 
@@ -244,6 +266,83 @@ public class SyncthingService extends Service {
 		}
 		else {
 			mOnWebGuiAvailableListeners.addLast(listener);
+		}
+	}
+
+	private File getConfigFile() {
+		return new File(getApplicationInfo().dataDir, CONFIG_FILE);
+	}
+
+	/**
+	 * Applies changes to config after update from version 0.2.0 or earlier.
+	 */
+	private void updateConfig() {
+		try {
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document d = db.parse(getConfigFile());
+			Element options = (Element)
+					d.getDocumentElement().getElementsByTagName("options").item(0);
+			Element globalAnnounceServer = (Element)
+					options.getElementsByTagName("globalAnnounceServer").item(0);
+			if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
+				Log.i(TAG, "Replacing globalAnnounceServer host with ip");
+				globalAnnounceServer.setTextContent("194.126.249.5:22025");
+
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				Transformer transformer = transformerFactory.newTransformer();
+				DOMSource domSource = new DOMSource(d);
+				StreamResult streamResult = new StreamResult(getConfigFile());
+				transformer.transform(domSource, streamResult);
+			}
+		}
+		catch (ParserConfigurationException e) {
+			Log.w(TAG, "Failed to parse config", e);
+		}
+		catch (IOException e) {
+			Log.w(TAG, "Failed to parse config", e);
+		}
+		catch (SAXException e) {
+			Log.w(TAG, "Failed to parse config", e);
+		}
+		catch (TransformerException e) {
+			Log.d(TAG, "Failed to save updated config", e);
+		}
+	}
+
+	/**
+	 * Returns true if this service has not been started before (ie config.xml does not exist).
+	 */
+	public static boolean isFirstStart(Context context) {
+		return !new File(context.getApplicationInfo().dataDir, CONFIG_FILE).exists();
+	}
+
+	/**
+	 * Copies the default config file from res/raw/config_default.xml to (data folder)/config.xml.
+	 */
+	private void copyDefaultConfig() {
+		InputStream in = null;
+		FileOutputStream out = null;
+		try {
+			in = getResources().openRawResource(R.raw.config_default);
+			out = new FileOutputStream(getConfigFile());
+			byte[] buff = new byte[1024];
+			int read = 0;
+
+			while ((read = in.read(buff)) > 0) {
+				out.write(buff, 0, read);
+			}
+		}
+		catch (IOException e) {
+			throw new RuntimeException("Failed to write config file", e);
+		}
+		finally {
+			try {
+				in.close();
+				out.close();
+			}
+			catch (IOException e) {
+				Log.w(TAG, "Failed to close stream while copying config", e);
+			}
 		}
 	}
 

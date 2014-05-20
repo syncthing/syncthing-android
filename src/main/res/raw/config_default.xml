@@ -4,7 +4,7 @@
 	</gui>
 	<options>
 		<listenAddress>:22000</listenAddress>
-		<globalAnnounceServer>announce.syncthing.net:22025</globalAnnounceServer>
+		<globalAnnounceServer>194.126.249.5:22025</globalAnnounceServer>
 		<globalAnnounceEnabled>true</globalAnnounceEnabled>
 		<localAnnounceEnabled>true</localAnnounceEnabled>
 		<parallelRequests>16</parallelRequests>

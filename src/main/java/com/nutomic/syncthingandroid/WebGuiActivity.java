@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,27 +20,12 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
 public class WebGuiActivity extends Activity implements SyncthingService.OnWebGuiAvailableListener {
 
 	private static final String TAG = "WebGuiActivity";
-
-	/**
-	 * File in the config folder that contains the public key.
-	 */
-	private static final String CERT_FILE = "cert.pem";
-
-	/**
-	 * File in the config folder that contains configuration.
-	 */
-	private static final String CONFIG_FILE = "config.xml";
 
 	private WebView mWebView;
 	private View mLoadingView;
@@ -93,11 +77,7 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(mWebViewClient);
 
-		// Handle first start.
-		File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
-		if (!config.exists()) {
-			copyDefaultConfig(config);
-
+		if (SyncthingService.isFirstStart(this)) {
 			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
 			loadingText.setText(R.string.web_gui_creating_key);
 			new AlertDialog.Builder(this)
@@ -148,39 +128,6 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
-		}
-	}
-
-	/**
-	 * Copies the default config file from res/raw/config_default.xml to config.
-	 *
-	 * @param config: Destination file where the default config should be written.
-	 */
-	private void copyDefaultConfig(File config) {
-		InputStream in = null;
-		FileOutputStream out = null;
-		try {
-			in = getResources().openRawResource(R.raw.config_default);
-			out = new FileOutputStream(config);
-			byte[] buff = new byte[1024];
-			int read = 0;
-
-			while ((read = in.read(buff)) > 0) {
-				out.write(buff, 0, read);
-			}
-		}
-		catch (IOException e) {
-			Log.w(TAG, "Failed to write config file", e);
-			config.delete();
-		}
-		finally {
-			try {
-				in.close();
-				out.close();
-			}
-			catch (IOException e) {
-				Log.w(TAG, "Failed to close stream while copying config", e);
-			}
 		}
 	}
 	
