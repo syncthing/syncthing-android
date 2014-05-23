@@ -22,6 +22,7 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -274,12 +275,20 @@ public class SyncthingService extends Service {
 	}
 
 	/**
-	 * Applies changes to config after update from version 0.2.0 or earlier.
+	 * Updates the config file.
+	 *
+	 * Coming from 0.2.0 and earlier, globalAnnounceServer value "announce.syncthing.net:22025" is
+	 * replaced with "194.126.249.5:22025" (as domain resolve is broken).
+	 *
+	 * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
 	 */
 	private void updateConfig() {
 		try {
+			boolean changed = false;
 			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document d = db.parse(getConfigFile());
+
+			// Hardcode default globalAnnounceServer ip.
 			Element options = (Element)
 					d.getDocumentElement().getElementsByTagName("options").item(0);
 			Element globalAnnounceServer = (Element)
@@ -287,7 +296,22 @@ public class SyncthingService extends Service {
 			if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
 				Log.i(TAG, "Replacing globalAnnounceServer host with ip");
 				globalAnnounceServer.setTextContent("194.126.249.5:22025");
+				changed = true;
+			}
 
+			// Set ignorePerms attribute.
+			NodeList repos = d.getDocumentElement().getElementsByTagName("repository");
+			for (int i = 0; i < repos.getLength(); i++) {
+				Element r = (Element) repos.item(i);
+				if (!r.hasAttribute("ignorePerms") ||
+						!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
+					r.setAttribute("ignorePerms", Boolean.toString(true));
+					changed = true;
+				}
+			}
+
+			// Write the changes back to file.
+			if (changed) {
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				DOMSource domSource = new DOMSource(d);
