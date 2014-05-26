@@ -106,70 +106,63 @@ public class SyncthingService extends Service {
 			return super.getMessage() + "\n" + mLog;
 		}
 	}
+
 	/**
-	 * Runs the syncthing binary from command line, and prints its output to logcat.
+	 * Runs the syncthing binary from command line, and prints its output to logcat (on exit).
 	 */
-	private class NativeSyncthingRunnable implements Runnable {
-		@Override
-		public void run() throws NativeExecutionException {
-			if (isFirstStart(SyncthingService.this)) {
-				copyDefaultConfig();
-			}
-			updateConfig();
+	private void runNative() {
+		DataOutputStream dos = null;
+		InputStreamReader isr = null;
+		int ret = 1;
+		String log = "";
+		try	{
+			Process p = Runtime.getRuntime().exec("sh");
+			dos = new DataOutputStream(p.getOutputStream());
+			// Set home directory to data folder for syncthing to use.
+			dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
+			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
+					"-home " + getApplicationInfo().dataDir + "\n");
+			dos.writeBytes("exit\n");
+			dos.flush();
 
-			DataOutputStream dos = null;
-			InputStreamReader isr = null;
-			int ret = 1;
-			String log = "";
-			try	{
-				Process p = Runtime.getRuntime().exec("sh");
-				dos = new DataOutputStream(p.getOutputStream());
-				// Set home directory to data folder for syncthing to use.
-				dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
-				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-						"-home " + getApplicationInfo().dataDir + "\n");
-				dos.writeBytes("exit\n");
-				dos.flush();
+			ret = p.waitFor();
 
-				ret = p.waitFor();
-
-				// Write syncthing binary output to log.
-				// NOTE: This is only done on shutdown, not live.
-				isr = new InputStreamReader(p.getInputStream());
-				BufferedReader stdout = new BufferedReader(isr);
-				String line;
-				while((line = stdout.readLine()) != null) {
-					log += "stderr: " + line + "\n";
-					Log.w(TAG, "stderr: " + line);
-				}
-				isr = new InputStreamReader(p.getErrorStream());
-				BufferedReader stderr = new BufferedReader(isr);
-				while((line = stderr.readLine()) != null) {
-					log += "stdout: " + line + "\n";
-					Log.i(TAG, "stdout: " + line);
-				}
+			// Write syncthing binary output to log.
+			// NOTE: This is only done on shutdown, not live.
+			isr = new InputStreamReader(p.getInputStream());
+			BufferedReader stdout = new BufferedReader(isr);
+			String line;
+			while((line = stdout.readLine()) != null) {
+				log += "stderr: " + line + "\n";
+				Log.w(TAG, "stderr: " + line);
 			}
-			catch(IOException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+			isr = new InputStreamReader(p.getErrorStream());
+			BufferedReader stderr = new BufferedReader(isr);
+			while((line = stderr.readLine()) != null) {
+				log += "stdout: " + line + "\n";
+				Log.i(TAG, "stdout: " + line);
 			}
-			catch(InterruptedException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+		}
+		catch(IOException e) {
+			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+		}
+		catch(InterruptedException e) {
+			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+		}
+		finally {
+			if (ret != 0) {
+				stopSelf();
+				// Include the log for Play Store crash reports.
+				throw new NativeExecutionException("Syncthing binary returned error code " +
+						Integer.toString(ret), log);
 			}
-			finally {
-				if (ret != 0) {
-					stopSelf();
-					// Include the log for Play Store crash reports.
-					throw new NativeExecutionException("Syncthing binary returned error code " +
-							Integer.toString(ret), log);
-				}
-				try {
-					dos.close();
-					isr.close();
-				}
-				catch (IOException e) {
-					Log.w(TAG, "Failed to close stream", e);
-				}
+			try {
+				dos.close();
+				isr.close();
+			}
+			catch (IOException e) {
+				Log.w(TAG, "Failed to close stream", e);
 			}
 		}
 	}
@@ -232,30 +225,35 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
-		String syncthingUrl = null;
-		try {
-			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document d = db.parse(getConfigFile());
-			Element options = (Element)
-					d.getDocumentElement().getElementsByTagName("gui").item(0);
-			syncthingUrl = options.getElementsByTagName("address").item(0).getTextContent();
-		}
-		catch (SAXException e) {
-			throw new RuntimeException("Failed to read gui url, aborting", e);
-		}
-		catch (ParserConfigurationException e) {
-			throw new RuntimeException("Failed to read gui url, aborting", e);
-		}
-		catch (IOException e) {
-			throw new RuntimeException("Failed to read gui url, aborting", e);
-		}
-		finally {
-			mApi = new RestApi(this, "http://" + syncthingUrl);
-			registerOnWebGuiAvailableListener(mApi);
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isFirstStart(SyncthingService.this)) {
+					copyDefaultConfig();
+				}
+				updateConfig();
 
-		new Thread(new NativeSyncthingRunnable()).start();
-		new PollWebGuiAvailableTask().execute();
+				String syncthingUrl = null;
+				try {
+					DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					Document d = db.parse(getConfigFile());
+					Element options = (Element)
+							d.getDocumentElement().getElementsByTagName("gui").item(0);
+					syncthingUrl = options.getElementsByTagName("address").item(0).getTextContent();
+				} catch (SAXException e) {
+					throw new RuntimeException("Failed to read gui url, aborting", e);
+				} catch (ParserConfigurationException e) {
+					throw new RuntimeException("Failed to read gui url, aborting", e);
+				} catch (IOException e) {
+					throw new RuntimeException("Failed to read gui url, aborting", e);
+				} finally {
+					mApi = new RestApi(SyncthingService.this, "http://" + syncthingUrl);
+					registerOnWebGuiAvailableListener(mApi);
+				}
+				new PollWebGuiAvailableTask().execute();
+				runNative();
+			}
+		}).start();
 	}
 
 	@Override
@@ -347,7 +345,7 @@ public class SyncthingService extends Service {
 			Log.w(TAG, "Failed to parse config", e);
 		}
 		catch (TransformerException e) {
-			Log.d(TAG, "Failed to save updated config", e);
+			Log.w(TAG, "Failed to save updated config", e);
 		}
 	}
 
