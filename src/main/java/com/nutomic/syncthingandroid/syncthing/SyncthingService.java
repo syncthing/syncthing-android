@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -125,10 +124,9 @@ public class SyncthingService extends Service {
 			try	{
 				Process p = Runtime.getRuntime().exec("sh");
 				dos = new DataOutputStream(p.getOutputStream());
-				// Set home directory to sdcard (so the "create repo" hint makes sense)
-				dos.writeBytes("HOME=" +
-						Environment.getExternalStorageDirectory().toString() + "\n");
-				// Set syncthing config folder to app data folder.
+				// Set home directory to data folder for syncthing to use.
+				dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
 						"-home " + getApplicationInfo().dataDir + "\n");
 				dos.writeBytes("exit\n");
@@ -137,7 +135,7 @@ public class SyncthingService extends Service {
 				ret = p.waitFor();
 
 				// Write syncthing binary output to log.
-				// NOTE: This is only done on shutdown, not in real time.
+				// NOTE: This is only done on shutdown, not live.
 				isr = new InputStreamReader(p.getInputStream());
 				BufferedReader stdout = new BufferedReader(isr);
 				String line;
