@@ -25,12 +25,12 @@ public class GetTask extends AsyncTask<String, Void, String> {
 	/**
 	 * URI to call to get version name.
 	 */
-	public static final String URI_VERSION = SyncthingService.SYNCTHING_URL + "/rest/version";
+	public static final String URI_VERSION = "/rest/version";
 
 	@Override
 	protected String doInBackground(String... uri) {
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpGet get = new HttpGet(uri[0]);
+		HttpGet get = new HttpGet(uri[0] + uri[1]);
 		String responseString = null;
 		try {
 			HttpResponse response = httpclient.execute(get);

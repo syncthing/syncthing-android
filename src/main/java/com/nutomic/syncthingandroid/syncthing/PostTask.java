@@ -20,12 +20,12 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 	/**
 	 * URI to call for shutdown.
 	 */
-	public static final String URI_SHUTDOWN = SyncthingService.SYNCTHING_URL + "/rest/shutdown";
+	public static final String URI_SHUTDOWN = "/rest/shutdown";
 
 	@Override
 	protected Void doInBackground(String... uri) {
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost post = new HttpPost(uri[0]);
+		HttpPost post = new HttpPost(uri[0] + uri[1]);
 		String responseString = null;
 		try {
 			HttpResponse response = httpclient.execute(post);

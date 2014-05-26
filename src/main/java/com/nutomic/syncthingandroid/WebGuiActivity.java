@@ -99,7 +99,7 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 	 */
 	@Override
 	public void onWebGuiAvailable() {
-		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
+		mWebView.loadUrl(mSyncthingService.getApi().getUrl());
 	}
 
 	@Override

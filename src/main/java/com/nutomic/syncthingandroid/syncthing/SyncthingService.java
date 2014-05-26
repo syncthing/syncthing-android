@@ -68,13 +68,6 @@ public class SyncthingService extends Service {
 	 */
 	private static final String CONFIG_FILE = "config.xml";
 
-	/**
-	 * URL of the local syncthing web UI.
-	 *
-	 * TODO: read from config.
-	 */
-	public static final String SYNCTHING_URL = "http://127.0.0.1:8080";
-
 	private RestApi mApi;
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
@@ -192,7 +185,7 @@ public class SyncthingService extends Service {
 		protected Void doInBackground(Void... voids) {
 			int status = 0;
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpHead head = new HttpHead(SYNCTHING_URL);
+			HttpHead head = new HttpHead(mApi.getUrl());
 			do {
 				try {
 					Thread.sleep(WEB_GUI_POLL_INTERVAL);
@@ -206,10 +199,10 @@ public class SyncthingService extends Service {
 					// so we ignore and continue.
 				}
 				catch (IOException e) {
-					Log.d(TAG, "Failed to poll for web interface", e);
+					Log.w(TAG, "Failed to poll for web interface", e);
 				}
 				catch (InterruptedException e) {
-					Log.d(TAG, "Failed to poll for web interface", e);
+					Log.w(TAG, "Failed to poll for web interface", e);
 				}
 			} while(status != HttpStatus.SC_OK);
 			return null;
@@ -241,8 +234,27 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
-		mApi = new RestApi(this);
-		registerOnWebGuiAvailableListener(mApi);
+		String syncthingUrl = null;
+		try {
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document d = db.parse(getConfigFile());
+			Element options = (Element)
+					d.getDocumentElement().getElementsByTagName("gui").item(0);
+			syncthingUrl = options.getElementsByTagName("address").item(0).getTextContent();
+		}
+		catch (SAXException e) {
+			throw new RuntimeException("Failed to read gui url, aborting", e);
+		}
+		catch (ParserConfigurationException e) {
+			throw new RuntimeException("Failed to read gui url, aborting", e);
+		}
+		catch (IOException e) {
+			throw new RuntimeException("Failed to read gui url, aborting", e);
+		}
+		finally {
+			mApi = new RestApi(this, "http://" + syncthingUrl);
+			registerOnWebGuiAvailableListener(mApi);
+		}
 
 		new Thread(new NativeSyncthingRunnable()).start();
 		new PollWebGuiAvailableTask().execute();
@@ -294,6 +306,7 @@ public class SyncthingService extends Service {
 			boolean changed = false;
 			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document d = db.parse(getConfigFile());
+
 
 			// Hardcode default globalAnnounceServer ip.
 			Element options = (Element)

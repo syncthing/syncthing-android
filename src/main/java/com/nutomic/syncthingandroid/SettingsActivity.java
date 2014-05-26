@@ -26,13 +26,16 @@ public class SettingsActivity extends PreferenceActivity {
 
 	private SyncthingService mSyncthingService;
 
+	/**
+	 * Binds to service and sets version name. The version name can not be retrieved if the service
+	 * is just started (as we don't wait until the api is up).
+	 */
 	private ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			final PreferenceScreen screen = getPreferenceScreen();
-			final Preference version = screen.findPreference(SYNCTHING_VERSION_KEY);
+			Preference version = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
 			version.setSummary(mSyncthingService.getApi().getVersion());
 		}
 
