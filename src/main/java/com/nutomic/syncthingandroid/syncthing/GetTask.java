@@ -15,30 +15,27 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Performs a GET request with no parameters to the URL in uri[0] and
+ * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
  * returns the result as a String.
  */
 public class GetTask extends AsyncTask<String, Void, String> {
 
 	private static final String TAG = "GetTask";
 
-	/**
-	 * URI to call to get version name.
-	 */
 	public static final String URI_VERSION = "/rest/version";
 
 	@Override
 	protected String doInBackground(String... uri) {
+		String fullUri = uri[0] + uri[1];
+		Log.i(TAG, "Sending GET request to " + fullUri);
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpGet get = new HttpGet(uri[0] + uri[1]);
+		HttpGet get = new HttpGet(fullUri);
 		String responseString = null;
 		try {
 			HttpResponse response = httpclient.execute(get);
 			HttpEntity entity = response.getEntity();
 
 			if (entity != null) {
-
-				// A Simple JSON Response Read
 				InputStream is = entity.getContent();
 
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -52,7 +49,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
 			}
 		}
 		catch (IOException e) {
-			Log.w(TAG, "Failed to call Rest API at " + uri[0], e);
+			Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
 		}
 		return null;
 	}

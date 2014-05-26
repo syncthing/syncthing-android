@@ -201,6 +201,7 @@ public class SyncthingService extends Service {
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
+			Log.i(TAG, "Web GUI has come online at " + mApi.getUrl());
 			mIsWebGuiAvailable = true;
 			for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
 				listener.onWebGuiAvailable();
@@ -229,6 +230,8 @@ public class SyncthingService extends Service {
 			@Override
 			public void run() {
 				if (isFirstStart(SyncthingService.this)) {
+					Log.i(TAG, "App started for the first time. " +
+							"Copying default config, keys will be generated automatically");
 					copyDefaultConfig();
 				}
 				updateConfig();
@@ -240,14 +243,19 @@ public class SyncthingService extends Service {
 					Element options = (Element)
 							d.getDocumentElement().getElementsByTagName("gui").item(0);
 					syncthingUrl = options.getElementsByTagName("address").item(0).getTextContent();
-				} catch (SAXException e) {
+				}
+				catch (SAXException e) {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
-				} catch (ParserConfigurationException e) {
+				}
+				catch (ParserConfigurationException e) {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
-				} finally {
+				}
+				finally {
 					mApi = new RestApi(SyncthingService.this, "http://" + syncthingUrl);
+					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 					registerOnWebGuiAvailableListener(mApi);
 				}
 				new PollWebGuiAvailableTask().execute();
@@ -267,6 +275,7 @@ public class SyncthingService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		Log.i(TAG, "Shutting down service");
 		mApi.shutdown();
 	}
 
@@ -299,6 +308,7 @@ public class SyncthingService extends Service {
 	 */
 	private void updateConfig() {
 		try {
+			Log.i(TAG, "Checking for needed config updates");
 			boolean changed = false;
 			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document d = db.parse(getConfigFile());
@@ -321,6 +331,7 @@ public class SyncthingService extends Service {
 				Element r = (Element) repos.item(i);
 				if (!r.hasAttribute("ignorePerms") ||
 						!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
+					Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
 					r.setAttribute("ignorePerms", Boolean.toString(true));
 					changed = true;
 				}
@@ -328,6 +339,7 @@ public class SyncthingService extends Service {
 
 			// Write the changes back to file.
 			if (changed) {
+				Log.i(TAG, "Writing updated config back to file");
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				DOMSource domSource = new DOMSource(d);

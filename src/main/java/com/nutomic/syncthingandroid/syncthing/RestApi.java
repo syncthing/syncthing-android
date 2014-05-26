@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.syncthing;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 
@@ -8,6 +9,8 @@ import com.nutomic.syncthingandroid.R;
  * Provides functions to interact with the syncthing REST API.
  */
 public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
+
+	private static final String TAG = "RestApi";
 
 	private Context mContext;
 
@@ -31,10 +34,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	public void onWebGuiAvailable() {
 		new GetTask() {
 			@Override
-			protected void onPostExecute(String versionName) {
-				mVersion = (versionName != null)
-						? versionName
-						: mContext.getString(R.string.syncthing_version_error);
+			protected void onPostExecute(String version) {
+				mVersion = version;
+				Log.i(TAG, "Syncthing version is " + mVersion);
 			}
 		}.execute(mUrl, GetTask.URI_VERSION);
 	}
@@ -43,7 +45,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Returns the version name, or a (text) error message on failure.
 	 */
 	public String getVersion() {
-		return mVersion;
+		return (mVersion != null)
+				? mVersion
+				: mContext.getString(R.string.syncthing_version_error);
 	}
 
 	/**
