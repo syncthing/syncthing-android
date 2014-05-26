@@ -89,7 +89,7 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 
 		getApplicationContext().startService(
 				new Intent(this, SyncthingService.class));
-		getApplicationContext().bindService(
+		bindService(
 				new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
@@ -102,11 +102,10 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 		mWebView.loadUrl(SyncthingService.SYNCTHING_URL);
 	}
 
-
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getApplicationContext().unbindService(mSyncthingServiceConnection);
+		unbindService(mSyncthingServiceConnection);
 	}
 
 	@Override

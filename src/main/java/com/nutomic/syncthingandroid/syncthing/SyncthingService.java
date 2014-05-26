@@ -58,11 +58,6 @@ public class SyncthingService extends Service {
 	private static final String BINARY_NAME = "lib/libsyncthing.so";
 
 	/**
-	 * URL of the local syncthing web UI.
-	 */
-	public static final String SYNCTHING_URL = "http://127.0.0.1:8080";
-
-	/**
 	 * Interval in ms, at which connections to the web gui are performed on first start
 	 * to find out if it's online.
 	 */
@@ -72,6 +67,15 @@ public class SyncthingService extends Service {
 	 * File in the config folder that contains configuration.
 	 */
 	private static final String CONFIG_FILE = "config.xml";
+
+	/**
+	 * URL of the local syncthing web UI.
+	 *
+	 * TODO: read from config.
+	 */
+	public static final String SYNCTHING_URL = "http://127.0.0.1:8080";
+
+	private RestApi mApi;
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -237,6 +241,9 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
+		mApi = new RestApi(this);
+		registerOnWebGuiAvailableListener(mApi);
+
 		new Thread(new NativeSyncthingRunnable()).start();
 		new PollWebGuiAvailableTask().execute();
 	}
@@ -252,7 +259,7 @@ public class SyncthingService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		new PostTask().execute(PostTask.URI_SHUTDOWN);
+		mApi.shutdown();
 	}
 
 	/**
@@ -368,6 +375,10 @@ public class SyncthingService extends Service {
 				Log.w(TAG, "Failed to close stream while copying config", e);
 			}
 		}
+	}
+
+	public RestApi getApi() {
+		return mApi;
 	}
 
 }
