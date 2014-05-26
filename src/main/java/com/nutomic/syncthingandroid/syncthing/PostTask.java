@@ -1,9 +1,7 @@
-package com.nutomic.syncthingandroid.service;
+package com.nutomic.syncthingandroid.syncthing;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

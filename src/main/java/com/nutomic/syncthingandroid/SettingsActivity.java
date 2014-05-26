@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +11,7 @@ import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-import com.nutomic.syncthingandroid.service.GetTask;
+import com.nutomic.syncthingandroid.syncthing.GetTask;
 
 public class SettingsActivity extends PreferenceActivity {
 

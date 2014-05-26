@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.service;
+package com.nutomic.syncthingandroid.syncthing;
 
 import android.app.Notification;
 import android.app.PendingIntent;

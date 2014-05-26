@@ -35,7 +35,7 @@
 					android:value=".WebGuiActivity" />
 		</activity>
 
-		<service android:name=".service.SyncthingService" />
+		<service android:name=".syncthing.SyncthingService" />
 
 	</application>
 </manifest> 
