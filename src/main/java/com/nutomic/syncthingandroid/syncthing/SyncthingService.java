@@ -259,7 +259,7 @@ public class SyncthingService extends Service {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
 				}
 				finally {
-					mApi = new RestApi(SyncthingService.this, "http://" + syncthingUrl);
+					mApi = new RestApi("http://" + syncthingUrl);
 					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 					registerOnWebGuiAvailableListener(mApi);
 				}
@@ -282,6 +282,10 @@ public class SyncthingService extends Service {
 		super.onDestroy();
 		Log.i(TAG, "Shutting down service");
 		mApi.shutdown();
+	}
+
+	public boolean isWebGuiAvailable() {
+		return mIsWebGuiAvailable;
 	}
 
 	/**

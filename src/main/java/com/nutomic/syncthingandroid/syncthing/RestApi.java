@@ -12,14 +12,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	private static final String TAG = "RestApi";
 
-	private Context mContext;
-
 	private String mVersion;
 
 	private String mUrl;
 
-	public RestApi(Context context, String url) {
-		mContext = context;
+	public RestApi(String url) {
 		mUrl = url;
 	}
 
@@ -45,9 +42,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Returns the version name, or a (text) error message on failure.
 	 */
 	public String getVersion() {
-		return (mVersion != null)
-				? mVersion
-				: mContext.getString(R.string.syncthing_version_error);
+		return mVersion;
 	}
 
 	/**

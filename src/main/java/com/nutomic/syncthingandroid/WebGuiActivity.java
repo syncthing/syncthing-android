@@ -115,6 +115,11 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		return mSyncthingService != null && mSyncthingService.isWebGuiAvailable();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.settings:
