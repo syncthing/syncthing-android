@@ -67,6 +67,11 @@ public class SyncthingService extends Service {
 	 */
 	private static final String CONFIG_FILE = "config.xml";
 
+	/**
+	 * Name of the public key file in the data directory.
+	 */
+	private static final String PUBLIC_KEY_FILE = "cert.pem";
+
 	private RestApi mApi;
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
@@ -363,9 +368,11 @@ public class SyncthingService extends Service {
 
 	/**
 	 * Returns true if this service has not been started before (ie config.xml does not exist).
+	 *
+	 * This will return true until the public key file has been generated.
 	 */
 	public static boolean isFirstStart(Context context) {
-		return !new File(context.getApplicationInfo().dataDir, CONFIG_FILE).exists();
+		return !new File(context.getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists();
 	}
 
 	/**
