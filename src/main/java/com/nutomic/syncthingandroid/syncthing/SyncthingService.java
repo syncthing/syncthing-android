@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -73,6 +74,10 @@ public class SyncthingService extends Service {
 	private static final String PUBLIC_KEY_FILE = "cert.pem";
 
 	private RestApi mApi;
+
+	private final ReentrantLock mNativeLogLock = new ReentrantLock();
+
+	private String mNativeLog = "";
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -117,12 +122,11 @@ public class SyncthingService extends Service {
 	 */
 	private void runNative() {
 		DataOutputStream dos = null;
-		InputStreamReader isr = null;
 		int ret = 1;
-		String log = "";
+		Process process = null;
 		try	{
-			Process p = Runtime.getRuntime().exec("sh");
-			dos = new DataOutputStream(p.getOutputStream());
+			process = Runtime.getRuntime().exec("sh");
+			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
 			dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
@@ -131,23 +135,10 @@ public class SyncthingService extends Service {
 			dos.writeBytes("exit\n");
 			dos.flush();
 
-			ret = p.waitFor();
+			log(process.getInputStream(), Log.INFO);
+			log(process.getErrorStream(), Log.WARN);
 
-			// Write syncthing binary output to log.
-			// NOTE: This is only done on shutdown, not live.
-			isr = new InputStreamReader(p.getInputStream());
-			BufferedReader stdout = new BufferedReader(isr);
-			String line;
-			while((line = stdout.readLine()) != null) {
-				log += "stderr: " + line + "\n";
-				Log.w(TAG, "stderr: " + line);
-			}
-			isr = new InputStreamReader(p.getErrorStream());
-			BufferedReader stderr = new BufferedReader(isr);
-			while((line = stderr.readLine()) != null) {
-				log += "stdout: " + line + "\n";
-				Log.i(TAG, "stdout: " + line);
-			}
+			ret = process.waitFor();
 		}
 		catch(IOException e) {
 			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
@@ -156,20 +147,44 @@ public class SyncthingService extends Service {
 			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
 		}
 		finally {
+			process.destroy();
 			if (ret != 0) {
 				stopSelf();
 				// Include the log for Play Store crash reports.
 				throw new NativeExecutionException("Syncthing binary returned error code " +
-						Integer.toString(ret), log);
-			}
-			try {
-				dos.close();
-				isr.close();
-			}
-			catch (IOException e) {
-				Log.w(TAG, "Failed to close stream", e);
+						Integer.toString(ret), mNativeLog);
 			}
 		}
+	}
+
+	/**
+	 * Logs the outputs of a stream to logcat and mNativeLog.
+	 *
+	 * @param is The stream to log.
+	 * @param priority The log level, eg Log.INFO or Log.WARN.
+	 */
+	private void log(final InputStream is, final int priority) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+				String line;
+				try {
+					while ((line = br.readLine()) != null) {
+						mNativeLogLock.lock();
+						Log.println(priority, TAG, ": " + line);
+						mNativeLog += line + "\n";
+						mNativeLogLock.unlock();
+					}
+				}
+				catch (IOException e) {
+					// NOTE: This is sometimes called on shutdown, as
+					// Process.destroy() closes the stream.
+					Log.w(TAG, "Failed to read syncthing command line output", e);
+				}
+			}
+		}).start();
 	}
 
 	/**
@@ -219,6 +234,7 @@ public class SyncthingService extends Service {
 	 * Creates notification, starts native binary.
 	 */
 	@Override
+
 	public void onCreate() {
 		PendingIntent pi = PendingIntent.getActivity(
 				this, 0, new Intent(this, WebGuiActivity.class),
