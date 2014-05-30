@@ -31,7 +31,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	public static final String TYPE_GUI = "GUI";
 
-	private static final int NOTIFICATION_ID = 2;
+	private static final int NOTIFICATION_RESTART = 2;
 
 	private Context mContext;
 
@@ -43,10 +43,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	private JSONObject mConfig;
 
+	private NotificationManager mNotificationManager;
+
 	public RestApi(Context context, String url, String apiKey) {
 		mContext = context;
 		mUrl = url;
 		mApiKey = apiKey;
+		mNotificationManager = (NotificationManager)
+				mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
 
 	/**
@@ -89,6 +93,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Stops syncthing. You should probably use SyncthingService.stopService() instead.
 	 */
 	public void shutdown() {
+		mNotificationManager.cancel(NOTIFICATION_RESTART);
 		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey, "");
 	}
 
@@ -168,9 +173,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				.setContentIntent(pi)
 				.build();
 		n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
-		NotificationManager mNotificationManager =
-				(NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotificationManager.notify(NOTIFICATION_ID, n);
+		mNotificationManager.notify(NOTIFICATION_RESTART, n);
 	}
 
 }
