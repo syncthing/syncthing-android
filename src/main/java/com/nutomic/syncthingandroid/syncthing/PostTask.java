@@ -19,9 +19,11 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 
 	private static final String TAG = "PostTask";
 
-	public static final String URI_SHUTDOWN = "/rest/shutdown";
-
 	public static final String URI_CONFIG = "/rest/config";
+
+	public static final String URI_RESTART = "/rest/restart";
+
+	public static final String URI_SHUTDOWN = "/rest/shutdown";
 
 	/**
 	 * params[0] Syncthing hostname

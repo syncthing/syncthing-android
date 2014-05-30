@@ -59,6 +59,11 @@ public class SyncthingService extends Service {
 	private static final int NOTIFICATION_ID = 1;
 
 	/**
+	 * Intent action to perform a syncthing restart.
+	 */
+	public static final String ACTION_RESTART = "restart";
+
+	/**
 	 * Path to the native, integrated syncthing binary, relative to the data folder
 	 */
 	private static final String BINARY_NAME = "lib/libsyncthing.so";
@@ -106,6 +111,9 @@ public class SyncthingService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		if (ACTION_RESTART.equals(intent.getAction())) {
+			mApi.restart();
+		}
 		return START_STICKY;
 	}
 
@@ -342,7 +350,7 @@ public class SyncthingService extends Service {
 
 		@Override
 		protected void onPostExecute(Pair<String, String> urlAndKey) {
-			mApi = new RestApi(urlAndKey.first, urlAndKey.second);
+			mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second);
 			Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 			// HACK: Make sure there is no syncthing binary left running from an improper
 			// shutdown (eg Play Store update).
