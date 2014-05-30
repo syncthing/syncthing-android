@@ -347,7 +347,7 @@ public class SyncthingService extends Service {
 			// HACK: Make sure there is no syncthing binary left running from an improper
 			// shutdown (eg Play Store update).
 			// NOTE: This will log an exception if syncthing is not actually running.
-			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second);
+			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second, "");
 			registerOnWebGuiAvailableListener(mApi);
 			new PollWebGuiAvailableTask().execute();
 			new Thread(new SyncthingRunnable()).start();

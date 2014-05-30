@@ -9,40 +9,86 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
+import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity
+		implements Preference.OnPreferenceChangeListener {
 
 	private static final String REPORT_ISSUE_KEY = "report_issue";
 
+	private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
+
+	private static final String SYNCTHING_GUI_KEY = "syncthing_gui";
+
 	private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
+
+	private Preference mVersion;
+
+	private PreferenceScreen mOptionsScreen;
+
+	private PreferenceScreen mGuiScreen;
 
 	private SyncthingService mSyncthingService;
 
 	/**
-	 * Binds to service and sets version name. The version name can not be retrieved if the service
-	 * is just started (as we don't wait until the api is up).
+	 * Binds to service and sets syncthing preferences from Rest API.
 	 */
 	private ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			Preference version = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
-			version.setSummary(mSyncthingService.getApi().getVersion());
+			mVersion.setSummary(mSyncthingService.getApi().getVersion());
+
+			for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
+				Preference pref = mOptionsScreen.getPreference(i);
+				pref.setOnPreferenceChangeListener(SettingsActivity.this);
+				String value = mSyncthingService.getApi()
+						.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
+				applyPreference(pref, value);
+			}
+
+			for (int i = 0; i < mGuiScreen.getPreferenceCount(); i++) {
+				Preference pref = mGuiScreen.getPreference(i);
+				pref.setOnPreferenceChangeListener(SettingsActivity.this);
+				String value = mSyncthingService.getApi()
+						.getValue(RestApi.TYPE_GUI, pref.getKey());
+				applyPreference(pref, value);
+			}
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
 			mSyncthingService = null;
 		}
 	};
+
+	/**
+	 * Applies the given value to the preference.
+	 *
+	 * If pref is an EditTextPreference, setText is used and the value shown as summary. If pref is
+	 * a CheckBoxPreference, setChecked is used (by parsing value as Boolean).
+	 */
+	private void applyPreference(Preference pref, String value) {
+		if (pref instanceof EditTextPreference) {
+			((EditTextPreference) pref).setText(value);
+			pref.setSummary(value);
+		}
+		else if (pref instanceof CheckBoxPreference) {
+			((CheckBoxPreference) pref).setChecked(Boolean.parseBoolean(value));
+		}
+	}
 
 	/**
 	 * Loads layout, sets version from Rest API.
@@ -64,6 +110,10 @@ public class SettingsActivity extends PreferenceActivity {
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 
 		addPreferencesFromResource(R.xml.settings);
+		PreferenceScreen screen = getPreferenceScreen();
+		mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
+		mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
+		mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
 	}
 
 	@Override
@@ -99,4 +149,30 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 	}
 
+	/**
+	 * Sends the updated value to {@link }RestApi}, and sets it as the summary
+	 * for EditTextPreference.
+	 */
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object o) {
+		if (preference instanceof EditTextPreference) {
+			String value = (String) o;
+			preference.setSummary(value);
+			EditTextPreference etp = (EditTextPreference) preference;
+			if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
+				o = Integer.parseInt((String) o);
+			}
+		}
+
+		if (mOptionsScreen.findPreference(preference.getKey()) != null) {
+			mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
+					preference.getKey().equals("ListenAddress"));
+			return true;
+		}
+		else if (mGuiScreen.findPreference(preference.getKey()) != null) {
+			mSyncthingService.getApi().setValue(RestApi.TYPE_GUI, preference.getKey(), o, false);
+			return true;
+		}
+		return false;
+	}
 }

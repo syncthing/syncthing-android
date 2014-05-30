@@ -23,6 +23,8 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
 	private static final String TAG = "GetTask";
 
+	public static final String URI_CONFIG = "/rest/config";
+
 	public static final String URI_VERSION = "/rest/version";
 
 	/**
