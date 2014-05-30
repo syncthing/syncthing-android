@@ -3,6 +3,12 @@
 
 	<string name="app_name">Syncthing</string>
 
+	<!-- Title of the notification shown when a restart is needed -->
+	<string name="restart_notif_title">Restart Needed</string>
+
+	<!-- Text of the notification shown when a restart is needed -->
+	<string name="restart_notif_text">Click here to restart syncthing now</string>
+
 	<!-- WebGuiActivity -->
 
 	<!-- Text for WebGuiActivity loading view -->
