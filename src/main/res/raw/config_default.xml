@@ -3,7 +3,7 @@
 		<address>127.0.0.1:8080</address>
 	</gui>
 	<options>
-		<listenAddress>:22000</listenAddress>
+		<listenAddress>0.0.0.0:22000</listenAddress>
 		<globalAnnounceServer>194.126.249.5:22025</globalAnnounceServer>
 		<globalAnnounceEnabled>true</globalAnnounceEnabled>
 		<localAnnounceEnabled>true</localAnnounceEnabled>
