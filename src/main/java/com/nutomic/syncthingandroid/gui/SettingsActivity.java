@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.gui;
 
 import android.annotation.TargetApi;
 import android.content.ComponentName;
@@ -16,9 +16,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
 
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;

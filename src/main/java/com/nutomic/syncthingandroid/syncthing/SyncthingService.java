@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.WebGuiActivity;
+import com.nutomic.syncthingandroid.gui.WebGuiActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
