@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.gui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
