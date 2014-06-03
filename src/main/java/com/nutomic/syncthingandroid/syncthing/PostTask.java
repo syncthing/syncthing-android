@@ -32,9 +32,8 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost post = new HttpPost(fullUri);
 		post.addHeader(new BasicHeader("X-API-Key", params[2]));
-		String responseString = null;
 		try {
-			HttpResponse response = httpclient.execute(post);
+			httpclient.execute(post);
 		}
 		catch (IOException e) {
 			Log.w(TAG, "Failed to call Rest API at " + fullUri, e);

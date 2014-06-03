@@ -326,6 +326,10 @@ public class SyncthingService extends Service {
 				finally {
 					mApi = new RestApi("http://" + syncthingUrl, apiKey);
 					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
+					// HACK: Make sure there is no syncthing binary left running from an improper
+					// shutdown (eg Play Store update).
+					// NOTE: This will log an exception if syncthing is not actually running.
+					new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN);
 					registerOnWebGuiAvailableListener(mApi);
 				}
 				new PollWebGuiAvailableTask().execute();
