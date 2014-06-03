@@ -1,16 +1,13 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,16 +21,15 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
-public class WebGuiActivity extends Activity implements SyncthingService.OnWebGuiAvailableListener {
-
-	private static final String TAG = "WebGuiActivity";
+public class WebGuiActivity extends ActionBarActivity implements SyncthingService.OnWebGuiAvailableListener {
 
 	private WebView mWebView;
+
 	private View mLoadingView;
 
 	private SyncthingService mSyncthingService;
 
-	private ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
+	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
@@ -49,7 +45,7 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 	/**
 	 * Hides the loading screen and shows the WebView once it is fully loaded.
 	 */
-	private WebViewClient mWebViewClient = new WebViewClient() {
+	private final WebViewClient mWebViewClient = new WebViewClient() {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
@@ -68,7 +64,8 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.web_gui_activity);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mLoadingView = findViewById(R.id.loading);
 		ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
@@ -81,15 +78,8 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 		if (SyncthingService.isFirstStart(this)) {
 			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
 			loadingText.setText(R.string.web_gui_creating_key);
-			new AlertDialog.Builder(this)
-					.setTitle(R.string.welcome_title)
-					.setMessage(R.string.welcome_text)
-					.setNeutralButton(android.R.string.ok, null)
-					.show();
 		}
 
-		getApplicationContext().startService(
-				new Intent(this, SyncthingService.class));
 		bindService(
 				new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
@@ -107,33 +97,6 @@ public class WebGuiActivity extends Activity implements SyncthingService.OnWebGu
 	public void onDestroy() {
 		super.onDestroy();
 		unbindService(mSyncthingServiceConnection);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		return mSyncthingService != null && mSyncthingService.isWebGuiAvailable();
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.settings:
-				startActivity(new Intent(this, SettingsActivity.class));
-				return true;
-			case R.id.exit:
-				// Make sure we unbind first.
-				finish();
-				getApplicationContext().stopService(new Intent(this, SyncthingService.class));
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
 	}
 	
 }

@@ -4,7 +4,7 @@ import android.os.Binder;
 
 public class SyncthingServiceBinder extends Binder {
 
-	SyncthingService mService;
+	private final SyncthingService mService;
 
 	public SyncthingServiceBinder(SyncthingService service) {
 		mService = service;

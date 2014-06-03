@@ -14,7 +14,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.gui.WebGuiActivity;
+import com.nutomic.syncthingandroid.gui.MainActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -104,7 +104,7 @@ public class SyncthingService extends Service {
 		public void onWebGuiAvailable();
 	}
 
-	private LinkedList<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
+	private final LinkedList<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
 			new LinkedList<OnWebGuiAvailableListener>();
 
 	private boolean mIsWebGuiAvailable = false;
@@ -292,10 +292,9 @@ public class SyncthingService extends Service {
 	 * Creates notification, starts native binary.
 	 */
 	@Override
-
 	public void onCreate() {
 		PendingIntent pi = PendingIntent.getActivity(
-				this, 0, new Intent(this, WebGuiActivity.class),
+				this, 0, new Intent(this, MainActivity.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		Notification n = new NotificationCompat.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
@@ -498,7 +497,7 @@ public class SyncthingService extends Service {
 			in = getResources().openRawResource(R.raw.config_default);
 			out = new FileOutputStream(getConfigFile());
 			byte[] buff = new byte[1024];
-			int read = 0;
+			int read;
 
 			while ((read = in.read(buff)) > 0) {
 				out.write(buff, 0, read);

@@ -9,7 +9,24 @@
 	<!-- Text of the notification shown when a restart is needed -->
 	<string name="restart_notif_text">Click here to restart syncthing now</string>
 
+	<!-- RepositoriesFragment -->
+
+	<string name="repositories_fragment_title">Repositories</string>
+
+	<!-- Shown if no repos exist -->
+	<string name="repositories_list_empty">No repositories found</string>
+
+	<!-- NodesFragment -->
+
+	<string name="nodes_fragment_title">Nodes</string>
+
+	<!-- Shown if no nodes exist -->
+	<string name="nodes_list_empty">No nodes found</string>
+
 	<!-- WebGuiActivity -->
+
+	<!-- Title of the web gui activity -->
+	<string name="web_gui_title">Web GUI</string>
 
 	<!-- Text for WebGuiActivity loading view -->
 	<string name="web_gui_loading">Waiting for GUI</string>
