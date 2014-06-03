@@ -79,9 +79,12 @@
 	</PreferenceScreen>
 
 	<Preference
-		android:key="report_issue"
-		android:title="@string/report_issue_title"
-		android:summary="@string/report_issue_summary"/>
+			android:title="@string/report_issue_title"
+			android:summary="@string/report_issue_summary" >
+		<intent
+				android:action="android.intent.action.VIEW"
+				android:data="@string/issue_tracker_url" />
+	</Preference>
 
 	<Preference
 		android:key="syncthing_version"

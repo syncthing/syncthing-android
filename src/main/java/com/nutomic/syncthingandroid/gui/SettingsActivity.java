@@ -26,8 +26,6 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 public class SettingsActivity extends PreferenceActivity
 		implements Preference.OnPreferenceChangeListener {
 
-	private static final String REPORT_ISSUE_KEY = "report_issue";
-
 	private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
 
 	private static final String SYNCTHING_GUI_KEY = "syncthing_gui";
@@ -120,19 +118,6 @@ public class SettingsActivity extends PreferenceActivity
 	public void onDestroy() {
 		super.onDestroy();
 		unbindService(mSyncthingServiceConnection);
-	}
-
-	/**
-	 * Opens issue tracker when that preference is clicked.
-	 */
-	@Override
-	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-										 Preference preference) {
-		if (REPORT_ISSUE_KEY.equals(preference.getKey())) {
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse(getString(R.string.issue_tracker_url))));
-		}
-		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
 
 	/**
