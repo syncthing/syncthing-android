@@ -157,7 +157,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Restarts the syncthing binary.
 	 */
 	public void restart() {
-		new PostTask().execute(mUrl, PostTask.URI_RESTART, "");
+		new PostTask().execute(mUrl, PostTask.URI_RESTART);
 	}
 
 	/**
