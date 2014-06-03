@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -38,6 +37,7 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost post = new HttpPost(fullUri);
 		post.addHeader(new BasicHeader("X-API-Key", params[2]));
+
 		try {
 			post.setEntity(new StringEntity(params[3]));
 			httpclient.execute(post);

@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -43,7 +42,7 @@ public class SettingsActivity extends PreferenceActivity
 	/**
 	 * Binds to service and sets syncthing preferences from Rest API.
 	 */
-	private ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
+	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
 
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;

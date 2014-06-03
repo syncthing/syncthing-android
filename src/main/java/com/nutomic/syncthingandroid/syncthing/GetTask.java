@@ -39,6 +39,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet get = new HttpGet(fullUri);
 		get.addHeader(new BasicHeader("X-API-Key", params[2]));
+
 		try {
 			HttpResponse response = httpclient.execute(get);
 			HttpEntity entity = response.getEntity();
