@@ -28,7 +28,7 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 	 * params[0] Syncthing hostname
 	 * params[1] URI to call
 	 * params[2] Syncthing API key
-	 * params[3] The request content
+	 * params[3] The request content (optional)
 	 */
 	@Override
 	protected Void doInBackground(String... params) {
@@ -39,7 +39,9 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 		post.addHeader(new BasicHeader("X-API-Key", params[2]));
 
 		try {
-			post.setEntity(new StringEntity(params[3]));
+			if (params.length > 2) {
+				post.setEntity(new StringEntity(params[3]));
+			}
 			httpclient.execute(post);
 		}
 		catch (IOException e) {
