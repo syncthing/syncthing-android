@@ -73,6 +73,11 @@ public class SyncthingService extends Service {
 	 */
 	private static final String PUBLIC_KEY_FILE = "cert.pem";
 
+    /**
+     * Name of the private key file in the data directory.
+     */
+    private static final String PRIVATE_KEY_FILE = "key.pem";
+
 	private RestApi mApi;
 
 	private final ReentrantLock mNativeLogLock = new ReentrantLock();
@@ -229,13 +234,36 @@ public class SyncthingService extends Service {
 			mOnWebGuiAvailableListeners.clear();
 		}
 	}
-	
+
+    /**
+     * Move pre 0.3.3 config files to "official" folder
+     */
+    private void moveConfigFiles() {
+        if (getFilesDir().getAbsolutePath() != getApplicationInfo().dataDir) {
+            if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
+                try {
+                    File filePubK = new File(getApplicationInfo().dataDir,PUBLIC_KEY_FILE);
+                    filePubK.renameTo( new File(getFilesDir(),PUBLIC_KEY_FILE) );
+                    File filePrivK = new File(getApplicationInfo().dataDir,PRIVATE_KEY_FILE);
+                    filePrivK.renameTo( new File(getFilesDir(),PRIVATE_KEY_FILE) );
+                    File fileConf = new File(getApplicationInfo().dataDir,CONFIG_FILE);
+                    fileConf.renameTo( new File(getFilesDir(),CONFIG_FILE) );
+                }
+                catch (Exception e) {
+                    Log.e(TAG, "Failed to move config files", e);
+                }
+            }
+        }
+    }
+
 	/**
 	 * Creates notification, starts native binary.
 	 */
 	@Override
 
 	public void onCreate() {
+        moveConfigFiles();
+
 		PendingIntent pi = PendingIntent.getActivity(
 				this, 0, new Intent(this, WebGuiActivity.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
