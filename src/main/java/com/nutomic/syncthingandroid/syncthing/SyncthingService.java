@@ -128,10 +128,10 @@ public class SyncthingService extends Service {
 			process = Runtime.getRuntime().exec("sh");
 			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+			dos.writeBytes("HOME=" + getFilesDir() + "\n");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-					"-home " + getApplicationInfo().dataDir + "\n");
+					"-home " + getFilesDir() + "\n");
 			dos.writeBytes("exit\n");
 			dos.flush();
 
@@ -320,7 +320,7 @@ public class SyncthingService extends Service {
 	}
 
 	private File getConfigFile() {
-		return new File(getApplicationInfo().dataDir, CONFIG_FILE);
+		return new File(getFilesDir(), CONFIG_FILE);
 	}
 
 	/**
@@ -392,7 +392,7 @@ public class SyncthingService extends Service {
 	 * This will return true until the public key file has been generated.
 	 */
 	public static boolean isFirstStart(Context context) {
-		return !new File(context.getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists();
+		return !new File(context.getFilesDir(), PUBLIC_KEY_FILE).exists();
 	}
 
 	/**
