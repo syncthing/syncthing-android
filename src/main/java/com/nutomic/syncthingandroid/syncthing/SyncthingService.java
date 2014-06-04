@@ -236,7 +236,7 @@ public class SyncthingService extends Service {
 	}
 
     /**
-     * Move pre 0.3.3 config files to "official" folder
+     * Move config files from old versions to "official" folder
      */
     private void moveConfigFiles() {
         if (getFilesDir().getAbsolutePath() != getApplicationInfo().dataDir) {
