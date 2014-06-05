@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -72,6 +73,11 @@ public class SyncthingService extends Service {
 	 * Name of the public key file in the data directory.
 	 */
 	private static final String PUBLIC_KEY_FILE = "cert.pem";
+
+	/**
+	 * Name of the private key file in the data directory.
+	 */
+	private static final String PRIVATE_KEY_FILE = "key.pem";
 
 	private RestApi mApi;
 
@@ -128,10 +134,10 @@ public class SyncthingService extends Service {
 			process = Runtime.getRuntime().exec("sh");
 			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getApplicationInfo().dataDir + "\n");
+			dos.writeBytes("HOME=" + getFilesDir() + "\n");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-					"-home " + getApplicationInfo().dataDir + "\n");
+					"-home " + getFilesDir() + "\n");
 			dos.writeBytes("exit\n");
 			dos.flush();
 
@@ -229,7 +235,43 @@ public class SyncthingService extends Service {
 			mOnWebGuiAvailableListeners.clear();
 		}
 	}
-	
+
+	/**
+	 * Move config file, keys, and index files to "official" folder
+	 *
+	 * Intended to bring the file locations in older installs in line with
+	 * newer versions.
+	 */
+	private void moveConfigFiles() {
+		FilenameFilter idxFilter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".idx.gz");
+			}
+		};
+
+		if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
+			try {
+				File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
+				publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
+				File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
+				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
+				File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
+				config.renameTo(new File(getFilesDir(), CONFIG_FILE));
+
+				File oldStorageDir = new File(getApplicationInfo().dataDir);
+				File[] files = oldStorageDir.listFiles(idxFilter);
+				for (File file : files) {
+					if (file.isFile()) {
+						file.renameTo(new File(getFilesDir(), file.getName()));
+					}
+				}
+			}
+			catch (Exception e) {
+				Log.e(TAG, "Failed to move config files", e);
+			}
+		}
+	}
+
 	/**
 	 * Creates notification, starts native binary.
 	 */
@@ -255,6 +297,7 @@ public class SyncthingService extends Service {
 							"Copying default config, keys will be generated automatically");
 					copyDefaultConfig();
 				}
+				moveConfigFiles();
 				updateConfig();
 
 				String syncthingUrl = null;
@@ -320,7 +363,7 @@ public class SyncthingService extends Service {
 	}
 
 	private File getConfigFile() {
-		return new File(getApplicationInfo().dataDir, CONFIG_FILE);
+		return new File(getFilesDir(), CONFIG_FILE);
 	}
 
 	/**
@@ -392,7 +435,7 @@ public class SyncthingService extends Service {
 	 * This will return true until the public key file has been generated.
 	 */
 	public static boolean isFirstStart(Context context) {
-		return !new File(context.getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists();
+		return !new File(context.getFilesDir(), PUBLIC_KEY_FILE).exists();
 	}
 
 	/**
