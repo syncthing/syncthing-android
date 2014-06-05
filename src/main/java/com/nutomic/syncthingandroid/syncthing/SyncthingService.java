@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -236,9 +237,22 @@ public class SyncthingService extends Service {
 	}
 
 	/**
-	 * Move config files from old versions to "official" folder
+	 * Move config file, keys, and index files to "official" folder
+     *
+     * Note: Intended to bring the file locations in older installs in line with
+     *       newer versions.
 	 */
 	private void moveConfigFiles() {
+		FilenameFilter idxFilter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				if (name.endsWith(".idx.gz")) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
+
 		if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
 			try {
 				File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
@@ -247,6 +261,14 @@ public class SyncthingService extends Service {
 				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
 				File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
 				config.renameTo(new File(getFilesDir(), CONFIG_FILE));
+
+                File oldStorageDir = new File(getApplicationInfo().dataDir);
+                File[] files = oldStorageDir.listFiles(idxFilter);
+                for (File file : files) {
+                    if (file.isFile()) {
+                        file.renameTo(new File(getFilesDir(), file.getName()));
+                    }
+                }
 			}
 			catch (Exception e) {
 				Log.e(TAG, "Failed to move config files", e);
