@@ -235,26 +235,24 @@ public class SyncthingService extends Service {
 		}
 	}
 
-    /**
-     * Move config files from old versions to "official" folder
-     */
-    private void moveConfigFiles() {
-        if (getFilesDir().getAbsolutePath() != getApplicationInfo().dataDir) {
-            if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
-                try {
-                    File filePubK = new File(getApplicationInfo().dataDir,PUBLIC_KEY_FILE);
-                    filePubK.renameTo( new File(getFilesDir(),PUBLIC_KEY_FILE) );
-                    File filePrivK = new File(getApplicationInfo().dataDir,PRIVATE_KEY_FILE);
-                    filePrivK.renameTo( new File(getFilesDir(),PRIVATE_KEY_FILE) );
-                    File fileConf = new File(getApplicationInfo().dataDir,CONFIG_FILE);
-                    fileConf.renameTo( new File(getFilesDir(),CONFIG_FILE) );
-                }
-                catch (Exception e) {
-                    Log.e(TAG, "Failed to move config files", e);
-                }
-            }
-        }
-    }
+	/**
+	 * Move config files from old versions to "official" folder
+	 */
+	private void moveConfigFiles() {
+		if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
+			try {
+				File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
+				publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
+				File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
+				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
+				File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
+				config.renameTo(new File(getFilesDir(), CONFIG_FILE));
+			}
+			catch (Exception e) {
+				Log.e(TAG, "Failed to move config files", e);
+			}
+		}
+	}
 
 	/**
 	 * Creates notification, starts native binary.
@@ -262,8 +260,6 @@ public class SyncthingService extends Service {
 	@Override
 
 	public void onCreate() {
-        moveConfigFiles();
-
 		PendingIntent pi = PendingIntent.getActivity(
 				this, 0, new Intent(this, WebGuiActivity.class),
 				PendingIntent.FLAG_UPDATE_CURRENT);
@@ -278,6 +274,7 @@ public class SyncthingService extends Service {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				moveConfigFiles();
 				if (isFirstStart(SyncthingService.this)) {
 					Log.i(TAG, "App started for the first time. " +
 							"Copying default config, keys will be generated automatically");
