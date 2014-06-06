@@ -106,8 +106,6 @@ public class SyncthingService extends Service {
 		return START_STICKY;
 	}
 
-	// private Handler mHandler = new Handler(Looper.getMainLooper());
-
 	/**
 	 * Thrown when execution of the native syncthing binary returns an error.
 	 * Prints the syncthing log.
