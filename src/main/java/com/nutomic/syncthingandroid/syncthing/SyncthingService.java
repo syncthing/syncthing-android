@@ -33,11 +33,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -301,12 +303,14 @@ public class SyncthingService extends Service {
 				updateConfig();
 
 				String syncthingUrl = null;
+				String apiKey = null;
 				try {
 					DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 					Document d = db.parse(getConfigFile());
-					Element options = (Element)
-							d.getDocumentElement().getElementsByTagName("gui").item(0);
-					syncthingUrl = options.getElementsByTagName("address").item(0).getTextContent();
+					Element gui = (Element) d.getDocumentElement()
+							.getElementsByTagName("gui").item(0);
+					syncthingUrl = gui.getElementsByTagName("address").item(0).getTextContent();
+					apiKey = gui.getElementsByTagName("apikey").item(0).getTextContent();
 				}
 				catch (SAXException e) {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
@@ -318,7 +322,7 @@ public class SyncthingService extends Service {
 					throw new RuntimeException("Failed to read gui url, aborting", e);
 				}
 				finally {
-					mApi = new RestApi("http://" + syncthingUrl);
+					mApi = new RestApi("http://" + syncthingUrl, apiKey);
 					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 					registerOnWebGuiAvailableListener(mApi);
 				}
@@ -379,12 +383,28 @@ public class SyncthingService extends Service {
 			Log.i(TAG, "Checking for needed config updates");
 			boolean changed = false;
 			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document d = db.parse(getConfigFile());
+			Document doc = db.parse(getConfigFile());
+			Element options = (Element) doc.getDocumentElement()
+					.getElementsByTagName("options").item(0);
+			Element gui = (Element)	doc.getDocumentElement()
+					.getElementsByTagName("gui").item(0);
 
+			// Create an API key if it does not exist.
+			if (gui.getElementsByTagName("apikey").getLength() == 0) {
+				Log.i(TAG, "Initializing API key with random string");
+				char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+				StringBuilder sb = new StringBuilder();
+				Random random = new Random();
+				for (int i = 0; i < 20; i++) {
+					sb.append(chars[random.nextInt(chars.length)]);
+				}
+				Element apiKey = doc.createElement("apikey");
+				apiKey.setTextContent(sb.toString());
+				gui.appendChild(apiKey);
+				changed = true;
+			}
 
 			// Hardcode default globalAnnounceServer ip.
-			Element options = (Element)
-					d.getDocumentElement().getElementsByTagName("options").item(0);
 			Element globalAnnounceServer = (Element)
 					options.getElementsByTagName("globalAnnounceServer").item(0);
 			if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
@@ -394,7 +414,7 @@ public class SyncthingService extends Service {
 			}
 
 			// Set ignorePerms attribute.
-			NodeList repos = d.getDocumentElement().getElementsByTagName("repository");
+			NodeList repos = doc.getDocumentElement().getElementsByTagName("repository");
 			for (int i = 0; i < repos.getLength(); i++) {
 				Element r = (Element) repos.item(i);
 				if (!r.hasAttribute("ignorePerms") ||
@@ -410,7 +430,7 @@ public class SyncthingService extends Service {
 				Log.i(TAG, "Writing updated config back to file");
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
-				DOMSource domSource = new DOMSource(d);
+				DOMSource domSource = new DOMSource(doc);
 				StreamResult streamResult = new StreamResult(getConfigFile());
 				transformer.transform(domSource, streamResult);
 			}

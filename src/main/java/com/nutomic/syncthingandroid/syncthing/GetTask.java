@@ -8,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,12 +25,18 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
 	public static final String URI_VERSION = "/rest/version";
 
+	/**
+	 * params[0] Syncthing hostname
+	 * params[1] URI to call
+	 * params[2] Syncthing API key
+	 */
 	@Override
-	protected String doInBackground(String... uri) {
-		String fullUri = uri[0] + uri[1];
+	protected String doInBackground(String... params) {
+		String fullUri = params[0] + params[1];
 		Log.i(TAG, "Sending GET request to " + fullUri);
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet get = new HttpGet(fullUri);
+		get.addHeader(new BasicHeader("X-API-Key", params[2]));
 		String responseString = null;
 		try {
 			HttpResponse response = httpclient.execute(get);

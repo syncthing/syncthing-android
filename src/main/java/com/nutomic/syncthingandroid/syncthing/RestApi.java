@@ -16,8 +16,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	private String mUrl;
 
-	public RestApi(String url) {
+	private String mApiKey;
+
+	public RestApi(String url, String apiKey) {
 		mUrl = url;
+		mApiKey = apiKey;
 	}
 
 	/**
@@ -35,7 +38,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				mVersion = version;
 				Log.i(TAG, "Syncthing version is " + mVersion);
 			}
-		}.execute(mUrl, GetTask.URI_VERSION);
+		}.execute(mUrl, GetTask.URI_VERSION, mApiKey);
 	}
 
 	/**
@@ -49,7 +52,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Stops syncthing. You should probably use SyncthingService.stopService() instead.
 	 */
 	public void shutdown() {
-		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN);
+		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
 	}
 
 }
