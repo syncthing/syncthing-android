@@ -134,7 +134,7 @@ public class SyncthingService extends Service {
 			process = Runtime.getRuntime().exec("sh");
 			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getFilesDir() + "\n");
+			dos.writeBytes("HOME=" + getFilesDir() + " ");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
 					"-home " + getFilesDir() + "\n");
