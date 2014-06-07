@@ -9,6 +9,15 @@
 	<!-- Text of the notification shown when a restart is needed -->
 	<string name="restart_notif_text">Click here to restart syncthing now</string>
 
+	<!-- ActionBar title shown when the drawer is open -->
+	<string name="system_info">System Info</string>
+
+	<!-- Title of the "share node id" menu action -->
+	<string name="share_node_id">Share Node ID</string>
+
+	<!-- Shown in the chooser dialog when sharing a Node ID -->
+	<string name="send_node_id_to">Send Node ID to</string>
+
 	<!-- RepositoriesFragment -->
 
 	<string name="repositories_fragment_title">Repositories</string>
@@ -62,5 +71,25 @@ Please report any problems you encounter.
 
 	<!-- Title of the preference showing upstream version name -->
 	<string name="syncthing_version_title">Syncthing Version</string>
+
+	<!-- RestApi -->
+
+	<!-- Strings representing units for file sizes, from smallest to largest -->
+	<string-array name="file_size_units">
+		<item>B</item>
+		<item>KB</item>
+		<item>MB</item>
+		<item>GB</item>
+		<item>TB</item>
+	</string-array>
+
+	<!-- Strings representing units for transfer rates, from smallest to largest -->
+	<string-array name="transfer_rate_units">
+		<item>b/s</item>
+		<item>Kb/s</item>
+		<item>Mb/s</item>
+		<item>Gb/s</item>
+		<item>Tb/s</item>
+	</string-array>
 
 </resources>

@@ -62,6 +62,11 @@ public class SyncthingService extends Service {
 	public static final String ACTION_RESTART = "restart";
 
 	/**
+	 * Interval in ms at which the GUI is updated (eg {@link }LocalNodeInfoFragment}).
+	 */
+	public static final int GUI_UPDATE_INTERVAL = 1000;
+
+	/**
 	 * Path to the native, integrated syncthing binary, relative to the data folder
 	 */
 	private static final String BINARY_NAME = "lib/libsyncthing.so";
@@ -109,7 +114,7 @@ public class SyncthingService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (ACTION_RESTART.equals(intent.getAction())) {
+		if (intent != null && ACTION_RESTART.equals(intent.getAction())) {
 			mApi.restart();
 		}
 		return START_STICKY;
