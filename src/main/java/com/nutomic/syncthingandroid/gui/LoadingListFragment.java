@@ -47,8 +47,6 @@ public abstract class LoadingListFragment extends Fragment implements RestApi.On
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-
-
 		if (savedInstanceState != null) {
 			mListFragment = (ListFragment) getChildFragmentManager()
 					.getFragment(savedInstanceState, ListFragment.class.getName());

@@ -14,11 +14,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Provides functions to interact with the syncthing REST API.
@@ -37,10 +39,25 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	public static final String TYPE_GUI = "GUI";
 
+	/**
+	 * Key of the map element containing connection info for the local node, in the return
+	 * value of {@link #getConnections}
+	 */
+	public static final String LOCAL_NODE_CONNECTIONS = "total";
+
 	public static class Node {
 		public String Addresses;
 		public String Name;
 		public String NodeID;
+	}
+
+	public static class SystemInfo {
+		public long alloc;
+		public double cpuPercent;
+		public boolean extAnnounceOK;
+		public int goroutines;
+		public String myID;
+		public long sys;
 	}
 
 	public static class Repository {
@@ -73,6 +90,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		}
 	}
 
+	public static class Connection {
+		public String At;
+		public long InBytesTotal;
+		public long OutBytesTotal;
+		public String Address;
+		public String ClientVersion;
+		public double Completion;
+	}
+
 	public interface OnApiAvailableListener {
 		public void onApiAvailable();
 	}
@@ -92,6 +118,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	private JSONObject mConfig;
 
+	private String mLocalNodeId;
+
 	private final NotificationManager mNotificationManager;
 
 	public RestApi(Context context, String url, String apiKey) {
@@ -110,7 +138,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	}
 
 	/**
-	 * Gets version and config, then calls any OnApiAvailableListeners.
+	 * Number of previous calls to {@link #tryIsAvailable()}.
+	 */
+	private AtomicInteger mAvailableCount = new AtomicInteger(0);
+
+	/**
+	 * Number of asynchronous calls performed in {@link #onWebGuiAvailable()}.
+	 */
+	private static final int TOTAL_STARTUP_CALLS = 3;
+
+	/**
+	 * Gets local node id, syncthing version and config, then calls all OnApiAvailableListeners.
 	 */
 	@Override
 	public void onWebGuiAvailable() {
@@ -119,6 +157,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			protected void onPostExecute(String version) {
 				mVersion = version;
 				Log.i(TAG, "Syncthing version is " + mVersion);
+				tryIsAvailable();
 			}
 		}.execute(mUrl, GetTask.URI_VERSION, mApiKey);
 		new GetTask() {
@@ -126,16 +165,35 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			protected void onPostExecute(String config) {
 				try {
 					mConfig = new JSONObject(config);
-					for (OnApiAvailableListener listener : mOnApiAvailableListeners) {
-						listener.onApiAvailable();
-					}
-					mOnApiAvailableListeners.clear();
+					tryIsAvailable();
 				}
 				catch (JSONException e) {
 					Log.w(TAG, "Failed to parse config", e);
 				}
 			}
 		}.execute(mUrl, GetTask.URI_CONFIG, mApiKey);
+		getSystemInfo(new OnReceiveSystemInfoListener() {
+			@Override
+			public void onReceiveSystemInfo(SystemInfo info) {
+				mLocalNodeId = info.myID;
+				tryIsAvailable();
+			}
+		});
+	}
+
+
+	/**
+	 * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS, notifies
+	 * all registered {@link OnApiAvailableListener} listeners.
+	 */
+	private void tryIsAvailable() {
+		int value = mAvailableCount.incrementAndGet();
+		if (value == TOTAL_STARTUP_CALLS) {
+			for (OnApiAvailableListener listener : mOnApiAvailableListeners) {
+				listener.onApiAvailable();
+			}
+			mOnApiAvailableListeners.clear();
+		}
 	}
 
 	/**
@@ -251,7 +309,41 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	}
 
 	/**
-	 * Returns a list of all nodes in the array nodes.
+	 * Result listener for {@link #getSystemInfo(OnReceiveSystemInfoListener)}.
+	 */
+	public interface OnReceiveSystemInfoListener {
+		public void onReceiveSystemInfo(SystemInfo info);
+	}
+
+	/**
+	 * Requests and parses information about current system status and resource usage.
+	 *
+	 * @param listener Callback invoked when the result is received.
+	 */
+	public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
+		new GetTask() {
+			@Override
+			protected void onPostExecute(String s) {
+				try {
+					JSONObject system = new JSONObject(s);
+					SystemInfo si = new SystemInfo();
+					si.alloc = system.getLong("alloc");
+					si.cpuPercent = system.getDouble("cpuPercent");
+					si.extAnnounceOK = system.optBoolean("extAnnounceOK", false);
+					si.goroutines = system.getInt("goroutines");
+					si.myID = system.getString("myID");
+					si.sys = system.getLong("sys");
+					listener.onReceiveSystemInfo(si);
+				}
+				catch (JSONException e) {
+					Log.w(TAG, "Failed to read system info", e);
+				}
+			}
+		}.execute(mUrl, GetTask.URI_SYSTEM, mApiKey);
+	}
+
+	/**
+	 * Returns a list of all nodes in the array nodes, excluding the local node.
 	 */
 	private List<Node> getNodes(JSONArray nodes) throws JSONException {
 		List<Node> ret;
@@ -264,7 +356,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			}
 			n.Name = json.getString("Name");
 			n.NodeID = json.getString("NodeID");
-			ret.add(n);
+			if (!n.NodeID.equals(mLocalNodeId)) {
+				ret.add(n);
+			}
 		}
 		return ret;
 	}
@@ -321,6 +415,71 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		else {
 			mOnApiAvailableListeners.addLast(listener);
 		}
+	}
+
+	/**
+	 * Converts a number of bytes to a human readable file size (eg 3.5 GB).
+	 */
+	public String readableFileSize(long bytes) {
+		final String[] units = mContext.getResources().getStringArray(R.array.file_size_units);
+		if (bytes <= 0) return "0 " + units[0];
+		int digitGroups = (int) (Math.log10(bytes)/Math.log10(1024));
+		return new DecimalFormat("#,##0.#")
+				.format(bytes/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+	}
+
+	/**
+	 * Converts a number of bytes to a human readable transfer rate in bits (eg 100 Kb/s).
+	 */
+	public String readableTransferRate(long bytes) {
+		bytes *= 8;
+		final String[] units = mContext.getResources().getStringArray(R.array.transfer_rate_units);
+		if (bytes <= 0) return "0 " + units[0];
+		int digitGroups = (int) (Math.log10(bytes)/Math.log10(1024));
+		return new DecimalFormat("#,##0.#")
+				.format(bytes/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+	}
+
+	/**
+	 * Listener for {@link #getConnections}.
+	 */
+	public interface OnReceiveConnectionsListener {
+		public void onReceiveConnections(Map<String, Connection> connections);
+	}
+
+	/**
+	 * Returns connection info for the local node and all connected nodes.
+	 *
+	 * Use the key {@link }LOCAL_NODE_CONNECTIONS} to get connection info for the local node.
+	 */
+	public void getConnections(final OnReceiveConnectionsListener listener) {
+		new GetTask() {
+			@Override
+			protected void onPostExecute(String s) {
+				try {
+					JSONObject json = new JSONObject(s);
+					String[] names = json.names().join(" ").replace("\"", "").split(" ");
+					HashMap<String, Connection> connections = new HashMap<String, Connection>();
+					for (String address : names) {
+						Connection c = new Connection();
+						JSONObject conn = json.getJSONObject(address);
+						c.Address = address;
+						c.At = conn.getString("At");
+						c.InBytesTotal = conn.getLong("InBytesTotal");
+						c.OutBytesTotal = conn.getLong("OutBytesTotal");
+						c.Address = conn.getString("Address");
+						c.ClientVersion = conn.getString("ClientVersion");
+						c.Completion = conn.getDouble("Completion");
+						connections.put(address, c);
+
+					}
+					listener.onReceiveConnections(connections);
+				}
+				catch (JSONException e) {
+					Log.w(TAG, "Failed to parse connections", e);
+				}
+			}
+		}.execute(mUrl, GetTask.URI_CONNECTIONS, mApiKey);
 	}
 
 }

@@ -33,7 +33,6 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 	@Override
 	protected Void doInBackground(String... params) {
 		String fullUri = params[0] + params[1];
-		Log.i(TAG, "Sending POST request to " + fullUri);
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost post = new HttpPost(fullUri);
 		post.addHeader(new BasicHeader("X-API-Key", params[2]));

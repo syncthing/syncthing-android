@@ -27,6 +27,10 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
 	public static final String URI_VERSION = "/rest/version";
 
+	public static final String URI_SYSTEM = "/rest/system";
+
+	public static final String URI_CONNECTIONS = "/rest/connections";
+
 	/**
 	 * params[0] Syncthing hostname
 	 * params[1] URI to call
