@@ -432,12 +432,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Converts a number of bytes to a human readable transfer rate in bits (eg 100 Kb/s).
 	 */
 	public String readableTransferRate(long bytes) {
-		bytes *= 8;
+		long bits = bytes * 8;
 		final String[] units = mContext.getResources().getStringArray(R.array.transfer_rate_units);
-		if (bytes <= 0) return "0 " + units[0];
-		int digitGroups = (int) (Math.log10(bytes)/Math.log10(1024));
+		if (bits <= 0) return "0 " + units[0];
+		int digitGroups = (int) (Math.log10(bits)/Math.log10(1024));
 		return new DecimalFormat("#,##0.#")
-				.format(bytes/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+				.format(bits/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
 	}
 
 	/**
