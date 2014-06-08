@@ -18,6 +18,9 @@
 	<!-- Shown in the chooser dialog when sharing a Node ID -->
 	<string name="send_node_id_to">Send Node ID to</string>
 
+	<!-- Text for RepositoriesFragment and NodesFragment loading view -->
+	<string name="api_loading">Waiting for API</string>
+
 	<!-- RepositoriesFragment -->
 
 	<string name="repositories_fragment_title">Repositories</string>
