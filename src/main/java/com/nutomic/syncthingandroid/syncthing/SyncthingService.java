@@ -6,6 +6,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -136,7 +138,7 @@ public class SyncthingService extends Service {
 			process = Runtime.getRuntime().exec("sh");
 			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getFilesDir() + "\n");
+			dos.writeBytes("HOME=" + getFilesDir() + " ");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
 					"-home " + getFilesDir() + "\n");
@@ -292,6 +294,8 @@ public class SyncthingService extends Service {
 		startForeground(NOTIFICATION_ID, n);
 
 		new Thread(new Runnable() {
+			private Handler mHandler = new Handler(Looper.getMainLooper());
+
 			@Override
 			public void run() {
 				if (isFirstStart(SyncthingService.this)) {
@@ -326,7 +330,14 @@ public class SyncthingService extends Service {
 					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 					registerOnWebGuiAvailableListener(mApi);
 				}
-				new PollWebGuiAvailableTask().execute();
+				
+				// run on the main GUI thread that WebGui occupies
+				mHandler.post(new Runnable() {
+					public void run() {
+						new PollWebGuiAvailableTask().execute();
+					}
+				});
+				
 				runNative();
 			}
 		}).start();
