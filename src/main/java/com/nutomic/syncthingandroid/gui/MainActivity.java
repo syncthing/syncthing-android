@@ -214,7 +214,8 @@ public class MainActivity extends ActionBarActivity
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mLocalNodeInfoFragment.onOptionsItemSelected(item)) {
+		if (mLocalNodeInfoFragment.onOptionsItemSelected(item) ||
+				mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
 
@@ -238,7 +239,6 @@ public class MainActivity extends ActionBarActivity
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
 		mDrawerToggle.syncState();
 	}
 
