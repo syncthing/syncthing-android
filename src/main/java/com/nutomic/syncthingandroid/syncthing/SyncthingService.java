@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -136,7 +137,7 @@ public class SyncthingService extends Service {
 			process = Runtime.getRuntime().exec("sh");
 			dos = new DataOutputStream(process.getOutputStream());
 			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getFilesDir() + "\n");
+			dos.writeBytes("HOME=" + getFilesDir() + " ");
 			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
 			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
 					"-home " + getFilesDir() + "\n");
@@ -294,6 +295,7 @@ public class SyncthingService extends Service {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				Looper.prepare();
 				if (isFirstStart(SyncthingService.this)) {
 					Log.i(TAG, "App started for the first time. " +
 							"Copying default config, keys will be generated automatically");
