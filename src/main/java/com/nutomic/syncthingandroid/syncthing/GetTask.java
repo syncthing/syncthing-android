@@ -5,15 +5,19 @@ import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 /**
  * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
@@ -31,16 +35,24 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
 	public static final String URI_CONNECTIONS = "/rest/connections";
 
+	public static final String URI_MODEL = "/rest/model";
+
 	/**
 	 * params[0] Syncthing hostname
 	 * params[1] URI to call
 	 * params[2] Syncthing API key
+	 * params[3] optional parameter key
+	 * params[4] optional parameter value
 	 */
 	@Override
 	protected String doInBackground(String... params) {
 		String fullUri = params[0] + params[1];
-		Log.i(TAG, "Sending GET request to " + fullUri);
 		HttpClient httpclient = new DefaultHttpClient();
+		if (params.length == 5) {
+			LinkedList<NameValuePair> urlParams = new LinkedList<NameValuePair>();
+			urlParams.add(new BasicNameValuePair(params[2], params[3]));
+			fullUri += "?" + URLEncodedUtils.format(urlParams, "utf-8");
+		}
 		HttpGet get = new HttpGet(fullUri);
 		get.addHeader(new BasicHeader("X-API-Key", params[2]));
 
