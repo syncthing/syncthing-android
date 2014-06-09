@@ -4,8 +4,8 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'com.android.tools.build:gradle:0.9.0+'
-		classpath 'com.alexvasilkov:android_sign:0.2'
+		classpath 'com.android.tools.build:gradle:0.11+'
+		classpath 'com.alexvasilkov:android_sign:0.2+'
 	}
 }
 
@@ -24,7 +24,7 @@ dependencies {
 
 android {
 	compileSdkVersion 19
-	buildToolsVersion "19.0.3"
+	buildToolsVersion "19.1.0"
 
 	defaultConfig {
 		versionCode getVersionCodeFromManifest()
@@ -51,7 +51,7 @@ android {
 
 	buildTypes {
 		debug {
-			packageNameSuffix ".debug"
+			applicationIdSuffix ".debug"
 			debuggable true
 		}
 		release {
