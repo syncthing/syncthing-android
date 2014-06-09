@@ -25,6 +25,9 @@
 
 	<string name="repositories_fragment_title">Repositories</string>
 
+	<!-- Format string for repository progress. First parameter is status string, second is sync percentage -->
+	<string name="repo_progress_format">%1$s (%2$d%%)</string>
+
 	<!-- Shown if no repos exist -->
 	<string name="repositories_list_empty">No repositories found</string>
 
@@ -34,6 +37,38 @@
 
 	<!-- Shown if no nodes exist -->
 	<string name="nodes_list_empty">No nodes found</string>
+
+	<!-- Indicates that a repo is fully synced to the local node -->
+	<string name="node_up_to_date">Up to Date</string>
+
+	<!-- Indicates that the node is currently syncing. Parameter is sync percentage -->
+	<string name="node_syncing">Syncing (%1$d%%)</string>
+
+	<!-- Indicates that there is no connection to the node -->
+	<string name="node_disconnected">Disconnected</string>
+
+	<!-- Title for current download rate -->
+	<string name="download_title">Download</string>
+
+	<!-- Title for current upload rate -->
+	<string name="upload_title">Upload</string>
+
+	<!-- LocalNodeInfoFragment -->
+
+	<!-- Same as download_title with a colon and space appended -->
+	<string name="download_title_colon">Download:\u0020</string>
+
+	<!-- Same as upload_title with a colon and space appended -->
+	<string name="upload_title_colon">Upload:\u0020</string>
+
+	<!-- Title for current CPU usage -->
+	<string name="cpu_usage">CPU Usage</string>
+
+	<!-- Title for current RAM usage -->
+	<string name="ram_usage">RAM Usage</string>
+
+	<!-- Title for announce server status -->
+	<string name="announce_server">Announce Server</string>
 
 	<!-- WebGuiActivity -->
 

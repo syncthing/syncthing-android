@@ -94,9 +94,26 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		public String At;
 		public long InBytesTotal;
 		public long OutBytesTotal;
+		public long InBits;
+		public long OutBits;
 		public String Address;
 		public String ClientVersion;
-		public double Completion;
+		public int Completion;
+	}
+
+	public static class Model {
+		public long globalBytes;
+		public long globalDeleted;
+		public long globalFiles;
+		public long localBytes;
+		public long localDeleted;
+		public long localFiles;
+		public long inSyncBytes;
+		public long inSyncFiles;
+		public long needBytes;
+		public long needFiles;
+		public String state;
+		public String invalid;
 	}
 
 	public interface OnApiAvailableListener {
@@ -121,6 +138,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	private String mLocalNodeId;
 
 	private final NotificationManager mNotificationManager;
+
+	/**
+	 * Stores the result of the last successful request to {@link GetTask#URI_CONNECTIONS},
+	 * or an empty HashMap.
+	 */
+	private HashMap<String, Connection> mPreviousConnections = new HashMap<String, Connection>();
+
+	/**
+	 * Stores the timestamp of the last successful request to {@link GetTask#URI_CONNECTIONS}.
+	 */
+	private long mPreviousConnectionTime = 0;
 
 	public RestApi(Context context, String url, String apiKey) {
 		mContext = context;
@@ -420,8 +448,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Converts a number of bytes to a human readable file size (eg 3.5 GB).
 	 */
-	public String readableFileSize(long bytes) {
-		final String[] units = mContext.getResources().getStringArray(R.array.file_size_units);
+	public static String readableFileSize(Context context, long bytes) {
+		final String[] units = context.getResources().getStringArray(R.array.file_size_units);
 		if (bytes <= 0) return "0 " + units[0];
 		int digitGroups = (int) (Math.log10(bytes)/Math.log10(1024));
 		return new DecimalFormat("#,##0.#")
@@ -431,9 +459,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Converts a number of bytes to a human readable transfer rate in bits (eg 100 Kb/s).
 	 */
-	public String readableTransferRate(long bytes) {
-		long bits = bytes * 8;
-		final String[] units = mContext.getResources().getStringArray(R.array.transfer_rate_units);
+	public static String readableTransferRate(Context context, long bits) {
+		final String[] units = context.getResources().getStringArray(R.array.transfer_rate_units);
 		if (bits <= 0) return "0 " + units[0];
 		int digitGroups = (int) (Math.log10(bits)/Math.log10(1024));
 		return new DecimalFormat("#,##0.#")
@@ -442,6 +469,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	/**
 	 * Listener for {@link #getConnections}.
+	 *
+	 * NOTE: The parameter connections is cached internally. Do not modify it or
+	 *       any of its contents.
 	 */
 	public interface OnReceiveConnectionsListener {
 		public void onReceiveConnections(Map<String, Connection> connections);
@@ -456,6 +486,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		new GetTask() {
 			@Override
 			protected void onPostExecute(String s) {
+				Long now = System.currentTimeMillis();
+				Long difference = (now - mPreviousConnectionTime) / 1000;
+				if (difference < 1) {
+					listener.onReceiveConnections(mPreviousConnections);
+					return;
+				}
+
 				try {
 					JSONObject json = new JSONObject(s);
 					String[] names = json.names().join(" ").replace("\"", "").split(" ");
@@ -469,17 +506,69 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 						c.OutBytesTotal = conn.getLong("OutBytesTotal");
 						c.Address = conn.getString("Address");
 						c.ClientVersion = conn.getString("ClientVersion");
-						c.Completion = conn.getDouble("Completion");
+						c.Completion = conn.getInt("Completion");
+
+						Connection prev = (mPreviousConnections.containsKey(address))
+								? mPreviousConnections.get(address)
+								: new Connection();
+						mPreviousConnectionTime = now;
+						if (difference != 0) {
+							c.InBits = Math.max(0, 8 *
+									(conn.getLong("InBytesTotal") - prev.InBytesTotal) / difference);
+							c.OutBits = Math.max(0, 8 *
+									(conn.getLong("OutBytesTotal") - prev.OutBytesTotal) / difference);
+						}
+
 						connections.put(address, c);
 
 					}
-					listener.onReceiveConnections(connections);
+					mPreviousConnections = connections;
+					listener.onReceiveConnections(mPreviousConnections);
 				}
 				catch (JSONException e) {
 					Log.w(TAG, "Failed to parse connections", e);
 				}
 			}
 		}.execute(mUrl, GetTask.URI_CONNECTIONS, mApiKey);
+	}
+
+
+	/**
+	 * Listener for {@link #getModel}.
+	 */
+	public interface OnReceiveModelListener {
+		public void onReceiveModel(String repoId, Model model);
+	}
+
+	/**
+	 * Returns status information about the repo with the given ID.
+	 */
+	public void getModel(final String repoId, final OnReceiveModelListener listener) {
+		new GetTask() {
+			@Override
+			protected void onPostExecute(String s) {
+				try {
+					JSONObject json = new JSONObject(s);
+					Model m = new Model();
+					m.globalBytes = json.getLong("globalBytes");
+					m.globalDeleted = json.getLong("globalDeleted");
+					m.globalFiles = json.getLong("globalFiles");
+					m.localBytes = json.getLong("localBytes");
+					m.localDeleted = json.getLong("localDeleted");
+					m.localFiles = json.getLong("localFiles");
+					m.inSyncBytes = json.getLong("inSyncBytes");
+					m.inSyncFiles = json.getLong("inSyncFiles");
+					m.needBytes = json.getLong("needBytes");
+					m.needFiles = json.getLong("needFiles");
+					m.state = json.getString("state");
+					m.invalid = json.optString("invalid");
+					listener.onReceiveModel(repoId, m);
+				}
+				catch (JSONException e) {
+					Log.w(TAG, "Failed to read repository info", e);
+				}
+			}
+		}.execute(mUrl, GetTask.URI_MODEL, mApiKey, "repo", repoId);
 	}
 
 }

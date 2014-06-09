@@ -12,7 +12,6 @@
 		<TextView
 				android:id="@+id/node_id_title"
 				android:textStyle="bold"
-				android:text="Node ID"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"/>
 
@@ -30,7 +29,7 @@
 		android:layout_height="wrap_content" >
 		<TextView
 			android:id="@+id/cpu_usage_title"
-			android:text="CPU Usage"
+			android:text="@string/cpu_usage"
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
@@ -48,7 +47,7 @@
 		android:layout_height="wrap_content" >
 		<TextView
 			android:id="@+id/ram_usage_title"
-			android:text="RAM Usage"
+			android:text="@string/ram_usage"
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
@@ -66,7 +65,7 @@
 		android:layout_height="wrap_content" >
 		<TextView
 			android:id="@+id/download_title"
-			android:text="Download"
+			android:text="@string/download_title"
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
@@ -84,7 +83,7 @@
 		android:layout_height="wrap_content" >
 		<TextView
 			android:id="@+id/upload_title"
-			android:text="Upload"
+			android:text="@string/upload_title"
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
@@ -102,7 +101,7 @@
 		android:layout_height="wrap_content" >
 		<TextView
 			android:id="@+id/announce_server_title"
-			android:text="Announce Server"
+			android:text="@string/announce_server"
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />

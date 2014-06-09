@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:layout_width="fill_parent"
-			  android:layout_height="?android:attr/listPreferredItemHeight" >
+			  android:layout_height="?android:attr/listPreferredItemHeight"
+			  android:padding="4dip" >
 
 	<TextView
 			android:id="@+id/name"
@@ -11,7 +11,46 @@
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:lines="1"
-			android:ellipsize="end"
-			android:padding="4dip" />
+			android:ellipsize="end" />
 
-</LinearLayout>
+	<TextView
+		android:id="@+id/status"
+		android:layout_alignParentRight="true"
+		android:layout_alignBottom="@+id/name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<TextView
+		android:id="@+id/download_title"
+		android:text="@string/download_title_colon"
+		android:layout_below="@id/name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<TextView
+		android:id="@+id/download"
+		android:layout_alignBaseline="@id/download_title"
+		android:layout_toRightOf="@id/download_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<TextView
+		android:id="@+id/upload_title"
+		android:text="@string/upload_title_colon"
+		android:layout_below="@id/download_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<TextView
+		android:id="@+id/upload"
+		android:layout_alignBaseline="@id/upload_title"
+		android:layout_toRightOf="@id/upload_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

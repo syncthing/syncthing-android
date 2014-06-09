@@ -18,12 +18,12 @@ package com.nutomic.syncthingandroid.gui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
@@ -117,8 +117,10 @@ public abstract class LoadingListFragment extends Fragment implements RestApi.On
 
 	/**
 	 * Called when the list adapter should be set.
-	 * @param activity
 	 */
 	public abstract void onInitAdapter(MainActivity activity);
 
+	public ListView getListView() {
+		return mListFragment.getListView();
+	}
 }

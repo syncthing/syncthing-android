@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -119,14 +118,14 @@ public class LocalNodeInfoFragment extends Fragment
 	public void onReceiveSystemInfo(RestApi.SystemInfo info) {
 		mNodeId.setText(info.myID);
 		mCpuUsage.setText(new  DecimalFormat("0.00").format(info.cpuPercent) + "%");
-		mRamUsage.setText(mActivity.getApi().readableFileSize(info.sys));
+		mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
 		if (info.extAnnounceOK) {
 			mAnnounceServer.setText("Online");
-			mAnnounceServer.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+			mAnnounceServer.setTextColor(getResources().getColor(R.color.text_green));
 		}
 		else {
 			mAnnounceServer.setText("Offline");
-			mAnnounceServer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+			mAnnounceServer.setTextColor(getResources().getColor(R.color.text_red));
 		}
 	}
 
@@ -136,8 +135,8 @@ public class LocalNodeInfoFragment extends Fragment
 	@Override
 	public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
 		RestApi.Connection c = connections.get(RestApi.LOCAL_NODE_CONNECTIONS);
-		mDownload.setText(mActivity.getApi().readableTransferRate(c.InBytesTotal));
-		mUpload.setText(mActivity.getApi().readableTransferRate(c.OutBytesTotal));
+		mDownload.setText(RestApi.readableTransferRate(mActivity, c.InBits));
+		mUpload.setText(RestApi.readableTransferRate(mActivity, c.OutBits));
 	}
 
 	/**
