@@ -6,6 +6,7 @@ cd "$GOPATH/src/github.com/calmh/syncthing/"
 ./build.sh assets
 
 export GOOS=linux
+export ENVIRONMENT=android
 
 export GOARCH=386
 
