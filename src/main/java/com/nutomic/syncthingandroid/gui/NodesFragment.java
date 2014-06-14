@@ -1,12 +1,11 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.content.Intent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.nutomic.syncthingandroid.NodeAdapter;
+import com.nutomic.syncthingandroid.util.NodeAdapter;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;

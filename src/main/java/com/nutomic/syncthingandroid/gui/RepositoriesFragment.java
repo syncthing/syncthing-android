@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.RepositoryAdapter;
+import com.nutomic.syncthingandroid.util.RepositoryAdapter;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 

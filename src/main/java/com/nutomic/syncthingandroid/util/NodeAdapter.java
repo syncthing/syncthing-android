@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.util.HashMap;
