@@ -415,10 +415,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				r.ReadOnly = json.getBoolean("ReadOnly");
 				JSONObject versioning = json.getJSONObject("Versioning");
 				if (versioning.getString("Type").equals("simple")) {
-					Log.d(TAG, mConfig.toString());
 					SimpleVersioning sv = new SimpleVersioning();
 					JSONObject params = versioning.getJSONObject("Params");
-					Log.d(TAG, params.toString());
 					sv.setParams(params.getInt("keep"));
 					r.Versioning = sv;
 				}
@@ -605,8 +603,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			n.put("NodeID", node.NodeID);
 			n.put("Name", node.Name);
 			n.put("Addresses", listToJson(node.Addresses.split(" ")));
-			Log.d(TAG, n.toString());
-			Log.d(TAG, nodes.toString());
 			configUpdated();
 		}
 		catch (JSONException e) {
@@ -614,6 +610,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		}
 	}
 
+	/**
+	 * Deletes the given node from syncthing.
+	 */
 	public void deleteNode(Node node) {
 		try {
 			JSONArray nodes = mConfig.getJSONArray("Nodes");
@@ -633,6 +632,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		}
 	}
 
+	/**
+	 * Updates or creates the given node.
+	 */
 	public void editRepository(Repository repository, boolean create) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
@@ -652,6 +654,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			}
 			r.put("Directory", repository.Directory);
 			r.put("ID", repository.ID);
+			r.put("IgnorePerms", true);
 			r.put("ReadOnly", repository.ReadOnly);
 			JSONArray nodes = new JSONArray();
 			for (Node n : repository.Nodes) {
@@ -677,6 +680,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		}
 	}
 
+	/**
+	 * Deletes the given repository from syncthing.
+	 */
 	public void deleteRepository(Repository repository) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
@@ -696,6 +702,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		}
 	}
 
+	/**
+	 * Replacement for {@link org.json.JSONArray#remove(int)}, which is not available on older APIs.
+	 */
 	private JSONArray delete(JSONArray array, JSONObject delete) throws JSONException {
 		JSONArray newArray = new JSONArray();
 		for (int i = 0; i < array.length(); i++) {
