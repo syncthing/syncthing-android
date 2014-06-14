@@ -28,7 +28,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 /**
- * Shows {@link RepositoriesFragment} and {@link NodesFragment} in different tabs, and
+ * Shows {@link ReposFragment} and {@link NodesFragment} in different tabs, and
  * {@link LocalNodeInfoFragment} in the navigation drawer.
  */
 public class MainActivity extends ActionBarActivity
@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity
 
 	};
 
-	private RepositoriesFragment mRepositoriesFragment;
+	private ReposFragment mRepositoriesFragment;
 
 	private NodesFragment mNodesFragment;
 
@@ -137,8 +137,8 @@ public class MainActivity extends ActionBarActivity
 
 		if (savedInstanceState != null) {
 			FragmentManager fm = getSupportFragmentManager();
-			mRepositoriesFragment = (RepositoriesFragment) fm.getFragment(
-					savedInstanceState, RepositoriesFragment.class.getName());
+			mRepositoriesFragment = (ReposFragment) fm.getFragment(
+					savedInstanceState, ReposFragment.class.getName());
 			mNodesFragment = (NodesFragment) fm.getFragment(
 					savedInstanceState, NodesFragment.class.getName());
 			mLocalNodeInfoFragment = (LocalNodeInfoFragment) fm.getFragment(
@@ -146,7 +146,7 @@ public class MainActivity extends ActionBarActivity
 			mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
 		}
 		else {
-			mRepositoriesFragment = new RepositoriesFragment();
+			mRepositoriesFragment = new ReposFragment();
 			mNodesFragment = new NodesFragment();
 			mLocalNodeInfoFragment = new LocalNodeInfoFragment();
 		}
@@ -188,7 +188,7 @@ public class MainActivity extends ActionBarActivity
 		// Avoid crash if called during startup.
 		if (mRepositoriesFragment != null && mNodesFragment != null) {
 			FragmentManager fm = getSupportFragmentManager();
-			fm.putFragment(outState, RepositoriesFragment.class.getName(), mRepositoriesFragment);
+			fm.putFragment(outState, ReposFragment.class.getName(), mRepositoriesFragment);
 			fm.putFragment(outState, NodesFragment.class.getName(), mNodesFragment);
 			fm.putFragment(outState, LocalNodeInfoFragment.class.getName(), mLocalNodeInfoFragment);
 			outState.putInt("currentTab", mViewPager.getCurrentItem());

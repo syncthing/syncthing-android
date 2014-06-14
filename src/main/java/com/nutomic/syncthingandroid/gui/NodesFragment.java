@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.nutomic.syncthingandroid.util.NodeAdapter;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.NodeAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;

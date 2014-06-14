@@ -17,12 +17,12 @@ import java.util.List;
 /**
  * Generates item views for repository items.
  */
-public class RepositoryAdapter extends ArrayAdapter<RestApi.Repository>
+public class ReposAdapter extends ArrayAdapter<RestApi.Repository>
 		implements RestApi.OnReceiveModelListener {
 
 	private HashMap<String, RestApi.Model> mModels = new HashMap<String, RestApi.Model>();
 
-	public RepositoryAdapter(Context context) {
+	public ReposAdapter(Context context) {
 		super(context, R.layout.node_list_item);
 	}
 
@@ -31,7 +31,7 @@ public class RepositoryAdapter extends ArrayAdapter<RestApi.Repository>
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.repository_list_item, parent, false);
+			convertView = inflater.inflate(R.layout.repo_list_item, parent, false);
 		}
 
 		TextView id = (TextView) convertView.findViewById(R.id.id);

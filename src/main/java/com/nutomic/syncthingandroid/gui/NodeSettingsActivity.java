@@ -20,7 +20,6 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
