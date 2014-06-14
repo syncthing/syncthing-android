@@ -45,5 +45,21 @@
 
 		<service android:name=".syncthing.SyncthingService" />
 
+		<activity
+				android:name=".gui.RepoSettingsActivity"
+				android:theme="@style/DialogWhenLargeCompat" >
+			<meta-data
+					android:name="android.support.PARENT_ACTIVITY"
+					android:value=".gui.MainActivity" />
+		</activity>
+
+		<activity
+				android:name=".gui.NodeSettingsActivity"
+				android:theme="@style/DialogWhenLargeCompat" >
+			<meta-data
+					android:name="android.support.PARENT_ACTIVITY"
+					android:value=".gui.MainActivity" />
+		</activity>
+
 	</application>
 </manifest> 

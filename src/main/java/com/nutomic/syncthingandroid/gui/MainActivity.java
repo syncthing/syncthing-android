@@ -32,7 +32,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
  * {@link LocalNodeInfoFragment} in the navigation drawer.
  */
 public class MainActivity extends ActionBarActivity
-		implements SyncthingService.OnWebGuiAvailableListener{
+		implements SyncthingService.OnWebGuiAvailableListener {
 
 	private SyncthingService mSyncthingService;
 
@@ -197,7 +197,7 @@ public class MainActivity extends ActionBarActivity
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu, menu);
+		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return true;
 	}
 
@@ -220,6 +220,16 @@ public class MainActivity extends ActionBarActivity
 		}
 
 		switch (item.getItemId()) {
+			case R.id.add_node:
+				Intent intent = new Intent(this, NodeSettingsActivity.class);
+				intent.setAction(NodeSettingsActivity.ACTION_CREATE);
+				startActivity(intent);
+				return true;
+			case R.id.add_repository:
+				intent = new Intent(this, RepoSettingsActivity.class);
+				intent.setAction(RepoSettingsActivity.ACTION_CREATE);
+				startActivity(intent);
+				return true;
 			case R.id.web_gui:
 				startActivity(new Intent(this, WebGuiActivity.class));
 				return true;

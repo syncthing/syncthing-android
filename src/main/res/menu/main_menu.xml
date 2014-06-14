@@ -8,6 +8,18 @@
 			android:icon="@android:drawable/ic_menu_share"
 			android:title="@string/share_node_id"
 			app:showAsAction="ifRoom" />
+
+	<item
+			android:id="@+id/add_repository"
+			android:title="@string/add_repo"
+			app:showAsAction="ifRoom" />
+
+	<item
+			android:id="@+id/add_node"
+			android:title="@string/add_node"
+			app:showAsAction="ifRoom" />
+
+
 	<item
 			android:id="@+id/web_gui"
 			android:title="@string/web_gui_title" />

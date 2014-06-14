@@ -1,5 +1,11 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.content.Intent;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
 import com.nutomic.syncthingandroid.NodeAdapter;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -12,7 +18,7 @@ import java.util.TimerTask;
  * Displays a list of all existing nodes.
  */
 public class NodesFragment extends LoadingListFragment implements
-		RestApi.OnApiAvailableListener {
+		RestApi.OnApiAvailableListener, ListView.OnItemClickListener {
 
 	private NodeAdapter mAdapter;
 
@@ -56,6 +62,14 @@ public class NodesFragment extends LoadingListFragment implements
 			mTimer.cancel();
 			mTimer = null;
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+		Intent intent = new Intent(getActivity(), NodeSettingsActivity.class);
+		intent.setAction(NodeSettingsActivity.ACTION_EDIT);
+		intent.putExtra(NodeSettingsActivity.KEY_NODE_ID, mAdapter.getItem(i).NodeID);
+		startActivity(intent);
 	}
 
 }

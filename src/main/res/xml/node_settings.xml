@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+		android:persistent="false" >
+
+	<EditTextPreference
+			android:key="node_id"
+			android:title="Node ID"
+			android:text="7TGPF3-AYRIE6-YVAHJN-TYWH5D-KFDF6B-7JUHMI-LNIC2S-YE5QIV-FH2Q" />
+
+	<EditTextPreference
+			android:key="name"
+			android:title="Name"
+			android:text="laptop" />
+
+	<EditTextPreference
+			android:key="addresses"
+			android:title="Addresses"
+			android:text="dynamic" />
+
+	<Preference
+			android:key="version"
+			android:title="@string/syncthing_version_title"
+			style="?android:preferenceInformationStyle"	/>
+
+	<Preference
+			android:key="current_address"
+			android:title="Current Address"
+			style="?android:preferenceInformationStyle"	/>
+
+	<Preference
+			android:key="delete"
+			android:title="Delete Node" />
+
+</PreferenceScreen>

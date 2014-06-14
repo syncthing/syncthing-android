@@ -22,6 +22,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 /**
  * {@link android.support.v4.app.ListFragment} that shows a configurable loading text.
  */
-public abstract class LoadingListFragment extends Fragment implements RestApi.OnApiAvailableListener {
+public abstract class LoadingListFragment extends Fragment implements RestApi.OnApiAvailableListener, AdapterView.OnItemClickListener {
 
 	private boolean mInitialized = false;
 
@@ -111,6 +112,7 @@ public abstract class LoadingListFragment extends Fragment implements RestApi.On
 		if (!mInitialized && getActivity() != null &&
 				activity.getApi() != null && mListFragment != null) {
 			onInitAdapter(activity);
+			getListView().setOnItemClickListener(this);
 			mInitialized = true;
 		}
 	}

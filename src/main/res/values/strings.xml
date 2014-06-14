@@ -12,6 +12,14 @@
 	<!-- ActionBar title shown when the drawer is open -->
 	<string name="system_info">System Info</string>
 
+	<!-- MainActivity -->
+
+	<!-- Title of the "add repo" menu action -->
+	<string name="add_repo">Add Repository</string>
+
+	<!-- Title of the "add node" menu action -->
+	<string name="add_node">Add Node</string>
+
 	<!-- Title of the "share node id" menu action -->
 	<string name="share_node_id">Share Node ID</string>
 
@@ -69,6 +77,43 @@
 
 	<!-- Title for announce server status -->
 	<string name="announce_server">Announce Server</string>
+
+	<!-- RepoSettingsActivity -->
+
+	<!-- Title for RepoSettingsActivity in create mode -->
+	<string name="create_repo">Create Repository</string>
+
+	<!-- Title for RepoSettingsActivity in edit mode -->
+	<string name="edit_repo">Edit Repository</string>
+
+	<!-- Used to confirm repo/node creation -->
+	<string name="create">Create</string>
+
+	<!-- Dialog shown when attempting to delete a repository -->
+	<string name="delete_repo_confirm">Do you really want to delete this repository?</string>
+
+	<!-- Toast shown when trying to create a repository with an empty ID -->
+	<string name="repo_id_required">The repository ID must not be empty</string>
+
+	<!-- Toast shown when trying to create a repository with an empty path -->
+	<string name="repo_path_required">The repository path must not be empty</string>
+
+	<!-- NodeSettingsActivity -->
+
+	<!-- Title for NodeSettingsActivity in create mode -->
+	<string name="create_node">Create Node</string>
+
+	<!-- Title for NodeSettingsActivity in edit mode -->
+	<string name="edit_node">Edit Node</string>
+
+	<!-- Dialog shown when attempting to delete a node -->
+	<string name="delete_node_confirm">Do you really want to delete this node?</string>
+
+	<!-- Toast shown when trying to create a node with an empty ID -->
+	<string name="node_id_required">The node ID must not be empty</string>
+
+	<!-- Toast shown when trying to create a node with an empty name -->
+	<string name="node_name_required">The node name must not be empty</string>
 
 	<!-- WebGuiActivity -->
 

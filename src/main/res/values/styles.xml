@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="MyAppCompatDialogTheme" parent="DialogWhenLargeCompat">
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+		<!--<item name="android:windowActionModeOverlay">true</item>-->
+		<item name="android:windowIsTranslucent">true</item>
+	</style>
+</resources>

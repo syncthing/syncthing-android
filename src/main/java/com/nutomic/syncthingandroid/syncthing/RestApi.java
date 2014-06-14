@@ -5,9 +5,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 
 import org.json.JSONArray;
@@ -63,7 +66,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	public static class Repository {
 		public String Directory;
 		public String ID;
-		public final boolean IgnorePerms = true;
 		public String Invalid;
 		public List<Node> Nodes;
 		public boolean ReadOnly;
@@ -236,14 +238,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	public void shutdown() {
 		mNotificationManager.cancel(NOTIFICATION_RESTART);
-		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey, "");
+		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
 	}
 
 	/**
 	 * Restarts the syncthing binary.
 	 */
 	public void restart() {
-		new PostTask().execute(mUrl, PostTask.URI_RESTART);
+		new PostTask().execute(mUrl, PostTask.URI_RESTART, mApiKey);
 	}
 
 	/**
@@ -307,7 +309,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Sends the updated mConfig via Rest API to syncthing and displays a "restart" notification.
 	 */
 	private void configUpdated() {
-		new PostTask().execute(mUrl, PostTask.URI_CONFIG, mConfig.toString());
+		new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
 		Intent i = new Intent(mContext, SyncthingService.class)
 				.setAction(SyncthingService.ACTION_RESTART);
@@ -352,6 +354,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		new GetTask() {
 			@Override
 			protected void onPostExecute(String s) {
+				if (s == null)
+					return;
+
 				try {
 					JSONObject system = new JSONObject(s);
 					SystemInfo si = new SystemInfo();
@@ -395,6 +400,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Returns a list of all existing repositores.
 	 */
 	public List<Repository> getRepositories() {
+		if (mConfig == null)
+			return new ArrayList<Repository>();
+
 		List<Repository> ret = null;
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
@@ -404,16 +412,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				Repository r = new Repository();
 				r.Directory = json.getString("Directory");
 				r.ID = json.getString("ID");
-				// Hardcoded to true because missing permissions support.
-				// r.IgnorePerms = json.getBoolean("IgnorePerms");
 				r.Invalid = json.getString("Invalid");
 				r.Nodes = getNodes(json.getJSONArray("Nodes"));
 
 				r.ReadOnly = json.getBoolean("ReadOnly");
 				JSONObject versioning = json.getJSONObject("Versioning");
 				if (versioning.getString("Type").equals("simple")) {
+					Log.d(TAG, mConfig.toString());
 					SimpleVersioning sv = new SimpleVersioning();
 					JSONObject params = versioning.getJSONObject("Params");
+					Log.d(TAG, params.toString());
 					sv.setParams(params.getInt("keep"));
 					r.Versioning = sv;
 				}
@@ -486,6 +494,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		new GetTask() {
 			@Override
 			protected void onPostExecute(String s) {
+				if (s == null)
+					return;
+
 				Long now = System.currentTimeMillis();
 				Long difference = (now - mPreviousConnectionTime) / 1000;
 				if (difference < 1) {
@@ -547,6 +558,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		new GetTask() {
 			@Override
 			protected void onPostExecute(String s) {
+				if (s == null)
+					return;
+
 				try {
 					JSONObject json = new JSONObject(s);
 					Model m = new Model();
@@ -569,6 +583,130 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				}
 			}
 		}.execute(mUrl, GetTask.URI_MODEL, mApiKey, "repo", repoId);
+	}
+
+	/**
+	 * Updates or creates the given node.
+	 */
+	public void editNode(Node node, boolean create) {
+		try {
+			JSONArray nodes = mConfig.getJSONArray("Nodes");
+			JSONObject n = null;
+			if (create) {
+				n = new JSONObject();
+				nodes.put(n);
+			}
+			else {
+				for (int i = 0; i < nodes.length(); i++) {
+					JSONObject json = nodes.getJSONObject(i);
+					if (node.NodeID.equals(json.getString("NodeID"))) {
+						n = nodes.getJSONObject(i);
+						break;
+					}
+				}
+			}
+			n.put("NodeID", node.NodeID);
+			n.put("Name", node.Name);
+			n.put("Addresses", listToJson(node.Addresses.split(" ")));
+			Log.d(TAG, n.toString());
+			Log.d(TAG, nodes.toString());
+			configUpdated();
+		}
+		catch (JSONException e) {
+			Log.w(TAG, "Failed to read nodes", e);
+		}
+	}
+
+	public void deleteNode(Node node) {
+		try {
+			JSONArray nodes = mConfig.getJSONArray("Nodes");
+
+			for (int i = 0; i < nodes.length(); i++) {
+				JSONObject json = nodes.getJSONObject(i);
+				if (node.NodeID.equals(json.getString("NodeID"))) {
+					mConfig.remove("Nodes");
+					mConfig.put("Nodes", delete(nodes, nodes.getJSONObject(i)));
+					break;
+				}
+			}
+			configUpdated();
+		}
+		catch (JSONException e) {
+			Log.w(TAG, "Failed to edit repo", e);
+		}
+	}
+
+	public void editRepository(Repository repository, boolean create) {
+		try {
+			JSONArray repos = mConfig.getJSONArray("Repositories");
+			JSONObject r = null;
+			if (create) {
+				r = new JSONObject();
+				repos.put(r);
+			}
+			else {
+				for (int i = 0; i < repos.length(); i++) {
+					JSONObject json = repos.getJSONObject(i);
+					if (repository.ID.equals(json.getString("ID"))) {
+						r = repos.getJSONObject(i);
+						break;
+					}
+				}
+			}
+			r.put("Directory", repository.Directory);
+			r.put("ID", repository.ID);
+			r.put("ReadOnly", repository.ReadOnly);
+			JSONArray nodes = new JSONArray();
+			for (Node n : repository.Nodes) {
+				JSONObject element = new JSONObject();
+				element.put("Addresses", n.Addresses);
+				element.put("Name", n.Name);
+				element.put("NodeID", n.NodeID);
+				nodes.put(element);
+			}
+			r.put("Nodes", nodes);
+			JSONObject versioning = new JSONObject();
+			versioning.put("Type", repository.Versioning.getType());
+			JSONObject params = new JSONObject();
+			versioning.put("Params", params);
+			for (String key : repository.Versioning.getParams().keySet()) {
+				params.put(key, repository.Versioning.getParams().get(key));
+			}
+			r.put("Versioning", versioning);
+			configUpdated();
+		}
+		catch (JSONException e) {
+			Log.w(TAG, "Failed to edit repo " + repository.ID + " at " + repository.Directory, e);
+		}
+	}
+
+	public void deleteRepository(Repository repository) {
+		try {
+			JSONArray repos = mConfig.getJSONArray("Repositories");
+
+			for (int i = 0; i < repos.length(); i++) {
+				JSONObject json = repos.getJSONObject(i);
+				if (repository.ID.equals(json.getString("ID"))) {
+					mConfig.remove("Repositories");
+					mConfig.put("Repositories", delete(repos, repos.getJSONObject(i)));
+					break;
+				}
+			}
+			configUpdated();
+		}
+		catch (JSONException e) {
+			Log.w(TAG, "Failed to edit repo", e);
+		}
+	}
+
+	private JSONArray delete(JSONArray array, JSONObject delete) throws JSONException {
+		JSONArray newArray = new JSONArray();
+		for (int i = 0; i < array.length(); i++) {
+			if (!array.getJSONObject(i).equals(delete)) {
+				newArray.put(array.get(i));
+			}
+		}
+		return newArray;
 	}
 
 }
