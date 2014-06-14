@@ -70,7 +70,8 @@
 
 		<EditTextPreference
 				android:key="Password"
-				android:title="GUI Authentication Password" />
+				android:title="GUI Authentication Password"
+				android:inputType="textPassword" />
 
 		<CheckBoxPreference
 				android:key="UseTLS"
