@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+		android:persistent="false" >
+
+	<EditTextPreference
+			android:key="repository_id"
+			android:title="Repository ID"
+			android:text="default" />
+
+	<EditTextPreference
+			android:key="directory"
+			android:title="Directory"
+			android:text="/sdcard/syncthing/" />
+
+	<CheckBoxPreference
+			android:key="repository_master"
+			android:title="Repository Master" />
+
+	<PreferenceScreen
+			android:key="nodes"
+			android:title="Nodes" />
+
+	<CheckBoxPreference
+			android:key="versioning"
+			android:title="File Versioning" />
+
+	<EditTextPreference
+			android:key="versioning_keep"
+			android:title="Keep Versions"
+			android:inputType="numberDecimal" />
+
+	<Preference
+			android:key="delete"
+			android:title="Delete Repository" />
+
+</PreferenceScreen>

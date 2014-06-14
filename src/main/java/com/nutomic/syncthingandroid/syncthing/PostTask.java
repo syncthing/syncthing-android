@@ -38,7 +38,7 @@ public class PostTask extends AsyncTask<String, Void, Void> {
 		post.addHeader(new BasicHeader("X-API-Key", params[2]));
 
 		try {
-			if (params.length > 2) {
+			if (params.length > 3) {
 				post.setEntity(new StringEntity(params[3]));
 			}
 			httpclient.execute(post);

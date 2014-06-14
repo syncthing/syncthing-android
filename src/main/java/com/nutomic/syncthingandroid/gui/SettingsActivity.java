@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
@@ -93,6 +94,7 @@ public class SettingsActivity extends PreferenceActivity
 	 * Manual target API as we manually check if ActionBar is available (for ActionBar back button).
 	 */
 	@Override
+	@SuppressLint("AppCompatMethod")
 	@TargetApi(11)
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,7 +108,7 @@ public class SettingsActivity extends PreferenceActivity
 		bindService(new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 
-		addPreferencesFromResource(R.xml.settings);
+		addPreferencesFromResource(R.xml.app_settings);
 		PreferenceScreen screen = getPreferenceScreen();
 		mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
 		mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);

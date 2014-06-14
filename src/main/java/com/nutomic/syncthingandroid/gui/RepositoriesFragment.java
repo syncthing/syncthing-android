@@ -1,5 +1,9 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.RepositoryAdapter;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -12,7 +16,7 @@ import java.util.TimerTask;
  * Displays a list of all existing repositories.
  */
 public class RepositoriesFragment extends LoadingListFragment implements
-		RestApi.OnApiAvailableListener {
+		RestApi.OnApiAvailableListener, AdapterView.OnItemClickListener {
 
 	private RepositoryAdapter mAdapter;
 
@@ -58,4 +62,11 @@ public class RepositoriesFragment extends LoadingListFragment implements
 		}
 	}
 
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+		Intent intent = new Intent(getActivity(), RepoSettingsActivity.class);
+		intent.setAction(RepoSettingsActivity.ACTION_EDIT);
+		intent.putExtra(RepoSettingsActivity.KEY_REPOSITORY_ID, mAdapter.getItem(i).ID);
+		startActivity(intent);
+	}
 }
