@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.preference.CheckBoxPreference;

@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.util.HashMap;
