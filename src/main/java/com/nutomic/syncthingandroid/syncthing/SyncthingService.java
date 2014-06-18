@@ -200,9 +200,9 @@ public class SyncthingService extends Service {
 	 * Polls SYNCTHING_URL until it returns HTTP status OK, then calls all listeners
 	 * in mOnWebGuiAvailableListeners and clears it.
 	 */
-	private class PollWebGuiAvailableTask extends AsyncTask<Void, Void, Void> {
+	private class PollWebGuiAvailableRunnable implements Runnable {
 		@Override
-		protected Void doInBackground(Void... voids) {
+		public void run() {
 			int status = 0;
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpHead head = new HttpHead(mApi.getUrl());
@@ -225,11 +225,7 @@ public class SyncthingService extends Service {
 					Log.w(TAG, "Failed to poll for web interface", e);
 				}
 			} while(status != HttpStatus.SC_OK);
-			return null;
-		}
 
-		@Override
-		protected void onPostExecute(Void aVoid) {
 			Log.i(TAG, "Web GUI has come online at " + mApi.getUrl());
 			mIsWebGuiAvailable = true;
 			for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
@@ -332,7 +328,7 @@ public class SyncthingService extends Service {
 					new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, apiKey);
 					registerOnWebGuiAvailableListener(mApi);
 				}
-				new PollWebGuiAvailableTask().execute();
+				new Thread(new PollWebGuiAvailableRunnable()).start();
 				runNative();
 			}
 		}).start();
@@ -362,6 +358,8 @@ public class SyncthingService extends Service {
 	 *
 	 * If the web gui is already available, listener will be called immediately.
 	 * Listeners are unregistered automatically after being called.
+	 *
+	 * Note that the listener might be called on a background thread.
 	 */
 	public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
 		if (mIsWebGuiAvailable) {
