@@ -6,10 +6,12 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.WebGuiActivity;
@@ -129,39 +131,42 @@ public class SyncthingService extends Service {
 	/**
 	 * Runs the syncthing binary from command line, and prints its output to logcat (on exit).
 	 */
-	private void runNative() {
-		DataOutputStream dos = null;
-		int ret = 1;
-		Process process = null;
-		try	{
-			process = Runtime.getRuntime().exec("sh");
-			dos = new DataOutputStream(process.getOutputStream());
-			// Set home directory to data folder for syncthing to use.
-			dos.writeBytes("HOME=" + getFilesDir() + " ");
-			// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-			dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-					"-home " + getFilesDir() + "\n");
-			dos.writeBytes("exit\n");
-			dos.flush();
+	private class SyncthingRunnable implements Runnable {
+		@Override
+		public void run() {
+			DataOutputStream dos = null;
+			int ret = 1;
+			Process process = null;
+			try	{
+				process = Runtime.getRuntime().exec("sh");
+				dos = new DataOutputStream(process.getOutputStream());
+				// Set home directory to data folder for syncthing to use.
+				dos.writeBytes("HOME=" + getFilesDir() + " ");
+				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
+				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
+						"-home " + getFilesDir() + "\n");
+				dos.writeBytes("exit\n");
+				dos.flush();
 
-			log(process.getInputStream(), Log.INFO);
-			log(process.getErrorStream(), Log.WARN);
+				log(process.getInputStream(), Log.INFO);
+				log(process.getErrorStream(), Log.WARN);
 
-			ret = process.waitFor();
-		}
-		catch(IOException e) {
-			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-		}
-		catch(InterruptedException e) {
-			Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-		}
-		finally {
-			process.destroy();
-			if (ret != 0) {
-				stopSelf();
-				// Include the log for Play Store crash reports.
-				throw new NativeExecutionException("Syncthing binary returned error code " +
-						Integer.toString(ret), mNativeLog);
+				ret = process.waitFor();
+			}
+			catch(IOException e) {
+				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+			}
+			catch(InterruptedException e) {
+				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
+			}
+			finally {
+				process.destroy();
+				if (ret != 0) {
+					stopSelf();
+					// Include the log for Play Store crash reports.
+					throw new NativeExecutionException("Syncthing binary returned error code " +
+							Integer.toString(ret), mNativeLog);
+				}
 			}
 		}
 	}
@@ -292,50 +297,61 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_ID, n);
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Looper.prepare();
-				if (isFirstStart(SyncthingService.this)) {
-					Log.i(TAG, "App started for the first time. " +
-							"Copying default config, keys will be generated automatically");
-					copyDefaultConfig();
-				}
-				moveConfigFiles();
-				updateConfig();
+		new StartupTask().execute();
+	}
 
-				String syncthingUrl = null;
-				String apiKey = null;
-				try {
-					DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-					Document d = db.parse(getConfigFile());
-					Element gui = (Element) d.getDocumentElement()
-							.getElementsByTagName("gui").item(0);
-					syncthingUrl = gui.getElementsByTagName("address").item(0).getTextContent();
-					apiKey = gui.getElementsByTagName("apikey").item(0).getTextContent();
-				}
-				catch (SAXException e) {
-					throw new RuntimeException("Failed to read gui url, aborting", e);
-				}
-				catch (ParserConfigurationException e) {
-					throw new RuntimeException("Failed to read gui url, aborting", e);
-				}
-				catch (IOException e) {
-					throw new RuntimeException("Failed to read gui url, aborting", e);
-				}
-				finally {
-					mApi = new RestApi("http://" + syncthingUrl, apiKey);
-					Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
-					// HACK: Make sure there is no syncthing binary left running from an improper
-					// shutdown (eg Play Store update).
-					// NOTE: This will log an exception if syncthing is not actually running.
-					new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, apiKey);
-					registerOnWebGuiAvailableListener(mApi);
-				}
-				new PollWebGuiAvailableTask().execute();
-				runNative();
+	/**
+	 * Sets up the initial configuration, updates the config when coming from an old
+	 * version, and reads syncthing URL and API key (these are passed internally as
+	 * {@code Pair<String, String>}.
+	 */
+	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+		@Override
+		protected Pair<String, String> doInBackground(Void... voids) {Looper.prepare();
+			if (isFirstStart(SyncthingService.this)) {
+				Log.i(TAG, "App started for the first time. " +
+						"Copying default config, keys will be generated automatically");
+				copyDefaultConfig();
 			}
-		}).start();
+			moveConfigFiles();
+			updateConfig();
+
+			String syncthingUrl = null;
+			String apiKey = null;
+			try {
+				DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document d = db.parse(getConfigFile());
+				Element gui = (Element) d.getDocumentElement()
+						.getElementsByTagName("gui").item(0);
+				syncthingUrl = gui.getElementsByTagName("address").item(0).getTextContent();
+				apiKey = gui.getElementsByTagName("apikey").item(0).getTextContent();
+			}
+			catch (SAXException e) {
+				throw new RuntimeException("Failed to read gui url, aborting", e);
+			}
+			catch (ParserConfigurationException e) {
+				throw new RuntimeException("Failed to read gui url, aborting", e);
+			}
+			catch (IOException e) {
+				throw new RuntimeException("Failed to read gui url, aborting", e);
+			}
+			finally {
+				return new Pair<String, String>("http://" + syncthingUrl, apiKey);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Pair<String, String> urlAndKey) {
+			mApi = new RestApi(urlAndKey.first, urlAndKey.second);
+			Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
+			// HACK: Make sure there is no syncthing binary left running from an improper
+			// shutdown (eg Play Store update).
+			// NOTE: This will log an exception if syncthing is not actually running.
+			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second);
+			registerOnWebGuiAvailableListener(mApi);
+			new PollWebGuiAvailableTask().execute();
+			new Thread(new SyncthingRunnable()).start();
+		}
 	}
 
 	@Override
