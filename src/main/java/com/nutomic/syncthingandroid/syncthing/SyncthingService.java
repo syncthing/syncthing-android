@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
@@ -15,6 +14,7 @@ import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.gui.MainActivity;
+import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -22,10 +22,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -35,19 +31,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -114,10 +100,27 @@ public class SyncthingService extends Service {
 
 	private boolean mIsWebGuiAvailable = false;
 
+	public interface OnApiAvailableListener {
+		public void onApiAvailable();
+	}
+
+	private final LinkedList<WeakReference<OnApiAvailableListener>> mOnApiAvailableListeners =
+			new LinkedList<WeakReference<OnApiAvailableListener>>();
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent != null && ACTION_RESTART.equals(intent.getAction())) {
-			mApi.restart();
+			mIsWebGuiAvailable = false;
+			new PostTask() {
+				@Override
+				protected void onPostExecute(Void aVoid) {
+					ConfigXml config = new ConfigXml(getConfigFile());
+					mApi = new RestApi(SyncthingService.this,
+							config.getWebGuiUrl(), config.getApiKey());
+					registerOnWebGuiAvailableListener(mApi);
+					new PollWebGuiAvailableTask().execute();
+				}
+			}.execute(mApi.getUrl(), PostTask.URI_RESTART, mApi.getApiKey());
 		}
 		return START_STICKY;
 	}
@@ -325,30 +328,9 @@ public class SyncthingService extends Service {
 				copyDefaultConfig();
 			}
 			moveConfigFiles();
-			updateConfig();
-
-			String syncthingUrl = null;
-			String apiKey = null;
-			try {
-				DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				Document d = db.parse(getConfigFile());
-				Element gui = (Element) d.getDocumentElement()
-						.getElementsByTagName("gui").item(0);
-				syncthingUrl = gui.getElementsByTagName("address").item(0).getTextContent();
-				apiKey = gui.getElementsByTagName("apikey").item(0).getTextContent();
-			}
-			catch (SAXException e) {
-				throw new RuntimeException("Failed to read gui url, aborting", e);
-			}
-			catch (ParserConfigurationException e) {
-				throw new RuntimeException("Failed to read gui url, aborting", e);
-			}
-			catch (IOException e) {
-				throw new RuntimeException("Failed to read gui url, aborting", e);
-			}
-			finally {
-				return new Pair<String, String>("http://" + syncthingUrl, apiKey);
-			}
+			ConfigXml config = new ConfigXml(getConfigFile());
+			config.update();
+			return new Pair<String, String>(config.getWebGuiUrl(), config.getApiKey());
 		}
 
 		@Override
@@ -404,85 +386,6 @@ public class SyncthingService extends Service {
 	}
 
 	/**
-	 * Updates the config file.
-	 *
-	 * Coming from 0.2.0 and earlier, globalAnnounceServer value "announce.syncthing.net:22025" is
-	 * replaced with "194.126.249.5:22025" (as domain resolve is broken).
-	 *
-	 * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
-	 */
-	private void updateConfig() {
-		try {
-			Log.i(TAG, "Checking for needed config updates");
-			boolean changed = false;
-			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = db.parse(getConfigFile());
-			Element options = (Element) doc.getDocumentElement()
-					.getElementsByTagName("options").item(0);
-			Element gui = (Element)	doc.getDocumentElement()
-					.getElementsByTagName("gui").item(0);
-
-			// Create an API key if it does not exist.
-			if (gui.getElementsByTagName("apikey").getLength() == 0) {
-				Log.i(TAG, "Initializing API key with random string");
-				char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-				StringBuilder sb = new StringBuilder();
-				Random random = new Random();
-				for (int i = 0; i < 20; i++) {
-					sb.append(chars[random.nextInt(chars.length)]);
-				}
-				Element apiKey = doc.createElement("apikey");
-				apiKey.setTextContent(sb.toString());
-				gui.appendChild(apiKey);
-				changed = true;
-			}
-
-			// Hardcode default globalAnnounceServer ip.
-			Element globalAnnounceServer = (Element)
-					options.getElementsByTagName("globalAnnounceServer").item(0);
-			if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
-				Log.i(TAG, "Replacing globalAnnounceServer host with ip");
-				globalAnnounceServer.setTextContent("194.126.249.5:22025");
-				changed = true;
-			}
-
-			// Set ignorePerms attribute.
-			NodeList repos = doc.getDocumentElement().getElementsByTagName("repository");
-			for (int i = 0; i < repos.getLength(); i++) {
-				Element r = (Element) repos.item(i);
-				if (!r.hasAttribute("ignorePerms") ||
-						!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
-					Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
-					r.setAttribute("ignorePerms", Boolean.toString(true));
-					changed = true;
-				}
-			}
-
-			// Write the changes back to file.
-			if (changed) {
-				Log.i(TAG, "Writing updated config back to file");
-				TransformerFactory transformerFactory = TransformerFactory.newInstance();
-				Transformer transformer = transformerFactory.newTransformer();
-				DOMSource domSource = new DOMSource(doc);
-				StreamResult streamResult = new StreamResult(getConfigFile());
-				transformer.transform(domSource, streamResult);
-			}
-		}
-		catch (ParserConfigurationException e) {
-			Log.w(TAG, "Failed to parse config", e);
-		}
-		catch (IOException e) {
-			Log.w(TAG, "Failed to parse config", e);
-		}
-		catch (SAXException e) {
-			Log.w(TAG, "Failed to parse config", e);
-		}
-		catch (TransformerException e) {
-			Log.w(TAG, "Failed to save updated config", e);
-		}
-	}
-
-	/**
 	 * Returns true if this service has not been started before (ie config.xml does not exist).
 	 *
 	 * This will return true until the public key file has been generated.
@@ -523,6 +426,39 @@ public class SyncthingService extends Service {
 
 	public RestApi getApi() {
 		return mApi;
+	}
+
+	/**
+	 * Register a listener for the syncthing API becoming available..
+	 *
+	 * If the API is already available, listener will be called immediately.
+	 *
+	 * Listeners are kept around (as weak reference) and called again after any configuration
+	 * changes to allow a data refresh.
+	 */
+	public void registerOnApiAvailableListener(OnApiAvailableListener listener) {
+		if (mApi.isApiAvailable()) {
+			listener.onApiAvailable();
+		}
+		else {
+			mOnApiAvailableListeners.addLast(new WeakReference<OnApiAvailableListener>(listener));
+		}
+	}
+
+	/**
+	 * Called by {@link RestApi} once it is fully initialized.
+	 *
+	 * Must not be called from anywhere else.
+	 */
+	public void onApiAvailable() {
+		for (WeakReference<OnApiAvailableListener> listener : mOnApiAvailableListeners) {
+			if (listener.get() != null) {
+				listener.get().onApiAvailable();
+			}
+			else {
+				mOnApiAvailableListeners.remove(listener);
+			}
+		}
 	}
 
 }

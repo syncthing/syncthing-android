@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,16 +116,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		public String invalid;
 	}
 
-	public interface OnApiAvailableListener {
-		public void onApiAvailable();
-	}
-
-	private final LinkedList<OnApiAvailableListener> mOnApiAvailableListeners =
-			new LinkedList<OnApiAvailableListener>();
-
 	private static final int NOTIFICATION_RESTART = 2;
 
-	private final Context mContext;
+	private final SyncthingService mSyncthingService;
 
 	private String mVersion;
 
@@ -149,12 +143,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	private long mPreviousConnectionTime = 0;
 
-	public RestApi(Context context, String url, String apiKey) {
-		mContext = context;
+	public RestApi(SyncthingService syncthingService, String url, String apiKey) {
+		mSyncthingService = syncthingService;
 		mUrl = url;
 		mApiKey = apiKey;
 		mNotificationManager = (NotificationManager)
-				mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+				mSyncthingService.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
 
 	/**
@@ -162,6 +156,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	public String getUrl() {
 		return mUrl;
+	}
+
+	/**
+	 * Returns the API key needed to access the Rest API.
+	 */
+	public String getApiKey() {
+		return mApiKey;
 	}
 
 	/**
@@ -208,18 +209,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		});
 	}
 
-
 	/**
-	 * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS, notifies
-	 * all registered {@link OnApiAvailableListener} listeners.
+	 * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS,
+	 * calls {@link SyncthingService#onApiAvailable()}.
 	 */
 	private void tryIsAvailable() {
 		int value = mAvailableCount.incrementAndGet();
 		if (value == TOTAL_STARTUP_CALLS) {
-			for (OnApiAvailableListener listener : mOnApiAvailableListeners) {
-				listener.onApiAvailable();
-			}
-			mOnApiAvailableListeners.clear();
+			mSyncthingService.onApiAvailable();
 		}
 	}
 
@@ -236,13 +233,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	public void shutdown() {
 		mNotificationManager.cancel(NOTIFICATION_RESTART);
 		new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
-	}
-
-	/**
-	 * Restarts the syncthing binary.
-	 */
-	public void restart() {
-		new PostTask().execute(mUrl, PostTask.URI_RESTART, mApiKey);
 	}
 
 	/**
@@ -308,13 +298,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	private void configUpdated() {
 		new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
-		Intent i = new Intent(mContext, SyncthingService.class)
+		Intent i = new Intent(mSyncthingService, SyncthingService.class)
 				.setAction(SyncthingService.ACTION_RESTART);
-		PendingIntent pi = PendingIntent.getService(mContext, 0, i, 0);
+		PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, i, 0);
 
-		Notification n = new NotificationCompat.Builder(mContext)
-				.setContentTitle(mContext.getString(R.string.restart_notif_title))
-				.setContentText(mContext.getString(R.string.restart_notif_text))
+		Notification n = new NotificationCompat.Builder(mSyncthingService)
+				.setContentTitle(mSyncthingService.getString(R.string.restart_notif_title))
+				.setContentText(mSyncthingService.getString(R.string.restart_notif_text))
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
 				.build();
@@ -431,21 +421,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			Log.w(TAG, "Failed to read nodes", e);
 		}
 		return ret;
-	}
-
-	/**
-	 * Register a listener for the web gui becoming available..
-	 *
-	 * If the web gui is already available, listener will be called immediately.
-	 * Listeners are unregistered automatically after being called.
-	 */
-	public void registerOnApiAvailableListener(OnApiAvailableListener listener) {
-		if (mConfig != null) {
-			listener.onApiAvailable();
-		}
-		else {
-			mOnApiAvailableListeners.addLast(listener);
-		}
 	}
 
 	/**
@@ -713,6 +688,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			}
 		}
 		return newArray;
+	}
+
+	public boolean isApiAvailable() {
+		return mAvailableCount.get() == TOTAL_STARTUP_CALLS;
 	}
 
 }

@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class NodeSettingsActivity extends PreferenceActivity implements
 		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-		RestApi.OnReceiveConnectionsListener, RestApi.OnApiAvailableListener {
+		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiAvailableListener {
 
 	public static final String ACTION_CREATE = "create";
 
@@ -43,8 +43,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.getApi()
-					.registerOnApiAvailableListener(NodeSettingsActivity.this);
+			mSyncthingService.registerOnApiAvailableListener(NodeSettingsActivity.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {

@@ -16,7 +16,7 @@ import java.util.TimerTask;
  * Displays a list of all existing repositories.
  */
 public class ReposFragment extends LoadingListFragment implements
-		RestApi.OnApiAvailableListener, AdapterView.OnItemClickListener {
+		SyncthingService.OnApiAvailableListener, AdapterView.OnItemClickListener {
 
 	private ReposAdapter mAdapter;
 

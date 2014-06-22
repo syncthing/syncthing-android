@@ -34,9 +34,8 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 /**
  * {@link android.support.v4.app.ListFragment} that shows a configurable loading text.
  */
-public abstract class LoadingListFragment extends Fragment implements RestApi.OnApiAvailableListener, AdapterView.OnItemClickListener {
-
-	private boolean mInitialized = false;
+public abstract class LoadingListFragment extends Fragment implements
+		SyncthingService.OnApiAvailableListener, AdapterView.OnItemClickListener {
 
 	private ListFragment mListFragment;
 
@@ -109,11 +108,10 @@ public abstract class LoadingListFragment extends Fragment implements RestApi.On
 	@Override
 	public void onApiAvailable() {
 		MainActivity activity = (MainActivity) getActivity();
-		if (!mInitialized && getActivity() != null &&
+		if (getActivity() != null &&
 				activity.getApi() != null && mListFragment != null) {
 			onInitAdapter(activity);
 			getListView().setOnItemClickListener(this);
-			mInitialized = true;
 		}
 	}
 

@@ -17,7 +17,7 @@ import java.util.TimerTask;
  * Displays a list of all existing nodes.
  */
 public class NodesFragment extends LoadingListFragment implements
-		RestApi.OnApiAvailableListener, ListView.OnItemClickListener {
+		SyncthingService.OnApiAvailableListener, ListView.OnItemClickListener {
 
 	private NodeAdapter mAdapter;
 

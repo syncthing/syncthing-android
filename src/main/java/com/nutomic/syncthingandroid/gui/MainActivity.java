@@ -54,9 +54,9 @@ public class MainActivity extends ActionBarActivity
 	 */
 	@Override
 	public void onWebGuiAvailable() {
-		mSyncthingService.getApi().registerOnApiAvailableListener(mRepositoriesFragment);
-		mSyncthingService.getApi().registerOnApiAvailableListener(mNodesFragment);
-		mSyncthingService.getApi().registerOnApiAvailableListener(mLocalNodeInfoFragment);
+		mSyncthingService.registerOnApiAvailableListener(mRepositoriesFragment);
+		mSyncthingService.registerOnApiAvailableListener(mNodesFragment);
+		mSyncthingService.registerOnApiAvailableListener(mLocalNodeInfoFragment);
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -220,14 +220,14 @@ public class MainActivity extends ActionBarActivity
 		}
 
 		switch (item.getItemId()) {
-			case R.id.add_node:
-				Intent intent = new Intent(this, NodeSettingsActivity.class);
-				intent.setAction(NodeSettingsActivity.ACTION_CREATE);
+			case R.id.add_repository:
+				Intent intent = new Intent(this, RepoSettingsActivity.class);
+				intent.setAction(RepoSettingsActivity.ACTION_CREATE);
 				startActivity(intent);
 				return true;
-			case R.id.add_repository:
-				intent = new Intent(this, RepoSettingsActivity.class);
-				intent.setAction(RepoSettingsActivity.ACTION_CREATE);
+			case R.id.add_node:
+				intent = new Intent(this, NodeSettingsActivity.class);
+				intent.setAction(NodeSettingsActivity.ACTION_CREATE);
 				startActivity(intent);
 				return true;
 			case R.id.web_gui:

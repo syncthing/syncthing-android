@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class RepoSettingsActivity extends PreferenceActivity
 		implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-		RestApi.OnApiAvailableListener {
+		SyncthingService.OnApiAvailableListener {
 
 	public static final String ACTION_CREATE = "create";
 
@@ -48,8 +48,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.getApi()
-					.registerOnApiAvailableListener(RepoSettingsActivity.this);
+			mSyncthingService.registerOnApiAvailableListener(RepoSettingsActivity.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {

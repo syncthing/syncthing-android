@@ -26,7 +26,7 @@ import java.util.TimerTask;
  */
 public class LocalNodeInfoFragment extends Fragment
 		implements RestApi.OnReceiveSystemInfoListener, RestApi.OnReceiveConnectionsListener,
-		RestApi.OnApiAvailableListener {
+		SyncthingService.OnApiAvailableListener {
 
 	private TextView mNodeId;
 
