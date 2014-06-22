@@ -14,11 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -386,7 +384,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Returns a list of all existing repositores.
 	 */
-	public List<Repository> getRepositories() {
+	public List<Repository> getRepos() {
 		if (mConfig == null)
 			return new ArrayList<Repository>();
 
@@ -610,7 +608,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Updates or creates the given node.
 	 */
-	public void editRepository(Repository repository, boolean create) {
+	public void editRepo(Repository repo, boolean create) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 			JSONObject r = null;
@@ -621,18 +619,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			else {
 				for (int i = 0; i < repos.length(); i++) {
 					JSONObject json = repos.getJSONObject(i);
-					if (repository.ID.equals(json.getString("ID"))) {
+					if (repo.ID.equals(json.getString("ID"))) {
 						r = repos.getJSONObject(i);
 						break;
 					}
 				}
 			}
-			r.put("Directory", repository.Directory);
-			r.put("ID", repository.ID);
+			r.put("Directory", repo.Directory);
+			r.put("ID", repo.ID);
 			r.put("IgnorePerms", true);
-			r.put("ReadOnly", repository.ReadOnly);
+			r.put("ReadOnly", repo.ReadOnly);
 			JSONArray nodes = new JSONArray();
-			for (Node n : repository.Nodes) {
+			for (Node n : repo.Nodes) {
 				JSONObject element = new JSONObject();
 				element.put("Addresses", n.Addresses);
 				element.put("Name", n.Name);
@@ -641,30 +639,30 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			}
 			r.put("Nodes", nodes);
 			JSONObject versioning = new JSONObject();
-			versioning.put("Type", repository.Versioning.getType());
+			versioning.put("Type", repo.Versioning.getType());
 			JSONObject params = new JSONObject();
 			versioning.put("Params", params);
-			for (String key : repository.Versioning.getParams().keySet()) {
-				params.put(key, repository.Versioning.getParams().get(key));
+			for (String key : repo.Versioning.getParams().keySet()) {
+				params.put(key, repo.Versioning.getParams().get(key));
 			}
 			r.put("Versioning", versioning);
 			configUpdated();
 		}
 		catch (JSONException e) {
-			Log.w(TAG, "Failed to edit repo " + repository.ID + " at " + repository.Directory, e);
+			Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
 		}
 	}
 
 	/**
 	 * Deletes the given repository from syncthing.
 	 */
-	public void deleteRepository(Repository repository) {
+	public void deleteRepo(Repository repo) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 
 			for (int i = 0; i < repos.length(); i++) {
 				JSONObject json = repos.getJSONObject(i);
-				if (repository.ID.equals(json.getString("ID"))) {
+				if (repo.ID.equals(json.getString("ID"))) {
 					mConfig.remove("Repositories");
 					mConfig.put("Repositories", delete(repos, repos.getJSONObject(i)));
 					break;

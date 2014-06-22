@@ -6,9 +6,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.util.NodeAdapter;
+import com.nutomic.syncthingandroid.util.NodesAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,7 +18,7 @@ import java.util.TimerTask;
 public class NodesFragment extends LoadingListFragment implements
 		SyncthingService.OnApiAvailableListener, ListView.OnItemClickListener {
 
-	private NodeAdapter mAdapter;
+	private NodesAdapter mAdapter;
 
 	private Timer mTimer;
 
@@ -27,7 +26,7 @@ public class NodesFragment extends LoadingListFragment implements
 
 	@Override
 	public void onInitAdapter(MainActivity activity) {
-		mAdapter = new NodeAdapter(activity);
+		mAdapter = new NodesAdapter(activity);
 		mAdapter.add(activity.getApi().getNodes());
 		setListAdapter(mAdapter, R.string.nodes_list_empty);
 		mInitialized = true;

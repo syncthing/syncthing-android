@@ -110,7 +110,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		else if (getIntent().getAction().equals(ACTION_EDIT)) {
 			setTitle(R.string.edit_repo);
 			mRepositoryId.setEnabled(false);
-			List<RestApi.Repository> repos = mSyncthingService.getApi().getRepositories();
+			List<RestApi.Repository> repos = mSyncthingService.getApi().getRepos();
 			for (int i = 0; i < repos.size(); i++) {
 				if (repos.get(i).ID.equals(getIntent().getStringExtra(KEY_REPO_ID))) {
 					mRepo = repos.get(i);
@@ -174,7 +174,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 					Toast.makeText(this, R.string.repo_path_required, Toast.LENGTH_LONG).show();
 					return true;
 				}
-				mSyncthingService.getApi().editRepository(mRepo, true);
+				mSyncthingService.getApi().editRepo(mRepo, true);
 				finish();
 				return true;
 		}
@@ -258,7 +258,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteRepository(mRepo);
+							mSyncthingService.getApi().deleteRepo(mRepo);
 							finish();
 						}
 					})
@@ -271,7 +271,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	private void repositoryUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
-			mSyncthingService.getApi().editRepository(mRepo, false);
+			mSyncthingService.getApi().editRepo(mRepo, false);
 		}
 	}
 

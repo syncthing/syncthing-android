@@ -28,7 +28,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 /**

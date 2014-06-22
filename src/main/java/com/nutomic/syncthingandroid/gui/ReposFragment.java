@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.ReposAdapter;
 
@@ -27,7 +26,7 @@ public class ReposFragment extends LoadingListFragment implements
 	@Override
 	public void onInitAdapter(MainActivity activity) {
 		mAdapter = new ReposAdapter(activity);
-		mAdapter.add(activity.getApi().getRepositories());
+		mAdapter.add(activity.getApi().getRepos());
 		setListAdapter(mAdapter, R.string.repositories_list_empty);
 		mInitialized = true;
 	}
@@ -69,4 +68,5 @@ public class ReposFragment extends LoadingListFragment implements
 		intent.putExtra(RepoSettingsActivity.KEY_REPO_ID, mAdapter.getItem(i).ID);
 		startActivity(intent);
 	}
+
 }

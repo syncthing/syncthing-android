@@ -1,9 +1,6 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.util.Log;
-import android.util.Pair;
-
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
