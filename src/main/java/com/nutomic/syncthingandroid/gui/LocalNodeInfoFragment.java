@@ -26,7 +26,7 @@ import java.util.TimerTask;
  */
 public class LocalNodeInfoFragment extends Fragment
 		implements RestApi.OnReceiveSystemInfoListener, RestApi.OnReceiveConnectionsListener,
-		SyncthingService.OnApiAvailableListener {
+		SyncthingService.OnApiChangeListener {
 
 	private TextView mNodeId;
 
@@ -97,7 +97,10 @@ public class LocalNodeInfoFragment extends Fragment
 	}
 
 	@Override
-	public void onApiAvailable() {
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable)
+			return;
+
 		updateGui();
 	}
 

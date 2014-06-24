@@ -209,12 +209,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	/**
 	 * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS,
-	 * calls {@link SyncthingService#onApiAvailable()}.
+	 * calls {@link SyncthingService#onApiChange(boolean)}.
 	 */
 	private void tryIsAvailable() {
 		int value = mAvailableCount.incrementAndGet();
 		if (value == TOTAL_STARTUP_CALLS) {
-			mSyncthingService.onApiAvailable();
+			mSyncthingService.onApiChange(true);
 		}
 	}
 

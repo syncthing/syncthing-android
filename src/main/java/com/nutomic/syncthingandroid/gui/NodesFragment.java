@@ -1,7 +1,11 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -15,31 +19,52 @@ import java.util.TimerTask;
 /**
  * Displays a list of all existing nodes.
  */
-public class NodesFragment extends LoadingListFragment implements
-		SyncthingService.OnApiAvailableListener, ListView.OnItemClickListener {
+public class NodesFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+		ListView.OnItemClickListener {
 
 	private NodesAdapter mAdapter;
 
 	private Timer mTimer;
 
-	private boolean mInitialized = false;
+	@Override
+	public void onResume() {
+		super.onResume();
+		setListShown(true);
+	}
 
 	@Override
-	public void onInitAdapter(MainActivity activity) {
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable)
+			return;
+
+		initAdapter();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+
+		initAdapter();
+	}
+
+	private void initAdapter() {
+		MainActivity activity = (MainActivity) getActivity();
+		if (activity == null || activity.getApi() == null)
+			return;
+
 		mAdapter = new NodesAdapter(activity);
 		mAdapter.add(activity.getApi().getNodes());
-		setListAdapter(mAdapter, R.string.nodes_list_empty);
-		mInitialized = true;
+		setListAdapter(mAdapter);
+		setEmptyText(getString(R.string.nodes_list_empty));
+		getListView().setOnItemClickListener(this);
 	}
 
 	private void updateList() {
-		if (!mInitialized)
+		if (mAdapter == null || getView() == null)
 			return;
 
 		MainActivity activity = (MainActivity) getActivity();
-		if (activity != null) {
-			mAdapter.updateConnections(activity.getApi(), getListView());
-		}
+		mAdapter.updateConnections(activity.getApi(), getListView());
 	}
 
 	@Override

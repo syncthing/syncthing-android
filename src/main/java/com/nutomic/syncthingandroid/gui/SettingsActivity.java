@@ -24,7 +24,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 public class SettingsActivity extends PreferenceActivity
-		implements Preference.OnPreferenceChangeListener {
+		implements SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener {
 
 	private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
 
@@ -48,29 +48,40 @@ public class SettingsActivity extends PreferenceActivity
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mVersion.setSummary(mSyncthingService.getApi().getVersion());
-
-			for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
-				Preference pref = mOptionsScreen.getPreference(i);
-				pref.setOnPreferenceChangeListener(SettingsActivity.this);
-				String value = mSyncthingService.getApi()
-						.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
-				applyPreference(pref, value);
-			}
-
-			for (int i = 0; i < mGuiScreen.getPreferenceCount(); i++) {
-				Preference pref = mGuiScreen.getPreference(i);
-				pref.setOnPreferenceChangeListener(SettingsActivity.this);
-				String value = mSyncthingService.getApi()
-						.getValue(RestApi.TYPE_GUI, pref.getKey());
-				applyPreference(pref, value);
-			}
+			mSyncthingService.registerOnApiChangeListener(SettingsActivity.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
 			mSyncthingService = null;
 		}
 	};
+
+	@Override
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable) {
+			finish();
+			return;
+		}
+
+		mVersion.setSummary(mSyncthingService.getApi().getVersion());
+
+		for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
+			Preference pref = mOptionsScreen.getPreference(i);
+			pref.setOnPreferenceChangeListener(SettingsActivity.this);
+			String value = mSyncthingService.getApi()
+					.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
+			applyPreference(pref, value);
+		}
+
+		for (int i = 0; i < mGuiScreen.getPreferenceCount(); i++) {
+			Preference pref = mGuiScreen.getPreference(i);
+			pref.setOnPreferenceChangeListener(SettingsActivity.this);
+			String value = mSyncthingService.getApi()
+					.getValue(RestApi.TYPE_GUI, pref.getKey());
+			applyPreference(pref, value);
+		}
+
+	}
 
 	/**
 	 * Applies the given value to the preference.

@@ -1,7 +1,11 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
@@ -14,31 +18,52 @@ import java.util.TimerTask;
 /**
  * Displays a list of all existing repositories.
  */
-public class ReposFragment extends LoadingListFragment implements
-		SyncthingService.OnApiAvailableListener, AdapterView.OnItemClickListener {
+public class ReposFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+		AdapterView.OnItemClickListener {
 
 	private ReposAdapter mAdapter;
 
 	private Timer mTimer;
 
-	private boolean mInitialized = false;
+	@Override
+	public void onResume() {
+		super.onResume();
+		setListShown(true);
+	}
 
 	@Override
-	public void onInitAdapter(MainActivity activity) {
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable)
+			return;
+
+		initAdapter();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+
+		initAdapter();
+	}
+
+	private void initAdapter() {
+		MainActivity activity = (MainActivity) getActivity();
+		if (activity == null || activity.getApi() == null)
+			return;
+
 		mAdapter = new ReposAdapter(activity);
 		mAdapter.add(activity.getApi().getRepos());
-		setListAdapter(mAdapter, R.string.repositories_list_empty);
-		mInitialized = true;
+		setListAdapter(mAdapter);
+		setEmptyText(getString(R.string.repositories_list_empty));
+		getListView().setOnItemClickListener(this);
 	}
 
 	private void updateList() {
-		if (!mInitialized)
+		if (mAdapter == null || getView() == null)
 			return;
 
 		MainActivity activity = (MainActivity) getActivity();
-		if (activity != null) {
-			mAdapter.updateModel(activity.getApi(), getListView());
-		}
+		mAdapter.updateModel(activity.getApi(), getListView());
 	}
 
 	@Override

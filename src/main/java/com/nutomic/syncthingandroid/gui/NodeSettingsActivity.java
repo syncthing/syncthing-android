@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class NodeSettingsActivity extends PreferenceActivity implements
 		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiAvailableListener {
+		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiChangeListener {
 
 	public static final String ACTION_CREATE = "create";
 
@@ -43,7 +43,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiAvailableListener(NodeSettingsActivity.this);
+			mSyncthingService.registerOnApiChangeListener(NodeSettingsActivity.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
@@ -89,7 +89,12 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	}
 
 	@Override
-	public void onApiAvailable() {
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable) {
+			finish();
+			return;
+		}
+
 		if (getIntent().getAction().equals(ACTION_CREATE)) {
 			setTitle(R.string.create_node);
 			mNode = new RestApi.Node();

@@ -32,7 +32,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -95,22 +97,25 @@ public class SyncthingService extends Service {
 		public void onWebGuiAvailable();
 	}
 
-	private final LinkedList<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
-			new LinkedList<OnWebGuiAvailableListener>();
+	private final ReentrantLock mOnWebGuiAvailableListenersLock = new ReentrantLock();
+
+	private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
+			new HashSet<OnWebGuiAvailableListener>();
 
 	private boolean mIsWebGuiAvailable = false;
 
-	public interface OnApiAvailableListener {
-		public void onApiAvailable();
+	public interface OnApiChangeListener {
+		public void onApiChange(boolean isAvailable);
 	}
 
-	private final LinkedList<WeakReference<OnApiAvailableListener>> mOnApiAvailableListeners =
-			new LinkedList<WeakReference<OnApiAvailableListener>>();
+	private final HashSet<WeakReference<OnApiChangeListener>> mOnApiAvailableListeners =
+			new HashSet<WeakReference<OnApiChangeListener>>();
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent != null && ACTION_RESTART.equals(intent.getAction())) {
 			mIsWebGuiAvailable = false;
+			onApiChange(false);
 			new PostTask() {
 				@Override
 				protected void onPostExecute(Void aVoid) {
@@ -377,7 +382,7 @@ public class SyncthingService extends Service {
 			listener.onWebGuiAvailable();
 		}
 		else {
-			mOnWebGuiAvailableListeners.addLast(listener);
+			mOnWebGuiAvailableListeners.add(listener);
 		}
 	}
 
@@ -429,34 +434,29 @@ public class SyncthingService extends Service {
 	}
 
 	/**
-	 * Register a listener for the syncthing API becoming available..
+	 * Register a listener for the syncthing API state changing.
 	 *
-	 * If the API is already available, listener will be called immediately.
-	 *
-	 * Listeners are kept around (as weak reference) and called again after any configuration
-	 * changes to allow a data refresh.
+	 * The listener is called immediately with the current state, and again whenever the state
+	 * changes.
 	 */
-	public void registerOnApiAvailableListener(OnApiAvailableListener listener) {
-		if (mApi.isApiAvailable()) {
-			listener.onApiAvailable();
-		}
-		else {
-			mOnApiAvailableListeners.addLast(new WeakReference<OnApiAvailableListener>(listener));
-		}
+	public void registerOnApiChangeListener(OnApiChangeListener listener) {
+		listener.onApiChange((mApi != null) ? mApi.isApiAvailable() : false);
+		mOnApiAvailableListeners.add(new WeakReference<OnApiChangeListener>(listener));
 	}
 
 	/**
-	 * Called by {@link RestApi} once it is fully initialized.
+	 * Called when the state of the API changes.
 	 *
-	 * Must not be called from anywhere else.
+	 * Must only be called from SyncthingService or {@link RestApi}.
 	 */
-	public void onApiAvailable() {
-		for (WeakReference<OnApiAvailableListener> listener : mOnApiAvailableListeners) {
+	public void onApiChange(boolean isAvailable) {
+		for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiAvailableListeners.iterator(); i.hasNext();) {
+			WeakReference<OnApiChangeListener> listener = i.next();
 			if (listener.get() != null) {
-				listener.get().onApiAvailable();
+				listener.get().onApiChange(isAvailable);
 			}
 			else {
-				mOnApiAvailableListeners.remove(listener);
+				i.remove();
 			}
 		}
 	}

@@ -1,8 +1,10 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
@@ -19,8 +21,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -32,7 +39,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
  * {@link LocalNodeInfoFragment} in the navigation drawer.
  */
 public class MainActivity extends ActionBarActivity
-		implements SyncthingService.OnWebGuiAvailableListener {
+		implements SyncthingService.OnApiChangeListener {
 
 	private SyncthingService mSyncthingService;
 
@@ -41,7 +48,10 @@ public class MainActivity extends ActionBarActivity
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnWebGuiAvailableListener(MainActivity.this);
+			mSyncthingService.registerOnApiChangeListener(MainActivity.this);
+			mSyncthingService.registerOnApiChangeListener(mRepositoriesFragment);
+			mSyncthingService.registerOnApiChangeListener(mNodesFragment);
+			mSyncthingService.registerOnApiChangeListener(mLocalNodeInfoFragment);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
@@ -49,14 +59,32 @@ public class MainActivity extends ActionBarActivity
 		}
 	};
 
+	private AlertDialog mLoadingDialog;
+
 	/**
 	 * Causes population of repo and node lists, unlocks info drawer.
 	 */
 	@Override
-	public void onWebGuiAvailable() {
-		mSyncthingService.registerOnApiAvailableListener(mRepositoriesFragment);
-		mSyncthingService.registerOnApiAvailableListener(mNodesFragment);
-		mSyncthingService.registerOnApiAvailableListener(mLocalNodeInfoFragment);
+	@SuppressLint("InflateParams")
+	public void onApiChange(boolean isAvailable) {
+		if (!isAvailable) {
+			LayoutInflater inflater = getLayoutInflater();
+			View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
+			TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+			loadingText.setText((SyncthingService.isFirstStart(this)
+					? R.string.web_gui_creating_key
+					: R.string.api_loading));
+
+			mLoadingDialog = new AlertDialog.Builder(this)
+					.setCancelable(false)
+					.setView(dialogLayout)
+					.show();
+			return;
+		}
+
+		if (mLoadingDialog != null) {
+			mLoadingDialog.dismiss();
+		}
 		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -170,13 +198,15 @@ public class MainActivity extends ActionBarActivity
 				.commit();
 		mDrawerToggle = mLocalNodeInfoFragment.new Toggle(this, mDrawerLayout,
 				R.drawable.ic_drawer);
-		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		unbindService(mSyncthingServiceConnection);
+		if (mLoadingDialog != null) {
+			mLoadingDialog.dismiss();
+		}
 	}
 
 	/**
@@ -209,7 +239,7 @@ public class MainActivity extends ActionBarActivity
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(findViewById(R.id.drawer));
 		menu.findItem(R.id.share_node_id).setVisible(drawerOpen);
-		return mSyncthingService != null && mSyncthingService.isWebGuiAvailable();
+		return true;
 	}
 
 	@Override
