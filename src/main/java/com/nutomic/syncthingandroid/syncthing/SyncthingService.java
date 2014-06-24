@@ -330,8 +330,12 @@ public class SyncthingService extends Service {
 						"Copying default config, keys will be generated automatically");
 				copyDefaultConfig();
 			}
+
 			moveConfigFiles();
 			ConfigXml config = new ConfigXml(getConfigFile());
+			if (isFirstStart()) {
+				config.createCameraRepo();
+			}
 			config.update();
 			return new Pair<String, String>(config.getWebGuiUrl(), config.getApiKey());
 		}

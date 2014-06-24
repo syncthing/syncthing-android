@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.util;
 
+import android.os.Environment;
 import android.util.Log;
 
 import org.w3c.dom.Document;
@@ -64,68 +65,91 @@ public class ConfigXml {
 	 * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
 	 */
 	public void update() {
-		try {
-			Log.i(TAG, "Checking for needed config updates");
-			boolean changed = false;
-			Element options = (Element) mConfig.getDocumentElement()
-					.getElementsByTagName("options").item(0);
-			Element gui = (Element)	mConfig.getDocumentElement()
-					.getElementsByTagName("gui").item(0);
+		Log.i(TAG, "Checking for needed config updates");
+		boolean changed = false;
+		Element options = (Element) mConfig.getDocumentElement()
+				.getElementsByTagName("options").item(0);
+		Element gui = (Element) mConfig.getDocumentElement()
+				.getElementsByTagName("gui").item(0);
 
-			// Create an API key if it does not exist.
-			if (gui.getElementsByTagName("apikey").getLength() == 0) {
-				Log.i(TAG, "Initializing API key with random string");
-				char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-				StringBuilder sb = new StringBuilder();
-				Random random = new Random();
-				for (int i = 0; i < 20; i++) {
-					sb.append(chars[random.nextInt(chars.length)]);
-				}
-				Element apiKey = mConfig.createElement("apikey");
-				apiKey.setTextContent(sb.toString());
-				gui.appendChild(apiKey);
+		// Create an API key if it does not exist.
+		if (gui.getElementsByTagName("apikey").getLength() == 0) {
+			Log.i(TAG, "Initializing API key with random string");
+			char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+			StringBuilder sb = new StringBuilder();
+			Random random = new Random();
+			for (int i = 0; i < 20; i++) {
+				sb.append(chars[random.nextInt(chars.length)]);
+			}
+			Element apiKey = mConfig.createElement("apikey");
+			apiKey.setTextContent(sb.toString());
+			gui.appendChild(apiKey);
+			changed = true;
+		}
+
+		// Hardcode default globalAnnounceServer ip.
+		Element globalAnnounceServer = (Element)
+				options.getElementsByTagName("globalAnnounceServer").item(0);
+		if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
+			Log.i(TAG, "Replacing globalAnnounceServer host with ip");
+			globalAnnounceServer.setTextContent("194.126.249.5:22025");
+			changed = true;
+		}
+
+		// Set ignorePerms attribute.
+		NodeList repos = mConfig.getDocumentElement().getElementsByTagName("repository");
+		for (int i = 0; i < repos.getLength(); i++) {
+			Element r = (Element) repos.item(i);
+			if (!r.hasAttribute("ignorePerms") ||
+					!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
+				Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
+				r.setAttribute("ignorePerms", Boolean.toString(true));
 				changed = true;
-			}
-
-			// Hardcode default globalAnnounceServer ip.
-			Element globalAnnounceServer = (Element)
-					options.getElementsByTagName("globalAnnounceServer").item(0);
-			if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
-				Log.i(TAG, "Replacing globalAnnounceServer host with ip");
-				globalAnnounceServer.setTextContent("194.126.249.5:22025");
-				changed = true;
-			}
-
-			// Set ignorePerms attribute.
-			NodeList repos = mConfig.getDocumentElement().getElementsByTagName("repository");
-			for (int i = 0; i < repos.getLength(); i++) {
-				Element r = (Element) repos.item(i);
-				if (!r.hasAttribute("ignorePerms") ||
-						!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
-					Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
-					r.setAttribute("ignorePerms", Boolean.toString(true));
-					changed = true;
-				}
-			}
-
-			// Write the changes back to file.
-			if (changed) {
-				Log.i(TAG, "Writing updated config back to file");
-				TransformerFactory transformerFactory = TransformerFactory.newInstance();
-				Transformer transformer = transformerFactory.newTransformer();
-				DOMSource domSource = new DOMSource(mConfig);
-				StreamResult streamResult = new StreamResult(mConfigFile);
-				transformer.transform(domSource, streamResult);
 			}
 		}
-		catch (TransformerException e) {
-			Log.w(TAG, "Failed to save updated config", e);
+
+		if (changed) {
+			saveChanges();
 		}
 	}
 
 	private Element getGuiElement() {
 		return (Element) mConfig.getDocumentElement()
 				.getElementsByTagName("gui").item(0);
+	}
+
+	/**
+	 * Creates a repository for the default camera folder.
+	 */
+	public void createCameraRepo() {
+		File cameraFolder =
+				Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+
+		Element cameraRepo = mConfig.createElement("repository");
+		cameraRepo.setAttribute("id", "camera");
+		cameraRepo.setAttribute("directory", cameraFolder.getAbsolutePath());
+		cameraRepo.setAttribute("ro", "true");
+		cameraRepo.setAttribute("ignorePerms", "true");
+		mConfig.getDocumentElement().appendChild(cameraRepo);
+
+		saveChanges();
+	}
+
+	/**
+	 * Writes updated mConfig back to file.
+	 */
+	private void saveChanges() {
+		try {
+			Log.i(TAG, "Writing updated config back to file");
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource domSource = new DOMSource(mConfig);
+			StreamResult streamResult = new StreamResult(mConfigFile);
+			transformer.transform(domSource, streamResult);
+		}
+		catch (TransformerException e) {
+			Log.w(TAG, "Failed to save updated config", e);
+		}
 	}
 
 }
