@@ -64,16 +64,7 @@ public class LocalNodeInfoFragment extends Fragment
 		@Override
 		public void onDrawerOpened(View drawerView) {
 			super.onDrawerOpened(drawerView);
-			mTimer = new Timer();
-			mTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					updateGui();
-				}
-
-			}, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-			mActivity.getSupportActionBar().setTitle(R.string.system_info);
-			mActivity.supportInvalidateOptionsMenu();
+			LocalNodeInfoFragment.this.onDrawerOpened();
 		}
 	};
 
@@ -94,6 +85,29 @@ public class LocalNodeInfoFragment extends Fragment
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		mActivity = (MainActivity) getActivity();
+
+		if (savedInstanceState != null && savedInstanceState.getBoolean("active")) {
+			onDrawerOpened();
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean("active", mTimer != null);
+	}
+
+	private void onDrawerOpened() {
+		mTimer = new Timer();
+		mTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				updateGui();
+			}
+
+		}, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+		mActivity.getSupportActionBar().setTitle(R.string.system_info);
+		mActivity.supportInvalidateOptionsMenu();
 	}
 
 	@Override
@@ -119,6 +133,9 @@ public class LocalNodeInfoFragment extends Fragment
 	 */
 	@Override
 	public void onReceiveSystemInfo(RestApi.SystemInfo info) {
+		if (getActivity() == null)
+			return;
+
 		mNodeId.setText(info.myID);
 		mCpuUsage.setText(new  DecimalFormat("0.00").format(info.cpuPercent) + "%");
 		mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));

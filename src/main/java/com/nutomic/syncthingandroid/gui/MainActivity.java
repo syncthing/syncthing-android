@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -21,9 +22,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -91,8 +94,8 @@ public class MainActivity extends ActionBarActivity
 		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
-	private final FragmentStatePagerAdapter mSectionsPagerAdapter =
-			new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+	private final FragmentPagerAdapter mSectionsPagerAdapter =
+			new FragmentPagerAdapter(getSupportFragmentManager()) {
 
 		@Override
 		public Fragment getItem(int position) {
@@ -216,7 +219,8 @@ public class MainActivity extends ActionBarActivity
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		// Avoid crash if called during startup.
-		if (mRepositoriesFragment != null && mNodesFragment != null) {
+		if (mRepositoriesFragment != null && mNodesFragment != null &&
+				mLocalNodeInfoFragment != null) {
 			FragmentManager fm = getSupportFragmentManager();
 			fm.putFragment(outState, ReposFragment.class.getName(), mRepositoriesFragment);
 			fm.putFragment(outState, NodesFragment.class.getName(), mNodesFragment);
@@ -297,5 +301,4 @@ public class MainActivity extends ActionBarActivity
 				? mSyncthingService.getApi()
 				: null;
 	}
-
 }
