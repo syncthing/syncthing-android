@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -71,17 +73,35 @@ public class MainActivity extends ActionBarActivity
 	@SuppressLint("InflateParams")
 	public void onApiChange(boolean isAvailable) {
 		if (!isAvailable) {
+			final SharedPreferences prefs =
+					PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
 			LayoutInflater inflater = getLayoutInflater();
 			View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
 			TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-			loadingText.setText((SyncthingService.isFirstStart(this)
+			loadingText.setText((mSyncthingService.isFirstStart())
 					? R.string.web_gui_creating_key
-					: R.string.api_loading));
+					: R.string.api_loading);
 
 			mLoadingDialog = new AlertDialog.Builder(this)
 					.setCancelable(false)
 					.setView(dialogLayout)
 					.show();
+
+			// Make sure the first start dialog is shown on top.
+			if (prefs.getBoolean("first_start", true)) {
+				new AlertDialog.Builder(this)
+						.setTitle(R.string.welcome_title)
+						.setMessage(R.string.welcome_text)
+						.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								prefs.edit().putBoolean("first_start", false).commit();
+							}
+						})
+						.show();
+			}
+
 			return;
 		}
 
@@ -180,14 +200,6 @@ public class MainActivity extends ActionBarActivity
 			mRepositoriesFragment = new ReposFragment();
 			mNodesFragment = new NodesFragment();
 			mLocalNodeInfoFragment = new LocalNodeInfoFragment();
-		}
-
-		if (SyncthingService.isFirstStart(this)) {
-			new AlertDialog.Builder(this)
-					.setTitle(R.string.welcome_title)
-					.setMessage(R.string.welcome_text)
-					.setNeutralButton(android.R.string.ok, null)
-					.show();
 		}
 
 		getApplicationContext().startService(

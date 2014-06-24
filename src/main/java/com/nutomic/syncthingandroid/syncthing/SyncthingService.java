@@ -97,8 +97,6 @@ public class SyncthingService extends Service {
 		public void onWebGuiAvailable();
 	}
 
-	private final ReentrantLock mOnWebGuiAvailableListenersLock = new ReentrantLock();
-
 	private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
 			new HashSet<OnWebGuiAvailableListener>();
 
@@ -327,7 +325,7 @@ public class SyncthingService extends Service {
 	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
 		@Override
 		protected Pair<String, String> doInBackground(Void... voids) {Looper.prepare();
-			if (isFirstStart(SyncthingService.this)) {
+			if (isFirstStart()) {
 				Log.i(TAG, "App started for the first time. " +
 						"Copying default config, keys will be generated automatically");
 				copyDefaultConfig();
@@ -367,10 +365,6 @@ public class SyncthingService extends Service {
 		mApi.shutdown();
 	}
 
-	public boolean isWebGuiAvailable() {
-		return mIsWebGuiAvailable;
-	}
-
 	/**
 	 * Register a listener for the web gui becoming available..
 	 *
@@ -395,8 +389,8 @@ public class SyncthingService extends Service {
 	 *
 	 * This will return true until the public key file has been generated.
 	 */
-	public static boolean isFirstStart(Context context) {
-		return !new File(context.getFilesDir(), PUBLIC_KEY_FILE).exists();
+	public boolean isFirstStart() {
+		return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
 	}
 
 	/**

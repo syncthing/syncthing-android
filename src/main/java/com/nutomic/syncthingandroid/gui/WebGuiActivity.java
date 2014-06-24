@@ -75,13 +75,7 @@ public class WebGuiActivity extends ActionBarActivity implements SyncthingServic
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		mWebView.setWebViewClient(mWebViewClient);
 
-		if (SyncthingService.isFirstStart(this)) {
-			TextView loadingText = (TextView) mLoadingView.findViewById(R.id.loading_text);
-			loadingText.setText(R.string.web_gui_creating_key);
-		}
-
-		bindService(
-				new Intent(this, SyncthingService.class),
+		bindService(new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
