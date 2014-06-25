@@ -167,7 +167,7 @@ public class SyncthingService extends Service {
 				dos.writeBytes("exit\n");
 				dos.flush();
 
-				log(process.getErrorStream(), Log.INFO);
+				log(process.getInputStream(), Log.INFO);
 
 				ret = process.waitFor();
 			}
