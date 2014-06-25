@@ -37,7 +37,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	public static final String ACTION_EDIT = "edit";
 
-	public static final String KEY_REPO_ID = "repository_id";
+	public static final String KEY_REPO_ID = "repo_id";
 
 	private static final String KEY_NODE_SHARED = "node_shared";
 
@@ -56,13 +56,13 @@ public class RepoSettingsActivity extends PreferenceActivity
 		}
 	};
 
-	private RestApi.Repository mRepo;
+	private RestApi.Repo mRepo;
 
-	private EditTextPreference mRepositoryId;
+	private EditTextPreference mRepoId;
 
 	private EditTextPreference mDirectory;
 
-	private CheckBoxPreference mRepositoryMaster;
+	private CheckBoxPreference mRepoMaster;
 
 	private PreferenceScreen mNodes;
 
@@ -83,12 +83,12 @@ public class RepoSettingsActivity extends PreferenceActivity
 			addPreferencesFromResource(R.xml.repo_settings_edit);
 		}
 
-		mRepositoryId = (EditTextPreference) findPreference("repository_id");
-		mRepositoryId.setOnPreferenceChangeListener(this);
+		mRepoId = (EditTextPreference) findPreference("repo_id");
+		mRepoId.setOnPreferenceChangeListener(this);
 		mDirectory = (EditTextPreference) findPreference("directory");
 		mDirectory.setOnPreferenceChangeListener(this);
-		mRepositoryMaster = (CheckBoxPreference) findPreference("repository_master");
-		mRepositoryMaster.setOnPreferenceChangeListener(this);
+		mRepoMaster = (CheckBoxPreference) findPreference("repo_master");
+		mRepoMaster.setOnPreferenceChangeListener(this);
 		mNodes = (PreferenceScreen) findPreference("nodes");
 		mVersioning = (CheckBoxPreference) findPreference("versioning");
 		mVersioning.setOnPreferenceChangeListener(this);
@@ -112,7 +112,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 		if (getIntent().getAction().equals(ACTION_CREATE)) {
 			setTitle(R.string.create_repo);
-			mRepo = new RestApi.Repository();
+			mRepo = new RestApi.Repo();
 			mRepo.ID = "";
 			mRepo.Directory = "";
 			mRepo.Nodes = new ArrayList<RestApi.Node>();
@@ -120,7 +120,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		}
 		else if (getIntent().getAction().equals(ACTION_EDIT)) {
 			setTitle(R.string.edit_repo);
-			List<RestApi.Repository> repos = mSyncthingService.getApi().getRepos();
+			List<RestApi.Repo> repos = mSyncthingService.getApi().getRepos();
 			for (int i = 0; i < repos.size(); i++) {
 				if (repos.get(i).ID.equals(getIntent().getStringExtra(KEY_REPO_ID))) {
 					mRepo = repos.get(i);
@@ -129,11 +129,11 @@ public class RepoSettingsActivity extends PreferenceActivity
 			}
 		}
 
-		mRepositoryId.setText(mRepo.ID);
-		mRepositoryId.setSummary(mRepo.ID);
+		mRepoId.setText(mRepo.ID);
+		mRepoId.setSummary(mRepo.ID);
 		mDirectory.setText(mRepo.Directory);
 		mDirectory.setSummary(mRepo.Directory);
-		mRepositoryMaster.setChecked(mRepo.ReadOnly);
+		mRepoMaster.setChecked(mRepo.ReadOnly);
 		List<RestApi.Node> nodesList = mSyncthingService.getApi().getNodes();
 		for (RestApi.Node n : nodesList) {
 			ExtendedCheckBoxPreference cbp =
@@ -204,19 +204,19 @@ public class RepoSettingsActivity extends PreferenceActivity
 			pref.setSummary((String) o);
 		}
 
-		if (preference.equals(mRepositoryId)) {
+		if (preference.equals(mRepoId)) {
 			mRepo.ID = (String) o;
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
 		else if (preference.equals(mDirectory)) {
 			mRepo.Directory = (String) o;
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
-		else if (preference.equals(mRepositoryMaster)) {
+		else if (preference.equals(mRepoMaster)) {
 			mRepo.ReadOnly = (Boolean) o;
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
 		else if (preference.getKey().equals(KEY_NODE_SHARED)) {
@@ -232,7 +232,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 					}
 				}
 			}
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
 		else if (preference.equals(mVersioning)) {
@@ -247,13 +247,13 @@ public class RepoSettingsActivity extends PreferenceActivity
 			else {
 				mRepo.Versioning = new RestApi.Versioning();
 			}
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
 		else if (preference.equals(mVersioningKeep)) {
 			((RestApi.SimpleVersioning) mRepo.Versioning)
 					.setParams(Integer.parseInt((String) o));
-			repositoryUpdated();
+			repoUpdated();
 			return true;
 		}
 
@@ -279,7 +279,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		return false;
 	}
 
-	private void repositoryUpdated() {
+	private void repoUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
 			mSyncthingService.getApi().editRepo(mRepo, false);
 		}

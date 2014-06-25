@@ -59,7 +59,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		public long sys;
 	}
 
-	public static class Repository {
+	public static class Repo {
 		public String Directory;
 		public String ID;
 		public String Invalid;
@@ -384,17 +384,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Returns a list of all existing repositores.
 	 */
-	public List<Repository> getRepos() {
+	public List<Repo> getRepos() {
 		if (mConfig == null)
-			return new ArrayList<Repository>();
+			return new ArrayList<Repo>();
 
-		List<Repository> ret = null;
+		List<Repo> ret = null;
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
-			ret = new ArrayList<Repository>(repos.length());
+			ret = new ArrayList<Repo>(repos.length());
 			for (int i = 0; i < repos.length(); i++) {
 				JSONObject json = repos.getJSONObject(i);
-				Repository r = new Repository();
+				Repo r = new Repo();
 				r.Directory = json.getString("Directory");
 				r.ID = json.getString("ID");
 				r.Invalid = json.getString("Invalid");
@@ -608,7 +608,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Updates or creates the given node.
 	 */
-	public void editRepo(Repository repo, boolean create) {
+	public void editRepo(Repo repo, boolean create) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 			JSONObject r = null;
@@ -656,7 +656,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Deletes the given repository from syncthing.
 	 */
-	public void deleteRepo(Repository repo) {
+	public void deleteRepo(Repo repo) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 

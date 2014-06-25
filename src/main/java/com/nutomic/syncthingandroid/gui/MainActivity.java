@@ -266,7 +266,7 @@ public class MainActivity extends ActionBarActivity
 		}
 
 		switch (item.getItemId()) {
-			case R.id.add_repository:
+			case R.id.add_repo:
 				Intent intent = new Intent(this, RepoSettingsActivity.class);
 				intent.setAction(RepoSettingsActivity.ACTION_CREATE);
 				startActivity(intent);

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Generates item views for repository items.
  */
-public class ReposAdapter extends ArrayAdapter<RestApi.Repository>
+public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 		implements RestApi.OnReceiveModelListener {
 
 	private HashMap<String, RestApi.Model> mModels = new HashMap<String, RestApi.Model>();
@@ -67,8 +67,8 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repository>
 	/**
 	 * Replacement for addAll, which is not implemented on lower API levels.
 	 */
-	public void add(List<RestApi.Repository> nodes) {
-		for (RestApi.Repository r : nodes) {
+	public void add(List<RestApi.Repo> nodes) {
+		for (RestApi.Repo r : nodes) {
 			add(r);
 		}
 	}

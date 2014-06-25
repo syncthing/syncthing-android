@@ -10,7 +10,7 @@
 			app:showAsAction="ifRoom" />
 
 	<item
-			android:id="@+id/add_repository"
+			android:id="@+id/add_repo"
 			android:title="@string/add_repo"
 			app:showAsAction="ifRoom" />
 

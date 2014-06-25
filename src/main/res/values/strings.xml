@@ -98,6 +98,8 @@
 	<!-- Setting title -->
 	<string name="keep_versions">Keep Versions</string>
 
+	<string name="delete_repo">Delete Repository</string>
+
 	<!-- Title for RepoSettingsActivity in create mode -->
 	<string name="create_repo">Create Repository</string>
 
