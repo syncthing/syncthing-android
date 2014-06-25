@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+		android:persistent="false" >
+
+	<EditTextPreference
+			android:key="repository_id"
+			android:title="@string/repo_id" />
+
+	<EditTextPreference
+			android:key="directory"
+			android:title="@string/directory" />
+
+	<CheckBoxPreference
+			android:key="repository_master"
+			android:title="@string/repo_master" />
+
+	<PreferenceScreen
+			android:key="nodes"
+			android:title="@string/nodes" />
+
+	<CheckBoxPreference
+			android:key="versioning"
+			android:title="@string/file_versioning" />
+
+	<EditTextPreference
+			android:key="versioning_keep"
+			android:title="@string/keep_versions"
+			android:inputType="numberDecimal" />
+
+</PreferenceScreen>

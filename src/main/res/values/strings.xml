@@ -80,6 +80,24 @@
 
 	<!-- RepoSettingsActivity -->
 
+	<!-- Setting title -->
+	<string name="repo_id">Repository ID</string>
+
+	<!-- Setting title -->
+	<string name="directory">Directory</string>
+
+	<!-- Setting title -->
+	<string name="repo_master">Repository Master</string>
+
+	<!-- Setting title -->
+	<string name="nodes">Nodes</string>
+
+	<!-- Setting title -->
+	<string name="file_versioning">File Versioning</string>
+
+	<!-- Setting title -->
+	<string name="keep_versions">Keep Versions</string>
+
 	<!-- Title for RepoSettingsActivity in create mode -->
 	<string name="create_repo">Create Repository</string>
 
@@ -99,6 +117,21 @@
 	<string name="repo_path_required">The repository path must not be empty</string>
 
 	<!-- NodeSettingsActivity -->
+
+	<!-- Setting title -->
+	<string name="node_id">Node ID</string>
+
+	<!-- Setting title -->
+	<string name="name">Name</string>
+
+	<!-- Setting title -->
+	<string name="addresses">Addresses</string>
+
+	<!-- Setting title -->
+	<string name="current_address">Current Address</string>
+
+	<!-- Setting title -->
+	<string name="delete_node">Delete Node</string>
 
 	<!-- Title for NodeSettingsActivity in create mode -->
 	<string name="create_node">Create Node</string>

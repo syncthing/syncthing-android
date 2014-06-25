@@ -76,7 +76,12 @@ public class RepoSettingsActivity extends PreferenceActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		addPreferencesFromResource(R.xml.repo_settings);
+		if (getIntent().getAction().equals(ACTION_CREATE)) {
+			addPreferencesFromResource(R.xml.repo_settings_create);
+		}
+		else if (getIntent().getAction().equals(ACTION_EDIT)) {
+			addPreferencesFromResource(R.xml.repo_settings_edit);
+		}
 
 		mRepositoryId = (EditTextPreference) findPreference("repository_id");
 		mRepositoryId.setOnPreferenceChangeListener(this);
@@ -89,8 +94,10 @@ public class RepoSettingsActivity extends PreferenceActivity
 		mVersioning.setOnPreferenceChangeListener(this);
 		mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
 		mVersioningKeep.setOnPreferenceChangeListener(this);
-		mDelete = findPreference("delete");
-		mDelete.setOnPreferenceClickListener(this);
+		if (getIntent().getAction().equals(ACTION_EDIT)) {
+			mDelete = findPreference("delete");
+			mDelete.setOnPreferenceClickListener(this);
+		}
 
 		bindService(new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
@@ -110,11 +117,9 @@ public class RepoSettingsActivity extends PreferenceActivity
 			mRepo.Directory = "";
 			mRepo.Nodes = new ArrayList<RestApi.Node>();
 			mRepo.Versioning = new RestApi.Versioning();
-			getPreferenceScreen().removePreference(mDelete);
 		}
 		else if (getIntent().getAction().equals(ACTION_EDIT)) {
 			setTitle(R.string.edit_repo);
-			mRepositoryId.setEnabled(false);
 			List<RestApi.Repository> repos = mSyncthingService.getApi().getRepos();
 			for (int i = 0; i < repos.size(); i++) {
 				if (repos.get(i).ID.equals(getIntent().getStringExtra(KEY_REPO_ID))) {

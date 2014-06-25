@@ -5,12 +5,12 @@
 	<EditTextPreference
 			android:key="repository_id"
 			android:title="Repository ID"
-			android:text="default" />
+			android:enabled="false"
+			style="?android:preferenceInformationStyle"  />
 
 	<EditTextPreference
 			android:key="directory"
-			android:title="Directory"
-			android:text="/sdcard/syncthing/" />
+			android:title="Directory" />
 
 	<CheckBoxPreference
 			android:key="repository_master"

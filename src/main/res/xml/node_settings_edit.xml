@@ -4,18 +4,17 @@
 
 	<EditTextPreference
 			android:key="node_id"
-			android:title="Node ID"
-			android:text="7TGPF3-AYRIE6-YVAHJN-TYWH5D-KFDF6B-7JUHMI-LNIC2S-YE5QIV-FH2Q" />
+			android:title="@string/node_id"
+			android:enabled="false"
+			style="?android:preferenceInformationStyle" />
 
 	<EditTextPreference
 			android:key="name"
-			android:title="Name"
-			android:text="laptop" />
+			android:title="@string/name" />
 
 	<EditTextPreference
 			android:key="addresses"
-			android:title="Addresses"
-			android:text="dynamic" />
+			android:title="@string/addresses" />
 
 	<Preference
 			android:key="version"
@@ -24,11 +23,11 @@
 
 	<Preference
 			android:key="current_address"
-			android:title="Current Address"
+			android:title="@string/current_address"
 			style="?android:preferenceInformationStyle"	/>
 
 	<Preference
 			android:key="delete"
-			android:title="Delete Node" />
+			android:title="@string/delete_node" />
 
 </PreferenceScreen>

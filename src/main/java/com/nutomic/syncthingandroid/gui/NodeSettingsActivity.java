@@ -69,7 +69,12 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		addPreferencesFromResource(R.xml.node_settings);
+		if (getIntent().getAction().equals(ACTION_CREATE)) {
+			addPreferencesFromResource(R.xml.node_settings_create);
+		}
+		else if (getIntent().getAction().equals(ACTION_EDIT)) {
+			addPreferencesFromResource(R.xml.node_settings_edit);
+		}
 
 		mNodeId = (EditTextPreference) findPreference("node_id");
 		mNodeId.setOnPreferenceChangeListener(this);
@@ -77,12 +82,14 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		mName.setOnPreferenceChangeListener(this);
 		mAddresses = (EditTextPreference) findPreference("addresses");
 		mAddresses.setOnPreferenceChangeListener(this);
-		mVersion = findPreference("version");
-		mVersion.setSummary("?");
-		mCurrentAddress = findPreference("current_address");
-		mCurrentAddress.setSummary("?");
-		mDelete = findPreference("delete");
-		mDelete.setOnPreferenceClickListener(this);
+		if (getIntent().getAction().equals(ACTION_EDIT)) {
+			mVersion = findPreference("version");
+			mVersion.setSummary("?");
+			mCurrentAddress = findPreference("current_address");
+			mDelete = findPreference("delete");
+			mCurrentAddress.setSummary("?");
+			mDelete.setOnPreferenceClickListener(this);
+		}
 
 		bindService(new Intent(this, SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
@@ -101,11 +108,9 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			mNode.Name = "";
 			mNode.NodeID = "";
 			mNode.Addresses = "dynamic";
-			getPreferenceScreen().removePreference(mDelete);
 		}
 		else if (getIntent().getAction().equals(ACTION_EDIT)) {
 			setTitle(R.string.edit_node);
-			mNodeId.setEnabled(false);
 			List<RestApi.Node> nodes = mSyncthingService.getApi().getNodes();
 			for (int i = 0; i < nodes.size(); i++) {
 				if (nodes.get(i).NodeID.equals(getIntent().getStringExtra(KEY_NODE_ID))) {
