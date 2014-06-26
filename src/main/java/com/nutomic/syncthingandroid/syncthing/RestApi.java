@@ -632,7 +632,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			JSONArray nodes = new JSONArray();
 			for (Node n : repo.Nodes) {
 				JSONObject element = new JSONObject();
-				element.put("Addresses", n.Addresses);
+				element.put("Addresses", listToJson(n.Addresses.split(" ")));
 				element.put("Name", n.Name);
 				element.put("NodeID", n.NodeID);
 				nodes.put(element);
