@@ -6,7 +6,7 @@
 			android:key="repo_id"
 			android:title="@string/repo_id" />
 
-	<EditTextPreference
+	<Preference
 			android:key="directory"
 			android:title="@string/directory" />
 

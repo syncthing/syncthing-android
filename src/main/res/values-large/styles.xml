@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="DialogWhenLargeCompat" parent="android:Theme.Holo.DialogWhenLarge" />
+	<style name="DialogWhenLarge" parent="android:Theme.Holo.DialogWhenLarge" />
 </resources>

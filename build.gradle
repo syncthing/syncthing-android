@@ -95,7 +95,7 @@ def getVersionCodeFromManifest() {
 	return Integer.parseInt(matcher.group(1))
 }
 
-task buildNative(type:Exec) {
+task buildNative(type: Exec) {
 	outputs.upToDateWhen { false }
 	executable = './build-native.sh'
 }

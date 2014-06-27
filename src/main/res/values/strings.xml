@@ -14,6 +14,7 @@
 
 	<!-- MainActivity -->
 
+
 	<!-- Title of the "add repo" menu action -->
 	<string name="add_repo">Add Repository</string>
 
@@ -63,6 +64,7 @@
 
 	<!-- LocalNodeInfoFragment -->
 
+
 	<!-- Same as download_title with a colon and space appended -->
 	<string name="download_title_colon">Download:\u0020</string>
 
@@ -79,6 +81,7 @@
 	<string name="announce_server">Announce Server</string>
 
 	<!-- RepoSettingsActivity -->
+
 
 	<!-- Setting title -->
 	<string name="repo_id">Repository ID</string>
@@ -97,7 +100,6 @@
 
 	<!-- Setting title -->
 	<string name="keep_versions">Keep Versions</string>
-
 	<string name="delete_repo">Delete Repository</string>
 
 	<!-- Title for RepoSettingsActivity in create mode -->
@@ -119,6 +121,7 @@
 	<string name="repo_path_required">The repository path must not be empty</string>
 
 	<!-- NodeSettingsActivity -->
+
 
 	<!-- Setting title -->
 	<string name="node_id">Node ID</string>
@@ -152,6 +155,7 @@
 
 	<!-- WebGuiActivity -->
 
+
 	<!-- Title of the web gui activity -->
 	<string name="web_gui_title">Web GUI</string>
 
@@ -171,10 +175,10 @@
 	<string name="welcome_text">Welcome to Syncthing for Android!\n\n\
 This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
 There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
-Please report any problems you encounter.
-	</string>
+Please report any problems you encounter.</string>
 
 	<!-- SettingsActivity -->
+
 
 	<string name="settings_title">Settings</string>
 
@@ -190,7 +194,15 @@ Please report any problems you encounter.
 	<!-- Title of the preference showing upstream version name -->
 	<string name="syncthing_version_title">Syncthing Version</string>
 
+	<!-- FolderPickerAcitivity -->
+
+
+	<string name="directory_empty">Directory is Empty</string>
+
+	<string name="create_folder">Create new Folder</string>
+
 	<!-- RestApi -->
+
 
 	<!-- Strings representing units for file sizes, from smallest to largest -->
 	<string-array name="file_size_units">
@@ -209,5 +221,9 @@ Please report any problems you encounter.
 		<item>Gb/s</item>
 		<item>Tb/s</item>
 	</string-array>
+
+	<string name="title_activity_folder_picker">FolderPickerActivity</string>
+	<string name="hello_world">Hello world!</string>
+	<string name="action_settings">Settings</string>
 
 </resources>

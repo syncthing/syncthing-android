@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -32,6 +34,8 @@ import java.util.List;
 public class RepoSettingsActivity extends PreferenceActivity
 		implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
 		SyncthingService.OnApiChangeListener {
+
+	private static final int DIRECTORY_REQUEST_CODE = 234;
 
 	public static final String ACTION_CREATE = "create";
 
@@ -60,7 +64,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	private EditTextPreference mRepoId;
 
-	private EditTextPreference mDirectory;
+	private Preference mDirectory;
 
 	private CheckBoxPreference mRepoMaster;
 
@@ -85,8 +89,8 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 		mRepoId = (EditTextPreference) findPreference("repo_id");
 		mRepoId.setOnPreferenceChangeListener(this);
-		mDirectory = (EditTextPreference) findPreference("directory");
-		mDirectory.setOnPreferenceChangeListener(this);
+		mDirectory = findPreference("directory");
+		mDirectory.setOnPreferenceClickListener(this);
 		mRepoMaster = (CheckBoxPreference) findPreference("repo_master");
 		mRepoMaster.setOnPreferenceChangeListener(this);
 		mNodes = (PreferenceScreen) findPreference("nodes");
@@ -131,7 +135,6 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 		mRepoId.setText(mRepo.ID);
 		mRepoId.setSummary(mRepo.ID);
-		mDirectory.setText(mRepo.Directory);
 		mDirectory.setSummary(mRepo.Directory);
 		mRepoMaster.setChecked(mRepo.ReadOnly);
 		List<RestApi.Node> nodesList = mSyncthingService.getApi().getNodes();
@@ -162,7 +165,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.repo_settings_menu, menu);
+		getMenuInflater().inflate(R.menu.repo_settings, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -262,7 +265,15 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.equals(mDelete)) {
+		if (preference.equals(mDirectory)) {
+			Intent intent = new Intent(this, FolderPickerActivity.class)
+					.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY,
+							(mRepo.Directory.length() != 0)
+									? mRepo.Directory
+									: Environment.getExternalStorageDirectory().getAbsolutePath());
+			startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
+		}
+		else if (preference.equals(mDelete)) {
 			new AlertDialog.Builder(this)
 					.setMessage(R.string.delete_repo_confirm)
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -277,6 +288,15 @@ public class RepoSettingsActivity extends PreferenceActivity
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
+			mRepo.Directory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
+			mDirectory.setSummary(mRepo.Directory);
+			repoUpdated();
+		}
 	}
 
 	private void repoUpdated() {

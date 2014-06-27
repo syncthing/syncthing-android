@@ -96,14 +96,23 @@ public class ConfigXml {
 			changed = true;
 		}
 
-		// Set ignorePerms attribute.
 		NodeList repos = mConfig.getDocumentElement().getElementsByTagName("repository");
 		for (int i = 0; i < repos.getLength(); i++) {
 			Element r = (Element) repos.item(i);
+			// Set ignorePerms attribute.
 			if (!r.hasAttribute("ignorePerms") ||
 					!Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
 				Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
 				r.setAttribute("ignorePerms", Boolean.toString(true));
+				changed = true;
+			}
+
+			// Replace /sdcard/ in repository path with proper path.
+			String dir = r.getAttribute("directory");
+			if (dir.startsWith("/sdcard")) {
+				String newDir = dir.replace("/sdcard",
+						Environment.getExternalStorageDirectory().getAbsolutePath());
+				r.setAttribute("directory", newDir);
 				changed = true;
 			}
 		}

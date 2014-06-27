@@ -23,7 +23,7 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 	private HashMap<String, RestApi.Model> mModels = new HashMap<String, RestApi.Model>();
 
 	public ReposAdapter(Context context) {
-		super(context, R.layout.node_list_item);
+		super(context, R.layout.repo_list_item);
 	}
 
 	@Override
