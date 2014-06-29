@@ -110,8 +110,6 @@ public class SettingsActivity extends PreferenceActivity
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// There is currently no way to get ActionBar in PreferenceActivity on pre-honeycomb with
-		// compatibility library, so we'll have to do a version check.
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
