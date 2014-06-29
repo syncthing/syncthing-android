@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -690,6 +691,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	public boolean isApiAvailable() {
 		return mAvailableCount.get() == TOTAL_STARTUP_CALLS;
+	}
+
+	/**
+	 * Shares the given node id via Intent. Must be called from an Activity.
+	 */
+	public static void shareNodeId(Activity activity, String id) {
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
+		activity.startActivity(Intent.createChooser(
+				shareIntent, activity.getString(R.string.send_node_id_to)));
 	}
 
 }

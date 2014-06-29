@@ -138,6 +138,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.create).setVisible(getIntent().getAction().equals(ACTION_CREATE));
+		menu.findItem(R.id.share_node_id).setVisible(getIntent().getAction().equals(ACTION_EDIT));
 		return true;
 	}
 
@@ -156,8 +157,12 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 				mSyncthingService.getApi().editNode(mNode, true);
 				finish();
 				return true;
+			case R.id.share_node_id:
+				RestApi.shareNodeId(this, mNode.NodeID);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

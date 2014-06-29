@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -166,11 +165,7 @@ public class LocalNodeInfoFragment extends Fragment
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.share_node_id:
-				Intent shareIntent = new Intent();
-				shareIntent.setAction(Intent.ACTION_SEND);
-				shareIntent.setType("text/plain");
-				shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, mNodeId.getText().toString());
-				startActivity(Intent.createChooser(shareIntent, getString(R.string.send_node_id_to)));
+				RestApi.shareNodeId(getActivity(), mNodeId.getText().toString());
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
