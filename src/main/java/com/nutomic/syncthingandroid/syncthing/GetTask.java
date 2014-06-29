@@ -50,7 +50,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
 		HttpClient httpclient = new DefaultHttpClient();
 		if (params.length == 5) {
 			LinkedList<NameValuePair> urlParams = new LinkedList<NameValuePair>();
-			urlParams.add(new BasicNameValuePair(params[2], params[3]));
+			urlParams.add(new BasicNameValuePair(params[3], params[4]));
 			fullUri += "?" + URLEncodedUtils.format(urlParams, "utf-8");
 		}
 		HttpGet get = new HttpGet(fullUri);
