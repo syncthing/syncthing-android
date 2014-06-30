@@ -61,7 +61,7 @@
 		</activity>
 		<activity
 				android:name=".gui.FolderPickerActivity"
-				android:label="@string/title_activity_folder_picker" >
+				android:label="@string/folder_picker_title" >
 			<meta-data
 					android:name="android.support.PARENT_ACTIVITY"
 					android:value=".gui.RepoSettingsActivity" />

@@ -4,10 +4,10 @@
 
 	<item
 			android:id="@+id/create_folder"
-			android:title="Create Folder" />
+			android:title="@string/create_folder" />
 
 	<item
 			android:id="@+id/select"
-			android:title="Select" />
+			android:title="@string/select_folder" />
 
 </menu>

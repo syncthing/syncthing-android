@@ -64,6 +64,7 @@ public class ConfigXml {
 	 *
 	 * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
 	 */
+	@SuppressWarnings("SdCardPath")
 	public void update() {
 		Log.i(TAG, "Checking for needed config updates");
 		boolean changed = false;

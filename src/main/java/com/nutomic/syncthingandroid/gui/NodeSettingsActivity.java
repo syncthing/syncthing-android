@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -67,6 +69,8 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	private Preference mDelete;
 
 	@Override
+	@SuppressLint("AppCompatMethod")
+	@TargetApi(11)
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 

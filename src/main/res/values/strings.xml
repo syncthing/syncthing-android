@@ -185,6 +185,7 @@ Please report any problems you encounter.</string>
 	<!-- SettingsActivity -->
 
 
+	<!-- Activity title -->
 	<string name="settings_title">Settings</string>
 
 	<!-- Settings item that opens issue tracker -->
@@ -201,10 +202,17 @@ Please report any problems you encounter.</string>
 
 	<!-- FolderPickerAcitivity -->
 
+	<!-- Activity title -->
+	<string name="folder_picker_title">Folder Picker</string>
 
+	<!-- ListView empty text -->
 	<string name="directory_empty">Directory is Empty</string>
 
+	<!-- Menu item to create folder -->
 	<string name="create_folder">Create new Folder</string>
+
+	<!-- Menu item to select the current folder -->
+	<string name="select_folder">Select Folder</string>
 
 	<!-- RestApi -->
 
@@ -226,9 +234,5 @@ Please report any problems you encounter.</string>
 		<item>Gb/s</item>
 		<item>Tb/s</item>
 	</string-array>
-
-	<string name="title_activity_folder_picker">FolderPickerActivity</string>
-	<string name="hello_world">Hello world!</string>
-	<string name="action_settings">Settings</string>
 
 </resources>

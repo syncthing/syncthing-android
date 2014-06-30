@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -78,6 +80,8 @@ public class RepoSettingsActivity extends PreferenceActivity
 	private Preference mDelete;
 
 	@Override
+	@SuppressLint("AppCompatMethod")
+	@TargetApi(11)
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
