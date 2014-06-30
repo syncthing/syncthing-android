@@ -100,6 +100,8 @@
 
 	<!-- Setting title -->
 	<string name="keep_versions">Keep Versions</string>
+
+	<!-- Setting title -->
 	<string name="delete_repo">Delete Repository</string>
 
 	<!-- Title for RepoSettingsActivity in create mode -->
@@ -119,6 +121,9 @@
 
 	<!-- Toast shown when trying to create a repository with an empty path -->
 	<string name="repo_path_required">The repository path must not be empty</string>
+
+	<!-- Toast shown when selecting 'nodes' if no nodes have been added -->
+	<string name="no_nodes">Please connect a node first.</string>
 
 	<!-- NodeSettingsActivity -->
 

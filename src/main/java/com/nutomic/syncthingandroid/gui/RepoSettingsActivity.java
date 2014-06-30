@@ -99,6 +99,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		mRepoMaster = (CheckBoxPreference) findPreference("repo_master");
 		mRepoMaster.setOnPreferenceChangeListener(this);
 		mNodes = (PreferenceScreen) findPreference("nodes");
+		mNodes.setOnPreferenceClickListener(this);
 		mVersioning = (CheckBoxPreference) findPreference("versioning");
 		mVersioning.setOnPreferenceChangeListener(this);
 		mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
@@ -277,6 +278,9 @@ public class RepoSettingsActivity extends PreferenceActivity
 									? mRepo.Directory
 									: Environment.getExternalStorageDirectory().getAbsolutePath());
 			startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
+		}
+		else if (preference.equals(mNodes) && mSyncthingService.getApi().getNodes().isEmpty()) {
+			Toast.makeText(this, R.string.no_nodes, Toast.LENGTH_SHORT).show();
 		}
 		else if (preference.equals(mDelete)) {
 			new AlertDialog.Builder(this)
