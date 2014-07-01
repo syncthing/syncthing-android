@@ -72,6 +72,8 @@ public class FolderPickerActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.folder_picker_activity);
 		mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setOnItemClickListener(this);
@@ -124,6 +126,9 @@ public class FolderPickerActivity extends ActionBarActivity
 				Intent intent = new Intent()
 						.putExtra(EXTRA_RESULT_DIRECTORY, mLocation.getAbsolutePath());
 				setResult(Activity.RESULT_OK, intent);
+				finish();
+				return true;
+			case android.R.id.home:
 				finish();
 				return true;
 			default:

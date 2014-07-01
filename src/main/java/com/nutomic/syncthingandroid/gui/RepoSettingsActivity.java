@@ -200,6 +200,9 @@ public class RepoSettingsActivity extends PreferenceActivity
 				mSyncthingService.getApi().editRepo(mRepo, true);
 				finish();
 				return true;
+			case android.R.id.home:
+				finish();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

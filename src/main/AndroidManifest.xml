@@ -47,25 +47,13 @@
 
 		<activity
 				android:name=".gui.RepoSettingsActivity"
-				android:theme="@style/DialogWhenLarge" >
-			<meta-data
-					android:name="android.support.PARENT_ACTIVITY"
-					android:value=".gui.MainActivity" />
-		</activity>
+				android:theme="@style/DialogWhenLarge" />
 		<activity
 				android:name=".gui.NodeSettingsActivity"
-				android:theme="@style/DialogWhenLarge" >
-			<meta-data
-					android:name="android.support.PARENT_ACTIVITY"
-					android:value=".gui.MainActivity" />
-		</activity>
+				android:theme="@style/DialogWhenLarge" />
 		<activity
 				android:name=".gui.FolderPickerActivity"
 				android:label="@string/folder_picker_title" >
-			<meta-data
-					android:name="android.support.PARENT_ACTIVITY"
-					android:value=".gui.RepoSettingsActivity"
-					android:uiOptions="splitActionBarWhenNarrow"/>
 			<meta-data
 					android:name="android.support.UI_OPTIONS"
 					android:value="splitActionBarWhenNarrow" />

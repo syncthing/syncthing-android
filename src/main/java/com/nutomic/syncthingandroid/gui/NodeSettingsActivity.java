@@ -169,6 +169,9 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			case R.id.share_node_id:
 				RestApi.shareNodeId(this, mNode.NodeID);
 				return true;
+			case android.R.id.home:
+				finish();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
