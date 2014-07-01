@@ -38,7 +38,8 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 
 		TextView state = (TextView) convertView.findViewById(R.id.state);
 		TextView folder = (TextView) convertView.findViewById(R.id.folder);
-		TextView progress = (TextView) convertView.findViewById(R.id.progress);
+		TextView items = (TextView) convertView.findViewById(R.id.items);
+		TextView size = (TextView) convertView.findViewById(R.id.size);
 		TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
 		id.setText(getItem(position).ID);
@@ -50,10 +51,10 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 					(model.globalBytes <= 0)
 							? 100
 							: (int) ((model.localBytes / (float) model.globalBytes) * 100)));
-			progress.setText(
-					RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
-					RestApi.readableFileSize(getContext(), model.globalBytes)
-			);
+			items.setText(getContext()
+					.getString(R.string.files, model.localFiles, model.globalFiles));
+			size.setText(RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
+					RestApi.readableFileSize(getContext(), model.globalBytes));
 			invalid.setText(model.invalid);
 			invalid.setVisibility((model.invalid.equals("")) ? View.INVISIBLE : View.VISIBLE);
 		}

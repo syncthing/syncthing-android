@@ -40,6 +40,9 @@
 	<!-- Shown if no repos exist -->
 	<string name="repositories_list_empty">No repositories found</string>
 
+	<!-- Format string for repository file count -->
+	<string name="files">%1$d / %2$d Files</string>
+
 	<!-- NodesFragment -->
 
 	<string name="nodes_fragment_title">Nodes</string>
