@@ -64,7 +64,8 @@
 				android:label="@string/folder_picker_title" >
 			<meta-data
 					android:name="android.support.PARENT_ACTIVITY"
-					android:value=".gui.RepoSettingsActivity" />
+					android:value=".gui.RepoSettingsActivity"
+					android:uiOptions="splitActionBarWhenNarrow"/>
 			<meta-data
 					android:name="android.support.UI_OPTIONS"
 					android:value="splitActionBarWhenNarrow" />
