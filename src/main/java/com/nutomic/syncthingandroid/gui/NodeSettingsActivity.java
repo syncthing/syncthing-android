@@ -163,7 +163,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 					Toast.makeText(this, R.string.node_name_required, Toast.LENGTH_LONG).show();
 					return true;
 				}
-				mSyncthingService.getApi().editNode(mNode, true);
+				mSyncthingService.getApi().editNode(mNode, true, this);
 				finish();
 				return true;
 			case R.id.share_node_id:
@@ -216,7 +216,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteNode(mNode);
+							mSyncthingService.getApi().deleteNode(mNode, NodeSettingsActivity.this);
 							finish();
 						}
 					})
@@ -246,7 +246,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	 */
 	private void nodeUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
-			mSyncthingService.getApi().editNode(mNode, false);
+			mSyncthingService.getApi().editNode(mNode, false, this);
 		}
 	}
 

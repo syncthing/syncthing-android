@@ -1,10 +1,12 @@
 package com.nutomic.syncthingandroid.syncthing;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -130,6 +132,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	private String mLocalNodeId;
 
 	private final NotificationManager mNotificationManager;
+
+	private boolean mRestartPostponed = false;
 
 	/**
 	 * Stores the result of the last successful request to {@link GetTask#URI_CONNECTIONS},
@@ -267,12 +271,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * @param value The new value to set, either String, Boolean or Integer.
 	 * @param isArray True iff value is a space seperated String that should be converted to array.
 	 */
-	public <T> void setValue(String name, String key, T value, boolean isArray) {
+	public <T> void setValue(String name, String key, T value, boolean isArray, Activity activity) {
 		try {
 			mConfig.getJSONObject(name).put(key, (isArray)
 					? listToJson(((String) value).split(" "))
 					: value);
-			configUpdated();
+			configUpdated(activity);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to set value for " + key, e);
@@ -294,21 +298,41 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Sends the updated mConfig via Rest API to syncthing and displays a "restart" notification.
 	 */
-	private void configUpdated() {
+	private void configUpdated(Activity activity) {
 		new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
-		Intent i = new Intent(mSyncthingService, SyncthingService.class)
-				.setAction(SyncthingService.ACTION_RESTART);
-		PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, i, 0);
+		if (mRestartPostponed) {
+			return;
+		}
 
-		Notification n = new NotificationCompat.Builder(mSyncthingService)
-				.setContentTitle(mSyncthingService.getString(R.string.restart_notif_title))
-				.setContentText(mSyncthingService.getString(R.string.restart_notif_text))
-				.setSmallIcon(R.drawable.ic_launcher)
-				.setContentIntent(pi)
-				.build();
-		n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
-		mNotificationManager.notify(NOTIFICATION_RESTART, n);
+		final Intent intent = new Intent(mSyncthingService, SyncthingService.class)
+				.setAction(SyncthingService.ACTION_RESTART);
+
+		new AlertDialog.Builder(activity)
+				.setMessage(R.string.restart_title)
+				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						mSyncthingService.startService(intent);
+					}
+				})
+				.setNegativeButton(R.string.restart_later, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, intent, 0);
+
+						Notification n = new NotificationCompat.Builder(mSyncthingService)
+								.setContentTitle(mSyncthingService.getString(R.string.restart_title))
+								.setContentText(mSyncthingService.getString(R.string.restart_notification_text))
+								.setSmallIcon(R.drawable.ic_launcher)
+								.setContentIntent(pi)
+								.build();
+						n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
+						mNotificationManager.notify(NOTIFICATION_RESTART, n);
+						mRestartPostponed = true;
+					}
+				})
+				.show();
 	}
 
 	/**
@@ -557,7 +581,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Updates or creates the given node.
 	 */
-	public void editNode(Node node, boolean create) {
+	public void editNode(Node node, boolean create, Activity activity) {
 		try {
 			JSONArray nodes = mConfig.getJSONArray("Nodes");
 			JSONObject n = null;
@@ -577,7 +601,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			n.put("NodeID", node.NodeID);
 			n.put("Name", node.Name);
 			n.put("Addresses", listToJson(node.Addresses.split(" ")));
-			configUpdated();
+			configUpdated(activity);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to read nodes", e);
@@ -587,7 +611,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Deletes the given node from syncthing.
 	 */
-	public void deleteNode(Node node) {
+	public void deleteNode(Node node, Activity activity) {
 		try {
 			JSONArray nodes = mConfig.getJSONArray("Nodes");
 
@@ -599,7 +623,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 					break;
 				}
 			}
-			configUpdated();
+			configUpdated(activity);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to edit repo", e);
@@ -609,7 +633,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Updates or creates the given node.
 	 */
-	public void editRepo(Repo repo, boolean create) {
+	public void editRepo(Repo repo, boolean create, Activity activity) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 			JSONObject r = null;
@@ -647,7 +671,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				params.put(key, repo.Versioning.getParams().get(key));
 			}
 			r.put("Versioning", versioning);
-			configUpdated();
+			configUpdated(activity);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
@@ -657,7 +681,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Deletes the given repository from syncthing.
 	 */
-	public void deleteRepo(Repo repo) {
+	public void deleteRepo(Repo repo, Activity activity) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 
@@ -669,7 +693,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 					break;
 				}
 			}
-			configUpdated();
+			configUpdated(activity);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to edit repo", e);

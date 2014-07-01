@@ -161,11 +161,12 @@ public class SettingsActivity extends PreferenceActivity
 
 		if (mOptionsScreen.findPreference(preference.getKey()) != null) {
 			mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
-					preference.getKey().equals("ListenAddress"));
+					preference.getKey().equals("ListenAddress"), this);
 			return true;
 		}
 		else if (mGuiScreen.findPreference(preference.getKey()) != null) {
-			mSyncthingService.getApi().setValue(RestApi.TYPE_GUI, preference.getKey(), o, false);
+			mSyncthingService.getApi().setValue(
+					RestApi.TYPE_GUI, preference.getKey(), o, false, this);
 			return true;
 		}
 		return false;

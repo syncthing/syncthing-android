@@ -197,7 +197,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 					Toast.makeText(this, R.string.repo_path_required, Toast.LENGTH_LONG).show();
 					return true;
 				}
-				mSyncthingService.getApi().editRepo(mRepo, true);
+				mSyncthingService.getApi().editRepo(mRepo, true, this);
 				finish();
 				return true;
 			case android.R.id.home:
@@ -295,7 +295,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteRepo(mRepo);
+							mSyncthingService.getApi().deleteRepo(mRepo, RepoSettingsActivity.this);
 							finish();
 						}
 					})
@@ -317,7 +317,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	private void repoUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
-			mSyncthingService.getApi().editRepo(mRepo, false);
+			mSyncthingService.getApi().editRepo(mRepo, false, this);
 		}
 	}
 

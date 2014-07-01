@@ -3,15 +3,6 @@
 
 	<string name="app_name">Syncthing</string>
 
-	<!-- Title of the notification shown when a restart is needed -->
-	<string name="restart_notif_title">Restart Needed</string>
-
-	<!-- Text of the notification shown when a restart is needed -->
-	<string name="restart_notif_text">Click here to restart syncthing now</string>
-
-	<!-- ActionBar title shown when the drawer is open -->
-	<string name="system_info">System Info</string>
-
 	<!-- MainActivity -->
 
 
@@ -67,6 +58,9 @@
 
 	<!-- LocalNodeInfoFragment -->
 
+
+	<!-- ActionBar title shown when the drawer is open -->
+	<string name="system_info">System Info</string>
 
 	<!-- Same as download_title with a colon and space appended -->
 	<string name="download_title_colon">Download:\u0020</string>
@@ -219,6 +213,15 @@ Please report any problems you encounter.</string>
 
 	<!-- RestApi -->
 
+
+	<!-- Title of the notification shown when a restart is needed -->
+	<string name="restart_title">Restart Needed</string>
+
+	<!-- Text of the notification shown when a restart is needed -->
+	<string name="restart_notification_text">Click here to restart syncthing now</string>
+
+	<!-- Text for the dismiss button of the restart Activity -->
+	<string name="restart_later">Restart Later</string>
 
 	<!-- Strings representing units for file sizes, from smallest to largest -->
 	<string-array name="file_size_units">
