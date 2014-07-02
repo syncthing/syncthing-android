@@ -324,7 +324,8 @@ public class SyncthingService extends Service {
 	 */
 	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
 		@Override
-		protected Pair<String, String> doInBackground(Void... voids) {Looper.prepare();
+		protected Pair<String, String> doInBackground(Void... voids) {
+			//Looper.prepare();
 			if (isFirstStart()) {
 				Log.i(TAG, "App started for the first time. " +
 						"Copying default config, keys will be generated automatically");
