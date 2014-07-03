@@ -3,11 +3,9 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
@@ -34,7 +32,6 @@ import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -134,16 +131,8 @@ public class SyncthingService extends Service {
 	 */
 	public static class NativeExecutionException extends RuntimeException {
 
-		private final String mLog;
-
 		public NativeExecutionException(String message, String log) {
-			super(message);
-			mLog = log;
-		}
-
-		@Override
-		public String getMessage() {
-			return super.getMessage() + "\n" + mLog;
+			super(message + "\n" + log);
 		}
 	}
 
@@ -167,7 +156,7 @@ public class SyncthingService extends Service {
 				dos.writeBytes("exit\n");
 				dos.flush();
 
-				log(process.getInputStream(), Log.INFO);
+				log(process.getErrorStream());
 
 				ret = process.waitFor();
 			}
@@ -181,6 +170,7 @@ public class SyncthingService extends Service {
 				process.destroy();
 				if (ret != 0) {
 					stopSelf();
+					mNativeLogLock.lock();
 					// Include the log for Play Store crash reports.
 					throw new NativeExecutionException("Syncthing binary returned error code " +
 							Integer.toString(ret), mNativeLog);
@@ -193,9 +183,8 @@ public class SyncthingService extends Service {
 	 * Logs the outputs of a stream to logcat and mNativeLog.
 	 *
 	 * @param is The stream to log.
-	 * @param priority The log level, eg Log.INFO or Log.WARN.
 	 */
-	private void log(final InputStream is, final int priority) {
+	private void log(final InputStream is) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -205,7 +194,7 @@ public class SyncthingService extends Service {
 				try {
 					while ((line = br.readLine()) != null) {
 						mNativeLogLock.lock();
-						Log.println(priority, TAG, ": " + line);
+						Log.i("SyncthingNativeCode", line);
 						mNativeLog += line + "\n";
 						mNativeLogLock.unlock();
 					}
