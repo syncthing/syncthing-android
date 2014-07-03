@@ -176,7 +176,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.repo_settings, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override

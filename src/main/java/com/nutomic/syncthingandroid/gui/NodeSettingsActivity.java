@@ -141,7 +141,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.node_settings, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
 	<item
 			android:id="@+id/create"
-			android:title="@string/create" />
+			android:title="@string/create"
+			android:showAsAction="always" />
 
 	<item
 			android:id="@+id/share_node_id"
 			android:icon="@android:drawable/ic_menu_share"
 			android:title="@string/share_node_id"
-			app:showAsAction="ifRoom" />
+			android:showAsAction="always" />
 
 </menu>
