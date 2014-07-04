@@ -299,6 +299,7 @@ public class SyncthingService extends Service {
 				.setContentTitle(getString(R.string.app_name))
 				.setSmallIcon(R.drawable.ic_launcher)
 				.setContentIntent(pi)
+				.setPriority(NotificationCompat.PRIORITY_MIN)
 				.build();
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_RUNNING, n);
