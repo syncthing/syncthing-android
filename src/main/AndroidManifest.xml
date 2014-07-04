@@ -46,11 +46,9 @@
 		<service android:name=".syncthing.SyncthingService" />
 
 		<activity
-				android:name=".gui.RepoSettingsActivity"
-				android:theme="@style/DialogWhenLarge" />
+				android:name=".gui.RepoSettingsActivity" />
 		<activity
-				android:name=".gui.NodeSettingsActivity"
-				android:theme="@style/DialogWhenLarge" />
+				android:name=".gui.NodeSettingsActivity" />
 		<activity
 				android:name=".gui.FolderPickerActivity"
 				android:label="@string/folder_picker_title" >
