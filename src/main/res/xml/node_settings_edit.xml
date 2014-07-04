@@ -2,11 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 		android:persistent="false" >
 
-	<EditTextPreference
+	<Preference
 			android:key="node_id"
-			android:title="@string/node_id"
-			android:enabled="false"
-			style="?android:preferenceInformationStyle" />
+			android:title="@string/node_id"/>
 
 	<EditTextPreference
 			android:key="name"

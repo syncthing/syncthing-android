@@ -223,6 +223,9 @@ Please report any problems you encounter.</string>
 	<!-- Text for the dismiss button of the restart Activity -->
 	<string name="restart_later">Restart Later</string>
 
+	<!-- Shown when a node ID is copied to the clipboard -->
+	<string name="node_id_copied_to_clipboard">Node ID copied to clipboard</string>
+
 	<!-- Strings representing units for file sizes, from smallest to largest -->
 	<string-array name="file_size_units">
 		<item>B</item>

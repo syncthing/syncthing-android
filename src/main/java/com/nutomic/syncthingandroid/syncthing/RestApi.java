@@ -1,15 +1,19 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 
@@ -727,6 +731,28 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 		shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
 		activity.startActivity(Intent.createChooser(
 				shareIntent, activity.getString(R.string.send_node_id_to)));
+	}
+
+	/**
+	 * Copies the given node ID to the clipboard (and shows a Toast telling about it).
+	 *
+	 * @param id The node ID to copy.
+	 */
+	@TargetApi(11)
+	public void copyNodeId(String id) {
+		int sdk = android.os.Build.VERSION.SDK_INT;
+		if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager)
+					mSyncthingService.getSystemService(Context.CLIPBOARD_SERVICE);
+			clipboard.setText(id);
+		} else {
+			ClipboardManager clipboard = (ClipboardManager)
+					mSyncthingService.getSystemService(Context.CLIPBOARD_SERVICE);
+			ClipData clip =	ClipData.newPlainText(mSyncthingService.getString(R.string.node_id), id);
+			clipboard.setPrimaryClip(clip);
+		}
+		Toast.makeText(mSyncthingService, R.string.node_id_copied_to_clipboard, Toast.LENGTH_SHORT)
+				.show();
 	}
 
 }

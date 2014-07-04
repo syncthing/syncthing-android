@@ -1,15 +1,21 @@
 package com.nutomic.syncthingandroid.gui;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -136,6 +142,14 @@ public class LocalNodeInfoFragment extends Fragment
 			return;
 
 		mNodeId.setText(info.myID);
+		mNodeId.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				mActivity.getApi().copyNodeId(mNodeId.getText().toString());
+				view.performClick();
+				return true;
+			}
+		});
 		mCpuUsage.setText(new  DecimalFormat("0.00").format(info.cpuPercent) + "%");
 		mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
 		if (info.extAnnounceOK) {

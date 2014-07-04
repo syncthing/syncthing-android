@@ -56,7 +56,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 
 	private RestApi.Node mNode;
 
-	private EditTextPreference mNodeId;
+	private Preference mNodeId;
 
 	private EditTextPreference mName;
 
@@ -70,7 +70,6 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 
 	@Override
 	@SuppressLint("AppCompatMethod")
-	@TargetApi(11)
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -85,7 +84,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			addPreferencesFromResource(R.xml.node_settings_edit);
 		}
 
-		mNodeId = (EditTextPreference) findPreference("node_id");
+		mNodeId = findPreference("node_id");
 		mNodeId.setOnPreferenceChangeListener(this);
 		mName = (EditTextPreference) findPreference("name");
 		mName.setOnPreferenceChangeListener(this);
@@ -117,6 +116,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			mNode.Name = "";
 			mNode.NodeID = "";
 			mNode.Addresses = "dynamic";
+			((EditTextPreference) mNodeId).setText(mNode.NodeID);
 		}
 		else if (getIntent().getAction().equals(ACTION_EDIT)) {
 			setTitle(R.string.edit_node);
@@ -127,10 +127,10 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 					break;
 				}
 			}
+			mNodeId.setOnPreferenceClickListener(this);
 		}
 		mSyncthingService.getApi().getConnections(NodeSettingsActivity.this);
 
-		mNodeId.setText(mNode.NodeID);
 		mNodeId.setSummary(mNode.NodeID);
 		mName.setText((mNode.Name));
 		mName.setSummary(mNode.Name);
@@ -222,6 +222,10 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 					})
 					.setNegativeButton(android.R.string.no, null)
 					.show();
+			return true;
+		}
+		else if (preference.equals(mNodeId)) {
+			mSyncthingService.getApi().copyNodeId(mNode.NodeID);
 			return true;
 		}
 		return false;
