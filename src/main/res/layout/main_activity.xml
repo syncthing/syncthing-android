@@ -17,6 +17,7 @@
 		android:layout_gravity="start"
 		android:layout_width="260dip"
 		android:layout_height="match_parent"
+		android:clickable="true"
 		android:background="@android:color/background_light" />
 
 </android.support.v4.widget.DrawerLayout>
