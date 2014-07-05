@@ -1,14 +1,18 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
+import android.view.WindowManager;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.gui.MainActivity;
@@ -125,16 +129,7 @@ public class SyncthingService extends Service {
 		return START_STICKY;
 	}
 
-	/**
-	 * Thrown when execution of the native syncthing binary returns an error.
-	 * Prints the syncthing log.
-	 */
-	public static class NativeExecutionException extends RuntimeException {
-
-		public NativeExecutionException(String message, String log) {
-			super(message + "\n" + log);
-		}
-	}
+	private Handler mMainThreadHandler;
 
 	/**
 	 * Runs the syncthing binary from command line, and prints its output to logcat (on exit).
@@ -167,13 +162,34 @@ public class SyncthingService extends Service {
 				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
 			}
 			finally {
+				try {
+					dos.close();
+				}
+				catch (IOException e) {
+					Log.w(TAG, "Failed to close shell stream", e);
+				}
 				process.destroy();
+				final int retVal = ret;
 				if (ret != 0) {
-					stopSelf();
-					mNativeLogLock.lock();
-					// Include the log for Play Store crash reports.
-					throw new NativeExecutionException("Syncthing binary returned error code " +
-							Integer.toString(ret), mNativeLog);
+					mMainThreadHandler.post(new Runnable() {
+						public void run() {
+							AlertDialog dialog = new AlertDialog.Builder(SyncthingService.this)
+									.setTitle(R.string.binary_crashed_title)
+									.setMessage(getString(R.string.binary_crashed_message, retVal))
+									.setPositiveButton(android.R.string.ok,
+											new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialogInterface,
+												int i) {
+											System.exit(0);
+										}
+									})
+									.create();
+							dialog.getWindow()
+									.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+							dialog.show();
+						}
+					});
 				}
 			}
 		}
@@ -341,6 +357,7 @@ public class SyncthingService extends Service {
 			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second, "");
 			registerOnWebGuiAvailableListener(mApi);
 			new PollWebGuiAvailableTask().execute();
+			mMainThreadHandler = new Handler();
 			new Thread(new SyncthingRunnable()).start();
 		}
 	}

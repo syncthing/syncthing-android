@@ -211,6 +211,17 @@ Please report any problems you encounter.</string>
 	<!-- Menu item to select the current folder -->
 	<string name="select_folder">Select Folder</string>
 
+	<!-- SyncthingService -->
+
+
+	<!-- Title of the dialog shown when the syncthing binary returns an error -->
+	<string name="binary_crashed_title">Syncthing Binary Crashed</string>
+
+
+	<!-- Message of the dialog shown when the syncthing binary returns an error -->
+	<string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n
+If this error persists, try reinstalling the app and restarting your device.\n\n</string>
+
 	<!-- RestApi -->
 
 
