@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.gui;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
@@ -38,6 +40,8 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	public static final String ACTION_EDIT = "edit";
 
 	public static final String KEY_NODE_ID = "node_id";
+
+	private static final int SCAN_QR_REQUEST_CODE = 235;
 
 	private SyncthingService mSyncthingService;
 
@@ -251,6 +255,29 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	private void nodeUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
 			mSyncthingService.getApi().editNode(mNode, false, this);
+		}
+	}
+
+	/**
+	 * Sends QR code scanning intent when clicking the qrcode icon.
+	 */
+	public void onClick(View view) {
+		Intent intentScan = new Intent("com.google.zxing.client.android.SCAN");
+		intentScan.addCategory(Intent.CATEGORY_DEFAULT);
+		intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+		startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
+	}
+
+	/**
+	 * Receives value of scanned QR code and sets it as node ID.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+			mNode.NodeID = data.getStringExtra("SCAN_RESULT");
+			((EditTextPreference) mNodeId).setText(mNode.NodeID);
+			mNodeId.setSummary(mNode.NodeID);
 		}
 	}
 

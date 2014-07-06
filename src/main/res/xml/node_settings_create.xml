@@ -4,7 +4,8 @@
 
 	<EditTextPreference
 			android:key="node_id"
-			android:title="@string/node_id" />
+			android:title="@string/node_id"
+			android:widgetLayout="@layout/scan_qr_code_widget" />
 
 	<EditTextPreference
 			android:key="name"
