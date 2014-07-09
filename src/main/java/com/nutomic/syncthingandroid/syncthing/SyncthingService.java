@@ -45,6 +45,8 @@ public class SyncthingService extends Service {
 
 	private static final String TAG = "SyncthingService";
 
+	private static final String TAG_NATIVE = "SyncthingNativeCode";
+
 	private static final int NOTIFICATION_RUNNING = 1;
 
 	/**
@@ -84,10 +86,6 @@ public class SyncthingService extends Service {
 	private static final String PRIVATE_KEY_FILE = "key.pem";
 
 	private RestApi mApi;
-
-	private final ReentrantLock mNativeLogLock = new ReentrantLock();
-
-	private String mNativeLog = "";
 
 	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -209,10 +207,7 @@ public class SyncthingService extends Service {
 				String line;
 				try {
 					while ((line = br.readLine()) != null) {
-						mNativeLogLock.lock();
-						Log.i("SyncthingNativeCode", line);
-						mNativeLog += line + "\n";
-						mNativeLogLock.unlock();
+						Log.i(TAG_NATIVE, line);
 					}
 				}
 				catch (IOException e) {
