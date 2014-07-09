@@ -88,6 +88,11 @@ public class FolderPickerActivity extends ActionBarActivity
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unbindService(mSyncthingServiceConnection);
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
