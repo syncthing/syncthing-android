@@ -11,8 +11,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
@@ -302,18 +304,20 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Sends the updated mConfig via Rest API to syncthing and displays a "restart" notification.
 	 */
-	private void configUpdated(Activity activity) {
+	@TargetApi(11)
+	private void configUpdated(Context context) {
 		new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
-		if (mRestartPostponed) {
+		if (mRestartPostponed)
 			return;
-		}
 
 		final Intent intent = new Intent(mSyncthingService, SyncthingService.class)
 				.setAction(SyncthingService.ACTION_RESTART);
 
-		new AlertDialog.Builder(activity)
-				.setMessage(R.string.restart_title)
+		AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				? new AlertDialog.Builder(context.getApplicationContext(), AlertDialog.THEME_HOLO_LIGHT)
+				: new AlertDialog.Builder(context.getApplicationContext());
+		AlertDialog dialog = builder.setMessage(R.string.restart_title)
 				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
@@ -323,20 +327,37 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				.setNegativeButton(R.string.restart_later, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, intent, 0);
-
-						Notification n = new NotificationCompat.Builder(mSyncthingService)
-								.setContentTitle(mSyncthingService.getString(R.string.restart_title))
-								.setContentText(mSyncthingService.getString(R.string.restart_notification_text))
-								.setSmallIcon(R.drawable.ic_launcher)
-								.setContentIntent(pi)
-								.build();
-						n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
-						mNotificationManager.notify(NOTIFICATION_RESTART, n);
-						mRestartPostponed = true;
+						createRestartNotification();
 					}
 				})
-				.show();
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						createRestartNotification();
+					}
+				})
+				.create();
+		dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+		dialog.show();
+	}
+
+	/**
+	 * Creates a notification prompting the user to restart the app.
+	 */
+	private void createRestartNotification() {
+		Intent intent = new Intent(mSyncthingService, SyncthingService.class)
+				.setAction(SyncthingService.ACTION_RESTART);
+		PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, intent, 0);
+
+		Notification n = new NotificationCompat.Builder(mSyncthingService)
+				.setContentTitle(mSyncthingService.getString(R.string.restart_title))
+				.setContentText(mSyncthingService.getString(R.string.restart_notification_text))
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentIntent(pi)
+				.build();
+		n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
+		mNotificationManager.notify(NOTIFICATION_RESTART, n);
+		mRestartPostponed = true;
 	}
 
 	/**
