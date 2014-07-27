@@ -115,7 +115,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		}
 
 		if (getIntent().getAction().equals(ACTION_CREATE)) {
-			setTitle(R.string.create_node);
+			setTitle(R.string.add_node);
 			mNode = new RestApi.Node();
 			mNode.Name = "";
 			mNode.NodeID = "";

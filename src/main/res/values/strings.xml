@@ -9,9 +9,6 @@
 	<!-- Title of the "add repo" menu action -->
 	<string name="add_repo">Add Repository</string>
 
-	<!-- Title of the "add node" menu action -->
-	<string name="add_node">Add Node</string>
-
 	<!-- Title of the "share node id" menu action -->
 	<string name="share_node_id">Share Node ID</string>
 
@@ -107,7 +104,7 @@
 	<!-- Title for RepoSettingsActivity in edit mode -->
 	<string name="edit_repo">Edit Repository</string>
 
-	<!-- Used to confirm repo/node creation -->
+	<!-- Menu item to confirm repo creation -->
 	<string name="create">Create</string>
 
 	<!-- Dialog shown when attempting to delete a repository -->
@@ -141,7 +138,10 @@
 	<string name="delete_node">Delete Node</string>
 
 	<!-- Title for NodeSettingsActivity in create mode -->
-	<string name="create_node">Create Node</string>
+	<string name="add_node">Add Node</string>
+
+	<!-- Menu item to confirm adding a node -->
+	<string name="add">Add</string>
 
 	<!-- Title for NodeSettingsActivity in edit mode -->
 	<string name="edit_node">Edit Node</string>
