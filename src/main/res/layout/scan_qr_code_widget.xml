@@ -4,4 +4,5 @@
 		android:layout_width="48dip"
 		android:layout_height="48dip"
 		android:src="@drawable/ic_qrcode"
-		android:onClick="onClick" />
+		android:onClick="onClick"
+		android:contentDescription="@string/scan_qr_code_description" />

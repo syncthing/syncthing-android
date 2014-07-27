@@ -155,6 +155,9 @@
 	<!-- Toast shown when trying to create a node with an empty name -->
 	<string name="node_name_required">The node name must not be empty</string>
 
+	<!-- Content description for node ID qr code icon -->
+	<string name="scan_qr_code_description">Scan QR Code</string>
+
 	<!-- WebGuiActivity -->
 
 
@@ -198,6 +201,7 @@ Please report any problems you encounter.</string>
 	<string name="syncthing_version_title">Syncthing Version</string>
 
 	<!-- FolderPickerAcitivity -->
+
 
 	<!-- Activity title -->
 	<string name="folder_picker_title">Folder Picker</string>
