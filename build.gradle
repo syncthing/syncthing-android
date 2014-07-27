@@ -11,7 +11,7 @@ buildscript {
 
 import java.util.regex.Pattern
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'android_sign'
 
 repositories {
