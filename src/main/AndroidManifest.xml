@@ -13,6 +13,7 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 	<application
 			android:allowBackup="false"
@@ -57,6 +58,17 @@
 					android:name="android.support.UI_OPTIONS"
 					android:value="splitActionBarWhenNarrow" />
 		</activity>
+		<receiver android:name=".syncthing.NetworkReceiver" >
+			<intent-filter>
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+			</intent-filter>
+		</receiver>
+		<receiver android:name=".syncthing.BatteryReceiver" >
+			<intent-filter>
+				<action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+				<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+			</intent-filter>
+		</receiver>
 	</application>
 
 </manifest>

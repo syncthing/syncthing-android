@@ -1,14 +1,18 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
@@ -16,6 +20,7 @@ import android.view.WindowManager;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.gui.MainActivity;
+import com.nutomic.syncthingandroid.gui.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import org.apache.http.HttpResponse;
@@ -98,20 +103,47 @@ public class SyncthingService extends Service {
 	private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
 			new HashSet<OnWebGuiAvailableListener>();
 
-	private boolean mIsWebGuiAvailable = false;
-
 	public interface OnApiChangeListener {
-		public void onApiChange(boolean isAvailable);
+		public void onApiChange(State currentState);
 	}
 
-	private final HashSet<WeakReference<OnApiChangeListener>> mOnApiAvailableListeners =
+	private final HashSet<WeakReference<OnApiChangeListener>> mOnApiChangeListeners =
 			new HashSet<WeakReference<OnApiChangeListener>>();
 
+    /**
+     * INIT: Service is starting up and initializing.
+     * STARTING: Syncthing binary is starting (but the API is not yet ready).
+     * ACTIVE: Syncthing binary is up and running.
+     * DISABLED: Syncthing binary is stopped according to user preferences.
+     */
+	public enum State {
+        INIT,
+		STARTING,
+		ACTIVE,
+		DISABLED
+	}
+
+	private State mCurrentState = State.INIT;
+
+	/**
+	 * True if a stop was requested while syncthing is starting, in that case, perform stop in
+	 * {@link PollWebGuiAvailableTask}.
+	 */
+	private boolean mStopScheduled = false;
+
+	private DeviceStateHolder mDeviceStateHolder;
+
+	/**
+     * Handles intents, either {@link #ACTION_RESTART}, or intents having
+     * {@link DeviceStateHolder.EXTRA_HAS_WIFI} or {@link DeviceStateHolder.EXTRA_IS_CHARGING}
+     * (which are handled by {@link DeviceStateHolder}.
+	 */
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (intent != null && ACTION_RESTART.equals(intent.getAction())) {
-			mIsWebGuiAvailable = false;
-			onApiChange(false);
+		// Just catch the empty intent and return.
+		if (intent == null) {
+		}
+		else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
 			new PostTask() {
 				@Override
 				protected void onPostExecute(Void aVoid) {
@@ -123,7 +155,53 @@ public class SyncthingService extends Service {
 				}
 			}.execute(mApi.getUrl(), PostTask.URI_RESTART, mApi.getApiKey());
 		}
+		else if (mCurrentState != State.INIT) {
+			mDeviceStateHolder.update(intent);
+			updateState();
+		}
 		return START_STICKY;
+	}
+
+	/**
+	 * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
+     * or not.
+     *
+     * Depending on the result, syncthing is started or stopped, and {@link #onApiChange()} is
+     * called.
+	 */
+	public void updateState() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean prefStopMobileData = prefs.getBoolean("stop_sync_on_mobile_data", true);
+		boolean prefStopNotCharging = prefs.getBoolean("stop_sync_while_not_charging", true);
+
+		// Start syncthing.
+		if ((mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
+				(mDeviceStateHolder.isWifiConnected() || !prefStopMobileData)) {
+			if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
+				mStopScheduled = false;
+				return;
+			}
+
+			mCurrentState = State.STARTING;
+			registerOnWebGuiAvailableListener(mApi);
+			new PollWebGuiAvailableTask().execute();
+			new Thread(new SyncthingRunnable()).start();
+		}
+		// Stop syncthing.
+		else {
+			if (mCurrentState == State.DISABLED)
+				return;
+
+			mCurrentState = State.DISABLED;
+
+			// Syncthing is currently started, perform the stop later.
+			if (mCurrentState == State.STARTING) {
+				mStopScheduled = true;
+			} else if (mApi != null) {
+				mApi.shutdown();
+			}
+		}
+		onApiChange();
 	}
 
 	private Handler mMainThreadHandler;
@@ -254,8 +332,15 @@ public class SyncthingService extends Service {
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
+			if (mStopScheduled) {
+				mCurrentState = State.DISABLED;
+				onApiChange();
+				mApi.shutdown();
+				mStopScheduled = false;
+				return;
+			}
 			Log.i(TAG, "Web GUI has come online at " + mApi.getUrl());
-			mIsWebGuiAvailable = true;
+			mCurrentState = State.ACTIVE;
 			for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
 				listener.onWebGuiAvailable();
 			}
@@ -316,6 +401,9 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_RUNNING, n);
 
+        mMainThreadHandler = new Handler();
+        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
+        registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		new StartupTask().execute();
 	}
 
@@ -327,7 +415,6 @@ public class SyncthingService extends Service {
 	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
 		@Override
 		protected Pair<String, String> doInBackground(Void... voids) {
-			//Looper.prepare();
 			if (isFirstStart()) {
 				Log.i(TAG, "App started for the first time. " +
 						"Copying default config, keys will be generated automatically");
@@ -347,14 +434,12 @@ public class SyncthingService extends Service {
 		protected void onPostExecute(Pair<String, String> urlAndKey) {
 			mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second);
 			Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
+
 			// HACK: Make sure there is no syncthing binary left running from an improper
 			// shutdown (eg Play Store update).
 			// NOTE: This will log an exception if syncthing is not actually running.
-			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second, "");
-			registerOnWebGuiAvailableListener(mApi);
-			new PollWebGuiAvailableTask().execute();
-			mMainThreadHandler = new Handler();
-			new Thread(new SyncthingRunnable()).start();
+			mApi.shutdown();
+            updateState();
 		}
 	}
 
@@ -380,7 +465,7 @@ public class SyncthingService extends Service {
 	 * Listeners are unregistered automatically after being called.
 	 */
 	public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
-		if (mIsWebGuiAvailable) {
+		if (mCurrentState == State.ACTIVE) {
 			listener.onWebGuiAvailable();
 		}
 		else {
@@ -442,25 +527,55 @@ public class SyncthingService extends Service {
 	 * changes.
 	 */
 	public void registerOnApiChangeListener(OnApiChangeListener listener) {
-		listener.onApiChange((mApi != null) ? mApi.isApiAvailable() : false);
-		mOnApiAvailableListeners.add(new WeakReference<OnApiChangeListener>(listener));
+        // Make sure we don't send an invalid state or syncthing might shwow a "disabled" message
+        // when it's just starting up.
+		listener.onApiChange(mCurrentState);
+		mOnApiChangeListeners.add(new WeakReference<OnApiChangeListener>(listener));
 	}
 
 	/**
-	 * Called when the state of the API changes.
-	 *
-	 * Must only be called from SyncthingService or {@link RestApi}.
+	 * Called to notifiy listeners of an API change.
+     *
+     * Must only be called from SyncthingService or {@link RestApi}.
 	 */
-	public void onApiChange(boolean isAvailable) {
-		for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiAvailableListeners.iterator(); i.hasNext();) {
+	public void onApiChange() {
+		for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiChangeListeners.iterator();
+             i.hasNext(); ) {
 			WeakReference<OnApiChangeListener> listener = i.next();
 			if (listener.get() != null) {
-				listener.get().onApiChange(isAvailable);
+				listener.get().onApiChange(mCurrentState);
 			}
 			else {
 				i.remove();
 			}
 		}
+	}
+
+	/**
+	 * Dialog to be shown when attempting to start syncthing while it is disabled according
+	 * to settings (because the device is not charging or wifi is disconnected).
+	 */
+	public static void showDisabledDialog(final Activity activity) {
+		new AlertDialog.Builder(activity)
+                .setTitle(R.string.syncthing_disabled_title)
+				.setMessage(R.string.syncthing_disabled_message)
+				.setPositiveButton(R.string.syncthing_disabled_change_settings,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        activity.finish();
+                        activity.startActivity(new Intent(activity, SettingsActivity.class));
+                    }
+                })
+				.setNegativeButton(R.string.exit,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        activity.finish();
+                    }
+                })
+				.show()
+				.setCancelable(false);
 	}
 
 }
