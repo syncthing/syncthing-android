@@ -32,6 +32,10 @@ public class SettingsActivity extends PreferenceActivity
 
 	private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
+	private CheckBoxPreference mStopNotCharging;
+
+	private CheckBoxPreference mStopMobileData;
+
 	private Preference mVersion;
 
 	private PreferenceScreen mOptionsScreen;
@@ -57,30 +61,29 @@ public class SettingsActivity extends PreferenceActivity
 	};
 
 	@Override
-	public void onApiChange(boolean isAvailable) {
-		if (!isAvailable) {
-			finish();
-			return;
-		}
+	public void onApiChange(SyncthingService.State currentState) {
+		mOptionsScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
+		mGuiScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
 
 		mVersion.setSummary(mSyncthingService.getApi().getVersion());
 
-		for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
-			Preference pref = mOptionsScreen.getPreference(i);
-			pref.setOnPreferenceChangeListener(SettingsActivity.this);
-			String value = mSyncthingService.getApi()
-					.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
-			applyPreference(pref, value);
-		}
+		if (currentState == SyncthingService.State.ACTIVE) {
+			for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
+				Preference pref = mOptionsScreen.getPreference(i);
+				pref.setOnPreferenceChangeListener(SettingsActivity.this);
+				String value = mSyncthingService.getApi()
+						.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
+				applyPreference(pref, value);
+			}
 
-		for (int i = 0; i < mGuiScreen.getPreferenceCount(); i++) {
-			Preference pref = mGuiScreen.getPreference(i);
-			pref.setOnPreferenceChangeListener(SettingsActivity.this);
-			String value = mSyncthingService.getApi()
-					.getValue(RestApi.TYPE_GUI, pref.getKey());
-			applyPreference(pref, value);
+			for (int i = 0; i < mGuiScreen.getPreferenceCount(); i++) {
+				Preference pref = mGuiScreen.getPreference(i);
+				pref.setOnPreferenceChangeListener(SettingsActivity.this);
+				String value = mSyncthingService.getApi()
+						.getValue(RestApi.TYPE_GUI, pref.getKey());
+				applyPreference(pref, value);
+			}
 		}
-
 	}
 
 	/**
@@ -119,6 +122,10 @@ public class SettingsActivity extends PreferenceActivity
 
 		addPreferencesFromResource(R.xml.app_settings);
 		PreferenceScreen screen = getPreferenceScreen();
+		mStopNotCharging = (CheckBoxPreference) findPreference("stop_sync_on_mobile_data");
+		mStopNotCharging.setOnPreferenceChangeListener(this);
+		mStopMobileData = (CheckBoxPreference) findPreference("stop_sync_while_not_charging");
+		mStopMobileData.setOnPreferenceChangeListener(this);
 		mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
 		mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
 		mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -159,16 +166,18 @@ public class SettingsActivity extends PreferenceActivity
 			}
 		}
 
-		if (mOptionsScreen.findPreference(preference.getKey()) != null) {
+		if (preference.equals(mStopNotCharging) || preference.equals(mStopMobileData)) {
+			mSyncthingService.updateState();
+		}
+		else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
 			mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
 					preference.getKey().equals("ListenAddress"), this);
-			return true;
 		}
 		else if (mGuiScreen.findPreference(preference.getKey()) != null) {
 			mSyncthingService.getApi().setValue(
 					RestApi.TYPE_GUI, preference.getKey(), o, false, this);
-			return true;
 		}
-		return false;
+
+		return true;
 	}
 }

@@ -75,6 +75,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 
 	@Override
 	@SuppressLint("AppCompatMethod")
+	@TargetApi(11)
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -109,8 +110,9 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	}
 
 	@Override
-	public void onApiChange(boolean isAvailable) {
-		if (!isAvailable) {
+	public void onApiChange(SyncthingService.State currentState) {
+		if (currentState != SyncthingService.State.ACTIVE) {
+			SyncthingService.showDisabledDialog(this);
 			finish();
 			return;
 		}

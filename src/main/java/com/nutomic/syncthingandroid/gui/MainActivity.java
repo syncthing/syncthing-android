@@ -23,6 +23,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,37 +67,44 @@ public class MainActivity extends ActionBarActivity
 	 */
 	@Override
 	@SuppressLint("InflateParams")
-	public void onApiChange(boolean isAvailable) {
-		if (!isAvailable) {
-			final SharedPreferences prefs =
-					PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
-			LayoutInflater inflater = getLayoutInflater();
-			View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
-			TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-			loadingText.setText((mSyncthingService.isFirstStart())
-					? R.string.web_gui_creating_key
-					: R.string.api_loading);
-
-			mLoadingDialog = new AlertDialog.Builder(this)
-					.setCancelable(false)
-					.setView(dialogLayout)
-					.show();
-
-			// Make sure the first start dialog is shown on top.
-			if (prefs.getBoolean("first_start", true)) {
-				new AlertDialog.Builder(this)
-						.setTitle(R.string.welcome_title)
-						.setMessage(R.string.welcome_text)
-						.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialogInterface, int i) {
-								prefs.edit().putBoolean("first_start", false).commit();
-							}
-						})
-						.show();
+	public void onApiChange(SyncthingService.State currentState) {
+		if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
+			if (currentState == SyncthingService.State.DISABLED) {
+				if (mLoadingDialog != null) {
+					mLoadingDialog.dismiss();
+				}
+				SyncthingService.showDisabledDialog(this);
 			}
+			else if (mLoadingDialog == null) {
+				final SharedPreferences prefs =
+						PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
+				LayoutInflater inflater = getLayoutInflater();
+				View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
+				TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+				loadingText.setText((mSyncthingService.isFirstStart())
+						? R.string.web_gui_creating_key
+						: R.string.api_loading);
+
+				mLoadingDialog = new AlertDialog.Builder(this)
+						.setCancelable(false)
+						.setView(dialogLayout)
+						.show();
+
+				// Make sure the first start dialog is shown on top.
+				if (prefs.getBoolean("first_start", true)) {
+					new AlertDialog.Builder(this)
+							.setTitle(R.string.welcome_title)
+							.setMessage(R.string.welcome_text)
+							.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialogInterface, int i) {
+									prefs.edit().putBoolean("first_start", false).commit();
+								}
+							})
+							.show();
+				}
+			}
 			return;
 		}
 

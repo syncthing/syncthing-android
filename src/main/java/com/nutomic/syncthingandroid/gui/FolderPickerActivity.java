@@ -203,9 +203,10 @@ public class FolderPickerActivity extends ActionBarActivity
 	}
 
 	@Override
-	public void onApiChange(boolean isAvailable) {
-		if (!isAvailable) {
+	public void onApiChange(SyncthingService.State currentState) {
+		if (currentState != SyncthingService.State.ACTIVE) {
 			setResult(Activity.RESULT_CANCELED);
+			SyncthingService.showDisabledDialog(this);
 			finish();
 		}
 	}
