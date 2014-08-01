@@ -78,7 +78,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	}
 
 	public static class Versioning {
-		protected final Map<String, String> mParams = new HashMap<String, String>();
+		protected final Map<String, String> mParams = new HashMap<>();
 		public String getType() {
 			return "";
 		}
