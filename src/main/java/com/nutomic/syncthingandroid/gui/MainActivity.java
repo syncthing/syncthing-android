@@ -285,11 +285,6 @@ public class MainActivity extends ActionBarActivity
 			case R.id.settings:
 				startActivity(new Intent(this, SettingsActivity.class));
 				return true;
-			case R.id.exit:
-				// Make sure we unbind first.
-				finish();
-				getApplicationContext().stopService(new Intent(this, SyncthingService.class));
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

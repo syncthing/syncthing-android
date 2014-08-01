@@ -176,9 +176,6 @@ Please install a scanner or enter the node ID manually.</string>
 	<!-- Shown instead of web_gui_loading if the key does not exist and has to be created -->
 	<string name="web_gui_creating_key">Generating keys. This may take a while.</string>
 
-	<!-- Menu item that stops Activity and Service -->
-	<string name="exit">Exit</string>
-
 	<!-- Title for dialog displayed on first start -->
 	<string name="welcome_title">First Start</string>
 
@@ -241,7 +238,11 @@ If this error persists, try reinstalling the app and restarting your device.\n\n
     <!-- Message of the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_message">Do you want to change your preferences?</string>
 
+	<!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>
+
+	<!-- Button text on the "syncthing disabled" dialog -->
+	<string name="exit">Exit</string>
 
 	<!-- RestApi -->
 
