@@ -195,6 +195,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	@Override
 	public void onWebGuiAvailable() {
+        mAvailableCount.set(0);
 		new GetTask() {
 			@Override
 			protected void onPostExecute(String version) {
@@ -226,12 +227,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	/**
 	 * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS,
-	 * calls {@link SyncthingService#onApiChange(boolean)}.
+	 * calls {@link SyncthingService#onApiChange()}.
 	 */
 	private void tryIsAvailable() {
 		int value = mAvailableCount.incrementAndGet();
+        assert(value <= TOTAL_STARTUP_CALLS);
 		if (value == TOTAL_STARTUP_CALLS) {
-			mSyncthingService.onApiChange(true);
+			mSyncthingService.onApiChange();
 		}
 	}
 
@@ -370,12 +372,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 * Returns a list of all existing nodes.
 	 */
 	public List<Node> getNodes() {
+		if (mConfig == null)
+			return new ArrayList<Node>();
+
 		try {
 			return getNodes(mConfig.getJSONArray("Nodes"));
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to read nodes", e);
-			return null;
+			return new ArrayList<Node>();
 		}
 	}
 
