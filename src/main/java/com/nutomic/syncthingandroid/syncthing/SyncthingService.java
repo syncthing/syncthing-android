@@ -10,13 +10,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
-import android.view.WindowManager;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.gui.MainActivity;
@@ -30,14 +28,11 @@ import org.apache.http.client.methods.HttpHead;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -48,8 +43,6 @@ import java.util.Iterator;
 public class SyncthingService extends Service {
 
 	private static final String TAG = "SyncthingService";
-
-	private static final String TAG_NATIVE = "SyncthingNativeCode";
 
 	private static final int NOTIFICATION_RUNNING = 1;
 
@@ -62,11 +55,6 @@ public class SyncthingService extends Service {
 	 * Interval in ms at which the GUI is updated (eg {@link }LocalNodeInfoFragment}).
 	 */
 	public static final int GUI_UPDATE_INTERVAL = 1000;
-
-	/**
-	 * Path to the native, integrated syncthing binary, relative to the data folder
-	 */
-	private static final String BINARY_NAME = "lib/libsyncthing.so";
 
 	/**
 	 * Interval in ms, at which connections to the web gui are performed on first start
@@ -185,7 +173,7 @@ public class SyncthingService extends Service {
 			mCurrentState = State.STARTING;
 			registerOnWebGuiAvailableListener(mApi);
 			new PollWebGuiAvailableTask().execute();
-			new Thread(new SyncthingRunnable()).start();
+			new Thread(new SyncthingRunnable(this)).start();
 		}
 		// Stop syncthing.
 		else {
@@ -202,100 +190,6 @@ public class SyncthingService extends Service {
 			}
 		}
 		onApiChange();
-	}
-
-	private Handler mMainThreadHandler;
-
-	/**
-	 * Runs the syncthing binary from command line, and prints its output to logcat (on exit).
-	 */
-	private class SyncthingRunnable implements Runnable {
-		@Override
-		public void run() {
-			DataOutputStream dos = null;
-			int ret = 1;
-			Process process = null;
-			try	{
-				process = Runtime.getRuntime().exec("sh");
-				dos = new DataOutputStream(process.getOutputStream());
-				// Set home directory to data folder for syncthing to use.
-				dos.writeBytes("HOME=" + getFilesDir() + " ");
-				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-						"-home " + getFilesDir() + "\n");
-				dos.writeBytes("exit\n");
-				dos.flush();
-
-				log(process.getInputStream());
-
-				ret = process.waitFor();
-			}
-			catch(IOException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-			}
-			catch(InterruptedException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-			}
-			finally {
-				try {
-					dos.close();
-				}
-				catch (IOException e) {
-					Log.w(TAG, "Failed to close shell stream", e);
-				}
-				process.destroy();
-				final int retVal = ret;
-				if (ret != 0) {
-					mMainThreadHandler.post(new Runnable() {
-						public void run() {
-							Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
-									Integer.toString(retVal));
-							AlertDialog dialog = new AlertDialog.Builder(SyncthingService.this)
-									.setTitle(R.string.binary_crashed_title)
-									.setMessage(getString(R.string.binary_crashed_message, retVal))
-									.setPositiveButton(android.R.string.ok,
-											new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialogInterface,
-												int i) {
-											System.exit(0);
-										}
-									})
-									.create();
-							dialog.getWindow()
-									.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-							dialog.show();
-						}
-					});
-				}
-			}
-		}
-	}
-
-	/**
-	 * Logs the outputs of a stream to logcat and mNativeLog.
-	 *
-	 * @param is The stream to log.
-	 */
-	private void log(final InputStream is) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
-				String line;
-				try {
-					while ((line = br.readLine()) != null) {
-						Log.i(TAG_NATIVE, line);
-					}
-				}
-				catch (IOException e) {
-					// NOTE: This is sometimes called on shutdown, as
-					// Process.destroy() closes the stream.
-					Log.w(TAG, "Failed to read syncthing command line output", e);
-				}
-			}
-		}).start();
 	}
 
 	/**
@@ -401,7 +295,6 @@ public class SyncthingService extends Service {
 		n.flags |= Notification.FLAG_ONGOING_EVENT;
 		startForeground(NOTIFICATION_RUNNING, n);
 
-        mMainThreadHandler = new Handler();
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		new StartupTask().execute();
@@ -568,12 +461,13 @@ public class SyncthingService extends Service {
                     }
                 })
 				.setNegativeButton(R.string.exit,
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        activity.finish();
-                    }
-                })
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								activity.finish();
+							}
+						}
+				)
 				.show()
 				.setCancelable(false);
 	}
