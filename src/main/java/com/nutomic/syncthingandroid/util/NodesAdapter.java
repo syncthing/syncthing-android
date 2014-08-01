@@ -23,7 +23,7 @@ public class NodesAdapter extends ArrayAdapter<RestApi.Node>
 		implements RestApi.OnReceiveConnectionsListener {
 
 	private Map<String, RestApi.Connection> mConnections =
-			new HashMap<String, RestApi.Connection>();
+			new HashMap<>();
 
 	public NodesAdapter(Context context) {
 		super(context, R.layout.node_list_item);
