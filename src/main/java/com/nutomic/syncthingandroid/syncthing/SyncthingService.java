@@ -249,24 +249,19 @@ public class SyncthingService extends Service {
 		};
 
 		if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
-			try {
-				File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
-				publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
-				File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
-				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
-				File config = new File(getApplicationInfo().dataDir, ConfigXml.CONFIG_FILE);
-				config.renameTo(new File(getFilesDir(), ConfigXml.CONFIG_FILE));
+			File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
+			publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
+			File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
+			privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
+			File config = new File(getApplicationInfo().dataDir, ConfigXml.CONFIG_FILE);
+			config.renameTo(new File(getFilesDir(), ConfigXml.CONFIG_FILE));
 
-				File oldStorageDir = new File(getApplicationInfo().dataDir);
-				File[] files = oldStorageDir.listFiles(idxFilter);
-				for (File file : files) {
-					if (file.isFile()) {
-						file.renameTo(new File(getFilesDir(), file.getName()));
-					}
+			File oldStorageDir = new File(getApplicationInfo().dataDir);
+			File[] files = oldStorageDir.listFiles(idxFilter);
+			for (File file : files) {
+				if (file.isFile()) {
+					file.renameTo(new File(getFilesDir(), file.getName()));
 				}
-			}
-			catch (Exception e) {
-				Log.e(TAG, "Failed to move config files", e);
 			}
 		}
 	}
