@@ -20,6 +20,7 @@
 
 	<!-- RepositoriesFragment -->
 
+
 	<string name="repositories_fragment_title">Repositories</string>
 
 	<!-- Format string for repository progress. First parameter is status string, second is sync percentage -->
@@ -32,6 +33,7 @@
 	<string name="files">%1$d / %2$d Files</string>
 
 	<!-- NodesFragment -->
+
 
 	<string name="nodes_fragment_title">Nodes</string>
 
@@ -192,6 +194,10 @@ Please report any problems you encounter.</string>
 	<!-- Activity title -->
 	<string name="settings_title">Settings</string>
 
+	<string name="stop_sync_while_not_charging">Stop sync when not charging</string>
+
+	<string name="stop_sync_on_mobile_data">Stop sync on mobile data</string>
+
 	<!-- Settings item that opens issue tracker -->
 	<string name="report_issue_title">Report Issue</string>
 
@@ -221,7 +227,6 @@ Please report any problems you encounter.</string>
 
 	<!-- SyncthingService -->
 
-
 	<!-- Title of the dialog shown when the syncthing binary returns an error -->
 	<string name="binary_crashed_title">Syncthing Binary Crashed</string>
 
@@ -229,6 +234,14 @@ Please report any problems you encounter.</string>
 	<!-- Message of the dialog shown when the syncthing binary returns an error -->
 	<string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n
 If this error persists, try reinstalling the app and restarting your device.\n\n</string>
+
+    <!-- Title of the "syncthing disabled" dialog -->
+    <string name="syncthing_disabled_title">Syncthing is disabled</string>
+
+    <!-- Message of the "syncthing disabled" dialog -->
+    <string name="syncthing_disabled_message">Do you want to change your preferences?</string>
+
+    <string name="syncthing_disabled_change_settings">Change Settings</string>
 
 	<!-- RestApi -->
 

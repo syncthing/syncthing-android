@@ -30,8 +30,8 @@ public class ReposFragment extends ListFragment implements SyncthingService.OnAp
 	}
 
 	@Override
-	public void onApiChange(boolean isAvailable) {
-		if (!isAvailable)
+	public void onApiChange(SyncthingService.State currentState) {
+		if (currentState != SyncthingService.State.ACTIVE)
 			return;
 
 		initAdapter();
