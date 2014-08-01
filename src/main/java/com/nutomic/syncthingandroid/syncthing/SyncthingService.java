@@ -29,10 +29,8 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,11 +59,6 @@ public class SyncthingService extends Service {
 	 * to find out if it's online.
 	 */
 	private static final long WEB_GUI_POLL_INTERVAL = 100;
-
-	/**
-	 * File in the config folder that contains configuration.
-	 */
-	private static final String CONFIG_FILE = "config.xml";
 
 	/**
 	 * Name of the public key file in the data directory.
@@ -135,7 +128,7 @@ public class SyncthingService extends Service {
 			new PostTask() {
 				@Override
 				protected void onPostExecute(Void aVoid) {
-					ConfigXml config = new ConfigXml(getConfigFile());
+					ConfigXml config = new ConfigXml(SyncthingService.this);
 					mApi = new RestApi(SyncthingService.this,
 							config.getWebGuiUrl(), config.getApiKey());
 					registerOnWebGuiAvailableListener(mApi);
@@ -261,8 +254,8 @@ public class SyncthingService extends Service {
 				publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
 				File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
 				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
-				File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
-				config.renameTo(new File(getFilesDir(), CONFIG_FILE));
+				File config = new File(getApplicationInfo().dataDir, ConfigXml.CONFIG_FILE);
+				config.renameTo(new File(getFilesDir(), ConfigXml.CONFIG_FILE));
 
 				File oldStorageDir = new File(getApplicationInfo().dataDir);
 				File[] files = oldStorageDir.listFiles(idxFilter);
@@ -308,18 +301,16 @@ public class SyncthingService extends Service {
 	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
 		@Override
 		protected Pair<String, String> doInBackground(Void... voids) {
+			moveConfigFiles();
+			ConfigXml config = new ConfigXml(SyncthingService.this);
+			config.updateIfNeeded();
+
 			if (isFirstStart()) {
 				Log.i(TAG, "App started for the first time. " +
 						"Copying default config, keys will be generated automatically");
-				copyDefaultConfig();
-			}
-
-			moveConfigFiles();
-			ConfigXml config = new ConfigXml(getConfigFile());
-			if (isFirstStart()) {
 				config.createCameraRepo();
 			}
-			config.update();
+
 			return new Pair<String, String>(config.getWebGuiUrl(), config.getApiKey());
 		}
 
@@ -329,7 +320,7 @@ public class SyncthingService extends Service {
 			Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
 
 			// HACK: Make sure there is no syncthing binary left running from an improper
-			// shutdown (eg Play Store update).
+			// shutdown (eg Play Store updateIfNeeded).
 			// NOTE: This will log an exception if syncthing is not actually running.
 			mApi.shutdown();
             updateState();
@@ -366,10 +357,6 @@ public class SyncthingService extends Service {
 		}
 	}
 
-	private File getConfigFile() {
-		return new File(getFilesDir(), CONFIG_FILE);
-	}
-
 	/**
 	 * Returns true if this service has not been started before (ie config.xml does not exist).
 	 *
@@ -377,36 +364,6 @@ public class SyncthingService extends Service {
 	 */
 	public boolean isFirstStart() {
 		return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
-	}
-
-	/**
-	 * Copies the default config file from res/raw/config_default.xml to (data folder)/config.xml.
-	 */
-	private void copyDefaultConfig() {
-		InputStream in = null;
-		FileOutputStream out = null;
-		try {
-			in = getResources().openRawResource(R.raw.config_default);
-			out = new FileOutputStream(getConfigFile());
-			byte[] buff = new byte[1024];
-			int read;
-
-			while ((read = in.read(buff)) > 0) {
-				out.write(buff, 0, read);
-			}
-		}
-		catch (IOException e) {
-			throw new RuntimeException("Failed to write config file", e);
-		}
-		finally {
-			try {
-				in.close();
-				out.close();
-			}
-			catch (IOException e) {
-				Log.w(TAG, "Failed to close stream while copying config", e);
-			}
-		}
 	}
 
 	public RestApi getApi() {
