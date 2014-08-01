@@ -29,8 +29,4 @@
 			android:id="@+id/settings"
 			android:title="@string/settings_title" />
 
-	<item
-			android:id="@+id/exit"
-			android:title="@string/exit" />
-
 </menu>
