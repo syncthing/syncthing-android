@@ -82,14 +82,14 @@ public class SyncthingService extends Service {
 	}
 
 	private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
-			new HashSet<OnWebGuiAvailableListener>();
+			new HashSet<>();
 
 	public interface OnApiChangeListener {
 		public void onApiChange(State currentState);
 	}
 
 	private final HashSet<WeakReference<OnApiChangeListener>> mOnApiChangeListeners =
-			new HashSet<WeakReference<OnApiChangeListener>>();
+			new HashSet<>();
 
     /**
      * INIT: Service is starting up and initializing.
@@ -311,7 +311,7 @@ public class SyncthingService extends Service {
 				config.createCameraRepo();
 			}
 
-			return new Pair<String, String>(config.getWebGuiUrl(), config.getApiKey());
+			return new Pair<>(config.getWebGuiUrl(), config.getApiKey());
 		}
 
 		@Override
