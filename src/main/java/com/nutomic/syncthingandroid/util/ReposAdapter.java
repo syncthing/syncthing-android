@@ -20,7 +20,7 @@ import java.util.List;
 public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 		implements RestApi.OnReceiveModelListener {
 
-	private HashMap<String, RestApi.Model> mModels = new HashMap<String, RestApi.Model>();
+	private HashMap<String, RestApi.Model> mModels = new HashMap<>();
 
 	public ReposAdapter(Context context) {
 		super(context, R.layout.repo_list_item);
