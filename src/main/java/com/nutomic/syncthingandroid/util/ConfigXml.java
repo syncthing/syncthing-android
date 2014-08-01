@@ -52,11 +52,7 @@ public class ConfigXml {
 		try {
 			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			mConfig = db.parse(mConfigFile);
-		} catch (SAXException e) {
-			throw new RuntimeException("Failed to parse config file", e);
-		} catch (ParserConfigurationException e) {
-			throw new RuntimeException("Failed to parse config file", e);
-		} catch (IOException e) {
+		} catch (SAXException | ParserConfigurationException | IOException e) {
 			throw new RuntimeException("Failed to open config file", e);
 		}
 	}
