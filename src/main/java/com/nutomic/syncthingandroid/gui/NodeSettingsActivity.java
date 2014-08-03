@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -266,7 +267,12 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 		intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
+		try {
+			startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
+		}
+		catch (ActivityNotFoundException e) {
+			Toast.makeText(this, R.string.no_qr_scanner_installed, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	/**

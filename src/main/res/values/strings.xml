@@ -158,6 +158,10 @@
 	<!-- Content description for node ID qr code icon -->
 	<string name="scan_qr_code_description">Scan QR Code</string>
 
+	<!-- Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException -->
+	<string name="no_qr_scanner_installed">You have no QR scanner installed or your scanner is not supported. \
+Please install a scanner or enter the node ID manually.</string>
+
 	<!-- WebGuiActivity -->
 
 
