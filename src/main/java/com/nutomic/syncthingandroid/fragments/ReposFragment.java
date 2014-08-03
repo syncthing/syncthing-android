@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.ReposAdapter;
 
