@@ -77,8 +77,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 
 	private EditTextPreference mVersioningKeep;
 
-	private Preference mDelete;
-
 	private boolean mIsCreate;
 
 	@Override
@@ -107,10 +105,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 		mVersioning.setOnPreferenceChangeListener(this);
 		mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
 		mVersioningKeep.setOnPreferenceChangeListener(this);
-		if (!mIsCreate) {
-			mDelete = findPreference("delete");
-			mDelete.setOnPreferenceClickListener(this);
-		}
 
 		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
@@ -182,6 +176,7 @@ public class RepoSettingsFragment extends PreferenceFragment
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.create).setVisible(mIsCreate);
+		menu.findItem(R.id.delete).setVisible(!mIsCreate);
 	}
 
 	@Override
@@ -200,6 +195,19 @@ public class RepoSettingsFragment extends PreferenceFragment
 				}
 				mSyncthingService.getApi().editRepo(mRepo, true, getActivity());
 				getActivity().finish();
+				return true;
+			case R.id.delete:
+				new AlertDialog.Builder(getActivity())
+						.setMessage(R.string.delete_repo_confirm)
+						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								mSyncthingService.getApi().deleteRepo(mRepo, getActivity());
+								getActivity().finish();
+							}
+						})
+						.setNegativeButton(android.R.string.no, null)
+						.show();
 				return true;
 			case android.R.id.home:
 				getActivity().finish();
@@ -290,20 +298,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 		else if (preference.equals(mNodes) && mSyncthingService.getApi().getNodes().isEmpty()) {
 			Toast.makeText(getActivity(), R.string.no_nodes, Toast.LENGTH_SHORT)
 					.show();
-		}
-		else if (preference.equals(mDelete)) {
-			new AlertDialog.Builder(getActivity())
-					.setMessage(R.string.delete_repo_confirm)
-					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteRepo(mRepo, getActivity());
-							getActivity().finish();
-						}
-					})
-					.setNegativeButton(android.R.string.no, null)
-					.show();
-			return true;
 		}
 		return false;
 	}
