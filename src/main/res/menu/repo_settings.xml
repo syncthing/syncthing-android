@@ -7,4 +7,11 @@
 			android:id="@+id/create"
 			android:title="@string/create"
 			app:showAsAction="always" />
+
+	<item
+		android:id="@+id/delete"
+		android:icon="@drawable/ic_delete"
+		android:title="@string/delete_repo"
+		app:showAsAction="ifRoom" />
+
 </menu>

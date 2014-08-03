@@ -29,8 +29,4 @@
 			android:title="@string/keep_versions"
 			android:inputType="numberDecimal" />
 
-	<Preference
-			android:key="delete"
-			android:title="@string/delete_repo" />
-
 </PreferenceScreen>
