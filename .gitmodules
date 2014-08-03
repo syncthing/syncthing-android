@@ -1,3 +1,6 @@
 [submodule "ext/syncthing/src/github.com/syncthing/syncthing"]
 	path = ext/syncthing/src/github.com/syncthing/syncthing
 	url = https://github.com/syncthing/syncthing.git
+[submodule "libraries/android-support-v4-preferencefragment"]
+	path = libraries/android-support-v4-preferencefragment
+	url = https://github.com/kolavar/android-support-v4-preferencefragment.git
