@@ -101,8 +101,7 @@ task buildNative(type: Exec) {
 }
 
 task copyNative(type: Copy) {
-	outputs.upToDateWhen { false }
-	def st_dir = System.getenv("GOPATH") + "/src/github.com/calmh/syncthing/";
+	def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/";
 	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
 	into 'libs/'
 	rename('syncthing-x86', 'x86/libsyncthing.so')
