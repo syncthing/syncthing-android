@@ -9,13 +9,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.support.v4.preference.PreferenceFragment;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -31,16 +31,12 @@ import java.util.Map;
 /**
  * Shows node details and allows changing them.
  */
-public class NodeSettingsActivity extends PreferenceActivity implements
+public class NodeSettingsFragment extends PreferenceFragment implements
 		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
 		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiChangeListener,
 		RestApi.OnNodeIdNormalizedListener {
 
-	public static final String ACTION_CREATE = "create";
-
-	public static final String ACTION_EDIT = "edit";
-
-	public static final String KEY_NODE_ID = "node_id";
+	public static final String EXTRA_NODE_ID = "node_id";
 
 	private static final int SCAN_QR_REQUEST_CODE = 235;
 
@@ -51,7 +47,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(NodeSettingsActivity.this);
+			mSyncthingService.registerOnApiChangeListener(NodeSettingsFragment.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
@@ -73,20 +69,19 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 
 	private Preference mDelete;
 
+	private boolean mIsCreate;
+
 	@Override
-	@SuppressLint("AppCompatMethod")
-	@TargetApi(11)
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+		mIsCreate = ((SettingsActivity) getActivity()).getIsCreate();
+		setHasOptionsMenu(true);
 
-		if (getIntent().getAction().equals(ACTION_CREATE)) {
+		if (mIsCreate) {
 			addPreferencesFromResource(R.xml.node_settings_create);
 		}
-		else if (getIntent().getAction().equals(ACTION_EDIT)) {
+		else {
 			addPreferencesFromResource(R.xml.node_settings_edit);
 		}
 
@@ -96,7 +91,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		mName.setOnPreferenceChangeListener(this);
 		mAddresses = (EditTextPreference) findPreference("addresses");
 		mAddresses.setOnPreferenceChangeListener(this);
-		if (getIntent().getAction().equals(ACTION_EDIT)) {
+		if (!mIsCreate) {
 			mVersion = findPreference("version");
 			mVersion.setSummary("?");
 			mCurrentAddress = findPreference("current_address");
@@ -105,38 +100,39 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			mDelete.setOnPreferenceClickListener(this);
 		}
 
-		bindService(new Intent(this, SyncthingService.class),
+		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
 	public void onApiChange(SyncthingService.State currentState) {
 		if (currentState != SyncthingService.State.ACTIVE) {
-			SyncthingService.showDisabledDialog(this);
-			finish();
+			SyncthingService.showDisabledDialog(getActivity());
+			getActivity().finish();
 			return;
 		}
 
-		if (getIntent().getAction().equals(ACTION_CREATE)) {
-			setTitle(R.string.add_node);
+		if (mIsCreate) {
+			getActivity().setTitle(R.string.add_node);
 			mNode = new RestApi.Node();
 			mNode.Name = "";
 			mNode.NodeID = "";
 			mNode.Addresses = "dynamic";
 			((EditTextPreference) mNodeId).setText(mNode.NodeID);
 		}
-		else if (getIntent().getAction().equals(ACTION_EDIT)) {
-			setTitle(R.string.edit_node);
+		else {
+			getActivity().setTitle(R.string.edit_node);
 			List<RestApi.Node> nodes = mSyncthingService.getApi().getNodes();
 			for (int i = 0; i < nodes.size(); i++) {
-				if (nodes.get(i).NodeID.equals(getIntent().getStringExtra(KEY_NODE_ID))) {
+				if (nodes.get(i).NodeID.equals(
+						getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
 					mNode = nodes.get(i);
 					break;
 				}
 			}
 			mNodeId.setOnPreferenceClickListener(this);
 		}
-		mSyncthingService.getApi().getConnections(NodeSettingsActivity.this);
+		mSyncthingService.getApi().getConnections(NodeSettingsFragment.this);
 
 		mNodeId.setSummary(mNode.NodeID);
 		mName.setText((mNode.Name));
@@ -146,16 +142,15 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.node_settings, menu);
-		return true;
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.node_settings, menu);
 	}
 
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.create).setVisible(getIntent().getAction().equals(ACTION_CREATE));
-		menu.findItem(R.id.share_node_id).setVisible(getIntent().getAction().equals(ACTION_EDIT));
-		return true;
+	public void onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(R.id.create).setVisible(mIsCreate);
+		menu.findItem(R.id.share_node_id).setVisible(!mIsCreate);
 	}
 
 	@Override
@@ -163,22 +158,22 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		switch (item.getItemId()) {
 			case R.id.create:
 				if (mNode.NodeID.equals("")) {
-					Toast.makeText(this, R.string.node_id_required, Toast.LENGTH_LONG)
+					Toast.makeText(getActivity(), R.string.node_id_required, Toast.LENGTH_LONG)
 							.show();
 					return true;
 				}
 				if (mNode.Name.equals("")) {
-					Toast.makeText(this, R.string.node_name_required, Toast.LENGTH_LONG)
+					Toast.makeText(getActivity(), R.string.node_name_required, Toast.LENGTH_LONG)
 							.show();
 					return true;
 				}
 				mSyncthingService.getApi().editNode(mNode, this);
 				return true;
 			case R.id.share_node_id:
-				RestApi.shareNodeId(this, mNode.NodeID);
+				RestApi.shareNodeId(getActivity(), mNode.NodeID);
 				return true;
 			case android.R.id.home:
-				finish();
+				getActivity().finish();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -188,7 +183,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		unbindService(mSyncthingServiceConnection);
+		getActivity().unbindService(mSyncthingServiceConnection);
 	}
 
 	@Override
@@ -219,13 +214,13 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.equals(mDelete)) {
-			new AlertDialog.Builder(this)
+			new AlertDialog.Builder(getActivity())
 					.setMessage(R.string.delete_node_confirm)
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteNode(mNode, NodeSettingsActivity.this);
-							finish();
+							mSyncthingService.getApi().deleteNode(mNode, getActivity());
+							getActivity().finish();
 						}
 					})
 					.setNegativeButton(android.R.string.no, null)
@@ -257,7 +252,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	 * Sends the updated node info if in edit mode.
 	 */
 	private void nodeUpdated() {
-		if (getIntent().getAction().equals(ACTION_EDIT)) {
+		if (!mIsCreate) {
 			mSyncthingService.getApi().editNode(mNode, this);
 		}
 	}
@@ -274,7 +269,8 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
 		}
 		catch (ActivityNotFoundException e) {
-			Toast.makeText(this, R.string.no_qr_scanner_installed, Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), R.string.no_qr_scanner_installed,
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -282,7 +278,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	 * Receives value of scanned QR code and sets it as node ID.
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 			mNode.NodeID = data.getStringExtra("SCAN_RESULT");
 			((EditTextPreference) mNodeId).setText(mNode.NodeID);
@@ -300,11 +296,10 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	@Override
 	public void onNodeIdNormalized(String normalizedId, String error) {
 		if (error != null) {
-			Toast.makeText(NodeSettingsActivity.this, error,
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
 		}
-		else if (getIntent().getAction().equals(ACTION_CREATE)) {
-			finish();
+		else if (mIsCreate) {
+			getActivity().finish();
 		}
 	}
 

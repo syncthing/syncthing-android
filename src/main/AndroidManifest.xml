@@ -39,8 +39,7 @@
 					android:value=".gui.MainActivity" />
 		</activity>
 		<activity
-				android:name=".gui.SettingsActivity"
-				android:label="@string/settings_title" >
+				android:name=".gui.SettingsActivity" >
 			<meta-data
 					android:name="android.support.PARENT_ACTIVITY"
 					android:value=".gui.MainActivity" />
@@ -48,10 +47,6 @@
 
 		<service android:name=".syncthing.SyncthingService" />
 
-		<activity
-				android:name=".gui.RepoSettingsActivity" />
-		<activity
-				android:name=".gui.NodeSettingsActivity" />
 		<activity
 				android:name=".gui.FolderPickerActivity"
 				android:label="@string/folder_picker_title" >

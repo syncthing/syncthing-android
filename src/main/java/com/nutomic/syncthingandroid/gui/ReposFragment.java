@@ -86,9 +86,10 @@ public class ReposFragment extends ListFragment implements SyncthingService.OnAp
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-		Intent intent = new Intent(getActivity(), RepoSettingsActivity.class);
-		intent.setAction(RepoSettingsActivity.ACTION_EDIT);
-		intent.putExtra(RepoSettingsActivity.KEY_REPO_ID, mAdapter.getItem(i).ID);
+		Intent intent = new Intent(getActivity(), SettingsActivity.class)
+				.setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+				.putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
+				.putExtra(RepoSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).ID);
 		startActivity(intent);
 	}
 

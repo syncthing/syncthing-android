@@ -76,7 +76,7 @@
 	<!-- Title for announce server status -->
 	<string name="announce_server">Announce Server</string>
 
-	<!-- RepoSettingsActivity -->
+	<!-- RepoSettingsFragment -->
 
 
 	<!-- Setting title -->
@@ -100,10 +100,10 @@
 	<!-- Setting title -->
 	<string name="delete_repo">Delete Repository</string>
 
-	<!-- Title for RepoSettingsActivity in create mode -->
+	<!-- Title for RepoSettingsFragment in create mode -->
 	<string name="create_repo">Create Repository</string>
 
-	<!-- Title for RepoSettingsActivity in edit mode -->
+	<!-- Title for RepoSettingsFragment in edit mode -->
 	<string name="edit_repo">Edit Repository</string>
 
 	<!-- Menu item to confirm repo creation -->
@@ -121,7 +121,7 @@
 	<!-- Toast shown when selecting 'nodes' if no nodes have been added -->
 	<string name="no_nodes">Please connect a node first.</string>
 
-	<!-- NodeSettingsActivity -->
+	<!-- NodeSettingsFragment -->
 
 
 	<!-- Setting title -->
@@ -139,13 +139,13 @@
 	<!-- Setting title -->
 	<string name="delete_node">Delete Node</string>
 
-	<!-- Title for NodeSettingsActivity in create mode -->
+	<!-- Title for NodeSettingsFragment in create mode -->
 	<string name="add_node">Add Node</string>
 
 	<!-- Menu item to confirm adding a node -->
 	<string name="add">Add</string>
 
-	<!-- Title for NodeSettingsActivity in edit mode -->
+	<!-- Title for NodeSettingsFragment in edit mode -->
 	<string name="edit_node">Edit Node</string>
 
 	<!-- Dialog shown when attempting to delete a node -->
@@ -185,7 +185,7 @@ This app is currently in Alpha state, and you may experience bugs, performance p
 There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
 Please report any problems you encounter.</string>
 
-	<!-- SettingsActivity -->
+	<!-- SettingsFragment -->
 
 
 	<!-- Activity title -->

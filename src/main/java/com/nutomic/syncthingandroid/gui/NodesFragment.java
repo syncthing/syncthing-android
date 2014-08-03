@@ -87,9 +87,10 @@ public class NodesFragment extends ListFragment implements SyncthingService.OnAp
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-		Intent intent = new Intent(getActivity(), NodeSettingsActivity.class);
-		intent.setAction(NodeSettingsActivity.ACTION_EDIT);
-		intent.putExtra(NodeSettingsActivity.KEY_NODE_ID, mAdapter.getItem(i).NodeID);
+		Intent intent = new Intent(getActivity(), SettingsActivity.class);
+		intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
+		intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
+		intent.putExtra(NodeSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).NodeID);
 		startActivity(intent);
 	}
 
