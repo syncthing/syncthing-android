@@ -23,7 +23,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -270,20 +269,23 @@ public class MainActivity extends ActionBarActivity
 
 		switch (item.getItemId()) {
 			case R.id.add_repo:
-				Intent intent = new Intent(this, RepoSettingsActivity.class);
-				intent.setAction(RepoSettingsActivity.ACTION_CREATE);
+				Intent intent = new Intent(this, SettingsActivity.class)
+						.setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+						.putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
 				startActivity(intent);
 				return true;
 			case R.id.add_node:
-				intent = new Intent(this, NodeSettingsActivity.class);
-				intent.setAction(NodeSettingsActivity.ACTION_CREATE);
+				intent = new Intent(this, SettingsActivity.class)
+						.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
+						.putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
 				startActivity(intent);
 				return true;
 			case R.id.web_gui:
 				startActivity(new Intent(this, WebGuiActivity.class));
 				return true;
 			case R.id.settings:
-				startActivity(new Intent(this, SettingsActivity.class));
+				startActivity(new Intent(this, SettingsActivity.class)
+						.setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
