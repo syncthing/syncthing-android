@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.fragments;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;

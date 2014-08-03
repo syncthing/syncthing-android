@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;

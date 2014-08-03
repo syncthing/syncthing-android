@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -30,13 +30,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment;
+import com.nutomic.syncthingandroid.fragments.NodesFragment;
+import com.nutomic.syncthingandroid.fragments.ReposFragment;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 /**
- * Shows {@link ReposFragment} and {@link NodesFragment} in different tabs, and
- * {@link LocalNodeInfoFragment} in the navigation drawer.
+ * Shows {@link com.nutomic.syncthingandroid.fragments.ReposFragment} and {@link com.nutomic.syncthingandroid.fragments.NodesFragment} in different tabs, and
+ * {@link com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment} in the navigation drawer.
  */
 public class MainActivity extends ActionBarActivity
 		implements SyncthingService.OnApiChangeListener {
