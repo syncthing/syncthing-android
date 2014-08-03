@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 	compile 'com.android.support:appcompat-v7:19.1.+'
+	compile project(':android-support-v4-preferencefragment')
 }
 
 android {

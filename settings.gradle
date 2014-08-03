@@ -1,0 +1,2 @@
+include ':android-support-v4-preferencefragment'
+project(':android-support-v4-preferencefragment').projectDir = new File('libraries/android-support-v4-preferencefragment')
