@@ -1,7 +1,5 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.fragments;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -9,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -24,6 +21,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
+import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
@@ -42,7 +41,7 @@ public class RepoSettingsFragment extends PreferenceFragment
 	private static final int DIRECTORY_REQUEST_CODE = 234;
 
 	/**
-	 * The ID of the repo to be edited. To be used with {@link SettingsActivity#EXTRA_IS_CREATE}
+	 * The ID of the repo to be edited. To be used with {@link com.nutomic.syncthingandroid.activities.SettingsActivity#EXTRA_IS_CREATE}
 	 * set to false.
 	 */
 	public static final String EXTRA_REPO_ID = "repo_id";
