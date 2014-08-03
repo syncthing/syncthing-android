@@ -16,9 +16,10 @@ import android.os.IBinder;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.support.v4.preference.PreferenceFragment;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -34,17 +35,17 @@ import java.util.List;
 /**
  * Shows repo details and allows changing them.
  */
-public class RepoSettingsActivity extends PreferenceActivity
+public class RepoSettingsFragment extends PreferenceFragment
 		implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
 		SyncthingService.OnApiChangeListener {
 
 	private static final int DIRECTORY_REQUEST_CODE = 234;
 
-	public static final String ACTION_CREATE = "create";
-
-	public static final String ACTION_EDIT = "edit";
-
-	public static final String KEY_REPO_ID = "repo_id";
+	/**
+	 * The ID of the repo to be edited. To be used with {@link SettingsActivity#EXTRA_IS_CREATE}
+	 * set to false.
+	 */
+	public static final String EXTRA_REPO_ID = "repo_id";
 
 	private static final String KEY_NODE_SHARED = "node_shared";
 
@@ -55,7 +56,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 		public void onServiceConnected(ComponentName className, IBinder service) {
 			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
 			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(RepoSettingsActivity.this);
+			mSyncthingService.registerOnApiChangeListener(RepoSettingsFragment.this);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {
@@ -79,20 +80,19 @@ public class RepoSettingsActivity extends PreferenceActivity
 
 	private Preference mDelete;
 
+	private boolean mIsCreate;
+
 	@Override
-	@SuppressLint("AppCompatMethod")
-	@TargetApi(11)
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+		mIsCreate = ((SettingsActivity) getActivity()).getIsCreate();
+		setHasOptionsMenu(true);
 
-		if (getIntent().getAction().equals(ACTION_CREATE)) {
+		if (mIsCreate) {
 			addPreferencesFromResource(R.xml.repo_settings_create);
 		}
-		else if (getIntent().getAction().equals(ACTION_EDIT)) {
+		else {
 			addPreferencesFromResource(R.xml.repo_settings_edit);
 		}
 
@@ -108,36 +108,37 @@ public class RepoSettingsActivity extends PreferenceActivity
 		mVersioning.setOnPreferenceChangeListener(this);
 		mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
 		mVersioningKeep.setOnPreferenceChangeListener(this);
-		if (getIntent().getAction().equals(ACTION_EDIT)) {
+		if (!mIsCreate) {
 			mDelete = findPreference("delete");
 			mDelete.setOnPreferenceClickListener(this);
 		}
 
-		bindService(new Intent(this, SyncthingService.class),
+		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
 				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
 	public void onApiChange(SyncthingService.State currentState) {
 		if (currentState != SyncthingService.State.ACTIVE) {
-			SyncthingService.showDisabledDialog(this);
-			finish();
+			SyncthingService.showDisabledDialog(getActivity());
+			getActivity().finish();
 			return;
 		}
 
-		if (getIntent().getAction().equals(ACTION_CREATE)) {
-			setTitle(R.string.create_repo);
+		if (mIsCreate) {
+			getActivity().setTitle(R.string.create_repo);
 			mRepo = new RestApi.Repo();
 			mRepo.ID = "";
 			mRepo.Directory = "";
 			mRepo.Nodes = new ArrayList<RestApi.Node>();
 			mRepo.Versioning = new RestApi.Versioning();
 		}
-		else if (getIntent().getAction().equals(ACTION_EDIT)) {
-			setTitle(R.string.edit_repo);
+		else {
+			getActivity().setTitle(R.string.edit_repo);
 			List<RestApi.Repo> repos = mSyncthingService.getApi().getRepos();
 			for (int i = 0; i < repos.size(); i++) {
-				if (repos.get(i).ID.equals(getIntent().getStringExtra(KEY_REPO_ID))) {
+				if (repos.get(i).ID.equals(
+						getActivity().getIntent().getStringExtra(EXTRA_REPO_ID))) {
 					mRepo = repos.get(i);
 					break;
 				}
@@ -150,11 +151,10 @@ public class RepoSettingsActivity extends PreferenceActivity
 		mRepoMaster.setChecked(mRepo.ReadOnly);
 		List<RestApi.Node> nodesList = mSyncthingService.getApi().getNodes();
 		for (RestApi.Node n : nodesList) {
-			ExtendedCheckBoxPreference cbp =
-					new ExtendedCheckBoxPreference(RepoSettingsActivity.this, n);
+			ExtendedCheckBoxPreference cbp = new ExtendedCheckBoxPreference(getActivity(), n);
 			cbp.setTitle(n.Name);
 			cbp.setKey(KEY_NODE_SHARED);
-			cbp.setOnPreferenceChangeListener(RepoSettingsActivity.this);
+			cbp.setOnPreferenceChangeListener(RepoSettingsFragment.this);
 			cbp.setChecked(false);
 			for (RestApi.Node n2 : mRepo.Nodes) {
 				if (n2.NodeID.equals(n.NodeID)) {
@@ -175,15 +175,14 @@ public class RepoSettingsActivity extends PreferenceActivity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.repo_settings, menu);
-		return true;
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.repo_settings, menu);
 	}
 
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.create).setVisible(getIntent().getAction().equals(ACTION_CREATE));
-		return true;
+	public void onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(R.id.create).setVisible(mIsCreate);
 	}
 
 	@Override
@@ -191,18 +190,20 @@ public class RepoSettingsActivity extends PreferenceActivity
 		switch (item.getItemId()) {
 			case R.id.create:
 				if (mRepo.ID.equals("")) {
-					Toast.makeText(this, R.string.repo_id_required, Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), R.string.repo_id_required, Toast.LENGTH_LONG)
+							.show();
 					return true;
 				}
 				if (mRepo.Directory.equals("")) {
-					Toast.makeText(this, R.string.repo_path_required, Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), R.string.repo_path_required, Toast.LENGTH_LONG)
+							.show();
 					return true;
 				}
-				mSyncthingService.getApi().editRepo(mRepo, true, this);
-				finish();
+				mSyncthingService.getApi().editRepo(mRepo, true, getActivity());
+				getActivity().finish();
 				return true;
 			case android.R.id.home:
-				finish();
+				getActivity().finish();
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -211,7 +212,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		unbindService(mSyncthingServiceConnection);
+		getActivity().unbindService(mSyncthingServiceConnection);
 	}
 
 	@Override
@@ -280,7 +281,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.equals(mDirectory)) {
-			Intent intent = new Intent(this, FolderPickerActivity.class)
+			Intent intent = new Intent(getActivity(), FolderPickerActivity.class)
 					.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY,
 							(mRepo.Directory.length() != 0)
 									? mRepo.Directory
@@ -288,16 +289,17 @@ public class RepoSettingsActivity extends PreferenceActivity
 			startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
 		}
 		else if (preference.equals(mNodes) && mSyncthingService.getApi().getNodes().isEmpty()) {
-			Toast.makeText(this, R.string.no_nodes, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), R.string.no_nodes, Toast.LENGTH_SHORT)
+					.show();
 		}
 		else if (preference.equals(mDelete)) {
-			new AlertDialog.Builder(this)
+			new AlertDialog.Builder(getActivity())
 					.setMessage(R.string.delete_repo_confirm)
 					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-							mSyncthingService.getApi().deleteRepo(mRepo, RepoSettingsActivity.this);
-							finish();
+							mSyncthingService.getApi().deleteRepo(mRepo, getActivity());
+							getActivity().finish();
 						}
 					})
 					.setNegativeButton(android.R.string.no, null)
@@ -308,7 +310,7 @@ public class RepoSettingsActivity extends PreferenceActivity
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
 			mRepo.Directory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
 			mDirectory.setSummary(mRepo.Directory);
@@ -317,8 +319,8 @@ public class RepoSettingsActivity extends PreferenceActivity
 	}
 
 	private void repoUpdated() {
-		if (getIntent().getAction().equals(ACTION_EDIT)) {
-			mSyncthingService.getApi().editRepo(mRepo, false, this);
+		if (!mIsCreate) {
+			mSyncthingService.getApi().editRepo(mRepo, false, getActivity());
 		}
 	}
 

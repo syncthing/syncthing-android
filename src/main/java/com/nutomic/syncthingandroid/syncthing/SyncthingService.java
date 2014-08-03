@@ -19,6 +19,7 @@ import android.util.Pair;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.gui.MainActivity;
 import com.nutomic.syncthingandroid.gui.SettingsActivity;
+import com.nutomic.syncthingandroid.gui.SettingsFragment;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import org.apache.http.HttpResponse;
@@ -409,7 +410,9 @@ public class SyncthingService extends Service {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         activity.finish();
-                        activity.startActivity(new Intent(activity, SettingsActivity.class));
+	                    Intent intent = new Intent(activity, SettingsActivity.class)
+			                    .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT);
+                        activity.startActivity(intent);
                     }
                 })
 				.setNegativeButton(R.string.exit,
