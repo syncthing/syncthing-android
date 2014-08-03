@@ -24,8 +24,4 @@
 			android:title="@string/current_address"
 			style="?android:preferenceInformationStyle"	/>
 
-	<Preference
-			android:key="delete"
-			android:title="@string/delete_node" />
-
 </PreferenceScreen>
