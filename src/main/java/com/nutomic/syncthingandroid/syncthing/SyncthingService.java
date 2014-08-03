@@ -171,6 +171,8 @@ public class SyncthingService extends Service {
 				if (ret != 0) {
 					mMainThreadHandler.post(new Runnable() {
 						public void run() {
+							Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
+									Integer.toString(retVal));
 							AlertDialog dialog = new AlertDialog.Builder(SyncthingService.this)
 									.setTitle(R.string.binary_crashed_title)
 									.setMessage(getString(R.string.binary_crashed_message, retVal))
