@@ -22,7 +22,7 @@
 			android:label="@string/app_name"
 			android:theme="@style/AppTheme" >
 		<activity
-				android:name=".gui.MainActivity"
+				android:name=".activities.MainActivity"
 				android:label="@string/app_name"
 				android:launchMode="singleTop" >
 			<intent-filter>
@@ -32,14 +32,14 @@
 			</intent-filter>
 		</activity>
 		<activity
-				android:name=".gui.WebGuiActivity"
+				android:name=".activities.WebGuiActivity"
 				android:label="@string/web_gui_title" >
 			<meta-data
 					android:name="android.support.PARENT_ACTIVITY"
 					android:value=".gui.MainActivity" />
 		</activity>
 		<activity
-				android:name=".gui.SettingsActivity" >
+				android:name=".activities.SettingsActivity" >
 			<meta-data
 					android:name="android.support.PARENT_ACTIVITY"
 					android:value=".gui.MainActivity" />
@@ -48,7 +48,7 @@
 		<service android:name=".syncthing.SyncthingService" />
 
 		<activity
-				android:name=".gui.FolderPickerActivity"
+				android:name=".activities.FolderPickerActivity"
 				android:label="@string/folder_picker_title" >
 			<meta-data
 					android:name="android.support.UI_OPTIONS"

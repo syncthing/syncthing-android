@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;

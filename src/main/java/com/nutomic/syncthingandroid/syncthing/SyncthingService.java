@@ -17,9 +17,8 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.gui.MainActivity;
-import com.nutomic.syncthingandroid.gui.SettingsActivity;
-import com.nutomic.syncthingandroid.gui.SettingsFragment;
+import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import org.apache.http.HttpResponse;

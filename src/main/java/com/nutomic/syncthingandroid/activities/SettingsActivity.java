@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.gui;
+package com.nutomic.syncthingandroid.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.fragments.NodeSettingsFragment;
+import com.nutomic.syncthingandroid.fragments.RepoSettingsFragment;
+import com.nutomic.syncthingandroid.fragments.SettingsFragment;
 
 /**
  * General Activity used by all PreferenceFragments.
@@ -23,8 +26,8 @@ public class SettingsActivity extends ActionBarActivity {
 	 * {@link #ACTION_REPO_SETTINGS_FRAGMENT} to determine if an existing repo/node should be
 	 * edited or a new one created.
 	 *
-	 * If this is false, {@link RepoSettingsFragment#EXTRA_REPO_ID} or
-	 * {@link NodeSettingsFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
+	 * If this is false, {@link com.nutomic.syncthingandroid.fragments.RepoSettingsFragment#EXTRA_REPO_ID} or
+	 * {@link com.nutomic.syncthingandroid.fragments.NodeSettingsFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
 	 */
 	public static final String EXTRA_IS_CREATE = "create";
 
