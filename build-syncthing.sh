@@ -4,6 +4,9 @@
 ORIG=$(pwd)
 mkdir -p bin
 
+# Load submodules
+git submodule update --init --recursive
+
 # Check for GOLANG installation
 if [ -z $GOROOT ]; then
 	# GOLANG v1.3 not support yet, using 1.2
