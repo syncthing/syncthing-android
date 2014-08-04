@@ -22,6 +22,10 @@ dependencies {
 	compile 'com.android.support:appcompat-v7:19.1.+'
 }
 
+preBuild {
+	dependsOn 'buildNative'
+}
+
 android {
 	compileSdkVersion 19
 	buildToolsVersion "19.1.0"
