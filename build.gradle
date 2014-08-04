@@ -84,6 +84,9 @@ android {
 				abiFilter "mips"
 			}
 		}
+		fat {
+			versionCode Integer.parseInt("0" + defaultConfig.versionCode)
+		}
 	}
 }
 
