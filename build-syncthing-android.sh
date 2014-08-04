@@ -1,3 +1,3 @@
 #!/bin/bash
-./lib/gradle/gradlew buildNative $@
-./lib/gradle/gradlew assembleDebug $@
+gradlew buildNative $@
+gradlew assembleDebug $@
