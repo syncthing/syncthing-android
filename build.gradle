@@ -34,6 +34,20 @@ android {
 		versionCode getVersionCodeFromManifest()
 	}
 
+	signingConfigs {
+		release {
+			// Android Studio does not pass environment variables.
+			// This means you have to use the command line for release builds.
+			def ks = System.getenv("KEYSTORE")
+			def ka = System.getenv("KEY_ALIAS")
+			if (ks != null && ka != null) {
+				storeFile file(ks)
+				keyAlias ka
+			}
+		}
+	}
+
+
 	sourceSets {
 		main {
 			jniLibs.srcDir file("libs/")
