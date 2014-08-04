@@ -48,13 +48,6 @@ export ENVIRONMENT=android
 
 # X86
 export GOARCH=386
-# For debugging:
-#echo "export GOROOT=$GOROOT"
-#echo "export GOPATH=$GOPATH"
-#echo "export PATH=$PATH"
-#echo "export GOOS=linux"
-#echo "export ENVIRONMENT=$ENVIRONMENT"
-#echo "export GOARCH=$GOARCH"
 ./build.sh "" -tags noupgrade
 cp bin/syncthing $ORIG/bin/syncthing-x86
 
