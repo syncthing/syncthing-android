@@ -59,11 +59,11 @@ export GOARCH=arm
 
 export GOARM=7
 ./build.sh "" -tags noupgrade
-cp bin/syncthing $ORIG/bin/syncthing-armeabi-v7a
+cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi-v7a
 
 export GOARM=5
 ./build.sh "" -tags noupgrade
-cp bin/syncthing $ORIG/bin/syncthing-armeabi
+cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
 
 
 # MIPS
