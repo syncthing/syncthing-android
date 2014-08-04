@@ -4,7 +4,7 @@
 	</gui>
 	<options>
 		<listenAddress>0.0.0.0:22000</listenAddress>
-		<globalAnnounceServer>194.126.249.5:22025</globalAnnounceServer>
+		<globalAnnounceServer>194.126.249.5:22026</globalAnnounceServer>
 		<globalAnnounceEnabled>true</globalAnnounceEnabled>
 		<localAnnounceEnabled>true</localAnnounceEnabled>
 		<parallelRequests>16</parallelRequests>
