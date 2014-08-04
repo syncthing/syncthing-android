@@ -23,11 +23,17 @@ dependencies {
 }
 
 android {
-	compileSdkVersion 20
-	buildToolsVersion "20"
+	compileSdkVersion 19
+	buildToolsVersion "19.1.0"
 
 	defaultConfig {
 		versionCode getVersionCodeFromManifest()
+	}
+
+	sourceSets {
+		main {
+			jniLibs.srcDir file("libs/")
+		}
 	}
 
 	signingConfigs {
@@ -43,20 +49,13 @@ android {
 		}
 	}
 
-
-	sourceSets {
-		main {
-			jniLibs.srcDir file("libs/")
-		}
-	}
-
-
 	buildTypes {
 		debug {
 			applicationIdSuffix ".debug"
 			debuggable true
 		}
 		release {
+			signingConfig signingConfigs.release
 		}
 	}
 
