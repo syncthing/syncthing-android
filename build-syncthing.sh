@@ -11,7 +11,6 @@ if [ -z $GOROOT ]; then
 	TMPGO='tmp/go1.2'
 	if [ ! -d "$TMPGO" ]; then
 		# Download GOLANG
-		echo "Downloading Golang..."
 		hg clone https://code.google.com/p/go/ -r release-branch.go1.2 "$TMPGO"
 		# Build GO for host
 		cd $TMPGO/src
