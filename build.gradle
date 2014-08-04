@@ -1,3 +1,7 @@
+task wrapper(type: Wrapper) {
+	    gradleVersion = '1.10'
+}
+
 buildscript {
 	repositories {
 		mavenCentral()
@@ -23,8 +27,8 @@ dependencies {
 }
 
 android {
-	compileSdkVersion 19
-	buildToolsVersion "19.1.0"
+	compileSdkVersion 20
+	buildToolsVersion "20"
 
 	defaultConfig {
 		versionCode getVersionCodeFromManifest()
@@ -36,18 +40,6 @@ android {
 		}
 	}
 
-	signingConfigs {
-		release {
-			// Android Studio does not pass environment variables.
-			// This means you have to use the command line for release builds.
-			def ks = System.getenv("KEYSTORE")
-			def ka = System.getenv("KEY_ALIAS")
-			if (ks != null && ka != null) {
-				storeFile file(ks)
-				keyAlias ka
-			}
-		}
-	}
 
 	buildTypes {
 		debug {
@@ -55,7 +47,6 @@ android {
 			debuggable true
 		}
 		release {
-			signingConfig signingConfigs.release
 		}
 	}
 
@@ -97,11 +88,11 @@ def getVersionCodeFromManifest() {
 
 task buildNative(type: Exec) {
 	outputs.upToDateWhen { false }
-	executable = './build-native.sh'
+	executable = './build-syncthing.sh'
 }
 
 task copyNative(type: Copy) {
-	def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/";
+	def st_dir = System.getenv("GOPATH") + "/bin/";
 	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
 	into 'libs/'
 	rename('syncthing-x86', 'x86/libsyncthing.so')

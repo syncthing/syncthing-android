@@ -1,0 +1,10 @@
+[submodule "submodule/syncthing"]
+	path = submodule/syncthing
+	url = https://github.com/syncthing/syncthing
+[submodule "submodule/golang-crosscompile"]
+	path = submodule/golang-crosscompile
+	url = https://github.com/davecheney/golang-crosscompile.git
+[submodule "submodule/graddle"]
+	path = submodule/graddle
+	url = https://github.com/gradle/gradle.git
+	branch = remotes/origin/REL_1.10
