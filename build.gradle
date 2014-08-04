@@ -97,11 +97,11 @@ def getVersionCodeFromManifest() {
 
 task buildNative(type: Exec) {
 	outputs.upToDateWhen { false }
-	executable = './build-native.sh'
+	executable = './build-syncthing.sh'
 }
 
 task copyNative(type: Copy) {
-	def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/";
+	def st_dir = System.getenv("GOPATH") + "/bin/";
 	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
 	into 'libs/'
 	rename('syncthing-x86', 'x86/libsyncthing.so')

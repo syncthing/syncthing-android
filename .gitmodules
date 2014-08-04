@@ -1,0 +1,6 @@
+[submodule "submodule/syncthing"]
+	path = submodule/syncthing
+	url = https://github.com/syncthing/syncthing
+[submodule "submodule/golang-crosscompile"]
+	path = submodule/golang-crosscompile
+	url = https://github.com/davecheney/golang-crosscompile.git
