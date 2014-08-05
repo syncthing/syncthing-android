@@ -9,6 +9,10 @@ buildscript {
 	}
 }
 
+task createWrapper(type: Wrapper) {
+	gradleVersion = '1.12'
+}
+
 import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'

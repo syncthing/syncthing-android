@@ -9,7 +9,7 @@ A wrapper of [syncthing](https://github.com/calmh/syncthing) for Android.
 To build everyhing from scratch, please run ./build-syncthing-android.sh
 The process consists of three phases:
 - Download and compile Golang v1.2 for x86 and ARM cross-compilation: Syncthing-android depends on Syncthing "native" (https://github.com/calmh/syncthing) and this requires Go v1.2. In order to create the APK for x86 and ARM we need to cross compile this library and these scripts are provided by https://github.com/davecheney/golang-crosscompile.
-- Compile Syncthing native for the different architectures using `gradle buildNative`. A compatible gradle wrapper provides gradle v1.10.
+- Compile Syncthing native for the different architectures using `gradle buildNative`. A gradle wrapper works best (gradlew with gradle v1.10+). Install a graddle wrapper using `gradle createWrapper`.
 - Compile the final APK using `gradle assembleDebug`.
 
 ## License
