@@ -40,7 +40,7 @@ $GOROOT/bin/go get github.com/tools/godep
 export PATH="$(readlink -e bin)":$PATH
 
 # Install dependencies
-./build.sh setup
+./build.sh setup || true
 
 # Build test
 #./build.sh test || exit 1
@@ -71,7 +71,9 @@ cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
 #./build.sh "" -tags noupgrade
 #cp bin/syncthing $ORIG/bin/syncthing-mips
 
-if [ ls $ORIG/bin/syncthing-* ]; then
-	cd $ORIG
-	rm -rf build/.
+
+# Cleanup if succeeded
+cd $ORIG
+if ls bin/syncthing-* >/dev/null ; then
+	rm -rf build/
 fi
