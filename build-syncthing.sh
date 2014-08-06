@@ -14,7 +14,7 @@ if [ -z $GOROOT ]; then
 	TMPGO='tmp/go1.2'
 	if [ ! -d "$TMPGO" ]; then
 		# Download GOLANG
-		hg clone https://code.google.com/p/go/ -r release-branch.go1.2 "$TMPGO"
+		hg clone https://code.google.com/p/go/ -r 9c4fdd8369ca4483fbed1cb8e67f02643ca10f79 "$TMPGO"
 		# Build GO for host
 		cd $TMPGO/src
 		./make.bash
