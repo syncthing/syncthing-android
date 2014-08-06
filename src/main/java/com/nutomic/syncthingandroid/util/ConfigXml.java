@@ -118,6 +118,13 @@ public class ConfigXml {
 			}
 		}
 
+		// Change global announce server port to 22026 for syncthing v0.9.0.
+		if (globalAnnounceServer.getTextContent().equals("194.126.249.5:22025")) {
+			Log.i(TAG, "Changing announce server port for v0.9.0");
+			globalAnnounceServer.setTextContent("194.126.249.5:22026");
+			changed = true;
+		}
+
 		if (changed) {
 			saveChanges();
 		}

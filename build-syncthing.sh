@@ -49,28 +49,16 @@ export GOOS=linux
 export ENVIRONMENT=android
 
 # X86
-export GOARCH=386
-./build.sh "" -tags noupgrade
-cp bin/syncthing $ORIG/bin/syncthing-x86
+GOARCH=386 ./build.sh "" -tags noupgrade
+mv bin/linux_386/syncthing $ORIG/bin/syncthing-x86
 
+# ARM-7
+GOARCH=arm GOARM=7 ./build.sh "" -tags noupgrade
+mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi-v7a
 
-# ARM
-export GOARCH=arm
-
-export GOARM=7
-./build.sh "" -tags noupgrade
-cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi-v7a
-
-export GOARM=5
-./build.sh "" -tags noupgrade
-cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
-
-
-# MIPS
-#export GOARCH=mips
-#./build.sh "" -tags noupgrade
-#cp bin/syncthing $ORIG/bin/syncthing-mips
-
+# ARM-5
+GOARCH=arm GOARM=5 ./build.sh "" -tags noupgrade
+mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
 
 # Cleanup if succeeded
 cd $ORIG
