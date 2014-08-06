@@ -1,6 +1,6 @@
-[submodule "submodule/syncthing"]
-	path = submodule/syncthing
-	url = https://github.com/syncthing/syncthing
-[submodule "submodule/golang-crosscompile"]
-	path = submodule/golang-crosscompile
+[submodule "ext/golang-crosscompile"]
+	path = ext/golang-crosscompile
 	url = https://github.com/davecheney/golang-crosscompile.git
+[submodule "ext/syncthing"]
+	path = ext/syncthing
+	url = https://github.com/syncthing/syncthing.git

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Build the syncthing library
 ORIG=$(pwd)
@@ -10,8 +10,8 @@ git submodule update --init --recursive
 # Check for GOLANG installation
 if [ -z $GOROOT ]; then
 	# GOLANG v1.3 not support yet, using 1.2
-	mkdir -p "tmp"
-	TMPGO='tmp/go1.2'
+	mkdir -p "build"
+	TMPGO='build/go1.2'
 	if [ ! -d "$TMPGO" ]; then
 		# Download GOLANG
 		hg clone https://code.google.com/p/go/ -r 9c4fdd8369ca4483fbed1cb8e67f02643ca10f79 "$TMPGO"
@@ -20,7 +20,7 @@ if [ -z $GOROOT ]; then
 		./make.bash
 		export GOROOT="$ORIG/$TMPGO"
 		# Build GO for cross-compilation
-		source "$ORIG/submodule/golang-crosscompile/crosscompile.bash"
+		source "$ORIG/ext/golang-crosscompile/crosscompile.bash"
 		go-crosscompile-build linux/386
 		go-crosscompile-build linux/arm
 		cd "$ORIG"
@@ -29,15 +29,15 @@ if [ -z $GOROOT ]; then
 	export GOROOT="$(readlink -e $TMPGO)"
 fi
 
-export PATH=$PATH:"$GOROOT/bin"
+export PATH="$GOROOT/bin":$PATH
 
 # Compile syncthing
-cd "submodule/syncthing/"
+cd "ext/syncthing/"
 export GOPATH="$(readlink -e .)"
 
 # Install godep
 $GOROOT/bin/go get github.com/tools/godep
-export PATH=$PATH:"$(readlink -e bin)"
+export PATH="$(readlink -e bin)":$PATH
 
 # Install dependencies
 ./build.sh setup
@@ -71,3 +71,7 @@ cp bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
 #./build.sh "" -tags noupgrade
 #cp bin/syncthing $ORIG/bin/syncthing-mips
 
+if [ ls $ORIG/bin/syncthing-* ]; then
+	cd $ORIG
+	rm -rf build/.
+fi
