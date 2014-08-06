@@ -2,26 +2,18 @@
 
 cd "$GOPATH/src/github.com/syncthing/syncthing/"
 
+rm bin/
+
 ./build.sh test || exit 1
 
 export GOOS=linux
 export ENVIRONMENT=android
 
-export GOARCH=386
+GOARCH=386 ./build.sh "" -tags noupgrade
+mv bin/linux_386/syncthing bin/syncthing-x86
 
-./build.sh "" -tags noupgrade
-cp syncthing syncthing-x86
+GOARCH=arm GOARM=5 ./build.sh "" -tags noupgrade
+mv bin/linux_arm/syncthing bin/syncthing-armeabi
 
-export GOARCH=arm
-
-export GOARM=7
-./build.sh "" -tags noupgrade
-cp syncthing syncthing-armeabi-v7a
-
-export GOARM=5
-./build.sh "" -tags noupgrade
-cp syncthing syncthing-armeabi
-
-#export GOARCH=mips
-#./build.sh "" -tags noupgrade
-#cp syncthing syncthing-mips
+GOARCH=arm GOARM=7 ./build.sh "" -tags noupgrade
+mv bin/linux_arm/syncthing bin/syncthing-armeabi-v7a
