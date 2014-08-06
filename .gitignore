@@ -33,3 +33,10 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# Syncthing native dependencies
+ext/syncthing/pkg/
+ext/syncthing/src/code.google.com/
+ext/syncthing/src/github.com/kr/
+ext/syncthing/src/github.com/mattn/
+ext/syncthing/src/github.com/tools/

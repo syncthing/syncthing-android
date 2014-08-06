@@ -31,7 +31,7 @@ fi
 
 export PATH="$GOROOT/bin":$PATH
 
-# Compile syncthing
+# Setup GOPATH
 cd "ext/syncthing/"
 export GOPATH="$(readlink -e .)"
 
@@ -40,6 +40,7 @@ $GOROOT/bin/go get github.com/tools/godep
 export PATH="$(readlink -e bin)":$PATH
 
 # Install dependencies
+cd src/github.com/syncthing/syncthing
 ./build.sh setup || true
 
 # Build test
@@ -50,15 +51,18 @@ export ENVIRONMENT=android
 
 # X86
 GOARCH=386 ./build.sh "" -tags noupgrade
-mv bin/linux_386/syncthing $ORIG/bin/syncthing-x86
+mv bin/syncthing $ORIG/bin/syncthing-x86
+rm -rf bin
 
 # ARM-7
 GOARCH=arm GOARM=7 ./build.sh "" -tags noupgrade
 mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi-v7a
+rm -rf bin
 
 # ARM-5
 GOARCH=arm GOARM=5 ./build.sh "" -tags noupgrade
 mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
+rm -rf bin
 
 # Cleanup if succeeded
 cd $ORIG
