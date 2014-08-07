@@ -125,5 +125,8 @@ task copyNative(type: Copy) {
 buildNative.finalizedBy copyNative
 
 task cleanNative(type: Delete) {
+	delete 'bin/'
+	delete 'build/'
 	delete 'libs/'
 }
+
