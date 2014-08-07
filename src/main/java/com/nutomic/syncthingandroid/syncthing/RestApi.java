@@ -152,6 +152,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	private long mPreviousConnectionTime = 0;
 
+	/**
+	 * Stores the latest result of {@link #getModel(String, OnReceiveModelListener)} for each repo,
+	 * for calculating node percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
+	 */
+	private HashMap<String, Model> mCachedModelInfo = new HashMap<String, Model>();
+
 	public RestApi(SyncthingService syncthingService, String url, String apiKey) {
 		mSyncthingService = syncthingService;
 		mUrl = url;
@@ -495,18 +501,22 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 	/**
 	 * Listener for {@link #getConnections}.
-	 *
-	 * NOTE: The parameter connections is cached internally. Do not modify it or
-	 *       any of its contents.
 	 */
 	public interface OnReceiveConnectionsListener {
+
+		/**
+		 * @param connections Map from Node ID to {@link Connection}.
+		 *
+		 * NOTE: The parameter connections is cached internally. Do not modify it or
+		 *       any of its contents.
+		 */
 		public void onReceiveConnections(Map<String, Connection> connections);
 	}
 
 	/**
 	 * Returns connection info for the local node and all connected nodes.
 	 *
-	 * Use the key {@link }LOCAL_NODE_CONNECTIONS} to get connection info for the local node.
+	 * Use the key {@link #LOCAL_NODE_CONNECTIONS} to get connection info for the local node.
 	 */
 	public void getConnections(final OnReceiveConnectionsListener listener) {
 		new GetTask() {
@@ -526,19 +536,19 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 					JSONObject json = new JSONObject(s);
 					String[] names = json.names().join(" ").replace("\"", "").split(" ");
 					HashMap<String, Connection> connections = new HashMap<String, Connection>();
-					for (String address : names) {
+					for (String nodeId : names) {
 						Connection c = new Connection();
-						JSONObject conn = json.getJSONObject(address);
-						c.Address = address;
+						JSONObject conn = json.getJSONObject(nodeId);
+						c.Address = nodeId;
 						c.At = conn.getString("At");
 						c.InBytesTotal = conn.getLong("InBytesTotal");
 						c.OutBytesTotal = conn.getLong("OutBytesTotal");
 						c.Address = conn.getString("Address");
 						c.ClientVersion = conn.getString("ClientVersion");
-						c.Completion = conn.getInt("Completion");
+						c.Completion = getNodeCompletion(nodeId);
 
-						Connection prev = (mPreviousConnections.containsKey(address))
-								? mPreviousConnections.get(address)
+						Connection prev = (mPreviousConnections.containsKey(nodeId))
+								? mPreviousConnections.get(nodeId)
 								: new Connection();
 						mPreviousConnectionTime = now;
 						if (difference != 0) {
@@ -548,7 +558,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 									(conn.getLong("OutBytesTotal") - prev.OutBytesTotal) / difference);
 						}
 
-						connections.put(address, c);
+						connections.put(nodeId, c);
 
 					}
 					mPreviousConnections = connections;
@@ -559,6 +569,38 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				}
 			}
 		}.execute(mUrl, GetTask.URI_CONNECTIONS, mApiKey);
+	}
+
+	/**
+	 * Calculates completion percentage for the given node using {@link #mCachedModelInfo}.
+	 */
+	private int getNodeCompletion(String nodeId) {
+		int repoCount = 0;
+		float percentageSum = 0;
+		for (String id : mCachedModelInfo.keySet()) {
+			boolean isShared = false;
+			outerloop:
+			for (Repo r : getRepos()) {
+				for (Node n : r.Nodes) {
+					if (n.NodeID.equals(nodeId)) {
+						isShared = true;
+						break outerloop;
+					}
+
+				}
+			}
+			if (isShared) {
+				long global = mCachedModelInfo.get(id).globalBytes;
+				long local = mCachedModelInfo.get(id).localBytes;
+				percentageSum += (global != 0)
+						? (local * 100f) / global
+						: 100f;
+				repoCount++;
+			}
+		}
+		return (repoCount != 0)
+				? (int) percentageSum / repoCount
+				: 100;
 	}
 
 
@@ -594,6 +636,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 					m.needFiles = json.getLong("needFiles");
 					m.state = json.getString("state");
 					m.invalid = json.optString("invalid");
+					mCachedModelInfo.put(repoId, m);
 					listener.onReceiveModel(repoId, m);
 				}
 				catch (JSONException e) {
