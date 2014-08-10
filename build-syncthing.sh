@@ -51,7 +51,7 @@ export ENVIRONMENT=android
 
 # X86
 GOARCH=386 ./build.sh "" -tags noupgrade
-mv bin/syncthing $ORIG/bin/syncthing-x86
+mv bin/linux_386/syncthing $ORIG/bin/syncthing-x86
 rm -rf bin
 
 # ARM-7
