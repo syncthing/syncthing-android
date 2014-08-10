@@ -129,4 +129,5 @@ task cleanNative(type: Delete) {
 	delete 'build/'
 	delete 'libs/'
 }
+clean.dependsOn cleanNative
 
