@@ -16,14 +16,16 @@ if [ -z $GOROOT ]; then
 		# Download GOLANG
 		hg clone https://code.google.com/p/go/ -r 9c4fdd8369ca4483fbed1cb8e67f02643ca10f79 "$TMPGO"
 		# Build GO for host
-		cd $TMPGO/src
+		pushd $TMPGO/src
 		./make.bash
-		export GOROOT="$ORIG/$TMPGO"
+		# Add GO to the environment
+		export GOROOT="$(readlink -e ..)"
+		export PATH=$PATH:$GOROOT/bin
 		# Build GO for cross-compilation
 		source "$ORIG/ext/golang-crosscompile/crosscompile.bash"
 		go-crosscompile-build linux/386
 		go-crosscompile-build linux/arm
-		cd "$ORIG"
+		popd
 	fi
 
 	export GOROOT="$(readlink -e $TMPGO)"
