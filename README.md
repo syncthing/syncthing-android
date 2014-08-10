@@ -8,7 +8,7 @@ A wrapper of [syncthing](https://github.com/syncthing/syncthing) for Android.
 
 Use `gradlew assembleDebug` to compile the APK.
 
-Note: Gradlew is a gradle wrapper which allows to specify the gradle version. Use `gradle createWrapper` to create your own gradlew instance.
+Note: Gradlew is a gradle wrapper which allows to specify the gradle version. Use `gradle -b gradle/wrapper/build.xml wrapper` to create your own gradlew instance. Then add it to your path using `export PATH=$PATH:$(pwd)/gradle/wrapper`.
 
 The build process follows three phases:
 - It downloads and compiles Golang v1.2 for x86 and ARM cross-compilation: Syncthing-android depends on Syncthing "native" (https://github.com/syncthing/syncthing) and this requires Go v1.2. In order to create the APK for x86 and ARM we need to cross compile this library and we use the scripts provided by https://github.com/davecheney/golang-crosscompile.
