@@ -11,12 +11,18 @@ git submodule update --init --recursive
 if [ -z $GOROOT ]; then
 	# GOLANG v1.3 not support yet, using 1.2
 	mkdir -p "build"
-	TMPGO='build/go1.2'
-	if [ ! -d "$TMPGO" ]; then
+	tmpgo='build/go1.2'
+	if [ ! -d "$tmpgo" ]; then
 		# Download GOLANG
-		hg clone https://code.google.com/p/go/ -r 9c4fdd8369ca4483fbed1cb8e67f02643ca10f79 "$TMPGO"
+		sha1=wget -O - http://golang.org/dl/go1.2.2.src.tar.gz |\
+			tee go.tar.gz | openssl dgst -sha1 | cut -d ' ' -f 2
+		if [ "$sha1" != "3ce0ac4db434fc1546fec074841ff40dc48c1167" ]; then
+			echo "go.src.tar.gz SHA1 checksum does not match!"
+			exit 1
+		fi
+		tar -xzf go.tar.gz --strip=1 -C $tmpgo
 		# Build GO for host
-		pushd $TMPGO/src
+		pushd $tmpgo/src
 		./make.bash
 		# Add GO to the environment
 		export GOROOT="$(readlink -e ..)"
@@ -28,7 +34,7 @@ if [ -z $GOROOT ]; then
 		popd
 	fi
 
-	export GOROOT="$(readlink -e $TMPGO)"
+	export GOROOT="$(readlink -e $tmpgo)"
 fi
 
 export PATH="$GOROOT/bin":$PATH
