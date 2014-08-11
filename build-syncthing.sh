@@ -14,9 +14,9 @@ if [ -z $GOROOT ]; then
 	tmpgo='build/go1.2'
 	if [ ! -f "$tmpgo/bin/go" ]; then
 		# Download GOLANG
-		sha1=wget -O - http://golang.org/dl/go1.2.2.src.tar.gz |\
-			tee go.tar.gz | openssl dgst -sha1 | cut -d ' ' -f 2
-		if [ "$sha1" != "3ce0ac4db434fc1546fec074841ff40dc48c1167" ]; then
+		wget -O go.src.tar.gz http://golang.org/dl/go1.2.2.src.tar.gz
+		sha1=$(sha1sum go.src.tar.gz)
+		if [ "$sha1" != "3ce0ac4db434fc1546fec074841ff40dc48c1167  go.src.tar.gz" ]; then
 			echo "go.src.tar.gz SHA1 checksum does not match!"
 			exit 1
 		fi
