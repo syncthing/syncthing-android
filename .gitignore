@@ -34,6 +34,10 @@ proguard/
 *.iws
 .idea/
 
+# Gradle wrapper
+gradle/wrapper/gradle/
+gradle/wrapper/gradlew*
+
 # Syncthing native dependencies
 ext/syncthing/pkg/
 ext/syncthing/src/code.google.com/
