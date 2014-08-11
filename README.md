@@ -11,7 +11,7 @@ Use `gradlew assembleDebug` to compile the APK.
 Note: Gradlew is a gradle wrapper which allows to specify the gradle version. Use `gradle -b gradle/wrapper/build.xml wrapper` to create your own gradlew instance. Then add it to your path using `export PATH=$PATH:$(pwd)/gradle/wrapper`.
 
 The build process follows three phases:
-- It downloads and compiles Golang v1.2 for x86 and ARM cross-compilation: Syncthing-android depends on Syncthing "native" (https://github.com/syncthing/syncthing) and this requires Go v1.2. In order to create the APK for x86 and ARM we need to cross compile this library and we use the scripts provided by https://github.com/davecheney/golang-crosscompile.
+- It downloads and compiles Golang v1.2 for x86 and ARM cross-compilation: Syncthing-android depends on Syncthing "native" (https://github.com/syncthing/syncthing) and this requires Go v1.2.
 - The Syncthing native libraries are compiled for the different architectures using `gradlew buildNative`.
 - The final APK is built using the `gradlew assembleDebug` task.
 
@@ -19,4 +19,3 @@ The build process follows three phases:
 ## License
 
 All code is licensed under the [MIT License](https://github.com/Nutomic/syncthing-android/blob/master/LICENSE).
-The golang-crosscompile is provided by the Go Authors [BSD 3-Clause License][https://github.com/davecheney/golang-crosscompile/blob/e925635a41997e4258fe86bfaf127e84e54ed806/LICENSE]

@@ -1,6 +1,3 @@
-[submodule "ext/golang-crosscompile"]
-	path = ext/golang-crosscompile
-	url = https://github.com/davecheney/golang-crosscompile.git
 [submodule "ext/syncthing/src/github.com/syncthing/syncthing"]
 	path = ext/syncthing/src/github.com/syncthing/syncthing
 	url = https://github.com/syncthing/syncthing.git

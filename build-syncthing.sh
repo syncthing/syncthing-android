@@ -12,7 +12,7 @@ if [ -z $GOROOT ]; then
 	# GOLANG v1.3 not support yet, using 1.2
 	mkdir -p "build"
 	tmpgo='build/go1.2'
-	if [ ! -d "$tmpgo" ]; then
+	if [ ! -f "$tmpgo/bin/go" ]; then
 		# Download GOLANG
 		sha1=wget -O - http://golang.org/dl/go1.2.2.src.tar.gz |\
 			tee go.tar.gz | openssl dgst -sha1 | cut -d ' ' -f 2
@@ -20,24 +20,35 @@ if [ -z $GOROOT ]; then
 			echo "go.src.tar.gz SHA1 checksum does not match!"
 			exit 1
 		fi
-		tar -xzf go.tar.gz --strip=1 -C $tmpgo
+		mkdir -p $tmpgo
+		tar -xzf go.src.tar.gz --strip=1 -C $tmpgo
 		# Build GO for host
 		pushd $tmpgo/src
-		./make.bash
-		# Add GO to the environment
-		export GOROOT="$(readlink -e ..)"
-		export PATH=$PATH:$GOROOT/bin
-		# Build GO for cross-compilation
-		source "$ORIG/ext/golang-crosscompile/crosscompile.bash"
-		go-crosscompile-build linux/386
-		go-crosscompile-build linux/arm
+		./make.bash --no-clean
 		popd
 	fi
-
+	# Add GO to the environment
 	export GOROOT="$(readlink -e $tmpgo)"
 fi
 
-export PATH="$GOROOT/bin":$PATH
+# Add GO compiler to PATH
+export PATH=$PATH:$GOROOT/bin
+
+# Check whether GOLANG is compiled with cross-compilation for 386
+if [ ! -f $GOROOT/bin/linux_386/go ]; then
+	pushd $GOROOT/src
+	# Build GO for cross-compilation
+	GOOS=linux GOARCH=386 ./make.bash --no-clean
+	popd
+fi
+
+# Check whether GOLANG is compiled with cross-compilation for arm
+if [ ! -f $GOROOT/bin/linux_arm/go ]; then
+	pushd $GOROOT/src
+	# Build GO for cross-compilation
+	GOOS=linux GOARCH=arm ./make.bash --no-clean
+	popd
+fi
 
 # Setup GOPATH
 cd "ext/syncthing/"
