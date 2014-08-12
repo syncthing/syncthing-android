@@ -9,14 +9,13 @@ git submodule update --init --recursive
 
 # Check for GOLANG installation
 if [ -z $GOROOT ]; then
-	# GOLANG v1.3 not support yet, using 1.2
 	mkdir -p "build"
-	tmpgo='build/go1.2'
+	tmpgo='build/go'
 	if [ ! -f "$tmpgo/bin/go" ]; then
-		# Download GOLANG
-		wget -O go.src.tar.gz http://golang.org/dl/go1.2.2.src.tar.gz
+		# Download GOLANG v1.3
+		wget -O go.src.tar.gz http://golang.org/dl/go1.3.src.tar.gz
 		sha1=$(sha1sum go.src.tar.gz)
-		if [ "$sha1" != "3ce0ac4db434fc1546fec074841ff40dc48c1167  go.src.tar.gz" ]; then
+		if [ "$sha1" != "9f9dfcbcb4fa126b2b66c0830dc733215f2f056e  go.src.tar.gz" ]; then
 			echo "go.src.tar.gz SHA1 checksum does not match!"
 			exit 1
 		fi
