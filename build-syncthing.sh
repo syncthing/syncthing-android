@@ -21,6 +21,7 @@ if [ -z $GOROOT ]; then
 		fi
 		mkdir -p $tmpgo
 		tar -xzf go.src.tar.gz --strip=1 -C $tmpgo
+		rm go.src.tar.gz
 		# Build GO for host
 		pushd $tmpgo/src
 		./make.bash --no-clean
@@ -81,9 +82,3 @@ rm -rf bin
 GOARCH=arm GOARM=5 ./build.sh "" -tags noupgrade
 mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
 rm -rf bin
-
-# Cleanup if succeeded
-cd $ORIG
-if ls bin/syncthing-* >/dev/null ; then
-	rm -rf build/
-fi
