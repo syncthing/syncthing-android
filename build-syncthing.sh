@@ -52,7 +52,7 @@ fi
 
 # Setup GOPATH
 cd "ext/syncthing/"
-export GOPATH="$(readlink -e .)"
+export GOPATH="$(pwd)"
 
 # Install godep
 $GOROOT/bin/go get github.com/tools/godep
