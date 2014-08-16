@@ -125,8 +125,8 @@ task cleanNative(type: Delete) {
 	delete 'bin/'
 	delete 'build/'
 	delete 'libs/'
-	delete 'ext/syncthing'
-	delete 'ext/syncthinglibs/'
+	delete 'ext/syncthing/bin/'
+	delete 'ext/syncthing/pkg/'
 }
 clean.dependsOn cleanNative
 
