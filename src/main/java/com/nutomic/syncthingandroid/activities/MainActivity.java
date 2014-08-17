@@ -3,10 +3,8 @@ package com.nutomic.syncthingandroid.activities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -22,7 +20,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,34 +30,14 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment;
 import com.nutomic.syncthingandroid.fragments.NodesFragment;
 import com.nutomic.syncthingandroid.fragments.ReposFragment;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 /**
  * Shows {@link com.nutomic.syncthingandroid.fragments.ReposFragment} and {@link com.nutomic.syncthingandroid.fragments.NodesFragment} in different tabs, and
  * {@link com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment} in the navigation drawer.
  */
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends SyncthingActivity
 		implements SyncthingService.OnApiChangeListener {
-
-	private SyncthingService mSyncthingService;
-
-	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
-			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(MainActivity.this);
-			mSyncthingService.registerOnApiChangeListener(mRepositoriesFragment);
-			mSyncthingService.registerOnApiChangeListener(mNodesFragment);
-			mSyncthingService.registerOnApiChangeListener(mLocalNodeInfoFragment);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mSyncthingService = null;
-		}
-	};
 
 	private AlertDialog mLoadingDialog;
 
@@ -84,7 +61,7 @@ public class MainActivity extends ActionBarActivity
 				LayoutInflater inflater = getLayoutInflater();
 				View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
 				TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-				loadingText.setText((mSyncthingService.isFirstStart())
+				loadingText.setText((getService().isFirstStart())
 						? R.string.web_gui_creating_key
 						: R.string.api_loading);
 
@@ -207,26 +184,28 @@ public class MainActivity extends ActionBarActivity
 			mLocalNodeInfoFragment = new LocalNodeInfoFragment();
 		}
 
-		getApplicationContext().startService(
-				new Intent(this, SyncthingService.class));
-		bindService(new Intent(this, SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
-
 		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.drawer, mLocalNodeInfoFragment)
 				.commit();
 		mDrawerToggle = mLocalNodeInfoFragment.new Toggle(this, mDrawerLayout,
 				R.drawable.ic_drawer);
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		unbindService(mSyncthingServiceConnection);
 		if (mLoadingDialog != null) {
 			mLoadingDialog.dismiss();
 		}
+	}
+
+	@Override
+	public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+		super.onServiceConnected(componentName, iBinder);
+		getService().registerOnApiChangeListener(mRepositoriesFragment);
+		getService().registerOnApiChangeListener(mNodesFragment);
 	}
 
 	/**
@@ -307,13 +286,4 @@ public class MainActivity extends ActionBarActivity
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-
-	/**
-	 * Returns RestApi instance, or null if SyncthingService is not yet connected.
-	 */
-	public RestApi getApi() {
-		return (mSyncthingService != null)
-				? mSyncthingService.getApi()
-				: null;
-	}
 }

@@ -17,12 +17,14 @@ import android.text.InputType;
 import android.view.MenuItem;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 public class SettingsFragment extends PreferenceFragment
-		implements SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener {
+		implements SyncthingActivity.OnServiceConnectedListener,
+		SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener {
 
 	private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
 
@@ -41,22 +43,6 @@ public class SettingsFragment extends PreferenceFragment
 	private PreferenceScreen mGuiScreen;
 
 	private SyncthingService mSyncthingService;
-
-	/**
-	 * Binds to service and sets syncthing preferences from Rest API.
-	 */
-	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
-			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(SettingsFragment.this);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mSyncthingService = null;
-		}
-	};
 
 	@Override
 	public void onApiChange(SyncthingService.State currentState) {
@@ -110,8 +96,7 @@ public class SettingsFragment extends PreferenceFragment
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
+		((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
 
 		addPreferencesFromResource(R.xml.app_settings);
 		PreferenceScreen screen = getPreferenceScreen();
@@ -125,9 +110,9 @@ public class SettingsFragment extends PreferenceFragment
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		getActivity().unbindService(mSyncthingServiceConnection);
+	public void onServiceConnected() {
+		mSyncthingService = ((SyncthingActivity) getActivity()).getService();
+		mSyncthingService.registerOnApiChangeListener(this);
 	}
 
 	/**

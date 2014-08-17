@@ -6,11 +6,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +23,6 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -34,7 +31,7 @@ import java.util.Arrays;
 /**
  * Activity that allows selecting a directory in the local file system.
  */
-public class FolderPickerActivity extends ActionBarActivity
+public class FolderPickerActivity extends SyncthingActivity
 		implements AdapterView.OnItemClickListener, SyncthingService.OnApiChangeListener {
 
 	private static final String TAG = "FolderPickerActivity";
@@ -49,22 +46,7 @@ public class FolderPickerActivity extends ActionBarActivity
 
 	private File mLocation;
 
-	private SyncthingService mSyncthingService;
-
-	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
-			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(FolderPickerActivity.this);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mSyncthingService = null;
-		}
-	};
-
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -79,15 +61,12 @@ public class FolderPickerActivity extends ActionBarActivity
 
 		mLocation = new File(getIntent().getStringExtra(EXTRA_INITIAL_DIRECTORY));
 		refresh();
-
-		bindService(new Intent(this, SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		unbindService(mSyncthingServiceConnection);
+	public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+		super.onServiceConnected(componentName, iBinder);
+		getService().registerOnApiChangeListener(this);
 	}
 
     @Override

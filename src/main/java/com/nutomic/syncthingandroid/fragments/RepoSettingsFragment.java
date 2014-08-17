@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
@@ -35,7 +36,8 @@ import java.util.List;
  * Shows repo details and allows changing them.
  */
 public class RepoSettingsFragment extends PreferenceFragment
-		implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
+		implements SyncthingActivity.OnServiceConnectedListener,
+		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
 		SyncthingService.OnApiChangeListener {
 
 	private static final int DIRECTORY_REQUEST_CODE = 234;
@@ -50,19 +52,7 @@ public class RepoSettingsFragment extends PreferenceFragment
 
 	private SyncthingService mSyncthingService;
 
-	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
-			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(RepoSettingsFragment.this);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mSyncthingService = null;
-		}
-	};
-
+	// FIXME: is null
 	private RestApi.Repo mRepo;
 
 	private EditTextPreference mRepoId;
@@ -83,7 +73,9 @@ public class RepoSettingsFragment extends PreferenceFragment
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mIsCreate = ((SettingsActivity) getActivity()).getIsCreate();
+		SettingsActivity activity = (SettingsActivity) getActivity();
+		activity.registerOnServiceConnectedListener(this);
+		mIsCreate = activity.getIsCreate();
 		setHasOptionsMenu(true);
 
 		if (mIsCreate) {
@@ -105,9 +97,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 		mVersioning.setOnPreferenceChangeListener(this);
 		mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
 		mVersioningKeep.setOnPreferenceChangeListener(this);
-
-		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -168,6 +157,12 @@ public class RepoSettingsFragment extends PreferenceFragment
 	}
 
 	@Override
+	public void onServiceConnected() {
+		mSyncthingService = ((SyncthingActivity) getActivity()).getService();
+		mSyncthingService.registerOnApiChangeListener(this);
+	}
+
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.repo_settings, menu);
@@ -214,12 +209,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		getActivity().unbindService(mSyncthingServiceConnection);
 	}
 
 	@Override
