@@ -52,7 +52,6 @@ public class RepoSettingsFragment extends PreferenceFragment
 
 	private SyncthingService mSyncthingService;
 
-	// FIXME: is null
 	private RestApi.Repo mRepo;
 
 	private EditTextPreference mRepoId;
@@ -102,10 +101,12 @@ public class RepoSettingsFragment extends PreferenceFragment
 	@Override
 	public void onApiChange(SyncthingService.State currentState) {
 		if (currentState != SyncthingService.State.ACTIVE) {
-			SyncthingService.showDisabledDialog(getActivity());
 			getActivity().finish();
 			return;
 		}
+
+		if (getActivity() == null || getActivity().isFinishing())
+			return;
 
 		if (mIsCreate) {
 			getActivity().setTitle(R.string.create_repo);
