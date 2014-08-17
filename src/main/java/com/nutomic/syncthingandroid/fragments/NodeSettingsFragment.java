@@ -4,13 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
@@ -22,9 +18,9 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 import java.util.List;
 import java.util.Map;
@@ -33,9 +29,9 @@ import java.util.Map;
  * Shows node details and allows changing them.
  */
 public class NodeSettingsFragment extends PreferenceFragment implements
-		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiChangeListener,
-		RestApi.OnNodeIdNormalizedListener {
+		SyncthingActivity.OnServiceConnectedListener, Preference.OnPreferenceChangeListener,
+		Preference.OnPreferenceClickListener, RestApi.OnReceiveConnectionsListener,
+		SyncthingService.OnApiChangeListener, RestApi.OnNodeIdNormalizedListener {
 
 	public static final String EXTRA_NODE_ID = "node_id";
 
@@ -43,19 +39,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
 	private SyncthingService mSyncthingService;
 
-	private final ServiceConnection mSyncthingServiceConnection = new ServiceConnection() {
-
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			SyncthingServiceBinder binder = (SyncthingServiceBinder) service;
-			mSyncthingService = binder.getService();
-			mSyncthingService.registerOnApiChangeListener(NodeSettingsFragment.this);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mSyncthingService = null;
-		}
-	};
-
+	// FIXME: is null
 	private RestApi.Node mNode;
 
 	private Preference mNodeId;
@@ -73,6 +57,8 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
 
 		mIsCreate = ((SettingsActivity) getActivity()).getIsCreate();
 		setHasOptionsMenu(true);
@@ -96,9 +82,12 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 			mCurrentAddress = findPreference("current_address");
 			mCurrentAddress.setSummary("?");
 		}
+	}
 
-		getActivity().bindService(new Intent(getActivity(), SyncthingService.class),
-				mSyncthingServiceConnection, Context.BIND_AUTO_CREATE);
+	@Override
+	public void onServiceConnected() {
+		mSyncthingService = ((SyncthingActivity) getActivity()).getService();
+		mSyncthingService.registerOnApiChangeListener(this);
 	}
 
 	@Override
@@ -189,12 +178,6 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		getActivity().unbindService(mSyncthingServiceConnection);
 	}
 
 	@Override
