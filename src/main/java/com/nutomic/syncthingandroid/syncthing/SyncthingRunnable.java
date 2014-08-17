@@ -54,7 +54,7 @@ public class SyncthingRunnable implements Runnable {
             dos.writeBytes("exit\n");
             dos.flush();
 
-            log(process.getErrorStream());
+            log(process.getInputStream());
 
             ret = process.waitFor();
         }
