@@ -3,12 +3,8 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.BatteryManager;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
  * Receives network connection change intents and sends the wifi state to {@link SyncthingService}.

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 
 import org.json.JSONArray;
@@ -231,7 +232,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	 */
 	private void tryIsAvailable() {
 		int value = mAvailableCount.incrementAndGet();
-        assert(value <= TOTAL_STARTUP_CALLS);
+		if (BuildConfig.DEBUG && value > TOTAL_STARTUP_CALLS) {
+			throw new AssertionError("Too many startup calls");
+		}
 		if (value == TOTAL_STARTUP_CALLS) {
 			mSyncthingService.onApiChange();
 		}
@@ -843,10 +846,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				listener.onNodeIdNormalized(normalized, error);
 			}
 		}.execute(mUrl, GetTask.URI_NODEID, mApiKey, "id", id);
-	}
-
-	public boolean isApiAvailable() {
-		return mAvailableCount.get() == TOTAL_STARTUP_CALLS;
 	}
 
 	/**
