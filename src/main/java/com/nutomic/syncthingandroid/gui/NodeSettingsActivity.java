@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.gui;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -34,7 +33,8 @@ import java.util.Map;
  */
 public class NodeSettingsActivity extends PreferenceActivity implements
 		Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiChangeListener {
+		RestApi.OnReceiveConnectionsListener, SyncthingService.OnApiChangeListener,
+		RestApi.OnNodeIdNormalizedListener {
 
 	public static final String ACTION_CREATE = "create";
 
@@ -161,15 +161,16 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 		switch (item.getItemId()) {
 			case R.id.create:
 				if (mNode.NodeID.equals("")) {
-					Toast.makeText(this, R.string.node_id_required, Toast.LENGTH_LONG).show();
+					Toast.makeText(this, R.string.node_id_required, Toast.LENGTH_LONG)
+							.show();
 					return true;
 				}
 				if (mNode.Name.equals("")) {
-					Toast.makeText(this, R.string.node_name_required, Toast.LENGTH_LONG).show();
+					Toast.makeText(this, R.string.node_name_required, Toast.LENGTH_LONG)
+							.show();
 					return true;
 				}
-				mSyncthingService.getApi().editNode(mNode, true, this);
-				finish();
+				mSyncthingService.getApi().editNode(mNode, this);
 				return true;
 			case R.id.share_node_id:
 				RestApi.shareNodeId(this, mNode.NodeID);
@@ -255,7 +256,7 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 	 */
 	private void nodeUpdated() {
 		if (getIntent().getAction().equals(ACTION_EDIT)) {
-			mSyncthingService.getApi().editNode(mNode, false, this);
+			mSyncthingService.getApi().editNode(mNode, this);
 		}
 	}
 
@@ -284,6 +285,24 @@ public class NodeSettingsActivity extends PreferenceActivity implements
 			mNode.NodeID = data.getStringExtra("SCAN_RESULT");
 			((EditTextPreference) mNodeId).setText(mNode.NodeID);
 			mNodeId.setSummary(mNode.NodeID);
+		}
+	}
+
+	/**
+	 * Callback for {@link RestApi#editNode(RestApi.Node, RestApi.OnNodeIdNormalizedListener)}.
+	 * Displays an error message if present, or finishes the Activity on success in edit mode.
+	 *
+	 * @param normalizedId The normalized node ID, or null on error.
+	 * @param error An error message, or null on success.
+	 */
+	@Override
+	public void onNodeIdNormalized(String normalizedId, String error) {
+		if (error != null) {
+			Toast.makeText(NodeSettingsActivity.this, error,
+					Toast.LENGTH_LONG).show();
+		}
+		else if (getIntent().getAction().equals(ACTION_CREATE)) {
+			finish();
 		}
 	}
 
