@@ -5,7 +5,9 @@ ORIG=$(pwd)
 mkdir -p bin
 
 # Load submodules
-git submodule update --init --recursive
+if [ ! -f "ext/syncthing/src/github.com/syncthing/syncthing/.git" ]; then
+	git submodule update --init --recursive
+fi
 
 # Check for GOLANG installation
 if [ -z $GOROOT ]; then
