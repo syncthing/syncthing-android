@@ -26,8 +26,7 @@ import java.util.TimerTask;
  * Displays information about the local node.
  */
 public class LocalNodeInfoFragment extends Fragment
-		implements RestApi.OnReceiveSystemInfoListener, RestApi.OnReceiveConnectionsListener,
-		SyncthingService.OnApiChangeListener {
+		implements RestApi.OnReceiveSystemInfoListener, RestApi.OnReceiveConnectionsListener {
 
 	private TextView mNodeId;
 
@@ -99,6 +98,7 @@ public class LocalNodeInfoFragment extends Fragment
 	}
 
 	private void onDrawerOpened() {
+		// FIXME: never called
 		mTimer = new Timer();
 		mTimer.schedule(new TimerTask() {
 			@Override
@@ -109,14 +109,6 @@ public class LocalNodeInfoFragment extends Fragment
 		}, 0, SyncthingService.GUI_UPDATE_INTERVAL);
 		mActivity.getSupportActionBar().setTitle(R.string.system_info);
 		mActivity.supportInvalidateOptionsMenu();
-	}
-
-	@Override
-	public void onApiChange(SyncthingService.State currentState) {
-		if (currentState != SyncthingService.State.ACTIVE)
-			return;
-
-		updateGui();
 	}
 
 	/**

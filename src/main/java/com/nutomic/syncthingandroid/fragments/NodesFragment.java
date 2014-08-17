@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.NodesAdapter;
 
@@ -48,7 +49,7 @@ public class NodesFragment extends ListFragment implements SyncthingService.OnAp
 	}
 
 	private void initAdapter() {
-		MainActivity activity = (MainActivity) getActivity();
+		SyncthingActivity activity = (SyncthingActivity) getActivity();
 		if (activity == null || activity.getApi() == null)
 			return;
 
