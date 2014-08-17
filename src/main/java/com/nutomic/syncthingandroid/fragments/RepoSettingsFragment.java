@@ -2,14 +2,10 @@ package com.nutomic.syncthingandroid.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.IBinder;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -26,7 +22,6 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.ExtendedCheckBoxPreference;
 
 import java.util.ArrayList;

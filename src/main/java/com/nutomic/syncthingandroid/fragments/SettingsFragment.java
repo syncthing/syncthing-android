@@ -1,18 +1,12 @@
 package com.nutomic.syncthingandroid.fragments;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
 import android.support.v4.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.view.MenuItem;
 
@@ -20,7 +14,6 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 
 public class SettingsFragment extends PreferenceFragment
 		implements SyncthingActivity.OnServiceConnectedListener,
