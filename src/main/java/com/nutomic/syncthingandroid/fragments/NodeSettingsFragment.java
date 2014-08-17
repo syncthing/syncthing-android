@@ -39,7 +39,6 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
 	private SyncthingService mSyncthingService;
 
-	// FIXME: is null
 	private RestApi.Node mNode;
 
 	private Preference mNodeId;
@@ -93,10 +92,12 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 	@Override
 	public void onApiChange(SyncthingService.State currentState) {
 		if (currentState != SyncthingService.State.ACTIVE) {
-			SyncthingService.showDisabledDialog(getActivity());
 			getActivity().finish();
 			return;
 		}
+
+		if (getActivity() == null || getActivity().isFinishing())
+			return;
 
 		if (mIsCreate) {
 			getActivity().setTitle(R.string.add_node);

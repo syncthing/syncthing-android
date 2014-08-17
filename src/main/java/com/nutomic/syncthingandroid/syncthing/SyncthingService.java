@@ -131,6 +131,7 @@ public class SyncthingService extends Service {
 					ConfigXml config = new ConfigXml(SyncthingService.this);
 					mApi = new RestApi(SyncthingService.this,
 							config.getWebGuiUrl(), config.getApiKey());
+					mCurrentState = State.STARTING;
 					registerOnWebGuiAvailableListener(mApi);
 					new PollWebGuiAvailableTask().execute();
 				}
