@@ -729,7 +729,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	/**
 	 * Updates or creates the given node.
 	 */
-	public void editRepo(Repo repo, boolean create, Activity activity) {
+	public void editRepo(Repo repo, boolean create, Context context) {
 		try {
 			JSONArray repos = mConfig.getJSONArray("Repositories");
 			JSONObject r = null;
@@ -767,7 +767,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				params.put(key, repo.Versioning.getParams().get(key));
 			}
 			r.put("Versioning", versioning);
-			configUpdated(activity);
+			configUpdated(context);
 		}
 		catch (JSONException e) {
 			Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
