@@ -45,8 +45,8 @@
 	<TextView
 		android:id="@+id/invalid"
 		android:textColor="@color/text_red"
-		android:layout_below="@id/items"
+		android:layout_below="@id/size"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
+		android:layout_height="wrap_content" />
 
 </RelativeLayout>
