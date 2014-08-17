@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.activities;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.NodeSettingsFragment;
@@ -13,7 +12,7 @@ import com.nutomic.syncthingandroid.fragments.SettingsFragment;
 /**
  * General Activity used by all PreferenceFragments.
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends SyncthingActivity {
 
 	public static final String ACTION_APP_SETTINGS_FRAGMENT = "app_settings_fragment";
 
