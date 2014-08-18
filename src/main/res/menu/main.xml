@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<item
-			android:id="@+id/share_node_id"
-			android:icon="@android:drawable/ic_menu_share"
-			android:title="@string/share_node_id"
-			app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/share_node_id"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/share_node_id"
+        app:showAsAction="ifRoom" />
 
-	<item
-			android:id="@+id/add_repo"
-			android:title="@string/add_repo"
-			app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_repo"
+        android:title="@string/add_repo"
+        app:showAsAction="ifRoom" />
 
-	<item
-			android:id="@+id/add_node"
-			android:title="@string/add_node"
-			app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_node"
+        android:title="@string/add_node"
+        app:showAsAction="ifRoom" />
 
 
-	<item
-			android:id="@+id/web_gui"
-			android:title="@string/web_gui_title" />
+    <item
+        android:id="@+id/web_gui"
+        android:title="@string/web_gui_title" />
 
-	<item
-			android:id="@+id/settings"
-			android:title="@string/settings_title" />
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings_title" />
 
 </menu>

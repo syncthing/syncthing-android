@@ -19,71 +19,70 @@ import java.util.LinkedList;
  */
 public class SyncthingActivity extends ActionBarActivity implements ServiceConnection {
 
-	private SyncthingService mSyncthingService;
+    private SyncthingService mSyncthingService;
 
-	private LinkedList<OnServiceConnectedListener> mServiceConnectedListeners = new LinkedList<>();
+    private LinkedList<OnServiceConnectedListener> mServiceConnectedListeners = new LinkedList<>();
 
-	/**
-	 * To be used for Fragments.
-	 */
-	public interface OnServiceConnectedListener {
-		public void onServiceConnected();
-	}
+    /**
+     * To be used for Fragments.
+     */
+    public interface OnServiceConnectedListener {
+        public void onServiceConnected();
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		bindService(new Intent(this, SyncthingService.class),
-				this, Context.BIND_AUTO_CREATE);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        bindService(new Intent(this, SyncthingService.class),
+                this, Context.BIND_AUTO_CREATE);
+    }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		unbindService(this);
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(this);
+    }
 
-	@Override
-	public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-		SyncthingServiceBinder binder = (SyncthingServiceBinder) iBinder;
-		mSyncthingService = binder.getService();
-		for (OnServiceConnectedListener listener : mServiceConnectedListeners) {
-			listener.onServiceConnected();
-		}
-		mServiceConnectedListeners.clear();
-	}
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        SyncthingServiceBinder binder = (SyncthingServiceBinder) iBinder;
+        mSyncthingService = binder.getService();
+        for (OnServiceConnectedListener listener : mServiceConnectedListeners) {
+            listener.onServiceConnected();
+        }
+        mServiceConnectedListeners.clear();
+    }
 
-	@Override
-	public void onServiceDisconnected(ComponentName componentName) {
-		mSyncthingService = null;
-	}
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+        mSyncthingService = null;
+    }
 
-	/**
-	 * Used for Fragments to use the Activity's service connection.
-	 */
-	public void registerOnServiceConnectedListener(OnServiceConnectedListener listener) {
-		if (mSyncthingService != null) {
-			listener.onServiceConnected();
-		}
-		else {
-			mServiceConnectedListeners.addLast(listener);
-		}
-	}
+    /**
+     * Used for Fragments to use the Activity's service connection.
+     */
+    public void registerOnServiceConnectedListener(OnServiceConnectedListener listener) {
+        if (mSyncthingService != null) {
+            listener.onServiceConnected();
+        } else {
+            mServiceConnectedListeners.addLast(listener);
+        }
+    }
 
-	/**
-	 * Returns service object (or null if not bound).
-	 */
-	public SyncthingService getService() {
-		return mSyncthingService;
-	}
+    /**
+     * Returns service object (or null if not bound).
+     */
+    public SyncthingService getService() {
+        return mSyncthingService;
+    }
 
-	/**
-	 * Returns RestApi instance, or null if SyncthingService is not yet connected.
-	 */
-	public RestApi getApi() {
-		return (getService() != null)
-				? getService().getApi()
-				: null;
-	}
+    /**
+     * Returns RestApi instance, or null if SyncthingService is not yet connected.
+     */
+    public RestApi getApi() {
+        return (getService() != null)
+                ? getService().getApi()
+                : null;
+    }
 
 }

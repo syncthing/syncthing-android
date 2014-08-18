@@ -43,7 +43,7 @@ public class SyncthingRunnable implements Runnable {
         DataOutputStream dos = null;
         int ret = 1;
         Process process = null;
-        try	{
+        try {
             process = Runtime.getRuntime().exec("sh");
             dos = new DataOutputStream(process.getOutputStream());
             // Set home directory to data folder for syncthing to use.
@@ -57,22 +57,19 @@ public class SyncthingRunnable implements Runnable {
             log(process.getInputStream());
 
             ret = process.waitFor();
-        }
-        catch(IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-        }
-        finally {
+        } finally {
             try {
                 dos.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Log.w(TAG, "Failed to close shell stream", e);
             }
             process.destroy();
             final int retVal = ret;
             if (ret != 0) {
-				Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " + Integer.toString(retVal));
-				postCrashDialog(retVal);
+                Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " + Integer.toString(retVal));
+                postCrashDialog(retVal);
             }
         }
     }
@@ -95,7 +92,8 @@ public class SyncthingRunnable implements Runnable {
                                                         int i) {
                                         System.exit(0);
                                     }
-                                })
+                                }
+                        )
                         .create();
                 dialog.getWindow()
                         .setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
@@ -120,8 +118,7 @@ public class SyncthingRunnable implements Runnable {
                     while ((line = br.readLine()) != null) {
                         Log.i(TAG_NATIVE, line);
                     }
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     // NOTE: This is sometimes called on shutdown, as
                     // Process.destroy() closes the stream.
                     Log.w(TAG, "Failed to read syncthing command line output", e);
