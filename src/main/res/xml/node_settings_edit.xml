@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-		android:persistent="false" >
+    android:persistent="false">
 
-	<Preference
-			android:key="node_id"
-			android:title="@string/node_id"/>
+    <Preference
+        android:key="node_id"
+        android:title="@string/node_id" />
 
-	<EditTextPreference
-			android:key="name"
-			android:title="@string/name" />
+    <EditTextPreference
+        android:key="name"
+        android:title="@string/name" />
 
-	<EditTextPreference
-			android:key="addresses"
-			android:title="@string/addresses" />
+    <EditTextPreference
+        android:key="addresses"
+        android:title="@string/addresses" />
 
-	<Preference
-			android:key="version"
-			android:title="@string/syncthing_version_title"
-			style="?android:preferenceInformationStyle"	/>
+    <Preference
+        android:key="version"
+        android:title="@string/syncthing_version_title"
+        style="?android:preferenceInformationStyle" />
 
-	<Preference
-			android:key="current_address"
-			android:title="@string/current_address"
-			style="?android:preferenceInformationStyle"	/>
+    <Preference
+        android:key="current_address"
+        android:title="@string/current_address"
+        style="?android:preferenceInformationStyle" />
 
 </PreferenceScreen>

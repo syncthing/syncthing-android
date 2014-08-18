@@ -17,56 +17,56 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
  */
 public class WebGuiActivity extends SyncthingActivity implements SyncthingService.OnWebGuiAvailableListener {
 
-	private WebView mWebView;
+    private WebView mWebView;
 
-	private View mLoadingView;
+    private View mLoadingView;
 
-	/**
-	 * Hides the loading screen and shows the WebView once it is fully loaded.
-	 */
-	private final WebViewClient mWebViewClient = new WebViewClient() {
+    /**
+     * Hides the loading screen and shows the WebView once it is fully loaded.
+     */
+    private final WebViewClient mWebViewClient = new WebViewClient() {
 
-		@Override
-		public void onPageFinished(WebView view, String url) {
-			mWebView.setVisibility(View.VISIBLE);
-			mLoadingView.setVisibility(View.GONE);
-		}
-	};
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            mWebView.setVisibility(View.VISIBLE);
+            mLoadingView.setVisibility(View.GONE);
+        }
+    };
 
-	/**
-	 * Initialize WebView.
-	 *
-	 * Ignore lint javascript warning as js is loaded only from our known, local service.
-	 */
-	@Override
-	@SuppressLint("SetJavaScriptEnabled")
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    /**
+     * Initialize WebView.
+     * <p/>
+     * Ignore lint javascript warning as js is loaded only from our known, local service.
+     */
+    @Override
+    @SuppressLint("SetJavaScriptEnabled")
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.web_gui_activity);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.web_gui_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		mLoadingView = findViewById(R.id.loading);
-		ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
-		pb.setIndeterminate(true);
+        mLoadingView = findViewById(R.id.loading);
+        ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
+        pb.setIndeterminate(true);
 
-		mWebView = (WebView) findViewById(R.id.webview);
-		mWebView.getSettings().setJavaScriptEnabled(true);
-		mWebView.setWebViewClient(mWebViewClient);
-	}
+        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(mWebViewClient);
+    }
 
-	@Override
-	public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-		super.onServiceConnected(componentName, iBinder);
-		getService().registerOnWebGuiAvailableListener(WebGuiActivity.this);
-	}
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        super.onServiceConnected(componentName, iBinder);
+        getService().registerOnWebGuiAvailableListener(WebGuiActivity.this);
+    }
 
-	/**
-	 * Loads and shows WebView, hides loading view.
-	 */
-	@Override
-	public void onWebGuiAvailable() {
-		mWebView.loadUrl(getApi().getUrl());
-	}
-	
+    /**
+     * Loads and shows WebView, hides loading view.
+     */
+    @Override
+    public void onWebGuiAvailable() {
+        mWebView.loadUrl(getApi().getUrl());
+    }
+
 }

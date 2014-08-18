@@ -8,15 +8,15 @@ import android.preference.CheckBoxPreference;
  */
 public class ExtendedCheckBoxPreference extends CheckBoxPreference {
 
-	private final Object mObject;
+    private final Object mObject;
 
-	public ExtendedCheckBoxPreference(Context context, Object object) {
-		super(context);
-		mObject = object;
-	}
+    public ExtendedCheckBoxPreference(Context context, Object object) {
+        super(context);
+        mObject = object;
+    }
 
-	public Object getObject() {
-		return mObject;
-	}
+    public Object getObject() {
+        return mObject;
+    }
 
 }

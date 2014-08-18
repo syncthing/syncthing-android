@@ -1,234 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Syncthing</string>
+    <string name="app_name">Syncthing</string>
 
-	<!-- MainActivity -->
-
-
-	<!-- Title of the "add repo" menu action -->
-	<string name="add_repo">Add Repository</string>
-
-	<!-- Title of the "share node id" menu action -->
-	<string name="share_node_id">Share Node ID</string>
-
-	<!-- Shown in the chooser dialog when sharing a Node ID -->
-	<string name="send_node_id_to">Send Node ID to</string>
-
-	<!-- Text for RepositoriesFragment and NodesFragment loading view -->
-	<string name="api_loading">Waiting for API</string>
-
-	<!-- RepositoriesFragment -->
+    <!-- MainActivity -->
 
 
-	<string name="repositories_fragment_title">Repositories</string>
+    <!-- Title of the "add repo" menu action -->
+    <string name="add_repo">Add Repository</string>
 
-	<!-- Format string for repository progress. First parameter is status string, second is sync percentage -->
-	<string name="repo_progress_format">%1$s (%2$d%%)</string>
+    <!-- Title of the "share node id" menu action -->
+    <string name="share_node_id">Share Node ID</string>
 
-	<!-- Shown if no repos exist -->
-	<string name="repositories_list_empty">No repositories found</string>
+    <!-- Shown in the chooser dialog when sharing a Node ID -->
+    <string name="send_node_id_to">Send Node ID to</string>
 
-	<!-- Format string for repository file count -->
-	<string name="files">%1$d / %2$d Files</string>
+    <!-- Text for RepositoriesFragment and NodesFragment loading view -->
+    <string name="api_loading">Waiting for API</string>
 
-	<!-- NodesFragment -->
-
-
-	<string name="nodes_fragment_title">Nodes</string>
-
-	<!-- Shown if no nodes exist -->
-	<string name="nodes_list_empty">No nodes found</string>
-
-	<!-- Indicates that a repo is fully synced to the local node -->
-	<string name="node_up_to_date">Up to Date</string>
-
-	<!-- Indicates that the node is currently syncing. Parameter is sync percentage -->
-	<string name="node_syncing">Syncing (%1$d%%)</string>
-
-	<!-- Indicates that there is no connection to the node -->
-	<string name="node_disconnected">Disconnected</string>
-
-	<!-- Title for current download rate -->
-	<string name="download_title">Download</string>
-
-	<!-- Title for current upload rate -->
-	<string name="upload_title">Upload</string>
-
-	<!-- LocalNodeInfoFragment -->
+    <!-- RepositoriesFragment -->
 
 
-	<!-- ActionBar title shown when the drawer is open -->
-	<string name="system_info">System Info</string>
+    <string name="repositories_fragment_title">Repositories</string>
 
-	<!-- Same as download_title with a colon and space appended -->
-	<string name="download_title_colon">Download:\u0020</string>
+    <!-- Format string for repository progress. First parameter is status string, second is sync percentage -->
+    <string name="repo_progress_format">%1$s (%2$d%%)</string>
 
-	<!-- Same as upload_title with a colon and space appended -->
-	<string name="upload_title_colon">Upload:\u0020</string>
+    <!-- Shown if no repos exist -->
+    <string name="repositories_list_empty">No repositories found</string>
 
-	<!-- Title for current CPU usage -->
-	<string name="cpu_usage">CPU Usage</string>
+    <!-- Format string for repository file count -->
+    <string name="files">%1$d / %2$d Files</string>
 
-	<!-- Title for current RAM usage -->
-	<string name="ram_usage">RAM Usage</string>
-
-	<!-- Title for announce server status -->
-	<string name="announce_server">Announce Server</string>
-
-	<!-- RepoSettingsFragment -->
+    <!-- NodesFragment -->
 
 
-	<!-- Setting title -->
-	<string name="repo_id">Repository ID</string>
+    <string name="nodes_fragment_title">Nodes</string>
 
-	<!-- Setting title -->
-	<string name="directory">Directory</string>
+    <!-- Shown if no nodes exist -->
+    <string name="nodes_list_empty">No nodes found</string>
 
-	<!-- Setting title -->
-	<string name="repo_master">Repository Master</string>
+    <!-- Indicates that a repo is fully synced to the local node -->
+    <string name="node_up_to_date">Up to Date</string>
 
-	<!-- Setting title -->
-	<string name="nodes">Nodes</string>
+    <!-- Indicates that the node is currently syncing. Parameter is sync percentage -->
+    <string name="node_syncing">Syncing (%1$d%%)</string>
 
-	<!-- Setting title -->
-	<string name="file_versioning">File Versioning</string>
+    <!-- Indicates that there is no connection to the node -->
+    <string name="node_disconnected">Disconnected</string>
 
-	<!-- Setting title -->
-	<string name="keep_versions">Keep Versions</string>
+    <!-- Title for current download rate -->
+    <string name="download_title">Download</string>
 
-	<!-- Setting title -->
-	<string name="delete_repo">Delete Repository</string>
+    <!-- Title for current upload rate -->
+    <string name="upload_title">Upload</string>
 
-	<!-- Title for RepoSettingsFragment in create mode -->
-	<string name="create_repo">Create Repository</string>
-
-	<!-- Title for RepoSettingsFragment in edit mode -->
-	<string name="edit_repo">Edit Repository</string>
-
-	<!-- Menu item to confirm repo creation -->
-	<string name="create">Create</string>
-
-	<!-- Dialog shown when attempting to delete a repository -->
-	<string name="delete_repo_confirm">Do you really want to delete this repository?</string>
-
-	<!-- Toast shown when trying to create a repository with an empty ID -->
-	<string name="repo_id_required">The repository ID must not be empty</string>
-
-	<!-- Toast shown when trying to create a repository with an empty path -->
-	<string name="repo_path_required">The repository path must not be empty</string>
-
-	<!-- Toast shown when selecting 'nodes' if no nodes have been added -->
-	<string name="no_nodes">Please connect a node first.</string>
-
-	<!-- NodeSettingsFragment -->
+    <!-- LocalNodeInfoFragment -->
 
 
-	<!-- Setting title -->
-	<string name="node_id">Node ID</string>
+    <!-- ActionBar title shown when the drawer is open -->
+    <string name="system_info">System Info</string>
 
-	<!-- Setting title -->
-	<string name="name">Name</string>
+    <!-- Same as download_title with a colon and space appended -->
+    <string name="download_title_colon">Download:\u0020</string>
 
-	<!-- Setting title -->
-	<string name="addresses">Addresses</string>
+    <!-- Same as upload_title with a colon and space appended -->
+    <string name="upload_title_colon">Upload:\u0020</string>
 
-	<!-- Setting title -->
-	<string name="current_address">Current Address</string>
+    <!-- Title for current CPU usage -->
+    <string name="cpu_usage">CPU Usage</string>
 
-	<!-- Setting title -->
-	<string name="delete_node">Delete Node</string>
+    <!-- Title for current RAM usage -->
+    <string name="ram_usage">RAM Usage</string>
 
-	<!-- Title for NodeSettingsFragment in create mode -->
-	<string name="add_node">Add Node</string>
+    <!-- Title for announce server status -->
+    <string name="announce_server">Announce Server</string>
 
-	<!-- Menu item to confirm adding a node -->
-	<string name="add">Add</string>
+    <!-- RepoSettingsFragment -->
 
-	<!-- Title for NodeSettingsFragment in edit mode -->
-	<string name="edit_node">Edit Node</string>
 
-	<!-- Dialog shown when attempting to delete a node -->
-	<string name="delete_node_confirm">Do you really want to delete this node?</string>
+    <!-- Setting title -->
+    <string name="repo_id">Repository ID</string>
 
-	<!-- Toast shown when trying to create a node with an empty ID -->
-	<string name="node_id_required">The node ID must not be empty</string>
+    <!-- Setting title -->
+    <string name="directory">Directory</string>
 
-	<!-- Toast shown when trying to create a node with an empty name -->
-	<string name="node_name_required">The node name must not be empty</string>
+    <!-- Setting title -->
+    <string name="repo_master">Repository Master</string>
 
-	<!-- Content description for node ID qr code icon -->
-	<string name="scan_qr_code_description">Scan QR Code</string>
+    <!-- Setting title -->
+    <string name="nodes">Nodes</string>
 
-	<!-- Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException -->
+    <!-- Setting title -->
+    <string name="file_versioning">File Versioning</string>
+
+    <!-- Setting title -->
+    <string name="keep_versions">Keep Versions</string>
+
+    <!-- Setting title -->
+    <string name="delete_repo">Delete Repository</string>
+
+    <!-- Title for RepoSettingsFragment in create mode -->
+    <string name="create_repo">Create Repository</string>
+
+    <!-- Title for RepoSettingsFragment in edit mode -->
+    <string name="edit_repo">Edit Repository</string>
+
+    <!-- Menu item to confirm repo creation -->
+    <string name="create">Create</string>
+
+    <!-- Dialog shown when attempting to delete a repository -->
+    <string name="delete_repo_confirm">Do you really want to delete this repository?</string>
+
+    <!-- Toast shown when trying to create a repository with an empty ID -->
+    <string name="repo_id_required">The repository ID must not be empty</string>
+
+    <!-- Toast shown when trying to create a repository with an empty path -->
+    <string name="repo_path_required">The repository path must not be empty</string>
+
+    <!-- Toast shown when selecting 'nodes' if no nodes have been added -->
+    <string name="no_nodes">Please connect a node first.</string>
+
+    <!-- NodeSettingsFragment -->
+
+
+    <!-- Setting title -->
+    <string name="node_id">Node ID</string>
+
+    <!-- Setting title -->
+    <string name="name">Name</string>
+
+    <!-- Setting title -->
+    <string name="addresses">Addresses</string>
+
+    <!-- Setting title -->
+    <string name="current_address">Current Address</string>
+
+    <!-- Setting title -->
+    <string name="delete_node">Delete Node</string>
+
+    <!-- Title for NodeSettingsFragment in create mode -->
+    <string name="add_node">Add Node</string>
+
+    <!-- Menu item to confirm adding a node -->
+    <string name="add">Add</string>
+
+    <!-- Title for NodeSettingsFragment in edit mode -->
+    <string name="edit_node">Edit Node</string>
+
+    <!-- Dialog shown when attempting to delete a node -->
+    <string name="delete_node_confirm">Do you really want to delete this node?</string>
+
+    <!-- Toast shown when trying to create a node with an empty ID -->
+    <string name="node_id_required">The node ID must not be empty</string>
+
+    <!-- Toast shown when trying to create a node with an empty name -->
+    <string name="node_name_required">The node name must not be empty</string>
+
+    <!-- Content description for node ID qr code icon -->
+    <string name="scan_qr_code_description">Scan QR Code</string>
+
+    <!-- Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException -->
 	<string name="no_qr_scanner_installed">You have no QR scanner installed or your scanner is not supported. \
 Please install a scanner or enter the node ID manually.</string>
 
-	<!-- WebGuiActivity -->
+    <!-- WebGuiActivity -->
 
 
-	<!-- Title of the web gui activity -->
-	<string name="web_gui_title">Web GUI</string>
+    <!-- Title of the web gui activity -->
+    <string name="web_gui_title">Web GUI</string>
 
-	<!-- Text for WebGuiActivity loading view -->
-	<string name="web_gui_loading">Waiting for GUI</string>
+    <!-- Text for WebGuiActivity loading view -->
+    <string name="web_gui_loading">Waiting for GUI</string>
 
-	<!-- Shown instead of web_gui_loading if the key does not exist and has to be created -->
-	<string name="web_gui_creating_key">Generating keys. This may take a while.</string>
+    <!-- Shown instead of web_gui_loading if the key does not exist and has to be created -->
+    <string name="web_gui_creating_key">Generating keys. This may take a while.</string>
 
-	<!-- Title for dialog displayed on first start -->
-	<string name="welcome_title">First Start</string>
+    <!-- Title for dialog displayed on first start -->
+    <string name="welcome_title">First Start</string>
 
-	<!-- Text for dialog displayed on first start -->
+    <!-- Text for dialog displayed on first start -->
 	<string name="welcome_text">Welcome to Syncthing for Android!\n\n\
 This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
 There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
 Please report any problems you encounter.</string>
 
-	<!-- SettingsFragment -->
+    <!-- SettingsFragment -->
 
 
-	<!-- Activity title -->
-	<string name="settings_title">Settings</string>
+    <!-- Activity title -->
+    <string name="settings_title">Settings</string>
 
-	<string name="stop_sync_while_not_charging">Stop sync when not charging</string>
+    <string name="stop_sync_while_not_charging">Stop sync when not charging</string>
 
-	<string name="stop_sync_on_mobile_data">Stop sync on mobile data</string>
+    <string name="stop_sync_on_mobile_data">Stop sync on mobile data</string>
 
-	<!-- Settings item that opens issue tracker -->
-	<string name="report_issue_title">Report Issue</string>
+    <!-- Settings item that opens issue tracker -->
+    <string name="report_issue_title">Report Issue</string>
 
-	<!-- Summary for the issue tracker settings item -->
-	<string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
+    <!-- Summary for the issue tracker settings item -->
+    <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
 
-	<!-- URL of the issue tracker -->
-	<string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>
+    <!-- URL of the issue tracker -->
+    <string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>
 
-	<!-- Title of the preference showing upstream version name -->
-	<string name="syncthing_version_title">Syncthing Version</string>
+    <!-- Title of the preference showing upstream version name -->
+    <string name="syncthing_version_title">Syncthing Version</string>
 
-	<!-- FolderPickerAcitivity -->
-
-
-	<!-- Activity title -->
-	<string name="folder_picker_title">Folder Picker</string>
-
-	<!-- ListView empty text -->
-	<string name="directory_empty">Directory is Empty</string>
-
-	<!-- Menu item to create folder -->
-	<string name="create_folder">Create new Folder</string>
-
-	<!-- Menu item to select the current folder -->
-	<string name="select_folder">Select Folder</string>
-
-	<!-- SyncthingService -->
-
-	<!-- Title of the dialog shown when the syncthing binary returns an error -->
-	<string name="binary_crashed_title">Syncthing Binary Crashed</string>
+    <!-- FolderPickerAcitivity -->
 
 
-	<!-- Message of the dialog shown when the syncthing binary returns an error -->
+    <!-- Activity title -->
+    <string name="folder_picker_title">Folder Picker</string>
+
+    <!-- ListView empty text -->
+    <string name="directory_empty">Directory is Empty</string>
+
+    <!-- Menu item to create folder -->
+    <string name="create_folder">Create new Folder</string>
+
+    <!-- Menu item to select the current folder -->
+    <string name="select_folder">Select Folder</string>
+
+    <!-- SyncthingService -->
+
+    <!-- Title of the dialog shown when the syncthing binary returns an error -->
+    <string name="binary_crashed_title">Syncthing Binary Crashed</string>
+
+
+    <!-- Message of the dialog shown when the syncthing binary returns an error -->
 	<string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n
 If this error persists, try reinstalling the app and restarting your device.\n\n</string>
 
@@ -238,43 +238,43 @@ If this error persists, try reinstalling the app and restarting your device.\n\n
     <!-- Message of the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_message">Do you want to change your preferences?</string>
 
-	<!-- Button text on the "syncthing disabled" dialog -->
+    <!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>
 
-	<!-- Button text on the "syncthing disabled" dialog -->
-	<string name="exit">Exit</string>
+    <!-- Button text on the "syncthing disabled" dialog -->
+    <string name="exit">Exit</string>
 
-	<!-- RestApi -->
+    <!-- RestApi -->
 
 
-	<!-- Title of the notification shown when a restart is needed -->
-	<string name="restart_title">Restart Needed</string>
+    <!-- Title of the notification shown when a restart is needed -->
+    <string name="restart_title">Restart Needed</string>
 
-	<!-- Text of the notification shown when a restart is needed -->
-	<string name="restart_notification_text">Click here to restart syncthing now</string>
+    <!-- Text of the notification shown when a restart is needed -->
+    <string name="restart_notification_text">Click here to restart syncthing now</string>
 
-	<!-- Text for the dismiss button of the restart Activity -->
-	<string name="restart_later">Restart Later</string>
+    <!-- Text for the dismiss button of the restart Activity -->
+    <string name="restart_later">Restart Later</string>
 
-	<!-- Shown when a node ID is copied to the clipboard -->
-	<string name="node_id_copied_to_clipboard">Node ID copied to clipboard</string>
+    <!-- Shown when a node ID is copied to the clipboard -->
+    <string name="node_id_copied_to_clipboard">Node ID copied to clipboard</string>
 
-	<!-- Strings representing units for file sizes, from smallest to largest -->
-	<string-array name="file_size_units">
-		<item>B</item>
-		<item>KB</item>
-		<item>MB</item>
-		<item>GB</item>
-		<item>TB</item>
-	</string-array>
+    <!-- Strings representing units for file sizes, from smallest to largest -->
+    <string-array name="file_size_units">
+        <item>B</item>
+        <item>KB</item>
+        <item>MB</item>
+        <item>GB</item>
+        <item>TB</item>
+    </string-array>
 
-	<!-- Strings representing units for transfer rates, from smallest to largest -->
-	<string-array name="transfer_rate_units">
-		<item>b/s</item>
-		<item>Kb/s</item>
-		<item>Mb/s</item>
-		<item>Gb/s</item>
-		<item>Tb/s</item>
-	</string-array>
+    <!-- Strings representing units for transfer rates, from smallest to largest -->
+    <string-array name="transfer_rate_units">
+        <item>b/s</item>
+        <item>Kb/s</item>
+        <item>Mb/s</item>
+        <item>Gb/s</item>
+        <item>Tb/s</item>
+    </string-array>
 
 </resources>

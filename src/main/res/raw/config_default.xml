@@ -1,18 +1,18 @@
 <configuration version="2">
-	<gui enabled="true">
-		<address>127.0.0.1:8080</address>
-	</gui>
-	<options>
-		<listenAddress>0.0.0.0:22000</listenAddress>
-		<globalAnnounceServer>194.126.249.5:22026</globalAnnounceServer>
-		<globalAnnounceEnabled>true</globalAnnounceEnabled>
-		<localAnnounceEnabled>true</localAnnounceEnabled>
-		<parallelRequests>16</parallelRequests>
-		<maxSendKbps>0</maxSendKbps>
-		<rescanIntervalS>60</rescanIntervalS>
-		<reconnectionIntervalS>60</reconnectionIntervalS>
-		<maxChangeKbps>1000</maxChangeKbps>
-		<startBrowser>false</startBrowser>
-		<upnpEnabled>true</upnpEnabled>
-	</options>
+    <gui enabled="true">
+        <address>127.0.0.1:8080</address>
+    </gui>
+    <options>
+        <listenAddress>0.0.0.0:22000</listenAddress>
+        <globalAnnounceServer>194.126.249.5:22026</globalAnnounceServer>
+        <globalAnnounceEnabled>true</globalAnnounceEnabled>
+        <localAnnounceEnabled>true</localAnnounceEnabled>
+        <parallelRequests>16</parallelRequests>
+        <maxSendKbps>0</maxSendKbps>
+        <rescanIntervalS>60</rescanIntervalS>
+        <reconnectionIntervalS>60</reconnectionIntervalS>
+        <maxChangeKbps>1000</maxChangeKbps>
+        <startBrowser>false</startBrowser>
+        <upnpEnabled>true</upnpEnabled>
+    </options>
 </configuration>
