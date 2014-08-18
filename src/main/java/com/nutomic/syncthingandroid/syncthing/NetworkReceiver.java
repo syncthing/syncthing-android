@@ -11,17 +11,17 @@ import android.net.NetworkInfo;
  */
 public class NetworkReceiver extends BroadcastReceiver {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		ConnectivityManager cm =
-				(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-		boolean isWifiConnected = (wifiInfo != null && wifiInfo.isConnected()) ||
-				activeNetworkInfo == null;
-		Intent i = new Intent(context, SyncthingService.class);
-		i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, isWifiConnected);
-		context.startService(i);
-	}
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+        boolean isWifiConnected = (wifiInfo != null && wifiInfo.isConnected()) ||
+                activeNetworkInfo == null;
+        Intent i = new Intent(context, SyncthingService.class);
+        i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, isWifiConnected);
+        context.startService(i);
+    }
 
 }

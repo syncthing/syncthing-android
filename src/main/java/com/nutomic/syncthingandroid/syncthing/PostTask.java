@@ -16,37 +16,36 @@ import java.io.IOException;
  */
 public class PostTask extends AsyncTask<String, Void, Void> {
 
-	private static final String TAG = "PostTask";
+    private static final String TAG = "PostTask";
 
-	public static final String URI_CONFIG = "/rest/config";
+    public static final String URI_CONFIG = "/rest/config";
 
-	public static final String URI_RESTART = "/rest/restart";
+    public static final String URI_RESTART = "/rest/restart";
 
-	public static final String URI_SHUTDOWN = "/rest/shutdown";
+    public static final String URI_SHUTDOWN = "/rest/shutdown";
 
-	/**
-	 * params[0] Syncthing hostname
-	 * params[1] URI to call
-	 * params[2] Syncthing API key
-	 * params[3] The request content (optional)
-	 */
-	@Override
-	protected Void doInBackground(String... params) {
-		String fullUri = params[0] + params[1];
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost post = new HttpPost(fullUri);
-		post.addHeader(new BasicHeader("X-API-Key", params[2]));
+    /**
+     * params[0] Syncthing hostname
+     * params[1] URI to call
+     * params[2] Syncthing API key
+     * params[3] The request content (optional)
+     */
+    @Override
+    protected Void doInBackground(String... params) {
+        String fullUri = params[0] + params[1];
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost post = new HttpPost(fullUri);
+        post.addHeader(new BasicHeader("X-API-Key", params[2]));
 
-		try {
-			if (params.length > 3) {
-				post.setEntity(new StringEntity(params[3]));
-			}
-			httpclient.execute(post);
-		}
-		catch (IOException e) {
-			Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
-		}
-		return null;
-	}
+        try {
+            if (params.length > 3) {
+                post.setEntity(new StringEntity(params[3]));
+            }
+            httpclient.execute(post);
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+        }
+        return null;
+    }
 
 }

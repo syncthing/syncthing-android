@@ -1,12 +1,12 @@
 buildscript {
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		classpath 'com.android.tools.build:gradle:0.12.+'
-		classpath 'com.alexvasilkov:android_sign:0.2+'
-	}
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.alexvasilkov:android_sign:0.2+'
+    }
 }
 
 import java.util.regex.Pattern
@@ -15,106 +15,106 @@ apply plugin: 'com.android.application'
 apply plugin: 'android_sign'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	compile 'com.android.support:appcompat-v7:19.1.+'
-	compile project(':android-support-v4-preferencefragment')
+    compile 'com.android.support:appcompat-v7:19.1.+'
+    compile project(':android-support-v4-preferencefragment')
 }
 
 android {
-	compileSdkVersion 19
-	buildToolsVersion "19.1.0"
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
 
-	defaultConfig {
-		versionCode getVersionCodeFromManifest()
-	}
+    defaultConfig {
+        versionCode getVersionCodeFromManifest()
+    }
 
-	sourceSets {
-		main {
-			jniLibs.srcDir file("libs/")
-		}
-	}
+    sourceSets {
+        main {
+            jniLibs.srcDir file("libs/")
+        }
+    }
 
-	signingConfigs {
-		release {
-			// Android Studio does not pass environment variables.
-			// This means you have to use the command line for release builds.
-			def ks = System.getenv("KEYSTORE")
-			def ka = System.getenv("KEY_ALIAS")
-			if (ks != null && ka != null) {
-				storeFile file(ks)
-				keyAlias ka
-			}
-		}
-	}
+    signingConfigs {
+        release {
+            // Android Studio does not pass environment variables.
+            // This means you have to use the command line for release builds.
+            def ks = System.getenv("KEYSTORE")
+            def ka = System.getenv("KEY_ALIAS")
+            if (ks != null && ka != null) {
+                storeFile file(ks)
+                keyAlias ka
+            }
+        }
+    }
 
-	buildTypes {
-		debug {
-			applicationIdSuffix ".debug"
-			debuggable true
-		}
-		release {
-			signingConfig signingConfigs.release
-		}
-	}
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 
-	productFlavors {
-		x86 {
-			versionCode Integer.parseInt("4" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "x86"
-			}
-		}
-		armeabi_v7a {
-			versionCode Integer.parseInt("3" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "armeabi-v7a"
-			}
-		}
-		armeabi {
-			versionCode Integer.parseInt("2" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "armeabi"
-			}
-		}
-		mips {
-			versionCode Integer.parseInt("1" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "mips"
-			}
-		}
-	}
-	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_7
-		targetCompatibility JavaVersion.VERSION_1_7
-	}
+    productFlavors {
+        x86 {
+            versionCode Integer.parseInt("4" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        armeabi_v7a {
+            versionCode Integer.parseInt("3" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "armeabi-v7a"
+            }
+        }
+        armeabi {
+            versionCode Integer.parseInt("2" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "armeabi"
+            }
+        }
+        mips {
+            versionCode Integer.parseInt("1" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "mips"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 def getVersionCodeFromManifest() {
-	def manifestFile = file(android.sourceSets.main.manifest.srcFile)
-	def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
-	def matcher = pattern.matcher(manifestFile.getText())
-	matcher.find()
-	return Integer.parseInt(matcher.group(1))
+    def manifestFile = file(android.sourceSets.main.manifest.srcFile)
+    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+    def matcher = pattern.matcher(manifestFile.getText())
+    matcher.find()
+    return Integer.parseInt(matcher.group(1))
 }
 
 task buildNative(type: Exec) {
-	outputs.upToDateWhen { false }
-	executable = './build-native.sh'
+    outputs.upToDateWhen { false }
+    executable = './build-native.sh'
 }
 
 task copyNative(type: Copy) {
-	def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/bin/";
-	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi-v7a', st_dir + 'syncthing-armeabi';
-	into 'libs/'
-	rename('syncthing-x86', 'x86/libsyncthing.so')
+    def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/bin/";
+    from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi-v7a', st_dir + 'syncthing-armeabi';
+    into 'libs/'
+    rename('syncthing-x86', 'x86/libsyncthing.so')
     rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
-	rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
+    rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
 }
 buildNative.finalizedBy copyNative
 
 task cleanNative(type: Delete) {
-	delete 'libs/'
+    delete 'libs/'
 }

@@ -21,80 +21,79 @@ import java.util.TimerTask;
  * Displays a list of all existing nodes.
  */
 public class NodesFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
-		ListView.OnItemClickListener {
+        ListView.OnItemClickListener {
 
-	private NodesAdapter mAdapter;
+    private NodesAdapter mAdapter;
 
-	private Timer mTimer;
+    private Timer mTimer;
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		setListShown(true);
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        setListShown(true);
+    }
 
-	@Override
-	public void onApiChange(SyncthingService.State currentState) {
-		if (currentState != SyncthingService.State.ACTIVE)
-			return;
+    @Override
+    public void onApiChange(SyncthingService.State currentState) {
+        if (currentState != SyncthingService.State.ACTIVE)
+            return;
 
-		initAdapter();
-	}
+        initAdapter();
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-		initAdapter();
-	}
+        initAdapter();
+    }
 
-	private void initAdapter() {
-		SyncthingActivity activity = (SyncthingActivity) getActivity();
-		if (activity == null || activity.getApi() == null)
-			return;
+    private void initAdapter() {
+        SyncthingActivity activity = (SyncthingActivity) getActivity();
+        if (activity == null || activity.getApi() == null)
+            return;
 
-		mAdapter = new NodesAdapter(activity);
-		mAdapter.add(activity.getApi().getNodes());
-		setListAdapter(mAdapter);
-		setEmptyText(getString(R.string.nodes_list_empty));
-		getListView().setOnItemClickListener(this);
-	}
+        mAdapter = new NodesAdapter(activity);
+        mAdapter.add(activity.getApi().getNodes());
+        setListAdapter(mAdapter);
+        setEmptyText(getString(R.string.nodes_list_empty));
+        getListView().setOnItemClickListener(this);
+    }
 
-	private void updateList() {
-		if (mAdapter == null || getView() == null)
-			return;
+    private void updateList() {
+        if (mAdapter == null || getView() == null)
+            return;
 
-		MainActivity activity = (MainActivity) getActivity();
-		mAdapter.updateConnections(activity.getApi(), getListView());
-	}
+        MainActivity activity = (MainActivity) getActivity();
+        mAdapter.updateConnections(activity.getApi(), getListView());
+    }
 
-	@Override
-	public void setUserVisibleHint(boolean isVisibleToUser) {
-		super.setUserVisibleHint(isVisibleToUser);
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
 
-		if (isVisibleToUser) {
-			mTimer = new Timer();
-			mTimer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					updateList();
-				}
+        if (isVisibleToUser) {
+            mTimer = new Timer();
+            mTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    updateList();
+                }
 
-			}, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-		}
-		else if (mTimer != null) {
-			mTimer.cancel();
-			mTimer = null;
-		}
-	}
+            }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+        } else if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
 
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-		Intent intent = new Intent(getActivity(), SettingsActivity.class);
-		intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
-		intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
-		intent.putExtra(NodeSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).NodeID);
-		startActivity(intent);
-	}
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
+        intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
+        intent.putExtra(NodeSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).NodeID);
+        startActivity(intent);
+    }
 
 }
