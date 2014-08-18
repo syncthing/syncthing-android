@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<WebView
-			android:id="@+id/webview"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:visibility="gone" />
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-	<RelativeLayout
-			android:id="@+id/loading"
-			android:layout_centerInParent="true"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" >
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-		<ProgressBar
-				android:id="@+id/progress"
-				android:layout_centerInParent="true"
-				style="?android:attr/progressBarStyleLarge"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="10dip" />
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip" />
 
-		<TextView
-				android:id="@+id/loading_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/progress"
-				android:text="@string/web_gui_loading" />
+        <TextView
+            android:id="@+id/loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress"
+            android:text="@string/web_gui_loading" />
 
-	</RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
