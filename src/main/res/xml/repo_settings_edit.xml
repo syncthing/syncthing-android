@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-		android:persistent="false" >
+    android:persistent="false">
 
-	<EditTextPreference
-			android:key="repo_id"
-			android:title="@string/repo_id"
-			android:enabled="false"
-			style="?android:preferenceInformationStyle"  />
+    <EditTextPreference
+        android:key="repo_id"
+        android:title="@string/repo_id"
+        android:enabled="false"
+        style="?android:preferenceInformationStyle" />
 
-	<Preference
-			android:key="directory"
-			android:title="@string/directory"
-            android:enabled="false"
-            style="?android:preferenceInformationStyle" />
+    <Preference
+        android:key="directory"
+        android:title="@string/directory"
+        android:enabled="false"
+        style="?android:preferenceInformationStyle" />
 
-	<CheckBoxPreference
-			android:key="repo_master"
-			android:title="@string/repo_master" />
+    <CheckBoxPreference
+        android:key="repo_master"
+        android:title="@string/repo_master" />
 
-	<PreferenceScreen
-			android:key="nodes"
-			android:title="@string/nodes" />
+    <PreferenceScreen
+        android:key="nodes"
+        android:title="@string/nodes" />
 
-	<CheckBoxPreference
-			android:key="versioning"
-			android:title="File Versioning" />
+    <CheckBoxPreference
+        android:key="versioning"
+        android:title="File Versioning" />
 
-	<EditTextPreference
-			android:key="versioning_keep"
-			android:title="@string/keep_versions"
-			android:inputType="numberDecimal" />
+    <EditTextPreference
+        android:key="versioning_keep"
+        android:title="@string/keep_versions"
+        android:inputType="numberDecimal" />
 
 </PreferenceScreen>

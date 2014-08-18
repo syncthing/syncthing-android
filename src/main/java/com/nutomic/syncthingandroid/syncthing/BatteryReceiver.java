@@ -9,12 +9,12 @@ import android.content.Intent;
  */
 public class BatteryReceiver extends BroadcastReceiver {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		boolean isCharging = Intent.ACTION_POWER_CONNECTED.equals(intent.getAction());
-		Intent i = new Intent(context, SyncthingService.class);
-		i.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, isCharging);
-		context.startService(i);
-	}
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        boolean isCharging = Intent.ACTION_POWER_CONNECTED.equals(intent.getAction());
+        Intent i = new Intent(context, SyncthingService.class);
+        i.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, isCharging);
+        context.startService(i);
+    }
 
 }
