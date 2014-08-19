@@ -13,7 +13,7 @@ To get syncthing app for android running on you device/emulator the native synct
 
 Then, run `gradle assembleDebug`.
 
-## Develop Notes
+## Development Notes
 
 The syncthing backend used for this android application provides a webinterface by default. It can be acces via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from you development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to do so or execute the following steps (assuming you have only one emulator/avd started)
 - `telnet localhost 5554`
