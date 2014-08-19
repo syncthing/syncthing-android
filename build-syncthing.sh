@@ -71,16 +71,16 @@ export GOOS=linux
 export ENVIRONMENT=android
 
 # X86
-GOARCH=386 ./build.sh "" -tags noupgrade
-mv bin/linux_386/syncthing $ORIG/bin/syncthing-x86
+$GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
+mv syncthing $ORIG/bin/syncthing-x86
 rm -rf bin
 
 # ARM-7
-GOARCH=arm GOARM=7 ./build.sh "" -tags noupgrade
-mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi-v7a
+$GOROOT/bin/go run build.go -goos linux -goarch armv7 -no-upgrade build
+mv syncthing $ORIG/bin/syncthing-armeabi-v7a
 rm -rf bin
 
 # ARM-5
-GOARCH=arm GOARM=5 ./build.sh "" -tags noupgrade
-mv bin/linux_arm/syncthing $ORIG/bin/syncthing-armeabi
+$GOROOT/bin/go run build.go -goos linux -goarch armv5 -no-upgrade build
+mv syncthing $ORIG/bin/syncthing-armeabi
 rm -rf bin
