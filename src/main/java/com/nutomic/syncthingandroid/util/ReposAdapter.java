@@ -56,10 +56,10 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
 			size.setText(RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
 					RestApi.readableFileSize(getContext(), model.globalBytes));
 			invalid.setText(model.invalid);
-			invalid.setVisibility((model.invalid.equals("")) ? View.INVISIBLE : View.VISIBLE);
+			invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
 		}
 		else {
-			invalid.setVisibility(View.INVISIBLE);
+			invalid.setVisibility(View.GONE);
 		}
 
 		return convertView;

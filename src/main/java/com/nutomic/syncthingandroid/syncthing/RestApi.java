@@ -647,33 +647,56 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 	}
 
 	/**
-	 * Updates or creates the given node.
+	 * Updates or creates the given node, depending on whether it already exists.
+	 *
+	 * @param node Settings of the node to edit. To create a node, pass a non-existant node ID.
+	 * @param listener {@link OnNodeIdNormalizedListener} for the normalized node ID.
 	 */
-	public void editNode(Node node, boolean create, Activity activity) {
-		try {
-			JSONArray nodes = mConfig.getJSONArray("Nodes");
-			JSONObject n = null;
-			if (create) {
-				n = new JSONObject();
-				nodes.put(n);
-			}
-			else {
-				for (int i = 0; i < nodes.length(); i++) {
-					JSONObject json = nodes.getJSONObject(i);
-					if (node.NodeID.equals(json.getString("NodeID"))) {
-						n = nodes.getJSONObject(i);
-						break;
+	public void editNode(final Node node,
+			final OnNodeIdNormalizedListener listener) {
+		mSyncthingService.getApi().normalizeNodeId(node.NodeID,
+				new RestApi.OnNodeIdNormalizedListener() {
+					@Override
+					public void onNodeIdNormalized(String normalizedId, String error) {
+						listener.onNodeIdNormalized(normalizedId, error);
+						if (normalizedId == null)
+							return;
+
+						node.NodeID = normalizedId;
+						// If the node already exists, just update it.
+						boolean create = true;
+						for (RestApi.Node n : getNodes()) {
+							if (n.NodeID.equals(node.NodeID)) {
+								create = false;
+							}
+						}
+
+						try {
+							JSONArray nodes = mConfig.getJSONArray("Nodes");
+							JSONObject n = null;
+							if (create) {
+								n = new JSONObject();
+								nodes.put(n);
+							}
+							else {
+								for (int i = 0; i < nodes.length(); i++) {
+									JSONObject json = nodes.getJSONObject(i);
+									if (node.NodeID.equals(json.getString("NodeID"))) {
+										n = nodes.getJSONObject(i);
+										break;
+									}
+								}
+							}
+							n.put("NodeID", node.NodeID);
+							n.put("Name", node.Name);
+							n.put("Addresses", listToJson(node.Addresses.split(" ")));
+							configUpdated(mSyncthingService);
+						}
+						catch (JSONException e) {
+							Log.w(TAG, "Failed to read nodes", e);
+						}
 					}
-				}
-			}
-			n.put("NodeID", node.NodeID);
-			n.put("Name", node.Name);
-			n.put("Addresses", listToJson(node.Addresses.split(" ")));
-			configUpdated(activity);
-		}
-		catch (JSONException e) {
-			Log.w(TAG, "Failed to read nodes", e);
-		}
+				});
 	}
 
 	/**
@@ -779,6 +802,42 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 			}
 		}
 		return newArray;
+	}
+
+	/**
+	 * Result listener for {@link #normalizeNodeId(String, OnNodeIdNormalizedListener)}.
+	 */
+	public interface OnNodeIdNormalizedListener {
+		/**
+		 * On any call, exactly one parameter will be null.
+		 *
+		 * @param normalizedId The normalized node ID, or null on error.
+		 * @param error An error message, or null on success.
+		 */
+		public void onNodeIdNormalized(String normalizedId, String error);
+	}
+
+	/**
+	 * Normalizes a given node ID.
+	 */
+	public void normalizeNodeId(String id, final OnNodeIdNormalizedListener listener) {
+		new GetTask() {
+			@Override
+			protected void onPostExecute(String s) {
+				super.onPostExecute(s);
+				String normalized = null;
+				String error = null;
+				try {
+					JSONObject json = new JSONObject(s);
+					normalized = json.optString("id", null);
+					error = json.optString("error", null);
+				}
+				catch (JSONException e) {
+					Log.d(TAG, "Failed to parse normalized node ID JSON", e);
+				}
+				listener.onNodeIdNormalized(normalized, error);
+			}
+		}.execute(mUrl, GetTask.URI_NODEID, mApiKey, "id", id);
 	}
 
 	public boolean isApiAvailable() {
