@@ -15,7 +15,7 @@ if [ -z $GOROOT ]; then
 	tmpgo='build/go'
 	if [ ! -f "$tmpgo/bin/go" ]; then
 		# Download GOLANG v1.3
-		wget -O go.src.tar.gz http://golang.org/dl/go1.3.src.tar.gz
+		wget -O go.src.tar.gz https://golang.org/dl/go1.3.src.tar.gz
 		sha1=$(sha1sum go.src.tar.gz)
 		if [ "$sha1" != "9f9dfcbcb4fa126b2b66c0830dc733215f2f056e  go.src.tar.gz" ]; then
 			echo "go.src.tar.gz SHA1 checksum does not match!"
