@@ -22,6 +22,10 @@ dependencies {
 	compile 'com.android.support:appcompat-v7:19.1.+'
 }
 
+preBuild {
+	dependsOn 'buildNative'
+}
+
 android {
 	compileSdkVersion 19
 	buildToolsVersion "19.1.0"
@@ -84,6 +88,9 @@ android {
 				abiFilter "mips"
 			}
 		}
+		fat {
+			versionCode Integer.parseInt("0" + defaultConfig.versionCode)
+		}
 	}
 }
 
@@ -97,19 +104,32 @@ def getVersionCodeFromManifest() {
 
 task buildNative(type: Exec) {
 	outputs.upToDateWhen { false }
-	executable = './build-native.sh'
+	executable = './build-syncthing.sh'
 }
 
 task copyNative(type: Copy) {
-	def st_dir = System.getenv("GOPATH") + "/src/github.com/syncthing/syncthing/bin/";
-	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi-v7a', st_dir + 'syncthing-armeabi';
-	into 'libs/'
+	def lib_dir = "libs/"
+	new File(lib_dir).mkdirs()
+	def st_dir = "bin/";
+	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
+	into lib_dir
 	rename('syncthing-x86', 'x86/libsyncthing.so')
     rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
 	rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
 }
 buildNative.finalizedBy copyNative
 
-task cleanNative(type: Delete) {
-	delete 'libs/'
+task cleanBin(type: Delete) {
+	delete 'bin/'
 }
+copyNative.finalizedBy cleanBin
+
+task cleanNative(type: Delete) {
+	delete 'bin/'
+	delete 'build/'
+	delete 'libs/'
+	delete 'ext/syncthing/bin/'
+	delete 'ext/syncthing/pkg/'
+}
+clean.dependsOn cleanNative
+
