@@ -28,6 +28,13 @@ To get Syncthing app for Android running on you device/emulator the native synct
 - Depending on your target architecture, download `syncthing-linux-386`, `syncthing-linux-armv5`, `syncthing-linux-armv7` or `syncthing-linux-mips` from [syncthing releases](https://github.com/calmh/syncthing/releases), and extract the binary to `libs/x86/libsyncthing.so`, `libs/armeabi/libsyncthing.so`, `libs/armeabi-v7a/libsyncthing.so` or `libs/mips/libsyncthing.so` respectively.
 
 
+## Development Notes
+
+The syncthing backend used for this android application provides a web interface by default. It can be accessed via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from your development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to access the network of your emulator. Or use the following steps to connect to the single currently running emulator/AVD.
+- `telnet localhost 5554`
+- `redir add tcp:18080:8080`
+- Start syncthing app on your emulator and access the web interface from you favorite browser of your development machine via [http://127.0.0.1:18080](http://127.0.0.1:18080)
+
 ## License
 
 All code is licensed under the [MIT License](https://github.com/Nutomic/syncthing-android/blob/master/LICENSE).
