@@ -15,10 +15,10 @@ Then, run `gradle assembleDebug`.
 
 ## Development Notes
 
-The syncthing backend used for this android application provides a webinterface by default. It can be acces via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from you development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to do so or execute the following steps (assuming you have only one emulator/avd started)
+The syncthing backend used for this android application provides a web interface by default. It can be accessed via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from your development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to do so or execute the following steps (assuming you have only one emulator/avd started)
 - `telnet localhost 5554`
 - `redir add tcp:18080:8080`
-- Start synchting app on your emulator and access the web ui from you favorite browser of your development machine via [http://127.0.0.1:18080](http://127.0.0.1:18080)
+- Start synchting app on your emulator and access the web interface from you favorite browser of your development machine via [http://127.0.0.1:18080](http://127.0.0.1:18080)
 
 ## License
 
