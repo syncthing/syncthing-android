@@ -116,9 +116,13 @@ task copyNative(type: Copy) {
 	rename('syncthing-x86', 'x86/libsyncthing.so')
 	rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
 	rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
-	delete st_dir
 }
 buildNative.finalizedBy copyNative
+
+task cleanBin(type: Delete) {
+	delete 'bin/'
+}
+copyNative.finalizedBy cleanBin
 
 task cleanNative(type: Delete) {
 	delete 'bin/'
