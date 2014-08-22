@@ -33,6 +33,10 @@ android {
 
     defaultConfig {
         versionCode getVersionCodeFromManifest()
+        testApplicationId 'com.nutomic.syncthingandroid.test'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        testHandleProfiling true
+        testFunctionalTest true
     }
 
     sourceSets {
