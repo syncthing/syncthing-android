@@ -34,7 +34,7 @@ public class NetworkReceiverTest extends AndroidTestCase {
         assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
-        assertEquals(receivedIntent.getComponent().getClassName(), SyncthingService.class.getName());
+        assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
         assertNull(receivedIntent.getAction());
         assertTrue(receivedIntent.hasExtra(DeviceStateHolder.EXTRA_HAS_WIFI));
         mContext.clearReceivedIntents();

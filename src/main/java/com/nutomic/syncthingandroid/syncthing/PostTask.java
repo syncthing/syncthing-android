@@ -35,7 +35,7 @@ public class PostTask extends AsyncTask<String, Void, Void> {
         String fullUri = params[0] + params[1];
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost post = new HttpPost(fullUri);
-        post.addHeader(new BasicHeader("X-API-Key", params[2]));
+        post.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
 
         try {
             if (params.length > 3) {

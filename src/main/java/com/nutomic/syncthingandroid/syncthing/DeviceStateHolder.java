@@ -25,27 +25,25 @@ public class DeviceStateHolder extends BroadcastReceiver {
      */
     public static final String EXTRA_IS_CHARGING = "is_charging";
 
-    private boolean mIsInitialized = false;
-
     private boolean mIsWifiConnected = false;
 
     private boolean mIsCharging = false;
 
-    private SyncthingService mService;
-
-    public DeviceStateHolder(SyncthingService service) {
-        mService = service;
+    public DeviceStateHolder(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
-                mService.getSystemService(Context.CONNECTIVITY_SERVICE);
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mIsWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
     }
 
+    /**
+     * Receiver for {@link Intent#ACTION_BATTERY_CHANGED}, which is used to determine the initial
+     * charging state.
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         context.unregisterReceiver(this);
-        int status = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        int status = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         mIsCharging = status != 0;
-        mIsInitialized = true;
     }
 
     public boolean isCharging() {

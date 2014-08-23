@@ -24,17 +24,20 @@ public class SyncthingRunnable implements Runnable {
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
 
-    /**
-     * Path to the native, integrated syncthing binary, relative to the data folder
-     */
-    private static final String BINARY_NAME = "lib/libsyncthing.so";
-
     private Handler mHandler;
+
+    private String mCommand;
 
     private Context mContext;
 
-    public SyncthingRunnable(Context context) {
+    /**
+     * Constructs instance.
+     *
+     * @param command The exact command to be executed on the shell.
+     */
+    public SyncthingRunnable(Context context, String command) {
         mContext = context;
+        mCommand = command;
         mHandler = new Handler();
     }
 
@@ -49,8 +52,7 @@ public class SyncthingRunnable implements Runnable {
             // Set home directory to data folder for syncthing to use.
             dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
             // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-            dos.writeBytes(mContext.getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-                    "-home " + mContext.getFilesDir() + "\n");
+            dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
             dos.writeBytes("exit\n");
             dos.flush();
 
@@ -68,7 +70,8 @@ public class SyncthingRunnable implements Runnable {
             process.destroy();
             final int retVal = ret;
             if (ret != 0) {
-                Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " + Integer.toString(retVal));
+                Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
+                        Integer.toString(retVal));
                 postCrashDialog(retVal);
             }
         }
@@ -88,15 +91,13 @@ public class SyncthingRunnable implements Runnable {
                         .setPositiveButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface,
-                                                        int i) {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
                                         System.exit(0);
                                     }
                                 }
                         )
                         .create();
-                dialog.getWindow()
-                        .setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
             }
         });
