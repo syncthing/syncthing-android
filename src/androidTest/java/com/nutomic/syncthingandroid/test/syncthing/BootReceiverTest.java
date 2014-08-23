@@ -30,7 +30,7 @@ public class BootReceiverTest extends AndroidTestCase {
         assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
-        assertEquals(receivedIntent.getComponent().getClassName(), SyncthingService.class.getName());
+        assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
         mContext.clearReceivedIntents();
     }
 }

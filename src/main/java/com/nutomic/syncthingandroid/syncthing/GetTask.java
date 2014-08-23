@@ -56,7 +56,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
             fullUri += "?" + URLEncodedUtils.format(urlParams, "utf-8");
         }
         HttpGet get = new HttpGet(fullUri);
-        get.addHeader(new BasicHeader("X-API-Key", params[2]));
+        get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
 
         try {
             HttpResponse response = httpclient.execute(get);

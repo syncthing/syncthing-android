@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:19.1.+'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.0.0'
     compile project(':android-support-v4-preferencefragment')
 }
 
