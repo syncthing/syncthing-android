@@ -30,7 +30,7 @@ if [ -z $GOROOT ]; then
 		popd
 	fi
 	# Add GO to the environment
-	export GOROOT="$(readlink -e $tmpgo)"
+	export GOROOT="$(pwd)/$tmpgo"
 fi
 
 # Add GO compiler to PATH
@@ -58,17 +58,12 @@ export GOPATH="$(pwd)"
 
 # Install godep
 $GOROOT/bin/go get github.com/tools/godep
-export PATH="$(readlink -e bin)":$PATH
+export PATH="$(pwd)/bin":$PATH
 
-# Install dependencies
-cd src/github.com/syncthing/syncthing
-./build.sh setup || true
-
-# Build test
-#./build.sh test || exit 1
-
-export GOOS=linux
+# Setup syncthing and clean
 export ENVIRONMENT=android
+cd src/github.com/syncthing/syncthing
+$GOROOT/bin/go run build.go clean
 
 # X86
 $GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
