@@ -1,12 +1,15 @@
 package com.nutomic.syncthingandroid.test;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.test.mock.MockContext;
 
 import junit.framework.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class TestContext extends MockContext {
 
     private Context mContext;
+
     private ArrayList<Intent> mReceivedIntents = new ArrayList<>();
 
     /**
@@ -50,4 +54,26 @@ public class TestContext extends MockContext {
         mReceivedIntents.clear();
     }
 
+    private BroadcastReceiver mLastUnregistered;
+
+    @Override
+    public void unregisterReceiver(BroadcastReceiver receiver) {
+        mLastUnregistered = receiver;
+    }
+
+    public BroadcastReceiver getLastUnregistered() {
+        return mLastUnregistered;
+    }
+
+    @Override
+    public File getFilesDir() {
+        File testFilesDir = new File(mContext.getFilesDir(), "test/");
+        testFilesDir.mkdir();
+        return testFilesDir;
+    }
+
+    @Override
+    public Resources getResources() {
+        return mContext.getResources();
+    }
 }

@@ -45,7 +45,7 @@ public class ConfigXml {
     private Document mConfig;
 
     public ConfigXml(Context context) {
-        mConfigFile = new File(context.getFilesDir(), CONFIG_FILE);
+        mConfigFile = getConfigFile(context);
         if (!mConfigFile.exists()) {
             copyDefaultConfig(context);
         }
@@ -55,6 +55,10 @@ public class ConfigXml {
         } catch (SAXException | ParserConfigurationException | IOException e) {
             throw new RuntimeException("Failed to open config file", e);
         }
+    }
+
+    public static File getConfigFile(Context context) {
+        return new File(context.getFilesDir(), CONFIG_FILE);
     }
 
     public String getWebGuiUrl() {

@@ -49,6 +49,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     public static final String TYPE_GUI = "GUI";
 
     /**
+     * The name of the HTTP header used for the syncthing API key.
+     */
+    public static final String HEADER_API_KEY = "X-API-Key";
+
+    /**
      * Key of the map element containing connection info for the local node, in the return
      * value of {@link #getConnections}
      */

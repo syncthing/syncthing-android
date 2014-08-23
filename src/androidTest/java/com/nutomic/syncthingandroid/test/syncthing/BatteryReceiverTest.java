@@ -41,7 +41,7 @@ public class BatteryReceiverTest extends AndroidTestCase {
         assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
-        assertEquals(receivedIntent.getComponent().getClassName(), SyncthingService.class.getName());
+        assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
         assertFalse(receivedIntent.getBooleanExtra(DeviceStateHolder.EXTRA_IS_CHARGING, true));
         mContext.clearReceivedIntents();
     }
