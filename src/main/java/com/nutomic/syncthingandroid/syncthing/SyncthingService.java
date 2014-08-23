@@ -70,6 +70,11 @@ public class SyncthingService extends Service {
      */
     private static final String PRIVATE_KEY_FILE = "key.pem";
 
+    /**
+     * Path to the native, integrated syncthing binary, relative to the data folder
+     */
+    private static final String BINARY_NAME = "lib/libsyncthing.so";
+
     private RestApi mApi;
 
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
@@ -165,7 +170,8 @@ public class SyncthingService extends Service {
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTask().execute();
-            new Thread(new SyncthingRunnable(this)).start();
+            new Thread(new SyncthingRunnable(
+                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
         }
         // Stop syncthing.
         else {
