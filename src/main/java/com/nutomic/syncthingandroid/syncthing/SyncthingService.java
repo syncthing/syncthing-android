@@ -55,12 +55,6 @@ public class SyncthingService extends Service {
     public static final int GUI_UPDATE_INTERVAL = 1000;
 
     /**
-     * Interval in ms, at which connections to the web gui are performed on first start
-     * to find out if it's online.
-     */
-    private static final long WEB_GUI_POLL_INTERVAL = 100;
-
-    /**
      * Name of the public key file in the data directory.
      */
     private static final String PUBLIC_KEY_FILE = "cert.pem";
@@ -73,7 +67,9 @@ public class SyncthingService extends Service {
     /**
      * Path to the native, integrated syncthing binary, relative to the data folder
      */
-    private static final String BINARY_NAME = "lib/libsyncthing.so";
+    public static final String BINARY_NAME = "lib/libsyncthing.so";
+
+    private ConfigXml mConfig;
 
     private RestApi mApi;
 
@@ -113,7 +109,7 @@ public class SyncthingService extends Service {
 
     /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
-     * {@link PollWebGuiAvailableTask}.
+     * {@link PollWebGuiAvailableTaskImpl}.
      */
     private boolean mStopScheduled = false;
 
@@ -121,7 +117,7 @@ public class SyncthingService extends Service {
 
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
-     * {@link DeviceStateHolder.EXTRA_HAS_WIFI} or {@link DeviceStateHolder.EXTRA_IS_CHARGING}
+     * {@link DeviceStateHolder#EXTRA_HAS_WIFI} or {@link DeviceStateHolder#EXTRA_IS_CHARGING}
      * (which are handled by {@link DeviceStateHolder}.
      */
     @Override
@@ -131,15 +127,10 @@ public class SyncthingService extends Service {
         } else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             new PostTask() {
                 @Override
-                protected void onPostExecute(Void aVoid) {
-                    ConfigXml config = new ConfigXml(SyncthingService.this);
-                    mApi = new RestApi(SyncthingService.this,
-                            config.getWebGuiUrl(), config.getApiKey());
-                    mCurrentState = State.STARTING;
-                    registerOnWebGuiAvailableListener(mApi);
-                    new PollWebGuiAvailableTask().execute();
+                protected void onPostExecute(Boolean aBoolean) {
+                    new StartupTask().execute();
                 }
-            }.execute(mApi.getUrl(), PostTask.URI_RESTART, mApi.getApiKey());
+            }.execute(mConfig.getWebGuiUrl(), PostTask.URI_RESTART, mConfig.getApiKey());
         } else if (mCurrentState != State.INIT) {
             mDeviceStateHolder.update(intent);
             updateState();
@@ -169,7 +160,7 @@ public class SyncthingService extends Service {
 
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
-            new PollWebGuiAvailableTask().execute();
+            new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
             new Thread(new SyncthingRunnable(
                     this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
         }
@@ -188,53 +179,6 @@ public class SyncthingService extends Service {
             }
         }
         onApiChange();
-    }
-
-    /**
-     * Polls SYNCTHING_URL until it returns HTTP status OK, then calls all listeners
-     * in mOnWebGuiAvailableListeners and clears it.
-     */
-    private class PollWebGuiAvailableTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            int status = 0;
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpHead head = new HttpHead(mApi.getUrl());
-            do {
-                try {
-                    Thread.sleep(WEB_GUI_POLL_INTERVAL);
-                    HttpResponse response = httpclient.execute(head);
-                    // NOTE: status is not really needed, as HttpHostConnectException is thrown
-                    // earlier.
-                    status = response.getStatusLine().getStatusCode();
-                } catch (HttpHostConnectException e) {
-                    // We catch this in every call, as long as the service is not online,
-                    // so we ignore and continue.
-                } catch (IOException e) {
-                    Log.w(TAG, "Failed to poll for web interface", e);
-                } catch (InterruptedException e) {
-                    Log.w(TAG, "Failed to poll for web interface", e);
-                }
-            } while (status != HttpStatus.SC_OK);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            if (mStopScheduled) {
-                mCurrentState = State.DISABLED;
-                onApiChange();
-                mApi.shutdown();
-                mStopScheduled = false;
-                return;
-            }
-            Log.i(TAG, "Web GUI has come online at " + mApi.getUrl());
-            mCurrentState = State.ACTIVE;
-            for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
-                listener.onWebGuiAvailable();
-            }
-            mOnWebGuiAvailableListeners.clear();
-        }
     }
 
     /**
@@ -299,22 +243,29 @@ public class SyncthingService extends Service {
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
             moveConfigFiles();
-            ConfigXml config = new ConfigXml(SyncthingService.this);
-            config.updateIfNeeded();
+            mConfig = new ConfigXml(SyncthingService.this);
+            mConfig.updateIfNeeded();
 
             if (isFirstStart()) {
                 Log.i(TAG, "App started for the first time. " +
                         "Copying default config, keys will be generated automatically");
-                config.createCameraRepo();
+                mConfig.createCameraRepo();
             }
 
-            return new Pair<>(config.getWebGuiUrl(), config.getApiKey());
+            return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
         }
 
         @Override
         protected void onPostExecute(Pair<String, String> urlAndKey) {
-            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second);
-            Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
+            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
+                    new RestApi.OnApiAvailableListener() {
+                @Override
+                public void onApiAvailable() {
+                    onApiChange();
+                }
+            });
+            registerOnWebGuiAvailableListener(mApi);
+            Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
 
             // HACK: Make sure there is no syncthing binary left running from an improper
             // shutdown (eg Play Store updateIfNeeded).
@@ -379,12 +330,31 @@ public class SyncthingService extends Service {
         mOnApiChangeListeners.add(new WeakReference<OnApiChangeListener>(listener));
     }
 
+    private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mStopScheduled) {
+                mCurrentState = State.DISABLED;
+                onApiChange();
+                mApi.shutdown();
+                mStopScheduled = false;
+                return;
+            }
+            Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+            mCurrentState = State.ACTIVE;
+            for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
+                listener.onWebGuiAvailable();
+            }
+            mOnWebGuiAvailableListeners.clear();
+        }
+    }
+
     /**
      * Called to notifiy listeners of an API change.
-     * <p/>
+     *
      * Must only be called from SyncthingService or {@link RestApi}.
      */
-    public void onApiChange() {
+    private void onApiChange() {
         for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiChangeListeners.iterator();
              i.hasNext(); ) {
             WeakReference<OnApiChangeListener> listener = i.next();
@@ -425,6 +395,10 @@ public class SyncthingService extends Service {
                 )
                 .show()
                 .setCancelable(false);
+    }
+
+    public String getWebGuiUrl() {
+        return mConfig.getWebGuiUrl();
     }
 
 }
