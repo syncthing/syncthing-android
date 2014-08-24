@@ -35,7 +35,7 @@ public class WebGuiActivity extends SyncthingActivity implements SyncthingServic
 
     /**
      * Initialize WebView.
-     * <p/>
+     *
      * Ignore lint javascript warning as js is loaded only from our known, local service.
      */
     @Override
@@ -66,7 +66,7 @@ public class WebGuiActivity extends SyncthingActivity implements SyncthingServic
      */
     @Override
     public void onWebGuiAvailable() {
-        mWebView.loadUrl(getApi().getUrl());
+        mWebView.loadUrl(getService().getWebGuiUrl());
     }
 
 }

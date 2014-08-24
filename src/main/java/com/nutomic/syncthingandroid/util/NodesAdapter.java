@@ -42,26 +42,28 @@ public class NodesAdapter extends ArrayAdapter<RestApi.Node>
         TextView download = (TextView) convertView.findViewById(R.id.download);
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
-        name.setText(getItem(position).Name);
-        final String nodeId = getItem(position).NodeID;
-
+        String nodeId = getItem(position).NodeID;
         RestApi.Connection conn = mConnections.get(nodeId);
-        Resources res = getContext().getResources();
+
+        name.setText(getItem(position).Name);
+        Resources r = getContext().getResources();
         if (conn != null) {
             if (conn.Completion == 100) {
-                status.setText(res.getString(R.string.node_up_to_date));
-                status.setTextColor(res.getColor(R.color.text_green));
-            } else {
-                status.setText(res.getString(R.string.node_syncing, conn.Completion));
-                status.setTextColor(res.getColor(R.color.text_blue));
+                status.setText(r.getString(R.string.node_up_to_date));
+                status.setTextColor(r.getColor(R.color.text_green));
+            }
+            else {
+                status.setText(r.getString(R.string.node_syncing, conn.Completion));
+                status.setTextColor(r.getColor(R.color.text_blue));
             }
             download.setText(RestApi.readableTransferRate(getContext(), conn.InBits));
             upload.setText(RestApi.readableTransferRate(getContext(), conn.OutBits));
-        } else {
-            download.setText("0 " + res.getStringArray(R.array.transfer_rate_units)[0]);
-            upload.setText("0 " + res.getStringArray(R.array.transfer_rate_units)[0]);
-            status.setText(res.getString(R.string.node_disconnected));
-            status.setTextColor(res.getColor(R.color.text_red));
+        }
+        else {
+            download.setText("0 " + r.getStringArray(R.array.transfer_rate_units)[0]);
+            upload.setText("0 " + r.getStringArray(R.array.transfer_rate_units)[0]);
+            status.setText(r.getString(R.string.node_disconnected));
+            status.setTextColor(r.getColor(R.color.text_red));
         }
 
         return convertView;

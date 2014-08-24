@@ -134,7 +134,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     private static final int NOTIFICATION_RESTART = 2;
 
-    private final SyncthingService mSyncthingService;
+    private final Context mContext;
 
     private String mVersion;
 
@@ -165,28 +165,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Stores the latest result of {@link #getModel(String, OnReceiveModelListener)} for each repo,
      * for calculating node percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
      */
-    private HashMap<String, Model> mCachedModelInfo = new HashMap<String, Model>();
+    private HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
-    public RestApi(SyncthingService syncthingService, String url, String apiKey) {
-        mSyncthingService = syncthingService;
+    public RestApi(Context context, String url, String apiKey, OnApiAvailableListener listener) {
+        mContext = context;
         mUrl = url;
         mApiKey = apiKey;
         mNotificationManager = (NotificationManager)
-                mSyncthingService.getSystemService(Context.NOTIFICATION_SERVICE);
-    }
-
-    /**
-     * Returns the full URL of the web gui.
-     */
-    public String getUrl() {
-        return mUrl;
-    }
-
-    /**
-     * Returns the API key needed to access the Rest API.
-     */
-    public String getApiKey() {
-        return mApiKey;
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mOnApiAvailableListener = listener;
     }
 
     /**
@@ -198,6 +185,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Number of asynchronous calls performed in {@link #onWebGuiAvailable()}.
      */
     private static final int TOTAL_STARTUP_CALLS = 3;
+
+    public interface OnApiAvailableListener {
+        public void onApiAvailable();
+    }
+
+    private OnApiAvailableListener mOnApiAvailableListener;
 
     /**
      * Gets local node id, syncthing version and config, then calls all OnApiAvailableListeners.
@@ -243,7 +236,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             throw new AssertionError("Too many startup calls");
         }
         if (value == TOTAL_STARTUP_CALLS) {
-            mSyncthingService.onApiChange();
+            mOnApiAvailableListener.onApiAvailable();
         }
     }
 
@@ -327,7 +320,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         if (mRestartPostponed)
             return;
 
-        final Intent intent = new Intent(mSyncthingService, SyncthingService.class)
+        final Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);
 
         AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
@@ -337,7 +330,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mSyncthingService.startService(intent);
+                        mContext.startService(intent);
                     }
                 })
                 .setNegativeButton(R.string.restart_later, new DialogInterface.OnClickListener() {
@@ -361,13 +354,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Creates a notification prompting the user to restart the app.
      */
     private void createRestartNotification() {
-        Intent intent = new Intent(mSyncthingService, SyncthingService.class)
+        Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);
-        PendingIntent pi = PendingIntent.getService(mSyncthingService, 0, intent, 0);
+        PendingIntent pi = PendingIntent.getService(mContext, 0, intent, 0);
 
-        Notification n = new NotificationCompat.Builder(mSyncthingService)
-                .setContentTitle(mSyncthingService.getString(R.string.restart_title))
-                .setContentText(mSyncthingService.getString(R.string.restart_notification_text))
+        Notification n = new NotificationCompat.Builder(mContext)
+                .setContentTitle(mContext.getString(R.string.restart_title))
+                .setContentText(mContext.getString(R.string.restart_notification_text))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pi)
                 .build();
@@ -381,13 +374,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     public List<Node> getNodes() {
         if (mConfig == null)
-            return new ArrayList<Node>();
+            return null;
 
         try {
             return getNodes(mConfig.getJSONArray("Nodes"));
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read nodes", e);
-            return new ArrayList<Node>();
+            return null;
         }
     }
 
@@ -432,7 +425,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     private List<Node> getNodes(JSONArray nodes) throws JSONException {
         List<Node> ret;
-        ret = new ArrayList<Node>(nodes.length());
+        ret = new ArrayList<>(nodes.length());
         for (int i = 0; i < nodes.length(); i++) {
             JSONObject json = nodes.getJSONObject(i);
             Node n = new Node();
@@ -453,12 +446,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     public List<Repo> getRepos() {
         if (mConfig == null)
-            return new ArrayList<Repo>();
+            return new ArrayList<>();
 
-        List<Repo> ret = null;
+        List<Repo> ret;
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
-            ret = new ArrayList<Repo>(repos.length());
+            ret = new ArrayList<>(repos.length());
             for (int i = 0; i < repos.length(); i++) {
                 JSONObject json = repos.getJSONObject(i);
                 Repo r = new Repo();
@@ -482,6 +475,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             }
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read nodes", e);
+            return null;
         }
         return ret;
     }
@@ -661,7 +655,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     public void editNode(final Node node,
                          final OnNodeIdNormalizedListener listener) {
-        mSyncthingService.getApi().normalizeNodeId(node.NodeID,
+        normalizeNodeId(node.NodeID,
                 new RestApi.OnNodeIdNormalizedListener() {
                     @Override
                     public void onNodeIdNormalized(String normalizedId, String error) {
@@ -696,7 +690,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                             n.put("NodeID", node.NodeID);
                             n.put("Name", node.Name);
                             n.put("Addresses", listToJson(node.Addresses.split(" ")));
-                            configUpdated(mSyncthingService);
+                            configUpdated(mContext);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read nodes", e);
                         }
@@ -708,7 +702,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Deletes the given node from syncthing.
      */
-    public void deleteNode(Node node, Activity activity) {
+    public boolean deleteNode(Node node, Context context) {
         try {
             JSONArray nodes = mConfig.getJSONArray("Nodes");
 
@@ -720,16 +714,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(activity);
+            configUpdated(context);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Updates or creates the given node.
      */
-    public void editRepo(Repo repo, boolean create, Context context) {
+    public boolean editRepo(Repo repo, boolean create, Context context) {
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
             JSONObject r = null;
@@ -769,13 +765,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             configUpdated(context);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Deletes the given repository from syncthing.
      */
-    public void deleteRepo(Repo repo, Activity activity) {
+    public boolean deleteRepo(Repo repo, Context context) {
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
 
@@ -787,10 +785,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(activity);
+            configUpdated(context);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -844,13 +844,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Shares the given node id via Intent. Must be called from an Activity.
      */
-    public static void shareNodeId(Activity activity, String id) {
+    public static void shareNodeId(Context context, String id) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
-        activity.startActivity(Intent.createChooser(
-                shareIntent, activity.getString(R.string.send_node_id_to)));
+        context.startActivity(Intent.createChooser(
+                shareIntent, context.getString(R.string.send_node_id_to)));
     }
 
     /**
@@ -863,15 +863,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         int sdk = android.os.Build.VERSION.SDK_INT;
         if (sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
             android.text.ClipboardManager clipboard = (android.text.ClipboardManager)
-                    mSyncthingService.getSystemService(Context.CLIPBOARD_SERVICE);
+                    mContext.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboard.setText(id);
         } else {
             ClipboardManager clipboard = (ClipboardManager)
-                    mSyncthingService.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText(mSyncthingService.getString(R.string.node_id), id);
+                    mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText(mContext.getString(R.string.node_id), id);
             clipboard.setPrimaryClip(clip);
         }
-        Toast.makeText(mSyncthingService, R.string.node_id_copied_to_clipboard, Toast.LENGTH_SHORT)
+        Toast.makeText(mContext, R.string.node_id_copied_to_clipboard, Toast.LENGTH_SHORT)
                 .show();
     }
 
