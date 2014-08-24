@@ -35,17 +35,17 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
         }
 
         TextView id = (TextView) convertView.findViewById(R.id.id);
-
         TextView state = (TextView) convertView.findViewById(R.id.state);
-        TextView folder = (TextView) convertView.findViewById(R.id.folder);
+        TextView directory = (TextView) convertView.findViewById(R.id.directory);
         TextView items = (TextView) convertView.findViewById(R.id.items);
         TextView size = (TextView) convertView.findViewById(R.id.size);
         TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
-        id.setText(getItem(position).ID);
+        RestApi.Repo repo = getItem(position);
+        RestApi.Model model = mModels.get(repo.ID);
+        id.setText(repo.ID);
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        folder.setText((getItem(position).Directory));
-        RestApi.Model model = mModels.get(getItem(position).ID);
+        directory.setText((repo.Directory));
         if (model != null) {
             state.setText(getContext().getString(R.string.repo_progress_format, model.state,
                     (model.globalBytes <= 0)
@@ -56,10 +56,13 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
                     .getString(R.string.files, model.localFiles, model.globalFiles));
             size.setText(RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
                     RestApi.readableFileSize(getContext(), model.globalBytes));
-            invalid.setText(model.invalid);
-            invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
+            if (repo.Invalid.equals("")) {
+                invalid.setText(model.invalid);
+                invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
+            }
         } else {
-            invalid.setVisibility(View.GONE);
+            invalid.setText(repo.Invalid);
+            invalid.setVisibility((repo.Invalid.equals("")) ? View.GONE : View.VISIBLE);
         }
 
         return convertView;
@@ -91,4 +94,5 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
         mModels.put(repoId, model);
         notifyDataSetChanged();
     }
+
 }

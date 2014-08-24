@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Performs a POST request with no parameters to the URL in uri[0]  with the path in uri[1].
  */
-public class PostTask extends AsyncTask<String, Void, Void> {
+public class PostTask extends AsyncTask<String, Void, Boolean> {
 
     private static final String TAG = "PostTask";
 
@@ -31,7 +31,7 @@ public class PostTask extends AsyncTask<String, Void, Void> {
      * params[3] The request content (optional)
      */
     @Override
-    protected Void doInBackground(String... params) {
+    protected Boolean doInBackground(String... params) {
         String fullUri = params[0] + params[1];
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost post = new HttpPost(fullUri);
@@ -44,8 +44,9 @@ public class PostTask extends AsyncTask<String, Void, Void> {
             httpclient.execute(post);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+            return false;
         }
-        return null;
+        return true;
     }
 
 }
