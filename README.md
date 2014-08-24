@@ -36,6 +36,8 @@ To get Syncthing app for Android running on you device/emulator the native synct
 
 ## Development Notes
 
+It is recommended to change the GUI and Listen Address ports for the debug app, eg to 8081 and 22001 respectively.
+
 The syncthing backend used for this android application provides a web interface by default. It can be accessed via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from your development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to access the network of your emulator. Or use the following steps to connect to the single currently running emulator/AVD.
 - `telnet localhost 5554`
 - `redir add tcp:18080:8080`
