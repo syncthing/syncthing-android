@@ -33,6 +33,7 @@ public class SyncthingActivity extends ActionBarActivity implements ServiceConne
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, SyncthingService.class));
         bindService(new Intent(this, SyncthingService.class),
                 this, Context.BIND_AUTO_CREATE);
     }
