@@ -454,7 +454,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 				r.Directory = json.getString("Directory");
 				r.ID = json.getString("ID");
 				r.Invalid = json.getString("Invalid");
-				r.Nodes = getNodes(json.getJSONArray("Nodes"));
+				r.Nodes = new ArrayList<Node>();
+				JSONArray nodes = json.getJSONArray("Nodes");
+				for (int j = 0; i < nodes.length(); i++) {
+					JSONObject n = nodes.getJSONObject(i);
+					String id = n.getString("NodeID");
+					for (Node n2 : getNodes()) {
+						if (n2.NodeID.equals(id)) {
+							r.Nodes.add(n2);
+						}
+					}
+				}
 
 				r.ReadOnly = json.getBoolean("ReadOnly");
 				JSONObject versioning = json.getJSONObject("Versioning");
