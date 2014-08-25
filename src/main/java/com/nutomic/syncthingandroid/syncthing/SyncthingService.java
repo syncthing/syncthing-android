@@ -73,6 +73,8 @@ public class SyncthingService extends Service {
 
     private RestApi mApi;
 
+    private SyncthingRunnable mSyncthingRunnable;
+
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
     /**
@@ -130,7 +132,7 @@ public class SyncthingService extends Service {
                 protected void onPostExecute(Boolean aBoolean) {
                     new StartupTask().execute();
                 }
-            }.execute(mConfig.getWebGuiUrl(), PostTask.URI_RESTART, mConfig.getApiKey());
+            }.execute(mConfig.getWebGuiUrl(), PostTask.URI_RESTART, mSyncthingRunnable.getApiKey());
         } else if (mCurrentState != State.INIT) {
             mDeviceStateHolder.update(intent);
             updateState();
@@ -161,8 +163,10 @@ public class SyncthingService extends Service {
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
-            new Thread(new SyncthingRunnable(
-                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
+            mSyncthingRunnable =
+                    new SyncthingRunnable(this, getApplicationInfo().dataDir + "/" + BINARY_NAME);
+            mApi.setApiKey(mSyncthingRunnable.getApiKey());
+            new Thread(mSyncthingRunnable).start();
         }
         // Stop syncthing.
         else {
@@ -237,11 +241,11 @@ public class SyncthingService extends Service {
     /**
      * Sets up the initial configuration, updates the config when coming from an old
      * version, and reads syncthing URL and API key (these are passed internally as
-     * {@code Pair<String, String>}.
+     * {@code Pair<String, String>}. TODO
      */
-    private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+    private class StartupTask extends AsyncTask<Void, Void, String> {
         @Override
-        protected Pair<String, String> doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             moveConfigFiles();
             mConfig = new ConfigXml(SyncthingService.this);
             mConfig.updateIfNeeded();
@@ -252,12 +256,12 @@ public class SyncthingService extends Service {
                 mConfig.createCameraRepo();
             }
 
-            return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
+            return mConfig.getWebGuiUrl();
         }
 
         @Override
-        protected void onPostExecute(Pair<String, String> urlAndKey) {
-            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
+        protected void onPostExecute(String webGuiUrl) {
+            mApi = new RestApi(SyncthingService.this, webGuiUrl,
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {

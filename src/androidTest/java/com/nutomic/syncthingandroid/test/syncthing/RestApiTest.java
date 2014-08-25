@@ -45,13 +45,14 @@ public class RestApiTest extends AndroidTestCase {
                 latch.countDown();
             }
         }.execute(mConfig.getWebGuiUrl());
-        mApi = new RestApi(getContext(), mConfig.getWebGuiUrl(), mConfig.getApiKey(),
+        mApi = new RestApi(getContext(), mConfig.getWebGuiUrl(),
                 new RestApi.OnApiAvailableListener() {
             @Override
             public void onApiAvailable() {
                 latch.countDown();
             }
         });
+        mApi.setApiKey(mSyncthing.getApiKey());
         latch.await(1, TimeUnit.SECONDS);
     }
 
@@ -66,7 +67,7 @@ public class RestApiTest extends AndroidTestCase {
                 assertTrue(aBoolean);
                 latch.countDown();
             }
-        }.execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN, mConfig.getApiKey());
+        }.execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN, mSyncthing.getApiKey());
         latch.await(1, TimeUnit.SECONDS);
         ConfigXml.getConfigFile(new TestContext(getContext())).delete();
     }

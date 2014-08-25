@@ -15,11 +15,16 @@ public class SyncthingRunnableTest extends AndroidTestCase {
         TestContext context = new TestContext(getContext());
         File testFile = new File(context.getFilesDir(), "was_running");
         assertFalse(testFile.exists());
-        String x = testFile.getAbsolutePath();
         // Inject a differenct command instead of the syncthing binary for testing.
         new SyncthingRunnable(context, "touch " + testFile.getAbsolutePath() + "\n").run();
         assertTrue(testFile.exists());
         testFile.delete();
+    }
+
+    @SmallTest
+    public void testApiKey() {
+        SyncthingRunnable st = new SyncthingRunnable(new TestContext(getContext()), "ls\n");
+        assertEquals(20, st.getApiKey().length());
     }
 
 }
