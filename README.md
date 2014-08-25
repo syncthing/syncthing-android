@@ -26,6 +26,8 @@ The build process follows three phases:
 - The Syncthing native libraries are compiled for the different architectures using `gradlew buildNative`.
 - The final APK is built using the `gradlew assembleDebug` task.
 
+To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git modules in `ext/syncthing/src/github.com/syncthing/syncthing` and `libraries/android-support-v4-preferencefragment` may need to be updated.
+
 
 ## Getting Syncthing without building natively
 
