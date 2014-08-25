@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nutomic.syncthingandroid"
-    android:versionCode="33"
-    android:versionName="0.4.19"
+    android:versionCode="30"
+    android:versionName="0.5.0-beta2"
     tools:ignore="GradleOverrides" >
 
     <uses-sdk
