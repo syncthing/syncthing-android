@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +48,7 @@ public class MainActivity extends SyncthingActivity
     @Override
     @SuppressLint("InflateParams")
     public void onApiChange(SyncthingService.State currentState) {
+        Log.d("MainActivity", currentState.toString());
         if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
             if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {
@@ -205,6 +207,7 @@ public class MainActivity extends SyncthingActivity
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
+        getService().registerOnApiChangeListener(this);
         getService().registerOnApiChangeListener(mRepositoriesFragment);
         getService().registerOnApiChangeListener(mNodesFragment);
     }
