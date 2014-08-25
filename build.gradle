@@ -1,11 +1,14 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
-        classpath 'com.alexvasilkov:android_sign:0.2+'
+        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.alexvasilkov:android_sign:0.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-6'
+        classpath 'org.codehaus.groovy:groovy-backports-compat23:2.3.5'
     }
 }
 
@@ -13,13 +16,14 @@ import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
 apply plugin: 'android_sign'
+apply plugin: 'com.github.ben-manes.versions'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:19.1.+'
+    compile 'com.android.support:appcompat-v7:19.1.0'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.0.0'
     compile project(':android-support-v4-preferencefragment')
 }
