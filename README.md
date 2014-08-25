@@ -1,5 +1,7 @@
 ## syncthing-android
 
+[![tip for next commit](https://tip4commit.com/projects/914.svg)](https://tip4commit.com/github/Nutomic/syncthing-android)
+
 A wrapper of [syncthing](https://github.com/syncthing/syncthing) for Android.
 
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.nutomic.syncthingandroid) [![Get it on F-Droid](https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png)](https://f-droid.org/repository/browse/?fdid=com.nutomic.syncthingandroid)
