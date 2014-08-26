@@ -1,5 +1,10 @@
 package com.nutomic.syncthingandroid.test;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.IBinder;
+
+import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.LinkedList;
@@ -8,6 +13,46 @@ import java.util.List;
 public class MockSyncthingService extends SyncthingService {
 
     private LinkedList<OnApiChangeListener> mOnApiChangedListeners = new LinkedList<>();
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void updateState() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void onCreate() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void onDestroy() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isFirstStart() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public RestApi getApi() {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public void registerOnApiChangeListener(OnApiChangeListener listener) {
@@ -21,6 +66,11 @@ public class MockSyncthingService extends SyncthingService {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getWebGuiUrl() {
+        throw new UnsupportedOperationException();
     }
 
 }
