@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.activities;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.NodeSettingsFragment;
@@ -82,6 +83,17 @@ public class SettingsActivity extends SyncthingActivity {
 
     public boolean getIsCreate() {
         return getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
+    }
+
+    /**
+	 * Used for the QR code scanner in NodeSettingsFragment.
+     *
+     * Instead of the cast, an interface could be used (if there are multiple fragments using this).
+     */
+    public void onClick(View view) {
+        if (mFragment instanceof NodeSettingsFragment) {
+            ((NodeSettingsFragment) mFragment).onClick(view);
+        }
     }
 
 }
