@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Syncthing</string>
+  <!--MainActivity-->
+  <!--Title of the "add repo" menu action-->
+  <string name="add_repo">Dodaj Repozytorium</string>
+  <!--Title of the "share node id" menu action-->
+  <string name="share_node_id">Odostępnij ID Węzła</string>
+  <!--Shown in the chooser dialog when sharing a Node ID-->
+  <string name="send_node_id_to">Wyślij ID węzła do</string>
+  <!--Text for RepositoriesFragment and NodesFragment loading view-->
+  <string name="api_loading">Oczekiwanie na API API</string>
+  <!--RepositoriesFragment-->
+  <string name="repositories_fragment_title">Repozytoria</string>
+  <!--Format string for repository progress. First parameter is status string, second is sync percentage-->
+  <string name="repo_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no repos exist-->
+  <string name="repositories_list_empty">Brak znalezionych węzłów</string>
+  <!--Format string for repository file count-->
+  <string name="files">%1$d / %2$d plików</string>
+  <!--NodesFragment-->
+  <string name="nodes_fragment_title">Węzły</string>
+  <!--Shown if no nodes exist-->
+  <string name="nodes_list_empty">Brak znalezionych węzłów</string>
+  <!--Indicates that a repo is fully synced to the local node-->
+  <string name="node_up_to_date">Aktualne</string>
+  <!--Indicates that the node is currently syncing. Parameter is sync percentage-->
+  <string name="node_syncing">Synchronizacja (%1$d%%)</string>
+  <!--Indicates that there is no connection to the node-->
+  <string name="node_disconnected">Rozłączono</string>
+  <!--Title for current download rate-->
+  <string name="download_title">Pobieranie</string>
+  <!--Title for current upload rate-->
+  <string name="upload_title">Wysyłanie</string>
+  <!--LocalNodeInfoFragment-->
+  <!--ActionBar title shown when the drawer is open-->
+  <string name="system_info">Informacje systemowe</string>
+  <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">Pobieranie:\u0020</string>
+  <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">Wysyłanie:\u0020</string>
+  <!--Title for current CPU usage-->
+  <string name="cpu_usage">Użycie CPU</string>
+  <!--Title for current RAM usage-->
+  <string name="ram_usage">Użycie RAMu</string>
+  <!--Title for announce server status-->
+  <string name="announce_server">Ogłoś serwer</string>
+  <!--RepoSettingsActivity-->
+  <!--Setting title-->
+  <string name="repo_id">Repository ID</string>
+  <!--Setting title-->
+  <string name="directory">Directory</string>
+  <!--Setting title-->
+  <string name="repo_master">Repository Master</string>
+  <!--Setting title-->
+  <string name="nodes">Nodes</string>
+  <!--Setting title-->
+  <string name="file_versioning">File Versioning</string>
+  <!--Setting title-->
+  <string name="keep_versions">Keep Versions</string>
+  <!--Setting title-->
+  <string name="delete_repo">Delete Repository</string>
+  <!--Title for RepoSettingsActivity in create mode-->
+  <string name="create_repo">Create Repository</string>
+  <!--Title for RepoSettingsActivity in edit mode-->
+  <string name="edit_repo">Edit Repository</string>
+  <!--Menu item to confirm repo creation-->
+  <string name="create">Create</string>
+  <!--Dialog shown when attempting to delete a repository-->
+  <string name="delete_repo_confirm">Do you really want to delete this repository?</string>
+  <!--Toast shown when trying to create a repository with an empty ID-->
+  <string name="repo_id_required">The repository ID must not be empty</string>
+  <!--Toast shown when trying to create a repository with an empty path-->
+  <string name="repo_path_required">The repository path must not be empty</string>
+  <!--Toast shown when selecting 'nodes' if no nodes have been added-->
+  <string name="no_nodes">Please connect a node first.</string>
+  <!--NodeSettingsActivity-->
+  <!--Setting title-->
+  <string name="node_id">Node ID</string>
+  <!--Setting title-->
+  <string name="name">Name</string>
+  <!--Setting title-->
+  <string name="addresses">Addresses</string>
+  <!--Setting title-->
+  <string name="current_address">Current Address</string>
+  <!--Setting title-->
+  <string name="delete_node">Delete Node</string>
+  <!--Title for NodeSettingsActivity in create mode-->
+  <string name="add_node">Add Node</string>
+  <!--Menu item to confirm adding a node-->
+  <string name="add">Add</string>
+  <!--Title for NodeSettingsActivity in edit mode-->
+  <string name="edit_node">Edit Node</string>
+  <!--Dialog shown when attempting to delete a node-->
+  <string name="delete_node_confirm">Do you really want to delete this node?</string>
+  <!--Toast shown when trying to create a node with an empty ID-->
+  <string name="node_id_required">The node ID must not be empty</string>
+  <!--Toast shown when trying to create a node with an empty name-->
+  <string name="node_name_required">The node name must not be empty</string>
+  <!--Content description for node ID qr code icon-->
+  <string name="scan_qr_code_description">Scan QR Code</string>
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">You have no QR scanner installed or your scanner is not supported. \
+Please install a scanner or enter the node ID manually.</string>
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <string name="web_gui_title">Web GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Waiting for GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generating keys. This may take a while.</string>
+  <!--Menu item that stops Activity and Service-->
+  <string name="exit">Exit</string>
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">First Start</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Welcome to Syncthing for Android!\n\n\
+This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
+There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
+Please report any problems you encounter.</string>
+  <!--SettingsActivity-->
+  <!--Activity title-->
+  <string name="settings_title">Settings</string>
+  <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">Report Issue</string>
+  <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing Version</string>
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <string name="folder_picker_title">Folder Picker</string>
+  <!--ListView empty text-->
+  <string name="directory_empty">Directory is Empty</string>
+  <!--Menu item to create folder-->
+  <string name="create_folder">Create new Folder</string>
+  <!--Menu item to select the current folder-->
+  <string name="select_folder">Select Folder</string>
+  <!--SyncthingService-->
+  <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_title">Syncthing Binary Crashed</string>
+  <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n
+If this error persists, try reinstalling the app and restarting your device.\n\n</string>
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">Restart Needed</string>
+  <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">Click here to restart syncthing now</string>
+  <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Restart Later</string>
+  <!--Shown when a node ID is copied to the clipboard-->
+  <string name="node_id_copied_to_clipboard">Node ID copied to clipboard</string>
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KB</item>
+    <item>MB</item>
+    <item>GB</item>
+    <item>TB</item>
+  </string-array>
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
+</resources>
