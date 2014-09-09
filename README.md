@@ -15,6 +15,7 @@ A wrapper of [syncthing](https://github.com/syncthing/syncthing) for Android.
 - Android SDK 19+ and the Android Support Repository are required.
 - Use `git clone --recursive https://github.com/Nutomic/syncthing-android` to download the source and its submodules.
 
+
 ## Building
 
 Use `gradlew assembleDebug` to compile the APK.
@@ -40,6 +41,17 @@ The syncthing backend used for this android application provides a web interface
 - `telnet localhost 5554`
 - `redir add tcp:18080:8080`
 - Start syncthing app on your emulator and access the web interface from you favorite browser of your development machine via [http://127.0.0.1:18080](http://127.0.0.1:18080)
+
+## Troubleshooting
+
+- You must install the Android Support Repository if you get an error similar to the one below. You can do it via `./android` (in $ANDROID_HOME/tools) and then select and install under extras or `android update sdk --no-ui --filter extra`
+
+  > A problem occurred configuring root project 'syncthing-android'.
+  > Could not resolve all dependencies for configuration ':_armeabiDebugCompile'.
+     > Could not find any version that matches com.android.support:appcompat-v7:19.1.+.
+       Required by:
+           :syncthing-android:unspecified`
+
 
 ## License
 
