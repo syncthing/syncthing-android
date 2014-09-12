@@ -10,7 +10,9 @@
 
 	<Preference
 			android:key="directory"
-			android:title="@string/directory" />
+			android:title="@string/directory"
+            android:enabled="false"
+            style="?android:preferenceInformationStyle" />
 
 	<CheckBoxPreference
 			android:key="repo_master"
