@@ -33,7 +33,7 @@
 
 	<!-- NodesFragment -->
 
-	<string name="nodes_fragment_title">Uztly</string>
+	<string name="nodes_fragment_title">Uzly</string>
 
 	<!-- Shown if no nodes exist -->
 	<string name="nodes_list_empty">Uzly nenalezeny</string>
