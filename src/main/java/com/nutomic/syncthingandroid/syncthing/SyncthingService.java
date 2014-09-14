@@ -2,8 +2,6 @@ package com.nutomic.syncthingandroid.syncthing;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,25 +10,14 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,8 +28,6 @@ import java.util.Iterator;
 public class SyncthingService extends Service {
 
     private static final String TAG = "SyncthingService";
-
-    private static final int NOTIFICATION_RUNNING = 1;
 
     /**
      * Intent action to perform a syncthing restart.
@@ -57,7 +42,7 @@ public class SyncthingService extends Service {
     /**
      * Name of the public key file in the data directory.
      */
-    private static final String PUBLIC_KEY_FILE = "cert.pem";
+    public static final String PUBLIC_KEY_FILE = "cert.pem";
 
     /**
      * Name of the private key file in the data directory.
@@ -68,6 +53,10 @@ public class SyncthingService extends Service {
      * Path to the native, integrated syncthing binary, relative to the data folder
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
+
+    public static final String PREF_SYNC_ONLY_WIFI = "stop_sync_on_mobile_data";
+
+    public static final String PREF_SYNC_ONLY_CHARGING = "stop_sync_while_not_charging";
 
     private ConfigXml mConfig;
 
@@ -143,14 +132,14 @@ public class SyncthingService extends Service {
     /**
      * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
      * or not.
-     * <p/>
+     *
      * Depending on the result, syncthing is started or stopped, and {@link #onApiChange()} is
      * called.
      */
     public void updateState() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean prefStopMobileData = prefs.getBoolean("stop_sync_on_mobile_data", true);
-        boolean prefStopNotCharging = prefs.getBoolean("stop_sync_while_not_charging", true);
+        boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, true);
+        boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, true);
 
         // Start syncthing.
         if ((mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
@@ -187,7 +176,7 @@ public class SyncthingService extends Service {
 
     /**
      * Move config file, keys, and index files to "official" folder
-     * <p/>
+     *
      * Intended to bring the file locations in older installs in line with
      * newer versions.
      */
@@ -221,18 +210,6 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onCreate() {
-        PendingIntent pi = PendingIntent.getActivity(
-                this, 0, new Intent(this, MainActivity.class),
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification n = new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.app_name))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentIntent(pi)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
-                .build();
-        n.flags |= Notification.FLAG_ONGOING_EVENT;
-        startForeground(NOTIFICATION_RUNNING, n);
-
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         new StartupTask().execute();
@@ -240,8 +217,7 @@ public class SyncthingService extends Service {
 
     /**
      * Sets up the initial configuration, updates the config when coming from an old
-     * version, and reads syncthing URL and API key (these are passed internally as
-     * {@code Pair<String, String>}. TODO
+     * version, and reads syncthing URL..
      */
     private class StartupTask extends AsyncTask<Void, Void, String> {
         @Override
@@ -272,7 +248,7 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
 
             // HACK: Make sure there is no syncthing binary left running from an improper
-            // shutdown (eg Play Store updateIfNeeded).
+            // shutdown (eg Play Store update).
             // NOTE: This will log an exception if syncthing is not actually running.
             mApi.shutdown();
             updateState();
@@ -291,12 +267,14 @@ public class SyncthingService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "Shutting down service");
-        mApi.shutdown();
+        if (mApi != null) {
+            mApi.shutdown();
+        }
     }
 
     /**
      * Register a listener for the web gui becoming available..
-     * <p/>
+     *
      * If the web gui is already available, listener will be called immediately.
      * Listeners are unregistered automatically after being called.
      */
@@ -310,7 +288,7 @@ public class SyncthingService extends Service {
 
     /**
      * Returns true if this service has not been started before (ie config.xml does not exist).
-     * <p/>
+     *
      * This will return true until the public key file has been generated.
      */
     public boolean isFirstStart() {
@@ -323,7 +301,7 @@ public class SyncthingService extends Service {
 
     /**
      * Register a listener for the syncthing API state changing.
-     * <p/>
+     *
      * The listener is called immediately with the current state, and again whenever the state
      * changes.
      */
@@ -331,7 +309,7 @@ public class SyncthingService extends Service {
         // Make sure we don't send an invalid state or syncthing might shwow a "disabled" message
         // when it's just starting up.
         listener.onApiChange(mCurrentState);
-        mOnApiChangeListeners.add(new WeakReference<OnApiChangeListener>(listener));
+        mOnApiChangeListeners.add(new WeakReference<>(listener));
     }
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {

@@ -1,21 +1,15 @@
 package com.nutomic.syncthingandroid.test.util;
 
-import android.content.Intent;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
-
-import java.io.File;
 
 public class ConfigXmlTest extends AndroidTestCase {
 
-    private TestContext mContext;
+    private MockContext mContext;
 
     private ConfigXml mConfig;
 
@@ -23,7 +17,7 @@ public class ConfigXmlTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mContext = new TestContext(getContext());
+        mContext = new MockContext(getContext());
         assertFalse(ConfigXml.getConfigFile(mContext).exists());
         mConfig = new ConfigXml(mContext);
         assertTrue(ConfigXml.getConfigFile(mContext).exists());
