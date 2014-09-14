@@ -146,15 +146,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     private String mLocalNodeId;
 
-    private final NotificationManager mNotificationManager;
-
     private boolean mRestartPostponed = false;
 
     /**
      * Stores the result of the last successful request to {@link GetTask#URI_CONNECTIONS},
      * or an empty HashMap.
      */
-    private HashMap<String, Connection> mPreviousConnections = new HashMap<String, Connection>();
+    private HashMap<String, Connection> mPreviousConnections = new HashMap<>();
 
     /**
      * Stores the timestamp of the last successful request to {@link GetTask#URI_CONNECTIONS}.
@@ -170,8 +168,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     public RestApi(Context context, String url, OnApiAvailableListener listener) {
         mContext = context;
         mUrl = url;
-        mNotificationManager = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mOnApiAvailableListener = listener;
     }
 
@@ -257,7 +253,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Stops syncthing. You should probably use SyncthingService.stopService() instead.
      */
     public void shutdown() {
-        mNotificationManager.cancel(NOTIFICATION_RESTART);
+        // Happens in unit tests.
+        if (mContext == null)
+            return;
+
+        NotificationManager nm = (NotificationManager)
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancel(NOTIFICATION_RESTART);
         new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
     }
 
@@ -371,7 +373,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 .setContentIntent(pi)
                 .build();
         n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
-        mNotificationManager.notify(NOTIFICATION_RESTART, n);
+        NotificationManager nm = (NotificationManager)
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(NOTIFICATION_RESTART, n);
         mRestartPostponed = true;
     }
 

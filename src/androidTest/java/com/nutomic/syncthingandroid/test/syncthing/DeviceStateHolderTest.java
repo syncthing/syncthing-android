@@ -4,21 +4,20 @@ import android.content.Intent;
 import android.os.BatteryManager;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 
 public class DeviceStateHolderTest extends AndroidTestCase {
 
     private DeviceStateHolder mReceiver;
-    private TestContext mContext;
+    private MockContext mContext;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         mReceiver = new DeviceStateHolder(getContext());
-        mContext = new TestContext(null);
+        mContext = new MockContext(null);
     }
 
     @MediumTest

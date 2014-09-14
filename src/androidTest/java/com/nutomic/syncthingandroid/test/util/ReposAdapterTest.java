@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.test.TestContext;
 import com.nutomic.syncthingandroid.util.ReposAdapter;
 
 import java.util.ArrayList;

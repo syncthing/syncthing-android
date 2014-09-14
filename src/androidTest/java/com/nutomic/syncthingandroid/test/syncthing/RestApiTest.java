@@ -10,7 +10,7 @@ import com.nutomic.syncthingandroid.syncthing.PostTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ public class RestApiTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mSyncthing = new SyncthingRunnable(new TestContext(null),
+        mSyncthing = new SyncthingRunnable(new MockContext(null),
                 getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
 
-        mConfig = new ConfigXml(new TestContext(getContext()));
+        mConfig = new ConfigXml(new MockContext(getContext()));
         mConfig.createCameraRepo();
         mConfig.updateIfNeeded();
 
@@ -69,7 +69,7 @@ public class RestApiTest extends AndroidTestCase {
             }
         }.execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN, mSyncthing.getApiKey());
         latch.await(1, TimeUnit.SECONDS);
-        ConfigXml.getConfigFile(new TestContext(getContext())).delete();
+        ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }
 
     @SmallTest

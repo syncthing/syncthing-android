@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.test;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -8,7 +7,6 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class MockSyncthingService extends SyncthingService {
 
@@ -51,7 +49,7 @@ public class MockSyncthingService extends SyncthingService {
 
     @Override
     public RestApi getApi() {
-        throw new UnsupportedOperationException();
+        return new MockRestApi(this, null, null);
     }
 
     @Override

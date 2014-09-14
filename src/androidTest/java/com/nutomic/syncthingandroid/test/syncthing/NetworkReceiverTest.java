@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
-import com.nutomic.syncthingandroid.syncthing.NetworkReceiver;
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
+import com.nutomic.syncthingandroid.syncthing.NetworkReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 
 /**
  * Tests for correct extras on the Intent sent by
@@ -19,13 +19,13 @@ import com.nutomic.syncthingandroid.test.TestContext;
 public class NetworkReceiverTest extends AndroidTestCase {
 
     private NetworkReceiver mReceiver;
-    private TestContext mContext;
+    private MockContext mContext;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         mReceiver = new NetworkReceiver();
-        mContext = new TestContext(getContext());
+        mContext = new MockContext(getContext());
     }
 
     @MediumTest
