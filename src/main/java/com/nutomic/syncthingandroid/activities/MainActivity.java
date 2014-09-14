@@ -48,7 +48,6 @@ public class MainActivity extends SyncthingActivity
     @Override
     @SuppressLint("InflateParams")
     public void onApiChange(SyncthingService.State currentState) {
-        Log.d("MainActivity", currentState.toString());
         if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
             if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {
