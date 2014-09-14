@@ -94,20 +94,20 @@ public class RepoSettingsFragment extends PreferenceFragment
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE) {
+        if (getActivity() == null || getActivity().isFinishing()) {
+            return;
+        }
+        else if (currentState != SyncthingService.State.ACTIVE) {
             getActivity().finish();
             return;
         }
-
-        if (getActivity() == null || getActivity().isFinishing())
-            return;
 
         if (mIsCreate) {
             getActivity().setTitle(R.string.create_repo);
             mRepo = new RestApi.Repo();
             mRepo.ID = "";
             mRepo.Directory = "";
-            mRepo.Nodes = new ArrayList<RestApi.Node>();
+            mRepo.Nodes = new ArrayList<>();
             mRepo.Versioning = new RestApi.Versioning();
         } else {
             getActivity().setTitle(R.string.edit_repo);
@@ -131,6 +131,7 @@ public class RepoSettingsFragment extends PreferenceFragment
             cbp.setTitle(n.Name);
             cbp.setKey(KEY_NODE_SHARED);
             cbp.setOnPreferenceChangeListener(RepoSettingsFragment.this);
+            // FIXME: something wrong here
             cbp.setChecked(false);
             for (RestApi.Node n2 : mRepo.Nodes) {
                 if (n2.NodeID.equals(n.NodeID)) {
