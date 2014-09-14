@@ -384,7 +384,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     public List<Node> getNodes() {
         if (mConfig == null)
-            return null;
+            return new ArrayList<>();
 
         try {
             return getNodes(mConfig.getJSONArray("Nodes"));
