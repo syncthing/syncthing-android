@@ -182,8 +182,7 @@ Please install a scanner or enter the node ID manually.</string>
     <!-- Text for dialog displayed on first start -->
 	<string name="welcome_text">Welcome to Syncthing for Android!\n\n\
 This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
-There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
-Please report any problems you encounter.</string>
+Please report any problems you encounter via Github.</string>
 
     <!-- SettingsFragment -->
 
