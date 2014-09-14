@@ -115,14 +115,13 @@ public class SyncthingService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Just catch the empty intent and return.
         if (intent == null) {
-        } else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            new PostTask() {
-                @Override
-                protected void onPostExecute(Boolean aBoolean) {
-                    new StartupTask().execute();
-                }
-            }.execute(mConfig.getWebGuiUrl(), PostTask.URI_RESTART, mSyncthingRunnable.getApiKey());
-        } else if (mCurrentState != State.INIT) {
+        }
+        else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
+            mApi.shutdown();
+            mCurrentState = State.INIT;
+            updateState();
+        }
+        else if (mCurrentState != State.INIT) {
             mDeviceStateHolder.update(intent);
             updateState();
         }
