@@ -7,18 +7,18 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.nutomic.syncthingandroid.syncthing.BatteryReceiver;
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 
 public class BatteryReceiverTest extends AndroidTestCase {
 
     private BatteryReceiver mReceiver;
-    private TestContext mContext;
+    private MockContext mContext;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         mReceiver = new BatteryReceiver();
-        mContext = new TestContext(null);
+        mContext = new MockContext(null);
     }
 
     @MediumTest

@@ -6,7 +6,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 
 import com.nutomic.syncthingandroid.syncthing.BootReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.test.TestContext;
+import com.nutomic.syncthingandroid.test.MockContext;
 
 /**
  * Tests that {@link com.nutomic.syncthingandroid.syncthing.BootReceiver} starts the right service
@@ -15,13 +15,13 @@ import com.nutomic.syncthingandroid.test.TestContext;
 public class BootReceiverTest extends AndroidTestCase {
 
     private BootReceiver mReceiver;
-    private TestContext mContext;
+    private MockContext mContext;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         mReceiver = new BootReceiver();
-        mContext = new TestContext(null);
+        mContext = new MockContext(null);
     }
 
     @MediumTest
