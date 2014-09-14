@@ -89,13 +89,12 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE) {
-            getActivity().finish();
+        if (getActivity() == null || getActivity().isFinishing()) {
             return;
         }
-
-        if (getActivity() == null || getActivity().isFinishing())
-            return;
+        else if (currentState != SyncthingService.State.ACTIVE) {
+            getActivity().finish();
+        }
 
         if (mIsCreate) {
             getActivity().setTitle(R.string.add_node);

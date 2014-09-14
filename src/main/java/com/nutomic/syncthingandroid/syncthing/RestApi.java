@@ -265,7 +265,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     /**
      * Gets a value from config,
-     * <p/>
+     *
      * Booleans are returned as {@link }Boolean#toString}, arrays as space seperated string.
      *
      * @param name {@link #TYPE_OPTIONS} or {@link #TYPE_GUI}
@@ -471,8 +471,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 r.Invalid = json.getString("Invalid");
                 r.Nodes = new ArrayList<>();
                 JSONArray nodes = json.getJSONArray("Nodes");
-                for (int j = 0; i < nodes.length(); i++) {
-                    JSONObject n = nodes.getJSONObject(i);
+                for (int j = 0; j < nodes.length(); j++) {
+                    JSONObject n = nodes.getJSONObject(j);
                     String id = n.getString("NodeID");
                     for (Node n2 : getNodes()) {
                         if (n2.NodeID.equals(id)) {
@@ -496,7 +496,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             }
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read nodes", e);
-            return null;
+            return new ArrayList<>();
         }
         return ret;
     }

@@ -3,13 +3,18 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Performs a POST request with no parameters to the URL in uri[0]  with the path in uri[1].
@@ -19,8 +24,6 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
     private static final String TAG = "PostTask";
 
     public static final String URI_CONFIG = "/rest/config";
-
-    public static final String URI_RESTART = "/rest/restart";
 
     public static final String URI_SHUTDOWN = "/rest/shutdown";
 
