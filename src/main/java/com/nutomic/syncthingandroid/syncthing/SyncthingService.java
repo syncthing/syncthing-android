@@ -54,9 +54,9 @@ public class SyncthingService extends Service {
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
 
-    public static final String PREF_SYNC_ONLY_WIFI = "stop_sync_on_mobile_data";
+    public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
 
-    public static final String PREF_SYNC_ONLY_CHARGING = "stop_sync_while_not_charging";
+    public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
 
     private ConfigXml mConfig;
 

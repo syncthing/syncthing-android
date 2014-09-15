@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <CheckBoxPreference
-        android:key="stop_sync_while_not_charging"
-        android:title="@string/stop_sync_while_not_charging"
+        android:key="sync_only_charging"
+        android:title="@string/sync_only_charging"
         android:defaultValue="true" />
 
     <CheckBoxPreference
-        android:key="stop_sync_on_mobile_data"
-        android:title="@string/stop_sync_on_mobile_data"
+        android:key="sync_only_wifi"
+        android:title="@string/sync_only_wifi"
         android:defaultValue="true" />
 
     <PreferenceScreen
