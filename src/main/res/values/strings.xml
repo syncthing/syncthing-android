@@ -190,9 +190,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Activity title -->
     <string name="settings_title">Settings</string>
 
-    <string name="stop_sync_while_not_charging">Stop sync when not charging</string>
+    <string name="sync_only_charging">Sync only when charging</string>
 
-    <string name="stop_sync_on_mobile_data">Stop sync on mobile data</string>
+    <string name="sync_only_wifi">Sync only on wifi</string>
 
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>
@@ -223,9 +223,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- SyncthingService -->
 
+
     <!-- Title of the dialog shown when the syncthing binary returns an error -->
     <string name="binary_crashed_title">Syncthing Binary Crashed</string>
-
 
     <!-- Message of the dialog shown when the syncthing binary returns an error -->
 	<string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n

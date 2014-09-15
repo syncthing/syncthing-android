@@ -25,9 +25,9 @@ public class SettingsFragment extends PreferenceFragment
 
     private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
-    private CheckBoxPreference mStopNotCharging;
+    private CheckBoxPreference mSyncOnlyCharging;
 
-    private CheckBoxPreference mStopMobileData;
+    private CheckBoxPreference mSyncOnlyWifi;
 
     private Preference mVersion;
 
@@ -65,7 +65,7 @@ public class SettingsFragment extends PreferenceFragment
 
     /**
      * Applies the given value to the preference.
-     * <p/>
+     *
      * If pref is an EditTextPreference, setText is used and the value shown as summary. If pref is
      * a CheckBoxPreference, setChecked is used (by parsing value as Boolean).
      */
@@ -81,7 +81,7 @@ public class SettingsFragment extends PreferenceFragment
 
     /**
      * Loads layout, sets version from Rest API.
-     * <p/>
+     *
      * Manual target API as we manually check if ActionBar is available (for ActionBar back button).
      */
     @Override
@@ -92,10 +92,11 @@ public class SettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.app_settings);
         PreferenceScreen screen = getPreferenceScreen();
-        mStopNotCharging = (CheckBoxPreference) findPreference("stop_sync_on_mobile_data");
-        mStopNotCharging.setOnPreferenceChangeListener(this);
-        mStopMobileData = (CheckBoxPreference) findPreference("stop_sync_while_not_charging");
-        mStopMobileData.setOnPreferenceChangeListener(this);
+        mSyncOnlyCharging = (CheckBoxPreference)
+                findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
+        mSyncOnlyCharging.setOnPreferenceChangeListener(this);
+        mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+        mSyncOnlyWifi.setOnPreferenceChangeListener(this);
         mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -136,7 +137,7 @@ public class SettingsFragment extends PreferenceFragment
             }
         }
 
-        if (preference.equals(mStopNotCharging) || preference.equals(mStopMobileData)) {
+        if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
             mSyncthingService.updateState();
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
