@@ -205,7 +205,7 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Creates notification, starts native binary.
+     * Starts the native binary.
      */
     @Override
     public void onCreate() {
