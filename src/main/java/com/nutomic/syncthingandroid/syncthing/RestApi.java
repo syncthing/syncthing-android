@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.BuildConfig;
@@ -322,7 +321,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Sends the updated mConfig via Rest API to syncthing and displays a "restart" notification.
      */
     @TargetApi(11)
-    private void configUpdated(Context context) {
+    private void configUpdated(Activity activity) {
         new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
         if (mRestartPostponed)
@@ -332,9 +331,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 .setAction(SyncthingService.ACTION_RESTART);
 
         AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                ? new AlertDialog.Builder(context.getApplicationContext(), AlertDialog.THEME_HOLO_LIGHT)
-                : new AlertDialog.Builder(context.getApplicationContext());
-        AlertDialog dialog = builder.setMessage(R.string.restart_title)
+                ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
+                : new AlertDialog.Builder(activity);
+        builder.setMessage(R.string.restart_title)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -353,9 +352,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                         createRestartNotification();
                     }
                 })
-                .create();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        dialog.show();
+                .show();
     }
 
     /**
@@ -674,8 +671,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * @param node     Settings of the node to edit. To create a node, pass a non-existant node ID.
      * @param listener {@link OnNodeIdNormalizedListener} for the normalized node ID.
      */
-    public void editNode(final Node node,
-                         final OnNodeIdNormalizedListener listener) {
+    public void editNode(final Node node, final Activity activity,
+            final OnNodeIdNormalizedListener listener) {
         normalizeNodeId(node.NodeID,
                 new RestApi.OnNodeIdNormalizedListener() {
                     @Override
@@ -711,7 +708,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                             n.put("NodeID", node.NodeID);
                             n.put("Name", node.Name);
                             n.put("Addresses", listToJson(node.Addresses.split(" ")));
-                            configUpdated(mContext);
+                            configUpdated(activity);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read nodes", e);
                         }
@@ -723,7 +720,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Deletes the given node from syncthing.
      */
-    public boolean deleteNode(Node node, Context context) {
+    public boolean deleteNode(Node node, Activity activity) {
         try {
             JSONArray nodes = mConfig.getJSONArray("Nodes");
 
@@ -735,7 +732,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(context);
+            configUpdated(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
             return false;
@@ -746,7 +743,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Updates or creates the given node.
      */
-    public boolean editRepo(Repo repo, boolean create, Context context) {
+    public boolean editRepo(Repo repo, boolean create, Activity activity) {
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
             JSONObject r = null;
@@ -783,7 +780,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 params.put(key, repo.Versioning.getParams().get(key));
             }
             r.put("Versioning", versioning);
-            configUpdated(context);
+            configUpdated(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
             return false;
@@ -794,7 +791,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Deletes the given repository from syncthing.
      */
-    public boolean deleteRepo(Repo repo, Context context) {
+    public boolean deleteRepo(Repo repo, Activity activity) {
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
 
@@ -806,7 +803,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(context);
+            configUpdated(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
             return false;

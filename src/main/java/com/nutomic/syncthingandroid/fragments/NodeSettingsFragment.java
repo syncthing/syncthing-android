@@ -151,7 +151,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editNode(mNode, this);
+                mSyncthingService.getApi().editNode(mNode, getActivity(), this);
                 return true;
             case R.id.share_node_id:
                 RestApi.shareNodeId(getActivity(), mNode.NodeID);
@@ -211,7 +211,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
     /**
      * Sets version and current address of the node.
-     * <p/>
+     *
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
@@ -228,7 +228,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
      */
     private void nodeUpdated() {
         if (!mIsCreate) {
-            mSyncthingService.getApi().editNode(mNode, this);
+            mSyncthingService.getApi().editNode(mNode, getActivity(), this);
         }
     }
 
@@ -261,7 +261,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
     }
 
     /**
-     * Callback for {@link RestApi#editNode(RestApi.Node, RestApi.OnNodeIdNormalizedListener)}.
+     * Callback for {@link RestApi#editNode}.
      * Displays an error message if present, or finishes the Activity on success in edit mode.
      *
      * @param normalizedId The normalized node ID, or null on error.
