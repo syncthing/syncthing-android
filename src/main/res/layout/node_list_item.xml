@@ -7,9 +7,11 @@
 
 	<TextView
 			android:id="@+id/name"
-			android:layout_width="fill_parent"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_alignParentLeft="true"
+			android:layout_toLeftOf="@+id/status"
 			android:lines="1"
 			android:ellipsize="end" />
 
@@ -19,7 +21,8 @@
 		android:layout_alignBottom="@+id/name"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceMedium" />
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:ellipsize="end" />
 
 	<TextView
 		android:id="@+id/download_title"
