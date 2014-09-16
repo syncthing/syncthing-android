@@ -1,11 +1,10 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.WindowManager;
 
 import com.nutomic.syncthingandroid.R;
 
@@ -25,11 +24,11 @@ public class SyncthingRunnable implements Runnable {
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
 
+    private static final int NOTIFICATION_CRASHED = 3;
+
     private final Context mContext;
 
     private final String mCommand;
-
-    private final Handler mHandler;
 
     private final String mApiKey;
 
@@ -41,7 +40,6 @@ public class SyncthingRunnable implements Runnable {
     public SyncthingRunnable(Context context, String command) {
         mContext = context;
         mCommand = command;
-        mHandler = new Handler();
 
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -84,39 +82,22 @@ public class SyncthingRunnable implements Runnable {
                 Log.w(TAG, "Failed to close shell stream", e);
             }
             process.destroy();
-            final int retVal = ret;
             if (ret != 0) {
                 Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
-                        Integer.toString(retVal));
-                postCrashDialog(retVal);
+                        Integer.toString(ret));
+                NotificationCompat.Builder b = new NotificationCompat.Builder(mContext)
+                        .setContentTitle(mContext.getString(R.string.binary_crashed_title))
+                        .setContentText(mContext.getString(R.string.binary_crashed_message, ret))
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setAutoCancel(true)
+                        .setOnlyAlertOnce(true);
+                Notification n = new NotificationCompat.BigTextStyle(b)
+                        .bigText(mContext.getString(R.string.binary_crashed_message, ret)).build();
+                NotificationManager mNotificationManager = (NotificationManager)
+                        mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(NOTIFICATION_CRASHED, n);
             }
         }
-    }
-
-    /**
-     * Displays a dialog with an info message and the return value.
-     *
-     * @param retVal
-     */
-    private void postCrashDialog(final int retVal) {
-        mHandler.post(new Runnable() {
-            public void run() {
-                AlertDialog dialog = new AlertDialog.Builder(mContext)
-                        .setTitle(R.string.binary_crashed_title)
-                        .setMessage(mContext.getString(R.string.binary_crashed_message, retVal))
-                        .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        System.exit(0);
-                                    }
-                                }
-                        )
-                        .create();
-                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-                dialog.show();
-            }
-        });
     }
 
     /**
