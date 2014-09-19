@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
 import android.support.v4.preference.PreferenceFragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.nutomic.syncthingandroid.R;
@@ -18,6 +20,8 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 public class SettingsFragment extends PreferenceFragment
         implements SyncthingActivity.OnServiceConnectedListener,
         SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener {
+
+    private static final String TAG = "SettingsFragment";
 
     private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
 
@@ -97,6 +101,10 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
+        Preference sttrace = findPreference("sttrace");
+        sttrace.setOnPreferenceChangeListener(this);
+        sttrace.setSummary(PreferenceManager
+                .getDefaultSharedPreferences(getActivity()).getString("sttrace", ""));
         mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -128,13 +136,9 @@ public class SettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        if (preference instanceof EditTextPreference) {
-            String value = (String) o;
-            preference.setSummary(value);
-            EditTextPreference etp = (EditTextPreference) preference;
-            if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
-                o = Integer.parseInt((String) o);
-            }
+        EditTextPreference etp = (EditTextPreference) preference;
+        if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
+            o = Integer.parseInt((String) o);
         }
 
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
@@ -145,6 +149,18 @@ public class SettingsFragment extends PreferenceFragment
         } else if (mGuiScreen.findPreference(preference.getKey()) != null) {
             mSyncthingService.getApi().setValue(
                     RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
+        } else if (preference.getKey().equals("sttrace")) {
+            // Avoid any code injection.
+            if (!((String) o).matches("[a-z,]*")) {
+                Log.w(TAG, "Only a-z and ',' are allowed in STTRACE options");
+                return false;
+            }
+            ((SyncthingActivity) getActivity()).getApi().requireRestart(getActivity());
+        }
+
+        if (preference instanceof EditTextPreference) {
+            String value = (String) o;
+            preference.setSummary(value);
         }
 
         return true;
