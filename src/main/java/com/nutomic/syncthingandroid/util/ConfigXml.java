@@ -27,7 +27,7 @@ import javax.xml.transform.stream.StreamResult;
 
 /**
  * Provides direct access to the config.xml file in the file system.
- * <p/>
+ *
  * This class should only be used if the syncthing API is not available (usually during startup).
  */
 public class ConfigXml {
