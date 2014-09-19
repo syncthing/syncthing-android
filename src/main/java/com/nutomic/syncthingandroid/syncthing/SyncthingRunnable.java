@@ -3,6 +3,8 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -56,6 +58,7 @@ public class SyncthingRunnable implements Runnable {
 
     @Override
     public void run() {
+        SharedPreferences pm = PreferenceManager.getDefaultSharedPreferences(mContext);
         DataOutputStream dos = null;
         int ret = 1;
         Process process = null;
@@ -65,6 +68,7 @@ public class SyncthingRunnable implements Runnable {
             // Set home directory to data folder for syncthing to use.
             dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
             dos.writeBytes("STGUIAPIKEY=" + mApiKey + " ");
+            dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
             // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
             dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
             dos.writeBytes("exit\n");

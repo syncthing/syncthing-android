@@ -194,6 +194,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="sync_only_wifi">Sync only on wifi</string>
 
+    <!-- Title for the preference to set STTRACE parameters -->
+    <string name="sttrace_title">Debug Options</string>
+
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>
 

@@ -90,6 +90,11 @@
 
     </PreferenceScreen>
 
+    <EditTextPreference
+        android:key="sttrace"
+        android:title="@string/sttrace_title"
+        android:singleLine="true" />
+
     <Preference
         android:title="@string/report_issue_title"
         android:summary="@string/report_issue_summary">
