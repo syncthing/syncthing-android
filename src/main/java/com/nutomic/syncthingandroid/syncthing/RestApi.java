@@ -77,7 +77,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         public String Directory;
         public String ID;
         public String Invalid;
-        public List<Node> Nodes;
+        public List<String> NodeIds;
         public boolean ReadOnly;
         public Versioning Versioning;
     }
@@ -459,7 +459,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         List<Repo> ret;
         try {
             JSONArray repos = mConfig.getJSONArray("Repositories");
-            String x = repos.toString();
             ret = new ArrayList<>(repos.length());
             for (int i = 0; i < repos.length(); i++) {
                 JSONObject json = repos.getJSONObject(i);
@@ -467,17 +466,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 r.Directory = json.getString("Directory");
                 r.ID = json.getString("ID");
                 r.Invalid = json.getString("Invalid");
-                r.Nodes = new ArrayList<>();
+                r.NodeIds = new ArrayList<>();
                 JSONArray nodes = json.getJSONArray("Nodes");
                 for (int j = 0; j < nodes.length(); j++) {
                     JSONObject n = nodes.getJSONObject(j);
-                    String id = n.getString("NodeID");
-                    for (Node n2 : getNodes()) {
-                        if (n2.NodeID.equals(id)) {
-                            r.Nodes.add(n2);
-                        }
-                    }
+                    r.NodeIds.add(n.getString("NodeID"));
                 }
+                r.NodeIds.add(mLocalNodeId);
 
                 r.ReadOnly = json.getBoolean("ReadOnly");
                 JSONObject versioning = json.getJSONObject("Versioning");
@@ -602,8 +597,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             boolean isShared = false;
             outerloop:
             for (Repo r : getRepos()) {
-                for (Node n : r.Nodes) {
-                    if (n.NodeID.equals(nodeId)) {
+                for (String n : r.NodeIds) {
+                    if (n.equals(nodeId)) {
                         isShared = true;
                         break outerloop;
                     }
@@ -765,11 +760,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             r.put("IgnorePerms", true);
             r.put("ReadOnly", repo.ReadOnly);
             JSONArray nodes = new JSONArray();
-            for (Node n : repo.Nodes) {
+            for (String n : repo.NodeIds) {
                 JSONObject element = new JSONObject();
-                element.put("Addresses", listToJson(n.Addresses.split(" ")));
-                element.put("Name", n.Name);
-                element.put("NodeID", n.NodeID);
+                element.put("NodeID", n);
                 nodes.put(element);
             }
             r.put("Nodes", nodes);

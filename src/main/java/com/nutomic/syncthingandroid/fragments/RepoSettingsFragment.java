@@ -25,6 +25,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.ExtendedCheckBoxPreference;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -107,7 +108,7 @@ public class RepoSettingsFragment extends PreferenceFragment
             mRepo = new RestApi.Repo();
             mRepo.ID = "";
             mRepo.Directory = "";
-            mRepo.Nodes = new ArrayList<>();
+            mRepo.NodeIds = new ArrayList<>();
             mRepo.Versioning = new RestApi.Versioning();
         } else {
             getActivity().setTitle(R.string.edit_repo);
@@ -133,8 +134,8 @@ public class RepoSettingsFragment extends PreferenceFragment
             cbp.setOnPreferenceChangeListener(RepoSettingsFragment.this);
             // FIXME: something wrong here
             cbp.setChecked(false);
-            for (RestApi.Node n2 : mRepo.Nodes) {
-                if (n2.NodeID.equals(n.NodeID)) {
+            for (String n2 : mRepo.NodeIds) {
+                if (n2.equals(n.NodeID)) {
                     cbp.setChecked(true);
                 }
             }
@@ -228,11 +229,13 @@ public class RepoSettingsFragment extends PreferenceFragment
             ExtendedCheckBoxPreference pref = (ExtendedCheckBoxPreference) preference;
             RestApi.Node node = (RestApi.Node) pref.getObject();
             if ((Boolean) o) {
-                mRepo.Nodes.add(node);
+                mRepo.NodeIds.add(node.NodeID);
             } else {
-                for (RestApi.Node n : mRepo.Nodes) {
-                    if (n.NodeID.equals(node.NodeID)) {
-                        mRepo.Nodes.remove(n);
+                Iterator<String> it = mRepo.NodeIds.iterator();
+                while (it.hasNext()) {
+                    String n = it.next();
+                    if (n.equals(node.NodeID)) {
+                        it.remove();
                     }
                 }
             }
