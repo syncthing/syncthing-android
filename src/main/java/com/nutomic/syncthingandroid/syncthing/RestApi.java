@@ -299,7 +299,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             mConfig.getJSONObject(name).put(key, (isArray)
                     ? listToJson(((String) value).split(" "))
                     : value);
-            configUpdated(activity);
+            requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to set value for " + key, e);
         }
@@ -318,10 +318,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     /**
-     * Sends the updated mConfig via Rest API to syncthing and displays a "restart" notification.
+     * Sends the updated mConfig via Rest API to syncthing and displays a "restart"
+     * dialog or notification.
      */
     @TargetApi(11)
-    private void configUpdated(Activity activity) {
+    public void requireRestart(Activity activity) {
         new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
         if (mRestartPostponed)
@@ -708,7 +709,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                             n.put("NodeID", node.NodeID);
                             n.put("Name", node.Name);
                             n.put("Addresses", listToJson(node.Addresses.split(" ")));
-                            configUpdated(activity);
+                            requireRestart(activity);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read nodes", e);
                         }
@@ -732,7 +733,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(activity);
+            requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
             return false;
@@ -780,7 +781,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 params.put(key, repo.Versioning.getParams().get(key));
             }
             r.put("Versioning", versioning);
-            configUpdated(activity);
+            requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo " + repo.ID + " at " + repo.Directory, e);
             return false;
@@ -803,7 +804,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     break;
                 }
             }
-            configUpdated(activity);
+            requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit repo", e);
             return false;
