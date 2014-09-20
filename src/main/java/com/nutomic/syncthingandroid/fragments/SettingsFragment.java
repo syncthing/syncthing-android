@@ -136,9 +136,12 @@ public class SettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        EditTextPreference etp = (EditTextPreference) preference;
-        if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
-            o = Integer.parseInt((String) o);
+        // Convert new value to integer if input type is number.
+        if (preference instanceof EditTextPreference) {
+            EditTextPreference etp = (EditTextPreference) preference;
+            if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
+                o = Integer.parseInt((String) o);
+            }
         }
 
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
@@ -158,6 +161,7 @@ public class SettingsFragment extends PreferenceFragment
             ((SyncthingActivity) getActivity()).getApi().requireRestart(getActivity());
         }
 
+        // Set the preference value as summary.
         if (preference instanceof EditTextPreference) {
             String value = (String) o;
             preference.setSummary(value);
