@@ -9,7 +9,6 @@
         <localAnnounceEnabled>true</localAnnounceEnabled>
         <parallelRequests>16</parallelRequests>
         <maxSendKbps>0</maxSendKbps>
-        <rescanIntervalS>60</rescanIntervalS>
         <reconnectionIntervalS>60</reconnectionIntervalS>
         <maxChangeKbps>1000</maxChangeKbps>
         <startBrowser>false</startBrowser>
