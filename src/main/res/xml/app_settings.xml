@@ -27,11 +27,6 @@
             android:numeric="integer" />
 
         <EditTextPreference
-            android:key="RescanIntervalS"
-            android:title="Rescan Interval (s)"
-            android:numeric="integer" />
-
-        <EditTextPreference
             android:key="ReconnectIntervalS"
             android:title="Reconnect Interval (s)"
             android:numeric="integer" />
