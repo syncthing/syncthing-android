@@ -141,6 +141,9 @@
     <string name="current_address">Current Address</string>
 
     <!-- Setting title -->
+    <string name="compression">Compression</string>
+
+    <!-- ActionBar item -->
     <string name="delete_node">Delete Node</string>
 
     <!-- Title for NodeSettingsFragment in create mode -->

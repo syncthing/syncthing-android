@@ -15,4 +15,8 @@
         android:key="addresses"
         android:title="@string/addresses" />
 
+    <CheckBoxPreference
+        android:key="compression"
+        android:title="@string/compression" />
+
 </PreferenceScreen>

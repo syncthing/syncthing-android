@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
@@ -46,6 +47,8 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
     private EditTextPreference mAddresses;
 
+    private CheckBoxPreference mCompression;
+
     private Preference mVersion;
 
     private Preference mCurrentAddress;
@@ -73,6 +76,8 @@ public class NodeSettingsFragment extends PreferenceFragment implements
         mName.setOnPreferenceChangeListener(this);
         mAddresses = (EditTextPreference) findPreference("addresses");
         mAddresses.setOnPreferenceChangeListener(this);
+        mCompression = (CheckBoxPreference) findPreference("compression");
+        mCompression.setOnPreferenceChangeListener(this);
         if (!mIsCreate) {
             mVersion = findPreference("version");
             mVersion.setSummary("?");
@@ -102,6 +107,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
             mNode.Name = "";
             mNode.NodeID = "";
             mNode.Addresses = "dynamic";
+            mNode.Compression = true;
             ((EditTextPreference) mNodeId).setText(mNode.NodeID);
         } else {
             getActivity().setTitle(R.string.edit_node);
@@ -122,6 +128,7 @@ public class NodeSettingsFragment extends PreferenceFragment implements
         mName.setSummary(mNode.Name);
         mAddresses.setText(mNode.Addresses);
         mAddresses.setSummary(mNode.Addresses);
+        mCompression.setChecked(mNode.Compression);
     }
 
     @Override
@@ -194,6 +201,10 @@ public class NodeSettingsFragment extends PreferenceFragment implements
             return true;
         } else if (preference.equals(mAddresses)) {
             mNode.Addresses = (String) o;
+            nodeUpdated();
+            return true;
+        } else if (preference.equals(mCompression)) {
+            mNode.Compression = (Boolean) o;
             nodeUpdated();
             return true;
         }

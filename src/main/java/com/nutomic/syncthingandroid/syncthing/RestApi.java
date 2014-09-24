@@ -65,6 +65,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String Addresses;
         public String Name;
         public String NodeID;
+        public boolean Compression;
     }
 
     public static class SystemInfo {
@@ -446,6 +447,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             }
             n.Name = json.getString("Name");
             n.NodeID = json.getString("NodeID");
+            n.Compression = json.getBoolean("Compression");
             if (!n.NodeID.equals(mLocalNodeId)) {
                 ret.add(n);
             }
@@ -709,6 +711,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                             n.put("NodeID", node.NodeID);
                             n.put("Name", node.Name);
                             n.put("Addresses", listToJson(node.Addresses.split(" ")));
+                            n.put("Compression", node.Compression);
                             requireRestart(activity);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read nodes", e);
