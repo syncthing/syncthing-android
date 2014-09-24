@@ -42,6 +42,8 @@ public class MainActivity extends SyncthingActivity
 
     private AlertDialog mLoadingDialog;
 
+    private AlertDialog mDisabledDialog;
+
     /**
      * Causes population of repo and node lists, unlocks info drawer.
      */
@@ -53,7 +55,7 @@ public class MainActivity extends SyncthingActivity
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-                SyncthingService.showDisabledDialog(this);
+                mDisabledDialog = SyncthingService.showDisabledDialog(this);
             } else if (mLoadingDialog == null) {
                 final SharedPreferences prefs =
                         PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
@@ -89,6 +91,9 @@ public class MainActivity extends SyncthingActivity
 
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
+        }
+        if (mDisabledDialog != null) {
+            mDisabledDialog.dismiss();
         }
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
