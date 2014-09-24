@@ -69,22 +69,22 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public void editNode(final Node node,
-                         final OnNodeIdNormalizedListener listener) {
+    public void editNode(Node node, Activity activity, OnNodeIdNormalizedListener listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteNode(Node node, Context context) {
+    public boolean deleteNode(Node node, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean editRepo(Repo repo, boolean create, Context context) {
+    public boolean editRepo(Repo repo, boolean create, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
-    public boolean deleteRepo(Repo repo, Context context) {
+    @Override
+    public boolean deleteRepo(Repo repo, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
@@ -99,4 +99,8 @@ public class MockRestApi extends RestApi {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void onRepoFileChange(String repoId, String relativePath) {
+        throw new UnsupportedOperationException();
+    }
 }

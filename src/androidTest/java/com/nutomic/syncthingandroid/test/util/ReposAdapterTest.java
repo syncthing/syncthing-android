@@ -28,7 +28,7 @@ public class ReposAdapterTest extends AndroidTestCase {
         mRepo.Directory = "/my/dir/";
         mRepo.ID = "id 123";
         mRepo.Invalid = "all good";
-        mRepo.Nodes = new ArrayList<>();
+        mRepo.NodeIds = new ArrayList<>();
         mRepo.ReadOnly = false;
         mRepo.Versioning = new RestApi.Versioning();
 

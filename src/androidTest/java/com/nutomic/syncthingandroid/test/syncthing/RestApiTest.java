@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
+import android.app.Activity;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
@@ -146,7 +147,7 @@ public class RestApiTest extends AndroidTestCase {
         node.Addresses = "dynamic";
         node.Name = "my node";
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.editNode(node, new RestApi.OnNodeIdNormalizedListener() {
+        mApi.editNode(node, new Activity(), new RestApi.OnNodeIdNormalizedListener() {
             @Override
             public void onNodeIdNormalized(String normalizedId, String error) {
                 assertEquals(node.NodeID, normalizedId);
@@ -156,7 +157,7 @@ public class RestApiTest extends AndroidTestCase {
         });
         latch.await(10, TimeUnit.SECONDS);
 
-        assertTrue(mApi.deleteNode(node, getContext()));
+        assertTrue(mApi.deleteNode(node, new Activity()));
     }
 
     @SmallTest
@@ -164,12 +165,12 @@ public class RestApiTest extends AndroidTestCase {
         RestApi.Repo repo = new RestApi.Repo();
         repo.Directory = "/my/dir";
         repo.ID = "my-repo";
-        repo.Nodes = new ArrayList<>();
+        repo.NodeIds = new ArrayList<>();
         repo.ReadOnly = false;
         repo.Versioning = new RestApi.Versioning();
-        assertTrue(mApi.editRepo(repo, true, getContext()));
+        assertTrue(mApi.editRepo(repo, true, new Activity()));
 
-        assertTrue(mApi.deleteRepo(repo, getContext()));
+        assertTrue(mApi.deleteRepo(repo, new Activity()));
     }
 
     @MediumTest

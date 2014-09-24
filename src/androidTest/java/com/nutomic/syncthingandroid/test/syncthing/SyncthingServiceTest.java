@@ -12,6 +12,7 @@ import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.test.MockContext;
+import com.nutomic.syncthingandroid.test.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,19 +42,9 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
 
     @Override
     protected void tearDown() throws Exception {
-        deleteRecursive(getContext().getFilesDir());
+        Util.deleteRecursive(getContext().getFilesDir());
         PreferenceManager.getDefaultSharedPreferences(getContext()).edit().clear().commit();
-
         super.tearDown();
-    }
-
-    private void deleteRecursive(File file) {
-        if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
-                deleteRecursive(f);
-            }
-        }
-        file.delete();
     }
 
     @LargeTest
