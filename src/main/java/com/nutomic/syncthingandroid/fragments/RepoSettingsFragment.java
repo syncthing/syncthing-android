@@ -190,7 +190,6 @@ public class RepoSettingsFragment extends PreferenceFragment
                     return true;
                 }
                 mSyncthingService.getApi().editRepo(mRepo, true, getActivity());
-                getActivity().finish();
                 return true;
             case R.id.delete:
                 new AlertDialog.Builder(getActivity())
@@ -199,7 +198,6 @@ public class RepoSettingsFragment extends PreferenceFragment
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mSyncthingService.getApi().deleteRepo(mRepo, getActivity());
-                                getActivity().finish();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)

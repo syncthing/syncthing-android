@@ -170,7 +170,6 @@ public class NodeSettingsFragment extends PreferenceFragment implements
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mSyncthingService.getApi().deleteNode(mNode, getActivity());
-                                getActivity().finish();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
@@ -273,17 +272,12 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
     /**
      * Callback for {@link RestApi#editNode}.
-     * Displays an error message if present, or finishes the Activity on success in edit mode.
-     *
-     * @param normalizedId The normalized node ID, or null on error.
-     * @param error        An error message, or null on success.
+     * Displays an error toast if error message present.
      */
     @Override
     public void onNodeIdNormalized(String normalizedId, String error) {
         if (error != null) {
             Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
-        } else if (mIsCreate) {
-            getActivity().finish();
         }
     }
 
