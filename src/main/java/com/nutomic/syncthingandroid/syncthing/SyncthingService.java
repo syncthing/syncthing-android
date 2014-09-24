@@ -141,8 +141,8 @@ public class SyncthingService extends Service {
      */
     public void updateState() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, true);
-        boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, true);
+        boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
+        boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
         // Start syncthing.
         if ((mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&

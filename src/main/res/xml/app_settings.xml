@@ -4,12 +4,12 @@
     <CheckBoxPreference
         android:key="sync_only_charging"
         android:title="@string/sync_only_charging"
-        android:defaultValue="true" />
+        android:defaultValue="false" />
 
     <CheckBoxPreference
         android:key="sync_only_wifi"
         android:title="@string/sync_only_wifi"
-        android:defaultValue="true" />
+        android:defaultValue="false" />
 
     <PreferenceScreen
         android:key="syncthing_options"
