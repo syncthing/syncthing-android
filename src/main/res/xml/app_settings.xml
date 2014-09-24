@@ -22,6 +22,11 @@
             android:defaultValue="0.0.0.0:22000" />
 
         <EditTextPreference
+            android:key="MaxRecvKbps"
+            android:title="Incoming Rate Limit (KiB/s)"
+            android:numeric="integer" />
+
+        <EditTextPreference
             android:key="MaxSendKbps"
             android:title="Outgoing Rate Limit (KiB/s)"
             android:numeric="integer" />

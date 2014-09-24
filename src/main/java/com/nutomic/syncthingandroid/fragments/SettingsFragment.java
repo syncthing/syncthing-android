@@ -163,7 +163,9 @@ public class SettingsFragment extends PreferenceFragment
 
         // Set the preference value as summary.
         if (preference instanceof EditTextPreference) {
-            String value = (String) o;
+            String value = (o instanceof String)
+                    ? (String) o
+                    : Integer.toString((Integer) o);
             preference.setSummary(value);
         }
 
