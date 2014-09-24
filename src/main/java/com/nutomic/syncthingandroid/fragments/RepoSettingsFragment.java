@@ -54,6 +54,8 @@ public class RepoSettingsFragment extends PreferenceFragment
 
     private Preference mDirectory;
 
+    private EditTextPreference mRescanInterval;
+
     private CheckBoxPreference mRepoMaster;
 
     private PreferenceScreen mNodes;
@@ -83,6 +85,8 @@ public class RepoSettingsFragment extends PreferenceFragment
         mRepoId.setOnPreferenceChangeListener(this);
         mDirectory = findPreference("directory");
         mDirectory.setOnPreferenceClickListener(this);
+        mRescanInterval = (EditTextPreference) findPreference("rescan_interval");
+        mRescanInterval.setOnPreferenceChangeListener(this);
         mRepoMaster = (CheckBoxPreference) findPreference("repo_master");
         mRepoMaster.setOnPreferenceChangeListener(this);
         mNodes = (PreferenceScreen) findPreference("nodes");
@@ -108,6 +112,7 @@ public class RepoSettingsFragment extends PreferenceFragment
             mRepo = new RestApi.Repo();
             mRepo.ID = "";
             mRepo.Directory = "";
+            mRepo.RescanIntervalS = 86400;
             mRepo.NodeIds = new ArrayList<>();
             mRepo.Versioning = new RestApi.Versioning();
         } else {
@@ -125,6 +130,8 @@ public class RepoSettingsFragment extends PreferenceFragment
         mRepoId.setText(mRepo.ID);
         mRepoId.setSummary(mRepo.ID);
         mDirectory.setSummary(mRepo.Directory);
+        mRescanInterval.setText(Integer.toString(mRepo.RescanIntervalS));
+        mRescanInterval.setSummary(Integer.toString(mRepo.RescanIntervalS));
         mRepoMaster.setChecked(mRepo.ReadOnly);
         List<RestApi.Node> nodesList = mSyncthingService.getApi().getNodes();
         for (RestApi.Node n : nodesList) {
@@ -132,7 +139,6 @@ public class RepoSettingsFragment extends PreferenceFragment
             cbp.setTitle(n.Name);
             cbp.setKey(KEY_NODE_SHARED);
             cbp.setOnPreferenceChangeListener(RepoSettingsFragment.this);
-            // FIXME: something wrong here
             cbp.setChecked(false);
             for (String n2 : mRepo.NodeIds) {
                 if (n2.equals(n.NodeID)) {
@@ -219,6 +225,11 @@ public class RepoSettingsFragment extends PreferenceFragment
             return true;
         } else if (preference.equals(mDirectory)) {
             mRepo.Directory = (String) o;
+            repoUpdated();
+            return true;
+        } else if (preference.equals(mRescanInterval)) {
+            mRepo.RescanIntervalS = Integer.parseInt((String) o);
+            mRescanInterval.setSummary((String) o);
             repoUpdated();
             return true;
         } else if (preference.equals(mRepoMaster)) {

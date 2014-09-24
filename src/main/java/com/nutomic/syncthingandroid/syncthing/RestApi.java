@@ -82,6 +82,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String Invalid;
         public List<String> NodeIds;
         public boolean ReadOnly;
+        public int RescanIntervalS;
         public Versioning Versioning;
     }
 
@@ -478,6 +479,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 r.NodeIds.add(mLocalNodeId);
 
                 r.ReadOnly = json.getBoolean("ReadOnly");
+                r.RescanIntervalS = json.getInt("RescanIntervalS");
                 JSONObject versioning = json.getJSONObject("Versioning");
                 if (versioning.getString("Type").equals("simple")) {
                     SimpleVersioning sv = new SimpleVersioning();
@@ -776,6 +778,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             for (String key : repo.Versioning.getParams().keySet()) {
                 params.put(key, repo.Versioning.getParams().get(key));
             }
+            r.put("RescanIntervalS", repo.RescanIntervalS);
             r.put("Versioning", versioning);
             requireRestart(activity);
         } catch (JSONException e) {

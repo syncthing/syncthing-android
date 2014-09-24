@@ -10,6 +10,11 @@
         android:key="directory"
         android:title="@string/directory" />
 
+    <EditTextPreference
+        android:key="rescan_interval"
+        android:title="@string/rescan_interval"
+        android:inputType="numberDecimal" />
+
     <CheckBoxPreference
         android:key="repo_master"
         android:title="@string/repo_master" />
