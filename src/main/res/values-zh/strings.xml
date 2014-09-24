@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Syncthing</string>
+  <!--MainActivity-->
+  <!--Title of the "add repo" menu action-->
+  <string name="add_repo">增加儲存庫</string>
+  <!--Title of the "share node id" menu action-->
+  <string name="share_node_id">分享節點識別碼</string>
+  <!--Shown in the chooser dialog when sharing a Node ID-->
+  <string name="send_node_id_to">傳送節點識別碼給</string>
+  <!--Text for RepositoriesFragment and NodesFragment loading view-->
+  <string name="api_loading">正在等待 API</string>
+  <!--RepositoriesFragment-->
+  <string name="repositories_fragment_title">儲存庫</string>
+  <!--Format string for repository progress. First parameter is status string, second is sync percentage-->
+  <string name="repo_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no repos exist-->
+  <string name="repositories_list_empty">找不到儲存庫</string>
+  <!--Format string for repository file count-->
+  <string name="files">%1$d / %2$d 個檔案</string>
+  <!--NodesFragment-->
+  <string name="nodes_fragment_title">節點</string>
+  <!--Shown if no nodes exist-->
+  <string name="nodes_list_empty">找不到節點</string>
+  <!--Indicates that a repo is fully synced to the local node-->
+  <string name="node_up_to_date">最新</string>
+  <!--Indicates that the node is currently syncing. Parameter is sync percentage-->
+  <string name="node_syncing">正在同步 (%1$d%%)</string>
+  <!--Indicates that there is no connection to the node-->
+  <string name="node_disconnected">斷線</string>
+  <!--Title for current download rate-->
+  <string name="download_title">下載</string>
+  <!--Title for current upload rate-->
+  <string name="upload_title">上載</string>
+  <!--LocalNodeInfoFragment-->
+  <!--ActionBar title shown when the drawer is open-->
+  <string name="system_info">系統資訊</string>
+  <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">下載:\u0020</string>
+  <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">上載:\u0020</string>
+  <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU 使用率</string>
+  <!--Title for current RAM usage-->
+  <string name="ram_usage">記憶體使用率</string>
+  <!--Title for announce server status-->
+  <string name="announce_server">發布伺服器</string>
+  <!--RepoSettingsActivity-->
+  <!--Setting title-->
+  <string name="repo_id">儲存庫識別碼</string>
+  <!--Setting title-->
+  <string name="directory">資料夾</string>
+  <!--Setting title-->
+  <string name="repo_master">主儲存庫</string>
+  <!--Setting title-->
+  <string name="nodes">節點</string>
+  <!--Setting title-->
+  <string name="file_versioning">檔案版本控制</string>
+  <!--Setting title-->
+  <string name="keep_versions">保留版本數</string>
+  <!--Setting title-->
+  <string name="delete_repo">刪除儲存庫</string>
+  <!--Title for RepoSettingsActivity in create mode-->
+  <string name="create_repo">建立儲存庫</string>
+  <!--Title for RepoSettingsActivity in edit mode-->
+  <string name="edit_repo">編輯儲存庫</string>
+  <!--Menu item to confirm repo creation-->
+  <string name="create">建立</string>
+  <!--Dialog shown when attempting to delete a repository-->
+  <string name="delete_repo_confirm">您確定要刪除此儲存庫？</string>
+  <!--Toast shown when trying to create a repository with an empty ID-->
+  <string name="repo_id_required">儲存庫識別碼不得為空</string>
+  <!--Toast shown when trying to create a repository with an empty path-->
+  <string name="repo_path_required">儲存庫路徑不得為空</string>
+  <!--Toast shown when selecting 'nodes' if no nodes have been added-->
+  <string name="no_nodes">請先連接至一個節點。</string>
+  <!--NodeSettingsActivity-->
+  <!--Setting title-->
+  <string name="node_id">節點識別碼</string>
+  <!--Setting title-->
+  <string name="name">名稱</string>
+  <!--Setting title-->
+  <string name="addresses">位址</string>
+  <!--Setting title-->
+  <string name="current_address">目前位址</string>
+  <!--Setting title-->
+  <string name="delete_node">刪除節點</string>
+  <!--Title for NodeSettingsActivity in create mode-->
+  <string name="add_node">增加節點</string>
+  <!--Menu item to confirm adding a node-->
+  <string name="add">增加</string>
+  <!--Title for NodeSettingsActivity in edit mode-->
+  <string name="edit_node">編輯節點</string>
+  <!--Dialog shown when attempting to delete a node-->
+  <string name="delete_node_confirm">您確定要刪除此節點？</string>
+  <!--Toast shown when trying to create a node with an empty ID-->
+  <string name="node_id_required">節點識別碼不得為空</string>
+  <!--Toast shown when trying to create a node with an empty name-->
+  <string name="node_name_required">節點名稱不得為空</string>
+  <!--Content description for node ID qr code icon-->
+  <string name="scan_qr_code_description">掃描 QR Code</string>
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">您未安裝 QR 掃描器或是您的掃描器未被支援。\
+請安裝一個掃描器或是手動輸入節點識別碼。</string>
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <string name="web_gui_title">網頁 GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">正在等待 GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">正在產生金鑰。這可能需要一些時間。</string>
+  <!--Menu item that stops Activity and Service-->
+  <string name="exit">離開</string>
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">初次開始</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">歡迎來到 Syncthing for Android!\n\n\
+此 app 目前正處於 Alpha 階段，且您可能遭遇程式錯誤、效能問題或資料遺失。\n\n\
+目前沒有針對行動數據進行特別處理，所以您的數據用量可能在 Syncthing 啟動時被用盡。\n\n\
+若遇到問題請您回報。</string>
+  <!--SettingsActivity-->
+  <!--Activity title-->
+  <string name="settings_title">設定</string>
+  <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">回報問題</string>
+  <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">開啟 Syncthing-Android 問題追蹤器</string>
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing 版本</string>
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <string name="folder_picker_title">資料夾選擇器</string>
+  <!--ListView empty text-->
+  <string name="directory_empty">資料夾為空</string>
+  <!--Menu item to create folder-->
+  <string name="create_folder">建立新資料夾</string>
+  <!--Menu item to select the current folder-->
+  <string name="select_folder">選擇資料夾</string>
+  <!--SyncthingService-->
+  <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_title">Syncthing 二進制檔案已損毀</string>
+  <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">syncthing 二進制檔案以錯誤碼 %1$d 退出。\n\n
+若此狀況持續，試著重新安裝 app 並重新啟動您的裝置。\n\n</string>
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">需要重新啟動</string>
+  <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">按此以重新啟動 syncthing</string>
+  <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">稍後重新啟動</string>
+  <!--Shown when a node ID is copied to the clipboard-->
+  <string name="node_id_copied_to_clipboard">節點識別碼已複製至剪貼版</string>
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KB</item>
+    <item>MB</item>
+    <item>GB</item>
+    <item>TB</item>
+  </string-array>
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
+</resources>
