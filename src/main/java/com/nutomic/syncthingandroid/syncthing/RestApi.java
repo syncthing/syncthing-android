@@ -18,11 +18,13 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.util.RepoObserver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +35,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Provides functions to interact with the syncthing REST API.
  */
-public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
+public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
+        RepoObserver.OnRepoFileChangeListener {
 
     private static final String TAG = "RestApi";
 
@@ -885,6 +888,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         }
         Toast.makeText(mContext, R.string.node_id_copied_to_clipboard, Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    /**
+     * Force a rescan of the given subdirectory in repository.
+     */
+    @Override
+    public void onRepoFileChange(String repoId, String relativePath) {
+        new PostTask().execute(mUrl, PostTask.URI_SCAN, mApiKey, "repo", repoId, "sub",
+                relativePath);
     }
 
 }

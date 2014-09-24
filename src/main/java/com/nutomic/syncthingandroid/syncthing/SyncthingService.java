@@ -15,12 +15,14 @@ import android.util.Log;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.RepoObserver;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -61,6 +63,8 @@ public class SyncthingService extends Service {
     private ConfigXml mConfig;
 
     private RestApi mApi;
+
+    private LinkedList<RepoObserver> mObservers = new LinkedList<>();
 
     private SyncthingRunnable mSyncthingRunnable;
 
@@ -168,6 +172,10 @@ public class SyncthingService extends Service {
                 mStopScheduled = true;
             } else if (mApi != null) {
                 mApi.shutdown();
+                for (RepoObserver ro : mObservers) {
+                    ro.stopWatching();
+                }
+                mObservers.clear();
             }
         }
         onApiChange();
@@ -241,6 +249,9 @@ public class SyncthingService extends Service {
                 @Override
                 public void onApiAvailable() {
                     onApiChange();
+                    for (RestApi.Repo r : mApi.getRepos()) {
+                        mObservers.add(new RepoObserver(mApi, r));
+                    }
                 }
             });
             registerOnWebGuiAvailableListener(mApi);

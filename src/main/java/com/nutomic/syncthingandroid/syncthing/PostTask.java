@@ -27,6 +27,8 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
 
     public static final String URI_SHUTDOWN = "/rest/shutdown";
 
+    public static final String URI_SCAN = "/rest/scan";
+
     /**
      * params[0] Syncthing hostname
      * params[1] URI to call
