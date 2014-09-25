@@ -4,6 +4,8 @@
 
     <string name="app_name">Syncthing</string>
 
+    <string name="app_description">Replace proprietary services with something open, trustworthy and decentralized.</string>
+
     <!-- MainActivity -->
 
 
