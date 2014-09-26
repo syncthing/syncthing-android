@@ -262,5 +262,26 @@ If this error persists, try reinstalling the app and restarting your device.\n\n
 		<item>Gb/s</item>
 		<item>Tb/s</item>
 	</string-array>
+	
+	<!-- Text for Options menu -->
+	<string name="syncthing_options_title">Syncthing Options</string>
+	<string name="listen_address">Sync Protocol Listen Addresses</string>
+	<string name="max_send_kbps">Outgoing Rate Limit (KiB/s)</string>
+	<string name="rescan_intervals">Rescan Interval (s)</string>
+	<string name="reconnect_intervals">Reconnect Interval (s)</string>
+	<string name="parallel_requests">Max Outstanding Requests</string>
+	<string name="max_change_kbps">Max File Change Rate (KiB/s)</string>
+	<string name="global_discovery">Global Discovery</string>
+	<string name="local_discovery">Local Discovery</string>
+	<string name="local_discovery_port">Local Discovery Port</string>
+	<string name="enable_upnp">Enable UPnP</string>
+	
+	<!-- Text for GUI menu -->
+	<string name="syncthing_gui_title">Syncthing GUI</string>
+	<string name="gui_listen_address">GUI Listen Addresses</string>
+	<string name="gui_auth_user">GUI Authentication User</string>
+	<string name="gui_auth_pass">GUI Authentication Password</string>
+	<string name="gui_use_tls">Use HTTPS for GUI</string>
+
 
 </resources>
