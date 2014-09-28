@@ -153,6 +153,11 @@ public class SyncthingService extends Service {
                 return;
             }
 
+            // HACK: Make sure there is no syncthing binary left running from an improper
+            // shutdown (eg Play Store update).
+            // NOTE: This will log an exception if syncthing is not actually running.
+            mApi.shutdown();
+
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
@@ -256,11 +261,6 @@ public class SyncthingService extends Service {
             });
             registerOnWebGuiAvailableListener(mApi);
             Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
-
-            // HACK: Make sure there is no syncthing binary left running from an improper
-            // shutdown (eg Play Store update).
-            // NOTE: This will log an exception if syncthing is not actually running.
-            mApi.shutdown();
             updateState();
         }
     }
