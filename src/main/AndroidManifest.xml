@@ -36,12 +36,12 @@
             android:label="@string/web_gui_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".gui.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity android:name=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".gui.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
         <service android:name=".syncthing.SyncthingService" />
