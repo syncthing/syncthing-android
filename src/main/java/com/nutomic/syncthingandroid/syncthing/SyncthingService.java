@@ -158,6 +158,7 @@ public class SyncthingService extends Service {
             // NOTE: This will log an exception if syncthing is not actually running.
             mApi.shutdown();
 
+            Log.i(TAG, "Starting syncthing according to current state and preferences");
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
@@ -169,6 +170,7 @@ public class SyncthingService extends Service {
             if (mCurrentState == State.DISABLED)
                 return;
 
+            Log.i(TAG, "Stopping syncthing according to current state and preferences");
             mCurrentState = State.DISABLED;
 
             // Syncthing is currently started, perform the stop later.
