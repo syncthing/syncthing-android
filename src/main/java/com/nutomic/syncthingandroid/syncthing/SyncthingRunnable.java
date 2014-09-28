@@ -53,6 +53,7 @@ public class SyncthingRunnable implements Runnable {
             // Set home directory to data folder for syncthing to use.
             dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
             dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
+            dos.writeBytes("STNORESTART=1 ");
             // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
             dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
             dos.writeBytes("exit\n");
