@@ -59,6 +59,7 @@ public class ConfigXmlTest extends AndroidTestCase {
         mConfig.updateIfNeeded();
         assertNotSame(oldTime, ConfigXml.getConfigFile(mContext).lastModified());
         assertNotSame(oldSize, ConfigXml.getConfigFile(mContext).lastModified());
+        assertNotNull(mConfig.getApiKey());
     }
 
 }

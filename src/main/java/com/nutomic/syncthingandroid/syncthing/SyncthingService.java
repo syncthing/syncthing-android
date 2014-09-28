@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
@@ -155,10 +156,8 @@ public class SyncthingService extends Service {
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
-            mSyncthingRunnable =
-                    new SyncthingRunnable(this, getApplicationInfo().dataDir + "/" + BINARY_NAME);
-            mApi.setApiKey(mSyncthingRunnable.getApiKey());
-            new Thread(mSyncthingRunnable).start();
+            new Thread(new SyncthingRunnable(
+                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
         }
         // Stop syncthing.
         else {
@@ -224,11 +223,12 @@ public class SyncthingService extends Service {
 
     /**
      * Sets up the initial configuration, updates the config when coming from an old
-     * version, and reads syncthing URL..
+     * version, and reads syncthing URL and API key (these are passed internally as
+     * {@code Pair<String, String>}.
      */
-    private class StartupTask extends AsyncTask<Void, Void, String> {
+    private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
         @Override
-        protected String doInBackground(Void... voids) {
+        protected Pair<String, String> doInBackground(Void... voids) {
             moveConfigFiles();
             mConfig = new ConfigXml(SyncthingService.this);
             mConfig.updateIfNeeded();
@@ -239,12 +239,12 @@ public class SyncthingService extends Service {
                 mConfig.createCameraRepo();
             }
 
-            return mConfig.getWebGuiUrl();
+            return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
         }
 
         @Override
-        protected void onPostExecute(String webGuiUrl) {
-            mApi = new RestApi(SyncthingService.this, webGuiUrl,
+        protected void onPostExecute(Pair<String, String> urlAndKey) {
+            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {
@@ -256,6 +256,11 @@ public class SyncthingService extends Service {
             });
             registerOnWebGuiAvailableListener(mApi);
             Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
+
+            // HACK: Make sure there is no syncthing binary left running from an improper
+            // shutdown (eg Play Store update).
+            // NOTE: This will log an exception if syncthing is not actually running.
+            mApi.shutdown();
             updateState();
         }
     }

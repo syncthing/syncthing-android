@@ -46,7 +46,7 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
         }.execute(mConfig.getWebGuiUrl());
         latch.await(1, TimeUnit.SECONDS);
 
-        new PostTask().execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN,
-                mSyncthing.getApiKey());
+        new PostTask().execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN, mConfig.getApiKey());
+
     }
 }

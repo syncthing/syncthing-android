@@ -169,17 +169,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     private HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
-    public RestApi(Context context, String url, OnApiAvailableListener listener) {
+    public RestApi(Context context, String url, String apiKey, OnApiAvailableListener listener) {
         mContext = context;
         mUrl = url;
-        mOnApiAvailableListener = listener;
-    }
-
-    /**
-     * The API key set in the syncthing instance, required to access the API.
-     */
-    public void setApiKey(String apiKey) {
         mApiKey = apiKey;
+        mOnApiAvailableListener = listener;
     }
 
     /**

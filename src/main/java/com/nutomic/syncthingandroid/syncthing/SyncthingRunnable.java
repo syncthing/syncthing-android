@@ -15,7 +15,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
@@ -30,9 +29,7 @@ public class SyncthingRunnable implements Runnable {
 
     private final Context mContext;
 
-    private final String mCommand;
-
-    private final String mApiKey;
+    private String mCommand;
 
     /**
      * Constructs instance.
@@ -42,18 +39,6 @@ public class SyncthingRunnable implements Runnable {
     public SyncthingRunnable(Context context, String command) {
         mContext = context;
         mCommand = command;
-
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < 20; i++) {
-            sb.append(chars[random.nextInt(chars.length)]);
-        }
-        mApiKey = sb.toString();
-    }
-
-    public String getApiKey() {
-        return mApiKey;
     }
 
     @Override
@@ -67,7 +52,6 @@ public class SyncthingRunnable implements Runnable {
             dos = new DataOutputStream(process.getOutputStream());
             // Set home directory to data folder for syncthing to use.
             dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
-            dos.writeBytes("STGUIAPIKEY=" + mApiKey + " ");
             dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
             // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
             dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");

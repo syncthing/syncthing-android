@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -64,12 +65,16 @@ public class ConfigXml {
         return "http://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
     }
 
+    public String getApiKey() {
+        return getGuiElement().getElementsByTagName("apikey").item(0).getTextContent();
+    }
+
     /**
      * Updates the config file.
-     *
+     * <p/>
      * Coming from 0.2.0 and earlier, globalAnnounceServer value "announce.syncthing.net:22025" is
      * replaced with "194.126.249.5:22025" (as domain resolve is broken).
-     *
+     * <p/>
      * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
      */
     @SuppressWarnings("SdCardPath")
@@ -78,6 +83,23 @@ public class ConfigXml {
         boolean changed = false;
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
+        Element gui = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("gui").item(0);
+
+        // Create an API key if it does not exist.
+        if (gui.getElementsByTagName("apikey").getLength() == 0) {
+            Log.i(TAG, "Initializing API key with random string");
+            char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+            StringBuilder sb = new StringBuilder();
+            Random random = new Random();
+            for (int i = 0; i < 20; i++) {
+                sb.append(chars[random.nextInt(chars.length)]);
+            }
+            Element apiKey = mConfig.createElement("apikey");
+            apiKey.setTextContent(sb.toString());
+            gui.appendChild(apiKey);
+            changed = true;
+        }
 
         // Hardcode default globalAnnounceServer ip.
         Element globalAnnounceServer = (Element)

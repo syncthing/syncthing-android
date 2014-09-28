@@ -21,10 +21,4 @@ public class SyncthingRunnableTest extends AndroidTestCase {
         testFile.delete();
     }
 
-    @SmallTest
-    public void testApiKey() {
-        SyncthingRunnable st = new SyncthingRunnable(new MockContext(getContext()), "ls\n");
-        assertEquals(20, st.getApiKey().length());
-    }
-
 }
