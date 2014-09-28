@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentraliserites.</string>
   <!--MainActivity-->
   <!--Title of the "add repo" menu action-->
   <string name="add_repo">Verzeichnis hinzufügen</string>
@@ -45,11 +46,13 @@
   <string name="ram_usage">RAM Auslastung</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ankündigungs-Server</string>
-  <!--RepoSettingsActivity-->
+  <!--RepoSettingsFragment-->
   <!--Setting title-->
   <string name="repo_id">Verzeichnis ID</string>
   <!--Setting title-->
   <string name="directory">Ordner</string>
+  <!--Setting title-->
+  <string name="rescan_interval">Suchintervall</string>
   <!--Setting title-->
   <string name="repo_master">Originalverzeichnis</string>
   <!--Setting title-->
@@ -60,9 +63,9 @@
   <string name="keep_versions">Versionen behalten</string>
   <!--Setting title-->
   <string name="delete_repo">Verzeichnis löschen</string>
-  <!--Title for RepoSettingsActivity in create mode-->
+  <!--Title for RepoSettingsFragment in create mode-->
   <string name="create_repo">Verzeichnis erstellen</string>
-  <!--Title for RepoSettingsActivity in edit mode-->
+  <!--Title for RepoSettingsFragment in edit mode-->
   <string name="edit_repo">Verzeichnis bearbeiten</string>
   <!--Menu item to confirm repo creation-->
   <string name="create">Erstellen</string>
@@ -74,7 +77,7 @@
   <string name="repo_path_required">Der Verzeichnispfad darf nicht leer sein</string>
   <!--Toast shown when selecting 'nodes' if no nodes have been added-->
   <string name="no_nodes">Bitte verbinden Sie zuerst einen Knoten.</string>
-  <!--NodeSettingsActivity-->
+  <!--NodeSettingsFragment-->
   <!--Setting title-->
   <string name="node_id">Knoten ID</string>
   <!--Setting title-->
@@ -84,12 +87,14 @@
   <!--Setting title-->
   <string name="current_address">Aktuelle Adresse</string>
   <!--Setting title-->
+  <string name="compression">Datenkomprimierung</string>
+  <!--ActionBar item-->
   <string name="delete_node">Knoten löschen</string>
-  <!--Title for NodeSettingsActivity in create mode-->
+  <!--Title for NodeSettingsFragment in create mode-->
   <string name="add_node">Knoten hinzufügen</string>
   <!--Menu item to confirm adding a node-->
   <string name="add">Hinzufügen</string>
-  <!--Title for NodeSettingsActivity in edit mode-->
+  <!--Title for NodeSettingsFragment in edit mode-->
   <string name="edit_node">Knoten bearbeiten</string>
   <!--Dialog shown when attempting to delete a node-->
   <string name="delete_node_confirm">Soll dieser Knoten wirklich gelöscht werden?</string>
@@ -109,21 +114,17 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <string name="web_gui_loading">Warte auf Oberfläche</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Generiere Schlüssel. Dies kann eine Weile dauern.</string>
-  <!--Menu item that stops Activity and Service-->
-  <string name="exit">Verlassen</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Erster Start</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Willkommen zu Syncthing für Android
-
-Diese App ist momentan im Alpha Status, sodass es zu Fehlern, Geschwindigkeitsproblemen oder Datenverlust kommen kann.
-
-Mobiles Datenvolumen wird nicht berücksichtigt. Daher kann es sein, dass Ihr gesamtes Datenvolumen aufgebraucht wird, während Syncthing aktiv ist.
-
-Bitte teilen Sie uns auftretende Probleme mit.</string>
-  <!--SettingsActivity-->
+  <string name="welcome_text">Willkommen zu Syncthing für Android \n \n Diese App ist momentan im Alpha Status, sodass es zu Fehlern, Geschwindigkeitsproblemen oder Datenverlust kommen kann. \n\n Bitte teilen Sie uns auftretende Probleme via Github mit.</string>
+  <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
+  <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
+  <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
+  <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Fehler berichten</string>
   <!--Summary for the issue tracker settings item-->
@@ -144,11 +145,14 @@ Bitte teilen Sie uns auftretende Probleme mit.</string>
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Syncthing ist abgestürzt</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Syncthing hat sich beendet mit Fehlercode %1$d.
-
-Wenn es bei diesem Fehler bleibt, installieren Sie die App neu und starten Ihr Gerät erneut.
-
-</string>
+  <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Synchting is deaktiviert</string>
+  <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Wollen sie ihre Voreinstellungen ändern?</string>
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Einstellungen ändern</string>
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="exit">Verlassen</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>

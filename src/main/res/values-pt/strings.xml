@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!--MainActivity-->
+  <!--Title of the "add repo" menu action-->
+  <!--Title of the "share node id" menu action-->
+  <!--Shown in the chooser dialog when sharing a Node ID-->
+  <!--Text for RepositoriesFragment and NodesFragment loading view-->
+  <!--RepositoriesFragment-->
+  <!--Format string for repository progress. First parameter is status string, second is sync percentage-->
+  <!--Shown if no repos exist-->
+  <!--Format string for repository file count-->
+  <!--NodesFragment-->
+  <!--Shown if no nodes exist-->
+  <!--Indicates that a repo is fully synced to the local node-->
+  <!--Indicates that the node is currently syncing. Parameter is sync percentage-->
+  <!--Indicates that there is no connection to the node-->
+  <!--Title for current download rate-->
+  <!--Title for current upload rate-->
+  <!--LocalNodeInfoFragment-->
+  <!--ActionBar title shown when the drawer is open-->
+  <!--Same as download_title with a colon and space appended-->
+  <!--Same as upload_title with a colon and space appended-->
+  <!--Title for current CPU usage-->
+  <!--Title for current RAM usage-->
+  <!--Title for announce server status-->
+  <!--RepoSettingsFragment-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Title for RepoSettingsFragment in create mode-->
+  <!--Title for RepoSettingsFragment in edit mode-->
+  <!--Menu item to confirm repo creation-->
+  <!--Dialog shown when attempting to delete a repository-->
+  <!--Toast shown when trying to create a repository with an empty ID-->
+  <!--Toast shown when trying to create a repository with an empty path-->
+  <!--Toast shown when selecting 'nodes' if no nodes have been added-->
+  <!--NodeSettingsFragment-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--ActionBar item-->
+  <!--Title for NodeSettingsFragment in create mode-->
+  <!--Menu item to confirm adding a node-->
+  <!--Title for NodeSettingsFragment in edit mode-->
+  <!--Dialog shown when attempting to delete a node-->
+  <!--Toast shown when trying to create a node with an empty ID-->
+  <!--Toast shown when trying to create a node with an empty name-->
+  <!--Content description for node ID qr code icon-->
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <!--Text for WebGuiActivity loading view-->
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <!--Title for dialog displayed on first start-->
+  <!--Text for dialog displayed on first start-->
+  <!--SettingsFragment-->
+  <!--Activity title-->
+  <!--Title for the preference to set STTRACE parameters-->
+  <!--Settings item that opens issue tracker-->
+  <!--Summary for the issue tracker settings item-->
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <!--ListView empty text-->
+  <!--Menu item to create folder-->
+  <!--Menu item to select the current folder-->
+  <!--SyncthingService-->
+  <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <!--Title of the "syncthing disabled" dialog-->
+  <!--Message of the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog-->
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <!--Text of the notification shown when a restart is needed-->
+  <!--Text for the dismiss button of the restart Activity-->
+  <!--Shown when a node ID is copied to the clipboard-->
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+</resources>
