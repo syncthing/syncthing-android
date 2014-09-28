@@ -1,8 +1,6 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
-import android.app.Activity;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
@@ -14,7 +12,6 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -137,39 +134,6 @@ public class RestApiTest extends AndroidTestCase {
             }
         });
         latch.await(1, TimeUnit.SECONDS);
-    }
-
-    @LargeTest
-    public void testModifyNode() throws InterruptedException {
-        final RestApi.Node node = new RestApi.Node();
-        node.NodeID = "P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2";
-        node.Addresses = "dynamic";
-        node.Name = "my node";
-        final CountDownLatch latch = new CountDownLatch(1);
-        mApi.editNode(node, new Activity(), new RestApi.OnNodeIdNormalizedListener() {
-            @Override
-            public void onNodeIdNormalized(String normalizedId, String error) {
-                assertEquals(node.NodeID, normalizedId);
-                assertEquals(null, error);
-                latch.countDown();
-            }
-        });
-        latch.await(10, TimeUnit.SECONDS);
-
-        assertTrue(mApi.deleteNode(node, new Activity()));
-    }
-
-    @SmallTest
-    public void testModifyRepo() {
-        RestApi.Repo repo = new RestApi.Repo();
-        repo.Directory = "/my/dir";
-        repo.ID = "my-repo";
-        repo.NodeIds = new ArrayList<>();
-        repo.ReadOnly = false;
-        repo.Versioning = new RestApi.Versioning();
-        assertTrue(mApi.editRepo(repo, true, new Activity()));
-
-        assertTrue(mApi.deleteRepo(repo, new Activity()));
     }
 
     @MediumTest
