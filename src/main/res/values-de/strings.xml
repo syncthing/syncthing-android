@@ -121,6 +121,9 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
   <!--Title for the preference to set STTRACE parameters-->
@@ -145,13 +148,14 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Syncthing ist abgestürzt</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">Syncthing hat sich mit dem Fehlercode %1$d beendet.\n\n Wenn sich dieser Fehler wiederholt, versuchen Sie einen Neustart Ihres Geräts. </string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Synchting is deaktiviert</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Wollen sie ihre Voreinstellungen ändern?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Einstellungen ändern</string>
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Verlassen</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

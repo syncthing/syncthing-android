@@ -123,6 +123,10 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
+  <!--Preference title-->
+  <string name="always_run_in_background">永遠在背景執行</string>
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
   <!--Title for the preference to set STTRACE parameters-->
@@ -147,13 +151,15 @@
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Syncthing 二進制檔案已損毀</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">Syncthing 二進制檔案以錯誤碼 %1$d 退出。\n\n
+若此錯誤持續發生，請試著重新啟動您的裝置。</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已經停用</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">您確定要更改您的偏好設定？</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">更改設定</string>
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">離開</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

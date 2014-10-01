@@ -117,6 +117,9 @@ Veuillez installer un scanneur ou entrer l\'ID du nœud manuellement.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Paramètres</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Signaler un problème</string>
@@ -141,7 +144,7 @@ Veuillez installer un scanneur ou entrer l\'ID du nœud manuellement.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Quitter</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

@@ -117,6 +117,9 @@ Installare un lettore o inserire l\'ID del nodo manualmente.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Impostazioni</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Segnala Problema</string>
@@ -141,7 +144,7 @@ Installare un lettore o inserire l\'ID del nodo manualmente.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Esci</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

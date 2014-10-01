@@ -117,6 +117,9 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Instellingen</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
@@ -141,7 +144,7 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Afsluiten</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

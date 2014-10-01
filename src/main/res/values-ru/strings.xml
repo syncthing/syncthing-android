@@ -62,6 +62,9 @@
   <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
@@ -78,7 +81,7 @@
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text of the notification shown when a restart is needed-->

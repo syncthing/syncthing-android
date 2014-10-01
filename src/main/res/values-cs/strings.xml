@@ -123,6 +123,9 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze při připojení na wifi</string>
   <!--Title for the preference to set STTRACE parameters-->
@@ -147,13 +150,15 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Syncthing přestal reagovat</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">Spustitelný soubor aplikace syncthing byl ukončen s chybou %1$d.\n\n
+Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Chcete změnit svoje nastavení?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Změnit nastavení</string>
-  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Ukončit</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
