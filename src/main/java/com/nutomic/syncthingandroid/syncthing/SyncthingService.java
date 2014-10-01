@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -56,6 +57,8 @@ public class SyncthingService extends Service {
      * Path to the native, integrated syncthing binary, relative to the data folder
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
+
+    public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
 
     public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
 
@@ -141,13 +144,23 @@ public class SyncthingService extends Service {
      * called.
      */
     public void updateState() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
-        boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
+        boolean shouldRun;
+        if (!alwaysRunInBackground(this)) {
+            // Always run, ignoring wifi/charging state.
+            shouldRun = true;
+        }
+        else {
+            // Check wifi/charging state against preferences and start if ok.
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
+            boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
+
+            shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
+                    (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
+        }
 
         // Start syncthing.
-        if ((mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
-                (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData)) {
+        if (shouldRun) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
                 mStopScheduled = false;
                 return;
@@ -394,6 +407,14 @@ public class SyncthingService extends Service {
 
     public String getWebGuiUrl() {
         return mConfig.getWebGuiUrl();
+    }
+
+    /**
+     * Returns the value of "always_run_in_background" preference.
+     */
+    public static boolean alwaysRunInBackground(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean(PREF_ALWAYS_RUN_IN_BACKGROUND, false);
     }
 
 }

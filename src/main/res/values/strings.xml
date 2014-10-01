@@ -199,6 +199,15 @@ Please report any problems you encounter via Github.</string>
     <!-- Activity title -->
     <string name="settings_title">Settings</string>
 
+    <!-- Preference title -->
+    <string name="always_run_in_background">Always run in background</string>
+
+    <!-- Preference summary in case it is enabled -->
+    <string name="always_run_in_background_enabled">Syncthing always runs in the background, according to preferences below.</string>
+
+    <!-- Preference summary in case it is disabled -->
+    <string name="always_run_in_background_disabled">Syncthing only runs when explicitly started, and can be stopped by menu button.</string>
+
     <string name="sync_only_charging">Sync only when charging</string>
 
     <string name="sync_only_wifi">Sync only on wifi</string>
@@ -252,7 +261,7 @@ If this error persists, try restarting your device.</string>
     <!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>
 
-    <!-- Button text on the "syncthing disabled" dialog -->
+    <!-- Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true -->
     <string name="exit">Exit</string>
 
     <!-- RestApi -->

@@ -56,7 +56,7 @@ public class RepoObserver extends FileObserver {
             }
         });
 
-        mChilds = new ArrayList<>(directories.length);
+        mChilds = new ArrayList<>();
         for (File f : directories) {
             mChilds.add(new RepoObserver(mListener, mRepo, path + "/" + f.getName()));
         }

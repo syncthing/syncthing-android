@@ -29,6 +29,8 @@ public class SettingsFragment extends PreferenceFragment
 
     private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
+    private CheckBoxPreference mAlwaysRunInBackground;
+
     private CheckBoxPreference mSyncOnlyCharging;
 
     private CheckBoxPreference mSyncOnlyWifi;
@@ -96,18 +98,24 @@ public class SettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.app_settings);
         PreferenceScreen screen = getPreferenceScreen();
+        mAlwaysRunInBackground = (CheckBoxPreference)
+                findPreference(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND);
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
-        mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+        mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
+        mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
+        mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
+
+        mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
+        mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
+        // Force summary update and wifi/charging preferences enable/disable.
+        onPreferenceChange(mAlwaysRunInBackground, mAlwaysRunInBackground.isChecked());
         Preference sttrace = findPreference("sttrace");
         sttrace.setOnPreferenceChangeListener(this);
         sttrace.setSummary(PreferenceManager
                 .getDefaultSharedPreferences(getActivity()).getString("sttrace", ""));
-        mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
-        mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
-        mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
     }
 
     @Override
@@ -146,6 +154,13 @@ public class SettingsFragment extends PreferenceFragment
 
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
             mSyncthingService.updateState();
+        } else if (preference.equals(mAlwaysRunInBackground)) {
+            preference.setSummary(((Boolean) o)
+                    ? R.string.always_run_in_background_enabled
+                    : R.string.always_run_in_background_disabled);
+            mSyncOnlyCharging.setEnabled((Boolean) o);
+            mSyncOnlyWifi.setEnabled((Boolean) o);
+
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
                     preference.getKey().equals("ListenAddress"), getActivity());

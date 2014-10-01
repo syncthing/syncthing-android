@@ -247,6 +247,7 @@ public class MainActivity extends SyncthingActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(findViewById(R.id.drawer));
         menu.findItem(R.id.share_node_id).setVisible(drawerOpen);
+        menu.findItem(R.id.exit).setVisible(!SyncthingService.alwaysRunInBackground(this));
         return true;
     }
 
@@ -277,6 +278,9 @@ public class MainActivity extends SyncthingActivity
                 startActivity(new Intent(this, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
                 return true;
+            case R.id.exit:
+                stopService(new Intent(this, SyncthingService.class));
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

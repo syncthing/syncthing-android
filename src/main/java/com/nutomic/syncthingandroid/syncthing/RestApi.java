@@ -849,7 +849,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     normalized = json.optString("id", null);
                     error = json.optString("error", null);
                 } catch (JSONException e) {
-                    Log.d(TAG, "Failed to parse normalized node ID JSON", e);
+                    Log.w(TAG, "Failed to parse normalized node ID JSON", e);
                 }
                 listener.onNodeIdNormalized(normalized, error);
             }

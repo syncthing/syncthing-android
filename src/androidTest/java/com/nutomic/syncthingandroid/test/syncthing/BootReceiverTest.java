@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
@@ -21,11 +22,21 @@ public class BootReceiverTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         mReceiver = new BootReceiver();
-        mContext = new MockContext(null);
+        mContext = new MockContext(getContext());
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit().clear().commit();
+        super.tearDown();
     }
 
     @MediumTest
     public void testOnReceiveCharging() {
+        PreferenceManager.getDefaultSharedPreferences(mContext)
+                .edit()
+                .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
+                .commit();
         mReceiver.onReceive(mContext, null);
         assertEquals(1, mContext.getReceivedIntents().size());
 
@@ -33,4 +44,14 @@ public class BootReceiverTest extends AndroidTestCase {
         assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
         mContext.clearReceivedIntents();
     }
+
+    public void testOnlyRunInForeground() {
+        PreferenceManager.getDefaultSharedPreferences(getContext())
+                .edit()
+                .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, false)
+                .commit();
+        mReceiver.onReceive(mContext, null);
+        assertEquals(0, mContext.getReceivedIntents().size());
+    }
+
 }

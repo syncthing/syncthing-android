@@ -8,6 +8,10 @@ import com.nutomic.syncthingandroid.test.MockContext;
 
 import java.io.File;
 
+/**
+ * NOTE: This test will cause a "syncthing binary crashed" notification, because
+ * {@code -home " + mContext.getFilesDir()} is run as a "command" and fails.
+ */
 public class SyncthingRunnableTest extends AndroidTestCase {
 
     @SmallTest
