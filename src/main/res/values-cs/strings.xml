@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Nahraďte proprietární služby něčím otevřeným, důvěryhodným a decentralizovaným.</string>
   <!--MainActivity-->
   <!--Title of the "add repo" menu action-->
   <string name="add_repo">Přidat repozitář</string>
@@ -45,11 +46,13 @@
   <string name="ram_usage">Využití RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ohlašovací Server</string>
-  <!--RepoSettingsActivity-->
+  <!--RepoSettingsFragment-->
   <!--Setting title-->
   <string name="repo_id">ID repozitáře</string>
   <!--Setting title-->
   <string name="directory">Adresář</string>
+  <!--Setting title-->
+  <string name="rescan_interval">Interval opakování skenu</string>
   <!--Setting title-->
   <string name="repo_master">Hlavní repozitář</string>
   <!--Setting title-->
@@ -60,9 +63,9 @@
   <string name="keep_versions">Udržovat verze</string>
   <!--Setting title-->
   <string name="delete_repo">Smazat repozitář</string>
-  <!--Title for RepoSettingsActivity in create mode-->
+  <!--Title for RepoSettingsFragment in create mode-->
   <string name="create_repo">Vytvořit repozitář</string>
-  <!--Title for RepoSettingsActivity in edit mode-->
+  <!--Title for RepoSettingsFragment in edit mode-->
   <string name="edit_repo">Upravit repozitář</string>
   <!--Menu item to confirm repo creation-->
   <string name="create">Vytvořit</string>
@@ -74,7 +77,7 @@
   <string name="repo_path_required">Cesta k repozitáři nesmí být prázdná</string>
   <!--Toast shown when selecting 'nodes' if no nodes have been added-->
   <string name="no_nodes">Nejdříve prosím připojte uzel.</string>
-  <!--NodeSettingsActivity-->
+  <!--NodeSettingsFragment-->
   <!--Setting title-->
   <string name="node_id">ID uzlu</string>
   <!--Setting title-->
@@ -84,12 +87,14 @@
   <!--Setting title-->
   <string name="current_address">Aktuální adresa</string>
   <!--Setting title-->
+  <string name="compression">Komprese</string>
+  <!--ActionBar item-->
   <string name="delete_node">Smazat uzel</string>
-  <!--Title for NodeSettingsActivity in create mode-->
+  <!--Title for NodeSettingsFragment in create mode-->
   <string name="add_node">Přidat uzel</string>
   <!--Menu item to confirm adding a node-->
   <string name="add">Přidat</string>
-  <!--Title for NodeSettingsActivity in edit mode-->
+  <!--Title for NodeSettingsFragment in edit mode-->
   <string name="edit_node">Upravit uzel</string>
   <!--Dialog shown when attempting to delete a node-->
   <string name="delete_node_confirm">Opravdu chcete smazat tento uzel?</string>
@@ -109,18 +114,25 @@ Nainstalujte prosím čtečku nebo vložte ID uzlu ručně.</string>
   <string name="web_gui_loading">Čekání na grafické rozhraní</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Klíče jsou vytvářeny. Může to chvíli trvat.</string>
-  <!--Menu item that stops Activity and Service-->
-  <string name="exit">Ukončit</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">První spuštění</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Vítejte do programu Syncthing pro Android!\n\n\
-Tato aplikace je momentálně v nestabilní alpha verzi. Může docházet k chybám, problémům s výkonem nebo ztrátám dat.\n\n\
-Speciální nastavení pro přenos dat v mobilních sítích není dostupné a to může vést k vyčerpání vašich datových limitů\n\n\
-Hlašte prosím jakékoliv problémy na které narazíte.</string>
-  <!--SettingsActivity-->
+Tato aplikace je momentálně v nestabilní alpha verzi. Může docházet k chybám, problémům s výkonem nebo ztrátě dat.\n\n\
+Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
+  <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
+  <!--Preference title-->
+  <string name="always_run_in_background">Vždy spouštět v pozadí</string>
+  <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing poběží vždy v pozadí, podle nastavení níže.</string>
+  <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing poběží pouze pokud bude ručně spuštěn a může být ukončen tlačítkem z menu.</string>
+  <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
+  <string name="sync_only_wifi">Synchronizovat pouze při připojení na wifi</string>
+  <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Možnosti ladění</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Nahlásit chybu</string>
   <!--Summary for the issue tracker settings item-->
@@ -142,7 +154,15 @@ Hlašte prosím jakékoliv problémy na které narazíte.</string>
   <string name="binary_crashed_title">Syncthing přestal reagovat</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_message">Spustitelný soubor aplikace syncthing byl ukončen s chybou %1$d.\n\n
-Pokud se toto bude opakovat, zkuste přeinstalovat aplikaci nebo restartovat váš přístroj.\n\n</string>
+Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
+  <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
+  <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Chcete změnit svoje nastavení?</string>
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Změnit nastavení</string>
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Ukončit</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>

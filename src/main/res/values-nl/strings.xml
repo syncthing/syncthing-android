@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add repo" menu action-->
@@ -45,11 +45,12 @@
   <string name="ram_usage">RAM-gebrui</string>
   <!--Title for announce server status-->
   <string name="announce_server">Mededelingsserver</string>
-  <!--RepoSettingsActivity-->
+  <!--RepoSettingsFragment-->
   <!--Setting title-->
   <string name="repo_id">Pakketbron-ID</string>
   <!--Setting title-->
   <string name="directory">Map</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="repo_master">Pakketbronmeester</string>
   <!--Setting title-->
@@ -60,9 +61,9 @@
   <string name="keep_versions">Versies behouden</string>
   <!--Setting title-->
   <string name="delete_repo">Pakketbron verwijderen</string>
-  <!--Title for RepoSettingsActivity in create mode-->
+  <!--Title for RepoSettingsFragment in create mode-->
   <string name="create_repo">Pakketbron creëren</string>
-  <!--Title for RepoSettingsActivity in edit mode-->
+  <!--Title for RepoSettingsFragment in edit mode-->
   <string name="edit_repo">Pakketbron bewerken</string>
   <!--Menu item to confirm repo creation-->
   <string name="create">Creëren</string>
@@ -74,7 +75,7 @@
   <string name="repo_path_required">Het pakketbron-pad mag niet leeg zijn</string>
   <!--Toast shown when selecting 'nodes' if no nodes have been added-->
   <string name="no_nodes">Verbind eerst met een knooppunt.</string>
-  <!--NodeSettingsActivity-->
+  <!--NodeSettingsFragment-->
   <!--Setting title-->
   <string name="node_id">Knooppunt-ID</string>
   <!--Setting title-->
@@ -84,12 +85,13 @@
   <!--Setting title-->
   <string name="current_address">Huidig adres</string>
   <!--Setting title-->
+  <!--ActionBar item-->
   <string name="delete_node">Knooppunt verwijderen</string>
-  <!--Title for NodeSettingsActivity in create mode-->
+  <!--Title for NodeSettingsFragment in create mode-->
   <string name="add_node">Knooppunt toevoegen</string>
   <!--Menu item to confirm adding a node-->
   <string name="add">Toevoegen</string>
-  <!--Title for NodeSettingsActivity in edit mode-->
+  <!--Title for NodeSettingsFragment in edit mode-->
   <string name="edit_node">Knooppunt bewerken</string>
   <!--Dialog shown when attempting to delete a node-->
   <string name="delete_node_confirm">Weet u zeker dat u dit knooppunt wilt verwijderen?</string>
@@ -109,18 +111,16 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <string name="web_gui_loading">Wachten op interface</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Bezig met genereren van sleutels. Dit kan even duren.</string>
-  <!--Menu item that stops Activity and Service-->
-  <string name="exit">Afsluiten</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Eerste opstart</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Welkom bij Syncthing voor Android!\n\n
-Deze app is momenteel in alfa-status en u kunt bugs verwachten, prestatieproblemen of dataverlies.\n\n
-Er is momenteel geen speciale behandeling voor mobiele netwerk-data dus het kan uw datavolume opbruiken indien actief.\n\n
-Rapporteer elk probleem dat u tegenkomt.</string>
-  <!--SettingsActivity-->
+  <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Instellingen</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
+  <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
@@ -141,8 +141,11 @@ Rapporteer elk probleem dat u tegenkomt.</string>
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Synthing-uitvoerbare bestand is gecrashed</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Het uitvoerbare bestand van synthing werd afgesloten met foutcode %1$d.\n\n
-Indien deze fout aanhoudt, probeer dan de app te herinstalleren en uw apparaat te herstarten.\n\n</string>
+  <!--Title of the "syncthing disabled" dialog-->
+  <!--Message of the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Afsluiten</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>

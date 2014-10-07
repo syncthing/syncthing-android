@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<item
-			android:id="@+id/create"
-			android:title="@string/add"
-			android:showAsAction="always" />
+    <item
+        android:id="@+id/create"
+        android:title="@string/add"
+        app:showAsAction="always" />
 
-	<item
-			android:id="@+id/share_node_id"
-			android:icon="@android:drawable/ic_menu_share"
-			android:title="@string/share_node_id"
-			android:showAsAction="always" />
+    <item
+        android:id="@+id/share_node_id"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/share_node_id"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete_node"
+        app:showAsAction="ifRoom" />
 
 </menu>

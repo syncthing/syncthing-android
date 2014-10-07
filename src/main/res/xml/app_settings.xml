@@ -1,96 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceScreen
-			android:key="syncthing_options"
-			android:title="Syncthing Options"
-			android:persistent="false" >
+    <CheckBoxPreference
+        android:key="always_run_in_background"
+        android:title="@string/always_run_in_background"
+        android:defaultValue="false" />
 
-		<EditTextPreference
-				android:key="ListenAddress"
-				android:title="Sync Protocol Listen Addresses"
-				android:defaultValue="0.0.0.0:22000" />
+    <CheckBoxPreference
+        android:key="sync_only_charging"
+        android:title="@string/sync_only_charging"
+        android:defaultValue="false" />
 
-		<EditTextPreference
-				android:key="MaxSendKbps"
-				android:title="Outgoing Rate Limit (KiB/s)"
-				android:numeric="integer" />
+    <CheckBoxPreference
+        android:key="sync_only_wifi"
+        android:title="@string/sync_only_wifi"
+        android:defaultValue="false" />
 
-		<EditTextPreference
-				android:key="RescanIntervalS"
-				android:title="Rescan Interval (s)"
-				android:numeric="integer" />
+    <PreferenceScreen
+        android:key="syncthing_options"
+        android:title="Syncthing Options"
+        android:persistent="false">
 
-		<EditTextPreference
-				android:key="ReconnectIntervalS"
-				android:title="Reconnect Interval (s)"
-				android:numeric="integer" />
+        <EditTextPreference
+            android:key="ListenAddress"
+            android:title="Sync Protocol Listen Addresses"
+            android:defaultValue="0.0.0.0:22000" />
 
-		<EditTextPreference
-				android:key="ParallelRequests"
-				android:title="Max Outstanding Requests"
-				android:numeric="integer" />
+        <EditTextPreference
+            android:key="MaxRecvKbps"
+            android:title="Incoming Rate Limit (KiB/s)"
+            android:numeric="integer" />
 
-		<EditTextPreference
-				android:key="MaxChangeKbps"
-				android:title="Max File Change Rate (KiB/s)"
-				android:numeric="integer" />
+        <EditTextPreference
+            android:key="MaxSendKbps"
+            android:title="Outgoing Rate Limit (KiB/s)"
+            android:numeric="integer" />
 
-		<CheckBoxPreference
-				android:key="GlobalAnnEnabled"
-				android:title="Global Discovery" />
+        <EditTextPreference
+            android:key="ReconnectIntervalS"
+            android:title="Reconnect Interval (s)"
+            android:numeric="integer" />
 
-		<CheckBoxPreference
-				android:key="LocalAnnEnabled"
-				android:title="Local Discovery" />
+        <EditTextPreference
+            android:key="ParallelRequests"
+            android:title="Max Outstanding Requests"
+            android:numeric="integer" />
 
-		<EditTextPreference
-				android:key="LocalAnnPort"
-				android:title="Local Discovery Port"
-				android:numeric="integer" />
+        <EditTextPreference
+            android:key="MaxChangeKbps"
+            android:title="Max File Change Rate (KiB/s)"
+            android:numeric="integer" />
 
-		<CheckBoxPreference
-				android:key="UPnPEnabled"
-				android:title="Enable UPnP" />
+        <CheckBoxPreference
+            android:key="GlobalAnnEnabled"
+            android:title="Global Discovery" />
 
-	</PreferenceScreen>
+        <CheckBoxPreference
+            android:key="LocalAnnEnabled"
+            android:title="Local Discovery" />
 
-	<PreferenceScreen
-			android:key="syncthing_gui"
-			android:title="Syncthing GUI"
-			android:persistent="false" >
+        <EditTextPreference
+            android:key="LocalAnnPort"
+            android:title="Local Discovery Port"
+            android:numeric="integer" />
 
-		<EditTextPreference
-				android:key="Address"
-				android:title="GUI Listen Addresses" />
+        <CheckBoxPreference
+            android:key="UPnPEnabled"
+            android:title="Enable UPnP" />
 
-		<EditTextPreference
-				android:key="User"
-				android:title="GUI Authentication User" />
+    </PreferenceScreen>
 
-		<EditTextPreference
-				android:key="Password"
-				android:title="GUI Authentication Password"
-				android:inputType="textPassword" />
+    <PreferenceScreen
+        android:key="syncthing_gui"
+        android:title="Syncthing GUI"
+        android:persistent="false">
 
-		<CheckBoxPreference
-				android:key="UseTLS"
-				android:title="Use HTTPS for GUI"
-				android:enabled="false" />
+        <EditTextPreference
+            android:key="Address"
+            android:title="GUI Listen Addresses" />
 
-	</PreferenceScreen>
+        <EditTextPreference
+            android:key="User"
+            android:title="GUI Authentication User" />
 
-	<Preference
-			android:title="@string/report_issue_title"
-			android:summary="@string/report_issue_summary" >
-		<intent
-				android:action="android.intent.action.VIEW"
-				android:data="@string/issue_tracker_url" />
-	</Preference>
+        <EditTextPreference
+            android:key="Password"
+            android:title="GUI Authentication Password"
+            android:inputType="textPassword" />
 
-	<Preference
-			android:key="syncthing_version"
-			android:title="@string/syncthing_version_title"
-			style="?android:preferenceInformationStyle" />
+        <CheckBoxPreference
+            android:key="UseTLS"
+            android:title="Use HTTPS for GUI"
+            android:enabled="false" />
+
+    </PreferenceScreen>
+
+    <EditTextPreference
+        android:key="sttrace"
+        android:title="@string/sttrace_title"
+        android:singleLine="true" />
+
+    <Preference
+        android:title="@string/report_issue_title"
+        android:summary="@string/report_issue_summary">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/issue_tracker_url" />
+    </Preference>
+
+    <Preference
+        android:key="syncthing_version"
+        android:title="@string/syncthing_version_title"
+        style="?android:preferenceInformationStyle" />
 
 </PreferenceScreen>

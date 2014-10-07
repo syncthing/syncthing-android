@@ -3,50 +3,55 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Performs a POST request with no parameters to the URL in uri[0]  with the path in uri[1].
  */
-public class PostTask extends AsyncTask<String, Void, Void> {
+public class PostTask extends AsyncTask<String, Void, Boolean> {
 
-	private static final String TAG = "PostTask";
+    private static final String TAG = "PostTask";
 
-	public static final String URI_CONFIG = "/rest/config";
+    public static final String URI_CONFIG = "/rest/config";
 
-	public static final String URI_RESTART = "/rest/restart";
+    public static final String URI_SHUTDOWN = "/rest/shutdown";
 
-	public static final String URI_SHUTDOWN = "/rest/shutdown";
+    public static final String URI_SCAN = "/rest/scan";
 
-	/**
-	 * params[0] Syncthing hostname
-	 * params[1] URI to call
-	 * params[2] Syncthing API key
-	 * params[3] The request content (optional)
-	 */
-	@Override
-	protected Void doInBackground(String... params) {
-		String fullUri = params[0] + params[1];
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost post = new HttpPost(fullUri);
-		post.addHeader(new BasicHeader("X-API-Key", params[2]));
+    /**
+     * params[0] Syncthing hostname
+     * params[1] URI to call
+     * params[2] Syncthing API key
+     * params[3] The request content (optional)
+     */
+    @Override
+    protected Boolean doInBackground(String... params) {
+        String fullUri = params[0] + params[1];
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost post = new HttpPost(fullUri);
+        post.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
 
-		try {
-			if (params.length > 3) {
-				post.setEntity(new StringEntity(params[3]));
-			}
-			httpclient.execute(post);
-		}
-		catch (IOException e) {
-			Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
-		}
-		return null;
-	}
+        try {
+            if (params.length > 3) {
+                post.setEntity(new StringEntity(params[3]));
+            }
+            httpclient.execute(post);
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+            return false;
+        }
+        return true;
+    }
 
 }

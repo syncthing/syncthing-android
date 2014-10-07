@@ -41,6 +41,8 @@ screenshots: *link to file* (only for UI problems)
 
 Always welcome.
 
-Code should follow the [Android Code Style Guidelines](https://source.android.com/source/code-style.html#java-language-rules), with the exception that we use tabs, not spaces for indentation.
+Code should follow the [Android Code Style Guidelines](https://source.android.com/source/code-style.html#java-language-rules). This can be done automatically in Android Studio.
+
+Unit tests are available, and can be executed with `gradle connectedAndroidTest`, or from Android Studio. New code should always add or improve related tests.
 
 Lint warnings should be fixed. If that's not possible, they should be ignored as specifically as possible.

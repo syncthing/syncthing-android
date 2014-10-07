@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add repo" menu action-->
@@ -45,11 +45,12 @@
   <string name="ram_usage">Użycie RAMu</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ogłoś serwer</string>
-  <!--RepoSettingsActivity-->
+  <!--RepoSettingsFragment-->
   <!--Setting title-->
   <string name="repo_id">Repository ID</string>
   <!--Setting title-->
   <string name="directory">Directory</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="repo_master">Repository Master</string>
   <!--Setting title-->
@@ -60,9 +61,9 @@
   <string name="keep_versions">Keep Versions</string>
   <!--Setting title-->
   <string name="delete_repo">Delete Repository</string>
-  <!--Title for RepoSettingsActivity in create mode-->
+  <!--Title for RepoSettingsFragment in create mode-->
   <string name="create_repo">Create Repository</string>
-  <!--Title for RepoSettingsActivity in edit mode-->
+  <!--Title for RepoSettingsFragment in edit mode-->
   <string name="edit_repo">Edit Repository</string>
   <!--Menu item to confirm repo creation-->
   <string name="create">Create</string>
@@ -74,7 +75,7 @@
   <string name="repo_path_required">The repository path must not be empty</string>
   <!--Toast shown when selecting 'nodes' if no nodes have been added-->
   <string name="no_nodes">Please connect a node first.</string>
-  <!--NodeSettingsActivity-->
+  <!--NodeSettingsFragment-->
   <!--Setting title-->
   <string name="node_id">Node ID</string>
   <!--Setting title-->
@@ -84,12 +85,13 @@
   <!--Setting title-->
   <string name="current_address">Current Address</string>
   <!--Setting title-->
+  <!--ActionBar item-->
   <string name="delete_node">Delete Node</string>
-  <!--Title for NodeSettingsActivity in create mode-->
+  <!--Title for NodeSettingsFragment in create mode-->
   <string name="add_node">Add Node</string>
   <!--Menu item to confirm adding a node-->
   <string name="add">Add</string>
-  <!--Title for NodeSettingsActivity in edit mode-->
+  <!--Title for NodeSettingsFragment in edit mode-->
   <string name="edit_node">Edit Node</string>
   <!--Dialog shown when attempting to delete a node-->
   <string name="delete_node_confirm">Do you really want to delete this node?</string>
@@ -109,18 +111,16 @@ Please install a scanner or enter the node ID manually.</string>
   <string name="web_gui_loading">Waiting for GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Generating keys. This may take a while.</string>
-  <!--Menu item that stops Activity and Service-->
-  <string name="exit">Exit</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">First Start</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Welcome to Syncthing for Android!\n\n\
-This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
-There is currently no special handling for mobile data, so it may use up your data volume if active.\n\n\
-Please report any problems you encounter.</string>
-  <!--SettingsActivity-->
+  <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Settings</string>
+  <!--Preference title-->
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
+  <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Report Issue</string>
   <!--Summary for the issue tracker settings item-->
@@ -141,8 +141,11 @@ Please report any problems you encounter.</string>
   <!--Title of the dialog shown when the syncthing binary returns an error-->
   <string name="binary_crashed_title">Syncthing Binary Crashed</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">The syncthing binary has exited with error code %1$d.\n\n
-If this error persists, try reinstalling the app and restarting your device.\n\n</string>
+  <!--Title of the "syncthing disabled" dialog-->
+  <!--Message of the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Exit</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Restart Needed</string>

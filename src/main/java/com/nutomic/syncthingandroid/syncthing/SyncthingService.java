@@ -1,466 +1,420 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Pair;
-import android.view.WindowManager;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.gui.MainActivity;
+import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.RepoObserver;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
  */
 public class SyncthingService extends Service {
 
-	private static final String TAG = "SyncthingService";
+    private static final String TAG = "SyncthingService";
 
-	private static final String TAG_NATIVE = "SyncthingNativeCode";
+    /**
+     * Intent action to perform a syncthing restart.
+     */
+    public static final String ACTION_RESTART = "restart";
 
-	private static final int NOTIFICATION_RUNNING = 1;
+    /**
+     * Interval in ms at which the GUI is updated (eg {@link }LocalNodeInfoFragment}).
+     */
+    public static final int GUI_UPDATE_INTERVAL = 1000;
 
-	/**
-	 * Intent action to perform a syncthing restart.
-	 */
-	public static final String ACTION_RESTART = "restart";
+    /**
+     * Name of the public key file in the data directory.
+     */
+    public static final String PUBLIC_KEY_FILE = "cert.pem";
 
-	/**
-	 * Interval in ms at which the GUI is updated (eg {@link }LocalNodeInfoFragment}).
-	 */
-	public static final int GUI_UPDATE_INTERVAL = 1000;
+    /**
+     * Name of the private key file in the data directory.
+     */
+    private static final String PRIVATE_KEY_FILE = "key.pem";
 
-	/**
-	 * Path to the native, integrated syncthing binary, relative to the data folder
-	 */
-	private static final String BINARY_NAME = "lib/libsyncthing.so";
+    /**
+     * Path to the native, integrated syncthing binary, relative to the data folder
+     */
+    public static final String BINARY_NAME = "lib/libsyncthing.so";
 
-	/**
-	 * Interval in ms, at which connections to the web gui are performed on first start
-	 * to find out if it's online.
-	 */
-	private static final long WEB_GUI_POLL_INTERVAL = 100;
+    public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
 
-	/**
-	 * File in the config folder that contains configuration.
-	 */
-	private static final String CONFIG_FILE = "config.xml";
+    public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
 
-	/**
-	 * Name of the public key file in the data directory.
-	 */
-	private static final String PUBLIC_KEY_FILE = "cert.pem";
+    public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
 
-	/**
-	 * Name of the private key file in the data directory.
-	 */
-	private static final String PRIVATE_KEY_FILE = "key.pem";
+    private ConfigXml mConfig;
 
-	private RestApi mApi;
+    private RestApi mApi;
 
-	private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
+    private LinkedList<RepoObserver> mObservers = new LinkedList<>();
 
-	/**
-	 * Callback for when the Syncthing web interface becomes first available after service start.
-	 */
-	public interface OnWebGuiAvailableListener {
-		public void onWebGuiAvailable();
-	}
+    private SyncthingRunnable mSyncthingRunnable;
 
-	private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
-			new HashSet<OnWebGuiAvailableListener>();
+    private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
-	private boolean mIsWebGuiAvailable = false;
+    /**
+     * Callback for when the Syncthing web interface becomes first available after service start.
+     */
+    public interface OnWebGuiAvailableListener {
+        public void onWebGuiAvailable();
+    }
 
-	public interface OnApiChangeListener {
-		public void onApiChange(boolean isAvailable);
-	}
+    private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
+            new HashSet<>();
 
-	private final HashSet<WeakReference<OnApiChangeListener>> mOnApiAvailableListeners =
-			new HashSet<WeakReference<OnApiChangeListener>>();
+    public interface OnApiChangeListener {
+        public void onApiChange(State currentState);
+    }
 
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (intent != null && ACTION_RESTART.equals(intent.getAction())) {
-			mIsWebGuiAvailable = false;
-			onApiChange(false);
-			new PostTask() {
-				@Override
-				protected void onPostExecute(Void aVoid) {
-					ConfigXml config = new ConfigXml(getConfigFile());
-					mApi = new RestApi(SyncthingService.this,
-							config.getWebGuiUrl(), config.getApiKey());
-					registerOnWebGuiAvailableListener(mApi);
-					new PollWebGuiAvailableTask().execute();
-				}
-			}.execute(mApi.getUrl(), PostTask.URI_RESTART, mApi.getApiKey());
-		}
-		return START_STICKY;
-	}
+    private final HashSet<WeakReference<OnApiChangeListener>> mOnApiChangeListeners =
+            new HashSet<>();
 
-	private Handler mMainThreadHandler;
+    /**
+     * INIT: Service is starting up and initializing.
+     * STARTING: Syncthing binary is starting (but the API is not yet ready).
+     * ACTIVE: Syncthing binary is up and running.
+     * DISABLED: Syncthing binary is stopped according to user preferences.
+     */
+    public enum State {
+        INIT,
+        STARTING,
+        ACTIVE,
+        DISABLED
+    }
 
-	/**
-	 * Runs the syncthing binary from command line, and prints its output to logcat (on exit).
-	 */
-	private class SyncthingRunnable implements Runnable {
-		@Override
-		public void run() {
-			DataOutputStream dos = null;
-			int ret = 1;
-			Process process = null;
-			try	{
-				process = Runtime.getRuntime().exec("sh");
-				dos = new DataOutputStream(process.getOutputStream());
-				// Set home directory to data folder for syncthing to use.
-				dos.writeBytes("HOME=" + getFilesDir() + " ");
-				// Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-				dos.writeBytes(getApplicationInfo().dataDir + "/" + BINARY_NAME + " " +
-						"-home " + getFilesDir() + "\n");
-				dos.writeBytes("exit\n");
-				dos.flush();
+    private State mCurrentState = State.INIT;
 
-				log(process.getInputStream());
+    /**
+     * True if a stop was requested while syncthing is starting, in that case, perform stop in
+     * {@link PollWebGuiAvailableTaskImpl}.
+     */
+    private boolean mStopScheduled = false;
 
-				ret = process.waitFor();
-			}
-			catch(IOException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-			}
-			catch(InterruptedException e) {
-				Log.e(TAG, "Failed to execute syncthing binary or read output", e);
-			}
-			finally {
-				try {
-					dos.close();
-				}
-				catch (IOException e) {
-					Log.w(TAG, "Failed to close shell stream", e);
-				}
-				process.destroy();
-				final int retVal = ret;
-				if (ret != 0) {
-					mMainThreadHandler.post(new Runnable() {
-						public void run() {
-							Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
-									Integer.toString(retVal));
-							AlertDialog dialog = new AlertDialog.Builder(SyncthingService.this)
-									.setTitle(R.string.binary_crashed_title)
-									.setMessage(getString(R.string.binary_crashed_message, retVal))
-									.setPositiveButton(android.R.string.ok,
-											new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialogInterface,
-												int i) {
-											System.exit(0);
-										}
-									})
-									.create();
-							dialog.getWindow()
-									.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-							dialog.show();
-						}
-					});
-				}
-			}
-		}
-	}
+    private DeviceStateHolder mDeviceStateHolder;
 
-	/**
-	 * Logs the outputs of a stream to logcat and mNativeLog.
-	 *
-	 * @param is The stream to log.
-	 */
-	private void log(final InputStream is) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
-				String line;
-				try {
-					while ((line = br.readLine()) != null) {
-						Log.i(TAG_NATIVE, line);
-					}
-				}
-				catch (IOException e) {
-					// NOTE: This is sometimes called on shutdown, as
-					// Process.destroy() closes the stream.
-					Log.w(TAG, "Failed to read syncthing command line output", e);
-				}
-			}
-		}).start();
-	}
+    /**
+     * Handles intents, either {@link #ACTION_RESTART}, or intents having
+     * {@link DeviceStateHolder#EXTRA_HAS_WIFI} or {@link DeviceStateHolder#EXTRA_IS_CHARGING}
+     * (which are handled by {@link DeviceStateHolder}.
+     */
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // Just catch the empty intent and return.
+        if (intent == null) {
+        }
+        else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
+            mApi.shutdown();
+            mCurrentState = State.INIT;
+            updateState();
+        }
+        else if (mCurrentState != State.INIT) {
+            mDeviceStateHolder.update(intent);
+            updateState();
+        }
+        return START_STICKY;
+    }
 
-	/**
-	 * Polls SYNCTHING_URL until it returns HTTP status OK, then calls all listeners
-	 * in mOnWebGuiAvailableListeners and clears it.
-	 */
-	private class PollWebGuiAvailableTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... voids) {
-			int status = 0;
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpHead head = new HttpHead(mApi.getUrl());
-			do {
-				try {
-					Thread.sleep(WEB_GUI_POLL_INTERVAL);
-					HttpResponse response = httpclient.execute(head);
-					// NOTE: status is not really needed, as HttpHostConnectException is thrown
-					// earlier.
-					status = response.getStatusLine().getStatusCode();
-				}
-				catch (HttpHostConnectException e) {
-					// We catch this in every call, as long as the service is not online,
-					// so we ignore and continue.
-				}
-				catch (IOException e) {
-					Log.w(TAG, "Failed to poll for web interface", e);
-				}
-				catch (InterruptedException e) {
-					Log.w(TAG, "Failed to poll for web interface", e);
-				}
-			} while(status != HttpStatus.SC_OK);
-			return null;
-		}
+    /**
+     * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
+     * or not.
+     *
+     * Depending on the result, syncthing is started or stopped, and {@link #onApiChange()} is
+     * called.
+     */
+    public void updateState() {
+        boolean shouldRun;
+        if (!alwaysRunInBackground(this)) {
+            // Always run, ignoring wifi/charging state.
+            shouldRun = true;
+        }
+        else {
+            // Check wifi/charging state against preferences and start if ok.
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
+            boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			Log.i(TAG, "Web GUI has come online at " + mApi.getUrl());
-			mIsWebGuiAvailable = true;
-			for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
-				listener.onWebGuiAvailable();
-			}
-			mOnWebGuiAvailableListeners.clear();
-		}
-	}
+            shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
+                    (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
+        }
 
-	/**
-	 * Move config file, keys, and index files to "official" folder
-	 *
-	 * Intended to bring the file locations in older installs in line with
-	 * newer versions.
-	 */
-	private void moveConfigFiles() {
-		FilenameFilter idxFilter = new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".idx.gz");
-			}
-		};
+        // Start syncthing.
+        if (shouldRun) {
+            if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
+                mStopScheduled = false;
+                return;
+            }
 
-		if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
-			try {
-				File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
-				publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
-				File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
-				privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
-				File config = new File(getApplicationInfo().dataDir, CONFIG_FILE);
-				config.renameTo(new File(getFilesDir(), CONFIG_FILE));
+            // HACK: Make sure there is no syncthing binary left running from an improper
+            // shutdown (eg Play Store update).
+            // NOTE: This will log an exception if syncthing is not actually running.
+            mApi.shutdown();
 
-				File oldStorageDir = new File(getApplicationInfo().dataDir);
-				File[] files = oldStorageDir.listFiles(idxFilter);
-				for (File file : files) {
-					if (file.isFile()) {
-						file.renameTo(new File(getFilesDir(), file.getName()));
-					}
-				}
-			}
-			catch (Exception e) {
-				Log.e(TAG, "Failed to move config files", e);
-			}
-		}
-	}
+            Log.i(TAG, "Starting syncthing according to current state and preferences");
+            mCurrentState = State.STARTING;
+            registerOnWebGuiAvailableListener(mApi);
+            new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
+            new Thread(new SyncthingRunnable(
+                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
+        }
+        // Stop syncthing.
+        else {
+            if (mCurrentState == State.DISABLED)
+                return;
 
-	/**
-	 * Creates notification, starts native binary.
-	 */
-	@Override
-	public void onCreate() {
-		PendingIntent pi = PendingIntent.getActivity(
-				this, 0, new Intent(this, MainActivity.class),
-				PendingIntent.FLAG_UPDATE_CURRENT);
-		Notification n = new NotificationCompat.Builder(this)
-				.setContentTitle(getString(R.string.app_name))
-				.setSmallIcon(R.drawable.ic_launcher)
-				.setContentIntent(pi)
-				.setPriority(NotificationCompat.PRIORITY_MIN)
-				.build();
-		n.flags |= Notification.FLAG_ONGOING_EVENT;
-		startForeground(NOTIFICATION_RUNNING, n);
+            Log.i(TAG, "Stopping syncthing according to current state and preferences");
+            mCurrentState = State.DISABLED;
 
-		new StartupTask().execute();
-	}
+            // Syncthing is currently started, perform the stop later.
+            if (mCurrentState == State.STARTING) {
+                mStopScheduled = true;
+            } else if (mApi != null) {
+                mApi.shutdown();
+                for (RepoObserver ro : mObservers) {
+                    ro.stopWatching();
+                }
+                mObservers.clear();
+            }
+        }
+        onApiChange();
+    }
 
-	/**
-	 * Sets up the initial configuration, updates the config when coming from an old
-	 * version, and reads syncthing URL and API key (these are passed internally as
-	 * {@code Pair<String, String>}.
-	 */
-	private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
-		@Override
-		protected Pair<String, String> doInBackground(Void... voids) {
-			//Looper.prepare();
-			if (isFirstStart()) {
-				Log.i(TAG, "App started for the first time. " +
-						"Copying default config, keys will be generated automatically");
-				copyDefaultConfig();
-			}
+    /**
+     * Move config file, keys, and index files to "official" folder
+     *
+     * Intended to bring the file locations in older installs in line with
+     * newer versions.
+     */
+    private void moveConfigFiles() {
+        FilenameFilter idxFilter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".idx.gz");
+            }
+        };
 
-			moveConfigFiles();
-			ConfigXml config = new ConfigXml(getConfigFile());
-			if (isFirstStart()) {
-				config.createCameraRepo();
-			}
-			config.update();
-			return new Pair<String, String>(config.getWebGuiUrl(), config.getApiKey());
-		}
+        if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
+            File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
+            publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
+            File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
+            privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
+            File config = new File(getApplicationInfo().dataDir, ConfigXml.CONFIG_FILE);
+            config.renameTo(new File(getFilesDir(), ConfigXml.CONFIG_FILE));
 
-		@Override
-		protected void onPostExecute(Pair<String, String> urlAndKey) {
-			mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second);
-			Log.i(TAG, "Web GUI will be available at " + mApi.getUrl());
-			// HACK: Make sure there is no syncthing binary left running from an improper
-			// shutdown (eg Play Store update).
-			// NOTE: This will log an exception if syncthing is not actually running.
-			new PostTask().execute(mApi.getUrl(), PostTask.URI_SHUTDOWN, urlAndKey.second, "");
-			registerOnWebGuiAvailableListener(mApi);
-			new PollWebGuiAvailableTask().execute();
-			mMainThreadHandler = new Handler();
-			new Thread(new SyncthingRunnable()).start();
-		}
-	}
+            File oldStorageDir = new File(getApplicationInfo().dataDir);
+            File[] files = oldStorageDir.listFiles(idxFilter);
+            for (File file : files) {
+                if (file.isFile()) {
+                    file.renameTo(new File(getFilesDir(), file.getName()));
+                }
+            }
+        }
+    }
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		return mBinder;
-	}
+    /**
+     * Starts the native binary.
+     */
+    @Override
+    public void onCreate() {
+        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
+        registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        new StartupTask().execute();
+    }
 
-	/**
-	 * Stops the native binary.
-	 */
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		Log.i(TAG, "Shutting down service");
-		mApi.shutdown();
-	}
+    /**
+     * Sets up the initial configuration, updates the config when coming from an old
+     * version, and reads syncthing URL and API key (these are passed internally as
+     * {@code Pair<String, String>}.
+     */
+    private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+        @Override
+        protected Pair<String, String> doInBackground(Void... voids) {
+            moveConfigFiles();
+            mConfig = new ConfigXml(SyncthingService.this);
+            mConfig.updateIfNeeded();
 
-	/**
-	 * Register a listener for the web gui becoming available..
-	 *
-	 * If the web gui is already available, listener will be called immediately.
-	 * Listeners are unregistered automatically after being called.
-	 */
-	public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
-		if (mIsWebGuiAvailable) {
-			listener.onWebGuiAvailable();
-		}
-		else {
-			mOnWebGuiAvailableListeners.add(listener);
-		}
-	}
+            if (isFirstStart()) {
+                Log.i(TAG, "App started for the first time. " +
+                        "Copying default config, keys will be generated automatically");
+                mConfig.createCameraRepo();
+            }
 
-	private File getConfigFile() {
-		return new File(getFilesDir(), CONFIG_FILE);
-	}
+            return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
+        }
 
-	/**
-	 * Returns true if this service has not been started before (ie config.xml does not exist).
-	 *
-	 * This will return true until the public key file has been generated.
-	 */
-	public boolean isFirstStart() {
-		return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
-	}
+        @Override
+        protected void onPostExecute(Pair<String, String> urlAndKey) {
+            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
+                    new RestApi.OnApiAvailableListener() {
+                @Override
+                public void onApiAvailable() {
+                    onApiChange();
+                    for (RestApi.Repo r : mApi.getRepos()) {
+                        mObservers.add(new RepoObserver(mApi, r));
+                    }
+                }
+            });
+            registerOnWebGuiAvailableListener(mApi);
+            Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
+            updateState();
+        }
+    }
 
-	/**
-	 * Copies the default config file from res/raw/config_default.xml to (data folder)/config.xml.
-	 */
-	private void copyDefaultConfig() {
-		InputStream in = null;
-		FileOutputStream out = null;
-		try {
-			in = getResources().openRawResource(R.raw.config_default);
-			out = new FileOutputStream(getConfigFile());
-			byte[] buff = new byte[1024];
-			int read;
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 
-			while ((read = in.read(buff)) > 0) {
-				out.write(buff, 0, read);
-			}
-		}
-		catch (IOException e) {
-			throw new RuntimeException("Failed to write config file", e);
-		}
-		finally {
-			try {
-				in.close();
-				out.close();
-			}
-			catch (IOException e) {
-				Log.w(TAG, "Failed to close stream while copying config", e);
-			}
-		}
-	}
+    /**
+     * Stops the native binary.
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "Shutting down service");
+        if (mApi != null) {
+            mApi.shutdown();
+        }
+    }
 
-	public RestApi getApi() {
-		return mApi;
-	}
+    /**
+     * Register a listener for the web gui becoming available..
+     *
+     * If the web gui is already available, listener will be called immediately.
+     * Listeners are unregistered automatically after being called.
+     */
+    public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
+        if (mCurrentState == State.ACTIVE) {
+            listener.onWebGuiAvailable();
+        } else {
+            mOnWebGuiAvailableListeners.add(listener);
+        }
+    }
 
-	/**
-	 * Register a listener for the syncthing API state changing.
-	 *
-	 * The listener is called immediately with the current state, and again whenever the state
-	 * changes.
-	 */
-	public void registerOnApiChangeListener(OnApiChangeListener listener) {
-		listener.onApiChange((mApi != null) ? mApi.isApiAvailable() : false);
-		mOnApiAvailableListeners.add(new WeakReference<OnApiChangeListener>(listener));
-	}
+    /**
+     * Returns true if this service has not been started before (ie config.xml does not exist).
+     *
+     * This will return true until the public key file has been generated.
+     */
+    public boolean isFirstStart() {
+        return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
+    }
 
-	/**
-	 * Called when the state of the API changes.
-	 *
-	 * Must only be called from SyncthingService or {@link RestApi}.
-	 */
-	public void onApiChange(boolean isAvailable) {
-		for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiAvailableListeners.iterator(); i.hasNext();) {
-			WeakReference<OnApiChangeListener> listener = i.next();
-			if (listener.get() != null) {
-				listener.get().onApiChange(isAvailable);
-			}
-			else {
-				i.remove();
-			}
-		}
-	}
+    public RestApi getApi() {
+        return mApi;
+    }
+
+    /**
+     * Register a listener for the syncthing API state changing.
+     *
+     * The listener is called immediately with the current state, and again whenever the state
+     * changes.
+     */
+    public void registerOnApiChangeListener(OnApiChangeListener listener) {
+        // Make sure we don't send an invalid state or syncthing might shwow a "disabled" message
+        // when it's just starting up.
+        listener.onApiChange(mCurrentState);
+        mOnApiChangeListeners.add(new WeakReference<>(listener));
+    }
+
+    private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mStopScheduled) {
+                mCurrentState = State.DISABLED;
+                onApiChange();
+                mApi.shutdown();
+                mStopScheduled = false;
+                return;
+            }
+            Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+            mCurrentState = State.ACTIVE;
+            for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
+                listener.onWebGuiAvailable();
+            }
+            mOnWebGuiAvailableListeners.clear();
+        }
+    }
+
+    /**
+     * Called to notifiy listeners of an API change.
+     *
+     * Must only be called from SyncthingService or {@link RestApi}.
+     */
+    private void onApiChange() {
+        for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiChangeListeners.iterator();
+             i.hasNext(); ) {
+            WeakReference<OnApiChangeListener> listener = i.next();
+            if (listener.get() != null) {
+                listener.get().onApiChange(mCurrentState);
+            } else {
+                i.remove();
+            }
+        }
+    }
+
+    /**
+     * Dialog to be shown when attempting to start syncthing while it is disabled according
+     * to settings (because the device is not charging or wifi is disconnected).
+     */
+    public static AlertDialog showDisabledDialog(final Activity activity) {
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setTitle(R.string.syncthing_disabled_title)
+                .setMessage(R.string.syncthing_disabled_message)
+                .setPositiveButton(R.string.syncthing_disabled_change_settings,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                activity.finish();
+                                Intent intent = new Intent(activity, SettingsActivity.class)
+                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT);
+                                activity.startActivity(intent);
+                            }
+                        }
+                )
+                .setNegativeButton(R.string.exit,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                activity.finish();
+                            }
+                        }
+                )
+                .show();
+        dialog.setCancelable(false);
+        return dialog;
+    }
+
+    public String getWebGuiUrl() {
+        return mConfig.getWebGuiUrl();
+    }
+
+    /**
+     * Returns the value of "always_run_in_background" preference.
+     */
+    public static boolean alwaysRunInBackground(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean(PREF_ALWAYS_RUN_IN_BACKGROUND, false);
+    }
 
 }

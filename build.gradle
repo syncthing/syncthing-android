@@ -1,135 +1,155 @@
 buildscript {
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+        jcenter()
 
-	dependencies {
-		classpath 'com.android.tools.build:gradle:0.12.+'
-		classpath 'com.alexvasilkov:android_sign:0.2+'
-	}
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.alexvasilkov:android_sign:0.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-6'
+        classpath 'org.codehaus.groovy:groovy-backports-compat23:2.3.5'
+    }
 }
 
 import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
 apply plugin: 'android_sign'
+apply plugin: 'com.github.ben-manes.versions'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+    maven {
+        url {
+            'https://raw.github.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/'
+        }
+    }
 }
 
 dependencies {
-	compile 'com.android.support:appcompat-v7:19.1.+'
+    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.0.0'
 }
 
 preBuild {
-	dependsOn 'buildNative'
+    dependsOn 'buildNative'
 }
 
 android {
-	compileSdkVersion 19
-	buildToolsVersion "19.1.0"
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
 
-	defaultConfig {
-		versionCode getVersionCodeFromManifest()
-	}
+    defaultConfig {
+        versionCode getVersionCodeFromManifest()
+        testApplicationId 'com.nutomic.syncthingandroid.test'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        testHandleProfiling true
+        testFunctionalTest true
+    }
 
-	sourceSets {
-		main {
-			jniLibs.srcDir file("libs/")
-		}
-	}
+    sourceSets {
+        main {
+            jniLibs.srcDir file("libs/")
+        }
+    }
 
-	signingConfigs {
-		release {
-			// Android Studio does not pass environment variables.
-			// This means you have to use the command line for release builds.
-			def ks = System.getenv("KEYSTORE")
-			def ka = System.getenv("KEY_ALIAS")
-			if (ks != null && ka != null) {
-				storeFile file(ks)
-				keyAlias ka
-			}
-		}
-	}
+    signingConfigs {
+        release {
+            // Android Studio does not pass environment variables.
+            // This means you have to use the command line for release builds.
+            def ks = System.getenv("KEYSTORE")
+            def ka = System.getenv("KEY_ALIAS")
+            if (ks != null && ka != null) {
+                storeFile file(ks)
+                keyAlias ka
+            }
+        }
+    }
 
-	buildTypes {
-		debug {
-			applicationIdSuffix ".debug"
-			debuggable true
-		}
-		release {
-			signingConfig signingConfigs.release
-		}
-	}
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 
-	productFlavors {
-		x86 {
-			versionCode Integer.parseInt("4" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "x86"
-			}
-		}
-		armeabi_v7a {
-			versionCode Integer.parseInt("3" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "armeabi-v7a"
-			}
-		}
-		armeabi {
-			versionCode Integer.parseInt("2" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "armeabi"
-			}
-		}
-		mips {
-			versionCode Integer.parseInt("1" + defaultConfig.versionCode)
-			ndk {
-				abiFilter "mips"
-			}
-		}
-		fat {
-			versionCode Integer.parseInt("0" + defaultConfig.versionCode)
-		}
-	}
+    productFlavors {
+        x86 {
+            versionCode Integer.parseInt("4" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        armeabi_v7a {
+            versionCode Integer.parseInt("3" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "armeabi-v7a"
+            }
+        }
+        armeabi {
+            versionCode Integer.parseInt("2" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "armeabi"
+            }
+        }
+        mips {
+            versionCode Integer.parseInt("1" + defaultConfig.versionCode)
+            ndk {
+                abiFilter "mips"
+            }
+        }
+        fat {
+            versionCode Integer.parseInt("0" + defaultConfig.versionCode)
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 def getVersionCodeFromManifest() {
-	def manifestFile = file(android.sourceSets.main.manifest.srcFile)
-	def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
-	def matcher = pattern.matcher(manifestFile.getText())
-	matcher.find()
-	return Integer.parseInt(matcher.group(1))
+    def manifestFile = file(android.sourceSets.main.manifest.srcFile)
+    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+    def matcher = pattern.matcher(manifestFile.getText())
+    matcher.find()
+    return Integer.parseInt(matcher.group(1))
 }
 
 task buildNative(type: Exec) {
-	outputs.upToDateWhen { false }
-	executable = './build-syncthing.sh'
+    outputs.upToDateWhen { false }
+    executable = './build-syncthing.sh'
 }
 
 task copyNative(type: Copy) {
-	def lib_dir = "libs/"
-	new File(lib_dir).mkdirs()
-	def st_dir = "bin/";
-	from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
-	into lib_dir
-	rename('syncthing-x86', 'x86/libsyncthing.so')
+    def lib_dir = "libs/"
+    new File(lib_dir).mkdirs()
+    def st_dir = "bin/";
+    from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
+    into lib_dir
+    rename('syncthing-x86', 'x86/libsyncthing.so')
     rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
-	rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
+    rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
 }
 buildNative.finalizedBy copyNative
 
 task cleanBin(type: Delete) {
-	delete 'bin/'
+    delete 'bin/'
 }
 copyNative.finalizedBy cleanBin
 
 task cleanNative(type: Delete) {
-	delete 'bin/'
-	delete 'build/'
-	delete 'libs/'
-	delete 'ext/syncthing/bin/'
-	delete 'ext/syncthing/pkg/'
+    delete 'bin/'
+    delete 'build/'
+    delete 'libs/'
+    delete 'ext/syncthing/bin/'
+    delete 'ext/syncthing/pkg/'
 }
 clean.dependsOn cleanNative
 
