@@ -122,8 +122,11 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Immer im Hintergrund ausführen</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing läuft immer im Hintergrund, entsprechend den folgenden Einstellungen.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
   <!--Title for the preference to set STTRACE parameters-->

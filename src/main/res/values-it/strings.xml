@@ -85,6 +85,7 @@
   <!--Setting title-->
   <string name="current_address">Indirizzo Attuale</string>
   <!--Setting title-->
+  <string name="compression">Compressione</string>
   <!--ActionBar item-->
   <string name="delete_node">Elimina Nodo</string>
   <!--Title for NodeSettingsFragment in create mode-->
@@ -121,6 +122,7 @@ Installare un lettore o inserire l\'ID del nodo manualmente.</string>
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Opzioni di Debug</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Segnala Problema</string>
   <!--Summary for the issue tracker settings item-->
@@ -142,8 +144,11 @@ Installare un lettore o inserire l\'ID del nodo manualmente.</string>
   <string name="binary_crashed_title">L\'app Syncthing si è bloccata</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing è disabilitato</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Vuoi cambiare le tue preferenze?</string>
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Cambia Impostazioni</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Esci</string>
   <!--RestApi-->

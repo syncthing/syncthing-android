@@ -124,8 +124,11 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Vždy spouštět v pozadí</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing poběží vždy v pozadí, podle nastavení níže.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing poběží pouze pokud bude ručně spuštěn a může být ukončen tlačítkem z menu.</string>
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze při připojení na wifi</string>
   <!--Title for the preference to set STTRACE parameters-->
