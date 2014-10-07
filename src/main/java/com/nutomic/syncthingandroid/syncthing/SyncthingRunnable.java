@@ -48,20 +48,23 @@ public class SyncthingRunnable implements Runnable {
         int ret = 1;
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec("sh");
-            dos = new DataOutputStream(process.getOutputStream());
-            // Set home directory to data folder for syncthing to use.
-            dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
-            dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
-            dos.writeBytes("STNORESTART=1 ");
-            // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-            dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
-            dos.writeBytes("exit\n");
-            dos.flush();
+            // Loop to handle syncthing restarts (these always have an error code of 3).
+            do {
+                process = Runtime.getRuntime().exec("sh");
+                dos = new DataOutputStream(process.getOutputStream());
+                // Set home directory to data folder for syncthing to use.
+                dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
+                dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
+                dos.writeBytes("STNORESTART=1 ");
+                // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
+                dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
+                dos.writeBytes("exit\n");
+                dos.flush();
 
-            log(process.getInputStream());
+                log(process.getInputStream());
 
-            ret = process.waitFor();
+                ret = process.waitFor();
+            } while (ret == 3);
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
