@@ -3,31 +3,20 @@
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Dodaj Folderzytorium</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Odostępnij ID Węzła</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Wyślij ID węzła do</string>
-  <!--Text for FolderFragment and DevicesFragment loading view-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Oczekiwanie na API API</string>
-  <!--FolderFragment-->
-  <string name="Folder_fragment_title">Folderzytoria</string>
+  <!--FoldersFragment-->
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
-  <string name="Folder_list_empty">Brak znalezionych węzłów</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d plików</string>
   <!--DevicesFragment-->
-  <string name="devices_fragment_title">Węzły</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Brak znalezionych węzłów</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Aktualne</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Synchronizacja (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Rozłączono</string>
   <!--Title for current download rate-->
   <string name="download_title">Pobieranie</string>
   <!--Title for current upload rate-->
@@ -47,37 +36,26 @@
   <string name="announce_server">Ogłoś serwer</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
-  <string name="folder_id">Folder ID</string>
   <!--Setting title-->
   <string name="directory">Directory</string>
   <!--Setting title-->
   <!--Setting title-->
-  <string name="folder_master">Folder Master</string>
   <!--Setting title-->
-  <string name="devices">Devices</string>
   <!--Setting title-->
   <string name="file_versioning">File Versioning</string>
   <!--Setting title-->
   <string name="keep_versions">Keep Versions</string>
   <!--Setting title-->
-  <string name="delete_folder">Delete Folder</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Create Folder</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Edit Folder</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Create</string>
   <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Do you really want to delete this folder?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">The folder ID must not be empty</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">The folder path must not be empty</string>
-  <!--Toast shown when selecting 'devices' if no nodes have been added-->
-  <string name="no_devices">Please connect a node first.</string>
+  <!--Toast shown when selecting 'devices' if no devices have been added-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
-  <string name="device_id">Device ID</string>
   <!--Setting title-->
   <string name="name">Name</string>
   <!--Setting title-->
@@ -86,24 +64,16 @@
   <string name="current_address">Current Address</string>
   <!--Setting title-->
   <!--ActionBar item-->
-  <string name="delete_device">Delete Device</string>
   <!--Title for DeviceSettingsFragment in create mode-->
-  <string name="add_device">Add Device</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Add</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Edit Device</string>
   <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Do you really want to delete this node?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">The node ID must not be empty</string>
   <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">The node name must not be empty</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scan QR Code</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">You have no QR scanner installed or your scanner is not supported. \
-Please install a scanner or enter the device ID manually.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
@@ -122,9 +92,9 @@ Please install a scanner or enter the device ID manually.</string>
   <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
-  <string name="folderrt_issue_title">Folderrt Issue</string>
+  <string name="report_issue_title">Report Issue</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="folderrt_issue_summary">Open the Syncthing-Android issue tracker</string>
+  <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Version</string>
@@ -133,8 +103,7 @@ Please install a scanner or enter the device ID manually.</string>
   <string name="folder_picker_title">Folder Picker</string>
   <!--ListView empty text-->
   <string name="directory_empty">Directory is Empty</string>
-  <!--Menu item to create folder-->
-  <string name="create_fs_folder">Create new Folder</string>
+  <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
   <string name="select_folder">Select Folder</string>
   <!--SyncthingService-->
@@ -154,7 +123,6 @@ Please install a scanner or enter the device ID manually.</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Restart Later</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">Device ID copied to clipboard</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
