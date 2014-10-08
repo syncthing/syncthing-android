@@ -88,7 +88,9 @@ public class FolderObserver extends FileObserver {
             case MOVED_TO:
                 // fall through
             case CREATE:
-                mChilds.add(new FolderObserver(mListener, mFolder, path));
+                if (new File(mPath, path).isDirectory()) {
+                    mChilds.add(new FolderObserver(mListener, mFolder, path));
+                }
                 // fall through
             default:
                 mListener.onFolderFileChange(mFolder.ID, new File(mPath, path).getPath());
