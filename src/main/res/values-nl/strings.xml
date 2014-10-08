@@ -2,37 +2,37 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
-  <!--Title of the "add repo" menu action-->
-  <string name="add_repo">Pakketbron toevoegen</string>
-  <!--Title of the "share node id" menu action-->
-  <string name="share_node_id">Knooppunt-ID delen</string>
-  <!--Shown in the chooser dialog when sharing a Node ID-->
-  <string name="send_node_id_to">Knooppunt-ID verzenden aan</string>
-  <!--Text for RepositoriesFragment and NodesFragment loading view-->
+  <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Pakketbron toevoegen</string>
+  <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Knooppunt-ID delen</string>
+  <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Knooppunt-ID verzenden aan</string>
+  <!--Text for FolderFragment and DevicesFragment loading view-->
   <string name="api_loading">Wachten op API</string>
-  <!--RepositoriesFragment-->
-  <string name="repositories_fragment_title">Pakketbronnen</string>
-  <!--Format string for repository progress. First parameter is status string, second is sync percentage-->
-  <string name="repo_progress_format">%1$s (%2$d%%)</string>
-  <!--Shown if no repos exist-->
-  <string name="repositories_list_empty">Geen pakketbronnen gevonden</string>
-  <!--Format string for repository file count-->
+  <!--FolderFragment-->
+  <string name="Folder_fragment_title">Pakketbronnen</string>
+  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no folders exist-->
+  <string name="Folder_list_empty">Geen pakketbronnen gevonden</string>
+  <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d bestanden</string>
-  <!--NodesFragment-->
-  <string name="nodes_fragment_title">Knooppunten</string>
-  <!--Shown if no nodes exist-->
-  <string name="nodes_list_empty">Geen knooppunten gevonden</string>
-  <!--Indicates that a repo is fully synced to the local node-->
-  <string name="node_up_to_date">Bijgewerkt</string>
-  <!--Indicates that the node is currently syncing. Parameter is sync percentage-->
-  <string name="node_syncing">Bezig met synchroniseren (%1$d%%)</string>
-  <!--Indicates that there is no connection to the node-->
-  <string name="node_disconnected">Niet verbonden</string>
+  <!--DevicesFragment-->
+  <string name="devices_fragment_title">Knooppunten</string>
+  <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Geen knooppunten gevonden</string>
+  <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Bijgewerkt</string>
+  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Bezig met synchroniseren (%1$d%%)</string>
+  <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Niet verbonden</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
-  <!--LocalNodeInfoFragment-->
+  <!--LocalDeviceInfoFragment-->
   <!--ActionBar title shown when the drawer is open-->
   <string name="system_info">Systeeminformatie</string>
   <!--Same as download_title with a colon and space appended-->
@@ -45,39 +45,39 @@
   <string name="ram_usage">RAM-gebrui</string>
   <!--Title for announce server status-->
   <string name="announce_server">Mededelingsserver</string>
-  <!--RepoSettingsFragment-->
+  <!--FolderSettingsFragment-->
   <!--Setting title-->
-  <string name="repo_id">Pakketbron-ID</string>
+  <string name="folder_id">Pakketbron-ID</string>
   <!--Setting title-->
   <string name="directory">Map</string>
   <!--Setting title-->
   <!--Setting title-->
-  <string name="repo_master">Pakketbronmeester</string>
+  <string name="folder_master">Pakketbronmeester</string>
   <!--Setting title-->
-  <string name="nodes">Knooppunten</string>
+  <string name="devices">Knooppunten</string>
   <!--Setting title-->
   <string name="file_versioning">Bestandsversies</string>
   <!--Setting title-->
   <string name="keep_versions">Versies behouden</string>
   <!--Setting title-->
-  <string name="delete_repo">Pakketbron verwijderen</string>
-  <!--Title for RepoSettingsFragment in create mode-->
-  <string name="create_repo">Pakketbron creëren</string>
-  <!--Title for RepoSettingsFragment in edit mode-->
-  <string name="edit_repo">Pakketbron bewerken</string>
-  <!--Menu item to confirm repo creation-->
+  <string name="delete_folder">Pakketbron verwijderen</string>
+  <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Pakketbron creëren</string>
+  <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Pakketbron bewerken</string>
+  <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
-  <!--Dialog shown when attempting to delete a repository-->
-  <string name="delete_repo_confirm">Weet u zeker dat u deze pakketbron wilt verwijderen?</string>
-  <!--Toast shown when trying to create a repository with an empty ID-->
-  <string name="repo_id_required">De pakketbron-ID mag niet leeg zijn</string>
-  <!--Toast shown when trying to create a repository with an empty path-->
-  <string name="repo_path_required">Het pakketbron-pad mag niet leeg zijn</string>
-  <!--Toast shown when selecting 'nodes' if no nodes have been added-->
-  <string name="no_nodes">Verbind eerst met een knooppunt.</string>
-  <!--NodeSettingsFragment-->
+  <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Weet u zeker dat u deze pakketbron wilt verwijderen?</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">De pakketbron-ID mag niet leeg zijn</string>
+  <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Het pakketbron-pad mag niet leeg zijn</string>
+  <!--Toast shown when selecting 'devices' if no nodes have been added-->
+  <string name="no_devices">Verbind eerst met een knooppunt.</string>
+  <!--DeviceSettingsFragment-->
   <!--Setting title-->
-  <string name="node_id">Knooppunt-ID</string>
+  <string name="device_id">Knooppunt-ID</string>
   <!--Setting title-->
   <string name="name">Naam</string>
   <!--Setting title-->
@@ -86,20 +86,20 @@
   <string name="current_address">Huidig adres</string>
   <!--Setting title-->
   <!--ActionBar item-->
-  <string name="delete_node">Knooppunt verwijderen</string>
-  <!--Title for NodeSettingsFragment in create mode-->
-  <string name="add_node">Knooppunt toevoegen</string>
-  <!--Menu item to confirm adding a node-->
+  <string name="delete_device">Knooppunt verwijderen</string>
+  <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Knooppunt toevoegen</string>
+  <!--Menu item to confirm adding a device-->
   <string name="add">Toevoegen</string>
-  <!--Title for NodeSettingsFragment in edit mode-->
-  <string name="edit_node">Knooppunt bewerken</string>
-  <!--Dialog shown when attempting to delete a node-->
-  <string name="delete_node_confirm">Weet u zeker dat u dit knooppunt wilt verwijderen?</string>
-  <!--Toast shown when trying to create a node with an empty ID-->
-  <string name="node_id_required">De knooppunt-ID mag niet leeg zijn</string>
-  <!--Toast shown when trying to create a node with an empty name-->
-  <string name="node_name_required">De knooppuntnaam mag niet leeg zijn</string>
-  <!--Content description for node ID qr code icon-->
+  <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Knooppunt bewerken</string>
+  <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Weet u zeker dat u dit knooppunt wilt verwijderen?</string>
+  <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">De knooppunt-ID mag niet leeg zijn</string>
+  <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">De knooppuntnaam mag niet leeg zijn</string>
+  <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
   <string name="no_qr_scanner_installed">U heeft QR-code-scanner geïnstalleerd of uw scanner wordt niet ondersteund.\
@@ -122,9 +122,9 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <!--Preference summary in case it is disabled-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Probleem rapporteren</string>
+  <string name="folderrt_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">De Syncthing-Android probleemtracker openen</string>
+  <string name="folderrt_issue_summary">De Syncthing-Android probleemtracker openen</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Synthing-versie</string>
@@ -134,7 +134,7 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <!--ListView empty text-->
   <string name="directory_empty">Map is leeg</string>
   <!--Menu item to create folder-->
-  <string name="create_folder">Nieuwe map creëren</string>
+  <string name="create_fs_folder">Nieuwe map creëren</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Map selecteren</string>
   <!--SyncthingService-->
@@ -153,8 +153,8 @@ Installeer een scanner of vul de knooppunt-ID handmatig in.</string>
   <string name="restart_notification_text">Klik hier om Syncthing nu te herstarten</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Later herstarten</string>
-  <!--Shown when a node ID is copied to the clipboard-->
-  <string name="node_id_copied_to_clipboard">Knooppunt-ID gekopieerd naar klembord</string>
+  <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">Knooppunt-ID gekopieerd naar klembord</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>

@@ -23,12 +23,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Displays information about the local node.
+ * Displays information about the local device.
  */
-public class LocalNodeInfoFragment extends Fragment
+public class LocalDeviceInfoFragment extends Fragment
         implements RestApi.OnReceiveSystemInfoListener, RestApi.OnReceiveConnectionsListener {
 
-    private TextView mNodeId;
+    private TextView mDeviceId;
 
     private TextView mCpuUsage;
 
@@ -64,7 +64,7 @@ public class LocalNodeInfoFragment extends Fragment
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
-            LocalNodeInfoFragment.this.onDrawerOpened();
+            LocalDeviceInfoFragment.this.onDrawerOpened();
         }
     }
 
@@ -72,8 +72,8 @@ public class LocalNodeInfoFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.local_node_info_fragment, container, false);
-        mNodeId = (TextView) view.findViewById(R.id.node_id);
+        View view = inflater.inflate(R.layout.local_device_info_fragment, container, false);
+        mDeviceId = (TextView) view.findViewById(R.id.device_id);
         mCpuUsage = (TextView) view.findViewById(R.id.cpu_usage);
         mRamUsage = (TextView) view.findViewById(R.id.ram_usage);
         mDownload = (TextView) view.findViewById(R.id.download);
@@ -131,11 +131,11 @@ public class LocalNodeInfoFragment extends Fragment
         if (getActivity() == null)
             return;
 
-        mNodeId.setText(info.myID);
-        mNodeId.setOnTouchListener(new View.OnTouchListener() {
+        mDeviceId.setText(info.myID);
+        mDeviceId.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                mActivity.getApi().copyNodeId(mNodeId.getText().toString());
+                mActivity.getApi().copyDeviceId(mDeviceId.getText().toString());
                 view.performClick();
                 return true;
             }
@@ -156,19 +156,19 @@ public class LocalNodeInfoFragment extends Fragment
      */
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-        RestApi.Connection c = connections.get(RestApi.LOCAL_NODE_CONNECTIONS);
+        RestApi.Connection c = connections.get(RestApi.LOCAL_DEVICE_CONNECTIONS);
         mDownload.setText(RestApi.readableTransferRate(mActivity, c.InBits));
         mUpload.setText(RestApi.readableTransferRate(mActivity, c.OutBits));
     }
 
     /**
-     * Shares the local node ID when "share" is clicked.
+     * Shares the local device ID when "share" is clicked.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.share_node_id:
-                RestApi.shareNodeId(getActivity(), mNodeId.getText().toString());
+            case R.id.share_device_id:
+                RestApi.shareDeviceId(getActivity(), mDeviceId.getText().toString());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

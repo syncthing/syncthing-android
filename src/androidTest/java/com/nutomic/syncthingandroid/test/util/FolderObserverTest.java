@@ -6,15 +6,15 @@ import android.test.suitebuilder.annotation.MediumTest;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.test.Util;
-import com.nutomic.syncthingandroid.util.RepoObserver;
+import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class RepoObserverTest extends AndroidTestCase
-        implements RepoObserver.OnRepoFileChangeListener {
+public class FolderObserverTest extends AndroidTestCase
+        implements FolderObserver.OnFolderFileChangeListener {
 
     private File mTestFolder;
 
@@ -36,15 +36,15 @@ public class RepoObserverTest extends AndroidTestCase
     }
 
     @Override
-    public void onRepoFileChange(String repoId, String relativePath) {
+    public void onFolderFileChange(String folderId, String relativePath) {
         mLatch.countDown();
-        assertEquals(mCurrentTest, repoId);
+        assertEquals(mCurrentTest, folderId);
         assertFalse(relativePath.endsWith("should-not-notifiy"));
     }
 
-    private RestApi.Repo createRepo(String id) {
-        RestApi.Repo r = new RestApi.Repo();
-        r.Directory = mTestFolder.getAbsolutePath();
+    private RestApi.Folder createFolder(String id) {
+        RestApi.Folder r = new RestApi.Folder();
+        r.Path = mTestFolder.getAbsolutePath();
         r.ID = id;
         return r;
     }
@@ -54,7 +54,7 @@ public class RepoObserverTest extends AndroidTestCase
         mCurrentTest = "testRecursion";
         File subFolder = new File(mTestFolder, "subfolder");
         subFolder.mkdir();
-        RepoObserver ro = new RepoObserver(this, createRepo(mCurrentTest));
+        FolderObserver ro = new FolderObserver(this, createFolder(mCurrentTest));
         File testFile = new File(subFolder, "test");
         mLatch = new CountDownLatch(1);
         testFile.createNewFile();
@@ -67,7 +67,7 @@ public class RepoObserverTest extends AndroidTestCase
         mCurrentTest = "testRemoveDirectory";
         File subFolder = new File(mTestFolder, "subfolder");
         subFolder.mkdir();
-        RepoObserver ro = new RepoObserver(this, createRepo(mCurrentTest));
+        FolderObserver ro = new FolderObserver(this, createFolder(mCurrentTest));
         File movedSubFolder = new File(getContext().getFilesDir(), subFolder.getName());
         subFolder.renameTo(movedSubFolder);
         File testFile = new File(movedSubFolder, "should-not-notifiy");
@@ -81,7 +81,7 @@ public class RepoObserverTest extends AndroidTestCase
     public void testAddDirectory() throws IOException, InterruptedException {
         mCurrentTest = "testAddDirectory";
         File subFolder = new File(mTestFolder, "subfolder");
-        RepoObserver ro = new RepoObserver(this, createRepo(mCurrentTest));
+        FolderObserver ro = new FolderObserver(this, createFolder(mCurrentTest));
         subFolder.mkdir();
         File testFile = new File(subFolder, "test");
         mLatch = new CountDownLatch(1);

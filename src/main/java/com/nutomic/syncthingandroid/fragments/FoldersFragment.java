@@ -10,18 +10,18 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.util.ReposAdapter;
+import com.nutomic.syncthingandroid.util.FoldersAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Displays a list of all existing repositories.
+ * Displays a list of all existing folders.
  */
-public class ReposFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+public class FoldersFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener {
 
-    private ReposAdapter mAdapter;
+    private FoldersAdapter mAdapter;
 
     private Timer mTimer;
 
@@ -51,10 +51,10 @@ public class ReposFragment extends ListFragment implements SyncthingService.OnAp
         if (activity == null || activity.getApi() == null)
             return;
 
-        mAdapter = new ReposAdapter(activity);
-        mAdapter.add(activity.getApi().getRepos());
+        mAdapter = new FoldersAdapter(activity);
+        mAdapter.add(activity.getApi().getFolders());
         setListAdapter(mAdapter);
-        setEmptyText(getString(R.string.repositories_list_empty));
+        setEmptyText(getString(R.string.folder_list_empty));
         getListView().setOnItemClickListener(this);
     }
 
@@ -90,7 +90,7 @@ public class ReposFragment extends ListFragment implements SyncthingService.OnAp
         Intent intent = new Intent(getActivity(), SettingsActivity.class)
                 .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
                 .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
-                .putExtra(RepoSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).ID);
+                .putExtra(FolderSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).ID);
         startActivity(intent);
     }
 

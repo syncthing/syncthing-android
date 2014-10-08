@@ -11,16 +11,16 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/node_id_title"
+            android:id="@+id/device_id_title"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/node_id"
+            android:id="@+id/device_id"
             android:lines="1"
             android:ellipsize="end"
-            android:layout_below="@id/node_id_title"
+            android:layout_below="@id/device_id_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

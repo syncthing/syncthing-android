@@ -75,7 +75,7 @@ public class ConfigXml {
      * Coming from 0.2.0 and earlier, globalAnnounceServer value "announce.syncthing.net:22025" is
      * replaced with "194.126.249.5:22025" (as domain resolve is broken).
      * <p/>
-     * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every repository.
+     * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every folder.
      */
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
@@ -110,18 +110,18 @@ public class ConfigXml {
             changed = true;
         }
 
-        NodeList repos = mConfig.getDocumentElement().getElementsByTagName("repository");
-        for (int i = 0; i < repos.getLength(); i++) {
-            Element r = (Element) repos.item(i);
+        NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
+        for (int i = 0; i < folders.getLength(); i++) {
+            Element r = (Element) folders.item(i);
             // Set ignorePerms attribute.
             if (!r.hasAttribute("ignorePerms") ||
                     !Boolean.parseBoolean(r.getAttribute("ignorePerms"))) {
-                Log.i(TAG, "Set 'ignorePerms' on repository " + r.getAttribute("id"));
+                Log.i(TAG, "Set 'ignorePerms' on folder " + r.getAttribute("id"));
                 r.setAttribute("ignorePerms", Boolean.toString(true));
                 changed = true;
             }
 
-            // Replace /sdcard/ in repository path with proper path.
+            // Replace /sdcard/ in folder path with proper path.
             String dir = r.getAttribute("directory");
             if (dir.startsWith("/sdcard")) {
                 String newDir = dir.replace("/sdcard",
@@ -149,18 +149,16 @@ public class ConfigXml {
     }
 
     /**
-     * Creates a repository for the default camera folder.
+     * Creates a folder for the default camera folder.
      */
-    public void createCameraRepo() {
-        File cameraFolder =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-
-        Element cameraRepo = mConfig.createElement("repository");
-        cameraRepo.setAttribute("id", "camera");
-        cameraRepo.setAttribute("directory", cameraFolder.getAbsolutePath());
-        cameraRepo.setAttribute("ro", "true");
-        cameraRepo.setAttribute("ignorePerms", "true");
-        mConfig.getDocumentElement().appendChild(cameraRepo);
+    public void createCameraFolder() {
+        Element cameraFolder = mConfig.createElement("folder");
+        cameraFolder.setAttribute("id", "camera");
+        cameraFolder.setAttribute("directory", Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
+        cameraFolder.setAttribute("ro", "true");
+        cameraFolder.setAttribute("ignorePerms", "true");
+        mConfig.getDocumentElement().appendChild(cameraFolder);
 
         saveChanges();
     }

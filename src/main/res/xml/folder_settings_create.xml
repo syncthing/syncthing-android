@@ -3,8 +3,8 @@
     android:persistent="false">
 
     <EditTextPreference
-        android:key="repo_id"
-        android:title="@string/repo_id" />
+        android:key="folder_id"
+        android:title="@string/folder_id" />
 
     <Preference
         android:key="directory"
@@ -16,12 +16,12 @@
         android:inputType="numberDecimal" />
 
     <CheckBoxPreference
-        android:key="repo_master"
-        android:title="@string/repo_master" />
+        android:key="folder_master"
+        android:title="@string/folder_master" />
 
     <PreferenceScreen
-        android:key="nodes"
-        android:title="@string/nodes" />
+        android:key="devices"
+        android:title="@string/devices" />
 
     <CheckBoxPreference
         android:key="versioning"

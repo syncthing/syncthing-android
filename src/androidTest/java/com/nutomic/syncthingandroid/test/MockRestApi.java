@@ -41,7 +41,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public List<Node> getNodes() {
+    public List<Device> getDevices() {
         throw new UnsupportedOperationException();
     }
 
@@ -51,7 +51,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public List<Repo> getRepos() {
+    public List<Folder> getFolders() {
         throw new UnsupportedOperationException();
     }
 
@@ -61,42 +61,42 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public void getModel(final String repoId, final OnReceiveModelListener listener) {
+    public void getModel(final String folderId, final OnReceiveModelListener listener) {
     }
 
     @Override
-    public void editNode(Node node, Activity activity, OnNodeIdNormalizedListener listener) {
+    public void editDevice(Device device, Activity activity, OnDeviceIdNormalizedListener listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteNode(Node node, Activity activity) {
+    public boolean deleteDevice(Device device, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean editRepo(Repo repo, boolean create, Activity activity) {
+    public boolean editFolder(Folder folder, boolean create, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteRepo(Repo repo, Activity activity) {
+    public boolean deleteFolder(Folder folder, Activity activity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void normalizeNodeId(String id, final OnNodeIdNormalizedListener listener) {
+    public void normalizeDeviceId(String id, final OnDeviceIdNormalizedListener listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     @TargetApi(11)
-    public void copyNodeId(String id) {
+    public void copyDeviceId(String id) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void onRepoFileChange(String repoId, String relativePath) {
+    public void onFolderFileChange(String folderId, String relativePath) {
         throw new UnsupportedOperationException();
     }
 }

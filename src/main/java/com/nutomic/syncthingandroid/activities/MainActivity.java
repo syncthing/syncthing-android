@@ -20,7 +20,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,14 +27,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment;
-import com.nutomic.syncthingandroid.fragments.NodesFragment;
-import com.nutomic.syncthingandroid.fragments.ReposFragment;
+import com.nutomic.syncthingandroid.fragments.DevicesFragment;
+import com.nutomic.syncthingandroid.fragments.FoldersFragment;
+import com.nutomic.syncthingandroid.fragments.LocalDeviceInfoFragment;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 /**
- * Shows {@link com.nutomic.syncthingandroid.fragments.ReposFragment} and {@link com.nutomic.syncthingandroid.fragments.NodesFragment} in different tabs, and
- * {@link com.nutomic.syncthingandroid.fragments.LocalNodeInfoFragment} in the navigation drawer.
+ * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and {@link com.nutomic.syncthingandroid.fragments.DevicesFragment} in different tabs, and
+ * {@link com.nutomic.syncthingandroid.fragments.LocalDeviceInfoFragment} in the navigation drawer.
  */
 public class MainActivity extends SyncthingActivity
         implements SyncthingService.OnApiChangeListener {
@@ -45,7 +44,7 @@ public class MainActivity extends SyncthingActivity
     private AlertDialog mDisabledDialog;
 
     /**
-     * Causes population of repo and node lists, unlocks info drawer.
+     * Causes population of folder and device lists, unlocks info drawer.
      */
     @Override
     @SuppressLint("InflateParams")
@@ -108,9 +107,9 @@ public class MainActivity extends SyncthingActivity
                 public Fragment getItem(int position) {
                     switch (position) {
                         case 0:
-                            return mRepositoriesFragment;
+                            return mFolderFragment;
                         case 1:
-                            return mNodesFragment;
+                            return mDevicesFragment;
                         default:
                             return null;
                     }
@@ -123,11 +122,11 @@ public class MainActivity extends SyncthingActivity
 
             };
 
-    private ReposFragment mRepositoriesFragment;
+    private FoldersFragment mFolderFragment;
 
-    private NodesFragment mNodesFragment;
+    private DevicesFragment mDevicesFragment;
 
-    private LocalNodeInfoFragment mLocalNodeInfoFragment;
+    private LocalDeviceInfoFragment mLocalDeviceInfoFragment;
 
     private ViewPager mViewPager;
 
@@ -170,32 +169,32 @@ public class MainActivity extends SyncthingActivity
         };
 
         actionBar.addTab(actionBar.newTab()
-                .setText(R.string.repositories_fragment_title)
+                .setText(R.string.folders_fragment_title)
                 .setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab()
-                .setText(R.string.nodes_fragment_title)
+                .setText(R.string.devices_fragment_title)
                 .setTabListener(tabListener));
 
         if (savedInstanceState != null) {
             FragmentManager fm = getSupportFragmentManager();
-            mRepositoriesFragment = (ReposFragment) fm.getFragment(
-                    savedInstanceState, ReposFragment.class.getName());
-            mNodesFragment = (NodesFragment) fm.getFragment(
-                    savedInstanceState, NodesFragment.class.getName());
-            mLocalNodeInfoFragment = (LocalNodeInfoFragment) fm.getFragment(
-                    savedInstanceState, LocalNodeInfoFragment.class.getName());
+            mFolderFragment = (FoldersFragment) fm.getFragment(
+                    savedInstanceState, FoldersFragment.class.getName());
+            mDevicesFragment = (DevicesFragment) fm.getFragment(
+                    savedInstanceState, DevicesFragment.class.getName());
+            mLocalDeviceInfoFragment = (LocalDeviceInfoFragment) fm.getFragment(
+                    savedInstanceState, LocalDeviceInfoFragment.class.getName());
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
         } else {
-            mRepositoriesFragment = new ReposFragment();
-            mNodesFragment = new NodesFragment();
-            mLocalNodeInfoFragment = new LocalNodeInfoFragment();
+            mFolderFragment = new FoldersFragment();
+            mDevicesFragment = new DevicesFragment();
+            mLocalDeviceInfoFragment = new LocalDeviceInfoFragment();
         }
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.drawer, mLocalNodeInfoFragment)
+                .replace(R.id.drawer, mLocalDeviceInfoFragment)
                 .commit();
-        mDrawerToggle = mLocalNodeInfoFragment.new Toggle(this, mDrawerLayout,
+        mDrawerToggle = mLocalDeviceInfoFragment.new Toggle(this, mDrawerLayout,
                 R.drawable.ic_drawer);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
@@ -212,8 +211,8 @@ public class MainActivity extends SyncthingActivity
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
         getService().registerOnApiChangeListener(this);
-        getService().registerOnApiChangeListener(mRepositoriesFragment);
-        getService().registerOnApiChangeListener(mNodesFragment);
+        getService().registerOnApiChangeListener(mFolderFragment);
+        getService().registerOnApiChangeListener(mDevicesFragment);
     }
 
     /**
@@ -223,12 +222,13 @@ public class MainActivity extends SyncthingActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Avoid crash if called during startup.
-        if (mRepositoriesFragment != null && mNodesFragment != null &&
-                mLocalNodeInfoFragment != null) {
+        if (mFolderFragment != null && mDevicesFragment != null &&
+                mLocalDeviceInfoFragment != null) {
             FragmentManager fm = getSupportFragmentManager();
-            fm.putFragment(outState, ReposFragment.class.getName(), mRepositoriesFragment);
-            fm.putFragment(outState, NodesFragment.class.getName(), mNodesFragment);
-            fm.putFragment(outState, LocalNodeInfoFragment.class.getName(), mLocalNodeInfoFragment);
+            fm.putFragment(outState, FoldersFragment.class.getName(), mFolderFragment);
+            fm.putFragment(outState, DevicesFragment.class.getName(), mDevicesFragment);
+            fm.putFragment(outState, LocalDeviceInfoFragment.class.getName(),
+                    mLocalDeviceInfoFragment);
             outState.putInt("currentTab", mViewPager.getCurrentItem());
         }
     }
@@ -246,26 +246,26 @@ public class MainActivity extends SyncthingActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(findViewById(R.id.drawer));
-        menu.findItem(R.id.share_node_id).setVisible(drawerOpen);
+        menu.findItem(R.id.share_device_id).setVisible(drawerOpen);
         menu.findItem(R.id.exit).setVisible(!SyncthingService.alwaysRunInBackground(this));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mLocalNodeInfoFragment.onOptionsItemSelected(item) ||
+        if (mLocalDeviceInfoFragment.onOptionsItemSelected(item) ||
                 mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
         switch (item.getItemId()) {
-            case R.id.add_repo:
+            case R.id.add_folder:
                 Intent intent = new Intent(this, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
                 startActivity(intent);
                 return true;
-            case R.id.add_node:
+            case R.id.add_device:
                 intent = new Intent(this, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);

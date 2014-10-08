@@ -7,16 +7,16 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.util.ReposAdapter;
+import com.nutomic.syncthingandroid.util.FoldersAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ReposAdapterTest extends AndroidTestCase {
+public class FoldersAdapterTest extends AndroidTestCase {
 
-    private ReposAdapter mAdapter;
+    private FoldersAdapter mAdapter;
 
-    private RestApi.Repo mRepo = new RestApi.Repo();
+    private RestApi.Folder mFolder = new RestApi.Folder();
 
     private RestApi.Model mModel = new RestApi.Model();
 
@@ -24,13 +24,13 @@ public class ReposAdapterTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mAdapter = new ReposAdapter(getContext());
-        mRepo.Directory = "/my/dir/";
-        mRepo.ID = "id 123";
-        mRepo.Invalid = "all good";
-        mRepo.NodeIds = new ArrayList<>();
-        mRepo.ReadOnly = false;
-        mRepo.Versioning = new RestApi.Versioning();
+        mAdapter = new FoldersAdapter(getContext());
+        mFolder.Path = "/my/dir/";
+        mFolder.ID = "id 123";
+        mFolder.Invalid = "all good";
+        mFolder.DeviceIds = new ArrayList<>();
+        mFolder.ReadOnly = false;
+        mFolder.Versioning = new RestApi.Versioning();
 
         mModel.localFiles = 50;
         mModel.globalFiles = 500;
@@ -40,17 +40,17 @@ public class ReposAdapterTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetViewNoModel() {
-        mAdapter.add(Arrays.asList(mRepo));
+        mAdapter.add(Arrays.asList(mFolder));
         View v = mAdapter.getView(0, null, null);
-        assertEquals(mRepo.ID, ((TextView) v.findViewById(R.id.id)).getText());
-        assertEquals(mRepo.Directory, ((TextView) v.findViewById(R.id.directory)).getText());
-        assertEquals(mRepo.Invalid, ((TextView) v.findViewById(R.id.invalid)).getText());
+        assertEquals(mFolder.ID, ((TextView) v.findViewById(R.id.id)).getText());
+        assertEquals(mFolder.Path, ((TextView) v.findViewById(R.id.directory)).getText());
+        assertEquals(mFolder.Invalid, ((TextView) v.findViewById(R.id.invalid)).getText());
     }
 
     @MediumTest
     public void testGetViewModel() {
-        mAdapter.add(Arrays.asList(mRepo));
-        mAdapter.onReceiveModel(mRepo.ID, mModel);
+        mAdapter.add(Arrays.asList(mFolder));
+        mAdapter.onReceiveModel(mFolder.ID, mModel);
         View v = mAdapter.getView(0, null, null);
         assertFalse(((TextView) v.findViewById(R.id.state)).getText().toString().equals(""));
         String items = ((TextView) v.findViewById(R.id.items)).getText().toString();

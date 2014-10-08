@@ -15,15 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Generates item views for repository items.
+ * Generates item views for folder items.
  */
-public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
+public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         implements RestApi.OnReceiveModelListener {
 
     private HashMap<String, RestApi.Model> mModels = new HashMap<>();
 
-    public ReposAdapter(Context context) {
-        super(context, R.layout.repo_list_item);
+    public FoldersAdapter(Context context) {
+        super(context, R.layout.folder_list_item);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.repo_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.folder_list_item, parent, false);
         }
 
         TextView id = (TextView) convertView.findViewById(R.id.id);
@@ -41,13 +41,13 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
         TextView size = (TextView) convertView.findViewById(R.id.size);
         TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
-        RestApi.Repo repo = getItem(position);
-        RestApi.Model model = mModels.get(repo.ID);
-        id.setText(repo.ID);
+        RestApi.Folder folder = getItem(position);
+        RestApi.Model model = mModels.get(folder.ID);
+        id.setText(folder.ID);
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        directory.setText((repo.Directory));
+        directory.setText((folder.Path));
         if (model != null) {
-            state.setText(getContext().getString(R.string.repo_progress_format, model.state,
+            state.setText(getContext().getString(R.string.folder_progress_format, model.state,
                     (model.globalBytes <= 0)
                             ? 100
                             : (int) ((model.localBytes / (float) model.globalBytes) * 100)
@@ -56,13 +56,13 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
                     .getString(R.string.files, model.localFiles, model.globalFiles));
             size.setText(RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
                     RestApi.readableFileSize(getContext(), model.globalBytes));
-            if (repo.Invalid.equals("")) {
+            if (folder.Invalid.equals("")) {
                 invalid.setText(model.invalid);
                 invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
             }
         } else {
-            invalid.setText(repo.Invalid);
-            invalid.setVisibility((repo.Invalid.equals("")) ? View.GONE : View.VISIBLE);
+            invalid.setText(folder.Invalid);
+            invalid.setVisibility((folder.Invalid.equals("")) ? View.GONE : View.VISIBLE);
         }
 
         return convertView;
@@ -71,8 +71,8 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
     /**
      * Replacement for addAll, which is not implemented on lower API levels.
      */
-    public void add(List<RestApi.Repo> nodes) {
-        for (RestApi.Repo r : nodes) {
+    public void add(List<RestApi.Folder> devices) {
+        for (RestApi.Folder r : devices) {
             add(r);
         }
     }
@@ -90,8 +90,8 @@ public class ReposAdapter extends ArrayAdapter<RestApi.Repo>
     }
 
     @Override
-    public void onReceiveModel(String repoId, RestApi.Model model) {
-        mModels.put(repoId, model);
+    public void onReceiveModel(String folderId, RestApi.Model model) {
+        mModels.put(folderId, model);
         notifyDataSetChanged();
     }
 

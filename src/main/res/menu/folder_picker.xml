@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/create_folder"
-        android:title="@string/create_folder"
+        android:title="@string/create_fs_folder"
         app:showAsAction="ifRoom" />
 
 </menu>

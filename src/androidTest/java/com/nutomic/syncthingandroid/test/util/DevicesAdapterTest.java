@@ -7,16 +7,16 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.util.NodesAdapter;
+import com.nutomic.syncthingandroid.util.DevicesAdapter;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NodesAdapterTest extends AndroidTestCase {
+public class DevicesAdapterTest extends AndroidTestCase {
 
-    private NodesAdapter mAdapter;
+    private DevicesAdapter mAdapter;
 
-    private RestApi.Node mNode = new RestApi.Node();
+    private RestApi.Device mDevice = new RestApi.Device();
 
     private RestApi.Connection mConnection = new RestApi.Connection();
 
@@ -24,10 +24,10 @@ public class NodesAdapterTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mAdapter = new NodesAdapter(getContext());
-        mNode.Addresses = "127.0.0.1:12345";
-        mNode.Name = "the node";
-        mNode.NodeID = "123-456-789";
+        mAdapter = new DevicesAdapter(getContext());
+        mDevice.Addresses = "127.0.0.1:12345";
+        mDevice.Name = "the device";
+        mDevice.DeviceID = "123-456-789";
 
         mConnection.Completion = 100;
         mConnection.InBits = 1048576;
@@ -37,11 +37,11 @@ public class NodesAdapterTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetViewNoConnections() {
-        mAdapter.add(Arrays.asList(mNode));
+        mAdapter.add(Arrays.asList(mDevice));
         View v = mAdapter.getView(0, null, null);
 
-        assertEquals(mNode.Name, ((TextView) v.findViewById(R.id.name)).getText());
-        assertEquals(getContext().getString(R.string.node_disconnected),
+        assertEquals(mDevice.Name, ((TextView) v.findViewById(R.id.name)).getText());
+        assertEquals(getContext().getString(R.string.device_disconnected),
                 ((TextView) v.findViewById(R.id.status)).getText().toString());
         assertFalse(((TextView) v.findViewById(R.id.status)).getText().equals(""));
         assertFalse(((TextView) v.findViewById(R.id.download)).getText().equals(""));
@@ -50,12 +50,12 @@ public class NodesAdapterTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetViewConnections() {
-        mAdapter.add(Arrays.asList(mNode));
+        mAdapter.add(Arrays.asList(mDevice));
         mAdapter.onReceiveConnections(
-                new HashMap<String, RestApi.Connection>() {{ put(mNode.NodeID, mConnection); }});
+                new HashMap<String, RestApi.Connection>() {{ put(mDevice.DeviceID, mConnection); }});
         View v = mAdapter.getView(0, null, null);
 
-        assertEquals(getContext().getString(R.string.node_up_to_date),
+        assertEquals(getContext().getString(R.string.device_up_to_date),
                 ((TextView) v.findViewById(R.id.status)).getText().toString());
         assertEquals("1 Mb/s", ((TextView) v.findViewById(R.id.download)).getText().toString());
         assertEquals("1 Gb/s", ((TextView) v.findViewById(R.id.upload)).getText().toString());

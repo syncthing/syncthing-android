@@ -26,22 +26,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Shows node details and allows changing them.
+ * Shows device details and allows changing them.
  */
-public class NodeSettingsFragment extends PreferenceFragment implements
+public class DeviceSettingsFragment extends PreferenceFragment implements
         SyncthingActivity.OnServiceConnectedListener, Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener, RestApi.OnReceiveConnectionsListener,
-        SyncthingService.OnApiChangeListener, RestApi.OnNodeIdNormalizedListener {
+        SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener {
 
-    public static final String EXTRA_NODE_ID = "node_id";
+    public static final String EXTRA_NODE_ID = "device_id";
 
     private static final int SCAN_QR_REQUEST_CODE = 235;
 
     private SyncthingService mSyncthingService;
 
-    private RestApi.Node mNode;
+    private RestApi.Device mDevice;
 
-    private Preference mNodeId;
+    private Preference mDeviceId;
 
     private EditTextPreference mName;
 
@@ -65,13 +65,13 @@ public class NodeSettingsFragment extends PreferenceFragment implements
         setHasOptionsMenu(true);
 
         if (mIsCreate) {
-            addPreferencesFromResource(R.xml.node_settings_create);
+            addPreferencesFromResource(R.xml.device_settings_create);
         } else {
-            addPreferencesFromResource(R.xml.node_settings_edit);
+            addPreferencesFromResource(R.xml.device_settings_edit);
         }
 
-        mNodeId = findPreference("node_id");
-        mNodeId.setOnPreferenceChangeListener(this);
+        mDeviceId = findPreference("device_id");
+        mDeviceId.setOnPreferenceChangeListener(this);
         mName = (EditTextPreference) findPreference("name");
         mName.setOnPreferenceChangeListener(this);
         mAddresses = (EditTextPreference) findPreference("addresses");
@@ -102,45 +102,45 @@ public class NodeSettingsFragment extends PreferenceFragment implements
         }
 
         if (mIsCreate) {
-            getActivity().setTitle(R.string.add_node);
-            mNode = new RestApi.Node();
-            mNode.Name = "";
-            mNode.NodeID = "";
-            mNode.Addresses = "dynamic";
-            mNode.Compression = true;
-            ((EditTextPreference) mNodeId).setText(mNode.NodeID);
+            getActivity().setTitle(R.string.add_device);
+            mDevice = new RestApi.Device();
+            mDevice.Name = "";
+            mDevice.DeviceID = "";
+            mDevice.Addresses = "dynamic";
+            mDevice.Compression = true;
+            ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
         } else {
-            getActivity().setTitle(R.string.edit_node);
-            List<RestApi.Node> nodes = mSyncthingService.getApi().getNodes();
-            for (int i = 0; i < nodes.size(); i++) {
-                if (nodes.get(i).NodeID.equals(
+            getActivity().setTitle(R.string.edit_device);
+            List<RestApi.Device> devices = mSyncthingService.getApi().getDevices();
+            for (int i = 0; i < devices.size(); i++) {
+                if (devices.get(i).DeviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
-                    mNode = nodes.get(i);
+                    mDevice = devices.get(i);
                     break;
                 }
             }
-            mNodeId.setOnPreferenceClickListener(this);
+            mDeviceId.setOnPreferenceClickListener(this);
         }
-        mSyncthingService.getApi().getConnections(NodeSettingsFragment.this);
+        mSyncthingService.getApi().getConnections(DeviceSettingsFragment.this);
 
-        mNodeId.setSummary(mNode.NodeID);
-        mName.setText((mNode.Name));
-        mName.setSummary(mNode.Name);
-        mAddresses.setText(mNode.Addresses);
-        mAddresses.setSummary(mNode.Addresses);
-        mCompression.setChecked(mNode.Compression);
+        mDeviceId.setSummary(mDevice.DeviceID);
+        mName.setText((mDevice.Name));
+        mName.setSummary(mDevice.Name);
+        mAddresses.setText(mDevice.Addresses);
+        mAddresses.setSummary(mDevice.Addresses);
+        mCompression.setChecked(mDevice.Compression);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.node_settings, menu);
+        inflater.inflate(R.menu.device_settings, menu);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.create).setVisible(mIsCreate);
-        menu.findItem(R.id.share_node_id).setVisible(!mIsCreate);
+        menu.findItem(R.id.share_device_id).setVisible(!mIsCreate);
         menu.findItem(R.id.delete).setVisible(!mIsCreate);
     }
 
@@ -148,28 +148,28 @@ public class NodeSettingsFragment extends PreferenceFragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mNode.NodeID.equals("")) {
-                    Toast.makeText(getActivity(), R.string.node_id_required, Toast.LENGTH_LONG)
+                if (mDevice.DeviceID.equals("")) {
+                    Toast.makeText(getActivity(), R.string.device_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                if (mNode.Name.equals("")) {
-                    Toast.makeText(getActivity(), R.string.node_name_required, Toast.LENGTH_LONG)
+                if (mDevice.Name.equals("")) {
+                    Toast.makeText(getActivity(), R.string.device_name_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editNode(mNode, getActivity(), this);
+                mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
                 return true;
-            case R.id.share_node_id:
-                RestApi.shareNodeId(getActivity(), mNode.NodeID);
+            case R.id.share_device_id:
+                RestApi.shareDeviceId(getActivity(), mDevice.DeviceID);
                 return true;
             case R.id.delete:
                 new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.delete_node_confirm)
+                        .setMessage(R.string.delete_device_confirm)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mSyncthingService.getApi().deleteNode(mNode, getActivity());
+                                mSyncthingService.getApi().deleteDevice(mDevice, getActivity());
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
@@ -190,21 +190,21 @@ public class NodeSettingsFragment extends PreferenceFragment implements
             pref.setSummary((String) o);
         }
 
-        if (preference.equals(mNodeId)) {
-            mNode.NodeID = (String) o;
-            nodeUpdated();
+        if (preference.equals(mDeviceId)) {
+            mDevice.DeviceID = (String) o;
+            deviceUpdated();
             return true;
         } else if (preference.equals(mName)) {
-            mNode.Name = (String) o;
-            nodeUpdated();
+            mDevice.Name = (String) o;
+            deviceUpdated();
             return true;
         } else if (preference.equals(mAddresses)) {
-            mNode.Addresses = (String) o;
-            nodeUpdated();
+            mDevice.Addresses = (String) o;
+            deviceUpdated();
             return true;
         } else if (preference.equals(mCompression)) {
-            mNode.Compression = (Boolean) o;
-            nodeUpdated();
+            mDevice.Compression = (Boolean) o;
+            deviceUpdated();
             return true;
         }
         return false;
@@ -212,33 +212,33 @@ public class NodeSettingsFragment extends PreferenceFragment implements
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.equals(mNodeId)) {
-            mSyncthingService.getApi().copyNodeId(mNode.NodeID);
+        if (preference.equals(mDeviceId)) {
+            mSyncthingService.getApi().copyDeviceId(mDevice.DeviceID);
             return true;
         }
         return false;
     }
 
     /**
-     * Sets version and current address of the node.
+     * Sets version and current address of the device.
      *
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-        if (connections.containsKey(mNode.NodeID)) {
-            mVersion.setSummary(connections.get(mNode.NodeID).ClientVersion);
-            mCurrentAddress.setSummary(connections.get(mNode.NodeID).Address);
+        if (connections.containsKey(mDevice.DeviceID)) {
+            mVersion.setSummary(connections.get(mDevice.DeviceID).ClientVersion);
+            mCurrentAddress.setSummary(connections.get(mDevice.DeviceID).Address);
         }
     }
 
     /**
-     * Sends the updated node info if in edit mode.
+     * Sends the updated device info if in edit mode.
      */
-    private void nodeUpdated() {
+    private void deviceUpdated() {
         if (!mIsCreate) {
-            mSyncthingService.getApi().editNode(mNode, getActivity(), this);
+            mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
         }
     }
 
@@ -259,23 +259,23 @@ public class NodeSettingsFragment extends PreferenceFragment implements
     }
 
     /**
-     * Receives value of scanned QR code and sets it as node ID.
+     * Receives value of scanned QR code and sets it as device ID.
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mNode.NodeID = data.getStringExtra("SCAN_RESULT");
-            ((EditTextPreference) mNodeId).setText(mNode.NodeID);
-            mNodeId.setSummary(mNode.NodeID);
+            mDevice.DeviceID = data.getStringExtra("SCAN_RESULT");
+            ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
+            mDeviceId.setSummary(mDevice.DeviceID);
         }
     }
 
     /**
-     * Callback for {@link RestApi#editNode}.
+     * Callback for {@link RestApi#editDevice}.
      * Displays an error toast if error message present.
      */
     @Override
-    public void onNodeIdNormalized(String normalizedId, String error) {
+    public void onDeviceIdNormalized(String normalizedId, String error) {
         if (error != null) {
             Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
         }

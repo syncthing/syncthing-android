@@ -29,9 +29,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Shows repo details and allows changing them.
+ * Shows folder details and allows changing them.
  */
-public class RepoSettingsFragment extends PreferenceFragment
+public class FolderSettingsFragment extends PreferenceFragment
         implements SyncthingActivity.OnServiceConnectedListener,
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
         SyncthingService.OnApiChangeListener {
@@ -39,26 +39,26 @@ public class RepoSettingsFragment extends PreferenceFragment
     private static final int DIRECTORY_REQUEST_CODE = 234;
 
     /**
-     * The ID of the repo to be edited. To be used with {@link com.nutomic.syncthingandroid.activities.SettingsActivity#EXTRA_IS_CREATE}
+     * The ID of the folder to be edited. To be used with {@link com.nutomic.syncthingandroid.activities.SettingsActivity#EXTRA_IS_CREATE}
      * set to false.
      */
-    public static final String EXTRA_REPO_ID = "repo_id";
+    public static final String EXTRA_REPO_ID = "folder_id";
 
-    private static final String KEY_NODE_SHARED = "node_shared";
+    private static final String KEY_NODE_SHARED = "device_shared";
 
     private SyncthingService mSyncthingService;
 
-    private RestApi.Repo mRepo;
+    private RestApi.Folder mFolder;
 
-    private EditTextPreference mRepoId;
+    private EditTextPreference mFolderId;
 
     private Preference mDirectory;
 
     private EditTextPreference mRescanInterval;
 
-    private CheckBoxPreference mRepoMaster;
+    private CheckBoxPreference mFolderMaster;
 
-    private PreferenceScreen mNodes;
+    private PreferenceScreen mDevices;
 
     private CheckBoxPreference mVersioning;
 
@@ -76,21 +76,21 @@ public class RepoSettingsFragment extends PreferenceFragment
         setHasOptionsMenu(true);
 
         if (mIsCreate) {
-            addPreferencesFromResource(R.xml.repo_settings_create);
+            addPreferencesFromResource(R.xml.folder_settings_create);
         } else {
-            addPreferencesFromResource(R.xml.repo_settings_edit);
+            addPreferencesFromResource(R.xml.folder_settings_edit);
         }
 
-        mRepoId = (EditTextPreference) findPreference("repo_id");
-        mRepoId.setOnPreferenceChangeListener(this);
+        mFolderId = (EditTextPreference) findPreference("folder_id");
+        mFolderId.setOnPreferenceChangeListener(this);
         mDirectory = findPreference("directory");
         mDirectory.setOnPreferenceClickListener(this);
         mRescanInterval = (EditTextPreference) findPreference("rescan_interval");
         mRescanInterval.setOnPreferenceChangeListener(this);
-        mRepoMaster = (CheckBoxPreference) findPreference("repo_master");
-        mRepoMaster.setOnPreferenceChangeListener(this);
-        mNodes = (PreferenceScreen) findPreference("nodes");
-        mNodes.setOnPreferenceClickListener(this);
+        mFolderMaster = (CheckBoxPreference) findPreference("folder_master");
+        mFolderMaster.setOnPreferenceChangeListener(this);
+        mDevices = (PreferenceScreen) findPreference("devices");
+        mDevices.setOnPreferenceClickListener(this);
         mVersioning = (CheckBoxPreference) findPreference("versioning");
         mVersioning.setOnPreferenceChangeListener(this);
         mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
@@ -108,49 +108,49 @@ public class RepoSettingsFragment extends PreferenceFragment
         }
 
         if (mIsCreate) {
-            getActivity().setTitle(R.string.create_repo);
-            mRepo = new RestApi.Repo();
-            mRepo.ID = "";
-            mRepo.Directory = "";
-            mRepo.RescanIntervalS = 86400;
-            mRepo.NodeIds = new ArrayList<>();
-            mRepo.Versioning = new RestApi.Versioning();
+            getActivity().setTitle(R.string.create_folder);
+            mFolder = new RestApi.Folder();
+            mFolder.ID = "";
+            mFolder.Path = "";
+            mFolder.RescanIntervalS = 86400;
+            mFolder.DeviceIds = new ArrayList<>();
+            mFolder.Versioning = new RestApi.Versioning();
         } else {
-            getActivity().setTitle(R.string.edit_repo);
-            List<RestApi.Repo> repos = mSyncthingService.getApi().getRepos();
-            for (int i = 0; i < repos.size(); i++) {
-                if (repos.get(i).ID.equals(
+            getActivity().setTitle(R.string.edit_folder);
+            List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
+            for (int i = 0; i < folders.size(); i++) {
+                if (folders.get(i).ID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_REPO_ID))) {
-                    mRepo = repos.get(i);
+                    mFolder = folders.get(i);
                     break;
                 }
             }
         }
 
-        mRepoId.setText(mRepo.ID);
-        mRepoId.setSummary(mRepo.ID);
-        mDirectory.setSummary(mRepo.Directory);
-        mRescanInterval.setText(Integer.toString(mRepo.RescanIntervalS));
-        mRescanInterval.setSummary(Integer.toString(mRepo.RescanIntervalS));
-        mRepoMaster.setChecked(mRepo.ReadOnly);
-        List<RestApi.Node> nodesList = mSyncthingService.getApi().getNodes();
-        for (RestApi.Node n : nodesList) {
+        mFolderId.setText(mFolder.ID);
+        mFolderId.setSummary(mFolder.ID);
+        mDirectory.setSummary(mFolder.Path);
+        mRescanInterval.setText(Integer.toString(mFolder.RescanIntervalS));
+        mRescanInterval.setSummary(Integer.toString(mFolder.RescanIntervalS));
+        mFolderMaster.setChecked(mFolder.ReadOnly);
+        List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices();
+        for (RestApi.Device n : devicesList) {
             ExtendedCheckBoxPreference cbp = new ExtendedCheckBoxPreference(getActivity(), n);
             cbp.setTitle(n.Name);
             cbp.setKey(KEY_NODE_SHARED);
-            cbp.setOnPreferenceChangeListener(RepoSettingsFragment.this);
+            cbp.setOnPreferenceChangeListener(FolderSettingsFragment.this);
             cbp.setChecked(false);
-            for (String n2 : mRepo.NodeIds) {
-                if (n2.equals(n.NodeID)) {
+            for (String n2 : mFolder.DeviceIds) {
+                if (n2.equals(n.DeviceID)) {
                     cbp.setChecked(true);
                 }
             }
-            mNodes.addPreference(cbp);
+            mDevices.addPreference(cbp);
         }
-        mVersioning.setChecked(mRepo.Versioning instanceof RestApi.SimpleVersioning);
+        mVersioning.setChecked(mFolder.Versioning instanceof RestApi.SimpleVersioning);
         if (mVersioning.isChecked()) {
-            mVersioningKeep.setText(mRepo.Versioning.getParams().get("keep"));
-            mVersioningKeep.setSummary(mRepo.Versioning.getParams().get("keep"));
+            mVersioningKeep.setText(mFolder.Versioning.getParams().get("keep"));
+            mVersioningKeep.setSummary(mFolder.Versioning.getParams().get("keep"));
             mVersioningKeep.setEnabled(true);
         } else {
             mVersioningKeep.setEnabled(false);
@@ -166,7 +166,7 @@ public class RepoSettingsFragment extends PreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.repo_settings, menu);
+        inflater.inflate(R.menu.folder_settings, menu);
     }
 
     @Override
@@ -179,25 +179,25 @@ public class RepoSettingsFragment extends PreferenceFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mRepo.ID.equals("")) {
-                    Toast.makeText(getActivity(), R.string.repo_id_required, Toast.LENGTH_LONG)
+                if (mFolder.ID.equals("")) {
+                    Toast.makeText(getActivity(), R.string.folder_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                if (mRepo.Directory.equals("")) {
-                    Toast.makeText(getActivity(), R.string.repo_path_required, Toast.LENGTH_LONG)
+                if (mFolder.Path.equals("")) {
+                    Toast.makeText(getActivity(), R.string.folder_path_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editRepo(mRepo, true, getActivity());
+                mSyncthingService.getApi().editFolder(mFolder, true, getActivity());
                 return true;
             case R.id.delete:
                 new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.delete_repo_confirm)
+                        .setMessage(R.string.delete_folder_confirm)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mSyncthingService.getApi().deleteRepo(mRepo, getActivity());
+                                mSyncthingService.getApi().deleteFolder(mFolder, getActivity());
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
@@ -217,56 +217,56 @@ public class RepoSettingsFragment extends PreferenceFragment
             pref.setSummary((String) o);
         }
 
-        if (preference.equals(mRepoId)) {
-            mRepo.ID = (String) o;
-            repoUpdated();
+        if (preference.equals(mFolderId)) {
+            mFolder.ID = (String) o;
+            folderUpdated();
             return true;
         } else if (preference.equals(mDirectory)) {
-            mRepo.Directory = (String) o;
-            repoUpdated();
+            mFolder.Path = (String) o;
+            folderUpdated();
             return true;
         } else if (preference.equals(mRescanInterval)) {
-            mRepo.RescanIntervalS = Integer.parseInt((String) o);
+            mFolder.RescanIntervalS = Integer.parseInt((String) o);
             mRescanInterval.setSummary((String) o);
-            repoUpdated();
+            folderUpdated();
             return true;
-        } else if (preference.equals(mRepoMaster)) {
-            mRepo.ReadOnly = (Boolean) o;
-            repoUpdated();
+        } else if (preference.equals(mFolderMaster)) {
+            mFolder.ReadOnly = (Boolean) o;
+            folderUpdated();
             return true;
         } else if (preference.getKey().equals(KEY_NODE_SHARED)) {
             ExtendedCheckBoxPreference pref = (ExtendedCheckBoxPreference) preference;
-            RestApi.Node node = (RestApi.Node) pref.getObject();
+            RestApi.Device device = (RestApi.Device) pref.getObject();
             if ((Boolean) o) {
-                mRepo.NodeIds.add(node.NodeID);
+                mFolder.DeviceIds.add(device.DeviceID);
             } else {
-                Iterator<String> it = mRepo.NodeIds.iterator();
+                Iterator<String> it = mFolder.DeviceIds.iterator();
                 while (it.hasNext()) {
                     String n = it.next();
-                    if (n.equals(node.NodeID)) {
+                    if (n.equals(device.DeviceID)) {
                         it.remove();
                     }
                 }
             }
-            repoUpdated();
+            folderUpdated();
             return true;
         } else if (preference.equals(mVersioning)) {
             mVersioningKeep.setEnabled((Boolean) o);
             if ((Boolean) o) {
                 RestApi.SimpleVersioning v = new RestApi.SimpleVersioning();
-                mRepo.Versioning = v;
+                mFolder.Versioning = v;
                 v.setParams(5);
                 mVersioningKeep.setText("5");
                 mVersioningKeep.setSummary("5");
             } else {
-                mRepo.Versioning = new RestApi.Versioning();
+                mFolder.Versioning = new RestApi.Versioning();
             }
-            repoUpdated();
+            folderUpdated();
             return true;
         } else if (preference.equals(mVersioningKeep)) {
-            ((RestApi.SimpleVersioning) mRepo.Versioning)
+            ((RestApi.SimpleVersioning) mFolder.Versioning)
                     .setParams(Integer.parseInt((String) o));
-            repoUpdated();
+            folderUpdated();
             return true;
         }
 
@@ -278,13 +278,13 @@ public class RepoSettingsFragment extends PreferenceFragment
         if (preference.equals(mDirectory)) {
             Intent intent = new Intent(getActivity(), FolderPickerActivity.class)
                     .putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY,
-                            (mRepo.Directory.length() != 0)
-                                    ? mRepo.Directory
+                            (mFolder.Path.length() != 0)
+                                    ? mFolder.Path
                                     : Environment.getExternalStorageDirectory().getAbsolutePath()
                     );
             startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
-        } else if (preference.equals(mNodes) && mSyncthingService.getApi().getNodes().isEmpty()) {
-            Toast.makeText(getActivity(), R.string.no_nodes, Toast.LENGTH_SHORT)
+        } else if (preference.equals(mDevices) && mSyncthingService.getApi().getDevices().isEmpty()) {
+            Toast.makeText(getActivity(), R.string.no_devices, Toast.LENGTH_SHORT)
                     .show();
         }
         return false;
@@ -293,15 +293,15 @@ public class RepoSettingsFragment extends PreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
-            mRepo.Directory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
-            mDirectory.setSummary(mRepo.Directory);
-            repoUpdated();
+            mFolder.Path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
+            mDirectory.setSummary(mFolder.Path);
+            folderUpdated();
         }
     }
 
-    private void repoUpdated() {
+    private void folderUpdated() {
         if (!mIsCreate) {
-            mSyncthingService.getApi().editRepo(mRepo, false, getActivity());
+            mSyncthingService.getApi().editFolder(mFolder, false, getActivity());
         }
     }
 

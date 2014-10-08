@@ -32,7 +32,7 @@ public class RestApiTest extends AndroidTestCase {
                 getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
 
         mConfig = new ConfigXml(new MockContext(getContext()));
-        mConfig.createCameraRepo();
+        mConfig.createCameraFolder();
         mConfig.updateIfNeeded();
 
         final CountDownLatch latch = new CountDownLatch(2);
@@ -76,8 +76,8 @@ public class RestApiTest extends AndroidTestCase {
     }
 
     @SmallTest
-    public void testGetNodes() {
-        assertNotNull(mApi.getNodes());
+    public void testGetDevices() {
+        assertNotNull(mApi.getDevices());
     }
 
     @MediumTest
@@ -94,8 +94,8 @@ public class RestApiTest extends AndroidTestCase {
     }
 
     @SmallTest
-    public void testGetRepos() {
-        assertNotNull(mApi.getRepos());
+    public void testGetFolders() {
+        assertNotNull(mApi.getFolders());
     }
 
     @SmallTest
@@ -128,7 +128,7 @@ public class RestApiTest extends AndroidTestCase {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.getModel("camera", new RestApi.OnReceiveModelListener() {
             @Override
-            public void onReceiveModel(String repoId, RestApi.Model model) {
+            public void onReceiveModel(String folderId, RestApi.Model model) {
                 assertNotNull(model);
                 latch.countDown();
             }
@@ -137,12 +137,12 @@ public class RestApiTest extends AndroidTestCase {
     }
 
     @MediumTest
-    public void testNormalizeNodeId() throws InterruptedException {
+    public void testNormalizeDeviceId() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.normalizeNodeId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq",
-                new RestApi.OnNodeIdNormalizedListener() {
+        mApi.normalizeDeviceId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq",
+                new RestApi.OnDeviceIdNormalizedListener() {
             @Override
-            public void onNodeIdNormalized(String normalizedId, String error) {
+            public void onDeviceIdNormalized(String normalizedId, String error) {
                 assertEquals("P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2",
                         normalizedId);
                 latch.countDown();

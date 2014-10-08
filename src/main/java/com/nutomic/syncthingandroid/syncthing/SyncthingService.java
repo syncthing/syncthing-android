@@ -17,7 +17,7 @@ import android.util.Pair;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
-import com.nutomic.syncthingandroid.util.RepoObserver;
+import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -39,7 +39,7 @@ public class SyncthingService extends Service {
     public static final String ACTION_RESTART = "restart";
 
     /**
-     * Interval in ms at which the GUI is updated (eg {@link }LocalNodeInfoFragment}).
+     * Interval in ms at which the GUI is updated (eg {@link }LocalDeviceInfoFragment}).
      */
     public static final int GUI_UPDATE_INTERVAL = 1000;
 
@@ -68,7 +68,7 @@ public class SyncthingService extends Service {
 
     private RestApi mApi;
 
-    private LinkedList<RepoObserver> mObservers = new LinkedList<>();
+    private LinkedList<FolderObserver> mObservers = new LinkedList<>();
 
     private SyncthingRunnable mSyncthingRunnable;
 
@@ -191,7 +191,7 @@ public class SyncthingService extends Service {
                 mStopScheduled = true;
             } else if (mApi != null) {
                 mApi.shutdown();
-                for (RepoObserver ro : mObservers) {
+                for (FolderObserver ro : mObservers) {
                     ro.stopWatching();
                 }
                 mObservers.clear();
@@ -256,7 +256,7 @@ public class SyncthingService extends Service {
             if (isFirstStart()) {
                 Log.i(TAG, "App started for the first time. " +
                         "Copying default config, keys will be generated automatically");
-                mConfig.createCameraRepo();
+                mConfig.createCameraFolder();
             }
 
             return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
@@ -269,8 +269,8 @@ public class SyncthingService extends Service {
                 @Override
                 public void onApiAvailable() {
                     onApiChange();
-                    for (RestApi.Repo r : mApi.getRepos()) {
-                        mObservers.add(new RepoObserver(mApi, r));
+                    for (RestApi.Folder r : mApi.getFolders()) {
+                        mObservers.add(new FolderObserver(mApi, r));
                     }
                 }
             });

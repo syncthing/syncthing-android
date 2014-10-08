@@ -12,44 +12,44 @@ import java.util.ArrayList;
 /**
  * Recursively watches a directory and all subfolders.
  */
-public class RepoObserver extends FileObserver {
+public class FolderObserver extends FileObserver {
 
-    private static final String TAG = "RepoObserver";
+    private static final String TAG = "FolderObserver";
 
-    private final OnRepoFileChangeListener mListener;
+    private final OnFolderFileChangeListener mListener;
 
-    private final RestApi.Repo mRepo;
+    private final RestApi.Folder mFolder;
 
     private final String mPath;
 
-    private final ArrayList<RepoObserver> mChilds;
+    private final ArrayList<FolderObserver> mChilds;
 
-    public interface OnRepoFileChangeListener {
-        public void onRepoFileChange(String repoId, String relativePath);
+    public interface OnFolderFileChangeListener {
+        public void onFolderFileChange(String folderId, String relativePath);
     }
 
-    public RepoObserver(OnRepoFileChangeListener listener, RestApi.Repo repo) {
-        this(listener, repo, "");
+    public FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder) {
+        this(listener, folder, "");
     }
 
     /**
      * Constructs watcher and starts watching the given directory recursively.
      *
      * @param listener The listener where changes should be sent to.
-     * @param repo The repository where this folder belongs to.
-     * @param path Path to the monitored folder, relative to repo root.
+     * @param folder The folder where this folder belongs to.
+     * @param path Path to the monitored folder, relative to folder root.
      */
-    private RepoObserver(OnRepoFileChangeListener listener, RestApi.Repo repo, String path) {
-        super(repo.Directory + "/" + path,
+    private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path) {
+        super(folder.Path + "/" + path,
                 ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MODIFY | MOVED_FROM |
                 MOVED_TO | MOVE_SELF);
         mListener = listener;
-        mRepo = repo;
+        mFolder = folder;
         mPath = path;
-        Log.v(TAG, "observer created for " + path + " in " + repo.ID);
+        Log.v(TAG, "observer created for " + path + " in " + folder.ID);
         startWatching();
 
-        File[] directories = new File(repo.Directory, path).listFiles(new FilenameFilter() {
+        File[] directories = new File(folder.Path, path).listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File current, String name) {
                 return new File(current, name).isDirectory();
@@ -58,7 +58,7 @@ public class RepoObserver extends FileObserver {
 
         mChilds = new ArrayList<>();
         for (File f : directories) {
-            mChilds.add(new RepoObserver(mListener, mRepo, path + "/" + f.getName()));
+            mChilds.add(new FolderObserver(mListener, mFolder, path + "/" + f.getName()));
         }
     }
 
@@ -78,7 +78,7 @@ public class RepoObserver extends FileObserver {
             case DELETE_SELF:
                 // fall through
             case DELETE:
-                for (RepoObserver ro : mChilds) {
+                for (FolderObserver ro : mChilds) {
                     if (ro.mPath.equals(path)) {
                         mChilds.remove(ro);
                         break;
@@ -88,10 +88,10 @@ public class RepoObserver extends FileObserver {
             case MOVED_TO:
                 // fall through
             case CREATE:
-                mChilds.add(new RepoObserver(mListener, mRepo, path));
+                mChilds.add(new FolderObserver(mListener, mFolder, path));
                 // fall through
             default:
-                mListener.onRepoFileChange(mRepo.ID, new File(mPath, path).getPath());
+                mListener.onFolderFileChange(mFolder.ID, new File(mPath, path).getPath());
         }
     }
 
@@ -101,7 +101,7 @@ public class RepoObserver extends FileObserver {
     @Override
     public void stopWatching() {
         super.stopWatching();
-        for (RepoObserver ro : mChilds) {
+        for (FolderObserver ro : mChilds) {
             ro.stopWatching();
         }
     }

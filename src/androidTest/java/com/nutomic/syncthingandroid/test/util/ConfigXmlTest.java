@@ -41,16 +41,16 @@ public class ConfigXmlTest extends AndroidTestCase {
      * This is not ideal, but way less complicated than starting up syncthing and accessing the API.
      */
     @SmallTest
-    public void testCreateCameraRepo() {
+    public void testCreateCameraFolder() {
         long oldTime = ConfigXml.getConfigFile(mContext).lastModified();
         long oldSize = ConfigXml.getConfigFile(mContext).length();
-        mConfig.createCameraRepo();
+        mConfig.createCameraFolder();
         assertNotSame(oldTime, ConfigXml.getConfigFile(mContext).lastModified());
         assertNotSame(oldSize, ConfigXml.getConfigFile(mContext).lastModified());
     }
 
     /**
-     * Same as {@link #testCreateCameraRepo()}.
+     * Same as {@link #testCreateCameraFolder()}.
      */
     @MediumTest
     public void testUpdateIfNeeded() {

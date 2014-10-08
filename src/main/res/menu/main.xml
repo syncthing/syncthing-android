@@ -4,19 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/share_node_id"
+        android:id="@+id/share_device_id"
         android:icon="@android:drawable/ic_menu_share"
-        android:title="@string/share_node_id"
+        android:title="@string/share_device_id"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/add_repo"
-        android:title="@string/add_repo"
+        android:id="@+id/add_folder"
+        android:title="@string/add_folder"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/add_node"
-        android:title="@string/add_node"
+        android:id="@+id/add_device"
+        android:title="@string/add_device"
         app:showAsAction="ifRoom" />
 
 

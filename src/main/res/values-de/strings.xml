@@ -3,37 +3,37 @@
   <string name="app_name">Syncthing</string>
   <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentraliserites.</string>
   <!--MainActivity-->
-  <!--Title of the "add repo" menu action-->
-  <string name="add_repo">Verzeichnis hinzufügen</string>
-  <!--Title of the "share node id" menu action-->
-  <string name="share_node_id">Knoten ID teilen</string>
-  <!--Shown in the chooser dialog when sharing a Node ID-->
-  <string name="send_node_id_to">Knoten ID senden an</string>
-  <!--Text for RepositoriesFragment and NodesFragment loading view-->
+  <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Verzeichnis hinzufügen</string>
+  <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Knoten ID teilen</string>
+  <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Knoten ID senden an</string>
+  <!--Text for FolderFragment and DevicesFragment loading view-->
   <string name="api_loading">Warte auf Schnittstelle</string>
-  <!--RepositoriesFragment-->
-  <string name="repositories_fragment_title">Verzeichnisse</string>
-  <!--Format string for repository progress. First parameter is status string, second is sync percentage-->
-  <string name="repo_progress_format">%1$s (%2$d%%)</string>
-  <!--Shown if no repos exist-->
-  <string name="repositories_list_empty">Keine Verzeichnisse gefunden</string>
-  <!--Format string for repository file count-->
+  <!--FolderFragment-->
+  <string name="Folder_fragment_title">Verzeichnisse</string>
+  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no folders exist-->
+  <string name="Folder_list_empty">Keine Verzeichnisse gefunden</string>
+  <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d Dateien</string>
-  <!--NodesFragment-->
-  <string name="nodes_fragment_title">Knoten</string>
-  <!--Shown if no nodes exist-->
-  <string name="nodes_list_empty">Keine Knoten gefunden</string>
-  <!--Indicates that a repo is fully synced to the local node-->
-  <string name="node_up_to_date">Aktuell</string>
-  <!--Indicates that the node is currently syncing. Parameter is sync percentage-->
-  <string name="node_syncing">Synchronisiere (%1$d%%)</string>
-  <!--Indicates that there is no connection to the node-->
-  <string name="node_disconnected">Nicht verbunden</string>
+  <!--DevicesFragment-->
+  <string name="devices_fragment_title">Knoten</string>
+  <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Keine Knoten gefunden</string>
+  <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Aktuell</string>
+  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Synchronisiere (%1$d%%)</string>
+  <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Nicht verbunden</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
-  <!--LocalNodeInfoFragment-->
+  <!--LocalDeviceInfoFragment-->
   <!--ActionBar title shown when the drawer is open-->
   <string name="system_info">System Informationen</string>
   <!--Same as download_title with a colon and space appended-->
@@ -46,40 +46,40 @@
   <string name="ram_usage">RAM Auslastung</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ankündigungs-Server</string>
-  <!--RepoSettingsFragment-->
+  <!--FolderSettingsFragment-->
   <!--Setting title-->
-  <string name="repo_id">Verzeichnis ID</string>
+  <string name="folder_id">Verzeichnis ID</string>
   <!--Setting title-->
   <string name="directory">Ordner</string>
   <!--Setting title-->
   <string name="rescan_interval">Suchintervall</string>
   <!--Setting title-->
-  <string name="repo_master">Originalverzeichnis</string>
+  <string name="folder_master">Originalverzeichnis</string>
   <!--Setting title-->
-  <string name="nodes">Knoten</string>
+  <string name="devices">Knoten</string>
   <!--Setting title-->
   <string name="file_versioning">Dateiversionierung</string>
   <!--Setting title-->
   <string name="keep_versions">Versionen behalten</string>
   <!--Setting title-->
-  <string name="delete_repo">Verzeichnis löschen</string>
-  <!--Title for RepoSettingsFragment in create mode-->
-  <string name="create_repo">Verzeichnis erstellen</string>
-  <!--Title for RepoSettingsFragment in edit mode-->
-  <string name="edit_repo">Verzeichnis bearbeiten</string>
-  <!--Menu item to confirm repo creation-->
+  <string name="delete_folder">Verzeichnis löschen</string>
+  <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Verzeichnis erstellen</string>
+  <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Verzeichnis bearbeiten</string>
+  <!--Menu item to confirm folder creation-->
   <string name="create">Erstellen</string>
-  <!--Dialog shown when attempting to delete a repository-->
-  <string name="delete_repo_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
-  <!--Toast shown when trying to create a repository with an empty ID-->
-  <string name="repo_id_required">Die Verzeichnis ID darf nicht leer sein</string>
-  <!--Toast shown when trying to create a repository with an empty path-->
-  <string name="repo_path_required">Der Verzeichnispfad darf nicht leer sein</string>
-  <!--Toast shown when selecting 'nodes' if no nodes have been added-->
-  <string name="no_nodes">Bitte verbinden Sie zuerst einen Knoten.</string>
-  <!--NodeSettingsFragment-->
+  <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">Die Verzeichnis ID darf nicht leer sein</string>
+  <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
+  <!--Toast shown when selecting 'devices' if no nodes have been added-->
+  <string name="no_devices">Bitte verbinden Sie zuerst einen Knoten.</string>
+  <!--DeviceSettingsFragment-->
   <!--Setting title-->
-  <string name="node_id">Knoten ID</string>
+  <string name="device_id">Knoten ID</string>
   <!--Setting title-->
   <string name="name">Name</string>
   <!--Setting title-->
@@ -89,20 +89,20 @@
   <!--Setting title-->
   <string name="compression">Datenkomprimierung</string>
   <!--ActionBar item-->
-  <string name="delete_node">Knoten löschen</string>
-  <!--Title for NodeSettingsFragment in create mode-->
-  <string name="add_node">Knoten hinzufügen</string>
-  <!--Menu item to confirm adding a node-->
+  <string name="delete_device">Knoten löschen</string>
+  <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Knoten hinzufügen</string>
+  <!--Menu item to confirm adding a device-->
   <string name="add">Hinzufügen</string>
-  <!--Title for NodeSettingsFragment in edit mode-->
-  <string name="edit_node">Knoten bearbeiten</string>
-  <!--Dialog shown when attempting to delete a node-->
-  <string name="delete_node_confirm">Soll dieser Knoten wirklich gelöscht werden?</string>
-  <!--Toast shown when trying to create a node with an empty ID-->
-  <string name="node_id_required">Die Knoten ID darf nicht leer sein</string>
-  <!--Toast shown when trying to create a node with an empty name-->
-  <string name="node_name_required">Der Knotenname darf nicht leer sein</string>
-  <!--Content description for node ID qr code icon-->
+  <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Knoten bearbeiten</string>
+  <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Soll dieser Knoten wirklich gelöscht werden?</string>
+  <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">Die Knoten ID darf nicht leer sein</string>
+  <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">Der Knotenname darf nicht leer sein</string>
+  <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Code scannen</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
   <string name="no_qr_scanner_installed">Sie haben keinen QR Scanner installiert, oder Ihr Scanner wird nicht unterstützt.
@@ -132,9 +132,9 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Fehler berichten</string>
+  <string name="folderrt_issue_title">Fehler berichten</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Syncthing-Android Fehler-Sammlung öffnen</string>
+  <string name="folderrt_issue_summary">Syncthing-Android Fehler-Sammlung öffnen</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Version</string>
@@ -144,7 +144,7 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <!--ListView empty text-->
   <string name="directory_empty">Ordner ist leer</string>
   <!--Menu item to create folder-->
-  <string name="create_folder">Erstelle neuen Ordner</string>
+  <string name="create_fs_folder">Erstelle neuen Ordner</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Ordner auswählen</string>
   <!--SyncthingService-->
@@ -167,8 +167,8 @@ Bitte installieren Sie einen Scanner oder geben Sie die Knoten ID manuell ein.</
   <string name="restart_notification_text">Klicken Sie hier um Syncthing neu zu starten</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Später neu starten</string>
-  <!--Shown when a node ID is copied to the clipboard-->
-  <string name="node_id_copied_to_clipboard">Knoten ID in die Zwischenablage kopiert</string>
+  <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">Knoten ID in die Zwischenablage kopiert</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>

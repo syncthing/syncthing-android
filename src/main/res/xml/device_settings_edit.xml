@@ -2,10 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:persistent="false">
 
-    <EditTextPreference
-        android:key="node_id"
-        android:title="@string/node_id"
-        android:widgetLayout="@layout/scan_qr_code_widget" />
+    <Preference
+        android:key="device_id"
+        android:title="@string/device_id" />
 
     <EditTextPreference
         android:key="name"
@@ -18,5 +17,15 @@
     <CheckBoxPreference
         android:key="compression"
         android:title="@string/compression" />
+
+    <Preference
+        android:key="version"
+        android:title="@string/syncthing_version_title"
+        style="?android:preferenceInformationStyle" />
+
+    <Preference
+        android:key="current_address"
+        android:title="@string/current_address"
+        style="?android:preferenceInformationStyle" />
 
 </PreferenceScreen>

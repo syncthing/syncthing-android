@@ -5,13 +5,19 @@
 
     <item
         android:id="@+id/create"
-        android:title="@string/create"
+        android:title="@string/add"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/share_device_id"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/share_device_id"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_delete"
-        android:title="@string/delete_repo"
+        android:title="@string/delete_device"
         app:showAsAction="ifRoom" />
 
 </menu>

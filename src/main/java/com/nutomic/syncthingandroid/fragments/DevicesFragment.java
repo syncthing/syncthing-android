@@ -12,18 +12,18 @@ import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.util.NodesAdapter;
+import com.nutomic.syncthingandroid.util.DevicesAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Displays a list of all existing nodes.
+ * Displays a list of all existing devices.
  */
-public class NodesFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+public class DevicesFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         ListView.OnItemClickListener {
 
-    private NodesAdapter mAdapter;
+    private DevicesAdapter mAdapter;
 
     private Timer mTimer;
 
@@ -53,10 +53,10 @@ public class NodesFragment extends ListFragment implements SyncthingService.OnAp
         if (activity == null || activity.getApi() == null)
             return;
 
-        mAdapter = new NodesAdapter(activity);
-        mAdapter.add(activity.getApi().getNodes());
+        mAdapter = new DevicesAdapter(activity);
+        mAdapter.add(activity.getApi().getDevices());
         setListAdapter(mAdapter);
-        setEmptyText(getString(R.string.nodes_list_empty));
+        setEmptyText(getString(R.string.devices_list_empty));
         getListView().setOnItemClickListener(this);
     }
 
@@ -92,7 +92,7 @@ public class NodesFragment extends ListFragment implements SyncthingService.OnAp
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
         intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
-        intent.putExtra(NodeSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).NodeID);
+        intent.putExtra(DeviceSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).DeviceID);
         startActivity(intent);
     }
 

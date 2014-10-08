@@ -37,7 +37,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
     public static final String URI_MODEL = "/rest/model";
 
-    public static final String URI_NODEID = "/rest/nodeid";
+    public static final String URI_DEVICEID = "/rest/deviceid";
 
     /**
      * params[0] Syncthing hostname
