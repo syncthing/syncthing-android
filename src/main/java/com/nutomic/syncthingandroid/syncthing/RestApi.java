@@ -749,7 +749,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public boolean editFolder(Folder folder, boolean create, Activity activity) {
         try {
-            JSONArray folders = mConfig.getJSONArray("Folder");
+            JSONArray folders = mConfig.getJSONArray("Folders");
             JSONObject r = null;
             if (create) {
                 r = new JSONObject();
