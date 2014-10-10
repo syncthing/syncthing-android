@@ -270,7 +270,11 @@ public class SyncthingService extends Service {
                 public void onApiAvailable() {
                     onApiChange();
                     for (RestApi.Folder r : mApi.getFolders()) {
-                        mObservers.add(new FolderObserver(mApi, r));
+                        try {
+                            mObservers.add(new FolderObserver(mApi, r));
+                        } catch (FolderObserver.FolderNotExistingException e) {
+                            Log.w(TAG, e.getMessage());
+                        }
                     }
                 }
             });

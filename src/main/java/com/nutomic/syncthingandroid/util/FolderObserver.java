@@ -32,6 +32,20 @@ public class FolderObserver extends FileObserver {
         this(listener, folder, "");
     }
 
+    public class FolderNotExistingException extends RuntimeException {
+
+        private String mPath;
+
+        public FolderNotExistingException(String path) {
+            mPath = path;
+        }
+
+        @Override
+        public String getMessage() {
+            return "Path " + mPath + " does not exist, aborting file observer";
+        }
+    }
+
     /**
      * Constructs watcher and starts watching the given directory recursively.
      *
@@ -49,7 +63,11 @@ public class FolderObserver extends FileObserver {
         Log.v(TAG, "observer created for " + path + " in " + folder.ID);
         startWatching();
 
-        File[] directories = new File(folder.Path, path).listFiles(new FilenameFilter() {
+        File currentFolder = new File(folder.Path, path);
+        if (!currentFolder.exists()) {
+            throw new FolderNotExistingException(currentFolder.getAbsolutePath());
+        }
+        File[] directories = currentFolder.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File current, String name) {
                 return new File(current, name).isDirectory();
