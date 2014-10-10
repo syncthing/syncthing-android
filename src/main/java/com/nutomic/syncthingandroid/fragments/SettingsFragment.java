@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -29,13 +31,13 @@ public class SettingsFragment extends PreferenceFragment
 
     private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
+    private static final String APP_VERSION_KEY = "app_version";
+
     private CheckBoxPreference mAlwaysRunInBackground;
 
     private CheckBoxPreference mSyncOnlyCharging;
 
     private CheckBoxPreference mSyncOnlyWifi;
-
-    private Preference mVersion;
 
     private PreferenceScreen mOptionsScreen;
 
@@ -48,7 +50,8 @@ public class SettingsFragment extends PreferenceFragment
         mOptionsScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
         mGuiScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
 
-        mVersion.setSummary(mSyncthingService.getApi().getVersion());
+        Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
+        syncthingVersion.setSummary(mSyncthingService.getApi().getVersion());
 
         if (currentState == SyncthingService.State.ACTIVE) {
             for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
@@ -103,7 +106,13 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
-        mVersion = screen.findPreference(SYNCTHING_VERSION_KEY);
+        Preference appVersion = screen.findPreference(APP_VERSION_KEY);
+        try {
+            appVersion.setSummary(getActivity().getPackageManager()
+                    .getPackageInfo(getActivity().getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d(TAG, "Failed to get app version name");
+        }
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
 

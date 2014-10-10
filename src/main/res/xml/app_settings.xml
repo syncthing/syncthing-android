@@ -113,4 +113,9 @@
         android:title="@string/syncthing_version_title"
         style="?android:preferenceInformationStyle" />
 
+    <Preference
+        android:key="app_version"
+        android:title="@string/app_version_title"
+        style="?android:preferenceInformationStyle" />
+
 </PreferenceScreen>
