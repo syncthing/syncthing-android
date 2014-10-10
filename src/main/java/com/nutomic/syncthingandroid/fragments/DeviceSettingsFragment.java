@@ -49,6 +49,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
 
     private CheckBoxPreference mCompression;
 
+    private CheckBoxPreference mIntroducer;
+
     private Preference mVersion;
 
     private Preference mCurrentAddress;
@@ -78,6 +80,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         mAddresses.setOnPreferenceChangeListener(this);
         mCompression = (CheckBoxPreference) findPreference("compression");
         mCompression.setOnPreferenceChangeListener(this);
+        mIntroducer = (CheckBoxPreference) findPreference("introducer");
+        mIntroducer.setOnPreferenceChangeListener(this);
         if (!mIsCreate) {
             mVersion = findPreference("version");
             mVersion.setSummary("?");
@@ -204,6 +208,10 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             return true;
         } else if (preference.equals(mCompression)) {
             mDevice.Compression = (Boolean) o;
+            deviceUpdated();
+            return true;
+        } else if (preference.equals(mIntroducer)) {
+            mDevice.Introducer = (Boolean) o;
             deviceUpdated();
             return true;
         }

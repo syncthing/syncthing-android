@@ -19,4 +19,8 @@
         android:key="compression"
         android:title="@string/compression" />
 
+    <CheckBoxPreference
+        android:key="introducer"
+        android:title="@string/introducer" />
+
 </PreferenceScreen>

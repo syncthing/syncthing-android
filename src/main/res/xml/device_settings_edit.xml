@@ -18,6 +18,10 @@
         android:key="compression"
         android:title="@string/compression" />
 
+    <CheckBoxPreference
+        android:key="introducer"
+        android:title="@string/introducer" />
+
     <Preference
         android:key="version"
         android:title="@string/syncthing_version_title"

@@ -65,6 +65,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String Name;
         public String DeviceID;
         public boolean Compression;
+        public boolean Introducer;
     }
 
     public static class SystemInfo {
@@ -440,14 +441,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         for (int i = 0; i < devices.length(); i++) {
             JSONObject json = devices.getJSONObject(i);
             Device n = new Device();
-            // TODO
-            //n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
-            if (!json.isNull("Addresses")) {
-                n.Addresses = json.getJSONArray("Addresses").join(" ").replace("\"", "");
-            }
+            n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
             n.Name = json.getString("Name");
             n.DeviceID = json.getString("DeviceID");
             n.Compression = json.getBoolean("Compression");
+            n.Introducer = json.getBoolean("Introducer");
             if (!n.DeviceID.equals(mLocalDeviceId)) {
                 ret.add(n);
             }
@@ -712,6 +710,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                             n.put("Name", device.Name);
                             n.put("Addresses", listToJson(device.Addresses.split(" ")));
                             n.put("Compression", device.Compression);
+                            n.put("Introducer", device.Introducer);
                             requireRestart(activity);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read devices", e);

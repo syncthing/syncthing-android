@@ -145,6 +145,9 @@
     <!-- Setting title -->
     <string name="compression">Compression</string>
 
+    <!-- Setting title -->
+    <string name="introducer">Introducer</string>
+
     <!-- ActionBar item -->
     <string name="delete_device">Delete Device</string>
 
