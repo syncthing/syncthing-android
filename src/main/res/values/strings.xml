@@ -303,4 +303,10 @@ If this error persists, try restarting your device.</string>
         <item>Tb/s</item>
     </string-array>
 
+    <!-- Possible folder states -->
+    <string name="state_idle">Idle</string>
+    <string name="state_scanning">Scanning</string>
+    <string name="state_cleaning">Cleaning</string>
+    <string name="state_syncing">Syncing</string>
+
 </resources>

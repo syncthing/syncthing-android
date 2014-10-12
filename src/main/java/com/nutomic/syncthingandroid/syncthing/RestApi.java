@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -662,6 +663,24 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_MODEL, mApiKey, "folder", folderId);
+    }
+
+    /**
+     * Returns the folder's state as a localized string.
+     *
+     * @param state One of idle, scanning, cleaning or syncing.
+     */
+    public static String getLocalizedState(Context c, String state) {
+        switch (state) {
+            case "idle":     return c.getString(R.string.state_idle);
+            case "scanning": return c.getString(R.string.state_scanning);
+            case "cleaning": return c.getString(R.string.state_cleaning);
+            case "syncing":  return c.getString(R.string.state_syncing);
+        }
+        if (BuildConfig.DEBUG) {
+            throw new AssertionError("Unexpected folder state");
+        }
+        return "";
     }
 
     /**

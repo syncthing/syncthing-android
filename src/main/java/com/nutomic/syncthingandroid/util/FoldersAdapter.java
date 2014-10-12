@@ -50,7 +50,8 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
             int percentage = (model.globalBytes != 0)
                     ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
-            state.setText(getContext().getString(R.string.folder_progress_format, model.state,
+            state.setText(getContext().getString(R.string.folder_progress_format,
+                    RestApi.getLocalizedState(getContext(), model.state),
                     percentage));
             items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
