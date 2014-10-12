@@ -2,6 +2,9 @@ package com.nutomic.syncthingandroid.syncthing;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,10 +14,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
@@ -63,6 +68,8 @@ public class SyncthingService extends Service {
     public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
 
     public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
+
+    private static final int NOTIFICATION_ACTIVE = 1;
 
     private ConfigXml mConfig;
 
@@ -159,6 +166,8 @@ public class SyncthingService extends Service {
                     (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
         }
 
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         // Start syncthing.
         if (shouldRun) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
@@ -177,6 +186,14 @@ public class SyncthingService extends Service {
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
             new Thread(new SyncthingRunnable(
                     this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
+            Notification n = new NotificationCompat.Builder(this)
+                    .setContentTitle(getString(R.string.syncthing_active))
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setPriority(NotificationCompat.PRIORITY_MIN)
+                    .setContentIntent(PendingIntent.getActivity(this, 0,
+                            new Intent(this, MainActivity.class), 0))
+                    .build();
+            nm.notify(NOTIFICATION_ACTIVE, n);
         }
         // Stop syncthing.
         else {
@@ -196,6 +213,7 @@ public class SyncthingService extends Service {
                 }
                 mObservers.clear();
             }
+            nm.cancel(NOTIFICATION_ACTIVE);
         }
         onApiChange();
     }
@@ -299,6 +317,8 @@ public class SyncthingService extends Service {
         if (mApi != null) {
             mApi.shutdown();
         }
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.cancel(NOTIFICATION_ACTIVE);
     }
 
     /**

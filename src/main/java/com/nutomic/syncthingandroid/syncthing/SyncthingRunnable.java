@@ -84,7 +84,8 @@ public class SyncthingRunnable implements Runnable {
                         .setAutoCancel(true)
                         .setOnlyAlertOnce(true);
                 Notification n = new NotificationCompat.BigTextStyle(b)
-                        .bigText(mContext.getString(R.string.binary_crashed_message, ret)).build();
+                        .bigText(mContext.getString(R.string.binary_crashed_message, ret))
+                        .build();
                 NotificationManager nm = (NotificationManager)
                         mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 nm.notify(NOTIFICATION_CRASHED, n);
