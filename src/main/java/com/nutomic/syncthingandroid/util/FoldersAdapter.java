@@ -47,14 +47,14 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
         directory.setText((folder.Path));
         if (model != null) {
+            int percentage = (model.globalBytes != 0)
+                    ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
+                    : 100;
             state.setText(getContext().getString(R.string.folder_progress_format, model.state,
-                    (model.globalBytes <= 0)
-                            ? 100
-                            : (int) ((model.localBytes / (float) model.globalBytes) * 100)
-            ));
+                    percentage));
             items.setText(getContext()
-                    .getString(R.string.files, model.localFiles, model.globalFiles));
-            size.setText(RestApi.readableFileSize(getContext(), model.localBytes) + " / " +
+                    .getString(R.string.files, model.inSyncFiles, model.globalFiles));
+            size.setText(RestApi.readableFileSize(getContext(), model.inSyncBytes) + " / " +
                     RestApi.readableFileSize(getContext(), model.globalBytes));
             if (folder.Invalid.equals("")) {
                 invalid.setText(model.invalid);

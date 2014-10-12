@@ -548,8 +548,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     return;
 
                 Long now = System.currentTimeMillis();
-                Long difference = (now - mPreviousConnectionTime) / 1000;
-                if (difference < 1) {
+                Long timeElapsed = (now - mPreviousConnectionTime) / 1000;
+                if (timeElapsed < 1) {
                     listener.onReceiveConnections(mPreviousConnections);
                     return;
                 }
@@ -573,12 +573,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                                 ? mPreviousConnections.get(deviceId)
                                 : new Connection();
                         mPreviousConnectionTime = now;
-                        if (difference != 0) {
-                            c.InBits = Math.max(0, 8 *
-                                    (conn.getLong("InBytesTotal") - prev.InBytesTotal) / difference);
-                            c.OutBits = Math.max(0, 8 *
-                                    (conn.getLong("OutBytesTotal") - prev.OutBytesTotal) / difference);
-                        }
+                        c.InBits = Math.max(0, 8 *
+                                (conn.getLong("InBytesTotal") - prev.InBytesTotal) / timeElapsed);
+                        c.OutBits = Math.max(0, 8 *
+                                (conn.getLong("OutBytesTotal") - prev.OutBytesTotal) / timeElapsed);
 
                         connections.put(deviceId, c);
 
