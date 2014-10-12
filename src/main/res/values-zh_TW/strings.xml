@@ -4,20 +4,31 @@
   <string name="app_description">一個開放的、值得信賴的、分散式的專有服務取代品。</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">增加資料夾</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">分享裝置識別碼</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">傳送裝置識別碼給</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">正在等待 API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">資料夾</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">未找到資料夾</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d 個檔案</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">裝置</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">未找到裝置</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">最新</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">正在同步 (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">斷線</string>
   <!--Title for current download rate-->
   <string name="download_title">下載</string>
   <!--Title for current upload rate-->
@@ -37,27 +48,38 @@
   <string name="announce_server">發布伺服器</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">資料夾識別碼</string>
   <!--Setting title-->
   <string name="directory">資料夾</string>
   <!--Setting title-->
   <string name="rescan_interval">重新掃描間隔</string>
   <!--Setting title-->
+  <string name="folder_master">主資料夾</string>
   <!--Setting title-->
+  <string name="devices">裝置</string>
   <!--Setting title-->
   <string name="file_versioning">檔案版本控制</string>
   <!--Setting title-->
   <string name="keep_versions">保留版本數</string>
   <!--Setting title-->
+  <string name="delete_folder">刪除資料夾</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">建立資料夾</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">編輯資料夾</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">建立</string>
   <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">您確定要刪除此資料夾？</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">資料夾識別碼不得為空</string>
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">資料夾路徑不得為空</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">請先連接至一個裝置。</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">裝置識別碼</string>
   <!--Setting title-->
   <string name="name">名稱</string>
   <!--Setting title-->
@@ -66,17 +88,27 @@
   <string name="current_address">目前位址</string>
   <!--Setting title-->
   <string name="compression">壓縮</string>
+  <!--Setting title-->
+  <string name="introducer">引入者</string>
   <!--ActionBar item-->
+  <string name="delete_device">刪除裝置</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">增加裝置</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">增加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">編輯裝置</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">您確定要刪除此裝置？</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">裝置識別碼不得為空</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">裝置名稱不得為空</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">掃描 QR Code</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">您未安裝 QR 掃描器或是您的掃描器未被支援。\
+請安裝一個掃描器或是手動輸入裝置識別碼。</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>
@@ -96,7 +128,9 @@
   <!--Preference title-->
   <string name="always_run_in_background">永遠在背景執行</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">根據下列的偏好設定，Syncthing 會永遠在背景執行。</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing 只會在明確地被要求時才會啟動，且可透過選單的按鈕停止。</string>
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
   <!--Title for the preference to set STTRACE parameters-->
@@ -108,12 +142,15 @@
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 版本</string>
+  <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android 版本</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">資料夾選擇器</string>
   <!--ListView empty text-->
   <string name="directory_empty">資料夾為空</string>
   <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">建立新資料夾</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">選擇資料夾</string>
   <!--SyncthingService-->
@@ -138,6 +175,7 @@
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">稍後重新啟動</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">裝置識別碼已複製至剪貼版</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -154,4 +192,9 @@
     <item>Gb/s</item>
     <item>Tb/s</item>
   </string-array>
+  <!--Possible folder states-->
+  <string name="state_idle">閒置</string>
+  <string name="state_scanning">正在掃描</string>
+  <string name="state_cleaning">正在清理</string>
+  <string name="state_syncing">正在同步</string>
 </resources>

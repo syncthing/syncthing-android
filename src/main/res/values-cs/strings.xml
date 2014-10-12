@@ -4,20 +4,31 @@
   <string name="app_description">Nahraďte proprietární služby něčím otevřeným, důvěryhodným a decentralizovaným.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">ID přístroje sdílení</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Poslat ID přístroje na</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Čekání na API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">Adresáře</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Nenalezeny žádné adresáře</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d souborů</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Přístroje</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Nenalezeny žádné přístroje</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Aktuální</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Synchronizuji (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Odpojeno</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
@@ -37,27 +48,38 @@
   <string name="announce_server">Ohlašovací Server</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">ID adresáře</string>
   <!--Setting title-->
   <string name="directory">Adresář</string>
   <!--Setting title-->
   <string name="rescan_interval">Interval opakování skenu</string>
   <!--Setting title-->
+  <string name="folder_master">Master adresář</string>
   <!--Setting title-->
+  <string name="devices">Přístroje</string>
   <!--Setting title-->
   <string name="file_versioning">Verze souborů</string>
   <!--Setting title-->
   <string name="keep_versions">Udržovat verze</string>
   <!--Setting title-->
+  <string name="delete_folder">Smazat adresář</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Vytvořit adresář</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Upravit adresář</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Vytvořit</string>
   <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Opravdu chcete smazat tento adresář?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">Nejdříve prosím připojte přístroj.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">ID přístroje</string>
   <!--Setting title-->
   <string name="name">Jméno</string>
   <!--Setting title-->
@@ -66,17 +88,26 @@
   <string name="current_address">Aktuální adresa</string>
   <!--Setting title-->
   <string name="compression">Komprese</string>
+  <!--Setting title-->
   <!--ActionBar item-->
+  <string name="delete_device">Smazat přístroj</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Přidat přístroj</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Přidat</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Upravit přístroj</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Opravdu chcete smazat tento přístroj?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">ID přístroje nesmí být prázdné</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">Jméno přístroje nesmí být prázdné</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Načíst QR kód</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Není nainstalována žádná QR čtečka, nebo není podporována. \
+Nainstalujte prosím čtečku nebo vložte ID přístroje ručně.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webové grafické rozhraní</string>
@@ -110,12 +141,14 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing verze</string>
+  <!--Title of the preference showing this app's version name-->
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Výběr adresáře</string>
   <!--ListView empty text-->
   <string name="directory_empty">Adresář je prázdný</string>
   <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">Vytvořit nový adresář</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Vybrat adresář</string>
   <!--SyncthingService-->
@@ -140,6 +173,7 @@ Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Restartovat později</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">ID přístroje bylo zkopírováno schránky</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -156,4 +190,5 @@ Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
     <item>Gb/s</item>
     <item>Tb/s</item>
   </string-array>
+  <!--Possible folder states-->
 </resources>

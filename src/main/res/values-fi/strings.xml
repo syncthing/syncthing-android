@@ -45,6 +45,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <!--Setting title-->
   <!--ActionBar item-->
   <!--Title for DeviceSettingsFragment in create mode-->
   <!--Menu item to confirm adding a device-->
@@ -70,6 +71,7 @@
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
+  <!--Title of the preference showing this app's version name-->
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <!--ListView empty text-->
@@ -89,4 +91,5 @@
   <!--Shown when a device ID is copied to the clipboard-->
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <!--Possible folder states-->
 </resources>
