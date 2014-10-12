@@ -88,6 +88,28 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             mCurrentAddress = findPreference("current_address");
             mCurrentAddress.setSummary("?");
         }
+
+        if (mIsCreate) {
+            if (savedInstanceState != null) {
+                mDevice = (RestApi.Device) savedInstanceState.getSerializable("device");
+            } else {
+                mDevice = new RestApi.Device();
+                mDevice.Name = "";
+                mDevice.DeviceID = "";
+                mDevice.Addresses = "dynamic";
+                mDevice.Compression = true;
+                ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
+            }
+        }
+    }
+
+    /**
+     * Save current settings in case we are in create mode and they aren't yet stored in the config.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("device", mDevice);
     }
 
     @Override
@@ -107,12 +129,6 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
 
         if (mIsCreate) {
             getActivity().setTitle(R.string.add_device);
-            mDevice = new RestApi.Device();
-            mDevice.Name = "";
-            mDevice.DeviceID = "";
-            mDevice.Addresses = "dynamic";
-            mDevice.Compression = true;
-            ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
         } else {
             getActivity().setTitle(R.string.edit_device);
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices();

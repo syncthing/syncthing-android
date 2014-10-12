@@ -95,6 +95,28 @@ public class FolderSettingsFragment extends PreferenceFragment
         mVersioning.setOnPreferenceChangeListener(this);
         mVersioningKeep = (EditTextPreference) findPreference("versioning_keep");
         mVersioningKeep.setOnPreferenceChangeListener(this);
+
+        if (mIsCreate) {
+            if (savedInstanceState != null) {
+                mFolder = (RestApi.Folder) savedInstanceState.getSerializable("folder");
+            } else {
+                mFolder = new RestApi.Folder();
+                mFolder.ID = "";
+                mFolder.Path = "";
+                mFolder.RescanIntervalS = 86400;
+                mFolder.DeviceIds = new ArrayList<>();
+                mFolder.Versioning = new RestApi.Versioning();
+            }
+        }
+    }
+
+    /**
+     * Save current settings in case we are in create mode and they aren't yet stored in the config.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("folder", mFolder);
     }
 
     @Override
@@ -109,12 +131,6 @@ public class FolderSettingsFragment extends PreferenceFragment
 
         if (mIsCreate) {
             getActivity().setTitle(R.string.create_folder);
-            mFolder = new RestApi.Folder();
-            mFolder.ID = "";
-            mFolder.Path = "";
-            mFolder.RescanIntervalS = 86400;
-            mFolder.DeviceIds = new ArrayList<>();
-            mFolder.Versioning = new RestApi.Versioning();
         } else {
             getActivity().setTitle(R.string.edit_folder);
             List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();

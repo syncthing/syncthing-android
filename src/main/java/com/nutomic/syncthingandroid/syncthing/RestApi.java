@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public static final String LOCAL_DEVICE_CONNECTIONS = "total";
 
-    public static class Device {
+    public static class Device implements Serializable {
         public String Addresses;
         public String Name;
         public String DeviceID;
@@ -78,7 +79,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public long sys;
     }
 
-    public static class Folder {
+    public static class Folder implements Serializable {
         public String Path;
         public String ID;
         public String Invalid;
@@ -88,7 +89,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public Versioning Versioning;
     }
 
-    public static class Versioning {
+    public static class Versioning implements Serializable {
         protected final Map<String, String> mParams = new HashMap<>();
 
         public String getType() {
