@@ -812,13 +812,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public boolean deleteFolder(Folder folder, Activity activity) {
         try {
-            JSONArray folders = mConfig.getJSONArray("Folder");
+            JSONArray folders = mConfig.getJSONArray("Folders");
 
             for (int i = 0; i < folders.length(); i++) {
                 JSONObject json = folders.getJSONObject(i);
                 if (folder.ID.equals(json.getString("ID"))) {
-                    mConfig.remove("Folder");
-                    mConfig.put("Folder", delete(folders, folders.getJSONObject(i)));
+                    mConfig.remove("Folders");
+                    mConfig.put("Folders", delete(folders, folders.getJSONObject(i)));
                     break;
                 }
             }
@@ -868,7 +868,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 String error = null;
                 try {
                     JSONObject json = new JSONObject(s);
-                    Log.d(TAG, s);
                     normalized = json.optString("id", null);
                     error = json.optString("error", null);
                 } catch (JSONException e) {

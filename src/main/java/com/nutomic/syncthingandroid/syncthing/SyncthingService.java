@@ -353,6 +353,7 @@ public class SyncthingService extends Service {
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
             mCurrentState = State.ACTIVE;
+            onApiChange();
             for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
                 listener.onWebGuiAvailable();
             }
