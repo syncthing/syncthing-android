@@ -18,79 +18,79 @@
 
     <PreferenceScreen
         android:key="syncthing_options"
-        android:title="Syncthing Options"
+        android:title="@string/syncthing_options"
         android:persistent="false">
 
         <EditTextPreference
             android:key="ListenAddress"
-            android:title="Sync Protocol Listen Addresses"
+            android:title="@string/listen_address"
             android:defaultValue="0.0.0.0:22000" />
 
         <EditTextPreference
             android:key="MaxRecvKbps"
-            android:title="Incoming Rate Limit (KiB/s)"
+            android:title="@string/max_recv_kbps"
             android:numeric="integer" />
 
         <EditTextPreference
             android:key="MaxSendKbps"
-            android:title="Outgoing Rate Limit (KiB/s)"
+            android:title="@string/max_send_kbps"
             android:numeric="integer" />
 
         <EditTextPreference
             android:key="ReconnectIntervalS"
-            android:title="Reconnect Interval (s)"
+            android:title="@string/reconnect_interval"
             android:numeric="integer" />
 
         <EditTextPreference
             android:key="ParallelRequests"
-            android:title="Max Outstanding Requests"
+            android:title="@string/parallell_requests"
             android:numeric="integer" />
 
         <EditTextPreference
             android:key="MaxChangeKbps"
-            android:title="Max File Change Rate (KiB/s)"
+            android:title="@string/max_change_kbps"
             android:numeric="integer" />
 
         <CheckBoxPreference
             android:key="GlobalAnnEnabled"
-            android:title="Global Discovery" />
+            android:title="@string/global_announce_enabled" />
 
         <CheckBoxPreference
             android:key="LocalAnnEnabled"
-            android:title="Local Discovery" />
+            android:title="@string/local_announce_enabled" />
 
         <EditTextPreference
             android:key="LocalAnnPort"
-            android:title="Local Discovery Port"
+            android:title="@string/local_announce_port"
             android:numeric="integer" />
 
         <CheckBoxPreference
             android:key="UPnPEnabled"
-            android:title="Enable UPnP" />
+            android:title="@string/upnp_enabled" />
 
     </PreferenceScreen>
 
     <PreferenceScreen
         android:key="syncthing_gui"
-        android:title="Syncthing GUI"
+        android:title="@string/syncthing_gui"
         android:persistent="false">
 
         <EditTextPreference
             android:key="Address"
-            android:title="GUI Listen Addresses" />
+            android:title="@string/gui_address" />
 
         <EditTextPreference
             android:key="User"
-            android:title="GUI Authentication User" />
+            android:title="@string/gui_user" />
 
         <EditTextPreference
             android:key="Password"
-            android:title="GUI Authentication Password"
+            android:title="@string/gui_password"
             android:inputType="textPassword" />
 
         <CheckBoxPreference
             android:key="UseTLS"
-            android:title="Use HTTPS for GUI"
+            android:title="@string/gui_https_enabled"
             android:enabled="false" />
 
     </PreferenceScreen>
