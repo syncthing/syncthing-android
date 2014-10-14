@@ -89,6 +89,7 @@
   <!--Setting title-->
   <string name="compression">Komprese</string>
   <!--Setting title-->
+  <string name="introducer">Zavaděč</string>
   <!--ActionBar item-->
   <string name="delete_device">Smazat přístroj</string>
   <!--Title for DeviceSettingsFragment in create mode-->
@@ -142,6 +143,7 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing verze</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android verze</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Výběr adresáře</string>
@@ -165,6 +167,8 @@ Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
   <string name="syncthing_disabled_change_settings">Změnit nastavení</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Ukončit</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing běží</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
@@ -191,4 +195,8 @@ Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
     <item>Tb/s</item>
   </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">Nečinný</string>
+  <string name="state_scanning">Probíhá sken</string>
+  <string name="state_cleaning">Probíhá čištění</string>
+  <string name="state_syncing">Probíhá synchronizace</string>
 </resources>

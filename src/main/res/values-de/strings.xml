@@ -164,6 +164,8 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <string name="syncthing_disabled_change_settings">Einstellungen ändern</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Verlassen</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing läuft</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>

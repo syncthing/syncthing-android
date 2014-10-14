@@ -1,26 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Zastępuje własnościowe serwisy czymś otwartym, zaufanym i zdecentralizowanym.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Dodaj folder</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Udostępnij ID urządzenia</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Wyślij ID urządzenia do</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Oczekiwanie na API API</string>
+  <string name="api_loading">Oczekiwanie na API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">Foldery</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Nie znaleziono folderów</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d plików</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Urządzenia</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Nie znaleziono urządzeń</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Aktualne</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronizacja (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Rozłączono</string>
+  <string name="device_disconnected">Rozłączony</string>
   <!--Title for current download rate-->
   <string name="download_title">Pobieranie</string>
   <!--Title for current upload rate-->
@@ -37,99 +45,139 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">Użycie RAMu</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Ogłoś serwer</string>
+  <string name="announce_server">Serwer ogłoszeniowy</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">ID folderu</string>
   <!--Setting title-->
-  <string name="directory">Directory</string>
+  <string name="directory">Katalog</string>
   <!--Setting title-->
+  <string name="rescan_interval">Odstęp między skanowaniem</string>
   <!--Setting title-->
+  <string name="folder_master">Główny folder</string>
   <!--Setting title-->
+  <string name="devices">Urządzenia</string>
   <!--Setting title-->
   <string name="file_versioning">File Versioning</string>
   <!--Setting title-->
-  <string name="keep_versions">Keep Versions</string>
+  <string name="keep_versions">Pamiętaj wersje</string>
   <!--Setting title-->
+  <string name="delete_folder">Usuń folder</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Utwórz folder</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Edytuj folder</string>
   <!--Menu item to confirm folder creation-->
-  <string name="create">Create</string>
+  <string name="create">Utwórz</string>
   <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Czy na pewno chcesz usunąć ten folder?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">ID folderu nie może być puste</string>
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Ścieżka do folderu nie może być pusta</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">Proszę połączyć sięwpierw z urządzeniem</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">ID urządzenia</string>
   <!--Setting title-->
-  <string name="name">Name</string>
+  <string name="name">Nazwa</string>
   <!--Setting title-->
-  <string name="addresses">Addresses</string>
+  <string name="addresses">Adresy</string>
   <!--Setting title-->
-  <string name="current_address">Current Address</string>
+  <string name="current_address">Bieżący adres</string>
   <!--Setting title-->
+  <string name="compression">Kompresja</string>
   <!--Setting title-->
+  <string name="introducer">Wprowadzający</string>
   <!--ActionBar item-->
+  <string name="delete_device">Usuń urządzenie</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Dodaj urządzenie</string>
   <!--Menu item to confirm adding a device-->
-  <string name="add">Add</string>
+  <string name="add">Dodaj</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Edytuj urządzenie</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Czy na pewno chcesz usunąć to urządzenie?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">ID urządzenie nie może być puste</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">Nazwa urządzenie nie może być pusta</string>
   <!--Content description for device ID qr code icon-->
-  <string name="scan_qr_code_description">Scan QR Code</string>
+  <string name="scan_qr_code_description">Skanuj QR Code</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Nie masz zainstalowanego wspieranego skanera QR.
+Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Waiting for GUI</string>
+  <string name="web_gui_loading">Oczekiwanie na GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generating keys. This may take a while.</string>
+  <string name="web_gui_creating_key">Generowanie kluczy. To może potrwać chwilę.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">First Start</string>
+  <string name="welcome_title">Pierwsze uruchomienie</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Witamy w Syncthing dla Androida!
+Ta aplikacja jest w fazie Alpha i mogą wystąpić błędy, problemy wydajnościowe albo utrata danych.
+Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
-  <string name="settings_title">Settings</string>
+  <string name="settings_title">Ustawienia</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Zawsze działaj w tle</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing zawsze działa w tle zgodnie z ustawieniami poniżej.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
+  <string name="sync_only_charging">Synchronizuj tylko, gdy podłączony do ładowarki</string>
+  <string name="sync_only_wifi">Synchronizuj tylko podłączony do WiFi</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Opcje debugowania</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Report Issue</string>
+  <string name="report_issue_title">Zgłoś błąd</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
+  <string name="report_issue_summary">Otwórz Syncthing-Android issue tracker</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Syncthing Version</string>
+  <string name="syncthing_version_title">Wersja Syncthing</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Wersja Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Folder Picker</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Directory is Empty</string>
+  <string name="directory_empty">Katalog jest pusty</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Create new Folder</string>
+  <string name="create_fs_folder">Nowy folder</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Select Folder</string>
+  <string name="select_folder">Wybierz folder</string>
   <!--SyncthingService-->
   <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing Binary Crashed</string>
+  <string name="binary_crashed_title">Syncthing uległo awarii</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">Syncthing zakończyło pracę z kodem błędu %1$d.
+Jeśli ten błąd będzie się utrzymywał, spróbuj zrestartować telefon.</string>
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Czy chcesz zmienić ustawienia?</string>
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Zmień ustawienia</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
-  <string name="exit">Exit</string>
+  <string name="exit">Wyjście</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing działa</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Restart Needed</string>
+  <string name="restart_title">Wymagany restart</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Click here to restart syncthing now</string>
+  <string name="restart_notification_text">Kliknij tu, aby zrestartować syncthing</string>
   <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Restart Later</string>
+  <string name="restart_later">Restartuj później</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">ID urządzenia skopiowane do schowka</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -147,4 +195,8 @@
     <item>Tb/s</item>
   </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">Bezczynny</string>
+  <string name="state_scanning">Skanuje</string>
+  <string name="state_cleaning">Czyści</string>
+  <string name="state_syncing">Synchronizuje</string>
 </resources>
