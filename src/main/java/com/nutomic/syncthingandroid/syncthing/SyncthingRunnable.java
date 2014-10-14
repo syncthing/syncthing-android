@@ -61,7 +61,8 @@ public class SyncthingRunnable implements Runnable {
                 dos.writeBytes("exit\n");
                 dos.flush();
 
-                log(process.getInputStream());
+                log(process.getInputStream(), Log.INFO);
+                log(process.getErrorStream(), Log.WARN);
 
                 ret = process.waitFor();
             } while (ret == 3);
@@ -98,7 +99,7 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param is The stream to log.
      */
-    private void log(final InputStream is) {
+    private void log(final InputStream is, final int priority) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -107,7 +108,7 @@ public class SyncthingRunnable implements Runnable {
                 String line;
                 try {
                     while ((line = br.readLine()) != null) {
-                        Log.i(TAG_NATIVE, line);
+                        Log.println(priority, TAG_NATIVE, line);
                     }
                 } catch (IOException e) {
                     // NOTE: This is sometimes called on shutdown, as
