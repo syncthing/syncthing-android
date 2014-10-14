@@ -181,6 +181,8 @@ public class SyncthingService extends Service {
             mApi.shutdown();
 
             Log.i(TAG, "Starting syncthing according to current state and preferences");
+            mConfig = new ConfigXml(SyncthingService.this);
+            mConfig.updateIfNeeded();
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());

@@ -129,6 +129,10 @@ public class ConfigXml {
                 r.setAttribute("directory", newDir);
                 changed = true;
             }
+
+            if (applyLenientMTimes(r)) {
+                changed = true;
+            }
         }
 
         // Change global announce server port to 22026 for syncthing v0.9.0.
@@ -141,6 +145,35 @@ public class ConfigXml {
         if (changed) {
             saveChanges();
         }
+    }
+
+    /**
+     * Set 'lenientMtimes' (see https://github.com/syncthing/syncthing/issues/831) on the
+     * given folder.
+     *
+     * @return True if the XML was changed.
+     */
+    private boolean applyLenientMTimes(Element folder) {
+        NodeList childs = folder.getChildNodes();
+        boolean lenientMTimesSet = false;
+        for (int i = 0; i < childs.getLength(); i++) {
+            if (childs.item(i).getNodeName().equals("lenientMtimes")) {
+                // Already set, do nothing (we assume that it is set to true, because nothing could
+                // change it (no GUI option).
+                lenientMTimesSet = true;
+                break;
+            }
+        }
+
+        // XML tag does not exist, create it.
+        if (!lenientMTimesSet) {
+            Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
+            Element newElem = mConfig.createElement("lenientMtimes");
+            newElem.setTextContent(Boolean.toString(true));
+            folder.appendChild(newElem);
+            return true;
+        }
+        return false;
     }
 
     private Element getGuiElement() {
