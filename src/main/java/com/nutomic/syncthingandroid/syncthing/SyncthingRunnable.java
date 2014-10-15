@@ -2,7 +2,9 @@ package com.nutomic.syncthingandroid.syncthing;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -81,6 +83,7 @@ public class SyncthingRunnable implements Runnable {
                 NotificationCompat.Builder b = new NotificationCompat.Builder(mContext)
                         .setContentTitle(mContext.getString(R.string.binary_crashed_title))
                         .setContentText(mContext.getString(R.string.binary_crashed_message, ret))
+                        .setContentIntent(PendingIntent.getActivity(mContext, 0, new Intent(), 0))
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setAutoCancel(true)
                         .setOnlyAlertOnce(true);
