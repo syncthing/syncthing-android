@@ -103,7 +103,7 @@ public class FolderSettingsFragment extends PreferenceFragment
                 mFolder = new RestApi.Folder();
                 mFolder.ID = "";
                 mFolder.Path = "";
-                mFolder.RescanIntervalS = 86400;
+                mFolder.RescanIntervalS = 0;
                 mFolder.DeviceIds = new ArrayList<>();
                 mFolder.Versioning = new RestApi.Versioning();
             }
