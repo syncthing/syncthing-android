@@ -100,7 +100,6 @@ public class LocalDeviceInfoFragment extends Fragment
     }
 
     private void onDrawerOpened() {
-        // FIXME: never called
         mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
