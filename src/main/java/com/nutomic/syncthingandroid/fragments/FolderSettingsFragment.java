@@ -195,8 +195,8 @@ public class FolderSettingsFragment extends PreferenceFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mFolder.ID.equals("")) {
-                    Toast.makeText(getActivity(), R.string.folder_id_required, Toast.LENGTH_LONG)
+                if (mFolder.ID.length() > 64 || !mFolder.ID.matches("[a-zA-Z0-9-_\\.]+")) {
+                    Toast.makeText(getActivity(), R.string.folder_id_invalid, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
