@@ -8,6 +8,7 @@ import com.nutomic.syncthingandroid.R;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -155,25 +156,23 @@ public class ConfigXml {
      */
     private boolean applyLenientMTimes(Element folder) {
         NodeList childs = folder.getChildNodes();
-        boolean lenientMTimesSet = false;
         for (int i = 0; i < childs.getLength(); i++) {
-            if (childs.item(i).getNodeName().equals("lenientMtimes")) {
-                // Already set, do nothing (we assume that it is set to true, because nothing could
-                // change it (no GUI option).
-                lenientMTimesSet = true;
-                break;
+            Node item = childs.item(i);
+            if (item.getNodeName().equals("lenientMtimes")) {
+                if (item.getTextContent().equals(Boolean.toString(false))) {
+                    item.setTextContent(Boolean.toString(true));
+                    return true;
+                }
+                return false;
             }
         }
 
         // XML tag does not exist, create it.
-        if (!lenientMTimesSet) {
-            Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
-            Element newElem = mConfig.createElement("lenientMtimes");
-            newElem.setTextContent(Boolean.toString(true));
-            folder.appendChild(newElem);
-            return true;
-        }
-        return false;
+        Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
+        Element newElem = mConfig.createElement("lenientMtimes");
+        newElem.setTextContent(Boolean.toString(true));
+        folder.appendChild(newElem);
+        return true;
     }
 
     private Element getGuiElement() {
