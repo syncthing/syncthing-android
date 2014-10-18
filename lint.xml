@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- We don't care about incomplete translations. -->
+    <issue id="MissingTranslation" severity="ignore" />
+	
+	<!-- Ignore "Value overridden by Gradle build script" for app
+	version (which is actually read from manifest by gradle). -->
+	<issue id="GradleOverrides" severity="ignore" />
+</lint>

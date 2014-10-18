@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nutomic.syncthingandroid"
     android:versionCode="41"
-    android:versionName="0.5.4"
-    tools:ignore="GradleOverrides" >
+    android:versionName="0.5.4" >
 
     <uses-sdk
         android:minSdkVersion="8"
