@@ -6,9 +6,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:0.13.3'
         classpath 'com.alexvasilkov:android_sign:0.2'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-6'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
         classpath 'org.codehaus.groovy:groovy-backports-compat23:2.3.5'
     }
 }
@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.0.0'
 }
@@ -39,7 +39,7 @@ preBuild {
 }
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 21
     buildToolsVersion "19.1.0"
 
     defaultConfig {
