@@ -131,6 +131,22 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
+  <string name="syncthing_options">Syncthing Optionen</string>
+  <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
+  <string name="max_recv_kbps">Eingehendes Datenratelimit (KiB/s)</string>
+  <string name="max_send_kbps">Ausgehendes Datenratelimit (KiB/s)</string>
+  <string name="reconnect_interval">Wiederverbindungsintervall (s)</string>
+  <string name="parallell_requests">Maximal ausstehende Anfragen</string>
+  <string name="max_change_kbps">Maximale Dateiändernungsrate (KiB/s)</string>
+  <string name="global_announce_enabled">Globale Auffindung</string>
+  <string name="local_announce_enabled">Lokale Auffindung</string>
+  <string name="local_announce_port">Lokaler Auffindungsport</string>
+  <string name="upnp_enabled">UPnP aktivieren</string>
+  <string name="syncthing_gui">Syncthing Benutzeroberfläche</string>
+  <string name="gui_address">Adresse(n) für die Benutzeroberfläche</string>
+  <string name="gui_user">Nutzername für Zugang zur Benutzeroberfläche</string>
+  <string name="gui_password">Passwort für Zugang zur Benutzeroberfläche</string>
+  <string name="gui_https_enabled">Benutze HTTPS für Benutzeroberfläche</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->

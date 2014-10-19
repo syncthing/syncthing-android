@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Poslat ID přístroje na</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Čekání na API</string>
+  <string name="api_loading">Čeká se na API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -28,7 +28,7 @@
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronizuji (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Odpojeno</string>
+  <string name="device_disconnected">Odpojen</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
@@ -113,9 +113,9 @@ Nainstalujte prosím čtečku nebo vložte ID přístroje ručně.</string>
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webové grafické rozhraní</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Čekání na grafické rozhraní</string>
+  <string name="web_gui_loading">Čeká se na grafické rozhraní</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Klíče jsou vytvářeny. Může to chvíli trvat.</string>
+  <string name="web_gui_creating_key">Jsou vytvářeny klíče. Chvíli strpení.</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">První spuštění</string>
   <!--Text for dialog displayed on first start-->
@@ -126,24 +126,40 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Vždy spouštět v pozadí</string>
+  <string name="always_run_in_background">Vždy spuštěné na pozadí</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing poběží vždy v pozadí, podle nastavení níže.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing poběží pouze pokud bude ručně spuštěn a může být ukončen tlačítkem z menu.</string>
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
-  <string name="sync_only_wifi">Synchronizovat pouze při připojení na wifi</string>
+  <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
+  <string name="syncthing_options">Nastavení Syncthing</string>
+  <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
+  <string name="max_recv_kbps">Omezení příchozí rychlosti (KiB/s)</string>
+  <string name="max_send_kbps">Omezení odchozí rychlosti (KiB/s)</string>
+  <string name="reconnect_interval">Interval pro opakování připojení (s)</string>
+  <string name="parallell_requests">Maximální počet požadavků</string>
+  <string name="max_change_kbps">Maximální rychlost výměny souborů (KiB/s)</string>
+  <string name="global_announce_enabled">Globální oznamování</string>
+  <string name="local_announce_enabled">Místní oznamování</string>
+  <string name="local_announce_port">Port místního oznamování</string>
+  <string name="upnp_enabled">Povolit UPnP</string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_address">Adresy naslouchání GUI</string>
+  <string name="gui_user">Přihlašovací jméno pro GUI</string>
+  <string name="gui_password">Přihlašovací heslo pro GUI</string>
+  <string name="gui_https_enabled">Použít HTTPS pro GUI</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Možnosti ladění</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Nahlásit chybu</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Otevřít hlášení chyb pro Syncthing-Android</string>
+  <string name="report_issue_summary">Otevřít hlášení chyb Syncthing pro Android</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing verze</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Syncthing-Android verze</string>
+  <string name="app_version_title">Verze Syncthing pro Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Výběr adresáře</string>
@@ -173,7 +189,7 @@ Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Kliknout zde pro restartování aplikace syncthing</string>
+  <string name="restart_notification_text">Tapnout zde pro restart aplikace syncthing</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Restartovat později</string>
   <!--Shown when a device ID is copied to the clipboard-->
