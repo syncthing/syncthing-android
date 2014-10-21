@@ -6,3 +6,4 @@ file_filter = src/main/res/values-<lang>/strings.xml
 source_file = src/main/res/values/strings.xml
 source_lang = en
 type = ANDROID
+lang_map = he:iw, id:in, yi:ji

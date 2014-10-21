@@ -52,9 +52,9 @@
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
-  <string name="rescan_interval">Odstęp między skanowaniem</string>
+  <string name="rescan_interval">Czas między skanowaniem</string>
   <!--Setting title-->
-  <string name="folder_master">Główny folder</string>
+  <string name="folder_master">Folder nadrzędny</string>
   <!--Setting title-->
   <string name="devices">Urządzenia</string>
   <!--Setting title-->
@@ -131,8 +131,20 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <string name="always_run_in_background_enabled">Syncthing zawsze działa w tle zgodnie z ustawieniami poniżej.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
-  <string name="sync_only_charging">Synchronizuj tylko, gdy podłączony do ładowarki</string>
-  <string name="sync_only_wifi">Synchronizuj tylko podłączony do WiFi</string>
+  <string name="sync_only_charging">tylko, ładując</string>
+  <string name="sync_only_wifi">tylko na WiFi</string>
+  <string name="syncthing_options">Ustawienia Syncthing</string>
+  <string name="max_recv_kbps">Limit pobierania (KiB/s)</string>
+  <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
+  <string name="global_announce_enabled">Globalny wyszukiwanie</string>
+  <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
+  <string name="local_announce_port">Port lokalnego wyszukiwania</string>
+  <string name="upnp_enabled">Włącz UPnP</string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_address">Adres GUI</string>
+  <string name="gui_user">Urzytkownik GUI</string>
+  <string name="gui_password">Hasło GUI</string>
+  <string name="gui_https_enabled">Użyj HTTPS dla GUI</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opcje debugowania</string>
   <!--Settings item that opens issue tracker-->
