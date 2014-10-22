@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -292,12 +291,10 @@ public class FolderSettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference.equals(mDirectory)) {
-            Intent intent = new Intent(getActivity(), FolderPickerActivity.class)
-                    .putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY,
-                            (mFolder.Path.length() != 0)
-                                    ? mFolder.Path
-                                    : Environment.getExternalStorageDirectory().getAbsolutePath()
-                    );
+            Intent intent = new Intent(getActivity(), FolderPickerActivity.class);
+            if (mFolder.Path.length() > 0) {
+                intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.Path);
+            }
             startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
         } else if (preference.equals(mDevices) && mSyncthingService.getApi().getDevices().isEmpty()) {
             Toast.makeText(getActivity(), R.string.no_devices, Toast.LENGTH_SHORT)

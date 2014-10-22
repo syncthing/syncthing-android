@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +25,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -42,8 +42,15 @@ public class FolderPickerActivity extends SyncthingActivity
 
     private ListView mListView;
 
-    private FileAdapter mAdapter;
+    private FileAdapter mFilesAdapter;
 
+    private RootsAdapter mRootsAdapter;
+
+    private ArrayList<File> mRootDirectories = new ArrayList();
+
+    /**
+     * Location of null means that the list of roots is displayed.
+     */
     private File mLocation;
 
     @Override
@@ -56,11 +63,24 @@ public class FolderPickerActivity extends SyncthingActivity
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);
         mListView.setEmptyView(findViewById(android.R.id.empty));
-        mAdapter = new FileAdapter(this);
-        mListView.setAdapter(mAdapter);
+        mFilesAdapter = new FileAdapter(this);
+        mRootsAdapter = new RootsAdapter(this);
+        mListView.setAdapter(mFilesAdapter);
 
-        mLocation = new File(getIntent().getStringExtra(EXTRA_INITIAL_DIRECTORY));
-        refresh();
+        // Populate roots.
+        if (android.os.Build.VERSION.SDK_INT >= 19) {
+            mRootDirectories.addAll(Arrays.asList(getExternalFilesDirs(null)));
+        }
+        mRootDirectories.add(Environment.getExternalStorageDirectory());
+        for (File f : mRootDirectories) {
+            mRootsAdapter.add(f);
+        }
+
+        if (getIntent().hasExtra(EXTRA_INITIAL_DIRECTORY)) {
+            displayFolder(new File(getIntent().getStringExtra(EXTRA_INITIAL_DIRECTORY)));
+        } else {
+            displayRoot();
+        }
     }
 
     @Override
@@ -123,15 +143,15 @@ public class FolderPickerActivity extends SyncthingActivity
     private void createFolder(String name) {
         File newFolder = new File(mLocation, name);
         newFolder.mkdir();
-        mLocation = newFolder;
-        refresh();
+        displayFolder(newFolder);
     }
 
     /**
      * Refreshes the ListView to show the contents of the folder in {@code }mLocation.peek()}.
      */
-    private void refresh() {
-        mAdapter.clear();
+    private void displayFolder(File folder) {
+        mLocation = folder;
+        mFilesAdapter.clear();
         File[] contents = mLocation.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
@@ -140,14 +160,15 @@ public class FolderPickerActivity extends SyncthingActivity
         });
         Arrays.sort(contents);
         for (File f : contents) {
-            mAdapter.add(f);
+            mFilesAdapter.add(f);
         }
+        mListView.setAdapter(mFilesAdapter);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        mLocation = mAdapter.getItem(i);
-        refresh();
+        ArrayAdapter<File> adapter = (ArrayAdapter<File>) mListView.getAdapter();
+        displayFolder(adapter.getItem(i));
     }
 
     private class FileAdapter extends ArrayAdapter<File> {
@@ -158,23 +179,40 @@ public class FolderPickerActivity extends SyncthingActivity
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) getContext()
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-            }
-
+            convertView = super.getView(position, convertView, parent);
             TextView title = (TextView) convertView.findViewById(android.R.id.text1);
             title.setText(getItem(position).getName());
             return convertView;
         }
     }
 
+    private class RootsAdapter extends ArrayAdapter<File> {
+
+        public RootsAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_1);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = super.getView(position, convertView, parent);
+            TextView title = (TextView) convertView.findViewById(android.R.id.text1);
+            title.setText(getItem(position).getAbsolutePath());
+            return convertView;
+        }
+    }
+
+    /**
+     * Goes up a directory, up to the list of roots if there are multiple roots.
+     *
+     * If we already are in the list of roots, or if we are directly in the only
+     * root folder, we cancel.
+     */
     @Override
     public void onBackPressed() {
-        if (!mLocation.equals(Environment.getExternalStorageDirectory())) {
-            mLocation = mLocation.getParentFile();
-            refresh();
+        if (!mRootDirectories.contains(mLocation) && mLocation != null) {
+            displayFolder(mLocation.getParentFile());
+        } else if (mRootDirectories.contains(mLocation) && mRootDirectories.size() > 1) {
+            displayRoot();
         } else {
             setResult(Activity.RESULT_CANCELED);
             finish();
@@ -187,6 +225,20 @@ public class FolderPickerActivity extends SyncthingActivity
             setResult(Activity.RESULT_CANCELED);
             SyncthingService.showDisabledDialog(this);
             finish();
+        }
+    }
+
+    /**
+     * Displays a list of all available roots, or if there is only one root, the
+     * contents of that folder.
+     */
+    private void displayRoot() {
+        mFilesAdapter.clear();
+        if (mRootDirectories.size() == 1) {
+            displayFolder(mRootDirectories.get(0));
+        } else {
+            mListView.setAdapter(mRootsAdapter);
+            mLocation = null;
         }
     }
 
