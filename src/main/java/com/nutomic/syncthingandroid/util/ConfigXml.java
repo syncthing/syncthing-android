@@ -123,7 +123,7 @@ public class ConfigXml {
             }
 
             // Replace /sdcard/ in folder path with proper path.
-            String dir = r.getAttribute("directory");
+            String dir = r.getAttribute("path");
             if (dir.startsWith("/sdcard")) {
                 String newDir = dir.replace("/sdcard",
                         Environment.getExternalStorageDirectory().getAbsolutePath());
