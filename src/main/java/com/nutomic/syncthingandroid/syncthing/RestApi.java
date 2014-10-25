@@ -612,7 +612,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             }
             if (isShared) {
                 long global = mCachedModelInfo.get(id).globalBytes;
-                long local = mCachedModelInfo.get(id).localBytes;
+                long local = mCachedModelInfo.get(id).inSyncBytes;
                 percentageSum += (global != 0)
                         ? (local * 100f) / global
                         : 100f;
