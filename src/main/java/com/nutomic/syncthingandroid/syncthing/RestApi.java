@@ -279,6 +279,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @return The value as a String, or null on failure.
      */
     public String getValue(String name, String key) {
+        // Happens if this functions is called before class is fully initialized.
+        if (mConfig == null)
+            return null;
+
         try {
             Object value = mConfig.getJSONObject(name).get(key);
             return (value instanceof JSONArray)

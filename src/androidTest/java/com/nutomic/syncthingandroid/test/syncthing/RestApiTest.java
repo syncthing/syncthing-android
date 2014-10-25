@@ -70,12 +70,6 @@ public class RestApiTest extends AndroidTestCase {
     }
 
     @SmallTest
-    public void testGetVersion() {
-        assertNotNull(mApi.getVersion());
-        assertFalse(mApi.getVersion().equals(""));
-    }
-
-    @SmallTest
     public void testGetDevices() {
         assertNotNull(mApi.getDevices());
     }
@@ -149,6 +143,12 @@ public class RestApiTest extends AndroidTestCase {
             }
         });
         latch.await(1, TimeUnit.SECONDS);
+    }
+
+    @SmallTest
+    public void testGetValueEarly() {
+        // Should never throw an exception.
+        mApi.getValue("Options", "ListenAddress");
     }
 
 }
