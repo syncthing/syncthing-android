@@ -4,8 +4,12 @@ import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ConfigXmlTest extends AndroidTestCase {
 
@@ -44,22 +48,9 @@ public class ConfigXmlTest extends AndroidTestCase {
     public void testCreateCameraFolder() {
         long oldTime = ConfigXml.getConfigFile(mContext).lastModified();
         long oldSize = ConfigXml.getConfigFile(mContext).length();
-        mConfig.createCameraFolder();
+        mConfig.changeDefaultFolder();
         assertNotSame(oldTime, ConfigXml.getConfigFile(mContext).lastModified());
         assertNotSame(oldSize, ConfigXml.getConfigFile(mContext).lastModified());
-    }
-
-    /**
-     * Same as {@link #testCreateCameraFolder()}.
-     */
-    @MediumTest
-    public void testUpdateIfNeeded() {
-        long oldTime = ConfigXml.getConfigFile(mContext).lastModified();
-        long oldSize = ConfigXml.getConfigFile(mContext).length();
-        mConfig.updateIfNeeded();
-        assertNotSame(oldTime, ConfigXml.getConfigFile(mContext).lastModified());
-        assertNotSame(oldSize, ConfigXml.getConfigFile(mContext).lastModified());
-        assertNotNull(mConfig.getApiKey());
     }
 
 }

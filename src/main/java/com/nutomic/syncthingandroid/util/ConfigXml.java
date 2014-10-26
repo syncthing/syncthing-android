@@ -4,7 +4,8 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
+import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,9 +14,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -47,15 +46,25 @@ public class ConfigXml {
 
     public ConfigXml(Context context) {
         mConfigFile = getConfigFile(context);
-        if (!mConfigFile.exists()) {
-            copyDefaultConfig(context);
+        boolean isFirstStart = !mConfigFile.exists();
+        if (isFirstStart) {
+            Log.i(TAG, "App started for the first time. Generating keys and config.");
+            new SyncthingRunnable(context, context.getApplicationInfo().dataDir + "/" +
+                    SyncthingService.BINARY_NAME + " -generate='" + context.getFilesDir() + "'")
+                    .run();
         }
+
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             mConfig = db.parse(mConfigFile);
         } catch (SAXException | ParserConfigurationException | IOException e) {
             throw new RuntimeException("Failed to open config file", e);
         }
+
+        if (isFirstStart) {
+            changeDefaultFolder();
+        }
+        updateIfNeeded();
     }
 
     public static File getConfigFile(Context context) {
@@ -79,7 +88,7 @@ public class ConfigXml {
      * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every folder.
      */
     @SuppressWarnings("SdCardPath")
-    public void updateIfNeeded() {
+    private void updateIfNeeded() {
         Log.i(TAG, "Checking for needed config updates");
         boolean changed = false;
         Element options = (Element) mConfig.getDocumentElement()
@@ -191,17 +200,15 @@ public class ConfigXml {
     }
 
     /**
-     * Creates a folder for the default camera folder.
+     * Change default folder id to camera and path to camera folder path.
      */
-    public void createCameraFolder() {
-        Element cameraFolder = mConfig.createElement("folder");
-        cameraFolder.setAttribute("id", "camera");
-        cameraFolder.setAttribute("directory", Environment
+    public void changeDefaultFolder() {
+        Element folder = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("folder").item(0);
+        folder.setAttribute("id", "camera");
+        folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
-        cameraFolder.setAttribute("ro", "true");
-        cameraFolder.setAttribute("ignorePerms", "true");
-        mConfig.getDocumentElement().appendChild(cameraFolder);
-
+        folder.setAttribute("ro", "true");
         saveChanges();
     }
 
@@ -218,33 +225,6 @@ public class ConfigXml {
             transformer.transform(domSource, streamResult);
         } catch (TransformerException e) {
             Log.w(TAG, "Failed to save updated config", e);
-        }
-    }
-
-    /**
-     * Copies the default config file from res/raw/config_default.xml to (data folder)/config.xml.
-     */
-    private void copyDefaultConfig(Context context) {
-        InputStream in = null;
-        FileOutputStream out = null;
-        try {
-            in = context.getResources().openRawResource(R.raw.config_default);
-            out = new FileOutputStream(mConfigFile);
-            byte[] buff = new byte[1024];
-            int read;
-
-            while ((read = in.read(buff)) > 0) {
-                out.write(buff, 0, read);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to write config file", e);
-        } finally {
-            try {
-                in.close();
-                out.close();
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close stream while copying config", e);
-            }
         }
     }
 

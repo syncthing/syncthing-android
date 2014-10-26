@@ -32,8 +32,7 @@ public class RestApiTest extends AndroidTestCase {
                 getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
 
         mConfig = new ConfigXml(new MockContext(getContext()));
-        mConfig.createCameraFolder();
-        mConfig.updateIfNeeded();
+        mConfig.changeDefaultFolder();
 
         final CountDownLatch latch = new CountDownLatch(2);
         new PollWebGuiAvailableTask() {

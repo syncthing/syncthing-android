@@ -23,7 +23,6 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
         super.setUp();
 
         mConfig = new ConfigXml(new MockContext(getContext()));
-        mConfig.updateIfNeeded();
     }
 
     @Override

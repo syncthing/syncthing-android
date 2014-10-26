@@ -77,8 +77,6 @@ public class SyncthingService extends Service {
 
     private LinkedList<FolderObserver> mObservers = new LinkedList<>();
 
-    private SyncthingRunnable mSyncthingRunnable;
-
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
     /**
@@ -182,7 +180,6 @@ public class SyncthingService extends Service {
 
             Log.i(TAG, "Starting syncthing according to current state and preferences");
             mConfig = new ConfigXml(SyncthingService.this);
-            mConfig.updateIfNeeded();
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
@@ -270,14 +267,8 @@ public class SyncthingService extends Service {
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
             moveConfigFiles();
-            mConfig = new ConfigXml(SyncthingService.this);
-            mConfig.updateIfNeeded();
 
-            if (isFirstStart()) {
-                Log.i(TAG, "App started for the first time. " +
-                        "Copying default config, keys will be generated automatically");
-                mConfig.createCameraFolder();
-            }
+            mConfig = new ConfigXml(SyncthingService.this);
 
             return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
         }
