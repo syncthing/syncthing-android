@@ -214,6 +214,8 @@ Please report any problems you encounter via Github.</string>
 
     <string name="sync_only_wifi">Sync only on wifi</string>
 
+    <string name="advanced_folder_picker">Use advanced Folder Picker</string>
+
     <string name="syncthing_options">Syncthing Options</string>
 
     <string name="listen_address">Sync Protocol Listen Addresses</string>
@@ -278,6 +280,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Menu item to select the current folder -->
     <string name="select_folder">Select Folder</string>
+
+    <string name="create_folder_failed">Failed to create folder</string>
 
     <!-- SyncthingService -->
 

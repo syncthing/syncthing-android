@@ -6,9 +6,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -72,6 +75,11 @@ public class FolderPickerActivity extends SyncthingActivity
             mRootDirectories.addAll(Arrays.asList(getExternalFilesDirs(null)));
         }
         mRootDirectories.add(Environment.getExternalStorageDirectory());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("advanced_folder_picker", false)) {
+            mRootDirectories.add(new File("/"));
+        }
+
         for (File f : mRootDirectories) {
             mRootsAdapter.add(f);
         }
@@ -145,8 +153,11 @@ public class FolderPickerActivity extends SyncthingActivity
      */
     private void createFolder(String name) {
         File newFolder = new File(mLocation, name);
-        newFolder.mkdir();
-        displayFolder(newFolder);
+        if (newFolder.mkdir()) {
+            displayFolder(newFolder);
+        } else {
+            Toast.makeText(this, R.string.create_folder_failed, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

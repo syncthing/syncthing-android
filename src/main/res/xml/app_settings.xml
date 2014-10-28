@@ -16,6 +16,11 @@
         android:title="@string/sync_only_wifi"
         android:defaultValue="false" />
 
+    <CheckBoxPreference
+        android:key="advanced_folder_picker"
+        android:title="@string/advanced_folder_picker"
+        android:defaultValue="false" />
+
     <PreferenceScreen
         android:key="syncthing_options"
         android:title="@string/syncthing_options"
