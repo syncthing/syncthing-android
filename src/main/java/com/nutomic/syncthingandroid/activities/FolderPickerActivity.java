@@ -91,6 +91,9 @@ public class FolderPickerActivity extends SyncthingActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (mListView.getAdapter() == mRootsAdapter)
+            return true;
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.folder_picker, menu);
         return true;
@@ -169,6 +172,7 @@ public class FolderPickerActivity extends SyncthingActivity
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         ArrayAdapter<File> adapter = (ArrayAdapter<File>) mListView.getAdapter();
         displayFolder(adapter.getItem(i));
+        invalidateOptionsMenu();
     }
 
     private class FileAdapter extends ArrayAdapter<File> {
@@ -240,6 +244,7 @@ public class FolderPickerActivity extends SyncthingActivity
             mListView.setAdapter(mRootsAdapter);
             mLocation = null;
         }
+        invalidateOptionsMenu();
     }
 
 }
