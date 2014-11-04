@@ -7,7 +7,6 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.13.3'
-        classpath 'com.alexvasilkov:android_sign:0.2'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
         classpath 'org.codehaus.groovy:groovy-backports-compat23:2.3.5'
     }
@@ -16,7 +15,6 @@ buildscript {
 import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
-apply plugin: 'android_sign'
 apply plugin: 'com.github.ben-manes.versions'
 
 repositories {
@@ -56,26 +54,10 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            // Android Studio does not pass environment variables.
-            // This means you have to use the command line for release builds.
-            def ks = System.getenv("KEYSTORE")
-            def ka = System.getenv("KEY_ALIAS")
-            if (ks != null && ka != null) {
-                storeFile file(ks)
-                keyAlias ka
-            }
-        }
-    }
-
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             debuggable true
-        }
-        release {
-            signingConfig signingConfigs.release
         }
     }
 
