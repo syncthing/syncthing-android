@@ -22,7 +22,7 @@ public class FolderObserver extends FileObserver {
 
     private final String mPath;
 
-    private final ArrayList<FolderObserver> mChilds;
+    private final ArrayList<FolderObserver> mChilds = new ArrayList<>();
 
     public interface OnFolderFileChangeListener {
         public void onFolderFileChange(String folderId, String relativePath);
@@ -74,9 +74,10 @@ public class FolderObserver extends FileObserver {
             }
         });
 
-        mChilds = new ArrayList<>();
-        for (File f : directories) {
-            mChilds.add(new FolderObserver(mListener, mFolder, path + "/" + f.getName()));
+        if (directories != null) {
+            for (File f : directories) {
+                mChilds.add(new FolderObserver(mListener, mFolder, path + "/" + f.getName()));
+            }
         }
     }
 
