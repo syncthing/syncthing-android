@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.3'
+        classpath 'com.android.tools.build:gradle:0.14.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.5'
         classpath 'org.codehaus.groovy:groovy-backports-compat23:2.3.5'
     }
@@ -38,7 +38,7 @@ preBuild {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "21.1.0"
 
     defaultConfig {
         versionCode getVersionCodeFromManifest()
