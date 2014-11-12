@@ -114,9 +114,10 @@ public class ConfigXml {
         // Hardcode default globalAnnounceServer ip.
         Element globalAnnounceServer = (Element)
                 options.getElementsByTagName("globalAnnounceServer").item(0);
-        if (globalAnnounceServer.getTextContent().equals("announce.syncthing.net:22025")) {
+        if (globalAnnounceServer.getTextContent().startsWith("announce.syncthing.net:") ||
+                globalAnnounceServer.getTextContent().startsWith("194.126.249.5:")) {
             Log.i(TAG, "Replacing globalAnnounceServer host with ip");
-            globalAnnounceServer.setTextContent("194.126.249.5:22025");
+            globalAnnounceServer.setTextContent("194.126.249.5:22026");
             changed = true;
         }
 
@@ -143,8 +144,7 @@ public class ConfigXml {
             // HACK: Create .stfolders in all folders if it does not exist.
             // This is not the best place to put it, but it's only temporary.
             try {
-                boolean exists = new File(dir, ".stfolder").createNewFile();
-                Log.d(TAG, dir + Boolean.toString(exists));
+                new File(dir, ".stfolder").createNewFile();
             } catch (IOException e) {
                 // This might happen if the device is not mounted.
                 Log.i(TAG, "Failed to create .stversions in " + dir, e);
@@ -153,13 +153,6 @@ public class ConfigXml {
             if (applyLenientMTimes(r)) {
                 changed = true;
             }
-        }
-
-        // Change global announce server port to 22026 for syncthing v0.9.0.
-        if (globalAnnounceServer.getTextContent().equals("194.126.249.5:22025")) {
-            Log.i(TAG, "Changing announce server port for v0.9.0");
-            globalAnnounceServer.setTextContent("194.126.249.5:22026");
-            changed = true;
         }
 
         if (changed) {
