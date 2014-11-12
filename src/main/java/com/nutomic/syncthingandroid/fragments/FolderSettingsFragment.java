@@ -151,6 +151,8 @@ public class FolderSettingsFragment extends PreferenceFragment
         List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices();
         for (RestApi.Device n : devicesList) {
             ExtendedCheckBoxPreference cbp = new ExtendedCheckBoxPreference(getActivity(), n);
+            // Calling addPreference later causes it to change the checked state.
+            mDevices.addPreference(cbp);
             cbp.setTitle(n.Name);
             cbp.setKey(KEY_NODE_SHARED);
             cbp.setOnPreferenceChangeListener(FolderSettingsFragment.this);
@@ -160,7 +162,6 @@ public class FolderSettingsFragment extends PreferenceFragment
                     cbp.setChecked(true);
                 }
             }
-            mDevices.addPreference(cbp);
         }
         mVersioning.setChecked(mFolder.Versioning instanceof RestApi.SimpleVersioning);
         if (mVersioning.isChecked()) {

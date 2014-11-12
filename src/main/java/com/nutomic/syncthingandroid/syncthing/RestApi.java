@@ -482,7 +482,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     JSONObject n = devices.getJSONObject(j);
                     r.DeviceIds.add(n.getString("DeviceID"));
                 }
-                r.DeviceIds.add(mLocalDeviceId);
 
                 r.ReadOnly = json.getBoolean("ReadOnly");
                 r.RescanIntervalS = json.getInt("RescanIntervalS");
