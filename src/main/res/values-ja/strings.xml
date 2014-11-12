@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">プロプライエタリなサービスを、オープン、信頼、そして分権されたものと置き換えましょう。</string>
+  <!--MainActivity-->
+  <!--Title of the "add folder" menu action-->
+  <string name="add_folder">フォルダーを追加</string>
+  <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">デバイス ID を共有</string>
+  <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">デバイス ID を送信…</string>
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">API を待機中</string>
+  <!--FoldersFragment-->
+  <string name="folders_fragment_title">フォルダー</string>
+  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no folders exist-->
+  <string name="folder_list_empty">フォルダーがありません</string>
+  <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d ファイル</string>
+  <!--DevicesFragment-->
+  <string name="devices_fragment_title">デバイス</string>
+  <!--Shown if no devices exist-->
+  <string name="devices_list_empty">デバイスがありません</string>
+  <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">最新です</string>
+  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">同期中 (%1$d%%)</string>
+  <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">切断されました</string>
+  <!--Title for current download rate-->
+  <string name="download_title">ダウンロード</string>
+  <!--Title for current upload rate-->
+  <string name="upload_title">アップロード</string>
+  <!--LocalDeviceInfoFragment-->
+  <!--ActionBar title shown when the drawer is open-->
+  <string name="system_info">システム情報</string>
+  <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">ダウンロード:\u0020</string>
+  <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">アップロード:\u0020</string>
+  <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU 使用</string>
+  <!--Title for current RAM usage-->
+  <string name="ram_usage">RAM 使用</string>
+  <!--Title for announce server status-->
+  <string name="announce_server">アナウンスサーバー</string>
+  <!--FolderSettingsFragment-->
+  <!--Setting title-->
+  <string name="folder_id">フォルダー ID</string>
+  <!--Setting title-->
+  <string name="directory">ディレクトリー</string>
+  <!--Setting title-->
+  <string name="rescan_interval">再スキャン間隔</string>
+  <!--Setting title-->
+  <string name="folder_master">フォルダーマスター</string>
+  <!--Setting title-->
+  <string name="devices">デバイス</string>
+  <!--Setting title-->
+  <string name="file_versioning">ファイルバージョニング</string>
+  <!--Setting title-->
+  <string name="keep_versions">保持バージョン</string>
+  <!--Setting title-->
+  <string name="delete_folder">フォルダーを削除</string>
+  <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">フォルダーを作成</string>
+  <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">フォルダーを編集</string>
+  <!--Menu item to confirm folder creation-->
+  <string name="create">作成</string>
+  <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">フォルダーを削除してもよろしいですか?</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">フォルダー ID は空にできません</string>
+  <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">フォルダーのパスは空にできません</string>
+  <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">まずデバイスに接続してください。</string>
+  <!--DeviceSettingsFragment-->
+  <!--Setting title-->
+  <string name="device_id">デバイス ID</string>
+  <!--Setting title-->
+  <string name="name">名前</string>
+  <!--Setting title-->
+  <string name="addresses">アドレス</string>
+  <!--Setting title-->
+  <string name="current_address">現在のアドレス</string>
+  <!--Setting title-->
+  <string name="compression">圧縮</string>
+  <!--Setting title-->
+  <string name="introducer">紹介者</string>
+  <!--ActionBar item-->
+  <string name="delete_device">デバイスを削除</string>
+  <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">デバイスを追加</string>
+  <!--Menu item to confirm adding a device-->
+  <string name="add">追加</string>
+  <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">デバイスを編集</string>
+  <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">このデバイスを削除してもよろしいですか?</string>
+  <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">デバイス ID は空にできません</string>
+  <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">デバイス名は空にできません</string>
+  <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">QR コードをスキャン</string>
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">QR スキャナーがインストールされていないか、スキャナーがサポートされていません持っている。 \
+スキャナをインストールするか、手動でデバイス ID を入力してください。</string>
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <string name="web_gui_title">Web GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI を待機中</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">キーを生成しています。しばらくお待ちください。</string>
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">初回の開始</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Android 用 Syncthing へようこそ!\n\n\
+このアプリは現在アルファ版です。バグ、パフォーマンスの問題、データの損失が発生する可能性があります。\n\n\
+GitHub 経由で、発生した問題をすべて報告してください。</string>
+  <!--SettingsFragment-->
+  <!--Activity title-->
+  <string name="settings_title">設定</string>
+  <!--Preference title-->
+  <string name="always_run_in_background">常にバックグラウンドで実行</string>
+  <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">以下のプリファレンスに応じて、常にバックグラウンドで実行されます。</string>
+  <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューボタンで停止することができます。</string>
+  <string name="sync_only_charging">充電中のみ同期</string>
+  <string name="sync_only_wifi">Wifi 時のみ同期</string>
+  <string name="syncthing_options">同期オプション</string>
+  <string name="listen_address">同期プロトコル リスンアドレス</string>
+  <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
+  <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
+  <string name="reconnect_interval">再接続間隔 (秒)</string>
+  <string name="parallell_requests">最大未解決リクエスト</string>
+  <string name="max_change_kbps">最大ファイル変更レート (KiB/秒)</string>
+  <string name="global_announce_enabled">グローバルディスカバリー</string>
+  <string name="local_announce_enabled">ローカルディスカバリー</string>
+  <string name="local_announce_port">ローカルディスカバリー ポート</string>
+  <string name="upnp_enabled">UPnP を有効にする</string>
+  <string name="syncthing_gui">同期中 GUI</string>
+  <string name="gui_address">GUI リスンアドレス</string>
+  <string name="gui_user">GUI 認証ユーザー</string>
+  <string name="gui_password">GUI 認証パスワード</string>
+  <string name="gui_https_enabled">GUI で HTTPS を使用する</string>
+  <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">デバッグオプション</string>
+  <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">問題を報告</string>
+  <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Syncthing-Android 問題トラッカーを開く</string>
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing バージョン</string>
+  <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android バージョン</string>
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <string name="folder_picker_title">フォルダー選択</string>
+  <!--ListView empty text-->
+  <string name="directory_empty">ディレクトリは空です</string>
+  <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">新しいフォルダーを作成</string>
+  <!--Menu item to select the current folder-->
+  <string name="select_folder">フォルダーを選択</string>
+  <!--SyncthingService-->
+  <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_title">Syncthing のバイナリがクラッシュしました</string>
+  <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">Syncthing のバイナリはエラーコード %1$d で終了しました。\n\n
+このエラーが解決しない場合は、お使いのデバイスを再起動してみてください。</string>
+  <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing は無効になりました</string>
+  <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">プリファレンスを変更しますか?</string>
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">設定を変更</string>
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">終了</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing は実行中です</string>
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">再起動が必要です</string>
+  <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">ここをクリックして、今すぐ Syncthing を再起動してください</string>
+  <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">後で再起動</string>
+  <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">デバイス ID をクリップボードにコピーしました</string>
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KB</item>
+    <item>MB</item>
+    <item>GB</item>
+    <item>TB</item>
+  </string-array>
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
+  <!--Possible folder states-->
+  <string name="state_idle">アイドル</string>
+  <string name="state_scanning">スキャン中</string>
+  <string name="state_cleaning">クリーニング中</string>
+  <string name="state_syncing">同期中</string>
+</resources>
