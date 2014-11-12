@@ -1,8 +1,11 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -19,7 +22,7 @@ import java.util.TimerTask;
  * Displays a list of all existing folders.
  */
 public class FoldersFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private FoldersAdapter mAdapter;
 
@@ -56,6 +59,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
         setListAdapter(mAdapter);
         setEmptyText(getString(R.string.folder_list_empty));
         getListView().setOnItemClickListener(this);
+        getListView().setOnItemLongClickListener(this);
     }
 
     private void updateList() {
@@ -92,6 +96,18 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
                 .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
                 .putExtra(FolderSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).ID);
         startActivity(intent);
+    }
+
+    /**
+     * Opens the folder path with a user selected app.
+     */
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse(mAdapter.getItem(i).Path);
+        intent.setDataAndType(uri, "*/*");
+        startActivity(intent);
+        return true;
     }
 
 }
