@@ -81,6 +81,9 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         for (File f : mRootDirectories) {
+            if (f == null)
+                continue;
+
             mRootsAdapter.add(f);
         }
 
