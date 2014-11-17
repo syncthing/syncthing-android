@@ -67,6 +67,10 @@ public class SyncthingRunnable implements Runnable {
                 log(process.getErrorStream(), Log.WARN);
 
                 ret = process.waitFor();
+
+                if (ret == 3) {
+                    Log.i(TAG, "Restarting syncthing");
+                }
             } while (ret == 3);
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
