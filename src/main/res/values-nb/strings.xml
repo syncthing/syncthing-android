@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">Erstatt proprietære tjenester med noe åpent, troverdig og desentralisert.</string>
+  <!--MainActivity-->
+  <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Legg til Mappe</string>
+  <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Del Enhets-ID</string>
+  <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Send Enhets-ID til</string>
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Venter på API</string>
+  <!--FoldersFragment-->
+  <string name="folders_fragment_title">Mapper</string>
+  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Ingen mapper funnet</string>
+  <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d Filer</string>
+  <!--DevicesFragment-->
+  <string name="devices_fragment_title">Enheter</string>
+  <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Ingen enheter funnet</string>
+  <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Oppdatert</string>
+  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Synkroniserer (%1$d%%)</string>
+  <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Frakoblet</string>
+  <!--Title for current download rate-->
+  <string name="download_title">Nedlasting</string>
+  <!--Title for current upload rate-->
+  <string name="upload_title">Opplasting</string>
+  <!--LocalDeviceInfoFragment-->
+  <!--ActionBar title shown when the drawer is open-->
+  <string name="system_info">Systeminfo</string>
+  <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">Nedlasting:\u0020</string>
+  <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">Opplasting:\u0020</string>
+  <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU-forbruk</string>
+  <!--Title for current RAM usage-->
+  <string name="ram_usage">RAM-forbruk</string>
+  <!--Title for announce server status-->
+  <!--FolderSettingsFragment-->
+  <!--Setting title-->
+  <string name="folder_id">Mappe-ID</string>
+  <!--Setting title-->
+  <string name="directory">Katalog</string>
+  <!--Setting title-->
+  <!--Setting title-->
+  <!--Setting title-->
+  <string name="devices">Enheter</string>
+  <!--Setting title-->
+  <!--Setting title-->
+  <string name="keep_versions">Behold Versjoner</string>
+  <!--Setting title-->
+  <string name="delete_folder">Slett Mappe</string>
+  <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Opprett Mappe</string>
+  <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Rediger Mappe</string>
+  <!--Menu item to confirm folder creation-->
+  <string name="create">Opprett</string>
+  <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Ønsker du virkelig å slette denne mappen?</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">Mappe-ID kan ikke være tom</string>
+  <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Mappestien kan ikke være tom</string>
+  <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <!--DeviceSettingsFragment-->
+  <!--Setting title-->
+  <string name="device_id">Enhets-ID</string>
+  <!--Setting title-->
+  <string name="name">Navn</string>
+  <!--Setting title-->
+  <string name="addresses">Adresser</string>
+  <!--Setting title-->
+  <string name="current_address">Nåværende Adresser</string>
+  <!--Setting title-->
+  <string name="compression">Komprimering</string>
+  <!--Setting title-->
+  <string name="introducer">Innføring</string>
+  <!--ActionBar item-->
+  <string name="delete_device">Slett Enhet</string>
+  <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Legg Til Enhet</string>
+  <!--Menu item to confirm adding a device-->
+  <string name="add">Legg til</string>
+  <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Rediger Enhet</string>
+  <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Ønsker du virkelig å slette denne enheten?</string>
+  <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">Enhets-ID kan ikke være tom</string>
+  <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">Enhetsnavnet kan ikke være tomt</string>
+  <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">Skann QR-kode</string>
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Du har ingen QR-skanner installert, eller din skanner er ikke støttet.d. \
+Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <string name="web_gui_title">Web-GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Venter på GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Genererer nøkler. Dette kan ta en stund.</string>
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Første Oppstart</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Velkommen til Syncthing for Android!\n\n\
+Denne appen er for tiden i Alphaversjon, og du kan oppleve bugs, ytelsesproblemer eller tap av data.\n\n\
+Vennligst rapporter alle problemer du møter på via Github.</string>
+  <!--SettingsFragment-->
+  <!--Activity title-->
+  <string name="settings_title">Innstillinger</string>
+  <!--Preference title-->
+  <string name="always_run_in_background">Kjør alltid i bakgrunnen</string>
+  <!--Preference summary in case it is enabled-->
+  <!--Preference summary in case it is disabled-->
+  <string name="sync_only_charging">Synkroniser kun ved lading</string>
+  <string name="sync_only_wifi">Synkroniser kun over WiFi.</string>
+  <string name="upnp_enabled">Aktiver UPnP</string>
+  <string name="syncthing_gui">Syncthing-GUI</string>
+  <string name="gui_https_enabled">Bruk HTTPS til GUI</string>
+  <!--Title for the preference to set STTRACE parameters-->
+  <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">Rapporter Problem</string>
+  <!--Summary for the issue tracker settings item-->
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing-versjon</string>
+  <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android-versjon</string>
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <string name="folder_picker_title">Mappe-velger</string>
+  <!--ListView empty text-->
+  <string name="directory_empty">Katalog er Tom</string>
+  <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">Opprett ny Mappe</string>
+  <!--Menu item to select the current folder-->
+  <string name="select_folder">Velg Mappe</string>
+  <!--SyncthingService-->
+  <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing er deaktivert</string>
+  <!--Message of the "syncthing disabled" dialog-->
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Endre Innstillinger</string>
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Avslutt</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing kjører</string>
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">Omstart Nødvendig</string>
+  <!--Text of the notification shown when a restart is needed-->
+  <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Start På Nytt Senere</string>
+  <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">Enhets-ID kopiert til utklippstavle</string>
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+  <!--Possible folder states-->
+  <string name="state_idle">Inaktiv</string>
+  <string name="state_scanning">Skanner</string>
+  <string name="state_cleaning">Rydder</string>
+  <string name="state_syncing">Synkroniserer</string>
+</resources>

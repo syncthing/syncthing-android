@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentraliserites.</string>
+  <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentrales.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
