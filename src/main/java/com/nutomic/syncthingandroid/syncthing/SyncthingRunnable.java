@@ -70,6 +70,8 @@ public class SyncthingRunnable implements Runnable {
 
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
+                    mContext.startService(new Intent(mContext, SyncthingService.class)
+                            .setAction(SyncthingService.ACTION_RESTART));
                 }
             } while (ret == 3);
         } catch (IOException | InterruptedException e) {
