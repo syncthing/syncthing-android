@@ -202,10 +202,7 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Stopping syncthing according to current state and preferences");
             mCurrentState = State.DISABLED;
 
-            // Syncthing is currently started, perform the stop later.
-            if (mCurrentState == State.STARTING) {
-                mStopScheduled = true;
-            } else if (mApi != null) {
+            if (mApi != null) {
                 mApi.shutdown();
                 for (FolderObserver ro : mObservers) {
                     ro.stopWatching();

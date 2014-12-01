@@ -24,11 +24,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * These tests assume that syncthing keys have already been generated. If not, tests may fail
  * because startup takes too long.
- *
- * FIXME: These tests are rather fragile and may fail even if they shouldn't. Repeating them
- *        should fix this.
- * NOTE: If a test fails with "expected:<ACTIVE> but was:<INIT>", you may have to increase
- *       {@link #STARTUP_TIME_SECONDS}.
  */
 public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
 
@@ -128,104 +123,6 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
             return mLastState;
         }
 
-    }
-
-    private Listener mListener = new Listener();
-
-    @MediumTest
-    public void testStatesAllRequired() throws InterruptedException {
-        setupStatesTest(true, true, true);
-
-        assertState(true, true, SyncthingService.State.ACTIVE);
-
-        assertState(true, false, SyncthingService.State.DISABLED);
-        assertState(false, true, SyncthingService.State.DISABLED);
-        assertState(false, false, SyncthingService.State.DISABLED);
-    }
-
-    @MediumTest
-    public void testStatesWifiRequired() throws InterruptedException {
-        setupStatesTest(true, true, false);
-
-        assertState(true, true, SyncthingService.State.ACTIVE);
-        assertState(false, true, SyncthingService.State.ACTIVE);
-
-        assertState(true, false, SyncthingService.State.DISABLED);
-        assertState(false, false, SyncthingService.State.DISABLED);
-    }
-
-    @MediumTest
-    public void testStatesChargingRequired() throws InterruptedException {
-        setupStatesTest(true, false, true);
-
-        assertState(true, true, SyncthingService.State.ACTIVE);
-        assertState(true, false, SyncthingService.State.ACTIVE);
-
-        assertState(false, true, SyncthingService.State.DISABLED);
-        assertState(false, false, SyncthingService.State.DISABLED);
-    }
-
-    @MediumTest
-    public void testStatesNoneRequired() throws InterruptedException {
-        setupStatesTest(true, false, false);
-
-        assertState(true, true, SyncthingService.State.ACTIVE);
-        assertState(true, false, SyncthingService.State.ACTIVE);
-        assertState(false, true, SyncthingService.State.ACTIVE);
-        assertState(false, false, SyncthingService.State.ACTIVE);
-    }
-
-    public void assertState(boolean charging, boolean wifi, SyncthingService.State expected)
-            throws InterruptedException {
-        Intent i = new Intent(getContext(), SyncthingService.class);
-        i.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, charging);
-        i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, wifi);
-        mLatch = new CountDownLatch(1);
-        startService(i);
-        // Wait for service to react to preference change.
-        mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(expected, mListener.getLastState());
-    }
-
-    public void setupStatesTest(boolean alwaysRunInBackground,
-            boolean syncOnlyWifi, boolean syncOnlyCharging) throws InterruptedException {
-        PreferenceManager.getDefaultSharedPreferences(getContext())
-                .edit()
-                .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, alwaysRunInBackground)
-                .putBoolean(SyncthingService.PREF_SYNC_ONLY_WIFI, syncOnlyWifi)
-                .putBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, syncOnlyCharging)
-                .commit();
-
-        startService(new Intent(getContext(), SyncthingService.class));
-        // 3 calls plus 1 call immediately when registering.
-        mLatch = new CountDownLatch(4);
-        getService().registerOnApiChangeListener(mListener);
-        if (mListener.getLastState() != SyncthingService.State.ACTIVE) {
-            // Wait for service to start.
-            mLatch.await(STARTUP_TIME_SECONDS, TimeUnit.SECONDS);
-            assertEquals(SyncthingService.State.ACTIVE, mListener.getLastState());
-        }
-    }
-
-    /**
-     * For all possible settings and charging/wifi states, service should be active.
-     */
-    @LargeTest
-    public void testOnlyForeground() throws InterruptedException {
-        ArrayList<Pair<Boolean, Boolean>> values = new ArrayList<>();
-        values.add(new Pair(true, true));
-        values.add(new Pair(true, false));
-        values.add(new Pair(false, true));
-        values.add(new Pair(false, false));
-
-        for (Pair<Boolean, Boolean> v : values) {
-            setupStatesTest(false, v.first, v.second);
-
-            assertState(true, true, SyncthingService.State.ACTIVE);
-            assertState(true, false, SyncthingService.State.ACTIVE);
-            assertState(false, true, SyncthingService.State.ACTIVE);
-            assertState(false, false, SyncthingService.State.ACTIVE);
-        }
     }
 
 }

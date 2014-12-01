@@ -36,7 +36,7 @@ public class ConfigXmlTest extends AndroidTestCase {
 
     @SmallTest
     public void testGetWebGuiUrl() {
-        assertEquals("http://127.0.0.1:8080", mConfig.getWebGuiUrl());
+        assertTrue(mConfig.getWebGuiUrl().startsWith("http://127.0.0.1:"));
     }
 
     /**

@@ -20,7 +20,7 @@ public class SyncthingRunnableTest extends AndroidTestCase {
         File testFile = new File(context.getFilesDir(), "was_running");
         assertFalse(testFile.exists());
         // Inject a differenct command instead of the syncthing binary for testing.
-        new SyncthingRunnable(context, "touch " + testFile.getAbsolutePath() + "\n").run();
+        new SyncthingRunnable(context, "touch " + testFile.getAbsolutePath() + "; exit\n").run();
         assertTrue(testFile.exists());
         testFile.delete();
     }

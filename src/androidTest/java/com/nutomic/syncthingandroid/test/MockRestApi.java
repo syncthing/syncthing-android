@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MockRestApi extends RestApi {
@@ -42,7 +43,7 @@ public class MockRestApi extends RestApi {
 
     @Override
     public List<Device> getDevices() {
-        throw new UnsupportedOperationException();
+        return new ArrayList<>();
     }
 
     @Override
@@ -52,7 +53,7 @@ public class MockRestApi extends RestApi {
 
     @Override
     public List<Folder> getFolders() {
-        throw new UnsupportedOperationException();
+        return new ArrayList<>();
     }
 
     @Override
