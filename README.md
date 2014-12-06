@@ -20,22 +20,14 @@ Translations can be updated using the [Transifex client](http://docs.transifex.c
 # Building
 
 ### Requirements
-- sudo apt-get install build-essential
-- Android SDK 19+ and the Android Support Repository are required.
-- Use `git clone --recursive https://github.com/Nutomic/syncthing-android` to download the source and its submodules.
+- Android SDK Platform (for the `compileSdkVersion` specified in [build.gradle](build.gradle))
+- Android Support Repository
 
 ### Build instructions
 
-Use `gradlew assembleDebug` to compile the APK.
+Use `./gradlew assembleDebug` in the project directory to compile the APK.
 
-Note: Gradlew is a gradle wrapper which allows to specify the gradle version. Use `gradle -b gradle/wrapper/build.xml wrapper` to create your own gradlew instance. Then add it to your path using `export PATH=$PATH:$(pwd)/gradle/wrapper`.
-
-The build process follows three phases:
-- It downloads and compiles Golang v1.3 for x86 and ARM cross-compilation: Syncthing-android depends on Syncthing "native" (https://github.com/syncthing/syncthing) and this requires Go v1.3.
-- The Syncthing native libraries are compiled for the different architectures using `gradlew buildNative`.
-- The final APK is built using the `gradlew assembleDebug` task.
-
-To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git modules in `ext/syncthing/src/github.com/syncthing/syncthing` and `libraries/android-support-v4-preferencefragment` may need to be updated.
+To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git submodule in `ext/syncthing/src/github.com/syncthing/syncthing` may need to be updated.
 
 
 ### Getting Syncthing without building natively
