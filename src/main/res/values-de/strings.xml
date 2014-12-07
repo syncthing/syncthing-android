@@ -150,7 +150,7 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Fehler berichten</string>
+  <string name="report_issue_title">Fehler melden</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Syncthing-Android Fehler-Sammlung öffnen</string>
   <!--URL of the issue tracker-->
@@ -209,7 +209,7 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Untätig</string>
-  <string name="state_scanning">Sucht</string>
+  <string name="state_scanning">Suchen</string>
   <string name="state_cleaning">Aufräumen</string>
   <string name="state_syncing">Synchronisiere</string>
 </resources>

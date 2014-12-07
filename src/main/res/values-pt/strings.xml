@@ -1,96 +1,218 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">Substitua serviços proprietários por algo aberto, fiável e descentralizado.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Partilhar ID do dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Enviar ID do dispositivo para</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Aguardando a API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">Pastas</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Não foram encontradas quaisquer pastas</string>
   <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d ficheiros</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Dispositivos</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Não foram encontrados quaisquer dispositivos</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Actualizada</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Sincronizando (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Desconectado</string>
   <!--Title for current download rate-->
+  <string name="download_title">Recepção</string>
   <!--Title for current upload rate-->
+  <string name="upload_title">Envio</string>
   <!--LocalDeviceInfoFragment-->
   <!--ActionBar title shown when the drawer is open-->
+  <string name="system_info">Informação de sistema</string>
   <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">Envio:\u0020</string>
   <!--Title for current CPU usage-->
+  <string name="cpu_usage">Utilização da CPU</string>
   <!--Title for current RAM usage-->
+  <string name="ram_usage">Utilização da RAM</string>
   <!--Title for announce server status-->
+  <string name="announce_server">Servidor de busca global</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">ID da pasta</string>
   <!--Setting title-->
+  <string name="directory">Pasta</string>
   <!--Setting title-->
+  <string name="rescan_interval">Intervalo entre verificações</string>
   <!--Setting title-->
+  <string name="folder_master">Pasta Mestre</string>
   <!--Setting title-->
+  <string name="devices">Dispositivos</string>
   <!--Setting title-->
+  <string name="file_versioning">Gestão de versões</string>
   <!--Setting title-->
+  <string name="keep_versions">Manter versões</string>
   <!--Setting title-->
+  <string name="delete_folder">Eliminar pasta</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Criar pasta</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Editar pasta</string>
   <!--Menu item to confirm folder creation-->
+  <string name="create">Criar</string>
   <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">Quer mesmo eliminar esta pasta?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">O ID da pasta não pode estar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">Ligue primeiro um dispositivo, por favor.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">ID do dispositivo</string>
   <!--Setting title-->
+  <string name="name">Nome</string>
   <!--Setting title-->
+  <string name="addresses">Endereço</string>
   <!--Setting title-->
+  <string name="current_address">Endereço actual</string>
   <!--Setting title-->
+  <string name="compression">Compressão</string>
   <!--Setting title-->
+  <string name="introducer">Apresentador</string>
   <!--ActionBar item-->
+  <string name="delete_device">Eliminar dispositivo</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Adicionar dispositivo</string>
   <!--Menu item to confirm adding a device-->
+  <string name="add">Adicionar</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Editar dispositivo</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Quer mesmo eliminar este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">O ID do dispositivo não pode estar vazio</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">O nome do dispositivo não pode estar vazio</string>
   <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">Ler código QR</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Não tem um leitor de QR instalado ou o leitor não é suportado. \
+Instale um leitor ou escreva o ID do dispositivo manualmente, por favor.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <string name="web_gui_title">Interface Web</string>
   <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Aguardando a interface web</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Gerando chaves. Isto pode demorar um bocado.</string>
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Primeiro início</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Bem vindo(a) ao Syncthing para Android!\n\n\
+Esta aplicação está em fase alfa, pelo que pode encontrar erros, problemas de desempenho ou perda de dados.\n\n\
+Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
+  <string name="settings_title">Configurações</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Correr sempre em segundo plano</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing corre sempre em segundo plano, de acordo com as preferências abaixo.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing apenas corre quando iniciado explicitamente e pode ser parado com o botão do menu.</string>
+  <string name="sync_only_charging">Sincronizar apenas quando está a carregar</string>
+  <string name="sync_only_wifi">Sincronizar apenas quando está em wifi</string>
+  <string name="syncthing_options">Opções do Syncthing</string>
+  <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
+  <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
+  <string name="max_send_kbps">Limite de velocidade de envio (KiB/s)</string>
+  <string name="reconnect_interval">Intervalo entre ligações (s)</string>
+  <string name="parallell_requests">Número máximo de pedidos únicos</string>
+  <string name="max_change_kbps">Taxa máxima de alterações de ficheiros (KiB/s)</string>
+  <string name="global_announce_enabled">Busca global</string>
+  <string name="local_announce_enabled">Busca local</string>
+  <string name="local_announce_port">Porto da busca local</string>
+  <string name="upnp_enabled">Activar UPnP</string>
+  <string name="syncthing_gui">Interface gráfica do Syncthing</string>
+  <string name="gui_address">Endereço de escuta da interface gráfica</string>
+  <string name="gui_user">Utilizador da autenticação na interface gráfica</string>
+  <string name="gui_password">Senha da autenticação na interface gráfica</string>
+  <string name="gui_https_enabled">Utilizar HTTPS na interface gráfica</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Opções da despistagem de erros</string>
   <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">Reportar incidente</string>
   <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Abrir o gestor de incidentes do Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Versão do </string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Versão do Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <string name="folder_picker_title">Selector de pasta</string>
   <!--ListView empty text-->
+  <string name="directory_empty">A pasta está vazia</string>
   <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">Criar uma nova pasta</string>
   <!--Menu item to select the current folder-->
+  <string name="select_folder">Seleccionar pasta</string>
   <!--SyncthingService-->
   <!--Title of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_title">O executável do Syncthing estoirou</string>
   <!--Message of the dialog shown when the syncthing binary returns an error-->
+  <string name="binary_crashed_message">O executável do syncthing terminou com um código de erro %1$d.\n\n
+Se o erro persistir, tente reiniciar o seu dispositivo.</string>
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">O Syncthing está desactivado</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Quer alterar as suas preferências?</string>
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Alterar configurações</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Sair</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">O Syncthing está a correr</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">É necessário reiniciar</string>
   <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">Clique aqui para reiniciar o syncthing agora</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Reiniciar mais tarde</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">O ID do dispositivo foi copiado para a área de transferência</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KB</item>
+    <item>MB</item>
+    <item>GB</item>
+    <item>TB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">Em espera</string>
+  <string name="state_scanning">Verificando</string>
+  <string name="state_cleaning">Limpando</string>
+  <string name="state_syncing">Sincronizando</string>
 </resources>
