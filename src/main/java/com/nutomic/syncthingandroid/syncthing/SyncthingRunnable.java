@@ -1,16 +1,10 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
-import com.nutomic.syncthingandroid.R;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -26,8 +20,6 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG = "SyncthingRunnable";
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
-
-    private static final int NOTIFICATION_CRASHED = 3;
 
     private final Context mContext;
 
@@ -84,21 +76,8 @@ public class SyncthingRunnable implements Runnable {
             }
             process.destroy();
             if (ret != 0) {
-                Log.w(TAG_NATIVE, "Syncthing binary crashed with error code " +
+                Log.e(TAG_NATIVE, "Syncthing binary crashed with error code " +
                         Integer.toString(ret));
-                NotificationCompat.Builder b = new NotificationCompat.Builder(mContext)
-                        .setContentTitle(mContext.getString(R.string.binary_crashed_title))
-                        .setContentText(mContext.getString(R.string.binary_crashed_message, ret))
-                        .setContentIntent(PendingIntent.getActivity(mContext, 0, new Intent(), 0))
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setAutoCancel(true)
-                        .setOnlyAlertOnce(true);
-                Notification n = new NotificationCompat.BigTextStyle(b)
-                        .bigText(mContext.getString(R.string.binary_crashed_message, ret))
-                        .build();
-                NotificationManager nm = (NotificationManager)
-                        mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                nm.notify(NOTIFICATION_CRASHED, n);
             }
         }
     }
