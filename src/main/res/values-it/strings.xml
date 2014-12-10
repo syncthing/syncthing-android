@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
@@ -70,8 +70,7 @@
   <string name="create">Crea</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Vuoi veramente eliminare questa cartella?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">L\'ID Cartella non può essere vuoto</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Il percorso della cartella non può essere vuoto</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -118,15 +117,20 @@ Installare un lettore o inserire l\'ID del dispositivo manualmente.</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Primo Avvio</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Benvenuto in Syncthing per Android!\n\n\
+Questa app è attualmente in fase Alpha e potrebbero verificarsi bug, problemi di prestazioni o perdite di dati.\n\n\
+Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Impostazioni</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Esegui sempre in background</string>
+  <string name="always_run_in_background">Sempre in background</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing è sempre in esecuzione in modalità background.</string>
   <!--Preference summary in case it is disabled-->
-  <string name="sync_only_charging">Sincron. solo in Ricarica</string>
-  <string name="sync_only_wifi">Sincronizza solo in Wifi</string>
+  <string name="always_run_in_background_disabled">Syncthing si attiva solo quando viene avviato manualmente e si arresta utilizzando il pulsante del menu.</string>
+  <string name="sync_only_charging">Sincr. solo in Ricarica</string>
+  <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="syncthing_options">Opzioni di Syncthing</string>
   <string name="listen_address">Indirizzi Protocollo Sincronizzazione</string>
   <string name="max_recv_kbps">Limite Velocità in Ingresso (KiB/s)</string>
@@ -164,11 +168,6 @@ Installare un lettore o inserire l\'ID del dispositivo manualmente.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Seleziona Cartella</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">L\'app Syncthing si è bloccata</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">L\'app Syncthing è stata arrestata con codice errore %1$d.\n\n
-Se questo errore persiste, prova a riavviare il tuo dispositivo.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing è disabilitato</string>
   <!--Message of the "syncthing disabled" dialog-->

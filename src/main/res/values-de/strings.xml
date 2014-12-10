@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentrales.</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">Erstellen</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">Die Verzeichnis ID darf nicht leer sein</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -168,10 +167,6 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <!--Menu item to select the current folder-->
   <string name="select_folder">Ordner auswählen</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing ist abgestürzt</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Syncthing hat sich mit dem Fehlercode %1$d beendet.\n\n Wenn sich dieser Fehler wiederholt, versuchen Sie einen Neustart Ihres Geräts. </string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Synchting is deaktiviert</string>
   <!--Message of the "syncthing disabled" dialog-->

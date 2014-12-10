@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Zastępuje własnościowe serwisy czymś otwartym, zaufanym i zdecentralizowanym.</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">Utwórz</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Czy na pewno chcesz usunąć ten folder?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">ID folderu nie może być puste</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka do folderu nie może być pusta</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -166,11 +165,6 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Wybierz folder</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing uległo awarii</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Syncthing zakończyło pracę z kodem błędu %1$d.
-Jeśli ten błąd będzie się utrzymywał, spróbuj zrestartować telefon.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
   <!--Message of the "syncthing disabled" dialog-->

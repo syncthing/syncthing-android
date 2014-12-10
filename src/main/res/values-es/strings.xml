@@ -1,16 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">Reemplace servicios propietarios con algo abierto, confiable y descentralizado.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Compartir el ID del dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Enviar el ID del dispositivo a</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <!--FoldersFragment-->
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <!--Shown if no folders exist-->
   <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d Archivos</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Dispositivos</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">No se encontraron dispositivos</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <!--Indicates that there is no connection to the device-->
@@ -21,7 +28,9 @@
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU Usage</string>
   <!--Title for current RAM usage-->
+  <string name="ram_usage">Uso de RAM</string>
   <!--Title for announce server status-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
@@ -29,6 +38,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <string name="devices">Dispositivos</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
@@ -36,25 +46,34 @@
   <!--Title for FolderSettingsFragment in edit mode-->
   <!--Menu item to confirm folder creation-->
   <!--Dialog shown when attempting to delete a folder-->
-  <!--Toast shown when trying to create a folder with an empty ID-->
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <!--Toast shown when selecting 'devices' if no devices have been added-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">ID del dispositivo</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
   <!--ActionBar item-->
+  <string name="delete_device">Eliminar dispositivo</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Agregar dispositivo</string>
   <!--Menu item to confirm adding a device-->
+  <string name="add">Añadir</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Editar dispositivo</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">¿Realmente desea eliminar este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">El nombre del dispositivo no debe estar vacío</string>
   <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">Escanear código QR</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Usted no tiene ningún escáner QR instalado o el escáner no es compatible.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <!--Text for WebGuiActivity loading view-->
@@ -66,6 +85,9 @@
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
+  <string name="sync_only_wifi">Sincronizar sólo en wifi</string>
+  <string name="syncthing_options">Opciones de Syncthing</string>
+  <string name="upnp_enabled">Activar UPnP</string>
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
@@ -78,19 +100,39 @@
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Cambiar la configuración</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Salir</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing se está ejecutando</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">Haga clic aquí para reiniciar syncthing ahora</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Reiniciar más tarde</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KB</item>
+    <item>MB</item>
+    <item>GB</item>
+    <item>TB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
   <!--Possible folder states-->
+  <string name="state_scanning">Escaneado</string>
+  <string name="state_cleaning">Limpiando</string>
+  <string name="state_syncing">Sincronizando</string>
 </resources>

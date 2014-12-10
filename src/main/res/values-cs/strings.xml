@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Nahraďte proprietární služby něčím otevřeným, důvěryhodným a decentralizovaným.</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">Vytvořit</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Opravdu chcete smazat tento adresář?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -170,11 +169,6 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Vybrat adresář</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing přestal reagovat</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Spustitelný soubor aplikace syncthing byl ukončen s chybou %1$d.\n\n
-Pokud se toto bude opakovat, zkuste restartovat svůj přístroj.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
   <!--Message of the "syncthing disabled" dialog-->

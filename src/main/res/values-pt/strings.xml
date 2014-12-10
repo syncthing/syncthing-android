@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Substitua serviços proprietários por algo aberto, fiável e descentralizado.</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">Criar</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Quer mesmo eliminar esta pasta?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">O ID da pasta não pode estar vazio</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -170,11 +169,6 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Seleccionar pasta</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">O executável do Syncthing estoirou</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">O executável do syncthing terminou com um código de erro %1$d.\n\n
-Se o erro persistir, tente reiniciar o seu dispositivo.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desactivado</string>
   <!--Message of the "syncthing disabled" dialog-->

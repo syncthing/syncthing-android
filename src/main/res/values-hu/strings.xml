@@ -1,27 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+  <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <!--Title of the "share device id" menu action-->
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Várakozás az API-ra</string>
   <!--FoldersFragment-->
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <!--Shown if no folders exist-->
   <!--Format string for folder file count-->
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Eszközök</string>
   <!--Shown if no devices exist-->
   <!--Indicates that a folder is fully synced to the local device-->
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <!--Indicates that there is no connection to the device-->
   <!--Title for current download rate-->
+  <string name="download_title">Letöltés</string>
   <!--Title for current upload rate-->
+  <string name="upload_title">Feltöltés</string>
   <!--LocalDeviceInfoFragment-->
   <!--ActionBar title shown when the drawer is open-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU használat</string>
   <!--Title for current RAM usage-->
+  <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
@@ -29,43 +36,56 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <string name="devices">Eszközök</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Title for FolderSettingsFragment in create mode-->
   <!--Title for FolderSettingsFragment in edit mode-->
   <!--Menu item to confirm folder creation-->
+  <string name="create">Létrehozás</string>
   <!--Dialog shown when attempting to delete a folder-->
-  <!--Toast shown when trying to create a folder with an empty ID-->
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <!--Toast shown when selecting 'devices' if no devices have been added-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <!--Setting title-->
+  <string name="name">Név</string>
+  <!--Setting title-->
+  <string name="addresses">Címek</string>
   <!--Setting title-->
   <!--Setting title-->
-  <!--Setting title-->
+  <string name="compression">Tömörítés</string>
   <!--Setting title-->
   <!--ActionBar item-->
   <!--Title for DeviceSettingsFragment in create mode-->
   <!--Menu item to confirm adding a device-->
+  <string name="add">Hozzáadás</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <!--Dialog shown when attempting to delete a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">QR kód olvasása</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <string name="web_gui_title">Web GUI</string>
   <!--Text for WebGuiActivity loading view-->
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title for dialog displayed on first start-->
   <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
+  <string name="settings_title">Beállítások</string>
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
+  <string name="sync_only_charging">Csak töltés közbeni szinkronizálás</string>
+  <string name="upnp_enabled">UPnP engedélyezése</string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_https_enabled">HTTPS használata a GUI-hoz</string>
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
@@ -78,12 +98,11 @@
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Kilépés</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -93,4 +112,6 @@
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <string name="state_idle">Tétlen</string>
+  <string name="state_syncing">Szinkronizálás</string>
 </resources>

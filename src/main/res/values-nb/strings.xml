@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Erstatt proprietære tjenester med noe åpent, troverdig og desentralisert.</string>
   <!--MainActivity-->
@@ -67,8 +67,7 @@
   <string name="create">Opprett</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Ønsker du virkelig å slette denne mappen?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">Mappe-ID kan ikke være tom</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappestien kan ikke være tom</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -148,8 +147,6 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Velg Mappe</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing er deaktivert</string>
   <!--Message of the "syncthing disabled" dialog-->

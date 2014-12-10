@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Vervang niet-vrije diensten door iets opens, betrouwbaars en ge-decentraliseerds.</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Weet u zeker dat u deze map wilt verwijderen?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">De map-ID mag niet leeg zijn</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -139,9 +138,6 @@
   <!--Menu item to select the current folder-->
   <string name="select_folder">Map selecteren</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Synthing-uitvoerbare bestand is gecrashed</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->

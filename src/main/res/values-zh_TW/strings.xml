@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">一個開放的、值得信賴的、分散式的專有服務取代品。</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">建立</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">您確定要刪除此資料夾？</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">資料夾識別碼不得為空</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -133,6 +132,10 @@
   <string name="always_run_in_background_disabled">Syncthing 只會在明確地被要求時才會啟動，且可透過選單的按鈕停止。</string>
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
+  <string name="syncthing_options">Syncthing 選項</string>
+  <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
+  <string name="max_send_kbps">上傳速率限制(KiB/s)</string>
+  <string name="upnp_enabled">允許UPnP</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">除錯選項</string>
   <!--Settings item that opens issue tracker-->
@@ -154,11 +157,6 @@
   <!--Menu item to select the current folder-->
   <string name="select_folder">選擇資料夾</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing 二進制檔案已損毀</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Syncthing 二進制檔案以錯誤碼 %1$d 退出。\n\n
-若此錯誤持續發生，請試著重新啟動您的裝置。</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已經停用</string>
   <!--Message of the "syncthing disabled" dialog-->

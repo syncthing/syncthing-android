@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <!--Title of the "share device id" menu action-->
@@ -36,7 +36,7 @@
   <!--Title for FolderSettingsFragment in edit mode-->
   <!--Menu item to confirm folder creation-->
   <!--Dialog shown when attempting to delete a folder-->
-  <!--Toast shown when trying to create a folder with an empty ID-->
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <!--Toast shown when selecting 'devices' if no devices have been added-->
   <!--DeviceSettingsFragment-->
@@ -78,8 +78,6 @@
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->

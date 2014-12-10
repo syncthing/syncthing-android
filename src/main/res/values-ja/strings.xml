@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">プロプライエタリなサービスを、オープン、信頼、そして分権されたものと置き換えましょう。</string>
   <!--MainActivity-->
@@ -71,8 +71,7 @@
   <string name="create">作成</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">フォルダーを削除してもよろしいですか?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">フォルダー ID は空にできません</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -170,11 +169,6 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <!--Menu item to select the current folder-->
   <string name="select_folder">フォルダーを選択</string>
   <!--SyncthingService-->
-  <!--Title of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_title">Syncthing のバイナリがクラッシュしました</string>
-  <!--Message of the dialog shown when the syncthing binary returns an error-->
-  <string name="binary_crashed_message">Syncthing のバイナリはエラーコード %1$d で終了しました。\n\n
-このエラーが解決しない場合は、お使いのデバイスを再起動してみてください。</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing は無効になりました</string>
   <!--Message of the "syncthing disabled" dialog-->
