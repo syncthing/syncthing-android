@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Ersetzt proprietäre Angebote durch etwas quelloffenes, vertrauswürdiges und dezentrales.</string>
+  <string name="app_description">Ersetzt proprietäre Angebote durch etwas Quelloffenes, Vertrauswürdiges und Dezentrales.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
@@ -28,14 +28,14 @@
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronisiere (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Nicht verbunden</string>
+  <string name="device_disconnected">Getrennt</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--LocalDeviceInfoFragment-->
   <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">System Informationen</string>
+  <string name="system_info">Systeminformationen</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -45,12 +45,12 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">RAM Auslastung</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Ankündigungs-Server</string>
+  <string name="announce_server">Ankündigungsserver</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis ID</string>
   <!--Setting title-->
-  <string name="directory">Ordner</string>
+  <string name="directory">Verzeichnis</string>
   <!--Setting title-->
   <string name="rescan_interval">Suchintervall</string>
   <!--Setting title-->
@@ -72,10 +72,11 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">Die Verzeichnis ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">Bitte verbinden Sie zuerst ein Gerät.</string>
+  <string name="no_devices">Bitte verbinde zuerst ein Gerät.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Geräte ID</string>
@@ -98,7 +99,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Gerät bearbeiten</string>
   <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
+  <string name="delete_device_confirm">Soll dieses Gerät wirklich gelöscht werden?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Die Geräte ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -106,19 +107,19 @@
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Code scannen</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Sie haben keinen QR Scanner installiert, oder Ihr Scanner wird nicht unterstützt.
-Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.</string>
+  <string name="no_qr_scanner_installed">Du hast keinen QR Scanner installiert, oder Dein Scanner wird nicht unterstützt.
+Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Web Oberfläche</string>
+  <string name="web_gui_title">Web Benutzeroberfläche</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Warte auf Oberfläche</string>
+  <string name="web_gui_loading">Warte auf Benutzeroberfläche</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Generiere Schlüssel. Dies kann eine Weile dauern.</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Erster Start</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Willkommen zu Syncthing für Android \n \n Diese App ist momentan im Alpha Status, sodass es zu Fehlern, Geschwindigkeitsproblemen oder Datenverlust kommen kann. \n\n Bitte teilen Sie uns auftretende Probleme via Github mit.</string>
+  <string name="welcome_text">Willkommen zu Syncthing für Android \n \n Diese App ist momentan im Alpha Status, sodass es zu Fehlern, Geschwindigkeitsproblemen oder Datenverlust kommen kann. \n\n Bitte teile uns auftretende Probleme via Github mit.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
@@ -130,13 +131,14 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
+  <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
   <string name="syncthing_options">Syncthing Optionen</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
   <string name="max_recv_kbps">Eingehendes Datenratelimit (KiB/s)</string>
   <string name="max_send_kbps">Ausgehendes Datenratelimit (KiB/s)</string>
   <string name="reconnect_interval">Wiederverbindungsintervall (s)</string>
   <string name="parallell_requests">Maximal ausstehende Anfragen</string>
-  <string name="max_change_kbps">Maximale Dateiändernungsrate (KiB/s)</string>
+  <string name="max_change_kbps">Maximale Dateiänderungsrate (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
   <string name="local_announce_port">Lokaler Auffindungsport</string>
@@ -145,43 +147,44 @@ Bitte installieren Sie einen Scanner oder geben Sie die Geräte ID manuell ein.<
   <string name="gui_address">Adresse(n) für die Benutzeroberfläche</string>
   <string name="gui_user">Nutzername für Zugang zur Benutzeroberfläche</string>
   <string name="gui_password">Passwort für Zugang zur Benutzeroberfläche</string>
-  <string name="gui_https_enabled">Benutze HTTPS für Benutzeroberfläche</string>
+  <string name="gui_https_enabled">HTTPS für Benutzeroberfläche benutzen</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Fehler melden</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Syncthing-Android Fehler-Sammlung öffnen</string>
+  <string name="report_issue_summary">Syncthing-Android Fehlersammlung öffnen</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Version</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Syncthing Android Version</string>
+  <string name="app_version_title">Syncthing-Android Version</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Ordnerauswahl</string>
+  <string name="folder_picker_title">Verzeichnisauswahl</string>
   <!--ListView empty text-->
   <string name="directory_empty">Ordner ist leer</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Erstelle neuen Ordner</string>
+  <string name="create_fs_folder">Neuen Ordner erstellen</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Ordner auswählen</string>
+  <string name="create_folder_failed">Verzeichniserstellung fehlgeschlagen</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Synchting is deaktiviert</string>
+  <string name="syncthing_disabled_title">Syncthing is deaktiviert</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Wollen sie ihre Voreinstellungen ändern?</string>
+  <string name="syncthing_disabled_message">Willst Du Deine Voreinstellungen ändern?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Einstellungen ändern</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
-  <string name="exit">Verlassen</string>
+  <string name="exit">Beenden</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing läuft</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Klicken Sie hier um Syncthing neu zu starten</string>
+  <string name="restart_notification_text">Klicke hier um Syncthing neu zu starten</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Später neu starten</string>
   <!--Shown when a device ID is copied to the clipboard-->

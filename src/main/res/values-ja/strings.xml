@@ -72,6 +72,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">フォルダーを削除してもよろしいですか?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">フォルダーIDは、文字、数字、ドット (.)、ダッシュ (-)、アンダースコア (_) からなる、短い識別子 (64文字以下) でなければなりません。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -132,6 +133,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューボタンで停止することができます。</string>
   <string name="sync_only_charging">充電中のみ同期</string>
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
+  <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="syncthing_options">同期オプション</string>
   <string name="listen_address">同期プロトコル リスンアドレス</string>
   <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
@@ -168,6 +170,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="create_fs_folder">新しいフォルダーを作成</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">フォルダーを選択</string>
+  <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing は無効になりました</string>

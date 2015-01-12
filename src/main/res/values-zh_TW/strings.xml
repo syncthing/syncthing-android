@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">一個開放的、值得信賴的、分散式的專有服務取代品。</string>
+  <string name="app_description">用一個開放的、值得信賴的、去中心化的封閉服務替代品。</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">增加資料夾</string>
@@ -72,6 +72,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">您確定要刪除此資料夾？</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">資料夾識別碼必須為一段只包含半形英文字母、數字、點 (.)、連接符號 (-) 以及底線 (_) 的簡短識別碼 (不多於 64 個字元)</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -132,10 +133,23 @@
   <string name="always_run_in_background_disabled">Syncthing 只會在明確地被要求時才會啟動，且可透過選單的按鈕停止。</string>
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
+  <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
   <string name="syncthing_options">Syncthing 選項</string>
+  <string name="listen_address">同步通訊協定監聽位址</string>
   <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
   <string name="max_send_kbps">上傳速率限制(KiB/s)</string>
+  <string name="reconnect_interval">重新連接間隔 (秒)</string>
+  <string name="parallell_requests">最大要求數上限</string>
+  <string name="max_change_kbps">最大檔案改變速率 (KiB/s)</string>
+  <string name="global_announce_enabled">全域探索</string>
+  <string name="local_announce_enabled">本地探索</string>
+  <string name="local_announce_port">本地探索連接埠</string>
   <string name="upnp_enabled">允許UPnP</string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_address">GUI 監聽位址</string>
+  <string name="gui_user">GUI 認證使用者名稱</string>
+  <string name="gui_password">GUI 認證密碼</string>
+  <string name="gui_https_enabled">為 GUI 使用 HTTPS</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">除錯選項</string>
   <!--Settings item that opens issue tracker-->
@@ -156,6 +170,7 @@
   <string name="create_fs_folder">建立新資料夾</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">選擇資料夾</string>
+  <string name="create_folder_failed">建立資料夾時失敗</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已經停用</string>

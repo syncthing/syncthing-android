@@ -72,6 +72,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Quer mesmo eliminar esta pasta?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">O ID da pasta tem que ser um identificador curto (64 caracteres ou menos) consistindo apenas em letras, números e os caracteres ponto (.), hífen (-) e sublinhado (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -132,6 +133,7 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <string name="always_run_in_background_disabled">Syncthing apenas corre quando iniciado explicitamente e pode ser parado com o botão do menu.</string>
   <string name="sync_only_charging">Sincronizar apenas quando está a carregar</string>
   <string name="sync_only_wifi">Sincronizar apenas quando está em wifi</string>
+  <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="syncthing_options">Opções do Syncthing</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
@@ -168,6 +170,7 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <string name="create_fs_folder">Criar uma nova pasta</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Seleccionar pasta</string>
+  <string name="create_folder_failed">Falhou a criação da pasta</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desactivado</string>

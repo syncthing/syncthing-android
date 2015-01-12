@@ -72,6 +72,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Opravdu chcete smazat tento adresář?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">ID adresáře musí být krátký identifikátor (64 znaků nebo méně) obsahující pouze písmena, čísla, tečky (.), pomlčky (-) a podtržítka (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -132,6 +133,7 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="always_run_in_background_disabled">Syncthing poběží pouze pokud bude ručně spuštěn a může být ukončen tlačítkem z menu.</string>
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
+  <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
   <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
   <string name="max_recv_kbps">Omezení příchozí rychlosti (KiB/s)</string>
@@ -168,6 +170,7 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="create_fs_folder">Vytvořit nový adresář</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Vybrat adresář</string>
+  <string name="create_folder_failed">Selhalo vytvoření adresáře</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
