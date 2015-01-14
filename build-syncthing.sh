@@ -70,12 +70,7 @@ $GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-x86
 $GOROOT/bin/go run build.go clean
 
-# ARM-7
-$GOROOT/bin/go run build.go -goos linux -goarch armv7 -no-upgrade build
-mv syncthing $ORIG/bin/syncthing-armeabi-v7a
-$GOROOT/bin/go run build.go clean
-
-# ARM-5
-$GOROOT/bin/go run build.go -goos linux -goarch armv5 -no-upgrade build
+# ARM
+$GOROOT/bin/go run build.go -goos linux -goarch arm -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-armeabi
 $GOROOT/bin/go run build.go clean

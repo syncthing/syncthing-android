@@ -67,12 +67,6 @@ android {
                 abiFilter "x86"
             }
         }
-        armeabi_v7a {
-            versionCode Integer.parseInt("3" + defaultConfig.versionCode)
-            ndk {
-                abiFilter "armeabi-v7a"
-            }
-        }
         armeabi {
             versionCode Integer.parseInt("2" + defaultConfig.versionCode)
             ndk {
