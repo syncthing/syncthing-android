@@ -10,14 +10,14 @@ if [ ! -f "ext/syncthing/src/github.com/syncthing/syncthing/.git" ]; then
 fi
 
 # Check for GOLANG installation
-if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.3.3* ]] ; then
+if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.4* ]] ; then
         mkdir -p "build"
         tmpgo='build/go'
         if [ ! -f "$tmpgo/bin/go" ]; then
-                # Download GOLANG v1.3.3
-                wget -O go.src.tar.gz https://golang.org/dl/go1.3.3.src.tar.gz
+                # Download GOLANG v1.4
+                wget -O go.src.tar.gz https://golang.org/dl/go1.4.src.tar.gz
                 sha1=$(sha1sum go.src.tar.gz)
-                if [ "$sha1" != "b54b7deb7b7afe9f5d9a3f5dd830c7dede35393a  go.src.tar.gz" ]; then
+                if [ "$sha1" != "6a7d9bd90550ae1e164d7803b3e945dc8309252b  go.src.tar.gz" ]; then
                         echo "go.src.tar.gz SHA1 checksum does not match!"
                         exit 1
                 fi
