@@ -106,10 +106,9 @@ task copyNative(type: Copy) {
     def lib_dir = "libs/"
     new File(lib_dir).mkdirs()
     def st_dir = "bin/";
-    from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi', st_dir + 'syncthing-armeabi-v7a';
+    from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi';
     into lib_dir
     rename('syncthing-x86', 'x86/libsyncthing.so')
-    rename('syncthing-armeabi-v7a', 'armeabi-v7a/libsyncthing.so')
     rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
 }
 buildNative.finalizedBy copyNative

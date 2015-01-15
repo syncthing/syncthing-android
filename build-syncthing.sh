@@ -34,13 +34,15 @@ if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.4* ]] ; then
 fi
 
 # Add GO compiler to PATH
-export PATH=$PATH:$GOROOT/bin
+export PATH=$GOROOT/bin:$PATH
+# Disable CGO (no dynamic linking)
+export CGO_ENABLED=0
 
 # Check whether GOLANG is compiled with cross-compilation for 386
 if [ ! -f $GOROOT/bin/linux_386/go ]; then
         pushd $GOROOT/src
         # Build GO for cross-compilation
-        GOOS=linux GOARCH=386 ./make.bash --no-clean
+        GOOS=linux GOARCH=386 GO386=387 ./make.bash --no-clean
         popd
 fi
 
