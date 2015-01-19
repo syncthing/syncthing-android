@@ -114,10 +114,9 @@ public class ConfigXml {
         // Hardcode default globalAnnounceServer ip.
         Element globalAnnounceServer = (Element)
                 options.getElementsByTagName("globalAnnounceServer").item(0);
-        if (globalAnnounceServer.getTextContent().startsWith("announce.syncthing.net:") ||
-                globalAnnounceServer.getTextContent().startsWith("194.126.249.5:")) {
+        if (globalAnnounceServer.getTextContent().equals("udp4://announce.syncthing.net:22026")) {
             Log.i(TAG, "Replacing globalAnnounceServer host with ip");
-            globalAnnounceServer.setTextContent("194.126.249.5:22026");
+            globalAnnounceServer.setTextContent("udp4://194.126.249.5:22026");
             changed = true;
         }
 
