@@ -27,9 +27,9 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Activity that allows selecting a directory in the local file system.
@@ -169,13 +169,17 @@ public class FolderPickerActivity extends SyncthingActivity
     private void displayFolder(File folder) {
         mLocation = folder;
         mFilesAdapter.clear();
-        File[] contents = mLocation.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory();
+        File[] contents = mLocation.listFiles();
+        Arrays.sort(contents, new Comparator<File>() {
+            public int compare(File f1, File f2) {
+                if (f1.isDirectory() && f2.isFile())
+                    return -1;
+                if (f1.isFile() && f2.isDirectory())
+                    return 1;
+                return f1.getName().compareTo(f2.getName());
             }
         });
-        Arrays.sort(contents);
+
         for (File f : contents) {
             mFilesAdapter.add(f);
         }
@@ -185,8 +189,11 @@ public class FolderPickerActivity extends SyncthingActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         ArrayAdapter<File> adapter = (ArrayAdapter<File>) mListView.getAdapter();
-        displayFolder(adapter.getItem(i));
-        invalidateOptionsMenu();
+        File f = adapter.getItem(i);
+        if (f.isDirectory()) {
+            displayFolder(f);
+            invalidateOptionsMenu();
+        }
     }
 
     private class FileAdapter extends ArrayAdapter<File> {
@@ -199,7 +206,13 @@ public class FolderPickerActivity extends SyncthingActivity
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
             TextView title = (TextView) convertView.findViewById(android.R.id.text1);
-            title.setText(getItem(position).getName());
+            File f = getItem(position);
+            title.setText(f.getName());
+            int textColor = (f.isDirectory())
+                    ? android.R.color.primary_text_light
+                    : android.R.color.tertiary_text_light;
+            title.setTextColor(getContext().getResources().getColor(textColor));
+
             return convertView;
         }
     }
