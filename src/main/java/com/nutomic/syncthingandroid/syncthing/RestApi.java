@@ -29,6 +29,7 @@ import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -73,7 +74,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public static class SystemInfo {
         public long alloc;
         public double cpuPercent;
-        public boolean extAnnounceOK;
+        public int extAnnounceConnected; // Number of connected announce servers.
+        public int extAnnounceTotal; // Total number of configured announce servers.
         public int goroutines;
         public String myID;
         public long sys;
@@ -427,7 +429,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     SystemInfo si = new SystemInfo();
                     si.alloc = system.getLong("alloc");
                     si.cpuPercent = system.getDouble("cpuPercent");
-                    si.extAnnounceOK = system.optBoolean("extAnnounceOK", false);
+                    JSONObject announce = system.getJSONObject("extAnnounceOK");
+                    si.extAnnounceConnected = 0;
+                    si.extAnnounceTotal = announce.length();
+                    for (Iterator<String> it = announce.keys(); it.hasNext(); ) {
+                        String key = it.next();
+                        if (announce.getBoolean(key)) {
+                            si.extAnnounceConnected++;
+                        }
+                    }
                     si.goroutines = system.getInt("goroutines");
                     si.myID = system.getString("myID");
                     si.sys = system.getLong("sys");

@@ -141,11 +141,12 @@ public class LocalDeviceInfoFragment extends Fragment
         });
         mCpuUsage.setText(new DecimalFormat("0.00").format(info.cpuPercent) + "%");
         mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
-        if (info.extAnnounceOK) {
-            mAnnounceServer.setText("Online");
+        if (info.extAnnounceConnected == info.extAnnounceTotal) {
+            mAnnounceServer.setText(android.R.string.ok);
             mAnnounceServer.setTextColor(getResources().getColor(R.color.text_green));
         } else {
-            mAnnounceServer.setText("Offline");
+            mAnnounceServer.setText(Integer.toString(info.extAnnounceConnected) + "/" +
+                    Integer.toString(info.extAnnounceTotal));
             mAnnounceServer.setTextColor(getResources().getColor(R.color.text_red));
         }
     }
