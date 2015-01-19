@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -47,7 +48,7 @@ public class SyncthingRunnable implements Runnable {
                 process = Runtime.getRuntime().exec("sh");
                 dos = new DataOutputStream(process.getOutputStream());
                 // Set home directory to data folder for syncthing to use.
-                dos.writeBytes("HOME=" + mContext.getFilesDir() + " ");
+                dos.writeBytes("HOME=" + Environment.getExternalStorageDirectory() + " ");
                 dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
                 dos.writeBytes("STNORESTART=1 ");
                 // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
