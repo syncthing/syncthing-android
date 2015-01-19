@@ -148,7 +148,7 @@ public class FolderSettingsFragment extends PreferenceFragment
         mRescanInterval.setText(Integer.toString(mFolder.RescanIntervalS));
         mRescanInterval.setSummary(Integer.toString(mFolder.RescanIntervalS));
         mFolderMaster.setChecked(mFolder.ReadOnly);
-        List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices();
+        List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices(false);
         for (RestApi.Device n : devicesList) {
             ExtendedCheckBoxPreference cbp = new ExtendedCheckBoxPreference(getActivity(), n);
             // Calling addPreference later causes it to change the checked state.
@@ -297,7 +297,8 @@ public class FolderSettingsFragment extends PreferenceFragment
                 intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.Path);
             }
             startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
-        } else if (preference.equals(mDevices) && mSyncthingService.getApi().getDevices().isEmpty()) {
+        } else if (preference.equals(mDevices) &&
+                mSyncthingService.getApi().getDevices(false).isEmpty()) {
             Toast.makeText(getActivity(), R.string.no_devices, Toast.LENGTH_SHORT)
                     .show();
         }

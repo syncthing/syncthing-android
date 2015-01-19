@@ -218,25 +218,23 @@ Please report any problems you encounter via Github.</string>
 
     <string name="syncthing_options">Syncthing Options</string>
 
+    <string name="device_name">Device Name</string>
+
     <string name="listen_address">Sync Protocol Listen Addresses</string>
 
     <string name="max_recv_kbps">Incoming Rate Limit (KiB/s)</string>
 
     <string name="max_send_kbps">Outgoing Rate Limit (KiB/s)</string>
 
-    <string name="reconnect_interval">Reconnect Interval (s)</string>
-
-    <string name="parallell_requests">Max Outstanding Requests</string>
-
-    <string name="max_change_kbps">Max File Change Rate (KiB/s)</string>
-
     <string name="global_announce_enabled">Global Discovery</string>
 
     <string name="local_announce_enabled">Local Discovery</string>
 
-    <string name="local_announce_port">Local Discovery Port</string>
-
     <string name="upnp_enabled">Enable UPnP</string>
+
+    <string name="global_announce_server">Global Discovery Server</string>
+
+    <string name="usage_reporting">Anonymous Usage Reporting</string>
 
     <string name="syncthing_gui">Syncthing GUI</string>
 

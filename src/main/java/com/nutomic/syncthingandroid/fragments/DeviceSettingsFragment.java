@@ -131,7 +131,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             getActivity().setTitle(R.string.add_device);
         } else {
             getActivity().setTitle(R.string.edit_device);
-            List<RestApi.Device> devices = mSyncthingService.getApi().getDevices();
+            List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
             for (int i = 0; i < devices.size(); i++) {
                 if (devices.get(i).DeviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {

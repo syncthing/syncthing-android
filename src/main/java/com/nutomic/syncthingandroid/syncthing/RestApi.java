@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -288,8 +287,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         try {
             Object value = mConfig.getJSONObject(name).get(key);
             return (value instanceof JSONArray)
-                    ? ((JSONArray) value).join(" ").replace("\"", "")
-                    : String.valueOf(value);
+                    ? ((JSONArray) value).join(" ").replace("\"", "").replace("\\", "")
+                    : value.toString();
         } catch (JSONException e) {
             Log.w(TAG, "Failed to get value for " + key, e);
             return null;
@@ -392,13 +391,29 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Returns a list of all existing devices.
+     *
+     * @param includeLocal True if the local device should be included in the result.
      */
-    public List<Device> getDevices() {
+    public List<Device> getDevices(boolean includeLocal) {
         if (mConfig == null)
             return new ArrayList<>();
 
         try {
-            return getDevices(mConfig.getJSONArray("Devices"));
+            JSONArray devices = mConfig.getJSONArray("Devices");
+            List<Device> ret = new ArrayList<>(devices.length());
+            for (int i = 0; i < devices.length(); i++) {
+                JSONObject json = devices.getJSONObject(i);
+                Device n = new Device();
+                n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
+                n.Name = json.getString("Name");
+                n.DeviceID = json.getString("DeviceID");
+                n.Compression = json.getBoolean("Compression");
+                n.Introducer = json.getBoolean("Introducer");
+                if (includeLocal || !mLocalDeviceId.equals(n.DeviceID)) {
+                    ret.add(n);
+                }
+            }
+            return ret;
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read devices", e);
             return null;
@@ -429,13 +444,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     SystemInfo si = new SystemInfo();
                     si.alloc = system.getLong("alloc");
                     si.cpuPercent = system.getDouble("cpuPercent");
-                    JSONObject announce = system.getJSONObject("extAnnounceOK");
-                    si.extAnnounceConnected = 0;
-                    si.extAnnounceTotal = announce.length();
-                    for (Iterator<String> it = announce.keys(); it.hasNext(); ) {
-                        String key = it.next();
-                        if (announce.getBoolean(key)) {
-                            si.extAnnounceConnected++;
+                    if (system.has("extAnnounceOK")) {
+                        JSONObject announce = system.getJSONObject("extAnnounceOK");
+                        si.extAnnounceTotal = announce.length();
+                        for (Iterator<String> it = announce.keys(); it.hasNext(); ) {
+                            String key = it.next();
+                            if (announce.getBoolean(key)) {
+                                si.extAnnounceConnected++;
+                            }
                         }
                     }
                     si.goroutines = system.getInt("goroutines");
@@ -450,27 +466,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Returns a list of all devices in the array devices, excluding the local device.
-     */
-    private List<Device> getDevices(JSONArray devices) throws JSONException {
-        List<Device> ret = new ArrayList<>(devices.length());
-        for (int i = 0; i < devices.length(); i++) {
-            JSONObject json = devices.getJSONObject(i);
-            Device n = new Device();
-            n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
-            n.Name = json.getString("Name");
-            n.DeviceID = json.getString("DeviceID");
-            n.Compression = json.getBoolean("Compression");
-            n.Introducer = json.getBoolean("Introducer");
-            if (!n.DeviceID.equals(mLocalDeviceId)) {
-                ret.add(n);
-            }
-        }
-        return ret;
-    }
-
-    /**
-     * Returns a list of all existing foldersitores.
+     * Returns a list of all existing folders.
      */
     public List<Folder> getFolders() {
         if (mConfig == null)
@@ -700,8 +696,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     /**
      * Updates or creates the given device, depending on whether it already exists.
      *
-     * @param device     Settings of the device to edit. To create a device, pass a non-existant device ID.
-     * @param listener {@link OnDeviceIdNormalizedListener} for the normalized device ID.
+     * @param device Settings of the device to edit. To create a device, pass a non-existant device ID.
+     * @param listener for the normalized device ID (may be null).
      */
     public void editDevice(final Device device, final Activity activity,
             final OnDeviceIdNormalizedListener listener) {
@@ -709,14 +705,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 new RestApi.OnDeviceIdNormalizedListener() {
                     @Override
                     public void onDeviceIdNormalized(String normalizedId, String error) {
-                        listener.onDeviceIdNormalized(normalizedId, error);
+                        if (listener != null) listener.onDeviceIdNormalized(normalizedId, error);
                         if (normalizedId == null)
                             return;
 
                         device.DeviceID = normalizedId;
                         // If the device already exists, just update it.
                         boolean create = true;
-                        for (RestApi.Device n : getDevices()) {
+                        for (RestApi.Device n : getDevices(true)) {
                             if (n.DeviceID.equals(device.DeviceID)) {
                                 create = false;
                             }
@@ -933,6 +929,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public void onFolderFileChange(String folderId, String relativePath) {
         new PostTask().execute(mUrl, PostTask.URI_SCAN, mApiKey, "folder", folderId, "sub",
                 relativePath);
+    }
+
+    /**
+     * Returns the object representing the local device.
+     */
+    public Device getLocalDevice() {
+        for (Device d : getDevices(true)) {
+            if (d.DeviceID.equals(mLocalDeviceId)) {
+                return d;
+            }
+        }
+        return new Device();
     }
 
 }
