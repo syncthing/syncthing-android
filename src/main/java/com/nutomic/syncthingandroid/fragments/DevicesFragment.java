@@ -3,6 +3,9 @@ package com.nutomic.syncthingandroid.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,6 +49,7 @@ public class DevicesFragment extends ListFragment implements SyncthingService.On
         super.onActivityCreated(savedInstanceState);
 
         initAdapter();
+        setHasOptionsMenu(true);
     }
 
     private void initAdapter() {
@@ -94,6 +98,25 @@ public class DevicesFragment extends ListFragment implements SyncthingService.On
         intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
         intent.putExtra(DeviceSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).DeviceID);
         startActivity(intent);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.device_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_device:
+                Intent intent = new Intent(getActivity(), SettingsActivity.class)
+                        .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
+                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

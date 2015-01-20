@@ -10,17 +10,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/add_folder"
-        android:title="@string/add_folder"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/add_device"
-        android:title="@string/add_device"
-        app:showAsAction="ifRoom" />
-
-
-    <item
         android:id="@+id/web_gui"
         android:title="@string/web_gui_title" />
 

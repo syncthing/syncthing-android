@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -194,8 +195,7 @@ public class MainActivity extends SyncthingActivity
                 .beginTransaction()
                 .replace(R.id.drawer, mLocalDeviceInfoFragment)
                 .commit();
-        mDrawerToggle = mLocalDeviceInfoFragment.new Toggle(this, mDrawerLayout,
-                R.drawable.ic_drawer);
+        mDrawerToggle = new Toggle(this, mDrawerLayout, R.drawable.ic_drawer);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -259,18 +259,6 @@ public class MainActivity extends SyncthingActivity
         }
 
         switch (item.getItemId()) {
-            case R.id.add_folder:
-                Intent intent = new Intent(this, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
-                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
-                startActivity(intent);
-                return true;
-            case R.id.add_device:
-                intent = new Intent(this, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
-                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
-                startActivity(intent);
-                return true;
             case R.id.web_gui:
                 startActivity(new Intent(this, WebGuiActivity.class));
                 return true;
@@ -296,6 +284,31 @@ public class MainActivity extends SyncthingActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * Receives drawer opened and closed events.
+     */
+    public class Toggle extends ActionBarDrawerToggle {
+        public Toggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes) {
+            super(activity, drawerLayout, drawerImageRes, R.string.app_name, R.string.app_name);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+            mLocalDeviceInfoFragment.onDrawerOpened();
+            mFolderFragment.setHasOptionsMenu(false);
+            mDevicesFragment.setHasOptionsMenu(false);
+        }
+
+        @Override
+        public void onDrawerClosed(View view) {
+            super.onDrawerClosed(view);
+            mLocalDeviceInfoFragment.onDrawerClosed();
+            mFolderFragment.setHasOptionsMenu(true);
+            mDevicesFragment.setHasOptionsMenu(true);
+        }
     }
 
 }

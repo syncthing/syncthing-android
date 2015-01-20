@@ -3,9 +3,10 @@ package com.nutomic.syncthingandroid.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -47,6 +48,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
         super.onActivityCreated(savedInstanceState);
 
         initAdapter();
+        setHasOptionsMenu(true);
     }
 
     private void initAdapter() {
@@ -108,6 +110,25 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
         intent.setDataAndType(uri, "*/*");
         startActivity(intent);
         return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.folder_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_folder:
+                Intent intent = new Intent(getActivity(), SettingsActivity.class)
+                        .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

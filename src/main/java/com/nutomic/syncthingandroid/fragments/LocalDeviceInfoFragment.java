@@ -1,10 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -44,31 +41,22 @@ public class LocalDeviceInfoFragment extends Fragment
 
     private MainActivity mActivity;
 
-    /**
-     * Starts polling for status when opened, stops when closed.
-     */
-    public class Toggle extends ActionBarDrawerToggle {
-        public Toggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes) {
-            super(activity, drawerLayout, drawerImageRes, R.string.app_name, R.string.system_info);
-        }
+    public void onDrawerOpened() {
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateGui();
+            }
 
-        @Override
-        public void onDrawerClosed(View view) {
-            super.onDrawerClosed(view);
-            mTimer.cancel();
-            mTimer = null;
-            mActivity.getSupportActionBar().setTitle(R.string.app_name);
-            mActivity.supportInvalidateOptionsMenu();
-        }
-
-        @Override
-        public void onDrawerOpened(View drawerView) {
-            super.onDrawerOpened(drawerView);
-            LocalDeviceInfoFragment.this.onDrawerOpened();
-        }
+        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+        mActivity.supportInvalidateOptionsMenu();
     }
 
-    ;
+    public void onDrawerClosed() {
+        mTimer.cancel();
+        mTimer = null;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,19 +85,6 @@ public class LocalDeviceInfoFragment extends Fragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("active", mTimer != null);
-    }
-
-    private void onDrawerOpened() {
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                updateGui();
-            }
-
-        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-        mActivity.getSupportActionBar().setTitle(R.string.system_info);
-        mActivity.supportInvalidateOptionsMenu();
     }
 
     /**
