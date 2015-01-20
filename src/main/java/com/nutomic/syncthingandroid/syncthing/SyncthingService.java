@@ -44,7 +44,7 @@ public class SyncthingService extends Service {
     public static final String ACTION_RESTART = "restart";
 
     /**
-     * Interval in ms at which the GUI is updated (eg {@link }LocalDeviceInfoFragment}).
+     * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
      */
     public static final int GUI_UPDATE_INTERVAL = 1000;
 

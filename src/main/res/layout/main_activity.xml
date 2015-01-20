@@ -14,7 +14,7 @@
         android:id="@+id/drawer"
         android:orientation="vertical"
         android:layout_gravity="start"
-        android:layout_width="260dip"
+        android:layout_width="240dip"
         android:layout_height="match_parent"
         android:clickable="true"
         android:background="@android:color/background_light" />

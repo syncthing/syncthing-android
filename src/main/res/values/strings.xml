@@ -57,7 +57,8 @@
     <!-- Title for current upload rate -->
     <string name="upload_title">Upload</string>
 
-    <!-- LocalDeviceInfoFragment -->
+    <!-- DrawerFragment -->
+
 
     <!-- Same as download_title with a colon and space appended -->
     <string name="download_title_colon">Download:\u0020</string>
@@ -73,6 +74,11 @@
 
     <!-- Title for announce server status -->
     <string name="announce_server">Announce Server</string>
+
+    <!-- Menu item to donate -->
+    <string name="donate">Donate</string>
+
+    <string name="donate_url" translatable="false">https://tip4commit.com/github/syncthing/syncthing-android</string>
 
     <!-- FolderSettingsFragment -->
 
@@ -278,8 +284,6 @@ Please report any problems you encounter via Github.</string>
     <string name="create_folder_failed">Failed to create folder</string>
 
     <!-- SyncthingService -->
-
-
 
 
     <!-- Title of the "syncthing disabled" dialog -->

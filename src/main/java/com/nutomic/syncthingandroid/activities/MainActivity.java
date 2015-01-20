@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -22,20 +21,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DevicesFragment;
+import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FoldersFragment;
-import com.nutomic.syncthingandroid.fragments.LocalDeviceInfoFragment;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 /**
  * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and {@link com.nutomic.syncthingandroid.fragments.DevicesFragment} in different tabs, and
- * {@link com.nutomic.syncthingandroid.fragments.LocalDeviceInfoFragment} in the navigation drawer.
+ * {@link com.nutomic.syncthingandroid.fragments.DrawerFragment} in the navigation drawer.
  */
 public class MainActivity extends SyncthingActivity
         implements SyncthingService.OnApiChangeListener {
@@ -127,7 +125,7 @@ public class MainActivity extends SyncthingActivity
 
     private DevicesFragment mDevicesFragment;
 
-    private LocalDeviceInfoFragment mLocalDeviceInfoFragment;
+    private DrawerFragment mDrawerFragment;
 
     private ViewPager mViewPager;
 
@@ -182,18 +180,18 @@ public class MainActivity extends SyncthingActivity
                     savedInstanceState, FoldersFragment.class.getName());
             mDevicesFragment = (DevicesFragment) fm.getFragment(
                     savedInstanceState, DevicesFragment.class.getName());
-            mLocalDeviceInfoFragment = (LocalDeviceInfoFragment) fm.getFragment(
-                    savedInstanceState, LocalDeviceInfoFragment.class.getName());
+            mDrawerFragment = (DrawerFragment) fm.getFragment(
+                    savedInstanceState, DrawerFragment.class.getName());
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
         } else {
             mFolderFragment = new FoldersFragment();
             mDevicesFragment = new DevicesFragment();
-            mLocalDeviceInfoFragment = new LocalDeviceInfoFragment();
+            mDrawerFragment = new DrawerFragment();
         }
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.drawer, mLocalDeviceInfoFragment)
+                .replace(R.id.drawer, mDrawerFragment)
                 .commit();
         mDrawerToggle = new Toggle(this, mDrawerLayout, R.drawable.ic_drawer);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -223,54 +221,13 @@ public class MainActivity extends SyncthingActivity
         super.onSaveInstanceState(outState);
         // Avoid crash if called during startup.
         if (mFolderFragment != null && mDevicesFragment != null &&
-                mLocalDeviceInfoFragment != null) {
+                mDrawerFragment != null) {
             FragmentManager fm = getSupportFragmentManager();
             fm.putFragment(outState, FoldersFragment.class.getName(), mFolderFragment);
             fm.putFragment(outState, DevicesFragment.class.getName(), mDevicesFragment);
-            fm.putFragment(outState, LocalDeviceInfoFragment.class.getName(),
-                    mLocalDeviceInfoFragment);
+            fm.putFragment(outState, DrawerFragment.class.getName(),
+                    mDrawerFragment);
             outState.putInt("currentTab", mViewPager.getCurrentItem());
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    /**
-     * Shows menu only once syncthing service is running, and shows "share" option only when
-     * drawer is open.
-     */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(findViewById(R.id.drawer));
-        menu.findItem(R.id.share_device_id).setVisible(drawerOpen);
-        menu.findItem(R.id.exit).setVisible(!SyncthingService.alwaysRunInBackground(this));
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mLocalDeviceInfoFragment.onOptionsItemSelected(item) ||
-                mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        switch (item.getItemId()) {
-            case R.id.web_gui:
-                startActivity(new Intent(this, WebGuiActivity.class));
-                return true;
-            case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
-                return true;
-            case R.id.exit:
-                stopService(new Intent(this, SyncthingService.class));
-                finish();
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -286,6 +243,16 @@ public class MainActivity extends SyncthingActivity
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     /**
      * Receives drawer opened and closed events.
      */
@@ -297,7 +264,7 @@ public class MainActivity extends SyncthingActivity
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
-            mLocalDeviceInfoFragment.onDrawerOpened();
+            mDrawerFragment.onDrawerOpened();
             mFolderFragment.setHasOptionsMenu(false);
             mDevicesFragment.setHasOptionsMenu(false);
         }
@@ -305,7 +272,7 @@ public class MainActivity extends SyncthingActivity
         @Override
         public void onDrawerClosed(View view) {
             super.onDrawerClosed(view);
-            mLocalDeviceInfoFragment.onDrawerClosed();
+            mDrawerFragment.onDrawerClosed();
             mFolderFragment.setHasOptionsMenu(true);
             mDevicesFragment.setHasOptionsMenu(true);
         }
