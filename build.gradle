@@ -6,8 +6,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0-rc4'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.6'
+        classpath 'com.android.tools.build:gradle:1.0.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.7'
     }
 }
 
@@ -26,9 +26,9 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
-    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.1.0'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.2.0'
 }
 
 preBuild {
