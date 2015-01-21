@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">アップロード</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">システム情報</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">ダウンロード:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -138,12 +136,8 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="listen_address">同期プロトコル リスンアドレス</string>
   <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
   <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
-  <string name="reconnect_interval">再接続間隔 (秒)</string>
-  <string name="parallell_requests">最大未解決リクエスト</string>
-  <string name="max_change_kbps">最大ファイル変更レート (KiB/秒)</string>
   <string name="global_announce_enabled">グローバルディスカバリー</string>
   <string name="local_announce_enabled">ローカルディスカバリー</string>
-  <string name="local_announce_port">ローカルディスカバリー ポート</string>
   <string name="upnp_enabled">UPnP を有効にする</string>
   <string name="syncthing_gui">同期中 GUI</string>
   <string name="gui_address">GUI リスンアドレス</string>

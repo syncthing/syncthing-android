@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Informação de sistema</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -138,12 +136,8 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
   <string name="max_send_kbps">Limite de velocidade de envio (KiB/s)</string>
-  <string name="reconnect_interval">Intervalo entre ligações (s)</string>
-  <string name="parallell_requests">Número máximo de pedidos únicos</string>
-  <string name="max_change_kbps">Taxa máxima de alterações de ficheiros (KiB/s)</string>
   <string name="global_announce_enabled">Busca global</string>
   <string name="local_announce_enabled">Busca local</string>
-  <string name="local_announce_port">Porto da busca local</string>
   <string name="upnp_enabled">Activar UPnP</string>
   <string name="syncthing_gui">Interface gráfica do Syncthing</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>

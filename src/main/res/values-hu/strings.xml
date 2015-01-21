@@ -22,7 +22,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Feltöltés</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->

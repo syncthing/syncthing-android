@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Informacje systemowe</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -137,7 +135,6 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
   <string name="global_announce_enabled">Globalny wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
-  <string name="local_announce_port">Port lokalnego wyszukiwania</string>
   <string name="upnp_enabled">Włącz UPnP</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adres GUI</string>

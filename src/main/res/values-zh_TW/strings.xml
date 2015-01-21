@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">上載</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">系統資訊</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">下載:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -138,12 +136,8 @@
   <string name="listen_address">同步通訊協定監聽位址</string>
   <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
   <string name="max_send_kbps">上傳速率限制(KiB/s)</string>
-  <string name="reconnect_interval">重新連接間隔 (秒)</string>
-  <string name="parallell_requests">最大要求數上限</string>
-  <string name="max_change_kbps">最大檔案改變速率 (KiB/s)</string>
   <string name="global_announce_enabled">全域探索</string>
   <string name="local_announce_enabled">本地探索</string>
-  <string name="local_announce_port">本地探索連接埠</string>
   <string name="upnp_enabled">允許UPnP</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">GUI 監聽位址</string>

@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Systémové informace</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -135,16 +133,15 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
+  <string name="device_name">Jméno přístroje</string>
   <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
   <string name="max_recv_kbps">Omezení příchozí rychlosti (KiB/s)</string>
   <string name="max_send_kbps">Omezení odchozí rychlosti (KiB/s)</string>
-  <string name="reconnect_interval">Interval pro opakování připojení (s)</string>
-  <string name="parallell_requests">Maximální počet požadavků</string>
-  <string name="max_change_kbps">Maximální rychlost výměny souborů (KiB/s)</string>
   <string name="global_announce_enabled">Globální oznamování</string>
   <string name="local_announce_enabled">Místní oznamování</string>
-  <string name="local_announce_port">Port místního oznamování</string>
   <string name="upnp_enabled">Povolit UPnP</string>
+  <string name="global_announce_server">Server globálního oznamování</string>
+  <string name="usage_reporting">Zasílání anonymních dat o využití</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adresy naslouchání GUI</string>
   <string name="gui_user">Přihlašovací jméno pro GUI</string>

@@ -33,8 +33,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Info Sistema</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -135,12 +133,8 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <string name="listen_address">Indirizzi Protocollo Sincronizzazione</string>
   <string name="max_recv_kbps">Limite Velocità in Ingresso (KiB/s)</string>
   <string name="max_send_kbps">Limite Velocità in Uscita (KiB/s)</string>
-  <string name="reconnect_interval">Intervallo Riconnessione (s)</string>
-  <string name="parallell_requests">Max richieste in sospeso</string>
-  <string name="max_change_kbps">Max Tasso Modifica File (KiB/s)</string>
   <string name="global_announce_enabled">Individuazione Globale</string>
   <string name="local_announce_enabled">Individuazione Locale</string>
-  <string name="local_announce_port">Porta Individuazione Locale</string>
   <string name="upnp_enabled">Abilita UPnP</string>
   <string name="syncthing_gui">Interfaccia Grafica di Syncthing</string>
   <string name="gui_address">Indirizzi Interfaccia Grafica</string>

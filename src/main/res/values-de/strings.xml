@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Systeminformationen</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -136,12 +134,8 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
   <string name="max_recv_kbps">Eingehendes Datenratelimit (KiB/s)</string>
   <string name="max_send_kbps">Ausgehendes Datenratelimit (KiB/s)</string>
-  <string name="reconnect_interval">Wiederverbindungsintervall (s)</string>
-  <string name="parallell_requests">Maximal ausstehende Anfragen</string>
-  <string name="max_change_kbps">Maximale Dateiänderungsrate (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
-  <string name="local_announce_port">Lokaler Auffindungsport</string>
   <string name="upnp_enabled">UPnP aktivieren</string>
   <string name="syncthing_gui">Syncthing Benutzeroberfläche</string>
   <string name="gui_address">Adresse(n) für die Benutzeroberfläche</string>

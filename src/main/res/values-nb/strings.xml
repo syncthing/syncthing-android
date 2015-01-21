@@ -34,8 +34,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Opplasting</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Systeminfo</string>
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Nedlasting:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->

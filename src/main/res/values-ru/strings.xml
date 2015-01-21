@@ -17,7 +17,6 @@
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->

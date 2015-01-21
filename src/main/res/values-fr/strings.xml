@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Envoyer ID machine à</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">En attente de l\'API</string>
+  <string name="api_loading">Attente de l\'interface API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,12 +34,10 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Emission</string>
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
-  <string name="system_info">Informations système</string>
   <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Téléchargement:\u0020</string>
+  <string name="download_title_colon">Réception:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Téléversement:\u0020</string>
+  <string name="upload_title_colon">Emission:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Utilisation du CPU</string>
   <!--Title for current RAM usage-->
@@ -126,21 +124,24 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--Activity title-->
   <string name="settings_title">Paramètres</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Continuer à fonctionner en tâche de fond.</string>
+  <string name="always_run_in_background">Fonctionner en tâche de fond.</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing continue à fonctionner en tâche de fond, selon les réglages dans les paramètres.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing ne fonctionne que si vous le lancez manuellement, et s\'arrête par le bouton quitter.</string>
-  <string name="sync_only_charging">Synchroniser uniquement si branché sur chargeur.</string>
-  <string name="sync_only_wifi">Synchroniser uniquement par WiFi</string>
+  <string name="sync_only_charging">Synchro uniquement sur chargeur</string>
+  <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
+  <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="syncthing_options">Options Syncthing</string>
+  <string name="device_name">Nom de machine</string>
+  <string name="listen_address">Adresse d\'écoute pour la synchro</string>
   <string name="max_recv_kbps">Limite de débit en réception (Ko/s)</string>
   <string name="max_send_kbps">Limité de débit en émission (Ko/s)</string>
-  <string name="reconnect_interval">Intervalle de reconnexion (s)</string>
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
-  <string name="local_announce_port">Port pour la recherche locale</string>
   <string name="upnp_enabled">Activer UPnP</string>
+  <string name="global_announce_server">Serveur de découverte globale</string>
+  <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="syncthing_gui">Interface WEB Syncthing</string>
   <string name="gui_address">Adresse pour l\'interface WEB</string>
   <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
@@ -177,7 +178,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Quitter</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
-  <string name="syncthing_active">Syncthing est en fonctionnement</string>
+  <string name="syncthing_active">Syncthing fonctionne</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>

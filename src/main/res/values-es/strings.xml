@@ -24,7 +24,6 @@
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--LocalDeviceInfoFragment-->
-  <!--ActionBar title shown when the drawer is open-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
@@ -53,6 +52,7 @@
   <!--Setting title-->
   <string name="device_id">ID del dispositivo</string>
   <!--Setting title-->
+  <string name="name">Nombre</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
@@ -76,12 +76,20 @@
   <string name="no_qr_scanner_installed">Usted no tiene ningún escáner QR instalado o el escáner no es compatible.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <string name="web_gui_title">Interfaz gráfica web</string>
   <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Esperando la interfaz gráfica</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title for dialog displayed on first start-->
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Bienvenido a Syncthing para Android!\n\n\
+
+Esta aplicación se encuentra actualmente en estado alfa, y es posible que se produzcan errores, problemas de rendimiento o pérdida de datos.\n\n\
+
+Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
+  <string name="settings_title">Ajustes</string>
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
@@ -101,6 +109,7 @@
   <!--Menu item to select the current folder-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing está deshabilitado</string>
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Cambiar la configuración</string>
@@ -110,6 +119,7 @@
   <string name="syncthing_active">Syncthing se está ejecutando</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">Reinicio Necesario</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Haga clic aquí para reiniciar syncthing ahora</string>
   <!--Text for the dismiss button of the restart Activity-->
