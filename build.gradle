@@ -73,12 +73,6 @@ android {
                 abiFilter "armeabi"
             }
         }
-        mips {
-            versionCode Integer.parseInt("1" + defaultConfig.versionCode)
-            ndk {
-                abiFilter "mips"
-            }
-        }
         fat {
             versionCode Integer.parseInt("0" + defaultConfig.versionCode)
         }
