@@ -10,7 +10,6 @@ android:
 env:
     matrix:
     - ANDROID_SDKS=android-8        ANDROID_TARGET=android-8   ANDROID_ABI=armeabi
-    - ANDROID_SDKS=android-16       ANDROID_TARGET=android-16  ANDROID_ABI=armeabi-v7a
     - ANDROID_SDKS=android-21       ANDROID_TARGET=android-21  ANDROID_ABI=x86
 
 script: "./gradlew build"
