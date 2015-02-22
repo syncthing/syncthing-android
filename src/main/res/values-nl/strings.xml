@@ -68,8 +68,9 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Weet u zeker dat u deze map wilt verwijderen?</string>
+  <string name="delete_folder_confirm">Weet je zeker dat je deze map wil verwijderen?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">De map-ID moet een korte aanduiding (64 of minder tekens) zijn, bestaande uit enkel letters, cijfers, punten (.), streepjes (-) en onderstrepingstekens (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -96,11 +97,16 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Apparaat bewerken</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Weet je zeker dat je dit apparaat wil verwijderen?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">De apparaat-ID kan niet leeg zijn</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">De apparaatnaam kan niet leeg zijn</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">Je hebt geen QR-scanner geïnstalleerd of je scanner wordt niet ondersteund. \
+Gelieve een scanner te installeren of de apparaat-ID handmatig in te voeren.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
@@ -111,13 +117,38 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Eerste opstart</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Welkom bij Syncthing voor Android!\n\n
+Deze applicatie is momenteel in alfa-status, en je kan bugs, prestatieproblemen of gegevensverlies verwachten.\n\n
+Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Instellingen</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Altijd draaien in achtergrond</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing draait altijd in de achtergrond, volgens de hieronder weergegeven voorkeuren.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing draait enkel wanneer expliciet gestart, en kan gestopt worden door de menu-knop.</string>
+  <string name="sync_only_charging">Synchroniseer alleen tijdens opladen</string>
+  <string name="sync_only_wifi">Synchroniseer alleen via Wi-Fi</string>
+  <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
+  <string name="syncthing_options">Syncthing-opties</string>
+  <string name="device_name">Apparaatnaam</string>
+  <string name="listen_address">Synchronisatieprotocol luister-adressen</string>
+  <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
+  <string name="max_send_kbps">Uitgaande snelheidslimiet (KiB/s)</string>
+  <string name="global_announce_enabled">Globale ontdekking</string>
+  <string name="local_announce_enabled">Lokale ontdekking</string>
+  <string name="upnp_enabled">UPnP aanzetten</string>
+  <string name="global_announce_server">Globale ontdekkingsserver</string>
+  <string name="usage_reporting">Anoniem gebruiksrapportage</string>
+  <string name="syncthing_gui">Syncthing-GUI</string>
+  <string name="gui_address">GUI luister-adressen</string>
+  <string name="gui_user">GUI-authenticatie gebruiker</string>
+  <string name="gui_password">GUI-authenticatie wachtwoord</string>
+  <string name="gui_https_enabled">Gebruik HTTPS voor GUI</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Debug-opties</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
@@ -126,6 +157,7 @@
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Synthing-versie</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android versie</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Mapkiezer</string>
@@ -135,13 +167,18 @@
   <string name="create_fs_folder">Nieuwe map creeëren</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Map selecteren</string>
+  <string name="create_folder_failed">Aanmaken van map mislukt</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing is uitgezet</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Wil je je voorkeuren wijzigen?</string>
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Instellingen wijzigen</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Afsluiten</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing draait</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>
@@ -150,6 +187,7 @@
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Later herstarten</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">Apparaat-ID gekopieerd naar klembord</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -167,4 +205,8 @@
     <item>Tb/s</item>
   </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">Inactief</string>
+  <string name="state_scanning">Bezig met scannen</string>
+  <string name="state_cleaning">Bezig met opruimen</string>
+  <string name="state_syncing">Bezig met synchroniseren</string>
 </resources>

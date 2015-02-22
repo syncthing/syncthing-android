@@ -133,12 +133,14 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_wifi">Sadece wifi bağlıyken eşitle</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
   <string name="syncthing_options">Syncthing Seçenekler</string>
+  <string name="device_name">Cihaz Adı</string>
   <string name="listen_address">Eşitleme Protokolü Dinleme Adresleri</string>
   <string name="max_recv_kbps">Gelen Hız Sınırı (KiB/s)</string>
   <string name="max_send_kbps">Giden Hız Sınırı (KiB/s)</string>
   <string name="global_announce_enabled">Küresel Bulunabilirlik</string>
   <string name="local_announce_enabled">Yerel Bulunabilirlik</string>
   <string name="upnp_enabled">UPnP Etkinleştir</string>
+  <string name="global_announce_server">Küresel Bulunabilirlik Sunucusu</string>
   <string name="syncthing_gui">Syncthing Arayüzü</string>
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>

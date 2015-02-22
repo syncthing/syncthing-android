@@ -50,7 +50,7 @@
   <!--Setting title-->
   <string name="directory">Dossier</string>
   <!--Setting title-->
-  <string name="rescan_interval">Intervalle de scan</string>
+  <string name="rescan_interval">Intervalle d\'analyse</string>
   <!--Setting title-->
   <string name="folder_master">Dossier maitre</string>
   <!--Setting title-->
@@ -136,7 +136,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="device_name">Nom de machine</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
   <string name="max_recv_kbps">Limite de débit en réception (Ko/s)</string>
-  <string name="max_send_kbps">Limité de débit en émission (Ko/s)</string>
+  <string name="max_send_kbps">Limite de débit en émission (Ko/s)</string>
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
   <string name="upnp_enabled">Activer UPnP</string>
@@ -198,11 +198,11 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kb/s</item>
-    <item>Mb/s</item>
-    <item>Gb/s</item>
-    <item>Tb/s</item>
+    <item>o/s</item>
+    <item>Ko/s</item>
+    <item>Mo/s</item>
+    <item>Go/s</item>
+    <item>To/s</item>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">En veille</string>
