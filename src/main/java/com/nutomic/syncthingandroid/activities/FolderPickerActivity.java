@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -49,7 +51,7 @@ public class FolderPickerActivity extends SyncthingActivity
 
     private RootsAdapter mRootsAdapter;
 
-    private ArrayList<File> mRootDirectories = new ArrayList();
+    private ArrayList<File> mRootDirectories = new ArrayList<>();
 
     /**
      * Location of null means that the list of roots is displayed.
@@ -57,6 +59,7 @@ public class FolderPickerActivity extends SyncthingActivity
     private File mLocation;
 
     @Override
+    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -192,8 +195,16 @@ public class FolderPickerActivity extends SyncthingActivity
         File f = adapter.getItem(i);
         if (f.isDirectory()) {
             displayFolder(f);
-            invalidateOptionsMenu();
+            invalidateOptions();
         }
+    }
+
+    @SuppressLint("NewApi")
+    private void invalidateOptions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            invalidateOptionsMenu();
+        else
+            supportInvalidateOptionsMenu();
     }
 
     private class FileAdapter extends ArrayAdapter<File> {
@@ -271,7 +282,7 @@ public class FolderPickerActivity extends SyncthingActivity
             mListView.setAdapter(mRootsAdapter);
             mLocation = null;
         }
-        invalidateOptionsMenu();
+        invalidateOptions();
     }
 
 }
