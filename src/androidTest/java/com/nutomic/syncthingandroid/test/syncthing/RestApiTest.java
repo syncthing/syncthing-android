@@ -70,7 +70,7 @@ public class RestApiTest extends AndroidTestCase {
 
     @SmallTest
     public void testGetDevices() {
-        assertNotNull(mApi.getDevices());
+        assertNotNull(mApi.getDevices(false));
     }
 
     @MediumTest

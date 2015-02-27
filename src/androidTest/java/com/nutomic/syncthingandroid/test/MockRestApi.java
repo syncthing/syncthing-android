@@ -42,7 +42,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public List<Device> getDevices() {
+    public List<Device> getDevices(boolean includeLocal) {
         return new ArrayList<>();
     }
 
