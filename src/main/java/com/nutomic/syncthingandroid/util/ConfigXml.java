@@ -40,6 +40,8 @@ public class ConfigXml {
      */
     public static final String CONFIG_FILE = "config.xml";
 
+    private static final String INVALID_CONFIG_FILE = "config.xml.invalid";
+
     private File mConfigFile;
 
     private Document mConfig;
@@ -49,22 +51,37 @@ public class ConfigXml {
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
-            new SyncthingRunnable(context, context.getApplicationInfo().dataDir + "/" +
-                    SyncthingService.BINARY_NAME + " -generate='" + context.getFilesDir() + "'")
-                    .run();
+            generateKeysConfig(context);
         }
 
-        try {
-            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            mConfig = db.parse(mConfigFile);
-        } catch (SAXException | ParserConfigurationException | IOException e) {
-            throw new RuntimeException("Failed to open config file", e);
-        }
+        // This could cause an infinite loop, maybe we should add a counter, too.
+        do {
+            try {
+                DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                mConfig = db.parse(mConfigFile);
+            } catch (SAXException | ParserConfigurationException | IOException e) {
+                Log.w(TAG, "Failed to open config, moving to " + INVALID_CONFIG_FILE +
+                        " and creating blank config");
+                File dest = new File(mConfigFile.getParent(), INVALID_CONFIG_FILE);
+                if (dest.exists())
+                    dest.delete();
+                mConfigFile.renameTo(dest);
+                generateKeysConfig(context);
+                isFirstStart = true;
+                mConfigFile = getConfigFile(context);
+            }
+        } while (mConfig == null);
 
         if (isFirstStart) {
             changeDefaultFolder();
         }
         updateIfNeeded();
+    }
+
+    private void generateKeysConfig(Context context) {
+        new SyncthingRunnable(context, context.getApplicationInfo().dataDir + "/" +
+                SyncthingService.BINARY_NAME + " -generate='" + context.getFilesDir() + "'")
+                .run();
     }
 
     public static File getConfigFile(Context context) {
