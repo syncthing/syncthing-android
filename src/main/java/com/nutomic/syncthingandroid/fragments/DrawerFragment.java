@@ -48,6 +48,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
 
     private TextView mAnnounceServer;
 
+    private ListView mList;
+
     private Timer mTimer;
 
     private MainActivity mActivity;
@@ -88,6 +90,12 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initMenu();
+    }
+
     public void onDrawerClosed() {
         mTimer.cancel();
         mTimer = null;
@@ -98,27 +106,35 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.drawer_fragment, container, false);
-        mDeviceId = (TextView) view.findViewById(R.id.device_id);
-        mCpuUsage = (TextView) view.findViewById(R.id.cpu_usage);
-        mRamUsage = (TextView) view.findViewById(R.id.ram_usage);
-        mDownload = (TextView) view.findViewById(R.id.download);
-        mUpload = (TextView) view.findViewById(R.id.upload);
+        View view       = inflater.inflate(R.layout.drawer_fragment, container, false);
+        mDeviceId       = (TextView) view.findViewById(R.id.device_id);
+        mCpuUsage       = (TextView) view.findViewById(R.id.cpu_usage);
+        mRamUsage       = (TextView) view.findViewById(R.id.ram_usage);
+        mDownload       = (TextView) view.findViewById(R.id.download);
+        mUpload         = (TextView) view.findViewById(R.id.upload);
         mAnnounceServer = (TextView) view.findViewById(R.id.announce_server);
+        mList           = (ListView) view.findViewById(android.R.id.list);
 
-        ArrayList<Pair<Integer, Integer>> items = new ArrayList<>();
-        items.add(new Pair<>(R.drawable.ic_action_share, R.string.share_device_id));
-        items.add(new Pair<>(R.drawable.ic_menu_browser, R.string.web_gui_title));
-        items.add(new Pair<>(R.drawable.ic_action_settings, R.string.settings_title));
-        items.add(new Pair<>(R.drawable.ic_action_donate, R.string.donate));
-        if (!SyncthingService.alwaysRunInBackground(getActivity())) {
-            items.add(new Pair<>(R.drawable.ic_menu_close_clear_cancel, R.string.exit));
-        }
-        ListView list = (ListView) view.findViewById(android.R.id.list);
-        list.setAdapter(new MenuAdapter(getActivity(), items));
-        list.setOnItemClickListener(this);
+        initMenu();
+        mList.setOnItemClickListener(this);
 
         return view;
+    }
+
+    /**
+     * Repopulates menu items.
+     */
+    private void initMenu() {
+        MenuAdapter adapter =
+                new MenuAdapter(getActivity(), new ArrayList<Pair<Integer, Integer>>());
+        adapter.add(new Pair<>(R.drawable.ic_action_share, R.string.share_device_id));
+        adapter.add(new Pair<>(R.drawable.ic_menu_browser, R.string.web_gui_title));
+        adapter.add(new Pair<>(R.drawable.ic_action_settings, R.string.settings_title));
+        adapter.add(new Pair<>(R.drawable.ic_action_donate, R.string.donate));
+        if (!SyncthingService.alwaysRunInBackground(getActivity()))
+            adapter.add(new Pair<>(R.drawable.ic_menu_close_clear_cancel, R.string.exit));
+
+        mList.setAdapter(adapter);
     }
 
     @Override
@@ -197,18 +213,22 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 break;
             case 1:
                 startActivity(new Intent(mActivity, WebGuiActivity.class));
+                mActivity.closeDrawer();
                 break;
             case 2:
                 startActivity(new Intent(mActivity, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
+                mActivity.closeDrawer();
                 break;
             case 3:
                 startActivity(new Intent(
                         Intent.ACTION_VIEW, Uri.parse(getString(R.string.donate_url))));
+                mActivity.closeDrawer();
                 break;
             case 4:
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
                 mActivity.finish();
+                mActivity.closeDrawer();
                 break;
         }
     }

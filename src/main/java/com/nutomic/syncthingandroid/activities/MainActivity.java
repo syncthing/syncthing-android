@@ -10,7 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -193,7 +194,7 @@ public class MainActivity extends SyncthingActivity
                 .beginTransaction()
                 .replace(R.id.drawer, mDrawerFragment)
                 .commit();
-        mDrawerToggle = new Toggle(this, mDrawerLayout, R.drawable.ic_drawer);
+        mDrawerToggle = new Toggle(this, mDrawerLayout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -245,11 +246,7 @@ public class MainActivity extends SyncthingActivity
 
     @Override
      public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
 
@@ -257,8 +254,8 @@ public class MainActivity extends SyncthingActivity
      * Receives drawer opened and closed events.
      */
     public class Toggle extends ActionBarDrawerToggle {
-        public Toggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes) {
-            super(activity, drawerLayout, drawerImageRes, R.string.app_name, R.string.app_name);
+        public Toggle(Activity activity, DrawerLayout drawerLayout) {
+            super(activity, drawerLayout, R.string.app_name, R.string.app_name);
         }
 
         @Override
@@ -276,6 +273,13 @@ public class MainActivity extends SyncthingActivity
             mFolderFragment.setHasOptionsMenu(true);
             mDevicesFragment.setHasOptionsMenu(true);
         }
+    }
+
+    /**
+     * Closes the drawer. Use when navigating away from activity.
+     */
+    public void closeDrawer() {
+        mDrawerLayout.closeDrawer(Gravity.START);
     }
 
 }
