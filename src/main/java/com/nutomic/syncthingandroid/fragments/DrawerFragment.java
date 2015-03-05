@@ -226,6 +226,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 mActivity.closeDrawer();
                 break;
             case 4:
+                mActivity.getService().getApi().shutdown();
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
                 mActivity.finish();
                 mActivity.closeDrawer();
