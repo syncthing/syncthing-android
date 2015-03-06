@@ -31,6 +31,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -50,8 +51,6 @@ public class FolderPickerActivity extends SyncthingActivity
     private FileAdapter mFilesAdapter;
 
     private RootsAdapter mRootsAdapter;
-
-    private ArrayList<File> mRootDirectories = new ArrayList<>();
 
     /**
      * Location of null means that the list of roots is displayed.
@@ -74,20 +73,22 @@ public class FolderPickerActivity extends SyncthingActivity
         mListView.setAdapter(mFilesAdapter);
 
         // Populate roots.
+        ArrayList<File> roots = new ArrayList<>();
         if (android.os.Build.VERSION.SDK_INT >= 19) {
-            mRootDirectories.addAll(Arrays.asList(getExternalFilesDirs(null)));
+            roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
         }
-        mRootDirectories.add(Environment.getExternalStorageDirectory());
+        roots.add(Environment.getExternalStorageDirectory());
+        File storage = new File("/storage/");
+        if (storage.exists() && storage.isDirectory())
+            Collections.addAll(roots, storage.listFiles());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getBoolean("advanced_folder_picker", false)) {
-            mRootDirectories.add(new File("/"));
+            roots.add(new File("/"));
         }
 
-        for (File f : mRootDirectories) {
-            if (f == null)
-                continue;
-
-            mRootsAdapter.add(f);
+        for (File f : roots) {
+            if (f != null)
+                mRootsAdapter.add(f);
         }
 
         if (getIntent().hasExtra(EXTRA_INITIAL_DIRECTORY)) {
@@ -241,6 +242,14 @@ public class FolderPickerActivity extends SyncthingActivity
             title.setText(getItem(position).getAbsolutePath());
             return convertView;
         }
+
+        public boolean contains(File file) {
+            for (int i = 0; i < getCount(); i++) {
+                if (getItem(i).equals(file))
+                    return true;
+            }
+            return false;
+        }
     }
 
     /**
@@ -251,9 +260,9 @@ public class FolderPickerActivity extends SyncthingActivity
      */
     @Override
     public void onBackPressed() {
-        if (!mRootDirectories.contains(mLocation) && mLocation != null) {
+        if (!mRootsAdapter.contains(mLocation) && mLocation != null) {
             displayFolder(mLocation.getParentFile());
-        } else if (mRootDirectories.contains(mLocation) && mRootDirectories.size() > 1) {
+        } else if (mRootsAdapter.contains(mLocation) && mRootsAdapter.getCount() > 1) {
             displayRoot();
         } else {
             setResult(Activity.RESULT_CANCELED);
@@ -276,8 +285,8 @@ public class FolderPickerActivity extends SyncthingActivity
      */
     private void displayRoot() {
         mFilesAdapter.clear();
-        if (mRootDirectories.size() == 1) {
-            displayFolder(mRootDirectories.get(0));
+        if (mRootsAdapter.getCount() == 1) {
+            displayFolder(mRootsAdapter.getItem(0));
         } else {
             mListView.setAdapter(mRootsAdapter);
             mLocation = null;
