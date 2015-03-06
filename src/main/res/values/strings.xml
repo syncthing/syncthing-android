@@ -218,6 +218,8 @@ Please report any problems you encounter via Github.</string>
 
     <string name="advanced_folder_picker">Use advanced Folder Picker</string>
 
+    <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
+
     <string name="syncthing_options">Syncthing Options</string>
 
     <string name="device_name">Device Name</string>

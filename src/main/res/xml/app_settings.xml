@@ -19,6 +19,7 @@
     <CheckBoxPreference
         android:key="advanced_folder_picker"
         android:title="@string/advanced_folder_picker"
+        android:summary="@string/advanced_folder_picker_summary"
         android:defaultValue="false" />
 
     <PreferenceScreen
