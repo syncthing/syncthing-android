@@ -32,7 +32,7 @@
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -43,6 +43,7 @@
   <string name="ram_usage">Utilizzo RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Server Presenza Globale</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Cartella</string>
@@ -69,6 +70,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Vuoi veramente eliminare questa cartella?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">L\'ID della cartella dev\'essere un identificatore breve (64 caratteri o meno) costituito solamente da lettere, numeri, punti (.), trattini (-) e trattini bassi (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Il percorso della cartella non può essere vuoto</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -129,13 +131,17 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <string name="always_run_in_background_disabled">Syncthing si attiva solo quando viene avviato manualmente e si arresta utilizzando il pulsante del menu.</string>
   <string name="sync_only_charging">Sincr. solo in Ricarica</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
+  <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="syncthing_options">Opzioni di Syncthing</string>
+  <string name="device_name">Nome Dispositivo</string>
   <string name="listen_address">Indirizzi Protocollo Sincronizzazione</string>
   <string name="max_recv_kbps">Limite Velocità in Ingresso (KiB/s)</string>
   <string name="max_send_kbps">Limite Velocità in Uscita (KiB/s)</string>
   <string name="global_announce_enabled">Individuazione Globale</string>
   <string name="local_announce_enabled">Individuazione Locale</string>
   <string name="upnp_enabled">Abilita UPnP</string>
+  <string name="global_announce_server">Server Ricerca Globale</string>
+  <string name="usage_reporting">Statistiche Anonime Utilizzo</string>
   <string name="syncthing_gui">Interfaccia Grafica di Syncthing</string>
   <string name="gui_address">Indirizzi Interfaccia Grafica</string>
   <string name="gui_user">Utente Interfaccia Grafica</string>
@@ -161,6 +167,7 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <string name="create_fs_folder">Crea Nuova Cartella</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Seleziona Cartella</string>
+  <string name="create_folder_failed">Impossibile creare la cartella</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing è disabilitato</string>
@@ -199,5 +206,6 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inattivo</string>
+  <string name="state_scanning">Scansione in corso</string>
   <string name="state_syncing">Sincronizzazione</string>
 </resources>

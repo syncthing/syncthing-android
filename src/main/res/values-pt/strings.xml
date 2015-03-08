@@ -33,7 +33,7 @@
   <string name="download_title">Recepção</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">Utilização da RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
@@ -133,12 +134,15 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <string name="sync_only_wifi">Sincronizar apenas quando está em wifi</string>
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="syncthing_options">Opções do Syncthing</string>
+  <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
   <string name="max_send_kbps">Limite de velocidade de envio (KiB/s)</string>
   <string name="global_announce_enabled">Busca global</string>
   <string name="local_announce_enabled">Busca local</string>
   <string name="upnp_enabled">Activar UPnP</string>
+  <string name="global_announce_server">Servidor da busca global</string>
+  <string name="usage_reporting">Enviar relatórios anónimos de utilização</string>
   <string name="syncthing_gui">Interface gráfica do Syncthing</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>
   <string name="gui_user">Utilizador da autenticação na interface gráfica</string>

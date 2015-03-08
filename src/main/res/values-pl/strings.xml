@@ -33,7 +33,7 @@
   <string name="download_title">Pobieranie</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">Użycie RAMu</string>
   <!--Title for announce server status-->
   <string name="announce_server">Serwer ogłoszeniowy</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID folderu</string>

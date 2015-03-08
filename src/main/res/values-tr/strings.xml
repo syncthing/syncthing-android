@@ -33,7 +33,7 @@
   <string name="download_title">İndirme</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Yükleme</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">İndirme:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">RAM Kullanımı</string>
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>
@@ -141,6 +142,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="local_announce_enabled">Yerel Bulunabilirlik</string>
   <string name="upnp_enabled">UPnP Etkinleştir</string>
   <string name="global_announce_server">Küresel Bulunabilirlik Sunucusu</string>
+  <string name="usage_reporting">Anonim olarak Kullanım Raporlama</string>
   <string name="syncthing_gui">Syncthing Arayüzü</string>
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>

@@ -33,7 +33,7 @@
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">RAM Auslastung</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ankündigungsserver</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis ID</string>
@@ -109,9 +110,9 @@
 Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Web Benutzeroberfläche</string>
+  <string name="web_gui_title">Weboberfläche</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Warte auf Benutzeroberfläche</string>
+  <string name="web_gui_loading">Warte auf Weboberfläche</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Generiere Schlüssel. Dies kann eine Weile dauern.</string>
   <!--Title for dialog displayed on first start-->
@@ -131,17 +132,20 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
   <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
   <string name="syncthing_options">Syncthing Optionen</string>
+  <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
   <string name="max_recv_kbps">Eingehendes Datenratelimit (KiB/s)</string>
   <string name="max_send_kbps">Ausgehendes Datenratelimit (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
   <string name="upnp_enabled">UPnP aktivieren</string>
-  <string name="syncthing_gui">Syncthing Benutzeroberfläche</string>
-  <string name="gui_address">Adresse(n) für die Benutzeroberfläche</string>
-  <string name="gui_user">Nutzername für Zugang zur Benutzeroberfläche</string>
-  <string name="gui_password">Passwort für Zugang zur Benutzeroberfläche</string>
-  <string name="gui_https_enabled">HTTPS für Benutzeroberfläche benutzen</string>
+  <string name="global_announce_server">Globaler Auffindungsserver</string>
+  <string name="usage_reporting">Anonymer Nutzungsbericht</string>
+  <string name="syncthing_gui">Syncthing Weboberfläche</string>
+  <string name="gui_address">Adressen für Weboberfläche</string>
+  <string name="gui_user">Nutzername für Weboberfläche</string>
+  <string name="gui_password">Passwort für Weboberfläche</string>
+  <string name="gui_https_enabled">HTTPS für Weboberfläche benutzen</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->

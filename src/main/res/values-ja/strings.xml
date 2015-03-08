@@ -33,7 +33,7 @@
   <string name="download_title">ダウンロード</string>
   <!--Title for current upload rate-->
   <string name="upload_title">アップロード</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">ダウンロード:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">RAM 使用</string>
   <!--Title for announce server status-->
   <string name="announce_server">アナウンスサーバー</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">フォルダー ID</string>
@@ -133,12 +134,15 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="syncthing_options">同期オプション</string>
+  <string name="device_name">デバイス名</string>
   <string name="listen_address">同期プロトコル リスンアドレス</string>
   <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
   <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
-  <string name="global_announce_enabled">グローバルディスカバリー</string>
-  <string name="local_announce_enabled">ローカルディスカバリー</string>
+  <string name="global_announce_enabled">グローバル探索</string>
+  <string name="local_announce_enabled">ローカル探索</string>
   <string name="upnp_enabled">UPnP を有効にする</string>
+  <string name="global_announce_server">グローバル探索サーバー</string>
+  <string name="usage_reporting">匿名使用状況レポート</string>
   <string name="syncthing_gui">同期中 GUI</string>
   <string name="gui_address">GUI リスンアドレス</string>
   <string name="gui_user">GUI 認証ユーザー</string>

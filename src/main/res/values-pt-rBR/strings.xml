@@ -33,7 +33,7 @@
   <string name="download_title">Recepção</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -44,6 +44,7 @@
   <string name="ram_usage">Uso da memória</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>

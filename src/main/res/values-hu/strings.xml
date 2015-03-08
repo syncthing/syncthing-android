@@ -21,7 +21,7 @@
   <string name="download_title">Letöltés</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Feltöltés</string>
-  <!--LocalDeviceInfoFragment-->
+  <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
@@ -29,6 +29,7 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
+  <!--Menu item to donate-->
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <!--Setting title-->
