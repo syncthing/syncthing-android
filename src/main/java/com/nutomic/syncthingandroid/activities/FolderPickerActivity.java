@@ -74,7 +74,7 @@ public class FolderPickerActivity extends SyncthingActivity
 
         // Populate roots.
         ArrayList<File> roots = new ArrayList<>();
-        if (android.os.Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
         }
         roots.add(Environment.getExternalStorageDirectory());
@@ -95,6 +95,11 @@ public class FolderPickerActivity extends SyncthingActivity
             displayFolder(new File(getIntent().getStringExtra(EXTRA_INITIAL_DIRECTORY)));
         } else {
             displayRoot();
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
+                    .show();
         }
     }
 

@@ -69,7 +69,7 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
                 latch.countDown();
             }
         });
-        latch.await(5, TimeUnit.SECONDS);
+        latch.await(1, TimeUnit.SECONDS);
         assertNotNull(getService().getApi());
         assertNotNull(getService().getWebGuiUrl());
     }
