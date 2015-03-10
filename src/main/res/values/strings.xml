@@ -203,6 +203,8 @@ Please report any problems you encounter via Github.</string>
     <!-- Activity title -->
     <string name="settings_title">Settings</string>
 
+    <string name="category_syncthing_android">Syncthing-Android</string>
+
     <!-- Preference title -->
     <string name="always_run_in_background">Always run in background</string>
 
@@ -219,6 +221,8 @@ Please report any problems you encounter via Github.</string>
     <string name="advanced_folder_picker">Use advanced Folder Picker</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
+
+    <string name="category_syncthing">Syncthing</string>
 
     <string name="syncthing_options">Syncthing Options</string>
 
@@ -265,6 +269,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title for the preference to set STTRACE parameters -->
     <string name="sttrace_title">Debug Options</string>
+
+    <string name="category_about">About</string>
 
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>

@@ -1,126 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:key="always_run_in_background"
-        android:title="@string/always_run_in_background"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="sync_only_charging"
-        android:title="@string/sync_only_charging"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="sync_only_wifi"
-        android:title="@string/sync_only_wifi"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="advanced_folder_picker"
-        android:title="@string/advanced_folder_picker"
-        android:summary="@string/advanced_folder_picker_summary"
-        android:defaultValue="false" />
-
-    <PreferenceScreen
-        android:key="syncthing_options"
-        android:title="@string/syncthing_options"
-        android:persistent="false">
-
-        <EditTextPreference
-            android:key="DeviceName"
-            android:title="@string/device_name" />
-
-        <EditTextPreference
-            android:key="ListenAddress"
-            android:title="@string/listen_address" />
-
-        <EditTextPreference
-            android:key="MaxRecvKbps"
-            android:title="@string/max_recv_kbps"
-            android:numeric="integer" />
-
-        <EditTextPreference
-            android:key="MaxSendKbps"
-            android:title="@string/max_send_kbps"
-            android:numeric="integer" />
+    <PreferenceCategory
+        android:title="@string/category_syncthing_android">
 
         <CheckBoxPreference
-            android:key="GlobalAnnEnabled"
-            android:title="@string/global_announce_enabled" />
+            android:key="always_run_in_background"
+            android:title="@string/always_run_in_background"
+            android:defaultValue="false" />
 
         <CheckBoxPreference
-            android:key="LocalAnnEnabled"
-            android:title="@string/local_announce_enabled" />
+            android:key="sync_only_charging"
+            android:title="@string/sync_only_charging"
+            android:defaultValue="false" />
 
         <CheckBoxPreference
-            android:key="UPnPEnabled"
-            android:title="@string/upnp_enabled" />
-
-        <EditTextPreference
-            android:key="GlobalAnnServers"
-            android:title="@string/global_announce_server" />
+            android:key="sync_only_wifi"
+            android:title="@string/sync_only_wifi"
+            android:defaultValue="false" />
 
         <CheckBoxPreference
-            android:key="URAccepted"
-            android:title="@string/usage_reporting" />
+            android:key="advanced_folder_picker"
+            android:title="@string/advanced_folder_picker"
+            android:summary="@string/advanced_folder_picker_summary"
+            android:defaultValue="false" />
 
-    </PreferenceScreen>
+    </PreferenceCategory>
 
-    <PreferenceScreen
-        android:key="syncthing_gui"
-        android:title="@string/syncthing_gui"
-        android:persistent="false">
+    <PreferenceCategory
+        android:title="@string/category_syncthing">
+
+        <PreferenceScreen
+            android:key="syncthing_options"
+            android:title="@string/syncthing_options"
+            android:persistent="false">
+
+            <EditTextPreference
+                android:key="DeviceName"
+                android:title="@string/device_name" />
+
+            <EditTextPreference
+                android:key="ListenAddress"
+                android:title="@string/listen_address" />
+
+            <EditTextPreference
+                android:key="MaxRecvKbps"
+                android:title="@string/max_recv_kbps"
+                android:numeric="integer" />
+
+            <EditTextPreference
+                android:key="MaxSendKbps"
+                android:title="@string/max_send_kbps"
+                android:numeric="integer" />
+
+            <CheckBoxPreference
+                android:key="GlobalAnnEnabled"
+                android:title="@string/global_announce_enabled" />
+
+            <CheckBoxPreference
+                android:key="LocalAnnEnabled"
+                android:title="@string/local_announce_enabled" />
+
+            <CheckBoxPreference
+                android:key="UPnPEnabled"
+                android:title="@string/upnp_enabled" />
+
+            <EditTextPreference
+                android:key="GlobalAnnServers"
+                android:title="@string/global_announce_server" />
+
+            <CheckBoxPreference
+                android:key="URAccepted"
+                android:title="@string/usage_reporting" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="syncthing_gui"
+            android:title="@string/syncthing_gui"
+            android:persistent="false">
+
+            <EditTextPreference
+                android:key="Address"
+                android:title="@string/gui_address" />
+
+            <EditTextPreference
+                android:key="User"
+                android:title="@string/gui_user" />
+
+            <EditTextPreference
+                android:key="Password"
+                android:title="@string/gui_password"
+                android:inputType="textPassword" />
+
+            <CheckBoxPreference
+                android:key="UseTLS"
+                android:title="@string/gui_https_enabled"
+                android:enabled="false" />
+
+        </PreferenceScreen>
+
+        <Preference
+            android:key="export_config"
+            android:title="@string/export_config" />
+
+        <Preference
+            android:key="import_config"
+            android:title="@string/import_config" />
 
         <EditTextPreference
-            android:key="Address"
-            android:title="@string/gui_address" />
+            android:key="sttrace"
+            android:title="@string/sttrace_title"
+            android:singleLine="true" />
 
-        <EditTextPreference
-            android:key="User"
-            android:title="@string/gui_user" />
+    </PreferenceCategory>
 
-        <EditTextPreference
-            android:key="Password"
-            android:title="@string/gui_password"
-            android:inputType="textPassword" />
+    <PreferenceCategory
+        android:title="@string/category_about">
 
-        <CheckBoxPreference
-            android:key="UseTLS"
-            android:title="@string/gui_https_enabled"
-            android:enabled="false" />
+        <Preference
+            android:title="@string/report_issue_title"
+            android:summary="@string/report_issue_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/issue_tracker_url" />
+        </Preference>
 
-    </PreferenceScreen>
+        <Preference
+            android:key="syncthing_version"
+            android:title="@string/syncthing_version_title"
+            style="?android:preferenceInformationStyle" />
 
-    <Preference
-        android:key="export_config"
-        android:title="@string/export_config" />
+        <Preference
+            android:key="app_version"
+            android:title="@string/app_version_title"
+            style="?android:preferenceInformationStyle" />
 
-    <Preference
-        android:key="import_config"
-        android:title="@string/import_config" />
-
-    <EditTextPreference
-        android:key="sttrace"
-        android:title="@string/sttrace_title"
-        android:singleLine="true" />
-
-    <Preference
-        android:title="@string/report_issue_title"
-        android:summary="@string/report_issue_summary">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="@string/issue_tracker_url" />
-    </Preference>
-
-    <Preference
-        android:key="syncthing_version"
-        android:title="@string/syncthing_version_title"
-        style="?android:preferenceInformationStyle" />
-
-    <Preference
-        android:key="app_version"
-        android:title="@string/app_version_title"
-        style="?android:preferenceInformationStyle" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
