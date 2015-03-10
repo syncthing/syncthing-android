@@ -92,6 +92,14 @@
 
     </PreferenceScreen>
 
+    <Preference
+        android:key="export_config"
+        android:title="@string/export_config" />
+
+    <Preference
+        android:key="import_config"
+        android:title="@string/import_config" />
+
     <EditTextPreference
         android:key="sttrace"
         android:title="@string/sttrace_title"

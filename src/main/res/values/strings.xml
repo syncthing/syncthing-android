@@ -250,6 +250,19 @@ Please report any problems you encounter via Github.</string>
 
     <string name="gui_https_enabled">Use HTTPS for GUI</string>
 
+    <string name="export_config">Export Configuration</string>
+
+    <!-- Toast shown after config was successfully exported -->
+    <string name="config_export_successful">Config was exported to %1$s</string>
+
+    <string name="import_config">Import Configuration</string>
+
+    <!-- Toast shown after config was successfully imported -->
+    <string name="config_imported_successful">Config was imported</string>
+
+    <!-- Toast shown after config was successfully imported -->
+    <string name="config_import_failed">Config import failed, make sure files are in %1$s</string>
+
     <!-- Title for the preference to set STTRACE parameters -->
     <string name="sttrace_title">Debug Options</string>
 

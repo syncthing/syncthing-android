@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -25,8 +26,15 @@ import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.IOError;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.nio.channels.FileChannel;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -56,7 +64,12 @@ public class SyncthingService extends Service {
     /**
      * Name of the private key file in the data directory.
      */
-    private static final String PRIVATE_KEY_FILE = "key.pem";
+    public static final String PRIVATE_KEY_FILE = "key.pem";
+
+    /**
+     * Directory where config is exported to and imported from.
+     */
+    public static final File EXPORT_PATH = Environment.getExternalStorageDirectory();
 
     /**
      * Path to the native, integrated syncthing binary, relative to the data folder
@@ -431,5 +444,61 @@ public class SyncthingService extends Service {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         return sp.getBoolean(PREF_ALWAYS_RUN_IN_BACKGROUND, false);
     }
+
+    /**
+     * Exports the local config and keys to {@link #EXPORT_PATH}.
+     */
+    public void exportConfig() {
+        copyFile(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
+                new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
+        copyFile(new File(getFilesDir(), PRIVATE_KEY_FILE),
+                new File(EXPORT_PATH, PRIVATE_KEY_FILE));
+        copyFile(new File(getFilesDir(), PUBLIC_KEY_FILE),
+                new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+    }
+
+    /**
+     * Imports config and keys from {@link #EXPORT_PATH}.
+     *
+     * @return True if the import was successful, false otherwise (eg if files aren't found).
+     */
+    public boolean importConfig() {
+        File config = new File(EXPORT_PATH, ConfigXml.CONFIG_FILE);
+        File privateKey = new File(EXPORT_PATH, PRIVATE_KEY_FILE);
+        File publicKey = new File(EXPORT_PATH, PUBLIC_KEY_FILE);
+        if (!config.exists() || !privateKey.exists() || !publicKey.exists())
+            return false;
+
+        copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
+        copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
+        copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+
+        startService(new Intent(this, SyncthingService.class)
+                .setAction(SyncthingService.ACTION_RESTART));
+        return true;
+    }
+
+    /**
+     * Copies files between different storage devices.
+     */
+    private void copyFile(File source, File dest) {
+        FileChannel is = null;
+        FileChannel os = null;
+        try {
+            is = new FileInputStream(source).getChannel();
+            os = new FileOutputStream(dest).getChannel();
+            is.transferTo(0, is.size(), os);
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to copy file", e);
+        } finally {
+            try {
+                is.close();
+                os.close();
+            } catch (IOException e) {
+                Log.w(TAG, "Failed to close stream", e);
+            }
+        }
+    }
+
 
 }

@@ -7,6 +7,7 @@ import android.test.ServiceTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 import android.util.Pair;
 
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
@@ -14,10 +15,12 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.test.Util;
+import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -66,7 +69,7 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
                 latch.countDown();
             }
         });
-        latch.await(1, TimeUnit.SECONDS);
+        latch.await(5, TimeUnit.SECONDS);
         assertNotNull(getService().getApi());
         assertNotNull(getService().getWebGuiUrl());
     }
@@ -123,6 +126,35 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
             return mLastState;
         }
 
+    }
+
+    public void testImportExportConfig() {
+        setContext(mContext);
+        SyncthingServiceBinder binder = (SyncthingServiceBinder)
+                bindService(new Intent(getContext(), SyncthingService.class));
+        SyncthingService service = binder.getService();
+        File config    = new File(mContext.getFilesDir(), ConfigXml.CONFIG_FILE);
+        File privateKey = new File(mContext.getFilesDir(), SyncthingService.PRIVATE_KEY_FILE);
+        File publicKey = new File(mContext.getFilesDir(), SyncthingService.PUBLIC_KEY_FILE);
+
+        try {
+            config.createNewFile();
+            privateKey.createNewFile();
+            publicKey.createNewFile();
+        } catch (IOException e) {
+            fail();
+        }
+
+        service.exportConfig();
+
+        config.delete();
+        privateKey.delete();
+        publicKey.delete();
+
+        service.importConfig();
+        assertTrue(config.exists());
+        assertTrue(privateKey.exists());
+        assertTrue(publicKey.exists());
     }
 
 }

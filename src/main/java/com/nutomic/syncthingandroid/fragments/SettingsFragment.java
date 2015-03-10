@@ -12,6 +12,7 @@ import android.support.v4.preference.PreferenceFragment;
 import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
@@ -20,17 +21,17 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 public class SettingsFragment extends PreferenceFragment
         implements SyncthingActivity.OnServiceConnectedListener,
-        SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener {
+        SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener,
+        Preference.OnPreferenceClickListener {
 
     private static final String TAG = "SettingsFragment";
 
     private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
-
     private static final String SYNCTHING_GUI_KEY = "syncthing_gui";
-
     private static final String DEVICE_NAME_KEY = "DeviceName";
-
     private static final String USAGE_REPORT_ACCEPTED = "URAccepted";
+    private static final String EXPORT_CONFIG = "export_config";
+    private static final String IMPORT_CONFIG = "import_config";
 
     private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
 
@@ -134,6 +135,8 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
+        screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
+        screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
         // Force summary update and wifi/charging preferences enable/disable.
         onPreferenceChange(mAlwaysRunInBackground, mAlwaysRunInBackground.isChecked());
         Preference sttrace = findPreference("sttrace");
@@ -224,4 +227,27 @@ public class SettingsFragment extends PreferenceFragment
 
         return true;
     }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        switch (preference.getKey()) {
+            case EXPORT_CONFIG:
+                mSyncthingService.exportConfig();
+                Toast.makeText(getActivity(), getString(R.string.config_export_successful,
+                        SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                return true;
+            case IMPORT_CONFIG:
+                if (mSyncthingService.importConfig()) {
+                    Toast.makeText(getActivity(), getString(R.string.config_imported_successful),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.config_import_failed,
+                            SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                }
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }
