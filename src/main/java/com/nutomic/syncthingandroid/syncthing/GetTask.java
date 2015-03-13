@@ -12,6 +12,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
         if (params.length == 5) {
             LinkedList<NameValuePair> urlParams = new LinkedList<>();
             urlParams.add(new BasicNameValuePair(params[3], params[4]));
-            fullUri += "?" + URLEncodedUtils.format(urlParams, "utf-8");
+            fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
         }
         HttpGet get = new HttpGet(fullUri);
         get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
