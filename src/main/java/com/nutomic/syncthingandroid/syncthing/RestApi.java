@@ -282,7 +282,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public String getValue(String name, String key) {
         // Happens if this functions is called before class is fully initialized.
         if (mConfig == null)
-            return null;
+            return "";
 
         try {
             Object value = mConfig.getJSONObject(name).get(key);
@@ -291,7 +291,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     : value.toString();
         } catch (JSONException e) {
             Log.w(TAG, "Failed to get value for " + key, e);
-            return null;
+            return "";
         }
     }
 
@@ -416,7 +416,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             return ret;
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read devices", e);
-            return null;
+            return new ArrayList<>();
         }
     }
 
