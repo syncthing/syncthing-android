@@ -142,6 +142,9 @@ Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <string name="gui_user">Usuario de Autenticación GUI</string>
   <string name="gui_password">Contraseña de Autenticación GUI</string>
   <string name="gui_https_enabled">Usar HHTPS para la GUI</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar Problema</string>
@@ -154,6 +157,7 @@ Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Seleccionador de Carpeta</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">El Directorio esta Vacío</string>
   <!--Menu item to create folder on the file system-->
@@ -182,21 +186,7 @@ Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">El ID de Dispositivo se copió al portapapéles</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
-  <string-array name="file_size_units">
-    <item>B</item>
-    <item>KB</item>
-    <item>MB</item>
-    <item>GB</item>
-    <item>TB</item>
-  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kb/s</item>
-    <item>Mb/s</item>
-    <item>Gb/s</item>
-    <item>Tb/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_scanning">Escaneado</string>
   <string name="state_cleaning">Limpiando</string>

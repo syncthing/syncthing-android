@@ -45,6 +45,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serveur d\'annonce</string>
   <!--Menu item to donate-->
+  <string name="donate">Faire un don</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID du dossier</string>
@@ -133,6 +134,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="sync_only_charging">Synchro uniquement sur chargeur</string>
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
+  <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
   <string name="syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de machine</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
@@ -148,6 +150,14 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
   <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
   <string name="gui_https_enabled">Utiliser HTTPS pour l\'interface WEB</string>
+  <string name="export_config">Exporter la configuration</string>
+  <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">La configuration a été exportée dans %1$s</string>
+  <string name="import_config">Importer la configuration</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">La configuration a été importée</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Echec de l\'import de la configuration, assurez-vous que les fichiers sont dans %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Options de débuggage</string>
   <!--Settings item that opens issue tracker-->
@@ -162,6 +172,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Sélection du dossier</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">Le dossier est vide</string>
   <!--Menu item to create folder on the file system-->
@@ -199,11 +210,11 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <string-array name="transfer_rate_units">
-    <item>o/s</item>
-    <item>Ko/s</item>
-    <item>Mo/s</item>
-    <item>Go/s</item>
-    <item>To/s</item>
+    <item>bits/s</item>
+    <item>Kbits/s</item>
+    <item>Mbits/s</item>
+    <item>Gbits/s</item>
+    <item>Tbits/s</item>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">En veille</string>

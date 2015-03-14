@@ -145,6 +145,9 @@
   <string name="gui_user">GUI 認證使用者名稱</string>
   <string name="gui_password">GUI 認證密碼</string>
   <string name="gui_https_enabled">為 GUI 使用 HTTPS</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">除錯選項</string>
   <!--Settings item that opens issue tracker-->
@@ -159,6 +162,7 @@
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">資料夾選擇器</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">資料夾為空</string>
   <!--Menu item to create folder on the file system-->
@@ -187,21 +191,7 @@
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">裝置識別碼已複製至剪貼版</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
-  <string-array name="file_size_units">
-    <item>B</item>
-    <item>KB</item>
-    <item>MB</item>
-    <item>GB</item>
-    <item>TB</item>
-  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kb/s</item>
-    <item>Mb/s</item>
-    <item>Gb/s</item>
-    <item>Tb/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">閒置</string>
   <string name="state_scanning">正在掃描</string>

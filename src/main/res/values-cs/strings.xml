@@ -6,9 +6,9 @@
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">ID přístroje sdílení</string>
+  <string name="share_device_id">Sdílet ID přístroje</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Poslat ID přístroje na</string>
+  <string name="send_device_id_to">Poslat ID přístroje přes</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Čeká se na API</string>
   <!--FoldersFragment-->
@@ -26,32 +26,33 @@
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Aktuální</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Synchronizuji (%1$d%%)</string>
+  <string name="device_syncing">Synchronizuje se (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Odpojen</string>
   <!--Title for current download rate-->
-  <string name="download_title">Download</string>
+  <string name="download_title">Rychlost stahování</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Upload</string>
+  <string name="upload_title">Rychlost odesílání</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Download:\u0020</string>
+  <string name="download_title_colon">Rychlost stahování:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Upload:\u0020</string>
+  <string name="upload_title_colon">Rychlost odesílání:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Využití CPU</string>
   <!--Title for current RAM usage-->
   <string name="ram_usage">Využití RAM</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Ohlašovací Server</string>
+  <string name="announce_server">Globální oznamování</string>
   <!--Menu item to donate-->
+  <string name="donate">Přispět</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresáře</string>
   <!--Setting title-->
   <string name="directory">Adresář</string>
   <!--Setting title-->
-  <string name="rescan_interval">Interval opakování skenu</string>
+  <string name="rescan_interval">Interval opakování skenování</string>
   <!--Setting title-->
   <string name="folder_master">Master adresář</string>
   <!--Setting title-->
@@ -59,15 +60,15 @@
   <!--Setting title-->
   <string name="file_versioning">Verze souborů</string>
   <!--Setting title-->
-  <string name="keep_versions">Udržovat verze</string>
+  <string name="keep_versions">Ponechat verze</string>
   <!--Setting title-->
   <string name="delete_folder">Smazat adresář</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Vytvořit adresář</string>
+  <string name="create_folder">Přidat adresář</string>
   <!--Title for FolderSettingsFragment in edit mode-->
   <string name="edit_folder">Upravit adresář</string>
   <!--Menu item to confirm folder creation-->
-  <string name="create">Vytvořit</string>
+  <string name="create">Přidat</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Opravdu chcete smazat tento adresář?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
@@ -110,9 +111,9 @@
 Nainstalujte prosím čtečku nebo vložte ID přístroje ručně.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Webové grafické rozhraní</string>
+  <string name="web_gui_title">Syncthing GUI</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Čeká se na grafické rozhraní</string>
+  <string name="web_gui_loading">Čeká se na Syncthing GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Jsou vytvářeny klíče. Chvíli strpení.</string>
   <!--Title for dialog displayed on first start-->
@@ -120,7 +121,7 @@ Nainstalujte prosím čtečku nebo vložte ID přístroje ručně.</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Vítejte do programu Syncthing pro Android!\n\n\
 Tato aplikace je momentálně v nestabilní alpha verzi. Může docházet k chybám, problémům s výkonem nebo ztrátě dat.\n\n\
-Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
+Hlašte prosím jakékoliv problémy, na které narazíte, přes Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
@@ -133,6 +134,7 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
+  <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
   <string name="device_name">Jméno přístroje</string>
   <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
@@ -142,12 +144,20 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="local_announce_enabled">Místní oznamování</string>
   <string name="upnp_enabled">Povolit UPnP</string>
   <string name="global_announce_server">Server globálního oznamování</string>
-  <string name="usage_reporting">Zasílání anonymních dat o využití</string>
+  <string name="usage_reporting">Anonymní hlášení o používání</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adresy naslouchání GUI</string>
   <string name="gui_user">Přihlašovací jméno pro GUI</string>
   <string name="gui_password">Přihlašovací heslo pro GUI</string>
   <string name="gui_https_enabled">Použít HTTPS pro GUI</string>
+  <string name="export_config">Zálohovat nastavení</string>
+  <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">Nastavení bylo zálohováno do %1$s</string>
+  <string name="import_config">Nahrát nastavení</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">Nastavení bylo nahráno</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Nahrání nastavení selhalo, ujistěte se, že soubory jsou v %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Možnosti ladění</string>
   <!--Settings item that opens issue tracker-->
@@ -156,19 +166,20 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <string name="report_issue_summary">Otevřít hlášení chyb Syncthing pro Android</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Syncthing verze</string>
+  <string name="syncthing_version_title">Verze Syncthing</string>
   <!--Title of the preference showing this app's version name-->
   <string name="app_version_title">Verze Syncthing pro Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Výběr adresáře</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">Adresář je prázdný</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Vytvořit nový adresář</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Vybrat adresář</string>
-  <string name="create_folder_failed">Selhalo vytvoření adresáře</string>
+  <string name="create_folder_failed">Vytvoření adresáře selhalo</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
@@ -184,7 +195,7 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Tapnout zde pro restart aplikace syncthing</string>
+  <string name="restart_notification_text">Tapnout sem pro restart aplikace Syncthing</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Restartovat později</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -192,22 +203,22 @@ Hlašte prosím jakékoliv problémy na které narazíte přes Github.</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
-    <item>KB</item>
-    <item>MB</item>
-    <item>GB</item>
-    <item>TB</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <string-array name="transfer_rate_units">
     <item>b/s</item>
-    <item>Kb/s</item>
-    <item>Mb/s</item>
-    <item>Gb/s</item>
-    <item>Tb/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
   </string-array>
   <!--Possible folder states-->
-  <string name="state_idle">Nečinný</string>
-  <string name="state_scanning">Probíhá sken</string>
-  <string name="state_cleaning">Probíhá čištění</string>
-  <string name="state_syncing">Probíhá synchronizace</string>
+  <string name="state_idle">Aktuální</string>
+  <string name="state_scanning">Skenování</string>
+  <string name="state_cleaning">Čištění</string>
+  <string name="state_syncing">Synchronizuje se</string>
 </resources>

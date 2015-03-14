@@ -127,6 +127,9 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <string name="upnp_enabled">Aktiver UPnP</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
   <string name="gui_https_enabled">Bruk HTTPS til GUI</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Rapporter Problem</string>
@@ -139,6 +142,7 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Mappe-velger</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">Katalog er Tom</string>
   <!--Menu item to create folder on the file system-->

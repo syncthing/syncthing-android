@@ -75,6 +75,9 @@
   <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Синхронизация только во время зарядки</string>
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
@@ -83,6 +86,7 @@
   <!--Title of the preference showing this app's version name-->
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->

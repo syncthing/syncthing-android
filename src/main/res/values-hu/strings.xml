@@ -86,6 +86,9 @@
   <string name="upnp_enabled">UPnP engedélyezése</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_https_enabled">HTTPS használata a GUI-hoz</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
@@ -94,6 +97,7 @@
   <!--Title of the preference showing this app's version name-->
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->

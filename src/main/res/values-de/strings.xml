@@ -45,6 +45,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Ankündigungsserver</string>
   <!--Menu item to donate-->
+  <string name="donate">Spenden</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis ID</string>
@@ -131,6 +132,7 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
   <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
+  <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="syncthing_options">Syncthing Optionen</string>
   <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
@@ -146,6 +148,9 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="gui_user">Nutzername für Weboberfläche</string>
   <string name="gui_password">Passwort für Weboberfläche</string>
   <string name="gui_https_enabled">HTTPS für Weboberfläche benutzen</string>
+  <!--Toast shown after config was successfully exported-->
+  <!--Toast shown after config was successfully imported-->
+  <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Settings item that opens issue tracker-->
@@ -160,6 +165,7 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Verzeichnisauswahl</string>
+  <!--Toast shown on devices with kitkat or higher-->
   <!--ListView empty text-->
   <string name="directory_empty">Ordner ist leer</string>
   <!--Menu item to create folder on the file system-->
@@ -188,21 +194,7 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Geräte ID in die Zwischenablage kopiert</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
-  <string-array name="file_size_units">
-    <item>B</item>
-    <item>KB</item>
-    <item>MB</item>
-    <item>GB</item>
-    <item>TB</item>
-  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kb/s</item>
-    <item>Mb/s</item>
-    <item>Gb/s</item>
-    <item>Tb/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Untätig</string>
   <string name="state_scanning">Suchen</string>
