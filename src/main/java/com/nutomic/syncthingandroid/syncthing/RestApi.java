@@ -66,7 +66,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String Addresses;
         public String Name;
         public String DeviceID;
-        public boolean Compression;
+        public String Compression;
         public boolean Introducer;
     }
 
@@ -407,7 +407,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
                 n.Name = json.getString("Name");
                 n.DeviceID = json.getString("DeviceID");
-                n.Compression = json.getBoolean("Compression");
+                n.Compression = json.getString("Compression");
                 n.Introducer = json.getBoolean("Introducer");
                 if (includeLocal || !mLocalDeviceId.equals(n.DeviceID)) {
                     ret.add(n);

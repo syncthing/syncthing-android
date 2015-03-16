@@ -146,6 +146,13 @@
     <!-- Setting title -->
     <string name="compression">Compression</string>
 
+    <!-- Strings representing compression options -->
+    <string-array name="compress_entries">
+        <item>Never</item>
+        <item>Metadata</item>
+        <item>Always</item>
+    </string-array>
+
     <!-- Setting title -->
     <string name="introducer">Introducer</string>
 

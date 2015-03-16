@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
 import android.view.Menu;
@@ -47,7 +48,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
 
     private EditTextPreference mAddresses;
 
-    private CheckBoxPreference mCompression;
+    private ListPreference mCompression;
 
     private CheckBoxPreference mIntroducer;
 
@@ -78,7 +79,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         mName.setOnPreferenceChangeListener(this);
         mAddresses = (EditTextPreference) findPreference("addresses");
         mAddresses.setOnPreferenceChangeListener(this);
-        mCompression = (CheckBoxPreference) findPreference("compression");
+        mCompression = (ListPreference) findPreference("compression");
         mCompression.setOnPreferenceChangeListener(this);
         mIntroducer = (CheckBoxPreference) findPreference("introducer");
         mIntroducer.setOnPreferenceChangeListener(this);
@@ -97,7 +98,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                 mDevice.Name = "";
                 mDevice.DeviceID = "";
                 mDevice.Addresses = "dynamic";
-                mDevice.Compression = true;
+                mDevice.Compression = "always";
                 ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
             }
         }
@@ -148,7 +149,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         mName.setSummary(mDevice.Name);
         mAddresses.setText(mDevice.Addresses);
         mAddresses.setSummary(mDevice.Addresses);
-        mCompression.setChecked(mDevice.Compression);
+        mCompression.setValue(mDevice.Compression);
+        mCompression.setSummary(mDevice.Compression);
     }
 
     @Override
@@ -209,7 +211,6 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             EditTextPreference pref = (EditTextPreference) preference;
             pref.setSummary((String) o);
         }
-
         if (preference.equals(mDeviceId)) {
             mDevice.DeviceID = (String) o;
             deviceUpdated();
@@ -223,7 +224,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             deviceUpdated();
             return true;
         } else if (preference.equals(mCompression)) {
-            mDevice.Compression = (Boolean) o;
+            mDevice.Compression = (String) o;
             deviceUpdated();
             return true;
         } else if (preference.equals(mIntroducer)) {

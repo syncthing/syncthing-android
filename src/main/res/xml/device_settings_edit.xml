@@ -14,8 +14,10 @@
         android:key="addresses"
         android:title="@string/addresses" />
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="compression"
+        android:entries="@array/compress_entries"
+        android:entryValues="@array/compress_values"
         android:title="@string/compression" />
 
     <CheckBoxPreference
