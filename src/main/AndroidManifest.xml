@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nutomic.syncthingandroid"
-    android:versionCode="57"
-    android:versionName="0.5.20" >
+    android:versionCode="58"
+    android:versionName="0.5.21" >
 
     <uses-sdk
         android:minSdkVersion="8"
