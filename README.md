@@ -48,4 +48,4 @@ The syncthing backend used for this android application provides a web interface
 
 # License
 
-All code is licensed under the [MIT License](https://github.com/Nutomic/syncthing-android/blob/master/LICENSE).
+The project is licensed under the [MPLv2](LICENSE).
