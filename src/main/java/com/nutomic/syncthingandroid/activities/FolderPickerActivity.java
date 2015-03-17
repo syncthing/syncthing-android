@@ -179,6 +179,10 @@ public class FolderPickerActivity extends SyncthingActivity
         mLocation = folder;
         mFilesAdapter.clear();
         File[] contents = mLocation.listFiles();
+        // In case we don't have read access to the folder, just display nothing.
+        if (contents == null)
+            contents = new File[]{};
+
         Arrays.sort(contents, new Comparator<File>() {
             public int compare(File f1, File f2) {
                 if (f1.isDirectory() && f2.isFile())
