@@ -182,12 +182,11 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         });
         mCpuUsage.setText(new DecimalFormat("0.00").format(info.cpuPercent) + "%");
         mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
-        if (info.extAnnounceConnected == info.extAnnounceTotal) {
-            mAnnounceServer.setText(android.R.string.ok);
+        mAnnounceServer.setText(Integer.toString(info.extAnnounceConnected) + "/" +
+                Integer.toString(info.extAnnounceTotal));
+        if (info.extAnnounceConnected > 0) {
             mAnnounceServer.setTextColor(getResources().getColor(R.color.text_green));
         } else {
-            mAnnounceServer.setText(Integer.toString(info.extAnnounceConnected) + "/" +
-                    Integer.toString(info.extAnnounceTotal));
             mAnnounceServer.setTextColor(getResources().getColor(R.color.text_red));
         }
     }
