@@ -125,6 +125,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">常にバックグラウンドで実行</string>
   <!--Preference summary in case it is enabled-->
@@ -135,6 +136,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">同期オプション</string>
   <string name="device_name">デバイス名</string>
   <string name="listen_address">同期プロトコル リスンアドレス</string>
@@ -160,6 +162,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="config_import_failed">設定のインポートに失敗しました。%1$s にファイルがあるか確認してください</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">デバッグオプション</string>
+  <string name="category_about">アプリについて</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">問題を報告</string>
   <!--Summary for the issue tracker settings item-->
@@ -173,6 +176,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <!--Activity title-->
   <string name="folder_picker_title">フォルダー選択</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">警告: お使いの Android のバージョンは外部ストレージデバイスに同期することができません</string>
   <!--ListView empty text-->
   <string name="directory_empty">ディレクトリは空です</string>
   <!--Menu item to create folder on the file system-->

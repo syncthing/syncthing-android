@@ -45,6 +45,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
   <!--Menu item to donate-->
+  <string name="donate">Bağış yap</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>
@@ -124,6 +125,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ayarlar</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Arkaplanda herzaman çalış</string>
   <!--Preference summary in case it is enabled-->
@@ -133,6 +135,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_charging">Sadece şarj ederken eşitle</string>
   <string name="sync_only_wifi">Sadece wifi bağlıyken eşitle</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing Seçenekler</string>
   <string name="device_name">Cihaz Adı</string>
   <string name="listen_address">Eşitleme Protokolü Dinleme Adresleri</string>
@@ -153,6 +156,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Hata Ayıklama Seçenekleri</string>
+  <string name="category_about">Hakkında</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Hata Bildir</string>
   <!--Summary for the issue tracker settings item-->

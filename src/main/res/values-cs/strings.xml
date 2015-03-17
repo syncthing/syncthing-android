@@ -125,6 +125,7 @@ Hlašte prosím jakékoliv problémy, na které narazíte, přes Github.</string
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Vždy spuštěné na pozadí</string>
   <!--Preference summary in case it is enabled-->
@@ -135,6 +136,7 @@ Hlašte prosím jakékoliv problémy, na které narazíte, přes Github.</string
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
   <string name="device_name">Jméno přístroje</string>
   <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
@@ -160,6 +162,7 @@ Hlašte prosím jakékoliv problémy, na které narazíte, přes Github.</string
   <string name="config_import_failed">Nahrání nastavení selhalo, ujistěte se, že soubory jsou v %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Možnosti ladění</string>
+  <string name="category_about">O aplikaci</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Nahlásit chybu</string>
   <!--Summary for the issue tracker settings item-->
@@ -173,6 +176,7 @@ Hlašte prosím jakékoliv problémy, na které narazíte, přes Github.</string
   <!--Activity title-->
   <string name="folder_picker_title">Výběr adresáře</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Varování: Tato verze Androidu nepovoluje synchronizaci na externí úložné přístroje</string>
   <!--ListView empty text-->
   <string name="directory_empty">Adresář je prázdný</string>
   <!--Menu item to create folder on the file system-->

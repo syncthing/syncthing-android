@@ -125,6 +125,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Instellingen</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Altijd draaien in achtergrond</string>
   <!--Preference summary in case it is enabled-->
@@ -135,6 +136,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="sync_only_wifi">Synchroniseer alleen via Wi-Fi</string>
   <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing-opties</string>
   <string name="device_name">Apparaatnaam</string>
   <string name="listen_address">Synchronisatieprotocol luister-adressen</string>
@@ -160,6 +162,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="config_import_failed">Importeren van configuratie mislukt, zorg dat de bestanden zich in %1$s bevinden</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug-opties</string>
+  <string name="category_about">Over</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
@@ -173,6 +176,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Mapkiezer</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Waarschuwing: je Android-versie laat synchroniseren naar externe opslagapparaten niet toe</string>
   <!--ListView empty text-->
   <string name="directory_empty">Map is leeg</string>
   <!--Menu item to create folder on the file system-->

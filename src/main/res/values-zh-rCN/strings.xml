@@ -1,98 +1,228 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">开放、分布式且值得信赖的自由服务</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">添加文件夹</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">分享设备标识</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">发送设备标识至</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">正在等待 API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">文件夹</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s（%2$d%%）</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">无文件夹</string>
   <!--Format string for folder file count-->
+  <string name="files">%2$d 中的 %1$d 个文件</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">设备</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">无设备</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">最新</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">正在同步 (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">连接断开</string>
   <!--Title for current download rate-->
+  <string name="download_title">下载速度</string>
   <!--Title for current upload rate-->
+  <string name="upload_title">上传速度</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">下载：\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">上传：\u0020</string>
   <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU 使用率</string>
   <!--Title for current RAM usage-->
+  <string name="ram_usage">内存使用</string>
   <!--Title for announce server status-->
+  <string name="announce_server">宣告服务器</string>
   <!--Menu item to donate-->
+  <string name="donate">捐赠</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">文件夹标识</string>
   <!--Setting title-->
+  <string name="directory">目录</string>
   <!--Setting title-->
+  <string name="rescan_interval">扫描间隔</string>
   <!--Setting title-->
+  <string name="folder_master">主文件夹</string>
   <!--Setting title-->
+  <string name="devices">设备</string>
   <!--Setting title-->
+  <string name="file_versioning">版本控制</string>
   <!--Setting title-->
+  <string name="keep_versions">保留历史版本数量</string>
   <!--Setting title-->
+  <string name="delete_folder">删除文件夹</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">新建文件夹</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">编辑文件夹</string>
   <!--Menu item to confirm folder creation-->
+  <string name="create">新建</string>
   <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">您确定要删除该文件夹吗？</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">文件夹路径不得为空</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">请先连接设备</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">设备标识</string>
   <!--Setting title-->
+  <string name="name">名称</string>
   <!--Setting title-->
+  <string name="addresses">地址</string>
   <!--Setting title-->
+  <string name="current_address">当前地址</string>
   <!--Setting title-->
+  <string name="compression">压缩</string>
   <!--Setting title-->
+  <string name="introducer">介绍人</string>
   <!--ActionBar item-->
+  <string name="delete_device">删除设备</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">添加设备</string>
   <!--Menu item to confirm adding a device-->
+  <string name="add">添加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">编辑设备</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">您确定要删除该设备吗？</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">设备标识不得为空</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">设备名不得为空</string>
   <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">扫描二维码</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">您尚未安装二维码扫描器或者是您安装的二维码扫描器尚不支持外部调用。
+请安装二维码扫描器或者手动添加设备标识。</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <string name="web_gui_title">网页管理页面</string>
   <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">正在等待管理页面</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">正在生成密钥。这可能需要一段时间，请稍等。</string>
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">首次启动</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">欢迎使用 Syncthing！\n\n\
+本应用现处于测试阶段，您可能会遇到一些功能、性能方面的问题，并且存在数据丢失的可能。\n\n\
+请通过 Github 来报告您所遇到的问题。</string>
   <!--SettingsFragment-->
   <!--Activity title-->
+  <string name="settings_title">设置</string>
+  <string name="category_syncthing_android">Android 版 Syncthing 功能</string>
   <!--Preference title-->
+  <string name="always_run_in_background">总是在后台运行</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing 会根据下方的偏好运行在后台</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing 仅在运行后启动同步并且可以通过点按菜单按钮停止</string>
+  <string name="sync_only_charging">仅在充电时同步</string>
+  <string name="sync_only_wifi">仅在无线网络下同步</string>
+  <string name="advanced_folder_picker">使用高级文件夹选择器</string>
+  <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
+  <string name="category_syncthing">Syncthing 通用功能</string>
+  <string name="syncthing_options">同步设置</string>
+  <string name="device_name">设备名称</string>
+  <string name="listen_address">同步协议监听地址</string>
+  <string name="max_recv_kbps">下载限速（KiB/s）</string>
+  <string name="max_send_kbps">上传限速（KiB/s）</string>
+  <string name="global_announce_enabled">在互联网中寻找节点</string>
+  <string name="local_announce_enabled">在局域网中寻找节点</string>
+  <string name="upnp_enabled">启用 UPnP</string>
+  <string name="global_announce_server">用以在互联网上寻找节点的发布服务器地址</string>
+  <string name="usage_reporting">匿名使用报告</string>
+  <string name="syncthing_gui">Syncthing 管理页</string>
+  <string name="gui_address">管理页监听地址</string>
+  <string name="gui_user">管理页认证用户</string>
+  <string name="gui_password">管理页认证密码</string>
+  <string name="gui_https_enabled">管理页使用 HTTPS 加密协议</string>
+  <string name="export_config">导出设置</string>
   <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">设置已导出至 %1$s</string>
+  <string name="import_config">导入设置</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">设置已导入</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">设置导入失败，请确保文件位于 %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">调试选项</string>
+  <string name="category_about">关于</string>
   <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">回报问题</string>
   <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">打开 Android 版 Syncthing 问题追踪页</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing 版本</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android 版本</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <string name="folder_picker_title">文件夹选择器</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">警告：您的系统版本不允许同步文件至外部存储器</string>
   <!--ListView empty text-->
+  <string name="directory_empty">目录为空</string>
   <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">新建文件夹</string>
   <!--Menu item to select the current folder-->
+  <string name="select_folder">选择文件夹</string>
+  <string name="create_folder_failed">新建文件夹失败</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing 已禁用</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">您确定要变更您的设置吗？</string>
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">变更设置</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">退出</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing 正在运行</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">需要重启以应用</string>
   <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">点此立即重启本应用</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">稍后重启</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">设备标识已复制到剪贴板</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
+  </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">闲置</string>
+  <string name="state_scanning">正在扫描</string>
+  <string name="state_cleaning">正在清理</string>
+  <string name="state_syncing">正在同步</string>
 </resources>

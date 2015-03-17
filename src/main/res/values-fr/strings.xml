@@ -125,6 +125,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Paramètres</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Fonctionner en tâche de fond.</string>
   <!--Preference summary in case it is enabled-->
@@ -135,6 +136,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de machine</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
@@ -160,6 +162,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="config_import_failed">Echec de l\'import de la configuration, assurez-vous que les fichiers sont dans %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Options de débuggage</string>
+  <string name="category_about">A propos</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Signaler un problème</string>
   <!--Summary for the issue tracker settings item-->
@@ -173,6 +176,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Sélection du dossier</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Attention: votre version Android n\'autorise pas la synchronisation avec des périphériques de stockage externes.</string>
   <!--ListView empty text-->
   <string name="directory_empty">Le dossier est vide</string>
   <!--Menu item to create folder on the file system-->
