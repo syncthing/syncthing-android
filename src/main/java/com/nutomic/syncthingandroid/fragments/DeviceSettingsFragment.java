@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +37,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener {
 
     public static final String EXTRA_NODE_ID = "device_id";
+
+    private static final String TAG = "DeviceSettingsFragment";
 
     private static final int SCAN_QR_REQUEST_CODE = 235;
 
@@ -61,6 +65,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkUpgradePreferences(this);
 
         ((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
 
@@ -105,6 +111,36 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     }
 
     /**
+     * Check for any upgrades of the preferences.
+     */
+    private void checkUpgradePreferences(PreferenceFragment activity) {
+        SharedPreferences settings = activity.getPreferenceManager().getSharedPreferences();
+        SharedPreferences.Editor editor = settings.edit();
+        int version = settings.getInt("version", 0);
+        if (version == 0) {
+            try {
+                // Legacy (03/2015) API update Syncthing
+                // Compression converted from boolean to string
+                Log.d(TAG, "Upgrading compression value");
+                Boolean compressionBoolean = settings.getBoolean("compression", true);
+                String compressionString;
+                if (compressionBoolean) {
+                    compressionString = "always";
+                } else {
+                    compressionString = "metadata";
+                }
+                editor.putInt("version", 1);
+                editor.putString("compression", compressionString);
+                editor.commit();
+            } catch (java.lang.ClassCastException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+    }
+
+
+    /**
      * Save current settings in case we are in create mode and they aren't yet stored in the config.
      */
     @Override
@@ -123,8 +159,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     public void onApiChange(SyncthingService.State currentState) {
         if (getActivity() == null || getActivity().isFinishing()) {
             return;
-        }
-        else if (currentState != SyncthingService.State.ACTIVE) {
+        } else if (currentState != SyncthingService.State.ACTIVE) {
             getActivity().finish();
         }
 
