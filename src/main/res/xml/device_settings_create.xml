@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:persistent="false">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
+        android:persistent="false"
         android:key="device_id"
         android:title="@string/device_id"
         android:widgetLayout="@layout/scan_qr_code_widget" />
 
     <EditTextPreference
+        android:persistent="false"
         android:key="name"
         android:title="@string/name" />
 
     <EditTextPreference
+        android:persistent="false"
         android:key="addresses"
         android:title="@string/addresses" />
 
     <ListPreference
+        android:persistent="false"
         android:key="compression"
         android:entries="@array/compress_entries"
         android:entryValues="@array/compress_values"
         android:title="@string/compression" />
 
     <CheckBoxPreference
+        android:persistent="false"
         android:key="introducer"
         android:title="@string/introducer" />
 
