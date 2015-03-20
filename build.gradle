@@ -53,10 +53,22 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("key.store"))
+            storePassword System.getenv("key.store.password")
+            keyAlias System.getenv("key.alias")
+            keyPassword System.getenv("key.alias.password")
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             debuggable true
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
 
