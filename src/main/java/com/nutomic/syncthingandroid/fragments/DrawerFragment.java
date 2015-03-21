@@ -101,6 +101,12 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         mTimer = null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        onDrawerClosed();
+    }
+
     /**
      * Populates views and menu.
      */
