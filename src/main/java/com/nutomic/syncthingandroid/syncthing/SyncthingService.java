@@ -27,12 +27,9 @@ import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.IOError;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.nio.channels.FileChannel;
 import java.util.HashSet;
@@ -290,13 +287,18 @@ public class SyncthingService extends Service {
                 @Override
                 public void onApiAvailable() {
                     onApiChange();
-                    for (RestApi.Folder r : mApi.getFolders()) {
-                        try {
-                            mObservers.add(new FolderObserver(mApi, r));
-                        } catch (FolderObserver.FolderNotExistingException e) {
-                            Log.w(TAG, e.getMessage());
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (RestApi.Folder r : mApi.getFolders()) {
+                                try {
+                                    mObservers.add(new FolderObserver(mApi, r));
+                                } catch (FolderObserver.FolderNotExistingException e) {
+                                    Log.w(TAG, "Failed to add observer for folder", e);
+                                }
+                            }
                         }
-                    }
+                    }).start();
                 }
             });
             registerOnWebGuiAvailableListener(mApi);
