@@ -45,12 +45,10 @@ public abstract class PollWebGuiAvailableTask extends AsyncTask<String, Void, Vo
             } catch (HttpHostConnectException e) {
                 // We catch this in every call, as long as the service is not online,
                 // so we ignore and continue.
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to poll for web interface", e);
-            } catch (InterruptedException e) {
+            } catch (IOException|InterruptedException e) {
                 Log.w(TAG, "Failed to poll for web interface", e);
             }
-        } while (status != HttpStatus.SC_OK);
+        } while (status != HttpStatus.SC_OK && status != HttpStatus.SC_UNAUTHORIZED);
         return null;
     }
 
