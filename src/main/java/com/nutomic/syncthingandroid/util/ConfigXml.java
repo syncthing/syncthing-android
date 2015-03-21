@@ -109,8 +109,6 @@ public class ConfigXml {
         boolean changed = false;
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
-        Element gui = (Element) mConfig.getDocumentElement()
-                .getElementsByTagName("gui").item(0);
 
         // Hardcode default globalAnnounceServer ip.
         NodeList globalAnnounceServer = options.getElementsByTagName("globalAnnounceServer");
@@ -139,17 +137,9 @@ public class ConfigXml {
                 changed = true;
             }
 
-            // Replace /sdcard/ in folder path with proper path.
-            String dir = r.getAttribute("path");
-            if (dir.startsWith("/sdcard")) {
-                String newDir = dir.replace("/sdcard",
-                        Environment.getExternalStorageDirectory().getAbsolutePath());
-                r.setAttribute("directory", newDir);
-                changed = true;
-            }
-
             // HACK: Create .stfolders in all folders if it does not exist.
             // This is not the best place to put it, but it's only temporary.
+            String dir = r.getAttribute("path");
             try {
                 new File(dir, ".stfolder").createNewFile();
             } catch (IOException e) {
