@@ -35,6 +35,8 @@ preBuild {
     dependsOn 'buildNative'
 }
 
+project.archivesBaseName = 'syncthing'
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -55,11 +57,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.getenv("key.store"))
-            storePassword System.getenv("key.store.password")
-            keyAlias System.getenv("key.alias")
-            keyPassword System.getenv("key.alias.password")
-        }
+            if (System.getenv("key_alias")) {
+                storeFile = file(System.getenv("key_store"))
+                storePassword = System.getenv("key_store_password")
+                keyAlias = System.getenv("key_alias")
+                keyPassword = System.getenv("key_alias_password")
+            }
+       }
     }
 
     buildTypes {
@@ -68,7 +72,9 @@ android {
             debuggable true
         }
         release {
-            signingConfig signingConfigs.release
+            if (System.getenv("key_alias")) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 
