@@ -15,7 +15,6 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -112,21 +111,6 @@ public class ConfigXml {
                 .getElementsByTagName("options").item(0);
         Element gui = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("gui").item(0);
-
-        // Create an API key if it does not exist.
-        if (gui.getElementsByTagName("apikey").getLength() == 0) {
-            Log.i(TAG, "Initializing API key with random string");
-            char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-            StringBuilder sb = new StringBuilder();
-            Random random = new Random();
-            for (int i = 0; i < 20; i++) {
-                sb.append(chars[random.nextInt(chars.length)]);
-            }
-            Element apiKey = mConfig.createElement("apikey");
-            apiKey.setTextContent(sb.toString());
-            gui.appendChild(apiKey);
-            changed = true;
-        }
 
         // Hardcode default globalAnnounceServer ip.
         NodeList globalAnnounceServer = options.getElementsByTagName("globalAnnounceServer");
