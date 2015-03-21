@@ -11,6 +11,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.support.v4.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +36,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener {
 
     public static final String EXTRA_NODE_ID = "device_id";
+
+    private static final String TAG = "DeviceSettingsFragment";
 
     private static final int SCAN_QR_REQUEST_CODE = 235;
 
@@ -93,7 +96,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         if (mIsCreate) {
             if (savedInstanceState != null) {
                 mDevice = (RestApi.Device) savedInstanceState.getSerializable("device");
-            } else {
+            }
+            if (mDevice == null) {
                 mDevice = new RestApi.Device();
                 mDevice.Name = "";
                 mDevice.DeviceID = "";
@@ -131,17 +135,25 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         if (mIsCreate) {
             getActivity().setTitle(R.string.add_device);
         } else {
+            RestApi.Device device = null;
             getActivity().setTitle(R.string.edit_device);
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
             for (int i = 0; i < devices.size(); i++) {
                 if (devices.get(i).DeviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
-                    mDevice = devices.get(i);
+                    device = devices.get(i);
                     break;
                 }
             }
-            mDeviceId.setOnPreferenceClickListener(this);
+            if (device == null) {
+                Log.w(TAG, "Device not found in API update");
+                getActivity().finish();
+                return;
+            }
+            mDevice = device;
+            mDeviceId.setOnPreferenceClickListener(this); // TODO is this needed?
         }
+
         mSyncthingService.getApi().getConnections(DeviceSettingsFragment.this);
 
         mDeviceId.setSummary(mDevice.DeviceID);
