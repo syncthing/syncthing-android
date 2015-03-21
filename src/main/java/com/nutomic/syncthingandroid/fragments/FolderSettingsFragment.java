@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -156,10 +157,12 @@ public class FolderSettingsFragment extends PreferenceFragment
             cbp.setTitle(n.Name);
             cbp.setKey(KEY_NODE_SHARED);
             cbp.setOnPreferenceChangeListener(FolderSettingsFragment.this);
-            cbp.setChecked(false);
-            for (String n2 : mFolder.DeviceIds) {
-                if (n2.equals(n.DeviceID)) {
-                    cbp.setChecked(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                cbp.setChecked(false);
+                for (String n2 : folder.DeviceIds) {
+                    if (n2.equals(n.DeviceID)) {
+                        cbp.setChecked(true);
+                    }
                 }
             }
         }
