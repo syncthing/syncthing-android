@@ -83,6 +83,7 @@
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Csak töltés közbeni szinkronizálás</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="upnp_enabled">UPnP engedélyezése</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_https_enabled">HTTPS használata a GUI-hoz</string>

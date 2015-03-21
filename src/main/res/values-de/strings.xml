@@ -133,6 +133,7 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
   <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing Optionen</string>
   <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>

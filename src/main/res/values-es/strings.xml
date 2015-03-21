@@ -129,6 +129,7 @@ Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <string name="sync_only_charging">Sincronizar solo mientras cargando</string>
   <string name="sync_only_wifi">Sincronizar sólo en wifi</string>
   <string name="advanced_folder_picker">Usar Selección Avanzada de carpeta</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del Dispositivo</string>
   <string name="max_recv_kbps">Limitar la Tasa de Tráfico Entrante (KiB/s)</string>

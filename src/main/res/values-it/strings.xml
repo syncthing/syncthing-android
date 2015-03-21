@@ -132,6 +132,7 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <string name="sync_only_charging">Sincr. solo in Ricarica</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opzioni di Syncthing</string>
   <string name="device_name">Nome Dispositivo</string>
   <string name="listen_address">Indirizzi Protocollo Sincronizzazione</string>

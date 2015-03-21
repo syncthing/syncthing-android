@@ -135,6 +135,7 @@ Por favor, relate qualquer problema que ocorrer através do Github.</string>
   <string name="sync_only_wifi">Sincronizar apenas em wifi</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>

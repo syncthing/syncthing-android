@@ -131,6 +131,7 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
   <string name="sync_only_charging">tylko, ładując</string>
   <string name="sync_only_wifi">tylko na WiFi</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Ustawienia Syncthing</string>
   <string name="max_recv_kbps">Limit pobierania (KiB/s)</string>
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>

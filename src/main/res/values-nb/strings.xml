@@ -124,6 +124,7 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Synkroniser kun ved lading</string>
   <string name="sync_only_wifi">Synkroniser kun over WiFi.</string>
+  <string name="category_syncthing">Syncthing</string>
   <string name="upnp_enabled">Aktiver UPnP</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
   <string name="gui_https_enabled">Bruk HTTPS til GUI</string>
