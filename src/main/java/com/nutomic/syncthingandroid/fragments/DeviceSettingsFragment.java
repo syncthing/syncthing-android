@@ -151,7 +151,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                 return;
             }
             mDevice = device;
-            mDeviceId.setOnPreferenceClickListener(this); // TODO is this needed?
+            mDeviceId.setOnPreferenceClickListener(this);
         }
 
         mSyncthingService.getApi().getConnections(DeviceSettingsFragment.this);

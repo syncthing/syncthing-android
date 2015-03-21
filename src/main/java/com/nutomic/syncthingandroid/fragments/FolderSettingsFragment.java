@@ -10,6 +10,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.support.v4.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +43,8 @@ public class FolderSettingsFragment extends PreferenceFragment
      * set to false.
      */
     public static final String EXTRA_REPO_ID = "folder_id";
+
+    private static final String TAG = "FolderSettingsFragment";
 
     private static final String KEY_NODE_SHARED = "device_shared";
 
@@ -98,7 +101,8 @@ public class FolderSettingsFragment extends PreferenceFragment
         if (mIsCreate) {
             if (savedInstanceState != null) {
                 mFolder = (RestApi.Folder) savedInstanceState.getSerializable("folder");
-            } else {
+            }
+            if (mFolder == null) {
                 mFolder = new RestApi.Folder();
                 mFolder.ID = "";
                 mFolder.Path = "";
@@ -131,15 +135,22 @@ public class FolderSettingsFragment extends PreferenceFragment
         if (mIsCreate) {
             getActivity().setTitle(R.string.create_folder);
         } else {
+            RestApi.Folder folder = null;
             getActivity().setTitle(R.string.edit_folder);
             List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
             for (int i = 0; i < folders.size(); i++) {
                 if (folders.get(i).ID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_REPO_ID))) {
-                    mFolder = folders.get(i);
+                    folder = folders.get(i);
                     break;
                 }
             }
+            if (folder == null) {
+                Log.w(TAG, "Folder not found in API update");
+                getActivity().finish();
+                return;
+            }
+            mFolder = folder;
         }
 
         mFolderId.setText(mFolder.ID);
