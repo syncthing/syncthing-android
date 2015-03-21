@@ -198,6 +198,7 @@ public class SyncthingService extends Service {
             Notification n = new NotificationCompat.Builder(this)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_launcher)
+                    .setOngoing(true)
                     .setPriority(NotificationCompat.PRIORITY_MIN)
                     .setContentIntent(PendingIntent.getActivity(this, 0,
                             new Intent(this, MainActivity.class), 0))
