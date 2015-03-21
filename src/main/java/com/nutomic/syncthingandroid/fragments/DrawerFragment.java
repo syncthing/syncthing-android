@@ -97,8 +97,10 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     }
 
     public void onDrawerClosed() {
-        mTimer.cancel();
-        mTimer = null;
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
     }
 
     @Override
