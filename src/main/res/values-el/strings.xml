@@ -3,23 +3,40 @@
   <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Προσθήκη φακέλου</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Διαμοιρασμός ID συσκευής</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Αποστολή ID συσκευής στο</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Περιμένοντας το API</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">Φάκελοι</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Δε βρέθηκαν φάκελοι</string>
   <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d αρχεία</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Συσκευές</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Δε βρέθηκαν συσκευές</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Ενημερωμένο</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Συγχρονίζοντας (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Αποσυνδεδεμένο</string>
   <!--Title for current download rate-->
+  <string name="download_title">Κατέβασμα</string>
   <!--Title for current upload rate-->
+  <string name="upload_title">Ανέβασμα</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">Κατέβασμα:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">Ανέβασμα:\u0020</string>
   <!--Title for current CPU usage-->
   <!--Title for current RAM usage-->
   <!--Title for announce server status-->
@@ -30,6 +47,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <string name="devices">Συσκευές</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
