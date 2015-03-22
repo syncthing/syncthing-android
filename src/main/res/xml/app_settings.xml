@@ -93,15 +93,12 @@
                 android:persistent="false" />
 
             <EditTextPreference
-                android:key="User"
-                android:title="@string/gui_user"
-                android:persistent="false" />
+                android:key="gui_user"
+                android:title="@string/gui_user" />
 
             <EditTextPreference
-                android:key="Password"
-                android:title="@string/gui_password"
-                android:inputType="textPassword"
-                android:persistent="false" />
+                android:key="gui_password"
+                android:title="@string/gui_password" />
 
             <CheckBoxPreference
                 android:key="UseTLS"

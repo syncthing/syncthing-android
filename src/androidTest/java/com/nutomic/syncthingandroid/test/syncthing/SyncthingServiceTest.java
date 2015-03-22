@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ServiceTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
@@ -107,6 +108,13 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         assertTrue(config.exists());
         assertTrue(privateKey.exists());
         assertTrue(publicKey.exists());
+    }
+
+    public void testPassword() {
+        startService(new Intent(getContext(), SyncthingService.class));
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+        assertNotNull(sp.getString("gui_user", null));
+        assertEquals(20, sp.getString("gui_password", null).length());
     }
 
 }

@@ -12,6 +12,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
@@ -42,20 +43,25 @@ public class SyncthingRunnable implements Runnable {
 
     @Override
     public void run() {
-        SharedPreferences pm = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         DataOutputStream dos = null;
         int ret = 1;
         Process process = null;
         try {
             // Loop to handle syncthing restarts (these always have an error code of 3).
             do {
-                process = Runtime.getRuntime().exec("sh");
+                ProcessBuilder pb = new ProcessBuilder("sh");
+                Map<String, String> env = pb.environment();
+                // Set home directory to data folder for web GUI folder picker.
+                env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
+                env.put("STTRACE", sp.getString("sttrace", ""));
+                env.put("STNORESTART", "1");
+                env.put("STNOUPGRADE", "1");
+                env.put("STGUIAUTH", sp.getString("gui_user", "") + ":" +
+                        sp.getString("gui_password", ""));
+                process = pb.start();
+
                 dos = new DataOutputStream(process.getOutputStream());
-                // Set home directory to data folder for syncthing to use.
-                dos.writeBytes("HOME=" + Environment.getExternalStorageDirectory() + " ");
-                dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
-                dos.writeBytes("STNORESTART=1 ");
-                dos.writeBytes("STNOUPGRADE=1 ");
                 // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
                 dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
                 dos.writeBytes("exit\n");

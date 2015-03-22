@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -24,6 +25,7 @@ import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
+import com.nutomic.syncthingandroid.util.PRNGFixes;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +34,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.channels.FileChannel;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -261,6 +264,26 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onCreate() {
+        PRNGFixes.apply();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Make sure this is also done for existing installs. We can replace this check with
+        // {@link #isFirstStart()} after a while.
+        if (!sp.getBoolean("default_user_pw_set", false)) {
+            sp.edit().putBoolean("default_user_pw_set", true).commit();
+            char[] chars =
+                    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
+            StringBuilder sb = new StringBuilder();
+            SecureRandom random = new SecureRandom();
+            for (int i = 0; i < 20; i++)
+                sb.append(chars[random.nextInt(chars.length)]);
+
+            String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
+            Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
+            sp.edit().putString("gui_user", user)
+                     .putString("gui_password", sb.toString()).commit();
+        }
+
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         new StartupTask().execute();
