@@ -27,18 +27,52 @@ public class SyncthingRunnable implements Runnable {
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
 
+    public static final String UNIT_TEST_PATH = "was running";
+
     private final Context mContext;
 
+    private boolean mGenerate;
+
     private String mCommand;
+
+    public enum Command {
+        generate, // Generate keys, a config file and immediately exit.
+        main,     // Run the main Syncthing application.
+        reset,    // Reset Syncthing's indexes
+    }
 
     /**
      * Constructs instance.
      *
-     * @param command The exact command to be executed on the shell.
+     * @param command Which type of Syncthing command to execute.
      */
-    public SyncthingRunnable(Context context, String command) {
+    public SyncthingRunnable(Context context, Command command) {
         mContext = context;
-        mCommand = command;
+        String syncthing = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
+        switch (command) {
+            case generate:
+                mCommand = syncthing + " -generate='" + mContext.getFilesDir() + "' -no-browser";
+                break;
+            case main:
+                mCommand = syncthing + " -home='" + mContext.getFilesDir() + "' -no-browser";
+                break;
+            case reset:
+                mCommand = syncthing + " -home='" + mContext.getFilesDir() + "' -reset";
+                break;
+            default:
+                Log.w(TAG, "Unknown command option");
+                mCommand = "";
+        }
+    }
+
+    /**
+     * Constructs instance.
+     *
+     * @param manualCommand The exact command to be executed on the shell. Used for tests only.
+     */
+    public SyncthingRunnable(Context context, String manualCommand) {
+        mContext = context;
+        mCommand = manualCommand;
     }
 
     @Override
@@ -48,7 +82,7 @@ public class SyncthingRunnable implements Runnable {
         int ret = 1;
         Process process = null;
         try {
-            // Loop to handle syncthing restarts (these always have an error code of 3).
+            // Loop to handle Syncthing restarts (these always have an error code of 3).
             do {
                 ProcessBuilder pb = new ProcessBuilder("sh");
                 Map<String, String> env = pb.environment();
@@ -62,9 +96,13 @@ public class SyncthingRunnable implements Runnable {
                 process = pb.start();
 
                 dos = new DataOutputStream(process.getOutputStream());
-                // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
-                dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
-                dos.writeBytes("exit\n");
+                // Set (Android) home directory to data folder for syncthing to use.
+                dos.writeBytes("HOME=" + Environment.getExternalStorageDirectory() + " ");
+                dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
+                dos.writeBytes("STNORESTART=1 ");
+                dos.writeBytes("STNOUPGRADE=1 ");
+                dos.writeBytes(mCommand);
+                dos.writeBytes("\nexit\n");
                 dos.flush();
 
                 log(process.getInputStream(), Log.INFO);

@@ -45,9 +45,15 @@ public class SyncthingService extends Service {
     private static final String TAG = "SyncthingService";
 
     /**
-     * Intent action to perform a syncthing restart.
+     * Intent action to perform a Syncthing restart.
      */
     public static final String ACTION_RESTART = "restart";
+
+    /**
+     * Intent action to reset Syncthing's database.
+     */
+    public static final String ACTION_RESET = "reset";
+
 
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
@@ -150,8 +156,12 @@ public class SyncthingService extends Service {
             mApi.shutdown();
             mCurrentState = State.INIT;
             updateState();
-        }
-        else if (mCurrentState != State.INIT) {
+        } else if (ACTION_RESET.equals(intent.getAction())) {
+            mApi.shutdown();
+            new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
+            mCurrentState = State.INIT;
+            updateState();
+        } else if (mCurrentState != State.INIT) {
             mDeviceStateHolder.update(intent);
             updateState();
         }
@@ -200,8 +210,7 @@ public class SyncthingService extends Service {
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
-            new Thread(new SyncthingRunnable(
-                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
+            new Thread(new SyncthingRunnable(this, SyncthingRunnable.Command.main)).start();
             Notification n = new NotificationCompat.Builder(this)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)

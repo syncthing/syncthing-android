@@ -78,9 +78,7 @@ public class ConfigXml {
     }
 
     private void generateKeysConfig(Context context) {
-        new SyncthingRunnable(context, context.getApplicationInfo().dataDir + "/" +
-                SyncthingService.BINARY_NAME + " -generate='" + context.getFilesDir() + "'")
-                .run();
+        new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
     }
 
     public static File getConfigFile(Context context) {

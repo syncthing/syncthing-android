@@ -380,6 +380,33 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
+     * Reset Syncthing's indexes when confirmed by a dialog.
+     */
+    @TargetApi(11)
+    public void resetSyncthing(final Activity activity) {
+        final Intent intent = new Intent(mContext, SyncthingService.class)
+                .setAction(SyncthingService.ACTION_RESET);
+
+        AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
+                : new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.streset_title);
+        builder.setMessage(R.string.streset_question)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mContext.startService(intent);
+                        Toast.makeText(activity, R.string.streset_done, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                })
+                .show();
+    }
+
+    /**
      * Creates a notification prompting the user to restart the app.
      */
     private void createRestartNotification() {
