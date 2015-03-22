@@ -10,7 +10,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -43,13 +43,15 @@ public class MainActivity extends SyncthingActivity
 
     private AlertDialog mDisabledDialog;
 
+    private boolean mIsDestroyed = false;
+
     /**
      * Causes population of folder and device lists, unlocks info drawer.
      */
     @Override
     @SuppressLint("InflateParams")
     public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && !isDestroyed()) {
+        if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && mIsDestroyed) {
             if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
@@ -204,6 +206,7 @@ public class MainActivity extends SyncthingActivity
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
+        mIsDestroyed = true;
     }
 
     @Override
