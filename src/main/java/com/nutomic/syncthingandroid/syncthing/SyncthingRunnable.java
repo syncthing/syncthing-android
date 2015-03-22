@@ -51,6 +51,7 @@ public class SyncthingRunnable implements Runnable {
                 dos.writeBytes("HOME=" + Environment.getExternalStorageDirectory() + " ");
                 dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
                 dos.writeBytes("STNORESTART=1 ");
+                dos.writeBytes("STNOUPGRADE=1 ");
                 // Call syncthing with -home (as it would otherwise use "~/.config/syncthing/".
                 dos.writeBytes(mCommand + " -home " + mContext.getFilesDir() + "\n");
                 dos.writeBytes("exit\n");
