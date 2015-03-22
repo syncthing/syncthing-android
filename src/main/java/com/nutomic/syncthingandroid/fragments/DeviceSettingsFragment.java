@@ -225,6 +225,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             return true;
         } else if (preference.equals(mCompression)) {
             mDevice.Compression = (String) o;
+            preference.setSummary(mDevice.Compression);
             deviceUpdated();
             return true;
         } else if (preference.equals(mIntroducer)) {
