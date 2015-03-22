@@ -57,8 +57,8 @@ public class DevicesAdapterTest extends AndroidTestCase {
 
         assertEquals(getContext().getString(R.string.device_up_to_date),
                 ((TextView) v.findViewById(R.id.status)).getText().toString());
-        assertEquals("1 Mb/s", ((TextView) v.findViewById(R.id.download)).getText().toString());
-        assertEquals("1 Gb/s", ((TextView) v.findViewById(R.id.upload)).getText().toString());
+        assertEquals("1 Mib/s", ((TextView) v.findViewById(R.id.download)).getText().toString());
+        assertEquals("1 Gib/s", ((TextView) v.findViewById(R.id.upload)).getText().toString());
     }
 
 }
