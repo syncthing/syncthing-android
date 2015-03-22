@@ -274,6 +274,17 @@ Please report any problems you encounter via Github.</string>
     <!-- Title for the preference to set STTRACE parameters -->
     <string name="sttrace_title">Debug Options</string>
 
+    <!-- Title for the preference to reset Syncthing indexes -->
+    <string name="streset_title">Reset Database</string>
+
+    <!-- Syncthing was reset -->
+    <string name="streset_question">This action should only be performed based on a recommendation from our support team.
+        \nAre you sure you want to clear Syncthing\'s index database?
+    </string>
+
+    <!-- Syncthing was reset -->
+    <string name="streset_done">Successfully reset Syncthing\'s database</string>
+
     <string name="category_about">About</string>
 
     <!-- Settings item that opens issue tracker -->

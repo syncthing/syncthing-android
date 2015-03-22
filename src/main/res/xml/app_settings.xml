@@ -113,6 +113,11 @@
             android:title="@string/sttrace_title"
             android:singleLine="true" />
 
+        <Preference
+            android:key="streset"
+            android:title="@string/streset_title"
+            android:singleLine="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
