@@ -90,12 +90,20 @@ public class MainActivity extends SyncthingActivity
             return;
         }
 
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
+        // Dismiss existing dialogs
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            try {
+                mLoadingDialog.dismiss();
+            } catch (IllegalArgumentException e) { } // SO/q/2745061
         }
-        if (mDisabledDialog != null) {
-            mDisabledDialog.dismiss();
+        mLoadingDialog = null;
+        if (mDisabledDialog != null && mDisabledDialog.isShowing()) {
+            try {
+                mDisabledDialog.dismiss();
+            } catch (IllegalArgumentException e) { } // SO/q/2745061
         }
+        mDisabledDialog = null;
+
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
