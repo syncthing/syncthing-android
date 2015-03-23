@@ -370,5 +370,6 @@ Please report any problems you encounter via Github.</string>
     <string name="state_scanning">Scanning</string>
     <string name="state_cleaning">Cleaning</string>
     <string name="state_syncing">Syncing</string>
+    <string name="state_unknown">Unknown</string>
 
 </resources>
