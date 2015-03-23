@@ -49,34 +49,42 @@ public class GetTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected String doInBackground(String... params) {
-        String fullUri = params[0] + params[1];
-        HttpClient httpclient = new DefaultHttpClient();
-        if (params.length == 5) {
-            LinkedList<NameValuePair> urlParams = new LinkedList<>();
-            urlParams.add(new BasicNameValuePair(params[3], params[4]));
-            fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
-        }
-        HttpGet get = new HttpGet(fullUri);
-        get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
-
-        try {
-            HttpResponse response = httpclient.execute(get);
-            HttpEntity entity = response.getEntity();
-
-            if (entity != null) {
-                InputStream is = entity.getContent();
-
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String line;
-                String result = "";
-                while ((line = br.readLine()) != null) {
-                    result += line;
-                }
-                br.close();
-                return result;
+        // Retry at most 10 times before failing
+        for (int i = 0; i < 10; i++) {
+            String fullUri = params[0] + params[1];
+            HttpClient httpclient = new DefaultHttpClient();
+            if (params.length == 5) {
+                LinkedList<NameValuePair> urlParams = new LinkedList<>();
+                urlParams.add(new BasicNameValuePair(params[3], params[4]));
+                fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
             }
-        } catch (IOException e) {
-            Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+            HttpGet get = new HttpGet(fullUri);
+            get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
+
+            try {
+                HttpResponse response = httpclient.execute(get);
+                HttpEntity entity = response.getEntity();
+
+                if (entity != null) {
+                    InputStream is = entity.getContent();
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    String result = "";
+                    while ((line = br.readLine()) != null) {
+                        result += line;
+                    }
+                    br.close();
+                    return result;
+                }
+            } catch (IOException e) {
+                Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+            }
+            try {
+                // Don't push the API too hard
+                Thread.sleep(100);
+            } catch (InterruptedException e) { }
+            Log.w(TAG, "Retrying GetTask Rest API call ("+i+")");
         }
         return null;
     }
