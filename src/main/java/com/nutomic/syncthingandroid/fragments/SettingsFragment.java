@@ -54,11 +54,10 @@ public class SettingsFragment extends PreferenceFragment
         mOptionsScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
         mGuiScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
 
-        Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
-        syncthingVersion.setSummary(mSyncthingService.getApi().getVersion());
-        RestApi api = mSyncthingService.getApi();
-
         if (currentState == SyncthingService.State.ACTIVE) {
+            Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
+            syncthingVersion.setSummary(mSyncthingService.getApi().getVersion());
+            RestApi api = mSyncthingService.getApi();
             for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
                 final Preference pref = mOptionsScreen.getPreference(i);
                 pref.setOnPreferenceChangeListener(SettingsFragment.this);
