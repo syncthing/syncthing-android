@@ -495,8 +495,10 @@ public class SyncthingService extends Service {
             Log.w(TAG, "Failed to copy file", e);
         } finally {
             try {
-                is.close();
-                os.close();
+                if (is != null)
+                  is.close();
+                if (os != null)
+                  os.close();
             } catch (IOException e) {
                 Log.w(TAG, "Failed to close stream", e);
             }
