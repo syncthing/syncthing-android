@@ -65,7 +65,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
     }
 
     private void updateList() {
-        if (mAdapter == null || getView() == null)
+        if (mAdapter == null || getView() == null || getActivity().isFinishing())
             return;
 
         MainActivity activity = (MainActivity) getActivity();
