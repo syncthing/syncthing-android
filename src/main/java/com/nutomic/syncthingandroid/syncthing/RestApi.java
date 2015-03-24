@@ -511,7 +511,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Converts a number of bytes to a human readable file size (eg 3.5 GB).
+     * Converts a number of bytes to a human readable file size (eg 3.5 GiB).
      */
     public static String readableFileSize(Context context, long bytes) {
         final String[] units = context.getResources().getStringArray(R.array.file_size_units);

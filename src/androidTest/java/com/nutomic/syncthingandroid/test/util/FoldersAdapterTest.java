@@ -32,9 +32,10 @@ public class FoldersAdapterTest extends AndroidTestCase {
         mFolder.ReadOnly = false;
         mFolder.Versioning = new RestApi.Versioning();
 
+        mModel.state = "idle";
         mModel.localFiles = 50;
         mModel.globalFiles = 500;
-        mModel.localBytes = 1048576;
+        mModel.inSyncBytes = 1048576;
         mModel.globalBytes = 1073741824;
     }
 
@@ -57,8 +58,8 @@ public class FoldersAdapterTest extends AndroidTestCase {
         assertTrue(items.contains(Long.toString(mModel.localFiles)));
         assertTrue(items.contains(Long.toString(mModel.localFiles)));
         String size = ((TextView) v.findViewById(R.id.size)).getText().toString();
-        assertTrue(size.contains("1 MB"));
-        assertTrue(size.contains("1 GB"));
+        assertTrue(size.contains("1 MiB"));
+        assertTrue(size.contains("1 GiB"));
     }
 
 }
