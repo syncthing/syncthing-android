@@ -103,6 +103,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                 mDevice.DeviceID = "";
                 mDevice.Addresses = "dynamic";
                 mDevice.Compression = "always";
+                mDevice.Introducer = false;
                 ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
             }
         }
@@ -163,6 +164,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         mAddresses.setSummary(mDevice.Addresses);
         mCompression.setValue(mDevice.Compression);
         mCompression.setSummary(mDevice.Compression);
+        mIntroducer.setChecked(mDevice.Introducer);
     }
 
     @Override
@@ -223,6 +225,14 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             EditTextPreference pref = (EditTextPreference) preference;
             pref.setSummary((String) o);
         }
+        if (preference instanceof CheckBoxPreference) {
+            CheckBoxPreference pref = (CheckBoxPreference) preference;
+            pref.setChecked((Boolean) o);
+        }
+        if (preference instanceof ListPreference) {
+            ListPreference pref = (ListPreference) preference;
+            pref.setSummary((String) o);
+        }
         if (preference.equals(mDeviceId)) {
             mDevice.DeviceID = (String) o;
             deviceUpdated();
@@ -237,7 +247,6 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             return true;
         } else if (preference.equals(mCompression)) {
             mDevice.Compression = (String) o;
-            preference.setSummary(mDevice.Compression);
             deviceUpdated();
             return true;
         } else if (preference.equals(mIntroducer)) {
