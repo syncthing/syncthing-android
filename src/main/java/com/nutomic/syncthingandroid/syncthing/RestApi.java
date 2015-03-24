@@ -268,6 +268,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_RESTART);
         new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
+        mRestartPostponed = false;
     }
 
     /**
