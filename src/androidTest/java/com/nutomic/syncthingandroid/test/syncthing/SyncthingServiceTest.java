@@ -66,10 +66,11 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         getService().registerOnApiChangeListener(new SyncthingService.OnApiChangeListener() {
             @Override
             public void onApiChange(SyncthingService.State currentState) {
-                latch.countDown();
+                if (currentState == SyncthingService.State.ACTIVE)
+                    latch.countDown();
             }
         });
-        latch.await(1, TimeUnit.SECONDS);
+        latch.await(10, TimeUnit.SECONDS);
         assertNotNull(getService().getApi());
         assertNotNull(getService().getWebGuiUrl());
     }
