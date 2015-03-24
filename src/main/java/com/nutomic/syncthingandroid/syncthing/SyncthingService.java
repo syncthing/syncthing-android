@@ -361,7 +361,7 @@ public class SyncthingService extends Service {
      * changes.
      */
     public void registerOnApiChangeListener(OnApiChangeListener listener) {
-        // Make sure we don't send an invalid state or syncthing might shwow a "disabled" message
+        // Make sure we don't send an invalid state or syncthing might show a "disabled" message
         // when it's just starting up.
         listener.onApiChange(mCurrentState);
         mOnApiChangeListeners.add(new WeakReference<>(listener));

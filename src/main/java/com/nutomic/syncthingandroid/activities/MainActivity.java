@@ -92,9 +92,11 @@ public class MainActivity extends SyncthingActivity
 
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
+            mLoadingDialog = null;
         }
         if (mDisabledDialog != null) {
             mDisabledDialog.dismiss();
+            mDisabledDialog = null;
         }
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
