@@ -49,8 +49,8 @@ public class GetTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected String doInBackground(String... params) {
-        // Retry at most 10 times before failing
-        for (int i = 0; i < 10; i++) {
+        // Retry at most 60 times before failing
+        for (int i = 0; i < 60; i++) {
             String fullUri = params[0] + params[1];
             HttpClient httpclient = new DefaultHttpClient();
             if (params.length == 5) {
@@ -82,7 +82,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
             }
             try {
                 // Don't push the API too hard
-                Thread.sleep(100);
+                Thread.sleep(200);
             } catch (InterruptedException e) { }
             Log.w(TAG, "Retrying GetTask Rest API call ("+i+")");
         }
