@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +20,8 @@ import java.io.InputStreamReader;
 public class SyncthingRunnable implements Runnable {
 
     private static final String TAG = "SyncthingRunnable";
+
+    private static final String TAG_IONICE = "SyncthingRunnable-IoNice";
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
 
@@ -60,6 +63,8 @@ public class SyncthingRunnable implements Runnable {
                 log(process.getInputStream(), Log.INFO);
                 log(process.getErrorStream(), Log.WARN);
 
+                niceSyncthing();
+
                 ret = process.waitFor();
 
                 if (ret == 3) {
@@ -82,6 +87,47 @@ public class SyncthingRunnable implements Runnable {
                         Integer.toString(ret));
             }
         }
+    }
+
+    /**
+     * Look for a running libsyncthing.so process and nice its IO.
+     */
+    private void niceSyncthing() {
+        new Thread() {
+            public void run() {
+                Process nice = null;
+                DataOutputStream niceOut = null;
+                int ret = 1;
+                try {
+                    Thread.sleep(1000); // Wait a second before getting the Pid
+                    nice = Runtime.getRuntime().exec("sh");
+                    niceOut = new DataOutputStream(nice.getOutputStream());
+                    niceOut.writeBytes("set `ps |grep libsyncthing.so`\n");
+                    niceOut.writeBytes("ionice $2 be 7\n"); // best-effort, low priority
+                    niceOut.writeBytes("exit\n");
+                    log(nice.getErrorStream(), Log.WARN);
+                    niceOut.flush();
+                    ret = nice.waitFor();
+                    Log.i(TAG_IONICE, "ionice performed on libsyncthing.so");
+                } catch (IOException | InterruptedException e) {
+                    Log.e(TAG_IONICE, "Failed to execute ionice binary", e);
+                } finally {
+                    try {
+                        if (niceOut != null) {
+                            niceOut.close();
+                        }
+                    } catch (IOException e) {
+                        Log.w(TAG_IONICE, "Failed to close shell stream", e);
+                    }
+                    if (nice != null) {
+                        nice.destroy();
+                    }
+                    if (ret != 0) {
+                        Log.e(TAG_IONICE, "Failed to set ionice " + Integer.toString(ret));
+                    }
+                }
+            }
+        }.start();
     }
 
     /**
