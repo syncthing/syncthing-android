@@ -1,38 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="app_name">Syncthing</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Доб Папки</string>
+  <string name="add_folder">Доб Папку</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Поделиться ID Устройства</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Отправить ID Устройства</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Ожидание API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Папки не найдены</string>
   <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d Файлов</string>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">Устройства</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Устройства не найдены</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Обновлено</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Синхронизация (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Отсоединено</string>
   <!--Title for current download rate-->
+  <string name="download_title">Скачивание</string>
   <!--Title for current upload rate-->
+  <string name="upload_title">Загрузка</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">Скачивание:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">Загрузка:\u0020</string>
   <!--Title for current CPU usage-->
+  <string name="cpu_usage">ЦП Нагрузка</string>
   <!--Title for current RAM usage-->
+  <string name="ram_usage">ОЗУ Нагрузка</string>
   <!--Title for announce server status-->
+  <string name="announce_server">Сервер Анонсов</string>
   <!--Menu item to donate-->
+  <string name="donate">Пожертвовать</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">ID Папки</string>
   <!--Setting title-->
+  <string name="directory">Папка</string>
   <!--Setting title-->
+  <string name="rescan_interval">Интервал Сканирования</string>
   <!--Setting title-->
+  <string name="folder_master">Главная папка</string>
   <!--Setting title-->
+  <string name="devices">Устройства</string>
   <!--Setting title-->
+  <string name="file_versioning">Версии файлов</string>
   <!--Setting title-->
+  <string name="keep_versions">Сохранять версии</string>
   <!--Setting title-->
   <string name="delete_folder">Удалить папку</string>
   <!--Title for FolderSettingsFragment in create mode-->
@@ -40,68 +67,128 @@
   <!--Title for FolderSettingsFragment in edit mode-->
   <string name="edit_folder">Изменить папку</string>
   <!--Menu item to confirm folder creation-->
+  <string name="create">Создать</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Вы действительно хотите удалить папку?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">Путь к папке не может быть пустым</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">Сначала подключите устройство</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">ID Устройства</string>
   <!--Setting title-->
+  <string name="name">Имя</string>
   <!--Setting title-->
+  <string name="addresses">Адреса</string>
   <!--Setting title-->
+  <string name="current_address">Текущий Адрес</string>
   <!--Setting title-->
+  <string name="compression">Сжатие</string>
   <!--Setting title-->
   <!--ActionBar item-->
+  <string name="delete_device">Удалить Устройство</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Доб Устройство</string>
   <!--Menu item to confirm adding a device-->
+  <string name="add">Добавить</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Изменить Устройство</string>
   <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">Вы действительно хотите удалить это устройство?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">ID устройства не может быть пустым</string>
   <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">Имя устройства не может быть пустым</string>
   <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">Сканировать QR Код</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">У вас не установлен QR сканер или он не поддерживается.
+Установите сканер или введите ID устройства вручную.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <string name="web_gui_title">Веб GUI</string>
   <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Ожидание GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Генерация ключей. Может занять много времени.</string>
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Первый Запуск</string>
   <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Настройки</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Всегда работать на фоне</string>
   <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing всегда работает на фоне, соответственно настройкам ниже.</string>
   <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing работает только когда запущен специально и может быть остановлен кнопкой в меню.</string>
   <string name="sync_only_charging">Синхронизация только во время зарядки</string>
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
+  <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
+  <string name="category_syncthing">Syncthing</string>
+  <string name="syncthing_options">Настройки Syncthing</string>
+  <string name="device_name">Имя устройства</string>
+  <string name="max_recv_kbps">Лимит скачивания (KiB/s)</string>
+  <string name="max_send_kbps">Лимит загрузки (KiB/s)</string>
+  <string name="upnp_enabled">Включить UPnP</string>
+  <string name="usage_reporting">Анонимные отчёты использования</string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_https_enabled">Использовать HTTPS для GUI</string>
+  <string name="export_config">Экспортировать конфигурацию</string>
   <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">Конфигурация экспортирована в %1$s</string>
+  <string name="import_config">Импортировать конфигурацию</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">Конфигурация импортирована</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Неудачное импортирование конфигурации, убедитесь что файлы находятся в %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Опции отладки</string>
+  <string name="category_about">Информация</string>
   <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">Сообщить о проблеме</string>
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Версия Syncthing</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Версия Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <string name="folder_picker_title">Выбор Папки</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Внимание: Ваша версия Android не позволяет синхронизацию на внешние хранилища</string>
   <!--ListView empty text-->
+  <string name="directory_empty">Папка Пуста</string>
   <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">Создать новую папку</string>
   <!--Menu item to select the current folder-->
+  <string name="select_folder">Выбрать Папку</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing выключен</string>
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">Изменить Настройки</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">Выход</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing запущен</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">Необходим перезапуск</string>
   <!--Text of the notification shown when a restart is needed-->
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Позже</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <string name="state_scanning">Сканирование</string>
+  <string name="state_cleaning">Очистка</string>
+  <string name="state_syncing">Синхронизация</string>
 </resources>
