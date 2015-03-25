@@ -3,7 +3,7 @@
 
     <string name="app_name">Syncthing</string>
 
-    <string name="app_description">Replace proprietary services with something open, trustworthy and decentralized.</string>
+    <string name="app_description">An open, trustworthy and decentralized file synchronization application.</string>
 
     <!-- MainActivity -->
 
@@ -18,7 +18,7 @@
     <string name="send_device_id_to">Send Device ID to</string>
 
     <!-- Text for FoldersFragment and DevicesFragment loading view -->
-    <string name="api_loading">Waiting for API</string>
+    <string name="api_loading">Loading&#8230;</string>
 
     <!-- FoldersFragment -->
 
@@ -194,14 +194,14 @@ Please install a scanner or enter the device ID manually.</string>
     <string name="web_gui_loading">Waiting for GUI</string>
 
     <!-- Shown instead of web_gui_loading if the key does not exist and has to be created -->
-    <string name="web_gui_creating_key">Generating keys. This may take a while.</string>
+    <string name="web_gui_creating_key">Generating secure keys. This may take a few minutes.</string>
 
     <!-- Title for dialog displayed on first start -->
-    <string name="welcome_title">First Start</string>
+    <string name="welcome_title">Welcome to Syncthing for Android</string>
 
     <!-- Text for dialog displayed on first start -->
-	<string name="welcome_text">Welcome to Syncthing for Android!\n\n\
-This app is currently in Alpha state, and you may experience bugs, performance problems or data loss.\n\n\
+	<string name="welcome_text">Syncthing is an open-source file synchronization application.\n\n\
+To share data with other devices, you need add their unique device ID to the device list. Afterwards you can select which folders to share with which devices.\n\n
 Please report any problems you encounter via Github.</string>
 
     <!-- SettingsFragment -->
