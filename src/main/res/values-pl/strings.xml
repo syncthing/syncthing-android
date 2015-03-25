@@ -74,7 +74,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka do folderu nie może być pusta</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">Proszę połączyć sięwpierw z urządzeniem</string>
+  <string name="no_devices">Proszę połączyć się najpierw z urządzeniem</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID urządzenia</string>
@@ -99,9 +99,9 @@
   <!--Dialog shown when attempting to delete a device-->
   <string name="delete_device_confirm">Czy na pewno chcesz usunąć to urządzenie?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">ID urządzenie nie może być puste</string>
+  <string name="device_id_required">ID urządzenia nie może być puste</string>
   <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Nazwa urządzenie nie może być pusta</string>
+  <string name="device_name_required">Nazwa urządzenia nie może być pusta</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Skanuj QR Code</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
@@ -119,7 +119,7 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Witamy w Syncthing dla Androida!
 Ta aplikacja jest w fazie Alpha i mogą wystąpić błędy, problemy wydajnościowe albo utrata danych.
-Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
+Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
@@ -140,7 +140,7 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <string name="upnp_enabled">Włącz UPnP</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adres GUI</string>
-  <string name="gui_user">Urzytkownik GUI</string>
+  <string name="gui_user">Użytkownik GUI</string>
   <string name="gui_password">Hasło GUI</string>
   <string name="gui_https_enabled">Użyj HTTPS dla GUI</string>
   <!--Toast shown after config was successfully exported-->
