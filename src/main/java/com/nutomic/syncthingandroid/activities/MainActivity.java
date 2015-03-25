@@ -55,6 +55,7 @@ public class MainActivity extends SyncthingActivity
             if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
+                    mLoadingDialog = null;
                 }
                 mDisabledDialog = SyncthingService.showDisabledDialog(this);
             } else if (mLoadingDialog == null) {
