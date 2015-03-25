@@ -225,10 +225,6 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             EditTextPreference pref = (EditTextPreference) preference;
             pref.setSummary((String) o);
         }
-        if (preference instanceof CheckBoxPreference) {
-            CheckBoxPreference pref = (CheckBoxPreference) preference;
-            pref.setChecked((Boolean) o);
-        }
         if (preference instanceof ListPreference) {
             ListPreference pref = (ListPreference) preference;
             pref.setSummary((String) o);
