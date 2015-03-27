@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.dialogs.AsyncDialogs;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.File;
@@ -283,7 +284,7 @@ public class FolderPickerActivity extends SyncthingActivity
     public void onApiChange(SyncthingService.State currentState) {
         if (!isFinishing() && currentState != SyncthingService.State.ACTIVE) {
             setResult(Activity.RESULT_CANCELED);
-            SyncthingService.showDisabledDialog(this);
+            AsyncDialogs.showDisabledDialog(this);
             finish();
         }
     }

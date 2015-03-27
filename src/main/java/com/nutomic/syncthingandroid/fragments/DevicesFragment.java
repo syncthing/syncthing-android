@@ -54,7 +54,7 @@ public class DevicesFragment extends ListFragment implements SyncthingService.On
 
     private void initAdapter() {
         SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || activity.getApi() == null)
+        if (activity == null || activity.getApi() == null || activity.isFinishing())
             return;
 
         mAdapter = new DevicesAdapter(activity);

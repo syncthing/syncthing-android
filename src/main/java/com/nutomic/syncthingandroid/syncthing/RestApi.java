@@ -344,6 +344,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         final Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);
 
+        if (activity.isFinishing()) {
+            mContext.startService(intent);
+            return;
+        }
+
         AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
                 ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
                 : new AlertDialog.Builder(activity);

@@ -319,8 +319,9 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
      */
     @Override
     public void onDeviceIdNormalized(String normalizedId, String error) {
-        if (error != null) {
-            Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+        Activity act = getActivity();
+        if (error != null && !act.isFinishing()) {
+            Toast.makeText(act, error, Toast.LENGTH_LONG).show();
         }
     }
 
