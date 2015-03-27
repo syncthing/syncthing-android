@@ -1,13 +1,10 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -21,7 +18,6 @@ import android.util.Pair;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
@@ -402,38 +398,6 @@ public class SyncthingService extends Service {
                 i.remove();
             }
         }
-    }
-
-    /**
-     * Dialog to be shown when attempting to start syncthing while it is disabled according
-     * to settings (because the device is not charging or wifi is disconnected).
-     */
-    public static AlertDialog showDisabledDialog(final Activity activity) {
-        AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setTitle(R.string.syncthing_disabled_title)
-                .setMessage(R.string.syncthing_disabled_message)
-                .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                activity.finish();
-                                Intent intent = new Intent(activity, SettingsActivity.class)
-                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT);
-                                activity.startActivity(intent);
-                            }
-                        }
-                )
-                .setNegativeButton(R.string.exit,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                activity.finish();
-                            }
-                        }
-                )
-                .show();
-        dialog.setCancelable(false);
-        return dialog;
     }
 
     public String getWebGuiUrl() {

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.dialogs.AsyncDialogs;
 import com.nutomic.syncthingandroid.fragments.DevicesFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FoldersFragment;
@@ -39,9 +41,9 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 public class MainActivity extends SyncthingActivity
         implements SyncthingService.OnApiChangeListener {
 
-    private AlertDialog mLoadingDialog;
+    private AsyncTask mLoadingDialog;
 
-    private AlertDialog mDisabledDialog;
+    private AsyncTask mDisabledDialog;
 
     private boolean mIsDestroyed = false;
 
@@ -53,50 +55,24 @@ public class MainActivity extends SyncthingActivity
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && !mIsDestroyed) {
             if (currentState == SyncthingService.State.DISABLED) {
+                // Stop loading when disabled
                 if (mLoadingDialog != null) {
-                    mLoadingDialog.dismiss();
+                    mLoadingDialog.cancel(true);
                     mLoadingDialog = null;
                 }
-                mDisabledDialog = SyncthingService.showDisabledDialog(this);
+                mDisabledDialog = AsyncDialogs.showDisabledDialog(this);
             } else if (mLoadingDialog == null) {
-                final SharedPreferences prefs =
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
-                TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-                loadingText.setText((getService().isFirstStart())
-                        ? R.string.web_gui_creating_key
-                        : R.string.api_loading);
-
-                mLoadingDialog = new AlertDialog.Builder(this)
-                        .setCancelable(false)
-                        .setView(dialogLayout)
-                        .show();
-
-                // Make sure the first start dialog is shown on top.
-                if (prefs.getBoolean("first_start", true)) {
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.welcome_title)
-                            .setMessage(R.string.welcome_text)
-                            .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    prefs.edit().putBoolean("first_start", false).commit();
-                                }
-                            })
-                            .show();
-                }
+                mLoadingDialog = AsyncDialogs.showLoadingDialog(this, getService().isFirstStart());
             }
             return;
         }
 
         if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
+            mLoadingDialog.cancel(true);
             mLoadingDialog = null;
         }
         if (mDisabledDialog != null) {
-            mDisabledDialog.dismiss();
+            mDisabledDialog.cancel(true);
             mDisabledDialog = null;
         }
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
@@ -207,7 +183,7 @@ public class MainActivity extends SyncthingActivity
     public void onDestroy() {
         super.onDestroy();
         if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
+            mLoadingDialog.cancel(true);
         }
         mIsDestroyed = true;
     }
