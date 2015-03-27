@@ -88,7 +88,7 @@ public class ConfigXml {
     }
 
     public String getWebGuiUrl() {
-        return "http://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
+        return "https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
     }
 
     public String getApiKey() {

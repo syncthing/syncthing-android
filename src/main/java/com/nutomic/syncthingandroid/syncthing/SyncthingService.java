@@ -66,6 +66,11 @@ public class SyncthingService extends Service {
     public static final String PRIVATE_KEY_FILE = "key.pem";
 
     /**
+     * Name of the public HTTPS CA file in the data directory.
+     */
+    public static final String HTTPS_CERT_FILE = "https-cert.pem";
+
+    /**
      * Directory where config is exported to and imported from.
      */
     public static final File EXPORT_PATH = Environment.getExternalStorageDirectory();
@@ -194,7 +199,7 @@ public class SyncthingService extends Service {
             mConfig = new ConfigXml(SyncthingService.this);
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
-            new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
+            new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
             new Thread(new SyncthingRunnable(
                     this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
             Notification n = new NotificationCompat.Builder(this)
@@ -356,6 +361,11 @@ public class SyncthingService extends Service {
     }
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
+
+        public PollWebGuiAvailableTaskImpl(String httpsCertPath) {
+            super(httpsCertPath);
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             if (mStopScheduled) {
