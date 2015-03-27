@@ -72,6 +72,8 @@ android {
             debuggable true
         }
         release {
+            minifyEnabled true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
             if (System.getenv("key_alias")) {
                 signingConfig signingConfigs.release
             }
