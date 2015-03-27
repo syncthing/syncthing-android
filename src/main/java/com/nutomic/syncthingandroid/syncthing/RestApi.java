@@ -151,7 +151,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     private final String mUrl;
 
-    private String mApiKey;
+    private final String mApiKey;
+
+    private final String mHttpsCertPath;
 
     private JSONObject mConfig;
 
@@ -180,6 +182,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
+        mHttpsCertPath = mContext.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
         mOnApiAvailableListener = listener;
     }
 
@@ -197,7 +200,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public void onApiAvailable();
     }
 
-    private OnApiAvailableListener mOnApiAvailableListener;
+    private final OnApiAvailableListener mOnApiAvailableListener;
 
     /**
      * Gets local device id, syncthing version and config, then calls all OnApiAvailableListeners.
@@ -205,7 +208,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     @Override
     public void onWebGuiAvailable() {
         mAvailableCount.set(0);
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 try {
@@ -219,7 +222,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_VERSION, mApiKey);
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String config) {
                 try {
@@ -340,7 +343,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @TargetApi(11)
     public void requireRestart(Activity activity) {
-        new PostTask().execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
+        new PostTask(mHttpsCertPath).execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
 
         if (mRestartPostponed)
             return;
@@ -438,7 +441,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param listener Callback invoked when the result is received.
      */
     public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -557,7 +560,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Use the key {@link #LOCAL_DEVICE_CONNECTIONS} to get connection info for the local device.
      */
     public void getConnections(final OnReceiveConnectionsListener listener) {
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -650,7 +653,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns status information about the folder with the given ID.
      */
     public void getModel(final String folderId, final OnReceiveModelListener listener) {
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -877,7 +880,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Normalizes a given device ID.
      */
     public void normalizeDeviceId(String id, final OnDeviceIdNormalizedListener listener) {
-        new GetTask() {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -934,7 +937,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
-        new PostTask().execute(mUrl, PostTask.URI_SCAN, mApiKey, "folder", folderId, "sub",
+        new PostTask(mHttpsCertPath).execute(mUrl, PostTask.URI_SCAN, mApiKey, "folder", folderId, "sub",
                 relativePath);
     }
 

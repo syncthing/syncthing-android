@@ -23,6 +23,8 @@ public class RestApiTest extends AndroidTestCase {
 
     private RestApi mApi;
 
+    private String mHttpsCertPath;
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -33,8 +35,10 @@ public class RestApiTest extends AndroidTestCase {
         mConfig = new ConfigXml(new MockContext(getContext()));
         mConfig.changeDefaultFolder();
 
+        mHttpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+
         final CountDownLatch latch = new CountDownLatch(2);
-        new PollWebGuiAvailableTask() {
+        new PollWebGuiAvailableTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 mApi.onWebGuiAvailable();
