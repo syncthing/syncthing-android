@@ -50,59 +50,64 @@ public class MainActivity extends SyncthingActivity
      */
     @Override
     @SuppressLint("InflateParams")
-    public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && !mIsDestroyed) {
-            if (currentState == SyncthingService.State.DISABLED) {
+    public void onApiChange(final SyncthingService.State currentState) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && !mIsDestroyed) {
+                    if (currentState == SyncthingService.State.DISABLED) {
+                        if (mLoadingDialog != null) {
+                            mLoadingDialog.dismiss();
+                            mLoadingDialog = null;
+                        }
+                        mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
+                    } else if (mLoadingDialog == null) {
+                        final SharedPreferences prefs =
+                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
+                        TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+                        loadingText.setText((getService().isFirstStart())
+                                ? R.string.web_gui_creating_key
+                                : R.string.api_loading);
+
+                        mLoadingDialog = new AlertDialog.Builder(MainActivity.this)
+                                .setCancelable(false)
+                                .setView(dialogLayout)
+                                .show();
+
+                        // Make sure the first start dialog is shown on top.
+                        if (prefs.getBoolean("first_start", true)) {
+                            new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle(R.string.welcome_title)
+                                    .setMessage(R.string.welcome_text)
+                                    .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            prefs.edit().putBoolean("first_start", false).commit();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                    return;
+                }
+
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                     mLoadingDialog = null;
                 }
-                mDisabledDialog = SyncthingService.showDisabledDialog(this);
-            } else if (mLoadingDialog == null) {
-                final SharedPreferences prefs =
-                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
-                TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-                loadingText.setText((getService().isFirstStart())
-                        ? R.string.web_gui_creating_key
-                        : R.string.api_loading);
-
-                mLoadingDialog = new AlertDialog.Builder(this)
-                        .setCancelable(false)
-                        .setView(dialogLayout)
-                        .show();
-
-                // Make sure the first start dialog is shown on top.
-                if (prefs.getBoolean("first_start", true)) {
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.welcome_title)
-                            .setMessage(R.string.welcome_text)
-                            .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    prefs.edit().putBoolean("first_start", false).commit();
-                                }
-                            })
-                            .show();
+                if (mDisabledDialog != null) {
+                    mDisabledDialog.dismiss();
+                    mDisabledDialog = null;
                 }
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                mDrawerLayout.setDrawerListener(mDrawerToggle);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeButtonEnabled(true);
             }
-            return;
-        }
-
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
-            mLoadingDialog = null;
-        }
-        if (mDisabledDialog != null) {
-            mDisabledDialog.dismiss();
-            mDisabledDialog = null;
-        }
-        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        });
     }
 
     private final FragmentPagerAdapter mSectionsPagerAdapter =
