@@ -279,6 +279,12 @@ Please report any problems you encounter via Github.</string>
 
     <string name="category_about">About</string>
 
+    <!-- Settings item that opens the log activity -->
+    <string name="open_log">Open Log</string>
+
+    <!-- Summary for the log activity -->
+    <string name="open_log_summary">Open the Syncthing and Android log window</string>
+
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>
 
@@ -313,6 +319,25 @@ Please report any problems you encounter via Github.</string>
     <string name="select_folder">Select Folder</string>
 
     <string name="create_folder_failed">Failed to create folder</string>
+
+    <!-- LogActivity -->
+
+
+    <!-- Title of the "log" activity -->
+    <string name="log_title">Log</string>
+
+    <!-- Title of the "log android" menu button -->
+    <string name="log_android_title">View Android Log</string>
+
+    <!-- Title of the "log Syncthing" menu button -->
+    <string name="log_syncthing_title">View Syncthing Log</string>
+
+    <!-- Title of the "share log" menu action -->
+    <string name="share_log_title">Share Log</string>
+
+    <!-- Title of the "share log" menu button -->
+    <string name="share_title">Share</string>
+
 
     <!-- SyncthingService -->
 
