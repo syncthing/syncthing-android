@@ -44,6 +44,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.LogActivity"
+            android:label="@string/log_title"
+            android:parentActivityName=".activities.SettingsActivity">
+            <intent-filter>
+                <action android:name=".activities.LogActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.SettingsActivity" />
+        </activity>
 
         <service android:name=".syncthing.SyncthingService" />
 
