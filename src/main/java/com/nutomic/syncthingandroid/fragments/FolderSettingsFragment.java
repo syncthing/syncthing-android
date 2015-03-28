@@ -10,6 +10,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.support.v4.preference.PreferenceFragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -241,6 +242,15 @@ public class FolderSettingsFragment extends PreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object o) {
         if (preference instanceof EditTextPreference) {
             EditTextPreference pref = (EditTextPreference) preference;
+            if ((pref.getEditText().getInputType() & InputType.TYPE_CLASS_NUMBER) > 0) {
+                try {
+                    o = Integer.parseInt((String) o);
+                    o = o.toString();
+                } catch (NumberFormatException e) {
+                    Log.w(TAG, "Invalid number: " + o);
+                    return false;
+                }
+            }
             pref.setSummary((String) o);
         }
 
@@ -253,10 +263,15 @@ public class FolderSettingsFragment extends PreferenceFragment
             folderUpdated();
             return true;
         } else if (preference.equals(mRescanInterval)) {
-            mFolder.RescanIntervalS = Integer.parseInt((String) o);
-            mRescanInterval.setSummary((String) o);
-            folderUpdated();
-            return true;
+            try {
+                mFolder.RescanIntervalS = Integer.parseInt((String) o);
+                mRescanInterval.setSummary((String) o);
+                folderUpdated();
+                return true;
+            } catch (NumberFormatException e) {
+                Log.w(TAG, "Invalid rescan interval: "+ o);
+            }
+            return false;
         } else if (preference.equals(mFolderMaster)) {
             mFolder.ReadOnly = (Boolean) o;
             folderUpdated();
@@ -291,10 +306,14 @@ public class FolderSettingsFragment extends PreferenceFragment
             folderUpdated();
             return true;
         } else if (preference.equals(mVersioningKeep)) {
-            ((RestApi.SimpleVersioning) mFolder.Versioning)
-                    .setParams(Integer.parseInt((String) o));
-            folderUpdated();
-            return true;
+            try {
+                ((RestApi.SimpleVersioning) mFolder.Versioning)
+                        .setParams(Integer.parseInt((String) o));
+                folderUpdated();
+                return true;
+            } catch (NumberFormatException e) {
+                Log.w(TAG, "Invalid versioning option: "+ o);
+            }
         }
 
         return false;

@@ -172,10 +172,17 @@ public class SettingsFragment extends PreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object o) {
         // Convert new value to integer if input type is number.
         if (preference instanceof EditTextPreference) {
-            EditTextPreference etp = (EditTextPreference) preference;
-            if (etp.getEditText().getInputType() == InputType.TYPE_CLASS_NUMBER) {
-                o = Integer.parseInt((String) o);
+            EditTextPreference pref = (EditTextPreference) preference;
+            if ((pref.getEditText().getInputType() & InputType.TYPE_CLASS_NUMBER) > 0) {
+                try {
+                    o = Integer.parseInt((String) o);
+                    o = o.toString();
+                } catch (NumberFormatException e) {
+                    Log.w(TAG, "Invalid number: " + o);
+                    return false;
+                }
             }
+            pref.setSummary((String) o);
         }
 
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
@@ -214,14 +221,6 @@ public class SettingsFragment extends PreferenceFragment
                 return false;
             }
             ((SyncthingActivity) getActivity()).getApi().requireRestart(getActivity());
-        }
-
-        // Set the preference value as summary.
-        if (preference instanceof EditTextPreference) {
-            String value = (o instanceof String)
-                    ? (String) o
-                    : Integer.toString((Integer) o);
-            preference.setSummary(value);
         }
 
         return true;
