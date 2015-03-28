@@ -11,6 +11,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -31,6 +32,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -267,7 +271,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         NotificationManager nm = (NotificationManager)
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_RESTART);
-        new PostTask().execute(mUrl, PostTask.URI_SHUTDOWN, mApiKey);
+        SyncthingRunnable.killSyncthing();
         mRestartPostponed = false;
     }
 
