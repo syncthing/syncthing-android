@@ -10,6 +10,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.support.v4.app.Fragment;
 import android.support.v4.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +24,8 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.BarcodeIntentIntegrator;
+import com.nutomic.syncthingandroid.util.BarcodeIntentResult;
 
 import java.util.List;
 import java.util.Map;
@@ -286,28 +289,21 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     }
 
     /**
-     * Sends QR code scanning intent when clicking the qrcode icon.
+     * Sends QR code scanning intent when clicking the QR code icon.
      */
     public void onClick(View view) {
-        Intent intentScan = new Intent("com.google.zxing.client.android.SCAN");
-        intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        try {
-            startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_qr_scanner_installed,
-                    Toast.LENGTH_LONG).show();
-        }
+        BarcodeIntentIntegrator integrator = new BarcodeIntentIntegrator(this);
+        integrator.initiateScan();
     }
 
     /**
      * Receives value of scanned QR code and sets it as device ID.
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mDevice.DeviceID = data.getStringExtra("SCAN_RESULT");
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        BarcodeIntentResult scanResult = BarcodeIntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            mDevice.DeviceID = scanResult.getContents();
             ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
             mDeviceId.setSummary(mDevice.DeviceID);
         }
