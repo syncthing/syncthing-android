@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">Map</string>
   <!--Setting title-->
-  <string name="rescan_interval">Herscanningstussenpose</string>
-  <!--Setting title-->
   <string name="folder_master">Maphoofd</string>
   <!--Setting title-->
   <string name="devices">Apparaten</string>

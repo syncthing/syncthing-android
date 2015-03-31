@@ -57,8 +57,6 @@ public class FolderSettingsFragment extends PreferenceFragment
 
     private Preference mDirectory;
 
-    private EditTextPreference mRescanInterval;
-
     private CheckBoxPreference mFolderMaster;
 
     private PreferenceScreen mDevices;
@@ -88,8 +86,6 @@ public class FolderSettingsFragment extends PreferenceFragment
         mFolderId.setOnPreferenceChangeListener(this);
         mDirectory = findPreference("directory");
         mDirectory.setOnPreferenceClickListener(this);
-        mRescanInterval = (EditTextPreference) findPreference("rescan_interval");
-        mRescanInterval.setOnPreferenceChangeListener(this);
         mFolderMaster = (CheckBoxPreference) findPreference("folder_master");
         mFolderMaster.setOnPreferenceChangeListener(this);
         mDevices = (PreferenceScreen) findPreference("devices");
@@ -107,7 +103,7 @@ public class FolderSettingsFragment extends PreferenceFragment
                 mFolder = new RestApi.Folder();
                 mFolder.ID = "";
                 mFolder.Path = "";
-                mFolder.RescanIntervalS = 0;
+                mFolder.RescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
                 mFolder.DeviceIds = new ArrayList<>();
                 mFolder.Versioning = new RestApi.Versioning();
             }
@@ -157,8 +153,6 @@ public class FolderSettingsFragment extends PreferenceFragment
         mFolderId.setText(mFolder.ID);
         mFolderId.setSummary(mFolder.ID);
         mDirectory.setSummary(mFolder.Path);
-        mRescanInterval.setText(Integer.toString(mFolder.RescanIntervalS));
-        mRescanInterval.setSummary(Integer.toString(mFolder.RescanIntervalS));
         mFolderMaster.setChecked(mFolder.ReadOnly);
         List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices(false);
         for (RestApi.Device n : devicesList) {
@@ -262,16 +256,6 @@ public class FolderSettingsFragment extends PreferenceFragment
             mFolder.Path = (String) o;
             folderUpdated();
             return true;
-        } else if (preference.equals(mRescanInterval)) {
-            try {
-                mFolder.RescanIntervalS = Integer.parseInt((String) o);
-                mRescanInterval.setSummary((String) o);
-                folderUpdated();
-                return true;
-            } catch (NumberFormatException e) {
-                Log.w(TAG, "Invalid rescan interval: "+ o);
-            }
-            return false;
         } else if (preference.equals(mFolderMaster)) {
             mFolder.ReadOnly = (Boolean) o;
             folderUpdated();

@@ -11,12 +11,6 @@
         android:key="directory"
         android:title="@string/directory" />
 
-    <EditTextPreference
-        android:persistent="false"
-        android:key="rescan_interval"
-        android:title="@string/rescan_interval"
-        android:inputType="numberDecimal" />
-
     <CheckBoxPreference
         android:persistent="false"
         android:key="folder_master"

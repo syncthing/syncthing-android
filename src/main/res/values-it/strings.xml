@@ -50,8 +50,6 @@
   <!--Setting title-->
   <string name="directory">Cartella</string>
   <!--Setting title-->
-  <string name="rescan_interval">Intervallo Scansione</string>
-  <!--Setting title-->
   <string name="folder_master">Cartella Principale</string>
   <!--Setting title-->
   <string name="devices">Dispositivi</string>

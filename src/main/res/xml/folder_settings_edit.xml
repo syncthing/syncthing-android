@@ -15,12 +15,6 @@
         android:enabled="false"
         style="?android:preferenceInformationStyle" />
 
-    <EditTextPreference
-        android:persistent="false"
-        android:key="rescan_interval"
-        android:title="@string/rescan_interval"
-        android:inputType="numberDecimal" />
-
     <CheckBoxPreference
         android:persistent="false"
         android:key="folder_master"

@@ -51,8 +51,6 @@
   <!--Setting title-->
   <string name="directory">Папка</string>
   <!--Setting title-->
-  <string name="rescan_interval">Интервал Сканирования</string>
-  <!--Setting title-->
   <string name="folder_master">Главная папка</string>
   <!--Setting title-->
   <string name="devices">Устройства</string>
