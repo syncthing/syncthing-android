@@ -5,7 +5,6 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.nutomic.syncthingandroid.syncthing.PollWebGuiAvailableTask;
-import com.nutomic.syncthingandroid.syncthing.PostTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -57,14 +56,7 @@ public class RestApiTest extends AndroidTestCase {
         super.tearDown();
 
         final CountDownLatch latch = new CountDownLatch(1);
-        new PostTask() {
-            @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                assertTrue(aBoolean);
-                latch.countDown();
-            }
-        }.execute(mConfig.getWebGuiUrl(), PostTask.URI_SHUTDOWN, mConfig.getApiKey());
-        latch.await(1, TimeUnit.SECONDS);
+        SyncthingRunnable.killSyncthing();
         ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }
 
