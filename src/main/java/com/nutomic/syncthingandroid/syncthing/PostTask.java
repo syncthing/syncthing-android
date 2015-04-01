@@ -21,8 +21,6 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
 
     public static final String URI_CONFIG = "/rest/config";
 
-    public static final String URI_SHUTDOWN = "/rest/shutdown";
-
     public static final String URI_SCAN = "/rest/scan";
 
     /**
