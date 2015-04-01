@@ -10,6 +10,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.support.v4.preference.PreferenceFragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,8 +57,6 @@ public class FolderSettingsFragment extends PreferenceFragment
 
     private Preference mDirectory;
 
-    private EditTextPreference mRescanInterval;
-
     private CheckBoxPreference mFolderMaster;
 
     private PreferenceScreen mDevices;
@@ -87,8 +86,6 @@ public class FolderSettingsFragment extends PreferenceFragment
         mFolderId.setOnPreferenceChangeListener(this);
         mDirectory = findPreference("directory");
         mDirectory.setOnPreferenceClickListener(this);
-        mRescanInterval = (EditTextPreference) findPreference("rescan_interval");
-        mRescanInterval.setOnPreferenceChangeListener(this);
         mFolderMaster = (CheckBoxPreference) findPreference("folder_master");
         mFolderMaster.setOnPreferenceChangeListener(this);
         mDevices = (PreferenceScreen) findPreference("devices");
@@ -106,7 +103,7 @@ public class FolderSettingsFragment extends PreferenceFragment
                 mFolder = new RestApi.Folder();
                 mFolder.ID = "";
                 mFolder.Path = "";
-                mFolder.RescanIntervalS = 0;
+                mFolder.RescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
                 mFolder.DeviceIds = new ArrayList<>();
                 mFolder.Versioning = new RestApi.Versioning();
             }
@@ -156,8 +153,6 @@ public class FolderSettingsFragment extends PreferenceFragment
         mFolderId.setText(mFolder.ID);
         mFolderId.setSummary(mFolder.ID);
         mDirectory.setSummary(mFolder.Path);
-        mRescanInterval.setText(Integer.toString(mFolder.RescanIntervalS));
-        mRescanInterval.setSummary(Integer.toString(mFolder.RescanIntervalS));
         mFolderMaster.setChecked(mFolder.ReadOnly);
         List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices(false);
         for (RestApi.Device n : devicesList) {
@@ -241,6 +236,15 @@ public class FolderSettingsFragment extends PreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object o) {
         if (preference instanceof EditTextPreference) {
             EditTextPreference pref = (EditTextPreference) preference;
+            if ((pref.getEditText().getInputType() & InputType.TYPE_CLASS_NUMBER) > 0) {
+                try {
+                    o = Integer.parseInt((String) o);
+                    o = o.toString();
+                } catch (NumberFormatException e) {
+                    Log.w(TAG, "Invalid number: " + o);
+                    return false;
+                }
+            }
             pref.setSummary((String) o);
         }
 
@@ -250,11 +254,6 @@ public class FolderSettingsFragment extends PreferenceFragment
             return true;
         } else if (preference.equals(mDirectory)) {
             mFolder.Path = (String) o;
-            folderUpdated();
-            return true;
-        } else if (preference.equals(mRescanInterval)) {
-            mFolder.RescanIntervalS = Integer.parseInt((String) o);
-            mRescanInterval.setSummary((String) o);
             folderUpdated();
             return true;
         } else if (preference.equals(mFolderMaster)) {
@@ -291,10 +290,14 @@ public class FolderSettingsFragment extends PreferenceFragment
             folderUpdated();
             return true;
         } else if (preference.equals(mVersioningKeep)) {
-            ((RestApi.SimpleVersioning) mFolder.Versioning)
-                    .setParams(Integer.parseInt((String) o));
-            folderUpdated();
-            return true;
+            try {
+                ((RestApi.SimpleVersioning) mFolder.Versioning)
+                        .setParams(Integer.parseInt((String) o));
+                folderUpdated();
+                return true;
+            } catch (NumberFormatException e) {
+                Log.w(TAG, "Invalid versioning option: "+ o);
+            }
         }
 
         return false;

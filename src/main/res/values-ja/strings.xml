@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">ディレクトリー</string>
   <!--Setting title-->
-  <string name="rescan_interval">再スキャン間隔</string>
-  <!--Setting title-->
   <string name="folder_master">フォルダーマスター</string>
   <!--Setting title-->
   <string name="devices">デバイス</string>

@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">目录</string>
   <!--Setting title-->
-  <string name="rescan_interval">扫描间隔</string>
-  <!--Setting title-->
   <string name="folder_master">主文件夹</string>
   <!--Setting title-->
   <string name="devices">设备</string>

@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">Dossier</string>
   <!--Setting title-->
-  <string name="rescan_interval">Intervalle d\'analyse</string>
-  <!--Setting title-->
   <string name="folder_master">Dossier maitre</string>
   <!--Setting title-->
   <string name="devices">Machines</string>
