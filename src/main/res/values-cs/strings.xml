@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">Adresář</string>
   <!--Setting title-->
-  <string name="rescan_interval">Interval opakování skenování</string>
-  <!--Setting title-->
   <string name="folder_master">Master adresář</string>
   <!--Setting title-->
   <string name="devices">Přístroje</string>

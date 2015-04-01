@@ -51,8 +51,6 @@
   <!--Setting title-->
   <string name="directory">資料夾</string>
   <!--Setting title-->
-  <string name="rescan_interval">重新掃描間隔</string>
-  <!--Setting title-->
   <string name="folder_master">主資料夾</string>
   <!--Setting title-->
   <string name="devices">裝置</string>

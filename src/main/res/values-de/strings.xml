@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">Verzeichnis</string>
   <!--Setting title-->
-  <string name="rescan_interval">Suchintervall</string>
-  <!--Setting title-->
   <string name="folder_master">Originalverzeichnis</string>
   <!--Setting title-->
   <string name="devices">Geräte</string>

@@ -52,8 +52,6 @@
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title-->
-  <string name="rescan_interval">Intervalo entre verificações</string>
-  <!--Setting title-->
   <string name="folder_master">Pasta Mestre</string>
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
