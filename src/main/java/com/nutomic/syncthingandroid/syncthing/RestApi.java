@@ -208,6 +208,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         new GetTask() {
             @Override
             protected void onPostExecute(String s) {
+                if (s == null)
+                    return;
                 try {
                     JSONObject json = new JSONObject(s);
                     mVersion = json.getString("version");
@@ -222,6 +224,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         new GetTask() {
             @Override
             protected void onPostExecute(String config) {
+                if (config == null)
+                    return;
                 try {
                     mConfig = new JSONObject(config);
                     tryIsAvailable();
@@ -881,6 +885,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                if (s == null)
+                    return;
                 String normalized = null;
                 String error = null;
                 try {
