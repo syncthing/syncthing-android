@@ -30,11 +30,11 @@ Use `./gradlew assembleDebug` in the project directory to compile the APK.
 To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git submodule in `ext/syncthing/src/github.com/syncthing/syncthing` may need to be updated.
 
 
-### Getting Syncthing without building natively
+### Building on Windows
 
-To get Syncthing app for Android running on you device/emulator the native syncthing binary has to be available. There are multiple ways to get the native syncthing binary:
-- open the Syncthing apk (the one taken from the play store) running on your device as a zip, extract the `lib/` folder into your project directory and rename it to `libs/`.
-- Depending on your target architecture, download `syncthing-linux-386` or `syncthing-linux-armv5` from [syncthing releases](https://github.com/syncthing/syncthing/releases), and extract the binary to `libs/x86/libsyncthing.so` or `libs/armeabi/libsyncthing.so` respectively.
+To build the Syncthing app on Windows we need to include the native syncthing binaries:
+- Download the `syncthing-linux-386` and `syncthing-linux-arm` archives from [syncthing releases](https://github.com/syncthing/syncthing/releases) and extract them. In each there is a `syncthing` executable. Rename and place both of these to `libs/x86/libsyncthing.so` and `libs/armeabi/libsyncthing.so` respectively.  
+You will also need to replace the standard `build.gradle` file with [this one](https://gist.github.com/Moter8/9cfc191434d1989d86be).
 
 
 ### Development Notes
