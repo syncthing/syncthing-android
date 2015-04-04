@@ -384,7 +384,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         Notification n = new NotificationCompat.Builder(mContext)
                 .setContentTitle(mContext.getString(R.string.restart_title))
                 .setContentText(mContext.getString(R.string.restart_notification_text))
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_notify)
                 .setContentIntent(pi)
                 .build();
         n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
