@@ -51,7 +51,6 @@
   <string name="directory">Katalog</string>
   <!--Setting title-->
   <!--Setting title-->
-  <!--Setting title-->
   <string name="devices">Enheter</string>
   <!--Setting title-->
   <!--Setting title-->
@@ -81,6 +80,7 @@
   <string name="current_address">Nåværende Adresser</string>
   <!--Setting title-->
   <string name="compression">Komprimering</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Innføring</string>
   <!--ActionBar item-->

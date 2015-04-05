@@ -45,17 +45,18 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serwer ogłoszeniowy</string>
   <!--Menu item to donate-->
+  <string name="donate">Wspomóż</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID folderu</string>
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
-  <string name="folder_master">Folder nadrzędny</string>
+  <string name="folder_master">Główny folder</string>
   <!--Setting title-->
   <string name="devices">Urządzenia</string>
   <!--Setting title-->
-  <string name="file_versioning">File Versioning</string>
+  <string name="file_versioning">System wersjonowania plików</string>
   <!--Setting title-->
   <string name="keep_versions">Pamiętaj wersje</string>
   <!--Setting title-->
@@ -69,10 +70,11 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Czy na pewno chcesz usunąć ten folder?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">Nazwa katalogu musi być krótka (64 lub mniej znaków). Może zawierać tylko litery, cyfry, kropki, myślniki i znak podkreślenia.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka do folderu nie może być pusta</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">Proszę połączyć sięwpierw z urządzeniem</string>
+  <string name="no_devices">Proszę najpierw podłączyć urządzenie.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID urządzenia</string>
@@ -84,6 +86,7 @@
   <string name="current_address">Bieżący adres</string>
   <!--Setting title-->
   <string name="compression">Kompresja</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Wprowadzający</string>
   <!--ActionBar item-->
@@ -97,11 +100,11 @@
   <!--Dialog shown when attempting to delete a device-->
   <string name="delete_device_confirm">Czy na pewno chcesz usunąć to urządzenie?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">ID urządzenie nie może być puste</string>
+  <string name="device_id_required">ID urządzenia nie może być puste</string>
   <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Nazwa urządzenie nie może być pusta</string>
+  <string name="device_name_required">Nazwa urządzenia nie może być pusta</string>
   <!--Content description for device ID qr code icon-->
-  <string name="scan_qr_code_description">Skanuj QR Code</string>
+  <string name="scan_qr_code_description">Skanuj kod QR</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
   <string name="no_qr_scanner_installed">Nie masz zainstalowanego wspieranego skanera QR.
 Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
@@ -111,41 +114,54 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Oczekiwanie na GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generowanie kluczy. To może potrwać chwilę.</string>
+  <string name="web_gui_creating_key">Generowanie kluczy. To może chwilę potrwać.</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Pierwsze uruchomienie</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Witamy w Syncthing dla Androida!
 Ta aplikacja jest w fazie Alpha i mogą wystąpić błędy, problemy wydajnościowe albo utrata danych.
-Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
+Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Zawsze działaj w tle</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing zawsze działa w tle zgodnie z ustawieniami poniżej.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
-  <string name="sync_only_charging">tylko, ładując</string>
-  <string name="sync_only_wifi">tylko na WiFi</string>
+  <string name="sync_only_charging">Synchronizuj tylko podczas ładowania</string>
+  <string name="sync_only_wifi">Synchronizuj tylko na WiFi</string>
+  <string name="advanced_folder_picker">Używaj zaawansowanego wybierania katalogów</string>
+  <string name="advanced_folder_picker_summary">Wybierz dowolny katalog do zsynchronizowania</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Ustawienia Syncthing</string>
+  <string name="device_name">Nazwa urządzenia</string>
+  <string name="listen_address">Adres nasłuchiwania protokołu</string>
   <string name="max_recv_kbps">Limit pobierania (KiB/s)</string>
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
-  <string name="global_announce_enabled">Globalny wyszukiwanie</string>
+  <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
   <string name="upnp_enabled">Włącz UPnP</string>
+  <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
+  <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adres GUI</string>
   <string name="gui_user">Urzytkownik GUI</string>
   <string name="gui_password">Hasło GUI</string>
   <string name="gui_https_enabled">Użyj HTTPS dla GUI</string>
+  <string name="export_config">Eksportuj konfigurację</string>
   <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">Konfiguracja została zapisana w %1$s</string>
+  <string name="import_config">Importuj konfigurację</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">Konfiguracja została zaimportowana pomyślnie</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Wystąpił błąd podczas importowania, upewnij się że w %1$s są potrzebne pliki</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opcje debugowania</string>
+  <string name="category_about">O projekcie</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Zgłoś błąd</string>
   <!--Summary for the issue tracker settings item-->
@@ -157,14 +173,16 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <string name="app_version_title">Wersja Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Folder Picker</string>
+  <string name="folder_picker_title">Wybieranie folderów</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Ostrzeżenie: Twoja wersja Androida nie pozwala na synchronizowanie zewnętrznych pamięci masowych</string>
   <!--ListView empty text-->
   <string name="directory_empty">Katalog jest pusty</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Nowy folder</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Wybierz folder</string>
+  <string name="create_folder_failed">Wystąpił błąd podczas tworzenia katalogu</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
@@ -175,7 +193,7 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Wyjście</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
-  <string name="syncthing_active">Syncthing działa</string>
+  <string name="syncthing_active">Syncthing jest uruchomione</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Wymagany restart</string>
@@ -184,12 +202,26 @@ Proszę o zgłaszanie wszelkich problemów na Github-ie.</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Restartuj później</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">ID urządzenia skopiowane do schowka</string>
+  <string name="device_id_copied_to_clipboard">ID urządzenia zostało skopiowane do schowka</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Bezczynny</string>
-  <string name="state_scanning">Skanuje</string>
-  <string name="state_cleaning">Czyści</string>
-  <string name="state_syncing">Synchronizuje</string>
+  <string name="state_scanning">Skanowanie</string>
+  <string name="state_cleaning">Czyszczenie</string>
+  <string name="state_syncing">Synchronizowanie</string>
 </resources>

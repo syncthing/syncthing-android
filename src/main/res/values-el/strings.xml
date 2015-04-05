@@ -46,7 +46,6 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
-  <!--Setting title-->
   <string name="devices">Συσκευές</string>
   <!--Setting title-->
   <!--Setting title-->
@@ -64,6 +63,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <!--ActionBar item-->
   <!--Title for DeviceSettingsFragment in create mode-->

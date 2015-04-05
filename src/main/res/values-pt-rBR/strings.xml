@@ -72,7 +72,7 @@
   <!--Toast shown when trying to create a folder with an invalid ID-->
   <string name="folder_id_invalid">O ID da pasta deve ser um nome curto (64 caracteres ou menos) consistindo apenas em letras, números, ponto (.), hífen (-) ou underscore (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">O caminho da pasta não pode ser vazio</string>
+  <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
   <string name="no_devices">Conecte um dispositivo antes, por favor.</string>
   <!--DeviceSettingsFragment-->
@@ -86,6 +86,12 @@
   <string name="current_address">Endereço atual</string>
   <!--Setting title-->
   <string name="compression">Compressão</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Nunca</item>
+    <item>Metadadados</item>
+    <item>Sempre</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Apresentador</string>
   <!--ActionBar item-->
@@ -101,7 +107,7 @@
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">O ID de dispositivo não pode ser vazio</string>
   <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">O nome do dispositivo não pode ser vazio</string>
+  <string name="device_name_required">O nome do dispositivo não pode ficar vazio</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Ler QR Code</string>
   <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
@@ -123,14 +129,15 @@ Por favor, relate qualquer problema que ocorrer através do Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Sempre rodar em segundo plano</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">O Syncthing sempre rodará em segundo plano, de acordo com as preferências abaixo.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">O Syncthing sempre rodará quando iniciado manualmente e pode ser parado pelo botão de menu.</string>
-  <string name="sync_only_charging">Sincronizar somente enquanto o dispositivo estiver carregando</string>
-  <string name="sync_only_wifi">Sincronizar apenas em wifi</string>
+  <string name="sync_only_charging">Somente durante o carregamento</string>
+  <string name="sync_only_wifi">Somentr conectado ao WiFi</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="category_syncthing">Syncthing</string>
@@ -159,6 +166,7 @@ Por favor, relate qualquer problema que ocorrer através do Github.</string>
   <string name="config_import_failed">A importação falhou. Cheque se os arquivos estão em %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções de depuração</string>
+  <string name="category_about">Sobre</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar incidente</string>
   <!--Summary for the issue tracker settings item-->
@@ -172,6 +180,7 @@ Por favor, relate qualquer problema que ocorrer através do Github.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Seletor de pasta</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Aviso: a versão do seu Android não suporta sincronização de dispositivos externos de armazenamento</string>
   <!--ListView empty text-->
   <string name="directory_empty">A pasta está vazia</string>
   <!--Menu item to create folder on the file system-->
@@ -220,4 +229,5 @@ Por favor, relate qualquer problema que ocorrer através do Github.</string>
   <string name="state_scanning">Verificando</string>
   <string name="state_cleaning">Limpando</string>
   <string name="state_syncing">Sincronizando</string>
+  <string name="state_unknown">Desconhecido</string>
 </resources>

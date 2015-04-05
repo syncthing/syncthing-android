@@ -86,6 +86,12 @@
   <string name="current_address">現在のアドレス</string>
   <!--Setting title-->
   <string name="compression">圧縮</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>なし</item>
+    <item>メタデータ</item>
+    <item>つねに</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">紹介者</string>
   <!--ActionBar item-->
@@ -223,4 +229,5 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="state_scanning">スキャン中</string>
   <string name="state_cleaning">クリーニング中</string>
   <string name="state_syncing">同期中</string>
+  <string name="state_unknown">不明</string>
 </resources>

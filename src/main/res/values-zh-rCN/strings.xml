@@ -86,6 +86,12 @@
   <string name="current_address">当前地址</string>
   <!--Setting title-->
   <string name="compression">压缩</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>从不</item>
+    <item>元数据</item>
+    <item>总是</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">介绍人</string>
   <!--ActionBar item-->
@@ -223,4 +229,5 @@
   <string name="state_scanning">正在扫描</string>
   <string name="state_cleaning">正在清理</string>
   <string name="state_syncing">正在同步</string>
+  <string name="state_unknown">未知</string>
 </resources>

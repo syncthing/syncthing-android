@@ -85,6 +85,7 @@
   <string name="current_address">目前位址</string>
   <!--Setting title-->
   <string name="compression">壓縮</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">引入者</string>
   <!--ActionBar item-->

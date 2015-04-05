@@ -86,6 +86,12 @@
   <string name="current_address">Adresses actuelles</string>
   <!--Setting title-->
   <string name="compression">Compression</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Jamais</item>
+    <item>Metadonnées</item>
+    <item>Toujours</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Initiateur</string>
   <!--ActionBar item-->
@@ -223,4 +229,5 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="state_scanning">Analyse en cours</string>
   <string name="state_cleaning">Effacement en cours</string>
   <string name="state_syncing">Synchro en cours</string>
+  <string name="state_unknown">Inconnu</string>
 </resources>

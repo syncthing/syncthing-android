@@ -86,6 +86,7 @@
   <string name="current_address">Geçerli Adres</string>
   <!--Setting title-->
   <string name="compression">Sıkıştırma</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Tanıtıcı</string>
   <!--ActionBar item-->

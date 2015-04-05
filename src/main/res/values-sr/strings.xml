@@ -31,7 +31,6 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
-  <!--Setting title-->
   <!--Title for FolderSettingsFragment in create mode-->
   <!--Title for FolderSettingsFragment in edit mode-->
   <!--Menu item to confirm folder creation-->
@@ -45,6 +44,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <!--ActionBar item-->
   <!--Title for DeviceSettingsFragment in create mode-->

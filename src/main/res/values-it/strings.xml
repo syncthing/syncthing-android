@@ -44,6 +44,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Server Presenza Globale</string>
   <!--Menu item to donate-->
+  <string name="donate">Donazione</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Cartella</string>
@@ -84,6 +85,12 @@
   <string name="current_address">Indirizzo Attuale</string>
   <!--Setting title-->
   <string name="compression">Compressione</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Mai</item>
+    <item>Metadati</item>
+    <item>Sempre</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Introduttore</string>
   <!--ActionBar item-->
@@ -121,6 +128,7 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Impostazioni</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Sempre in background</string>
   <!--Preference summary in case it is enabled-->
@@ -146,11 +154,16 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <string name="gui_user">Utente Interfaccia Grafica</string>
   <string name="gui_password">Password Autenticazione Utente</string>
   <string name="gui_https_enabled">Usa HTTPS per l\'interfaccia grafica</string>
+  <string name="export_config">Esporta Configurazione</string>
   <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">Config è stata esportata in %1$s</string>
+  <string name="import_config">Importa Configurazione</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">Config importata</string>
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opzioni di Debug</string>
+  <string name="category_about">Info</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Segnala Problema</string>
   <!--Summary for the issue tracker settings item-->
@@ -164,6 +177,7 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Selezione Cartella</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Attenzione: La tua versione di Android non permette la sincronizzazione con dispositivi esterni di archiviazione</string>
   <!--ListView empty text-->
   <string name="directory_empty">Cartella Vuota</string>
   <!--Menu item to create folder on the file system-->
@@ -192,9 +206,24 @@ Si prega di segnalare eventuali problemi riscontrati tramite Github.</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">ID Dispositivo copiato negli appunti</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inattivo</string>
   <string name="state_scanning">Scansione in corso</string>
   <string name="state_syncing">Sincronizzazione</string>
+  <string name="state_unknown">Sconosciuto</string>
 </resources>

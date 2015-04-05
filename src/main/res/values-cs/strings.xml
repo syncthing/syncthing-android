@@ -86,6 +86,7 @@
   <string name="current_address">Aktuální adresa</string>
   <!--Setting title-->
   <string name="compression">Komprese</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Zavaděč</string>
   <!--ActionBar item-->

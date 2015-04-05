@@ -86,6 +86,7 @@
   <string name="current_address">Aktuelle Adresse</string>
   <!--Setting title-->
   <string name="compression">Datenkomprimierung</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Verteilergerät</string>
   <!--ActionBar item-->

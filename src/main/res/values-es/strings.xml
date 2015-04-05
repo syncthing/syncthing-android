@@ -45,6 +45,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de Anuncio</string>
   <!--Menu item to donate-->
+  <string name="donate">Donar</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID de carpeta</string>
@@ -83,6 +84,7 @@
   <string name="current_address">Dirección actual</string>
   <!--Setting title-->
   <string name="compression">Compresión</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Introductor</string>
   <!--ActionBar item-->
@@ -141,6 +143,7 @@ Por favor reporte cualquier problema que encuentre a través de Github.</string>
   <string name="gui_user">Usuario de Autenticación GUI</string>
   <string name="gui_password">Contraseña de Autenticación GUI</string>
   <string name="gui_https_enabled">Usar HHTPS para la GUI</string>
+  <string name="export_config">Exportar Configuración</string>
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->

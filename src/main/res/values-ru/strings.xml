@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Открытая, надёжная и децентрализованная замена проприетарных сервисов.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Доб Папку</string>
@@ -69,6 +70,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Вы действительно хотите удалить папку?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">ID папки должен быть коротким идентификатором (64 символов или меньше) состоящий из букв, цифр и символов точки (.), тире(-) и подчеркивания (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Путь к папке не может быть пустым</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
@@ -84,7 +86,14 @@
   <string name="current_address">Текущий Адрес</string>
   <!--Setting title-->
   <string name="compression">Сжатие</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Никогда</item>
+    <item>Метаданные</item>
+    <item>Всегда</item>
+  </string-array>
   <!--Setting title-->
+  <string name="introducer">Интродюсер</string>
   <!--ActionBar item-->
   <string name="delete_device">Удалить Устройство</string>
   <!--Title for DeviceSettingsFragment in create mode-->
@@ -114,6 +123,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Первый Запуск</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Добро пожаловать в Syncthing для Android!\n\n\
+Приложение сейчас находится в альфа версии, и вы можете столкнуться с недоработками, проблемами производительности и потерей данных.\n\n\
+Пожалуйста сообщайте о проблемах через Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Настройки</string>
@@ -126,30 +138,39 @@
   <string name="always_run_in_background_disabled">Syncthing работает только когда запущен специально и может быть остановлен кнопкой в меню.</string>
   <string name="sync_only_charging">Синхронизация только во время зарядки</string>
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
+  <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Настройки Syncthing</string>
-  <string name="device_name">Имя устройства</string>
-  <string name="max_recv_kbps">Лимит скачивания (KiB/s)</string>
-  <string name="max_send_kbps">Лимит загрузки (KiB/s)</string>
+  <string name="device_name">Имя Устройства</string>
+  <string name="listen_address">Адрес Ожидания Протокола Синхронизации</string>
+  <string name="max_recv_kbps">Лимит Скачивания (КБ/с)</string>
+  <string name="max_send_kbps">Лимит Загрузки (КБ/с)</string>
+  <string name="global_announce_enabled">Глобальное Обнаружение</string>
+  <string name="local_announce_enabled">Локальное Обнаружение</string>
   <string name="upnp_enabled">Включить UPnP</string>
-  <string name="usage_reporting">Анонимные отчёты использования</string>
+  <string name="global_announce_server">Сервер Глобального Обнаружения</string>
+  <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_address">Адрес Ожидания GUI</string>
+  <string name="gui_user">Пользователь Идентификации GUI</string>
+  <string name="gui_password">Пароль Идентификации GUI</string>
   <string name="gui_https_enabled">Использовать HTTPS для GUI</string>
-  <string name="export_config">Экспортировать конфигурацию</string>
+  <string name="export_config">Экспортировать Конфигурацию</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Конфигурация экспортирована в %1$s</string>
-  <string name="import_config">Импортировать конфигурацию</string>
+  <string name="import_config">Импортировать Конфигурацию</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Конфигурация импортирована</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Неудачное импортирование конфигурации, убедитесь что файлы находятся в %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Опции отладки</string>
+  <string name="sttrace_title">Опции Отладки</string>
   <string name="category_about">Информация</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Сообщить о проблеме</string>
+  <string name="report_issue_title">Сообщить о Проблеме</string>
   <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Открыть трекер проблем Syncthing-Android </string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия Syncthing</string>
@@ -166,10 +187,12 @@
   <string name="create_fs_folder">Создать новую папку</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Выбрать Папку</string>
+  <string name="create_folder_failed">Неудачное создание папки</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing выключен</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Вы хотите изменить ваши настройки?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Изменить Настройки</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -178,15 +201,33 @@
   <string name="syncthing_active">Syncthing запущен</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Необходим перезапуск</string>
+  <string name="restart_title">Необходим Перезапуск</string>
   <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">Нажмите здесь чтобы перезагрузить syncthing</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Позже</string>
   <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">ID устройства копирован в буфер обмена</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>Б</item>
+    <item>КБ</item>
+    <item>МБ</item>
+    <item>ГБ</item>
+    <item>ТБ</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>б/с</item>
+    <item>Кб/с</item>
+    <item>Мб/с</item>
+    <item>Гб/с</item>
+    <item>Тб/с</item>
+  </string-array>
   <!--Possible folder states-->
+  <string name="state_idle">Бездействие</string>
   <string name="state_scanning">Сканирование</string>
   <string name="state_cleaning">Очистка</string>
   <string name="state_syncing">Синхронизация</string>
+  <string name="state_unknown">Неизвестно</string>
 </resources>

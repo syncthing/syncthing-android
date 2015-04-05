@@ -86,6 +86,7 @@
   <string name="current_address">Endereço actual</string>
   <!--Setting title-->
   <string name="compression">Compressão</string>
+  <!--Strings representing compression options-->
   <!--Setting title-->
   <string name="introducer">Apresentador</string>
   <!--ActionBar item-->

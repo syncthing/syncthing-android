@@ -86,6 +86,12 @@
   <string name="current_address">Huidig adres</string>
   <!--Setting title-->
   <string name="compression">Compressie</string>
+  <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Nooit</item>
+    <item>Alleen metadata</item>
+    <item>Altijd</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Introductie</string>
   <!--ActionBar item-->
@@ -223,4 +229,5 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="state_scanning">Bezig met scannen</string>
   <string name="state_cleaning">Bezig met opruimen</string>
   <string name="state_syncing">Bezig met synchroniseren</string>
+  <string name="state_unknown">Onbekend</string>
 </resources>
