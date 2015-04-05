@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.3.0'
 }
@@ -38,8 +38,8 @@ preBuild {
 project.archivesBaseName = 'syncthing'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         versionCode getVersionCodeFromManifest()
