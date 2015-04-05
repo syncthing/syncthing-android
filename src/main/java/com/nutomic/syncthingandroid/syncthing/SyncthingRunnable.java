@@ -9,7 +9,6 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -79,11 +78,13 @@ public class SyncthingRunnable implements Runnable {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
             try {
-                dos.close();
+                if (dos != null)
+                    dos.close();
             } catch (IOException e) {
                 Log.w(TAG, "Failed to close shell stream", e);
             }
-            process.destroy();
+            if (process != null)
+                process.destroy();
             if (ret != 0) {
                 Log.e(TAG_NATIVE, "Syncthing binary crashed with error code " +
                         Integer.toString(ret));
@@ -158,9 +159,8 @@ public class SyncthingRunnable implements Runnable {
                 Log.w(TAG_KILL, "Failed list Syncthing processes", e);
             } finally {
                 try {
-                    if (psOut != null) {
+                    if (psOut != null)
                         psOut.close();
-                    }
                 } catch (IOException e) {
                     Log.w(TAG_KILL, "Failed close the psOut stream", e);
                 }
@@ -197,9 +197,8 @@ public class SyncthingRunnable implements Runnable {
             Log.w(TAG_KILL, "Failed to kill process id "+id, e);
         } finally {
             try {
-                if (killOut != null) {
+                if (killOut != null)
                     killOut.close();
-                }
             } catch (IOException e) {
                 Log.w(TAG_KILL, "Failed close the killOut stream", e);}
             if (kill != null) {
