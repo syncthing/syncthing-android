@@ -68,11 +68,11 @@ cd src/github.com/syncthing/syncthing
 $GOROOT/bin/go run build.go clean
 
 # X86
-$GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
+GO386=387 $GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-x86
 $GOROOT/bin/go run build.go clean
 
 # ARM
-$GOROOT/bin/go run build.go -goos linux -goarch arm -no-upgrade build
+GOARM=5 $GOROOT/bin/go run build.go -goos linux -goarch arm -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-armeabi
 $GOROOT/bin/go run build.go clean
