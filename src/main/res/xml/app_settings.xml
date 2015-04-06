@@ -20,6 +20,12 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference
+            android:key="sync_only_ap"
+            android:title="@string/sync_only_ap"
+            android:defaultValue="false" />
+
+
+        <CheckBoxPreference
             android:key="advanced_folder_picker"
             android:title="@string/advanced_folder_picker"
             android:summary="@string/advanced_folder_picker_summary"
