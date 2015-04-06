@@ -197,7 +197,7 @@ public class SyncthingService extends Service {
                     this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
             Notification n = new NotificationCompat.Builder(this)
                     .setContentTitle(getString(R.string.syncthing_active))
-                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
                     .setPriority(NotificationCompat.PRIORITY_MIN)
                     .setContentIntent(PendingIntent.getActivity(this, 0,
