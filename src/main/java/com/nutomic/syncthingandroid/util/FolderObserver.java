@@ -96,25 +96,21 @@ public class FolderObserver extends FileObserver {
                 : new File(mPath);
 
         switch (event) {
-            case MOVED_FROM:
-                // fall through
-            case DELETE_SELF:
-                // fall through
-            case DELETE:
+            case MOVED_FROM: DELETE_SELF: DELETE:
                 for (FolderObserver c : mChilds) {
                     if (c.mPath.equals(path)) {
                         mChilds.remove(c);
                         break;
                     }
                 }
+                mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
                 break;
-            case MOVED_TO:
-                // fall through
-            case CREATE:
+            case MOVED_TO: CREATE:
                 if (fullPath.isDirectory()) {
                     mChilds.add(new FolderObserver(mListener, mFolder, path));
                 }
-                // fall through
+                mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
+                break;
             default:
                 mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
         }
