@@ -270,6 +270,8 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
      */
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
+        if (mVersion == null || mCurrentAddress == null)
+            return;
         if (connections.containsKey(mDevice.DeviceID)) {
             mVersion.setSummary(connections.get(mDevice.DeviceID).ClientVersion);
             mCurrentAddress.setSummary(connections.get(mDevice.DeviceID).Address);
