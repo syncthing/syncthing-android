@@ -27,8 +27,7 @@ public class RestApiTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mSyncthing = new SyncthingRunnable(new MockContext(null),
-                getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
+        mSyncthing = new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
 
         mConfig = new ConfigXml(new MockContext(getContext()));
         mConfig.changeDefaultFolder();

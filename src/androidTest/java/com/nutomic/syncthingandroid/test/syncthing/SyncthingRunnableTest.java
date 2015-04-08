@@ -17,9 +17,9 @@ public class SyncthingRunnableTest extends AndroidTestCase {
     @SmallTest
     public void testRunning() throws InterruptedException {
         MockContext context = new MockContext(getContext());
-        File testFile = new File(context.getFilesDir(), "was_running");
+        File testFile = new File(context.getFilesDir(), SyncthingRunnable.UNIT_TEST_PATH);
         assertFalse(testFile.exists());
-        // Inject a differenct command instead of the syncthing binary for testing.
+        // Inject a different command instead of the Syncthing binary for testing.
         new SyncthingRunnable(context, "touch " + testFile.getAbsolutePath() + "; exit\n").run();
         assertTrue(testFile.exists());
         testFile.delete();

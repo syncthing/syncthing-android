@@ -30,8 +30,7 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
     }
 
     public void testPolling() throws InterruptedException {
-        new SyncthingRunnable(new MockContext(null),
-                getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
+        mSyncthing = new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
 
         final CountDownLatch latch = new CountDownLatch(1);
         new PollWebGuiAvailableTask() {
