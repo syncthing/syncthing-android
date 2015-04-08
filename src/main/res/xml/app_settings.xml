@@ -32,71 +32,79 @@
 
         <PreferenceScreen
             android:key="syncthing_options"
-            android:title="@string/syncthing_options"
-            android:persistent="false">
+            android:title="@string/syncthing_options">
 
             <EditTextPreference
                 android:key="DeviceName"
-                android:title="@string/device_name" />
+                android:title="@string/device_name"
+                android:persistent="false" />
 
             <EditTextPreference
                 android:key="ListenAddress"
-                android:title="@string/listen_address" />
+                android:title="@string/listen_address"
+                android:persistent="false" />
 
             <EditTextPreference
                 android:key="MaxRecvKbps"
                 android:title="@string/max_recv_kbps"
-                android:numeric="integer" />
+                android:numeric="integer"
+                android:persistent="false" />
 
             <EditTextPreference
                 android:key="MaxSendKbps"
                 android:title="@string/max_send_kbps"
-                android:numeric="integer" />
+                android:numeric="integer"
+                android:persistent="false" />
 
             <CheckBoxPreference
                 android:key="GlobalAnnEnabled"
-                android:title="@string/global_announce_enabled" />
+                android:title="@string/global_announce_enabled"
+                android:persistent="false" />
 
             <CheckBoxPreference
                 android:key="LocalAnnEnabled"
-                android:title="@string/local_announce_enabled" />
+                android:title="@string/local_announce_enabled"
+                android:persistent="false" />
 
             <CheckBoxPreference
                 android:key="UPnPEnabled"
-                android:title="@string/upnp_enabled" />
+                android:title="@string/upnp_enabled"
+                android:persistent="false" />
 
             <EditTextPreference
                 android:key="GlobalAnnServers"
-                android:title="@string/global_announce_server" />
+                android:title="@string/global_announce_server"
+                android:persistent="false" />
 
             <CheckBoxPreference
                 android:key="URAccepted"
-                android:title="@string/usage_reporting" />
+                android:title="@string/usage_reporting"
+                android:persistent="false" />
 
         </PreferenceScreen>
 
         <PreferenceScreen
             android:key="syncthing_gui"
-            android:title="@string/syncthing_gui"
-            android:persistent="false">
+            android:title="@string/syncthing_gui">
 
             <EditTextPreference
                 android:key="Address"
-                android:title="@string/gui_address" />
+                android:title="@string/gui_address"
+                android:persistent="false" />
 
             <EditTextPreference
-                android:key="User"
+                android:key="gui_user"
                 android:title="@string/gui_user" />
 
             <EditTextPreference
-                android:key="Password"
-                android:title="@string/gui_password"
-                android:inputType="textPassword" />
+                android:key="gui_password"
+                android:title="@string/gui_password" />
 
             <CheckBoxPreference
                 android:key="UseTLS"
                 android:title="@string/gui_https_enabled"
-                android:enabled="false" />
+                android:enabled="false"
+                android:persistent="false" />
 
         </PreferenceScreen>
 
