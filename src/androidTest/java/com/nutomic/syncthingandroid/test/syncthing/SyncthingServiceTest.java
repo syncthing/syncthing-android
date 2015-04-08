@@ -4,13 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.test.ServiceTestCase;
-import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
-import android.util.Pair;
 
-import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.test.MockContext;
@@ -19,8 +15,6 @@ import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -30,11 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
 
-    private static final int STARTUP_TIME_SECONDS = 90;
-
     private Context mContext;
-
-    private CountDownLatch mLatch;
 
     public SyncthingServiceTest() {
         super(SyncthingService.class);
@@ -51,28 +41,6 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         Util.deleteRecursive(mContext.getFilesDir());
         PreferenceManager.getDefaultSharedPreferences(getContext()).edit().clear().commit();
         super.tearDown();
-    }
-
-    @LargeTest
-    public void testStartService() throws InterruptedException {
-        startService(new Intent(getContext(), SyncthingService.class));
-        final CountDownLatch latch = new CountDownLatch(2);
-        getService().registerOnWebGuiAvailableListener(new SyncthingService.OnWebGuiAvailableListener() {
-            @Override
-            public void onWebGuiAvailable() {
-                latch.countDown();
-            }
-        });
-        getService().registerOnApiChangeListener(new SyncthingService.OnApiChangeListener() {
-            @Override
-            public void onApiChange(SyncthingService.State currentState) {
-                if (currentState == SyncthingService.State.ACTIVE)
-                    latch.countDown();
-            }
-        });
-        latch.await(10, TimeUnit.SECONDS);
-        assertNotNull(getService().getApi());
-        assertNotNull(getService().getWebGuiUrl());
     }
 
     @SmallTest
@@ -110,23 +78,6 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         });
         latch.await(1, TimeUnit.SECONDS);
         assertNotNull(service);
-    }
-
-    private class Listener implements SyncthingService.OnApiChangeListener {
-
-        private SyncthingService.State mLastState;
-
-        @Override
-        public void onApiChange(SyncthingService.State currentState) {
-            mLatch.countDown();
-
-            mLastState = currentState;
-        }
-
-        public SyncthingService.State getLastState() {
-            return mLastState;
-        }
-
     }
 
     public void testImportExportConfig() {
