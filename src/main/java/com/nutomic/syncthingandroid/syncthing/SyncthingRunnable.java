@@ -217,6 +217,7 @@ public class SyncthingRunnable implements Runnable {
      * Logs the outputs of a stream to logcat and mNativeLog.
      *
      * @param is The stream to log.
+     * @param priority The priority level.
      */
     private void log(final InputStream is, final int priority) {
         new Thread(new Runnable() {
@@ -232,7 +233,7 @@ public class SyncthingRunnable implements Runnable {
                 } catch (IOException e) {
                     // NOTE: This is sometimes called on shutdown, as
                     // Process.destroy() closes the stream.
-                    Log.w(TAG, "Failed to read syncthing command line output", e);
+                    Log.w(TAG, "Failed to read Syncthing's command line output", e);
                 }
             }
         }).start();
