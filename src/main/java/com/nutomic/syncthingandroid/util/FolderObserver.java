@@ -107,7 +107,7 @@ public class FolderObserver extends FileObserver {
                         break;
                     }
                 }
-                break;
+                // fall through
             case MOVED_TO:
                 // fall through
             case CREATE:
