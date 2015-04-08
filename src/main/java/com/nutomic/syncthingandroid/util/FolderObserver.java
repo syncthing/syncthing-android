@@ -107,6 +107,7 @@ public class FolderObserver extends FileObserver {
                         break;
                     }
                 }
+                mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
                 break;
             case MOVED_TO:
                 // fall through
