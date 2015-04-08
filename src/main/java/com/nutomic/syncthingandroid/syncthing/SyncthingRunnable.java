@@ -9,7 +9,6 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,7 +20,7 @@ public class SyncthingRunnable implements Runnable {
 
     private static final String TAG = "SyncthingRunnable";
 
-    private static final String TAG_IONICE = "SyncthingRunnable-IoNice";
+    private static final String TAG_IONICE = "SyncthingRunnableIoNice";
 
     private static final String TAG_NATIVE = "SyncthingNativeCode";
 
@@ -134,6 +133,7 @@ public class SyncthingRunnable implements Runnable {
      * Logs the outputs of a stream to logcat and mNativeLog.
      *
      * @param is The stream to log.
+     * @param priority The priority level.
      */
     private void log(final InputStream is, final int priority) {
         new Thread(new Runnable() {
@@ -149,7 +149,7 @@ public class SyncthingRunnable implements Runnable {
                 } catch (IOException e) {
                     // NOTE: This is sometimes called on shutdown, as
                     // Process.destroy() closes the stream.
-                    Log.w(TAG, "Failed to read syncthing command line output", e);
+                    Log.w(TAG, "Failed to read Syncthing's command line output", e);
                 }
             }
         }).start();
