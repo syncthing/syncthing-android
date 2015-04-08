@@ -30,7 +30,6 @@ import com.nutomic.syncthingandroid.util.PRNGFixes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.channels.FileChannel;
@@ -229,37 +228,6 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Move config file, keys, and index files to "official" folder
-     *
-     * Intended to bring the file locations in older installs in line with
-     * newer versions.
-     */
-    private void moveConfigFiles() {
-        FilenameFilter idxFilter = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".idx.gz");
-            }
-        };
-
-        if (new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE).exists()) {
-            File publicKey = new File(getApplicationInfo().dataDir, PUBLIC_KEY_FILE);
-            publicKey.renameTo(new File(getFilesDir(), PUBLIC_KEY_FILE));
-            File privateKey = new File(getApplicationInfo().dataDir, PRIVATE_KEY_FILE);
-            privateKey.renameTo(new File(getFilesDir(), PRIVATE_KEY_FILE));
-            File config = new File(getApplicationInfo().dataDir, ConfigXml.CONFIG_FILE);
-            config.renameTo(new File(getFilesDir(), ConfigXml.CONFIG_FILE));
-
-            File oldStorageDir = new File(getApplicationInfo().dataDir);
-            File[] files = oldStorageDir.listFiles(idxFilter);
-            for (File file : files) {
-                if (file.isFile()) {
-                    file.renameTo(new File(getFilesDir(), file.getName()));
-                }
-            }
-        }
-    }
-
-    /**
      * Starts the native binary.
      */
     @Override
@@ -297,10 +265,7 @@ public class SyncthingService extends Service {
     private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
-            moveConfigFiles();
-
             mConfig = new ConfigXml(SyncthingService.this);
-
             return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
         }
 

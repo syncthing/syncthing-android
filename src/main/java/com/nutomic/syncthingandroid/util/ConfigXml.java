@@ -137,16 +137,6 @@ public class ConfigXml {
                 changed = true;
             }
 
-            // HACK: Create .stfolders in all folders if it does not exist.
-            // This is not the best place to put it, but it's only temporary.
-            String dir = r.getAttribute("path");
-            try {
-                new File(dir, ".stfolder").createNewFile();
-            } catch (IOException e) {
-                // This might happen if the device is not mounted.
-                Log.i(TAG, "Failed to create .stversions in " + dir, e);
-            }
-
             if (applyLenientMTimes(r)) {
                 changed = true;
             }
