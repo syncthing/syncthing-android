@@ -88,7 +88,7 @@ public class ConfigXml {
     }
 
     public String getWebGuiUrl() {
-        return "http://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
+        return "https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
     }
 
     public String getApiKey() {
@@ -138,6 +138,27 @@ public class ConfigXml {
             }
 
             if (applyLenientMTimes(r)) {
+                changed = true;
+            }
+        }
+
+        // Enforce TLS.
+        Element gui = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("gui").item(0);
+        boolean tls = Boolean.parseBoolean(gui.getAttribute("tls"));
+        if (!tls) {
+            Log.i(TAG, "Enforce TLS");
+            gui.setAttribute("tls", Boolean.toString(true));
+            changed = true;
+        }
+
+        // Update deprecated 8080 port to 8384
+        NodeList addressList = gui.getElementsByTagName("address");
+        for (int i = 0; i < addressList.getLength(); i++) {
+            Element g = (Element) addressList.item(i);
+            if (g.getTextContent().equals("127.0.0.1:8080")) {
+                Log.i(TAG, "Replacing 127.0.0.1:8080 address with 127.0.0.1:8384");
+                g.setTextContent("127.0.0.1:8384");
                 changed = true;
             }
         }
