@@ -48,7 +48,7 @@ public class WebGuiActivity extends SyncthingActivity
     private X509Certificate mCaCert;
 
     /**
-     * Hides the loading screen and shows the WebView once it is fully loaded.
+     * Hides the loading screen and shows the WebView once it is partially loaded.
      */
     private final WebViewClient mWebViewClient = new WebViewClient() {
 
@@ -79,7 +79,7 @@ public class WebGuiActivity extends SyncthingActivity
         }
 
         @Override
-        public void onPageFinished(WebView view, String url) {
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
             mWebView.setVisibility(View.VISIBLE);
             mLoadingView.setVisibility(View.GONE);
         }
