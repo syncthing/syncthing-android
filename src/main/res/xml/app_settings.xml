@@ -100,12 +100,6 @@
                 android:key="gui_password"
                 android:title="@string/gui_password" />
 
-            <CheckBoxPreference
-                android:key="UseTLS"
-                android:title="@string/gui_https_enabled"
-                android:enabled="false"
-                android:persistent="false" />
-
         </PreferenceScreen>
 
         <Preference

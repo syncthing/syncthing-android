@@ -142,6 +142,16 @@ public class ConfigXml {
             }
         }
 
+        // Enforce TLS.
+        Element gui = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("gui").item(0);
+        boolean tls = Boolean.parseBoolean(gui.getAttribute("tls"));
+        if (!tls) {
+            Log.i(TAG, "Enforce TLS");
+            gui.setAttribute("tls", Boolean.toString(true));
+            changed = true;
+        }
+
         // Update deprecated 8080 port to 8384
         NodeList addressList = gui.getElementsByTagName("address");
         for (int i = 0; i < addressList.getLength(); i++) {
