@@ -101,11 +101,11 @@ public class FolderSettingsFragment extends PreferenceFragment
             }
             if (mFolder == null) {
                 mFolder = new RestApi.Folder();
-                mFolder.ID = "";
-                mFolder.Path = "";
-                mFolder.RescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
-                mFolder.DeviceIds = new ArrayList<>();
-                mFolder.Versioning = new RestApi.Versioning();
+                mFolder.id = "";
+                mFolder.path = "";
+                mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
+                mFolder.deviceIds = new ArrayList<>();
+                mFolder.versioning = new RestApi.Versioning();
             }
         }
     }
@@ -136,7 +136,7 @@ public class FolderSettingsFragment extends PreferenceFragment
             getActivity().setTitle(R.string.edit_folder);
             List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
             for (int i = 0; i < folders.size(); i++) {
-                if (folders.get(i).ID.equals(
+                if (folders.get(i).id.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_REPO_ID))) {
                     folder = folders.get(i);
                     break;
@@ -150,29 +150,29 @@ public class FolderSettingsFragment extends PreferenceFragment
             mFolder = folder;
         }
 
-        mFolderId.setText(mFolder.ID);
-        mFolderId.setSummary(mFolder.ID);
-        mDirectory.setSummary(mFolder.Path);
-        mFolderMaster.setChecked(mFolder.ReadOnly);
+        mFolderId.setText(mFolder.id);
+        mFolderId.setSummary(mFolder.id);
+        mDirectory.setSummary(mFolder.path);
+        mFolderMaster.setChecked(mFolder.readOnly);
         List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices(false);
         for (RestApi.Device n : devicesList) {
             ExtendedCheckBoxPreference cbp = new ExtendedCheckBoxPreference(getActivity(), n);
             // Calling addPreference later causes it to change the checked state.
             mDevices.addPreference(cbp);
-            cbp.setTitle(n.Name);
+            cbp.setTitle(n.name);
             cbp.setKey(KEY_NODE_SHARED);
             cbp.setOnPreferenceChangeListener(FolderSettingsFragment.this);
             cbp.setChecked(false);
-            for (String n2 : mFolder.DeviceIds) {
-                if (n2.equals(n.DeviceID)) {
+            for (String n2 : mFolder.deviceIds) {
+                if (n2.equals(n.deviceID)) {
                     cbp.setChecked(true);
                 }
             }
         }
-        mVersioning.setChecked(mFolder.Versioning instanceof RestApi.SimpleVersioning);
+        mVersioning.setChecked(mFolder.versioning instanceof RestApi.SimpleVersioning);
         if (mVersioning.isChecked()) {
-            mVersioningKeep.setText(mFolder.Versioning.getParams().get("keep"));
-            mVersioningKeep.setSummary(mFolder.Versioning.getParams().get("keep"));
+            mVersioningKeep.setText(mFolder.versioning.getParams().get("keep"));
+            mVersioningKeep.setSummary(mFolder.versioning.getParams().get("keep"));
             mVersioningKeep.setEnabled(true);
         } else {
             mVersioningKeep.setEnabled(false);
@@ -201,12 +201,12 @@ public class FolderSettingsFragment extends PreferenceFragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mFolder.ID.length() > 64 || !mFolder.ID.matches("[a-zA-Z0-9-_\\.]+")) {
+                if (mFolder.id.length() > 64 || !mFolder.id.matches("[a-zA-Z0-9-_\\.]+")) {
                     Toast.makeText(getActivity(), R.string.folder_id_invalid, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                if (mFolder.Path.equals("")) {
+                if (mFolder.path.equals("")) {
                     Toast.makeText(getActivity(), R.string.folder_path_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
@@ -249,27 +249,27 @@ public class FolderSettingsFragment extends PreferenceFragment
         }
 
         if (preference.equals(mFolderId)) {
-            mFolder.ID = (String) o;
+            mFolder.id = (String) o;
             folderUpdated();
             return true;
         } else if (preference.equals(mDirectory)) {
-            mFolder.Path = (String) o;
+            mFolder.path = (String) o;
             folderUpdated();
             return true;
         } else if (preference.equals(mFolderMaster)) {
-            mFolder.ReadOnly = (Boolean) o;
+            mFolder.readOnly = (Boolean) o;
             folderUpdated();
             return true;
         } else if (preference.getKey().equals(KEY_NODE_SHARED)) {
             ExtendedCheckBoxPreference pref = (ExtendedCheckBoxPreference) preference;
             RestApi.Device device = (RestApi.Device) pref.getObject();
             if ((Boolean) o) {
-                mFolder.DeviceIds.add(device.DeviceID);
+                mFolder.deviceIds.add(device.deviceID);
             } else {
-                Iterator<String> it = mFolder.DeviceIds.iterator();
+                Iterator<String> it = mFolder.deviceIds.iterator();
                 while (it.hasNext()) {
                     String n = it.next();
-                    if (n.equals(device.DeviceID)) {
+                    if (n.equals(device.deviceID)) {
                         it.remove();
                     }
                 }
@@ -280,23 +280,23 @@ public class FolderSettingsFragment extends PreferenceFragment
             mVersioningKeep.setEnabled((Boolean) o);
             if ((Boolean) o) {
                 RestApi.SimpleVersioning v = new RestApi.SimpleVersioning();
-                mFolder.Versioning = v;
+                mFolder.versioning = v;
                 v.setParams(5);
                 mVersioningKeep.setText("5");
                 mVersioningKeep.setSummary("5");
             } else {
-                mFolder.Versioning = new RestApi.Versioning();
+                mFolder.versioning = new RestApi.Versioning();
             }
             folderUpdated();
             return true;
         } else if (preference.equals(mVersioningKeep)) {
             try {
-                ((RestApi.SimpleVersioning) mFolder.Versioning)
+                ((RestApi.SimpleVersioning) mFolder.versioning)
                         .setParams(Integer.parseInt((String) o));
                 folderUpdated();
                 return true;
             } catch (NumberFormatException e) {
-                Log.w(TAG, "Invalid versioning option: "+ o);
+                Log.w(TAG, "invalid versioning option: "+ o);
             }
         }
 
@@ -307,8 +307,8 @@ public class FolderSettingsFragment extends PreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
         if (preference.equals(mDirectory)) {
             Intent intent = new Intent(getActivity(), FolderPickerActivity.class);
-            if (mFolder.Path.length() > 0) {
-                intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.Path);
+            if (mFolder.path.length() > 0) {
+                intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.path);
             }
             startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
         } else if (preference.equals(mDevices) &&
@@ -322,8 +322,8 @@ public class FolderSettingsFragment extends PreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
-            mFolder.Path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
-            mDirectory.setSummary(mFolder.Path);
+            mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
+            mDirectory.setSummary(mFolder.path);
             folderUpdated();
         }
     }

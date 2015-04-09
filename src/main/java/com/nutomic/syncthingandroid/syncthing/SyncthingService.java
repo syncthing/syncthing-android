@@ -56,17 +56,17 @@ public class SyncthingService extends Service {
     public static final int GUI_UPDATE_INTERVAL = 1000;
 
     /**
-     * Name of the public key file in the data directory.
+     * name of the public key file in the data directory.
      */
     public static final String PUBLIC_KEY_FILE = "cert.pem";
 
     /**
-     * Name of the private key file in the data directory.
+     * name of the private key file in the data directory.
      */
     public static final String PRIVATE_KEY_FILE = "key.pem";
 
     /**
-     * Name of the public HTTPS CA file in the data directory.
+     * name of the public HTTPS CA file in the data directory.
      */
     public static final String HTTPS_CERT_FILE = "https-cert.pem";
 
@@ -77,7 +77,7 @@ public class SyncthingService extends Service {
             new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
 
     /**
-     * Path to the native, integrated syncthing binary, relative to the data folder
+     * path to the native, integrated syncthing binary, relative to the data folder
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
 

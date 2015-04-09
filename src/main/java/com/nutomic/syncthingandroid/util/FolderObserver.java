@@ -42,7 +42,7 @@ public class FolderObserver extends FileObserver {
 
         @Override
         public String getMessage() {
-            return "Path " + mPath + " does not exist, aborting file observer";
+            return "path " + mPath + " does not exist, aborting file observer";
         }
     }
 
@@ -51,19 +51,19 @@ public class FolderObserver extends FileObserver {
      *
      * @param listener The listener where changes should be sent to.
      * @param folder The folder where this folder belongs to.
-     * @param path Path to the monitored folder, relative to folder root.
+     * @param path path to the monitored folder, relative to folder root.
      */
     private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path) {
-        super(folder.Path + "/" + path,
+        super(folder.path + "/" + path,
                 ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MODIFY | MOVED_FROM |
                 MOVED_TO | MOVE_SELF);
         mListener = listener;
         mFolder = folder;
         mPath = path;
-        Log.v(TAG, "observer created for " + path + " in " + folder.ID);
+        Log.v(TAG, "observer created for " + path + " in " + folder.id);
         startWatching();
 
-        File currentFolder = new File(folder.Path, path);
+        File currentFolder = new File(folder.path, path);
         if (!currentFolder.exists()) {
             throw new FolderNotExistingException(currentFolder.getAbsolutePath());
         }
@@ -107,7 +107,7 @@ public class FolderObserver extends FileObserver {
                         break;
                     }
                 }
-                mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
+                mListener.onFolderFileChange(mFolder.id, fullPath.getPath());
                 break;
             case MOVED_TO:
                 // fall through
@@ -117,7 +117,7 @@ public class FolderObserver extends FileObserver {
                 }
                 // fall through
             default:
-                mListener.onFolderFileChange(mFolder.ID, fullPath.getPath());
+                mListener.onFolderFileChange(mFolder.id, fullPath.getPath());
         }
     }
 

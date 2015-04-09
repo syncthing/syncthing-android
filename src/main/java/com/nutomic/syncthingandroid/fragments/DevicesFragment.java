@@ -96,7 +96,7 @@ public class DevicesFragment extends ListFragment implements SyncthingService.On
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
         intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
-        intent.putExtra(DeviceSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).DeviceID);
+        intent.putExtra(DeviceSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).deviceID);
         startActivity(intent);
     }
 

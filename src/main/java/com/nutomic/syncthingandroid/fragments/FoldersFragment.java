@@ -96,7 +96,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
         Intent intent = new Intent(getActivity(), SettingsActivity.class)
                 .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
                 .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
-                .putExtra(FolderSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).ID);
+                .putExtra(FolderSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).id);
         startActivity(intent);
     }
 
@@ -106,7 +106,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.parse(mAdapter.getItem(i).Path);
+        Uri uri = Uri.parse(mAdapter.getItem(i).path);
         intent.setDataAndType(uri, "*/*");
         startActivity(intent);
         return true;

@@ -205,9 +205,9 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      */
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-        RestApi.Connection c = connections.get(RestApi.LOCAL_DEVICE_CONNECTIONS);
-        mDownload.setText(RestApi.readableTransferRate(mActivity, c.InBits));
-        mUpload.setText(RestApi.readableTransferRate(mActivity, c.OutBits));
+        RestApi.Connection c = connections.get(RestApi.TOTAL_STATS);
+        mDownload.setText(RestApi.readableTransferRate(mActivity, c.inBits));
+        mUpload.setText(RestApi.readableTransferRate(mActivity, c.outBits));
     }
 
     /**

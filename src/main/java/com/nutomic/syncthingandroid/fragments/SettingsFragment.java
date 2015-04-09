@@ -29,12 +29,11 @@ public class SettingsFragment extends PreferenceFragment
 
     private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
     private static final String SYNCTHING_GUI_KEY     = "syncthing_gui";
-    private static final String DEVICE_NAME_KEY       = "DeviceName";
-    private static final String USAGE_REPORT_ACCEPTED = "URAccepted";
-    private static final String ADDRESS               = "Address";
+    private static final String DEVICE_NAME_KEY       = "deviceName";
+    private static final String USAGE_REPORT_ACCEPTED = "urAccepted";
+    private static final String ADDRESS               = "address";
     private static final String GUI_USER              = "gui_user";
     private static final String GUI_PASSWORD          = "gui_password";
-    private static final String USER_TLS              = "UseTLS";
     private static final String EXPORT_CONFIG         = "export_config";
     private static final String IMPORT_CONFIG         = "import_config";
     private static final String STTRACE               = "sttrace";
@@ -70,7 +69,7 @@ public class SettingsFragment extends PreferenceFragment
                 String value;
                 switch (pref.getKey()) {
                     case DEVICE_NAME_KEY:
-                        value = api.getLocalDevice().Name;
+                        value = api.getLocalDevice().name;
                         break;
                     case USAGE_REPORT_ACCEPTED:
                         String v = api.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
@@ -84,9 +83,6 @@ public class SettingsFragment extends PreferenceFragment
 
             Preference address = mGuiScreen.findPreference(ADDRESS);
             applyPreference(address, api.getValue(RestApi.TYPE_GUI, ADDRESS));
-
-            Preference tls = mGuiScreen.findPreference(USER_TLS);
-            applyPreference(tls, api.getValue(RestApi.TYPE_GUI, USER_TLS));
         }
     }
 
@@ -188,7 +184,7 @@ public class SettingsFragment extends PreferenceFragment
                     o = Integer.parseInt((String) o);
                     o = o.toString();
                 } catch (NumberFormatException e) {
-                    Log.w(TAG, "Invalid number: " + o);
+                    Log.w(TAG, "invalid number: " + o);
                     return false;
                 }
             }
@@ -206,21 +202,21 @@ public class SettingsFragment extends PreferenceFragment
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
-            updated.Addresses = old.Addresses;
-            updated.Compression = old.Compression;
-            updated.DeviceID = old.DeviceID;
-            updated.Introducer = old.Introducer;
-            updated.Name = (String) o;
+            updated.addresses = old.addresses;
+            updated.compression = old.compression;
+            updated.deviceID = old.deviceID;
+            updated.introducer = old.introducer;
+            updated.name = (String) o;
             mSyncthingService.getApi().editDevice(updated, getActivity(), null);
         } else if (preference.getKey().equals(USAGE_REPORT_ACCEPTED)) {
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(),
                     ((Boolean) o) ? 1 : 0, false, getActivity());
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
-            boolean isArray = preference.getKey().equals("ListenAddress") ||
-                    preference.getKey().equals("GlobalAnnServers");
+            boolean isArray = preference.getKey().equals("listenAddress") ||
+                    preference.getKey().equals("globalAnnServers");
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
                     isArray, getActivity());
-        } else if (preference.getKey().equals(ADDRESS) || preference.getKey().equals(USER_TLS)) {
+        } else if (preference.getKey().equals(ADDRESS)) {
             mSyncthingService.getApi().setValue(
                     RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
         }
