@@ -953,4 +953,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         return new Device();
     }
 
+    public String getApiKey() {
+        return mApiKey;
+    }
+
 }
