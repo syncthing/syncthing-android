@@ -161,9 +161,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Stores the result of the last successful request to {@link GetTask#URI_CONNECTIONS},
-     * or an empty HashMap.
+     * or an empty Map.
      */
-    private HashMap<String, Connection> mPreviousConnections = new HashMap<>();
+    private Map<String, Connection> mPreviousConnections = new HashMap<>();
 
     /**
      * Stores the timestamp of the last successful request to {@link GetTask#URI_CONNECTIONS}.
@@ -572,8 +572,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
                 try {
                     JSONObject json = new JSONObject(s);
-                    String[] names = json.names().join(" ").replace("\"", "").split(" ");
-                    HashMap<String, Connection> connections = new HashMap<String, Connection>();
+                    String[] names = json.getJSONObject("connections").names().join(" ").replace("\"", "").split(" ");
+                    Map<String, Connection> connections = new HashMap<>();
                     for (String deviceId : names) {
                         Connection c = new Connection();
                         JSONObject conn = json.getJSONObject(deviceId);
