@@ -28,6 +28,7 @@ repositories {
 dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
+    compile 'com.google.zxing:android-integration:3.2.0'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.3.0'
 }
 

@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
@@ -291,25 +293,18 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
      * Sends QR code scanning intent when clicking the qrcode icon.
      */
     public void onClick(View view) {
-        Intent intentScan = new Intent("com.google.zxing.client.android.SCAN");
-        intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        try {
-            startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_qr_scanner_installed,
-                    Toast.LENGTH_LONG).show();
-        }
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.initiateScan();
     }
 
     /**
      * Receives value of scanned QR code and sets it as device ID.
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mDevice.DeviceID = data.getStringExtra("SCAN_RESULT");
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            mDevice.DeviceID = scanResult.getContents();
             ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
             mDeviceId.setSummary(mDevice.DeviceID);
         }
