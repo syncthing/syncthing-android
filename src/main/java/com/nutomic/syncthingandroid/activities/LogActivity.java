@@ -142,9 +142,10 @@ public class LogActivity extends SyncthingActivity {
                     new InputStreamReader(process.getInputStream()), 8192);
             StringBuilder log = new StringBuilder();
             String line = "";
+            String sep = System.getProperty("line.separator");
             while ((line = bufferedReader.readLine()) != null) {
                 log.append(line);
-                log.append(System.getProperty("line.separator"));
+                log.append(sep);
             }
             return log.toString();
         } catch (IOException e) {
