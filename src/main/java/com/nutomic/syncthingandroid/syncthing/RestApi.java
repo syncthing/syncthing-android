@@ -149,6 +149,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     private final String mApiKey;
 
+    private final String mGuiUser;
+
+    private final String mGuiPassword;
+
     private final String mHttpsCertPath;
 
     private JSONObject mConfig;
@@ -174,10 +178,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     private HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
-    public RestApi(Context context, String url, String apiKey, OnApiAvailableListener listener) {
+    public RestApi(Context context, String url, String apiKey, String guiUser, String guiPassword,
+                   OnApiAvailableListener listener) {
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
+        mGuiUser = guiUser;
+        mGuiPassword = guiPassword;
         mHttpsCertPath = mContext.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
         mOnApiAvailableListener = listener;
     }
@@ -959,6 +966,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     public String getApiKey() {
         return mApiKey;
+    }
+
+    public String getGuiUser() {
+        return mGuiUser;
+    }
+
+    public String getGuiPassword() {
+        return mGuiPassword;
     }
 
 }

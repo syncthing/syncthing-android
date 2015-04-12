@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -78,6 +79,10 @@ public class WebGuiActivity extends SyncthingActivity
             }
         }
 
+        public void onReceivedHttpAuthRequest (WebView view, HttpAuthHandler handler, String host, String realm) {
+            handler.proceed(getService().getApi().getGuiUser(), getService().getApi().getGuiPassword());
+        }
+
         @Override
         public void onPageFinished(WebView view, String url) {
             mWebView.setVisibility(View.VISIBLE);
@@ -115,16 +120,9 @@ public class WebGuiActivity extends SyncthingActivity
         getService().registerOnWebGuiAvailableListener(WebGuiActivity.this);
     }
 
-    /**
-     * Loads and shows WebView, hides loading view.
-     *
-     * Sets the X-API-Key (HEADER_API_KEY) header for authorization
-     */
     @Override
     public void onWebGuiAvailable() {
-        Map<String, String> extraHeaders = new HashMap<>();
-        extraHeaders.put(RestApi.HEADER_API_KEY, getService().getApi().getApiKey());
-        mWebView.loadUrl(getService().getWebGuiUrl(), extraHeaders);
+        mWebView.loadUrl(getService().getWebGuiUrl());
     }
 
     /**
