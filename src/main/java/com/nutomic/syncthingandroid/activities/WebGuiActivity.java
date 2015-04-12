@@ -137,7 +137,7 @@ public class WebGuiActivity extends SyncthingActivity
             mCaCert = (X509Certificate)
                     cf.generateCertificate(inStream);
         } catch (FileNotFoundException|CertificateException e) {
-            throw new IllegalArgumentException("Untrusted Certificate");
+            throw new IllegalArgumentException("Untrusted Certificate", e);
         } finally {
             try {
                 if (inStream != null)
