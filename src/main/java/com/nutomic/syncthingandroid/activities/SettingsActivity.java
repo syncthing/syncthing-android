@@ -65,7 +65,7 @@ public class SettingsActivity extends SyncthingActivity {
                     throw new IllegalArgumentException(
                             "You must provide the requested fragment type as an extra.");
             }
-        } else{
+        } else {
             setTitle(R.string.settings_title);
             mFragment = new SettingsFragment();
         }

@@ -66,9 +66,11 @@ public class LogActivity extends SyncthingActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.log_list, menu);
 
+        MenuItem switchLog = menu.findItem(R.id.switch_logs);
+        switchLog.setTitle(mSyncthingLog ? R.string.log_android_title : R.string.log_syncthing_title);
+
         // Add the share button
         MenuItem shareItem = menu.findItem(R.id.menu_share);
-        shareItem.setTitle(mSyncthingLog ? R.string.log_android_title : R.string.log_syncthing_title);
         ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
         mShareIntent = new Intent();
         mShareIntent.setAction(Intent.ACTION_SEND);
@@ -120,9 +122,13 @@ public class LogActivity extends SyncthingActivity {
         }.execute();
     }
 
+    /**
+     * Queries logcat to obtain a log.
+     *
+     * @param syncthingLog Filter on Syncthing's native messages.
+     */
     private String getLog(final boolean syncthingLog) {
         Process process = null;
-        DataOutputStream pOut = null;
         try {
             ProcessBuilder pb;
             if (syncthingLog) {
@@ -144,13 +150,6 @@ public class LogActivity extends SyncthingActivity {
         } catch (IOException e) {
             Log.w(TAG, "Error reading Android log", e);
         } finally {
-            try {
-                if (pOut != null) {
-                    pOut.close();
-                }
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close shell stream", e);
-            }
             if (process != null) {
                 process.destroy();
             }

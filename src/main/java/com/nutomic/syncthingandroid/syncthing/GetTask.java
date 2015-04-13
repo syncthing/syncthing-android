@@ -83,8 +83,10 @@ public class GetTask extends AsyncTask<String, Void, String> {
             try {
                 // Don't push the API too hard
                 Thread.sleep(500 * i);
-            } catch (InterruptedException e) { }
-            Log.w(TAG, "Retrying GetTask Rest API call ("+i+")");
+            } catch (InterruptedException e) {
+                Log.w(TAG, e);
+            }
+            Log.w(TAG, "Retrying GetTask Rest API call ("+(i+1)+"/10)");
         }
         return null;
     }
