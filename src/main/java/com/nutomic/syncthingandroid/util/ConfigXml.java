@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.util;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -53,8 +54,7 @@ public class ConfigXml {
             generateKeysConfig(context);
         }
 
-        // This could cause an infinite loop, maybe we should add a counter, too.
-        do {
+        for (int i = 0; i < 10 && mConfig == null; i++) {
             try {
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 mConfig = db.parse(mConfigFile);
@@ -69,7 +69,10 @@ public class ConfigXml {
                 isFirstStart = true;
                 mConfigFile = getConfigFile(context);
             }
-        } while (mConfig == null);
+        }
+        if (mConfig == null) {
+            Toast.makeText(context, "Failed to create a Syncthing config. Syncthing will not start!", Toast.LENGTH_LONG).show();
+        }
 
         if (isFirstStart) {
             changeDefaultFolder();
