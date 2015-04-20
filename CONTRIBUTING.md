@@ -31,7 +31,7 @@ Device name and Android version:
 
 versions of involved syncthing nodes: vx.x.x, ...
 
-logcat: *link to file* (over the entire procedure, limited to the package `com.nutomic.syncthingandroid` if you can, [How to Logcat](http://forum.xda-developers.com/showthread.php?t=1726238) [Android Studio Logging Guide](http://stackoverflow.com/a/17648663/1837158)).
+logcat: *link to file* (over the entire procedure, limited to the package `com.nutomic.syncthingandroid` if you can, [How to Logcat](http://forum.xda-developers.com/showthread.php?t=1726238), [Logcat in Terminal](http://wiki.cyanogenmod.org/w/Doc:_debugging_with_logcat), [Android Studio Logging Guide](http://stackoverflow.com/a/17648663/1837158)).
 
 config.xml: *link to file* (if it might be related, located in `/data/data/com.nutomic.syncthingandroid`, requires root)
 
