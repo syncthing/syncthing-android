@@ -68,7 +68,8 @@ public class SyncthingService extends Service {
     /**
      * Directory where config is exported to and imported from.
      */
-    public static final File EXPORT_PATH = Environment.getExternalStorageDirectory();
+    public static final File EXPORT_PATH =
+            new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
 
     /**
      * Path to the native, integrated syncthing binary, relative to the data folder
@@ -440,6 +441,7 @@ public class SyncthingService extends Service {
      * Exports the local config and keys to {@link #EXPORT_PATH}.
      */
     public void exportConfig() {
+        EXPORT_PATH.mkdirs();
         copyFile(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
                 new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
         copyFile(new File(getFilesDir(), PRIVATE_KEY_FILE),
