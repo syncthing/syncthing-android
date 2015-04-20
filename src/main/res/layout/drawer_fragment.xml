@@ -21,7 +21,10 @@
             android:id="@+id/device_id"
             android:layout_below="@id/device_id_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:typeface="monospace"
+            android:text="@string/device_id_placeholder"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
