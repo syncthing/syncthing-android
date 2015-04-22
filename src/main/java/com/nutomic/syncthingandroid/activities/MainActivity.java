@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -291,6 +292,22 @@ public class MainActivity extends SyncthingActivity
      */
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(Gravity.START);
+    }
+
+    /**
+     * Toggles the drawer on menu button press.
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent e) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (!mDrawerLayout.isDrawerOpen(Gravity.START))
+                mDrawerLayout.openDrawer(Gravity.START);
+            else
+                closeDrawer();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, e);
     }
 
 }
