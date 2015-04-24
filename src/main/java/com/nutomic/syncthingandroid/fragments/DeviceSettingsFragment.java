@@ -125,17 +125,21 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSyncthingService.unregisterOnApiChangeListener(this);
+    }
+
+    @Override
     public void onApiChange(SyncthingService.State currentState) {
-        if (getActivity() == null || getActivity().isFinishing()) {
+        if (currentState != SyncthingService.State.ACTIVE) {
+            getActivity().finish();
             return;
         }
-        else if (currentState != SyncthingService.State.ACTIVE) {
-            getActivity().finish();
-        }
 
-        if (mIsCreate) {
+        if (mIsCreate)
             getActivity().setTitle(R.string.add_device);
-        } else {
+        else {
             RestApi.Device device = null;
             getActivity().setTitle(R.string.edit_device);
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);

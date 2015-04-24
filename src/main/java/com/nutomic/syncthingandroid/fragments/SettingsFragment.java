@@ -160,6 +160,12 @@ public class SettingsFragment extends PreferenceFragment
         mSyncthingService.registerOnApiChangeListener(this);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSyncthingService.unregisterOnApiChangeListener(this);
+    }
+
     /**
      * Handles ActionBar back selected.
      */

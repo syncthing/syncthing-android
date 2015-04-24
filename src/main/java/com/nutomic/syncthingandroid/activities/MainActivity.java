@@ -44,8 +44,6 @@ public class MainActivity extends SyncthingActivity
 
     private AlertDialog mDisabledDialog;
 
-    private boolean mIsDestroyed = false;
-
     /**
      * Causes population of folder and device lists, unlocks info drawer.
      */
@@ -55,7 +53,7 @@ public class MainActivity extends SyncthingActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (currentState != SyncthingService.State.ACTIVE && !isFinishing() && !mIsDestroyed) {
+                if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
                     if (currentState == SyncthingService.State.DISABLED) {
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
@@ -215,7 +213,9 @@ public class MainActivity extends SyncthingActivity
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
-        mIsDestroyed = true;
+        getService().unregisterOnApiChangeListener(this);
+        getService().unregisterOnApiChangeListener(mFolderFragment);
+        getService().unregisterOnApiChangeListener(mDevicesFragment);
     }
 
     @Override

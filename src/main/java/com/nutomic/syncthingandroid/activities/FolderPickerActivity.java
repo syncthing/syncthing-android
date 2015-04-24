@@ -110,6 +110,12 @@ public class FolderPickerActivity extends SyncthingActivity
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getService().unregisterOnApiChangeListener(this);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (mListView.getAdapter() == mRootsAdapter)
             return true;

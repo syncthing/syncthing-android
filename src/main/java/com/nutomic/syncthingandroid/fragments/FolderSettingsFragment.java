@@ -121,10 +121,7 @@ public class FolderSettingsFragment extends PreferenceFragment
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        if (getActivity() == null || getActivity().isFinishing()) {
-            return;
-        }
-        else if (currentState != SyncthingService.State.ACTIVE) {
+        if (currentState != SyncthingService.State.ACTIVE) {
             getActivity().finish();
             return;
         }
@@ -183,6 +180,12 @@ public class FolderSettingsFragment extends PreferenceFragment
     public void onServiceConnected() {
         mSyncthingService = ((SyncthingActivity) getActivity()).getService();
         mSyncthingService.registerOnApiChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSyncthingService.unregisterOnApiChangeListener(this);
     }
 
     @Override

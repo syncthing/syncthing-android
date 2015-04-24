@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -31,7 +32,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.nio.channels.FileChannel;
 import java.security.SecureRandom;
 import java.util.HashSet;
@@ -92,6 +92,8 @@ public class SyncthingService extends Service {
 
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
+    private Handler mMainHandler;
+
     /**
      * Callback for when the Syncthing web interface becomes first available after service start.
      */
@@ -106,7 +108,7 @@ public class SyncthingService extends Service {
         public void onApiChange(State currentState);
     }
 
-    private final HashSet<WeakReference<OnApiChangeListener>> mOnApiChangeListeners =
+    private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
             new HashSet<>();
 
     /**
@@ -139,10 +141,10 @@ public class SyncthingService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Just catch the empty intent and return.
-        if (intent == null) {
-        }
-        else if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
+        if (intent == null)
+            return START_STICKY;
+
+        if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             mApi.shutdown();
             mCurrentState = State.INIT;
             updateState();
@@ -253,6 +255,7 @@ public class SyncthingService extends Service {
                      .putString("gui_password", sb.toString()).commit();
         }
 
+        mMainHandler = new Handler();
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         new StartupTask().execute();
@@ -347,13 +350,24 @@ public class SyncthingService extends Service {
      * Register a listener for the syncthing API state changing.
      *
      * The listener is called immediately with the current state, and again whenever the state
-     * changes.
+     * changes. The call is always from the GUI thread.
+     *
+     * @see {@link #unregisterOnApiChangeListener}
      */
     public void registerOnApiChangeListener(OnApiChangeListener listener) {
         // Make sure we don't send an invalid state or syncthing might show a "disabled" message
         // when it's just starting up.
         listener.onApiChange(mCurrentState);
-        mOnApiChangeListeners.add(new WeakReference<>(listener));
+        mOnApiChangeListeners.add(listener);
+    }
+
+    /**
+     * Unregisters a previously registered listener.
+     *
+     * @see {@link #registerOnApiChangeListener}
+     */
+    public void unregisterOnApiChangeListener(OnApiChangeListener listener) {
+        mOnApiChangeListeners.remove(listener);
     }
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
@@ -382,15 +396,20 @@ public class SyncthingService extends Service {
      * Must only be called from SyncthingService or {@link RestApi}.
      */
     private void onApiChange() {
-        for (Iterator<WeakReference<OnApiChangeListener>> i = mOnApiChangeListeners.iterator();
-             i.hasNext(); ) {
-            WeakReference<OnApiChangeListener> listener = i.next();
-            if (listener.get() != null) {
-                listener.get().onApiChange(mCurrentState);
-            } else {
-                i.remove();
+        mMainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
+                     i.hasNext(); ) {
+                    OnApiChangeListener listener = i.next();
+                    if (listener != null) {
+                        listener.onApiChange(mCurrentState);
+                    } else {
+                        i.remove();
+                    }
+                }
             }
-        }
+        });
     }
 
     /**
