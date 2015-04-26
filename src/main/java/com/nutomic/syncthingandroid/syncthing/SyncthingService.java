@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -91,8 +90,6 @@ public class SyncthingService extends Service {
     private LinkedList<FolderObserver> mObservers = new LinkedList<>();
 
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
-
-    private Handler mMainHandler;
 
     /**
      * Callback for when the Syncthing web interface becomes first available after service start.
@@ -255,7 +252,6 @@ public class SyncthingService extends Service {
                      .putString("gui_password", sb.toString()).commit();
         }
 
-        mMainHandler = new Handler();
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         new StartupTask().execute();
@@ -393,23 +389,18 @@ public class SyncthingService extends Service {
     /**
      * Called to notifiy listeners of an API change.
      *
-     * Must only be called from SyncthingService or {@link RestApi}.
+     * Must only be called from SyncthingService or {@link RestApi} on the main thread.
      */
     private void onApiChange() {
-        mMainHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
-                     i.hasNext(); ) {
-                    OnApiChangeListener listener = i.next();
-                    if (listener != null) {
-                        listener.onApiChange(mCurrentState);
-                    } else {
-                        i.remove();
-                    }
-                }
+        for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
+             i.hasNext(); ) {
+            OnApiChangeListener listener = i.next();
+            if (listener != null) {
+                listener.onApiChange(mCurrentState);
+            } else {
+                i.remove();
             }
-        });
+        }
     }
 
     /**
