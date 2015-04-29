@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.graphics.Bitmap;
 import android.net.http.SslCertificate;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -59,7 +60,14 @@ public class WebGuiActivity extends SyncthingActivity
         @Override
         public void onReceivedSslError (WebView view, SslErrorHandler handler, SslError error) {
             try {
-                // Uses reflection to access the private mX509Certificate field of SslCertificate
+                int sdk = android.os.Build.VERSION.SDK_INT;
+                if (sdk >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                    // The mX509Certificate field is not available for ICS- devices
+                    Log.w(TAG, "Skipping certificate check for devices <ICS");
+                    handler.proceed();
+                    return;
+                }
+                // Use reflection to access the private mX509Certificate field of SslCertificate
                 SslCertificate sslCert = error.getCertificate();
                 Field f = sslCert.getClass().getDeclaredField("mX509Certificate");
                 f.setAccessible(true);
