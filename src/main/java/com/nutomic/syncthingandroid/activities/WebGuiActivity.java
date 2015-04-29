@@ -53,6 +53,7 @@ public class WebGuiActivity extends SyncthingActivity implements SyncthingServic
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(mWebViewClient);
+        mWebView.clearCache(true);
     }
 
     @Override
