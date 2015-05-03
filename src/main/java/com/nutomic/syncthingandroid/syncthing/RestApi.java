@@ -48,12 +48,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     /**
      * Parameter for {@link #getValue} or {@link #setValue} referring to "options" config item.
      */
-    public static final String TYPE_OPTIONS = "Options";
+    public static final String TYPE_OPTIONS = "options";
 
     /**
      * Parameter for {@link #getValue} or {@link #setValue} referring to "gui" config item.
      */
-    public static final String TYPE_GUI = "GUI";
+    public static final String TYPE_GUI = "gui";
 
     /**
      * The name of the HTTP header used for the syncthing API key.
@@ -404,16 +404,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             return new ArrayList<>();
 
         try {
-            JSONArray devices = mConfig.getJSONArray("Devices");
+            JSONArray devices = mConfig.getJSONArray("devices");
             List<Device> ret = new ArrayList<>(devices.length());
             for (int i = 0; i < devices.length(); i++) {
                 JSONObject json = devices.getJSONObject(i);
                 Device n = new Device();
-                n.Addresses = json.optJSONArray("Addresses").join(" ").replace("\"", "");
-                n.Name = json.getString("Name");
-                n.DeviceID = json.getString("DeviceID");
-                n.Compression = json.getString("Compression");
-                n.Introducer = json.getBoolean("Introducer");
+                n.Addresses = json.optJSONArray("addresses").join(" ").replace("\"", "");
+                n.Name = json.getString("name");
+                n.DeviceID = json.getString("deviceID");
+                n.Compression = json.getString("compression");
+                n.Introducer = json.getBoolean("introducer");
                 if (includeLocal || !mLocalDeviceId.equals(n.DeviceID)) {
                     ret.add(n);
                 }
@@ -479,27 +479,27 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
         List<Folder> ret;
         try {
-            JSONArray folders = mConfig.getJSONArray("Folders");
+            JSONArray folders = mConfig.getJSONArray("folders");
             ret = new ArrayList<>(folders.length());
             for (int i = 0; i < folders.length(); i++) {
                 JSONObject json = folders.getJSONObject(i);
                 Folder r = new Folder();
-                r.Path = json.getString("Path");
-                r.ID = json.getString("ID");
-                r.Invalid = json.getString("Invalid");
+                r.Path = json.getString("path");
+                r.ID = json.getString("id");
+                r.Invalid = json.getString("invalid");
                 r.DeviceIds = new ArrayList<>();
-                JSONArray devices = json.getJSONArray("Devices");
+                JSONArray devices = json.getJSONArray("devices");
                 for (int j = 0; j < devices.length(); j++) {
                     JSONObject n = devices.getJSONObject(j);
-                    r.DeviceIds.add(n.getString("DeviceID"));
+                    r.DeviceIds.add(n.getString("deviceID"));
                 }
 
-                r.ReadOnly = json.getBoolean("ReadOnly");
-                r.RescanIntervalS = json.getInt("RescanIntervalS");
-                JSONObject versioning = json.getJSONObject("Versioning");
-                if (versioning.getString("Type").equals("simple")) {
+                r.ReadOnly = json.getBoolean("readOnly");
+                r.RescanIntervalS = json.getInt("rescanIntervalS");
+                JSONObject versioning = json.getJSONObject("versioning");
+                if (versioning.getString("type").equals("simple")) {
                     SimpleVersioning sv = new SimpleVersioning();
-                    JSONObject params = versioning.getJSONObject("Params");
+                    JSONObject params = versioning.getJSONObject("params");
                     sv.setParams(params.getInt("keep"));
                     r.Versioning = sv;
                 } else {
@@ -572,17 +572,24 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
                 try {
                     JSONObject json = new JSONObject(s);
-                    String[] names = json.names().join(" ").replace("\"", "").split(" ");
+                    JSONObject jsonConns = json.getJSONObject("connections");
+
+                    // Move total into connections to make iteration easier.
+                    jsonConns.put(RestApi.LOCAL_DEVICE_CONNECTIONS,
+                            json.getJSONObject(RestApi.LOCAL_DEVICE_CONNECTIONS));
+
+                    String[] names = jsonConns.names().join(" ").replace("\"", "").split(" ");
+
                     HashMap<String, Connection> connections = new HashMap<String, Connection>();
                     for (String deviceId : names) {
                         Connection c = new Connection();
-                        JSONObject conn = json.getJSONObject(deviceId);
+                        JSONObject conn = jsonConns.getJSONObject(deviceId);
                         c.Address = deviceId;
-                        c.At = conn.getString("At");
-                        c.InBytesTotal = conn.getLong("InBytesTotal");
-                        c.OutBytesTotal = conn.getLong("OutBytesTotal");
-                        c.Address = conn.getString("Address");
-                        c.ClientVersion = conn.getString("ClientVersion");
+                        c.At = conn.getString("at");
+                        c.InBytesTotal = conn.getLong("inBytesTotal");
+                        c.OutBytesTotal = conn.getLong("outBytesTotal");
+                        c.Address = conn.getString("address");
+                        c.ClientVersion = conn.getString("clientVersion");
                         c.Completion = getDeviceCompletion(deviceId);
 
                         Connection prev = (mPreviousConnections.containsKey(deviceId))
@@ -590,9 +597,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                                 : new Connection();
                         mPreviousConnectionTime = now;
                         c.InBits = Math.max(0, 8 *
-                                (conn.getLong("InBytesTotal") - prev.InBytesTotal) / timeElapsed);
+                                (conn.getLong("inBytesTotal") - prev.InBytesTotal) / timeElapsed);
                         c.OutBits = Math.max(0, 8 *
-                                (conn.getLong("OutBytesTotal") - prev.OutBytesTotal) / timeElapsed);
+                                (conn.getLong("outBytesTotal") - prev.OutBytesTotal) / timeElapsed);
 
                         connections.put(deviceId, c);
 
@@ -726,7 +733,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                         }
 
                         try {
-                            JSONArray devices = mConfig.getJSONArray("Devices");
+                            JSONArray devices = mConfig.getJSONArray("devices");
                             JSONObject n = null;
                             if (create) {
                                 n = new JSONObject();
@@ -734,17 +741,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                             } else {
                                 for (int i = 0; i < devices.length(); i++) {
                                     JSONObject json = devices.getJSONObject(i);
-                                    if (device.DeviceID.equals(json.getString("DeviceID"))) {
+                                    if (device.DeviceID.equals(json.getString("deviceID"))) {
                                         n = devices.getJSONObject(i);
                                         break;
                                     }
                                 }
                             }
-                            n.put("DeviceID", device.DeviceID);
-                            n.put("Name", device.Name);
-                            n.put("Addresses", listToJson(device.Addresses.split(" ")));
-                            n.put("Compression", device.Compression);
-                            n.put("Introducer", device.Introducer);
+                            n.put("deviceID", device.DeviceID);
+                            n.put("name", device.Name);
+                            n.put("addresses", listToJson(device.Addresses.split(" ")));
+                            n.put("compression", device.Compression);
+                            n.put("introducer", device.Introducer);
                             requireRestart(activity);
                         } catch (JSONException e) {
                             Log.w(TAG, "Failed to read devices", e);
@@ -759,13 +766,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public boolean deleteDevice(Device device, Activity activity) {
         try {
-            JSONArray devices = mConfig.getJSONArray("Devices");
+            JSONArray devices = mConfig.getJSONArray("devices");
 
             for (int i = 0; i < devices.length(); i++) {
                 JSONObject json = devices.getJSONObject(i);
-                if (device.DeviceID.equals(json.getString("DeviceID"))) {
-                    mConfig.remove("Devices");
-                    mConfig.put("Devices", delete(devices, devices.getJSONObject(i)));
+                if (device.DeviceID.equals(json.getString("deviceID"))) {
+                    mConfig.remove("devices");
+                    mConfig.put("devices", delete(devices, devices.getJSONObject(i)));
                     break;
                 }
             }
@@ -782,7 +789,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public boolean editFolder(Folder folder, boolean create, Activity activity) {
         try {
-            JSONArray folders = mConfig.getJSONArray("Folders");
+            JSONArray folders = mConfig.getJSONArray("folders");
             JSONObject r = null;
             if (create) {
                 r = new JSONObject();
@@ -790,32 +797,32 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             } else {
                 for (int i = 0; i < folders.length(); i++) {
                     JSONObject json = folders.getJSONObject(i);
-                    if (folder.ID.equals(json.getString("ID"))) {
+                    if (folder.ID.equals(json.getString("id"))) {
                         r = folders.getJSONObject(i);
                         break;
                     }
                 }
             }
-            r.put("Path", folder.Path);
-            r.put("ID", folder.ID);
-            r.put("IgnorePerms", true);
-            r.put("ReadOnly", folder.ReadOnly);
+            r.put("path", folder.Path);
+            r.put("id", folder.ID);
+            r.put("ignorePerms", true);
+            r.put("readOnly", folder.ReadOnly);
             JSONArray devices = new JSONArray();
             for (String n : folder.DeviceIds) {
                 JSONObject element = new JSONObject();
-                element.put("DeviceID", n);
+                element.put("deviceID", n);
                 devices.put(element);
             }
-            r.put("Devices", devices);
+            r.put("devices", devices);
             JSONObject versioning = new JSONObject();
-            versioning.put("Type", folder.Versioning.getType());
+            versioning.put("type", folder.Versioning.getType());
             JSONObject params = new JSONObject();
-            versioning.put("Params", params);
+            versioning.put("params", params);
             for (String key : folder.Versioning.getParams().keySet()) {
                 params.put(key, folder.Versioning.getParams().get(key));
             }
-            r.put("RescanIntervalS", folder.RescanIntervalS);
-            r.put("Versioning", versioning);
+            r.put("rescanIntervalS", folder.RescanIntervalS);
+            r.put("versioning", versioning);
             requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit folder " + folder.ID + " at " + folder.Path, e);
@@ -829,13 +836,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public boolean deleteFolder(Folder folder, Activity activity) {
         try {
-            JSONArray folders = mConfig.getJSONArray("Folders");
+            JSONArray folders = mConfig.getJSONArray("folders");
 
             for (int i = 0; i < folders.length(); i++) {
                 JSONObject json = folders.getJSONObject(i);
                 if (folder.ID.equals(json.getString("ID"))) {
-                    mConfig.remove("Folders");
-                    mConfig.put("Folders", delete(folders, folders.getJSONObject(i)));
+                    mConfig.remove("folders");
+                    mConfig.put("folders", delete(folders, folders.getJSONObject(i)));
                     break;
                 }
             }
