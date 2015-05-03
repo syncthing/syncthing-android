@@ -2,9 +2,12 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -30,6 +33,14 @@ public class WebGuiActivity extends SyncthingActivity implements SyncthingServic
         public void onPageFinished(WebView view, String url) {
             mWebView.setVisibility(View.VISIBLE);
             mLoadingView.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
+            final SharedPreferences prefs =
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            handler.proceed(prefs.getString("gui_user", ""), prefs.getString("gui_password", ""));
+            super.onReceivedHttpAuthRequest(view, handler, host, realm);
         }
     };
 
