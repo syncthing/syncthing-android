@@ -29,12 +29,12 @@ public class SettingsFragment extends PreferenceFragment
 
     private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
     private static final String SYNCTHING_GUI_KEY     = "syncthing_gui";
-    private static final String DEVICE_NAME_KEY       = "DeviceName";
-    private static final String USAGE_REPORT_ACCEPTED = "URAccepted";
-    private static final String ADDRESS               = "Address";
+    private static final String DEVICE_NAME_KEY       = "deviceName";
+    private static final String USAGE_REPORT_ACCEPTED = "urAccepted";
+    private static final String ADDRESS               = "address";
     private static final String GUI_USER              = "gui_user";
     private static final String GUI_PASSWORD          = "gui_password";
-    private static final String USER_TLS              = "UseTLS";
+    private static final String USER_TLS              = "useTLS";
     private static final String EXPORT_CONFIG         = "export_config";
     private static final String IMPORT_CONFIG         = "import_config";
     private static final String STTRACE               = "sttrace";
@@ -222,8 +222,8 @@ public class SettingsFragment extends PreferenceFragment
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(),
                     ((Boolean) o) ? 1 : 0, false, getActivity());
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
-            boolean isArray = preference.getKey().equals("ListenAddress") ||
-                    preference.getKey().equals("GlobalAnnServers");
+            boolean isArray = preference.getKey().equals("listenAddress") ||
+                    preference.getKey().equals("globalAnnounceServers");
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
                     isArray, getActivity());
         } else if (preference.getKey().equals(ADDRESS) || preference.getKey().equals(USER_TLS)) {
