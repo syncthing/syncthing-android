@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
@@ -29,11 +30,15 @@ public class SyncthingRunnable implements Runnable {
 
     public static final String UNIT_TEST_PATH = "was running";
 
+    private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
+
     private final Context mContext;
 
     private boolean mGenerate;
 
-    private String mCommand;
+    private String mSyncthingBinary;
+
+    private String[] mCommand;
 
     public enum Command {
         generate, // Generate keys, a config file and immediately exit.
@@ -48,16 +53,16 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, Command command) {
         mContext = context;
-        String syncthing = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
+        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
         switch (command) {
             case generate:
-                mCommand = syncthing + " -generate='" + mContext.getFilesDir() + "' -no-browser";
+                mCommand = new String[]{ mSyncthingBinary, "-generate", mContext.getFilesDir().toString() };
                 break;
             case main:
-                mCommand = syncthing + " -home='" + mContext.getFilesDir() + "' -no-browser";
+                mCommand = new String[]{ mSyncthingBinary, "-home", mContext.getFilesDir().toString(), "-no-browser" };
                 break;
             case reset:
-                mCommand = syncthing + " -home='" + mContext.getFilesDir() + "' -reset";
+                mCommand = new String[]{ mSyncthingBinary, "-home", mContext.getFilesDir().toString(), "-reset" };
                 break;
             default:
                 Log.w(TAG, "Unknown command option");
@@ -72,14 +77,21 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, String manualCommand) {
         mContext = context;
-        mCommand = manualCommand;
+        mCommand = new String[] { manualCommand };
     }
 
     @Override
     public void run() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        DataOutputStream dos = null;
         int ret = 1;
+        // Make sure Syncthing is executable
+        try {
+            ProcessBuilder pb = new ProcessBuilder("chmod", "+x", mSyncthingBinary);
+            pb.start().waitFor();
+        } catch (IOException|InterruptedException e) {
+            Log.w(TAG, "Failed to chmod Syncthing", e);
+        }
+        // Loop Syncthing
         Process process = null;
         try {
             // Loop to handle Syncthing restarts (these always have an error code of 3).
@@ -94,16 +106,7 @@ public class SyncthingRunnable implements Runnable {
                 env.put("STGUIAUTH", sp.getString("gui_user", "") + ":" +
                         sp.getString("gui_password", ""));
                 process = pb.start();
-
-                dos = new DataOutputStream(process.getOutputStream());
-                // Set (Android) home directory to data folder for syncthing to use.
-                dos.writeBytes("HOME=" + Environment.getExternalStorageDirectory() + " ");
-                dos.writeBytes("STTRACE=" + pm.getString("sttrace", "") + " ");
-                dos.writeBytes("STNORESTART=1 ");
-                dos.writeBytes("STNOUPGRADE=1 ");
-                dos.writeBytes(mCommand);
-                dos.writeBytes("\nexit\n");
-                dos.flush();
+                mSyncthing.set(process);
 
                 log(process.getInputStream(), Log.INFO);
                 log(process.getErrorStream(), Log.WARN);
@@ -111,6 +114,7 @@ public class SyncthingRunnable implements Runnable {
                 niceSyncthing();
 
                 ret = process.waitFor();
+                mSyncthing.set(null);
 
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
@@ -121,12 +125,6 @@ public class SyncthingRunnable implements Runnable {
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
-            try {
-                if (dos != null)
-                    dos.close();
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close shell stream", e);
-            }
             if (process != null)
                 process.destroy();
             if (ret != 0) {
@@ -149,7 +147,7 @@ public class SyncthingRunnable implements Runnable {
                     Thread.sleep(1000); // Wait a second before getting the pid
                     nice = Runtime.getRuntime().exec("sh");
                     niceOut = new DataOutputStream(nice.getOutputStream());
-                    niceOut.writeBytes("set `ps |grep libsyncthing.so`\n");
+                    niceOut.writeBytes("set `ps | grep libsyncthing.so`\n");
                     niceOut.writeBytes("ionice $2 be 7\n"); // best-effort, low priority
                     niceOut.writeBytes("exit\n");
                     log(nice.getErrorStream(), Log.WARN);
@@ -183,6 +181,18 @@ public class SyncthingRunnable implements Runnable {
      *
      */
     public static void killSyncthing() {
+        final Process p = mSyncthing.get();
+        if (p != null) {
+            mSyncthing.set(null);
+            p.destroy();
+            try {
+                p.waitFor();
+            } catch (InterruptedException e) {
+                Log.w(TAG_KILL, "Failed to kill Syncthing's process", e);
+            }
+        }
+
+        // Ensure kill
         for (int i = 0; i < 2; i++) {
             Process ps = null;
             DataOutputStream psOut = null;
