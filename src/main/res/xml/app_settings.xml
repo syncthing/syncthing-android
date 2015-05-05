@@ -121,6 +121,13 @@
         android:title="@string/category_about">
 
         <Preference
+            android:title="@string/open_log"
+            android:summary="@string/open_log_summary">
+            <intent
+                android:action=".activities.LogActivity" />
+        </Preference>
+
+        <Preference
             android:title="@string/report_issue_title"
             android:summary="@string/report_issue_summary">
             <intent
