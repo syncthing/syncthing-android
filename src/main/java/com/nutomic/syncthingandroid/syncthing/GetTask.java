@@ -93,7 +93,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
             } catch (InterruptedException e) {
                 Log.w(TAG, e);
             }
-            Log.w(TAG, "Retrying GetTask Rest API call ("+i+")");
+            Log.w(TAG, "Retrying GetTask Rest API call ("+(i+1)+"/10)");
         }
         return null;
     }

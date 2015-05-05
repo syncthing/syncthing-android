@@ -43,7 +43,7 @@ public class SettingsActivity extends SyncthingActivity {
         if (savedInstanceState != null) {
             mFragment = fm.getFragment(savedInstanceState,
                     savedInstanceState.getString("fragment_name"));
-        } else {
+        } else if (getIntent().getAction() != null) {
             switch (getIntent().getAction()) {
                 case ACTION_APP_SETTINGS_FRAGMENT:
                     setTitle(R.string.settings_title);
@@ -65,6 +65,9 @@ public class SettingsActivity extends SyncthingActivity {
                     throw new IllegalArgumentException(
                             "You must provide the requested fragment type as an extra.");
             }
+        } else {
+            setTitle(R.string.settings_title);
+            mFragment = new SettingsFragment();
         }
 
         fm.beginTransaction()
