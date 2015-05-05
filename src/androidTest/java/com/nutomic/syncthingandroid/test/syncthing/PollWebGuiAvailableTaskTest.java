@@ -33,8 +33,10 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
         new SyncthingRunnable(new MockContext(null),
                 getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
 
+        String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+
         final CountDownLatch latch = new CountDownLatch(1);
-        new PollWebGuiAvailableTask() {
+        new PollWebGuiAvailableTask(httpsCertPath) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 latch.countDown();

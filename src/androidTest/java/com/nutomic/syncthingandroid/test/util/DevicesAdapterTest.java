@@ -25,13 +25,13 @@ public class DevicesAdapterTest extends AndroidTestCase {
         super.setUp();
 
         mAdapter = new DevicesAdapter(getContext());
-        mDevice.Addresses = "127.0.0.1:12345";
-        mDevice.Name = "the device";
-        mDevice.DeviceID = "123-456-789";
+        mDevice.addresses = "127.0.0.1:12345";
+        mDevice.name = "the device";
+        mDevice.deviceID = "123-456-789";
 
-        mConnection.Completion = 100;
-        mConnection.InBits = 1048576;
-        mConnection.OutBits = 1073741824;
+        mConnection.completion = 100;
+        mConnection.inBits = 1048576;
+        mConnection.outBits = 1073741824;
 
     }
 
@@ -40,7 +40,7 @@ public class DevicesAdapterTest extends AndroidTestCase {
         mAdapter.add(Arrays.asList(mDevice));
         View v = mAdapter.getView(0, null, null);
 
-        assertEquals(mDevice.Name, ((TextView) v.findViewById(R.id.name)).getText());
+        assertEquals(mDevice.name, ((TextView) v.findViewById(R.id.name)).getText());
         assertEquals(getContext().getString(R.string.device_disconnected),
                 ((TextView) v.findViewById(R.id.status)).getText().toString());
         assertFalse(((TextView) v.findViewById(R.id.status)).getText().equals(""));
@@ -52,7 +52,7 @@ public class DevicesAdapterTest extends AndroidTestCase {
     public void testGetViewConnections() {
         mAdapter.add(Arrays.asList(mDevice));
         mAdapter.onReceiveConnections(
-                new HashMap<String, RestApi.Connection>() {{ put(mDevice.DeviceID, mConnection); }});
+                new HashMap<String, RestApi.Connection>() {{ put(mDevice.deviceID, mConnection); }});
         View v = mAdapter.getView(0, null, null);
 
         assertEquals(getContext().getString(R.string.device_up_to_date),

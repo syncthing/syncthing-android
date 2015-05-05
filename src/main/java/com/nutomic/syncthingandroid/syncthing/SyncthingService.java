@@ -55,14 +55,19 @@ public class SyncthingService extends Service {
     public static final int GUI_UPDATE_INTERVAL = 1000;
 
     /**
-     * Name of the public key file in the data directory.
+     * name of the public key file in the data directory.
      */
     public static final String PUBLIC_KEY_FILE = "cert.pem";
 
     /**
-     * Name of the private key file in the data directory.
+     * name of the private key file in the data directory.
      */
     public static final String PRIVATE_KEY_FILE = "key.pem";
+
+    /**
+     * name of the public HTTPS CA file in the data directory.
+     */
+    public static final String HTTPS_CERT_FILE = "https-cert.pem";
 
     /**
      * Directory where config is exported to and imported from.
@@ -71,7 +76,7 @@ public class SyncthingService extends Service {
             new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
 
     /**
-     * Path to the native, integrated syncthing binary, relative to the data folder
+     * path to the native, integrated syncthing binary, relative to the data folder
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
 
@@ -194,7 +199,7 @@ public class SyncthingService extends Service {
             mConfig = new ConfigXml(SyncthingService.this);
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
-            new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
+            new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
             new Thread(new SyncthingRunnable(
                     this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
             Notification n = new NotificationCompat.Builder(this)
@@ -254,7 +259,7 @@ public class SyncthingService extends Service {
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        new StartupTask().execute();
+        new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
     }
 
     /**
@@ -263,6 +268,14 @@ public class SyncthingService extends Service {
      * {@code Pair<String, String>}.
      */
     private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+        String mGuiUser;
+        String mGuiPassword;
+
+        public StartupTask(String guiUser, String guiPassword) {
+            mGuiUser = guiUser;
+            mGuiPassword = guiPassword;
+        }
+
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
             mConfig = new ConfigXml(SyncthingService.this);
@@ -272,6 +285,7 @@ public class SyncthingService extends Service {
         @Override
         protected void onPostExecute(Pair<String, String> urlAndKey) {
             mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
+                    mGuiUser, mGuiPassword,
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {
@@ -367,6 +381,11 @@ public class SyncthingService extends Service {
     }
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
+
+        public PollWebGuiAvailableTaskImpl(String httpsCertPath) {
+            super(httpsCertPath);
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             if (mStopScheduled) {

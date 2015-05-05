@@ -44,8 +44,8 @@ public class FolderObserverTest extends AndroidTestCase
 
     private RestApi.Folder createFolder(String id) {
         RestApi.Folder r = new RestApi.Folder();
-        r.Path = mTestFolder.getAbsolutePath();
-        r.ID = id;
+        r.path = mTestFolder.getAbsolutePath();
+        r.id = id;
         return r;
     }
 

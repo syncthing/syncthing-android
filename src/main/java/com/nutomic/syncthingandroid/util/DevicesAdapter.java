@@ -42,22 +42,22 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         TextView download = (TextView) convertView.findViewById(R.id.download);
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
-        String deviceId = getItem(position).DeviceID;
+        String deviceId = getItem(position).deviceID;
         RestApi.Connection conn = mConnections.get(deviceId);
 
-        name.setText(getItem(position).Name);
+        name.setText(getItem(position).name);
         Resources r = getContext().getResources();
         if (conn != null) {
-            if (conn.Completion == 100) {
+            if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(r.getColor(R.color.text_green));
             }
             else {
-                status.setText(r.getString(R.string.device_syncing, conn.Completion));
+                status.setText(r.getString(R.string.device_syncing, conn.completion));
                 status.setTextColor(r.getColor(R.color.text_blue));
             }
-            download.setText(RestApi.readableTransferRate(getContext(), conn.InBits));
-            upload.setText(RestApi.readableTransferRate(getContext(), conn.OutBits));
+            download.setText(RestApi.readableTransferRate(getContext(), conn.inBits));
+            upload.setText(RestApi.readableTransferRate(getContext(), conn.outBits));
         }
         else {
             download.setText("0 " + r.getStringArray(R.array.transfer_rate_units)[0]);

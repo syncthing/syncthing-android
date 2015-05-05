@@ -17,31 +17,29 @@ import java.util.concurrent.TimeUnit;
 
 public class RestApiTest extends AndroidTestCase {
 
-    private SyncthingRunnable mSyncthing;
-
-    private ConfigXml mConfig;
-
     private RestApi mApi;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
 
-        mSyncthing = new SyncthingRunnable(new MockContext(null),
+        new SyncthingRunnable(new MockContext(null),
                 getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
 
-        mConfig = new ConfigXml(new MockContext(getContext()));
-        mConfig.changeDefaultFolder();
+        ConfigXml config = new ConfigXml(new MockContext(getContext()));
+        config.changeDefaultFolder();
+
+        String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(2);
-        new PollWebGuiAvailableTask() {
+        new PollWebGuiAvailableTask(httpsCertPath) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 mApi.onWebGuiAvailable();
                 latch.countDown();
             }
-        }.execute(mConfig.getWebGuiUrl());
-        mApi = new RestApi(getContext(), mConfig.getWebGuiUrl(), mConfig.getApiKey(),
+        }.execute(config.getWebGuiUrl());
+        mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
                 new RestApi.OnApiAvailableListener() {
             @Override
             public void onApiAvailable() {
@@ -54,8 +52,6 @@ public class RestApiTest extends AndroidTestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-
-        final CountDownLatch latch = new CountDownLatch(1);
         SyncthingRunnable.killSyncthing();
         ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }

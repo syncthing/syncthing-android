@@ -43,7 +43,7 @@ public class GetTaskTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetNoParams() throws IOException, InterruptedException {
-        new GetTask() {
+        new GetTask("") {
             @Override
             protected void onPostExecute(String s) {
                 assertEquals(RESPONSE, s);
@@ -57,7 +57,7 @@ public class GetTaskTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetParams() throws IOException, InterruptedException {
-        new GetTask() {
+        new GetTask("") {
             @Override
             protected void onPostExecute(String s) {
                 assertEquals(RESPONSE, s);
