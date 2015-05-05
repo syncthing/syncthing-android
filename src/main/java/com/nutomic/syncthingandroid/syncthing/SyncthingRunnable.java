@@ -222,10 +222,10 @@ public class SyncthingRunnable implements Runnable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                String line;
                 try {
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
                     while ((line = br.readLine()) != null) {
                         Log.println(priority, TAG_NATIVE, line);
                     }
