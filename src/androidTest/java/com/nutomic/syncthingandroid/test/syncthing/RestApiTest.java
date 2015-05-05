@@ -23,7 +23,7 @@ public class RestApiTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
+        new SyncthingRunnable(new MockContext(getContext()), SyncthingRunnable.Command.main);
 
         ConfigXml config = new ConfigXml(new MockContext(getContext()));
         config.changeDefaultFolder();
@@ -52,7 +52,7 @@ public class RestApiTest extends AndroidTestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        SyncthingRunnable.killSyncthing();
+        // TODO? SyncthingRunnable.killSyncthing();
         ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }
 

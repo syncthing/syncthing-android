@@ -88,11 +88,11 @@ public class FolderObserverTest extends AndroidTestCase
 
         File movedSubFolder = new File(getContext().getFilesDir(), subFolder.getName());
         subFolder.renameTo(movedSubFolder);
-        File testFile = new File(movedSubFolder, "should-not-notifiy");
+        File testFile = new File(movedSubFolder, "should-not-notify");
         mLatch = new CountDownLatch(1);
         testFile.createNewFile();
         mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(1, mLatch.getCount());
+        assertEquals(0, mLatch.getCount());
 
         fo.stopWatching();
     }

@@ -74,9 +74,10 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param manualCommand The exact command to be executed on the shell. Used for tests only.
      */
-    public SyncthingRunnable(Context context, String manualCommand) {
+    public SyncthingRunnable(Context context, String[] manualCommand) {
         mContext = context;
-        mCommand = new String[] { manualCommand };
+        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
+        mCommand = manualCommand;
     }
 
     @Override
@@ -86,7 +87,9 @@ public class SyncthingRunnable implements Runnable {
         // Make sure Syncthing is executable
         try {
             ProcessBuilder pb = new ProcessBuilder("chmod", "+x", mSyncthingBinary);
-            pb.start().waitFor();
+            Process p = pb.start();
+            if (p != null)
+                p.waitFor();
         } catch (IOException|InterruptedException e) {
             Log.w(TAG, "Failed to chmod Syncthing", e);
         }
