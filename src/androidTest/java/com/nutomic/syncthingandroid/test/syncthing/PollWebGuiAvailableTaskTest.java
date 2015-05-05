@@ -30,7 +30,7 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
     }
 
     public void testPolling() throws InterruptedException {
-        mSyncthing = new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
+        new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
 
         String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 

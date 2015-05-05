@@ -22,9 +22,11 @@ public class SyncthingRunnable implements Runnable {
 
     private static final String TAG = "SyncthingRunnable";
 
-    private static final String TAG_IONICE = "SyncthingRunnableIoNice";
-
     private static final String TAG_NATIVE = "SyncthingNativeCode";
+
+    private static final String TAG_NICE = "SyncthingRunnableIoNice";
+
+    private static final String TAG_KILL = "SyncthingRunnableKill";
 
     public static final String UNIT_TEST_PATH = "was running";
 
@@ -64,7 +66,6 @@ public class SyncthingRunnable implements Runnable {
                 break;
             default:
                 Log.w(TAG, "Unknown command option");
-                mCommand = "";
         }
     }
 
@@ -94,7 +95,7 @@ public class SyncthingRunnable implements Runnable {
         try {
             // Loop to handle Syncthing restarts (these always have an error code of 3).
             do {
-                ProcessBuilder pb = new ProcessBuilder("sh");
+                ProcessBuilder pb = new ProcessBuilder(mCommand);
                 Map<String, String> env = pb.environment();
                 // Set home directory to data folder for web GUI folder picker.
                 env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());

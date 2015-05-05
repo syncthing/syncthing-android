@@ -23,7 +23,7 @@ public class RestApiTest extends AndroidTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        mSyncthing = new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
+        new SyncthingRunnable(new MockContext(null), SyncthingRunnable.Command.main);
 
         ConfigXml config = new ConfigXml(new MockContext(getContext()));
         config.changeDefaultFolder();
@@ -39,6 +39,7 @@ public class RestApiTest extends AndroidTestCase {
             }
         }.execute(config.getWebGuiUrl());
         mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
+                null, null, // TODO
                 new RestApi.OnApiAvailableListener() {
             @Override
             public void onApiAvailable() {
