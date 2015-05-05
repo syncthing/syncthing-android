@@ -141,6 +141,10 @@ public class ConfigXml {
             if (applyLenientMTimes(r)) {
                 changed = true;
             }
+
+            if (applyHashers(r)) {
+                changed = true;
+            }
         }
 
         // Enforce TLS.
@@ -192,6 +196,33 @@ public class ConfigXml {
         Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
         Element newElem = mConfig.createElement("lenientMtimes");
         newElem.setTextContent(Boolean.toString(true));
+        folder.appendChild(newElem);
+        return true;
+    }
+
+    /**
+     * Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
+     * given folder.
+     *
+     * @return True if the XML was changed.
+     */
+    private boolean applyHashers(Element folder) {
+        NodeList childs = folder.getChildNodes();
+        for (int i = 0; i < childs.getLength(); i++) {
+            Node item = childs.item(i);
+            if (item.getNodeName().equals("hashers")) {
+                if (item.getTextContent().equals(Integer.toString(0))) {
+                    item.setTextContent(Integer.toString(1));
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        // XML tag does not exist, create it.
+        Log.i(TAG, "Set 'hashers' on folder " + folder.getAttribute("id"));
+        Element newElem = mConfig.createElement("hashers");
+        newElem.setTextContent(Integer.toString(1));
         folder.appendChild(newElem);
         return true;
     }
