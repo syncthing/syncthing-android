@@ -108,13 +108,15 @@ public class SyncthingRunnable implements Runnable {
                 process = pb.start();
                 mSyncthing.set(process);
 
-                log(process.getInputStream(), Log.INFO);
-                log(process.getErrorStream(), Log.WARN);
+                Thread lInfo = log(process.getInputStream(), Log.INFO);
+                Thread lWarn = log(process.getErrorStream(), Log.WARN);
 
                 niceSyncthing();
 
                 ret = process.waitFor();
                 mSyncthing.set(null);
+                lInfo.join();
+                lWarn.join();
 
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
@@ -266,8 +268,8 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param is The stream to log.
      */
-    private void log(final InputStream is, final int priority) {
-        new Thread(new Runnable() {
+    private Thread log(final InputStream is, final int priority) {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -283,7 +285,9 @@ public class SyncthingRunnable implements Runnable {
                     Log.w(TAG, "Failed to read syncthing command line output", e);
                 }
             }
-        }).start();
+        });
+        t.start();
+        return t;
     }
 
 }
