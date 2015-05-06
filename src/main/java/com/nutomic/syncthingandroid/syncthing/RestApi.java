@@ -519,7 +519,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 Folder r = new Folder();
                 r.path = json.getString("path");
                 r.id = json.getString("id");
-                r.invalid = json.getString("invalid");
+                if (json.has("invalid")) {
+                    r.invalid = json.getString("invalid"); // TODO Upstream bug
+                } else {
+                    r.invalid = "";
+                }
                 r.deviceIds = new ArrayList<>();
                 JSONArray devices = json.getJSONArray("devices");
                 for (int j = 0; j < devices.length(); j++) {
