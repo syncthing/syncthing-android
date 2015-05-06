@@ -4,10 +4,10 @@ Please search for existing issues before opening a new one.
 
 ### Where To Report
 
-Issues might be related either to syncthing, syncthing-android or both. The general rule of thumb is this:
+Issues might be related either to Syncthing, syncthing-android or both. The general rule of thumb is this:
 If the issue has to do with synchronization, discovery, the web interface, or can be reproduced on a desktop, it should be posted at [syncthing](https://github.com/calmh/syncthing/issues).
 
-If the issue is related to the Android UI, background service, or can't be reproduced on a desktop running the same syncthing version, it should be posted here.
+If the issue is related to the Android UI, background service, or can't be reproduced on a desktop running the same Syncthing version, it should be posted here.
 
 For general usage help or questions, you should post to [discourse](http://discourse.syncthing.net/category/support).
 
@@ -29,11 +29,12 @@ syncthing-android version: x.x.x
 
 Device name and Android version:
 
-versions of involved syncthing nodes: vx.x.x, ...
+versions of involved Syncthing nodes: vx.x.x, ...
 
-logcat: *link to file* (over the entire procedure, limited to the package `com.nutomic.syncthingandroid` if you can, [How to Logcat](http://forum.xda-developers.com/showthread.php?t=1726238), [Logcat in Terminal](http://wiki.cyanogenmod.org/w/Doc:_debugging_with_logcat), [Android Studio Logging Guide](http://stackoverflow.com/a/17648663/1837158)).
 
-config.xml: *link to file* (if it might be related, located in `/data/data/com.nutomic.syncthingandroid`, requires root)
+logcat: *link to file*: Use the log window (Settings -> Open Log -> Android Log -> Share)
+
+config.xml: *link to file* (if it might be related, located in `/data/data/com.nutomic.syncthingandroid`, use the export functionality and fetch the file at /sdcard/backups/syncthing/config.xml)
 
 screenshots: *link to file* (only for UI problems)
 
