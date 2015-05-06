@@ -1,5 +1,9 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -269,6 +274,16 @@ public class SettingsFragment extends PreferenceFragment
                 if (mSyncthingService.importConfig()) {
                     Toast.makeText(getActivity(), getString(R.string.config_imported_successful),
                             Toast.LENGTH_SHORT).show();
+                    // Restart application because API key changed
+                    // TODO Should be nicer
+                    Intent mStartActivity = new Intent(this.getActivity(), MainActivity.class);
+                    int mPendingIntentId = 838465;
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(this.getActivity(),
+                            mPendingIntentId,
+                            mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager mgr = (AlarmManager)this.getActivity().getSystemService(Context.ALARM_SERVICE);
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                    System.exit(0);
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.config_import_failed,
                             SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
