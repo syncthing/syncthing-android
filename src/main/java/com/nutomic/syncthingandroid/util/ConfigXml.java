@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -138,10 +137,6 @@ public class ConfigXml {
                 changed = true;
             }
 
-            if (applyLenientMTimes(r)) {
-                changed = true;
-            }
-
             if (applyHashers(r)) {
                 changed = true;
             }
@@ -171,33 +166,6 @@ public class ConfigXml {
         if (changed) {
             saveChanges();
         }
-    }
-
-    /**
-     * Set 'lenientMtimes' (see https://github.com/syncthing/syncthing/issues/831) on the
-     * given folder.
-     *
-     * @return True if the XML was changed.
-     */
-    private boolean applyLenientMTimes(Element folder) {
-        NodeList childs = folder.getChildNodes();
-        for (int i = 0; i < childs.getLength(); i++) {
-            Node item = childs.item(i);
-            if (item.getNodeName().equals("lenientMtimes")) {
-                if (item.getTextContent().equals(Boolean.toString(false))) {
-                    item.setTextContent(Boolean.toString(true));
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        // XML tag does not exist, create it.
-        Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
-        Element newElem = mConfig.createElement("lenientMtimes");
-        newElem.setTextContent(Boolean.toString(true));
-        folder.appendChild(newElem);
-        return true;
     }
 
     /**
