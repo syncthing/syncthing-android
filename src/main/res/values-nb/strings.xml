@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Erstatt proprietære tjenester med noe åpent, troverdig og desentralisert.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Legg til Mappe</string>
@@ -10,7 +9,6 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Send Enhets-ID til</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Venter på API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +32,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Opplasting</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Nedlasting:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -108,13 +107,8 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Venter på GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Genererer nøkler. Dette kan ta en stund.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Første Oppstart</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Velkommen til Syncthing for Android!\n\n\
-Denne appen er for tiden i Alphaversjon, og du kan oppleve bugs, ytelsesproblemer eller tap av data.\n\n\
-Vennligst rapporter alle problemer du møter på via Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Innstillinger</string>
@@ -132,6 +126,14 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
+  <!--Toast after entering invalid STTRACE params-->
+  <!--Toast after entering invalid username-->
+  <!--Toast after entering invalid password-->
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
+  <!--Settings item that opens the log activity-->
+  <!--Summary for the log activity-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Rapporter Problem</string>
   <!--Summary for the issue tracker settings item-->
@@ -150,6 +152,12 @@ Vennligst rapporter alle problemer du møter på via Github.</string>
   <string name="create_fs_folder">Opprett ny Mappe</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Velg Mappe</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <!--Title of the "log android" menu button-->
+  <!--Title of the "log Syncthing" menu button-->
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing er deaktivert</string>

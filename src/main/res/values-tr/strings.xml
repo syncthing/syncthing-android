@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Mülkiyetli ve kullanıcısına kapalı hizmetler yerine açık, özgür, güvenilir ve dağıtık hizmetleri seçin.</string>
+  <string name="app_description">Açık, güvenilir ve merkezi olmayan bir dosya eşitleme uygulamasıdır.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Klasör Ekleme</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">İle Cihaz ID Gönder</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">API Bekleniyor</string>
+  <string name="api_loading">Yükleniyor...</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Klasörler</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Yükleme</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">İndirme:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -87,6 +88,11 @@
   <!--Setting title-->
   <string name="compression">Sıkıştırma</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Asla</item>
+    <item>Metadata</item>
+    <item>Her zaman</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Tanıtıcı</string>
   <!--ActionBar item-->
@@ -114,12 +120,12 @@ Lütfen bir tarayıcı kurun veya cihaz ID el ile girin.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Arayüz Bekleniyor</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Anahtarlar üretiliyor. Biraz zaman alabilir.</string>
+  <string name="web_gui_creating_key">Gücenli anahtarlar üretiliyor. Birkaç dakika zaman alabilir.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Başlangıç</string>
+  <string name="welcome_title">Android için Syncthing\'e Hoşgeldiniz</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Hoşgeldiniz, Android için Syncthing!\n\n\
-Bu uygulama halen Alfa durumunda, bu nedenle hatalar ile karşılaşabilir, verimsiz çalışabilir veya verilerinizi kaybedebilirsiniz.\n\n\
+  <string name="welcome_text">Syncthing, açık kaynaklı dosya eşitleme uygulamasıdır.\n\n\
+Diğer cihazlar ile veri paylaşmak için cihaz listenize onların benzersiz cihaz ID eklemeniz gerekir. Devamında hangi klasörleri, hangi cihazlar ile paylaşacağınızı  seçebilirsiniz.\n\n
 Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildirin.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -134,6 +140,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_charging">Sadece şarj ederken eşitle</string>
   <string name="sync_only_wifi">Sadece wifi bağlıyken eşitle</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
+  <string name="advanced_folder_picker_summary">Eşitleme için cihazdan herhangi bir klasör seçin</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing Seçenekler</string>
   <string name="device_name">Cihaz Adı</string>
@@ -150,12 +157,30 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>
   <string name="gui_password">Arayüz Kullanıcı Doğrulaması için Kullanıcı Parolası</string>
   <string name="gui_https_enabled">Arayüz için HTTPS Kullan</string>
+  <string name="export_config">Ayarları Dışarı Aktar</string>
   <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">Ayarlar %1$s dışarı aktarıldı</string>
+  <string name="import_config">Ayarları İçeri Aktar</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">Ayarlar içeri aktarıldı</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Ayarlar içeri aktarılamadı, dosyaların %1$s içinde olduğundan emin olun</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Hata Ayıklama Seçenekleri</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE seçenekleri içinde sadece a-z ve \',\' karakterleri kullanabilirsiniz</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Kullanıcı adı içinde : ve \' karakterleri kullanamazsınız</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Parola içinde : ve \' karakterleri kullanamazsınız</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
   <string name="category_about">Hakkında</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">Günlük Aç</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Syncthing ve Android günlük penceresi aç</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Hata Bildir</string>
   <!--Summary for the issue tracker settings item-->
@@ -169,6 +194,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Activity title-->
   <string name="folder_picker_title">Klasör Seçici</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Uyarı: Android sürümünüz, harici depolama cihazlarına eşitlemeye izin vermiyor.</string>
   <!--ListView empty text-->
   <string name="directory_empty">Dizin Boş</string>
   <!--Menu item to create folder on the file system-->
@@ -176,6 +202,16 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Menu item to select the current folder-->
   <string name="select_folder">Klasör Seç</string>
   <string name="create_folder_failed">Klasör oluşturulamadı</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">Günlük</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Android Günlüğünü Göster</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Syncthing Günlüğünü Göster</string>
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">Paylaş</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing devredışı</string>
@@ -197,10 +233,25 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Cihaz ID panoya kopyalandı</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Boşta</string>
   <string name="state_scanning">Taranıyor</string>
   <string name="state_cleaning">Temizleniyor</string>
   <string name="state_syncing">Eşitleniyor</string>
+  <string name="state_unknown">Bilinmiyor</string>
 </resources>

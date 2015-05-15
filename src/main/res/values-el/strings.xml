@@ -9,7 +9,6 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Αποστολή ID συσκευής στο</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Περιμένοντας το API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Φάκελοι</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -33,6 +32,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Ανέβασμα</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Κατέβασμα:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -90,6 +90,14 @@
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
+  <!--Toast after entering invalid STTRACE params-->
+  <!--Toast after entering invalid username-->
+  <!--Toast after entering invalid password-->
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
+  <!--Settings item that opens the log activity-->
+  <!--Summary for the log activity-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
@@ -101,6 +109,12 @@
   <!--ListView empty text-->
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <!--Title of the "log android" menu button-->
+  <!--Title of the "log Syncthing" menu button-->
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->

@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Substitua serviços proprietários por algo aberto, fiável e descentralizado.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
@@ -10,7 +9,6 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar ID do dispositivo para</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Aguardando a API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +32,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -114,13 +113,8 @@ Instale um leitor ou escreva o ID do dispositivo manualmente, por favor.</string
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Aguardando a interface web</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Gerando chaves. Isto pode demorar um bocado.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Primeiro início</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Bem vindo(a) ao Syncthing para Android!\n\n\
-Esta aplicação está em fase alfa, pelo que pode encontrar erros, problemas de desempenho ou perda de dados.\n\n\
-Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
@@ -161,7 +155,15 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <string name="config_import_failed">A importação da configuração falhou, assegure-se que os ficheiros estão em %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções da despistagem de erros</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <!--Toast after entering invalid username-->
+  <!--Toast after entering invalid password-->
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
   <string name="category_about">Sobre</string>
+  <!--Settings item that opens the log activity-->
+  <!--Summary for the log activity-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar incidente</string>
   <!--Summary for the issue tracker settings item-->
@@ -183,6 +185,12 @@ Por favor, relate quaisquer problemas que encontre através do Github.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Seleccionar pasta</string>
   <string name="create_folder_failed">Falhou a criação da pasta</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <!--Title of the "log android" menu button-->
+  <!--Title of the "log Syncthing" menu button-->
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desactivado</string>

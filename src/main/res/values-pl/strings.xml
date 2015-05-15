@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -123,6 +124,9 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Witam w Syncthing dla Androida</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing to otwartoźródłowa aplikacja do synchronizacji plików.\n\n
+Do współdzielenia plików z innymi urządzeniami potrzebujesz dodać unikalny ID innego urządzenia. Potem możesz wybrać, które foldery chcesz współdzielić z jakim urządzeniem.\n\n
+Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
@@ -169,6 +173,9 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <string name="toast_invalid_username">Znaki \':\' oraz \' są niedozwolone w nazwie użytkownika</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Znaki \':\' oraz \' są niedozwolone w haśle</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
   <string name="category_about">O projekcie</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Otwórz log</string>
@@ -203,7 +210,6 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Pokaż log Syncthing</string>
   <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Udostępnij log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Udostępnij</string>
   <!--SyncthingService-->

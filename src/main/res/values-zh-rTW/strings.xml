@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">用一個開放的、值得信賴的、去中心化的封閉服務替代品。</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">增加資料夾</string>
@@ -10,7 +9,6 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">傳送裝置識別碼給</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">正在等待 API</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">資料夾</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +32,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">上載</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">下載:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -113,13 +112,8 @@
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">正在等待 GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">正在產生金鑰。這可能需要一些時間。</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">初次開始</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">歡迎來到 Syncthing for Android!\n\n\
-此 app 目前正處於 Alpha 階段，且您可能遭遇程式錯誤、效能問題或資料遺失。\n\n\
-若遇到問題請您透過 Github 回報。</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
@@ -150,6 +144,14 @@
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">除錯選項</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <!--Toast after entering invalid username-->
+  <!--Toast after entering invalid password-->
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
+  <!--Settings item that opens the log activity-->
+  <!--Summary for the log activity-->
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">回報問題</string>
   <!--Summary for the issue tracker settings item-->
@@ -170,6 +172,12 @@
   <!--Menu item to select the current folder-->
   <string name="select_folder">選擇資料夾</string>
   <string name="create_folder_failed">建立資料夾時失敗</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <!--Title of the "log android" menu button-->
+  <!--Title of the "log Syncthing" menu button-->
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已經停用</string>
