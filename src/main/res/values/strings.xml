@@ -225,6 +225,8 @@ Please report any problems you encounter via Github.</string>
 
     <string name="sync_only_wifi">Sync only on wifi</string>
 
+    <string name="sync_only_ap">Sync only while tethering</string>
+
     <string name="advanced_folder_picker">Use advanced Folder Picker</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>

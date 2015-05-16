@@ -69,6 +69,7 @@
         <receiver android:name=".syncthing.NetworkReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
             </intent-filter>
         </receiver>
         <receiver android:name=".syncthing.BatteryReceiver">

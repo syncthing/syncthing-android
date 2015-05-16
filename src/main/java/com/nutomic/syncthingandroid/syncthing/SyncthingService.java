@@ -90,6 +90,8 @@ public class SyncthingService extends Service {
 
     public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
 
+    public static final String PREF_SYNC_ONLY_AP = "sync_only_ap";
+
     public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
 
     private static final int NOTIFICATION_ACTIVE = 1;
@@ -185,10 +187,12 @@ public class SyncthingService extends Service {
             // Check wifi/charging state against preferences and start if ok.
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
+            boolean prefAP = prefs.getBoolean(PREF_SYNC_ONLY_AP, false);
             boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
             shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
-                    (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
+                    (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData) &&
+                    (mDeviceStateHolder.isApEnabled() || !prefAP ) ;
         }
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
