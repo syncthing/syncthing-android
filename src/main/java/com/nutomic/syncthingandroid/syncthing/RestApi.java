@@ -267,7 +267,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Stops syncthing. You should probably use SyncthingService.stopService() instead.
+     * Stops syncthing and cancels notification. For use by {@link SyncthingService}.
      */
     public void shutdown() {
         // Happens in unit tests.
@@ -277,7 +277,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         NotificationManager nm = (NotificationManager)
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_RESTART);
-        SyncthingRunnable.killSyncthing();
         mRestartPostponed = false;
     }
 
@@ -740,7 +739,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             case "":         return c.getString(R.string.state_unknown);
         }
         if (BuildConfig.DEBUG) {
-            throw new AssertionError("Unexpected folder state");
+            throw new AssertionError("Unexpected folder state " + state);
         }
         return "";
     }

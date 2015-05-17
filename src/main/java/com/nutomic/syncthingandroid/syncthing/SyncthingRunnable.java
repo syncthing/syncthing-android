@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -14,6 +15,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+
+import eu.chainfire.libsuperuser.Shell;
 
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
@@ -88,8 +91,7 @@ public class SyncthingRunnable implements Runnable {
         try {
             ProcessBuilder pb = new ProcessBuilder("chmod", "+x", mSyncthingBinary);
             Process p = pb.start();
-            if (p != null)
-                p.waitFor();
+            p.waitFor();
         } catch (IOException|InterruptedException e) {
             Log.w(TAG, "Failed to chmod Syncthing", e);
         }
@@ -98,7 +100,10 @@ public class SyncthingRunnable implements Runnable {
         try {
             // Loop to handle Syncthing restarts (these always have an error code of 3).
             do {
-                ProcessBuilder pb = new ProcessBuilder(mCommand);
+                ProcessBuilder pb = (useRoot())
+                        ? new ProcessBuilder("su", "-c", TextUtils.join(" ", mCommand))
+                        : new ProcessBuilder(mCommand);
+
                 Map<String, String> env = pb.environment();
                 // Set home directory to data folder for web GUI folder picker.
                 env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
@@ -139,6 +144,14 @@ public class SyncthingRunnable implements Runnable {
     }
 
     /**
+     * Returns true if root is available and enabled in settings.
+     */
+    private boolean useRoot() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sp.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
+    }
+
+    /**
      * Look for a running libsyncthing.so process and nice its IO.
      */
     private void niceSyncthing() {
@@ -149,7 +162,7 @@ public class SyncthingRunnable implements Runnable {
                 int ret = 1;
                 try {
                     Thread.sleep(1000); // Wait a second before getting the pid
-                    nice = Runtime.getRuntime().exec("sh");
+                    nice = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
                     niceOut = new DataOutputStream(nice.getOutputStream());
                     niceOut.writeBytes("set `ps | grep libsyncthing.so`\n");
                     niceOut.writeBytes("ionice $2 be 7\n"); // best-effort, low priority
@@ -182,9 +195,8 @@ public class SyncthingRunnable implements Runnable {
     /**
      * Look for running libsyncthing.so processes and kill them.
      * Try a SIGTERM once, then try again (twice) with SIGKILL.
-     *
      */
-    public static void killSyncthing() {
+    public void killSyncthing() {
         final Process p = mSyncthing.get();
         if (p != null) {
             mSyncthing.set(null);
@@ -201,7 +213,7 @@ public class SyncthingRunnable implements Runnable {
             Process ps = null;
             DataOutputStream psOut = null;
             try {
-                ps = Runtime.getRuntime().exec("sh");
+                ps = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
                 psOut = new DataOutputStream(ps.getOutputStream());
                 psOut.writeBytes("ps | grep libsyncthing.so\n");
                 psOut.writeBytes("exit\n");

@@ -25,6 +25,12 @@
             android:summary="@string/advanced_folder_picker_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="use_root"
+            android:title="Sync as root"
+            android:summary="Run syncthing as superuser"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
