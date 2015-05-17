@@ -39,6 +39,8 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... params) {
         String fullUri = params[0] + params[1];
+        Log.v(TAG, "Calling Rest API at " + fullUri);
+
         HttpClient httpclient = Https.createHttpsClient(mHttpsCertPath);
         HttpPost post = new HttpPost(fullUri);
         post.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));

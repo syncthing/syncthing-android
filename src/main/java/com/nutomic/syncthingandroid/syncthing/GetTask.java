@@ -56,9 +56,11 @@ public class GetTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected String doInBackground(String... params) {
+        String fullUri = params[0] + params[1];
+        Log.v(TAG, "Calling Rest API at " + fullUri);
+
         // Retry at most 10 times before failing
         for (int i = 0; i < 10; i++) {
-            String fullUri = params[0] + params[1];
             HttpClient httpclient = Https.createHttpsClient(mHttpsCertPath);
             if (params.length == 5) {
                 LinkedList<NameValuePair> urlParams = new LinkedList<>();
@@ -72,8 +74,6 @@ public class GetTask extends AsyncTask<String, Void, String> {
                 return null;
 
             try {
-                Log.w(TAG, "Calling Rest API at " + fullUri);
-
                 HttpResponse response = httpclient.execute(get);
                 HttpEntity entity = response.getEntity();
 
