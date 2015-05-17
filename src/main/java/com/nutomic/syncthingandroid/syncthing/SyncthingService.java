@@ -92,6 +92,8 @@ public class SyncthingService extends Service {
 
     public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
 
+    public static final String PREF_USE_ROOT = "use_root";
+
     private static final int NOTIFICATION_ACTIVE = 1;
 
     private ConfigXml mConfig;
@@ -142,6 +144,8 @@ public class SyncthingService extends Service {
 
     private DeviceStateHolder mDeviceStateHolder;
 
+    private SyncthingRunnable mRunnable;
+
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
      * {@link DeviceStateHolder#EXTRA_HAS_WIFI} or {@link DeviceStateHolder#EXTRA_IS_CHARGING}
@@ -153,11 +157,11 @@ public class SyncthingService extends Service {
             return START_STICKY;
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            mApi.shutdown();
+            shutdown();
             mCurrentState = State.INIT;
             updateState();
         } else if (ACTION_RESET.equals(intent.getAction())) {
-            mApi.shutdown();
+            shutdown();
             new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
             mCurrentState = State.INIT;
             updateState();
@@ -203,14 +207,15 @@ public class SyncthingService extends Service {
             // HACK: Make sure there is no syncthing binary left running from an improper
             // shutdown (eg Play Store update).
             // NOTE: This will log an exception if syncthing is not actually running.
-            mApi.shutdown();
+            shutdown();
 
             Log.i(TAG, "Starting syncthing according to current state and preferences");
             mConfig = new ConfigXml(SyncthingService.this);
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
             new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
-            new Thread(new SyncthingRunnable(this, SyncthingRunnable.Command.main)).start();
+            mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
+            new Thread(mRunnable).start();
             Notification n = new NotificationCompat.Builder(this)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)
@@ -229,14 +234,7 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Stopping syncthing according to current state and preferences");
             mCurrentState = State.DISABLED;
 
-            if (mApi != null) {
-                mApi.shutdown();
-                for (FolderObserver ro : mObservers) {
-                    ro.stopWatching();
-                }
-                mObservers.clear();
-            }
-            nm.cancel(NOTIFICATION_ACTIVE);
+            shutdown();
         }
         onApiChange();
     }
@@ -331,11 +329,23 @@ public class SyncthingService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "Shutting down service");
-        if (mApi != null) {
+        shutdown();
+    }
+
+    private void shutdown() {
+        if (mRunnable != null)
+            mRunnable.killSyncthing();
+
+        if (mApi != null)
             mApi.shutdown();
-        }
+
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_ACTIVE);
+
+        for (FolderObserver ro : mObservers) {
+            ro.stopWatching();
+        }
+        mObservers.clear();
     }
 
     /**
@@ -400,7 +410,7 @@ public class SyncthingService extends Service {
             if (mStopScheduled) {
                 mCurrentState = State.DISABLED;
                 onApiChange();
-                mApi.shutdown();
+                shutdown();
                 mStopScheduled = false;
                 return;
             }

@@ -25,6 +25,8 @@ import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
+import eu.chainfire.libsuperuser.Shell;
+
 public class SettingsFragment extends PreferenceFragment
         implements SyncthingActivity.OnServiceConnectedListener,
         SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener,
@@ -126,6 +128,7 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+        Preference useRoot = findPreference(SyncthingService.PREF_USE_ROOT);
         Preference appVersion = screen.findPreference(APP_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -143,6 +146,10 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
+        if (!Shell.SU.available()) {
+            screen.removePreference(useRoot);
+        }
+        useRoot.setOnPreferenceChangeListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(SYNCTHING_RESET).setOnPreferenceClickListener(this);
@@ -234,23 +241,25 @@ public class SettingsFragment extends PreferenceFragment
                     RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
         }
 
+        boolean requireRestart = false;
+
         // Avoid any code injection.
         int error = 0;
         if (preference.getKey().equals(STTRACE)) {
             if (((String) o).matches("[a-z, ]*"))
-                mSyncthingService.getApi().requireRestart(getActivity());
+                requireRestart = true;
             else
                 error = R.string.toast_invalid_sttrace;
         } else if (preference.getKey().equals(GUI_USER)) {
             String s = (String) o;
             if (!s.contains(":") && !s.contains("'"))
-                mSyncthingService.getApi().requireRestart(getActivity());
+                requireRestart = true;
             else
                 error = R.string.toast_invalid_username;
         } else if (preference.getKey().equals(GUI_PASSWORD)) {
             String s = (String) o;
             if (!s.contains(":") && !s.contains("'"))
-                mSyncthingService.getApi().requireRestart(getActivity());
+                requireRestart = true;
             else
                 error = R.string.toast_invalid_password;
         }
@@ -258,6 +267,13 @@ public class SettingsFragment extends PreferenceFragment
             Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        if (preference.getKey().equals(SyncthingService.PREF_USE_ROOT))
+            requireRestart = true;
+
+        if (requireRestart)
+            mSyncthingService.getApi().requireRestart(getActivity());
+
 
         return true;
     }
