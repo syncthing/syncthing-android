@@ -338,13 +338,24 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }
         return json;
     }
+
+    public void requireRestart(Activity activity) {
+        requireRestart(activity, true);
+    }
+
     /**
      * Sends the updated mConfig via Rest API to syncthing and displays a "restart"
      * dialog or notification.
+     *
+     * @param activity The calling activity.
+     * @param updateConfig If true, {@link #mConfig} will be sent to `/rest/system/config`.
      */
     @TargetApi(11)
-    public void requireRestart(Activity activity) {
-        new PostTask(mHttpsCertPath).execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
+    public void requireRestart(Activity activity, boolean updateConfig) {
+        if (updateConfig) {
+            new PostTask(mHttpsCertPath)
+                    .execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
+        }
         // TODO Should wait for completion...
 
         if (mRestartPostponed)

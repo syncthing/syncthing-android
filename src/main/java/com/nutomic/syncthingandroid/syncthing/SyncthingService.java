@@ -513,9 +513,6 @@ public class SyncthingService extends Service {
         copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
         copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
         copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
-
-        startService(new Intent(this, SyncthingService.class)
-                .setAction(SyncthingService.ACTION_RESTART));
         return true;
     }
 
