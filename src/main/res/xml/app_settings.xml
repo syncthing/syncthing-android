@@ -27,8 +27,8 @@
 
         <CheckBoxPreference
             android:key="use_root"
-            android:title="Sync as root"
-            android:summary="Run syncthing as superuser"
+            android:title="@string/use_root_title"
+            android:summary="@string/use_root_summary"
             android:defaultValue="false"
             android:enabled="false" />
 
