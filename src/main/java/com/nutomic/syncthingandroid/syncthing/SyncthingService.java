@@ -40,7 +40,8 @@ import java.util.LinkedList;
 /**
  * Holds the native syncthing instance and provides an API to access it.
  */
-public class SyncthingService extends Service {
+public class SyncthingService extends Service implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "SyncthingService";
 
@@ -87,12 +88,10 @@ public class SyncthingService extends Service {
     public static final String BINARY_NAME = "lib/libsyncthing.so";
 
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
-
-    public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
-
-    public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
-
-    public static final String PREF_USE_ROOT = "use_root";
+    public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
+    public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
+    public static final String PREF_USE_ROOT                 = "use_root";
+    private static final String PREF_PERSISTENT_NOTIFICATION  = "persistent_notification";
 
     private static final int NOTIFICATION_ACTIVE = 1;
 
@@ -180,6 +179,7 @@ public class SyncthingService extends Service {
      * called.
      */
     public void updateState() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean shouldRun;
         if (!alwaysRunInBackground(this)) {
             // Always run, ignoring wifi/charging state.
@@ -187,15 +187,12 @@ public class SyncthingService extends Service {
         }
         else {
             // Check wifi/charging state against preferences and start if ok.
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
             boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
             shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
                     (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
         }
-
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Start syncthing.
         if (shouldRun) {
@@ -216,15 +213,7 @@ public class SyncthingService extends Service {
             new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
             mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
             new Thread(mRunnable).start();
-            Notification n = new NotificationCompat.Builder(this)
-                    .setContentTitle(getString(R.string.syncthing_active))
-                    .setSmallIcon(R.drawable.ic_stat_notify)
-                    .setOngoing(true)
-                    .setPriority(NotificationCompat.PRIORITY_MIN)
-                    .setContentIntent(PendingIntent.getActivity(this, 0,
-                            new Intent(this, MainActivity.class), 0))
-                    .build();
-            nm.notify(NOTIFICATION_ACTIVE, n);
+            updateNotification();
         }
         // Stop syncthing.
         else {
@@ -237,6 +226,35 @@ public class SyncthingService extends Service {
             shutdown();
         }
         onApiChange();
+    }
+
+    /**
+     * Shows or hides the persistent notification based on running state and
+     * {@link #PREF_PERSISTENT_NOTIFICATION}.
+     */
+    private void updateNotification() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
+                sp.getBoolean(PREF_PERSISTENT_NOTIFICATION, true)) {
+            Notification n = new NotificationCompat.Builder(this)
+                    .setContentTitle(getString(R.string.syncthing_active))
+                    .setSmallIcon(R.drawable.ic_stat_notify)
+                    .setOngoing(true)
+                    .setPriority(NotificationCompat.PRIORITY_MIN)
+                    .setContentIntent(PendingIntent.getActivity(this, 0,
+                            new Intent(this, MainActivity.class), 0))
+                    .build();
+            nm.notify(NOTIFICATION_ACTIVE, n);
+        } else {
+            nm.cancel(NOTIFICATION_ACTIVE);
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(PREF_PERSISTENT_NOTIFICATION))
+            updateNotification();
     }
 
     /**
@@ -267,6 +285,7 @@ public class SyncthingService extends Service {
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
+        sp.registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -330,6 +349,8 @@ public class SyncthingService extends Service {
         super.onDestroy();
         Log.i(TAG, "Shutting down service");
         shutdown();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     private void shutdown() {

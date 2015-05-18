@@ -32,6 +32,12 @@
             android:defaultValue="false"
             android:enabled="false" />
 
+        <CheckBoxPreference
+            android:key="persistent_notification"
+            android:title="@string/persistent_notification_title"
+            android:summary="@string/persistent_notification_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

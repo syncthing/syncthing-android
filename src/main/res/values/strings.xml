@@ -229,9 +229,13 @@ Please report any problems you encounter via Github.</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
 
-    <string name="use_root_title">Sync as root</string>
+    <string name="use_root_title">Sync as Root</string>
 
-    <string name="use_root_summary">Run syncthing as superuser</string>
+    <string name="use_root_summary">Run Syncthing as Superuser</string>
+
+    <string name="persistent_notification_title">Persistent Notification</string>
+
+    <string name="persistent_notification_summary">Show Notification while Syncthing is running</string>
 
     <string name="category_syncthing">Syncthing</string>
 

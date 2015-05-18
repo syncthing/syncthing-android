@@ -43,23 +43,15 @@ public class SettingsFragment extends PreferenceFragment
     private static final String IMPORT_CONFIG         = "import_config";
     private static final String STTRACE               = "sttrace";
     private static final String SYNCTHING_RESET       = "streset";
-
     private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
-
-    private static final String APP_VERSION_KEY = "app_version";
+    private static final String APP_VERSION_KEY       = "app_version";
 
     private CheckBoxPreference mAlwaysRunInBackground;
-
     private CheckBoxPreference mSyncOnlyCharging;
-
     private CheckBoxPreference mSyncOnlyWifi;
-
     private Preference mUseRoot;
-
     private PreferenceScreen mOptionsScreen;
-
     private PreferenceScreen mGuiScreen;
-
     private SyncthingService mSyncthingService;
 
     @Override
@@ -224,6 +216,8 @@ public class SettingsFragment extends PreferenceFragment
             pref.setSummary((String) o);
         }
 
+        boolean requireRestart = false;
+
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
             mSyncthingService.updateState();
         } else if (preference.equals(mAlwaysRunInBackground)) {
@@ -232,6 +226,10 @@ public class SettingsFragment extends PreferenceFragment
                     : R.string.always_run_in_background_disabled);
             mSyncOnlyCharging.setEnabled((Boolean) o);
             mSyncOnlyWifi.setEnabled((Boolean) o);
+        } else if (preference.equals(mUseRoot)) {
+            if (!(Boolean) o)
+                new Thread(new ChownFilesRunnable()).start();
+            requireRestart = true;
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
@@ -254,7 +252,6 @@ public class SettingsFragment extends PreferenceFragment
                     RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
         }
 
-        boolean requireRestart = false;
 
         // Avoid any code injection.
         int error = 0;
@@ -281,15 +278,8 @@ public class SettingsFragment extends PreferenceFragment
             return false;
         }
 
-        if (preference.getKey().equals(SyncthingService.PREF_USE_ROOT)) {
-            if (!(Boolean) o)
-                new Thread(new ChownFilesRunnable()).start();
-            requireRestart = true;
-        }
-
         if (requireRestart)
             mSyncthingService.getApi().requireRestart(getActivity());
-
 
         return true;
     }
