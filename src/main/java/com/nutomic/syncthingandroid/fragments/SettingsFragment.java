@@ -21,6 +21,8 @@ import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
+import java.util.List;
+
 import eu.chainfire.libsuperuser.Shell;
 
 public class SettingsFragment extends PreferenceFragment
@@ -279,14 +281,29 @@ public class SettingsFragment extends PreferenceFragment
             return false;
         }
 
-        if (preference.getKey().equals(SyncthingService.PREF_USE_ROOT))
+        if (preference.getKey().equals(SyncthingService.PREF_USE_ROOT)) {
+            if (!(Boolean) o)
+                new Thread(new ChownFilesRunnable()).start();
             requireRestart = true;
+        }
 
         if (requireRestart)
             mSyncthingService.getApi().requireRestart(getActivity());
 
 
         return true;
+    }
+
+    /**
+     * Changes the owner of syncthing files so they can be accessed without root.
+     */
+    private class ChownFilesRunnable implements Runnable {
+        @Override
+        public void run() {
+            String f = getActivity().getFilesDir().getAbsolutePath();
+            List<String> out = Shell.SU.run("chown -R --reference=" + f + " " + f);
+            Log.i(TAG, "Changed owner of syncthing files, output: " + out);
+        }
     }
 
     @Override
