@@ -297,7 +297,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         try {
             Object value = mConfig.getJSONObject(name).get(key);
             return (value instanceof JSONArray)
-                    ? ((JSONArray) value).join(" ").replace("\"", "").replace("\\", "")
+                    ? ((JSONArray) value).join(", ").replace("\"", "").replace("\\", "")
                     : value.toString();
         } catch (JSONException e) {
             Log.w(TAG, "Failed to get value for " + key, e);
@@ -314,12 +314,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param name    {@link #TYPE_OPTIONS} or {@link #TYPE_GUI}
      * @param key     The key to write to.
      * @param value   The new value to set, either String, Boolean or Integer.
-     * @param isArray True iff value is a space seperated String that should be converted to array.
+     * @param isArray True if value is a space seperated String that should be converted to array.
      */
     public <T> void setValue(String name, String key, T value, boolean isArray, Activity activity) {
         try {
             mConfig.getJSONObject(name).put(key, (isArray)
-                    ? listToJson(((String) value).split(" "))
+                    ? listToJson(((String) value).split(","))
                     : value);
             requireRestart(activity);
         } catch (JSONException e) {
@@ -334,7 +334,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private JSONArray listToJson(String[] list) {
         JSONArray json = new JSONArray();
         for (String s : list) {
-            json.put(s);
+            json.put(s.trim());
         }
         return json;
     }
