@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.fragments;
 
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -50,6 +51,8 @@ public class SettingsFragment extends PreferenceFragment
     private CheckBoxPreference mSyncOnlyCharging;
 
     private CheckBoxPreference mSyncOnlyWifi;
+
+    private Preference mUseRoot;
 
     private PreferenceScreen mOptionsScreen;
 
@@ -117,17 +120,17 @@ public class SettingsFragment extends PreferenceFragment
         ((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
 
         addPreferencesFromResource(R.xml.app_settings);
-        PreferenceScreen screen = getPreferenceScreen();
+        final PreferenceScreen screen = getPreferenceScreen();
         mAlwaysRunInBackground = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND);
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
-        Preference useRoot = findPreference(SyncthingService.PREF_USE_ROOT);
+        mUseRoot = findPreference(SyncthingService.PREF_USE_ROOT);
         Preference appVersion = screen.findPreference(APP_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
-        Preference user = screen.findPreference(GUI_USER);
+        final Preference user = screen.findPreference(GUI_USER);
         Preference password = screen.findPreference(GUI_PASSWORD);
         Preference sttrace = findPreference(STTRACE);
 
@@ -141,10 +144,8 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
-        if (!Shell.SU.available()) {
-            screen.removePreference(useRoot);
-        }
-        useRoot.setOnPreferenceChangeListener(this);
+        new TestRootTask().execute();
+        mUseRoot.setOnPreferenceChangeListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(SYNCTHING_RESET).setOnPreferenceClickListener(this);
@@ -157,6 +158,21 @@ public class SettingsFragment extends PreferenceFragment
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         user.setSummary(sp.getString("gui_user", ""));
         sttrace.setSummary(sp.getString("sttrace", ""));
+    }
+
+    /**
+     * Enables or disables {@link #mUseRoot} preference depending whether root is available.
+     */
+    private class TestRootTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return Shell.SU.available();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            mUseRoot.setEnabled(result);
+        }
     }
 
     @Override

@@ -29,7 +29,8 @@
             android:key="use_root"
             android:title="Sync as root"
             android:summary="Run syncthing as superuser"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            android:enabled="false" />
 
     </PreferenceCategory>
 
