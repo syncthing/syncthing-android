@@ -315,6 +315,7 @@ public class SyncthingService extends Service implements
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {
+                    mCurrentState = State.ACTIVE;
                     onApiChange();
                     new Thread(new Runnable() {
                         @Override
@@ -436,7 +437,7 @@ public class SyncthingService extends Service implements
                 return;
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-            mCurrentState = State.ACTIVE;
+            mCurrentState = State.STARTING;
             onApiChange();
             for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
                 listener.onWebGuiAvailable();

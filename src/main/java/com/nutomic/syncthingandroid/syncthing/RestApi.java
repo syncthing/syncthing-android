@@ -1017,4 +1017,67 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         return mGuiPassword;
     }
 
+    public enum UsageReportSetting {
+        UNDECIDED,
+        ACCEPTED,
+        DENIED,
+    }
+
+    /**
+     * Returns value of usage reporting preference.
+     */
+    public UsageReportSetting getUsageReportAccepted() {
+        try {
+            switch (mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted")) {
+                case  0: return UsageReportSetting.UNDECIDED;
+                case  1: return UsageReportSetting.ACCEPTED;
+                case -1: return UsageReportSetting.DENIED;
+                default: throw new RuntimeException("Invalid usage report value");
+            }
+        } catch (JSONException e) {
+            Log.w(TAG, "Failed to read usage report value", e);
+            return UsageReportSetting.DENIED;
+        }
+    }
+
+    /**
+     * Sets new value for usage reporting preference.
+     */
+    public void setUsageReportAccepted(UsageReportSetting value, Activity activity) {
+        int v = 0;
+        switch (value) {
+            case ACCEPTED:  v =  1; break;
+            case DENIED:    v = -1; break;
+        }
+        try {
+            mConfig.getJSONObject(TYPE_OPTIONS).put("urAccepted", v);
+        } catch (JSONException e) {
+            Log.w(TAG, "Failed to set usage report value", e);
+        }
+        requireRestart(activity);
+    }
+
+    /**
+     * Callback for {@link #getUsageReport}.
+     */
+    public interface OnReceiveUsageReportListener {
+        public void onReceiveUsageReport(String report);
+    }
+
+    /**
+     * Returns prettyfied usage report.
+     */
+    public void getUsageReport(final OnReceiveUsageReportListener listener) {
+        new GetTask(mHttpsCertPath) {
+            @Override
+            protected void onPostExecute(String s) {
+                try {
+                    listener.onReceiveUsageReport(new JSONObject(s).toString(4));
+                } catch (JSONException e) {
+                    throw new RuntimeException("Failed to prettify usage report", e);
+                }
+            }
+        }.execute(mUrl, GetTask.URI_REPORT, mApiKey);
+    }
+
 }

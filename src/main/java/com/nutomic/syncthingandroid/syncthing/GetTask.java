@@ -29,17 +29,13 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
     private static final String TAG = "GetTask";
 
-    public static final String URI_CONFIG = "/rest/system/config";
-
-    public static final String URI_VERSION = "/rest/system/version";
-
-    public static final String URI_SYSTEM = "/rest/system/status";
-
+    public static final String URI_CONFIG      = "/rest/system/config";
+    public static final String URI_VERSION     = "/rest/system/version";
+    public static final String URI_SYSTEM      = "/rest/system/status";
     public static final String URI_CONNECTIONS = "/rest/system/connections";
-
-    public static final String URI_MODEL = "/rest/db/status";
-
-    public static final String URI_DEVICEID = "/rest/svc/deviceid";
+    public static final String URI_MODEL       = "/rest/db/status";
+    public static final String URI_DEVICEID    = "/rest/svc/deviceid";
+    public static final String URI_REPORT      = "/rest/svc/report";
 
     private String mHttpsCertPath;
 

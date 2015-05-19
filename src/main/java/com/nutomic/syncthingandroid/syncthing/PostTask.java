@@ -21,8 +21,7 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
     private static final String TAG = "PostTask";
 
     public static final String URI_CONFIG = "/rest/system/config";
-
-    public static final String URI_SCAN = "/rest/db/scan";
+    public static final String URI_SCAN   = "/rest/db/scan";
 
     private String mHttpsCertPath;
 

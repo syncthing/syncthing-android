@@ -20,6 +20,14 @@
     <!-- Text for FoldersFragment and DevicesFragment loading view -->
     <string name="api_loading">Loading&#8230;</string>
 
+    <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting?</string>
+
+    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
+
+    <string name="yes">Yes</string>
+
+    <string name="no">No</string>
+
     <!-- FoldersFragment -->
 
 
