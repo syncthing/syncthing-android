@@ -244,7 +244,7 @@ public class SettingsFragment extends PreferenceFragment
                     ((Boolean) o) ? 1 : 0, false, getActivity());
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
             boolean isArray = preference.getKey().equals("listenAddress") ||
-                    preference.getKey().equals("globalAnnServers");
+                    preference.getKey().equals("globalAnnounceServers");
             mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
                     isArray, getActivity());
         } else if (preference.getKey().equals(ADDRESS)) {

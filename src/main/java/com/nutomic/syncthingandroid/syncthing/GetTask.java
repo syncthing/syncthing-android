@@ -87,6 +87,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
                         result += line;
                     }
                     br.close();
+                    Log.v(TAG, "API call result: " + result);
                     return result;
                 }
             } catch (IOException|IllegalArgumentException e) {

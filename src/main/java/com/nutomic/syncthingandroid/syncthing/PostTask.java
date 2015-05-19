@@ -48,6 +48,7 @@ public class PostTask extends AsyncTask<String, Void, Boolean> {
         try {
             if (params.length > 3) {
                 post.setEntity(new StringEntity(params[3], HTTP.UTF_8));
+                Log.v(TAG, "API call parameters: " + params[3]);
             }
             httpclient.execute(post);
         } catch (IOException|IllegalArgumentException e) {
