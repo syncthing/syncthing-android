@@ -393,6 +393,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>
 
+    <!-- Toast shown if folder observer fails to traverse a folder -->
+    <string name="toast_folder_observer_stack_overflow">Directory tree too deep. Check for cyclic symlinks</string>
+
     <!-- RestApi -->
 
 

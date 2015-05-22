@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
@@ -325,6 +326,12 @@ public class SyncthingService extends Service implements
                                     mObservers.add(new FolderObserver(mApi, r));
                                 } catch (FolderObserver.FolderNotExistingException e) {
                                     Log.w(TAG, "Failed to add observer for folder", e);
+                                } catch (StackOverflowError e) {
+                                    Log.w(TAG, "Failed to add folder observer", e);
+                                    Toast.makeText(SyncthingService.this,
+                                            R.string.toast_folder_observer_stack_overflow,
+                                            Toast.LENGTH_LONG)
+                                            .show();
                                 }
                             }
                         }
