@@ -356,7 +356,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             new PostTask(mHttpsCertPath)
                     .execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
         }
-        // TODO Should wait for completion...
+        // TODO Should wait until PostTask is completed, see #398
 
         if (mRestartPostponed)
             return;

@@ -39,7 +39,7 @@ public class RestApiTest extends AndroidTestCase {
             }
         }.execute(config.getWebGuiUrl());
         mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
-                null, null, // TODO
+                null, null,
                 new RestApi.OnApiAvailableListener() {
             @Override
             public void onApiAvailable() {
@@ -52,7 +52,7 @@ public class RestApiTest extends AndroidTestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        // TODO? SyncthingRunnable.killSyncthing();
+        // TODO: Unit tests fail when Syncthing is killed SyncthingRunnable.killSyncthing();
         ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }
 

@@ -43,6 +43,6 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
         }.execute(mConfig.getWebGuiUrl());
         latch.await(1, TimeUnit.SECONDS);
 
-        // TODO? SyncthingRunnable.killSyncthing();
+        // TODO: Unit tests fail when Syncthing is killed SyncthingRunnable.killSyncthing();
     }
 }
