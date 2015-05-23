@@ -529,11 +529,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 Folder r = new Folder();
                 r.path = json.getString("path");
                 r.id = json.getString("id");
-                if (json.has("invalid")) {
-                    r.invalid = json.getString("invalid"); // TODO Upstream bug
-                } else {
-                    r.invalid = "";
-                }
+                // TODO: Field seems to be missing sometimes.
+                // https://github.com/syncthing/syncthing-android/issues/291
+                r.invalid = json.optString("invalid");
                 r.deviceIds = new ArrayList<>();
                 JSONArray devices = json.getJSONArray("devices");
                 for (int j = 0; j < devices.length(); j++) {
