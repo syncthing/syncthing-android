@@ -5,7 +5,7 @@ ORIG=$(pwd)
 mkdir -p bin
 
 # Load submodules
-if [ ! -f "ext/syncthing/src/github.com/syncthing/syncthing/.git" ]; then
+if [ ! -e "ext/syncthing/src/github.com/syncthing/syncthing/.git" ]; then
         git submodule update --init --recursive
 fi
 
@@ -26,7 +26,7 @@ if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.4* ]] ; then
                 rm go.src.tar.gz
                 # Build GO for host
                 pushd $tmpgo/src
-                ./make.bash --no-clean
+                GO386=387 GOARM=5 ./make.bash --no-clean
                 popd
         fi
         # Add GO to the environment
@@ -50,7 +50,7 @@ fi
 if [ ! -f $GOROOT/bin/linux_arm/go ]; then
         pushd $GOROOT/src
         # Build GO for cross-compilation
-        GOOS=linux GOARCH=arm ./make.bash --no-clean
+        GOOS=linux GOARCH=arm GOARM=5 ./make.bash --no-clean
         popd
 fi
 
