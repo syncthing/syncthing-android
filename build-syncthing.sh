@@ -9,6 +9,11 @@ if [ ! -f "ext/syncthing/src/github.com/syncthing/syncthing/.git" ]; then
         git submodule update --init --recursive
 fi
 
+if [ -z $ANDROID_NDK ]; then
+  echo 'Missing $ANDROID_NDK (https://developer.android.com/tools/sdk/ndk/)'
+  exit 1
+fi
+
 # Check for GOLANG installation
 if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.4* ]] ; then
         mkdir -p "build"
@@ -35,22 +40,25 @@ fi
 
 # Add GO compiler to PATH
 export PATH=$GOROOT/bin:$PATH
-# Disable CGO (no dynamic linking)
-export CGO_ENABLED=0
 
-# Check whether GOLANG is compiled with cross-compilation for 386
+# Prepare GOLANG to cross-compile for android i386.
 if [ ! -f $GOROOT/bin/linux_386/go ]; then
         pushd $GOROOT/src
         # Build GO for cross-compilation
-        GOOS=linux GOARCH=386 GO386=387 ./make.bash --no-clean
+        # Disable CGO (no dynamic linking)
+        CGO_ENABLED=0 GOOS=linux GOARCH=386 GO386=387 ./make.bash --no-clean
         popd
 fi
 
-# Check whether GOLANG is compiled with cross-compilation for arm
-if [ ! -f $GOROOT/bin/linux_arm/go ]; then
+# Prepare GOLANG to cross-compile for android ARM. Requires NDK with gcc.
+ndkarm=$(pwd)/build/ndk-arm
+if [ ! -f $ndkarm/arm-linux-androideabi/bin/gcc ] || [ ! -f $GOROOT/bin/android_arm/go ]; then
+        ABI=arch-arm $ANDROID_NDK/build/tools/make-standalone-toolchain.sh --platform=android-9 --install-dir=$ndkarm --arch=arm
         pushd $GOROOT/src
-        # Build GO for cross-compilation
-        GOOS=linux GOARCH=arm ./make.bash --no-clean
+        # KNOWN TO FAIL: https://github.com/MarinX/godroid
+        set +e
+        CC_FOR_TARGET=$ndkarm/bin/arm-linux-androideabi-gcc GOOS=android GOARCH=arm GOARM=5 ./make.bash --no-clean
+        set -e
         popd
 fi
 
@@ -58,21 +66,21 @@ fi
 cd "ext/syncthing/"
 export GOPATH="$(pwd)"
 
-# Install godep
+## Install godep
 $GOROOT/bin/go get github.com/tools/godep
 export PATH="$(pwd)/bin":$PATH
 
-# Setup syncthing and clean
-export ENVIRONMENT=android
+## Setup syncthing and clean
 cd src/github.com/syncthing/syncthing
 $GOROOT/bin/go run build.go clean
 
-# X86
+# X86 (No CGO supported for i386 yet, waiting for Go upstream)
 GO386=387 $GOROOT/bin/go run build.go -goos linux -goarch 386 -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-x86
 $GOROOT/bin/go run build.go clean
 
-# ARM
-GOARM=5 $GOROOT/bin/go run build.go -goos linux -goarch arm -no-upgrade build
+# ARM-Android
+PATH=$ndkarm/arm-linux-androideabi/bin:$PATH CGO_ENABLED=1 GOARM=5 go run build.go -goos android -goarch arm -no-upgrade build
 mv syncthing $ORIG/bin/syncthing-armeabi
 $GOROOT/bin/go run build.go clean
+
