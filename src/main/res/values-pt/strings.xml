@@ -202,6 +202,7 @@ Instale um leitor ou escreva o ID do dispositivo manualmente, por favor.</string
   <string name="exit">Sair</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está a correr</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>

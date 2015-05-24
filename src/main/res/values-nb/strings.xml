@@ -168,6 +168,7 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <string name="exit">Avslutt</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing kjører</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Omstart Nødvendig</string>

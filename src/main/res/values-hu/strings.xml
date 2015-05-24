@@ -123,6 +123,7 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Kilépés</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text of the notification shown when a restart is needed-->

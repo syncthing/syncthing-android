@@ -223,6 +223,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="exit">Esci</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing è in esecuzione</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Riavvio Necessario</string>

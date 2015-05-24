@@ -174,8 +174,13 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Caracteres \":\" (dois-pontos) e \"\'\" (apóstrofo) não são permitidos na senha</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Limpar banco de dados</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Esta ação deve ser executada somente com base em uma recomendação da nossa equipe de suporte.
+\nTem certeza de que quer limpar o banco de dados do Syncthing?
+</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">O banco de dados do Syncthing foi limpo com sucesso</string>
   <string name="category_about">Sobre</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Abrir log</string>
@@ -210,6 +215,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Exibir o log do Syncthing</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Compartilhar log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartilhar</string>
   <!--SyncthingService-->
@@ -223,6 +229,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="exit">Sair</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está rodando</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>

@@ -174,8 +174,12 @@
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">パスワードに 文字 : および \' は使用できません</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">データベースをリセット</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">この操作は、私たちサポートチームが推奨した場合にのみ行ってください。
+\n本当に Syncthing のインデックスデータベースをクリアしてもよろしいですか?</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">政情に Syncthing のデータベースをリセットしました</string>
   <string name="category_about">アプリについて</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">ログを開く</string>
@@ -210,6 +214,7 @@
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing ログを表示</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">ログを共有</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">共有</string>
   <!--SyncthingService-->
@@ -223,6 +228,7 @@
   <string name="exit">終了</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>

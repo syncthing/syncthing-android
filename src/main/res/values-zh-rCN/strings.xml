@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
+  <string name="app_description">开放、分布式且值得信赖的文件同步应用。</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">添加文件夹</string>
@@ -119,8 +120,13 @@
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">正在等待管理页面</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">正在生成安全密钥。这可能需要一段时间，请稍等。</string>
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">欢迎使用 Android 版 Syncthing</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing 是一款开源文件同步应用。\n\n\
+若要同步数据到别的设备中，您需要添加该设备的唯一标识至设备列表中，其后选择分享哪些文件夹至该设备之中。\n\n\
+若您遇到任何的问题，欢迎您到 Github 上给我们反馈。</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">设置</string>
@@ -162,15 +168,23 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">调试选项</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE 选项仅允许 a-z 与逗号</string>
   <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">用户名不允许存在符号 \'</string>
   <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">密码不允许存在符号 \'</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">本操作仅因在支持团队的推荐下进行。\n
+您确定要清理 Syncthing 的索引数据库吗？</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">重置 Syncthing 数据库完成</string>
   <string name="category_about">关于</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">打开日志</string>
   <!--Summary for the log activity-->
+  <string name="open_log_summary">打开 Syncthing 与 Android 系统日志窗口</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">回报问题</string>
   <!--Summary for the issue tracker settings item-->
@@ -194,10 +208,15 @@
   <string name="create_folder_failed">新建文件夹失败</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
+  <string name="log_title">日志</string>
   <!--Title of the "log android" menu button-->
+  <string name="log_android_title">查看 Android 系统日志</string>
   <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">查看 Syncthing 日志</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">分享日志</string>
   <!--Title of the "share log" menu button-->
+  <string name="share_title">日志</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已禁用</string>
@@ -209,6 +228,7 @@
   <string name="exit">退出</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在运行</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重启以应用</string>

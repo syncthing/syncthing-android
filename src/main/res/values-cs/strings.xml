@@ -174,8 +174,12 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">V heslu nejsou povoleny znaky : a \'</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Resetovat databázi</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Tento krok by měl být proveden pouze na základě doporučení našeho technického týmu.
+\nOpravdu chcete vyčistit databázi aplikace Syncthing?</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">Databáze aplikace Syncthing úspěšně resetována</string>
   <string name="category_about">O aplikaci</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Otevřít log</string>
@@ -210,6 +214,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zobrazit log pro Syncthing</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Sdílet log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Sdílet</string>
   <!--SyncthingService-->
@@ -223,6 +228,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="exit">Ukončit</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing běží</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
