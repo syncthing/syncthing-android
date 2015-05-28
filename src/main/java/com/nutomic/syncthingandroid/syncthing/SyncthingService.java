@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
@@ -40,29 +41,41 @@ import java.util.LinkedList;
 /**
  * Holds the native syncthing instance and provides an API to access it.
  */
-public class SyncthingService extends Service {
+public class SyncthingService extends Service implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "SyncthingService";
 
     /**
-     * Intent action to perform a syncthing restart.
+     * Intent action to perform a Syncthing restart.
      */
     public static final String ACTION_RESTART = "restart";
 
     /**
-     * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
+     * Intent action to reset Syncthing's database.
      */
-    public static final int GUI_UPDATE_INTERVAL = 1000;
+    public static final String ACTION_RESET = "reset";
+
 
     /**
-     * Name of the public key file in the data directory.
+     * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
+     */
+    public static final int GUI_UPDATE_INTERVAL = 10000;
+
+    /**
+     * name of the public key file in the data directory.
      */
     public static final String PUBLIC_KEY_FILE = "cert.pem";
 
     /**
-     * Name of the private key file in the data directory.
+     * name of the private key file in the data directory.
      */
     public static final String PRIVATE_KEY_FILE = "key.pem";
+
+    /**
+     * name of the public HTTPS CA file in the data directory.
+     */
+    public static final String HTTPS_CERT_FILE = "https-cert.pem";
 
     /**
      * Directory where config is exported to and imported from.
@@ -71,15 +84,15 @@ public class SyncthingService extends Service {
             new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
 
     /**
-     * Path to the native, integrated syncthing binary, relative to the data folder
+     * path to the native, integrated syncthing binary, relative to the data folder
      */
     public static final String BINARY_NAME = "lib/libsyncthing.so";
 
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
-
-    public static final String PREF_SYNC_ONLY_WIFI = "sync_only_wifi";
-
-    public static final String PREF_SYNC_ONLY_CHARGING = "sync_only_charging";
+    public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
+    public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
+    public static final String PREF_USE_ROOT                 = "use_root";
+    private static final String PREF_PERSISTENT_NOTIFICATION  = "persistent_notification";
 
     private static final int NOTIFICATION_ACTIVE = 1;
 
@@ -131,6 +144,8 @@ public class SyncthingService extends Service {
 
     private DeviceStateHolder mDeviceStateHolder;
 
+    private SyncthingRunnable mRunnable;
+
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
      * {@link DeviceStateHolder#EXTRA_HAS_WIFI} or {@link DeviceStateHolder#EXTRA_IS_CHARGING}
@@ -142,11 +157,15 @@ public class SyncthingService extends Service {
             return START_STICKY;
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            mApi.shutdown();
+            shutdown();
             mCurrentState = State.INIT;
             updateState();
-        }
-        else if (mCurrentState != State.INIT) {
+        } else if (ACTION_RESET.equals(intent.getAction())) {
+            shutdown();
+            new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
+            mCurrentState = State.INIT;
+            updateState();
+        } else if (mCurrentState != State.INIT) {
             mDeviceStateHolder.update(intent);
             updateState();
         }
@@ -161,6 +180,7 @@ public class SyncthingService extends Service {
      * called.
      */
     public void updateState() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean shouldRun;
         if (!alwaysRunInBackground(this)) {
             // Always run, ignoring wifi/charging state.
@@ -168,15 +188,12 @@ public class SyncthingService extends Service {
         }
         else {
             // Check wifi/charging state against preferences and start if ok.
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
             boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
             shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
                     (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
         }
-
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Start syncthing.
         if (shouldRun) {
@@ -188,24 +205,16 @@ public class SyncthingService extends Service {
             // HACK: Make sure there is no syncthing binary left running from an improper
             // shutdown (eg Play Store update).
             // NOTE: This will log an exception if syncthing is not actually running.
-            mApi.shutdown();
+            shutdown();
 
             Log.i(TAG, "Starting syncthing according to current state and preferences");
             mConfig = new ConfigXml(SyncthingService.this);
             mCurrentState = State.STARTING;
             registerOnWebGuiAvailableListener(mApi);
-            new PollWebGuiAvailableTaskImpl().execute(mConfig.getWebGuiUrl());
-            new Thread(new SyncthingRunnable(
-                    this, getApplicationInfo().dataDir + "/" + BINARY_NAME)).start();
-            Notification n = new NotificationCompat.Builder(this)
-                    .setContentTitle(getString(R.string.syncthing_active))
-                    .setSmallIcon(R.drawable.ic_stat_notify)
-                    .setOngoing(true)
-                    .setPriority(NotificationCompat.PRIORITY_MIN)
-                    .setContentIntent(PendingIntent.getActivity(this, 0,
-                            new Intent(this, MainActivity.class), 0))
-                    .build();
-            nm.notify(NOTIFICATION_ACTIVE, n);
+            new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
+            mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
+            new Thread(mRunnable).start();
+            updateNotification();
         }
         // Stop syncthing.
         else {
@@ -215,16 +224,38 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Stopping syncthing according to current state and preferences");
             mCurrentState = State.DISABLED;
 
-            if (mApi != null) {
-                mApi.shutdown();
-                for (FolderObserver ro : mObservers) {
-                    ro.stopWatching();
-                }
-                mObservers.clear();
-            }
-            nm.cancel(NOTIFICATION_ACTIVE);
+            shutdown();
         }
         onApiChange();
+    }
+
+    /**
+     * Shows or hides the persistent notification based on running state and
+     * {@link #PREF_PERSISTENT_NOTIFICATION}.
+     */
+    private void updateNotification() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
+                sp.getBoolean(PREF_PERSISTENT_NOTIFICATION, true)) {
+            Notification n = new NotificationCompat.Builder(this)
+                    .setContentTitle(getString(R.string.syncthing_active))
+                    .setSmallIcon(R.drawable.ic_stat_notify)
+                    .setOngoing(true)
+                    .setPriority(NotificationCompat.PRIORITY_MIN)
+                    .setContentIntent(PendingIntent.getActivity(this, 0,
+                            new Intent(this, MainActivity.class), 0))
+                    .build();
+            nm.notify(NOTIFICATION_ACTIVE, n);
+        } else {
+            nm.cancel(NOTIFICATION_ACTIVE);
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(PREF_PERSISTENT_NOTIFICATION))
+            updateNotification();
     }
 
     /**
@@ -254,7 +285,8 @@ public class SyncthingService extends Service {
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        new StartupTask().execute();
+        new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
+        sp.registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -263,6 +295,14 @@ public class SyncthingService extends Service {
      * {@code Pair<String, String>}.
      */
     private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+        String mGuiUser;
+        String mGuiPassword;
+
+        public StartupTask(String guiUser, String guiPassword) {
+            mGuiUser = guiUser;
+            mGuiPassword = guiPassword;
+        }
+
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
             mConfig = new ConfigXml(SyncthingService.this);
@@ -272,9 +312,11 @@ public class SyncthingService extends Service {
         @Override
         protected void onPostExecute(Pair<String, String> urlAndKey) {
             mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
+                    mGuiUser, mGuiPassword,
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {
+                    mCurrentState = State.ACTIVE;
                     onApiChange();
                     new Thread(new Runnable() {
                         @Override
@@ -284,6 +326,12 @@ public class SyncthingService extends Service {
                                     mObservers.add(new FolderObserver(mApi, r));
                                 } catch (FolderObserver.FolderNotExistingException e) {
                                     Log.w(TAG, "Failed to add observer for folder", e);
+                                } catch (StackOverflowError e) {
+                                    Log.w(TAG, "Failed to add folder observer", e);
+                                    Toast.makeText(SyncthingService.this,
+                                            R.string.toast_folder_observer_stack_overflow,
+                                            Toast.LENGTH_LONG)
+                                            .show();
                                 }
                             }
                         }
@@ -308,11 +356,25 @@ public class SyncthingService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "Shutting down service");
-        if (mApi != null) {
+        shutdown();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    private void shutdown() {
+        if (mRunnable != null)
+            mRunnable.killSyncthing();
+
+        if (mApi != null)
             mApi.shutdown();
-        }
+
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_ACTIVE);
+
+        for (FolderObserver ro : mObservers) {
+            ro.stopWatching();
+        }
+        mObservers.clear();
     }
 
     /**
@@ -367,17 +429,22 @@ public class SyncthingService extends Service {
     }
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
+
+        public PollWebGuiAvailableTaskImpl(String httpsCertPath) {
+            super(httpsCertPath);
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             if (mStopScheduled) {
                 mCurrentState = State.DISABLED;
                 onApiChange();
-                mApi.shutdown();
+                shutdown();
                 mStopScheduled = false;
                 return;
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-            mCurrentState = State.ACTIVE;
+            mCurrentState = State.STARTING;
             onApiChange();
             for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
                 listener.onWebGuiAvailable();
@@ -475,9 +542,6 @@ public class SyncthingService extends Service {
         copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
         copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
         copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
-
-        startService(new Intent(this, SyncthingService.class)
-                .setAction(SyncthingService.ACTION_RESTART));
         return true;
     }
 

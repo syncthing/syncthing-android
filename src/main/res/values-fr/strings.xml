@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Remplace les services propriétaires avec quelque chose d\'ouvert, digne de confiance, et décentralisé.</string>
+  <string name="app_description">Une application ouverte, fiable et décentralisée pour synchroniser des fichiers.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Ajouter dossier</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Envoyer ID machine à</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Attente de l\'interface API</string>
+  <string name="api_loading">Chargement...</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Emission</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Réception:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -119,13 +120,13 @@ SVP, installez un lecteur ou entrez l\'ID machine manuellement.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">En attente de l\'interface WEB</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Génération des clés. Cela peut prendre du temps.</string>
+  <string name="web_gui_creating_key">Génération des clefs de sécurité. Cela peut prendre quelques minutes.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Premier démarrage</string>
+  <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Bienvenue dans Syncthing pour Android !\n\n
-Cette application est actuellement en version Alpha, vous pourrez don rencontrer des bug, des problèmes de performances ou des pertes de données.\n\n
-SVP, signalez les problèmes que vous rencontrez via Github.</string>
+  <string name="welcome_text">Syncthing est une application \"open-source\" de synchronisation de fichiers.\n\n\
+Pour partager des données avec une autre machine, vous devez ajouter l\'identifiant unique machine (ID), sur chacune d\'elles dans la liste des machines. Ensuite, vous pourrez sélectionner quel dossier partager avec quelle machine.\n\n
+S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Paramètres</string>
@@ -166,11 +167,29 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="config_import_failed">Echec de l\'import de la configuration, assurez-vous que les fichiers sont dans %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Options de débuggage</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Seuls, les caractères a-z et \',\' sont autorisés dans les options STTRACE</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Les caractères : et \' ne sont pas autorisés dans le nom d\'utilisateur</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Les caractères : et \' ne sont pas autorisés dans le mot de passe</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Remise à zéro de la base de données</string>
+  <!--Syncthing was reset-->
+  <string name="streset_question">Cette action ne doit être réalisée que sur recommandation de l\'équipe support.
+        \nEtes-vous sûr de vouloir effacer l\'index de base de données de Syncthing ?
+    </string>
+  <!--Syncthing was reset-->
+  <string name="streset_done">Réinitialisation réussie de la base de données Syncthing</string>
   <string name="category_about">A propos</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">Ouvrir le journal</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Ouvre la fenêtre du journal de Syncthing et Android</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Signaler un problème</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Ouvrir le système de suivi des problèmes de Syncthing-Android</string>
+  <string name="report_issue_summary">Ouvre le suivi des problèmes de Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Version de Syncthing</string>
@@ -188,6 +207,17 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Sélectionner ce dossier</string>
   <string name="create_folder_failed">Echec de création du dossier</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">Journal</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Voir le journal Android</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Voir le journal Syncthing</string>
+  <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Partager le journal</string>
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">Partage</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing est désactivé</string>
@@ -199,6 +229,7 @@ SVP, signalez les problèmes que vous rencontrez via Github.</string>
   <string name="exit">Quitter</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing fonctionne</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>

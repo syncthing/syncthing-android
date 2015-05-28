@@ -29,10 +29,10 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.TreeSet;
 
 /**
  * Activity that allows selecting a directory in the local file system.
@@ -58,7 +58,6 @@ public class FolderPickerActivity extends SyncthingActivity
     private File mLocation;
 
     @Override
-    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -72,24 +71,7 @@ public class FolderPickerActivity extends SyncthingActivity
         mRootsAdapter = new RootsAdapter(this);
         mListView.setAdapter(mFilesAdapter);
 
-        // Populate roots.
-        ArrayList<File> roots = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
-        }
-        roots.add(Environment.getExternalStorageDirectory());
-        File storage = new File("/storage/");
-        if (storage.exists() && storage.isDirectory())
-            Collections.addAll(roots, storage.listFiles());
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("advanced_folder_picker", false)) {
-            roots.add(new File("/"));
-        }
-
-        for (File f : roots) {
-            if (f != null)
-                mRootsAdapter.add(f);
-        }
+        populateRoots();
 
         if (getIntent().hasExtra(EXTRA_INITIAL_DIRECTORY)) {
             displayFolder(new File(getIntent().getStringExtra(EXTRA_INITIAL_DIRECTORY)));
@@ -100,6 +82,44 @@ public class FolderPickerActivity extends SyncthingActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
                     .show();
+        }
+    }
+
+    /**
+     * Reads available storage devices/folders from various APIs and inserts them into
+     * {@link #mRootsAdapter}.
+     */
+    @SuppressLint("NewApi")
+    private void populateRoots() {
+        // Use own comparator to handle null values.
+        TreeSet<File> roots = new TreeSet<>(new Comparator<File>() {
+            @Override
+            public int compare(File lhs, File rhs) {
+                if (lhs == null | rhs == null)
+                    return 0;
+                return lhs.compareTo(rhs);
+            }
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
+        }
+        roots.add(Environment.getExternalStorageDirectory());
+
+        // Add all sd cards. These might already be in {@link getExternalFilesDirs}, and might not
+        // be writable.
+        File storage = new File("/storage/");
+        if (storage.exists() && storage.isDirectory())
+            Collections.addAll(roots, storage.listFiles());
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getBoolean("advanced_folder_picker", false)) {
+            roots.add(new File("/"));
+        }
+
+        for (File f : roots) {
+            if (f != null)
+                mRootsAdapter.add(f);
         }
     }
 

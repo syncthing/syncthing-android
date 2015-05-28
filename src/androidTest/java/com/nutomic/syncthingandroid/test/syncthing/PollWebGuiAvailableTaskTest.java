@@ -30,11 +30,12 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
     }
 
     public void testPolling() throws InterruptedException {
-        new SyncthingRunnable(new MockContext(null),
-                getContext().getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME);
+        new SyncthingRunnable(new MockContext(getContext()), SyncthingRunnable.Command.main);
+
+        String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(1);
-        new PollWebGuiAvailableTask() {
+        new PollWebGuiAvailableTask(httpsCertPath) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 latch.countDown();
@@ -42,6 +43,6 @@ public class PollWebGuiAvailableTaskTest extends AndroidTestCase {
         }.execute(mConfig.getWebGuiUrl());
         latch.await(1, TimeUnit.SECONDS);
 
-        SyncthingRunnable.killSyncthing();
+        // TODO: Unit tests fail when Syncthing is killed SyncthingRunnable.killSyncthing();
     }
 }

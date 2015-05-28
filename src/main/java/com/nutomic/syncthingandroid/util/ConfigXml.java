@@ -3,9 +3,9 @@ package com.nutomic.syncthingandroid.util;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -53,8 +53,7 @@ public class ConfigXml {
             generateKeysConfig(context);
         }
 
-        // This could cause an infinite loop, maybe we should add a counter, too.
-        do {
+        for (int i = 0; i < 10 && mConfig == null; i++) {
             try {
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 mConfig = db.parse(mConfigFile);
@@ -69,7 +68,10 @@ public class ConfigXml {
                 isFirstStart = true;
                 mConfigFile = getConfigFile(context);
             }
-        } while (mConfig == null);
+        }
+        if (mConfig == null) {
+            Toast.makeText(context, "Failed to create a Syncthing config. Syncthing will not start!", Toast.LENGTH_LONG).show();
+        }
 
         if (isFirstStart) {
             changeDefaultFolder();
@@ -78,9 +80,7 @@ public class ConfigXml {
     }
 
     private void generateKeysConfig(Context context) {
-        new SyncthingRunnable(context, context.getApplicationInfo().dataDir + "/" +
-                SyncthingService.BINARY_NAME + " -generate='" + context.getFilesDir() + "'")
-                .run();
+        new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
     }
 
     public static File getConfigFile(Context context) {
@@ -88,7 +88,7 @@ public class ConfigXml {
     }
 
     public String getWebGuiUrl() {
-        return "http://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
+        return "https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
     }
 
     public String getApiKey() {
@@ -137,7 +137,28 @@ public class ConfigXml {
                 changed = true;
             }
 
-            if (applyLenientMTimes(r)) {
+            if (applyHashers(r)) {
+                changed = true;
+            }
+        }
+
+        // Enforce TLS.
+        Element gui = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("gui").item(0);
+        boolean tls = Boolean.parseBoolean(gui.getAttribute("tls"));
+        if (!tls) {
+            Log.i(TAG, "Enforce TLS");
+            gui.setAttribute("tls", Boolean.toString(true));
+            changed = true;
+        }
+
+        // Update deprecated 8080 port to 8384
+        NodeList addressList = gui.getElementsByTagName("address");
+        for (int i = 0; i < addressList.getLength(); i++) {
+            Element g = (Element) addressList.item(i);
+            if (g.getTextContent().equals("127.0.0.1:8080")) {
+                Log.i(TAG, "Replacing 127.0.0.1:8080 address with 127.0.0.1:8384");
+                g.setTextContent("127.0.0.1:8384");
                 changed = true;
             }
         }
@@ -148,18 +169,18 @@ public class ConfigXml {
     }
 
     /**
-     * Set 'lenientMtimes' (see https://github.com/syncthing/syncthing/issues/831) on the
+     * Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
      * given folder.
      *
      * @return True if the XML was changed.
      */
-    private boolean applyLenientMTimes(Element folder) {
+    private boolean applyHashers(Element folder) {
         NodeList childs = folder.getChildNodes();
         for (int i = 0; i < childs.getLength(); i++) {
             Node item = childs.item(i);
-            if (item.getNodeName().equals("lenientMtimes")) {
-                if (item.getTextContent().equals(Boolean.toString(false))) {
-                    item.setTextContent(Boolean.toString(true));
+            if (item.getNodeName().equals("hashers")) {
+                if (item.getTextContent().equals(Integer.toString(0))) {
+                    item.setTextContent(Integer.toString(1));
                     return true;
                 }
                 return false;
@@ -167,9 +188,9 @@ public class ConfigXml {
         }
 
         // XML tag does not exist, create it.
-        Log.i(TAG, "Set 'lenientMtimes' on folder " + folder.getAttribute("id"));
-        Element newElem = mConfig.createElement("lenientMtimes");
-        newElem.setTextContent(Boolean.toString(true));
+        Log.i(TAG, "Set 'hashers' on folder " + folder.getAttribute("id"));
+        Element newElem = mConfig.createElement("hashers");
+        newElem.setTextContent(Integer.toString(1));
         folder.appendChild(newElem);
         return true;
     }

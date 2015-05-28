@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">プロプライエタリなサービスを、オープン、信頼、そして分権されたものと置き換えましょう。</string>
+  <string name="app_description">オープンで、信頼できる、分散されたファイル同期アプリケーション。</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">フォルダーを追加</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">デバイス ID を送信…</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">API を待機中</string>
+  <string name="api_loading">ロード中…</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">アップロード</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">ダウンロード:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -119,13 +120,13 @@
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">GUI を待機中</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">キーを生成しています。しばらくお待ちください。</string>
+  <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">初回の開始</string>
+  <string name="welcome_title">Syncthing for Android にようこそ</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Android 用 Syncthing へようこそ!\n\n\
-このアプリは現在アルファ版です。バグ、パフォーマンスの問題、データの損失が発生する可能性があります。\n\n\
-GitHub 経由で、発生した問題をすべて報告してください。</string>
+  <string name="welcome_text">Syncthing は、オープンソースのファイル同期アプリケーションです。\n\n
+他のデバイスとデータを共有するには、デバイスリストにその一意のデバイスIDを追加する必要があります。その後で、そのデバイスと共有するフォルダーを選択することができます。\n\n
+発生した問題はすべて GitHub で報告してください。</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
@@ -166,7 +167,24 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="config_import_failed">設定のインポートに失敗しました。%1$s にファイルがあるか確認してください</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">デバッグオプション</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE オプションでは、a-z および \',\' のみ使用できます。</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">ユーザー名に 文字 : および \' は使用できません</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">パスワードに 文字 : および \' は使用できません</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">データベースをリセット</string>
+  <!--Syncthing was reset-->
+  <string name="streset_question">この操作は、私たちサポートチームが推奨した場合にのみ行ってください。
+\n本当に Syncthing のインデックスデータベースをクリアしてもよろしいですか?</string>
+  <!--Syncthing was reset-->
+  <string name="streset_done">政情に Syncthing のデータベースをリセットしました</string>
   <string name="category_about">アプリについて</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">ログを開く</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Syncthing と Android のログ ウインドウを開く</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">問題を報告</string>
   <!--Summary for the issue tracker settings item-->
@@ -188,6 +206,17 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <!--Menu item to select the current folder-->
   <string name="select_folder">フォルダーを選択</string>
   <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">ログ</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Android ログを表示</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Syncthing ログを表示</string>
+  <!--Title of the "share log" menu action-->
+  <string name="share_log_title">ログを共有</string>
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">共有</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing は無効になりました</string>
@@ -199,6 +228,7 @@ GitHub 経由で、発生した問題をすべて報告してください。</st
   <string name="exit">終了</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>

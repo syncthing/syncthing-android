@@ -12,8 +12,9 @@ import java.util.List;
 public class MockRestApi extends RestApi {
 
     public MockRestApi(Context context, String url, String apiKey,
-            OnApiAvailableListener listener) {
-        super(context, url, apiKey, listener);
+                       String guiUser, String guiPassword,
+                       OnApiAvailableListener listener) {
+        super(context, url, apiKey, guiUser, guiPassword, listener);
     }
 
     @Override

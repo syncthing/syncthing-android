@@ -1,3 +1,8 @@
 # Fix appcompat-v7 v21.0.0 causing crash on Samsung devices with Android v4.2.2 (https://code.google.com/p/android/issues/detail?id=78377)
 -keep class !android.support.v7.internal.view.menu.MenuBuilder, !android.support.v7.internal.view.menu.SubMenuBuilder, android.support.v7.** { *; }
 -keep interface android.support.v7.** { *; }
+-keep class android.support.v7.widget.ShareActionProvider { *; }
+# Enable reflective access to mX509Certificate
+-keepclassmembers class android.net.http.SslCertificate {
+  private final X509Certificate mX509Certificate;
+}

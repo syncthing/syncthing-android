@@ -49,7 +49,7 @@ public class MockSyncthingService extends SyncthingService {
 
     @Override
     public RestApi getApi() {
-        return new MockRestApi(this, null, null, null);
+        return new MockRestApi(this, null, null, null, null, null);
     }
 
     @Override

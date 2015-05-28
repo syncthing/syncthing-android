@@ -25,12 +25,12 @@ public class FoldersAdapterTest extends AndroidTestCase {
         super.setUp();
 
         mAdapter = new FoldersAdapter(getContext());
-        mFolder.Path = "/my/dir/";
-        mFolder.ID = "id 123";
-        mFolder.Invalid = "all good";
-        mFolder.DeviceIds = new ArrayList<>();
-        mFolder.ReadOnly = false;
-        mFolder.Versioning = new RestApi.Versioning();
+        mFolder.path = "/my/dir/";
+        mFolder.id = "id 123";
+        mFolder.invalid = "all good";
+        mFolder.deviceIds = new ArrayList<>();
+        mFolder.readOnly = false;
+        mFolder.versioning = new RestApi.Versioning();
 
         mModel.state = "idle";
         mModel.localFiles = 50;
@@ -43,15 +43,15 @@ public class FoldersAdapterTest extends AndroidTestCase {
     public void testGetViewNoModel() {
         mAdapter.add(Arrays.asList(mFolder));
         View v = mAdapter.getView(0, null, null);
-        assertEquals(mFolder.ID, ((TextView) v.findViewById(R.id.id)).getText());
-        assertEquals(mFolder.Path, ((TextView) v.findViewById(R.id.directory)).getText());
-        assertEquals(mFolder.Invalid, ((TextView) v.findViewById(R.id.invalid)).getText());
+        assertEquals(mFolder.id, ((TextView) v.findViewById(R.id.id)).getText());
+        assertEquals(mFolder.path, ((TextView) v.findViewById(R.id.directory)).getText());
+        assertEquals(mFolder.invalid, ((TextView) v.findViewById(R.id.invalid)).getText());
     }
 
     @MediumTest
     public void testGetViewModel() {
         mAdapter.add(Arrays.asList(mFolder));
-        mAdapter.onReceiveModel(mFolder.ID, mModel);
+        mAdapter.onReceiveModel(mFolder.id, mModel);
         View v = mAdapter.getView(0, null, null);
         assertFalse(((TextView) v.findViewById(R.id.state)).getText().toString().equals(""));
         String items = ((TextView) v.findViewById(R.id.items)).getText().toString();

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Vervang niet-vrije diensten door iets opens, betrouwbaars en ge-decentraliseerds.</string>
+  <string name="app_description">Een open, betrouwbare en gedecentraliseerde applicatie voor bestandssynchronisatie.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Map toevoegen</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Apparaat-ID versturen naar</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Wachten op API</string>
+  <string name="api_loading">Laden…</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Downloaden:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -119,12 +120,12 @@ Gelieve een scanner te installeren of de apparaat-ID handmatig in te voeren.</st
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Wachten op interface</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Bezig met genereren van sleutels. Dit kan even duren.</string>
+  <string name="web_gui_creating_key">Bezig met aanmaken van veilige sleutels. Dit kan enkele minuten duren.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Eerste opstart</string>
+  <string name="welcome_title">Welkom bij Syncthing voor Android</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Welkom bij Syncthing voor Android!\n\n
-Deze applicatie is momenteel in alfa-status, en je kan bugs, prestatieproblemen of gegevensverlies verwachten.\n\n
+  <string name="welcome_text">Syncthing is een open-source applicatie voor bestandssynchronisatie.\n\n
+Om gegevens te delen met anderen apparaten moet je hun unieke apparaat-ID toevoegen aan de lijst met apparaten. Nadien kan je kiezen welke mappen je wil delen met welke apparaten.\n\n
 Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -166,7 +167,24 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="config_import_failed">Importeren van configuratie mislukt, zorg dat de bestanden zich in %1$s bevinden</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug-opties</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Enkel a-z en \',\' zijn toegestaan in STTRACE-opties</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Tekens : en \' zijn niet toegestaan in gebruikersnaam</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Tekens : en \' zijn niet toegestaan in wachtwoord</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Database opnieuw instellen</string>
+  <!--Syncthing was reset-->
+  <string name="streset_question">Deze actie moet je enkel uitvoeren wanneer ons ondersteuningsteam je dit aanraadt.
+\nBen je zeker dat je de indexdatabase van Syncthing wil wissen?</string>
+  <!--Syncthing was reset-->
+  <string name="streset_done">Opnieuw instellen van Syncthing-database geslaagd</string>
   <string name="category_about">Over</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">Log openen</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Open het Syncthing- en Android-logvenster</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
@@ -188,6 +206,17 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Map selecteren</string>
   <string name="create_folder_failed">Aanmaken van map mislukt</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">Log</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Bekijk Android-log</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Bekijk Syncthing-log</string>
+  <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Log delen</string>
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">Delen</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing is uitgezet</string>
@@ -199,6 +228,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="exit">Afsluiten</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>

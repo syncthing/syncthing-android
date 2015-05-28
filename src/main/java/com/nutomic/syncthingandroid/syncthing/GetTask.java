@@ -3,13 +3,14 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.nutomic.syncthingandroid.util.Https;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
@@ -28,17 +29,19 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
     private static final String TAG = "GetTask";
 
-    public static final String URI_CONFIG = "/rest/config";
+    public static final String URI_CONFIG      = "/rest/system/config";
+    public static final String URI_VERSION     = "/rest/system/version";
+    public static final String URI_SYSTEM      = "/rest/system/status";
+    public static final String URI_CONNECTIONS = "/rest/system/connections";
+    public static final String URI_MODEL       = "/rest/db/status";
+    public static final String URI_DEVICEID    = "/rest/svc/deviceid";
+    public static final String URI_REPORT      = "/rest/svc/report";
 
-    public static final String URI_VERSION = "/rest/version";
+    private String mHttpsCertPath;
 
-    public static final String URI_SYSTEM = "/rest/system";
-
-    public static final String URI_CONNECTIONS = "/rest/connections";
-
-    public static final String URI_MODEL = "/rest/model";
-
-    public static final String URI_DEVICEID = "/rest/deviceid";
+    public GetTask(String httpsCertPath) {
+        mHttpsCertPath = httpsCertPath;
+    }
 
     /**
      * params[0] Syncthing hostname
@@ -49,10 +52,12 @@ public class GetTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected String doInBackground(String... params) {
+        String fullUri = params[0] + params[1];
+        Log.v(TAG, "Calling Rest API at " + fullUri);
+
         // Retry at most 10 times before failing
         for (int i = 0; i < 10; i++) {
-            String fullUri = params[0] + params[1];
-            HttpClient httpclient = new DefaultHttpClient();
+            HttpClient httpclient = Https.createHttpsClient(mHttpsCertPath);
             if (params.length == 5) {
                 LinkedList<NameValuePair> urlParams = new LinkedList<>();
                 urlParams.add(new BasicNameValuePair(params[3], params[4]));
@@ -60,6 +65,9 @@ public class GetTask extends AsyncTask<String, Void, String> {
             }
             HttpGet get = new HttpGet(fullUri);
             get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
+
+            if (isCancelled())
+                return null;
 
             try {
                 HttpResponse response = httpclient.execute(get);
@@ -75,16 +83,19 @@ public class GetTask extends AsyncTask<String, Void, String> {
                         result += line;
                     }
                     br.close();
+                    Log.v(TAG, "API call result: " + result);
                     return result;
                 }
-            } catch (IOException e) {
+            } catch (IOException|IllegalArgumentException e) {
                 Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
             }
             try {
                 // Don't push the API too hard
                 Thread.sleep(500 * i);
-            } catch (InterruptedException e) { }
-            Log.w(TAG, "Retrying GetTask Rest API call ("+i+")");
+            } catch (InterruptedException e) {
+                Log.w(TAG, e);
+            }
+            Log.w(TAG, "Retrying GetTask Rest API call ("+(i+1)+"/10)");
         }
         return null;
     }

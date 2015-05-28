@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Ersetzt proprietäre Angebote durch etwas Quelloffenes, Vertrauswürdiges und Dezentrales.</string>
+  <string name="app_description">Eine offene, vertrauenswürdige und dezentralisierte Anwendung zur Dateisynchronisation.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Geräte ID senden an</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Warte auf Schnittstelle</string>
+  <string name="api_loading">Lade...</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -114,11 +115,13 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Warte auf Weboberfläche</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generiere Schlüssel. Dies kann eine Weile dauern.</string>
+  <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Erster Start</string>
+  <string name="welcome_title">Willkommen bei Syncthing für Android</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Willkommen zu Syncthing für Android \n \n Diese App ist momentan im Alpha-Status, sodass es zu Fehlern, Geschwindigkeitsproblemen oder Datenverlust kommen kann. \n\n Bitte teile uns auftretende Probleme via Github mit.</string>
+  <string name="welcome_text">Syncthing ist eine quell offene Applikation zum Synchronisieren von Dateien.\n\n\
+Um Daten mit anderen Geräten zu teilen musst du deren Geräte ID in die Liste der Geräte hinzufügen. Danach kannst du die Verzeichnisse auswählen, welche mit den Geräten geteilt werden sollen.\n\n
+Bitte auftretenden Probleme via Github melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
@@ -129,8 +132,8 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="always_run_in_background_enabled">Syncthing läuft immer im Hintergrund, entsprechend den folgenden Einstellungen.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
-  <string name="sync_only_charging">Synchronisierung nur mit angeschlossenem Ladegerät</string>
-  <string name="sync_only_wifi">Synchronisierung nur im WLAN</string>
+  <string name="sync_only_charging">Sync nur mit Ladegerät</string>
+  <string name="sync_only_wifi">Sync nur im WLAN</string>
   <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="category_syncthing">Syncthing</string>
@@ -159,7 +162,20 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="config_import_failed">Import fehlgeschlagen, Dateien werden in %1$s erwartet</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Nur a-z und \',\' sind in STTRACE Optionen errlaubt</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Die Zeichen : und \' sind im Benutzernamen nicht erlaubt</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Die Zeichen : und \' sind im Passwort nicht erlaubt</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
   <string name="category_about">Über</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">Log öffnen</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Öffne das Syncthing und Android Log Fenster</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Fehler melden</string>
   <!--Summary for the issue tracker settings item-->
@@ -181,6 +197,16 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Ordner auswählen</string>
   <string name="create_folder_failed">Verzeichniserstellung fehlgeschlagen</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">Log</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Zeige Android Log</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Zeige Syncthing Log</string>
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">Teilen</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing is deaktiviert</string>
@@ -192,6 +218,7 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="exit">Beenden</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing läuft</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>
@@ -222,4 +249,5 @@ Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <string name="state_scanning">Suchen</string>
   <string name="state_cleaning">Aufräumen</string>
   <string name="state_syncing">Synchronisiere</string>
+  <string name="state_unknown">Unbekannt</string>
 </resources>

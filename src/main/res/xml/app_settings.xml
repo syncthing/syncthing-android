@@ -25,6 +25,19 @@
             android:summary="@string/advanced_folder_picker_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="use_root"
+            android:title="@string/use_root_title"
+            android:summary="@string/use_root_summary"
+            android:defaultValue="false"
+            android:enabled="false" />
+
+        <CheckBoxPreference
+            android:key="persistent_notification"
+            android:title="@string/persistent_notification_title"
+            android:summary="@string/persistent_notification_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -35,49 +48,49 @@
             android:title="@string/syncthing_options">
 
             <EditTextPreference
-                android:key="DeviceName"
+                android:key="deviceName"
                 android:title="@string/device_name"
                 android:persistent="false" />
 
             <EditTextPreference
-                android:key="ListenAddress"
+                android:key="listenAddress"
                 android:title="@string/listen_address"
                 android:persistent="false" />
 
             <EditTextPreference
-                android:key="MaxRecvKbps"
+                android:key="maxRecvKbps"
                 android:title="@string/max_recv_kbps"
                 android:numeric="integer"
                 android:persistent="false" />
 
             <EditTextPreference
-                android:key="MaxSendKbps"
+                android:key="maxSendKbps"
                 android:title="@string/max_send_kbps"
                 android:numeric="integer"
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="GlobalAnnEnabled"
+                android:key="globalAnnounceEnabled"
                 android:title="@string/global_announce_enabled"
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="LocalAnnEnabled"
+                android:key="localAnnounceEnabled"
                 android:title="@string/local_announce_enabled"
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="UPnPEnabled"
+                android:key="upnpEnabled"
                 android:title="@string/upnp_enabled"
                 android:persistent="false" />
 
             <EditTextPreference
-                android:key="GlobalAnnServers"
+                android:key="globalAnnounceServers"
                 android:title="@string/global_announce_server"
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="URAccepted"
+                android:key="urAccepted"
                 android:title="@string/usage_reporting"
                 android:persistent="false" />
 
@@ -88,7 +101,7 @@
             android:title="@string/syncthing_gui">
 
             <EditTextPreference
-                android:key="Address"
+                android:key="address"
                 android:title="@string/gui_address"
                 android:persistent="false" />
 
@@ -99,12 +112,6 @@
             <EditTextPreference
                 android:key="gui_password"
                 android:title="@string/gui_password" />
-
-            <CheckBoxPreference
-                android:key="UseTLS"
-                android:title="@string/gui_https_enabled"
-                android:enabled="false"
-                android:persistent="false" />
 
         </PreferenceScreen>
 
@@ -121,10 +128,22 @@
             android:title="@string/sttrace_title"
             android:singleLine="true" />
 
+        <Preference
+            android:key="streset"
+            android:title="@string/streset_title"
+            android:singleLine="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_about">
+
+        <Preference
+            android:title="@string/open_log"
+            android:summary="@string/open_log_summary">
+            <intent
+                android:action=".activities.LogActivity" />
+        </Preference>
 
         <Preference
             android:title="@string/report_issue_title"

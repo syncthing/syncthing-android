@@ -10,6 +10,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.support.v4.app.Fragment;
 import android.support.v4.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +24,8 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.BarcodeIntentIntegrator;
+import com.nutomic.syncthingandroid.util.BarcodeIntentResult;
 
 import java.util.List;
 import java.util.Map;
@@ -99,12 +102,12 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             }
             if (mDevice == null) {
                 mDevice = new RestApi.Device();
-                mDevice.Name = "";
-                mDevice.DeviceID = "";
-                mDevice.Addresses = "dynamic";
-                mDevice.Compression = "always";
-                mDevice.Introducer = false;
-                ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
+                mDevice.name = "";
+                mDevice.deviceID = "";
+                mDevice.addresses = "dynamic";
+                mDevice.compression = "always";
+                mDevice.introducer = false;
+                ((EditTextPreference) mDeviceId).setText(mDevice.deviceID);
             }
         }
     }
@@ -144,7 +147,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             getActivity().setTitle(R.string.edit_device);
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
             for (int i = 0; i < devices.size(); i++) {
-                if (devices.get(i).DeviceID.equals(
+                if (devices.get(i).deviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
                     device = devices.get(i);
                     break;
@@ -161,14 +164,14 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
 
         mSyncthingService.getApi().getConnections(DeviceSettingsFragment.this);
 
-        mDeviceId.setSummary(mDevice.DeviceID);
-        mName.setText((mDevice.Name));
-        mName.setSummary(mDevice.Name);
-        mAddresses.setText(mDevice.Addresses);
-        mAddresses.setSummary(mDevice.Addresses);
-        mCompression.setValue(mDevice.Compression);
-        mCompression.setSummary(mDevice.Compression);
-        mIntroducer.setChecked(mDevice.Introducer);
+        mDeviceId.setSummary(mDevice.deviceID);
+        mName.setText((mDevice.name));
+        mName.setSummary(mDevice.name);
+        mAddresses.setText(mDevice.addresses);
+        mAddresses.setSummary(mDevice.addresses);
+        mCompression.setValue(mDevice.compression);
+        mCompression.setSummary(mDevice.compression);
+        mIntroducer.setChecked(mDevice.introducer);
     }
 
     @Override
@@ -188,12 +191,12 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mDevice.DeviceID.equals("")) {
+                if (mDevice.deviceID.equals("")) {
                     Toast.makeText(getActivity(), R.string.device_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                if (mDevice.Name.equals("")) {
+                if (mDevice.name.equals("")) {
                     Toast.makeText(getActivity(), R.string.device_name_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
@@ -201,7 +204,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                 mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
                 return true;
             case R.id.share_device_id:
-                RestApi.shareDeviceId(getActivity(), mDevice.DeviceID);
+                RestApi.shareDeviceId(getActivity(), mDevice.deviceID);
                 return true;
             case R.id.delete:
                 new AlertDialog.Builder(getActivity())
@@ -234,23 +237,23 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
             pref.setSummary((String) o);
         }
         if (preference.equals(mDeviceId)) {
-            mDevice.DeviceID = (String) o;
+            mDevice.deviceID = (String) o;
             deviceUpdated();
             return true;
         } else if (preference.equals(mName)) {
-            mDevice.Name = (String) o;
+            mDevice.name = (String) o;
             deviceUpdated();
             return true;
         } else if (preference.equals(mAddresses)) {
-            mDevice.Addresses = (String) o;
+            mDevice.addresses = (String) o;
             deviceUpdated();
             return true;
         } else if (preference.equals(mCompression)) {
-            mDevice.Compression = (String) o;
+            mDevice.compression = (String) o;
             deviceUpdated();
             return true;
         } else if (preference.equals(mIntroducer)) {
-            mDevice.Introducer = (Boolean) o;
+            mDevice.introducer = (Boolean) o;
             deviceUpdated();
             return true;
         }
@@ -260,7 +263,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference.equals(mDeviceId)) {
-            mSyncthingService.getApi().copyDeviceId(mDevice.DeviceID);
+            mSyncthingService.getApi().copyDeviceId(mDevice.deviceID);
             return true;
         }
         return false;
@@ -276,9 +279,9 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
         if (mVersion == null || mCurrentAddress == null)
             return;
-        if (connections.containsKey(mDevice.DeviceID)) {
-            mVersion.setSummary(connections.get(mDevice.DeviceID).ClientVersion);
-            mCurrentAddress.setSummary(connections.get(mDevice.DeviceID).Address);
+        if (connections.containsKey(mDevice.deviceID)) {
+            mVersion.setSummary(connections.get(mDevice.deviceID).clientVersion);
+            mCurrentAddress.setSummary(connections.get(mDevice.deviceID).address);
         }
     }
 
@@ -292,30 +295,23 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     }
 
     /**
-     * Sends QR code scanning intent when clicking the qrcode icon.
+     * Sends QR code scanning intent when clicking the QR code icon.
      */
     public void onClick(View view) {
-        Intent intentScan = new Intent("com.google.zxing.client.android.SCAN");
-        intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        try {
-            startActivityForResult(intentScan, SCAN_QR_REQUEST_CODE);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_qr_scanner_installed,
-                    Toast.LENGTH_LONG).show();
-        }
+        BarcodeIntentIntegrator integrator = new BarcodeIntentIntegrator(this);
+        integrator.initiateScan();
     }
 
     /**
      * Receives value of scanned QR code and sets it as device ID.
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SCAN_QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mDevice.DeviceID = data.getStringExtra("SCAN_RESULT");
-            ((EditTextPreference) mDeviceId).setText(mDevice.DeviceID);
-            mDeviceId.setSummary(mDevice.DeviceID);
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        BarcodeIntentResult scanResult = BarcodeIntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            mDevice.deviceID = scanResult.getContents();
+            ((EditTextPreference) mDeviceId).setText(mDevice.deviceID);
+            mDeviceId.setSummary(mDevice.deviceID);
         }
     }
 

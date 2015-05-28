@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">공개되어 믿을 수 있는, 분산 파일 동기화 응용 프로그램.</string>
+  <!--MainActivity-->
+  <!--Title of the "add folder" menu action-->
+  <string name="add_folder">폴더 추가</string>
+  <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">기기 ID 공유</string>
+  <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">로드 중...</string>
+  <!--FoldersFragment-->
+  <string name="folders_fragment_title">폴더</string>
+  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
+  <string name="folder_progress_format">%1$s (%2$d%%)</string>
+  <!--Shown if no folders exist-->
+  <string name="folder_list_empty">폴더를 찾을 수 없습니다</string>
+  <!--Format string for folder file count-->
+  <string name="files">%1$d / %2$d 파일</string>
+  <!--DevicesFragment-->
+  <string name="devices_fragment_title">기기</string>
+  <!--Shown if no devices exist-->
+  <string name="devices_list_empty">발견된 기기가 없습니다</string>
+  <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">최신</string>
+  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">동기화 중 (%1$d%%)</string>
+  <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">연결 끊김</string>
+  <!--Title for current download rate-->
+  <string name="download_title">다운로드</string>
+  <!--Title for current upload rate-->
+  <string name="upload_title">업로드</string>
+  <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
+  <!--Same as download_title with a colon and space appended-->
+  <string name="download_title_colon">다운로드됨:\u0020</string>
+  <!--Same as upload_title with a colon and space appended-->
+  <string name="upload_title_colon">업로드됨:\u0020</string>
+  <!--Title for current CPU usage-->
+  <string name="cpu_usage">CPU 사용량</string>
+  <!--Title for current RAM usage-->
+  <string name="ram_usage">RAM 사용량</string>
+  <!--Title for announce server status-->
+  <string name="announce_server">익명 서버</string>
+  <!--Menu item to donate-->
+  <string name="donate">기부하기</string>
+  <!--FolderSettingsFragment-->
+  <!--Setting title-->
+  <string name="folder_id">폴더 ID</string>
+  <!--Setting title-->
+  <string name="directory">디렉토리</string>
+  <!--Setting title-->
+  <string name="folder_master">읽기 전용</string>
+  <!--Setting title-->
+  <string name="devices">기기</string>
+  <!--Setting title-->
+  <string name="file_versioning">파일 버전</string>
+  <!--Setting title-->
+  <string name="keep_versions">버전 보호</string>
+  <!--Setting title-->
+  <string name="delete_folder">폴더 삭제</string>
+  <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">폴더 생성</string>
+  <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">폴더 편집</string>
+  <!--Menu item to confirm folder creation-->
+  <string name="create">생성</string>
+  <!--Dialog shown when attempting to delete a folder-->
+  <string name="delete_folder_confirm">정말로 이 폴더를 삭제하시겠습니까?</string>
+  <!--Toast shown when trying to create a folder with an invalid ID-->
+  <string name="folder_id_invalid">폴더 ID는 문자, 숫자, 마침표(.), 붙임표(-), 밑줄 문자(_)로만 구성되어 있는 짧은 식별자(64자 이하)여야 합니다.</string>
+  <!--Toast shown when trying to create a folder with an empty path-->
+  <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
+  <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <string name="no_devices">먼저 기기를 연결해 주십시오.</string>
+  <!--DeviceSettingsFragment-->
+  <!--Setting title-->
+  <string name="device_id">기기 ID</string>
+  <!--Setting title-->
+  <string name="name">이름 </string>
+  <!--Setting title-->
+  <string name="addresses">주소</string>
+  <!--Setting title-->
+  <string name="current_address">현 주소</string>
+  <!--Setting title-->
+  <string name="compression">압축</string>
+  <!--Strings representing compression options-->
+  <!--Setting title-->
+  <!--ActionBar item-->
+  <string name="delete_device">기기 삭제</string>
+  <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">기기 추가</string>
+  <!--Menu item to confirm adding a device-->
+  <string name="add">추가</string>
+  <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">기기 수정</string>
+  <!--Dialog shown when attempting to delete a device-->
+  <string name="delete_device_confirm">정말로 이 기기를 삭제하시겠습니까?</string>
+  <!--Toast shown when trying to create a device with an empty ID-->
+  <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
+  <!--Toast shown when trying to create a device with an empty name-->
+  <string name="device_name_required">기기명을 공백으로 둘 수 없습니다.</string>
+  <!--Content description for device ID qr code icon-->
+  <string name="scan_qr_code_description">QR 코드 스캔</string>
+  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
+  <string name="no_qr_scanner_installed">QR 코드 스캐너가 설치되어 있지 않거나, 설치된 스캐너가 지원되지 않는 것 같습니다. 
+스캐너를 설치하시거나, 기기 ID를 수동으로 입력하여 주십시오.</string>
+  <!--WebGuiActivity-->
+  <!--Title of the web gui activity-->
+  <string name="web_gui_title">웹 GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI를 기다리는 중</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing은 오픈 소스 파일 동기화 응용 프로그램입니다.\n\n\
+다른 기기와 데이터를 공유하려면, 기기 목록에 해당 기기의 고유한 기기 ID를 추가해야 합니다. 이후, 해당 기기와 공유할 폴더를 선택할 수 있습니다.\n\n\
+문제가 발생하는 경우 Github를 통해 문의해 주세요.</string>
+  <!--SettingsFragment-->
+  <!--Activity title-->
+  <string name="settings_title">설정</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
+  <!--Preference title-->
+  <string name="always_run_in_background">백그라운드에서 항상 실행</string>
+  <!--Preference summary in case it is enabled-->
+  <string name="always_run_in_background_enabled">Syncthing이 항상 백그라운드에서 실행되도록, 다음의 설정을 변경할 수 있습니다.</string>
+  <!--Preference summary in case it is disabled-->
+  <string name="always_run_in_background_disabled">Syncthing은 제대로 시작된 경우에만 작동하며, 메뉴 버튼을 눌러 정지할 수 있습니다.</string>
+  <string name="sync_only_charging">충전 중일 때만 동기화</string>
+  <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
+  <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
+  <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
+  <string name="category_syncthing">Syncthing</string>
+  <string name="syncthing_options">Syncthing 옵션 </string>
+  <string name="device_name">기기명</string>
+  <string name="listen_address">동기화 프로토콜 수신 주소</string>
+  <string name="max_recv_kbps">다운로드 속도 제한 (KiB/s)</string>
+  <string name="max_send_kbps">업로드 속도 제한 (KiB/s)</string>
+  <string name="global_announce_enabled">글로벌 탐색</string>
+  <string name="local_announce_enabled">로컬 탐색</string>
+  <string name="upnp_enabled">UPnP 활성화 </string>
+  <string name="global_announce_server">글로벌 탐색 서버</string>
+  <string name="usage_reporting">익명 사용 기록 </string>
+  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="gui_address">접속 대기 주소</string>
+  <string name="gui_user">GUI 인증 사용자</string>
+  <string name="gui_password">GUI 인증 비밀번호</string>
+  <string name="gui_https_enabled">GUI에 HTTPS 사용</string>
+  <string name="export_config">설정 내보내기</string>
+  <!--Toast shown after config was successfully exported-->
+  <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
+  <string name="import_config">설정 불러오기</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_imported_successful">설정을 불러왔습니다</string>
+  <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">설정을 불러오지 못했습니다, 파일이 %1$s에 있는지 확인해 주세요</string>
+  <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">디버그 옵션</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE 옵션에서는 a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">문자 :와 \'은 사용자명으로 사용할 수 없습니다</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">문자 :와 \'은 비밀번호로 사용할 수 없습니다</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
+  <string name="category_about">정보</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">로그 열기</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Syncthing 및 Android 로그 윈도우 열기</string>
+  <!--Settings item that opens issue tracker-->
+  <string name="report_issue_title">문제 보고</string>
+  <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Syncthing-Android 이슈 트래커 열기</string>
+  <!--URL of the issue tracker-->
+  <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing 버전</string>
+  <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android 버전</string>
+  <!--FolderPickerAcitivity-->
+  <!--Activity title-->
+  <string name="folder_picker_title">폴더 선택기</string>
+  <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">경고: 사용하는 Android 버전에서는 외부 저장소에의 동기화를 지원하지 않습니다</string>
+  <!--ListView empty text-->
+  <string name="directory_empty">디렉토리가 비어 있습니다</string>
+  <!--Menu item to create folder on the file system-->
+  <string name="create_fs_folder">새로운 폴더 생성</string>
+  <!--Menu item to select the current folder-->
+  <string name="select_folder">폴더 선택</string>
+  <string name="create_folder_failed">폴더를 생성할 수 없었습니다</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">로그</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Android 로그 보기</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Syncthing 로그 보기</string>
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">공유</string>
+  <!--SyncthingService-->
+  <!--Title of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_title">Syncthing이 비활성화되었습니다</string>
+  <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">정말로 설정을 변경하시겠습니까?</string>
+  <!--Button text on the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_change_settings">설정 변경</string>
+  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+  <string name="exit">나가기</string>
+  <!--Title of the notification shown while syncthing is running and enabled-->
+  <string name="syncthing_active">Syncthing이 작동 중입니다</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--RestApi-->
+  <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">재시작 필요</string>
+  <!--Text of the notification shown when a restart is needed-->
+  <string name="restart_notification_text">Syncthing을 재시작하려면 이곳을 클릭하세요</string>
+  <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">나중에 재시작</string>
+  <!--Shown when a device ID is copied to the clipboard-->
+  <string name="device_id_copied_to_clipboard">기기 ID가 클립보드에 복사되었습니다</string>
+  <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>B</item>
+    <item>KiB</item>
+    <item>MiB</item>
+    <item>GiB</item>
+    <item>TiB</item>
+  </string-array>
+  <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>b/s</item>
+    <item>Kib/s</item>
+    <item>Mib/s</item>
+    <item>Gib/s</item>
+    <item>Tib/s</item>
+  </string-array>
+  <!--Possible folder states-->
+  <string name="state_idle">대기</string>
+  <string name="state_scanning">스캔 중</string>
+  <string name="state_cleaning">지우는 중</string>
+  <string name="state_syncing">동기화 중</string>
+  <string name="state_unknown">알 수 없음</string>
+</resources>

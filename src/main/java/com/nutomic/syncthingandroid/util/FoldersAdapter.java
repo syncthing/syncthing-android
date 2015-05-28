@@ -42,10 +42,10 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
         RestApi.Folder folder = getItem(position);
-        RestApi.Model model = mModels.get(folder.ID);
-        id.setText(folder.ID);
+        RestApi.Model model = mModels.get(folder.id);
+        id.setText(folder.id);
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        directory.setText((folder.Path));
+        directory.setText((folder.path));
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
@@ -57,13 +57,13 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
             size.setText(RestApi.readableFileSize(getContext(), model.inSyncBytes) + " / " +
                     RestApi.readableFileSize(getContext(), model.globalBytes));
-            if (folder.Invalid.equals("")) {
+            if (folder.invalid.equals("")) {
                 invalid.setText(model.invalid);
                 invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
             }
         } else {
-            invalid.setText(folder.Invalid);
-            invalid.setVisibility((folder.Invalid.equals("")) ? View.GONE : View.VISIBLE);
+            invalid.setText(folder.invalid);
+            invalid.setVisibility((folder.invalid.equals("")) ? View.GONE : View.VISIBLE);
         }
 
         return convertView;
@@ -85,7 +85,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         for (int i = 0; i < getCount(); i++) {
             if (i >= listView.getFirstVisiblePosition() &&
                     i <= listView.getLastVisiblePosition()) {
-                api.getModel(getItem(i).ID, this);
+                api.getModel(getItem(i).id, this);
             }
         }
     }

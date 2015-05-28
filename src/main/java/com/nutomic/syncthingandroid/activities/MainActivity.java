@@ -1,12 +1,15 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -20,6 +23,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,14 +35,27 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DevicesFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FoldersFragment;
+import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
+import java.util.Date;
+
 /**
- * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and {@link com.nutomic.syncthingandroid.fragments.DevicesFragment} in different tabs, and
+ * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and
+ * {@link com.nutomic.syncthingandroid.fragments.DevicesFragment} in different tabs, and
  * {@link com.nutomic.syncthingandroid.fragments.DrawerFragment} in the navigation drawer.
  */
 public class MainActivity extends SyncthingActivity
         implements SyncthingService.OnApiChangeListener {
+
+    private static final String TAG = "MainActivity";
+
+    /**
+     * Time after first start when usage reporting dialog should be shown.
+     *
+     * @see #showUsageReportingDialog()
+     */
+    private static final long USAGE_REPORTING_DIALOG_DELAY = 3 * 24 * 60 * 60 * 1000;
 
     private AlertDialog mLoadingDialog;
 
@@ -49,64 +66,88 @@ public class MainActivity extends SyncthingActivity
      */
     @Override
     @SuppressLint("InflateParams")
-    public void onApiChange(final SyncthingService.State currentState) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
-                    if (currentState == SyncthingService.State.DISABLED) {
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
-                        mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
-                    } else if (mLoadingDialog == null) {
-                        final SharedPreferences prefs =
-                                PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
-                        LayoutInflater inflater = getLayoutInflater();
-                        View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
-                        TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-                        loadingText.setText((getService().isFirstStart())
-                                ? R.string.web_gui_creating_key
-                                : R.string.api_loading);
-
-                        mLoadingDialog = new AlertDialog.Builder(MainActivity.this)
-                                .setCancelable(false)
-                                .setView(dialogLayout)
-                                .show();
-
-                        // Make sure the first start dialog is shown on top.
-                        if (prefs.getBoolean("first_start", true)) {
-                            new AlertDialog.Builder(MainActivity.this)
-                                    .setTitle(R.string.welcome_title)
-                                    .setMessage(R.string.welcome_text)
-                                    .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            prefs.edit().putBoolean("first_start", false).commit();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    }
-                    return;
-                }
-
+    public void onApiChange(SyncthingService.State currentState) {
+        if (currentState == SyncthingService.State.ACTIVE &&
+                new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
+                getApi().getUsageReportAccepted() == RestApi.UsageReportSetting.UNDECIDED) {
+            showUsageReportingDialog();
+        } else if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
+            if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                     mLoadingDialog = null;
                 }
-                if (mDisabledDialog != null) {
-                    mDisabledDialog.dismiss();
-                    mDisabledDialog = null;
+                mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
+            } else if (mLoadingDialog == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
+                TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+                loadingText.setText((getService().isFirstStart())
+                        ? R.string.web_gui_creating_key
+                        : R.string.api_loading);
+
+                mLoadingDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setCancelable(false)
+                        .setView(dialogLayout)
+                        .show();
+
+                final SharedPreferences sp =
+                        PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
+                // Make sure the first start dialog is shown on top.
+                if (sp.getBoolean("first_start", true)) {
+                    showFirstStartDialog(sp);
                 }
-                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                mDrawerLayout.setDrawerListener(mDrawerToggle);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setHomeButtonEnabled(true);
             }
-        });
+            return;
+        }
+
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
+        if (mDisabledDialog != null) {
+            mDisabledDialog.dismiss();
+            mDisabledDialog = null;
+        }
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    /**
+     * Returns the unix timestamp at which the app was first installed.
+     */
+    @TargetApi(9)
+    private long getFirstStartTime() {
+        PackageManager pm = getPackageManager();
+        long firstInstallTime = 0;
+        try {
+            // No info is available on Froyo.
+            firstInstallTime = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
+                    ? pm.getPackageInfo(getPackageName(), 0).firstInstallTime
+                    : 0;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "This should never happen", e);
+        }
+        return firstInstallTime;
+    }
+
+    /**
+     * Displays information for first app start.
+     */
+    private void showFirstStartDialog(final SharedPreferences sp) {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.welcome_title)
+                .setMessage(R.string.welcome_text)
+                .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sp.edit().putBoolean("first_start", false).commit();
+                    }
+                })
+                .show();
     }
 
     private final FragmentPagerAdapter mSectionsPagerAdapter =
@@ -227,7 +268,7 @@ public class MainActivity extends SyncthingActivity
     }
 
     /**
-     * Saves fragment states.
+     * Saves current tab index and fragment states.
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -263,7 +304,7 @@ public class MainActivity extends SyncthingActivity
 
 
     /**
-     * Receives drawer opened and closed events.
+     * Handles drawer opened and closed events, toggling option menu state.
      */
     public class Toggle extends ActionBarDrawerToggle {
         public Toggle(Activity activity, DrawerLayout drawerLayout) {
@@ -308,6 +349,40 @@ public class MainActivity extends SyncthingActivity
             return true;
         }
         return super.onKeyDown(keyCode, e);
+    }
+
+    /**
+     * Displays dialog asking user to accept/deny usage reporting.
+     */
+    @SuppressLint("InflateParams")
+    private void showUsageReportingDialog() {
+        final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getApi().setUsageReportAccepted(
+                        (which == DialogInterface.BUTTON_POSITIVE)
+                                ? RestApi.UsageReportSetting.ACCEPTED
+                                : RestApi.UsageReportSetting.DENIED,
+                        MainActivity.this);
+            }
+        };
+
+        getApi().getUsageReport(new RestApi.OnReceiveUsageReportListener() {
+            @Override
+            public void onReceiveUsageReport(String report) {
+                View v = LayoutInflater.from(MainActivity.this)
+                        .inflate(R.layout.usage_reporting_dialog, null);
+                TextView tv = (TextView) v.findViewById(R.id.example);
+                tv.setText(report);
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.usage_reporting_dialog_title)
+                        .setView(v)
+                        .setPositiveButton(R.string.yes, listener)
+                        .setNegativeButton(R.string.no, listener)
+                        .setCancelable(false)
+                        .show();
+            }
+        });
     }
 
 }

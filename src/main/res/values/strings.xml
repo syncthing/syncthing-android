@@ -20,6 +20,14 @@
     <!-- Text for FoldersFragment and DevicesFragment loading view -->
     <string name="api_loading">Loading&#8230;</string>
 
+    <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting?</string>
+
+    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
+
+    <string name="yes">Yes</string>
+
+    <string name="no">No</string>
+
     <!-- FoldersFragment -->
 
 
@@ -229,6 +237,14 @@ Please report any problems you encounter via Github.</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
 
+    <string name="use_root_title">Sync as Root</string>
+
+    <string name="use_root_summary">Run Syncthing as Superuser</string>
+
+    <string name="persistent_notification_title">Persistent Notification</string>
+
+    <string name="persistent_notification_summary">Show Notification while Syncthing is running</string>
+
     <string name="category_syncthing">Syncthing</string>
 
     <string name="syncthing_options">Syncthing Options</string>
@@ -286,7 +302,24 @@ Please report any problems you encounter via Github.</string>
     <!-- Toast after entering invalid password -->
     <string name="toast_invalid_password">Characters : and \' are not allowed in password</string>
 
+    <!-- Title for the preference to reset Syncthing indexes -->
+    <string name="streset_title">Reset Database</string>
+
+    <!-- Syncthing was reset -->
+    <string name="streset_question">This action should only be performed based on a recommendation from our support team.
+        \nAre you sure you want to clear Syncthing\'s index database?
+    </string>
+
+    <!-- Syncthing was reset -->
+    <string name="streset_done">Successfully reset Syncthing\'s database</string>
+
     <string name="category_about">About</string>
+
+    <!-- Settings item that opens the log activity -->
+    <string name="open_log">Open Log</string>
+
+    <!-- Summary for the log activity -->
+    <string name="open_log_summary">Open the Syncthing and Android log window</string>
 
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>
@@ -323,6 +356,25 @@ Please report any problems you encounter via Github.</string>
 
     <string name="create_folder_failed">Failed to create folder</string>
 
+    <!-- LogActivity -->
+
+
+    <!-- Title of the "log" activity -->
+    <string name="log_title">Log</string>
+
+    <!-- Title of the "log android" menu button -->
+    <string name="log_android_title">View Android Log</string>
+
+    <!-- Title of the "log Syncthing" menu button -->
+    <string name="log_syncthing_title">View Syncthing Log</string>
+
+    <!-- Title of the "share log" menu action -->
+    <string name="share_log_title">Share Log</string>
+
+    <!-- Title of the "share log" menu button -->
+    <string name="share_title">Share</string>
+
+
     <!-- SyncthingService -->
 
 
@@ -340,6 +392,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>
+
+    <!-- Toast shown if folder observer fails to traverse a folder -->
+    <string name="toast_folder_observer_stack_overflow">Directory tree too deep. Check for cyclic symlinks</string>
 
     <!-- RestApi -->
 

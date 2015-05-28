@@ -17,6 +17,7 @@
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
@@ -70,6 +71,14 @@
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
+  <!--Toast after entering invalid STTRACE params-->
+  <!--Toast after entering invalid username-->
+  <!--Toast after entering invalid password-->
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
+  <!--Settings item that opens the log activity-->
+  <!--Summary for the log activity-->
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
@@ -81,12 +90,19 @@
   <!--ListView empty text-->
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <!--Title of the "log android" menu button-->
+  <!--Title of the "log Syncthing" menu button-->
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <!--Title of the notification shown while syncthing is running and enabled-->
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text of the notification shown when a restart is needed-->

@@ -19,13 +19,15 @@ apply plugin: 'com.github.ben-manes.versions'
 repositories {
     mavenCentral()
     maven {
-        url {
-            'https://raw.github.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/'
-        }
+        url 'https://raw.github.com/kolavar/android-support-v4-preferencefragment/master/maven-repository/'
+    }
+    maven {
+        url 'http://jcenter.bintray.com'
     }
 }
 
 dependencies {
+    compile 'eu.chainfire:libsuperuser:1.0.0.201504231659'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.3.0'
@@ -74,7 +76,7 @@ android {
         }
         release {
             minifyEnabled true
-            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-android.txt'
             if (System.getenv("key_alias")) {
                 signingConfig signingConfigs.release
             }

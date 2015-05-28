@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Zastępuje własnościowe serwisy czymś otwartym, zaufanym i zdecentralizowanym.</string>
+  <string name="app_description">Otwarta, godna zaufania oraz zdecentralizowana aplikacja do synchronizacji plików.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Dodaj folder</string>
@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Wyślij ID urządzenia do</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Oczekiwanie na API</string>
+  <string name="api_loading">Ładowanie...</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Foldery</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -34,6 +34,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
   <!--DrawerFragment-->
+  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -87,6 +88,11 @@
   <!--Setting title-->
   <string name="compression">Kompresja</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Nic</item>
+    <item>Metadata</item>
+    <item>Wszystko</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Wprowadzający</string>
   <!--ActionBar item-->
@@ -114,12 +120,12 @@ Zainstaluj wspierany skaner, albo wprowadź ID urządzenia ręcznie.</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Oczekiwanie na GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generowanie kluczy. To może chwilę potrwać.</string>
+  <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Pierwsze uruchomienie</string>
+  <string name="welcome_title">Witam w Syncthing dla Androida</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Witamy w Syncthing dla Androida!
-Ta aplikacja jest w fazie Alpha i mogą wystąpić błędy, problemy wydajnościowe albo utrata danych.
+  <string name="welcome_text">Syncthing to otwartoźródłowa aplikacja do synchronizacji plików.\n\n
+Do współdzielenia plików z innymi urządzeniami potrzebujesz dodać unikalny ID innego urządzenia. Potem możesz wybrać, które foldery chcesz współdzielić z jakim urządzeniem.\n\n
 Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -161,7 +167,20 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="config_import_failed">Wystąpił błąd podczas importowania, upewnij się że w %1$s są potrzebne pliki</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opcje debugowania</string>
+  <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Tylko znaki a-z oraz \',\' są dopuszczalne w STTRACE</string>
+  <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Znaki \':\' oraz \' są niedozwolone w nazwie użytkownika</string>
+  <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Znaki \':\' oraz \' są niedozwolone w haśle</string>
+  <!--Title for the preference to reset Syncthing indexes-->
+  <!--Syncthing was reset-->
+  <!--Syncthing was reset-->
   <string name="category_about">O projekcie</string>
+  <!--Settings item that opens the log activity-->
+  <string name="open_log">Otwórz log</string>
+  <!--Summary for the log activity-->
+  <string name="open_log_summary">Otwórz okno logów Syncthing oraz Androida</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Zgłoś błąd</string>
   <!--Summary for the issue tracker settings item-->
@@ -183,6 +202,16 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Wybierz folder</string>
   <string name="create_folder_failed">Wystąpił błąd podczas tworzenia katalogu</string>
+  <!--LogActivity-->
+  <!--Title of the "log" activity-->
+  <string name="log_title">Log</string>
+  <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Pokaż log Androida</string>
+  <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Pokaż log Syncthing</string>
+  <!--Title of the "share log" menu action-->
+  <!--Title of the "share log" menu button-->
+  <string name="share_title">Udostępnij</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
@@ -194,6 +223,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="exit">Wyjście</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing jest uruchomione</string>
+  <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Wymagany restart</string>
@@ -224,4 +254,5 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="state_scanning">Skanowanie</string>
   <string name="state_cleaning">Czyszczenie</string>
   <string name="state_syncing">Synchronizowanie</string>
+  <string name="state_unknown">Nieznany</string>
 </resources>
