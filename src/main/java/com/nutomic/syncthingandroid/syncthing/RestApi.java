@@ -368,7 +368,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
                 : new AlertDialog.Builder(activity);
         builder.setMessage(R.string.restart_title)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.restart_now, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mContext.startService(intent);
