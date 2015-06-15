@@ -11,6 +11,10 @@
   <string name="send_device_id_to">Envoyer ID machine à</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Chargement...</string>
+  <string name="usage_reporting_dialog_title">Autoriser l\'envoi anonyme de rapports d\'utilisation ?</string>
+  <string name="usage_reporting_dialog_description">Le rapport crypté des usages est envoyé tous les jours. Il est utilisé pour recueillir les types de plateformes, la tailles des dossiers et les versions d\'applications. Si le type de données envoyées dans les rapports est modifié, vous verrez à nouveau cette boite de dialogue.\n\nL\'agrégation des statistiques est publique, et disponible sur https://data.syncthing.net.</string>
+  <string name="yes">Oui</string>
+  <string name="no">Non</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -141,6 +145,10 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
+  <string name="use_root_title">Sync en root</string>
+  <string name="use_root_summary">Faire fonctionner syncthing en super-utilisateur</string>
+  <string name="persistent_notification_title">Notification persistante</string>
+  <string name="persistent_notification_summary">Afficher une notification quand Syncthing fonctionne</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de machine</string>
@@ -230,13 +238,14 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing fonctionne</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Arborescence des répertoires trop profonde. Vérifiez les liens symboliques cycliques.</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Cliquez ici pour redémarrer Syncthing</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Redémarrer plus tard</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">L\'ID machine est copié dans le bloc-notes</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -248,13 +257,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
     <item>To</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>bits/s</item>
-    <item>Kbits/s</item>
-    <item>Mbits/s</item>
-    <item>Gbits/s</item>
-    <item>Tbits/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">En veille</string>
   <string name="state_scanning">Analyse en cours</string>

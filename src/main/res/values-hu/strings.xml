@@ -126,8 +126,9 @@
   <!--Toast shown if folder observer fails to traverse a folder-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <!--Text of the notification shown when a restart is needed-->
+  <!--Text for positive button in restart dialog-->
   <!--Text for the dismiss button of the restart Activity-->
+  <!--Text of the notification shown when a restart is needed-->
   <!--Shown when a device ID is copied to the clipboard-->
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->

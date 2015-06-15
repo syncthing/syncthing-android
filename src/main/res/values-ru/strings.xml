@@ -11,6 +11,10 @@
   <string name="send_device_id_to">Отправить ID устройства</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Ожидайте...</string>
+  <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику?</string>
+  <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
+  <string name="yes">Да</string>
+  <string name="no">Нет</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -141,6 +145,10 @@
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
+  <string name="use_root_title">Sync как Root</string>
+  <string name="use_root_summary">Запуск Syncthing как Superuser</string>
+  <string name="persistent_notification_title">Постоянное уведомление</string>
+  <string name="persistent_notification_summary">Показать уведомление когда Syncthing запущен</string>
   <string name="category_syncthing">Общие настройки Syncthing</string>
   <string name="syncthing_options">Настройки устройства</string>
   <string name="device_name">Имя устройства</string>
@@ -174,8 +182,13 @@
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Символы : и \' запрещено использовать в пароле</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Сбросить базу данных</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Это действие должно выполняться только по рекомендации нашей поддержки.
+        \nВы уверены что хотите очистить индекс базы Syncthing?
+    </string>
   <!--Syncthing was reset-->
+  <string name="streset_done">БД Syncthing успешно сброшена</string>
   <string name="category_about">Информация</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Открыть лог</string>
@@ -210,6 +223,7 @@
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Логи Syncthing</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Отправить лог</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Поделиться</string>
   <!--SyncthingService-->
@@ -224,13 +238,14 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing запущен</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Слишком глубокая папка. Проверьте на цикличные симлинки</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Необходим Перезапуск</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Нажмите здесь чтобы перезагрузить syncthing</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Позже</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">ID устройства копирован в буфер обмена</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -242,13 +257,6 @@
     <item>ТБ</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>б/с</item>
-    <item>Кб/с</item>
-    <item>Мб/с</item>
-    <item>Гб/с</item>
-    <item>Тб/с</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Бездействие</string>
   <string name="state_scanning">Сканирование</string>

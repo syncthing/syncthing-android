@@ -1,0 +1,9 @@
+Syncthing ist eine tolle Alternative zu den bekannten Synchronisierungs- und Cloud-Diensten, weil es offen, vertrauenswürdig und dezentral funktioniert. Deine Daten sind deine Daten. Du allein entscheidest, wo sie gespeichert werden. Syncthing benötigt keine Drittanbieter-Server, um zu funktionieren.
+
+Webseite: https://syncthing.net/
+
+Quellcode: https://github.com/syncthing/syncthing-android
+
+Forum: https://discourse.syncthing.net/
+
+Problemfragen: https://github.com/syncthing/syncthing-android/issues

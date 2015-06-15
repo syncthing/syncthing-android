@@ -11,6 +11,10 @@
   <string name="send_device_id_to">Apparaat-ID versturen naar</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laden…</string>
+  <string name="usage_reporting_dialog_title">Anoniem gebruiksrapportage toestaan?</string>
+  <string name="usage_reporting_dialog_description">Het versleuteld gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en applicatieversies te volgen. Indien de gerapporteerde gegevensset wordt veranderd zal je deze dialoog opnieuw te zien krijgen.\n\nDe geaggregeerde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -141,6 +145,10 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="sync_only_wifi">Synchroniseer alleen via Wi-Fi</string>
   <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
+  <string name="use_root_title">Synchroniseren als root</string>
+  <string name="use_root_summary">Syncthing uitvoeren als superuser</string>
+  <string name="persistent_notification_title">Blijvende melding</string>
+  <string name="persistent_notification_summary">Toon melding wanneer Syncthing wordt uitgevoerd</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing-opties</string>
   <string name="device_name">Apparaatnaam</string>
@@ -229,13 +237,14 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Directorystructuur te diep. Controleer op cyclische symlinks</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Klik hier om Syncthing nu te herstarten</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Later herstarten</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Apparaat-ID gekopieerd naar klembord</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -247,13 +256,6 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kib/s</item>
-    <item>Mib/s</item>
-    <item>Gib/s</item>
-    <item>Tib/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inactief</string>
   <string name="state_scanning">Bezig met scannen</string>

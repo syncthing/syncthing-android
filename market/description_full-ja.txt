@@ -1,0 +1,9 @@
+Syncthing は、オープンで、信頼できる、分散型のもので、プロプライエタリな同期、クラウドサービスを置き換えます。あなたのデータ単体では、あなたのデータでしかありませんが、第三者と共有し、インターネット上で送信した場合は、それが格納される場所は選択に値します。
+
+Webサイト: https://syncthing.net/
+
+ソースコード: https://github.com/syncthing/syncthing-android
+
+フォーラム: https://discourse.syncthing.net/
+
+問題: https://github.com/syncthing/syncthing-android/issues

@@ -193,10 +193,10 @@
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重新啟動</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">按此以重新啟動 syncthing</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">稍後重新啟動</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">裝置識別碼已複製至剪貼版</string>
   <!--Strings representing units for file sizes, from smallest to largest-->

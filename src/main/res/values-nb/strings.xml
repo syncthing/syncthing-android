@@ -172,9 +172,9 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Omstart Nødvendig</string>
-  <!--Text of the notification shown when a restart is needed-->
+  <!--Text for positive button in restart dialog-->
   <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Start På Nytt Senere</string>
+  <!--Text of the notification shown when a restart is needed-->
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Enhets-ID kopiert til utklippstavle</string>
   <!--Strings representing units for file sizes, from smallest to largest-->

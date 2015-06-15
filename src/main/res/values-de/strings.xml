@@ -11,6 +11,10 @@
   <string name="send_device_id_to">Geräte ID senden an</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Lade...</string>
+  <string name="usage_reporting_dialog_title">anonymen Nutzungsbericht erlauben?</string>
+  <string name="usage_reporting_dialog_description">Der anonyme Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die verwendeten Plattformen, Ordnergrößen und syncthing-Versionen zu erstellen. Wenn sich die angefragten Daten ändern, werden Sie erneut um Erlaubnis gefragt. Die fertigen Statistiken sind unter https://data.syncthing.net zu finden.</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nein</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -44,7 +48,7 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">RAM Auslastung</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Ankündigungsserver</string>
+  <string name="announce_server">Indexserver</string>
   <!--Menu item to donate-->
   <string name="donate">Spenden</string>
   <!--FolderSettingsFragment-->
@@ -88,6 +92,11 @@
   <!--Setting title-->
   <string name="compression">Datenkomprimierung</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Nie</item>
+    <item>Metadaten</item>
+    <item>Immer</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Verteilergerät</string>
   <!--ActionBar item-->
@@ -136,6 +145,10 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="sync_only_wifi">Sync nur im WLAN</string>
   <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
+  <string name="use_root_title">Syncronisiere mit Root-Rechten</string>
+  <string name="use_root_summary">Syncthing mit Superuser Rechten ausführen</string>
+  <string name="persistent_notification_title">permanente Benachrichtigung</string>
+  <string name="persistent_notification_summary">Zeige Benachrichtigungen während syncthing läuft</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing Optionen</string>
   <string name="device_name">Gerätename</string>
@@ -145,7 +158,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
   <string name="upnp_enabled">UPnP aktivieren</string>
-  <string name="global_announce_server">Globaler Auffindungsserver</string>
+  <string name="global_announce_server">Globaler Indexserver</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
   <string name="syncthing_gui">Syncthing Weboberfläche</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
@@ -169,8 +182,12 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Die Zeichen : und \' sind im Passwort nicht erlaubt</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden.
+\nSind Sie sicher, dass Sie die Syncthing Datenbank leeren möchten?</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">Datenbank erfolgreich zurückgesetzt</string>
   <string name="category_about">Über</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Log öffnen</string>
@@ -205,6 +222,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zeige Syncthing Log</string>
   <!--Title of the "share log" menu action-->
+  <string name="share_log_title">Log teilen</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>
   <!--SyncthingService-->
@@ -219,13 +237,14 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing läuft</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Klicke hier um Syncthing neu zu starten</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">Später neu starten</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Geräte ID in die Zwischenablage kopiert</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -237,16 +256,9 @@ Bitte auftretenden Probleme via Github melden.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kib/s</item>
-    <item>Mib/s</item>
-    <item>Gib/s</item>
-    <item>Tib/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Untätig</string>
-  <string name="state_scanning">Suchen</string>
+  <string name="state_scanning">scanning</string>
   <string name="state_cleaning">Aufräumen</string>
   <string name="state_syncing">Synchronisiere</string>
   <string name="state_unknown">Unbekannt</string>

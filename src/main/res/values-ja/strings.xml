@@ -11,6 +11,10 @@
   <string name="send_device_id_to">デバイス ID を送信…</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">ロード中…</string>
+  <string name="usage_reporting_dialog_title">匿名使用状況レポートを許可しますか?</string>
+  <string name="usage_reporting_dialog_description">暗号化された使用状況レポートを毎日送信します。これは、一般的なプラットフォーム、フォルダーのサイズ、およびアプリケーションのバージョンを追跡するために使用します。報告されたデータセットが変更された場合、このダイアログボックスを再度表示します。\n\n集計された統計は https://data.syncthing.net で公開されています。</string>
+  <string name="yes">はい</string>
+  <string name="no">いいえ</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -141,6 +145,10 @@
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
+  <string name="use_root_title">Root として同期</string>
+  <string name="use_root_summary">スーパーユーザーとして同期を実行します</string>
+  <string name="persistent_notification_title">永続的な通知</string>
+  <string name="persistent_notification_summary">Syncthing の実行中、通知を表示します</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">同期オプション</string>
   <string name="device_name">デバイス名</string>
@@ -200,7 +208,7 @@
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">警告: お使いの Android のバージョンは外部ストレージデバイスに同期することができません</string>
   <!--ListView empty text-->
-  <string name="directory_empty">ディレクトリは空です</string>
+  <string name="directory_empty">ディレクトリーは空です</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">新しいフォルダーを作成</string>
   <!--Menu item to select the current folder-->
@@ -229,13 +237,14 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの巡回を確認してください</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>
+  <!--Text for positive button in restart dialog-->
+  <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">ここをクリックして、今すぐ Syncthing を再起動してください</string>
-  <!--Text for the dismiss button of the restart Activity-->
-  <string name="restart_later">後で再起動</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">デバイス ID をクリップボードにコピーしました</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -247,13 +256,6 @@
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>b/s</item>
-    <item>Kib/s</item>
-    <item>Mib/s</item>
-    <item>Gib/s</item>
-    <item>Tib/s</item>
-  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">アイドル</string>
   <string name="state_scanning">スキャン中</string>
