@@ -577,9 +577,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public static String readableTransferRate(Context context, long bits) {
         final String[] units = context.getResources().getStringArray(R.array.transfer_rate_units);
         if (bits <= 0) return "0 " + units[0];
-        int digitGroups = (int) (Math.log10(bits) / Math.log10(1024));
+        long bytes = bits / 8;
+        int digitGroups = (int) (Math.log10(bytes) / Math.log10(1024));
         return new DecimalFormat("#,##0.#")
-                .format(bits / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+                .format(bytes / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
     /**

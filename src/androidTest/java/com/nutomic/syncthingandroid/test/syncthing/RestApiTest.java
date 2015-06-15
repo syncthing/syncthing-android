@@ -87,8 +87,8 @@ public class RestApiTest extends AndroidTestCase {
 
     @SmallTest
     public void testGetReadableTransferRate() {
-        assertEquals("1 Mib/s", RestApi.readableTransferRate(getContext(), 1048576));
-        assertEquals("1 Gib/s", RestApi.readableTransferRate(getContext(), 1073741824));
+        assertEquals("1 MiB/s", RestApi.readableTransferRate(getContext(), 8388608L));
+        assertEquals("1 GiB/s", RestApi.readableTransferRate(getContext(), 8589934592L));
     }
 
     @MediumTest

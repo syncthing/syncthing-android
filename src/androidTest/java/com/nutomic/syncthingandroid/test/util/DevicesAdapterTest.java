@@ -30,8 +30,8 @@ public class DevicesAdapterTest extends AndroidTestCase {
         mDevice.deviceID = "123-456-789";
 
         mConnection.completion = 100;
-        mConnection.inBits = 1048576;
-        mConnection.outBits = 1073741824;
+        mConnection.inBits = 8388608L;
+        mConnection.outBits = 8589934592L;
 
     }
 
@@ -57,8 +57,8 @@ public class DevicesAdapterTest extends AndroidTestCase {
 
         assertEquals(getContext().getString(R.string.device_up_to_date),
                 ((TextView) v.findViewById(R.id.status)).getText().toString());
-        assertEquals("1 Mib/s", ((TextView) v.findViewById(R.id.download)).getText().toString());
-        assertEquals("1 Gib/s", ((TextView) v.findViewById(R.id.upload)).getText().toString());
+        assertEquals("1 MiB/s", ((TextView) v.findViewById(R.id.download)).getText().toString());
+        assertEquals("1 GiB/s", ((TextView) v.findViewById(R.id.upload)).getText().toString());
     }
 
 }
