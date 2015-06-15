@@ -364,10 +364,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         final Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);
 
-        AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
-                : new AlertDialog.Builder(activity);
-        builder.setMessage(R.string.restart_title)
+        new AlertDialog.Builder(activity)
+                .setMessage(R.string.restart_title)
                 .setPositiveButton(R.string.restart_now, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -397,11 +395,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         final Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESET);
 
-        AlertDialog.Builder builder = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                ? new AlertDialog.Builder(activity, AlertDialog.THEME_HOLO_LIGHT)
-                : new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.streset_title);
-        builder.setMessage(R.string.streset_question)
+        new AlertDialog.Builder(activity)
+                .setTitle(R.string.streset_title)
+                .setMessage(R.string.streset_question)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
