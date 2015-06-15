@@ -2,7 +2,12 @@
 -keep class !android.support.v7.internal.view.menu.MenuBuilder, !android.support.v7.internal.view.menu.SubMenuBuilder, android.support.v7.** { *; }
 -keep interface android.support.v7.** { *; }
 -keep class android.support.v7.widget.ShareActionProvider { *; }
+
 # Enable reflective access to mX509Certificate
 -keepclassmembers class android.net.http.SslCertificate {
   private final X509Certificate mX509Certificate;
 }
+
+# Disable code obfuscation.(http://stackoverflow.com/a/13877518)
+-dontobfuscate
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
