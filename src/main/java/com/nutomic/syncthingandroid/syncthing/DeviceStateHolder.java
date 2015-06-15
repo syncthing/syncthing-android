@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +30,13 @@ public class DeviceStateHolder extends BroadcastReceiver {
 
     private boolean mIsCharging = false;
 
+    @TargetApi(16)
     public DeviceStateHolder(Context context) {
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mIsWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+        if (android.os.Build.VERSION.SDK_INT >= 16 && cm.isActiveNetworkMetered())
+            mIsWifiConnected = false;
     }
 
     /**
