@@ -576,11 +576,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         long bytes = bits / 8;
         if (bytes <= 0) return "0 " + units[0];
         int digitGroups = (int) (Math.log10(bytes) / Math.log10(1024));
-        if (digitGroups < 0 || digitGroups > 4)
-            throw new ArrayIndexOutOfBoundsException("bits=" + Long.toString(bits) +
-                    ", bytes=" + Long.toString(bytes) +
-                    " (int) digitGroups=" + Integer.toString(digitGroups) +
-                    " (double) digitGroups=" + Double.toString(Math.log10(bytes) / Math.log10(1024)));
         return new DecimalFormat("#,##0.#")
                 .format(bytes / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
