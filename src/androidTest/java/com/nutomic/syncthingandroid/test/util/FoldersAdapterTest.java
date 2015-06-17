@@ -39,7 +39,6 @@ public class FoldersAdapterTest extends AndroidTestCase {
         mModel.globalBytes = 1073741824;
     }
 
-    @MediumTest
     public void testGetViewNoModel() {
         mAdapter.add(Arrays.asList(mFolder));
         View v = mAdapter.getView(0, null, null);
@@ -48,7 +47,6 @@ public class FoldersAdapterTest extends AndroidTestCase {
         assertEquals(mFolder.invalid, ((TextView) v.findViewById(R.id.invalid)).getText());
     }
 
-    @MediumTest
     public void testGetViewModel() {
         mAdapter.add(Arrays.asList(mFolder));
         mAdapter.onReceiveModel(mFolder.id, mModel);

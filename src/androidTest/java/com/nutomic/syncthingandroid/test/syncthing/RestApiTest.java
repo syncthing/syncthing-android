@@ -56,12 +56,10 @@ public class RestApiTest extends AndroidTestCase {
         ConfigXml.getConfigFile(new MockContext(getContext())).delete();
     }
 
-    @SmallTest
     public void testGetDevices() {
         assertNotNull(mApi.getDevices(false));
     }
 
-    @MediumTest
     public void testGetSystemInfo() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.getSystemInfo(new RestApi.OnReceiveSystemInfoListener() {
@@ -74,24 +72,20 @@ public class RestApiTest extends AndroidTestCase {
         latch.await(1, TimeUnit.SECONDS);
     }
 
-    @SmallTest
     public void testGetFolders() {
         assertNotNull(mApi.getFolders());
     }
 
-    @SmallTest
     public void testReadableFileSize() {
         assertEquals("1 MiB", RestApi.readableFileSize(getContext(), 1048576));
         assertEquals("1 GiB", RestApi.readableFileSize(getContext(), 1073741824));
     }
-
-    @SmallTest
+    
     public void testGetReadableTransferRate() {
         assertEquals("1 MiB/s", RestApi.readableTransferRate(getContext(), 8388608L));
         assertEquals("1 GiB/s", RestApi.readableTransferRate(getContext(), 8589934592L));
     }
-
-    @SmallTest
+    
     public void testConvertNotCrashing() {
         long[] values = new long[]{-1, 0, 1, 2, 4, 8, 16, 1024, 2^10, 2^15, 2^20, 2^25, 2^30};
         for (long l : values) {
@@ -100,7 +94,6 @@ public class RestApiTest extends AndroidTestCase {
         }
     }
 
-    @MediumTest
     public void testGetConnections() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.getConnections(new RestApi.OnReceiveConnectionsListener() {
@@ -113,7 +106,6 @@ public class RestApiTest extends AndroidTestCase {
         latch.await(1, TimeUnit.SECONDS);
     }
 
-    @MediumTest
     public void testGetModel() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.getModel("camera", new RestApi.OnReceiveModelListener() {
@@ -126,7 +118,6 @@ public class RestApiTest extends AndroidTestCase {
         latch.await(1, TimeUnit.SECONDS);
     }
 
-    @MediumTest
     public void testNormalizeDeviceId() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.normalizeDeviceId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq",
@@ -141,7 +132,6 @@ public class RestApiTest extends AndroidTestCase {
         latch.await(1, TimeUnit.SECONDS);
     }
 
-    @SmallTest
     public void testGetValueEarly() {
         // Should never throw an exception.
         mApi.getValue("Options", "ListenAddress");

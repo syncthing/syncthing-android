@@ -31,7 +31,6 @@ public class BootReceiverTest extends AndroidTestCase {
         super.tearDown();
     }
 
-    @MediumTest
     public void testOnReceiveCharging() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()

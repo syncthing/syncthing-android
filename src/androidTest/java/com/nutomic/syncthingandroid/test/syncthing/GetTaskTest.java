@@ -41,7 +41,6 @@ public class GetTaskTest extends AndroidTestCase {
         //mServer.shutdown();
     }
 
-    @MediumTest
     public void testGetNoParams() throws IOException, InterruptedException {
         new GetTask("") {
             @Override
@@ -55,7 +54,6 @@ public class GetTaskTest extends AndroidTestCase {
         assertEquals(GetTask.URI_CONFIG, uri.getPath());
     }
 
-    @MediumTest
     public void testGetParams() throws IOException, InterruptedException {
         new GetTask("") {
             @Override

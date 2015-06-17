@@ -7,10 +7,10 @@ import com.nutomic.syncthingandroid.util.ExtendedCheckBoxPreference;
 
 public class ExtendedCheckBoxPreferenceTest extends AndroidTestCase {
 
-    @SmallTest
     public void testExtendedCheckBoxPreference() {
         Object o = new Object();
         ExtendedCheckBoxPreference cb = new ExtendedCheckBoxPreference(getContext(), o);
         assertEquals(cb.getObject(), o);
     }
+
 }

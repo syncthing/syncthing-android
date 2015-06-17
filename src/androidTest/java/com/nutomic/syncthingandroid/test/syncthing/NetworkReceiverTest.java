@@ -35,7 +35,6 @@ public class NetworkReceiverTest extends AndroidTestCase {
         super.tearDown();
     }
 
-    @MediumTest
     public void testOnReceive() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
@@ -51,7 +50,6 @@ public class NetworkReceiverTest extends AndroidTestCase {
         mContext.clearReceivedIntents();
     }
 
-    @MediumTest
     public void testOnlyRunInForeground() {
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .edit()

@@ -34,7 +34,6 @@ public class ConfigXmlTest extends AndroidTestCase {
         ConfigXml.getConfigFile(mContext).delete();
     }
 
-    @SmallTest
     public void testGetWebGuiUrl() {
         assertTrue(mConfig.getWebGuiUrl().startsWith("https://127.0.0.1:"));
     }
@@ -44,7 +43,6 @@ public class ConfigXmlTest extends AndroidTestCase {
      *
      * This is not ideal, but way less complicated than starting up syncthing and accessing the API.
      */
-    @SmallTest
     public void testCreateCameraFolder() {
         long oldTime = ConfigXml.getConfigFile(mContext).lastModified();
         long oldSize = ConfigXml.getConfigFile(mContext).length();

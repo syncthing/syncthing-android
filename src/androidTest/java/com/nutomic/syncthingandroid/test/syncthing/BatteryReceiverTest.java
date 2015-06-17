@@ -28,7 +28,6 @@ public class BatteryReceiverTest extends AndroidTestCase {
         super.tearDown();
     }
 
-    @MediumTest
     public void testOnReceiveCharging() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
@@ -44,7 +43,6 @@ public class BatteryReceiverTest extends AndroidTestCase {
         mContext.clearReceivedIntents();
     }
 
-    @MediumTest
     public void testOnReceiveNotCharging() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
@@ -61,7 +59,6 @@ public class BatteryReceiverTest extends AndroidTestCase {
         mContext.clearReceivedIntents();
     }
 
-    @MediumTest
     public void testOnlyRunInForeground() {
         PreferenceManager.getDefaultSharedPreferences(getContext())
                 .edit()

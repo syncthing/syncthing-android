@@ -44,14 +44,12 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         super.tearDown();
     }
 
-    @SmallTest
     public void testFirstStart() {
         setContext(mContext);
         startService(new Intent(mContext, SyncthingService.class));
         assertTrue(getService().isFirstStart());
     }
 
-    @MediumTest
     public void testNotFirstStart() throws IOException {
         setContext(mContext);
         startService(new Intent(mContext, SyncthingService.class));
@@ -59,7 +57,6 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         assertFalse(getService().isFirstStart());
     }
 
-    @SmallTest
     public void testBindService() throws InterruptedException {
         SyncthingServiceBinder binder = (SyncthingServiceBinder)
                 bindService(new Intent(getContext(), SyncthingService.class));

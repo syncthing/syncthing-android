@@ -49,7 +49,6 @@ public class FolderObserverTest extends AndroidTestCase
         return r;
     }
 
-    @MediumTest
     public void testRecursion() throws IOException, InterruptedException {
         mCurrentTest = "testRecursion";
         File subFolder = new File(mTestFolder, "subfolder");
@@ -64,7 +63,6 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    @MediumTest
     public void testRemoveFile() throws IOException, InterruptedException {
         mCurrentTest = "testRemoveFile";
         File test = new File(mTestFolder, "test");
@@ -79,7 +77,6 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    @MediumTest
     public void testMoveDirectoryOut() throws IOException, InterruptedException {
         mCurrentTest = "testMoveDirectory";
         File subFolder = new File(mTestFolder, "subfolder");
@@ -97,7 +94,6 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    @MediumTest
     public void testAddDirectory() throws IOException, InterruptedException {
         mCurrentTest = "testAddDirectory";
         File subFolder = new File(mTestFolder, "subfolder");

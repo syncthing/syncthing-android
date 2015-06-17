@@ -17,7 +17,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         super(MainActivity.class);
     }
 
-    @SmallTest
     public void testOnServiceConnected() {
         getActivity().onServiceConnected(null, new SyncthingServiceBinder(mService));
         assertTrue(mService.containsListenerInstance(MainActivity.class));

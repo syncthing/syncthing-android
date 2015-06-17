@@ -14,7 +14,6 @@ import java.io.File;
  */
 public class SyncthingRunnableTest extends AndroidTestCase {
 
-    @SmallTest
     public void testRunning() throws InterruptedException {
         MockContext context = new MockContext(getContext());
         File testFile = new File(context.getFilesDir(), SyncthingRunnable.UNIT_TEST_PATH);

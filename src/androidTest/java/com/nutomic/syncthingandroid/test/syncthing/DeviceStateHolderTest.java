@@ -20,7 +20,6 @@ public class DeviceStateHolderTest extends AndroidTestCase {
         mContext = new MockContext(null);
     }
 
-    @MediumTest
     public void testIsCharging() {
         Intent i = new Intent();
         i.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, false);
@@ -32,7 +31,6 @@ public class DeviceStateHolderTest extends AndroidTestCase {
         assertTrue(mReceiver.isCharging());
     }
 
-    @MediumTest
     public void testWifiConnected() {
         Intent i = new Intent();
         i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, false);
@@ -44,7 +42,6 @@ public class DeviceStateHolderTest extends AndroidTestCase {
         assertTrue(mReceiver.isWifiConnected());
     }
 
-    @MediumTest
     public void testonReceiveInitialChargingState() {
         Intent i = new Intent();
         mReceiver.onReceive(mContext, i);
