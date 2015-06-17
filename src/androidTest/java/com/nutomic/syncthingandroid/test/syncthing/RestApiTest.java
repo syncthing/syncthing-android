@@ -91,6 +91,15 @@ public class RestApiTest extends AndroidTestCase {
         assertEquals("1 GiB/s", RestApi.readableTransferRate(getContext(), 8589934592L));
     }
 
+    @SmallTest
+    public void testConvertNotCrashing() {
+        long[] values = new long[]{-1, 0, 1, 2, 4, 8, 16, 1024, 2^10, 2^15, 2^20, 2^25, 2^30};
+        for (long l : values) {
+            assertNotSame("", RestApi.readableFileSize(getContext(), l));
+            assertNotSame("", RestApi.readableTransferRate(getContext(), l));
+        }
+    }
+
     @MediumTest
     public void testGetConnections() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
