@@ -256,9 +256,11 @@ public class MainActivity extends SyncthingActivity
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
-        getService().unregisterOnApiChangeListener(this);
-        getService().unregisterOnApiChangeListener(mFolderFragment);
-        getService().unregisterOnApiChangeListener(mDevicesFragment);
+        if (getService() != null) {
+            getService().unregisterOnApiChangeListener(this);
+            getService().unregisterOnApiChangeListener(mFolderFragment);
+            getService().unregisterOnApiChangeListener(mDevicesFragment);
+        }
     }
 
     @Override
