@@ -2,9 +2,12 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 
 import org.w3c.dom.Document;
@@ -32,6 +35,9 @@ import javax.xml.transform.stream.StreamResult;
  */
 public class ConfigXml {
 
+    public class OpenConfigException extends RuntimeException {
+    }
+
     private static final String TAG = "ConfigXml";
 
     /**
@@ -41,11 +47,13 @@ public class ConfigXml {
 
     private static final String INVALID_CONFIG_FILE = "config.xml.invalid";
 
+    private static final int OPEN_CONFIG_MAX_TRIES = 10;
+
     private File mConfigFile;
 
     private Document mConfig;
 
-    public ConfigXml(Context context) {
+    public ConfigXml(final Context context) throws OpenConfigException {
         mConfigFile = getConfigFile(context);
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
@@ -53,7 +61,7 @@ public class ConfigXml {
             generateKeysConfig(context);
         }
 
-        for (int i = 0; i < 10 && mConfig == null; i++) {
+        for (int i = 0; i < OPEN_CONFIG_MAX_TRIES && mConfig == null; i++) {
             try {
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 mConfig = db.parse(mConfigFile);
@@ -69,9 +77,8 @@ public class ConfigXml {
                 mConfigFile = getConfigFile(context);
             }
         }
-        if (mConfig == null) {
-            Toast.makeText(context, "Failed to create a Syncthing config. Syncthing will not start!", Toast.LENGTH_LONG).show();
-        }
+        if (mConfig == null)
+            throw new OpenConfigException();
 
         if (isFirstStart) {
             changeDefaultFolder();

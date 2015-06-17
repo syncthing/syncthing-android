@@ -71,6 +71,8 @@ public class MainActivity extends SyncthingActivity
                 new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
                 getApi().getUsageReportAccepted() == RestApi.UsageReportSetting.UNDECIDED) {
             showUsageReportingDialog();
+        } else if (currentState == SyncthingService.State.ERROR) {
+            finish();
         } else if (currentState != SyncthingService.State.ACTIVE && !isFinishing()) {
             if (currentState == SyncthingService.State.DISABLED) {
                 if (mLoadingDialog != null) {

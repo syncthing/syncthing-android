@@ -396,6 +396,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Toast shown if folder observer fails to traverse a folder -->
     <string name="toast_folder_observer_stack_overflow">Directory tree too deep. Check for cyclic symlinks</string>
 
+    <!-- Toast shown if syncthing failed to create a config -->
+    <string name="config_create_failed">Failed to create a Syncthing config. Please check the logs.</string>
+
     <!-- RestApi -->
 
 

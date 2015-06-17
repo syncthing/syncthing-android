@@ -131,7 +131,8 @@ public class SyncthingService extends Service implements
         INIT,
         STARTING,
         ACTIVE,
-        DISABLED
+        DISABLED,
+        ERROR
     }
 
     private State mCurrentState = State.INIT;
@@ -208,13 +209,23 @@ public class SyncthingService extends Service implements
             shutdown();
 
             Log.i(TAG, "Starting syncthing according to current state and preferences");
-            mConfig = new ConfigXml(SyncthingService.this);
-            mCurrentState = State.STARTING;
-            registerOnWebGuiAvailableListener(mApi);
-            new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE).execute(mConfig.getWebGuiUrl());
-            mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
-            new Thread(mRunnable).start();
-            updateNotification();
+            mConfig = null;
+            try {
+                mConfig = new ConfigXml(SyncthingService.this);
+            } catch (ConfigXml.OpenConfigException e) {
+                mCurrentState = State.ERROR;
+                Toast.makeText(this, R.string.config_create_failed, Toast.LENGTH_LONG).show();
+            }
+
+            if (mConfig != null) {
+                mCurrentState = State.STARTING;
+                registerOnWebGuiAvailableListener(mApi);
+                new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE)
+                        .execute(mConfig.getWebGuiUrl());
+                mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
+                new Thread(mRunnable).start();
+                updateNotification();
+            }
         }
         // Stop syncthing.
         else {
@@ -305,12 +316,24 @@ public class SyncthingService extends Service implements
 
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
-            mConfig = new ConfigXml(SyncthingService.this);
-            return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
+            try {
+                mConfig = new ConfigXml(SyncthingService.this);
+                return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
+            } catch (ConfigXml.OpenConfigException e) {
+                return null;
+            }
         }
 
         @Override
         protected void onPostExecute(Pair<String, String> urlAndKey) {
+            if (urlAndKey == null) {
+                Toast.makeText(SyncthingService.this, R.string.config_create_failed,
+                        Toast.LENGTH_LONG).show();
+                mCurrentState = State.ERROR;
+                onApiChange();
+                return;
+            }
+
             mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
                     mGuiUser, mGuiPassword,
                     new RestApi.OnApiAvailableListener() {
