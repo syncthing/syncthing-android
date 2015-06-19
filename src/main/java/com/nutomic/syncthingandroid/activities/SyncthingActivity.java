@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -17,7 +18,7 @@ import java.util.LinkedList;
 /**
  * Connects to {@link SyncthingService} and provides access to it.
  */
-public class SyncthingActivity extends ActionBarActivity implements ServiceConnection {
+public class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
 
     private SyncthingService mSyncthingService;
 
