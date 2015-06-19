@@ -115,9 +115,6 @@
   <string name="device_name_required">Jméno přístroje nesmí být prázdné</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Načíst QR kód</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Není nainstalována žádná QR čtečka, nebo není podporována. \
-Nainstalujte prosím čtečku nebo vložte ID přístroje ručně.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Syncthing GUI</string>
@@ -164,7 +161,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="gui_address">Adresy naslouchání GUI</string>
   <string name="gui_user">Přihlašovací jméno pro GUI</string>
   <string name="gui_password">Přihlašovací heslo pro GUI</string>
-  <string name="gui_https_enabled">Použít HTTPS pro GUI</string>
   <string name="export_config">Zálohovat nastavení</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Nastavení bylo zálohováno do %1$s</string>
@@ -221,8 +217,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="log_android_title">Zobrazit log pro Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zobrazit log pro Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Sdílet log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Sdílet</string>
   <!--SyncthingService-->
@@ -238,6 +232,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="syncthing_active">Syncthing běží</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Adresářová struktura je moc hluboká. Zkontrolujte zacyklené symlinky.</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>

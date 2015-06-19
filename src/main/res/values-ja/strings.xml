@@ -115,9 +115,6 @@
   <string name="device_name_required">デバイス名は空にできません</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR コードをスキャン</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">QR スキャナーがインストールされていないか、スキャナーがサポートされていません持っている。 \
-スキャナをインストールするか、手動でデバイス ID を入力してください。</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
@@ -164,7 +161,6 @@
   <string name="gui_address">GUI リスンアドレス</string>
   <string name="gui_user">GUI 認証ユーザー</string>
   <string name="gui_password">GUI 認証パスワード</string>
-  <string name="gui_https_enabled">GUI で HTTPS を使用する</string>
   <string name="export_config">設定をエクスポート</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">設定を %1$s にエクスポートしました</string>
@@ -221,8 +217,6 @@
   <string name="log_android_title">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing ログを表示</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">ログを共有</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">共有</string>
   <!--SyncthingService-->
@@ -238,6 +232,7 @@
   <string name="syncthing_active">Syncthing は実行中です</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの巡回を確認してください</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>

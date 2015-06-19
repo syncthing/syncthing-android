@@ -98,9 +98,6 @@
   <string name="device_name_required">Enhetsnavnet kan ikke være tomt</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Skann QR-kode</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Du har ingen QR-skanner installert, eller din skanner er ikke støttet.d. \
-Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-GUI</string>
@@ -121,7 +118,6 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="upnp_enabled">Aktiver UPnP</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
-  <string name="gui_https_enabled">Bruk HTTPS til GUI</string>
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
@@ -156,7 +152,6 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <!--Title of the "log" activity-->
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
-  <!--Title of the "share log" menu action-->
   <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
@@ -169,6 +164,7 @@ Vennligst installer en skanner, eller legg til enhets-ID manuelt.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing kjører</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Omstart Nødvendig</string>

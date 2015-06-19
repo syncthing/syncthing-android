@@ -115,9 +115,6 @@
   <string name="device_name_required">设备名不得为空</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">扫描二维码</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">您尚未安装二维码扫描器或者是您安装的二维码扫描器尚不支持外部调用。
-请安装二维码扫描器或者手动添加设备标识。</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">网页管理页面</string>
@@ -145,7 +142,7 @@
   <string name="sync_only_wifi">仅在无线网络下同步</string>
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
-  <string name="use_root_title">使用根权限来同步</string>
+  <string name="use_root_title">使用root权限来同步</string>
   <string name="use_root_summary">Syncthing 运行于超级用户</string>
   <string name="persistent_notification_title">常驻通知</string>
   <string name="persistent_notification_summary">Syncthing 运行时显示通知</string>
@@ -164,7 +161,6 @@
   <string name="gui_address">管理页监听地址</string>
   <string name="gui_user">管理页认证用户</string>
   <string name="gui_password">管理页认证密码</string>
-  <string name="gui_https_enabled">管理页使用 HTTPS 加密协议</string>
   <string name="export_config">导出设置</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">设置已导出至 %1$s</string>
@@ -184,7 +180,7 @@
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">本操作仅因在支持团队的推荐下进行。\n
+  <string name="streset_question">本操作仅应在支持团队的推荐下进行。\n
 您确定要清理 Syncthing 的索引数据库吗？</string>
   <!--Syncthing was reset-->
   <string name="streset_done">重置 Syncthing 数据库完成</string>
@@ -221,8 +217,6 @@
   <string name="log_android_title">查看 Android 系统日志</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">查看 Syncthing 日志</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">分享日志</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">日志</string>
   <!--SyncthingService-->
@@ -238,11 +232,14 @@
   <string name="syncthing_active">Syncthing 正在运行</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">目录树层次过深，正在检查循环符号链接。</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重启以应用</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">立即重启</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">稍后重启</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">点此立即重启本应用</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -256,8 +253,15 @@
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
-  <string name="state_idle">闲置</string>
+  <string name="state_idle">空闲</string>
   <string name="state_scanning">正在扫描</string>
   <string name="state_cleaning">正在清理</string>
   <string name="state_syncing">正在同步</string>

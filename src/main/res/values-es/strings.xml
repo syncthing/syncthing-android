@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Una aplicación de sincronización de ficheros abierta, confiable y descentralizada.</string>
+  <string name="app_description">Una aplicación de sincronización de ficheros abierta, de confianza y descentralizada.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Agregar carpeta</string>
+  <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Compartir el ID del dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar el ID del dispositivo a</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Cargando...</string>
-  <string name="usage_reporting_dialog_title">Permitir informes anónimos de uso?</string>
-  <string name="usage_reporting_dialog_description">El informe encriptado de uso se manda a diario. Se utilitza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si el conjunto de datos del informe es modificado serás notificado de nuevo con este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_title">¿Permitir informes anónimos de uso?</string>
+  <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utilitza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si el conjunto de datos del informe es modificado serás notificado de nuevo con este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <!--FoldersFragment-->
@@ -30,7 +30,7 @@
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Al día</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Syncing (%1$d%%)</string>
+  <string name="device_syncing">Sincronizando (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Desconectado</string>
   <!--Title for current download rate-->
@@ -73,13 +73,13 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Crear</string>
   <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">¿Realmente quieres eliminar esta carpeta?</string>
+  <string name="delete_folder_confirm">¿De verdad quieres eliminar esta carpeta?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">El ID de carpeta tiene que ser un identificador corto (64 carácteres o menos) formado por letras, números i los carácteres como el punto (.), el guión (-) i el subrayado(_).</string>
+  <string name="folder_id_invalid">El ID de carpeta tiene que ser un identificador corto (64 caracteres o menos) formado por letras, números y los caracteres como el punto (.), el guión (-) y el subrayado(_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">La ruta a la carpeta no puede estar vacio</string>
+  <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">Primero conecte un dispositivo por favor.</string>
+  <string name="no_devices">Para empezar conecte un dispositivo, por favor.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID del dispositivo</string>
@@ -102,7 +102,7 @@
   <!--ActionBar item-->
   <string name="delete_device">Eliminar dispositivo</string>
   <!--Title for DeviceSettingsFragment in create mode-->
-  <string name="add_device">Agregar dispositivo</string>
+  <string name="add_device">Añadir dispositivo</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Añadir</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
@@ -115,8 +115,6 @@
   <string name="device_name_required">El nombre del dispositivo no debe estar vacío</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Escanear código QR</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Usted no tiene ningún escáner QR instalado o el escáner no es compatible.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>
@@ -135,12 +133,12 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="settings_title">Ajustes</string>
   <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Siempre correr en background</string>
+  <string name="always_run_in_background">Ejecutar siempre en segundo plano</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing se ejecutará siempre en segundo plano, de acuerdo a la configuración.</string>
   <!--Preference summary in case it is disabled-->
-  <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explicitamente, puede ser detenido a través del botón del meú.</string>
-  <string name="sync_only_charging">Sincronizar solo mientras cargando</string>
+  <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explícitamente, puede ser detenido a través del botón del menú.</string>
+  <string name="sync_only_charging">Sincronizar solo cuando esté cargando</string>
   <string name="sync_only_wifi">Sincronizar sólo en wifi</string>
   <string name="advanced_folder_picker">Usar Selección Avanzada de carpeta</string>
   <string name="advanced_folder_picker_summary">Escoja una carpeta del dispositivo para sincronizar</string>
@@ -163,10 +161,9 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="gui_address">Direcciones de escucha GUI</string>
   <string name="gui_user">Usuario de Autenticación GUI</string>
   <string name="gui_password">Contraseña de Autenticación GUI</string>
-  <string name="gui_https_enabled">Usar HHTPS para la GUI</string>
   <string name="export_config">Exportar Configuración</string>
   <!--Toast shown after config was successfully exported-->
-  <string name="config_export_successful">La configuración fué exportada a %1$s</string>
+  <string name="config_export_successful">La configuración fue exportada a %1$s</string>
   <string name="import_config">Importar Configuración</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Configuración importada</string>
@@ -175,19 +172,19 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opciones de depuración</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Sólo se permiten a-z i \',\' en las opciones STTRACE</string>
+  <string name="toast_invalid_sttrace">Sólo se permiten a-z y \',\' en las opciones STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">No se permiten los carácteres : i \' en el nombre de usuario</string>
+  <string name="toast_invalid_username">No se permiten los carácteres : y \' en el nombre de usuario</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">No se permiten los carácteres : i \' en la contraseña</string>
+  <string name="toast_invalid_password">No se permiten los carácteres : y \' en la contraseña</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Restablecer base de datos</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">Esta acción sólo se deberia realizar basandose en las recomendaciones de nuestro equipo de soporte.
-\nEstás seguro que quieres borrar el índice de la base de datos de Syncthing?</string>
+  <string name="streset_question">Esta acción sólo se debería realizar basandose en las recomendaciones de nuestro equipo de soporte.
+\n¿Estás seguro que quieres borrar el índice de la base de datos de Syncthing?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Base de datos de Syncthing restablecida con éxito</string>
-  <string name="category_about">A cerca</string>
+  <string name="category_about">Acerca de</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Abrir registro</string>
   <!--Summary for the log activity-->
@@ -207,12 +204,12 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Aviso: Tu versión de Android no permite la sincronización con dispositivos de almacenamiento externos</string>
   <!--ListView empty text-->
-  <string name="directory_empty">El Directorio esta Vacío</string>
+  <string name="directory_empty">El Directorio esta vacío</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Crear Nueva Carpeta</string>
+  <string name="create_fs_folder">Crear nueva carpeta</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Seleccionar Carpeta</string>
-  <string name="create_folder_failed">Falló al Crear la Carpeta</string>
+  <string name="select_folder">Seleccionar carpeta</string>
+  <string name="create_folder_failed">Error al crear la carpeta</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
   <string name="log_title">Registro</string>
@@ -220,8 +217,6 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="log_android_title">Mostrar registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Mostrar registro de Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Compartir registro</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartir</string>
   <!--SyncthingService-->
@@ -236,14 +231,17 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing se está ejecutando</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">Arbol de directorio demasiado profundo. Comprobar symlinks cíclicos</string>
+  <string name="toast_folder_observer_stack_overflow">Arbol de directorio demasiado profundo. Comprobar enlaces simbólicos cíclicos</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Reinicio Necesario</string>
+  <string name="restart_title">Es necesario reiniciar</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Reiniciar ahora</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Después</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Haga clic aquí para reiniciar syncthing ahora</string>
+  <string name="restart_notification_text">Haga clic aquí para reiniciar Syncthing ahora</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">El ID de Dispositivo se copió al portapapéles</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -255,6 +253,13 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inactivo</string>
   <string name="state_scanning">Escaneado</string>

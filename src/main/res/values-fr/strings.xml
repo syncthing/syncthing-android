@@ -115,9 +115,6 @@
   <string name="device_name_required">Le nom de la machine ne peut pas être vide</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scanner un QR Code</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Vous n\'avez aucun lecteur de QR code installé, ou votre lecteur n\'est pas compatible.
-SVP, installez un lecteur ou entrez l\'ID machine manuellement.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface WEB</string>
@@ -164,7 +161,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="gui_address">Adresse pour l\'interface WEB</string>
   <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
   <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
-  <string name="gui_https_enabled">Utiliser HTTPS pour l\'interface WEB</string>
   <string name="export_config">Exporter la configuration</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuration a été exportée dans %1$s</string>
@@ -222,8 +218,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="log_android_title">Voir le journal Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Voir le journal Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Partager le journal</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Partage</string>
   <!--SyncthingService-->
@@ -239,11 +233,14 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="syncthing_active">Syncthing fonctionne</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Arborescence des répertoires trop profonde. Vérifiez les liens symboliques cycliques.</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Redémarrer maintenant</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Plus tard</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Cliquez ici pour redémarrer Syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -257,6 +254,13 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
     <item>To</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>Octets/s</item>
+    <item>Ko/s</item>
+    <item>Mo/s</item>
+    <item>Go/s</item>
+    <item>To/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">En veille</string>
   <string name="state_scanning">Analyse en cours</string>

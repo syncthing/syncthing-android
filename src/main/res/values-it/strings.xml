@@ -115,9 +115,6 @@
   <string name="device_name_required">Il nome del dispositivo non può essere vuoto</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scansiona Codice QR</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Non hai installato nessun lettore di Codici QR o il tuo lettore non è supportato. \
-Installare un lettore o inserire l\'ID del dispositivo manualmente.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaccia Web</string>
@@ -164,7 +161,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="gui_address">Indirizzi Interfaccia Grafica</string>
   <string name="gui_user">Utente Interfaccia Grafica</string>
   <string name="gui_password">Password Autenticazione Utente</string>
-  <string name="gui_https_enabled">Usa HTTPS per l\'interfaccia grafica</string>
   <string name="export_config">Esporta Configurazione</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Config è stata esportata in %1$s</string>
@@ -222,8 +218,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="log_android_title">Mostra Registro di Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Mostra Registro di Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Condividi il Registro</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Condividi</string>
   <!--SyncthingService-->
@@ -239,6 +233,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="syncthing_active">Syncthing è in esecuzione</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Albero delle cartelle troppo nidificato. Verificare la presenza di link simbolici ciclici</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Riavvio Necessario</string>

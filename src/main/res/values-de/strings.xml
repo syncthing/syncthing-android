@@ -115,9 +115,6 @@
   <string name="device_name_required">Der Gerätename darf nicht leer sein</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Code scannen</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Du hast keinen QR Scanner installiert, oder Dein Scanner wird nicht unterstützt.
-Bitte installiere einen Scanner oder gib die Geräte ID manuell ein.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Weboberfläche</string>
@@ -164,7 +161,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
   <string name="gui_user">Nutzername für Weboberfläche</string>
   <string name="gui_password">Passwort für Weboberfläche</string>
-  <string name="gui_https_enabled">HTTPS für Weboberfläche benutzen</string>
   <string name="export_config">Konfiguration exportieren</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exportiert nach %1$s</string>
@@ -221,8 +217,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="log_android_title">Zeige Android Log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zeige Syncthing Log</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Log teilen</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>
   <!--SyncthingService-->
@@ -238,11 +232,14 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="syncthing_active">Syncthing läuft</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Jetzt neu starten</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Später</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Klicke hier um Syncthing neu zu starten</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -256,6 +253,13 @@ Bitte auftretenden Probleme via Github melden.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>Kb/s</item>
+    <item>Mb/s</item>
+    <item>Gb/s</item>
+    <item>Tb/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Untätig</string>
   <string name="state_scanning">scanning</string>

@@ -115,9 +115,6 @@
   <string name="device_name_required">Имя устройства не может быть пустым</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Сканировать QR Код</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">У вас не установлен QR сканер или он не поддерживается.
-Установите сканер или введите ID устройства вручную.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Веб-интерфейс</string>
@@ -164,7 +161,6 @@
   <string name="gui_address">Адрес Ожидания GUI</string>
   <string name="gui_user">Пользователь Идентификации GUI</string>
   <string name="gui_password">Пароль Идентификации GUI</string>
-  <string name="gui_https_enabled">Использовать HTTPS для GUI</string>
   <string name="export_config">Экспорт настроек</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройки экспортированы в %1$s</string>
@@ -222,8 +218,6 @@
   <string name="log_android_title">Логи Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Логи Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Отправить лог</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Поделиться</string>
   <!--SyncthingService-->
@@ -239,11 +233,14 @@
   <string name="syncthing_active">Syncthing запущен</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Слишком глубокая папка. Проверьте на цикличные симлинки</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Необходим Перезапуск</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Перезапустить сейчас</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Позже</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Нажмите здесь чтобы перезагрузить syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -257,6 +254,13 @@
     <item>ТБ</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>б/с</item>
+    <item>Кб/с</item>
+    <item>Мб/с</item>
+    <item>Гб/с</item>
+    <item>Тб/с</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Бездействие</string>
   <string name="state_scanning">Сканирование</string>

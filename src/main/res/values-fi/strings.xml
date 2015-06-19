@@ -55,7 +55,6 @@
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <!--Text for WebGuiActivity loading view-->
@@ -94,7 +93,6 @@
   <!--Title of the "log" activity-->
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
-  <!--Title of the "share log" menu action-->
   <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
@@ -103,6 +101,7 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text for positive button in restart dialog-->

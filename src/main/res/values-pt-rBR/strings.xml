@@ -117,9 +117,6 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <string name="device_name_required">O nome do dispositivo não pode ficar vazio</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Ler QR Code</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Não há um leitor de QR instalado ou o leitor não é suportado.
-Instale um leitor ou digite o ID do dispositivo manualmente.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface web</string>
@@ -166,7 +163,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="gui_address">Endereços de escuta da interface</string>
   <string name="gui_user">Nome de usuário da interface</string>
   <string name="gui_password">Senha da interface</string>
-  <string name="gui_https_enabled">Usar HTTPS na interface</string>
   <string name="export_config">Exportar configuração</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">A configuração foi exportada para %1$s</string>
@@ -224,8 +220,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="log_android_title">Exibir o log do Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Exibir o log do Syncthing</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Compartilhar log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartilhar</string>
   <!--SyncthingService-->
@@ -241,11 +235,15 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="syncthing_active">O Syncthing está rodando</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Árvore de diretórios profunda demais. Verifique links simbólicos cíclicos.</string>
+  <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Ocorreu um erro tentando configurar o Syncthing. Por favor, verifique os logs.</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Reiniciar agora</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Depois</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Toque aqui para reiniciar o Syncthing agora</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -259,6 +257,13 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Em espera</string>
   <string name="state_scanning">Verificando</string>

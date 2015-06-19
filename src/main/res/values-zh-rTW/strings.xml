@@ -103,9 +103,6 @@
   <string name="device_name_required">裝置名稱不得為空</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">掃描 QR Code</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">您未安裝 QR 掃描器或是您的掃描器未被支援。\
-請安裝一個掃描器或是手動輸入裝置識別碼。</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>
@@ -138,7 +135,6 @@
   <string name="gui_address">GUI 監聽位址</string>
   <string name="gui_user">GUI 認證使用者名稱</string>
   <string name="gui_password">GUI 認證密碼</string>
-  <string name="gui_https_enabled">為 GUI 使用 HTTPS</string>
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
@@ -176,7 +172,6 @@
   <!--Title of the "log" activity-->
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
-  <!--Title of the "share log" menu action-->
   <!--Title of the "share log" menu button-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
@@ -190,6 +185,7 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在執行</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重新啟動</string>

@@ -188,10 +188,6 @@
     <!-- Content description for device ID qr code icon -->
     <string name="scan_qr_code_description">Scan QR Code</string>
 
-    <!-- Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException -->
-	<string name="no_qr_scanner_installed">You have no QR scanner installed or your scanner is not supported. \
-Please install a scanner or enter the device ID manually.</string>
-
     <!-- WebGuiActivity -->
 
 
@@ -274,8 +270,6 @@ Please report any problems you encounter via Github.</string>
     <string name="gui_user">GUI Authentication User</string>
 
     <string name="gui_password">GUI Authentication Password</string>
-
-    <string name="gui_https_enabled">Use HTTPS for GUI</string>
 
     <string name="export_config">Export Configuration</string>
 
@@ -367,9 +361,6 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the "log Syncthing" menu button -->
     <string name="log_syncthing_title">View Syncthing Log</string>
-
-    <!-- Title of the "share log" menu action -->
-    <string name="share_log_title">Share Log</string>
 
     <!-- Title of the "share log" menu button -->
     <string name="share_title">Share</string>

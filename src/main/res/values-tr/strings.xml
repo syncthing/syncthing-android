@@ -111,9 +111,6 @@
   <string name="device_name_required">Cihaz adı boş olmamalı</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Kod Tarama</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">QR tarayıcı kurulu değil veya tarayıcınız desteklenmiyor. \
-Lütfen bir tarayıcı kurun veya cihaz ID el ile girin.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web Arayüzü</string>
@@ -156,7 +153,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>
   <string name="gui_password">Arayüz Kullanıcı Doğrulaması için Kullanıcı Parolası</string>
-  <string name="gui_https_enabled">Arayüz için HTTPS Kullan</string>
   <string name="export_config">Ayarları Dışarı Aktar</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Ayarlar %1$s dışarı aktarıldı</string>
@@ -209,7 +205,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="log_android_title">Android Günlüğünü Göster</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing Günlüğünü Göster</string>
-  <!--Title of the "share log" menu action-->
   <!--Title of the "share log" menu button-->
   <string name="share_title">Paylaş</string>
   <!--SyncthingService-->
@@ -224,6 +219,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing çalışıyor</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Yeniden Başlatılması Gerekli</string>

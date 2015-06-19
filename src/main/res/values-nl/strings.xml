@@ -115,9 +115,6 @@
   <string name="device_name_required">De apparaatnaam kan niet leeg zijn</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">Je hebt geen QR-scanner geïnstalleerd of je scanner wordt niet ondersteund. \
-Gelieve een scanner te installeren of de apparaat-ID handmatig in te voeren.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
@@ -164,7 +161,6 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="gui_address">GUI luister-adressen</string>
   <string name="gui_user">GUI-authenticatie gebruiker</string>
   <string name="gui_password">GUI-authenticatie wachtwoord</string>
-  <string name="gui_https_enabled">Gebruik HTTPS voor GUI</string>
   <string name="export_config">Configuratie exporteren</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Configuratie is geëxporteerd naar %1$s</string>
@@ -221,8 +217,6 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="log_android_title">Bekijk Android-log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Bekijk Syncthing-log</string>
-  <!--Title of the "share log" menu action-->
-  <string name="share_log_title">Log delen</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Delen</string>
   <!--SyncthingService-->
@@ -238,6 +232,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="syncthing_active">Syncthing draait</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Directorystructuur te diep. Controleer op cyclische symlinks</string>
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>

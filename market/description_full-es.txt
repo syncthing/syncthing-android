@@ -1,9 +1,9 @@
-Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.
+Syncthing reemplaza los servicios de sincronización propietarios y en la nube con algo abierto, de confianza y descentralizado. Tus datos son solo tuyos, y mereces elegir dónde se almacenarán, si se compartirán con algún tercero, y cómo serán transmitidos a través de Internet.
 
-Website: https://syncthing.net/
+Página web: https://syncthing.net/
 
-Source code: https://github.com/syncthing/syncthing-android
+Código fuente: https://github.com/syncthing/syncthing-android
 
-Forum: https://discourse.syncthing.net/
+Foros: https://discourse.syncthing.net/
 
-Issues: https://github.com/syncthing/syncthing-android/issues
+Problemas: https://github.com/syncthing/syncthing-android/issues

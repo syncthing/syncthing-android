@@ -105,9 +105,6 @@
   <string name="device_name_required">기기명을 공백으로 둘 수 없습니다.</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR 코드 스캔</string>
-  <!--Text for toast shown if the "scan QR code" intent fails with an ActivityNotFoundException-->
-  <string name="no_qr_scanner_installed">QR 코드 스캐너가 설치되어 있지 않거나, 설치된 스캐너가 지원되지 않는 것 같습니다. 
-스캐너를 설치하시거나, 기기 ID를 수동으로 입력하여 주십시오.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">웹 GUI</string>
@@ -150,7 +147,6 @@
   <string name="gui_address">접속 대기 주소</string>
   <string name="gui_user">GUI 인증 사용자</string>
   <string name="gui_password">GUI 인증 비밀번호</string>
-  <string name="gui_https_enabled">GUI에 HTTPS 사용</string>
   <string name="export_config">설정 내보내기</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
@@ -203,7 +199,6 @@
   <string name="log_android_title">Android 로그 보기</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing 로그 보기</string>
-  <!--Title of the "share log" menu action-->
   <!--Title of the "share log" menu button-->
   <string name="share_title">공유</string>
   <!--SyncthingService-->
@@ -218,6 +213,7 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing이 작동 중입니다</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <!--Toast shown if syncthing failed to create a config-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">재시작 필요</string>
