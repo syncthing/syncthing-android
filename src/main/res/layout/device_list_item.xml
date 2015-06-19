@@ -11,13 +11,16 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/status"
+        android:layout_toStartOf="@+id/status"
         android:lines="1"
         android:ellipsize="end" />
 
     <TextView
         android:id="@+id/status"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +38,7 @@
         android:id="@+id/download"
         android:layout_alignBaseline="@id/download_title"
         android:layout_toRightOf="@id/download_title"
+        android:layout_toEndOf="@id/download_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -51,6 +55,7 @@
         android:id="@+id/upload"
         android:layout_alignBaseline="@id/upload_title"
         android:layout_toRightOf="@id/upload_title"
+        android:layout_toEndOf="@id/upload_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />

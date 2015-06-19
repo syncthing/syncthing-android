@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Poslat ID přístroje přes</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Načítání...</string>
+  <string name="api_loading">Načítání…</string>
   <string name="usage_reporting_dialog_title">Povolit anonymní hlášení o používání?</string>
   <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
   <string name="yes">Ano</string>

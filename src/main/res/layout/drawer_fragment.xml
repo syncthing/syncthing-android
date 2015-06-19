@@ -43,6 +43,7 @@
             android:id="@+id/cpu_usage"
             android:layout_alignBottom="@id/cpu_usage_title"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -62,6 +63,7 @@
             android:id="@+id/ram_usage"
             android:layout_alignBottom="@id/ram_usage_title"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -81,6 +83,7 @@
             android:id="@+id/download"
             android:layout_alignBottom="@id/download_title"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -100,6 +103,7 @@
             android:id="@+id/upload"
             android:layout_alignBottom="@id/upload_title"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -119,6 +123,7 @@
             android:id="@+id/announce_server"
             android:layout_alignBottom="@id/announce_server_title"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

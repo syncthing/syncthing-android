@@ -6,12 +6,12 @@
     <item
         android:id="@+id/switch_logs"
         android:title="@string/log_android_title"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
       <item
         android:id="@+id/menu_share"
         android:title="@string/share_title"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

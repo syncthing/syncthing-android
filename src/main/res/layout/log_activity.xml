@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/log"
             android:gravity="top"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textIsSelectable="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
