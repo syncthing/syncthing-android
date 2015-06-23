@@ -11,7 +11,6 @@
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,7 +23,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         android:description="@string/app_description"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:installLocation="internalOnly">
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
