@@ -12,6 +12,8 @@ buildscript {
 }
 
 import java.util.regex.Pattern
+import groovy.json.*
+import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
@@ -34,7 +36,11 @@ dependencies {
 }
 
 preBuild {
-    dependsOn 'buildNative'
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        dependsOn 'downloadNative'
+    } else {
+        dependsOn 'buildNative'
+    }
 }
 
 project.archivesBaseName = 'syncthing'
@@ -90,7 +96,7 @@ android {
                 abiFilter "x86"
             }
         }
-        armeabi {
+        arm {
             versionCode Integer.parseInt("3" + defaultConfig.versionCode)
             ndk {
                 abiFilter "armeabi"
@@ -114,6 +120,35 @@ def getVersionCodeFromManifest() {
     return Integer.parseInt(matcher.group(1))
 }
 
+task downloadNative(type: Copy) {
+    def release = new JsonSlurper().parseText("https://api.github.com/repos/syncthing/syncthing/releases/latest".toURL().text)
+
+    // Download ARM
+    new File('bin').mkdirs()
+    copy {
+        ant.get(src: "https://github.com/syncthing/syncthing/releases/download/"+release.tag_name+"/syncthing-linux-arm-"+release.tag_name+".tar.gz", dest: "bin/syncthing-arm.tar.gz")
+        from tarTree(resources.gzip("bin/syncthing-arm.tar.gz"))
+        into "bin/"
+    }
+    copy {
+        from "bin/syncthing-linux-arm-"+release.tag_name
+        into "bin/"
+        rename('^syncthing$', 'syncthing-armeabi')
+    }
+
+    // Download X86
+    copy {
+        ant.get(src: "https://github.com/syncthing/syncthing/releases/download/"+release.tag_name+"/syncthing-linux-386-"+release.tag_name+".tar.gz", dest: "bin/syncthing-x86.tar.gz")
+        from tarTree(resources.gzip("bin/syncthing-x86.tar.gz"))
+        into "bin/"
+    }
+    copy {
+        from "bin/syncthing-linux-386-"+release.tag_name
+        into "bin/"
+        rename('^syncthing$', 'syncthing-x86')
+    }
+}
+
 task buildNative(type: Exec) {
     outputs.upToDateWhen { false }
     executable = './build-syncthing.sh'
@@ -129,6 +164,7 @@ task copyNative(type: Copy) {
     rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
 }
 buildNative.finalizedBy copyNative
+downloadNative.finalizedBy copyNative
 
 task cleanBin(type: Delete) {
     delete 'bin/'
