@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nutomic.syncthingandroid"
-    android:versionCode="70"
-    android:versionName="0.6.4" >
-
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="22" />
+    package="com.nutomic.syncthingandroid">
 
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
