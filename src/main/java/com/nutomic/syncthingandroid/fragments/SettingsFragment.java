@@ -221,11 +221,17 @@ public class SettingsFragment extends PreferenceFragment
         if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
             mSyncthingService.updateState();
         } else if (preference.equals(mAlwaysRunInBackground)) {
-            preference.setSummary(((Boolean) o)
+            boolean value = (Boolean) o;
+            preference.setSummary((value)
                     ? R.string.always_run_in_background_enabled
                     : R.string.always_run_in_background_disabled);
-            mSyncOnlyCharging.setEnabled((Boolean) o);
-            mSyncOnlyWifi.setEnabled((Boolean) o);
+            mSyncOnlyCharging.setEnabled(value);
+            mSyncOnlyWifi.setEnabled(value);
+            // Uncheck items when disabled, so it is clear they have no effect.
+            if (!value) {
+                mSyncOnlyCharging.setChecked(false);
+                mSyncOnlyWifi.setChecked(false);
+            }
         } else if (preference.equals(mUseRoot)) {
             if (!(Boolean) o)
                 new Thread(new ChownFilesRunnable()).start();
