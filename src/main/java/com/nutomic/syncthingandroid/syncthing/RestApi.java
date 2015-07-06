@@ -742,6 +742,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             case "scanning": return c.getString(R.string.state_scanning);
             case "cleaning": return c.getString(R.string.state_cleaning);
             case "syncing":  return c.getString(R.string.state_syncing);
+            case "error":    return c.getString(R.string.state_error);
             case "unknown":  // Fallthrough
             case "":         return c.getString(R.string.state_unknown);
         }
