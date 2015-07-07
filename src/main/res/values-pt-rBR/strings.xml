@@ -146,8 +146,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Sincronizar como usuário root</string>
   <string name="use_root_summary">Executar Syncthing como Superusuário</string>
-  <string name="persistent_notification_title">Notificação persistente</string>
-  <string name="persistent_notification_summary">Exibir notificação enquanto o Syncthing estiver rodando</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
@@ -237,6 +235,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="toast_folder_observer_stack_overflow">Árvore de diretórios profunda demais. Verifique links simbólicos cíclicos.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Ocorreu um erro tentando configurar o Syncthing. Por favor, verifique os logs.</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>

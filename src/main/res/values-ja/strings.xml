@@ -144,8 +144,6 @@
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">Root として同期</string>
   <string name="use_root_summary">スーパーユーザーとして同期を実行します</string>
-  <string name="persistent_notification_title">永続的な通知</string>
-  <string name="persistent_notification_summary">Syncthing の実行中、通知を表示します</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">同期オプション</string>
   <string name="device_name">デバイス名</string>
@@ -233,11 +231,15 @@
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの巡回を確認してください</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Syncthing 設定の作成に失敗しました。ログを確認してください。</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">今すぐ再起動</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">後で</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">ここをクリックして、今すぐ Syncthing を再起動してください</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -251,6 +253,13 @@
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">アイドル</string>
   <string name="state_scanning">スキャン中</string>

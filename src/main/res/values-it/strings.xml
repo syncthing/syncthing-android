@@ -144,8 +144,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Sincr. come Root</string>
   <string name="use_root_summary">Esegui Syncthing come Superutente</string>
-  <string name="persistent_notification_title">Notifica Persistente</string>
-  <string name="persistent_notification_summary">Mostra una Notifica mentre Syncthing è in esecuzione</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opzioni di Syncthing</string>
   <string name="device_name">Nome Dispositivo</string>
@@ -234,6 +232,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Albero delle cartelle troppo nidificato. Verificare la presenza di link simbolici ciclici</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Riavvio Necessario</string>

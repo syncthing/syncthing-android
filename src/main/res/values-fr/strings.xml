@@ -144,8 +144,13 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
   <string name="use_root_title">Sync en root</string>
   <string name="use_root_summary">Faire fonctionner syncthing en super-utilisateur</string>
-  <string name="persistent_notification_title">Notification persistante</string>
-  <string name="persistent_notification_summary">Afficher une notification quand Syncthing fonctionne</string>
+  <string name="notification_type_title">Notification</string>
+  <string name="notification_type_summary">Choisissez le type de notification</string>
+  <string-array name="notification_type_entries">
+    <item>Normal</item>
+    <item>Basse priorité</item>
+    <item>Aucune</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de machine</string>
@@ -234,6 +239,9 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Arborescence des répertoires trop profonde. Vérifiez les liens symboliques cycliques.</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Impossible de créer la configuration de Syncthing. SVP, vérifiez le journal (log).</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>
@@ -266,5 +274,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="state_scanning">Analyse en cours</string>
   <string name="state_cleaning">Effacement en cours</string>
   <string name="state_syncing">Synchro en cours</string>
+  <string name="state_error">Erreur</string>
   <string name="state_unknown">Inconnu</string>
 </resources>

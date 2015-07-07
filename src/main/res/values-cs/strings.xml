@@ -144,8 +144,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Synchronizovat jako root</string>
   <string name="use_root_summary">Spustit syncthing jako superuživatel</string>
-  <string name="persistent_notification_title">Trvalé upozornění</string>
-  <string name="persistent_notification_summary">Zobrazovat upozornění při běhu aplikace Syncthing</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
   <string name="device_name">Jméno přístroje</string>
@@ -233,11 +231,15 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Adresářová struktura je moc hluboká. Zkontrolujte zacyklené symlinky.</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Selhalo vytvoření konfigurace Syncthing. Zkontrolujte prosím logy.</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Restartovat hned</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Později</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Tapnout sem pro restart aplikace Syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -251,6 +253,13 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Aktuální</string>
   <string name="state_scanning">Skenování</string>

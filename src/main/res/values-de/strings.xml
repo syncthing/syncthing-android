@@ -6,13 +6,13 @@
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Geräte ID teilen</string>
+  <string name="share_device_id">Geräte-ID teilen</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Geräte ID senden an</string>
+  <string name="send_device_id_to">Geräte-ID senden an</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Lade...</string>
   <string name="usage_reporting_dialog_title">anonymen Nutzungsbericht erlauben?</string>
-  <string name="usage_reporting_dialog_description">Der anonyme Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die verwendeten Plattformen, Ordnergrößen und syncthing-Versionen zu erstellen. Wenn sich die angefragten Daten ändern, werden Sie erneut um Erlaubnis gefragt. Die fertigen Statistiken sind unter https://data.syncthing.net zu finden.</string>
+  <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, werden Sie erneut um Erlaubnis gefragt. Die zusammengeführten Statistiken sind unter https://data.syncthing.net zu finden.</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <!--FoldersFragment-->
@@ -46,14 +46,14 @@
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Prozessorauslastung</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">RAM Auslastung</string>
+  <string name="ram_usage">RAM-Auslastung</string>
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
   <!--Menu item to donate-->
   <string name="donate">Spenden</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
-  <string name="folder_id">Verzeichnis ID</string>
+  <string name="folder_id">Verzeichnis-ID</string>
   <!--Setting title-->
   <string name="directory">Verzeichnis</string>
   <!--Setting title-->
@@ -69,20 +69,20 @@
   <!--Title for FolderSettingsFragment in create mode-->
   <string name="create_folder">Verzeichnis erstellen</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Verzeichnis auswählen</string>
+  <string name="edit_folder">Verzeichnis bearbeiten</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Erstellen</string>
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">Die Verzeichnis ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
+  <string name="folder_id_invalid">Die Verzeichnis-ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
+  <string name="folder_path_required">Der Ordnerpfad darf nicht leer sein</string>
   <!--Toast shown when selecting 'devices' if no devices have been added-->
   <string name="no_devices">Bitte verbinde zuerst ein Gerät.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
-  <string name="device_id">Geräte ID</string>
+  <string name="device_id">Geräte-ID</string>
   <!--Setting title-->
   <string name="name">Name</string>
   <!--Setting title-->
@@ -110,7 +110,7 @@
   <!--Dialog shown when attempting to delete a device-->
   <string name="delete_device_confirm">Soll dieses Gerät wirklich gelöscht werden?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">Die Geräte ID darf nicht leer sein</string>
+  <string name="device_id_required">Die Geräte-ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a device with an empty name-->
   <string name="device_name_required">Der Gerätename darf nicht leer sein</string>
   <!--Content description for device ID qr code icon-->
@@ -140,24 +140,29 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Sync nur mit Ladegerät</string>
   <string name="sync_only_wifi">Sync nur im WLAN</string>
-  <string name="advanced_folder_picker">Erweiterte Ordnerauswahl benutzen</string>
+  <string name="advanced_folder_picker">Erweiterte Verzeichnisauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="use_root_title">Syncronisiere mit Root-Rechten</string>
   <string name="use_root_summary">Syncthing mit Superuser Rechten ausführen</string>
-  <string name="persistent_notification_title">permanente Benachrichtigung</string>
-  <string name="persistent_notification_summary">Zeige Benachrichtigungen während syncthing läuft</string>
+  <string name="notification_type_title">Permanente Benachrichtigung</string>
+  <string name="notification_type_summary">Wähle die Art der Benachrichtigung</string>
+  <string-array name="notification_type_entries">
+    <item>Normale Priorität</item>
+    <item>Geringe Priorität</item>
+    <item>Keine Priorität</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing Optionen</string>
+  <string name="syncthing_options">Syncthing-Optionen</string>
   <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
-  <string name="max_recv_kbps">Eingehendes Datenratelimit (KiB/s)</string>
-  <string name="max_send_kbps">Ausgehendes Datenratelimit (KiB/s)</string>
+  <string name="max_recv_kbps">Eingehende Datenrate Limite (KiB/s)</string>
+  <string name="max_send_kbps">Ausgehende Datenrate Limite (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
   <string name="upnp_enabled">UPnP aktivieren</string>
   <string name="global_announce_server">Globaler Indexserver</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
-  <string name="syncthing_gui">Syncthing Weboberfläche</string>
+  <string name="syncthing_gui">Syncthing-Weboberfläche</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
   <string name="gui_user">Nutzername für Weboberfläche</string>
   <string name="gui_password">Passwort für Weboberfläche</string>
@@ -195,20 +200,20 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="report_issue_summary">Syncthing-Android Fehlersammlung öffnen</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Syncthing Version</string>
+  <string name="syncthing_version_title">Syncthing-Version</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Syncthing-Android Version</string>
+  <string name="app_version_title">Syncthing-Android-Version</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Verzeichnisauswahl</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Warnung: Ihre Andoid-Version erlaubt kein synchronisieren auf externe Datenträger</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Ordner ist leer</string>
+  <string name="directory_empty">Verzeichnis ist leer</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Neuen Ordner erstellen</string>
+  <string name="create_fs_folder">Neues Verzeichnis erstellen</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Ordner auswählen</string>
+  <string name="select_folder">Verzeichnis auswählen</string>
   <string name="create_folder_failed">Verzeichniserstellung fehlgeschlagen</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
@@ -233,6 +238,9 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Erstellen einer Syncthing Konfiguration gescheitert. Bitte die Logs prüfen.</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-Bilder</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Neustart erforderlich</string>
@@ -243,7 +251,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Klicke hier um Syncthing neu zu starten</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">Geräte ID in die Zwischenablage kopiert</string>
+  <string name="device_id_copied_to_clipboard">Geräte-ID in die Zwischenablage kopiert</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -265,5 +273,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="state_scanning">scanning</string>
   <string name="state_cleaning">Aufräumen</string>
   <string name="state_syncing">Synchronisiere</string>
+  <string name="state_error">Fehler</string>
   <string name="state_unknown">Unbekannt</string>
 </resources>

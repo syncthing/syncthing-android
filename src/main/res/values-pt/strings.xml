@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Uma aplicação de sincronização de ficheiros aberta, fiável e descentralizada.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
@@ -9,6 +10,11 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar ID do dispositivo para</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Carregando...</string>
+  <string name="usage_reporting_dialog_title">Permitir relatórios anónimos de utilização?</string>
+  <string name="usage_reporting_dialog_description">O relatório de utilização cifrado é enviado diariamente. É usado para rastrear plataformas comuns, tamanhos de pastas e versões da aplicação. Se o conjunto de dados do relatório for alterado, este diálogo será apresentado novamente.\n\nAs estatísticas agregadas estão disponíveis publicamente em </string>
+  <string name="yes">Sim</string>
+  <string name="no">Não</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -86,6 +92,11 @@
   <!--Setting title-->
   <string name="compression">Compressão</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Nunca</item>
+    <item>Metadados</item>
+    <item>Sempre</item>
+  </string-array>
   <!--Setting title-->
   <string name="introducer">Apresentador</string>
   <!--ActionBar item-->
@@ -110,8 +121,13 @@
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Aguardando a interface web</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Gerando chaves seguras. Isto pode demorar uns minutos.</string>
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Bem vindo(a) ao Syncthing para Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing é uma aplicação em código aberto de sincronização de ficheiros.\n\n\
+Para partilhar dados com outros dispositivos, tem que adicionar o ID único de cada dispositivo à lista de dispositivos. Depois pode seleccionar que pastas pretende partilhar com que dispositivos.\n\n
+Relate quaisquer problemas que encontre via Github, por favor.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
@@ -126,6 +142,8 @@
   <string name="sync_only_wifi">Sincronizar apenas quando está em wifi</string>
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>
+  <string name="use_root_title">Sincronizar como root</string>
+  <string name="use_root_summary">Correr o Syncthing como superutilizador</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
@@ -152,14 +170,24 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções da despistagem de erros</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Apenas é permitido usar a-z e \';\' nas opções do STTRACE</string>
   <!--Toast after entering invalid username-->
+  <string name="toast_invalid_username">Os caracteres : e \' não são permitidos no nome de utilizador</string>
   <!--Toast after entering invalid password-->
+  <string name="toast_invalid_password">Os caracteres : e \' não são permitidos na senha</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Esta acção só deve ser executada com base numa recomendação da nossa equipa de suporte.
+\nTem a certeza que quer limpar o índice da base de dados do Syncthing?
+    </string>
   <!--Syncthing was reset-->
+  <string name="streset_done">Base de dados do Syncthing reiniciada com sucesso.</string>
   <string name="category_about">Sobre</string>
   <!--Settings item that opens the log activity-->
+  <string name="open_log">Abrir registo</string>
   <!--Summary for the log activity-->
+  <string name="open_log_summary">Abrir a janela de registo do Syncthing e do Android</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar incidente</string>
   <!--Summary for the issue tracker settings item-->
@@ -183,9 +211,13 @@
   <string name="create_folder_failed">Falhou a criação da pasta</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
+  <string name="log_title">Registo</string>
   <!--Title of the "log android" menu button-->
+  <string name="log_android_title">Ver registo do Android</string>
   <!--Title of the "log Syncthing" menu button-->
+  <string name="log_syncthing_title">Ver o registo do Syncthing</string>
   <!--Title of the "share log" menu button-->
+  <string name="share_title">Partilhar</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desactivado</string>
@@ -198,12 +230,17 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está a correr</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Árvore de pastas demasiado profunda. Verifique se existem ligações simbólicas cíclicas</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Falhou a criação duma configuração para o Syncthing. Verifique os registos, por favor.</string>
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Reiniciar agora</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Mais tarde</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Clique aqui para reiniciar o syncthing agora</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -217,9 +254,17 @@
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Em espera</string>
   <string name="state_scanning">Verificando</string>
   <string name="state_cleaning">Limpando</string>
   <string name="state_syncing">Sincronizando</string>
+  <string name="state_unknown">Desconhecido</string>
 </resources>

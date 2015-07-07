@@ -121,6 +121,7 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <!--Toast shown if folder observer fails to traverse a folder-->
   <!--Toast shown if syncthing failed to create a config-->
+  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <!--Text for positive button in restart dialog-->
