@@ -237,9 +237,15 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_root_summary">Run Syncthing as Superuser</string>
 
-    <string name="persistent_notification_title">Persistent Notification</string>
+    <string name="notification_type_title">Notification</string>
 
-    <string name="persistent_notification_summary">Show Notification while Syncthing is running</string>
+    <string name="notification_type_summary">Choose the notification type</string>
+
+    <string-array name="notification_type_entries">
+        <item>Normal</item>
+        <item>Low Priority</item>
+        <item>None</item>
+    </string-array>
 
     <string name="category_syncthing">Syncthing</string>
 

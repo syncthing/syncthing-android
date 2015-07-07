@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources translatable="false">
+
     <string-array name="compress_values">
         <item>never</item>
         <item>metadata</item>
         <item>always</item>
     </string-array>
+
+    <string-array name="notification_type_entry_values">
+        <item>normal</item>
+        <item>low_priority</item>
+        <item>none</item>
+    </string-array>
+
 </resources>

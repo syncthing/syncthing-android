@@ -92,7 +92,7 @@ public class SyncthingService extends Service implements
     public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
     public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
     public static final String PREF_USE_ROOT                 = "use_root";
-    private static final String PREF_PERSISTENT_NOTIFICATION  = "persistent_notification";
+    private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
 
     private static final int NOTIFICATION_ACTIVE = 1;
 
@@ -242,22 +242,24 @@ public class SyncthingService extends Service implements
 
     /**
      * Shows or hides the persistent notification based on running state and
-     * {@link #PREF_PERSISTENT_NOTIFICATION}.
+     * {@link #PREF_NOTIFICATION_TYPE}.
      */
     private void updateNotification() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String type = sp.getString(PREF_NOTIFICATION_TYPE, "low_priority");
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
-                sp.getBoolean(PREF_PERSISTENT_NOTIFICATION, true)) {
-            Notification n = new NotificationCompat.Builder(this)
+                !type.equals("none")) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
-                    .setPriority(NotificationCompat.PRIORITY_MIN)
                     .setContentIntent(PendingIntent.getActivity(this, 0,
-                            new Intent(this, MainActivity.class), 0))
-                    .build();
-            nm.notify(NOTIFICATION_ACTIVE, n);
+                            new Intent(this, MainActivity.class), 0));
+            if (type.equals("low_priority"))
+                builder.setPriority(NotificationCompat.PRIORITY_MIN);
+
+            nm.notify(NOTIFICATION_ACTIVE, builder.build());
         } else {
             nm.cancel(NOTIFICATION_ACTIVE);
         }
@@ -265,7 +267,7 @@ public class SyncthingService extends Service implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PREF_PERSISTENT_NOTIFICATION))
+        if (key.equals(PREF_NOTIFICATION_TYPE))
             updateNotification();
     }
 
