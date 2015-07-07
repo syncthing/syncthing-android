@@ -59,9 +59,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />
         </activity>
-
-        <service android:name=".syncthing.SyncthingService" />
-
         <activity
             android:name=".activities.FolderPickerActivity"
             android:label="@string/folder_picker_title">
@@ -69,6 +66,10 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
+        <activity android:name=".activities.RestartActivity"
+            android:theme="@style/Translucent"/>
+
+        <service android:name=".syncthing.SyncthingService" />
 
         <receiver android:name=".syncthing.NetworkReceiver">
             <intent-filter>

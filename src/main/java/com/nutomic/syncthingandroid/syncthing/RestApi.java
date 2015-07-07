@@ -3,21 +3,18 @@ package com.nutomic.syncthingandroid.syncthing;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.RestartActivity;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import org.json.JSONArray;
@@ -138,8 +135,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String state;
         public String invalid;
     }
-
-    private static final int NOTIFICATION_RESTART = 2;
 
     private final Context mContext;
 
@@ -276,7 +271,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
         NotificationManager nm = (NotificationManager)
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancel(NOTIFICATION_RESTART);
+        nm.cancel(RestartActivity.NOTIFICATION_RESTART);
         mRestartPostponed = false;
     }
 
@@ -350,7 +345,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param activity The calling activity.
      * @param updateConfig If true, {@link #mConfig} will be sent to `/rest/system/config`.
      */
-    @TargetApi(11)
     public void requireRestart(Activity activity, boolean updateConfig) {
         if (updateConfig) {
             new PostTask(mHttpsCertPath)
@@ -361,36 +355,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         if (mRestartPostponed)
             return;
 
-        final Intent intent = new Intent(mContext, SyncthingService.class)
-                .setAction(SyncthingService.ACTION_RESTART);
-
-        new AlertDialog.Builder(activity)
-                .setMessage(R.string.restart_title)
-                .setPositiveButton(R.string.restart_now, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mContext.startService(intent);
-                    }
-                })
-                .setNegativeButton(R.string.restart_later, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        createRestartNotification();
-                    }
-                })
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        createRestartNotification();
-                    }
-                })
-                .show();
+        activity.startActivity(new Intent(mContext, RestartActivity.class));
     }
 
     /**
      * Reset Syncthing's indexes when confirmed by a dialog.
+     *
+     * TODO: why is this here and not in fragment?
      */
-    @TargetApi(11)
     public void resetSyncthing(final Activity activity) {
         final Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESET);
@@ -410,27 +382,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     public void onClick(DialogInterface dialogInterface, int i) { }
                 })
                 .show();
-    }
-
-    /**
-     * Creates a notification prompting the user to restart the app.
-     */
-    private void createRestartNotification() {
-        Intent intent = new Intent(mContext, SyncthingService.class)
-                .setAction(SyncthingService.ACTION_RESTART);
-        PendingIntent pi = PendingIntent.getService(mContext, 0, intent, 0);
-
-        Notification n = new NotificationCompat.Builder(mContext)
-                .setContentTitle(mContext.getString(R.string.restart_title))
-                .setContentText(mContext.getString(R.string.restart_notification_text))
-                .setSmallIcon(R.drawable.ic_stat_notify)
-                .setContentIntent(pi)
-                .build();
-        n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
-        NotificationManager nm = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(NOTIFICATION_RESTART, n);
-        mRestartPostponed = true;
     }
 
     /**
@@ -1075,6 +1026,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_REPORT, mApiKey);
+    }
+
+    /**
+     * Sets {@link #mRestartPostponed} to true.
+     */
+    public void setRestartPostponed() {
+        mRestartPostponed = true;
     }
 
 }

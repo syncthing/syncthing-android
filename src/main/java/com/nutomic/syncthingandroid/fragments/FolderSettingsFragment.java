@@ -215,6 +215,7 @@ public class FolderSettingsFragment extends PreferenceFragment
                     return true;
                 }
                 mSyncthingService.getApi().editFolder(mFolder, true, getActivity());
+                getActivity().finish();
                 return true;
             case R.id.delete:
                 new AlertDialog.Builder(getActivity())

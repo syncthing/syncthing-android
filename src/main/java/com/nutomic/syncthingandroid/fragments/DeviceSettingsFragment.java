@@ -202,6 +202,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                     return true;
                 }
                 mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
+                getActivity().finish();
                 return true;
             case R.id.share_device_id:
                 RestApi.shareDeviceId(getActivity(), mDevice.deviceID);
