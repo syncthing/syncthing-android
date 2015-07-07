@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,11 +50,14 @@ public class ConfigXml {
 
     private static final int OPEN_CONFIG_MAX_TRIES = 10;
 
+    private final Context mContext;
+
     private File mConfigFile;
 
     private Document mConfig;
 
-    public ConfigXml(final Context context) throws OpenConfigException {
+    public ConfigXml(Context context) throws OpenConfigException {
+        mContext = context;
         mConfigFile = getConfigFile(context);
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
@@ -213,7 +217,11 @@ public class ConfigXml {
     public void changeDefaultFolder() {
         Element folder = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("folder").item(0);
-        folder.setAttribute("id", "camera");
+        String model = Build.MODEL
+                .replace(" ", "_")
+                .toLowerCase()
+                .replaceAll("[^a-z0-9_-]", "");
+        folder.setAttribute("id", mContext.getString(R.string.default_folder_id, model));
         folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("ro", "true");
