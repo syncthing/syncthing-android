@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,13 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
 
     private Map<String, RestApi.Connection> mConnections =
             new HashMap<>();
+
+    private final static Comparator<RestApi.Device> COMPARATOR = new Comparator<RestApi.Device>() {
+        @Override
+        public int compare(RestApi.Device lhs, RestApi.Device rhs) {
+            return lhs.name.compareTo(rhs.name);
+        }
+    };
 
     public DevicesAdapter(Context context) {
         super(context, R.layout.device_list_item);
@@ -76,6 +84,15 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         for (RestApi.Device n : devices) {
             add(n);
         }
+    }
+
+    /**
+     * Sorts adapter after insert.
+     */
+    @Override
+    public void add(RestApi.Device device) {
+        super.add(device);
+        sort(COMPARATOR);
     }
 
     /**

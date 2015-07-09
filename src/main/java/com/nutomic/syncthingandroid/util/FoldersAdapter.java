@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,13 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         implements RestApi.OnReceiveModelListener {
 
     private HashMap<String, RestApi.Model> mModels = new HashMap<>();
+
+    private final static Comparator<RestApi.Folder> COMPARATOR = new Comparator<RestApi.Folder>() {
+        @Override
+        public int compare(RestApi.Folder lhs, RestApi.Folder rhs) {
+            return lhs.id.compareTo(rhs.id);
+        }
+    };
 
     public FoldersAdapter(Context context) {
         super(context, R.layout.folder_list_item);
@@ -76,6 +84,15 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         for (RestApi.Folder r : devices) {
             add(r);
         }
+    }
+
+    /**
+     * Sorts adapter after insert.
+     */
+    @Override
+    public void add(RestApi.Folder object) {
+        super.add(object);
+        sort(COMPARATOR);
     }
 
     /**
