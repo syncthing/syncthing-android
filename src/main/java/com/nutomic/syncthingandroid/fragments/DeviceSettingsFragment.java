@@ -105,7 +105,7 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
                 mDevice.name = "";
                 mDevice.deviceID = "";
                 mDevice.addresses = "dynamic";
-                mDevice.compression = "always";
+                mDevice.compression = "metadata";
                 mDevice.introducer = false;
                 ((EditTextPreference) mDeviceId).setText(mDevice.deviceID);
             }
