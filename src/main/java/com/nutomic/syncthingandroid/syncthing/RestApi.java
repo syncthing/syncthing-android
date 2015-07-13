@@ -509,6 +509,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Converts a number of bytes to a human readable file size (eg 3.5 GiB).
+     *
+     * Based on http://stackoverflow.com/a/5599842
      */
     public static String readableFileSize(Context context, long bytes) {
         final String[] units = context.getResources().getStringArray(R.array.file_size_units);
@@ -521,6 +523,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     /**
      * Converts a number of bytes to a human readable transfer rate in bytes per second
      * (eg 100 KiB/s).
+     *
+     * Based on http://stackoverflow.com/a/5599842
      */
     public static String readableTransferRate(Context context, long bits) {
         final String[] units = context.getResources().getStringArray(R.array.transfer_rate_units);
