@@ -9,6 +9,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -173,6 +175,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * for calculating device percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
      */
     private HashMap<String, Model> mCachedModelInfo = new HashMap<>();
+
+    /**
+     * Stores a hash map to resolve folders to paths for events.
+     */
+    private final Map<String, String> mCacheFolderPathLookup = new HashMap<String, String>();
 
     public RestApi(Context context, String url, String apiKey, String guiUser, String guiPassword,
                    OnApiAvailableListener listener) {
@@ -644,7 +651,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 : 100;
     }
 
-
     /**
      * Listener for {@link #getModel}.
      */
@@ -652,6 +658,25 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public void onReceiveModel(String folderId, Model model);
     }
 
+    /**
+     * Listener for {@link #getEvents}.
+     */
+    public interface OnReceiveEventListener {
+        /**
+         * Called for each event.
+         * @param id ID of the event. Monotonously increasing.
+         * @param eventType Name of the event. (See Syncthing documentation)
+         * @param eventData Bundle containing the data fields of the event as data elements.
+         */
+        void onEvent(final long id, final String eventType, final Bundle eventData);
+
+        /**
+         * Called after all available events have been processed.
+         * @param lastId The id of the last event processed. Should be used as a starting point for
+         *               the next round of event processing.
+         */
+        void onDone(long lastId);
+    }
     /**
      * Returns status information about the folder with the given id.
      */
@@ -684,6 +709,105 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_MODEL, mApiKey, "folder", folderId);
+    }
+
+    /**
+     * Refreshes the lookup table to convert folder names to paths for events.
+     */
+    private String getPathForFolder(String folderName) {
+        synchronized(mCacheFolderPathLookup) {
+            if (!mCacheFolderPathLookup.containsKey(folderName)) {
+                mCacheFolderPathLookup.clear();
+                for (Folder folder : getFolders()) {
+                    mCacheFolderPathLookup.put(folder.id, folder.path);
+                }
+            }
+
+            return mCacheFolderPathLookup.get(folderName);
+        }
+    }
+
+    private void clearFolderCache() {
+        synchronized(mCacheFolderPathLookup) {
+            mCacheFolderPathLookup.clear();
+        }
+    }
+
+    /**
+     * Retrieves the events that have accumulated since the given event id.
+     * The OnReceiveEventListeners onEvent method is called for each event.
+     */
+    public final void getEvents(final long sinceId, final long limit, final OnReceiveEventListener listener) {
+
+        GetTask eventGetTask = new GetTask(mHttpsCertPath) {
+            @Override
+            protected void onPostExecute(String s) {
+                if (s == null)
+                    return;
+
+                try {
+                    JSONArray jsonEvents = new JSONArray(s);
+
+                    long lastId = 0;
+
+                    for (int i = 0; i < jsonEvents.length(); i++) {
+
+                        final JSONObject json = jsonEvents.getJSONObject(i);
+                        final String eventType = json.getString("type").toLowerCase();
+                        final long id = json.getLong("id");
+
+                        Bundle dataBundle = null;
+
+                        if (lastId < id) lastId = id;
+
+                        switch (eventType) {
+                            // This special shortcut can be used if data only contains strings.
+                            // It just copies everything into a bundle.
+                            case "itemfinished":
+                            case "foldercompletion":
+                            case "deviceconnected":
+                            case "devicediscovered":
+                            case "statechanged":
+                                dataBundle = new Bundle();
+                                JSONObject data = json.getJSONObject("data");
+
+                                for (Iterator<String> keyIterator = data.keys(); keyIterator.hasNext();) {
+                                    String key = keyIterator.next();
+                                    dataBundle.putString(key, data.getString(key));
+                                }
+
+                                // If the event contains a folder keyword but no path synthesise
+                                // a path keyword to ease processing of the event.
+                                String folder = data.optString("folder", null);
+                                if ((folder != null) && (data.optString("path", null) == null)) {
+                                    String folderPath = getPathForFolder(folder);
+                                    if (folderPath != null) {
+                                        dataBundle.putString("path", folderPath);
+                                    }
+                                }
+
+                                break;
+
+                            // Ignored events.
+                            case "ping":
+                                break;
+
+                            default:
+                                Log.d(TAG, "Unhandled event " + json.getString("type"));
+                        }
+
+                        if (dataBundle != null) listener.onEvent(id, eventType, dataBundle);
+                    }
+
+                    listener.onDone(lastId);
+                }
+                catch (JSONException e) {
+                    Log.w(TAG, "Failed to read events", e);
+                }
+            }
+        };
+
+        eventGetTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mUrl, GetTask.URI_EVENTS, mApiKey, "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
     }
 
     /**
@@ -828,6 +952,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             Log.w(TAG, "Failed to edit folder " + folder.id + " at " + folder.path, e);
             return false;
         }
+
+        clearFolderCache();
         return true;
     }
 
@@ -851,6 +977,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             Log.w(TAG, "Failed to edit folder", e);
             return false;
         }
+
+        clearFolderCache();
         return true;
     }
 
