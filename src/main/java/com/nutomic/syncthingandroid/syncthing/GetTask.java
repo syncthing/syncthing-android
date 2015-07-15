@@ -55,14 +55,15 @@ public class GetTask extends AsyncTask<String, Void, String> {
         String fullUri = params[0] + params[1];
         Log.v(TAG, "Calling Rest API at " + fullUri);
 
+        if (params.length == 5) {
+            LinkedList<NameValuePair> urlParams = new LinkedList<>();
+            urlParams.add(new BasicNameValuePair(params[3], params[4]));
+            fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
+        }
+
         // Retry at most 10 times before failing
         for (int i = 0; i < 10; i++) {
             HttpClient httpclient = Https.createHttpsClient(mHttpsCertPath);
-            if (params.length == 5) {
-                LinkedList<NameValuePair> urlParams = new LinkedList<>();
-                urlParams.add(new BasicNameValuePair(params[3], params[4]));
-                fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
-            }
             HttpGet get = new HttpGet(fullUri);
             get.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[2]));
 
