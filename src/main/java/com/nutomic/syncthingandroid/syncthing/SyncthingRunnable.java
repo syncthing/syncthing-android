@@ -37,8 +37,6 @@ public class SyncthingRunnable implements Runnable {
 
     private final Context mContext;
 
-    private boolean mGenerate;
-
     private String mSyncthingBinary;
 
     private String[] mCommand;
