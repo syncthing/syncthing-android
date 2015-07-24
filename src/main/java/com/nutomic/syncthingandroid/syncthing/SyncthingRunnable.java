@@ -87,7 +87,7 @@ public class SyncthingRunnable implements Runnable {
         int ret = 1;
         // Make sure Syncthing is executable
         try {
-            ProcessBuilder pb = new ProcessBuilder("chmod", "+x", mSyncthingBinary);
+            ProcessBuilder pb = new ProcessBuilder("chmod", "500", mSyncthingBinary);
             Process p = pb.start();
             p.waitFor();
         } catch (IOException|InterruptedException e) {
