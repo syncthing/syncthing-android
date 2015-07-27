@@ -55,7 +55,7 @@ public class FolderObserver extends FileObserver {
      */
     private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path) {
         super(folder.path + "/" + path,
-                ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MODIFY | MOVED_FROM |
+                ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MOVED_FROM |
                 MOVED_TO | MOVE_SELF);
         mListener = listener;
         mFolder = folder;
