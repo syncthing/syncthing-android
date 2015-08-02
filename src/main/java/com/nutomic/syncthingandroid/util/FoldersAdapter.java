@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static com.nutomic.syncthingandroid.syncthing.RestApi.readableFileSize;
+
 /**
  * Generates item views for folder items.
  */
@@ -22,6 +27,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         implements RestApi.OnReceiveModelListener {
 
     private HashMap<String, RestApi.Model> mModels = new HashMap<>();
+    private LayoutInflater inflater;
 
     private final static Comparator<RestApi.Folder> COMPARATOR = new Comparator<RestApi.Folder>() {
         @Override
@@ -32,46 +38,53 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
 
     public FoldersAdapter(Context context) {
         super(context, R.layout.item_folder_list);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_folder_list, parent, false);
-        }
 
-        TextView id = (TextView) convertView.findViewById(R.id.id);
-        TextView state = (TextView) convertView.findViewById(R.id.state);
-        TextView directory = (TextView) convertView.findViewById(R.id.directory);
-        TextView items = (TextView) convertView.findViewById(R.id.items);
-        TextView size = (TextView) convertView.findViewById(R.id.size);
-        TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
+            viewHolder = new ViewHolder();
+            viewHolder.id = (TextView) convertView.findViewById(R.id.id);
+            viewHolder.state = (TextView) convertView.findViewById(R.id.state);
+            viewHolder.directory = (TextView) convertView.findViewById(R.id.directory);
+            viewHolder.items = (TextView) convertView.findViewById(R.id.items);
+            viewHolder.size = (TextView) convertView.findViewById(R.id.size);
+            viewHolder.invalid = (TextView) convertView.findViewById(R.id.invalid);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
         RestApi.Folder folder = getItem(position);
         RestApi.Model model = mModels.get(folder.id);
-        id.setText(folder.id);
-        state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        directory.setText((folder.path));
+        viewHolder.id.setText(folder.id);
+        viewHolder.state.setTextColor(getContext().getResources().getColor(R.color.text_green));
+        viewHolder.directory.setText((folder.path));
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
-            state.setText(getContext().getString(R.string.folder_progress_format,
+            viewHolder.state.setText(getContext().getString(R.string.folder_progress_format,
                     RestApi.getLocalizedState(getContext(), model.state),
                     percentage));
-            items.setText(getContext()
+            viewHolder.items.setVisibility(VISIBLE);
+            viewHolder.items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
-            size.setText(RestApi.readableFileSize(getContext(), model.inSyncBytes) + " / " +
-                    RestApi.readableFileSize(getContext(), model.globalBytes));
-            if (folder.invalid.equals("")) {
-                invalid.setText(model.invalid);
-                invalid.setVisibility((model.invalid.equals("")) ? View.GONE : View.VISIBLE);
+            viewHolder.size.setVisibility(VISIBLE);
+            viewHolder.size.setText(readableFileSize(getContext(), model.inSyncBytes) + " / " +
+                    readableFileSize(getContext(), model.globalBytes));
+            if (TextUtils.isEmpty(folder.invalid)) {
+                setTextOrHide(viewHolder.invalid, model.invalid);
             }
         } else {
-            invalid.setText(folder.invalid);
-            invalid.setVisibility((folder.invalid.equals("")) ? View.GONE : View.VISIBLE);
+            viewHolder.items.setVisibility(GONE);
+            viewHolder.size.setVisibility(GONE);
+            setTextOrHide(viewHolder.invalid, folder.invalid);
         }
 
         return convertView;
@@ -113,4 +126,22 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         notifyDataSetChanged();
     }
 
+    private void setTextOrHide(TextView view, String text) {
+        boolean isEmpty = TextUtils.isEmpty(text);
+        if (isEmpty) {
+            view.setVisibility(GONE);
+        } else {
+            view.setText(text);
+            view.setVisibility(VISIBLE);
+        }
+    }
+
+    private static class ViewHolder {
+        TextView id;
+        TextView state;
+        TextView directory;
+        TextView items;
+        TextView size;
+        TextView invalid;
+    }
 }
