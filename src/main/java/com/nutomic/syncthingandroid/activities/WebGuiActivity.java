@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
-import android.graphics.Bitmap;
 import android.net.http.SslCertificate;
 import android.net.http.SslError;
 import android.os.Build;
@@ -17,7 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.FileInputStream;
@@ -32,8 +30,6 @@ import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
@@ -108,7 +104,7 @@ public class WebGuiActivity extends SyncthingActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.web_gui_activity);
+        setContentView(R.layout.activity_web_gui);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLoadingView = findViewById(R.id.loading);

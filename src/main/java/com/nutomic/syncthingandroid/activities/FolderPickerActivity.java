@@ -63,7 +63,7 @@ public class FolderPickerActivity extends SyncthingActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setContentView(R.layout.folder_picker_activity);
+        setContentView(R.layout.activity_folder_picker);
         mListView = (ListView) findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);
         mListView.setEmptyView(findViewById(android.R.id.empty));

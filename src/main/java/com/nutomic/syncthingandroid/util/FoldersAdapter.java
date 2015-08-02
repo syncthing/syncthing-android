@@ -31,7 +31,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
     };
 
     public FoldersAdapter(Context context) {
-        super(context, R.layout.folder_list_item);
+        super(context, R.layout.item_folder_list);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.folder_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_folder_list, parent, false);
         }
 
         TextView id = (TextView) convertView.findViewById(R.id.id);

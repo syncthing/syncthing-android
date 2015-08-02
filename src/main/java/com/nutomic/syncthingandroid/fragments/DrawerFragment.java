@@ -68,7 +68,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.menu_item, parent, false);
+                convertView = inflater.inflate(R.layout.item_menu, parent, false);
             }
 
             ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
@@ -114,7 +114,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view       = inflater.inflate(R.layout.drawer_fragment, container, false);
+        View view       = inflater.inflate(R.layout.fragment_drawer, container, false);
         mDeviceId       = (TextView) view.findViewById(R.id.device_id);
         mCpuUsage       = (TextView) view.findViewById(R.id.cpu_usage);
         mRamUsage       = (TextView) view.findViewById(R.id.ram_usage);

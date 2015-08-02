@@ -82,7 +82,7 @@ public class MainActivity extends SyncthingActivity
                 mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
             } else if (mLoadingDialog == null) {
                 LayoutInflater inflater = getLayoutInflater();
-                View dialogLayout = inflater.inflate(R.layout.loading_dialog, null);
+                View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
                 TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
                 loadingText.setText((getService().isFirstStart())
                         ? R.string.web_gui_creating_key
@@ -194,7 +194,7 @@ public class MainActivity extends SyncthingActivity
         final ActionBar actionBar = getSupportActionBar();
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -375,7 +375,7 @@ public class MainActivity extends SyncthingActivity
             @Override
             public void onReceiveUsageReport(String report) {
                 View v = LayoutInflater.from(MainActivity.this)
-                        .inflate(R.layout.usage_reporting_dialog, null);
+                        .inflate(R.layout.dialog_usage_reporting, null);
                 TextView tv = (TextView) v.findViewById(R.id.example);
                 tv.setText(report);
                 new AlertDialog.Builder(MainActivity.this)
