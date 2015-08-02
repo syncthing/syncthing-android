@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Widget styles -->
+    <eat-comment />
+
+    <style name="Widget.Syncthing.ListView" parent="Widget.AppCompat.ListView">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@android:color/transparent</item>
+    </style>
+
+    <!-- Text appearances -->
+    <eat-comment />
+
+    <style name="TextAppearance.Syncthing.ListItemPrimary" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Syncthing.ListItemSecondary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.Syncthing.ListItemSmall" parent="TextAppearance.AppCompat.Caption" />
+</resources>
