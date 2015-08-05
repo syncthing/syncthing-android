@@ -27,7 +27,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         implements RestApi.OnReceiveModelListener {
 
     private HashMap<String, RestApi.Model> mModels = new HashMap<>();
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
 
     private final static Comparator<RestApi.Folder> COMPARATOR = new Comparator<RestApi.Folder>() {
         @Override
@@ -38,14 +38,14 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
 
     public FoldersAdapter(Context context) {
         super(context, R.layout.item_folder_list);
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_folder_list, parent, false);
+            convertView = mInflater.inflate(R.layout.item_folder_list, parent, false);
 
             viewHolder = new ViewHolder();
             viewHolder.id = (TextView) convertView.findViewById(R.id.id);
