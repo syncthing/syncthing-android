@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 import android.support.v4.view.MenuItemCompat;
 import android.widget.ScrollView;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.R;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -42,7 +40,7 @@ public class LogActivity extends SyncthingActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.log_activity);
+        setContentView(R.layout.activity_log);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState != null) {

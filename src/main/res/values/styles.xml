@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:textColorSecondary">@color/secondary_text</item>
+    <!-- Widget styles -->
+    <eat-comment />
+
+    <style name="Widget.Syncthing.ListView" parent="Widget.AppCompat.ListView">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@android:color/transparent</item>
     </style>
 
-    <style name="AppTheme" parent="BaseTheme"/>
+    <!-- Text appearances -->
+    <eat-comment />
 
-    <style name="Translucent" parent="AppTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    <style name="TextAppearance.Syncthing.ListItemPrimary" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
+    <style name="TextAppearance.Syncthing.ListItemSecondary" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.Syncthing.ListItemSmall" parent="TextAppearance.AppCompat.Caption" />
 </resources>

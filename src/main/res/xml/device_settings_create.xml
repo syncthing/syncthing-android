@@ -5,7 +5,7 @@
         android:persistent="false"
         android:key="device_id"
         android:title="@string/device_id"
-        android:widgetLayout="@layout/scan_qr_code_widget" />
+        android:widgetLayout="@layout/pref_widget_scan_qr_code" />
 
     <EditTextPreference
         android:persistent="false"

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.FoldersAdapter;
 
@@ -44,6 +45,15 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setEmptyText(getString(R.string.folder_list_empty));
+        getListView().setOnItemClickListener(this);
+        getListView().setOnItemLongClickListener(this);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -52,16 +62,13 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
     }
 
     private void initAdapter() {
-        MainActivity activity = (MainActivity) getActivity();
+        SyncthingActivity activity = (SyncthingActivity) getActivity();
         if (activity == null || activity.getApi() == null)
             return;
 
         mAdapter = new FoldersAdapter(activity);
         mAdapter.add(activity.getApi().getFolders());
         setListAdapter(mAdapter);
-        setEmptyText(getString(R.string.folder_list_empty));
-        getListView().setOnItemClickListener(this);
-        getListView().setOnItemLongClickListener(this);
     }
 
     private void updateList() {

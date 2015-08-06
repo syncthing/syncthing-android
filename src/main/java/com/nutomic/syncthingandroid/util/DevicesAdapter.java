@@ -34,7 +34,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
     };
 
     public DevicesAdapter(Context context) {
-        super(context, R.layout.device_list_item);
+        super(context, R.layout.item_device_list);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.device_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_device_list, parent, false);
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
