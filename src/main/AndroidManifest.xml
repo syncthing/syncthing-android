@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nutomic.syncthingandroid">
+    package="com.nutomic.syncthingandroid" >
 
-    <uses-feature android:name="android.software.leanback" android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,37 +16,40 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
         android:banner="@drawable/banner"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Syncthing"
         android:description="@string/app_description"
+        android:icon="@drawable/ic_launcher"
+        android:installLocation="internalOnly"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:installLocation="internalOnly">
+        android:theme="@style/Theme.Syncthing" >
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.WebGuiActivity"
             android:label="@string/web_gui_title"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SettingsActivity"
+        <activity
+            android:name=".activities.SettingsActivity"
             android:label="@string/settings_title"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -50,43 +57,66 @@
         <activity
             android:name=".activities.LogActivity"
             android:label="@string/log_title"
-            android:parentActivityName=".activities.SettingsActivity">
+            android:parentActivityName=".activities.SettingsActivity" >
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />
         </activity>
         <activity
             android:name=".activities.FolderPickerActivity"
-            android:label="@string/folder_picker_title">
+            android:label="@string/folder_picker_title" >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
-        <activity android:name=".activities.RestartActivity"
-            android:theme="@style/Theme.Syncthing.Translucent"/>
+        <activity
+            android:name=".activities.RestartActivity"
+            android:theme="@style/Theme.Syncthing.Translucent" />
+        <activity
+            android:name=".activities.ShareToFolderActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" >
+                </action>
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+                <data android:mimeType="*/*" >
+                </data>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" >
+                </action>
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+                <data android:mimeType="*/*" >
+                </data>
+            </intent-filter>
+        </activity>
 
         <service android:name=".syncthing.SyncthingService" />
 
-        <receiver android:name=".syncthing.NetworkReceiver">
+        <receiver android:name=".syncthing.NetworkReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.BatteryReceiver">
+        <receiver android:name=".syncthing.BatteryReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.BootReceiver">
+        <receiver android:name=".syncthing.BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
