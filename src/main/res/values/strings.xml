@@ -443,4 +443,7 @@ Please report any problems you encounter via Github.</string>
     <string name="state_error">Error</string>
     <string name="state_unknown">Unknown</string>
 
+    <string name="hi_there">Hi there</string>
+    <string name="action_settings">Settings</string>
+
 </resources>
