@@ -26,7 +26,7 @@ import java.util.TimerTask;
 public class FoldersFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
-    private FoldersAdapter mAdapter;
+    protected FoldersAdapter mAdapter;
 
     private Timer mTimer;
 
