@@ -18,10 +18,11 @@ import java.util.ArrayList;
 public class SelectFolderFragment extends FoldersFragment {
 
     private static final String TAG = "SelectFolderFragment";
+    private ArrayList<Uri> mFiles;
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        for (Uri uri : files) {
+        for (Uri uri : mFiles) {
             File sourceFile = new File(getRealPathFromURI(uri));
             String path = mAdapter.getItem(i).path;
             File destFile = new File(path, sourceFile.getName());
@@ -37,7 +38,7 @@ public class SelectFolderFragment extends FoldersFragment {
     }
 
     public void setFiles(ArrayList<Uri> files) {
-        this.files = files;
+        mFiles = files;
     }
 
     // Copied from http://stackoverflow.com/a/9293885/943814
@@ -70,6 +71,4 @@ public class SelectFolderFragment extends FoldersFragment {
         }
         return result;
     }
-
-    private ArrayList<Uri> files;
 }

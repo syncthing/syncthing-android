@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class ShareToFolderActivity extends SyncthingActivity {
 
+    private SelectFolderFragment mFolderFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,4 @@ public class ShareToFolderActivity extends SyncthingActivity {
         super.onDestroy();
         getService().unregisterOnApiChangeListener(mFolderFragment);
     }
-
-    private SelectFolderFragment mFolderFragment;
 }
