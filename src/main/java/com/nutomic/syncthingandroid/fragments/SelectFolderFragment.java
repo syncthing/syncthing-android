@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.syncthing.RestApi;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,10 +25,10 @@ public class SelectFolderFragment extends FoldersFragment {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        RestApi.Folder folder = getItemFolder(i);
         for (Uri uri : mFiles) {
             File sourceFile = new File(getRealPathFromURI(uri));
-            String path = super.getItemPath(i);
-            File destFile = new File(path, sourceFile.getName());
+            File destFile = new File(folder.path, sourceFile.getName());
             try {
                 copy(sourceFile, destFile);
             }
@@ -34,7 +37,9 @@ public class SelectFolderFragment extends FoldersFragment {
             }
         }
 
-        getActivity().finish();
+        SyncthingActivity activity = (SyncthingActivity) getActivity();
+        activity.getApi().onFolderFileChange(folder.id, folder.path);
+        activity.finish();
     }
 
     public void setFiles(ArrayList<Uri> files) {
