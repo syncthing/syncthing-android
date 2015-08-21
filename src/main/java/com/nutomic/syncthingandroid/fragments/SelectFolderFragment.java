@@ -24,7 +24,7 @@ public class SelectFolderFragment extends FoldersFragment {
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         for (Uri uri : mFiles) {
             File sourceFile = new File(getRealPathFromURI(uri));
-            String path = mAdapter.getItem(i).path;
+            String path = super.getItemPath(i);
             File destFile = new File(path, sourceFile.getName());
             try {
                 copy(sourceFile, destFile);

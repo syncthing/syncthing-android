@@ -26,7 +26,7 @@ import java.util.TimerTask;
 public class FoldersFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
-    protected FoldersAdapter mAdapter;
+    private FoldersAdapter mAdapter;
 
     private Timer mTimer;
 
@@ -136,6 +136,10 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected String getItemPath(int index) {
+        return mAdapter.getItem(index).path;
     }
 
 }
