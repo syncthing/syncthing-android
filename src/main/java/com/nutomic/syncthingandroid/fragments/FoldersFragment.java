@@ -103,7 +103,7 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
         Intent intent = new Intent(getActivity(), SettingsActivity.class)
                 .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
                 .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
-                .putExtra(FolderSettingsFragment.EXTRA_REPO_ID, mAdapter.getItem(i).id);
+                .putExtra(FolderFragment.EXTRA_REPO_ID, mAdapter.getItem(i).id);
         startActivity(intent);
     }
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FoldersFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:listDivider"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:showDividers="middle"
+        tools:ignore="RtlSymmetry">
+
+        <EditText
+            android:id="@+id/id"
+            style="@style/Widget.Syncthing.TextView.Field"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:drawableLeft="@drawable/ic_vpn_key_black_36dp"
+            android:drawableStart="@drawable/ic_vpn_key_black_36dp"
+            android:hint="@string/folder_id" />
+
+        <TextView
+            android:id="@+id/directory"
+            style="@style/Widget.Syncthing.TextView.Label"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:drawableLeft="@drawable/ic_folder_black_36dp"
+            android:drawableStart="@drawable/ic_folder_black_36dp"
+            android:hint="@string/directory" />
+
+        <LinearLayout
+            android:id="@+id/devicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:drawableLeft="@drawable/ic_device_hub_black_36dp"
+                android:drawableStart="@drawable/ic_device_hub_black_36dp"
+                android:text="@string/devices" />
+        </LinearLayout>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/master"
+            style="@style/Widget.Syncthing.TextView.Label"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:checked="false"
+            android:drawableLeft="@drawable/ic_lock_black_36dp"
+            android:drawableStart="@drawable/ic_lock_black_36dp"
+            android:text="@string/folder_master" />
+
+        <LinearLayout
+            android:id="@+id/versioningContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:checked="false"
+                android:drawableLeft="@drawable/ic_history_black_36dp"
+                android:drawableStart="@drawable/ic_history_black_36dp"
+                android:background="@null"
+                android:text="@string/keep_versions" />
+
+            <TextView
+                android:id="@+id/versioningKeep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

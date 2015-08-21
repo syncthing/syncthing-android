@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -24,7 +25,6 @@ import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -278,13 +278,11 @@ public class MainActivity extends SyncthingActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Avoid crash if called during startup.
-        if (mFolderFragment != null && mDevicesFragment != null &&
-                mDrawerFragment != null) {
+        if (mFolderFragment != null && mDevicesFragment != null && mDrawerFragment != null) {
             FragmentManager fm = getSupportFragmentManager();
             fm.putFragment(outState, FoldersFragment.class.getName(), mFolderFragment);
             fm.putFragment(outState, DevicesFragment.class.getName(), mDevicesFragment);
-            fm.putFragment(outState, DrawerFragment.class.getName(),
-                    mDrawerFragment);
+            fm.putFragment(outState, DrawerFragment.class.getName(), mDrawerFragment);
             outState.putInt("currentTab", mViewPager.getCurrentItem());
         }
     }
@@ -336,7 +334,7 @@ public class MainActivity extends SyncthingActivity
      * Closes the drawer. Use when navigating away from activity.
      */
     public void closeDrawer() {
-        mDrawerLayout.closeDrawer(Gravity.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     /**
@@ -345,8 +343,8 @@ public class MainActivity extends SyncthingActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent e) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (!mDrawerLayout.isDrawerOpen(Gravity.START))
-                mDrawerLayout.openDrawer(Gravity.START);
+            if (!mDrawerLayout.isDrawerOpen(GravityCompat.START))
+                mDrawerLayout.openDrawer(GravityCompat.START);
             else
                 closeDrawer();
 

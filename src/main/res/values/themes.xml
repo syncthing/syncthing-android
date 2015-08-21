@@ -9,11 +9,13 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="actionBarTheme">@style/ThemeOverlay.Syncthing.ActionBar</item>
+
         <item name="textAppearanceListItemPrimary">@style/TextAppearance.Syncthing.ListItemPrimary</item>
         <item name="textAppearanceListItemSecondary">@style/TextAppearance.Syncthing.ListItemSecondary</item>
         <item name="textAppearanceListItemSmall">@style/TextAppearance.Syncthing.ListItemSmall</item>
 
         <item name="android:listViewStyle">@style/Widget.Syncthing.ListView</item>
+        <item name="android:listDivider">@drawable/list_divider_inset</item>
     </style>
 
     <style name="Theme.Syncthing" parent="Theme.Syncthing.Base"/>

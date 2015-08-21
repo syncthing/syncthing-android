@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
-        minSdkVersion 8
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 72
         versionName "0.6.6"
