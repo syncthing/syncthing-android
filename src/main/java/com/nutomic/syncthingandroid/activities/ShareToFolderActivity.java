@@ -13,15 +13,15 @@ import java.util.ArrayList;
 
 public class ShareToFolderActivity extends SyncthingActivity {
 
-    private SelectFolderFragment mFolderFragment;
+    private SelectFolderFragment mSelectFolderFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_to_folder);
-        mFolderFragment = (SelectFolderFragment) getSupportFragmentManager()
+        mSelectFolderFragment = (SelectFolderFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.share_to_folder_fragment);
-        mFolderFragment.setHasOptionsMenu(false);
+        mSelectFolderFragment .setHasOptionsMenu(false);
 
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -35,18 +35,18 @@ public class ShareToFolderActivity extends SyncthingActivity {
             uris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
         }
 
-        mFolderFragment.setFiles(uris);
+        mSelectFolderFragment.setFiles(uris);
     }
 
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        getService().registerOnApiChangeListener(mFolderFragment);
+        getService().registerOnApiChangeListener(mSelectFolderFragment);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getService().unregisterOnApiChangeListener(mFolderFragment);
+        getService().unregisterOnApiChangeListener(mSelectFolderFragment);
     }
 }
