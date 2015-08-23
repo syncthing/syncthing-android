@@ -4,13 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer.DrawableContainerState;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +11,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,7 +36,6 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
 import static android.view.Gravity.CENTER_VERTICAL;
@@ -366,8 +357,11 @@ public class FolderFragment extends Fragment
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, dp(48, getActivity()));
         // 72dp margin to align with dividers
         // 4dp additional margin to align with the rest of the items
-        setMarginStart(params, dp(72 + 4, getActivity()));
-        setMarginEnd(params, dp(16 + 4, getActivity()));
+        int dividerInset = getResources().getDimensionPixelOffset(R.dimen.material_divider_inset);
+        int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
+        int textPadding = dp(4, getActivity());
+        setMarginStart(params, dividerInset + textPadding);
+        setMarginEnd(params, contentInset + textPadding);
         TextView emptyView = new TextView(mDevicesContainer.getContext());
         emptyView.setGravity(CENTER_VERTICAL);
         emptyView.setText(R.string.devices_list_empty);

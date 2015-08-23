@@ -4,7 +4,7 @@
     style="@style/Widget.Syncthing.TextView.Label.DeviceList"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:layout_marginLeft="72dp"
-    android:layout_marginStart="72dp"
+    android:layout_marginLeft="@dimen/material_divider_inset"
+    android:layout_marginStart="@dimen/material_divider_inset"
     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
     tools:ignore="RtlHardcoded,RtlSymmetry" />

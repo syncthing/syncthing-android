@@ -80,9 +80,8 @@
                 android:id="@+id/versioningKeep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="0"
+                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
