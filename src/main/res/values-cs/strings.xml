@@ -144,6 +144,13 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Synchronizovat jako root</string>
   <string name="use_root_summary">Spustit syncthing jako superuživatel</string>
+  <string name="notification_type_title">Upozornění</string>
+  <string name="notification_type_summary">Vybrat typ upozornění</string>
+  <string-array name="notification_type_entries">
+    <item>Normální</item>
+    <item>Nízká priorita</item>
+    <item>Źádné</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Nastavení Syncthing</string>
   <string name="device_name">Jméno přístroje</string>
@@ -233,6 +240,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Selhalo vytvoření konfigurace Syncthing. Zkontrolujte prosím logy.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-foto</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Je potřeba restartovat</string>
@@ -265,5 +273,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="state_scanning">Skenování</string>
   <string name="state_cleaning">Čištění</string>
   <string name="state_syncing">Synchronizuje se</string>
+  <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámý</string>
 </resources>

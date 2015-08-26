@@ -30,7 +30,7 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">Não foram encontrados quaisquer dispositivos</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Atualizada</string>
+  <string name="device_up_to_date">Atualizado</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Sincronizando (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
@@ -146,6 +146,13 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Sincronizar como usuário root</string>
   <string name="use_root_summary">Executar Syncthing como Superusuário</string>
+  <string name="notification_type_title">Notificação</string>
+  <string name="notification_type_summary">Escolha o tipo da notificação</string>
+  <string-array name="notification_type_entries">
+    <item>Normal</item>
+    <item>Baixa prioridade</item>
+    <item>Nenhum</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
@@ -236,6 +243,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Ocorreu um erro tentando configurar o Syncthing. Por favor, verifique os logs.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-fotos</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>
@@ -268,5 +276,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="state_scanning">Verificando</string>
   <string name="state_cleaning">Limpando</string>
   <string name="state_syncing">Sincronizando</string>
+  <string name="state_error">Erro</string>
   <string name="state_unknown">Desconhecido</string>
 </resources>

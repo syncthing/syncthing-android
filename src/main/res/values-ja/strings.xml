@@ -144,6 +144,13 @@
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">Root として同期</string>
   <string name="use_root_summary">スーパーユーザーとして同期を実行します</string>
+  <string name="notification_type_title">通知</string>
+  <string name="notification_type_summary">通知の種類を選択します</string>
+  <string-array name="notification_type_entries">
+    <item>通常</item>
+    <item>優先度低</item>
+    <item>なし</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">同期オプション</string>
   <string name="device_name">デバイス名</string>
@@ -233,6 +240,7 @@
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Syncthing 設定の作成に失敗しました。ログを確認してください。</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-写真</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>
@@ -265,5 +273,6 @@
   <string name="state_scanning">スキャン中</string>
   <string name="state_cleaning">クリーニング中</string>
   <string name="state_syncing">同期中</string>
+  <string name="state_error">エラー</string>
   <string name="state_unknown">不明</string>
 </resources>
