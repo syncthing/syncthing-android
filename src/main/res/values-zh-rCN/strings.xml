@@ -144,6 +144,13 @@
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
   <string name="use_root_title">使用root权限来同步</string>
   <string name="use_root_summary">Syncthing 运行于超级用户</string>
+  <string name="notification_type_title">通知</string>
+  <string name="notification_type_summary">选择通知类型</string>
+  <string-array name="notification_type_entries">
+    <item>常规</item>
+    <item>低优先级</item>
+    <item>隐藏</item>
+  </string-array>
   <string name="category_syncthing">Syncthing 通用功能</string>
   <string name="syncthing_options">同步设置</string>
   <string name="device_name">设备名称</string>
@@ -233,6 +240,7 @@
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">创建 Syncthing 配置文件失败，请检查日志。</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-照片</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重启以应用</string>
@@ -265,5 +273,6 @@
   <string name="state_scanning">正在扫描</string>
   <string name="state_cleaning">正在清理</string>
   <string name="state_syncing">正在同步</string>
+  <string name="state_error">错误</string>
   <string name="state_unknown">未知</string>
 </resources>

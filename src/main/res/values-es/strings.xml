@@ -144,6 +144,13 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="advanced_folder_picker_summary">Escoja una carpeta del dispositivo para sincronizar</string>
   <string name="use_root_title">Sincronizar como Root</string>
   <string name="use_root_summary">Ejecutar Syncthing como Superusuario</string>
+  <string name="notification_type_title">Notificación</string>
+  <string name="notification_type_summary">Elige el tipo de notificación</string>
+  <string-array name="notification_type_entries">
+    <item>Normal</item>
+    <item>Baja Prioridad</item>
+    <item>Ninguno</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del Dispositivo</string>
@@ -233,6 +240,7 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Error al crear la configuración de Syncthing. Por favor, comprueba el registro.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Es necesario reiniciar</string>
@@ -265,5 +273,6 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="state_scanning">Escaneado</string>
   <string name="state_cleaning">Limpiando</string>
   <string name="state_syncing">Sincronizando</string>
+  <string name="state_error">Error</string>
   <string name="state_unknown">Desconocido</string>
 </resources>

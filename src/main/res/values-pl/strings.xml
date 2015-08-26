@@ -11,6 +11,9 @@
   <string name="send_device_id_to">Wyślij ID urządzenia do</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Ładowanie...</string>
+  <string name="usage_reporting_dialog_title">Zezwolić na wysyłanie anonimowych statystyk użycia?</string>
+  <string name="yes">Tak</string>
+  <string name="no">Nie</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Foldery</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -138,6 +141,10 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="sync_only_wifi">Synchronizuj tylko na WiFi</string>
   <string name="advanced_folder_picker">Używaj zaawansowanego wybierania katalogów</string>
   <string name="advanced_folder_picker_summary">Wybierz dowolny katalog do zsynchronizowania</string>
+  <string name="use_root_title">Pozwól Syncthing działać z uprawnieniami roota</string>
+  <string name="use_root_summary">Uruchom Syncthing jako Superuser</string>
+  <string name="notification_type_title">Powiadomienie</string>
+  <string name="notification_type_summary">Wybierz rodzaj powiadomienia</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Ustawienia Syncthing</string>
   <string name="device_name">Nazwa urządzenia</string>
@@ -151,7 +158,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adres GUI</string>
-  <string name="gui_user">Urzytkownik GUI</string>
+  <string name="gui_user">Użytkownik GUI</string>
   <string name="gui_password">Hasło GUI</string>
   <string name="export_config">Eksportuj konfigurację</string>
   <!--Toast shown after config was successfully exported-->
@@ -170,8 +177,13 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Znaki \':\' oraz \' są niedozwolone w haśle</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">Przywróć bazę danych do stanu pierwotnego</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">Tę akcję powinno się przeprowadzać tylko, kiedy jest ona zalecona przez nasz dział wsparcia.
+
+\nCzy jesteś pewien, że chcesz wyczyścić indeks Syncthing?</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">Resetowanie bazy Syncthing zakończono powodzeniem</string>
   <string name="category_about">O projekcie</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Otwórz log</string>
@@ -219,13 +231,18 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing jest uruchomione</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">Drzewo folderów zbyt głębokie. Sprawdź pod kątem obecności zapętlonych dowiązań symbolicznych.</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Nie udało się stworzyć pliku konfiguracyjnego Syncthing. Sprawdź logi.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-zdjęcia</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Wymagany restart</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Uruchom ponownie teraz</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Później</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Kliknij tu, aby zrestartować syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -244,5 +261,6 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="state_scanning">Skanowanie</string>
   <string name="state_cleaning">Czyszczenie</string>
   <string name="state_syncing">Synchronizowanie</string>
+  <string name="state_error">Błąd</string>
   <string name="state_unknown">Nieznany</string>
 </resources>

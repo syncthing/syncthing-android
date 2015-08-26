@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Geräte-ID senden an</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Lade...</string>
+  <string name="api_loading">Ladevorgang…</string>
   <string name="usage_reporting_dialog_title">anonymen Nutzungsbericht erlauben?</string>
   <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, werden Sie erneut um Erlaubnis gefragt. Die zusammengeführten Statistiken sind unter https://data.syncthing.net zu finden.</string>
   <string name="yes">Ja</string>
@@ -40,9 +40,9 @@
   <!--DrawerFragment-->
   <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Download:\u0020</string>
+  <string name="download_title_colon">Herunterladen:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Upload:\u0020</string>
+  <string name="upload_title_colon">Hochladen:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Prozessorauslastung</string>
   <!--Title for current RAM usage-->
@@ -135,7 +135,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Preference title-->
   <string name="always_run_in_background">Immer im Hintergrund ausführen</string>
   <!--Preference summary in case it is enabled-->
-  <string name="always_run_in_background_enabled">Syncthing läuft immer im Hintergrund, entsprechend den folgenden Einstellungen.</string>
+  <string name="always_run_in_background_enabled">Syncthing läuft immer im Hintergrund, entsprechend den untenstehenden Einstellungen.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Sync nur mit Ladegerät</string>
@@ -219,9 +219,9 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Title of the "log" activity-->
   <string name="log_title">Log</string>
   <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Zeige Android Log</string>
+  <string name="log_android_title">Zeige Android-Log</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Zeige Syncthing Log</string>
+  <string name="log_syncthing_title">Zeige Syncthing-Log</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>
   <!--SyncthingService-->
@@ -238,7 +238,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Erstellen einer Syncthing Konfiguration gescheitert. Bitte die Logs prüfen.</string>
+  <string name="config_create_failed">Erstellen einer Syncthing-Konfiguration gescheitert. Bitte prüfen Sie die Logs.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-Bilder</string>
   <!--RestApi-->
