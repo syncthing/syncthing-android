@@ -1,153 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="10dip"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/bottomActions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:divider="@drawable/list_divider"
+        android:background="?android:windowBackground"
+        android:elevation="2dp"
+        app:showDividers="beginning">
 
         <TextView
-            android:id="@+id/device_id_title"
-            android:text="@string/device_id"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/drawerActionSettings"
+            style="@style/Widget.Syncthing.TextView.DrawerAction"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableLeft="@drawable/ic_action_settings"
+            android:drawableStart="@drawable/ic_action_settings"
+            android:text="@string/settings_title" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
-        <TextView
-            android:id="@+id/device_id"
-            android:layout_below="@id/device_id_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="monospace"
-            android:text="@string/device_id_placeholder"
-            android:visibility="invisible"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/cpu_usage_title"
-            android:text="@string/cpu_usage"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/cpu_usage"
-            android:layout_alignBottom="@id/cpu_usage_title"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/ram_usage_title"
-            android:text="@string/ram_usage"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/ram_usage"
-            android:layout_alignBottom="@id/ram_usage_title"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/download_title"
-            android:text="@string/download_title"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/download"
-            android:layout_alignBottom="@id/download_title"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/upload_title"
-            android:text="@string/upload_title"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/upload"
-            android:layout_alignBottom="@id/upload_title"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/announce_server_title"
-            android:text="@string/announce_server"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/announce_server"
-            android:layout_alignBottom="@id/announce_server_title"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dip" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="@android:color/darker_gray"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dip" />
-
-    <ListView android:id="@android:id/list"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" />
+        android:layout_above="@+id/bottomActions"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/deviceIdContainer"
+                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/device_id"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <TextView
+                    android:id="@+id/device_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="@string/device_id_placeholder"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/drawerActionWebGui"
+                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_menu_browser"
+                android:drawableStart="@drawable/ic_menu_browser"
+                android:text="@string/web_gui_title" />
+
+            <TextView
+                android:id="@+id/drawerActionDonate"
+                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_action_donate"
+                android:drawableStart="@drawable/ic_action_donate"
+                android:text="@string/donate" />
+
+            <TextView
+                android:id="@+id/drawerActionExit"
+                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_menu_close_clear_cancel"
+                android:drawableStart="@drawable/ic_menu_close_clear_cancel"
+                android:text="@string/exit"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/list_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+
+                <TextView
+                    android:id="@+id/cpu_usage_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cpu_usage"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/cpu_usage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+
+                <TextView
+                    android:id="@+id/ram_usage_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ram_usage"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/ram_usage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+
+                <TextView
+                    android:id="@+id/download_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/download_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+
+                <TextView
+                    android:id="@+id/upload_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+
+                <TextView
+                    android:id="@+id/announce_server_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/announce_server"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?android:textColorSecondary" />
+
+                <TextView
+                    android:id="@+id/announce_server"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

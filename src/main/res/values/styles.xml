@@ -36,6 +36,15 @@
         <item name="android:inputType">textVisiblePassword</item>
     </style>
 
+    <style name="Widget.Syncthing.TextView.DrawerAction">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:paddingLeft">@dimen/abc_action_bar_content_inset_material</item>
+        <item name="android:paddingRight">@dimen/abc_action_bar_content_inset_material</item>
+    </style>
+
     <style name="Widget.Syncthing.Switch" parent="@style/Widget.AppCompat.CompoundButton.Switch" >
         <item name="android:paddingLeft">4dp</item>
         <item name="android:minHeight">48dp</item>
