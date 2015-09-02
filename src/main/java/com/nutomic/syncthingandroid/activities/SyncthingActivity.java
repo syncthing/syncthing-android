@@ -18,7 +18,7 @@ import java.util.LinkedList;
 /**
  * Connects to {@link SyncthingService} and provides access to it.
  */
-public class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
+public abstract class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
 
     private SyncthingService mSyncthingService;
 
@@ -28,7 +28,7 @@ public class SyncthingActivity extends AppCompatActivity implements ServiceConne
      * To be used for Fragments.
      */
     public interface OnServiceConnectedListener {
-        public void onServiceConnected();
+        void onServiceConnected();
     }
 
     @Override

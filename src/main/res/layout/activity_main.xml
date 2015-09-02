@@ -4,10 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/drawer"
@@ -16,5 +27,5 @@
         android:layout_gravity="start"
         android:background="?android:windowBackground"
         android:clickable="true"
-        android:elevation="16dp"/>
+        android:elevation="16dp" />
 </android.support.v4.widget.DrawerLayout>

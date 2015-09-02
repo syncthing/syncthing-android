@@ -13,16 +13,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -172,6 +169,17 @@ public class MainActivity extends SyncthingActivity
                     return 2;
                 }
 
+                @Override
+                public CharSequence getPageTitle(int position) {
+                    switch (position) {
+                        case 0:
+                            return getResources().getString(R.string.folders_fragment_title);
+                        case 1:
+                            return getResources().getString(R.string.devices_fragment_title);
+                        default:
+                            return String.valueOf(position);
+                    }
+                }
             };
 
     private FoldersFragment mFolderFragment;
@@ -182,6 +190,8 @@ public class MainActivity extends SyncthingActivity
 
     private ViewPager mViewPager;
 
+    private TabLayout mTabLayout;
+
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
@@ -191,41 +201,15 @@ public class MainActivity extends SyncthingActivity
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
 
-        TabListener tabListener = new TabListener() {
-            public void onTabSelected(Tab tab, FragmentTransaction ft) {
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabReselected(Tab tab, FragmentTransaction ft) {
-            }
-
-            @Override
-            public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-            }
-        };
-
-        actionBar.addTab(actionBar.newTab()
-                .setText(R.string.folders_fragment_title)
-                .setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab()
-                .setText(R.string.devices_fragment_title)
-                .setTabListener(tabListener));
+        mTabLayout = (TabLayout) findViewById(R.id.tabContainer);
+        mTabLayout.setupWithViewPager(mViewPager);
 
         if (savedInstanceState != null) {
             FragmentManager fm = getSupportFragmentManager();
