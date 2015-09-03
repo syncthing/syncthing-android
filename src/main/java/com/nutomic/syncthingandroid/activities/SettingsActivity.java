@@ -37,7 +37,7 @@ public class SettingsActivity extends SyncthingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_settings);
 
         FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState != null) {
@@ -71,7 +71,7 @@ public class SettingsActivity extends SyncthingActivity {
         }
 
         fm.beginTransaction()
-                .replace(android.R.id.content, mFragment)
+                .replace(R.id.content, mFragment)
                 .commit();
     }
 

@@ -104,7 +104,6 @@ public class WebGuiActivity extends SyncthingActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_web_gui);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLoadingView = findViewById(R.id.loading);
         loadCaCert();

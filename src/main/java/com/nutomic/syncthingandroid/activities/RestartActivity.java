@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,12 +8,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 
-import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
@@ -32,8 +28,6 @@ public class RestartActivity extends SyncthingActivity {
     @TargetApi(11)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Using `<item name="windowActionBar">false</item>` in style causes crash.
-        getSupportActionBar().hide();
 
         final Intent intent = new Intent(this, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);

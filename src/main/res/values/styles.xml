@@ -50,6 +50,11 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
+    <style name="Widget.Syncthing.DrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
     <!-- Text appearances -->
     <eat-comment />
 

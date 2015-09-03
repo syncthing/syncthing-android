@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/widget_toolbar" />
 
     <WebView
         android:id="@+id/webview"
@@ -12,9 +14,8 @@
 
     <LinearLayout
         android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -30,4 +31,4 @@
             android:layout_height="wrap_content"
             android:text="@string/web_gui_loading" />
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

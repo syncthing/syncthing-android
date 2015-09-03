@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -110,9 +111,6 @@ public class MainActivity extends SyncthingActivity
             mDisabledDialog = null;
         }
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     /**
@@ -190,8 +188,6 @@ public class MainActivity extends SyncthingActivity
 
     private ViewPager mViewPager;
 
-    private TabLayout mTabLayout;
-
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
@@ -208,8 +204,8 @@ public class MainActivity extends SyncthingActivity
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mTabLayout = (TabLayout) findViewById(R.id.tabContainer);
-        mTabLayout.setupWithViewPager(mViewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabContainer);
+        tabLayout.setupWithViewPager(mViewPager);
 
         if (savedInstanceState != null) {
             FragmentManager fm = getSupportFragmentManager();
@@ -231,6 +227,7 @@ public class MainActivity extends SyncthingActivity
                 .replace(R.id.drawer, mDrawerFragment)
                 .commit();
         mDrawerToggle = new Toggle(this, mDrawerLayout);
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -274,7 +271,13 @@ public class MainActivity extends SyncthingActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         mDrawerToggle.syncState();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+        }
     }
 
     @Override
@@ -288,7 +291,6 @@ public class MainActivity extends SyncthingActivity
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-
     /**
      * Handles drawer opened and closed events, toggling option menu state.
      */
@@ -301,16 +303,12 @@ public class MainActivity extends SyncthingActivity
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
             mDrawerFragment.onDrawerOpened();
-            mFolderFragment.setHasOptionsMenu(false);
-            mDevicesFragment.setHasOptionsMenu(false);
         }
 
         @Override
         public void onDrawerClosed(View view) {
             super.onDrawerClosed(view);
             mDrawerFragment.onDrawerClosed();
-            mFolderFragment.setHasOptionsMenu(true);
-            mDevicesFragment.setHasOptionsMenu(true);
         }
     }
 
