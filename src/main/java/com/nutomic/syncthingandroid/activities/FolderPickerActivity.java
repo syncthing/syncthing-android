@@ -244,7 +244,7 @@ public class FolderPickerActivity extends SyncthingActivity
     private class FileAdapter extends ArrayAdapter<File> {
 
         public FileAdapter(Context context) {
-            super(context, android.R.layout.simple_list_item_1);
+            super(context, R.layout.item_folder_picker);
         }
 
         @Override
