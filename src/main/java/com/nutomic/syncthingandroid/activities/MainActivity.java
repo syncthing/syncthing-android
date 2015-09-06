@@ -22,11 +22,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
@@ -37,6 +40,8 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.Date;
+
+import static java.lang.Math.min;
 
 /**
  * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and
@@ -231,6 +236,7 @@ public class MainActivity extends SyncthingActivity
         mDrawerToggle = new Toggle(this, mDrawerLayout);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        setOptimalDrawerWidth(findViewById(R.id.drawer));
     }
 
     @Override
@@ -335,6 +341,25 @@ public class MainActivity extends SyncthingActivity
             return true;
         }
         return super.onKeyDown(keyCode, e);
+    }
+
+    /**
+     * Calculating width based on
+     * http://www.google.com/design/spec/patterns/navigation-drawer.html#navigation-drawer-specs.
+     */
+    private void setOptimalDrawerWidth(View drawerContainer) {
+        int actionBarSize = 0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarSize = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        }
+
+        ViewGroup.LayoutParams params = drawerContainer.getLayoutParams();
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int minScreenWidth = min(displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        params.width = min(minScreenWidth - actionBarSize, 5 * actionBarSize);
+        drawerContainer.requestLayout();
     }
 
     /**
