@@ -110,7 +110,9 @@ public class MainActivity extends SyncthingActivity
             mDisabledDialog.dismiss();
             mDisabledDialog = null;
         }
+
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        mDrawerFragment.requestGuiUpdate();
     }
 
     /**

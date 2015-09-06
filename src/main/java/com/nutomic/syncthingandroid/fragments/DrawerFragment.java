@@ -183,6 +183,15 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     }
 
     /**
+     * This will not do anything if gui updates are already scheduled.
+     */
+    public void requestGuiUpdate() {
+        if (mTimer == null) {
+            updateGui();
+        }
+    }
+
+    /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
     @Override
