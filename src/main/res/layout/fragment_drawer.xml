@@ -20,8 +20,8 @@
             style="@style/Widget.Syncthing.TextView.DrawerAction"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableLeft="@drawable/ic_action_settings"
-            android:drawableStart="@drawable/ic_action_settings"
+            android:drawableLeft="@drawable/ic_settings_black_24dp"
+            android:drawableStart="@drawable/ic_settings_black_24dp"
             android:text="@string/settings_title" />
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -70,8 +70,8 @@
                 style="@style/Widget.Syncthing.TextView.DrawerAction"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_menu_browser"
-                android:drawableStart="@drawable/ic_menu_browser"
+                android:drawableLeft="@drawable/ic_web_black_24dp"
+                android:drawableStart="@drawable/ic_web_black_24dp"
                 android:text="@string/web_gui_title" />
 
             <TextView
@@ -79,8 +79,8 @@
                 style="@style/Widget.Syncthing.TextView.DrawerAction"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_action_donate"
-                android:drawableStart="@drawable/ic_action_donate"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawableStart="@drawable/ic_attach_money_black_24dp"
                 android:text="@string/donate" />
 
             <TextView
@@ -88,8 +88,8 @@
                 style="@style/Widget.Syncthing.TextView.DrawerAction"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_menu_close_clear_cancel"
-                android:drawableStart="@drawable/ic_menu_close_clear_cancel"
+                android:drawableLeft="@drawable/ic_close_black_24dp"
+                android:drawableStart="@drawable/ic_close_black_24dp"
                 android:text="@string/exit"
                 android:visibility="gone" />
 

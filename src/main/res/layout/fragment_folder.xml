@@ -20,8 +20,8 @@
             style="@style/Widget.Syncthing.TextView.Field"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:drawableLeft="@drawable/ic_vpn_key_black_36dp"
-            android:drawableStart="@drawable/ic_vpn_key_black_36dp"
+            android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+            android:drawableStart="@drawable/ic_vpn_key_black_24dp"
             android:hint="@string/folder_id" />
 
         <TextView
@@ -29,8 +29,8 @@
             style="@style/Widget.Syncthing.TextView.Label"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:drawableLeft="@drawable/ic_folder_black_36dp"
-            android:drawableStart="@drawable/ic_folder_black_36dp"
+            android:drawableLeft="@drawable/ic_folder_black_24dp"
+            android:drawableStart="@drawable/ic_folder_black_24dp"
             android:hint="@string/directory" />
 
         <LinearLayout
@@ -43,8 +43,8 @@
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:drawableLeft="@drawable/ic_device_hub_black_36dp"
-                android:drawableStart="@drawable/ic_device_hub_black_36dp"
+                android:drawableLeft="@drawable/ic_device_hub_black_24dp"
+                android:drawableStart="@drawable/ic_device_hub_black_24dp"
                 android:text="@string/devices" />
         </LinearLayout>
 
@@ -54,8 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:checked="false"
-            android:drawableLeft="@drawable/ic_lock_black_36dp"
-            android:drawableStart="@drawable/ic_lock_black_36dp"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawableStart="@drawable/ic_lock_black_24dp"
             android:text="@string/folder_master" />
 
         <LinearLayout
@@ -71,8 +71,8 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_history_black_36dp"
-                android:drawableStart="@drawable/ic_history_black_36dp"
+                android:drawableLeft="@drawable/ic_history_black_24dp"
+                android:drawableStart="@drawable/ic_history_black_24dp"
                 android:background="@null"
                 android:text="@string/keep_versions" />
 
