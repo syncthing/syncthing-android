@@ -11,6 +11,7 @@
     <item
         android:id="@+id/create_folder"
         android:title="@string/create_fs_folder"
+        android:icon="@drawable/ic_add_folder_24dp_white"
         app:showAsAction="ifRoom" />
 
 </menu>
