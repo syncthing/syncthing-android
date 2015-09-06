@@ -18,31 +18,25 @@
 
     <style name="Widget.Syncthing.TextView.Label" parent="@android:style/Widget.TextView">
         <item name="android:background">?selectableItemBackground</item>
-        <item name="android:drawablePadding">24dp</item>
+        <item name="android:drawablePadding">32dp</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
-        <item name="android:textColor">?attr/editTextColor</item>
         <item name="android:paddingLeft">@dimen/abc_action_bar_content_inset_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_content_inset_material</item>
     </style>
 
-    <style name="Widget.Syncthing.TextView.Label.DeviceList">
+    <style name="Widget.Syncthing.TextView.Label.Folder">
+        <item name="android:textColor">?attr/editTextColor</item>
+    </style>
+
+    <style name="Widget.Syncthing.TextView.Label.Folder.DeviceList">
         <item name="android:paddingLeft">4dp</item>
     </style>
 
-    <style name="Widget.Syncthing.TextView.Field" parent="Widget.Syncthing.TextView.Label">
+    <style name="Widget.Syncthing.TextView.Label.Folder.Field">
         <item name="android:background">@null</item>
         <item name="android:imeOptions">actionDone</item>
         <item name="android:inputType">textVisiblePassword</item>
-    </style>
-
-    <style name="Widget.Syncthing.TextView.DrawerAction">
-        <item name="android:background">?selectableItemBackground</item>
-        <item name="android:drawablePadding">16dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
-        <item name="android:paddingLeft">@dimen/abc_action_bar_content_inset_material</item>
-        <item name="android:paddingRight">@dimen/abc_action_bar_content_inset_material</item>
     </style>
 
     <style name="Widget.Syncthing.Switch" parent="@style/Widget.AppCompat.CompoundButton.Switch" >

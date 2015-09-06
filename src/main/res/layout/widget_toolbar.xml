@@ -8,4 +8,5 @@
     android:minHeight="?android:actionBarSize"
     android:background="?colorPrimary"
     android:elevation="@dimen/toolbar_elevation"
+    app:titleMarginStart="16dp"
     app:theme="@style/ThemeOverlay.Syncthing.Toolbar" />

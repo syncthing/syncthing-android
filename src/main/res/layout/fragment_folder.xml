@@ -17,7 +17,7 @@
 
         <EditText
             android:id="@+id/id"
-            style="@style/Widget.Syncthing.TextView.Field"
+            style="@style/Widget.Syncthing.TextView.Label.Folder.Field"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/directory"
-            style="@style/Widget.Syncthing.TextView.Label"
+            style="@style/Widget.Syncthing.TextView.Label.Folder"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:drawableLeft="@drawable/ic_folder_black_24dp"
@@ -40,7 +40,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/Widget.Syncthing.TextView.Label"
+                style="@style/Widget.Syncthing.TextView.Label.Folder"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:drawableLeft="@drawable/ic_device_hub_black_24dp"
@@ -50,7 +50,7 @@
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/master"
-            style="@style/Widget.Syncthing.TextView.Label"
+            style="@style/Widget.Syncthing.TextView.Label.Folder"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:checked="false"
@@ -66,7 +66,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/Widget.Syncthing.TextView.Label"
+                style="@style/Widget.Syncthing.TextView.Label.Folder"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"

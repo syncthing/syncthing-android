@@ -356,12 +356,10 @@ public class FolderFragment extends Fragment
     private void addEmptyDeviceListView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, dp(48, getActivity()));
         // 72dp margin to align with dividers
-        // 4dp additional margin to align with the rest of the items
         int dividerInset = getResources().getDimensionPixelOffset(R.dimen.material_divider_inset);
         int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
-        int textPadding = dp(4, getActivity());
-        setMarginStart(params, dividerInset + textPadding);
-        setMarginEnd(params, contentInset + textPadding);
+        setMarginStart(params, dividerInset);
+        setMarginEnd(params, contentInset);
         TextView emptyView = new TextView(mDevicesContainer.getContext());
         emptyView.setGravity(CENTER_VERTICAL);
         emptyView.setText(R.string.devices_list_empty);

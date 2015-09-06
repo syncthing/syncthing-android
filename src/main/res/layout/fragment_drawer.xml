@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/drawerActionSettings"
-            style="@style/Widget.Syncthing.TextView.DrawerAction"
+            style="@style/Widget.Syncthing.TextView.Label"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:drawableLeft="@drawable/ic_settings_black_24dp"
@@ -39,7 +39,7 @@
 
             <LinearLayout
                 android:id="@+id/deviceIdContainer"
-                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -67,7 +67,7 @@
 
             <TextView
                 android:id="@+id/drawerActionWebGui"
-                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_web_black_24dp"
@@ -76,7 +76,7 @@
 
             <TextView
                 android:id="@+id/drawerActionDonate"
-                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_attach_money_black_24dp"
@@ -85,7 +85,7 @@
 
             <TextView
                 android:id="@+id/drawerActionExit"
-                style="@style/Widget.Syncthing.TextView.DrawerAction"
+                style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_close_black_24dp"
