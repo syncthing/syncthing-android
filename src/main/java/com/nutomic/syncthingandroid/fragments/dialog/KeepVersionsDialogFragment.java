@@ -68,6 +68,7 @@ public class KeepVersionsDialogFragment extends DialogFragment {
         picker.setMinValue(0);
         picker.setMaxValue(5);
         picker.setValue(mValue);
+        picker.setWrapSelectorWheel(false);
         return picker;
     }
 
