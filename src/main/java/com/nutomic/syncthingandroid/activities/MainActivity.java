@@ -35,7 +35,7 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DevicesFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
-import com.nutomic.syncthingandroid.fragments.FoldersFragment;
+import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
@@ -44,7 +44,7 @@ import java.util.Date;
 import static java.lang.Math.min;
 
 /**
- * Shows {@link com.nutomic.syncthingandroid.fragments.FoldersFragment} and
+ * Shows {@link FolderListFragment} and
  * {@link com.nutomic.syncthingandroid.fragments.DevicesFragment} in different tabs, and
  * {@link com.nutomic.syncthingandroid.fragments.DrawerFragment} in the navigation drawer.
  */
@@ -187,7 +187,7 @@ public class MainActivity extends SyncthingActivity
                 }
             };
 
-    private FoldersFragment mFolderFragment;
+    private FolderListFragment mFolderFragment;
 
     private DevicesFragment mDevicesFragment;
 
@@ -216,15 +216,15 @@ public class MainActivity extends SyncthingActivity
 
         if (savedInstanceState != null) {
             FragmentManager fm = getSupportFragmentManager();
-            mFolderFragment = (FoldersFragment) fm.getFragment(
-                    savedInstanceState, FoldersFragment.class.getName());
+            mFolderFragment = (FolderListFragment) fm.getFragment(
+                    savedInstanceState, FolderListFragment.class.getName());
             mDevicesFragment = (DevicesFragment) fm.getFragment(
                     savedInstanceState, DevicesFragment.class.getName());
             mDrawerFragment = (DrawerFragment) fm.getFragment(
                     savedInstanceState, DrawerFragment.class.getName());
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
         } else {
-            mFolderFragment = new FoldersFragment();
+            mFolderFragment = new FolderListFragment();
             mDevicesFragment = new DevicesFragment();
             mDrawerFragment = new DrawerFragment();
         }
@@ -269,7 +269,7 @@ public class MainActivity extends SyncthingActivity
         // Avoid crash if called during startup.
         if (mFolderFragment != null && mDevicesFragment != null && mDrawerFragment != null) {
             FragmentManager fm = getSupportFragmentManager();
-            fm.putFragment(outState, FoldersFragment.class.getName(), mFolderFragment);
+            fm.putFragment(outState, FolderListFragment.class.getName(), mFolderFragment);
             fm.putFragment(outState, DevicesFragment.class.getName(), mDevicesFragment);
             fm.putFragment(outState, DrawerFragment.class.getName(), mDrawerFragment);
             outState.putInt("currentTab", mViewPager.getCurrentItem());

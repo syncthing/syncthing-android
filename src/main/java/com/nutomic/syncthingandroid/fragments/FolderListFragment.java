@@ -23,7 +23,7 @@ import java.util.TimerTask;
 /**
  * Displays a list of all existing folders.
  */
-public class FoldersFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+public class FolderListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private FoldersAdapter mAdapter;
