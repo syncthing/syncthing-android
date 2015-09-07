@@ -36,16 +36,6 @@ To build the Syncthing app on Windows we need to include the native Syncthing bi
 - Download the `syncthing-linux-386` and `syncthing-linux-arm` archives from [Syncthing releases](https://github.com/syncthing/syncthing/releases) and extract them. In each there is a `syncthing` executable. Rename and place both of these to `libs/x86/libsyncthing.so` and `libs/armeabi/libsyncthing.so` respectively.  
 You will also need to replace the standard `build.gradle` file with [this one](https://gist.github.com/Moter8/9cfc191434d1989d86be).
 
-
-### Development Notes
-
-It is recommended to change the GUI and Listen Address ports for the debug app, eg to 8385 and 22001 respectively.
-
-The Syncthing backend used for this android application provides a web interface by default. It can be accessed via the Settings menu -> 'Web GUI'. It is quite helpful to access this web interface from your development machine. Read [android documentation](http://developer.android.com/tools/devices/emulator.html#redirection) on how to access the network of your emulator. Or use the following steps to connect to the single currently running emulator/AVD.
-- `telnet localhost 5554`
-- `redir add tcp:18384:8384`
-- Start Syncthing app on your emulator and access the web interface from you favorite browser of your development machine via [http://127.0.0.1:18384](http://127.0.0.1:18384)
-
 # License
 
 The project is licensed under the [MPLv2](LICENSE).
