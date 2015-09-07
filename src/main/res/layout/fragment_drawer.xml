@@ -42,7 +42,7 @@
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:minHeight="48dp"
                 android:orientation="vertical"
@@ -64,34 +64,6 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:visibility="invisible" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/drawerActionWebGui"
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_web_black_24dp"
-                android:drawableStart="@drawable/ic_web_black_24dp"
-                android:text="@string/web_gui_title" />
-
-            <TextView
-                android:id="@+id/drawerActionDonate"
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
-                android:drawableStart="@drawable/ic_attach_money_black_24dp"
-                android:text="@string/donate" />
-
-            <TextView
-                android:id="@+id/drawerActionExit"
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_close_black_24dp"
-                android:drawableStart="@drawable/ic_close_black_24dp"
-                android:text="@string/exit"
-                android:visibility="gone" />
 
             <View
                 android:layout_width="match_parent"
@@ -219,6 +191,41 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/list_divider" />
+
+            <TextView
+                android:id="@+id/drawerActionWebGui"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_web_black_24dp"
+                android:drawableStart="@drawable/ic_web_black_24dp"
+                android:text="@string/web_gui_title" />
+
+            <TextView
+                android:id="@+id/drawerActionDonate"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawableStart="@drawable/ic_attach_money_black_24dp"
+                android:text="@string/donate" />
+
+            <TextView
+                android:id="@+id/drawerActionExit"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_close_black_24dp"
+                android:drawableStart="@drawable/ic_close_black_24dp"
+                android:text="@string/exit"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

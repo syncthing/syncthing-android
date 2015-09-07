@@ -28,7 +28,7 @@ import static android.content.Intent.ACTION_VIEW;
  * Displays information about the local device.
  */
 public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemInfoListener,
-        RestApi.OnReceiveConnectionsListener {
+        RestApi.OnReceiveConnectionsListener, View.OnClickListener {
 
     private TextView mDeviceId;
 
@@ -47,48 +47,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     private Timer mTimer;
 
     private MainActivity mActivity;
-
-    private View.OnClickListener mShareIdListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            RestApi.shareDeviceId(getActivity(), mDeviceId.getText().toString());
-        }
-    };
-
-    private View.OnClickListener mWebGuiClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(mActivity, WebGuiActivity.class));
-            mActivity.closeDrawer();
-        }
-    };
-
-    private View.OnClickListener mDonateButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(ACTION_VIEW, Uri.parse(
-                    getString(R.string.donate_url))));
-            mActivity.closeDrawer();
-        }
-    };
-
-    private View.OnClickListener mSettingsClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(mActivity, SettingsActivity.class)
-                    .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
-            mActivity.closeDrawer();
-        }
-    };
-
-    private View.OnClickListener mExitClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mActivity.stopService(new Intent(mActivity, SyncthingService.class));
-            mActivity.finish();
-            mActivity.closeDrawer();
-        }
-    };
 
     public void onDrawerOpened() {
         mTimer = new Timer();
@@ -139,21 +97,21 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         mExitButton     = (TextView) view.findViewById(R.id.drawerActionExit);
 
         view.findViewById(R.id.deviceIdContainer)
-                .setOnClickListener(mShareIdListener);
+                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionWebGui)
-                .setOnClickListener(mWebGuiClickListener);
+                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionDonate)
-                .setOnClickListener(mDonateButtonClickListener);
+                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionSettings)
-                .setOnClickListener(mSettingsClickListener);
-        mExitButton.setOnClickListener(mExitClickListener);
+                .setOnClickListener(this);
+        mExitButton.setOnClickListener(this);
 
         updateExitButtonVisibility();
     }
 
     private void updateExitButtonVisibility() {
         boolean alwaysInBackground = SyncthingService.alwaysRunInBackground(getActivity());
-        mExitButton.setVisibility(alwaysInBackground ? View.VISIBLE : View.GONE);
+        mExitButton.setVisibility(alwaysInBackground ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -230,5 +188,33 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         RestApi.Connection c = connections.get(RestApi.TOTAL_STATS);
         mDownload.setText(RestApi.readableTransferRate(mActivity, c.inBits));
         mUpload.setText(RestApi.readableTransferRate(mActivity, c.outBits));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.deviceIdContainer:
+                RestApi.shareDeviceId(getActivity(), mDeviceId.getText().toString());
+                return;
+            case R.id.drawerActionWebGui:
+                startActivity(new Intent(mActivity, WebGuiActivity.class));
+                mActivity.closeDrawer();
+                return;
+            case R.id.drawerActionDonate:
+                startActivity(new Intent(ACTION_VIEW, Uri.parse(
+                        getString(R.string.donate_url))));
+                mActivity.closeDrawer();
+                return;
+            case R.id.drawerActionSettings:
+                startActivity(new Intent(mActivity, SettingsActivity.class)
+                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
+                mActivity.closeDrawer();
+                return;
+            case R.id.drawerActionExit:
+                mActivity.stopService(new Intent(mActivity, SyncthingService.class));
+                mActivity.finish();
+                mActivity.closeDrawer();
+                return;
+        }
     }
 }
