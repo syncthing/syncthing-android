@@ -33,9 +33,7 @@
     <eat-comment/>
 
     <style name="Theme.Syncthing.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorAccent">@color/primary_dark</item>
     </style>
 
     <!-- Toolbar themes -->
