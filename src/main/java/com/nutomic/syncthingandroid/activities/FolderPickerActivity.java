@@ -225,8 +225,7 @@ public class FolderPickerActivity extends SyncthingActivity
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        ArrayAdapter<File> adapter = (ArrayAdapter<File>) mListView.getAdapter();
-        File f = adapter.getItem(i);
+        File f = mFilesAdapter.getItem(i);
         if (f.isDirectory()) {
             displayFolder(f);
             invalidateOptions();

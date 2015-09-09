@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -159,14 +158,10 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
 
         mDeviceId.setText(info.myID);
         mDeviceId.setVisibility(View.VISIBLE);
-        mDeviceId.setOnTouchListener(new View.OnTouchListener() {
+        mDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    mActivity.getApi().copyDeviceId(mDeviceId.getText().toString());
-                    return true;
-                }
-                return false;
+            public void onClick(View v) {
+                mActivity.getApi().copyDeviceId(mDeviceId.getText().toString());
             }
         });
         mCpuUsage.setText(new DecimalFormat("0.00").format(info.cpuPercent) + "%");

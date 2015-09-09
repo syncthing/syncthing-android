@@ -40,6 +40,7 @@
     <eat-comment/>
 
     <style name="ThemeOverlay.Syncthing.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowBackground">@null</item>
         <item name="colorAccent">@android:color/white</item>
     </style>
 </resources>
