@@ -29,8 +29,7 @@
             android:key="use_root"
             android:title="@string/use_root_title"
             android:summary="@string/use_root_summary"
-            android:defaultValue="false"
-            android:enabled="false" />
+            android:defaultValue="false" />
 
         <ListPreference
             android:key="notification_type"

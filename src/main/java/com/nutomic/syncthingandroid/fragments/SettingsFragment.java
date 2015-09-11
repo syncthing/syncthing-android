@@ -51,15 +51,17 @@ public class SettingsFragment extends PreferenceFragment
     private CheckBoxPreference mAlwaysRunInBackground;
     private CheckBoxPreference mSyncOnlyCharging;
     private CheckBoxPreference mSyncOnlyWifi;
-    private Preference mUseRoot;
+    private CheckBoxPreference mUseRoot;
     private PreferenceScreen mOptionsScreen;
     private PreferenceScreen mGuiScreen;
     private SyncthingService mSyncthingService;
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        mOptionsScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
-        mGuiScreen.setEnabled(currentState == SyncthingService.State.ACTIVE);
+        boolean enabled = currentState == SyncthingService.State.ACTIVE;
+        mOptionsScreen.setEnabled(enabled);
+        mGuiScreen.setEnabled(enabled);
+        mUseRoot.setEnabled(enabled);
 
         if (currentState == SyncthingService.State.ACTIVE) {
             Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
@@ -122,7 +124,7 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
-        mUseRoot = findPreference(SyncthingService.PREF_USE_ROOT);
+        mUseRoot = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
         Preference appVersion = screen.findPreference(APP_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -140,7 +142,6 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
-        new TestRootTask().execute();
         mUseRoot.setOnPreferenceChangeListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
@@ -166,8 +167,14 @@ public class SettingsFragment extends PreferenceFragment
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            mUseRoot.setEnabled(result);
+        protected void onPostExecute(Boolean haveRoot) {
+            if (haveRoot) {
+                mSyncthingService.getApi().requireRestart(getActivity());
+                mUseRoot.setChecked(true);
+            } else {
+                Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
     }
 
@@ -235,9 +242,13 @@ public class SettingsFragment extends PreferenceFragment
                 mSyncOnlyWifi.setChecked(false);
             }
         } else if (preference.equals(mUseRoot)) {
-            if (!(Boolean) o)
+            if ((Boolean) o) {
+                new TestRootTask().execute();
+                return false;
+            } else {
                 new Thread(new ChownFilesRunnable()).start();
-            requireRestart = true;
+                requireRestart = true;
+            }
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
