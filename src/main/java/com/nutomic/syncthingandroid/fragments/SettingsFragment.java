@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -308,19 +310,42 @@ public class SettingsFragment extends PreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
             case EXPORT_CONFIG:
-                mSyncthingService.exportConfig();
-                Toast.makeText(getActivity(), getString(R.string.config_export_successful,
-                        SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.dialog_confirm_export)
+                        .setPositiveButton(android.R.string.yes,
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mSyncthingService.exportConfig();
+                                Toast.makeText(getActivity(),
+                                        getString(R.string.config_export_successful,
+                                        SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
                 return true;
             case IMPORT_CONFIG:
-                if (mSyncthingService.importConfig()) {
-                    Toast.makeText(getActivity(), getString(R.string.config_imported_successful),
-                            Toast.LENGTH_SHORT).show();
-                    mSyncthingService.getApi().requireRestart(getActivity(), false);
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.config_import_failed,
-                            SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
-                }
+                new AlertDialog.Builder(getActivity())
+                        .setMessage(R.string.dialog_confirm_import)
+                        .setPositiveButton(android.R.string.yes,
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (mSyncthingService.importConfig()) {
+                                    Toast.makeText(getActivity(),
+                                            getString(R.string.config_imported_successful),
+                                            Toast.LENGTH_SHORT).show();
+                                    mSyncthingService.getApi().requireRestart(getActivity(), false);
+                                } else {
+                                    Toast.makeText(getActivity(),
+                                            getString(R.string.config_import_failed,
+                                            SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
                 return true;
             case SYNCTHING_RESET:
                 ((SyncthingActivity) getActivity()).getApi().resetSyncthing(getActivity());

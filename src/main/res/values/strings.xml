@@ -136,6 +136,12 @@
     <!-- Toast shown when selecting 'devices' if no devices have been added -->
     <string name="no_devices">Please connect a device first.</string>
 
+    <!-- Dialog shown before config export -->
+    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.</string>
+
+    <!-- Dialog shown before config import -->
+    <string name="dialog_confirm_import">Do you really want to import a new configuration? Existing files will be overwritten.</string>
+
     <!-- DeviceSettingsFragment -->
 
 
