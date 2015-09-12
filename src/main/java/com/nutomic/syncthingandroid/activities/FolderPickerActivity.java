@@ -225,7 +225,9 @@ public class FolderPickerActivity extends SyncthingActivity
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        File f = mFilesAdapter.getItem(i);
+        @SuppressWarnings("unchecked")
+        ArrayAdapter<File> adapter = (ArrayAdapter<File>) mListView.getAdapter();
+        File f = adapter.getItem(i);
         if (f.isDirectory()) {
             displayFolder(f);
             invalidateOptions();
