@@ -14,6 +14,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.FoldersAdapter;
 
@@ -136,6 +137,10 @@ public class FoldersFragment extends ListFragment implements SyncthingService.On
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected RestApi.Folder getItemFolder(int index) {
+        return mAdapter.getItem(index);
     }
 
 }

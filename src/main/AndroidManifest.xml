@@ -68,7 +68,25 @@
         </activity>
         <activity android:name=".activities.RestartActivity"
             android:theme="@style/Theme.Syncthing.Translucent"/>
-
+        <activity
+            android:name=".activities.ShareToFolderActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" >
+                </action>
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+                <data android:mimeType="*/*" >
+                </data>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" >
+                </action>
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+                <data android:mimeType="*/*" >
+                </data>
+            </intent-filter>
+        </activity>
         <service android:name=".syncthing.SyncthingService" />
 
         <receiver android:name=".syncthing.NetworkReceiver">
