@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Widget" />
+    <style name="Widget.Syncthing" />
 
     <!-- Widget styles -->
     <eat-comment />
@@ -10,6 +12,41 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
         <item name="android:divider">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.Syncthing.TextView" />
+
+    <style name="Widget.Syncthing.TextView.Label" parent="@android:style/Widget.TextView">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:drawablePadding">32dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:paddingLeft">@dimen/abc_action_bar_content_inset_material</item>
+        <item name="android:paddingRight">@dimen/abc_action_bar_content_inset_material</item>
+    </style>
+
+    <style name="Widget.Syncthing.TextView.Label.Folder">
+        <item name="android:textColor">?attr/editTextColor</item>
+    </style>
+
+    <style name="Widget.Syncthing.TextView.Label.Folder.DeviceList">
+        <item name="android:paddingLeft">4dp</item>
+    </style>
+
+    <style name="Widget.Syncthing.TextView.Label.Folder.Field">
+        <item name="android:background">@null</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:inputType">textVisiblePassword</item>
+    </style>
+
+    <style name="Widget.Syncthing.Switch" parent="@style/Widget.AppCompat.CompoundButton.Switch" >
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Widget.Syncthing.DrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+        <item name="color">@android:color/white</item>
     </style>
 
     <!-- Text appearances -->

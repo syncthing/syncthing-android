@@ -41,7 +41,6 @@ public class LogActivity extends SyncthingActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_log);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState != null) {
             mSyncthingLog = savedInstanceState.getBoolean("syncthingLog");

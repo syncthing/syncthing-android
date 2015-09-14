@@ -13,7 +13,6 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -105,12 +104,8 @@ public class WebGuiActivity extends SyncthingActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_web_gui);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLoadingView = findViewById(R.id.loading);
-        ProgressBar pb = (ProgressBar) mLoadingView.findViewById(R.id.progress);
-        pb.setIndeterminate(true);
-
         loadCaCert();
 
         mWebView = (WebView) findViewById(R.id.webview);

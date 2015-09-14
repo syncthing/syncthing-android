@@ -6,17 +6,18 @@
     <item
         android:id="@+id/create"
         android:title="@string/add"
+        android:icon="@drawable/ic_save_white_24dp_active"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/share_device_id"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_share_white_24dp_active"
         android:title="@string/share_device_id"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/delete"
-        android:icon="@drawable/ic_delete"
+        android:icon="@drawable/ic_delete_white_24dp_active"
         android:title="@string/delete_device"
         app:showAsAction="ifRoom" />
 

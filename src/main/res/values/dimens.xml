@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_divider_inset">72dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+</resources>

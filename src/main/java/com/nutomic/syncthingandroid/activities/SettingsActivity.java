@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceSettingsFragment;
-import com.nutomic.syncthingandroid.fragments.FolderSettingsFragment;
+import com.nutomic.syncthingandroid.fragments.FolderFragment;
 import com.nutomic.syncthingandroid.fragments.SettingsFragment;
 
 /**
@@ -26,7 +26,7 @@ public class SettingsActivity extends SyncthingActivity {
      * {@link #ACTION_REPO_SETTINGS_FRAGMENT} to determine if an existing folder/device should be
      * edited or a new one created.
      * <p/>
-     * If this is false, {@link com.nutomic.syncthingandroid.fragments.FolderSettingsFragment#EXTRA_REPO_ID} or
+     * If this is false, {@link FolderFragment#EXTRA_REPO_ID} or
      * {@link com.nutomic.syncthingandroid.fragments.DeviceSettingsFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
      */
     public static final String EXTRA_IS_CREATE = "create";
@@ -37,7 +37,7 @@ public class SettingsActivity extends SyncthingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_settings);
 
         FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState != null) {
@@ -56,7 +56,7 @@ public class SettingsActivity extends SyncthingActivity {
                     }
                     break;
                 case ACTION_REPO_SETTINGS_FRAGMENT:
-                    mFragment = new FolderSettingsFragment();
+                    mFragment = new FolderFragment();
                     if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
                         throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
                     }
@@ -71,7 +71,7 @@ public class SettingsActivity extends SyncthingActivity {
         }
 
         fm.beginTransaction()
-                .replace(android.R.id.content, mFragment)
+                .replace(R.id.content, mFragment)
                 .commit();
     }
 

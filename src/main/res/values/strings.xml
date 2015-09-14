@@ -28,6 +28,8 @@
 
     <string name="no">No</string>
 
+    <string name="off">off</string>
+
     <!-- FoldersFragment -->
 
 
@@ -132,9 +134,6 @@
 
     <!-- Toast shown when trying to create a folder with an empty path -->
     <string name="folder_path_required">The folder path must not be empty</string>
-
-    <!-- Toast shown when selecting 'devices' if no devices have been added -->
-    <string name="no_devices">Please connect a device first.</string>
 
     <!-- Dialog shown before config export -->
     <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.</string>

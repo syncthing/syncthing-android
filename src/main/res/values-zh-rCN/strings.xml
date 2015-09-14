@@ -78,8 +78,6 @@
   <string name="folder_id_invalid">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
-  <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">请先连接设备</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">设备标识</string>

@@ -74,8 +74,6 @@
   <string name="folder_id_invalid">폴더 ID는 문자, 숫자, 마침표(.), 붙임표(-), 밑줄 문자(_)로만 구성되어 있는 짧은 식별자(64자 이하)여야 합니다.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
-  <!--Toast shown when selecting 'devices' if no devices have been added-->
-  <string name="no_devices">먼저 기기를 연결해 주십시오.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">기기 ID</string>

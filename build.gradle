@@ -27,6 +27,8 @@ repositories {
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201504231659'
     compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
@@ -43,7 +45,7 @@ android {
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
-        minSdkVersion 8
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 72
         versionName "0.6.6"
