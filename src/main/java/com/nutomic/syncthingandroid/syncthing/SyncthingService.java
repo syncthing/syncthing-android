@@ -282,7 +282,7 @@ public class SyncthingService extends Service implements
         // Make sure this is also done for existing installs. We can replace this check with
         // {@link #isFirstStart()} after a while.
         if (!sp.getBoolean("default_user_pw_set", false)) {
-            sp.edit().putBoolean("default_user_pw_set", true).commit();
+            sp.edit().putBoolean("default_user_pw_set", true).apply();
             char[] chars =
                     "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
             StringBuilder sb = new StringBuilder();
@@ -293,7 +293,7 @@ public class SyncthingService extends Service implements
             String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
             Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
             sp.edit().putString("gui_user", user)
-                     .putString("gui_password", sb.toString()).commit();
+                     .putString("gui_password", sb.toString()).apply();
         }
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);

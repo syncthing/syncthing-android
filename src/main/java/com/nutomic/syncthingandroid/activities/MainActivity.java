@@ -148,7 +148,7 @@ public class MainActivity extends SyncthingActivity
                 .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        sp.edit().putBoolean("first_start", false).commit();
+                        sp.edit().putBoolean("first_start", false).apply();
                     }
                 })
                 .show();

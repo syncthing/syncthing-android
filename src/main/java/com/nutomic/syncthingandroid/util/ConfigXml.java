@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -219,7 +220,7 @@ public class ConfigXml {
                 .getElementsByTagName("folder").item(0);
         String model = Build.MODEL
                 .replace(" ", "_")
-                .toLowerCase()
+                .toLowerCase(Locale.US)
                 .replaceAll("[^a-z0-9_-]", "");
         folder.setAttribute("id", mContext.getString(R.string.default_folder_id, model));
         folder.setAttribute("path", Environment

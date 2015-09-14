@@ -234,12 +234,8 @@ public class FolderPickerActivity extends SyncthingActivity
         }
     }
 
-    @SuppressLint("NewApi")
     private void invalidateOptions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-            invalidateOptionsMenu();
-        else
-            supportInvalidateOptionsMenu();
+        invalidateOptionsMenu();
     }
 
     private class FileAdapter extends ArrayAdapter<File> {
