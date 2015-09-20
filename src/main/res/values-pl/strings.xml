@@ -219,7 +219,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="share_title">Udostępnij</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
+  <string name="syncthing_disabled_title">Syncthing jest wyłączony</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Czy chcesz zmienić ustawienia?</string>
   <!--Button text on the "syncthing disabled" dialog-->
@@ -227,7 +227,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Wyjście</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
-  <string name="syncthing_active">Syncthing jest uruchomione</string>
+  <string name="syncthing_active">Syncthing jest uruchomiony</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Drzewo folderów zbyt głębokie. Sprawdź pod kątem obecności zapętlonych dowiązań symbolicznych.</string>
   <!--Toast shown if syncthing failed to create a config-->
