@@ -32,6 +32,7 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.RestApi.SimpleVersioning;
 import com.nutomic.syncthingandroid.syncthing.RestApi.Versioning;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class FolderFragment extends Fragment
 
     private TextView mVersioningKeepView;
 
-    private boolean mIsCreate;
+    private boolean mIsCreateMode;
 
     private KeepVersionsDialogFragment mKeepVersionsDialogFragment = new KeepVersionsDialogFragment();
 
@@ -154,18 +155,26 @@ public class FolderFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         SettingsActivity activity = (SettingsActivity) getActivity();
-        mIsCreate = activity.getIsCreate();
-        activity.setTitle(isCreatingFolder() ? R.string.create_folder : R.string.edit_folder);
+        mIsCreateMode = activity.getIsCreate();
+        activity.setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
         activity.registerOnServiceConnectedListener(this);
         setHasOptionsMenu(true);
 
-        if (isCreatingFolder()) {
+        if (mIsCreateMode) {
             if (savedInstanceState != null) {
                 mFolder = (RestApi.Folder) savedInstanceState.getSerializable("folder");
             }
             if (mFolder == null) {
                 initFolder();
             }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mSyncthingService != null) {
+            mSyncthingService.unregisterOnApiChangeListener(this);
         }
     }
 
@@ -196,9 +205,48 @@ public class FolderFragment extends Fragment
         mPathView.setOnClickListener(mPathViewClickListener);
         view.findViewById(R.id.versioningContainer).setOnClickListener(mVersioningContainerClickListener);
 
-        if (isEditingFolder()) {
+        if (!mIsCreateMode) {
             prepareEditMode();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mIdView.removeTextChangedListener(mIdTextWatcher);
+        mPathView.removeTextChangedListener(mPathTextWatcher);
+    }
+
+    @Override
+    public void onServiceConnected() {
+        mSyncthingService = ((SyncthingActivity) getActivity()).getService();
+        mSyncthingService.registerOnApiChangeListener(this);
+    }
+
+    @Override
+    public void onApiChange(SyncthingService.State currentState) {
+        if (currentState != ACTIVE) {
+            getActivity().finish();
+            return;
+        }
+
+        if (!mIsCreateMode) {
+            List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
+            String passedId = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
+            for (RestApi.Folder currentFolder : folders) {
+                if (currentFolder.id.equals(passedId)) {
+                    mFolder = currentFolder;
+                    break;
+                }
+            }
+            if (mFolder == null) {
+                Log.w(TAG, "Folder not found in API update");
+                getActivity().finish();
+                return;
+            }
+        }
+
+        updateViewsAndSetListeners();
     }
 
     private void updateViewsAndSetListeners() {
@@ -234,53 +282,6 @@ public class FolderFragment extends Fragment
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mIdView.removeTextChangedListener(mIdTextWatcher);
-        mPathView.removeTextChangedListener(mPathTextWatcher);
-    }
-
-    @Override
-    public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != ACTIVE) {
-            getActivity().finish();
-            return;
-        }
-
-        if (isEditingFolder()) {
-            List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
-            String passedId = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
-            for (RestApi.Folder currentFolder : folders) {
-                if (currentFolder.id.equals(passedId)) {
-                    mFolder = currentFolder;
-                    break;
-                }
-            }
-            if (mFolder == null) {
-                Log.w(TAG, "Folder not found in API update");
-                getActivity().finish();
-                return;
-            }
-        }
-
-        updateViewsAndSetListeners();
-    }
-
-    @Override
-    public void onServiceConnected() {
-        mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-        mSyncthingService.registerOnApiChangeListener(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mSyncthingService != null) {
-            mSyncthingService.unregisterOnApiChangeListener(this);
-        }
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.folder_settings, menu);
@@ -288,8 +289,8 @@ public class FolderFragment extends Fragment
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.create).setVisible(isCreatingFolder());
-        menu.findItem(R.id.delete).setVisible(isEditingFolder());
+        menu.findItem(R.id.create).setVisible(mIsCreateMode);
+        menu.findItem(R.id.delete).setVisible(!mIsCreateMode);
     }
 
     @Override
@@ -324,8 +325,9 @@ public class FolderFragment extends Fragment
             case android.R.id.home:
                 getActivity().finish();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -355,7 +357,6 @@ public class FolderFragment extends Fragment
 
     private void addEmptyDeviceListView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, dp(48, getActivity()));
-        // 72dp margin to align with dividers
         int dividerInset = getResources().getDimensionPixelOffset(R.dimen.material_divider_inset);
         int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
         setMarginStart(params, dividerInset);
@@ -376,28 +377,8 @@ public class FolderFragment extends Fragment
     }
 
     private void updateRepo() {
-        if (isEditingFolder()) {
+        if (!mIsCreateMode) {
             mSyncthingService.getApi().editFolder(mFolder, false, getActivity());
         }
-    }
-
-    private boolean isEditingFolder() {
-        return !mIsCreate;
-    }
-
-    private boolean isCreatingFolder() {
-        return mIsCreate;
-    }
-
-    private class TextWatcherAdapter implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        @Override
-        public void afterTextChanged(Editable s) {}
     }
 }

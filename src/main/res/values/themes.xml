@@ -13,6 +13,7 @@
         <item name="textAppearanceListItemSecondary">@style/TextAppearance.Syncthing.ListItemSecondary</item>
         <item name="textAppearanceListItemSmall">@style/TextAppearance.Syncthing.ListItemSmall</item>
 
+        <item name="windowActionModeOverlay">true</item>
         <item name="android:listViewStyle">@style/Widget.Syncthing.ListView</item>
         <item name="android:listDivider">@drawable/list_divider_inset</item>
         <item name="drawerArrowStyle">@style/Widget.Syncthing.DrawerArrowToggle</item>

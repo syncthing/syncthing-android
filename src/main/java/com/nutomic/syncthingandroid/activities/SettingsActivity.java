@@ -3,10 +3,9 @@ package com.nutomic.syncthingandroid.activities;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.fragments.DeviceSettingsFragment;
+import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
 import com.nutomic.syncthingandroid.fragments.SettingsFragment;
 
@@ -27,7 +26,7 @@ public class SettingsActivity extends SyncthingActivity {
      * edited or a new one created.
      * <p/>
      * If this is false, {@link FolderFragment#EXTRA_REPO_ID} or
-     * {@link com.nutomic.syncthingandroid.fragments.DeviceSettingsFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
+     * {@link DeviceFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
      */
     public static final String EXTRA_IS_CREATE = "create";
 
@@ -50,7 +49,7 @@ public class SettingsActivity extends SyncthingActivity {
                     mFragment = new SettingsFragment();
                     break;
                 case ACTION_NODE_SETTINGS_FRAGMENT:
-                    mFragment = new DeviceSettingsFragment();
+                    mFragment = new DeviceFragment();
                     if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
                         throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
                     }
@@ -87,16 +86,4 @@ public class SettingsActivity extends SyncthingActivity {
     public boolean getIsCreate() {
         return getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
     }
-
-    /**
-	 * Used for the QR code scanner in DeviceSettingsFragment.
-     *
-     * Instead of the cast, an interface could be used (if there are multiple fragments using this).
-     */
-    public void onClick(View view) {
-        if (mFragment instanceof DeviceSettingsFragment) {
-            ((DeviceSettingsFragment) mFragment).onClick(view);
-        }
-    }
-
 }
