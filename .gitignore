@@ -45,3 +45,6 @@ ext/syncthing/src/github.com/kr/
 ext/syncthing/src/github.com/mattn/
 ext/syncthing/src/github.com/tools/
 ext/syncthing/src/golang.org/
+
+# gradle-play-publisher
+keys.json

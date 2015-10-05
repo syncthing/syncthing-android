@@ -8,11 +8,13 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.3.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.github.triplet.play'
 
 repositories {
     mavenCentral()
@@ -132,3 +134,26 @@ task cleanNative(type: Delete) {
 }
 clean.dependsOn cleanNative
 
+play {
+    jsonFile = file('keys.json')
+    uploadImages = true
+}
+
+/**
+ * Some languages are not supported by Google Play, so we ignore them.
+ */
+task deleteUnsupportedPlayTranslations(type: Delete) {
+    delete 'src/fat/play/en/'
+    delete 'src/fat/play/da_DK'
+    delete 'src/fat/play/el-EL'
+    delete 'src/fat/play/es_EC'
+    delete 'src/fat/play/es_MX'
+    delete 'src/fat/play/fr_FR'
+    delete 'src/fat/play/no_NO'
+    delete 'src/fat/play/zh_TW'
+    delete 'src/fat/play/zh_CN'
+    delete 'src/fat/play/pt_BR'
+    delete 'src/fat/play/pl_PL'
+    delete 'src/fat/play/nb'
+    delete 'src/fat/play/nn'
+}
