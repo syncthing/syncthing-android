@@ -31,12 +31,28 @@ Device name and Android version:
 
 versions of involved Syncthing nodes: vx.x.x, ...
 
-
 logcat: *link to file*: Use the log window (Settings -> Open Log -> Android Log -> Share)
 
 config.xml: *link to file* (if it might be related, located in `/data/data/com.nutomic.syncthingandroid`, use the export functionality and fetch the file at /sdcard/backups/syncthing/config.xml)
 
 screenshots: *link to file* (only for UI problems)
+
+
+## Running Syncthing directly
+
+If you can't start the app, you may be asked to execute the Syncthing binary from a command line.
+
+This requires root permissions!
+
+First, open a shell on you device, either through adb or with an app. Then, execute the following commands:
+```
+cd data/data/com.nutomic.syncthingandroid/lib/
+./libsyncthing.so -home data/data/com.nutomic.syncthingandroid/files/
+```
+
+You can also pass [environment variables](http://docs.syncthing.net/dev/debugging.html#debugging) to Syncthing.
+
+
 
 ## Pull Requests
 
@@ -44,6 +60,6 @@ Always welcome.
 
 Code should follow the [Android Code Style Guidelines](https://source.android.com/source/code-style.html#java-language-rules). This can be done automatically in Android Studio.
 
-Unit tests are available, and can be executed with `gradle connectedAndroidTest`, or from Android Studio. New code should always add or improve related tests.
+Unit tests are available, and can be executed with `gradle connectedAndroidTest`, or from Android Studio. New code should always come with tests.
 
 Lint warnings should be fixed. If that's not possible, they should be ignored as specifically as possible.
