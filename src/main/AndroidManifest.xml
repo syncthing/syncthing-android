@@ -67,7 +67,8 @@
                 android:value="splitActionBarWhenNarrow" />
         </activity>
         <activity android:name=".activities.RestartActivity"
-            android:theme="@style/Theme.Syncthing.Translucent"/>
+            android:theme="@style/Theme.Syncthing.Translucent"
+            android:launchMode="singleTop"/>
 
         <service android:name=".syncthing.SyncthingService" />
 

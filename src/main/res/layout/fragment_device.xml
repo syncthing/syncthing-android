@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DeviceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:listDivider"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:id="@+id/idContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="horizontal">
+
+            <com.nutomic.syncthingandroid.widget.EnhancedEditText
+                android:id="@+id/id"
+                style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_cellphone_black_24dp"
+                android:drawableStart="@drawable/ic_cellphone_black_24dp"
+                android:hint="@string/device_id"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:nextFocusForward="@+id/name"
+                tools:text="@string/device_id_placeholder" />
+
+            <ImageView
+                android:id="@+id/qrButton"
+                style="?actionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                android:contentDescription="@string/scan_qr_code_description"
+                android:src="@drawable/ic_qrcode_black_24dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/name"
+            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_tag_text_outline_black_24dp"
+            android:drawableStart="@drawable/ic_tag_text_outline_black_24dp"
+            android:hint="@string/name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/addresses"
+            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_link_black_24dp"
+            android:drawableStart="@drawable/ic_link_black_24dp"
+            android:hint="@string/addresses"
+            android:imeOptions="actionDone" />
+
+        <LinearLayout
+            android:id="@+id/compressionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Widget.Syncthing.TextView.Label.Details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:checked="false"
+                android:drawableLeft="@drawable/ic_zip_box_black_24dp"
+                android:drawableStart="@drawable/ic_zip_box_black_24dp"
+                android:text="@string/compression" />
+
+            <TextView
+                android:id="@+id/compressionValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/introducer"
+            style="@style/Widget.Syncthing.TextView.Label.Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:drawableLeft="@drawable/ic_phonelink_black_24dp"
+            android:drawableStart="@drawable/ic_phonelink_black_24dp"
+            android:text="@string/introducer" />
+
+        <TextView
+            android:id="@+id/currentAddress"
+            style="@style/Widget.Syncthing.TextView.Label.Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_info_black_24dp"
+            android:drawableStart="@drawable/ic_info_black_24dp"
+            android:enabled="false"
+            android:hint="@string/current_address"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/syncthingVersion"
+            style="@style/Widget.Syncthing.TextView.Label.Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_transparent_24dp"
+            android:drawableStart="@drawable/ic_transparent_24dp"
+            android:enabled="false"
+            android:hint="@string/syncthing_version_title"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+</ScrollView>

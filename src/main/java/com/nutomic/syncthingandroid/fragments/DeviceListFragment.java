@@ -23,7 +23,7 @@ import java.util.TimerTask;
 /**
  * Displays a list of all existing devices.
  */
-public class DevicesFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
+public class DeviceListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         ListView.OnItemClickListener {
 
     private DevicesAdapter mAdapter;
@@ -96,7 +96,7 @@ public class DevicesFragment extends ListFragment implements SyncthingService.On
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
         intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
-        intent.putExtra(DeviceSettingsFragment.EXTRA_NODE_ID, mAdapter.getItem(i).deviceID);
+        intent.putExtra(DeviceFragment.EXTRA_NODE_ID, mAdapter.getItem(i).deviceID);
         startActivity(intent);
     }
 
