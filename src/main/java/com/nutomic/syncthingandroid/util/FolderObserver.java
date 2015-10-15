@@ -95,6 +95,8 @@ public class FolderObserver extends FileObserver {
                 ? new File(mPath, path)
                 : new File(mPath);
 
+        Log.v(TAG, "Received inotify event " + Integer.toHexString(event) + " at " +
+                fullPath.getAbsolutePath());
         switch (event) {
             case MOVED_FROM:
                 // fall through
