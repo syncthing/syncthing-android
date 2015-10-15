@@ -347,10 +347,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void requireRestart(Activity activity, boolean updateConfig) {
         if (updateConfig) {
-            new PostTask(mHttpsCertPath)
-                    .execute(mUrl, PostTask.URI_CONFIG, mApiKey, mConfig.toString());
+            new PostConfigTask(mHttpsCertPath)
+                    .execute(mUrl, mApiKey, mConfig.toString());
         }
-        // TODO Should wait until PostTask is completed, see #398
+        // TODO Should wait until PostConfigTask is completed, see #398
 
         if (mRestartPostponed)
             return;
@@ -941,8 +941,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
-        new PostTask(mHttpsCertPath).execute(mUrl, PostTask.URI_SCAN, mApiKey, "folder", folderId, "sub",
-                relativePath);
+        new PostScanTask(mHttpsCertPath).execute(mUrl, mApiKey, folderId, relativePath);
     }
 
     /**
