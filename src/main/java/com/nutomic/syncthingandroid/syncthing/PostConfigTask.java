@@ -43,8 +43,8 @@ public class PostConfigTask extends AsyncTask<String, Void, Boolean> {
         post.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[1]));
 
         try {
-            post.setEntity(new StringEntity(params[3], HTTP.UTF_8));
-            Log.v(TAG, "API call parameters: " + params[3]);
+            post.setEntity(new StringEntity(params[2], HTTP.UTF_8));
+            Log.v(TAG, "API call parameters: " + params[2]);
             httpclient.execute(post);
         } catch (IOException|IllegalArgumentException e) {
             Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
