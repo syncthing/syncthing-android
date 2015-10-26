@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, werden Sie erneut um Erlaubnis gefragt. Die zusammengeführten Statistiken sind unter https://data.syncthing.net zu finden.</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
+  <string name="off">aus</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -50,7 +51,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
   <!--Menu item to donate-->
-  <string name="donate">Spenden</string>
+  <string name="donate">Jetzt Spenden!</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis-ID</string>
@@ -78,6 +79,10 @@
   <string name="folder_id_invalid">Die Verzeichnis-ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Der Ordnerpfad darf nicht leer sein</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Geräte-ID</string>
@@ -113,6 +118,8 @@
   <string name="device_name_required">Der Gerätename darf nicht leer sein</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Code scannen</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Konnte keine Root-Rechte erhalten.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Weboberfläche</string>
@@ -268,7 +275,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Untätig</string>
-  <string name="state_scanning">scanning</string>
+  <string name="state_scanning">Scannen</string>
   <string name="state_cleaning">Aufräumen</string>
   <string name="state_syncing">Synchronisiere</string>
   <string name="state_error">Fehler</string>
