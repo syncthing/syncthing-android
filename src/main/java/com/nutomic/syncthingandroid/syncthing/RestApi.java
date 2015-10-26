@@ -439,16 +439,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     SystemInfo si = new SystemInfo();
                     si.alloc = system.getLong("alloc");
                     si.cpuPercent = system.getDouble("cpuPercent");
-                    if (system.has("extAnnounceOK")) {
-                        JSONObject announce = system.getJSONObject("extAnnounceOK");
-                        si.extAnnounceTotal = announce.length();
-                        for (Iterator<String> it = announce.keys(); it.hasNext(); ) {
-                            String key = it.next();
-                            if (announce.getBoolean(key)) {
-                                si.extAnnounceConnected++;
-                            }
-                        }
-                    }
+                    si.extAnnounceTotal = system.getInt("discoveryMethods");
+                    si.extAnnounceConnected =
+                            si.extAnnounceTotal - system.getJSONObject("discoveryErrors").length();
                     si.goroutines = system.getInt("goroutines");
                     si.myID = system.getString("myID");
                     si.sys = system.getLong("sys");
