@@ -974,7 +974,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         try {
             switch (mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted")) {
                 case  0: return UsageReportSetting.UNDECIDED;
-                case  1: return UsageReportSetting.ACCEPTED;
+                case  1: return UsageReportSetting.UNDECIDED;
+                case  2: return UsageReportSetting.ACCEPTED;
                 case -1: return UsageReportSetting.DENIED;
                 default: throw new RuntimeException("Invalid usage report value");
             }
