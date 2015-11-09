@@ -119,6 +119,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String address;
         public String clientVersion;
         public int completion;
+        public boolean connected;
     }
 
     public static class Model {
@@ -583,6 +584,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                         c.address = conn.getString("address");
                         c.clientVersion = conn.getString("clientVersion");
                         c.completion = getDeviceCompletion(deviceId);
+                        c.connected = conn.getBoolean("connected");
 
                         Connection prev = (mPreviousConnections.containsKey(deviceId))
                                 ? mPreviousConnections.get(deviceId)

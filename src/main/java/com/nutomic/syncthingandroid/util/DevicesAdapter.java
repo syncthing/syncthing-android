@@ -55,7 +55,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
 
         name.setText(getItem(position).name);
         Resources r = getContext().getResources();
-        if (conn != null) {
+        if (conn != null && conn.connected) {
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(r.getColor(R.color.text_green));
