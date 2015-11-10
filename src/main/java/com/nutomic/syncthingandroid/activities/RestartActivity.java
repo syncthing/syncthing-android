@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -25,7 +24,6 @@ public class RestartActivity extends SyncthingActivity {
     public static final int NOTIFICATION_RESTART = 2;
 
     @Override
-    @TargetApi(11)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

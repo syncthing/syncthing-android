@@ -1,8 +1,8 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
@@ -38,7 +38,7 @@ public class SettingsActivity extends SyncthingActivity {
 
         setContentView(R.layout.activity_settings);
 
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         if (savedInstanceState != null) {
             mFragment = fm.getFragment(savedInstanceState,
                     savedInstanceState.getString("fragment_name"));
@@ -79,7 +79,7 @@ public class SettingsActivity extends SyncthingActivity {
         super.onSaveInstanceState(outState);
         String fragmentClassName = mFragment.getClass().getName();
         outState.putString("fragment_name", fragmentClassName);
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         fm.putFragment(outState, fragmentClassName, mFragment);
     }
 
