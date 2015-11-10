@@ -1,21 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
+  <string name="app_description">Egy nyílt, megbízható és decentralizált fájl szinkronizáló alkalmazás.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Mappa hozzáadása</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Eszköz azonosító megosztása</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Eszköz azonosító megosztása</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Betöltés...</string>
+  <string name="yes">Igen</string>
+  <string name="no">Nem</string>
+  <string name="off">kikapcsolva</string>
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">Mappák</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">Nem található mappa</string>
   <!--Format string for folder file count-->
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Eszközök</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Nem található eszköz</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">Szinkronizálás (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">Kapcsolat bontva</string>
   <!--Title for current download rate-->
   <string name="download_title">Letöltés</string>
   <!--Title for current upload rate-->
@@ -30,60 +43,90 @@
   <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
   <!--Menu item to donate-->
+  <string name="donate">Támogatás</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
+  <string name="folder_id">Mappa azonosító</string>
   <!--Setting title-->
+  <string name="directory">Mappa</string>
   <!--Setting title-->
+  <string name="folder_master">Központi mappa</string>
   <!--Setting title-->
   <string name="devices">Eszközök</string>
   <!--Setting title-->
+  <string name="file_versioning">Fájl verziózás</string>
   <!--Setting title-->
+  <string name="keep_versions">Verziók megtartása</string>
   <!--Setting title-->
+  <string name="delete_folder">Mappa törlése</string>
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">Mappa hozzáadása</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">Mappa szerkesztése</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Létrehozás</string>
   <!--Dialog shown when attempting to delete a folder-->
   <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
-  <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
+  <string name="device_id">Eszköz azonosító</string>
   <!--Setting title-->
   <string name="name">Név</string>
   <!--Setting title-->
   <string name="addresses">Címek</string>
   <!--Setting title-->
+  <string name="current_address">Jelenlegi cím</string>
   <!--Setting title-->
   <string name="compression">Tömörítés</string>
   <!--Strings representing compression options-->
   <!--Setting title-->
+  <string name="introducer">Bevezető</string>
   <!--ActionBar item-->
+  <string name="delete_device">Eszköz törlése</string>
   <!--Title for DeviceSettingsFragment in create mode-->
+  <string name="add_device">Eszköz hozzáadása</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Hozzáadás</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">Eszköz szerkesztése</string>
   <!--Dialog shown when attempting to delete a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR kód olvasása</string>
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
   <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Várakozás a felületre</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title for dialog displayed on first start-->
   <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Beállítások</string>
+  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
+  <string name="always_run_in_background">Mindig fusson a háttérben</string>
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
   <string name="sync_only_charging">Csak töltés közbeni szinkronizálás</string>
+  <string name="sync_only_wifi">Szinkronizálás csak WiFi-n keresztül</string>
+  <string name="use_root_title">Szinkronizálás Root-ként</string>
+  <string name="use_root_summary">Syncthing futtatása Superuser-ként</string>
+  <string name="notification_type_title">Értesítés</string>
+  <string name="notification_type_summary">Értesítés típusának kiválasztása</string>
   <string name="category_syncthing">Syncthing</string>
+  <string name="syncthing_options">Syncthing beállításai</string>
+  <string name="device_name">Eszköz név</string>
+  <string name="global_announce_enabled">Globális felfedezés</string>
+  <string name="local_announce_enabled">Helyi felfedezés</string>
   <string name="upnp_enabled">UPnP engedélyezése</string>
+  <string name="global_announce_server">Globális felfedező szerver</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
@@ -101,7 +144,9 @@
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Syncthing verzió</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Syncthing-Android verzió</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <!--Toast shown on devices with kitkat or higher-->
@@ -110,9 +155,11 @@
   <!--Menu item to select the current folder-->
   <!--LogActivity-->
   <!--Title of the "log" activity-->
+  <string name="log_title">Napló</string>
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
   <!--Title of the "share log" menu button-->
+  <string name="share_title">Megosztás</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <!--Message of the "syncthing disabled" dialog-->
@@ -125,13 +172,20 @@
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
+  <string name="restart_title">Újraindítás szükséges</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">Újraindítás most</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">Később</string>
   <!--Text of the notification shown when a restart is needed-->
   <!--Shown when a device ID is copied to the clipboard-->
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
   <string name="state_idle">Tétlen</string>
+  <string name="state_scanning">Átnézés</string>
+  <string name="state_cleaning">Takarítás</string>
   <string name="state_syncing">Szinkronizálás</string>
+  <string name="state_error">Hiba</string>
+  <string name="state_unknown">Ismeretlen</string>
 </resources>

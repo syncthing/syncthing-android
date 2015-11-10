@@ -6,4 +6,4 @@ Quellcode: https://github.com/syncthing/syncthing-android
 
 Forum: https://discourse.syncthing.net/
 
-Problemfragen: https://github.com/syncthing/syncthing-android/issues
+Vorgänge: https://github.com/syncthing/syncthing-android/issues
