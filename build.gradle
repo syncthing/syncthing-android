@@ -16,9 +16,7 @@ apply plugin: 'com.github.ben-manes.versions'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://jcenter.bintray.com'
-    }
+    jcenter()
 }
 
 dependencies {
