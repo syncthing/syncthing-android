@@ -17,7 +17,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -25,6 +24,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -128,10 +128,7 @@ public class MainActivity extends SyncthingActivity
         PackageManager pm = getPackageManager();
         long firstInstallTime = 0;
         try {
-            // No info is available on Froyo.
-            firstInstallTime = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
-                    ? pm.getPackageInfo(getPackageName(), 0).firstInstallTime
-                    : 0;
+            firstInstallTime = pm.getPackageInfo(getPackageName(), 0).firstInstallTime;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "This should never happen", e);
         }
@@ -324,7 +321,7 @@ public class MainActivity extends SyncthingActivity
      * Closes the drawer. Use when navigating away from activity.
      */
     public void closeDrawer() {
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
 
     /**
@@ -333,8 +330,8 @@ public class MainActivity extends SyncthingActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent e) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (!mDrawerLayout.isDrawerOpen(GravityCompat.START))
-                mDrawerLayout.openDrawer(GravityCompat.START);
+            if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
             else
                 closeDrawer();
 
