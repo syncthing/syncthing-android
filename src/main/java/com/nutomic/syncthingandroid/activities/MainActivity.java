@@ -6,10 +6,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -40,6 +41,7 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.min;
 
@@ -58,7 +60,7 @@ public class MainActivity extends SyncthingActivity
      *
      * @see #showUsageReportingDialog()
      */
-    private static final long USAGE_REPORTING_DIALOG_DELAY = 3 * 24 * 60 * 60 * 1000;
+    private static final long USAGE_REPORTING_DIALOG_DELAY = TimeUnit.DAYS.toMillis(3);
 
     private AlertDialog mLoadingDialog;
 
@@ -362,22 +364,32 @@ public class MainActivity extends SyncthingActivity
     /**
      * Displays dialog asking user to accept/deny usage reporting.
      */
-    @SuppressLint("InflateParams")
     private void showUsageReportingDialog() {
         final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getApi().setUsageReportAccepted(
-                        (which == DialogInterface.BUTTON_POSITIVE)
-                                ? RestApi.UsageReportSetting.ACCEPTED
-                                : RestApi.UsageReportSetting.DENIED,
-                        MainActivity.this);
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.ACCEPTED,
+                                                        MainActivity.this);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.DENIED,
+                                                        MainActivity.this);
+                        break;
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        Uri uri = Uri.parse("https://data.syncthing.net");
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                        break;
+                }
+
             }
         };
 
         getApi().getUsageReport(new RestApi.OnReceiveUsageReportListener() {
             @Override
             public void onReceiveUsageReport(String report) {
+                @SuppressLint("InflateParams")
                 View v = LayoutInflater.from(MainActivity.this)
                         .inflate(R.layout.dialog_usage_reporting, null);
                 TextView tv = (TextView) v.findViewById(R.id.example);
@@ -387,6 +399,7 @@ public class MainActivity extends SyncthingActivity
                         .setView(v)
                         .setPositiveButton(R.string.yes, listener)
                         .setNegativeButton(R.string.no, listener)
+                        .setNeutralButton("Open Website", listener)
                         .setCancelable(false)
                         .show();
             }
