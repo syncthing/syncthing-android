@@ -3,14 +3,12 @@ package com.nutomic.syncthingandroid.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import android.support.v4.view.MenuItemCompat;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -44,7 +42,7 @@ public class LogActivity extends SyncthingActivity {
 
         if (savedInstanceState != null) {
             mSyncthingLog = savedInstanceState.getBoolean("syncthingLog");
-            ActivityCompat.invalidateOptionsMenu(this);
+            invalidateOptionsMenu();
         }
 
         mLog = (TextView) findViewById(R.id.log);

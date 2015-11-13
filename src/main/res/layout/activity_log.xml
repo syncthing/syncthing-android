@@ -2,7 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/widget_toolbar" />
 
@@ -11,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/log"
@@ -19,8 +21,8 @@
             android:textSize="12sp"
             android:textIsSelectable="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
     </ScrollView>
 
 </LinearLayout>

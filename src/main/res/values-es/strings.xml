@@ -78,6 +78,10 @@
   <string name="folder_id_invalid">El ID de carpeta tiene que ser un identificador corto (64 caracteres o menos) formado por letras, números y los caracteres como el punto (.), el guión (-) y el subrayado(_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">¿Realmente desea exportar la configuración? Se sobrescribirán los archivos existentes.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">¿Realmente desea importar una nueva configuración? Se sobrescribirán los archivos existentes.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID del dispositivo</string>
@@ -113,6 +117,7 @@
   <string name="device_name_required">El nombre del dispositivo no debe estar vacío</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Escanear código QR</string>
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>

@@ -119,6 +119,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String address;
         public String clientVersion;
         public int completion;
+        public boolean connected;
     }
 
     public static class Model {
@@ -439,16 +440,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     SystemInfo si = new SystemInfo();
                     si.alloc = system.getLong("alloc");
                     si.cpuPercent = system.getDouble("cpuPercent");
-                    if (system.has("extAnnounceOK")) {
-                        JSONObject announce = system.getJSONObject("extAnnounceOK");
-                        si.extAnnounceTotal = announce.length();
-                        for (Iterator<String> it = announce.keys(); it.hasNext(); ) {
-                            String key = it.next();
-                            if (announce.getBoolean(key)) {
-                                si.extAnnounceConnected++;
-                            }
-                        }
-                    }
+                    si.extAnnounceTotal = system.getInt("discoveryMethods");
+                    si.extAnnounceConnected =
+                            si.extAnnounceTotal - system.getJSONObject("discoveryErrors").length();
                     si.goroutines = system.getInt("goroutines");
                     si.myID = system.getString("myID");
                     si.sys = system.getLong("sys");
@@ -590,6 +584,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                         c.address = conn.getString("address");
                         c.clientVersion = conn.getString("clientVersion");
                         c.completion = getDeviceCompletion(deviceId);
+                        c.connected = conn.getBoolean("connected");
 
                         Connection prev = (mPreviousConnections.containsKey(deviceId))
                                 ? mPreviousConnections.get(deviceId)
@@ -981,7 +976,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         try {
             switch (mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted")) {
                 case  0: return UsageReportSetting.UNDECIDED;
-                case  1: return UsageReportSetting.ACCEPTED;
+                case  1: return UsageReportSetting.UNDECIDED;
+                case  2: return UsageReportSetting.ACCEPTED;
                 case -1: return UsageReportSetting.DENIED;
                 default: throw new RuntimeException("Invalid usage report value");
             }

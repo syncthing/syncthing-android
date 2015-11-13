@@ -6,10 +6,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -17,7 +18,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,6 +41,7 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.min;
 
@@ -58,7 +60,7 @@ public class MainActivity extends SyncthingActivity
      *
      * @see #showUsageReportingDialog()
      */
-    private static final long USAGE_REPORTING_DIALOG_DELAY = 3 * 24 * 60 * 60 * 1000;
+    private static final long USAGE_REPORTING_DIALOG_DELAY = TimeUnit.DAYS.toMillis(3);
 
     private AlertDialog mLoadingDialog;
 
@@ -128,10 +130,7 @@ public class MainActivity extends SyncthingActivity
         PackageManager pm = getPackageManager();
         long firstInstallTime = 0;
         try {
-            // No info is available on Froyo.
-            firstInstallTime = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
-                    ? pm.getPackageInfo(getPackageName(), 0).firstInstallTime
-                    : 0;
+            firstInstallTime = pm.getPackageInfo(getPackageName(), 0).firstInstallTime;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "This should never happen", e);
         }
@@ -324,7 +323,7 @@ public class MainActivity extends SyncthingActivity
      * Closes the drawer. Use when navigating away from activity.
      */
     public void closeDrawer() {
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
 
     /**
@@ -333,8 +332,8 @@ public class MainActivity extends SyncthingActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent e) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (!mDrawerLayout.isDrawerOpen(GravityCompat.START))
-                mDrawerLayout.openDrawer(GravityCompat.START);
+            if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
             else
                 closeDrawer();
 
@@ -365,22 +364,32 @@ public class MainActivity extends SyncthingActivity
     /**
      * Displays dialog asking user to accept/deny usage reporting.
      */
-    @SuppressLint("InflateParams")
     private void showUsageReportingDialog() {
         final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getApi().setUsageReportAccepted(
-                        (which == DialogInterface.BUTTON_POSITIVE)
-                                ? RestApi.UsageReportSetting.ACCEPTED
-                                : RestApi.UsageReportSetting.DENIED,
-                        MainActivity.this);
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.ACCEPTED,
+                                                        MainActivity.this);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.DENIED,
+                                                        MainActivity.this);
+                        break;
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        Uri uri = Uri.parse("https://data.syncthing.net");
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                        break;
+                }
+
             }
         };
 
         getApi().getUsageReport(new RestApi.OnReceiveUsageReportListener() {
             @Override
             public void onReceiveUsageReport(String report) {
+                @SuppressLint("InflateParams")
                 View v = LayoutInflater.from(MainActivity.this)
                         .inflate(R.layout.dialog_usage_reporting, null);
                 TextView tv = (TextView) v.findViewById(R.id.example);
@@ -390,6 +399,7 @@ public class MainActivity extends SyncthingActivity
                         .setView(v)
                         .setPositiveButton(R.string.yes, listener)
                         .setNegativeButton(R.string.no, listener)
+                        .setNeutralButton("Open Website", listener)
                         .setCancelable(false)
                         .show();
             }

@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">Otwarta, wiarygodna i zdecentralizowana aplikacja do synchronizacji plików.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">Dodaj folder</string>
   <!--Title of the "share device id" menu action-->
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
@@ -38,7 +41,8 @@
   <!--Dialog shown when attempting to delete a folder-->
   <!--Toast shown when trying to create a folder with an invalid ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
-  <!--Toast shown when selecting 'devices' if no devices have been added-->
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <!--Setting title-->
@@ -55,6 +59,7 @@
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <!--Text for WebGuiActivity loading view-->
@@ -66,6 +71,7 @@
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
+  <string name="category_syncthing">Syncthing</string>
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->

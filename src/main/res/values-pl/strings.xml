@@ -12,6 +12,7 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Ładowanie...</string>
   <string name="usage_reporting_dialog_title">Zezwolić na wysyłanie anonimowych statystyk użycia?</string>
+  <string name="usage_reporting_dialog_description">Codziennie wysyłany jest zaszyfrowany raport statystyk użycia. Zawarte w nim są informacje o platformie użytkownika, rozmiarach folderów i wersji aplikacji. Jeśli zestaw pobieranych danych zmieni się to okno zostanie ponownie wyświetlone .\n\nZebrane statystyki są dostępne dla każdego na https://data.syncthing.net.</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <!--FoldersFragment-->
@@ -77,6 +78,10 @@
   <string name="folder_id_invalid">Nazwa katalogu musi być krótka (64 lub mniej znaków). Może zawierać tylko litery, cyfry, kropki, myślniki i znak podkreślenia.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka do folderu nie może być pusta</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Czy na pewno chcesz eksportować swoje ustawienia? Istniejące pliki zostaną nadpisane.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Czy na pewno chcesz importować nowe ustawienia? Istniejące pliki zostaną nadpisane.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID urządzenia</string>
@@ -112,6 +117,8 @@
   <string name="device_name_required">Nazwa urządzenia nie może być pusta</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Skanuj kod QR</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Nie otrzymano uprawnień root.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
@@ -219,7 +226,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <string name="share_title">Udostępnij</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing jest wyłączone</string>
+  <string name="syncthing_disabled_title">Syncthing jest wyłączony</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Czy chcesz zmienić ustawienia?</string>
   <!--Button text on the "syncthing disabled" dialog-->
@@ -227,7 +234,7 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Wyjście</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
-  <string name="syncthing_active">Syncthing jest uruchomione</string>
+  <string name="syncthing_active">Syncthing jest uruchomiony</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Drzewo folderów zbyt głębokie. Sprawdź pod kątem obecności zapętlonych dowiązań symbolicznych.</string>
   <!--Toast shown if syncthing failed to create a config-->
@@ -254,6 +261,13 @@ Proszę o zgłaszanie wszelkich problemów na Githubie.</string>
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Bezczynny</string>
   <string name="state_scanning">Skanowanie</string>

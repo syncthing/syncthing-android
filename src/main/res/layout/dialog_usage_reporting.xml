@@ -13,7 +13,7 @@
         android:paddingBottom="10dip"
         android:text="@string/usage_reporting_dialog_description" />
 
-    <HorizontalScrollView android:layout_width="match_parent"
+    <ScrollView android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
@@ -21,6 +21,6 @@
             android:background="@color/light_grey"
             android:padding="5dip"
             android:id="@+id/example"/>
-    </HorizontalScrollView>
+    </ScrollView>
 
 </LinearLayout>
