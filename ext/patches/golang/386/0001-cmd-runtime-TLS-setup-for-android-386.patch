@@ -1,0 +1,267 @@
+From df553e646c597ab7fb26e3ffa2b730c04ab069f8 Mon Sep 17 00:00:00 2001
+From: Hyang-Ah Hana Kim <hyangah@gmail.com>
+Date: Thu, 5 Nov 2015 16:32:27 -0500
+Subject: [PATCH 1/4] cmd,runtime: TLS setup for android/386
+
+Same ugly hack as https://go-review.googlesource.com/15991.
+
+Update golang/go#9327.
+
+Change-Id: I58284e83268a15de95eabc833c3e01bf1e3faa2e
+---
+ src/cmd/internal/obj/x86/asm6.go  |  3 ++
+ src/cmd/link/internal/ld/sym.go   | 15 +++++--
+ src/runtime/cgo/gcc_android_386.c | 87 +++++++++++++++++++++++++++++++++++++++
+ src/runtime/cgo/gcc_linux_386.c   | 12 ++++++
+ src/runtime/rt0_android_386.s     | 39 ++++++++++++++++++
+ src/runtime/sys_linux_386.s       | 10 +++++
+ 6 files changed, 162 insertions(+), 4 deletions(-)
+ create mode 100644 src/runtime/cgo/gcc_android_386.c
+ create mode 100644 src/runtime/rt0_android_386.s
+
+diff --git a/src/cmd/internal/obj/x86/asm6.go b/src/cmd/internal/obj/x86/asm6.go
+index 919e00b..13ab240 100644
+--- a/src/cmd/internal/obj/x86/asm6.go
++++ b/src/cmd/internal/obj/x86/asm6.go
+@@ -1975,6 +1975,9 @@ func prefixof(ctxt *obj.Link, p *obj.Prog, a *obj.Addr) int {
+ 			if p.Mode == 32 {
+ 				switch ctxt.Headtype {
+ 				default:
++					if isAndroid {
++						return 0x65 // GS
++					}
+ 					log.Fatalf("unknown TLS base register for %s", obj.Headstr(ctxt.Headtype))
+ 
+ 				case obj.Hdarwin,
+diff --git a/src/cmd/link/internal/ld/sym.go b/src/cmd/link/internal/ld/sym.go
+index da5776d..d91f138 100644
+--- a/src/cmd/link/internal/ld/sym.go
++++ b/src/cmd/link/internal/ld/sym.go
+@@ -102,10 +102,17 @@ func linknew(arch *LinkArch) *Link {
+ 		obj.Hopenbsd,
+ 		obj.Hdragonfly,
+ 		obj.Hsolaris:
+-		if obj.Getgoos() == "android" && ctxt.Arch.Thechar == '6' {
+-			// Android/x86 constant - offset from 0(FS) to our
+-			// TLS slot. Explained in src/runtime/cgo/gcc_android_*.c
+-			ctxt.Tlsoffset = 0x1d0
++		if obj.Getgoos() == "android" {
++			switch ctxt.Arch.Thechar {
++			case '6':
++				// Android/x86 constant - offset from 0(FS) to our
++				// TLS slot. Explained in src/runtime/cgo/gcc_android_*.c
++				ctxt.Tlsoffset = 0x1d0
++			case '8':
++				ctxt.Tlsoffset = 0xf8
++			default:
++				ctxt.Tlsoffset = -1 * ctxt.Arch.Ptrsize
++			}
+ 		} else {
+ 			ctxt.Tlsoffset = -1 * ctxt.Arch.Ptrsize
+ 		}
+diff --git a/src/runtime/cgo/gcc_android_386.c b/src/runtime/cgo/gcc_android_386.c
+new file mode 100644
+index 0000000..a82d7d0
+--- /dev/null
++++ b/src/runtime/cgo/gcc_android_386.c
+@@ -0,0 +1,87 @@
++// Copyright 2015 The Go Authors.  All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++#include <string.h> /* for strerror */
++#include <pthread.h>
++#include <signal.h>
++#include "libcgo.h"
++
++static void* threadentry(void*);
++static pthread_key_t k1;
++
++#define magic1 (0x23581321U)
++
++static void
++inittls(void)
++{
++	uint32 x;
++	pthread_key_t tofree[128], k;
++	int i, ntofree;
++
++	/*
++	 * Same logic, code as gcc_android_amd64.c:/inittls.
++	 * Note that this is a temporary hack that should be fixed soon.
++	 *
++	 * TODO: fix this.
++	 *
++	 * The linker and runtime hard-code this constant offset
++	 * from %gs where we expect to find g. Disgusting.
++	 *
++	 * Known to src/cmd/link/internal/ld/sym.go:/0xf8
++	 * and to src/runtime/sys_linux_386.s:/0xf8 or /GOOS_android.
++	 * TODO(hyangah): check 0xb0 works with API23+
++	 *
++	 * As disgusting as on the darwin/386, darwin/amd64.
++	 */
++	ntofree = 0;
++	for(;;) {
++		if(pthread_key_create(&k, nil) < 0) {
++			fprintf(stderr, "runtime/cgo: pthread_key_create failed\n");
++			abort();
++		}
++		pthread_setspecific(k, (void*)magic1);
++		asm volatile("movl %%gs:0xf8, %0" : "=r"(x));
++		pthread_setspecific(k, 0);
++		if (x == magic1) {
++			k1 = k;
++			break;
++		}
++		if(ntofree >= nelem(tofree)) {
++			fprintf(stderr, "runtime/cgo: could not obtain pthread_keys\n");
++			fprintf(stderr, "\ttried");
++			for(i=0; i<ntofree; i++)
++				fprintf(stderr, " %#x", (unsigned)tofree[i]);
++			fprintf(stderr, "\n");
++			abort();
++		}
++		tofree[ntofree++] = k;
++	}
++	// TODO: output to stderr is not useful for apps.
++	// Can we fall back to Android's log library?
++
++	/*
++	 * We got the key we wanted.  Free the others.
++	 */
++	for(i=0; i<ntofree; i++) {
++		pthread_key_delete(tofree[i]);
++	}
++}
++
++
++static void*
++threadentry(void *v)
++{
++	ThreadStart ts;
++
++	ts = *(ThreadStart*)v;
++	free(v);
++
++	pthread_setspecific(k1, (void*)ts.g);
++
++	crosscall_386(ts.fn);
++	return nil;
++}
++
++void (*x_cgo_inittls)(void) = inittls;
++void* (*x_cgo_threadentry)(void*) = threadentry;
+diff --git a/src/runtime/cgo/gcc_linux_386.c b/src/runtime/cgo/gcc_linux_386.c
+index 9801c87..8fb7130 100644
+--- a/src/runtime/cgo/gcc_linux_386.c
++++ b/src/runtime/cgo/gcc_linux_386.c
+@@ -10,6 +10,10 @@
+ static void *threadentry(void*);
+ static void (*setg_gcc)(void*);
+ 
++// These will be set in gcc_android_386.c for android-specific customization.
++void (*x_cgo_inittls)(void);
++void* (*x_cgo_threadentry)(void*);
++
+ void
+ x_cgo_init(G *g, void (*setg)(void*))
+ {
+@@ -21,6 +25,10 @@ x_cgo_init(G *g, void (*setg)(void*))
+ 	pthread_attr_getstacksize(&attr, &size);
+ 	g->stacklo = (uintptr)&attr - size + 4096;
+ 	pthread_attr_destroy(&attr);
++
++	if (x_cgo_inittls) {
++		x_cgo_inittls();
++	}
+ }
+ 
+ 
+@@ -57,6 +65,10 @@ _cgo_sys_thread_start(ThreadStart *ts)
+ static void*
+ threadentry(void *v)
+ {
++	if (x_cgo_threadentry) {
++		return x_cgo_threadentry(v);
++	}
++
+ 	ThreadStart ts;
+ 
+ 	ts = *(ThreadStart*)v;
+diff --git a/src/runtime/rt0_android_386.s b/src/runtime/rt0_android_386.s
+new file mode 100644
+index 0000000..bf44af3
+--- /dev/null
++++ b/src/runtime/rt0_android_386.s
+@@ -0,0 +1,39 @@
++// Copyright 2015 The Go Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++#include "textflag.h"
++
++TEXT _rt0_386_android(SB),NOSPLIT,$8
++	MOVL	8(SP), AX  // argc
++	LEAL	12(SP), BX  // argv
++	MOVL	AX, 0(SP)
++	MOVL	BX, 4(SP)
++	CALL	main(SB)
++	INT	$3
++
++TEXT _rt0_386_android_lib(SB),NOSPLIT,$0
++	PUSHL	$_rt0_386_android_argv(SB)  // argv
++	PUSHL	$1  // argc
++	CALL	_rt0_386_linux_lib(SB)
++	POPL	AX
++	POPL	AX
++	RET
++
++DATA _rt0_386_android_argv+0x00(SB)/4,$_rt0_386_android_argv0(SB)
++DATA _rt0_386_android_argv+0x04(SB)/4,$0
++DATA _rt0_386_android_argv+0x08(SB)/4,$0
++DATA _rt0_386_android_argv+0x0c(SB)/4,$15  // AT_PLATFORM  (auxvec.h)
++DATA _rt0_386_android_argv+0x10(SB)/4,$_rt0_386_android_auxv0(SB)
++DATA _rt0_386_android_argv+0x14(SB)/4,$0
++DATA _rt0_386_android_argv+0x18(SB)/4,$0
++DATA _rt0_386_android_argv+0x1c(SB)/4,$0
++GLOBL _rt0_386_android_argv(SB),NOPTR,$0x20
++
++// TODO: AT_HWCAP necessary? If so, what value?
++
++DATA _rt0_386_android_argv0(SB)/8, $"gojni"
++GLOBL _rt0_386_android_argv0(SB),RODATA,$8
++
++DATA _rt0_386_android_auxv0(SB)/8, $"i386"
++GLOBL _rt0_386_android_auxv0(SB),RODATA,$8
+diff --git a/src/runtime/sys_linux_386.s b/src/runtime/sys_linux_386.s
+index 9e0e87c..a52c4b2 100644
+--- a/src/runtime/sys_linux_386.s
++++ b/src/runtime/sys_linux_386.s
+@@ -405,6 +405,15 @@ TEXT runtime·setldt(SB),NOSPLIT,$32
+ 	MOVL	entry+0(FP), BX	// entry
+ 	MOVL	address+4(FP), CX	// base address
+ 
++#ifdef GOOS_android
++	/*
++	 * Same as in sys_darwin_386.s:/ugliness, different constant.
++	 * address currently holds m->tls, which must be %gs:0xf8.
++	 * See cgo/gcc_android_386.c for the derivation of the constant.
++	 */
++	SUBL	$0xf8, CX
++	MOVL	CX, 0(CX)
++#else
+ 	/*
+ 	 * When linking against the system libraries,
+ 	 * we use its pthread_create and let it set up %gs
+@@ -420,6 +429,7 @@ TEXT runtime·setldt(SB),NOSPLIT,$32
+ 	 */
+ 	ADDL	$0x4, CX	// address
+ 	MOVL	CX, 0(CX)
++#endif
+ 
+ 	// set up user_desc
+ 	LEAL	16(SP), AX	// struct user_desc
+-- 
+2.5.2
+

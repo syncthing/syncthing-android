@@ -38,6 +38,9 @@ proguard/
 gradle/wrapper/gradle/
 gradle/wrapper/gradlew*
 
+# Go native dependencies
+ext/golang/dist
+
 # Syncthing native dependencies
 ext/syncthing/pkg/
 ext/syncthing/src/code.google.com/

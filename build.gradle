@@ -27,10 +27,6 @@ dependencies {
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
 
-preBuild {
-    dependsOn 'buildNative'
-}
-
 project.archivesBaseName = 'syncthing'
 
 android {
@@ -104,24 +100,8 @@ android {
 
 task buildNative(type: Exec) {
     outputs.upToDateWhen { false }
-    executable = './build-syncthing.sh'
+    executable = './make-all.bash'
 }
-
-task copyNative(type: Copy) {
-    def lib_dir = "libs/"
-    new File(lib_dir).mkdirs()
-    def st_dir = "bin/";
-    from st_dir + 'syncthing-x86', st_dir + 'syncthing-armeabi';
-    into lib_dir
-    rename('syncthing-x86', 'x86/libsyncthing.so')
-    rename('syncthing-armeabi', 'armeabi/libsyncthing.so')
-}
-buildNative.finalizedBy copyNative
-
-task cleanBin(type: Delete) {
-    delete 'bin/'
-}
-copyNative.finalizedBy cleanBin
 
 task cleanNative(type: Delete) {
     delete 'bin/'
