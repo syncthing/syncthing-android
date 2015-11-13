@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
+  <string name="off">vypnuto</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -61,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">Přístroje</string>
   <!--Setting title-->
-  <string name="file_versioning">Verze souborů</string>
-  <!--Setting title-->
   <string name="keep_versions">Ponechat verze</string>
   <!--Setting title-->
   <string name="delete_folder">Smazat adresář</string>
@@ -78,6 +77,10 @@
   <string name="folder_id_invalid">ID adresáře musí být krátký identifikátor (64 znaků nebo méně) obsahující pouze písmena, čísla, tečky (.), pomlčky (-) a podtržítka (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci? Existující soubory budou přepsány.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID přístroje</string>
@@ -113,6 +116,8 @@
   <string name="device_name_required">Jméno přístroje nesmí být prázdné</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Načíst QR kód</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Práva uživatele root nejsou dostupná</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Syncthing GUI</string>

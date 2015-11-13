@@ -61,8 +61,6 @@
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
-  <string name="file_versioning">Gestão de versões</string>
-  <!--Setting title-->
   <string name="keep_versions">Manter versões</string>
   <!--Setting title-->
   <string name="delete_folder">Eliminar pasta</string>
@@ -78,6 +76,8 @@
   <string name="folder_id_invalid">O ID da pasta tem que ser um identificador curto (64 caracteres ou menos) consistindo apenas em letras, números e os caracteres ponto (.), hífen (-) e sublinhado (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -113,6 +113,7 @@
   <string name="device_name_required">O nome do dispositivo não pode estar vazio</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Ler código QR</string>
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface Web</string>

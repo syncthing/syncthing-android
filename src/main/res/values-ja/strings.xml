@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">暗号化された使用状況レポートを毎日送信します。これは、一般的なプラットフォーム、フォルダーのサイズ、およびアプリケーションのバージョンを追跡するために使用します。報告されたデータセットが変更された場合、このダイアログボックスを再度表示します。\n\n集計された統計は https://data.syncthing.net で公開されています。</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
+  <string name="off">オフ</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -61,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">デバイス</string>
   <!--Setting title-->
-  <string name="file_versioning">ファイルバージョニング</string>
-  <!--Setting title-->
   <string name="keep_versions">保持バージョン</string>
   <!--Setting title-->
   <string name="delete_folder">フォルダーを削除</string>
@@ -78,6 +77,10 @@
   <string name="folder_id_invalid">フォルダーIDは、文字、数字、ドット (.)、ダッシュ (-)、アンダースコア (_) からなる、短い識別子 (64文字以下) でなければなりません。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">デバイス ID</string>
@@ -113,6 +116,8 @@
   <string name="device_name_required">デバイス名は空にできません</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR コードをスキャン</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">root アクセス許可を取得できませんでした</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>

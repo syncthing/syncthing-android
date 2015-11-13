@@ -54,8 +54,6 @@
   <!--Setting title-->
   <string name="devices">裝置</string>
   <!--Setting title-->
-  <string name="file_versioning">檔案版本控制</string>
-  <!--Setting title-->
   <string name="keep_versions">保留版本數</string>
   <!--Setting title-->
   <string name="delete_folder">刪除資料夾</string>
@@ -71,6 +69,8 @@
   <string name="folder_id_invalid">資料夾識別碼必須為一段只包含半形英文字母、數字、點 (.)、連接符號 (-) 以及底線 (_) 的簡短識別碼 (不多於 64 個字元)</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">裝置識別碼</string>
@@ -101,6 +101,7 @@
   <string name="device_name_required">裝置名稱不得為空</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">掃描 QR Code</string>
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>

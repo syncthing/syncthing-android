@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">Le rapport crypté des usages est envoyé tous les jours. Il est utilisé pour recueillir les types de plateformes, la tailles des dossiers et les versions d\'applications. Si le type de données envoyées dans les rapports est modifié, vous verrez à nouveau cette boite de dialogue.\n\nL\'agrégation des statistiques est publique, et disponible sur https://data.syncthing.net.</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
+  <string name="off">Arrêt</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -61,15 +62,13 @@
   <!--Setting title-->
   <string name="devices">Machines</string>
   <!--Setting title-->
-  <string name="file_versioning">Gestion des versions</string>
-  <!--Setting title-->
   <string name="keep_versions">Conserver les versions</string>
   <!--Setting title-->
   <string name="delete_folder">Supprimer le dossier</string>
   <!--Title for FolderSettingsFragment in create mode-->
   <string name="create_folder">Créer un dossier</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Editer le dossier</string>
+  <string name="edit_folder">Edition du dossier</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Créer</string>
   <!--Dialog shown when attempting to delete a folder-->
@@ -78,6 +77,10 @@
   <string name="folder_id_invalid">L\'ID du dossier doit être un identifiant court (64 caractères ou moins) pouvant contenir les valeurs suivantes: lettres, chiffres, point (.), tiret milieu (-), et tiret-bas (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Le chemin du dossier ne doit pas être vide</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Voulez-vous vraiment exporter votre configuration ? Les fichiers existants seront écrasés.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Voulez-vous vraiment importer la nouvelle configuration ? Les paramètres existants seront écrasés.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID machine</string>
@@ -104,7 +107,7 @@
   <!--Menu item to confirm adding a device-->
   <string name="add">Ajouter</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Editer machine</string>
+  <string name="edit_device">Edition de la machine</string>
   <!--Dialog shown when attempting to delete a device-->
   <string name="delete_device_confirm">Voulez-vous vraiment supprimer cette machine ?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
@@ -113,6 +116,8 @@
   <string name="device_name_required">Le nom de la machine ne peut pas être vide</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scanner un QR Code</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Échec d\'obtention des droits root (superviseur).</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface WEB</string>

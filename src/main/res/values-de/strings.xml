@@ -62,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">Geräte</string>
   <!--Setting title-->
-  <string name="file_versioning">Dateiversionierung</string>
-  <!--Setting title-->
   <string name="keep_versions">Versionen behalten</string>
   <!--Setting title-->
   <string name="delete_folder">Verzeichnis löschen</string>

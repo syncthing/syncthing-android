@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
+  <string name="off">выкл</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -61,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">Устройства</string>
   <!--Setting title-->
-  <string name="file_versioning">Версионирование</string>
-  <!--Setting title-->
   <string name="keep_versions">Сохранять версии</string>
   <!--Setting title-->
   <string name="delete_folder">Удалить папку</string>
@@ -78,6 +77,10 @@
   <string name="folder_id_invalid">ID папки должен быть коротким идентификатором (64 символов или меньше) состоящий из букв, цифр и символов точки (.), тире(-) и подчеркивания (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Путь к папке не может быть пустым</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Действительно хотите экспортировать вашу конфигурацию? Существующие файлы будут перезаписаны.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Действительно хотите импортировать новую конфигурацию? Существующие файлы будут перезаписаны.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID устройства</string>
@@ -113,6 +116,8 @@
   <string name="device_name_required">Имя устройства не может быть пустым</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Сканировать QR Код</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Рут права не доступны</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Веб-интерфейс</string>

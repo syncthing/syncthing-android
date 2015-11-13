@@ -62,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">Enheter</string>
   <!--Setting title-->
-  <string name="file_versioning">Versjonering av filer</string>
-  <!--Setting title-->
   <string name="keep_versions">Behold versjoner</string>
   <!--Setting title-->
   <string name="delete_folder">Slett Mappe</string>

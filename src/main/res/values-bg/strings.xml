@@ -61,8 +61,6 @@
   <!--Setting title-->
   <string name="devices">Устройства</string>
   <!--Setting title-->
-  <string name="file_versioning">Версии на файловете</string>
-  <!--Setting title-->
   <string name="keep_versions">Запазвай последните</string>
   <!--Setting title-->
   <string name="delete_folder">Изтриване на папката</string>
@@ -136,7 +134,7 @@
   <string name="settings_title">Настройки</string>
   <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Постоянна работа на заден фон</string>
+  <string name="always_run_in_background">Постоянна работа на заден план</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Постоянно синхронизиране, според следващите опции.</string>
   <!--Preference summary in case it is disabled-->

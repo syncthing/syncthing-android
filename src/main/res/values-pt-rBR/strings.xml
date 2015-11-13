@@ -6,15 +6,13 @@
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Compartilhar ID do dispositivo</string>
+  <string name="share_device_id">Compartilhar ID</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar ID do dispositivo para</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Carregando...</string>
   <string name="usage_reporting_dialog_title">Permitir relatório anônimo de uso?</string>
-  <string name="usage_reporting_dialog_description">O relatório criptografado de uso é enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.
-
-As estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <!--FoldersFragment-->
@@ -22,13 +20,13 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Não foram encontradas quaisquer pastas</string>
+  <string name="folder_list_empty">Nenhuma pasta encontrada</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d arquivos</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivos</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Não foram encontrados quaisquer dispositivos</string>
+  <string name="devices_list_empty">Nenhum dispositivo encontrado</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Atualizado</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
@@ -46,9 +44,9 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Same as upload_title with a colon and space appended-->
   <string name="upload_title_colon">Envio:\u0020</string>
   <!--Title for current CPU usage-->
-  <string name="cpu_usage">Uso do processador</string>
+  <string name="cpu_usage">Uso de CPU</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">Uso da memória</string>
+  <string name="ram_usage">Uso de RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
   <!--Menu item to donate-->
@@ -59,13 +57,11 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title-->
-  <string name="folder_master">Pasta Mestre</string>
+  <string name="folder_master">Mestre</string>
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
-  <string name="file_versioning">Versionamento de arquivos</string>
-  <!--Setting title-->
-  <string name="keep_versions">Manter versões</string>
+  <string name="keep_versions">Versões a manter</string>
   <!--Setting title-->
   <string name="delete_folder">Apagar pasta</string>
   <!--Title for FolderSettingsFragment in create mode-->
@@ -77,9 +73,13 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Deseja mesmo apagar esta pasta?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">O ID da pasta deve ser um nome curto (64 caracteres ou menos) consistindo apenas em letras, números, ponto (.), hífen (-) ou underscore (_).</string>
+  <string name="folder_id_invalid">O ID da pasta deve ser um nome curto (64 caracteres ou menos) e composto apenas de letras, números, ponto (.), hífen (-) ou underscore (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Exportar configuração? Arquivos existentes serão sobrescritos.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Importar uma nova configuração? Arquivos existentes serão sobrescritos.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -94,7 +94,7 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Strings representing compression options-->
   <string-array name="compress_entries">
     <item>Nunca</item>
-    <item>Metadadados</item>
+    <item>Metadados</item>
     <item>Sempre</item>
   </string-array>
   <!--Setting title-->
@@ -110,11 +110,13 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Dialog shown when attempting to delete a device-->
   <string name="delete_device_confirm">Deseja mesmo apagar este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">O ID de dispositivo não pode ser vazio</string>
+  <string name="device_id_required">O ID de dispositivo não pode ficar vazio</string>
   <!--Toast shown when trying to create a device with an empty name-->
   <string name="device_name_required">O nome do dispositivo não pode ficar vazio</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Ler QR Code</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Não consegui obter permissões de superusuário</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface web</string>
@@ -125,8 +127,8 @@ As estatísticas agregadas estão disponíveis publicamente em https://data.sync
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Bem vindo(a) ao Syncthing for Android</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">O Syncthing é uma aplicação em código aberto para sincronização de arquivos.\n\n
-Para compartilhar seus dados com outros dispositivos, você deve adicionar o ID unico deles à sua lista de dispositivos e selecionar quais pastas devem ser compartilhadas com cada dispositivo.\n\n
+  <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.\n\n
+Para compartilhar seus dados com outros dispositivos, você deve adicionar o ID único deles à sua lista de dispositivos e selecionar quais pastas devem ser compartilhadas com cada dispositivo.\n\n
 Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -142,14 +144,14 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="sync_only_wifi">Somente conectado ao WiFi</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
-  <string name="use_root_title">Sincronizar como usuário root</string>
+  <string name="use_root_title">Sincronizar como Superusuário</string>
   <string name="use_root_summary">Executar Syncthing como Superusuário</string>
   <string name="notification_type_title">Notificação</string>
   <string name="notification_type_summary">Escolha o tipo da notificação</string>
   <string-array name="notification_type_entries">
     <item>Normal</item>
     <item>Baixa prioridade</item>
-    <item>Nenhum</item>
+    <item>Nenhuma</item>
   </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opções do Syncthing</string>
@@ -160,7 +162,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="global_announce_enabled">Descoberta global</string>
   <string name="local_announce_enabled">Descoberta local</string>
   <string name="upnp_enabled">Habilitar UPnP</string>
-  <string name="global_announce_server">Servidor de busca global</string>
+  <string name="global_announce_server">Descoberta global</string>
   <string name="usage_reporting">Relatório anônimo de uso</string>
   <string name="syncthing_gui">Interface do Syncthing</string>
   <string name="gui_address">Endereços de escuta da interface</string>
@@ -168,18 +170,18 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="gui_password">Senha da interface</string>
   <string name="export_config">Exportar configuração</string>
   <!--Toast shown after config was successfully exported-->
-  <string name="config_export_successful">A configuração foi exportada para %1$s</string>
+  <string name="config_export_successful">A configuração foi salva em %1$s</string>
   <string name="import_config">Importar configuração</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">A configuração foi importada</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">A importação falhou. Cheque se os arquivos estão em %1$s</string>
+  <string name="config_import_failed">A importação falhou. Verifique se os arquivos estão em %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções de depuração</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Somente a-z e \",\" (vírgula) são permitidos nas opções de STTRACE</string>
+  <string name="toast_invalid_sttrace">Somente a-z e \",\" (vírgula) são permitidos nas opções do STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Caracteres \":\" (dois-pontos) não são permitidos no nome de usuário</string>
+  <string name="toast_invalid_username">Caracteres \":\" (dois-pontos) e \"\'\" (apóstrofo) não são permitidos no nome de usuário</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Caracteres \":\" (dois-pontos) e \"\'\" (apóstrofo) não são permitidos na senha</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -194,11 +196,11 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Abrir log</string>
   <!--Summary for the log activity-->
-  <string name="open_log_summary">Abrir o Syncthing e janela de log do Android</string>
+  <string name="open_log_summary">Abrir a janela de log do Syncthing e do Android</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Reportar incidente</string>
+  <string name="report_issue_title">Reportar problema</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Abrir o gerenciador de incidentes do Syncthing-Android</string>
+  <string name="report_issue_summary">Abrir o gerenciador de problemas do Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versão do Syncthing</string>

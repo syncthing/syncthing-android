@@ -61,8 +61,6 @@
   <!--Setting title-->
   <string name="devices">设备</string>
   <!--Setting title-->
-  <string name="file_versioning">版本控制</string>
-  <!--Setting title-->
   <string name="keep_versions">保留历史版本数量</string>
   <!--Setting title-->
   <string name="delete_folder">删除文件夹</string>
@@ -78,6 +76,10 @@
   <string name="folder_id_invalid">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">您确定要导出当前配置？会覆盖现有文件。</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">您确定要导入新配置？会覆盖现有配置。</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">设备标识</string>
@@ -113,6 +115,8 @@
   <string name="device_name_required">设备名不得为空</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">扫描二维码</string>
+  <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">无法获取管理员权限</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">网页管理页面</string>

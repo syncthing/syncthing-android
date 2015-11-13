@@ -15,6 +15,7 @@
   <string name="usage_reporting_dialog_description">Het versleuteld gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en applicatieversies te volgen. Indien de gerapporteerde gegevensset wordt veranderd zal je deze dialoog opnieuw te zien krijgen.\n\nDe geaggregeerde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
+  <string name="off">uit</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -61,8 +62,6 @@
   <!--Setting title-->
   <string name="devices">Apparaten</string>
   <!--Setting title-->
-  <string name="file_versioning">Bestandsversies</string>
-  <!--Setting title-->
   <string name="keep_versions">Versies behouden</string>
   <!--Setting title-->
   <string name="delete_folder">Map verwijderen</string>
@@ -78,6 +77,8 @@
   <string name="folder_id_invalid">De map-ID moet een korte aanduiding (64 of minder tekens) zijn, bestaande uit enkel letters, cijfers, punten (.), streepjes (-) en onderstrepingstekens (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Apparaat-ID</string>
@@ -113,6 +114,7 @@
   <string name="device_name_required">De apparaatnaam kan niet leeg zijn</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
+  <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
@@ -142,6 +144,13 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Synchroniseren als root</string>
   <string name="use_root_summary">Syncthing uitvoeren als superuser</string>
+  <string name="notification_type_title">Melding</string>
+  <string name="notification_type_summary">Kies het meldingstype</string>
+  <string-array name="notification_type_entries">
+    <item>Normaal</item>
+    <item>Lage prioriteit</item>
+    <item>Geen</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing-opties</string>
   <string name="device_name">Apparaatnaam</string>
@@ -231,6 +240,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Aanmaken van een Syncthing-config mislukt. Controleer de logs.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>
@@ -263,5 +273,6 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="state_scanning">Bezig met scannen</string>
   <string name="state_cleaning">Bezig met opruimen</string>
   <string name="state_syncing">Bezig met synchroniseren</string>
+  <string name="state_error">Fout</string>
   <string name="state_unknown">Onbekend</string>
 </resources>

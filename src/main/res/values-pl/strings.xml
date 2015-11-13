@@ -61,8 +61,6 @@
   <!--Setting title-->
   <string name="devices">Urządzenia</string>
   <!--Setting title-->
-  <string name="file_versioning">System wersjonowania plików</string>
-  <!--Setting title-->
   <string name="keep_versions">Pamiętaj wersje</string>
   <!--Setting title-->
   <string name="delete_folder">Usuń folder</string>

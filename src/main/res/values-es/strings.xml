@@ -61,8 +61,6 @@
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
-  <string name="file_versioning">Versionado de Archivos</string>
-  <!--Setting title-->
   <string name="keep_versions">Versiones a Mantener</string>
   <!--Setting title-->
   <string name="delete_folder">Eliminar Carpeta</string>

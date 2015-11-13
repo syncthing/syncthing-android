@@ -54,8 +54,6 @@
   <!--Setting title-->
   <string name="devices">Eszközök</string>
   <!--Setting title-->
-  <string name="file_versioning">Fájl verziózás</string>
-  <!--Setting title-->
   <string name="keep_versions">Verziók megtartása</string>
   <!--Setting title-->
   <string name="delete_folder">Mappa törlése</string>
