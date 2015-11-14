@@ -268,6 +268,8 @@ public class SyncthingService extends Service implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(PREF_NOTIFICATION_TYPE))
             updateNotification();
+        else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI))
+            updateState();
     }
 
     /**

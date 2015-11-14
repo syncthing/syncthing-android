@@ -227,9 +227,7 @@ public class SettingsFragment extends PreferenceFragment
 
         boolean requireRestart = false;
 
-        if (preference.equals(mSyncOnlyCharging) || preference.equals(mSyncOnlyWifi)) {
-            mSyncthingService.updateState();
-        } else if (preference.equals(mAlwaysRunInBackground)) {
+        if (preference.equals(mAlwaysRunInBackground)) {
             boolean value = (Boolean) o;
             preference.setSummary((value)
                     ? R.string.always_run_in_background_enabled
