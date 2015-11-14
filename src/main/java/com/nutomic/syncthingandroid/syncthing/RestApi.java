@@ -440,9 +440,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     SystemInfo si = new SystemInfo();
                     si.alloc = system.getLong("alloc");
                     si.cpuPercent = system.getDouble("cpuPercent");
-                    si.extAnnounceTotal = system.getInt("discoveryMethods");
-                    si.extAnnounceConnected =
+                    if (system.has("discoveryEnabled")) {
+                        si.extAnnounceTotal = system.getInt("discoveryMethods");
+                        si.extAnnounceConnected =
                             si.extAnnounceTotal - system.getJSONObject("discoveryErrors").length();
+                    } else {
+                        si.extAnnounceTotal = 0;
+                        si.extAnnounceConnected = 0;
+                    }
                     si.goroutines = system.getInt("goroutines");
                     si.myID = system.getString("myID");
                     si.sys = system.getLong("sys");
