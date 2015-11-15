@@ -363,6 +363,17 @@ public class MainActivity extends SyncthingActivity
     }
 
     /**
+     * Close drawer on back button press.
+     */
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+            closeDrawer();
+        else
+            super.onBackPressed();
+    }
+
+    /**
      * Calculating width based on
      * http://www.google.com/design/spec/patterns/navigation-drawer.html#navigation-drawer-specs.
      */
