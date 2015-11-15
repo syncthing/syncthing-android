@@ -40,21 +40,6 @@ public class ConfigXml {
 
     private static final String TAG = "ConfigXml";
 
-    private static final String[] REPLACE_DISCOVERY_SERVERS = new String[] {
-            "default",
-            "udp4://194.126.249.5:22026",
-            "udp6://[2001:470:28:4d6::5]:22026"
-    };
-
-    private static final String[] DISCOVERY_SERVER_IPS = new String[] {
-        "https://194.126.249.5/?id=SR7AARM-TCBUZ5O-VFAXY4D-CECGSDE-3Q6IZ4G-XG7AH75-OBIXJQV-QJ6NLQA",
-        "https://45.55.230.38/?id=AQEHEO2-XOS7QRA-X2COH5K-PO6OPVA-EWOSEGO-KZFMD32-XJ4ZV46-CUUVKAS",
-        "https://128.199.95.124/?id=7WT2BVR-FX62ZOW-TNVVW25-6AHFJGD-XEXQSBW-VO3MPL2-JBTLL4T-P4572Q4",
-        "https://[2001:470:28:4d6::5]/?id=SR7AARM-TCBUZ5O-VFAXY4D-CECGSDE-3Q6IZ4G-XG7AH75-OBIXJQV-QJ6NLQA",
-        "https://[2604:a880:800:10::182:a001]/?id=AQEHEO2-XOS7QRA-X2COH5K-PO6OPVA-EWOSEGO-KZFMD32-XJ4ZV46-CUUVKAS",
-        "https://[2400:6180:0:d0::d9:d001]/?id=7WT2BVR-FX62ZOW-TNVVW25-6AHFJGD-XEXQSBW-VO3MPL2-JBTLL4T-P4572Q4",
-    };
-
     /**
      * File in the config folder that contains configuration.
      */
@@ -123,9 +108,6 @@ public class ConfigXml {
     /**
      * Updates the config file.
      * <p/>
-     * Coming from 0.2.0 and earlier, globalAnnounceServer value "announce.syncthing.net:22025" is
-     * replaced with "194.126.249.5:22025" (as domain resolve is broken).
-     * <p/>
      * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every folder.
      */
     @SuppressWarnings("SdCardPath")
@@ -134,10 +116,6 @@ public class ConfigXml {
         boolean changed = false;
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
-
-        if (replaceAnnounceServers(options)) {
-            changed = true;
-        }
 
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
         for (int i = 0; i < folders.getLength(); i++) {
@@ -181,33 +159,6 @@ public class ConfigXml {
         }
     }
 
-    /**
-     * Replaces the announce servers in {@link #REPLACE_DISCOVERY_SERVERS} with those in
-     * {@link #DISCOVERY_SERVER_IPS}.
-     */
-    private boolean replaceAnnounceServers(Element options) {
-        // Hardcode default globalAnnounceServer ip.
-        NodeList globalAnnounceServers = options.getElementsByTagName("globalAnnounceServer");
-        boolean needUpdateAnnounceServers = false;
-        for (int i = 0; i < globalAnnounceServers.getLength(); i++) {
-            Node announce = globalAnnounceServers.item(i);
-            if (Arrays.asList(REPLACE_DISCOVERY_SERVERS).contains(announce.getTextContent())) {
-                options.removeChild(announce);
-                needUpdateAnnounceServers = true;
-            }
-        }
-
-        if (needUpdateAnnounceServers) {
-            Log.i(TAG, "Replacing globalAnnounceServer address with ip");
-            for (String server : DISCOVERY_SERVER_IPS) {
-                Element newAnnounce = mConfig.createElement("globalAnnounceServer");
-                newAnnounce.setTextContent(server);
-                options.appendChild(newAnnounce);
-            }
-            return true;
-        }
-        return false;
-    }
     /**
      * Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
      * given folder.
