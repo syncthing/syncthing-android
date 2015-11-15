@@ -86,6 +86,7 @@ public class SettingsFragment extends PreferenceFragment
             }
 
             Preference address = mGuiScreen.findPreference(ADDRESS);
+            address.setOnPreferenceChangeListener(this);
             applyPreference(address, api.getValue(RestApi.TYPE_GUI, ADDRESS));
         }
     }
