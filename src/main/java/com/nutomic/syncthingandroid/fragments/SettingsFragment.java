@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -358,7 +359,25 @@ public class SettingsFragment extends PreferenceFragment
                         .show();
                 return true;
             case SYNCTHING_RESET:
-                ((SyncthingActivity) getActivity()).getApi().resetSyncthing(getActivity());
+                final Intent intent = new Intent(getActivity(), SyncthingService.class)
+                        .setAction(SyncthingService.ACTION_RESET);
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.streset_title)
+                        .setMessage(R.string.streset_question)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                getActivity().startService(intent);
+                                Toast.makeText(getActivity(), R.string.streset_done, Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .show();
                 return true;
             default:
                 return false;
