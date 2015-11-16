@@ -246,6 +246,10 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_root_summary">Run Syncthing as Superuser</string>
 
+    <string name="root_dialog_title">Are you sure you want to enable root?</string>
+
+    <string name="root_dialog_message">This may cause various problems with Syncthing and with your device. Use at your own risk.</string>
+
     <string name="notification_type_title">Notification</string>
 
     <string name="notification_type_summary">Choose the notification type</string>

@@ -144,7 +144,7 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
-        mUseRoot.setOnPreferenceChangeListener(this);
+        mUseRoot.setOnPreferenceClickListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(SYNCTHING_RESET).setOnPreferenceClickListener(this);
@@ -241,14 +241,6 @@ public class SettingsFragment extends PreferenceFragment
                 mSyncOnlyCharging.setChecked(false);
                 mSyncOnlyWifi.setChecked(false);
             }
-        } else if (preference.equals(mUseRoot)) {
-            if ((Boolean) o) {
-                new TestRootTask().execute();
-                return false;
-            } else {
-                new Thread(new ChownFilesRunnable()).start();
-                requireRestart = true;
-            }
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
@@ -320,6 +312,27 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
+            case SyncthingService.PREF_USE_ROOT:
+                if (mUseRoot.isChecked()) {
+                    // Only check preference after dialog was confirmed and root was granted.
+                    mUseRoot.setChecked(false);
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.root_dialog_title)
+                            .setMessage(R.string.root_dialog_message)
+                            .setPositiveButton(android.R.string.yes,
+                                    new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new TestRootTask().execute();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null)
+                            .show();
+                } else {
+                    new Thread(new ChownFilesRunnable()).start();
+                    mSyncthingService.getApi().requireRestart(getActivity());
+                }
+                return true;
             case EXPORT_CONFIG:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.dialog_confirm_export)
