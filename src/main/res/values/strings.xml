@@ -137,7 +137,7 @@
     <string name="folder_path_required">The folder path must not be empty</string>
 
     <!-- Dialog shown before config export -->
-    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.</string>
+    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
 
     <!-- Dialog shown before config import -->
     <string name="dialog_confirm_import">Do you really want to import a new configuration? Existing files will be overwritten.</string>
