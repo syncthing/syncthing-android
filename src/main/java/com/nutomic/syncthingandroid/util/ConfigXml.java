@@ -108,7 +108,7 @@ public class ConfigXml {
     /**
      * Updates the config file.
      * <p/>
-     * Coming from 0.3.0 and earlier, the ignorePerms flag is set to true on every folder.
+     * Sets ignorePerms flag to true on every folder.
      */
     @SuppressWarnings("SdCardPath")
     private void updateIfNeeded() {
@@ -141,17 +141,6 @@ public class ConfigXml {
             Log.i(TAG, "Enforce TLS");
             gui.setAttribute("tls", Boolean.toString(true));
             changed = true;
-        }
-
-        // Update deprecated 8080 port to 8384
-        NodeList addressList = gui.getElementsByTagName("address");
-        for (int i = 0; i < addressList.getLength(); i++) {
-            Element g = (Element) addressList.item(i);
-            if (g.getTextContent().equals("127.0.0.1:8080")) {
-                Log.i(TAG, "Replacing 127.0.0.1:8080 address with 127.0.0.1:8384");
-                g.setTextContent("127.0.0.1:8384");
-                changed = true;
-            }
         }
 
         if (changed) {
