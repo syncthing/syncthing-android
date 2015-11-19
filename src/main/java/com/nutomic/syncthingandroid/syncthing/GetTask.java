@@ -36,6 +36,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
     public static final String URI_MODEL       = "/rest/db/status";
     public static final String URI_DEVICEID    = "/rest/svc/deviceid";
     public static final String URI_REPORT      = "/rest/svc/report";
+    public static final String URI_EVENTS      = "/rest/events";
 
     private String mHttpsCertPath;
 
@@ -55,9 +56,11 @@ public class GetTask extends AsyncTask<String, Void, String> {
         String fullUri = params[0] + params[1];
         Log.v(TAG, "Calling Rest API at " + fullUri);
 
-        if (params.length == 5) {
+        if (params.length >= 5) {
             LinkedList<NameValuePair> urlParams = new LinkedList<>();
-            urlParams.add(new BasicNameValuePair(params[3], params[4]));
+            for (int paramCounter = 3; paramCounter + 1 < params.length; ) {
+                urlParams.add(new BasicNameValuePair(params[paramCounter++], params[paramCounter++]));
+            }
             fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
         }
 
