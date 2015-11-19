@@ -1,0 +1,53 @@
+From 467be3ff84bd18698b2c7dce8695a210c19b705a Mon Sep 17 00:00:00 2001
+From: Hyang-Ah Hana Kim <hyangah@gmail.com>
+Date: Thu, 5 Nov 2015 16:37:07 -0500
+Subject: [PATCH 3/4] cmd: enable android/386 build (buildmode=pie by default)
+
+no buildmode=c-shared yet.
+
+Update golang/go#9327.
+
+Change-Id: I9989d954d574807bac105da401c3463607fe8a99
+---
+ src/cmd/compile/internal/gc/lex.go | 2 +-
+ src/cmd/go/build.go                | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/cmd/compile/internal/gc/lex.go b/src/cmd/compile/internal/gc/lex.go
+index 9fe0f6c..31d41b4 100644
+--- a/src/cmd/compile/internal/gc/lex.go
++++ b/src/cmd/compile/internal/gc/lex.go
+@@ -221,7 +221,7 @@ func Main() {
+ 	var flag_shared int
+ 	var flag_dynlink bool
+ 	switch Thearch.Thechar {
+-	case '5', '6', '7', '9':
++	case '5', '6', '7', '8', '9':
+ 		obj.Flagcount("shared", "generate code that can be linked into a shared library", &flag_shared)
+ 	}
+ 	if Thearch.Thechar == '6' {
+diff --git a/src/cmd/go/build.go b/src/cmd/go/build.go
+index e869b27..50d7a6d 100644
+--- a/src/cmd/go/build.go
++++ b/src/cmd/go/build.go
+@@ -361,7 +361,7 @@ func buildModeInit() {
+ 		ldBuildmode = "c-shared"
+ 	case "default":
+ 		switch platform {
+-		case "android/arm", "android/amd64":
++		case "android/arm", "android/amd64", "android/386":
+ 			codegenArg = "-shared"
+ 			ldBuildmode = "pie"
+ 		default:
+@@ -375,7 +375,7 @@ func buildModeInit() {
+ 			fatalf("-buildmode=pie not supported by gccgo")
+ 		} else {
+ 			switch platform {
+-			case "android/arm", "linux/amd64", "android/amd64":
++			case "android/arm", "linux/amd64", "android/amd64", "android/386":
+ 				codegenArg = "-shared"
+ 			default:
+ 				fatalf("-buildmode=pie not supported on %s\n", platform)
+-- 
+2.5.2
+

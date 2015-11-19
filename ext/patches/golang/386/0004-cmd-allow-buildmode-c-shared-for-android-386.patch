@@ -1,0 +1,99 @@
+From de38cf7c1a1e59009e917c3619ca1c6d1372b72c Mon Sep 17 00:00:00 2001
+From: Hyang-Ah Hana Kim <hyangah@gmail.com>
+Date: Fri, 6 Nov 2015 17:28:58 -0500
+Subject: [PATCH 4/4] cmd: allow buildmode=c-shared for android/386
+
+Update golang/go#9327.
+
+Change-Id: Iab7dad31cf6b9f9347c3f34faebb67ecb38b17fc
+---
+ misc/cgo/testcshared/test.bash  |  4 +++-
+ src/cmd/dist/test.go            |  4 +++-
+ src/cmd/go/build.go             |  2 +-
+ src/cmd/link/internal/ld/lib.go | 24 +++++++++++++++++++++---
+ 4 files changed, 28 insertions(+), 6 deletions(-)
+
+diff --git a/misc/cgo/testcshared/test.bash b/misc/cgo/testcshared/test.bash
+index a641162..8963e4b 100755
+--- a/misc/cgo/testcshared/test.bash
++++ b/misc/cgo/testcshared/test.bash
+@@ -81,7 +81,9 @@ GOPATH=$(pwd) go install -buildmode=c-shared $suffix libgo
+ GOPATH=$(pwd) go build -buildmode=c-shared $suffix -o libgo.$libext src/libgo/libgo.go
+ binpush libgo.$libext
+ 
+-if [ "$goos" == "linux" ] || [ "$goos" == "android" ] ; then
++# TODO: fix text relocation bug in android/386.
++
++if [ "$goos" == "linux" ] || [ "$goos" == "android" ] && [ "$goarch" != "386" ] ; then
+     if readelf -d libgo.$libext | grep TEXTREL >/dev/null; then
+         echo "libgo.$libext has TEXTREL set"
+         exit 1
+diff --git a/src/cmd/dist/test.go b/src/cmd/dist/test.go
+index 6b0056a..8a7638c 100644
+--- a/src/cmd/dist/test.go
++++ b/src/cmd/dist/test.go
+@@ -581,7 +581,9 @@ func (t *tester) supportedBuildmode(mode string) bool {
+ 	case "c-shared":
+ 		// TODO(hyangah): add linux-386.
+ 		switch pair {
+-		case "linux-amd64", "darwin-amd64", "android-arm", "linux-arm", "linux-arm64":
++		case "linux-amd64", "linux-arm", "linux-arm64",
++			"darwin-amd64",
++			"android-amd64", "android-386", "android-arm":
+ 			return true
+ 		}
+ 		return false
+diff --git a/src/cmd/go/build.go b/src/cmd/go/build.go
+index 50d7a6d..e7a9f13 100644
+--- a/src/cmd/go/build.go
++++ b/src/cmd/go/build.go
+@@ -351,7 +351,7 @@ func buildModeInit() {
+ 		} else {
+ 			switch platform {
+ 			case "linux/amd64", "linux/arm", "linux/arm64",
+-				"android/amd64", "android/arm":
++				"android/amd64", "android/arm", "android/386":
+ 				codegenArg = "-shared"
+ 			case "darwin/amd64":
+ 			default:
+diff --git a/src/cmd/link/internal/ld/lib.go b/src/cmd/link/internal/ld/lib.go
+index f0e0511..d17825f 100644
+--- a/src/cmd/link/internal/ld/lib.go
++++ b/src/cmd/link/internal/ld/lib.go
+@@ -317,12 +317,30 @@ func (mode *BuildMode) Set(s string) error {
+ 		}
+ 		*mode = BuildmodeCArchive
+ 	case "c-shared":
+-		if goarch != "amd64" && goarch != "arm" && goarch != "arm64" {
+-			return badmode()
++		switch goos {
++		case "android":
++			switch goarch {
++			case "386", "amd64", "arm", "arm64":
++			default:
++				return badmode()
++			}
++		default:
++			switch goarch {
++			case "amd64", "arm", "arm64":
++			default:
++				return badmode()
++			}
+ 		}
+ 		*mode = BuildmodeCShared
+ 	case "shared":
+-		if goos != "linux" || (goarch != "386" && goarch != "amd64" && goarch != "arm" && goarch != "arm64") {
++		switch goos {
++		case "linux":
++			switch goarch {
++			case "386", "amd64", "arm", "arm64":
++			default:
++				return badmode()
++			}
++		default:
+ 			return badmode()
+ 		}
+ 		*mode = BuildmodeShared
+-- 
+2.5.2
+
