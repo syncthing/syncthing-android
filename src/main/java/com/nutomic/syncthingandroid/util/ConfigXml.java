@@ -40,6 +40,17 @@ public class ConfigXml {
 
     private static final String TAG = "ConfigXml";
 
+    private static final String[] REMOVE_ANNOUNCE_IPS = new String[] {
+            "udp4://194.126.249.5:22026",
+            "udp6://[2001:470:28:4d6::5]:22026",
+            "https://194.126.249.5/?id=SR7AARM-TCBUZ5O-VFAXY4D-CECGSDE-3Q6IZ4G-XG7AH75-OBIXJQV-QJ6NLQA",
+            "https://45.55.230.38/?id=AQEHEO2-XOS7QRA-X2COH5K-PO6OPVA-EWOSEGO-KZFMD32-XJ4ZV46-CUUVKAS",
+            "https://128.199.95.124/?id=7WT2BVR-FX62ZOW-TNVVW25-6AHFJGD-XEXQSBW-VO3MPL2-JBTLL4T-P4572Q4",
+            "https://[2001:470:28:4d6::5]/?id=SR7AARM-TCBUZ5O-VFAXY4D-CECGSDE-3Q6IZ4G-XG7AH75-OBIXJQV-QJ6NLQA",
+            "https://[2604:a880:800:10::182:a001]/?id=AQEHEO2-XOS7QRA-X2COH5K-PO6OPVA-EWOSEGO-KZFMD32-XJ4ZV46-CUUVKAS",
+            "https://[2400:6180:0:d0::d9:d001]/?id=7WT2BVR-FX62ZOW-TNVVW25-6AHFJGD-XEXQSBW-VO3MPL2-JBTLL4T-P4572Q4",
+    };
+
     /**
      * File in the config folder that contains configuration.
      */
@@ -117,6 +128,10 @@ public class ConfigXml {
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
 
+        if (restoreDefaultAnnounceServers(options)) {
+            changed = true;
+        }
+
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
         for (int i = 0; i < folders.getLength(); i++) {
             Element r = (Element) folders.item(i);
@@ -146,6 +161,33 @@ public class ConfigXml {
         if (changed) {
             saveChanges();
         }
+    }
+
+    /**
+     * Removes our hardcoded announce server IPs, and adds the 'default' value again.
+     *
+     * For compatibility with 0.7.4
+     */
+    private boolean restoreDefaultAnnounceServers(Element options) {
+        // Hardcode default globalAnnounceServer ip.
+        NodeList globalAnnounceServers = options.getElementsByTagName("globalAnnounceServer");
+        boolean announceServersRemoved = false;
+        for (int i = 0; i < globalAnnounceServers.getLength(); i++) {
+            Node announce = globalAnnounceServers.item(i);
+            if (Arrays.asList(REMOVE_ANNOUNCE_IPS).contains(announce.getTextContent())) {
+                options.removeChild(announce);
+                announceServersRemoved = true;
+            }
+        }
+
+        if (announceServersRemoved) {
+            Log.i(TAG, "Replacing globalAnnounceServer address with ip");
+            Element newAnnounce = mConfig.createElement("globalAnnounceServer");
+            newAnnounce.setTextContent("default");
+            options.appendChild(newAnnounce);
+            return true;
+        }
+        return false;
     }
 
     /**
