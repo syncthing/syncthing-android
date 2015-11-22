@@ -110,7 +110,6 @@ task cleanNative(type: Delete) {
     delete 'ext/syncthing/bin/'
     delete 'ext/syncthing/pkg/'
 }
-clean.dependsOn cleanNative
 
 play {
     jsonFile = file('keys.json')
