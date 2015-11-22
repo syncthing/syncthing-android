@@ -12,6 +12,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +52,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      * @return Returns the full intent action used for local broadcasts.
      */
     public static String getEventIntentAction(String eventName) {
-        return EVENT_BASE_ACTION + "." + eventName.toUpperCase();
+        return EVENT_BASE_ACTION + "." + eventName.toUpperCase(Locale.US);
     }
 
     /**
@@ -129,14 +130,13 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             }
         }
 
-        final Intent eventBroadcastItent = new Intent(EVENT_BASE_ACTION + "." + eventType.toUpperCase());
-        eventBroadcastItent.putExtras(eventData);
-        mLocalBM.sendBroadcast(eventBroadcastItent);
+        Intent broadcastIntent =
+                new Intent(EVENT_BASE_ACTION + "." + eventType.toUpperCase(Locale.US));
+        broadcastIntent.putExtras(eventData);
+        mLocalBM.sendBroadcast(broadcastIntent);
 
-        Log.d(TAG,
-                "Sent local event broadcast " + eventBroadcastItent.getAction() +
-                " including " + eventType.length() + " extra data items."
-        );
+        Log.d(TAG, "Sent local event broadcast " + broadcastIntent.getAction() +
+                " including " + eventType.length() + " extra data items.");
     }
 
     /**

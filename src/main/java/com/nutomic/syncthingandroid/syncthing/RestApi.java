@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -727,7 +728,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     for (int i = 0; i < jsonEvents.length(); i++) {
 
                         final JSONObject json = jsonEvents.getJSONObject(i);
-                        final String eventType = json.getString("type").toLowerCase();
+                        final String eventType = json.getString("type").toLowerCase(Locale.US);
                         final long id = json.getLong("id");
 
                         Bundle dataBundle = null;
