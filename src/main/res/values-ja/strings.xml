@@ -16,6 +16,8 @@
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="off">オフ</string>
+  <string name="open_website">Web サイトを開く</string>
+  <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -78,7 +80,6 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
   <!--DeviceSettingsFragment-->
@@ -147,6 +148,8 @@
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">Root として同期</string>
   <string name="use_root_summary">スーパーユーザーとして同期を実行します</string>
+  <string name="root_dialog_title">root を有効にしてもよろしいですか?</string>
+  <string name="root_dialog_message">これは Syncthing とお使いのデバイスで様々な問題が発生する可能性があります。ご自分のリスクでご利用ください。</string>
   <string name="notification_type_title">通知</string>
   <string name="notification_type_summary">通知の種類を選択します</string>
   <string-array name="notification_type_entries">

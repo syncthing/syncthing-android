@@ -16,6 +16,8 @@
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <string name="off">vypnuto</string>
+  <string name="open_website">Otevřít webovou stránku</string>
+  <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -78,7 +80,6 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci? Existující soubory budou přepsány.</string>
   <!--DeviceSettingsFragment-->
@@ -147,6 +148,8 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Synchronizovat jako root</string>
   <string name="use_root_summary">Spustit syncthing jako superuživatel</string>
+  <string name="root_dialog_title">Jste si jistí, že chcete povolit režim superuživatele?</string>
+  <string name="root_dialog_message">Toto může způsobit různé problémy se Syncthing a s vaším zařízením. Pouze na vlastní riziko.</string>
   <string name="notification_type_title">Upozornění</string>
   <string name="notification_type_summary">Vybrat typ upozornění</string>
   <string-array name="notification_type_entries">

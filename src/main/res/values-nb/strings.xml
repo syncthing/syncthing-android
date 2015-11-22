@@ -16,6 +16,8 @@
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <string name="off">av</string>
+  <string name="open_website">Åpne Nettsted</string>
+  <string name="toast_write_storage_permission_required">Skriverettigheter kreves av denne appen</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -78,7 +80,6 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappestien kan ikke være tom</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Er du sikker på at du vil eksportere konfigurasjonen din? Eksisterende filer vil bli skrevet over.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Er du sikker på at du vil importere en ny konfigurasjonen? Eksisterende filer vil bli skrevet over.</string>
   <!--DeviceSettingsFragment-->
@@ -147,6 +148,8 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
   <string name="use_root_title">Synkroniser som Root</string>
   <string name="use_root_summary">Kjør Syncthing som Superbruker</string>
+  <string name="root_dialog_title">Er du sikker på at du vil aktivere root?</string>
+  <string name="root_dialog_message">Dette kan forårsake diverse problemer med Syncthing og med din enhet. Bruk på eget ansvar.</string>
   <string name="notification_type_title">Varsling</string>
   <string name="notification_type_summary">Velg varslingstype</string>
   <string-array name="notification_type_entries">

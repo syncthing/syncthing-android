@@ -15,6 +15,8 @@
   <string name="usage_reporting_dialog_description">每天发送加密过的使用情况报告。它被用来跟踪在何种平台、文件夹大小和应用程序的版本。如果报告所需收集的数据有改变，您将会再次看到本提醒对话框。\n\n汇总统计数据公开于 https://data.syncthing.net</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="open_website">打开主页</string>
+  <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">文件夹</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -77,7 +79,6 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">您确定要导出当前配置？会覆盖现有文件。</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">您确定要导入新配置？会覆盖现有配置。</string>
   <!--DeviceSettingsFragment-->
@@ -146,6 +147,8 @@
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
   <string name="use_root_title">使用root权限来同步</string>
   <string name="use_root_summary">Syncthing 运行于超级用户</string>
+  <string name="root_dialog_title">您确定要赋予超级用户权限？</string>
+  <string name="root_dialog_message">这可能会导致本应用及操作系统出现各种问题。使用需要您自担风险。</string>
   <string name="notification_type_title">通知</string>
   <string name="notification_type_summary">选择通知类型</string>
   <string-array name="notification_type_entries">

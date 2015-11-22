@@ -77,7 +77,6 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">¿Realmente desea exportar la configuración? Se sobrescribirán los archivos existentes.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">¿Realmente desea importar una nueva configuración? Se sobrescribirán los archivos existentes.</string>
   <!--DeviceSettingsFragment-->
