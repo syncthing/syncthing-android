@@ -443,7 +443,7 @@ public class SyncthingService extends Service implements
         shutdown();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(this.mItemFinishedBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mItemFinishedBroadcastReceiver);
     }
 
     private void shutdown() {

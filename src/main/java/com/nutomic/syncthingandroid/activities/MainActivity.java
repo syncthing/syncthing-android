@@ -90,14 +90,14 @@ public class MainActivity extends SyncthingActivity
     public void onApiChange(SyncthingService.State currentState) {
         switch (currentState) {
             case INIT:
-                mLoadingDialog.show();
+                showLoadingDialog();
                 // Make sure the first start dialog is shown on top.
                 if (isFirstStart()) {
                     showFirstStartDialog();
                 }
                 break;
             case STARTING:
-                mLoadingDialog.show();
+                showLoadingDialog();
                 dismissDisabledDialog();
                 int permissionState = ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -108,8 +108,8 @@ public class MainActivity extends SyncthingActivity
                 }
                 break;
             case ACTIVE:
-                mLoadingDialog.hide();
                 dismissDisabledDialog();
+                dismissLoadingDialog();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
                 if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
@@ -121,7 +121,7 @@ public class MainActivity extends SyncthingActivity
                 finish();
                 break;
             case DISABLED:
-                mLoadingDialog.hide();
+                dismissLoadingDialog();
                 if (!isFinishing()) {
                     mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
                 }
@@ -131,7 +131,7 @@ public class MainActivity extends SyncthingActivity
 
     private void dismissDisabledDialog() {
         if (mDisabledDialog != null) {
-            mDisabledDialog.cancel();
+            mDisabledDialog.dismiss();
             mDisabledDialog = null;
         }
     }
@@ -168,6 +168,34 @@ public class MainActivity extends SyncthingActivity
                     }
                 })
                 .show();
+    }
+
+    /**
+     * Shows the loading dialog with the correct text ("creating keys" or "loading").
+     */
+    private void showLoadingDialog() {
+        if (mLoadingDialog != null)
+            return;
+
+        LayoutInflater inflater = getLayoutInflater();
+        @SuppressLint("InflateParams")
+        View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
+        TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+        loadingText.setText((isFirstStart())
+                ? R.string.web_gui_creating_key
+                : R.string.api_loading);
+
+        mLoadingDialog = new AlertDialog.Builder(MainActivity.this)
+                .setCancelable(false)
+                .setView(dialogLayout)
+                .show();
+    }
+
+    private void dismissLoadingDialog() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
     }
 
     private final FragmentPagerAdapter mSectionsPagerAdapter =
@@ -242,28 +270,13 @@ public class MainActivity extends SyncthingActivity
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setOptimalDrawerWidth(findViewById(R.id.drawer));
-
-        LayoutInflater inflater = getLayoutInflater();
-        @SuppressLint("InflateParams")
-        View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
-        TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
-        loadingText.setText((isFirstStart())
-                ? R.string.web_gui_creating_key
-                : R.string.api_loading);
-
-        mLoadingDialog = new AlertDialog.Builder(MainActivity.this)
-                .setCancelable(false)
-                .setView(dialogLayout)
-                .create();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mLoadingDialog.dismiss();
-        if (mDisabledDialog != null) {
-            mDisabledDialog.dismiss();
-        }
+        dismissDisabledDialog();
+        dismissLoadingDialog();
         if (getService() != null) {
             getService().unregisterOnApiChangeListener(this);
             getService().unregisterOnApiChangeListener(mFolderListFragment);

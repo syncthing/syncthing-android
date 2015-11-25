@@ -218,6 +218,15 @@
                 android:text="@string/donate" />
 
             <TextView
+                android:id="@+id/drawerActionRestart"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_autorenew_black_24dp"
+                android:drawableStart="@drawable/ic_autorenew_black_24dp"
+                android:text="@string/restart" />
+
+            <TextView
                 android:id="@+id/drawerActionExit"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"

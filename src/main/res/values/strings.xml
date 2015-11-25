@@ -97,6 +97,8 @@
 
     <string name="donate_url" translatable="false">https://tip4commit.com/github/syncthing/syncthing-android</string>
 
+    <string name="restart">Restart</string>
+
     <!-- FolderSettingsFragment -->
 
 

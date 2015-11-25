@@ -101,6 +101,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionDonate)
                 .setOnClickListener(this);
+        view.findViewById(R.id.drawerActionRestart)
+                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionSettings)
                 .setOnClickListener(this);
         mExitButton.setOnClickListener(this);
@@ -190,26 +192,31 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         switch (v.getId()) {
             case R.id.deviceIdContainer:
                 RestApi.shareDeviceId(getActivity(), mDeviceId.getText().toString());
-                return;
+                break;
             case R.id.drawerActionWebGui:
                 startActivity(new Intent(mActivity, WebGuiActivity.class));
                 mActivity.closeDrawer();
-                return;
+                break;
             case R.id.drawerActionDonate:
                 startActivity(new Intent(ACTION_VIEW, Uri.parse(
                         getString(R.string.donate_url))));
                 mActivity.closeDrawer();
-                return;
+                break;
             case R.id.drawerActionSettings:
                 startActivity(new Intent(mActivity, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
                 mActivity.closeDrawer();
-                return;
+                break;
+            case R.id.drawerActionRestart:
+                getContext().startService(new Intent(getContext(), SyncthingService.class)
+                        .setAction(SyncthingService.ACTION_RESTART));
+                mActivity.closeDrawer();
+                break;
             case R.id.drawerActionExit:
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
                 mActivity.finish();
                 mActivity.closeDrawer();
-                return;
+                break;
         }
     }
 }
