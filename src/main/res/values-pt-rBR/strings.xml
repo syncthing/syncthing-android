@@ -80,6 +80,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Deseja realmente exportar a configuração? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Importar uma nova configuração? Arquivos existentes serão sobrescritos.</string>
   <!--DeviceSettingsFragment-->

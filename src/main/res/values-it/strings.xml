@@ -80,6 +80,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Il percorso della cartella non può essere vuoto</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione? I files esistenti verranno sovrascritti.n\nATTENZIONE! Le altre applicazioni potrebbero non essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Vuoi realmente importare una nuova configurazione? I files esistenti verranno sovrascritti.</string>
   <!--DeviceSettingsFragment-->

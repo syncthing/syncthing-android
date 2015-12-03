@@ -16,6 +16,8 @@
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="off">uit</string>
+  <string name="open_website">Website openen</string>
+  <string name="toast_write_storage_permission_required">Vereist schrijftoegang</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -72,13 +74,15 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Weet je zeker dat je deze map wil verwijderen?</string>
+  <string name="delete_folder_confirm">Weet je zeker dat je deze map wilt verwijderen?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
   <string name="folder_id_invalid">De map-ID moet een korte aanduiding (64 of minder tekens) zijn, bestaande uit enkel letters, cijfers, punten (.), streepjes (-) en onderstrepingstekens (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Wil je jouw configuratie echt exporteren? Bestaande bestanden worden overschreven.\n\nWAARSCHUWING: Andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesyncte bestanden downloaden/wijzigen.</string>
   <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Wil je echt importeren? Huidige configuratie wordt vervangen.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Apparaat-ID</string>
@@ -107,7 +111,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Apparaat bewerken</string>
   <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Weet je zeker dat je dit apparaat wil verwijderen?</string>
+  <string name="delete_device_confirm">Weet je zeker dat je dit apparaat wilt verwijderen?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">De apparaat-ID kan niet leeg zijn</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -115,6 +119,7 @@
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
   <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">Geen roottoegang</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
@@ -126,7 +131,7 @@
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Syncthing is een open-source applicatie voor bestandssynchronisatie.\n\n
-Om gegevens te delen met anderen apparaten moet je hun unieke apparaat-ID toevoegen aan de lijst met apparaten. Nadien kan je kiezen welke mappen je wil delen met welke apparaten.\n\n
+Om gegevens te delen met anderen apparaten moet je hun unieke apparaat-ID toevoegen aan de lijst met apparaten. Nadien kun je kiezen welke mappen je wilt delen met welke apparaten.\n\n
 Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -144,6 +149,8 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Synchroniseren als root</string>
   <string name="use_root_summary">Syncthing uitvoeren als superuser</string>
+  <string name="root_dialog_title">Zeker om root in te schakelen?</string>
+  <string name="root_dialog_message">Dit kan verschillende Syncthing- of apparaatproblemen veroorzaken. Gebruik op eigen risico.</string>
   <string name="notification_type_title">Melding</string>
   <string name="notification_type_summary">Kies het meldingstype</string>
   <string-array name="notification_type_entries">
@@ -186,7 +193,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->
   <string name="streset_question">Deze actie moet je enkel uitvoeren wanneer ons ondersteuningsteam je dit aanraadt.
-\nBen je zeker dat je de indexdatabase van Syncthing wil wissen?</string>
+\nZeker dat je de indexdatabase van Syncthing wilt wissen?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Opnieuw instellen van Syncthing-database geslaagd</string>
   <string name="category_about">Over</string>
@@ -228,7 +235,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing is uitgezet</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Wil je je voorkeuren wijzigen?</string>
+  <string name="syncthing_disabled_message">Wil je voorkeuren wijzigen?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Instellingen wijzigen</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
