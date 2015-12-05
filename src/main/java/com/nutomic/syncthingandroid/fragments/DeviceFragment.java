@@ -21,13 +21,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.util.BarcodeIntentIntegrator;
-import com.nutomic.syncthingandroid.util.BarcodeIntentResult;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
@@ -353,7 +353,7 @@ public class DeviceFragment extends Fragment implements
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        BarcodeIntentResult scanResult = BarcodeIntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             mDevice.deviceID = scanResult.getContents();
             mIdView.setText(mDevice.deviceID);
@@ -416,7 +416,7 @@ public class DeviceFragment extends Fragment implements
                             mCompressionEntrySelectedListener)
                     .show();
         } else if (v.equals(mQrButton)){
-            BarcodeIntentIntegrator integrator = new BarcodeIntentIntegrator(DeviceFragment.this);
+            IntentIntegrator integrator = new IntentIntegrator(DeviceFragment.this);
             integrator.initiateScan();
         } else if (v.equals(mIdContainer)) {
             mSyncthingService.getApi().copyDeviceId(mDevice.deviceID);
