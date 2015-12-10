@@ -15,16 +15,20 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.preferences.WifiSsidPreference;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -52,6 +56,7 @@ public class SettingsFragment extends PreferenceFragment
     private CheckBoxPreference mAlwaysRunInBackground;
     private CheckBoxPreference mSyncOnlyCharging;
     private CheckBoxPreference mSyncOnlyWifi;
+    private WifiSsidPreference mSyncOnlyOnSSIDs;
     private CheckBoxPreference mUseRoot;
     private PreferenceScreen mOptionsScreen;
     private PreferenceScreen mGuiScreen;
@@ -126,6 +131,8 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyCharging = (CheckBoxPreference)
                 findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
         mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+        mSyncOnlyOnSSIDs = (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
+        mSyncOnlyOnSSIDs.setDefaultValue(new TreeSet<String>()); // default to empty list
         mUseRoot = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
         Preference appVersion = screen.findPreference(APP_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
@@ -144,6 +151,7 @@ public class SettingsFragment extends PreferenceFragment
         mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
         mSyncOnlyCharging.setOnPreferenceChangeListener(this);
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
+        mSyncOnlyOnSSIDs.setOnPreferenceChangeListener(this);
         mUseRoot.setOnPreferenceClickListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
@@ -153,8 +161,9 @@ public class SettingsFragment extends PreferenceFragment
         sttrace.setOnPreferenceChangeListener(this);
 
         // Force summary update and wifi/charging preferences enable/disable.
-        onPreferenceChange(mAlwaysRunInBackground, mAlwaysRunInBackground.isChecked());
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        onPreferenceChange(mAlwaysRunInBackground, mAlwaysRunInBackground.isChecked());
+        onPreferenceChange(mSyncOnlyOnSSIDs, sp.getStringSet("sync_only_wifi_ssids_set", new TreeSet<String>()));
         user.setSummary(sp.getString("gui_user", ""));
         sttrace.setSummary(sp.getString("sttrace", ""));
     }
@@ -236,11 +245,19 @@ public class SettingsFragment extends PreferenceFragment
                     : R.string.always_run_in_background_disabled);
             mSyncOnlyCharging.setEnabled(value);
             mSyncOnlyWifi.setEnabled(value);
+            mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
             // Uncheck items when disabled, so it is clear they have no effect.
             if (!value) {
                 mSyncOnlyCharging.setChecked(false);
                 mSyncOnlyWifi.setChecked(false);
             }
+        } else if (preference.equals(mSyncOnlyWifi)) {
+            mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
+        } else if (preference.equals(mSyncOnlyOnSSIDs)) {
+            String ssids = formatWifiNameList((Set<String>) o);
+            mSyncOnlyOnSSIDs.setSummary(ssids.isEmpty()
+                    ? getString(R.string.sync_only_wifi_ssids_all)
+                    : getString(R.string.sync_only_wifi_ssids_values, ssids));
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
@@ -295,6 +312,14 @@ public class SettingsFragment extends PreferenceFragment
             mSyncthingService.getApi().requireRestart(getActivity());
 
         return true;
+    }
+
+    private String formatWifiNameList(Set<String> ssids) {
+        Set<String> formatted = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        for (String ssid : ssids) {
+            formatted.add(ssid.replaceFirst("^\"", "").replaceFirst("\"$", ""));
+        }
+        return TextUtils.join(", ", formatted);
     }
 
     /**

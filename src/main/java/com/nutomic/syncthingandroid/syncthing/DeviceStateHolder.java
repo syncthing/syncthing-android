@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 
 /**
@@ -26,17 +28,25 @@ public class DeviceStateHolder extends BroadcastReceiver {
      */
     public static final String EXTRA_IS_CHARGING = "is_charging";
 
+    private Context mContext;
+
     private boolean mIsWifiConnected = false;
+
+    private String mWifiSsid;
 
     private boolean mIsCharging = false;
 
     @TargetApi(16)
     public DeviceStateHolder(Context context) {
+        mContext = context;
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mIsWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
         if (android.os.Build.VERSION.SDK_INT >= 16 && cm.isActiveNetworkMetered())
             mIsWifiConnected = false;
+        if (mIsWifiConnected) {
+            updateWifiSsid();
+        }
     }
 
     /**
@@ -61,5 +71,25 @@ public class DeviceStateHolder extends BroadcastReceiver {
     public void update(Intent intent) {
         mIsWifiConnected = intent.getBooleanExtra(EXTRA_HAS_WIFI, mIsWifiConnected);
         mIsCharging = intent.getBooleanExtra(EXTRA_IS_CHARGING, mIsCharging);
+
+        if (mIsWifiConnected) {
+            updateWifiSsid();
+        } else {
+            mWifiSsid = null;
+        }
+    }
+
+    public void updateWifiSsid() {
+        mWifiSsid = null;
+        WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        // may be null, if WiFi has been turned off in meantime
+        if (wifiInfo != null) {
+            mWifiSsid = wifiInfo.getSSID();
+        }
+    }
+
+    public String getWifiSsid() {
+        return mWifiSsid;
     }
 }

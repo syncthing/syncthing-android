@@ -39,6 +39,7 @@ import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -92,6 +93,7 @@ public class SyncthingService extends Service implements
 
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
     public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
+    public static final String PREF_SYNC_ONLY_WIFI_SSIDS     = "sync_only_wifi_ssids_set";
     public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
     public static final String PREF_USE_ROOT                 = "use_root";
     private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
@@ -213,7 +215,7 @@ public class SyncthingService extends Service implements
             boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
 
             shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
-                    (mDeviceStateHolder.isWifiConnected() || !prefStopMobileData);
+                    (!prefStopMobileData || isAllowedWifiConnected());
         }
 
         // Start syncthing.
@@ -261,6 +263,34 @@ public class SyncthingService extends Service implements
         onApiChange();
     }
 
+    private boolean isAllowedWifiConnected() {
+        boolean wifiConnected = mDeviceStateHolder.isWifiConnected();
+        if (wifiConnected) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            Set<String> ssids = sp.getStringSet(PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<String>());
+            if (ssids.isEmpty()) {
+                Log.d(TAG, "All SSIDs allowed for syncing");
+                return true;
+            } else {
+                String ssid = mDeviceStateHolder.getWifiSsid();
+                if (ssid != null) {
+                    if (ssids.contains(ssid)) {
+                        Log.d(TAG, "SSID " + ssid + " found in whitelist");
+                        return true;
+                    }
+                    Log.i(TAG, "SSID " + ssid + " not whitelisted");
+                    return false;
+                } else {
+                    // Don't know the SSID (yet) (should not happen?!), so not allowing
+                    Log.w(TAG, "SSID unknown (yet), cannot check SSID whitelist. Disallowing sync.");
+                    return false;
+                }
+            }
+        }
+        Log.d(TAG, "Wifi not connected");
+        return false;
+    }
+
     /**
      * Shows or hides the persistent notification based on running state and
      * {@link #PREF_NOTIFICATION_TYPE}.
@@ -290,7 +320,8 @@ public class SyncthingService extends Service implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(PREF_NOTIFICATION_TYPE))
             updateNotification();
-        else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI))
+        else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI)
+                || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS))
             updateState();
     }
 
