@@ -28,11 +28,12 @@ public class FolderObserver extends FileObserver {
         public void onFolderFileChange(String folderId, String relativePath);
     }
 
-    public FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder) {
+    public FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder)
+            throws FolderNotExistingException {
         this(listener, folder, "");
     }
 
-    public class FolderNotExistingException extends RuntimeException {
+    public class FolderNotExistingException extends Exception {
 
         private String mPath;
 
@@ -53,7 +54,8 @@ public class FolderObserver extends FileObserver {
      * @param folder The folder where this folder belongs to.
      * @param path path to the monitored folder, relative to folder root.
      */
-    private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path) {
+    private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path)
+            throws FolderNotExistingException {
         super(folder.path + "/" + path,
                 ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MOVED_FROM |
                 MOVED_TO | MOVE_SELF);
@@ -115,7 +117,11 @@ public class FolderObserver extends FileObserver {
                 // fall through
             case CREATE:
                 if (fullPath.isDirectory()) {
-                    mChilds.add(new FolderObserver(mListener, mFolder, path));
+                    try {
+                        mChilds.add(new FolderObserver(mListener, mFolder, path));
+                    } catch (FolderNotExistingException e) {
+                        Log.w(TAG, "Failed to add listener for nonexisting folder", e);
+                    }
                 }
                 // fall through
             default:

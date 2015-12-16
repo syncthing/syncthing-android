@@ -44,12 +44,13 @@ public class FolderObserverTest extends AndroidTestCase
 
     private RestApi.Folder createFolder(String id) {
         RestApi.Folder r = new RestApi.Folder();
-        r.path = mTestFolder.getAbsolutePath();
+        r.path = mTestFolder.getPath();
         r.id = id;
         return r;
     }
 
-    public void testRecursion() throws IOException, InterruptedException {
+    public void testRecursion() throws IOException, InterruptedException,
+            FolderObserver.FolderNotExistingException {
         mCurrentTest = "testRecursion";
         File subFolder = new File(mTestFolder, "subfolder");
         subFolder.mkdir();
@@ -63,7 +64,8 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    public void testRemoveFile() throws IOException, InterruptedException {
+    public void testRemoveFile() throws IOException, InterruptedException,
+            FolderObserver.FolderNotExistingException {
         mCurrentTest = "testRemoveFile";
         File test = new File(mTestFolder, "test");
         test.createNewFile();
@@ -77,7 +79,8 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    public void testMoveDirectoryOut() throws IOException, InterruptedException {
+    public void testMoveDirectoryOut() throws IOException, InterruptedException,
+            FolderObserver.FolderNotExistingException {
         mCurrentTest = "testMoveDirectory";
         File subFolder = new File(mTestFolder, "subfolder");
         subFolder.mkdir();
@@ -94,7 +97,8 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    public void testAddDirectory() throws IOException, InterruptedException {
+    public void testAddDirectory() throws IOException, InterruptedException,
+            FolderObserver.FolderNotExistingException {
         mCurrentTest = "testAddDirectory";
         File subFolder = new File(mTestFolder, "subfolder");
         subFolder.mkdir();
@@ -107,6 +111,18 @@ public class FolderObserverTest extends AndroidTestCase
         assertEquals(0, mLatch.getCount());
 
         fo.stopWatching();
+    }
+
+    public void testNotExisting() throws IOException, InterruptedException {
+        RestApi.Folder r = new RestApi.Folder();
+        r.path = new File(new MockContext(getContext()).getFilesDir(), "not-existing").getPath();
+        r.id = "testNotExisting";
+        try {
+            new FolderObserver(this, r);
+            fail("Expected FolderNotExistingException");
+        } catch (FolderObserver.FolderNotExistingException e) {
+            assertTrue(e.getMessage().contains(r.path));
+        }
     }
 
 }
