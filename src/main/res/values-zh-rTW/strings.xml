@@ -66,7 +66,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">您確定要刪除此資料夾？</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">資料夾識別碼必須為一段只包含半形英文字母、數字、點 (.)、連接符號 (-) 以及底線 (_) 的簡短識別碼 (不多於 64 個字元)</string>
+  <string name="folder_id_required">資料夾識別碼必須為一段只包含半形英文字母、數字、點 (.)、連接符號 (-) 以及底線 (_) 的簡短識別碼 (不多於 64 個字元)</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
   <!--Dialog shown before config export-->

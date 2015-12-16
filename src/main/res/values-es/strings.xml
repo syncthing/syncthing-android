@@ -73,7 +73,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">¿De verdad quieres eliminar esta carpeta?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">El ID de carpeta tiene que ser un identificador corto (64 caracteres o menos) formado por letras, números y los caracteres como el punto (.), el guión (-) y el subrayado(_).</string>
+  <string name="folder_id_required">El ID de carpeta tiene que ser un identificador corto (64 caracteres o menos) formado por letras, números y los caracteres como el punto (.), el guión (-) y el subrayado(_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
   <!--Dialog shown before config export-->

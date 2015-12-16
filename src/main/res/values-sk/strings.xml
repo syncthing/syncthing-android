@@ -76,7 +76,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Naozaj chcete odstrániť adresár?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">ID adresára musí byť krátky reťazec  (max. 64 znakov) zložený z čísel, písmen bez diakritiky, bodky (.), pomlčky (-) alebo podtržítka (_).</string>
+  <string name="folder_id_required">ID adresára musí byť krátky reťazec  (max. 64 znakov) zložený z čísel, písmen bez diakritiky, bodky (.), pomlčky (-) alebo podtržítka (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáru nemôže byť prázdna</string>
   <!--Dialog shown before config export-->

@@ -76,7 +76,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">您确定要删除该文件夹吗？</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
+  <string name="folder_id_required">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
   <!--Dialog shown before config export-->

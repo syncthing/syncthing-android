@@ -76,7 +76,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">フォルダーを削除してもよろしいですか?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">フォルダーIDは、文字、数字、ドット (.)、ダッシュ (-)、アンダースコア (_) からなる、短い識別子 (64文字以下) でなければなりません。</string>
+  <string name="folder_id_required">フォルダーIDは、文字、数字、ドット (.)、ダッシュ (-)、アンダースコア (_) からなる、短い識別子 (64文字以下) でなければなりません。</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <!--Dialog shown before config export-->

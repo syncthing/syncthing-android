@@ -69,7 +69,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">정말로 이 폴더를 삭제하시겠습니까?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">폴더 ID는 문자, 숫자, 마침표(.), 붙임표(-), 밑줄 문자(_)로만 구성되어 있는 짧은 식별자(64자 이하)여야 합니다.</string>
+  <string name="folder_id_required">폴더 ID는 문자, 숫자, 마침표(.), 붙임표(-), 밑줄 문자(_)로만 구성되어 있는 짧은 식별자(64자 이하)여야 합니다.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <!--Dialog shown before config export-->

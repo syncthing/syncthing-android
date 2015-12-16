@@ -76,7 +76,7 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Weet je zeker dat je deze map wilt verwijderen?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_invalid">De map-ID moet een korte aanduiding (64 of minder tekens) zijn, bestaande uit enkel letters, cijfers, punten (.), streepjes (-) en onderstrepingstekens (_).</string>
+  <string name="folder_id_required">De map-ID moet een korte aanduiding (64 of minder tekens) zijn, bestaande uit enkel letters, cijfers, punten (.), streepjes (-) en onderstrepingstekens (_).</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
   <!--Dialog shown before config export-->

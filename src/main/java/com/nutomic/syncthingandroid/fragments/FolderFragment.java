@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -298,12 +299,12 @@ public class FolderFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create:
-                if (mFolder.id.length() > 64 || !mFolder.id.matches("[a-zA-Z0-9-_\\.]+")) {
-                    Toast.makeText(getActivity(), R.string.folder_id_invalid, Toast.LENGTH_LONG)
+                if (TextUtils.isEmpty(mFolder.id)) {
+                    Toast.makeText(getActivity(), R.string.folder_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                if (mFolder.path.equals("")) {
+                if (TextUtils.isEmpty(mFolder.path)) {
                     Toast.makeText(getActivity(), R.string.folder_path_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
