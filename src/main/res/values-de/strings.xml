@@ -76,12 +76,12 @@
   <!--Dialog shown when attempting to delete a folder-->
   <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
   <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">Die Verzeichnis-ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
+  <string name="folder_id_required">Die Verzeichnis-ID darf nicht leer sein.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Der Ordnerpfad darf nicht leer sein</string>
+  <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
+  <string name="dialog_confirm_import">Soll wirklich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Geräte-ID</string>
