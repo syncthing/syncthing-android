@@ -15,7 +15,7 @@
   <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
-  <string name="off">off</string>
+  <string name="off">nenhuma</string>
   <string name="open_website">Abrir site</string>
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
   <!--FoldersFragment-->
@@ -54,6 +54,7 @@
   <string name="announce_server">Servidor de busca global</string>
   <!--Menu item to donate-->
   <string name="donate">Doações</string>
+  <string name="restart">Reiniciar</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
@@ -73,10 +74,9 @@
   <string name="edit_folder">Editar pasta</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Criar</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Deseja mesmo apagar esta pasta?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">O ID da pasta deve ser um nome curto (64 caracteres ou menos) e composto apenas de letras, números, ponto (.), hífen (-) ou underscore (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">O ID da pasta não pode ficar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <!--Dialog shown before config export-->
@@ -110,8 +110,7 @@
   <string name="add">Adicionar</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Editar dispositivo</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Deseja mesmo apagar este dispositivo?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">O ID de dispositivo não pode ficar vazio</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -145,6 +144,10 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="always_run_in_background_disabled">O Syncthing sempre rodará quando iniciado manualmente e pode ser parado pelo botão de menu.</string>
   <string name="sync_only_charging">Somente durante o carregamento</string>
   <string name="sync_only_wifi">Somente conectado ao WiFi</string>
+  <string name="sync_only_wifi_ssids">Limitar a certas redes WiFi</string>
+  <string name="sync_only_wifi_ssids_all">Sincronizar em todas as redes WiFi</string>
+  <string name="sync_only_wifi_ssids_values">Sincronizar somente quando conectado a %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Sincronizar como Superusuário</string>

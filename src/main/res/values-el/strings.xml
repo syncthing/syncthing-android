@@ -52,8 +52,8 @@
   <!--Title for FolderSettingsFragment in create mode-->
   <!--Title for FolderSettingsFragment in edit mode-->
   <!--Menu item to confirm folder creation-->
-  <!--Dialog shown when attempting to delete a folder-->
-  <!--Toast shown when trying to create a folder with an invalid ID-->
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
@@ -69,7 +69,7 @@
   <!--Title for DeviceSettingsFragment in create mode-->
   <!--Menu item to confirm adding a device-->
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <!--Dialog shown when attempting to delete a device-->
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->

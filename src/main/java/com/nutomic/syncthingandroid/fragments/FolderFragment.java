@@ -292,7 +292,7 @@ public class FolderFragment extends Fragment
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.create).setVisible(mIsCreateMode);
-        menu.findItem(R.id.delete).setVisible(!mIsCreateMode);
+        menu.findItem(R.id.remove).setVisible(!mIsCreateMode);
     }
 
     @Override
@@ -312,9 +312,9 @@ public class FolderFragment extends Fragment
                 mSyncthingService.getApi().editFolder(mFolder, true, getActivity());
                 getActivity().finish();
                 return true;
-            case R.id.delete:
+            case R.id.remove:
                 new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.delete_folder_confirm)
+                        .setMessage(R.string.remove_folder_confirm)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

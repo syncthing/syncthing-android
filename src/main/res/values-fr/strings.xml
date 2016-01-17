@@ -54,6 +54,7 @@
   <string name="announce_server">Serveur d\'annonce</string>
   <!--Menu item to donate-->
   <string name="donate">Faire un don</string>
+  <string name="restart">Redémarrer</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID du dossier</string>
@@ -73,10 +74,9 @@
   <string name="edit_folder">Edition du dossier</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Créer</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Voulez-vous vraiment supprimer ce dossier ?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">L\'ID du dossier doit être un identifiant court (64 caractères ou moins) pouvant contenir les valeurs suivantes: lettres, chiffres, point (.), tiret milieu (-), et tiret-bas (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">L\'ID du dossier ne doit pas être vide</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Le chemin du dossier ne doit pas être vide</string>
   <!--Dialog shown before config export-->
@@ -110,8 +110,7 @@
   <string name="add">Ajouter</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Edition de la machine</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Voulez-vous vraiment supprimer cette machine ?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">L\'ID machine ne peut pas être vide</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -145,6 +144,10 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="always_run_in_background_disabled">Syncthing ne fonctionne que si vous le lancez manuellement, et s\'arrête par le bouton quitter.</string>
   <string name="sync_only_charging">Synchro uniquement sur chargeur</string>
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
+  <string name="sync_only_wifi_ssids">Limiter à certains réseaux WiFi</string>
+  <string name="sync_only_wifi_ssids_all">Synchroniser sur tous réseaux WiFi</string>
+  <string name="sync_only_wifi_ssids_values">Synchroniser seulement si connecté à: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">S\'il vous plait, activer le WiFi pour sélectionner un réseau</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
   <string name="use_root_title">Sync en root</string>

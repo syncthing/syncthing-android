@@ -305,7 +305,7 @@ public class DeviceFragment extends Fragment implements
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.create).setVisible(mIsCreateMode);
         menu.findItem(R.id.share_device_id).setVisible(!mIsCreateMode);
-        menu.findItem(R.id.delete).setVisible(!mIsCreateMode);
+        menu.findItem(R.id.remove).setVisible(!mIsCreateMode);
     }
 
     @Override
@@ -328,9 +328,9 @@ public class DeviceFragment extends Fragment implements
             case R.id.share_device_id:
                 RestApi.shareDeviceId(getActivity(), mDevice.deviceID);
                 return true;
-            case R.id.delete:
+            case R.id.remove:
                 new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.delete_device_confirm)
+                        .setMessage(R.string.remove_device_confirm)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

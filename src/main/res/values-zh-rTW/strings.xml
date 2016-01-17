@@ -63,10 +63,9 @@
   <string name="edit_folder">編輯資料夾</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">建立</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">您確定要刪除此資料夾？</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">資料夾識別碼必須為一段只包含半形英文字母、數字、點 (.)、連接符號 (-) 以及底線 (_) 的簡短識別碼 (不多於 64 個字元)</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">資料夾識別碼不得為空</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
   <!--Dialog shown before config export-->
@@ -93,8 +92,7 @@
   <string name="add">增加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">編輯裝置</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">您確定要刪除此裝置？</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">裝置識別碼不得為空</string>
   <!--Toast shown when trying to create a device with an empty name-->

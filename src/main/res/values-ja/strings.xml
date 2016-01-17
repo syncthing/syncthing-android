@@ -54,6 +54,7 @@
   <string name="announce_server">アナウンスサーバー</string>
   <!--Menu item to donate-->
   <string name="donate">寄付</string>
+  <string name="restart">再起動</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">フォルダー ID</string>
@@ -73,10 +74,9 @@
   <string name="edit_folder">フォルダーを編集</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">作成</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">フォルダーを削除してもよろしいですか?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">フォルダーIDは、文字、数字、ドット (.)、ダッシュ (-)、アンダースコア (_) からなる、短い識別子 (64文字以下) でなければなりません。</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">フォルダー ID は空にできません</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <!--Dialog shown before config export-->
@@ -110,8 +110,7 @@
   <string name="add">追加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">デバイスを編集</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">このデバイスを削除してもよろしいですか?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">デバイス ID は空にできません</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -145,6 +144,10 @@
   <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューボタンで停止することができます。</string>
   <string name="sync_only_charging">充電中のみ同期</string>
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
+  <string name="sync_only_wifi_ssids">特定の WiFi ネットワークに制限する</string>
+  <string name="sync_only_wifi_ssids_all">すべての WiFi ネットワークで共有する</string>
+  <string name="sync_only_wifi_ssids_values">%1$s に接続時のみ同期する</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">Root として同期</string>

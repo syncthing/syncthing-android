@@ -73,10 +73,9 @@
   <string name="edit_folder">Редактиране на папка</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Създай</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Наистина ли желаете папката да бъде изтрита?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">Идентификаторът на папка трябва да бъде къс (64 символа или по-малко) състоящ се само от букви, цифри, точка (.), тире (-) и подчерта (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">Наложително е да въведете идентификатор на папката</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Наложително е да въведете път до папката</string>
   <!--Dialog shown before config export-->
@@ -109,8 +108,7 @@
   <string name="add">Добави</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Редактиране на устройство</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Наистина ли желаете устройството да бъде изтрито?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Наложително е да въведете идентификатор на устройството</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -129,7 +127,7 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Добре дошли в Syncthing за Android</string>
   <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing приложение с отворен код, за синхронизиране на файлове.\n\n\
+  <string name="welcome_text">Syncthing еприложение с отворен код, за синхронизиране на файлове.\n\n\
 За да споделите информация с друго устройство е необходимо да добавите уникалния идентификатор, на даденото устройство, към списъка с устройства. Тогава можете да определите кои папки с кои устройства да се споделят.\n\n
 Ако срещнете проблеми моля докладвайте за тях чрез Github.</string>
   <!--SettingsFragment-->
@@ -144,6 +142,10 @@
   <string name="always_run_in_background_disabled">Синхронизиране само след стартиране на Syncthing. Може бъде спряно от меню бутона \"Изход\".</string>
   <string name="sync_only_charging">Само по време на зареждане</string>
   <string name="sync_only_wifi">Само чрез WiFi</string>
+  <string name="sync_only_wifi_ssids">Ограничаване до определени WiFi мрежи</string>
+  <string name="sync_only_wifi_ssids_all">Синхронизиране чрез всяка WiFi мрежа</string>
+  <string name="sync_only_wifi_ssids_values">Синхронизиране само чрез: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
   <string name="advanced_folder_picker">Избор на папка, за напреднали</string>
   <string name="advanced_folder_picker_summary">Изберете папка, от устройството, за синхронизиране</string>
   <string name="use_root_title">Синхронизиране като Root</string>

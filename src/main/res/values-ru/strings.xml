@@ -73,10 +73,8 @@
   <string name="edit_folder">Изменить папку</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Создать</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Вы действительно хотите удалить папку?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">ID папки должен быть коротким идентификатором (64 символов или меньше) состоящий из букв, цифр и символов точки (.), тире(-) и подчеркивания (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Путь к папке не может быть пустым</string>
   <!--Dialog shown before config export-->
@@ -109,8 +107,7 @@
   <string name="add">Добавить</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Изменить устройство</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Вы действительно хотите удалить это устройство?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">ID устройства не может быть пустым</string>
   <!--Toast shown when trying to create a device with an empty name-->

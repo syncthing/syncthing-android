@@ -54,6 +54,7 @@
   <string name="announce_server">宣告服务器</string>
   <!--Menu item to donate-->
   <string name="donate">捐赠</string>
+  <string name="restart">重启</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">文件夹标识</string>
@@ -73,10 +74,10 @@
   <string name="edit_folder">编辑文件夹</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">新建</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">您确定要删除该文件夹吗？</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">文件夹标识必须由不长于 64 位字符，且仅能包含字母、数字、半角句号（.）、横线（-）和下划线（_）。</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">您确定要从 Syncthing 中删除该文件夹吗？</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">文件夹标识不得为空</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
   <!--Dialog shown before config export-->
@@ -110,8 +111,8 @@
   <string name="add">添加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">编辑设备</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">您确定要删除该设备吗？</string>
+  <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">您确定要移除该设备吗？</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">设备标识不得为空</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -145,6 +146,10 @@
   <string name="always_run_in_background_disabled">Syncthing 仅在运行后启动同步并且可以通过点按菜单按钮停止</string>
   <string name="sync_only_charging">仅在充电时同步</string>
   <string name="sync_only_wifi">仅在无线网络下同步</string>
+  <string name="sync_only_wifi_ssids">对某些无线网络下限制同步</string>
+  <string name="sync_only_wifi_ssids_all">在所有网络环境下同步</string>
+  <string name="sync_only_wifi_ssids_values">仅当连接到 %1$s 网络中才进行同步</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开无线网络连接并选择网络</string>
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
   <string name="use_root_title">使用root权限来同步</string>

@@ -66,10 +66,8 @@
   <string name="edit_folder">폴더 편집</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">생성</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">정말로 이 폴더를 삭제하시겠습니까?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">폴더 ID는 문자, 숫자, 마침표(.), 붙임표(-), 밑줄 문자(_)로만 구성되어 있는 짧은 식별자(64자 이하)여야 합니다.</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <!--Dialog shown before config export-->
@@ -95,8 +93,7 @@
   <string name="add">추가</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">기기 수정</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">정말로 이 기기를 삭제하시겠습니까?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
   <!--Toast shown when trying to create a device with an empty name-->

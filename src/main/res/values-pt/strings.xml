@@ -73,10 +73,9 @@
   <string name="edit_folder">Editar pasta</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Criar</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Quer mesmo eliminar esta pasta?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">O ID da pasta tem que ser um identificador curto (64 caracteres ou menos) consistindo apenas em letras, números e os caracteres ponto (.), hífen (-) e sublinhado (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">O ID da pasta não pode estar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
   <!--Dialog shown before config export-->
@@ -109,8 +108,7 @@
   <string name="add">Adicionar</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Editar dispositivo</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Quer mesmo eliminar este dispositivo?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">O ID do dispositivo não pode estar vazio</string>
   <!--Toast shown when trying to create a device with an empty name-->

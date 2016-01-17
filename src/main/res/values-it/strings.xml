@@ -12,7 +12,7 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Caricamento...</string>
   <string name="usage_reporting_dialog_title">Abilitare Statistiche Anonime di Utilizzo?</string>
-  <string name="usage_reporting_dialog_description">Quotidianamente il software invia le statistiche di utilizzo in forma criptata. Questi dati riguardano i sistemi operativi utilizzati, le dimensioni delle cartelle e le versioni del software. Se i dati riportati sono cambiati, verrà mostrata di nuovo questa finestra di dialogo.\n\nI dati statistici in forma aggregata sono disponibili pubblicamente su https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Quotidianamente il software invia le statistiche di utilizzo in forma criptata. Questi dati riguardano i sistemi operativi utilizzati, le dimensioni delle cartelle e le versioni del software. Se i dati riportati sono cambiati, verrà mostrata di nuovo questa finestra di dialogo.\n\nDati statistici in forma aggregata sono disponibili pubblicamente su https://data.syncthing.net.</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
   <string name="off">off</string>
@@ -23,13 +23,13 @@
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Nessuna cartella</string>
+  <string name="folder_list_empty">Nessuna cartella trovata</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d File</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivi</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Nessun dispositivo</string>
+  <string name="devices_list_empty">Nessun dispositivo trovato</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Sincronizzato</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
@@ -54,6 +54,7 @@
   <string name="announce_server">Server Presenza Globale</string>
   <!--Menu item to donate-->
   <string name="donate">Donazione</string>
+  <string name="restart">Riavvia ora</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Cartella</string>
@@ -73,10 +74,10 @@
   <string name="edit_folder">Modifica Cartella</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Crea</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Vuoi veramente eliminare questa cartella?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">L\'ID della cartella dev\'essere un identificatore breve (64 caratteri o meno) costituito solamente da lettere, numeri, punti (.), trattini (-) e trattini bassi (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Vuoi veramente eliminare questa cartella?</string>
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">L\'ID Cartella non può essere vuoto</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Il percorso della cartella non può essere vuoto</string>
   <!--Dialog shown before config export-->
@@ -110,8 +111,8 @@
   <string name="add">Aggiungi</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Modifica Dispositivo</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Vuoi veramente eliminare questo dispositivo?</string>
+  <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Vuoi veramente eliminare questo dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">L\'ID Dispositivo non può essere vuoto</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -145,6 +146,10 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="always_run_in_background_disabled">Syncthing si attiva solo quando viene avviato manualmente e si arresta utilizzando il pulsante del menu.</string>
   <string name="sync_only_charging">Sincr. solo in Ricarica</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
+  <string name="sync_only_wifi_ssids">Solo determinate reti wifi</string>
+  <string name="sync_only_wifi_ssids_all">Sincronizzazione su tutte le reti wifi</string>
+  <string name="sync_only_wifi_ssids_values">Sincronizzazione solo quando connessi a: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Sincr. come Root</string>
@@ -167,7 +172,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="global_announce_enabled">Individuazione Globale</string>
   <string name="local_announce_enabled">Individuazione Locale</string>
   <string name="upnp_enabled">Abilita UPnP</string>
-  <string name="global_announce_server">Server Ricerca Globale</string>
+  <string name="global_announce_server">Server Individuazione Globale</string>
   <string name="usage_reporting">Statistiche Anonime Utilizzo</string>
   <string name="syncthing_gui">Interfaccia Grafica di Syncthing</string>
   <string name="gui_address">Indirizzi Interfaccia Grafica</string>

@@ -129,8 +129,8 @@
     <!-- Menu item to confirm folder creation -->
     <string name="create">Create</string>
 
-    <!-- Dialog shown when attempting to delete a folder -->
-    <string name="delete_folder_confirm">Do you really want to delete this folder?</string>
+    <!-- Dialog shown when attempting to remove a folder -->
+    <string name="remove_folder_confirm">Do you really want to remove this folder from Syncthing?</string>
 
     <!-- Toast shown when trying to create a folder with an empty ID -->
     <string name="folder_id_required">The folder ID must not be empty</string>
@@ -184,8 +184,8 @@
     <!-- Title for DeviceSettingsFragment in edit mode -->
     <string name="edit_device">Edit Device</string>
 
-    <!-- Dialog shown when attempting to delete a device -->
-    <string name="delete_device_confirm">Do you really want to delete this device?</string>
+    <!-- Dialog shown when attempting to remove a device -->
+    <string name="remove_device_confirm">Do you really want to remove this device?</string>
 
     <!-- Toast shown when trying to create a device with an empty ID -->
     <string name="device_id_required">The device ID must not be empty</string>

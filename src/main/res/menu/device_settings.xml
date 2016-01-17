@@ -16,7 +16,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/delete"
+        android:id="@+id/remove"
         android:icon="@drawable/ic_delete_white_24dp_active"
         android:title="@string/delete_device"
         app:showAsAction="ifRoom" />

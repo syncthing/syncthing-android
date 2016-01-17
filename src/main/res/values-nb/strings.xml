@@ -73,10 +73,9 @@
   <string name="edit_folder">Rediger Mappe</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Opprett</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Ønsker du virkelig å slette denne mappen?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">Mappe-ID må være en kort identifikator (64 tegn eller færre) bestående av kun bokstaver, tall og tegnene punktum (.), bindestrek (-) og understrek (_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">Mappe-ID kan ikke være tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappestien kan ikke være tom</string>
   <!--Dialog shown before config export-->
@@ -109,8 +108,7 @@
   <string name="add">Legg til</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Rediger Enhet</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Ønsker du virkelig å slette denne enheten?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Enhets-ID kan ikke være tom</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -144,6 +142,10 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="always_run_in_background_disabled">Syncthing kjører bare når eksplisitt startet, og kan stoppes med meny-knappen.</string>
   <string name="sync_only_charging">Synkroniser kun ved lading</string>
   <string name="sync_only_wifi">Synkroniser kun over WiFi.</string>
+  <string name="sync_only_wifi_ssids">Begrens til visse wifi-nettverk</string>
+  <string name="sync_only_wifi_ssids_all">Synkroniser på alle wifi-nettverk</string>
+  <string name="sync_only_wifi_ssids_values">Synkroniser bare når koblet til: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vennligst skru på WiFi for å velge nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappevelger</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
   <string name="use_root_title">Synkroniser som Root</string>

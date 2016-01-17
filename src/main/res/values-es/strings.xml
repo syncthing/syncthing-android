@@ -15,6 +15,9 @@
   <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utilitza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si el conjunto de datos del informe es modificado serás notificado de nuevo con este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
+  <string name="off">apagar</string>
+  <string name="open_website">Sitio abierto</string>
+  <string name="toast_write_storage_permission_required">Hace falta permiso de escritura a disco para esta app.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
@@ -70,13 +73,13 @@
   <string name="edit_folder">Editar Carpeta</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Crear</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">¿De verdad quieres eliminar esta carpeta?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">El ID de carpeta tiene que ser un identificador corto (64 caracteres o menos) formado por letras, números y los caracteres como el punto (.), el guión (-) y el subrayado(_).</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">El ID de carpeta no debe estar vacío</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Realmente quieres exportar tu configuración? Los ficheros existentes seran sobrescritos.\n\nAVISO! Otras aplicaciones puede pueden leer la llave privada del sitio de backup y usarla para descargar/modificar ficheros sincronizados.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">¿Realmente desea importar una nueva configuración? Se sobrescribirán los archivos existentes.</string>
   <!--DeviceSettingsFragment-->
@@ -106,8 +109,7 @@
   <string name="add">Añadir</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Editar dispositivo</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">¿Realmente desea eliminar este dispositivo?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">El ID de dispositivo no debe estar vacío</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -115,6 +117,7 @@
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Escanear código QR</string>
   <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">No obtuvimos permisos de root</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>
@@ -140,10 +143,16 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explícitamente, puede ser detenido a través del botón del menú.</string>
   <string name="sync_only_charging">Sincronizar solo cuando esté cargando</string>
   <string name="sync_only_wifi">Sincronizar sólo en wifi</string>
+  <string name="sync_only_wifi_ssids">Restringir a algunas redes wifi</string>
+  <string name="sync_only_wifi_ssids_all">Sincronizar en todas las redes wifi</string>
+  <string name="sync_only_wifi_ssids_values">Sincronizar solo cuando se está conectado a: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor enciende el WIFI en las redes seleccionadas.</string>
   <string name="advanced_folder_picker">Usar Selección Avanzada de carpeta</string>
   <string name="advanced_folder_picker_summary">Escoja una carpeta del dispositivo para sincronizar</string>
   <string name="use_root_title">Sincronizar como Root</string>
   <string name="use_root_summary">Ejecutar Syncthing como Superusuario</string>
+  <string name="root_dialog_title">Estás seguro que quieres activar root?</string>
+  <string name="root_dialog_message">Esto puede causar algunos problemas con Syncthing y tu dispositivo. Usalo bajo tu responsabilidad.</string>
   <string name="notification_type_title">Notificación</string>
   <string name="notification_type_summary">Elige el tipo de notificación</string>
   <string-array name="notification_type_entries">

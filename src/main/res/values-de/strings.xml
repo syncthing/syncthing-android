@@ -53,7 +53,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
   <!--Menu item to donate-->
-  <string name="donate">Jetzt Spenden!</string>
+  <string name="donate">Spenden</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis-ID</string>
@@ -73,13 +73,13 @@
   <string name="edit_folder">Verzeichnis bearbeiten</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Erstellen</string>
-  <!--Dialog shown when attempting to delete a folder-->
-  <string name="delete_folder_confirm">Soll dieses Verzeichnis wirklich gelöscht werden?</string>
-  <!--Toast shown when trying to create a folder with an invalid ID-->
-  <string name="folder_id_required">Die Verzeichnis-ID muss eine kurze Kennung (64 Zeichen oder weniger) sein. Sie kann nur aus Buchstaben, Zahlen und dem Punkt- (.), Bindestrich- (-), und Unterstrich- (_) Zeichen bestehen.</string>
+  <!--Dialog shown when attempting to remove a folder-->
+  <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">Die Verzeichnis ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Der Ordnerpfad darf nicht leer sein</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupordner lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
   <!--DeviceSettingsFragment-->
@@ -109,8 +109,7 @@
   <string name="add">Hinzufügen</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Gerät bearbeiten</string>
-  <!--Dialog shown when attempting to delete a device-->
-  <string name="delete_device_confirm">Soll dieses Gerät wirklich gelöscht werden?</string>
+  <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Die Geräte-ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a device with an empty name-->
@@ -144,6 +143,10 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
   <string name="sync_only_charging">Sync nur mit Ladegerät</string>
   <string name="sync_only_wifi">Sync nur im WLAN</string>
+  <string name="sync_only_wifi_ssids">Nur in bestimmten WLAN Netzwerken</string>
+  <string name="sync_only_wifi_ssids_all">Synchronisiere in allen WLAN Netzwerken</string>
+  <string name="sync_only_wifi_ssids_values">Synchronisiere nur in folgendem WLAN: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
   <string name="advanced_folder_picker">Erweiterte Verzeichnisauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="use_root_title">Syncronisiere mit Root-Rechten</string>
