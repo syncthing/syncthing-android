@@ -80,10 +80,6 @@ mkdir -p "$GOROOT_FINAL"
 
 pushd ext/golang/go/src
 
-if [ "$GOARCH" = "386" ]; then
-    git am -3 ../../../patches/golang/386/*
-fi
-
 set +e
 ./clean.bash
 rm -r ../bin
