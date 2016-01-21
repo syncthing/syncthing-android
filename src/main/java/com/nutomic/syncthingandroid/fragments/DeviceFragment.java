@@ -317,11 +317,6 @@ public class DeviceFragment extends Fragment implements
                             .show();
                     return true;
                 }
-                if (isEmpty(mDevice.name)) {
-                    Toast.makeText(getActivity(), R.string.device_name_required, Toast.LENGTH_LONG)
-                            .show();
-                    return true;
-                }
                 mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
                 getActivity().finish();
                 return true;
