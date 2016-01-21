@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,10 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         String deviceId = getItem(position).deviceID;
         RestApi.Connection conn = mConnections.get(deviceId);
 
-        name.setText(getItem(position).name);
+        String displayName = (TextUtils.isEmpty(getItem(position).name))
+                ? deviceId.substring(0, 7)
+                : getItem(position).name;
+        name.setText(displayName);
         Resources r = getContext().getResources();
         if (conn != null && conn.connected) {
             if (conn.completion == 100) {
