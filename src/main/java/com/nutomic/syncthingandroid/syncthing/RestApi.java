@@ -218,6 +218,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
+                if (s == null)
+                    return;
+
                 try {
                     JSONObject json = new JSONObject(s);
                     mVersion = json.getString("version");
@@ -986,11 +989,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     /**
      * Normalizes a given device ID.
      */
-    public void normalizeDeviceId(String id, final OnDeviceIdNormalizedListener listener) {
+    public void normalizeDeviceId(final String id, final OnDeviceIdNormalizedListener listener) {
         new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                if (s == null)
+                    return;
+
                 String normalized = null;
                 String error = null;
                 try {
@@ -1127,6 +1133,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             @Override
             protected void onPostExecute(String s) {
                 try {
+                    if (s == null)
+                        return;
+
                     listener.onReceiveUsageReport(new JSONObject(s).toString(4));
                 } catch (JSONException e) {
                     throw new RuntimeException("Failed to prettify usage report", e);
