@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.test;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 
@@ -92,7 +91,6 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    @TargetApi(11)
     public void copyDeviceId(String id) {
         throw new UnsupportedOperationException();
     }

@@ -1,13 +1,10 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -1028,19 +1025,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      *
      * @param id The device ID to copy.
      */
-    @TargetApi(11)
     public void copyDeviceId(String id) {
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if (sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            android.text.ClipboardManager clipboard = (android.text.ClipboardManager)
-                    mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboard.setText(id);
-        } else {
-            ClipboardManager clipboard = (ClipboardManager)
-                    mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText(mContext.getString(R.string.device_id), id);
-            clipboard.setPrimaryClip(clip);
-        }
+        ClipboardManager clipboard = (ClipboardManager)
+                mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(mContext.getString(R.string.device_id), id);
+        clipboard.setPrimaryClip(clip);
         Toast.makeText(mContext, R.string.device_id_copied_to_clipboard, Toast.LENGTH_SHORT)
                 .show();
     }
