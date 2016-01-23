@@ -7,7 +7,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,9 +24,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -640,11 +637,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public interface OnReceiveEventListener {
         /**
          * Called for each event.
+         *
+         * Events with a "folder" field in the data have an extra "folderpath" element added.
+         *
          * @param id ID of the event. Monotonously increasing.
          * @param eventType Name of the event. (See Syncthing documentation)
-         * @param eventData Bundle containing the data fields of the event as data elements.
+         * @param data Contains the data fields of the event.
          */
-        void onEvent(final long id, final String eventType, final Bundle eventData);
+        void onEvent(long id, String eventType, JSONObject data) throws JSONException;
 
         /**
          * Called after all available events have been processed.
@@ -711,11 +711,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Retrieves the events that have accumulated since the given event id.
+     *
      * The OnReceiveEventListeners onEvent method is called for each event.
      */
     public final void getEvents(final long sinceId, final long limit, final OnReceiveEventListener listener) {
-
-        GetTask eventGetTask = new GetTask(mHttpsCertPath) {
+        new GetTask(mHttpsCertPath) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -723,56 +723,26 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
                 try {
                     JSONArray jsonEvents = new JSONArray(s);
-
                     long lastId = 0;
 
                     for (int i = 0; i < jsonEvents.length(); i++) {
+                        JSONObject json = jsonEvents.getJSONObject(i);
+                        String type     = json.getString("type");
+                        long id         = json.getLong("id");
 
-                        final JSONObject json = jsonEvents.getJSONObject(i);
-                        final String eventType = json.getString("type").toLowerCase(Locale.US);
-                        final long id = json.getLong("id");
+                        if (lastId < id)
+                            lastId = id;
 
-                        Bundle dataBundle = null;
+                        JSONObject data = json.optJSONObject("data");
 
-                        if (lastId < id) lastId = id;
-
-                        switch (eventType) {
-                            // This special shortcut can be used if data only contains strings.
-                            // It just copies everything into a bundle.
-                            case "itemfinished":
-                            case "foldercompletion":
-                            case "deviceconnected":
-                            case "devicediscovered":
-                            case "statechanged":
-                                dataBundle = new Bundle();
-                                JSONObject data = json.getJSONObject("data");
-
-                                for (Iterator<String> keyIterator = data.keys(); keyIterator.hasNext();) {
-                                    String key = keyIterator.next();
-                                    dataBundle.putString(key, data.getString(key));
-                                }
-
-                                // If the event contains a folder keyword but no path synthesise
-                                // a path keyword to ease processing of the event.
-                                String folder = data.optString("folder", null);
-                                if ((folder != null) && (data.optString("path", null) == null)) {
-                                    String folderPath = getPathForFolder(folder);
-                                    if (folderPath != null) {
-                                        dataBundle.putString("path", folderPath);
-                                    }
-                                }
-
-                                break;
-
-                            // Ignored events.
-                            case "ping":
-                                break;
-
-                            default:
-                                Log.d(TAG, "Unhandled event " + json.getString("type"));
+                        // Add folder path to data.
+                        if (data != null && data.has("folder")) {
+                            String folder = data.getString("folder");
+                            String folderPath = getPathForFolder(folder);
+                            data.put("folderpath", folderPath);
                         }
 
-                        if (dataBundle != null) listener.onEvent(id, eventType, dataBundle);
+                        listener.onEvent(id, type, data);
                     }
 
                     listener.onDone(lastId);
@@ -781,9 +751,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to read events", e);
                 }
             }
-        };
-
-        eventGetTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mUrl, GetTask.URI_EVENTS, mApiKey, "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mUrl, GetTask.URI_EVENTS, mApiKey,
+                "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
     }
 
     /**
