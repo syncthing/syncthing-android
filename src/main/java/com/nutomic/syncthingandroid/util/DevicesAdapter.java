@@ -54,10 +54,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         String deviceId = getItem(position).deviceID;
         RestApi.Connection conn = mConnections.get(deviceId);
 
-        String displayName = (TextUtils.isEmpty(getItem(position).name))
-                ? deviceId.substring(0, 7)
-                : getItem(position).name;
-        name.setText(displayName);
+        name.setText(RestApi.getDeviceDisplayName(getItem(position)));
         Resources r = getContext().getResources();
         if (conn != null && conn.connected) {
             if (conn.completion == 100) {

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -1140,4 +1141,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mRestartPostponed = true;
     }
 
+    /**
+     * Returns the device name, or the first characters of the ID if the name is empty.
+     */
+    public static String getDeviceDisplayName(Device device) {
+        return (TextUtils.isEmpty(device.name))
+                ? device.deviceID.substring(0, 7)
+                : device.name;
+    }
 }
