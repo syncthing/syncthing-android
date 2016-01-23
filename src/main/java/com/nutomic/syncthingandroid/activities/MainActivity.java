@@ -284,6 +284,10 @@ public class MainActivity extends SyncthingActivity
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
+        // intent's action will be null if notification is selected
+        if (intent.getAction() == null) {
+            return;
+        }
         switch (intent.getAction()) {
             case ACTION_ADD_DEVICE:
                 final String deviceId = intent.getStringExtra(EXTRA_DEVICE_ID);
