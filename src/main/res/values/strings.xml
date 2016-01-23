@@ -34,6 +34,10 @@
 
     <string name="toast_write_storage_permission_required">Write storage permission is required for this app</string>
 
+    <string name="device_rejected">Device %1$s wants to connect</string>
+
+    <string name="ignore">Ignore</string>
+
     <!-- FoldersFragment -->
 
 
@@ -175,7 +179,6 @@
     <!-- ActionBar item -->
     <string name="delete_device">Delete Device</string>
 
-    <!-- Title for DeviceSettingsFragment in create mode -->
     <string name="add_device">Add Device</string>
 
     <!-- Menu item to confirm adding a device -->

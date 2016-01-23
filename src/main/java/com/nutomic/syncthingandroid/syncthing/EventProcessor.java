@@ -1,5 +1,8 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,12 +10,17 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -82,6 +90,29 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     @Override
     public void onEvent(long id, String type, JSONObject data) throws JSONException {
         switch (type) {
+            case "DeviceRejected":
+                String deviceId = data.getString("device");
+                Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
+
+                Intent intent = new Intent(mContext, MainActivity.class);
+                intent.setAction(MainActivity.ACTION_ADD_DEVICE);
+                intent.putExtra(MainActivity.EXTRA_DEVICE_ID, deviceId);
+                PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
+
+                String title = mContext.getString(R.string.device_rejected,
+                        deviceId.substring(0, 7));
+
+                Notification n = new NotificationCompat.Builder(mContext)
+                        .setContentTitle(title)
+                        .setContentIntent(pi)
+                        .setSmallIcon(R.drawable.ic_stat_notify)
+                        .setAutoCancel(true)
+                        .build();
+                NotificationManager nm = (NotificationManager)
+                        mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                // Use random ID so previous notifications are not replaced.
+                nm.notify(new Random().nextInt(), n);
             case "ItemFinished":
                 File updatedFile = new File(data.getString("folderpath"), data.getString("item"));
                 Log.i(TAG, "Notified media scanner about " + updatedFile.toString());
