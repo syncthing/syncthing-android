@@ -18,10 +18,10 @@
   <string name="off">off</string>
   <string name="open_website">Apri sito</string>
   <string name="toast_write_storage_permission_required">E\' richiesto il permesso di scrittura per questa app</string>
+  <string name="device_rejected">Dispositivo %1$s vuole connettersi</string>
+  <string name="ignore">Ignora</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Cartelle</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nessuna cartella trovata</string>
   <!--Format string for folder file count-->
@@ -105,7 +105,6 @@
   <string name="introducer">Introduttore</string>
   <!--ActionBar item-->
   <string name="delete_device">Elimina Dispositivo</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Nuovo Dispositivo</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Aggiungi</string>
@@ -115,8 +114,6 @@
   <string name="remove_device_confirm">Vuoi veramente eliminare questo dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">L\'ID Dispositivo non può essere vuoto</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Il nome del dispositivo non può essere vuoto</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scansiona Codice QR</string>
   <!--Toast show if we could not get root permissions-->
@@ -285,7 +282,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="state_idle">Inattivo</string>
   <string name="state_scanning">Scansione in corso</string>
   <string name="state_cleaning">Pulizia</string>
-  <string name="state_syncing">Sincronizzazione</string>
+  <string name="state_syncing">Sincronizzazione (%1$d%%)</string>
   <string name="state_error">Errore</string>
   <string name="state_unknown">Sconosciuto</string>
 </resources>

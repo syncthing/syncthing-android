@@ -6,7 +6,6 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <!--FoldersFragment-->
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
   <!--Shown if no folders exist-->
   <!--Format string for folder file count-->
   <!--DevicesFragment-->
@@ -48,12 +47,10 @@
   <!--Strings representing compression options-->
   <!--Setting title-->
   <!--ActionBar item-->
-  <!--Title for DeviceSettingsFragment in create mode-->
   <!--Menu item to confirm adding a device-->
   <!--Title for DeviceSettingsFragment in edit mode-->
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
-  <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
   <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->

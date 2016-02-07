@@ -18,10 +18,10 @@
   <string name="off">wył</string>
   <string name="open_website">Otwórz stronę internetową</string>
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
+  <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
+  <string name="ignore">Ignoru</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nie znaleziono katalogów</string>
   <!--Format string for folder file count-->
@@ -54,6 +54,7 @@
   <string name="announce_server">Serwer ogłoszeniowy</string>
   <!--Menu item to donate-->
   <string name="donate">Wspomóż</string>
+  <string name="restart">Uruchom ponownie</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Identyfikator katalogu</string>
@@ -74,11 +75,13 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Utwórz</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Usunąć ten katalog z Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">ID folderu nie może być puste</string>
+  <string name="folder_id_required">Identyfikator katalogu nie może być pusty</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka katalogu nie może być pusta</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Czy rzeczywiście chcesz wyeksportować swoją konfigurację? Istniejące pliki zostaną nadpisane.\n\nUWAGA! Inne aplikacje mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Zaimportować nowe ustawienia? Istniejące pliki zostaną zastąpione.</string>
   <!--DeviceSettingsFragment-->
@@ -102,17 +105,15 @@
   <string name="introducer">Wprowadzający</string>
   <!--ActionBar item-->
   <string name="delete_device">Usuń urządzenie</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Dodawanie urządzenia</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Dodaj</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Edycja urządzenia</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Usunąć to urządzenie?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Identyfikator urządzenia nie może być pusty</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Nazwa urządzenia nie może być pusta</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Skanuj kod QR</string>
   <!--Toast show if we could not get root permissions-->
@@ -121,7 +122,7 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfejs internetowy</string>
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Oczekiwanie na GUI</string>
+  <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
   <!--Title for dialog displayed on first start-->
@@ -142,11 +143,15 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
   <string name="sync_only_charging">Synchronizowanie tylko podczas ładowania</string>
   <string name="sync_only_wifi">Synchronizowanie tylko przy użyciu Wi-Fi</string>
+  <string name="sync_only_wifi_ssids">Ogranicz do określonych sieci WiFi</string>
+  <string name="sync_only_wifi_ssids_all">Synchronizowanie przy użyciu wszystkich sieci wifi</string>
+  <string name="sync_only_wifi_ssids_values">Synchronizuj jedynie gdy połączono z: %1$s</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
   <string name="use_root_title">Działanie z uprawnieniami roota</string>
   <string name="use_root_summary">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
-  <string name="root_dialog_title">Czy jesteś pewny, że chcesz udostępnić prawa roota?</string>
+  <string name="root_dialog_title">Udostępnić uprawnienia root?</string>
   <string name="root_dialog_message">To może spowodować różne problemy z Syncthing i twoim urządzeniem. Używaj na własne ryzyko.</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
@@ -189,7 +194,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
 \nPrzywrócić bazę danych do stanu początkowego?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Przywrócono stan początkowy bazy danych</string>
-  <string name="category_about">O projekcie</string>
+  <string name="category_about">O programie</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Otwórz dziennik</string>
   <!--Summary for the log activity-->
@@ -272,7 +277,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="state_idle">Bezczynny</string>
   <string name="state_scanning">Skanowanie</string>
   <string name="state_cleaning">Czyszczenie</string>
-  <string name="state_syncing">Synchronizowanie</string>
+  <string name="state_syncing">Synchronizowanie (%1$d%%)</string>
   <string name="state_error">Błąd</string>
   <string name="state_unknown">Nieznany</string>
 </resources>

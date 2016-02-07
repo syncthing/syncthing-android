@@ -20,8 +20,6 @@
   <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Geen mappen gevonden</string>
   <!--Format string for folder file count-->
@@ -75,6 +73,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Weet je zeker dat je deze map van Syncthing wil verwijderen?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">De map-ID mag niet leeg zijn</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -104,17 +103,15 @@
   <string name="introducer">Introduceerder</string>
   <!--ActionBar item-->
   <string name="delete_device">Apparaat verwijderen</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Apparaat toevoegen</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Toevoegen</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Apparaat bewerken</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Weet je zeker dat je dit apparaat wil verwijderen?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">De apparaat-ID kan niet leeg zijn</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">De apparaatnaam kan niet leeg zijn</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
   <!--Toast show if we could not get root permissions-->
@@ -282,7 +279,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="state_idle">Inactief</string>
   <string name="state_scanning">Bezig met scannen</string>
   <string name="state_cleaning">Bezig met opruimen</string>
-  <string name="state_syncing">Bezig met synchroniseren</string>
+  <string name="state_syncing">Bezig met synchroniseren (%1$d%%)</string>
   <string name="state_error">Fout</string>
   <string name="state_unknown">Onbekend</string>
 </resources>

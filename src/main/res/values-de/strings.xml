@@ -20,8 +20,6 @@
   <string name="toast_write_storage_permission_required">Diese App benötigt Schreibzugriff auf Ihren Gerätespeicher</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Keine Verzeichnisse gefunden</string>
   <!--Format string for folder file count-->
@@ -60,7 +58,7 @@
   <!--Setting title-->
   <string name="directory">Verzeichnis</string>
   <!--Setting title-->
-  <string name="folder_master">Originalverzeichnis</string>
+  <string name="folder_master">Master Verzeichnis - schreibgeschützt</string>
   <!--Setting title-->
   <string name="devices">Geräte</string>
   <!--Setting title-->
@@ -103,7 +101,6 @@
   <string name="introducer">Verteilergerät</string>
   <!--ActionBar item-->
   <string name="delete_device">Gerät löschen</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Gerät hinzufügen</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Hinzufügen</string>
@@ -112,8 +109,6 @@
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Die Geräte-ID darf nicht leer sein</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Der Gerätename darf nicht leer sein</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR Code scannen</string>
   <!--Toast show if we could not get root permissions-->
@@ -281,7 +276,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="state_idle">Untätig</string>
   <string name="state_scanning">Scannen</string>
   <string name="state_cleaning">Aufräumen</string>
-  <string name="state_syncing">Synchronisiere</string>
+  <string name="state_syncing">Synchronisiere (%1$d%%)</string>
   <string name="state_error">Fehler</string>
   <string name="state_unknown">Unbekannt</string>
 </resources>

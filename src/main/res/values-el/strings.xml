@@ -11,8 +11,6 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Φάκελοι</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Δε βρέθηκαν φάκελοι</string>
   <!--Format string for folder file count-->
@@ -66,12 +64,10 @@
   <!--Strings representing compression options-->
   <!--Setting title-->
   <!--ActionBar item-->
-  <!--Title for DeviceSettingsFragment in create mode-->
   <!--Menu item to confirm adding a device-->
   <!--Title for DeviceSettingsFragment in edit mode-->
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
-  <!--Toast shown when trying to create a device with an empty name-->
   <!--Content description for device ID qr code icon-->
   <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
@@ -132,4 +128,5 @@
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <string name="state_syncing">Συγχρονίζοντας (%1$d%%)</string>
 </resources>

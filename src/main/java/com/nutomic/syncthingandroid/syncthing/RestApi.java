@@ -756,27 +756,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Returns the folder's state as a localized string.
-     *
-     * @param state One of idle, scanning, cleaning or syncing.
-     */
-    public static String getLocalizedState(Context c, String state) {
-        switch (state) {
-            case "idle":     return c.getString(R.string.state_idle);
-            case "scanning": return c.getString(R.string.state_scanning);
-            case "cleaning": return c.getString(R.string.state_cleaning);
-            case "syncing":  return c.getString(R.string.state_syncing);
-            case "error":    return c.getString(R.string.state_error);
-            case "unknown":  // Fallthrough
-            case "":         return c.getString(R.string.state_unknown);
-        }
-        if (BuildConfig.DEBUG) {
-            throw new AssertionError("Unexpected folder state " + state);
-        }
-        return "";
-    }
-
-    /**
      * Updates or creates the given device, depending on whether it already exists.
      *
      * @param device Settings of the device to edit. To create a device, pass a non-existant device ID.

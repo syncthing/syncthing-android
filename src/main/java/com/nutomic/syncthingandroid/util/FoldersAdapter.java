@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
@@ -43,51 +44,61 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
+        if (convertView == null)
             convertView = mInflater.inflate(R.layout.item_folder_list, parent, false);
 
-            viewHolder = new ViewHolder();
-            viewHolder.id = (TextView) convertView.findViewById(R.id.id);
-            viewHolder.state = (TextView) convertView.findViewById(R.id.state);
-            viewHolder.directory = (TextView) convertView.findViewById(R.id.directory);
-            viewHolder.items = (TextView) convertView.findViewById(R.id.items);
-            viewHolder.size = (TextView) convertView.findViewById(R.id.size);
-            viewHolder.invalid = (TextView) convertView.findViewById(R.id.invalid);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+        TextView id = (TextView) convertView.findViewById(R.id.id);
+        TextView state = (TextView) convertView.findViewById(R.id.state);
+        TextView directory = (TextView) convertView.findViewById(R.id.directory);
+        TextView items = (TextView) convertView.findViewById(R.id.items);
+        TextView size = (TextView) convertView.findViewById(R.id.size);
+        TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
         RestApi.Folder folder = getItem(position);
         RestApi.Model model = mModels.get(folder.id);
-        viewHolder.id.setText(folder.id);
-        viewHolder.state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        viewHolder.directory.setText((folder.path));
+        id.setText(folder.id);
+        state.setTextColor(getContext().getResources().getColor(R.color.text_green));
+        directory.setText((folder.path));
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
-            viewHolder.state.setText(getContext().getString(R.string.folder_progress_format,
-                    RestApi.getLocalizedState(getContext(), model.state),
-                    percentage));
-            viewHolder.items.setVisibility(VISIBLE);
-            viewHolder.items.setText(getContext()
+            state.setText(getLocalizedState(getContext(), model.state, percentage));
+            items.setVisibility(VISIBLE);
+            items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
-            viewHolder.size.setVisibility(VISIBLE);
-            viewHolder.size.setText(readableFileSize(getContext(), model.inSyncBytes) + " / " +
+            size.setVisibility(VISIBLE);
+            size.setText(readableFileSize(getContext(), model.inSyncBytes) + " / " +
                     readableFileSize(getContext(), model.globalBytes));
             if (TextUtils.isEmpty(folder.invalid)) {
-                setTextOrHide(viewHolder.invalid, model.invalid);
+                setTextOrHide(invalid, model.invalid);
             }
         } else {
-            viewHolder.items.setVisibility(GONE);
-            viewHolder.size.setVisibility(GONE);
-            setTextOrHide(viewHolder.invalid, folder.invalid);
+            items.setVisibility(GONE);
+            size.setVisibility(GONE);
+            setTextOrHide(invalid, folder.invalid);
         }
 
         return convertView;
+    }
+
+    /**
+     * Returns the folder's state as a localized string.
+     */
+    public static String getLocalizedState(Context c, String state, int percentage) {
+        switch (state) {
+            case "idle":     return c.getString(R.string.state_idle);
+            case "scanning": return c.getString(R.string.state_scanning);
+            case "cleaning": return c.getString(R.string.state_cleaning);
+            case "syncing":  return c.getString(R.string.state_syncing, percentage);
+            case "error":    return c.getString(R.string.state_error);
+            case "unknown":  // Fallthrough
+            case "":         return c.getString(R.string.state_unknown);
+        }
+        if (BuildConfig.DEBUG) {
+            throw new AssertionError("Unexpected folder state " + state);
+        }
+        return "";
     }
 
     /**
@@ -136,12 +147,4 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         }
     }
 
-    private static class ViewHolder {
-        TextView id;
-        TextView state;
-        TextView directory;
-        TextView items;
-        TextView size;
-        TextView invalid;
-    }
 }

@@ -20,8 +20,6 @@
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Các thư mục</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Không tìm thấy thư mục nào</string>
   <!--Format string for folder file count-->
@@ -54,6 +52,7 @@
   <string name="announce_server">Máy chủ thông báo</string>
   <!--Menu item to donate-->
   <string name="donate">Quyên góp</string>
+  <string name="restart">Khởi chạy lại</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID thư mục</string>
@@ -74,6 +73,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Tạo mới</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Có chắc là bạn muốn xoá thư mục này khỏi Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">Không được để trống ID thư mục</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -103,17 +103,15 @@
   <string name="introducer">Thiết bị giới thiệu</string>
   <!--ActionBar item-->
   <string name="delete_device">Xoá thiết bị</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Thêm thiết bị</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Thêm</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Chỉnh sửa thiết bị</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Có chắc là bạn muốn xoá thiết bị này?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Không được để trống ID thiết bị</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Không được để trống tên thiết bị</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Quét mã QR</string>
   <!--Toast show if we could not get root permissions-->
@@ -282,7 +280,7 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="state_idle">Rãnh rỗi</string>
   <string name="state_scanning">Đang quét</string>
   <string name="state_cleaning">Đang dọn dẹp</string>
-  <string name="state_syncing">Đang đồng bộ</string>
+  <string name="state_syncing">Đang đồng bộ (%1$d%%)</string>
   <string name="state_error">Lỗi</string>
   <string name="state_unknown">Không rõ</string>
 </resources>

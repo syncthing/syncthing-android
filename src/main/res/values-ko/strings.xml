@@ -13,8 +13,6 @@
   <string name="api_loading">로드 중...</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">폴더를 찾을 수 없습니다</string>
   <!--Format string for folder file count-->
@@ -87,7 +85,6 @@
   <!--Setting title-->
   <!--ActionBar item-->
   <string name="delete_device">기기 삭제</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">기기 추가</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">추가</string>
@@ -96,8 +93,6 @@
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">기기명을 공백으로 둘 수 없습니다.</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR 코드 스캔</string>
   <!--Toast show if we could not get root permissions-->
@@ -233,6 +228,6 @@
   <string name="state_idle">대기</string>
   <string name="state_scanning">스캔 중</string>
   <string name="state_cleaning">지우는 중</string>
-  <string name="state_syncing">동기화 중</string>
+  <string name="state_syncing">동기화 중 (%1$d%%)</string>
   <string name="state_unknown">알 수 없음</string>
 </resources>

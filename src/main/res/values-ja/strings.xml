@@ -18,10 +18,10 @@
   <string name="off">オフ</string>
   <string name="open_website">Web サイトを開く</string>
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
+  <string name="device_rejected">デバイス %1$s が接続を求めています</string>
+  <string name="ignore">無視</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">フォルダーがありません</string>
   <!--Format string for folder file count-->
@@ -75,6 +75,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">作成</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Syncthing からフォルダーを削除してもよろしいですか?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">フォルダー ID は空にできません</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -104,17 +105,15 @@
   <string name="introducer">紹介者</string>
   <!--ActionBar item-->
   <string name="delete_device">デバイスを削除</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">デバイスを追加</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">追加</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">デバイスを編集</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">このデバイスを削除してもよろしいですか?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">デバイス ID は空にできません</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">デバイス名は空にできません</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR コードをスキャン</string>
   <!--Toast show if we could not get root permissions-->
@@ -282,7 +281,7 @@
   <string name="state_idle">アイドル</string>
   <string name="state_scanning">スキャン中</string>
   <string name="state_cleaning">クリーニング中</string>
-  <string name="state_syncing">同期中</string>
+  <string name="state_syncing">同期中 (%1$d%%)</string>
   <string name="state_error">エラー</string>
   <string name="state_unknown">不明</string>
 </resources>

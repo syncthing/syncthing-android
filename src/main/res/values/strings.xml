@@ -43,9 +43,6 @@
 
     <string name="folders_fragment_title">Folders</string>
 
-    <!-- Format string for folder progress. First parameter is status string, second is sync percentage -->
-    <string name="folder_progress_format">%1$s (%2$d%%)</string>
-
     <!-- Shown if no folders exist -->
     <string name="folder_list_empty">No folders found</string>
 
@@ -462,7 +459,7 @@ Please report any problems you encounter via Github.</string>
     <string name="state_idle">Idle</string>
     <string name="state_scanning">Scanning</string>
     <string name="state_cleaning">Cleaning</string>
-    <string name="state_syncing">Syncing</string>
+    <string name="state_syncing">Syncing (%1$d%%)</string>
     <string name="state_error">Error</string>
     <string name="state_unknown">Unknown</string>
 

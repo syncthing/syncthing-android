@@ -18,10 +18,10 @@
   <string name="off">Arrêt</string>
   <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
+  <string name="device_rejected">La machine %1$s veut se connecter</string>
+  <string name="ignore">Ignorer</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Aucun dossier trouvé</string>
   <!--Format string for folder file count-->
@@ -31,7 +31,7 @@
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">Aucune machine trouvée</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">À jour</string>
+  <string name="device_up_to_date">Synchronisé</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronisation (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
@@ -75,6 +75,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Créer</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Voulez-vous vraiment enlever ce dossier de Syncthing ?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">L\'ID du dossier ne doit pas être vide</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -104,17 +105,15 @@
   <string name="introducer">Initiateur</string>
   <!--ActionBar item-->
   <string name="delete_device">Supprimer la machine</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
-  <string name="add_device">Ajouter machine</string>
+  <string name="add_device">Ajouter une machine</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Ajouter</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Edition de la machine</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Voulez-vous vraiment enlever cette machine ?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">L\'ID machine ne peut pas être vide</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Le nom de la machine ne peut pas être vide</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scanner un QR Code</string>
   <!--Toast show if we could not get root permissions-->
@@ -153,7 +152,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="use_root_title">Sync en root</string>
   <string name="use_root_summary">Faire fonctionner syncthing en super-utilisateur</string>
   <string name="root_dialog_title">Êtes-vous sûr de vouloir activer le mode root (superutilisateur) ?</string>
-  <string name="root_dialog_message">Ceci peut causer divers problèmes entre Syncthing et votre appareil. A utiliser à vos risques.</string>
+  <string name="root_dialog_message">Ceci peut causer divers problèmes entre Syncthing et votre machine. A utiliser à vos risques.</string>
   <string name="notification_type_title">Notification</string>
   <string name="notification_type_summary">Choisissez le type de notification</string>
   <string-array name="notification_type_entries">
@@ -218,7 +217,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Activity title-->
   <string name="folder_picker_title">Sélection du dossier</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Attention: votre version Android n\'autorise pas la synchronisation avec des périphériques de stockage externes.</string>
+  <string name="kitkat_external_storage_warning">Attention: votre version Android n\'autorise pas la synchronisation avec des périphériques de stockages externes.</string>
   <!--ListView empty text-->
   <string name="directory_empty">Le dossier est vide</string>
   <!--Menu item to create folder on the file system-->
@@ -283,7 +282,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="state_idle">En veille</string>
   <string name="state_scanning">Analyse en cours</string>
   <string name="state_cleaning">Effacement en cours</string>
-  <string name="state_syncing">Synchro en cours</string>
+  <string name="state_syncing">Synchronisation (%1$d%%)</string>
   <string name="state_error">Erreur</string>
   <string name="state_unknown">Inconnu</string>
 </resources>

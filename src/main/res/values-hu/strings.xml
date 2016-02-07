@@ -19,8 +19,6 @@
   <string name="toast_write_storage_permission_required">Ehhez az alkalmazáshoz írási jogra van szükség.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappák</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nem található mappa</string>
   <!--Format string for folder file count-->
@@ -93,7 +91,6 @@
   <string name="introducer">Bevezető</string>
   <!--ActionBar item-->
   <string name="delete_device">Eszköz törlése</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Eszköz hozzáadása</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Hozzáadás</string>
@@ -102,8 +99,6 @@
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Az eszközazonosító nem lehet üres</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Az eszköznév nem lehet üres</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR kód olvasása</string>
   <!--Toast show if we could not get root permissions-->
@@ -213,7 +208,7 @@
   <string name="state_idle">Tétlen</string>
   <string name="state_scanning">Átnézés</string>
   <string name="state_cleaning">Takarítás</string>
-  <string name="state_syncing">Szinkronizálás</string>
+  <string name="state_syncing">Szinkronizálás (%1$d%%)</string>
   <string name="state_error">Hiba</string>
   <string name="state_unknown">Ismeretlen</string>
 </resources>

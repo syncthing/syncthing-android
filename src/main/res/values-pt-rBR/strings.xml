@@ -18,10 +18,10 @@
   <string name="off">nenhuma</string>
   <string name="open_website">Abrir site</string>
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
+  <string name="device_rejected">O dispositivo %1$s quer se conectar</string>
+  <string name="ignore">Ignorar</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nenhuma pasta encontrada</string>
   <!--Format string for folder file count-->
@@ -75,14 +75,15 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Criar</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Deseja mesmo remover esta pasta do Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">O ID da pasta não pode ficar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Deseja realmente exportar a configuração? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
+  <string name="dialog_confirm_export">Deseja mesmo exportar a configuração? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Importar uma nova configuração? Arquivos existentes serão sobrescritos.</string>
+  <string name="dialog_confirm_import">Deseja mesmo importar uma nova configuração? Arquivos existentes serão sobrescritos.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -104,17 +105,15 @@
   <string name="introducer">Apresentador</string>
   <!--ActionBar item-->
   <string name="delete_device">Apagar dispositivo</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Adicionar dispositivo</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Adicionar</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Editar dispositivo</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Deseja mesmo remover este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">O ID de dispositivo não pode ficar vazio</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">O nome do dispositivo não pode ficar vazio</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Ler QR Code</string>
   <!--Toast show if we could not get root permissions-->
@@ -283,7 +282,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="state_idle">Em espera</string>
   <string name="state_scanning">Verificando</string>
   <string name="state_cleaning">Limpando</string>
-  <string name="state_syncing">Sincronizando</string>
+  <string name="state_syncing">Sincronizando (%1$d%%)</string>
   <string name="state_error">Erro</string>
   <string name="state_unknown">Desconhecido</string>
 </resources>

@@ -20,8 +20,6 @@
   <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
-  <!--Format string for folder progress. First parameter is status string, second is sync percentage-->
-  <string name="folder_progress_format">%1$s (%2$d%%)</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nenalezeny žádné adresáře</string>
   <!--Format string for folder file count-->
@@ -75,6 +73,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Přidat</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Opravdu chcete odebrat tento adresář ze Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -104,17 +103,15 @@
   <string name="introducer">Zavaděč</string>
   <!--ActionBar item-->
   <string name="delete_device">Smazat přístroj</string>
-  <!--Title for DeviceSettingsFragment in create mode-->
   <string name="add_device">Přidat přístroj</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Přidat</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Upravit přístroj</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Opravdu chcete odebrat tento přístroj?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">ID přístroje nesmí být prázdné</string>
-  <!--Toast shown when trying to create a device with an empty name-->
-  <string name="device_name_required">Jméno přístroje nesmí být prázdné</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Načíst QR kód</string>
   <!--Toast show if we could not get root permissions-->
@@ -282,7 +279,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="state_idle">Aktuální</string>
   <string name="state_scanning">Skenování</string>
   <string name="state_cleaning">Čištění</string>
-  <string name="state_syncing">Synchronizuje se</string>
+  <string name="state_syncing">Synchronizuje se (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámý</string>
 </resources>
