@@ -61,7 +61,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         directory.setText((folder.path));
         if (model != null) {
             int percentage = (model.globalBytes != 0)
-                    ? (int) Math.floor(100 * model.inSyncBytes / model.globalBytes)
+                    ? Math.round(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
             state.setText(getLocalizedState(getContext(), model.state, percentage));
             items.setVisibility(VISIBLE);
