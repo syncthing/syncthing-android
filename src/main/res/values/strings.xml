@@ -75,9 +75,6 @@
     <!-- DrawerFragment -->
 
 
-    <!-- Placeholder for device ID field, to avoid layout changes. This is never visible to users. -->
-    <string name="device_id_placeholder" translatable="false">xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx</string>
-
     <!-- Same as download_title with a colon and space appended -->
     <string name="download_title_colon">Download:\u0020</string>
 

@@ -60,7 +60,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:text="@string/device_id_placeholder"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:visibility="invisible" />
             </LinearLayout>
