@@ -30,15 +30,10 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         RestApi.OnReceiveConnectionsListener, View.OnClickListener {
 
     private TextView mDeviceId;
-
     private TextView mCpuUsage;
-
     private TextView mRamUsage;
-
     private TextView mDownload;
-
     private TextView mUpload;
-
     private TextView mAnnounceServer;
 
     private TextView mExitButton;
@@ -95,9 +90,9 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         mAnnounceServer = (TextView) view.findViewById(R.id.announce_server);
         mExitButton     = (TextView) view.findViewById(R.id.drawerActionExit);
 
-        view.findViewById(R.id.deviceIdContainer)
-                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionWebGui)
+                .setOnClickListener(this);
+        view.findViewById(R.id.drawerActionShareId)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionDonate)
                 .setOnClickListener(this);
@@ -190,11 +185,15 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.deviceIdContainer:
-                RestApi.shareDeviceId(getActivity(), mDeviceId.getText().toString());
-                break;
             case R.id.drawerActionWebGui:
                 startActivity(new Intent(mActivity, WebGuiActivity.class));
+                mActivity.closeDrawer();
+                break;
+            case R.id.drawerActionShareId:
+                Intent i = new Intent(android.content.Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId.getText());
+                startActivity(Intent.createChooser(i, "Share device ID with"));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionDonate:

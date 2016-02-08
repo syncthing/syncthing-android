@@ -30,7 +30,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomActions"
         android:layout_alignParentTop="true"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:fadeScrollbars="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +39,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/deviceIdContainer"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -206,6 +206,15 @@
                 android:drawableLeft="@drawable/ic_web_black_24dp"
                 android:drawableStart="@drawable/ic_web_black_24dp"
                 android:text="@string/web_gui_title" />
+
+            <TextView
+                android:id="@+id/drawerActionShareId"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_share_black_24dp"
+                android:drawableStart="@drawable/ic_share_black_24dp"
+                android:text="@string/share_device_id" />
 
             <TextView
                 android:id="@+id/drawerActionDonate"
