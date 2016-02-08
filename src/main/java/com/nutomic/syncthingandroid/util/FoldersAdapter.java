@@ -68,8 +68,9 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
             items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
             size.setVisibility(VISIBLE);
-            size.setText(readableFileSize(getContext(), model.inSyncBytes) + " / " +
-                    readableFileSize(getContext(), model.globalBytes));
+            size.setText(getContext().getString(R.string.folder_size_format,
+                    readableFileSize(getContext(), model.inSyncBytes),
+                    readableFileSize(getContext(), model.globalBytes)));
             if (TextUtils.isEmpty(folder.invalid)) {
                 setTextOrHide(invalid, model.invalid);
             }

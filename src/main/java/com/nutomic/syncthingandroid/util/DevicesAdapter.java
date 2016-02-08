@@ -69,8 +69,8 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
             upload.setText(RestApi.readableTransferRate(getContext(), conn.outBits));
         }
         else {
-            download.setText("0 " + r.getStringArray(R.array.transfer_rate_units)[0]);
-            upload.setText("0 " + r.getStringArray(R.array.transfer_rate_units)[0]);
+            download.setText(RestApi.readableTransferRate(getContext(), 0));
+            upload.setText(RestApi.readableTransferRate(getContext(), 0));
             status.setText(r.getString(R.string.device_disconnected));
             status.setTextColor(r.getColor(R.color.text_red));
         }

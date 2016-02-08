@@ -463,4 +463,7 @@ Please report any problems you encounter via Github.</string>
     <string name="state_error">Error</string>
     <string name="state_unknown">Unknown</string>
 
+    <!-- Format string for folder size, eg "500 MiB / 1 GiB" -->
+    <string name="folder_size_format">%1$s / %2$s</string>
+
 </resources>
