@@ -6,7 +6,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import android.util.AttributeSet;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;

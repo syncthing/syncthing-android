@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
