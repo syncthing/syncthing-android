@@ -620,7 +620,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             }
         }
         return (folderCount != 0)
-                ? (int) percentageSum / folderCount
+                ? Math.round(percentageSum / folderCount)
                 : 100;
     }
 
