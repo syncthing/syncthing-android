@@ -55,24 +55,28 @@
             <EditTextPreference
                 android:key="deviceName"
                 android:title="@string/device_name"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="textCapWords" />
 
             <EditTextPreference
                 android:key="listenAddress"
                 android:title="@string/listen_address"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="textNoSuggestions" />
 
             <EditTextPreference
                 android:key="maxRecvKbps"
                 android:title="@string/max_recv_kbps"
                 android:numeric="integer"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="number" />
 
             <EditTextPreference
                 android:key="maxSendKbps"
                 android:title="@string/max_send_kbps"
                 android:numeric="integer"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="number" />
 
             <CheckBoxPreference
                 android:key="globalAnnounceEnabled"
@@ -92,7 +96,8 @@
             <EditTextPreference
                 android:key="globalAnnounceServers"
                 android:title="@string/global_announce_server"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="textNoSuggestions" />
 
             <CheckBoxPreference
                 android:key="urAccepted"
@@ -108,15 +113,18 @@
             <EditTextPreference
                 android:key="address"
                 android:title="@string/gui_address"
-                android:persistent="false" />
+                android:persistent="false"
+                android:inputType="textNoSuggestions" />
 
             <EditTextPreference
                 android:key="gui_user"
-                android:title="@string/gui_user" />
+                android:title="@string/gui_user"
+                android:inputType="textCapWords" />
 
             <EditTextPreference
                 android:key="gui_password"
-                android:title="@string/gui_password" />
+                android:title="@string/gui_password"
+                android:inputType="textVisiblePassword" />
 
         </PreferenceScreen>
 
@@ -131,7 +139,8 @@
         <EditTextPreference
             android:key="sttrace"
             android:title="@string/sttrace_title"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"/>
 
         <Preference
             android:key="streset"

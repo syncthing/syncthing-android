@@ -32,8 +32,7 @@
                 android:hint="@string/device_id"
                 android:imeOptions="actionNext"
                 android:inputType="textNoSuggestions|textMultiLine"
-                android:nextFocusForward="@+id/name"
-                tools:text="@string/device_id_placeholder" />
+                android:nextFocusForward="@+id/name" />
 
             <ImageView
                 android:id="@+id/qrButton"
@@ -66,7 +65,8 @@
             android:drawableLeft="@drawable/ic_link_black_24dp"
             android:drawableStart="@drawable/ic_link_black_24dp"
             android:hint="@string/addresses"
-            android:imeOptions="actionDone" />
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"/>
 
         <LinearLayout
             android:id="@+id/compressionContainer"
