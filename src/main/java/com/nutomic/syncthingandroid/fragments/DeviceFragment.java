@@ -3,8 +3,10 @@ package com.nutomic.syncthingandroid.fragments;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -378,6 +380,8 @@ public class DeviceFragment extends Fragment implements
     private void prepareEditMode() {
         getActivity().getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        Drawable dr = ContextCompat.getDrawable(getActivity(), R.drawable.ic_content_copy_black_24dp);
+        mIdView.setCompoundDrawablesWithIntrinsicBounds(null, null, dr, null);
         mIdView.setEnabled(false);
         mQrButton.setVisibility(GONE);
 

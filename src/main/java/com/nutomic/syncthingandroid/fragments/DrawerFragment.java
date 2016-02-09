@@ -154,7 +154,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
             return;
 
         mDeviceId.setText(info.myID);
-        mDeviceId.setVisibility(View.VISIBLE);
         mDeviceId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

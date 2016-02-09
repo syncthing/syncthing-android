@@ -61,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    android:visibility="invisible" />
+                    android:drawableRight="@drawable/ic_content_copy_black_24dp"
+                    android:drawableEnd="@drawable/ic_content_copy_black_24dp" />
             </LinearLayout>
 
             <View
