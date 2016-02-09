@@ -48,8 +48,8 @@ public class PostScanTask extends AsyncTask<String, Void, Void> {
         fullUri += "?" + URLEncodedUtils.format(urlParams, HTTP.UTF_8);
         Log.v(TAG, "Calling Rest API at " + fullUri);
 
-        // Retry at most 10 times before failing
-        for (int i = 0; i < 10; i++) {
+        // Retry at most 5 times before failing
+        for (int i = 0; i < 5; i++) {
             HttpClient httpclient = Https.createHttpsClient(mHttpsCertPath);
             HttpPost post = new HttpPost(fullUri);
             post.addHeader(new BasicHeader(RestApi.HEADER_API_KEY, params[1]));
@@ -62,7 +62,7 @@ public class PostScanTask extends AsyncTask<String, Void, Void> {
                 if (response.getEntity() != null)
                     return null;
             } catch (IOException | IllegalArgumentException e) {
-                Log.w(TAG, "Failed to call Rest API at " + fullUri, e);
+                Log.w(TAG, "Failed to call Rest API at " + fullUri);
             }
             try {
                 // Don't push the API too hard
@@ -70,7 +70,7 @@ public class PostScanTask extends AsyncTask<String, Void, Void> {
             } catch (InterruptedException e) {
                 Log.w(TAG, e);
             }
-            Log.w(TAG, "Retrying GetTask Rest API call ("+(i+1)+"/10)");
+            Log.w(TAG, "Retrying GetTask Rest API call (" + (i + 1) + "/5)");
         }
         return null;
     }
