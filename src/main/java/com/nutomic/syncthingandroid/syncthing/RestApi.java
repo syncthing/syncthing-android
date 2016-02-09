@@ -341,28 +341,32 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         return json;
     }
 
+    /**
+     * Either shows a restart dialog, or only updates the config, depending on
+     * {@link #mRestartPostponed}.
+     */
     public void requireRestart(Activity activity) {
-        requireRestart(activity, true);
+        if (mRestartPostponed) {
+            new PostConfigTask(mHttpsCertPath).execute(mUrl, mApiKey, mConfig.toString());
+        } else {
+            activity.startActivity(new Intent(mContext, RestartActivity.class));
+        }
     }
 
     /**
-     * Sends the updated mConfig via Rest API to syncthing and displays a "restart"
-     * dialog or notification.
+     * Sends the current config to Syncthing and restarts it.
      *
-     * @param activity The calling activity.
-     * @param updateConfig If true, {@link #mConfig} will be sent to `/rest/system/config`.
+     * This executes a restart immediately, and does not show a dialog.
      */
-    public void requireRestart(Activity activity, boolean updateConfig) {
-        if (updateConfig) {
-            new PostConfigTask(mHttpsCertPath)
-                    .execute(mUrl, mApiKey, mConfig.toString());
-        }
-        // TODO Should wait until PostConfigTask is completed, see #398
+    public void updateConfig() {
+        new PostConfigTask(mHttpsCertPath) {
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                mContext.startService(new Intent(mContext, SyncthingService.class)
+                        .setAction(SyncthingService.ACTION_RESTART));
+            }
+        }.execute(mUrl, mApiKey, mConfig.toString());
 
-        if (mRestartPostponed)
-            return;
-
-        activity.startActivity(new Intent(mContext, RestartActivity.class));
     }
 
     /**

@@ -385,7 +385,7 @@ public class SettingsFragment extends PreferenceFragment
                                     Toast.makeText(getActivity(),
                                             getString(R.string.config_imported_successful),
                                             Toast.LENGTH_SHORT).show();
-                                    mSyncthingService.getApi().requireRestart(getActivity(), false);
+                                    mSyncthingService.getApi().requireRestart(getActivity());
                                 } else {
                                     Toast.makeText(getActivity(),
                                             getString(R.string.config_import_failed,

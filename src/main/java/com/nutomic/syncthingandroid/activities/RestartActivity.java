@@ -27,15 +27,13 @@ public class RestartActivity extends SyncthingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Intent intent = new Intent(this, SyncthingService.class)
-                .setAction(SyncthingService.ACTION_RESTART);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.restart_title)
                 .setPositiveButton(R.string.restart_now, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        startService(intent);
+                        getService().getApi().updateConfig();
                         finish();
                     }
                 })
