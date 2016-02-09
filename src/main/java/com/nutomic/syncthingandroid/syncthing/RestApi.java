@@ -352,13 +352,20 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param activity The calling activity.
      * @param updateConfig If true, {@link #mConfig} will be sent to `/rest/system/config`.
      */
-    public void requireRestart(Activity activity, boolean updateConfig) {
+    public void requireRestart(final Activity activity, boolean updateConfig) {
         if (updateConfig) {
-            new PostConfigTask(mHttpsCertPath)
-                    .execute(mUrl, mApiKey, mConfig.toString());
+            new PostConfigTask(mHttpsCertPath) {
+                @Override
+                protected void onPostExecute(Boolean aBoolean) {
+                    restart(activity);
+                }
+            }.execute(mUrl, mApiKey, mConfig.toString());
+        } else {
+            restart(activity);
         }
-        // TODO Should wait until PostConfigTask is completed, see #398
+    }
 
+    private void restart(Activity activity) {
         if (mRestartPostponed)
             return;
 
