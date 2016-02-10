@@ -24,19 +24,19 @@ fi
 case "$1" in
     arm)
         export CGO_ENABLED=0
-        export GOOS=android
+        export GOOS=linux
         export GOARCH=arm
         export GOARM=5
         ;;
     386)
         export CGO_ENABLED=0
-        export GOOS=android
+        export GOOS=linux
         export GOARCH=386
         export GO386=387
         ;;
     amd64)
         export CGO_ENABLED=0
-        export GOOS=android
+        export GOOS=linux
         export GOARCH=amd64
         ;;
     *)
