@@ -29,6 +29,7 @@ public class DevicesAdapterTest extends AndroidTestCase {
         mDevice.name = "the device";
         mDevice.deviceID = "123-456-789";
 
+        mConnection.connected = true;
         mConnection.completion = 100;
         mConnection.inBits = 8388608L;
         mConnection.outBits = 8589934592L;
