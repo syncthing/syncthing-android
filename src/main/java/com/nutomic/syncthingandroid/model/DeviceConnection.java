@@ -1,24 +1,18 @@
 package com.nutomic.syncthingandroid.model;
 
+import java.io.Serializable;
+
 /**
  * Created by martin on 2/9/16.
  */
-public class DeviceConnection {
+public class DeviceConnection implements Serializable {
 
-    private Device device;
-    private String connectionType;
+    public Device device;
+    public String connectionType;
 
     public DeviceConnection(Device device, String connectionType) {
         this.device = device;
         this.connectionType = connectionType;
-    }
-
-    public Device getDevice() {
-        return device;
-    }
-
-    public String getConnectionType() {
-        return connectionType;
     }
 
     @Override

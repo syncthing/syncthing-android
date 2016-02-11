@@ -1,25 +1,19 @@
 package com.nutomic.syncthingandroid.model;
 
+import java.io.Serializable;
+
 /**
  * A folder on a device.
  */
-public class DeviceFolder {
+public class DeviceFolder implements Serializable {
 
-    private String deviceId;
+    public String deviceId;
 
-    private String folderName;
+    public String folderName;
 
     public DeviceFolder(String deviceId, String folderName) {
         this.deviceId = deviceId;
         this.folderName = folderName;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public String getFolderName() {
-        return folderName;
     }
 
     @Override

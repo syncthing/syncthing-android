@@ -319,7 +319,12 @@ public class SyncthingService extends Service implements
 
     private CharSequence formatOngoingSyncInfo() {
         EventBasedModel m = mEventProcessor.createEventBasedModelSnapshot();
-        StringBuffer sb = new StringBuffer();
+        if (m.isInitializing())
+            return "";
+        if (!m.isStillValid())
+            return "ERROR: Event Model out-of-sync!";
+
+        StringBuilder sb = new StringBuilder();
 
         // local activity
         for (Map.Entry<String, String> fs : m.getFolderState().entrySet()) {
@@ -334,7 +339,7 @@ public class SyncthingService extends Service implements
 
         // ongoing uploads
         String[] uploads = formatOngoingUploadInfo(m);
-        if (uploads != null && uploads.length > 0) {
+        if (uploads.length > 0) {
             if (sb.length() > 0) sb.append(", ");
             sb.append(TextUtils.join(", ", uploads));
         }
@@ -349,7 +354,7 @@ public class SyncthingService extends Service implements
         ArrayList<String> entries = new ArrayList<String>();
         for (Map.Entry<DeviceFolder, Double> cs : m.getCompletionStatus().entrySet()) {
             if (cs.getValue() < 100d) {
-                entries.add(m.getConnectedDevices().get(cs.getKey().getDeviceId()).getDevice().getName() + "/" + cs.getKey().getFolderName() + " (" + cs.getValue().intValue() + "%)");
+                entries.add(m.getConnectedDevices().get(cs.getKey().deviceId).device.name + "/" + cs.getKey().folderName + " (" + cs.getValue().intValue() + "%)");
             } // if
         }
         Collections.sort(entries);

@@ -55,11 +55,12 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     private final Context mContext;
     private final RestApi mApi;
 
-    private EventBasedModel mEventBasedModel = new EventBasedModel();
+    private EventBasedModel mEventBasedModel;
 
     public EventProcessor(Context context, RestApi api) {
         mContext = context;
         mApi = api;
+        mEventBasedModel = new EventBasedModel(api);
     }
 
     @Override
@@ -165,6 +166,8 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             if (!mShutdown) {
                 mMainThreadHandler.removeCallbacks(this);
                 mMainThreadHandler.postDelayed(this, EVENT_UPDATE_INTERVAL);
+            } else {
+                mEventBasedModel.reset();
             }
         }
     }
@@ -187,6 +190,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         synchronized (mMainThreadHandler) {
             mShutdown = true;
             mMainThreadHandler.removeCallbacks(this);
+            mEventBasedModel.reset();
         }
     }
 
