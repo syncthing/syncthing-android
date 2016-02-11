@@ -92,7 +92,7 @@ public class FolderObserverTest extends AndroidTestCase
         mLatch = new CountDownLatch(1);
         testFile.createNewFile();
         mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(0, mLatch.getCount());
+        assertEquals(1, mLatch.getCount());
 
         fo.stopWatching();
     }
