@@ -109,12 +109,12 @@ public class EventBasedModel implements Serializable {
             mStillValid = true;
             mLastId = INIT_VIA_API;
         }
-        fireOnEventBasedModelChanged();
+        firePendingOnEventBasedModelChanged();
     }
 
 
-    public void updateByEvent(long id, String type, JSONObject data) {
-        boolean notify;
+    public void updateByEvent(long id, String type, JSONObject data, boolean fireChangeEvent) {
+        boolean notify = false;
         synchronized (mMonitor) {
             if (!mStillValid) {
                 Log.w(TAG, "Attempting to update an outdated model. Ignore.");
@@ -127,10 +127,8 @@ public class EventBasedModel implements Serializable {
             } // if
 
             processEvent(id, type, data);
-            notify = mChangeEventPending;
-            mChangeEventPending = false;
         }
-        if (notify) fireOnEventBasedModelChanged();
+        if (fireChangeEvent) firePendingOnEventBasedModelChanged();
     }
 
     private void processEvent(long id, String type, JSONObject data) {
@@ -252,9 +250,12 @@ public class EventBasedModel implements Serializable {
         }
     }
 
-    protected void fireOnEventBasedModelChanged() {
+    public void firePendingOnEventBasedModelChanged() {
         ArrayList<OnEventBasedModelChangedListener> copy;
         synchronized (mListeners) {
+            if (!mChangeEventPending)
+                return;
+            mChangeEventPending = false;
             if (mListeners == null) return;
             copy = new ArrayList<>(mListeners);
         }

@@ -97,7 +97,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      */
     @Override
     public void onEvent(long id, String type, JSONObject data) throws JSONException {
-        mEventBasedModel.updateByEvent(id, type, data);
+        mEventBasedModel.updateByEvent(id, type, data, false);
         switch (type) {
             case "DeviceRejected":
                 String deviceId = data.getString("device");
@@ -165,6 +165,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             if (!mShutdown) {
                 mMainThreadHandler.removeCallbacks(this);
                 mMainThreadHandler.postDelayed(this, EVENT_UPDATE_INTERVAL);
+                mEventBasedModel.firePendingOnEventBasedModelChanged();
             } else {
                 mEventBasedModel.reset();
             }
