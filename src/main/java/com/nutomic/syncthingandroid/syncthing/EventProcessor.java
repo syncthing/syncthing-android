@@ -18,7 +18,6 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.model.EventBasedModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -209,7 +208,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         nm.notify(notificationId, n);
     }
 
-    public EventBasedModel createEventBasedModelSnapshot() {
+    public EventBasedModel.Snapshot createEventBasedModelSnapshot() {
         return mEventBasedModel.createSnapshot();
     }
 

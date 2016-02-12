@@ -24,8 +24,6 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
-import com.nutomic.syncthingandroid.model.DeviceFolder;
-import com.nutomic.syncthingandroid.model.EventBasedModel;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 import com.nutomic.syncthingandroid.util.PRNGFixes;
@@ -36,11 +34,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.security.SecureRandom;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -318,47 +318,73 @@ public class SyncthingService extends Service implements
     }
 
     private CharSequence formatOngoingSyncInfo() {
-        EventBasedModel m = mEventProcessor.createEventBasedModelSnapshot();
+        EventBasedModel.Snapshot m = mEventProcessor.createEventBasedModelSnapshot();
         if (m.isInitializing())
-            return "";
+            return "Initializing...";
         if (!m.isStillValid())
             return "ERROR: Event Model out-of-sync!";
 
         StringBuilder sb = new StringBuilder();
 
-        // local activity
-        for (Map.Entry<String, String> fs : m.getFolderState().entrySet()) {
-            if (!"idle".equals(fs.getValue())) {
-                if (sb.length() > 0) sb.append(", ");
-                sb.append(fs.getKey());
-                sb.append(" (");
-                sb.append(fs.getValue());
-                sb.append(")");
-            }
-        }
+        List<String> nonIdleFolders = formatNonIdleStates(m);
+        sb.append(TextUtils.join(", ", nonIdleFolders));
 
-        // ongoing uploads
-        String[] uploads = formatOngoingUploadInfo(m);
-        if (uploads.length > 0) {
-            if (sb.length() > 0) sb.append(", ");
-            sb.append(TextUtils.join(", ", uploads));
-        }
+        List<String> uploads = formatOngoingUploads(m);
+        if (uploads.size() > 0 && sb.length() > 0) sb.append(", ");
+        sb.append(TextUtils.join(", ", uploads));
 
         if (sb.length() > 0) sb.append(", ");
-        sb.append(m.getConnectedDevices().size());
-        sb.append(" device(s) connected");
+        int devices = m.getConnections().size();
+        sb.append(devices != 1 ?
+                MessageFormat.format("{0} devices connected", devices) : MessageFormat.format("{0} device connected", devices));
         return sb.length() > 0 ? sb.toString() : null;
     }
 
-    private String[] formatOngoingUploadInfo(EventBasedModel m) {
-        ArrayList<String> entries = new ArrayList<String>();
-        for (Map.Entry<DeviceFolder, Double> cs : m.getCompletionStatus().entrySet()) {
-            if (cs.getValue() < 100d) {
-                entries.add(m.getConnectedDevices().get(cs.getKey().deviceId).device.name + "/" + cs.getKey().folderName + " (" + cs.getValue().intValue() + "%)");
-            } // if
+    /**
+     * Textual representations of folder state.
+     * Sorted alphabetically.
+     */
+    private List<String> formatNonIdleStates(EventBasedModel.Snapshot m) {
+        ArrayList<String> states = new ArrayList<>();
+        for (Map.Entry<String, String> entries : m.getFolderState().entrySet()) {
+            String folderName = entries.getKey();
+            String state = entries.getValue();
+            if (!"idle".equalsIgnoreCase(state)) {
+                states.add(MessageFormat.format("{0} ({1})", folderName, state));
+            }
         }
-        Collections.sort(entries);
-        return entries.toArray(new String[entries.size()]);
+        Collections.sort(states);
+        return states;
+    }
+
+    /**
+     * Textual representations of ongoing uploads. Average over all completions of a device.
+     * Currently, the lowest folder's progression is used.
+     * Sorted alphabetically.
+     */
+    private List<String> formatOngoingUploads(EventBasedModel.Snapshot m) {
+        ArrayList<String> uploads = new ArrayList<>();
+        Map<String, RestApi.Device> devices = m.getDevices();
+        for (Map.Entry<String, Map<String, Double>> folderCompletions : m.getDeviceFolderCompletion().entrySet()) {
+            String deviceId = folderCompletions.getKey();
+            int min = 100;
+            int count = 0;
+            for (Map.Entry<String, Double> completions : folderCompletions.getValue().entrySet()) {
+                if (completions.getValue() < 100d) {
+                    min = Math.min(min, completions.getValue().intValue());
+                    count++;
+                }
+            }
+            if (count > 0) {
+                if (min < 100) {
+                    RestApi.Device d = devices.get(deviceId);
+                    String deviceName = d != null ? d.name : deviceId;
+                    uploads.add(MessageFormat.format("{0} ({1}%)", deviceName, min));
+                }
+            }
+        }
+        Collections.sort(uploads);
+        return uploads;
     }
 
     @Override

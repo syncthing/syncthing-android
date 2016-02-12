@@ -115,8 +115,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }
     }
 
-    public static class Connection {
+    public static class Connection implements Serializable {
         public String at;
+        public String deviceName;
         public long inBytesTotal;
         public long outBytesTotal;
         public long inBits;
@@ -127,7 +128,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public boolean connected;
     }
 
-    public static class Model {
+    public static class Model implements Serializable {
         public long globalBytes;
         public long globalDeleted;
         public long globalFiles;
