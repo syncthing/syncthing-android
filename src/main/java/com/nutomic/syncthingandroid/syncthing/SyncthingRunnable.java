@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -95,7 +96,14 @@ public class SyncthingRunnable implements Runnable {
         }
         // Loop Syncthing
         Process process = null;
+        // Potential fix for #498, keep the CPU running while native binary is running
+        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = useWakeLock()
+                ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG)
+                : null;
         try {
+            if (wakeLock != null)
+                wakeLock.acquire();
             // Loop to handle Syncthing restarts (these always have an error code of 3).
             do {
                 ProcessBuilder pb = (useRoot())
@@ -132,6 +140,8 @@ public class SyncthingRunnable implements Runnable {
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
+            if (wakeLock != null)
+                wakeLock.release();
             if (process != null)
                 process.destroy();
             if (ret != 0) {
@@ -147,6 +157,14 @@ public class SyncthingRunnable implements Runnable {
     private boolean useRoot() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         return sp.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
+    }
+
+    /**
+     * Returns true if the experimental setting for using wake locks has been enabled in settings.
+     */
+    private boolean useWakeLock() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sp.getBoolean(SyncthingService.PREF_USE_WAKE_LOCK, false);
     }
 
     /**

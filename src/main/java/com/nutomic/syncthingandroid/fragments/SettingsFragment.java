@@ -58,6 +58,7 @@ public class SettingsFragment extends PreferenceFragment
     private CheckBoxPreference mSyncOnlyWifi;
     private WifiSsidPreference mSyncOnlyOnSSIDs;
     private CheckBoxPreference mUseRoot;
+    private CheckBoxPreference mKeepWakelock;
     private PreferenceScreen mOptionsScreen;
     private PreferenceScreen mGuiScreen;
     private SyncthingService mSyncthingService;
@@ -134,6 +135,7 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyOnSSIDs = (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
         mSyncOnlyOnSSIDs.setDefaultValue(new TreeSet<String>()); // default to empty list
         mUseRoot = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
+        mKeepWakelock = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
         Preference appVersion = screen.findPreference(APP_VERSION_KEY);
         mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
         mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
@@ -153,6 +155,7 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyWifi.setOnPreferenceChangeListener(this);
         mSyncOnlyOnSSIDs.setOnPreferenceChangeListener(this);
         mUseRoot.setOnPreferenceClickListener(this);
+        mKeepWakelock.setOnPreferenceClickListener(this);
         screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
         screen.findPreference(SYNCTHING_RESET).setOnPreferenceClickListener(this);
@@ -357,6 +360,9 @@ public class SettingsFragment extends PreferenceFragment
                     new Thread(new ChownFilesRunnable()).start();
                     mSyncthingService.getApi().requireRestart(getActivity());
                 }
+                return true;
+            case SyncthingService.PREF_USE_WAKE_LOCK:
+                mSyncthingService.getApi().requireRestart(getActivity());
                 return true;
             case EXPORT_CONFIG:
                 new AlertDialog.Builder(getActivity())

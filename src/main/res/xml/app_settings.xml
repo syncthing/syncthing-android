@@ -147,6 +147,18 @@
             android:title="@string/streset_title"
             android:singleLine="true" />
 
+        <PreferenceScreen
+            android:key="syncthing_experimental"
+            android:title="@string/experimental_settings">
+
+            <CheckBoxPreference
+                android:key="wakelock_while_binary_running"
+                android:title="@string/keep_wakelock_while_binary_running"
+                android:summary="@string/keep_wakelock_while_binary_running_summary"
+                android:defaultValue="false" />
+
+        </PreferenceScreen>
+
     </PreferenceCategory>
 
     <PreferenceCategory
