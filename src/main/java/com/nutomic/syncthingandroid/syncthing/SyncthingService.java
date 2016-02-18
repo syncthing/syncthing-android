@@ -94,6 +94,7 @@ public class SyncthingService extends Service implements
     public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
     public static final String PREF_USE_ROOT                 = "use_root";
     private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
+    public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
 
     private static final int NOTIFICATION_ACTIVE = 1;
 
