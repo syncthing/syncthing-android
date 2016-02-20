@@ -29,12 +29,6 @@
             android:summary="@string/advanced_folder_picker_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="use_root"
-            android:title="@string/use_root_title"
-            android:summary="@string/use_root_summary"
-            android:defaultValue="false" />
-
         <ListPreference
             android:key="notification_type"
             android:title="@string/notification_type_title"
@@ -150,6 +144,12 @@
         <PreferenceScreen
             android:key="syncthing_experimental"
             android:title="@string/experimental_settings">
+
+            <CheckBoxPreference
+                android:key="use_root"
+                android:title="@string/use_root_title"
+                android:summary="@string/use_root_summary"
+                android:defaultValue="false" />
 
             <CheckBoxPreference
                 android:key="wakelock_while_binary_running"

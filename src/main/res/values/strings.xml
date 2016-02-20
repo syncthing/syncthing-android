@@ -246,13 +246,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
 
-    <string name="use_root_title">Sync as Root</string>
+    <string name="use_root_title">Run Syncthing as Superuser</string>
 
-    <string name="use_root_summary">Run Syncthing as Superuser</string>
-
-    <string name="root_dialog_title">Are you sure you want to enable root?</string>
-
-    <string name="root_dialog_message">This may cause various problems with Syncthing and with your device. Use at your own risk.</string>
+    <string name="use_root_summary">This may cause various problems with Syncthing and with your device. Use at your own risk.</string>
 
     <string name="notification_type_title">Notification</string>
 

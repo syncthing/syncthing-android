@@ -343,20 +343,9 @@ public class SettingsFragment extends PreferenceFragment
         switch (preference.getKey()) {
             case SyncthingService.PREF_USE_ROOT:
                 if (mUseRoot.isChecked()) {
-                    // Only check preference after dialog was confirmed and root was granted.
+                    // Only check preference after root was granted.
                     mUseRoot.setChecked(false);
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.root_dialog_title)
-                            .setMessage(R.string.root_dialog_message)
-                            .setPositiveButton(android.R.string.yes,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    new TestRootTask().execute();
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, null)
-                            .show();
+                    new TestRootTask().execute();
                 } else {
                     new Thread(new ChownFilesRunnable()).start();
                     mSyncthingService.getApi().requireRestart(getActivity());
