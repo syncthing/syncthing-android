@@ -39,7 +39,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Yükleme</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">İndirme:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -277,4 +276,5 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="state_syncing">Eşzamanlama gerçekleştiriliyor (%1$d%%)</string>
   <string name="state_error">Hata</string>
   <string name="state_unknown">Bilinmiyor</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

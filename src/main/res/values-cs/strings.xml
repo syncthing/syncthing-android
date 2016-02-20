@@ -18,6 +18,8 @@
   <string name="off">vypnuto</string>
   <string name="open_website">Otevřít webovou stránku</string>
   <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
+  <string name="device_rejected">Přístroj %1$s žádá o připojení</string>
+  <string name="ignore">Ignorovat</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Shown if no folders exist-->
@@ -39,7 +41,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Rychlost odesílání</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Rychlost stahování:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -282,4 +283,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="state_syncing">Synchronizuje se (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámý</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
 </resources>

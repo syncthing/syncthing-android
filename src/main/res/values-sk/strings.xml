@@ -39,7 +39,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Odosielanie</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Sťahovanie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -272,4 +271,5 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <string name="state_syncing">Synchronizuje sa (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámy</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

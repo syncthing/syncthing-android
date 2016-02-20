@@ -39,7 +39,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -275,4 +274,5 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="state_syncing">Sincronizando (%1$d%%)</string>
   <string name="state_error">Erro</string>
   <string name="state_unknown">Desconhecido</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

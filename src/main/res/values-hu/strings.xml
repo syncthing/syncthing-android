@@ -37,7 +37,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Feltöltés</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Letöltve:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -211,4 +210,5 @@
   <string name="state_syncing">Szinkronizálás (%1$d%%)</string>
   <string name="state_error">Hiba</string>
   <string name="state_unknown">Ismeretlen</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

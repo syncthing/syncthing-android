@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Otwarty, godny zaufania oraz zdecentralizowany progam do synchronizacji plików.</string>
+  <string name="app_description">Otwarty, godny zaufania oraz zdecentralizowany program do synchronizacji plików.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Dodaj katalog</string>
@@ -23,7 +23,7 @@
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Nie znaleziono katalogów</string>
+  <string name="folder_list_empty">Nie odnaleziono katalogów</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d plików</string>
   <!--DevicesFragment-->
@@ -41,7 +41,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -81,7 +80,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka katalogu nie może być pusta</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Czy rzeczywiście chcesz wyeksportować swoją konfigurację? Istniejące pliki zostaną nadpisane.\n\nUWAGA! Inne aplikacje mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
+  <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Zaimportować nowe ustawienia? Istniejące pliki zostaną zastąpione.</string>
   <!--DeviceSettingsFragment-->
@@ -140,7 +139,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Uruchamia program w tle zgodnie z poniższymi preferencjami</string>
   <!--Preference summary in case it is disabled-->
-  <string name="always_run_in_background_disabled">Syncthing działa tylko, gdy jest ręcznie uruchomiony i może być zatrzymany z przycisku w menu.</string>
+  <string name="always_run_in_background_disabled">Uruchamia program ręcznie i kończy jego działanie przyciskiem w menu</string>
   <string name="sync_only_charging">Synchronizowanie tylko podczas ładowania</string>
   <string name="sync_only_wifi">Synchronizowanie tylko przy użyciu Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Ogranicz do określonych sieci WiFi</string>
@@ -152,7 +151,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="use_root_title">Działanie z uprawnieniami roota</string>
   <string name="use_root_summary">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
   <string name="root_dialog_title">Udostępnić uprawnienia root?</string>
-  <string name="root_dialog_message">To może spowodować różne problemy z Syncthing i twoim urządzeniem. Używaj na własne ryzyko.</string>
+  <string name="root_dialog_message">To może spowodować różne problemy z Syncthing i urządzeniem. Proszę używać na własne ryzyko.</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
   <string name="category_syncthing">Syncthing</string>
@@ -170,24 +169,24 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="gui_address">Adres GUI</string>
   <string name="gui_user">Użytkownik GUI</string>
   <string name="gui_password">Hasło GUI</string>
-  <string name="export_config">Eksportuj konfigurację</string>
+  <string name="export_config">Eksportuj ustawienia</string>
   <!--Toast shown after config was successfully exported-->
-  <string name="config_export_successful">Wyeksportowano konfigurację do %1$s</string>
-  <string name="import_config">Importuj konfigurację</string>
+  <string name="config_export_successful">Wyeksportowano ustawienia do %1$s</string>
+  <string name="import_config">Importuj ustawienia</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_imported_successful">Zaimportowano konfigurację</string>
+  <string name="config_imported_successful">Zaimportowano ustawienia</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Nie udało się zaimportować konfiguracji. Proszę upewnić się, że pliki znajdują się w położeniu %1$s.</string>
+  <string name="config_import_failed">Nie udało się zaimportować ustawień. Proszę upewnić się, że pliki znajdują się w położeniu %1$s.</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opcje diagnozowania błędów</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Tylko znaki a-z oraz \',\' są dopuszczalne w STTRACE</string>
+  <string name="toast_invalid_sttrace">Tylko znaki a-z oraz „,” są dopuszczalne w STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Znaki \':\' oraz \' są niedozwolone w nazwie użytkownika</string>
+  <string name="toast_invalid_username">Znaki „:” oraz „\'” są niedozwolone w nazwie użytkownika</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Znaki \':\' oraz \' są niedozwolone w haśle</string>
+  <string name="toast_invalid_password">Znaki „:” oraz „\'” są niedozwolone w haśle</string>
   <!--Title for the preference to reset Syncthing indexes-->
-  <string name="streset_title">Przywróć stan pierwotny bazy danych</string>
+  <string name="streset_title">Przywróć pierwotny stan bazy danych</string>
   <!--Syncthing was reset-->
   <string name="streset_question">To działanie powinno się przeprowadzać tylko, kiedy jest ono zalecone przez dział wsparcia programu.
 
@@ -212,7 +211,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Wybieranie katalogu</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Ostrzeżenie: Twoja wersja Androida nie pozwala na synchronizowanie zewnętrznych pamięci masowych</string>
+  <string name="kitkat_external_storage_warning">Ostrzeżenie: aktualna wersja systemu Android nie pozwala na synchronizowanie zewnętrznych pamięci masowych</string>
   <!--ListView empty text-->
   <string name="directory_empty">Katalog jest pusty</string>
   <!--Menu item to create folder on the file system-->
@@ -224,7 +223,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Title of the "log" activity-->
   <string name="log_title">Dziennik</string>
   <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Wyświetl dziennik Androida</string>
+  <string name="log_android_title">Wyświetl dziennik systemu</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Wyświetl dziennik programu</string>
   <!--Title of the "share log" menu button-->
@@ -254,9 +253,9 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Później</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Kliknij tu, aby zrestartować syncthing</string>
+  <string name="restart_notification_text">Proszę kliknąć, aby zrestartować syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">Skopiowano identyfikator urządzenia do schowka</string>
+  <string name="device_id_copied_to_clipboard">Skopiowano do schowka identyfikator urządzenia</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -280,4 +279,6 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="state_syncing">Synchronizowanie (%1$d%%)</string>
   <string name="state_error">Błąd</string>
   <string name="state_unknown">Nieznany</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
 </resources>

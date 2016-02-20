@@ -30,7 +30,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">上載</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">下載:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -195,4 +194,5 @@
   <string name="state_scanning">正在掃描</string>
   <string name="state_cleaning">正在清理</string>
   <string name="state_syncing">正在同步 (%1$d%%)</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

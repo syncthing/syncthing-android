@@ -16,7 +16,6 @@
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
@@ -110,4 +109,5 @@
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

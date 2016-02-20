@@ -41,7 +41,6 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Emission</string>
   <!--DrawerFragment-->
-  <!--Placeholder for device ID field, to avoid layout changes. This is never visible to users.-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Réception:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
@@ -285,4 +284,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="state_syncing">Synchronisation (%1$d%%)</string>
   <string name="state_error">Erreur</string>
   <string name="state_unknown">Inconnu</string>
+  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
 </resources>
