@@ -69,6 +69,7 @@ public class SettingsFragment extends PreferenceFragment
         mOptionsScreen.setEnabled(enabled);
         mGuiScreen.setEnabled(enabled);
         mUseRoot.setEnabled(enabled);
+        mKeepWakelock.setEnabled(enabled);
 
         if (currentState == SyncthingService.State.ACTIVE) {
             Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
