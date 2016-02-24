@@ -23,6 +23,17 @@
             android:drawableLeft="@drawable/ic_settings_black_24dp"
             android:drawableStart="@drawable/ic_settings_black_24dp"
             android:text="@string/settings_title" />
+
+        <TextView
+            android:id="@+id/drawerActionExit"
+            style="@style/Widget.Syncthing.TextView.Label"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawableLeft="@drawable/ic_close_black_24dp"
+            android:drawableStart="@drawable/ic_close_black_24dp"
+            android:text="@string/exit"
+            android:visibility="gone" />
+
     </android.support.v7.widget.LinearLayoutCompat>
 
     <ScrollView
@@ -234,16 +245,6 @@
                 android:drawableLeft="@drawable/ic_autorenew_black_24dp"
                 android:drawableStart="@drawable/ic_autorenew_black_24dp"
                 android:text="@string/restart" />
-
-            <TextView
-                android:id="@+id/drawerActionExit"
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_close_black_24dp"
-                android:drawableStart="@drawable/ic_close_black_24dp"
-                android:text="@string/exit"
-                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
