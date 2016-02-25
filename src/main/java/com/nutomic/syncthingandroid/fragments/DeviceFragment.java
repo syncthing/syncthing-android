@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +58,7 @@ public class DeviceFragment extends Fragment implements
 
     private static final String TAG = "DeviceSettingsFragment";
 
-    private static final String DYNAMIC_ADDRESSES = "dynamic";
+    public static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
 
     private SyncthingService mSyncthingService;
 
@@ -286,7 +289,7 @@ public class DeviceFragment extends Fragment implements
         // Update views
         mIdView.setText(mDevice.deviceID);
         mNameView.setText((mDevice.name));
-        mAddressesView.setText(displayableAddresses());
+        mAddressesView.setText(TextUtils.join(" ", displayableAddresses()));
         mCompressionValueView.setText(Compression.fromValue(getActivity(), mDevice.compression).getTitle(getActivity()));
         mIntroducerView.setChecked(mDevice.introducer);
 
@@ -372,7 +375,7 @@ public class DeviceFragment extends Fragment implements
         mDevice = new RestApi.Device();
         mDevice.name = "";
         mDevice.deviceID = "";
-        mDevice.addresses = "dynamic";
+        mDevice.addresses = DYNAMIC_ADDRESS;
         mDevice.compression = METADATA.getValue(getActivity());
         mDevice.introducer = false;
     }
@@ -397,12 +400,16 @@ public class DeviceFragment extends Fragment implements
         }
     }
 
-    private String persistableAddresses(CharSequence userInput) {
-        return isEmpty(userInput) ? DYNAMIC_ADDRESSES : userInput.toString();
+    private List<String> persistableAddresses(CharSequence userInput) {
+        return isEmpty(userInput)
+                ? DYNAMIC_ADDRESS
+                : Arrays.asList(userInput.toString().split(" "));
     }
 
-    private String displayableAddresses() {
-        return DYNAMIC_ADDRESSES.equals(mDevice.addresses) ? "" : mDevice.addresses;
+    private List<String> displayableAddresses() {
+        return DYNAMIC_ADDRESS.equals(mDevice.addresses)
+                ? DYNAMIC_ADDRESS
+                : mDevice.addresses;
     }
 
     @Override

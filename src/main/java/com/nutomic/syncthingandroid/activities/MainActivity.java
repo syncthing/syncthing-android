@@ -38,6 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
@@ -298,7 +299,7 @@ public class MainActivity extends SyncthingActivity
                             public void onClick(DialogInterface dialog, int which) {
                                 RestApi.Device device = new RestApi.Device();
                                 device.deviceID = deviceId;
-                                device.addresses = "";
+                                device.addresses = DeviceFragment.DYNAMIC_ADDRESS;
                                 getApi().editDevice(device, MainActivity.this, null);
                             }
                         })

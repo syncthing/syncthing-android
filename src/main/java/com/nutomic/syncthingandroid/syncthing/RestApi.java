@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public static final String TOTAL_STATS = "total";
 
     public static class Device implements Serializable {
-        public String addresses;
+        public List<String> addresses;
         public String name;
         public String deviceID;
         public String compression;
@@ -321,7 +322,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public <T> void setValue(String name, String key, T value, boolean isArray, Activity activity) {
         try {
             mConfig.getJSONObject(name).put(key, (isArray)
-                    ? listToJson(((String) value).split(","))
+                    ? new JSONArray(Arrays.asList(((String) value).split(",")))
                     : value);
             requireRestart(activity);
         } catch (JSONException e) {
@@ -329,16 +330,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }
     }
 
-    /**
-     * Converts an array of strings to JSON array. Like JSONArray#JSONArray(Object array), but
-     * works on all API levels.
-     */
-    private JSONArray listToJson(String[] list) {
-        JSONArray json = new JSONArray();
-        for (String s : list) {
-            json.put(s.trim());
+    private List<String> jsonToList(JSONArray array) throws JSONException {
+        ArrayList<String> list = new ArrayList<>(array.length());
+        for (int i = 0; i < array.length(); i++) {
+            list.add(array.getString(i));
         }
-        return json;
+        return list;
     }
 
     /**
@@ -384,7 +381,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             for (int i = 0; i < devices.length(); i++) {
                 JSONObject json = devices.getJSONObject(i);
                 Device n = new Device();
-                n.addresses = json.optJSONArray("addresses").join(" ").replace("\"", "");
+                n.addresses = jsonToList(json.optJSONArray("addresses"));
                 n.name = json.getString("name");
                 n.deviceID = json.getString("deviceID");
                 n.compression = json.getString("compression");
@@ -801,7 +798,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                             }
                             n.put("deviceID", device.deviceID);
                             n.put("name", device.name);
-                            n.put("addresses", listToJson(device.addresses.split(" ")));
+                            n.put("addresses", new JSONArray(device.addresses));
                             n.put("compression", device.compression);
                             n.put("introducer", device.introducer);
                             requireRestart(activity);
