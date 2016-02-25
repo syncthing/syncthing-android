@@ -113,7 +113,7 @@ task cleanNative(type: Delete) {
 
 play {
     jsonFile = file('keys.json')
-    uploadImages = true
+    uploadImages = false
 }
 
 /**

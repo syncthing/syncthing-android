@@ -10,14 +10,14 @@ lang_map = af_ZA: af-rZA, am_ET: am-rET, ar_AE: ar-rAE, ar_BH: ar-rBH, ar_DZ: ar
 
 [syncthing-android.description_fulltxt]
 file_filter = src/fat/play/<lang>/listing/fulldescription
-source_file = src/fat/play/en-UK/listing/fulldescription
-source_lang = en-UK
+source_file = src/fat/play/en-GB/listing/fulldescription
+source_lang = en_GB
 type = TXT
 lang_map = ja: ja-JP, sv: sv-SE, da: da-DK, de: de-DE, el: el-EL, es: es-ES, fi: fi-FI, it: it-IT, pl: pl-PL, nl: nl-NL, ru: ru-RU, no: no-NO, pt: pt-PT, ko: ko-KR, cs: cs-CZ, hu: hu-HU, fr: fr-FR, tr: tr-TR
 
 [syncthing-android.description_shorttxt]
 file_filter = src/fat/play/<lang>/listing/shortdescription
-source_file = src/fat/play/en-UK/listing/shortdescription
-source_lang = en-UK
+source_file = src/fat/play/en-GB/listing/shortdescription
+source_lang = en_GB
 type = TXT
 lang_map = ja: ja-JP, sv: sv-SE, da: da-DK, de: de-DE, el: el-EL, es: es-ES, fi: fi-FI, it: it-IT, pl: pl-PL, nl: nl-NL, ru: ru-RU, no: no-NO, pt: pt-PT, ko: ko-KR, cs: cs-CZ, hu: hu-HU, fr: fr-FR, tr: tr-TR
