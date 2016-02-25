@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -33,7 +32,25 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     @Override
     public void onResume() {
         super.onResume();
-        setListShown(true);
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateList();
+                    }
+                });
+            }
+
+        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mTimer.cancel();
     }
 
     @Override
@@ -41,7 +58,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         if (currentState != SyncthingService.State.ACTIVE)
             return;
 
-        initAdapter();
+        updateList();
     }
 
     @Override
@@ -57,45 +74,30 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initAdapter();
+        updateList();
         setHasOptionsMenu(true);
     }
 
-    private void initAdapter() {
-        SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || activity.getApi() == null)
-            return;
-
-        mAdapter = new FoldersAdapter(activity);
-        mAdapter.add(activity.getApi().getFolders());
-        setListAdapter(mAdapter);
-    }
-
+    /**
+     * Refreshes ListView by updating folders and info.
+     *
+     * Also creates adapter if it doesn't exist yet.
+     */
     private void updateList() {
-        if (mAdapter == null || getView() == null || getActivity().isFinishing())
+        SyncthingActivity activity = (SyncthingActivity) getActivity();
+        if (activity == null || activity.getApi() == null || getView() == null ||
+                activity.isFinishing())
             return;
 
-        MainActivity activity = (MainActivity) getActivity();
-        mAdapter.updateModel(activity.getApi(), getListView());
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser) {
-            mTimer = new Timer();
-            mTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    updateList();
-                }
-
-            }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-        } else if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
+        if (mAdapter == null) {
+            mAdapter = new FoldersAdapter(activity);
+            setListAdapter(mAdapter);
         }
+
+        mAdapter.clear();
+        mAdapter.add(activity.getApi().getFolders());
+        mAdapter.updateModel(activity.getApi());
+        setListShown(true);
     }
 
     @Override

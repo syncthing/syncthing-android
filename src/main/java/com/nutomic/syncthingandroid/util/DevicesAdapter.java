@@ -98,12 +98,9 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
     /**
      * Requests new connection info for all devices visible in listView.
      */
-    public void updateConnections(RestApi api, ListView listView) {
+    public void updateConnections(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            if (i >= listView.getFirstVisiblePosition() &&
-                    i <= listView.getLastVisiblePosition()) {
-                api.getConnections(this);
-            }
+            api.getConnections(this);
         }
     }
 

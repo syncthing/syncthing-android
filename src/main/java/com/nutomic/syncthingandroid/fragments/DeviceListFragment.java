@@ -33,7 +33,25 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
     @Override
     public void onResume() {
         super.onResume();
-        setListShown(true);
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateList();
+                    }
+                });
+            }
+
+        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mTimer.cancel();
     }
 
     @Override
@@ -41,54 +59,45 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         if (currentState != SyncthingService.State.ACTIVE)
             return;
 
-        initAdapter();
+        updateList();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setEmptyText(getString(R.string.devices_list_empty));
+        getListView().setOnItemClickListener(this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initAdapter();
+        updateList();
         setHasOptionsMenu(true);
     }
 
-    private void initAdapter() {
-        SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || activity.getApi() == null)
-            return;
-
-        mAdapter = new DevicesAdapter(activity);
-        mAdapter.add(activity.getApi().getDevices(false));
-        setListAdapter(mAdapter);
-        setEmptyText(getString(R.string.devices_list_empty));
-        getListView().setOnItemClickListener(this);
-    }
-
+    /**
+     * Refreshes ListView by updating devices and info.
+     *
+     * Also creates adapter if it doesn't exist yet.
+     */
     private void updateList() {
-        if (mAdapter == null || getView() == null || getActivity().isFinishing())
+        SyncthingActivity activity = (SyncthingActivity) getActivity();
+        if (activity == null || activity.getApi() == null || getView() == null ||
+                activity.isFinishing())
             return;
 
-        MainActivity activity = (MainActivity) getActivity();
-        mAdapter.updateConnections(activity.getApi(), getListView());
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser) {
-            mTimer = new Timer();
-            mTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    updateList();
-                }
-
-            }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-        } else if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
+        if (mAdapter == null) {
+            mAdapter = new DevicesAdapter(activity);
+            setListAdapter(mAdapter);
         }
+
+        mAdapter.clear();
+        mAdapter.add(activity.getApi().getDevices(false));
+        mAdapter.updateConnections(activity.getApi());
+        setListShown(true);
     }
 
     @Override
