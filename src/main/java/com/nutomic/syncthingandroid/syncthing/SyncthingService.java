@@ -401,6 +401,11 @@ public class SyncthingService extends Service implements
                         }
                     }).start();
                 }
+            }, new RestApi.OnConfigChangedListener() {
+                @Override
+                public void onConfigChanged() {
+                    onApiChange();
+                }
             });
 
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);

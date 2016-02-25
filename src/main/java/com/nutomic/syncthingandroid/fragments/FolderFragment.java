@@ -234,6 +234,7 @@ public class FolderFragment extends Fragment
         if (!mIsCreateMode) {
             List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
             String passedId = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
+            mFolder = null;
             for (RestApi.Folder currentFolder : folders) {
                 if (currentFolder.id.equals(passedId)) {
                     mFolder = currentFolder;
@@ -241,7 +242,7 @@ public class FolderFragment extends Fragment
                 }
             }
             if (mFolder == null) {
-                Log.w(TAG, "Folder not found in API update");
+                Log.w(TAG, "Folder not found in API update, maybe it was deleted?");
                 getActivity().finish();
                 return;
             }

@@ -266,6 +266,7 @@ public class DeviceFragment extends Fragment implements
 
         if (!mIsCreateMode) {
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
+            mDevice = null;
             for (int i = 0; i < devices.size(); i++) {
                 if (devices.get(i).deviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
@@ -274,7 +275,7 @@ public class DeviceFragment extends Fragment implements
                 }
             }
             if (mDevice == null) {
-                Log.w(TAG, "Device not found in API update");
+                Log.w(TAG, "Device not found in API update, maybe it was deleted?");
                 getActivity().finish();
                 return;
             }

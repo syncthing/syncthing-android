@@ -136,6 +136,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public String invalid;
     }
 
+    public interface OnConfigChangedListener {
+        void onConfigChanged();
+    }
+
     private final Context mContext;
 
     private String mVersion;
@@ -179,14 +183,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private final Map<String, String> mCacheFolderPathLookup = new HashMap<String, String>();
 
     public RestApi(Context context, String url, String apiKey, String guiUser, String guiPassword,
-                   OnApiAvailableListener listener) {
+                   OnApiAvailableListener apiListener, OnConfigChangedListener configListener) {
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
         mGuiUser = guiUser;
         mGuiPassword = guiPassword;
         mHttpsCertPath = mContext.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
-        mOnApiAvailableListener = listener;
+        mOnApiAvailableListener = apiListener;
+        mOnConfigChangedListener = configListener;
     }
 
     /**
@@ -204,6 +209,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     private final OnApiAvailableListener mOnApiAvailableListener;
+
+    private final OnConfigChangedListener mOnConfigChangedListener;
 
     /**
      * Gets local device ID, syncthing version and config, then calls all OnApiAvailableListeners.
@@ -348,6 +355,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         } else {
             activity.startActivity(new Intent(mContext, RestartActivity.class));
         }
+        mOnConfigChangedListener.onConfigChanged();
     }
 
     /**
