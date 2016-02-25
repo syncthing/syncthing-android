@@ -129,7 +129,7 @@ public class DeviceFragment extends Fragment implements
     private TextWatcher mAddressesTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
-            if (!s.toString().equals(mDevice.addresses)) {
+            if (!s.toString().equals(displayableAddresses())) {
                 mDeviceNeedsToUpdate = true;
 
                 mDevice.addresses = persistableAddresses(s);
@@ -289,7 +289,7 @@ public class DeviceFragment extends Fragment implements
         // Update views
         mIdView.setText(mDevice.deviceID);
         mNameView.setText((mDevice.name));
-        mAddressesView.setText(TextUtils.join(" ", displayableAddresses()));
+        mAddressesView.setText(displayableAddresses());
         mCompressionValueView.setText(Compression.fromValue(getActivity(), mDevice.compression).getTitle(getActivity()));
         mIntroducerView.setChecked(mDevice.introducer);
 
@@ -406,10 +406,11 @@ public class DeviceFragment extends Fragment implements
                 : Arrays.asList(userInput.toString().split(" "));
     }
 
-    private List<String> displayableAddresses() {
-        return DYNAMIC_ADDRESS.equals(mDevice.addresses)
+    private String displayableAddresses() {
+        List<String> list = DYNAMIC_ADDRESS.equals(mDevice.addresses)
                 ? DYNAMIC_ADDRESS
                 : mDevice.addresses;
+        return TextUtils.join(" ", list);
     }
 
     @Override
