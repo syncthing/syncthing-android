@@ -252,6 +252,11 @@ public class FolderFragment extends Fragment
     }
 
     private void updateViewsAndSetListeners() {
+        mIdView.removeTextChangedListener(mIdTextWatcher);
+        mPathView.removeTextChangedListener(mPathTextWatcher);
+        mFolderMasterView.setOnCheckedChangeListener(null);
+        mKeepVersionsDialogFragment.setOnValueChangeListener(null);
+
         // Update views
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
