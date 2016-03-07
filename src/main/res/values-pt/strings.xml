@@ -140,8 +140,6 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>
   <string name="use_root_title">Sincronizar como root</string>
   <string name="use_root_summary">Correr o Syncthing como superutilizador</string>
-  <string name="root_dialog_title">Tem a certeza que pretende activar o root?</string>
-  <string name="root_dialog_message">Isto pode causar vários problemas com o Syncthing e com o seu dispositivo. Use por sua conta e risco.</string>
   <string name="notification_type_title">Notificação</string>
   <string name="notification_type_summary">Escolha o tipo de notificação</string>
   <string-array name="notification_type_entries">

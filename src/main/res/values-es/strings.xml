@@ -145,8 +145,6 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="advanced_folder_picker_summary">Escoja una carpeta del dispositivo para sincronizar</string>
   <string name="use_root_title">Sincronizar como Root</string>
   <string name="use_root_summary">Ejecutar Syncthing como Superusuario</string>
-  <string name="root_dialog_title">Estás seguro que quieres activar root?</string>
-  <string name="root_dialog_message">Esto puede causar algunos problemas con Syncthing y tu dispositivo. Usalo bajo tu responsabilidad.</string>
   <string name="notification_type_title">Notificación</string>
   <string name="notification_type_summary">Elige el tipo de notificación</string>
   <string-array name="notification_type_entries">

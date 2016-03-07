@@ -150,8 +150,6 @@
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
   <string name="use_root_title">Sync как Root</string>
   <string name="use_root_summary">Запуск Syncthing как Superuser</string>
-  <string name="root_dialog_title">Вы уверены, что хотите включить root доступ?</string>
-  <string name="root_dialog_message">Это может вызвать проблемы в работе Syncthing и вашего устройства. Используйте на свой страх и риск.</string>
   <string name="notification_type_title">Уведомление</string>
   <string name="notification_type_summary">Выбор метода уведомления</string>
   <string-array name="notification_type_entries">

@@ -148,10 +148,8 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">S\'il vous plait, activer le WiFi pour sélectionner un réseau</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
-  <string name="use_root_title">Sync en root</string>
-  <string name="use_root_summary">Faire fonctionner syncthing en super-utilisateur</string>
-  <string name="root_dialog_title">Êtes-vous sûr de vouloir activer le mode root (superutilisateur) ?</string>
-  <string name="root_dialog_message">Ceci peut causer divers problèmes entre Syncthing et votre machine. A utiliser à vos risques.</string>
+  <string name="use_root_title">Faire fonctionner syncthing en super-utilisateur</string>
+  <string name="use_root_summary">Ceci peut causer divers problèmes entre Syncthing et votre machine. A utiliser à vos risques.</string>
   <string name="notification_type_title">Notification</string>
   <string name="notification_type_summary">Choisissez le type de notification</string>
   <string-array name="notification_type_entries">
@@ -163,8 +161,8 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de machine</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
-  <string name="max_recv_kbps">Limite de débit en réception (Ko/s)</string>
-  <string name="max_send_kbps">Limite de débit en émission (Ko/s)</string>
+  <string name="max_recv_kbps">Limite du débit de réception (Ko/s)</string>
+  <string name="max_send_kbps">Limite du débit d\'émission (Ko/s)</string>
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
   <string name="upnp_enabled">Activer UPnP</string>
@@ -175,6 +173,9 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
   <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
   <string name="export_config">Exporter la configuration</string>
+  <string name="experimental_settings">Expérimental</string>
+  <string name="keep_wakelock_while_binary_running">Maintient le CPU en éveil quand Syncthing est en marche.</string>
+  <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuration a été exportée dans %1$s</string>
   <string name="import_config">Importer la configuration</string>

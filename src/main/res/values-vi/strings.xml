@@ -18,6 +18,8 @@
   <string name="off">tắt</string>
   <string name="open_website">Mở trang web</string>
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
+  <string name="device_rejected">Thiết bị %1$s muốn kết nối</string>
+  <string name="ignore">Bỏ qua</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Các thư mục</string>
   <!--Shown if no folders exist-->
@@ -146,10 +148,8 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hãy bật WiFi để lựa chọn mạng.</string>
   <string name="advanced_folder_picker">Sử dụng trình chọn thư mục nâng cao</string>
   <string name="advanced_folder_picker_summary">Chọn bất kỳ thư mục nào trên thiết bị để đồng bộ</string>
-  <string name="use_root_title">Đồng bộ với quyền Root</string>
-  <string name="use_root_summary">Chạy Syncthing với quyền Superuser</string>
-  <string name="root_dialog_title">Có chắc là bạn muốn bật quyền root?</string>
-  <string name="root_dialog_message">Thao tác này có thể gây ra nhiều vấn đề cho Syncthing và thiết bị của bạn. Hãy thận trọng.</string>
+  <string name="use_root_title">Chạy Syncthing với quyền Superuser</string>
+  <string name="use_root_summary">Thao tác này có thể gây ra nhiều vấn đề cho Syncthing và thiết bị của bạn. Hãy thận trọng.</string>
   <string name="notification_type_title">Thông báo</string>
   <string name="notification_type_summary">Chọn dạng thông báo</string>
   <string-array name="notification_type_entries">
@@ -173,6 +173,9 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="gui_user">Người dùng xác thực GUI</string>
   <string name="gui_password">Mật khẩu xác thực GUI</string>
   <string name="export_config">Xuất cấu hình</string>
+  <string name="experimental_settings">Thực nghiệm</string>
+  <string name="keep_wakelock_while_binary_running">Giữ CPU thức khi Syncthing đang chạy</string>
+  <string name="keep_wakelock_while_binary_running_summary">Dùng tuỳ chỉnh này nếu bạn bị mất kết nối bất ngờ khi đang dùng pin. Nó sẽ tiêu thụ nhiều pin hơn.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Cấu hình đã được xuất vào %1$s</string>
   <string name="import_config">Nhập cấu hình</string>
@@ -283,4 +286,5 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="state_error">Lỗi</string>
   <string name="state_unknown">Không rõ</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
 </resources>

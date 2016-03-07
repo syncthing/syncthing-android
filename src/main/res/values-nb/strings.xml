@@ -144,8 +144,6 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
   <string name="use_root_title">Synkroniser som Root</string>
   <string name="use_root_summary">Kjør Syncthing som Superbruker</string>
-  <string name="root_dialog_title">Er du sikker på at du vil aktivere root?</string>
-  <string name="root_dialog_message">Dette kan forårsake diverse problemer med Syncthing og med din enhet. Bruk på eget ansvar.</string>
   <string name="notification_type_title">Varsling</string>
   <string name="notification_type_summary">Velg varslingstype</string>
   <string-array name="notification_type_entries">

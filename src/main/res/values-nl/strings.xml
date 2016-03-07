@@ -148,10 +148,8 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Wi-Fi aanzetten t.b.v. netwerkselectie.</string>
   <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
-  <string name="use_root_title">Synchroniseren als root</string>
-  <string name="use_root_summary">Syncthing uitvoeren als superuser</string>
-  <string name="root_dialog_title">Ben je zeker dat je root wil inschakelen?</string>
-  <string name="root_dialog_message">Dit kan verschillende Syncthing- of apparaatproblemen veroorzaken. Gebruik op eigen risico.</string>
+  <string name="use_root_title">Syncthing uitvoeren als superuser</string>
+  <string name="use_root_summary">Dit kan verschillende Syncthing- of apparaatproblemen veroorzaken. Gebruik op eigen risico.</string>
   <string name="notification_type_title">Melding</string>
   <string name="notification_type_summary">Kies het meldingstype</string>
   <string-array name="notification_type_entries">
@@ -175,6 +173,9 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="gui_user">GUI-authenticatie gebruiker</string>
   <string name="gui_password">GUI-authenticatie wachtwoord</string>
   <string name="export_config">Configuratie exporteren</string>
+  <string name="experimental_settings">Experimenteel</string>
+  <string name="keep_wakelock_while_binary_running">Laat de CPU niet slapen wanneer Syncthing wordt uitgevoerd</string>
+  <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als je onverwacht losgekoppeld wordt wanneer je op batterij werkt. Dit zal leiden tot verhoogd batterijverbruik.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Configuratie is geëxporteerd naar %1$s</string>
   <string name="import_config">Configuratie importeren</string>

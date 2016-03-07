@@ -145,8 +145,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için cihazdan herhangi bir klasör seçin</string>
   <string name="use_root_title">Kök Kullanıcı/Root olarak Eşzamanlama yap</string>
   <string name="use_root_summary">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>
-  <string name="root_dialog_title">Kök Kullanıcı/Root özelliğini açmak istediğine emin misin?</string>
-  <string name="root_dialog_message">Syncthing ve cihazınızla ilgili çeşitli sorunlara neden olabilir. Kullanırken risk alıyorsunuz.</string>
   <string name="notification_type_title">Bildirimler</string>
   <string name="notification_type_summary">Bildirim türünü seçin</string>
   <string-array name="notification_type_entries">

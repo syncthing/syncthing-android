@@ -148,10 +148,8 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
-  <string name="use_root_title">Działanie z uprawnieniami roota</string>
-  <string name="use_root_summary">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
-  <string name="root_dialog_title">Udostępnić uprawnienia root?</string>
-  <string name="root_dialog_message">To może spowodować różne problemy z Syncthing i urządzeniem. Proszę używać na własne ryzyko.</string>
+  <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
+  <string name="use_root_summary">To może spowodować różne problemy z Syncthing i urządzeniem. Proszę używać na własne ryzyko.</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
   <string name="category_syncthing">Syncthing</string>
@@ -170,6 +168,9 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="gui_user">Użytkownik GUI</string>
   <string name="gui_password">Hasło GUI</string>
   <string name="export_config">Eksportuj ustawienia</string>
+  <string name="experimental_settings">Eksperymelne!</string>
+  <string name="keep_wakelock_while_binary_running">Utrzymuj CPU wybudzony podczas działania Syncthing.</string>
+  <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Wyeksportowano ustawienia do %1$s</string>
   <string name="import_config">Importuj ustawienia</string>

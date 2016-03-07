@@ -150,8 +150,6 @@
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
   <string name="use_root_title">使用root权限来同步</string>
   <string name="use_root_summary">Syncthing 运行于超级用户</string>
-  <string name="root_dialog_title">您确定要赋予超级用户权限？</string>
-  <string name="root_dialog_message">这可能会导致本应用及操作系统出现各种问题。使用需要您自担风险。</string>
   <string name="notification_type_title">通知</string>
   <string name="notification_type_summary">选择通知类型</string>
   <string-array name="notification_type_entries">

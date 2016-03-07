@@ -144,8 +144,6 @@
   <string name="advanced_folder_picker_summary">Изберете папка, от устройството, за синхронизиране</string>
   <string name="use_root_title">Синхронизиране като Root</string>
   <string name="use_root_summary">Стартира Syncthing с права на Superuser</string>
-  <string name="root_dialog_title">Наистина ли желаете да активирате Root?</string>
-  <string name="root_dialog_message">Може да предизвика разнообразни проблеми със Syncthing и като цяло с устройството. Ползвайте на ваша отговорност.</string>
   <string name="notification_type_title">Известия</string>
   <string name="notification_type_summary">Изберете тип известия</string>
   <string-array name="notification_type_entries">

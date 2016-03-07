@@ -148,10 +148,8 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
-  <string name="use_root_title">Synchronizovat jako root</string>
-  <string name="use_root_summary">Spustit syncthing jako superuživatel</string>
-  <string name="root_dialog_title">Jste si jistí, že chcete povolit režim superuživatele?</string>
-  <string name="root_dialog_message">Toto může způsobit různé problémy se Syncthing a s vaším zařízením. Pouze na vlastní riziko.</string>
+  <string name="use_root_title">Spustit syncthing jako superuživatel</string>
+  <string name="use_root_summary">Toto může způsobit různé problémy se Syncthing a s vaším zařízením. Pouze na vlastní riziko.</string>
   <string name="notification_type_title">Upozornění</string>
   <string name="notification_type_summary">Vybrat typ upozornění</string>
   <string-array name="notification_type_entries">
@@ -175,6 +173,9 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="gui_user">Přihlašovací jméno pro GUI</string>
   <string name="gui_password">Přihlašovací heslo pro GUI</string>
   <string name="export_config">Zálohovat nastavení</string>
+  <string name="experimental_settings">Experimentální</string>
+  <string name="keep_wakelock_while_binary_running">Udržovat CPU aktivní pokud běží Syncthing</string>
+  <string name="keep_wakelock_while_binary_running_summary">Použijte toto nastavení pokud zaznamenáváte neočekávaná ukončení spojení při běhu na baterii. Toto bude mít za následek vyšší spotřebu energie.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Nastavení bylo zálohováno do %1$s</string>
   <string name="import_config">Nahrát nastavení</string>
