@@ -45,7 +45,7 @@ public class RestApiTest extends AndroidTestCase {
             public void onApiAvailable() {
                 latch.countDown();
             }
-        });
+        }, null);
         latch.await(1, TimeUnit.SECONDS);
     }
 

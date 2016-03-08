@@ -9,6 +9,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.util.DevicesAdapter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -25,7 +26,8 @@ public class DevicesAdapterTest extends AndroidTestCase {
         super.setUp();
 
         mAdapter = new DevicesAdapter(getContext());
-        mDevice.addresses = "127.0.0.1:12345";
+        mDevice.addresses = new ArrayList<>();
+        mDevice.addresses.add("127.0.0.1:12345");
         mDevice.name = "the device";
         mDevice.deviceID = "123-456-789";
 
