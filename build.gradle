@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201602271131'
-    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:design:23.1.1'
     compile 'com.google.zxing:android-integration:3.2.1'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
