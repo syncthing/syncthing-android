@@ -21,6 +21,8 @@ import eu.chainfire.libsuperuser.Shell;
 
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
+ *
+ * @see <a href="http://docs.syncthing.net/users/syncthing.html">Command Line Docs</a>
  */
 public class SyncthingRunnable implements Runnable {
 
@@ -41,6 +43,8 @@ public class SyncthingRunnable implements Runnable {
     private String mSyncthingBinary;
 
     private String[] mCommand;
+
+    private String mErrorLog;
 
     public enum Command {
         generate, // Generate keys, a config file and immediately exit.
@@ -121,6 +125,7 @@ public class SyncthingRunnable implements Runnable {
                 process = pb.start();
                 mSyncthing.set(process);
 
+                mErrorLog = "";
                 Thread lInfo = log(process.getInputStream(), Log.INFO);
                 Thread lWarn = log(process.getErrorStream(), Log.WARN);
 
@@ -131,10 +136,16 @@ public class SyncthingRunnable implements Runnable {
                 lInfo.join();
                 lWarn.join();
 
+                // Restart if that was requested.
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
                     mContext.startService(new Intent(mContext, SyncthingService.class)
                             .setAction(SyncthingService.ACTION_RESTART));
+                }
+                // Force crash if Syncthing exits with an error.
+                else if (ret == 1 || ret > 4) {
+                    throw new RuntimeException("Syncthing binary crashed with error code " +
+                            Integer.toString(ret) + ", output:\n" + mErrorLog);
                 }
             } while (ret == 3);
         } catch (IOException | InterruptedException e) {
@@ -144,10 +155,6 @@ public class SyncthingRunnable implements Runnable {
                 wakeLock.release();
             if (process != null)
                 process.destroy();
-            if (ret != 0) {
-                Log.e(TAG_NATIVE, "Syncthing binary crashed with error code " +
-                        Integer.toString(ret));
-            }
         }
     }
 
@@ -309,6 +316,9 @@ public class SyncthingRunnable implements Runnable {
                     String line;
                     while ((line = br.readLine()) != null) {
                         Log.println(priority, TAG_NATIVE, line);
+
+                        if (priority == Log.WARN)
+                            mErrorLog += line + "\n";
                     }
                 } catch (IOException e) {
                     // NOTE: This is sometimes called on shutdown, as
