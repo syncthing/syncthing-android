@@ -318,10 +318,7 @@ public class SyncthingService extends Service implements
         PRNGFixes.apply();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Make sure this is also done for existing installs. We can replace this check with
-        // {@link #isFirstStart()} after a while.
-        if (!sp.getBoolean("default_user_pw_set", false)) {
-            sp.edit().putBoolean("default_user_pw_set", true).apply();
+        if (isFirstStart()) {
             char[] chars =
                     "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
             StringBuilder sb = new StringBuilder();
