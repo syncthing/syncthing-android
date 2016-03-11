@@ -9,5 +9,5 @@
     android:background="?colorPrimary"
     android:elevation="@dimen/toolbar_elevation"
     app:titleMarginStart="16dp"
-    app:theme="@style/ThemeOverlay.Syncthing.Toolbar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    android:theme="@style/ThemeOverlay.Syncthing.Toolbar"
+    android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
