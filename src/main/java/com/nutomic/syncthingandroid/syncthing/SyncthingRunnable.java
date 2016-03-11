@@ -126,8 +126,8 @@ public class SyncthingRunnable implements Runnable {
                 mSyncthing.set(process);
 
                 mErrorLog = "";
-                Thread lInfo = log(process.getInputStream(), Log.INFO);
-                Thread lWarn = log(process.getErrorStream(), Log.WARN);
+                Thread lInfo = log(process.getInputStream(), Log.INFO, false);
+                Thread lWarn = log(process.getErrorStream(), Log.WARN, true);
 
                 niceSyncthing();
 
@@ -190,7 +190,7 @@ public class SyncthingRunnable implements Runnable {
                     niceOut.writeBytes("set `ps | grep libsyncthing.so`\n");
                     niceOut.writeBytes("ionice $2 be 7\n"); // best-effort, low priority
                     niceOut.writeBytes("exit\n");
-                    log(nice.getErrorStream(), Log.WARN);
+                    log(nice.getErrorStream(), Log.WARN, false);
                     niceOut.flush();
                     ret = nice.waitFor();
                     Log.i(TAG_NICE, "ionice performed on libsyncthing.so");
@@ -305,8 +305,9 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param is The stream to log.
      * @param priority The priority level.
+     * @param saveLog True if the log should be stored to {@link #mErrorLog}.
      */
-    private Thread log(final InputStream is, final int priority) {
+    private Thread log(final InputStream is, final int priority, final boolean saveLog) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -317,7 +318,7 @@ public class SyncthingRunnable implements Runnable {
                     while ((line = br.readLine()) != null) {
                         Log.println(priority, TAG_NATIVE, line);
 
-                        if (priority == Log.WARN)
+                        if (saveLog)
                             mErrorLog += line + "\n";
                     }
                 } catch (IOException e) {
