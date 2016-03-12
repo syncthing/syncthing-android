@@ -136,7 +136,7 @@ public class SyncthingRunnable implements Runnable {
                 lInfo.join();
                 lWarn.join();
 
-                // Restart if that was requested.
+                // Restart if that was requested via Rest API call.
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
                     mContext.startService(new Intent(mContext, SyncthingService.class)

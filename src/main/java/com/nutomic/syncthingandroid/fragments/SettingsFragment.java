@@ -381,7 +381,8 @@ public class SettingsFragment extends PreferenceFragment
                                     Toast.makeText(getActivity(),
                                             getString(R.string.config_imported_successful),
                                             Toast.LENGTH_SHORT).show();
-                                    mSyncthingService.getApi().requireRestart(getActivity());
+                                    // No need to restart, as we shutdown to import the config, and
+                                    // then have to start Syncthing again.
                                 } else {
                                     Toast.makeText(getActivity(),
                                             getString(R.string.config_import_failed,
