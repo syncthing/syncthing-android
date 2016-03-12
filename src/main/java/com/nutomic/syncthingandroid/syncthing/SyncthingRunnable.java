@@ -234,6 +234,7 @@ public class SyncthingRunnable implements Runnable {
                 BufferedReader br = new BufferedReader(isr);
                 String id;
                 while ((id = br.readLine()) != null) {
+                    id = id.trim().split("\\s+")[1];
                     killProcessId(id, i > 0);
                 }
             } catch (IOException | InterruptedException e) {
