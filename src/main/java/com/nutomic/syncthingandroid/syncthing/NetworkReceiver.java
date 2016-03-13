@@ -22,7 +22,7 @@ public class NetworkReceiver extends BroadcastReceiver {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        boolean isWifiConnected = (wifiInfo != null && wifiInfo.isConnected());
+        boolean isWifiConnected = wifiInfo != null && wifiInfo.isConnected();
         Log.v(TAG, "Received wifi " + (isWifiConnected ? "connected" : "disconnected") + " event");
         Intent i = new Intent(context, SyncthingService.class);
         i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, isWifiConnected);

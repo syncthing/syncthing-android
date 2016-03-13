@@ -289,7 +289,7 @@ public class DeviceFragment extends Fragment implements
     private void updateViewsAndSetListeners() {
         // Update views
         mIdView.setText(mDevice.deviceID);
-        mNameView.setText((mDevice.name));
+        mNameView.setText(mDevice.name);
         mAddressesView.setText(displayableAddresses());
         mCompressionValueView.setText(Compression.fromValue(getActivity(), mDevice.compression).getTitle(getActivity()));
         mIntroducerView.setChecked(mDevice.introducer);
