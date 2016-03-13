@@ -80,7 +80,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
                 if (entity != null) {
                     InputStream is = entity.getContent();
 
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                     String line;
                     String result = "";
                     while ((line = br.readLine()) != null) {

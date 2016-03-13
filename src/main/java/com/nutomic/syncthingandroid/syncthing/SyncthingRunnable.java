@@ -242,7 +242,7 @@ public class SyncthingRunnable implements Runnable {
                 psOut.writeBytes("exit\n");
                 psOut.flush();
                 ps.waitFor();
-                InputStreamReader isr = new InputStreamReader(ps.getInputStream());
+                InputStreamReader isr = new InputStreamReader(ps.getInputStream(), "UTF-8");
                 BufferedReader br = new BufferedReader(isr);
                 String id;
                 while ((id = br.readLine()) != null) {
@@ -312,7 +312,7 @@ public class SyncthingRunnable implements Runnable {
             @Override
             public void run() {
                 try {
-                    InputStreamReader isr = new InputStreamReader(is);
+                    InputStreamReader isr = new InputStreamReader(is, "UTF-8");
                     BufferedReader br = new BufferedReader(isr);
                     String line;
                     while ((line = br.readLine()) != null) {
