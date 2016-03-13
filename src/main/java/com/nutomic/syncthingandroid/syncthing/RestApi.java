@@ -568,9 +568,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                         }
                     }
                     Map<String, Connection> connections = new HashMap<>();
-                    for (String deviceId : jsonConnections.keySet()) {
+                    for (Map.Entry<String, JSONObject> jsonConnection : jsonConnections.entrySet()) {
+                        String deviceId = jsonConnection.getKey();
                         Connection c = new Connection();
-                        JSONObject conn = jsonConnections.get(deviceId);
+                        JSONObject conn = jsonConnection.getValue();
                         c.address = deviceId;
                         c.at = conn.getString("at");
                         c.inBytesTotal = conn.getLong("inBytesTotal");
@@ -607,7 +608,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private int getDeviceCompletion(String deviceId) {
         int folderCount = 0;
         float percentageSum = 0;
-        for (String id : mCachedModelInfo.keySet()) {
+        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
             boolean isShared = false;
             outerloop:
             for (Folder r : getFolders()) {
@@ -620,8 +621,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
             if (isShared) {
-                long global = mCachedModelInfo.get(id).globalBytes;
-                long local = mCachedModelInfo.get(id).inSyncBytes;
+                long global = modelInfo.getValue().globalBytes;
+                long local = modelInfo.getValue().inSyncBytes;
                 percentageSum += (global != 0)
                         ? (local * 100f) / global
                         : 100f;
