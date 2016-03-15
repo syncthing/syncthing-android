@@ -59,7 +59,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         RestApi.Model model = mModels.get(folder.id);
         id.setText(folder.id);
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
-        directory.setText((folder.path));
+        directory.setText(folder.path);
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? Math.round(100 * model.inSyncBytes / model.globalBytes)
