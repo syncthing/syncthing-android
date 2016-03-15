@@ -135,7 +135,7 @@ public class LogActivity extends SyncthingActivity {
             pb.redirectErrorStream(true);
             process = pb.start();
             BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()), 8192);
+                    new InputStreamReader(process.getInputStream(), "UTF-8"), 8192);
             StringBuilder log = new StringBuilder();
             String line = "";
             String sep = System.getProperty("line.separator");
