@@ -606,6 +606,8 @@ public class SyncthingService extends Service implements
      * @return True if the import was successful, false otherwise (eg if files aren't found).
      */
     public boolean importConfig() {
+        mCurrentState = State.DISABLED;
+        shutdown();
         File config = new File(EXPORT_PATH, ConfigXml.CONFIG_FILE);
         File privateKey = new File(EXPORT_PATH, PRIVATE_KEY_FILE);
         File publicKey = new File(EXPORT_PATH, PUBLIC_KEY_FILE);
@@ -615,6 +617,8 @@ public class SyncthingService extends Service implements
         copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
         copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
         copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+        mCurrentState = State.INIT;
+        updateState();
         return true;
     }
 

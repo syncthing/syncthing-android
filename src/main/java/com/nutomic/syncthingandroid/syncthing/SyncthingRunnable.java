@@ -136,7 +136,7 @@ public class SyncthingRunnable implements Runnable {
                 lInfo.join();
                 lWarn.join();
 
-                // Restart if that was requested.
+                // Restart if that was requested via Rest API call.
                 if (ret == 3) {
                     Log.i(TAG, "Restarting syncthing");
                     mContext.startService(new Intent(mContext, SyncthingService.class)
@@ -217,21 +217,9 @@ public class SyncthingRunnable implements Runnable {
 
     /**
      * Look for running libsyncthing.so processes and kill them.
-     * Try a SIGTERM once, then try again (twice) with SIGKILL.
+     * Try a SIGINT first, then try again with SIGKILL.
      */
     public void killSyncthing() {
-        final Process p = mSyncthing.get();
-        if (p != null) {
-            mSyncthing.set(null);
-            p.destroy();
-            try {
-                p.waitFor();
-            } catch (InterruptedException e) {
-                Log.w(TAG_KILL, "Failed to kill Syncthing's process", e);
-            }
-        }
-
-        // Ensure kill
         for (int i = 0; i < 2; i++) {
             Process ps = null;
             DataOutputStream psOut = null;
@@ -246,6 +234,7 @@ public class SyncthingRunnable implements Runnable {
                 BufferedReader br = new BufferedReader(isr);
                 String id;
                 while ((id = br.readLine()) != null) {
+                    id = id.trim().split("\\s+")[1];
                     killProcessId(id, i > 0);
                 }
             } catch (IOException | InterruptedException e) {
@@ -269,18 +258,18 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param force Whether to use a SIGKILL.
      */
-    private static void killProcessId(String id, boolean force) {
+    private void killProcessId(String id, boolean force) {
         Process kill = null;
         DataOutputStream killOut = null;
         try {
-            kill = Runtime.getRuntime().exec("sh");
+            kill = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
             killOut = new DataOutputStream(kill.getOutputStream());
             if (!force) {
-                killOut.writeBytes("kill " + id + "\n");
+                killOut.writeBytes("kill -SIGINT " + id + "\n");
                 killOut.writeBytes("sleep 1\n");
             } else {
                 killOut.writeBytes("sleep 3\n");
-                killOut.writeBytes("kill -9 " + id + "\n");
+                killOut.writeBytes("kill -SIGKILL " + id + "\n");
             }
             killOut.writeBytes("exit\n");
             killOut.flush();
@@ -322,8 +311,6 @@ public class SyncthingRunnable implements Runnable {
                             mErrorLog += line + "\n";
                     }
                 } catch (IOException e) {
-                    // NOTE: This is sometimes called on shutdown, as
-                    // Process.destroy() closes the stream.
                     Log.w(TAG, "Failed to read Syncthing's command line output", e);
                 }
             }
