@@ -148,7 +148,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
-  <string name="use_root_title">Executar Syncthing como Superusuário</string>
+  <string name="use_root_title">Executar como Superusuário</string>
   <string name="use_root_summary">Isto pode causar alguns problemas com o Syncthing e com seu aparelho. Use por sua conta e risco.</string>
   <string name="notification_type_title">Notificação</string>
   <string name="notification_type_summary">Escolha o tipo da notificação</string>
@@ -173,8 +173,8 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="gui_user">Nome de usuário da interface</string>
   <string name="gui_password">Senha da interface</string>
   <string name="export_config">Exportar configuração</string>
-  <string name="experimental_settings">Experimental</string>
-  <string name="keep_wakelock_while_binary_running">Manter a CPU acordada enquanto o Syncthing estiver rodando</string>
+  <string name="experimental_settings">Configurações experimentais</string>
+  <string name="keep_wakelock_while_binary_running">Manter a CPU acordada</string>
   <string name="keep_wakelock_while_binary_running_summary">Marque esta opção se você observar desconexões inesperadas enquanto a bateria do dispositivo não está sendo carregada. Isto resultará em maior uso da bateria.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">A configuração foi salva em %1$s</string>
