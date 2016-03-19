@@ -22,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -97,9 +96,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
 
                 Intent intent = new Intent(mContext, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
+                        .setAction(SettingsActivity.ACTION_DEVICE_SETTINGS)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
-                        .putExtra(DeviceFragment.EXTRA_NODE_ID, deviceId);
+                        .putExtra(DeviceFragment.EXTRA_DEVICE_ID, deviceId);
                 PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
 
                 String title = mContext.getString(R.string.device_rejected,
@@ -113,10 +112,10 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
                 intent = new Intent(mContext, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+                        .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
                         .putExtra(FolderFragment.EXTRA_DEVICE_ID, deviceId)
-                        .putExtra(FolderFragment.EXTRA_REPO_ID, folderId);
+                        .putExtra(FolderFragment.EXTRA_FOLDER_ID, folderId);
                 pi = PendingIntent.getActivity(mContext, 0, intent, 0);
 
                 String deviceName = null;

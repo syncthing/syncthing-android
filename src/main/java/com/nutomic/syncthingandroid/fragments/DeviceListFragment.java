@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -103,9 +102,9 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
-        intent.setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT);
+        intent.setAction(SettingsActivity.ACTION_DEVICE_SETTINGS);
         intent.putExtra(SettingsActivity.EXTRA_IS_CREATE, false);
-        intent.putExtra(DeviceFragment.EXTRA_NODE_ID, mAdapter.getItem(i).deviceID);
+        intent.putExtra(DeviceFragment.EXTRA_DEVICE_ID, mAdapter.getItem(i).deviceID);
         startActivity(intent);
     }
 
@@ -119,7 +118,7 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         switch (item.getItemId()) {
             case R.id.add_device:
                 Intent intent = new Intent(getActivity(), SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
+                        .setAction(SettingsActivity.ACTION_DEVICE_SETTINGS)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
                 startActivity(intent);
                 return true;

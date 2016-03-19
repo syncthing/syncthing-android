@@ -14,15 +14,13 @@ import com.nutomic.syncthingandroid.fragments.SettingsFragment;
  */
 public class SettingsActivity extends SyncthingActivity {
 
-    public static final String ACTION_APP_SETTINGS_FRAGMENT = "app_settings_fragment";
-
-    public static final String ACTION_NODE_SETTINGS_FRAGMENT = "device_settings_fragment";
-
-    public static final String ACTION_REPO_SETTINGS_FRAGMENT = "folder_settings_fragment";
+    public static final String ACTION_APP_SETTINGS    = "app_settings_fragment";
+    public static final String ACTION_DEVICE_SETTINGS = "device_settings_fragment";
+    public static final String ACTION_FOLDER_SETTINGS = "folder_settings_fragment";
 
     /**
-     * Must be set for {@link #ACTION_NODE_SETTINGS_FRAGMENT} and
-     * {@link #ACTION_REPO_SETTINGS_FRAGMENT} to determine if an existing folder/device should be
+     * Must be set for {@link #ACTION_DEVICE_SETTINGS} and
+     * {@link #ACTION_FOLDER_SETTINGS} to determine if an existing folder/device should be
      * edited or a new one created.
      */
     public static final String EXTRA_IS_CREATE = "create";
@@ -41,17 +39,17 @@ public class SettingsActivity extends SyncthingActivity {
                     savedInstanceState.getString("fragment_name"));
         } else if (getIntent().getAction() != null) {
             switch (getIntent().getAction()) {
-                case ACTION_APP_SETTINGS_FRAGMENT:
+                case ACTION_APP_SETTINGS:
                     setTitle(R.string.settings_title);
                     mFragment = new SettingsFragment();
                     break;
-                case ACTION_NODE_SETTINGS_FRAGMENT:
+                case ACTION_DEVICE_SETTINGS:
                     mFragment = new DeviceFragment();
                     if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
                         throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
                     }
                     break;
-                case ACTION_REPO_SETTINGS_FRAGMENT:
+                case ACTION_FOLDER_SETTINGS:
                     mFragment = new FolderFragment();
                     if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
                         throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");

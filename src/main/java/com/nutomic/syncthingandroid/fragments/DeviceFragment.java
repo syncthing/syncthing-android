@@ -54,7 +54,7 @@ public class DeviceFragment extends Fragment implements
         SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener,
         View.OnClickListener {
 
-    public static final String EXTRA_NODE_ID = "device_id";
+    public static final String EXTRA_DEVICE_ID = "device_id";
 
     private static final String TAG = "DeviceSettingsFragment";
 
@@ -269,7 +269,7 @@ public class DeviceFragment extends Fragment implements
             mDevice = null;
             for (int i = 0; i < devices.size(); i++) {
                 if (devices.get(i).deviceID.equals(
-                        getActivity().getIntent().getStringExtra(EXTRA_NODE_ID))) {
+                        getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
                     mDevice = devices.get(i);
                     break;
                 }
@@ -375,7 +375,7 @@ public class DeviceFragment extends Fragment implements
     private void initDevice() {
         mDevice = new RestApi.Device();
         mDevice.name = "";
-        mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_NODE_ID);
+        mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;
         mDevice.compression = METADATA.getValue(getActivity());
         mDevice.introducer = false;

@@ -103,9 +103,9 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(getActivity(), SettingsActivity.class)
-                .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+                .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
                 .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
-                .putExtra(FolderFragment.EXTRA_REPO_ID, mAdapter.getItem(i).id);
+                .putExtra(FolderFragment.EXTRA_FOLDER_ID, mAdapter.getItem(i).id);
         startActivity(intent);
     }
 
@@ -131,7 +131,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         switch (item.getItemId()) {
             case R.id.add_folder:
                 Intent intent = new Intent(getActivity(), SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+                        .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
                 startActivity(intent);
                 return true;

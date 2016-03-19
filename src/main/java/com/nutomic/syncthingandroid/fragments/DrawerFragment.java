@@ -202,7 +202,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 break;
             case R.id.drawerActionSettings:
                 startActivity(new Intent(mActivity, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT));
+                        .setAction(SettingsActivity.ACTION_APP_SETTINGS));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionRestart:

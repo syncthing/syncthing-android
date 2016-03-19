@@ -52,7 +52,7 @@ import static java.lang.String.valueOf;
 public class FolderFragment extends Fragment
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
 
-    public static final String EXTRA_REPO_ID = "folder_id";
+    public static final String EXTRA_FOLDER_ID = "folder_id";
 
     public static final String EXTRA_DEVICE_ID = "device_id";
 
@@ -84,7 +84,7 @@ public class FolderFragment extends Fragment
         @Override
         public void afterTextChanged(Editable s) {
             mFolder.id = s.toString();
-            updateRepo();
+            updateFolder();
         }
     };
 
@@ -99,7 +99,7 @@ public class FolderFragment extends Fragment
         @Override
         public void onCheckedChanged(CompoundButton view, boolean isChecked) {
             mFolder.readOnly = isChecked;
-            updateRepo();
+            updateFolder();
         }
     };
 
@@ -112,7 +112,7 @@ public class FolderFragment extends Fragment
             } else {
                 mFolder.deviceIds.remove(device.deviceID);
             }
-            updateRepo();
+            updateFolder();
         }
     };
 
@@ -127,7 +127,7 @@ public class FolderFragment extends Fragment
                 ((SimpleVersioning) mFolder.versioning).setParams(intValue);
                 mVersioningKeepView.setText(valueOf(intValue));
             }
-            updateRepo();
+            updateFolder();
         }
     };
 
@@ -231,7 +231,7 @@ public class FolderFragment extends Fragment
 
         if (!mIsCreateMode) {
             List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
-            String passedId = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
+            String passedId = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
             mFolder = null;
             for (RestApi.Folder currentFolder : folders) {
                 if (currentFolder.id.equals(passedId)) {
@@ -341,13 +341,13 @@ public class FolderFragment extends Fragment
         if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
-            updateRepo();
+            updateFolder();
         }
     }
 
     private void initFolder() {
         mFolder = new RestApi.Folder();
-        mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
+        mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
         mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
         mFolder.deviceIds = new ArrayList<>();
@@ -385,7 +385,7 @@ public class FolderFragment extends Fragment
         deviceView.setOnCheckedChangeListener(mOnShareChangeListener);
     }
 
-    private void updateRepo() {
+    private void updateFolder() {
         if (!mIsCreateMode) {
             mSyncthingService.getApi().editFolder(mFolder, false, getActivity());
         }

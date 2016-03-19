@@ -557,7 +557,7 @@ public class SyncthingService extends Service implements
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 activity.finish();
                                 Intent intent = new Intent(activity, SettingsActivity.class)
-                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS_FRAGMENT);
+                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS);
                                 activity.startActivity(intent);
                             }
                         }
