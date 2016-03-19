@@ -37,31 +37,24 @@ public class SettingsActivity extends SyncthingActivity {
         if (savedInstanceState != null) {
             mFragment = fm.getFragment(savedInstanceState,
                     savedInstanceState.getString("fragment_name"));
-        } else if (getIntent().getAction() != null) {
+        } else {
             switch (getIntent().getAction()) {
                 case ACTION_APP_SETTINGS:
                     setTitle(R.string.settings_title);
                     mFragment = new SettingsFragment();
                     break;
                 case ACTION_DEVICE_SETTINGS:
+                    assertHasCreateExtra();
                     mFragment = new DeviceFragment();
-                    if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
-                        throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
-                    }
                     break;
                 case ACTION_FOLDER_SETTINGS:
+                    assertHasCreateExtra();
                     mFragment = new FolderFragment();
-                    if (!getIntent().hasExtra(EXTRA_IS_CREATE)) {
-                        throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
-                    }
                     break;
                 default:
                     throw new IllegalArgumentException(
                             "You must provide the requested fragment type as an extra.");
             }
-        } else {
-            setTitle(R.string.settings_title);
-            mFragment = new SettingsFragment();
         }
 
         fm.beginTransaction()
@@ -76,6 +69,11 @@ public class SettingsActivity extends SyncthingActivity {
         outState.putString("fragment_name", fragmentClassName);
         FragmentManager fm = getFragmentManager();
         fm.putFragment(outState, fragmentClassName, mFragment);
+    }
+
+    private void assertHasCreateExtra() {
+        if (!getIntent().hasExtra(EXTRA_IS_CREATE))
+            throw new IllegalArgumentException("EXTRA_IS_CREATE must be set");
     }
 
     public boolean getIsCreate() {
