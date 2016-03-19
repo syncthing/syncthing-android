@@ -375,7 +375,7 @@ public class DeviceFragment extends Fragment implements
     private void initDevice() {
         mDevice = new RestApi.Device();
         mDevice.name = "";
-        mDevice.deviceID = "";
+        mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_NODE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;
         mDevice.compression = METADATA.getValue(getActivity());
         mDevice.introducer = false;

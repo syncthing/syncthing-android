@@ -24,9 +24,6 @@ public class SettingsActivity extends SyncthingActivity {
      * Must be set for {@link #ACTION_NODE_SETTINGS_FRAGMENT} and
      * {@link #ACTION_REPO_SETTINGS_FRAGMENT} to determine if an existing folder/device should be
      * edited or a new one created.
-     * <p/>
-     * If this is false, {@link FolderFragment#EXTRA_REPO_ID} or
-     * {@link DeviceFragment#EXTRA_NODE_ID} must be set (according to the selected fragment).
      */
     public static final String EXTRA_IS_CREATE = "create";
 

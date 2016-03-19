@@ -14,7 +14,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.fragments.DeviceFragment;
+import com.nutomic.syncthingandroid.fragments.FolderFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,25 +96,38 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 String deviceId = data.getString("device");
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
 
-                Intent intent = new Intent(mContext, MainActivity.class);
-                intent.setAction(MainActivity.ACTION_ADD_DEVICE);
-                intent.putExtra(MainActivity.EXTRA_DEVICE_ID, deviceId);
+                Intent intent = new Intent(mContext, SettingsActivity.class)
+                        .setAction(SettingsActivity.ACTION_NODE_SETTINGS_FRAGMENT)
+                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
+                        .putExtra(DeviceFragment.EXTRA_NODE_ID, deviceId);
                 PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
 
                 String title = mContext.getString(R.string.device_rejected,
                         deviceId.substring(0, 7));
 
-                Notification n = new NotificationCompat.Builder(mContext)
-                        .setContentTitle(title)
-                        .setContentIntent(pi)
-                        .setSmallIcon(R.drawable.ic_stat_notify)
-                        .setAutoCancel(true)
-                        .build();
-                NotificationManager nm = (NotificationManager)
-                        mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                notify(title, pi);
+                break;
+            case "FolderRejected":
+                deviceId = data.getString("device");
+                String folderId = data.getString("folder");
+                Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
-                // Use random ID so previous notifications are not replaced.
-                nm.notify(new Random().nextInt(), n);
+                intent = new Intent(mContext, SettingsActivity.class)
+                        .setAction(SettingsActivity.ACTION_REPO_SETTINGS_FRAGMENT)
+                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
+                        .putExtra(FolderFragment.EXTRA_DEVICE_ID, deviceId)
+                        .putExtra(FolderFragment.EXTRA_REPO_ID, folderId);
+                pi = PendingIntent.getActivity(mContext, 0, intent, 0);
+
+                String deviceName = null;
+                for (RestApi.Device d : mApi.getDevices(false)) {
+                    if (d.deviceID.equals(deviceId))
+                        deviceName = RestApi.getDeviceDisplayName(d);
+                }
+                title = mContext.getString(R.string.folder_rejected, deviceName, folderId);
+
+                notify(title, pi);
+                break;
             case "ItemFinished":
                 File updatedFile = new File(data.getString("folderpath"), data.getString("item"));
                 Log.i(TAG, "Notified media scanner about " + updatedFile.toString());
@@ -166,5 +181,20 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             mShutdown = true;
             mMainThreadHandler.removeCallbacks(this);
         }
+    }
+
+    private void notify(String title, PendingIntent pi) {
+        NotificationManager nm = (NotificationManager)
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification n = new NotificationCompat.Builder(mContext)
+                .setContentTitle(title)
+                .setContentIntent(pi)
+                .setSmallIcon(R.drawable.ic_stat_notify)
+                .setAutoCancel(true)
+                .build();
+        // HACK: Use a random, deterministic ID between 1000 and 2000 to avoid duplicate
+        //       notifications.
+        int notificationId = 1000 + title.hashCode() % 1000;
+        nm.notify(notificationId, n);
     }
 }

@@ -70,9 +70,6 @@ public class MainActivity extends SyncthingActivity
 
     private static final int REQUEST_WRITE_STORAGE = 142;
 
-    public static final String ACTION_ADD_DEVICE = "add_device";
-    public static final String EXTRA_DEVICE_ID   = "device_id";
-
     private AlertDialog mLoadingDialog;
     private AlertDialog mDisabledDialog;
 
@@ -276,37 +273,6 @@ public class MainActivity extends SyncthingActivity
         setOptimalDrawerWidth(findViewById(R.id.drawer));
 
         onNewIntent(getIntent());
-    }
-
-    /**
-     * Shows dialog to add rejected devices.
-     */
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        // intent's action will be null if notification is selected
-        if (intent.getAction() == null) {
-            return;
-        }
-        switch (intent.getAction()) {
-            case ACTION_ADD_DEVICE:
-                final String deviceId = intent.getStringExtra(EXTRA_DEVICE_ID);
-                new AlertDialog.Builder(this)
-                        .setMessage(getString(R.string.device_rejected, deviceId))
-                        .setPositiveButton(R.string.add_device, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                RestApi.Device device = new RestApi.Device();
-                                device.deviceID = deviceId;
-                                device.addresses = DeviceFragment.DYNAMIC_ADDRESS;
-                                getApi().editDevice(device, MainActivity.this, null);
-                            }
-                        })
-                        .setNegativeButton(R.string.ignore, null)
-                        .show();
-
-        }
     }
 
     @Override

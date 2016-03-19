@@ -52,11 +52,9 @@ import static java.lang.String.valueOf;
 public class FolderFragment extends Fragment
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
 
-    /**
-     * The ID of the folder to be edited. To be used with {@link com.nutomic.syncthingandroid.activities.SettingsActivity#EXTRA_IS_CREATE}
-     * set to false.
-     */
     public static final String EXTRA_REPO_ID = "folder_id";
+
+    public static final String EXTRA_DEVICE_ID = "device_id";
 
     private static final int DIRECTORY_REQUEST_CODE = 234;
 
@@ -349,11 +347,14 @@ public class FolderFragment extends Fragment
 
     private void initFolder() {
         mFolder = new RestApi.Folder();
-        mFolder.id = "";
+        mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_REPO_ID);
         mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
         mFolder.deviceIds = new ArrayList<>();
         mFolder.versioning = new Versioning();
+        String deviceId = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
+        if (deviceId != null)
+            mFolder.deviceIds.add(deviceId);
     }
 
     private void prepareEditMode() {
