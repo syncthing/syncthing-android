@@ -267,7 +267,7 @@ public class FolderFragment extends Fragment
             addEmptyDeviceListView();
         } else {
             for (RestApi.Device n : devicesList) {
-
+                mDevicesContainer.removeAllViews();
                 addDeviceViewAndSetListener(n, LayoutInflater.from(getActivity()));
             }
         }
