@@ -79,6 +79,6 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
         mConnections = connections;
-        notifyDataSetInvalidated();
+        notifyDataSetChanged();
     }
 }
