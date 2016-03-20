@@ -37,6 +37,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -60,7 +61,7 @@ public class SyncthingService extends Service implements
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
      */
-    public static final int GUI_UPDATE_INTERVAL = 10000;
+    public static final long GUI_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(10);
 
     /**
      * name of the public key file in the data directory.
