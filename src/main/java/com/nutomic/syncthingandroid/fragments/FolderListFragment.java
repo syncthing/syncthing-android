@@ -13,9 +13,13 @@ import android.widget.AdapterView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.FoldersAdapter;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +28,13 @@ import java.util.TimerTask;
  */
 public class FolderListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+
+    private final static Comparator<RestApi.Folder> FOLDERS_COMPARATOR = new Comparator<RestApi.Folder>() {
+        @Override
+        public int compare(RestApi.Folder lhs, RestApi.Folder rhs) {
+            return lhs.id.compareTo(rhs.id);
+        }
+    };
 
     private FoldersAdapter mAdapter;
 
@@ -95,7 +106,9 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         }
 
         mAdapter.clear();
-        mAdapter.add(activity.getApi().getFolders());
+        List<RestApi.Folder> folders = activity.getApi().getFolders();
+        Collections.sort(folders, FOLDERS_COMPARATOR);
+        mAdapter.addAll(folders);
         mAdapter.updateModel(activity.getApi());
         setListShown(true);
     }
