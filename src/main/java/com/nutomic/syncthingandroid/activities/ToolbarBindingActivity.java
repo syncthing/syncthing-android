@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 
@@ -14,15 +15,26 @@ import com.nutomic.syncthingandroid.R;
  */
 public class ToolbarBindingActivity extends AppCompatActivity {
 
+    private static final String TAG = "ToolbarBindingActivity";
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
+        if (toolbar == null)
+            return;
+
+        try {
             setSupportActionBar(toolbar);
-            //noinspection ConstantConditions
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (NoClassDefFoundError e) {
+            // Workaround for crash on Samsung 4.2 devices.
+            // This should be fixed in support library 24.0.0
+            // https://code.google.com/p/android/issues/detail?id=78377#c364
+            // https://github.com/syncthing/syncthing-android/issues/591
+            Log.w(TAG, e);
         }
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
