@@ -40,7 +40,7 @@ public class DevicesAdapterTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetViewNoConnections() {
-        mAdapter.add(Arrays.asList(mDevice));
+        mAdapter.addAll(Arrays.asList(mDevice));
         View v = mAdapter.getView(0, null, null);
 
         assertEquals(mDevice.name, ((TextView) v.findViewById(R.id.name)).getText());
@@ -53,7 +53,7 @@ public class DevicesAdapterTest extends AndroidTestCase {
 
     @MediumTest
     public void testGetViewConnections() {
-        mAdapter.add(Arrays.asList(mDevice));
+        mAdapter.addAll(Arrays.asList(mDevice));
         mAdapter.onReceiveConnections(
                 new HashMap<String, RestApi.Connection>() {{ put(mDevice.deviceID, mConnection); }});
         View v = mAdapter.getView(0, null, null);

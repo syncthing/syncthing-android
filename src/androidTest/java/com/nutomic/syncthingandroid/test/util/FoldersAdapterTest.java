@@ -40,7 +40,7 @@ public class FoldersAdapterTest extends AndroidTestCase {
     }
 
     public void testGetViewNoModel() {
-        mAdapter.add(Arrays.asList(mFolder));
+        mAdapter.addAll(Arrays.asList(mFolder));
         View v = mAdapter.getView(0, null, null);
         assertEquals(mFolder.id, ((TextView) v.findViewById(R.id.id)).getText());
         assertEquals(mFolder.path, ((TextView) v.findViewById(R.id.directory)).getText());
@@ -48,7 +48,7 @@ public class FoldersAdapterTest extends AndroidTestCase {
     }
 
     public void testGetViewModel() {
-        mAdapter.add(Arrays.asList(mFolder));
+        mAdapter.addAll(Arrays.asList(mFolder));
         mAdapter.onReceiveModel(mFolder.id, mModel);
         View v = mAdapter.getView(0, null, null);
         assertFalse(((TextView) v.findViewById(R.id.state)).getText().toString().equals(""));
