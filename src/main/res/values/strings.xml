@@ -470,4 +470,5 @@ Please report any problems you encounter via Github.</string>
     <!-- Format string for folder size, eg "500 MiB / 1 GiB" -->
     <string name="folder_size_format">%1$s / %2$s</string>
 
+    <string name="appconfig_receiver_background_enabled">Stopping Syncthing is not supported when running in background is enabled.</string>
 </resources>
