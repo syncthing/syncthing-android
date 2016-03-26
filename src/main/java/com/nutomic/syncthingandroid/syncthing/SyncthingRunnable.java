@@ -126,7 +126,7 @@ public class SyncthingRunnable implements Runnable {
                 mSyncthing.set(process);
 
                 mErrorLog = "";
-                Thread lInfo = log(process.getInputStream(), Log.INFO, false);
+                Thread lInfo = log(process.getInputStream(), Log.INFO, true);
                 Thread lWarn = log(process.getErrorStream(), Log.WARN, true);
 
                 niceSyncthing();
