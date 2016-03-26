@@ -42,8 +42,6 @@ public class DeviceStateHolder extends BroadcastReceiver {
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mIsWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
-        if (android.os.Build.VERSION.SDK_INT >= 16 && cm.isActiveNetworkMetered())
-            mIsWifiConnected = false;
         if (mIsWifiConnected) {
             updateWifiSsid();
         }
