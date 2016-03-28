@@ -60,6 +60,16 @@ mkdir -p "$GOROOT_FINAL"
 
 pushd ext/golang/go/src
 
+# Apply patches to Golang
+for PATCH in $MYDIR/patches/golang/all/*.patch; do
+    if ! patch -R -p1 --dry-run <$PATCH &>/dev/null; then
+        echo "Applying $PATCH"
+        patch -p1 <$PATCH
+    else
+        echo "Patch $PATCH already applied"
+    fi
+done
+
 set +e
 ./clean.bash
 rm -r ../bin
