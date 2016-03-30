@@ -68,9 +68,9 @@
   <!--Setting title-->
   <string name="delete_folder">Supprimer le dossier</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Créer un dossier</string>
+  <string name="create_folder">Création d\'un dossier</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Edition du dossier</string>
+  <string name="edit_folder">Édition du dossier</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Créer</string>
   <!--Dialog shown when attempting to remove a folder-->
@@ -104,7 +104,7 @@
   <string name="introducer">Initiateur</string>
   <!--ActionBar item-->
   <string name="delete_device">Supprimer la machine</string>
-  <string name="add_device">Ajouter une machine</string>
+  <string name="add_device">Ajout d\'une machine</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Ajouter</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
