@@ -58,6 +58,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public static final String TOTAL_STATS = "total";
 
+    public static final int USAGE_REPORTING_UNDECIDED = 0;
+    public static final int USAGE_REPORTING_ACCEPTED  = 2;
+    public static final int USAGE_REPORTING_DENIED    = -1;
+    private static final List<Integer> USAGE_REPORTING_DECIDED =
+            Arrays.asList(USAGE_REPORTING_ACCEPTED, USAGE_REPORTING_DENIED);
+
     public static class Device implements Serializable {
         public List<String> addresses;
         public String name;
@@ -1025,41 +1031,33 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         return mGuiPassword;
     }
 
-    public enum UsageReportSetting {
-        UNDECIDED,
-        ACCEPTED,
-        DENIED,
-    }
-
     /**
      * Returns value of usage reporting preference.
      */
-    public UsageReportSetting getUsageReportAccepted() {
+    public int getUsageReportAccepted() {
         try {
-            switch (mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted")) {
-                case  0: return UsageReportSetting.UNDECIDED;
-                case  1: return UsageReportSetting.UNDECIDED;
-                case  2: return UsageReportSetting.ACCEPTED;
-                case -1: return UsageReportSetting.DENIED;
-                default: throw new RuntimeException("Invalid usage report value");
-            }
+            int value = mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted");
+            if (value > USAGE_REPORTING_ACCEPTED)
+                throw new RuntimeException("Inalid usage reporting value");
+            if (!USAGE_REPORTING_DECIDED.contains(value))
+                value = USAGE_REPORTING_UNDECIDED;
+
+            return value;
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read usage report value", e);
-            return UsageReportSetting.DENIED;
+            return USAGE_REPORTING_DENIED;
         }
     }
 
     /**
      * Sets new value for usage reporting preference.
      */
-    public void setUsageReportAccepted(UsageReportSetting value, Activity activity) {
-        int v = 0;
-        switch (value) {
-            case ACCEPTED:  v =  2; break;
-            case DENIED:    v = -1; break;
-        }
+    public void setUsageReportAccepted(int value, Activity activity) {
+        if (BuildConfig.DEBUG && !USAGE_REPORTING_DECIDED.contains(value))
+            throw new IllegalArgumentException("Invalid value for usage report");
+
         try {
-            mConfig.getJSONObject(TYPE_OPTIONS).put("urAccepted", v);
+            mConfig.getJSONObject(TYPE_OPTIONS).put("urAccepted", value);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to set usage report value", e);
         }

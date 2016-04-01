@@ -84,8 +84,8 @@ public class SettingsFragment extends PreferenceFragment
                         value = api.getLocalDevice().name;
                         break;
                     case USAGE_REPORT_ACCEPTED:
-                        RestApi.UsageReportSetting setting = api.getUsageReportAccepted();
-                        value = Boolean.toString(setting  == RestApi.UsageReportSetting.ACCEPTED);
+                        int setting = api.getUsageReportAccepted();
+                        value = Boolean.toString(setting == RestApi.USAGE_REPORTING_ACCEPTED);
                         break;
                     default:
                         value = api.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
@@ -272,9 +272,9 @@ public class SettingsFragment extends PreferenceFragment
             updated.name = (String) o;
             mSyncthingService.getApi().editDevice(updated, getActivity(), null);
         } else if (preference.getKey().equals(USAGE_REPORT_ACCEPTED)) {
-            RestApi.UsageReportSetting setting = ((Boolean) o)
-                    ? RestApi.UsageReportSetting.ACCEPTED
-                    : RestApi.UsageReportSetting.DENIED;
+            int setting = ((Boolean) o)
+                    ? RestApi.USAGE_REPORTING_ACCEPTED
+                    : RestApi.USAGE_REPORTING_DENIED;
             mSyncthingService.getApi().setUsageReportAccepted(setting, getActivity());
         } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
             boolean isArray = preference.getKey().equals("listenAddress") ||

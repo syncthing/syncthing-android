@@ -114,7 +114,7 @@ public class MainActivity extends SyncthingActivity
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
                 if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
-                        getApi().getUsageReportAccepted() == RestApi.UsageReportSetting.UNDECIDED) {
+                        getApi().getUsageReportAccepted() == RestApi.USAGE_REPORTING_UNDECIDED) {
                     showUsageReportingDialog();
                 }
                 break;
@@ -422,11 +422,11 @@ public class MainActivity extends SyncthingActivity
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.ACCEPTED,
+                        getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_ACCEPTED,
                                                         MainActivity.this);
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        getApi().setUsageReportAccepted(RestApi.UsageReportSetting.DENIED,
+                        getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_DENIED,
                                                         MainActivity.this);
                         break;
                     case DialogInterface.BUTTON_NEUTRAL:
