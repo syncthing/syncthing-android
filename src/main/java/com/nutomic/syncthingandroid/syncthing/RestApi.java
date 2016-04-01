@@ -1055,7 +1055,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public void setUsageReportAccepted(UsageReportSetting value, Activity activity) {
         int v = 0;
         switch (value) {
-            case ACCEPTED:  v =  1; break;
+            case ACCEPTED:  v =  2; break;
             case DENIED:    v = -1; break;
         }
         try {
