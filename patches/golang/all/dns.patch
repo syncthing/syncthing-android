@@ -2,7 +2,7 @@ diff --git a/net/dnsconfig_unix.go b/net/dnsconfig_unix.go
 index 6073fdb..9df3cec 100644
 --- a/net/dnsconfig_unix.go
 +++ b/net/dnsconfig_unix.go
-@@ -8,18 +8,57 @@
+@@ -8,18 +8,61 @@
  
  package net
  
@@ -23,8 +23,10 @@ index 6073fdb..9df3cec 100644
 +	var servers []string
 +	for _, prop := range []string{"net.dns", "net.dns1", "net.dns2", "net.dns3", "net.dns4"} {
 +		cmd := exec.Command("getprop", prop)
-+		if cmd.Run() == nil {
++		cerr := cmd.Run()
++		if cerr == nil {
 +			outputBytes, err := cmd.Output()
++			fmt.Println("Output", prop, string(outputBytes), err) 
 +			if err != nil {
 +				continue
 +			}
@@ -33,6 +35,8 @@ index 6073fdb..9df3cec 100644
 +			if ParseIP(output) != nil {
 +				servers = append(servers, output)
 +			}
++		} else {
++			fmt.Println("Error calling to utility", cerr)
 +		}
 +	}
 +
@@ -41,7 +45,7 @@ index 6073fdb..9df3cec 100644
 +	}
 +
 +	logOnce.Do(func() {
-+		fmt.Println("Using the following DNS servers", servers)
++		fmt.Println("XXX Using the following DNS servers", servers)
 +	})
 +
 +	return servers
