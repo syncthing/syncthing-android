@@ -1,7 +1,6 @@
 # syncthing-android
 
 [![Build Status](http://android.syncthing.net/job/Syncthing-Android/badge/icon)](http://android.syncthing.net/job/Syncthing-Android/)
-[![tip for next commit](https://tip4commit.com/projects/914.svg)](https://tip4commit.com/github/syncthing/syncthing-android)
 
 A wrapper of [Syncthing](https://github.com/syncthing/syncthing) for Android.
 
