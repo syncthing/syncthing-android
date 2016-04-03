@@ -54,7 +54,8 @@ public class DeviceFragment extends Fragment implements
         SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener,
         View.OnClickListener {
 
-    public static final String EXTRA_DEVICE_ID = "device_id";
+    public static final String EXTRA_DEVICE_ID =
+            "com.nutomic.syncthingandroid.fragments.DeviceFragment.DEVICE_ID";
 
     private static final String TAG = "DeviceSettingsFragment";
 

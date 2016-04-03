@@ -14,16 +14,20 @@ import com.nutomic.syncthingandroid.fragments.SettingsFragment;
  */
 public class SettingsActivity extends SyncthingActivity {
 
-    public static final String ACTION_APP_SETTINGS    = "app_settings_fragment";
-    public static final String ACTION_DEVICE_SETTINGS = "device_settings_fragment";
-    public static final String ACTION_FOLDER_SETTINGS = "folder_settings_fragment";
+    public static final String ACTION_APP_SETTINGS    =
+            "com.nutomic.syncthingandroid.activities.SettingsActivity.APP_SETTINGS";
+    public static final String ACTION_DEVICE_SETTINGS =
+            "com.nutomic.syncthingandroid.activities.SettingsActivity.DEVICE_SETTINGS";
+    public static final String ACTION_FOLDER_SETTINGS =
+            "com.nutomic.syncthingandroid.activities.SettingsActivity.FOLDER_SETTINGS";
 
     /**
      * Must be set for {@link #ACTION_DEVICE_SETTINGS} and
      * {@link #ACTION_FOLDER_SETTINGS} to determine if an existing folder/device should be
      * edited or a new one created.
      */
-    public static final String EXTRA_IS_CREATE = "create";
+    public static final String EXTRA_IS_CREATE =
+            "com.nutomic.syncthingandroid.activities.SettingsActivity.IS_CREATE";
 
     private Fragment mFragment;
 

@@ -50,12 +50,14 @@ public class SyncthingService extends Service implements
     /**
      * Intent action to perform a Syncthing restart.
      */
-    public static final String ACTION_RESTART = "restart";
+    public static final String ACTION_RESTART =
+            "com.nutomic.syncthingandroid.service.SyncthingService.RESTART";
 
     /**
      * Intent action to reset Syncthing's database.
      */
-    public static final String ACTION_RESET = "reset";
+    public static final String ACTION_RESET =
+            "com.nutomic.syncthingandroid.service.SyncthingService.RESET";
 
 
     /**

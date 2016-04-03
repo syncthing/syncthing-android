@@ -52,9 +52,11 @@ import static java.lang.String.valueOf;
 public class FolderFragment extends Fragment
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
 
-    public static final String EXTRA_FOLDER_ID = "folder_id";
+    public static final String EXTRA_FOLDER_ID =
+            "com.nutomic.syncthingandroid.fragments.FolderFragment.FOLDER_ID";
 
-    public static final String EXTRA_DEVICE_ID = "device_id";
+    public static final String EXTRA_DEVICE_ID =
+            "com.nutomic.syncthingandroid.fragments.FolderFragment.DEVICE_ID";
 
     private static final int DIRECTORY_REQUEST_CODE = 234;
 

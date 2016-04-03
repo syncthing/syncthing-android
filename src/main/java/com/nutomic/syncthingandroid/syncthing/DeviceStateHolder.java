@@ -20,13 +20,15 @@ public class DeviceStateHolder extends BroadcastReceiver {
     /**
      * Intent extra containing a boolean saying whether wifi is connected or not.
      */
-    public static final String EXTRA_HAS_WIFI = "has_wifi";
+    public static final String EXTRA_HAS_WIFI =
+            "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.HAS_WIFI";
 
     /**
      * Intent extra containging a boolean saying whether the device is
      * charging or not (any power source).
      */
-    public static final String EXTRA_IS_CHARGING = "is_charging";
+    public static final String EXTRA_IS_CHARGING =
+            "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.IS_CHARGING";
 
     private Context mContext;
 
