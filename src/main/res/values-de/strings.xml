@@ -52,7 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
   <!--Menu item to donate-->
-  <string name="donate">Spenden</string>
+  <string name="donate_title">Spenden</string>
   <string name="restart">Neustart</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->

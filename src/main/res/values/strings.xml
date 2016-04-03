@@ -92,11 +92,6 @@
     <!-- Title for announce server status -->
     <string name="announce_server">Announce Server</string>
 
-    <!-- Menu item to donate -->
-    <string name="donate">Donate</string>
-
-    <string name="donate_url" translatable="false">https://syncthing.net/#donate</string>
-
     <string name="restart">Restart</string>
 
     <!-- FolderSettingsFragment -->
@@ -350,6 +345,14 @@ Please report any problems you encounter via Github.</string>
 
     <!-- URL of the issue tracker -->
     <string name="issue_tracker_url" translatable="false">https://github.com/Nutomic/syncthing-android/issues</string>
+
+
+    <!-- Menu item to donate -->
+    <string name="donate_title">Donate</string>
+
+    <string name="donate_summary">Help us pay for domains and hosting fees</string>
+
+    <string name="donate_url" translatable="false">https://syncthing.net/#donate</string>
 
     <!-- Title of the preference showing upstream version name -->
     <string name="syncthing_version_title">Syncthing Version</string>

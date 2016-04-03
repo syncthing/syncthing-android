@@ -229,15 +229,6 @@
                 android:text="@string/share_device_id" />
 
             <TextView
-                android:id="@+id/drawerActionDonate"
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
-                android:drawableStart="@drawable/ic_attach_money_black_24dp"
-                android:text="@string/donate" />
-
-            <TextView
                 android:id="@+id/drawerActionRestart"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"

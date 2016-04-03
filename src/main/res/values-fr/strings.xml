@@ -52,7 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serveur d\'annonce</string>
   <!--Menu item to donate-->
-  <string name="donate">Faire un don</string>
+  <string name="donate_title">Faire un don</string>
   <string name="restart">Redémarrer</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->

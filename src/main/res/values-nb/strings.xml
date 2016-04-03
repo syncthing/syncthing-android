@@ -50,7 +50,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Søketjener</string>
   <!--Menu item to donate-->
-  <string name="donate">Donér</string>
+  <string name="donate_title">Donér</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappe-ID</string>

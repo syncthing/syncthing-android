@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,8 +19,6 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static android.content.Intent.ACTION_VIEW;
 
 /**
  * Displays information about the local device.
@@ -93,8 +90,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         view.findViewById(R.id.drawerActionWebGui)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionShareId)
-                .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionDonate)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionRestart)
                 .setOnClickListener(this);
@@ -193,11 +188,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 i.setType("text/plain");
                 i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId.getText());
                 startActivity(Intent.createChooser(i, "Share device ID with"));
-                mActivity.closeDrawer();
-                break;
-            case R.id.drawerActionDonate:
-                startActivity(new Intent(ACTION_VIEW, Uri.parse(
-                        getString(R.string.donate_url))));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionSettings:

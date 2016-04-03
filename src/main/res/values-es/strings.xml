@@ -50,7 +50,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de Anuncio</string>
   <!--Menu item to donate-->
-  <string name="donate">Donar</string>
+  <string name="donate_title">Donar</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID de carpeta</string>

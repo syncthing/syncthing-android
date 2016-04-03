@@ -47,7 +47,7 @@
   <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
   <!--Menu item to donate-->
-  <string name="donate">Támogatás</string>
+  <string name="donate_title">Támogatás</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappa azonosító</string>

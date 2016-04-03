@@ -52,7 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">宣告服务器</string>
   <!--Menu item to donate-->
-  <string name="donate">捐赠</string>
+  <string name="donate_title">捐赠</string>
   <string name="restart">重启</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->

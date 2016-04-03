@@ -43,7 +43,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">익명 서버</string>
   <!--Menu item to donate-->
-  <string name="donate">기부하기</string>
+  <string name="donate_title">기부하기</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">폴더 ID</string>

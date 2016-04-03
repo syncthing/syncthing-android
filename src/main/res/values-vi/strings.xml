@@ -52,7 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Máy chủ thông báo</string>
   <!--Menu item to donate-->
-  <string name="donate">Quyên góp</string>
+  <string name="donate_title">Quyên góp</string>
   <string name="restart">Khởi chạy lại</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->

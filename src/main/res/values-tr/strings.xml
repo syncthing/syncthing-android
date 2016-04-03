@@ -50,7 +50,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
   <!--Menu item to donate-->
-  <string name="donate">Bağış yap</string>
+  <string name="donate_title">Bağış yap</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>

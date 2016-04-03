@@ -52,7 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
   <!--Menu item to donate-->
-  <string name="donate">Doações</string>
+  <string name="donate_title">Doações</string>
   <string name="restart">Reiniciar</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->

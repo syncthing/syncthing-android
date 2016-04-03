@@ -180,6 +180,14 @@
         </Preference>
 
         <Preference
+            android:title="@string/donate_title"
+            android:summary="@string/donate_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/donate_url" />
+        </Preference>
+
+        <Preference
             android:key="syncthing_version"
             android:title="@string/syncthing_version_title"
             style="?android:preferenceInformationStyle" />

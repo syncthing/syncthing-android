@@ -50,7 +50,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Ohlasovací server</string>
   <!--Menu item to donate-->
-  <string name="donate">Prispieť</string>
+  <string name="donate_title">Prispieť</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresára</string>
