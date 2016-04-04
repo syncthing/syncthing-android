@@ -60,14 +60,12 @@ mkdir -p "$GOROOT_FINAL"
 
 pushd ext/golang/go/src
 
+git reset --hard HEAD
+
 # Apply patches to Golang
 for PATCH in $MYDIR/patches/golang/all/*.patch; do
-    if ! patch -R -p1 --dry-run <$PATCH &>/dev/null; then
-        echo "Applying $PATCH"
-        patch -p1 <$PATCH
-    else
-        echo "Patch $PATCH already applied"
-    fi
+    echo "Applying $PATCH"
+    patch -p1 <$PATCH
 done
 
 set +e
