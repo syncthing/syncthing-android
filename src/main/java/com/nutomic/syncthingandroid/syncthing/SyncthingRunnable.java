@@ -108,46 +108,54 @@ public class SyncthingRunnable implements Runnable {
         try {
             if (wakeLock != null)
                 wakeLock.acquire();
-            // Loop to handle Syncthing restarts (these always have an error code of 3).
-            do {
-                ProcessBuilder pb = (useRoot())
-                        ? new ProcessBuilder("su", "-c", TextUtils.join(" ", mCommand))
-                        : new ProcessBuilder(mCommand);
+            ProcessBuilder pb = (useRoot())
+                    ? new ProcessBuilder("su", "-c", TextUtils.join(" ", mCommand))
+                    : new ProcessBuilder(mCommand);
 
-                Map<String, String> env = pb.environment();
-                // Set home directory to data folder for web GUI folder picker.
-                env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
-                env.put("STTRACE", sp.getString("sttrace", ""));
-                env.put("STNORESTART", "1");
-                env.put("STNOUPGRADE", "1");
-                env.put("STGUIAUTH", sp.getString("gui_user", "") + ":" +
-                        sp.getString("gui_password", ""));
-                process = pb.start();
-                mSyncthing.set(process);
+            Map<String, String> env = pb.environment();
+            // Set home directory to data folder for web GUI folder picker.
+            env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
+            env.put("STTRACE", sp.getString("sttrace", ""));
+            env.put("STNORESTART", "1");
+            env.put("STNOUPGRADE", "1");
+            env.put("STGUIAUTH", sp.getString("gui_user", "") + ":" +
+                    sp.getString("gui_password", ""));
+            process = pb.start();
+            mSyncthing.set(process);
 
-                mErrorLog = "";
-                Thread lInfo = log(process.getInputStream(), Log.INFO, true);
-                Thread lWarn = log(process.getErrorStream(), Log.WARN, true);
+            mErrorLog = "";
+            Thread lInfo = log(process.getInputStream(), Log.INFO, true);
+            Thread lWarn = log(process.getErrorStream(), Log.WARN, true);
 
-                niceSyncthing();
+            niceSyncthing();
 
-                ret = process.waitFor();
-                mSyncthing.set(null);
-                lInfo.join();
-                lWarn.join();
+            ret = process.waitFor();
+            mSyncthing.set(null);
+            lInfo.join();
+            lWarn.join();
 
-                // Restart if that was requested via Rest API call.
-                if (ret == 3) {
+            switch (ret) {
+                case 0:
+                case 2:
+                case 4:
+                    // Valid exit codes, ignored.
+                    break;
+                case 3:
+                    // Restart if that was requested via Rest API call.
                     Log.i(TAG, "Restarting syncthing");
                     mContext.startService(new Intent(mContext, SyncthingService.class)
                             .setAction(SyncthingService.ACTION_RESTART));
-                }
-                // Force crash if Syncthing exits with an error.
-                else if (ret == 1 || ret > 4) {
+                    break;
+                case 137:
+                    // Ignore SIGKILL that we use to stop Syncthing.
+                    break;
+                case 1:
+                    // fallthrough
+                default:
+                    // Force crash if Syncthing exits with an error.
                     throw new RuntimeException("Syncthing binary crashed with error code " +
                             Integer.toString(ret) + ", output:\n" + mErrorLog);
-                }
-            } while (ret == 3);
+            }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
