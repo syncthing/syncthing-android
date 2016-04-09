@@ -6,13 +6,26 @@
     tools:context=".fragments.FolderFragment">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="?android:listDivider"
         android:orientation="vertical"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/label"
+            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_label_outline_black_24dp"
+            android:drawableStart="@drawable/ic_label_outline_black_24dp"
+            android:hint="@string/folder_label"
+            android:imeOptions="actionDone"
+            android:inputType="textCapWords|textNoSuggestions" />
 
         <EditText
             android:id="@+id/id"

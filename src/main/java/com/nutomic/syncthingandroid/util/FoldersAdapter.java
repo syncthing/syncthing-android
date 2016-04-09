@@ -37,7 +37,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         if (convertView == null)
             convertView = mInflater.inflate(R.layout.item_folder_list, parent, false);
 
-        TextView id = (TextView) convertView.findViewById(R.id.id);
+        TextView label = (TextView) convertView.findViewById(R.id.label);
         TextView state = (TextView) convertView.findViewById(R.id.state);
         TextView directory = (TextView) convertView.findViewById(R.id.directory);
         TextView items = (TextView) convertView.findViewById(R.id.items);
@@ -46,7 +46,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
 
         RestApi.Folder folder = getItem(position);
         RestApi.Model model = mModels.get(folder.id);
-        id.setText(folder.id);
+        label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         state.setTextColor(getContext().getResources().getColor(R.color.text_green));
         directory.setText(folder.path);
         if (model != null) {

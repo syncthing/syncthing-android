@@ -99,6 +99,9 @@
     <string name="folder_id">Folder ID</string>
 
     <!-- Setting title -->
+    <string name="folder_label">Folder Label</string>
+
+    <!-- Setting title -->
     <string name="directory">Directory</string>
 
     <!-- Setting title -->
@@ -417,6 +420,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Toast shown if syncthing failed to create a config -->
     <string name="config_create_failed">Failed to create a Syncthing config. Please check the logs.</string>
+
+    <!-- Label of the default folder created of first start (camera folder). -->
+    <string name="default_folder_label">Camera</string>
 
     <!-- ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
     <string name="default_folder_id">%1$s-photos</string>
