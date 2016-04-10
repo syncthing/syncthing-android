@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.nutomic.syncthingandroid.BuildConfig;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -152,9 +154,13 @@ public class SyncthingRunnable implements Runnable {
                 case 1:
                     // fallthrough
                 default:
-                    // Force crash if Syncthing exits with an error.
-                    throw new RuntimeException("Syncthing binary crashed with error code " +
-                            Integer.toString(ret) + ", output:\n" + mErrorLog);
+                    // Report Syncthing crashes, using Exception in debug mode or log in release mode.
+                    String message = "Syncthing binary crashed with error code " +
+                            Integer.toString(ret) + ", output:\n" + mErrorLog;
+                    if (BuildConfig.DEBUG)
+                        throw new RuntimeException(message);
+                    else
+                        Log.e(TAG, message);
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
