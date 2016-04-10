@@ -227,8 +227,10 @@ public class SyncthingService extends Service implements
             if (mConfig != null) {
                 mCurrentState = State.STARTING;
 
-                if (mApi != null)
+                if (mApi != null) {
                     registerOnWebGuiAvailableListener(mApi);
+                    mApi.setWebGuiUrl(mConfig.getWebGuiUrl());
+                }
                 if (mEventProcessor != null)
                     registerOnWebGuiAvailableListener(mEventProcessor);
                 new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE)

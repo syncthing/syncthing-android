@@ -150,7 +150,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     private String mVersion;
 
-    private final String mUrl;
+    private String mUrl;
 
     private final String mApiKey;
 
@@ -198,6 +198,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mHttpsCertPath = mContext.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
         mOnApiAvailableListener = apiListener;
         mOnConfigChangedListener = configListener;
+    }
+
+    public void setWebGuiUrl(String newUrl) {
+        mUrl = newUrl;
     }
 
     /**
