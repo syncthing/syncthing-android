@@ -45,12 +45,6 @@ android {
         testFunctionalTest true
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDir file("libs/")
-        }
-    }
-
     // Without this parameter, all builds fail with error:
     //     Execution failed for task ':mergeArmeabiDebugResources'.
     //     > Some file crunching failed, see logs for details
@@ -110,9 +104,7 @@ task buildNative(type: Exec) {
 }
 
 task cleanNative(type: Delete) {
-    delete 'bin/'
-    delete 'build/'
-    delete 'libs/'
+    delete 'src/main/jniLibs/'
     delete 'ext/syncthing/bin/'
     delete 'ext/syncthing/pkg/'
 }

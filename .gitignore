@@ -12,7 +12,7 @@
 bin/
 build/
 gen/
-libs/
+src/main/jniLibs/
 obj/
 .gradle/
 

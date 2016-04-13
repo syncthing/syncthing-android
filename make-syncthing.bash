@@ -5,6 +5,7 @@ set -e
 RESET=1
 
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+JNIDIR="/src/main/jniLibs"
 
 case "$1" in
     arm)
@@ -12,20 +13,20 @@ case "$1" in
         export GOOS=linux
         export GOARCH=arm
         export GOARM=5
-        export TARGETDIR=${MYDIR}/libs/armeabi
+        export TARGETDIR=$MYDIR$JNIDIR/armeabi
         ;;
     386)
         export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=386
         export GO386=387
-        export TARGETDIR=${MYDIR}/libs/x86
+        export TARGETDIR=$MYDIR$JNIDIR/x86
         ;;
     amd64)
         export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=amd64
-        export TARGETDIR=${MYDIR}/libs/x86_64
+        export TARGETDIR=$MYDIR$JNIDIR/x86_64
         ;;
     *)
         echo "Must specify either arm or 386 or amd64"
