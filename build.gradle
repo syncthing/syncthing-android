@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.1'
+        classpath 'com.android.tools.build:gradle:2.0.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
     }
@@ -20,10 +20,9 @@ repositories {
     mavenCentral()
     jcenter()
 }
-
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201602271131'
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.google.zxing:android-integration:3.2.1'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
@@ -33,8 +32,6 @@ project.archivesBaseName = 'syncthing'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
-    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
@@ -53,6 +50,15 @@ android {
             jniLibs.srcDir file("libs/")
         }
     }
+
+    // Without this parameter, all builds fail with error:
+    //     Execution failed for task ':mergeArmeabiDebugResources'.
+    //     > Some file crunching failed, see logs for details
+    // https://code.google.com/p/android/issues/detail?id=163378
+    aaptOptions.setProperty("cruncherEnabled", false)
+
+    // We haven't upgraded to the new HTTP library yet.
+    useLibrary 'org.apache.http.legacy'
 
     signingConfigs {
         release {
