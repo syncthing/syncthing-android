@@ -75,16 +75,6 @@ public class RestApiTest extends AndroidTestCase {
     public void testGetFolders() {
         assertNotNull(mApi.getFolders());
     }
-
-    public void testReadableFileSize() {
-        assertEquals("1 MiB", RestApi.readableFileSize(getContext(), 1048576));
-        assertEquals("1 GiB", RestApi.readableFileSize(getContext(), 1073741824));
-    }
-    
-    public void testGetReadableTransferRate() {
-        assertEquals("1 MiB/s", RestApi.readableTransferRate(getContext(), 8388608L));
-        assertEquals("1 GiB/s", RestApi.readableTransferRate(getContext(), 8589934592L));
-    }
     
     public void testConvertNotCrashing() {
         long[] values = new long[]{-1, 0, 1, 2, 4, 8, 16, 1024, 2^10, 2^15, 2^20, 2^25, 2^30};
