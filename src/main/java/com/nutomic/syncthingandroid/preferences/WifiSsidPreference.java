@@ -91,11 +91,13 @@ public class WifiSsidPreference extends MultiSelectListPreference {
     private CharSequence[] extractSsid(WifiConfiguration[] configs, boolean stripQuotes) {
         CharSequence[] result = new CharSequence[configs.length];
         for (int i = 0; i < configs.length; i++) {
+            // See #620: there may be null-SSIDs
+            String ssid = configs[i].SSID != null ? configs[i].SSID : "";
             // WiFi SSIDs can either be UTF-8 (encapsulated in '"') or hex-strings
             if (stripQuotes)
-                result[i] = configs[i].SSID.replaceFirst("^\"", "").replaceFirst("\"$", "");
+                result[i] = ssid.replaceFirst("^\"", "").replaceFirst("\"$", "");
             else
-                result[i] = configs[i].SSID;
+                result[i] = ssid;
         }
         return result;
     }
@@ -115,7 +117,10 @@ public class WifiSsidPreference extends MultiSelectListPreference {
                 Arrays.sort(result, new Comparator<WifiConfiguration>() {
                     @Override
                     public int compare(WifiConfiguration lhs, WifiConfiguration rhs) {
-                        return lhs.SSID.compareToIgnoreCase(rhs.SSID);
+                        // See #620: There may be null-SSIDs
+                        String l = lhs.SSID != null ? lhs.SSID : "";
+                        String r = rhs.SSID != null ? rhs.SSID : "";
+                        return l.compareToIgnoreCase(r);
                     }
                 });
                 return result;
