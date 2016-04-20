@@ -16,6 +16,7 @@ import java.util.List;
 public class MockContext extends ContextWrapper {
 
     private ArrayList<Intent> mReceivedIntents = new ArrayList<>();
+    private ArrayList<Intent> mStopServiceIntents = new ArrayList<>();
 
     /**
      * Use the actual context for calls that aren't easily mocked. May be null if those
@@ -36,8 +37,18 @@ public class MockContext extends ContextWrapper {
         return null;
     }
 
+    @Override
+    public boolean stopService(Intent intent) {
+        mStopServiceIntents.add(intent);
+        return true;
+    }
+
     public List<Intent> getReceivedIntents() {
         return mReceivedIntents;
+    }
+
+    public List<Intent> getStopServiceIntents() {
+        return mStopServiceIntents;
     }
 
     public void clearReceivedIntents() {

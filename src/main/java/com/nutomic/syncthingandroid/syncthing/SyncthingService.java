@@ -59,7 +59,6 @@ public class SyncthingService extends Service implements
     public static final String ACTION_RESET =
             "com.nutomic.syncthingandroid.service.SyncthingService.RESET";
 
-
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
      */
@@ -145,6 +144,12 @@ public class SyncthingService extends Service implements
     private State mCurrentState = State.INIT;
 
     /**
+     * Object that can be locked upon when accessing mCurrentState
+     * Currently used to male onDestroy() and PollWebGuiAvailableTaskImpl.onPostExcecute() tread-safe
+     */
+    private final Object stateLock = new Object();
+
+    /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
      * {@link PollWebGuiAvailableTaskImpl}.
      */
@@ -227,10 +232,8 @@ public class SyncthingService extends Service implements
             if (mConfig != null) {
                 mCurrentState = State.STARTING;
 
-                if (mApi != null) {
+                if (mApi != null)
                     registerOnWebGuiAvailableListener(mApi);
-                    mApi.setWebGuiUrl(mConfig.getWebGuiUrl());
-                }
                 if (mEventProcessor != null)
                     registerOnWebGuiAvailableListener(mEventProcessor);
                 new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE)
@@ -426,12 +429,25 @@ public class SyncthingService extends Service implements
 
     /**
      * Stops the native binary.
+     *
+     * The native binary crashes if stopped before it is fully active. In that case signal the
+     * stop request to PollWebGuiAvailableTaskImpl that is active in that situation and terminate
+     * the service there.
      */
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "Shutting down service");
-        shutdown();
+
+        synchronized (stateLock) {
+            if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
+                Log.i(TAG, "Delay shutting down service until initialisation of Syncthing finished");
+                mStopScheduled = true;
+
+            } else {
+                Log.i(TAG, "Shutting down service immediately");
+                shutdown();
+            }
+        }
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
     }
@@ -512,14 +528,24 @@ public class SyncthingService extends Service implements
             super(httpsCertPath);
         }
 
+        /**
+         * Wait for the web-gui of the native syncthing binary to come online.
+         *
+         * In case the binary is to be stopped, also be aware that another thread could request
+         * to stop the binary in the time while waiting for the GUI to become active. See the comment
+         * for SyncthingService.onDestroy for details.
+         */
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (mStopScheduled) {
-                mCurrentState = State.DISABLED;
-                onApiChange();
-                shutdown();
-                mStopScheduled = false;
-                return;
+            synchronized (stateLock) {
+                if (mStopScheduled) {
+                    mCurrentState = State.DISABLED;
+                    onApiChange();
+                    shutdown();
+                    mStopScheduled = false;
+                    stopSelf();
+                    return;
+                }
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
             mCurrentState = State.STARTING;
