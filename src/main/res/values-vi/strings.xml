@@ -19,7 +19,6 @@
   <string name="open_website">Mở trang web</string>
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
   <string name="device_rejected">Thiết bị %1$s muốn kết nối</string>
-  <string name="ignore">Bỏ qua</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Các thư mục</string>
   <!--Shown if no folders exist-->

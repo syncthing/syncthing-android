@@ -38,8 +38,6 @@
 
     <string name="folder_rejected">Device %1$s wants to share folder %2$s</string>
 
-    <string name="ignore">Ignore</string>
-
     <!-- FoldersFragment -->
 
 

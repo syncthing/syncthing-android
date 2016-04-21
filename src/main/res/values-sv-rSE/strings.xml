@@ -20,7 +20,6 @@
   <string name="toast_write_storage_permission_required">Skrivlagrings tillstånd krävs för denna applikation</string>
   <string name="device_rejected">Enhet %1$s vill ansluta</string>
   <string name="folder_rejected">Enhet %1$s vill dela mapp %2$s</string>
-  <string name="ignore">Ignorera</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappar</string>
   <!--Shown if no folders exist-->

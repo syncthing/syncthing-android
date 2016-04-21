@@ -19,7 +19,6 @@
   <string name="open_website">打开主页</string>
   <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
   <string name="device_rejected">%1$s 想要连接</string>
-  <string name="ignore">忽略</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">文件夹</string>
   <!--Shown if no folders exist-->

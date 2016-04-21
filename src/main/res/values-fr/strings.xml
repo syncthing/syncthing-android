@@ -19,7 +19,6 @@
   <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
   <string name="device_rejected">La machine %1$s veut se connecter</string>
-  <string name="ignore">Ignorer</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Shown if no folders exist-->

@@ -13,7 +13,7 @@ import com.nutomic.syncthingandroid.R;
  * The Toolbar must exist in the content view and have an id of R.id.toolbar.<br/>
  * Trying to call getSupportActionBar before this Activity's onPostCreate will cause a crash.
  */
-public class ToolbarBindingActivity extends AppCompatActivity {
+public abstract class ToolbarBindingActivity extends AppCompatActivity {
 
     private static final String TAG = "ToolbarBindingActivity";
 

@@ -12,6 +12,9 @@
 	platforms -->
 	<issue id="UnusedAttribute" severity="ignore" />
 
+	<!-- We don't care about Google App Indexing -->
+	<issue id="GoogleAppIndexingWarning" severity="ignore" />
+
 	<!-- Ignore types in translations (not handled by us) -->
 	<issue id="Typos">
 		<ignore path="src/main/res/values-ar" />

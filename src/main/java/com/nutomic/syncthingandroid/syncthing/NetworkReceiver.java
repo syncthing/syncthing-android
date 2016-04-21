@@ -16,6 +16,10 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!intent.getAction().equals(Intent.ACTION_POWER_CONNECTED) &&
+                !intent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED))
+            return;
+
         if (!SyncthingService.alwaysRunInBackground(context))
             return;
 
