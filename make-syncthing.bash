@@ -37,11 +37,6 @@ unset GOPATH #Set by build.go
 export GOROOT=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
 export PATH=${GOROOT}/bin:${PATH}
 
-if [ ! -x ${GOROOT}/bin/${GOOS}_${GOARCH}/go ]; then
-    echo Need to build go for ${GOOS}-${GOARCH}
-    exit 1
-fi
-
 if [ $RESET -eq 1 ]; then
     git submodule update --init ext/syncthing/src/github.com/syncthing/syncthing
 fi
