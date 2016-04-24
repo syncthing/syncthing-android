@@ -36,7 +36,7 @@ public class BootReceiverTest extends AndroidTestCase {
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
                 .commit();
-        mReceiver.onReceive(mContext, null);
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
         assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
@@ -49,7 +49,7 @@ public class BootReceiverTest extends AndroidTestCase {
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, false)
                 .commit();
-        mReceiver.onReceive(mContext, null);
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
         assertEquals(0, mContext.getReceivedIntents().size());
     }
 

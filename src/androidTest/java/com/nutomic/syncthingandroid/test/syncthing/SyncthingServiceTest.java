@@ -3,10 +3,9 @@ package com.nutomic.syncthingandroid.test.syncthing;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.test.ServiceTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
@@ -107,11 +106,16 @@ public class SyncthingServiceTest extends ServiceTestCase<SyncthingService> {
         assertTrue(publicKey.exists());
     }
 
-    public void testPassword() {
+    public void testPassword() throws InterruptedException {
         startService(new Intent(getContext(), SyncthingService.class));
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-        assertNotNull(sp.getString("gui_user", null));
-        assertEquals(20, sp.getString("gui_password", null).length());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+                assertNotNull(sp.getString("gui_user", null));
+                assertEquals(20, sp.getString("gui_password", null).length());
+            }
+        }, 5000);
     }
 
 }

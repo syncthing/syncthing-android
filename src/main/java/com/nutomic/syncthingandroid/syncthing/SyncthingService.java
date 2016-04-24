@@ -294,12 +294,13 @@ public class SyncthingService extends Service implements
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
                 !type.equals("none")) {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+            Context appContext = getApplicationContext();
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
-                    .setContentIntent(PendingIntent.getActivity(this, 0,
-                            new Intent(this, MainActivity.class), 0));
+                    .setContentIntent(PendingIntent.getActivity(appContext, 0,
+                            new Intent(appContext, MainActivity.class), 0));
             if (type.equals("low_priority"))
                 builder.setPriority(NotificationCompat.PRIORITY_MIN);
 
