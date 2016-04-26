@@ -6,6 +6,8 @@ RESET=1
 
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+export CGO_ENABLED=0
+
 if [ -z "$GOROOT_BOOTSTRAP" ]; then
     # We need Go 1.4 to bootstrap Go 1.5
     if [ -z $GOROOT ] || [[ $(go version) != go\ version\ go1.4* ]] ; then
@@ -23,19 +25,16 @@ fi
 
 case "$1" in
     arm)
-        export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=arm
         export GOARM=5
         ;;
     386)
-        export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=386
         export GO386=387
         ;;
     amd64)
-        export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=amd64
         ;;
