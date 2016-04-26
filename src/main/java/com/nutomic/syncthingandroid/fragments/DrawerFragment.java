@@ -125,7 +125,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      * Invokes status callbacks.
      */
     private void updateGui() {
-        if (mActivity.getApi() == null || getActivity().isFinishing())
+        if (mActivity.getApi() == null || getActivity() == null || getActivity().isFinishing())
             return;
         mActivity.getApi().getSystemInfo(this);
         mActivity.getApi().getConnections(this);
