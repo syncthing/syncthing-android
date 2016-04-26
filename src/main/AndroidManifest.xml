@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nutomic.syncthingandroid">
 
     <uses-feature android:name="android.software.leanback" android:required="false" />
@@ -91,7 +92,8 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.AppConfigReceiver">
+        <receiver android:name=".syncthing.AppConfigReceiver"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.nutomic.syncthingandroid.action.START" />
                 <action android:name="com.nutomic.syncthingandroid.action.STOP" />
