@@ -486,7 +486,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     r.deviceIds.add(n.getString("deviceID"));
                 }
 
-                r.readOnly = json.getBoolean("readOnly");
+                r.readOnly = json.getString("type").equals("readonly");
                 r.rescanIntervalS = json.getInt("rescanIntervalS");
                 JSONObject versioning = json.getJSONObject("versioning");
                 if (versioning.getString("type").equals("simple")) {
@@ -877,7 +877,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             r.put("label", folder.label);
             r.put("id", folder.id);
             r.put("ignorePerms", true);
-            r.put("readOnly", folder.readOnly);
+            r.put("type", (folder.readOnly) ? "readonly" : "readwrite");
+
             JSONArray devices = new JSONArray();
             for (String n : folder.deviceIds) {
                 JSONObject element = new JSONObject();

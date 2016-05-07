@@ -236,7 +236,7 @@ public class ConfigXml {
         folder.setAttribute("id", mContext.getString(R.string.default_folder_id, model));
         folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
-        folder.setAttribute("ro", "true");
+        folder.setAttribute("type", "readonly");
         saveChanges();
     }
 
