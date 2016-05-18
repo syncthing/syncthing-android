@@ -50,12 +50,11 @@
   <string name="ram_usage">Объём памяти</string>
   <!--Title for announce server status-->
   <string name="announce_server">Сервера анонсов</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Пожертвовать</string>
   <string name="restart">Перезагрузить</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID папки</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Папка</string>
   <!--Setting title-->
@@ -147,8 +146,8 @@
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
-  <string name="use_root_title">Sync как Root</string>
-  <string name="use_root_summary">Запуск Syncthing как Superuser</string>
+  <string name="use_root_title">Запуск Syncthing как Superuser</string>
+  <string name="use_root_summary">Это может вызвать проблемы в работе Syncthing и вашего устройства. Используйте на свой страх и риск.</string>
   <string name="notification_type_title">Уведомление</string>
   <string name="notification_type_summary">Выбор метода уведомления</string>
   <string-array name="notification_type_entries">
@@ -205,6 +204,8 @@
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Открыть трекер проблем Syncthing-Android </string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Пожертвовать</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия ядра</string>
   <!--Title of the preference showing this app's version name-->
@@ -245,6 +246,7 @@
   <string name="toast_folder_observer_stack_overflow">Слишком глубокая папка. Проверьте на цикличные симлинки</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Не смог создать конфигурацию Syncthing. Посмотрите журнал.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s фото</string>
   <!--RestApi-->

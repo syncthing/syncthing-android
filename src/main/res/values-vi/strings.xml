@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Ứng dụng đồng bộ hoá tập tin phi tập trung, mở và đáng tin cậy.</string>
+  <string name="app_description">Một ứng dụng đồng bộ hoá tập tin phi tập trung, mở và đáng tin cậy.</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Thêm thư mục</string>
+  <string name="add_folder">Thêm th.mục</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Chia sẻ ID thiết bị</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
@@ -12,29 +12,30 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Đang tải...</string>
   <string name="usage_reporting_dialog_title">Cho phép báo cáo sử dụng ẩn danh?</string>
-  <string name="usage_reporting_dialog_description">Báo cáo sử dụng đã mã hoá sẽ được gửi đi hằng ngày. Nó được dùng để theo dõi các hệ điều hành thông dụng, kích cỡ thư mục và phiên bản ứng dụng. Nếu bộ dữ liệu báo cáo có thay đổi gì, bạn sẽ được nhắc lại bằng hội thoại này.\n\nThống kê tổng hợp được đăng tải công khai tại https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Báo cáo s.dụng đã mã hoá sẽ được gửi đi hằng ngày. Nó được dùng để theo dõi các HĐH thông dụng, kích cỡ th.mục và ph.bản ứng dụng. Nếu bộ d.liệu báo cáo có th.đổi gì, bạn sẽ được nhắc lại bằng h.thoại này.\n\nThống kê t.hợp được đăng công khai tại https://data.syncthing.net.</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <string name="off">tắt</string>
   <string name="open_website">Mở trang web</string>
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
   <string name="device_rejected">Thiết bị %1$s muốn kết nối</string>
+  <string name="folder_rejected">Thiết bị %1$s muốn chia sẻ thư mục %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Các thư mục</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Không tìm thấy thư mục nào</string>
+  <string name="folder_list_empty">Không thấy th.mục nào</string>
   <!--Format string for folder file count-->
   <string name="files">Các tập tin %1$d / %2$d</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Các thiết bị</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Không tìm thấy thiết bị nào</string>
+  <string name="devices_list_empty">Không thấy th.bị nào</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Đã đồng bộ</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Đang đồng bộ (%1$d%%)</string>
+  <string name="device_syncing">Đang đ.bộ (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Đã ngắt kết nối</string>
+  <string name="device_disconnected">Đã ngắt k.nối</string>
   <!--Title for current download rate-->
   <string name="download_title">Tải xuống</string>
   <!--Title for current upload rate-->
@@ -45,31 +46,30 @@
   <!--Same as upload_title with a colon and space appended-->
   <string name="upload_title_colon">Tải lên:\u0020</string>
   <!--Title for current CPU usage-->
-  <string name="cpu_usage">Mức sử dụng CPU</string>
+  <string name="cpu_usage">Mức s.dụng CPU</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">Mức sử dụng RAM</string>
+  <string name="ram_usage">Mức s.dụng RAM</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Máy chủ thông báo</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Quyên góp</string>
-  <string name="restart">Khởi chạy lại</string>
+  <string name="announce_server">Máy chủ th.báo</string>
+  <string name="restart">Kh.chạy lại</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID thư mục</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Thư mục</string>
   <!--Setting title-->
   <string name="folder_master">Thư mục Chủ</string>
   <!--Setting title-->
-  <string name="devices">Các thiết bị</string>
+  <string name="devices">Các th.bị</string>
   <!--Setting title-->
-  <string name="keep_versions">Giữ các phiên bản</string>
+  <string name="keep_versions">Giữ các ph.bản</string>
   <!--Setting title-->
   <string name="delete_folder">Xoá thư mục</string>
   <!--Title for FolderSettingsFragment in create mode-->
   <string name="create_folder">Tạo thư mục</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Chỉnh sửa thư mục</string>
+  <string name="edit_folder">Chỉnh sửa th.mục</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Tạo mới</string>
   <!--Dialog shown when attempting to remove a folder-->
@@ -100,14 +100,14 @@
     <item>Luôn luôn</item>
   </string-array>
   <!--Setting title-->
-  <string name="introducer">Thiết bị giới thiệu</string>
+  <string name="introducer">Thiết bị g.thiệu</string>
   <!--ActionBar item-->
   <string name="delete_device">Xoá thiết bị</string>
   <string name="add_device">Thêm thiết bị</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Thêm</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Chỉnh sửa thiết bị</string>
+  <string name="edit_device">Chỉnh sửa th.bị</string>
   <!--Dialog shown when attempting to remove a device-->
   <string name="remove_device_confirm">Có chắc là bạn muốn xoá thiết bị này?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
@@ -139,14 +139,14 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="always_run_in_background_enabled">Syncthing luôn chạy nền theo như tuỳ chỉnh bên dưới.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing chỉ chạy khi được bật thủ công và có thể được tắt bởi nút trình đơn.</string>
-  <string name="sync_only_charging">Chỉ đồng bộ khi sạc pin</string>
-  <string name="sync_only_wifi">Chỉ đồng bộ khi dùng wifi</string>
-  <string name="sync_only_wifi_ssids">Hạn chế với một vài mạng wifi nhất định</string>
-  <string name="sync_only_wifi_ssids_all">Đồng bộ trên tất cả mạng wifi</string>
+  <string name="sync_only_charging">Chỉ đ.bộ khi sạc pin</string>
+  <string name="sync_only_wifi">Chỉ đ.bộ khi dùng wifi</string>
+  <string name="sync_only_wifi_ssids">Hạn chế với vài mạng wifi nhất định</string>
+  <string name="sync_only_wifi_ssids_all">Đồng bộ trên t.cả mạng wifi</string>
   <string name="sync_only_wifi_ssids_values">Chỉ đồng bộ khi kết nối đến: %1$s</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hãy bật WiFi để lựa chọn mạng.</string>
-  <string name="advanced_folder_picker">Sử dụng trình chọn thư mục nâng cao</string>
-  <string name="advanced_folder_picker_summary">Chọn bất kỳ thư mục nào trên thiết bị để đồng bộ</string>
+  <string name="advanced_folder_picker">S.dụng trình chọn th.mục nâng cao</string>
+  <string name="advanced_folder_picker_summary">Chọn bất kỳ th.mục nào trên th.bị để đồng bộ</string>
   <string name="use_root_title">Chạy Syncthing với quyền Superuser</string>
   <string name="use_root_summary">Thao tác này có thể gây ra nhiều vấn đề cho Syncthing và thiết bị của bạn. Hãy thận trọng.</string>
   <string name="notification_type_title">Thông báo</string>
@@ -159,16 +159,16 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Tuỳ chọn Syncthing</string>
   <string name="device_name">Tên thiết bị</string>
-  <string name="listen_address">Đồng bộ các địa chỉ lắng nghe giao thức</string>
-  <string name="max_recv_kbps">Giới hạn tốc độ đầu vào (KiB/s)</string>
-  <string name="max_send_kbps">Giới hạn tốc độ đầu ra (KiB/s)</string>
+  <string name="listen_address">Đồng bộ các đ.chỉ lắng nghe giao thức</string>
+  <string name="max_recv_kbps">Giới hạn t.độ đầu vào (KiB/s)</string>
+  <string name="max_send_kbps">Giới hạn t.độ đầu ra (KiB/s)</string>
   <string name="global_announce_enabled">Dò tìm toàn cầu</string>
   <string name="local_announce_enabled">Dò tìm cục bộ</string>
   <string name="upnp_enabled">Bật UPnP</string>
   <string name="global_announce_server">Máy chủ dò tìm toàn cầu</string>
   <string name="usage_reporting">Báo cáo sử dụng ẩn danh</string>
   <string name="syncthing_gui">GUI Syncthing</string>
-  <string name="gui_address">Các địa chỉ lắng nghe GUI</string>
+  <string name="gui_address">Các đ.chỉ lắng nghe GUI</string>
   <string name="gui_user">Người dùng xác thực GUI</string>
   <string name="gui_password">Mật khẩu xác thực GUI</string>
   <string name="export_config">Xuất cấu hình</string>
@@ -181,7 +181,7 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Cấu hình đã được nhập</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Nhập cấu hình thất bại, hãy chắc rằng các tập tin nằm trong %1$s</string>
+  <string name="config_import_failed">Nhập c.hình th.bại, hãy chắc rằng các t.tin nằm trong %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Tuỳ chọn dò lỗi</string>
   <!--Toast after entering invalid STTRACE params-->
@@ -208,15 +208,18 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Mở trình theo dõi lỗi của Syncthing-Android</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Quyên góp</string>
+  <string name="donate_summary">Xin hỗ trợ chúng tôi phí tên miền và dịch vụ</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Phiên bản Syncthing</string>
   <!--Title of the preference showing this app's version name-->
   <string name="app_version_title">Phiên bản Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Trình chọn thư mục</string>
+  <string name="folder_picker_title">Trình chọn th.mục</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Cảnh báo: Phiên bản Android của bạn không cho phép đồng bộ vào các thiết bị lưu trữ ngoại vi</string>
+  <string name="kitkat_external_storage_warning">Cảnh báo: Ph.bản Android của bạn không cho phép đ.bộ vào các th.bị lưu trữ ngoại vi</string>
   <!--ListView empty text-->
   <string name="directory_empty">Thư mục rỗng</string>
   <!--Menu item to create folder on the file system-->
@@ -245,20 +248,21 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing đang chạy</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">Cây thư mục quá sâu. Hãy kiểm tra các liên kết biểu trưng trùng lặp</string>
+  <string name="toast_folder_observer_stack_overflow">Cây th.mục quá sâu. Hãy k.tra các l.kết biểu trưng trùng lặp</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Tạo cấu hình Syncthing thất bại. Hãy kiểm tra lịch sử.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-ảnh</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Cần khởi động lại</string>
+  <string name="restart_title">Cần kh.động lại</string>
   <!--Text for positive button in restart dialog-->
-  <string name="restart_now">Khởi động lại ngay</string>
+  <string name="restart_now">Kh.động lại ngay</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Để sau</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Nhấp vào đây để khởi động lại Syncthing ngay</string>
+  <string name="restart_notification_text">Nhấp để kh.động lại Syncthing ngay</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Đã chép ID thiết bị vào clipboard</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -281,7 +285,7 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="state_idle">Rãnh rỗi</string>
   <string name="state_scanning">Đang quét</string>
   <string name="state_cleaning">Đang dọn dẹp</string>
-  <string name="state_syncing">Đang đồng bộ (%1$d%%)</string>
+  <string name="state_syncing">Đang đ.bộ (%1$d%%)</string>
   <string name="state_error">Lỗi</string>
   <string name="state_unknown">Không rõ</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->

@@ -49,11 +49,10 @@
   <string name="ram_usage">Využitie RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ohlasovací server</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Prispieť</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresára</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Adersár</string>
   <!--Setting title-->
@@ -136,8 +135,8 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <string name="sync_only_wifi">Synchronizovať iba na wifi</string>
   <string name="advanced_folder_picker">Použiť rozšírený dialóg pre volbu adresára</string>
   <string name="advanced_folder_picker_summary">Vyberte ľubovolný adresár pre synchronizáciu</string>
-  <string name="use_root_title">Synchronizovať s použitím root oprávnení</string>
-  <string name="use_root_summary">Spúšťať Syncthing s root oprávneniami</string>
+  <string name="use_root_title">Spúšťať Syncthing s root oprávneniami</string>
+  <string name="use_root_summary">Toto nastavenia môže spôsobiť rôzne problémy so Syncthing alebo s Vaším zariadením. Použitie na vlastné riziko.</string>
   <string name="notification_type_title">Notifikácie</string>
   <string name="notification_type_summary">Zvolte si druh notifikácií</string>
   <string-array name="notification_type_entries">
@@ -193,6 +192,8 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Otvoriť stránku pre hlásenie chýb v Syncthing-Android</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Prispieť</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Verzia Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -233,6 +234,7 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <string name="toast_folder_observer_stack_overflow">Strom adresárov je príliš hlboký. Skontrolujte, či neobsahuje zacyklené symlinky.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Nepodarilo sa vytvoriť konfiguráciu pre Syncthing. Prosím, skontrolujte chybové záznamy.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-fotografie</string>
   <!--RestApi-->

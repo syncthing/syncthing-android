@@ -17,8 +17,9 @@
   <string name="no">Nein</string>
   <string name="off">aus</string>
   <string name="open_website">Webseite öffnen</string>
-  <string name="toast_write_storage_permission_required">Diese App benötigt Schreibzugriff auf Ihren Gerätespeicher</string>
+  <string name="toast_write_storage_permission_required">Diese App benötigt Schreibzugriff auf den Gerätespeicher</string>
   <string name="device_rejected">Gerät %1$s möchte sich verbinden</string>
+  <string name="folder_rejected">Gerät %1$s möchte Verzeichnis %2$s teilen</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Shown if no folders exist-->
@@ -50,12 +51,11 @@
   <string name="ram_usage">RAM-Auslastung</string>
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Spenden</string>
   <string name="restart">Neustart</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis-ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Verzeichnis</string>
   <!--Setting title-->
@@ -73,13 +73,13 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Erstellen</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Willst du diesen Ordner wirklich aus Syncthing entfernen?</string>
+  <string name="remove_folder_confirm">Willst du dieses Verzeichnis wirklich aus Syncthing entfernen?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">Die Verzeichnis ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Der Ordnerpfad darf nicht leer sein</string>
+  <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupordner lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
+  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
   <!--DeviceSettingsFragment-->
@@ -194,7 +194,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->
   <string name="streset_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden.
-\nSind Sie sicher, dass Sie die Syncthing Datenbank leeren möchten?</string>
+\nBist du sicher, dass du die Syncthing Datenbank leeren möchtest?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Datenbank erfolgreich zurückgesetzt</string>
   <string name="category_about">Über</string>
@@ -207,6 +207,9 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Syncthing-Android Fehlersammlung öffnen</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Spenden</string>
+  <string name="donate_summary">Hilf uns die Domain- und Hostinggebühren zu zahlen</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-Version</string>
   <!--Title of the preference showing this app's version name-->
@@ -215,7 +218,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Activity title-->
   <string name="folder_picker_title">Verzeichnisauswahl</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Warnung: Ihre Andoid-Version erlaubt kein synchronisieren auf externe Datenträger</string>
+  <string name="kitkat_external_storage_warning">Warnung: Deine Andoid-Version erlaubt kein Synchronisieren auf externe Datenträger</string>
   <!--ListView empty text-->
   <string name="directory_empty">Verzeichnis ist leer</string>
   <!--Menu item to create folder on the file system-->
@@ -246,7 +249,8 @@ Bitte auftretenden Probleme via Github melden.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Erstellen einer Syncthing-Konfiguration gescheitert. Bitte prüfen Sie die Logs.</string>
+  <string name="config_create_failed">Erstellen einer Syncthing-Konfiguration gescheitert. Bitte prüfe die Logs.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-Bilder</string>
   <!--RestApi-->

@@ -49,11 +49,10 @@
   <string name="ram_usage">RAM-forbruk</string>
   <!--Title for announce server status-->
   <string name="announce_server">Søketjener</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Donér</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappe-ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
@@ -142,8 +141,8 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vennligst skru på WiFi for å velge nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappevelger</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
-  <string name="use_root_title">Synkroniser som Root</string>
-  <string name="use_root_summary">Kjør Syncthing som Superbruker</string>
+  <string name="use_root_title">Kjør Syncthing som Superbruker</string>
+  <string name="use_root_summary">Dette kan forårsake diverse problemer med Syncthing og med din enhet. Bruk på eget ansvar.</string>
   <string name="notification_type_title">Varsling</string>
   <string name="notification_type_summary">Velg varslingstype</string>
   <string-array name="notification_type_entries">
@@ -200,6 +199,8 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Åpne Syncthing-Android sin feilhåndteringsside</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Donér</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-versjon</string>
   <!--Title of the preference showing this app's version name-->
@@ -240,6 +241,7 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="toast_folder_observer_stack_overflow">Katalogtreet er for dypt. Se etter sykliske symlenker.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Opprettelse av Syncthing konfigurasjon feilet. Vennligst se i loggene.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->

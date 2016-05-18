@@ -18,6 +18,8 @@
   <string name="off">изкл.</string>
   <string name="open_website">Отвори уеб сайта</string>
   <string name="toast_write_storage_permission_required">Приложението изисква права за записване в хранилището на данни</string>
+  <string name="device_rejected">Заявка за връзка от %1$s</string>
+  <string name="folder_rejected">Устройство %1$s споделя папка %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -49,11 +51,11 @@
   <string name="ram_usage">RAM в употреба</string>
   <!--Title for announce server status-->
   <string name="announce_server">Сървър за откриване на устройства</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Дарете</string>
+  <string name="restart">Рестартиране</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Идентификатор на папката</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Директория</string>
   <!--Setting title-->
@@ -71,6 +73,7 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Създай</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Наистина ли желаете папката да бъде изтрита?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">Наложително е да въведете идентификатор на папката</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -105,6 +108,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Редактиране на устройство</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Наистина ли желаете устройството да бъде изтрито?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Наложително е да въведете идентификатор на устройството</string>
   <!--Content description for device ID qr code icon-->
@@ -142,8 +146,8 @@
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
   <string name="advanced_folder_picker">Избор на папка, за напреднали</string>
   <string name="advanced_folder_picker_summary">Изберете папка, от устройството, за синхронизиране</string>
-  <string name="use_root_title">Синхронизиране като Root</string>
-  <string name="use_root_summary">Стартира Syncthing с права на Superuser</string>
+  <string name="use_root_title">Стартира Syncthing с права на Superuser</string>
+  <string name="use_root_summary">Може да предизвика разнообразни проблеми със Syncthing и като цяло с устройството. Ползвайте на ваша отговорност.</string>
   <string name="notification_type_title">Известия</string>
   <string name="notification_type_summary">Изберете тип известия</string>
   <string-array name="notification_type_entries">
@@ -167,6 +171,7 @@
   <string name="gui_user">Потребител за потребителския интерфейс</string>
   <string name="gui_password">Парола за потребителския интерфейс</string>
   <string name="export_config">Изнасяне на настройките</string>
+  <string name="experimental_settings">Експериментално</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройките са изнесени в %1$s</string>
   <string name="import_config">Внасяне на настройки</string>
@@ -200,6 +205,9 @@
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Отваря уеб страницата за проблеми на Syncthing-Android</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Дарете</string>
+  <string name="donate_summary">Помогнете с разходите за домейн и хостинг</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия на Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -240,6 +248,7 @@
   <string name="toast_folder_observer_stack_overflow">Твърде много папки. Проверяване за cyclic symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Създаването на конфигурационните файлове на Syncthing се провали. Проверете журнала.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-снимки</string>
   <!--RestApi-->
@@ -277,4 +286,5 @@
   <string name="state_error">Грешка</string>
   <string name="state_unknown">Неясно</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
 </resources>

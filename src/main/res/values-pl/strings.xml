@@ -50,12 +50,11 @@
   <string name="ram_usage">Użycie pamięci</string>
   <!--Title for announce server status-->
   <string name="announce_server">Serwer ogłoszeniowy</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Wspomóż</string>
   <string name="restart">Uruchom ponownie</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Identyfikator katalogu</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
@@ -203,6 +202,8 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Otwiera serwis zgłaszania błędów</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Wspomóż</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Wersja Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -243,6 +244,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="toast_folder_observer_stack_overflow">Drzewo katalogów jest zbyt głębokie. Proszę je sprawdzić pod kątem obecności zapętlonych dowiązań symbolicznych.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Nie udało się utworzyć pliku konfiguracyjnego. Proszę sprawdzić dziennik.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-zdjęcia</string>
   <!--RestApi-->

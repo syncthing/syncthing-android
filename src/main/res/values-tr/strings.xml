@@ -49,11 +49,10 @@
   <string name="ram_usage">RAM Kullanımı</string>
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Bağış yap</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Dizin</string>
   <!--Setting title-->
@@ -143,8 +142,8 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için cihazdan herhangi bir klasör seçin</string>
-  <string name="use_root_title">Kök Kullanıcı/Root olarak Eşzamanlama yap</string>
-  <string name="use_root_summary">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>
+  <string name="use_root_title">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>
+  <string name="use_root_summary">Syncthing ve cihazınızla ilgili çeşitli sorunlara neden olabilir. Kullanırken risk alıyorsunuz.</string>
   <string name="notification_type_title">Bildirimler</string>
   <string name="notification_type_summary">Bildirim türünü seçin</string>
   <string-array name="notification_type_entries">
@@ -199,6 +198,8 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Syncthing-Android hata takip sistemini aç</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Bağış yap</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Sürümü</string>
   <!--Title of the preference showing this app's version name-->
@@ -239,6 +240,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="toast_folder_observer_stack_overflow">Dizin ağacı çok derin. Döngüsel sembolik bağlantıların varlığını araştır.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Syncthing yapılandırması başarısız oldu. Lütfen günlük kayıtlarını inceleyin.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

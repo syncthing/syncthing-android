@@ -11,6 +11,7 @@
   <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">로드 중...</string>
+  <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까?</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
@@ -42,11 +43,10 @@
   <string name="ram_usage">RAM 사용량</string>
   <!--Title for announce server status-->
   <string name="announce_server">익명 서버</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">기부하기</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">폴더 ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">디렉토리</string>
   <!--Setting title-->
@@ -68,7 +68,9 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
   <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">기기 ID</string>
@@ -122,6 +124,13 @@
   <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
   <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
   <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
+  <string name="notification_type_title">알림</string>
+  <string name="notification_type_summary">알림 종류를 선택하세요</string>
+  <string-array name="notification_type_entries">
+    <item>일반</item>
+    <item>우선 순위 낮음</item>
+    <item>사용 안 함</item>
+  </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing 옵션 </string>
   <string name="device_name">기기명</string>
@@ -138,6 +147,8 @@
   <string name="gui_user">GUI 인증 사용자</string>
   <string name="gui_password">GUI 인증 비밀번호</string>
   <string name="export_config">설정 내보내기</string>
+  <string name="experimental_settings">실험적인 기능</string>
+  <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
   <string name="import_config">설정 불러오기</string>
@@ -166,6 +177,8 @@
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Syncthing-Android 이슈 트래커 열기</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">기부하기</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 버전</string>
   <!--Title of the preference showing this app's version name-->
@@ -204,6 +217,7 @@
   <string name="syncthing_active">Syncthing이 작동 중입니다</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <!--Toast shown if syncthing failed to create a config-->
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

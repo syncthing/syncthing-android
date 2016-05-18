@@ -49,11 +49,10 @@
   <string name="ram_usage">Utilização da RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Doar</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title-->
@@ -138,8 +137,8 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="sync_only_wifi">Sincronizar apenas quando está em wifi</string>
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>
-  <string name="use_root_title">Sincronizar como root</string>
-  <string name="use_root_summary">Correr o Syncthing como superutilizador</string>
+  <string name="use_root_title">Correr o Syncthing como superutilizador</string>
+  <string name="use_root_summary">Isto pode causar vários problemas com o Syncthing e com o seu dispositivo. Use por sua conta e risco.</string>
   <string name="notification_type_title">Notificação</string>
   <string name="notification_type_summary">Escolha o tipo de notificação</string>
   <string-array name="notification_type_entries">
@@ -196,6 +195,8 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Abrir o gestor de incidentes do Syncthing-Android</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Doar</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versão do </string>
   <!--Title of the preference showing this app's version name-->
@@ -236,6 +237,7 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="toast_folder_observer_stack_overflow">Árvore de pastas demasiado profunda. Verifique se existem ligações simbólicas cíclicas</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Falhou a criação duma configuração para o Syncthing. Verifique os registos, por favor.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">fotos-de-%1$s</string>
   <!--RestApi-->

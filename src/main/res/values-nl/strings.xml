@@ -19,6 +19,7 @@
   <string name="open_website">Website openen</string>
   <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
   <string name="device_rejected">Apparaat %1$s wil verbinding maken</string>
+  <string name="folder_rejected">Apparaat %1$s wil map %2$s delen</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->
@@ -50,12 +51,11 @@
   <string name="ram_usage">RAM-gebrui</string>
   <!--Title for announce server status-->
   <string name="announce_server">Mededelingsserver</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Doneren</string>
   <string name="restart">Herstarten</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Map-ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Map</string>
   <!--Setting title-->
@@ -207,6 +207,9 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">De Syncthing-Android probleemtracker openen</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Doneren</string>
+  <string name="donate_summary">Help ons betalen voor domeinen en hostingkosten</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Synthing-versie</string>
   <!--Title of the preference showing this app's version name-->
@@ -247,6 +250,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="toast_folder_observer_stack_overflow">Directorystructuur te diep. Controleer op cyclische symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Aanmaken van een Syncthing-config mislukt. Controleer de logs.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->

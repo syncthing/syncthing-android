@@ -19,6 +19,7 @@
   <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
   <string name="device_rejected">La machine %1$s veut se connecter</string>
+  <string name="folder_rejected">La machine %1$s veut partager le dossier %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Dossiers</string>
   <!--Shown if no folders exist-->
@@ -50,12 +51,11 @@
   <string name="ram_usage">Utilisation de la RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Serveur d\'annonce</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Faire un don</string>
   <string name="restart">Redémarrer</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID du dossier</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Dossier</string>
   <!--Setting title-->
@@ -208,6 +208,9 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Ouvre le suivi des problèmes de Syncthing-Android</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Faire un don</string>
+  <string name="donate_summary">Aidez-nous à payer les domaines et les frais d\'hébergement</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Version de Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -248,6 +251,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="toast_folder_observer_stack_overflow">Arborescence des répertoires trop profonde. Vérifiez les liens symboliques cycliques.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Impossible de créer la configuration de Syncthing. SVP, vérifiez le journal (log).</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->

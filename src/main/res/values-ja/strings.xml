@@ -19,6 +19,7 @@
   <string name="open_website">Web サイトを開く</string>
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
+  <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Shown if no folders exist-->
@@ -50,12 +51,11 @@
   <string name="ram_usage">RAM 使用</string>
   <!--Title for announce server status-->
   <string name="announce_server">アナウンスサーバー</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">寄付</string>
   <string name="restart">再起動</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">フォルダー ID</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">ディレクトリー</string>
   <!--Setting title-->
@@ -207,6 +207,9 @@
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Syncthing-Android 問題トラッカーを開く</string>
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">寄付</string>
+  <string name="donate_summary">ドメインとホスティング手数料の支払いをご支援ください</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing バージョン</string>
   <!--Title of the preference showing this app's version name-->
@@ -247,6 +250,7 @@
   <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの巡回を確認してください</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Syncthing 設定の作成に失敗しました。ログを確認してください。</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-写真</string>
   <!--RestApi-->

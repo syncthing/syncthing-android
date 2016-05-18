@@ -45,11 +45,10 @@
   <string name="ram_usage">Penggunaan RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Server Penyiaran</string>
-  <!--Menu item to donate-->
-  <string name="donate_title">Donasi</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Folder</string>
+  <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Direktori</string>
   <!--Setting title-->
@@ -108,6 +107,8 @@
   <!--Settings item that opens issue tracker-->
   <!--Summary for the issue tracker settings item-->
   <!--URL of the issue tracker-->
+  <!--Menu item to donate-->
+  <string name="donate_title">Donasi</string>
   <!--Title of the preference showing upstream version name-->
   <!--Title of the preference showing this app's version name-->
   <!--FolderPickerAcitivity-->
@@ -129,6 +130,7 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <!--Toast shown if folder observer fails to traverse a folder-->
   <!--Toast shown if syncthing failed to create a config-->
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

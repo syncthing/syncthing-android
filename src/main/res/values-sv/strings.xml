@@ -56,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">Katalog ID</string>
   <!--Setting title-->
+  <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
   <string name="folder_master">Mapp-master</string>
@@ -249,6 +250,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="toast_folder_observer_stack_overflow">Katalogträd för djupt. Kontrollera cyclic symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Det gick inte att skapa en Syncthing konfiguration. Kontrollera loggarna.</string>
+  <!--Label of the default folder created of first start (camera folder).-->
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-foton</string>
   <!--RestApi-->
