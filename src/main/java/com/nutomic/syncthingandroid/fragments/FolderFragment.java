@@ -99,7 +99,7 @@ public class FolderFragment extends Fragment
                     mFolder.readOnly = isChecked;
                     mFolderNeedsToUpdate = true;
                     break;
-                case R.id.share_device_id:
+                case R.id.device_toggle:
                     RestApi.Device device = (RestApi.Device) view.getTag();
                     if (isChecked) {
                         mFolder.deviceIds.add(device.deviceID);

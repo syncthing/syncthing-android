@@ -2,6 +2,7 @@
 <android.support.v7.widget.SwitchCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Syncthing.TextView.Label.Details.DeviceList"
+    android:id="@+id/device_toggle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/material_divider_inset"
