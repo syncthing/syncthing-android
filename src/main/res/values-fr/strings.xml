@@ -56,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">ID du dossier</string>
   <!--Setting title-->
+  <string name="folder_label">Étiquette du répertoire</string>
   <!--Setting title-->
   <string name="directory">Dossier</string>
   <!--Setting title-->
@@ -252,6 +253,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Impossible de créer la configuration de Syncthing. SVP, vérifiez le journal (log).</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Caméra</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
@@ -290,4 +292,5 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="state_unknown">Inconnu</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">L\'arrêt de Syncthing n\'est pas supporté quand le fonctionnement en tâche de fond est activé.</string>
 </resources>

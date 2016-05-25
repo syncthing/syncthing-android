@@ -11,13 +11,15 @@
   <string name="send_device_id_to">Send Enhets-ID til</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laster...</string>
-  <string name="usage_reporting_dialog_title">Tillat Anonym Rapportering av Bruk?</string>
+  <string name="usage_reporting_dialog_title">Tillat anonym rapportering av bruk?</string>
   <string name="usage_reporting_dialog_description">Den krypterte rapporten over bruk sendes daglig. Den brukes til å spore felles plattformer, mappestørrelser og versjoner av appen. Hvis datasettet endres vil du bli vist denne dialogen på nytt.\n\nDen aggregerte statistikken er offentlig tilgjengelig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <string name="off">av</string>
-  <string name="open_website">Åpne Nettsted</string>
-  <string name="toast_write_storage_permission_required">Skriverettigheter kreves av denne appen</string>
+  <string name="open_website">Åpne nettsted</string>
+  <string name="toast_write_storage_permission_required">Skriverettigheter til lagringsenheten kreves av denne appen</string>
+  <string name="device_rejected">Enheten %1$s ønsker å koble til</string>
+  <string name="folder_rejected">Enheten %1$s ønsker å dele mappen %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Shown if no folders exist-->
@@ -49,14 +51,16 @@
   <string name="ram_usage">RAM-forbruk</string>
   <!--Title for announce server status-->
   <string name="announce_server">Søketjener</string>
+  <string name="restart">Omstart</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappe-ID</string>
   <!--Setting title-->
+  <string name="folder_label">Mappenavn</string>
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
-  <string name="folder_master">Originalmappe</string>
+  <string name="folder_master">Originalmappe - skrivebeskyttet</string>
   <!--Setting title-->
   <string name="devices">Enheter</string>
   <!--Setting title-->
@@ -70,13 +74,15 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Opprett</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Vil du virkelig fjerne denne mappen fra Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">Mappe-ID kan ikke være tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappestien kan ikke være tom</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Ønsker du virkelig å eksportere innstillingene? Eksisterende filer vil bli overskrevet.\n\nADVARSEL! Andre applikasjoner kan være i stand til å lese den private nøkkelen fra sikkerhetskopien og bruke den til å laste ned eller endre synkroniserte filer.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Er du sikker på at du vil importere en ny konfigurasjonen? Eksisterende filer vil bli skrevet over.</string>
+  <string name="dialog_confirm_import">Er du sikker på at du vil importere innstillinger? Eksisterende filer vil bli skrevet over.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
   <string name="device_id">Enhets-ID</string>
@@ -104,6 +110,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Rediger Enhet</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Ønsker du å fjerne denne enheten?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Enhets-ID kan ikke være tom</string>
   <!--Content description for device ID qr code icon-->
@@ -112,7 +119,7 @@
   <string name="toast_root_denied">Fikk ikke root-rettigheter</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Web-GUI</string>
+  <string name="web_gui_title">Webgrensesnitt</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Venter på GUI</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
@@ -121,7 +128,7 @@
   <string name="welcome_title">Velkommen til Syncthing for Android</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Syncthing er en filsynkroniseringsapplikasjon med åpen kildekode.\n\n
-For å dele data med andre enheter må du legge til deres unike enhets-ID til enhetslisten. Etterpå kan du velge hvilke mapper du vil dele med hvilke enheter.\n\n
+For å dele data med andre enheter, må du legge til deres unike enhets-ID til enhetslisten. Etterpå kan du velge hvilke mapper du vil dele med hvilke enheter.\n\n
 Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -134,73 +141,76 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing kjører bare når eksplisitt startet, og kan stoppes med meny-knappen.</string>
   <string name="sync_only_charging">Synkroniser kun ved lading</string>
-  <string name="sync_only_wifi">Synkroniser kun over WiFi.</string>
+  <string name="sync_only_wifi">Synkroniser kun over WiFi</string>
   <string name="sync_only_wifi_ssids">Begrens til visse wifi-nettverk</string>
   <string name="sync_only_wifi_ssids_all">Synkroniser på alle wifi-nettverk</string>
   <string name="sync_only_wifi_ssids_values">Synkroniser bare når koblet til: %1$s</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vennligst skru på WiFi for å velge nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappevelger</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
-  <string name="use_root_title">Kjør Syncthing som Superbruker</string>
-  <string name="use_root_summary">Dette kan forårsake diverse problemer med Syncthing og med din enhet. Bruk på eget ansvar.</string>
-  <string name="notification_type_title">Varsling</string>
+  <string name="use_root_title">Kjør Syncthing som superbruker</string>
+  <string name="use_root_summary">Dette kan forårsake diverse problemer med Syncthing og din enhet. Bruk på eget ansvar.</string>
+  <string name="notification_type_title">Varsler</string>
   <string name="notification_type_summary">Velg varslingstype</string>
   <string-array name="notification_type_entries">
     <item>Normal</item>
-    <item>Lav Prioritet</item>
+    <item>Lav prioritet</item>
     <item>Ingen</item>
   </string-array>
   <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing-opsjoner</string>
+  <string name="syncthing_options">Valg for Syncthing</string>
   <string name="device_name">Enhetsnavn</string>
   <string name="listen_address">Lytteadresser for synkeprotokoll</string>
   <string name="max_recv_kbps">Grense for innkommende trafikk (KiB/s)</string>
   <string name="max_send_kbps">Grense for utgående trafikk (KiB/s)</string>
-  <string name="global_announce_enabled">Global Søking</string>
-  <string name="local_announce_enabled">Lokal Søking</string>
+  <string name="global_announce_enabled">Global søking</string>
+  <string name="local_announce_enabled">Lokal søking</string>
   <string name="upnp_enabled">Aktiver UPnP</string>
-  <string name="global_announce_server">Global Søketjener</string>
-  <string name="usage_reporting">Anonym Rapportering av Bruk</string>
+  <string name="global_announce_server">Global søketjener</string>
+  <string name="usage_reporting">Anonym bruksrapportering</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
   <string name="gui_address">GUI Lytteadresser</string>
   <string name="gui_user">GUI Autentiseringsbruker</string>
   <string name="gui_password">GUI Autentiseringspassord</string>
-  <string name="export_config">Eksporter konfigurasjon</string>
+  <string name="export_config">Eksporter innstillinger</string>
+  <string name="experimental_settings">Eksperimentelt</string>
+  <string name="keep_wakelock_while_binary_running">Hold prosessoren våken mens Syncthing kjører</string>
+  <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillingen dersom du opplever uventede frakoblinger mens enheten går på batteri. Dette vil medføre økt batteriforbruk.</string>
   <!--Toast shown after config was successfully exported-->
-  <string name="config_export_successful">Konfigurasjonen ble eksportert til %1$s</string>
-  <string name="import_config">Importer konfigurasjon</string>
+  <string name="config_export_successful">Innstillingene ble eksportert til %1$s</string>
+  <string name="import_config">Importer instillinger</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_imported_successful">Konfigurasjonen ble importertert</string>
+  <string name="config_imported_successful">Instillingene ble importert</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Import av konfigurasjon feilet, sørg for at filene er i %1$s</string>
+  <string name="config_import_failed">Import av innstillinger mislyktes, sørg for at filene er i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Debug Opsjoner</string>
+  <string name="sttrace_title">Feilsøkingsvalg</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Bare a-z og \',\' er tillatt som STTRACE opsjoner</string>
+  <string name="toast_invalid_sttrace">Bare a-z og \',\' er tillatt som STTRACE-valg</string>
   <!--Toast after entering invalid username-->
   <string name="toast_invalid_username">Tegnene : og \' er ikke tillatt i brukernavn</string>
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">Tegnene : og \' er ikke tillatt i passord</string>
   <!--Title for the preference to reset Syncthing indexes-->
-  <string name="streset_title">Nullstill Database</string>
+  <string name="streset_title">Nullstill database</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">Denne operasjonen bør bare utføres på anbefaling fra vår supportavdeling.
-\nEr du sikker på at du vil nullstille Syncthing sin indeks-database?
-</string>
+  <string name="streset_question">Denne operasjonen bør bare utføres på anbefaling fra vår brukerstøttegruppe.
+\nEr du sikker på at du vil nullstille Syncthings indeks-database?</string>
   <!--Syncthing was reset-->
-  <string name="streset_done">Nullstilling av Syncthing sin database var vellykket</string>
+  <string name="streset_done">Nullstilling av Syncthings database var vellykket</string>
   <string name="category_about">Om</string>
   <!--Settings item that opens the log activity-->
-  <string name="open_log">Åpne Logg</string>
+  <string name="open_log">Åpne logg</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Åpne loggvinduet for Syncthing og Android</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Rapporter Problem</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Åpne Syncthing-Android sin feilhåndteringsside</string>
+  <string name="report_issue_summary">Åpne feilrapportverktøyet for Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Donér</string>
+  <string name="donate_summary">Hjelp oss å betale for domener og tjenere</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-versjon</string>
   <!--Title of the preference showing this app's version name-->
@@ -211,7 +221,7 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Advarsel: Din versjon av Android tillater ikke synkronisering til eksterne lagringsenheter. </string>
   <!--ListView empty text-->
-  <string name="directory_empty">Katalog er Tom</string>
+  <string name="directory_empty">Katalogen er tom</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Opprett ny Mappe</string>
   <!--Menu item to select the current folder-->
@@ -221,11 +231,11 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--Title of the "log" activity-->
   <string name="log_title">Logg</string>
   <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Vis Android Logg</string>
+  <string name="log_android_title">Vis Android-logg</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Vis Syncthing Logg</string>
+  <string name="log_syncthing_title">Vis Syncthing-logg</string>
   <!--Title of the "share log" menu button-->
-  <string name="share_title">Dele</string>
+  <string name="share_title">Del</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing er deaktivert</string>
@@ -240,19 +250,20 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Katalogtreet er for dypt. Se etter sykliske symlenker.</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Opprettelse av Syncthing konfigurasjon feilet. Vennligst se i loggene.</string>
+  <string name="config_create_failed">Opprettelse av Syncthinginnstillinger mislyktes. Vennligst se i loggene.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
-  <string name="default_folder_id">%1$s-photos</string>
+  <string name="default_folder_id">%1$s-foto</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Omstart Nødvendig</string>
   <!--Text for positive button in restart dialog-->
-  <string name="restart_now">Restart Nå</string>
+  <string name="restart_now">Start på nytt nå</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Senere</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Trykk her for å restarte syncthing nå</string>
+  <string name="restart_notification_text">Trykk her for å omstarte Syncthing nå</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Enhets-ID kopiert til utklippstavle</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -279,4 +290,6 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="state_error">Feil</string>
   <string name="state_unknown">Ukjent</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Du kan ikke stoppe Syncthing når «kjør i bakgrunnen» er skrudd på.</string>
 </resources>

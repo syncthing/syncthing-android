@@ -56,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
   <!--Setting title-->
+  <string name="folder_label">Rótulo da pasta</string>
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title-->
@@ -136,7 +137,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Preference title-->
   <string name="always_run_in_background">Sempre rodar em segundo plano</string>
   <!--Preference summary in case it is enabled-->
-  <string name="always_run_in_background_enabled">O Syncthing sempre rodará em segundo plano, de acordo com as preferências abaixo.</string>
+  <string name="always_run_in_background_enabled">O Syncthing sempre rodará em segundo plano de acordo com as preferências abaixo.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">O Syncthing sempre rodará quando iniciado manualmente e pode ser parado pelo botão de menu.</string>
   <string name="sync_only_charging">Somente durante o carregamento</string>
@@ -252,6 +253,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Ocorreu um erro tentando configurar o Syncthing. Por favor, verifique os logs.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Câmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-fotos</string>
   <!--RestApi-->
@@ -290,4 +292,5 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="state_unknown">Desconhecido</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Não é possível parar o Syncthing enquanto ele estiver configurado para rodar em segundo plano.</string>
 </resources>

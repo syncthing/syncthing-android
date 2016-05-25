@@ -56,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">文件夹标识</string>
   <!--Setting title-->
+  <string name="folder_label">文件夹标签</string>
   <!--Setting title-->
   <string name="directory">目录</string>
   <!--Setting title-->
@@ -251,6 +252,7 @@
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">创建 Syncthing 配置文件失败，请检查日志。</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">摄像机</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-照片</string>
   <!--RestApi-->
@@ -289,4 +291,5 @@
   <string name="state_unknown">未知</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">当启用后台运行时不支持停止 Syncthing。</string>
 </resources>
