@@ -37,7 +37,6 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Getrennt</string>
   <!--Title for current download rate-->
-  <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--DrawerFragment-->
@@ -160,8 +159,8 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="syncthing_options">Syncthing-Optionen</string>
   <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
-  <string name="max_recv_kbps">Eingehende Datenrate Limite (KiB/s)</string>
-  <string name="max_send_kbps">Ausgehende Datenrate Limite (KiB/s)</string>
+  <string name="max_recv_kbps">Eingehende Datenrate limitieren (KiB/s)</string>
+  <string name="max_send_kbps">Ausgehende Datenrate limitieren (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
   <string name="upnp_enabled">UPnP aktivieren</string>
@@ -289,4 +288,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="state_unknown">Unbekannt</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Bei Ausführung im Hintergrund, kann Syncthing nicht gestoppt werden.</string>
+  <string name="download_title">Download</string>
+  <string name="folder_label">Bezeichnung des Verzeichnisses</string>
 </resources>
