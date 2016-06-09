@@ -24,7 +24,9 @@ import java.util.TimerTask;
  * Displays information about the local device.
  */
 public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemInfoListener,
-        RestApi.OnReceiveConnectionsListener, View.OnClickListener {
+                                                        RestApi.OnReceiveConnectionsListener,
+                                                        RestApi.OnReceiveSystemVersionListener,
+                                                        View.OnClickListener {
 
     private TextView mDeviceId;
     private TextView mCpuUsage;
@@ -32,6 +34,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     private TextView mDownload;
     private TextView mUpload;
     private TextView mAnnounceServer;
+    private TextView mVersion;
 
     private TextView mExitButton;
 
@@ -85,6 +88,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         mDownload       = (TextView) view.findViewById(R.id.download);
         mUpload         = (TextView) view.findViewById(R.id.upload);
         mAnnounceServer = (TextView) view.findViewById(R.id.announce_server);
+        mVersion        = (TextView) view.findViewById(R.id.version);
         mExitButton     = (TextView) view.findViewById(R.id.drawerActionExit);
 
         view.findViewById(R.id.drawerActionWebGui)
@@ -128,6 +132,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         if (mActivity.getApi() == null || getActivity() == null || getActivity().isFinishing())
             return;
         mActivity.getApi().getSystemInfo(this);
+        mActivity.getApi().getSystemVersion(this);
         mActivity.getApi().getConnections(this);
     }
 
@@ -164,6 +169,17 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         } else {
             mAnnounceServer.setTextColor(getResources().getColor(R.color.text_red));
         }
+    }
+
+    /**
+     * Populates views with status received via {@link RestApi#getSystemInfo}.
+     */
+    @Override
+    public void onReceiveSystemVersion(RestApi.SystemVersion info) {
+        if (getActivity() == null)
+            return;
+
+        mVersion.setText(info.version);
     }
 
     /**

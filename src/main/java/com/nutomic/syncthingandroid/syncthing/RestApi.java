@@ -11,6 +11,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.annotations.SerializedName;
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.RestartActivity;
@@ -80,6 +84,19 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public int goroutines;
         public String myID;
         public long sys;
+    }
+
+    public static class SystemVersion {
+        @SerializedName("arch")
+        public String architecture;
+        @SerializedName("codename")
+        public String codename;
+        @SerializedName("longVersion")
+        public String longVersion;
+        @SerializedName("os")
+        public String os;
+        @SerializedName("version")
+        public String version;
     }
 
     public static class Folder implements Serializable {
@@ -424,6 +441,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
+     * Result listener for {@link #getSystemVersion(OnReceiveSystemVersionListener)}.
+     */
+    public interface OnReceiveSystemVersionListener {
+        void onReceiveSystemVersion(SystemVersion version);
+    }
+
+    /**
      * Requests and parses information about current system status and resource usage.
      *
      * @param listener Callback invoked when the result is received.
@@ -457,6 +481,29 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_SYSTEM, mApiKey);
+    }
+
+    /**
+     * Requests and parses system version information.
+     *
+     * @param listener Callback invoked when the result is received.
+     */
+    public void getSystemVersion(final OnReceiveSystemVersionListener listener) {
+        new GetTask(mHttpsCertPath) {
+            @Override
+            protected void onPostExecute(String response) {
+                if (response == null) {
+                    return;
+                }
+
+                try {
+                    SystemVersion systemVersion = new Gson().fromJson(response, SystemVersion.class);
+                    listener.onReceiveSystemVersion(systemVersion);
+                } catch (JsonSyntaxException e) {
+                    Log.w(TAG, "Failed to read system info", e);
+                }
+            }
+        }.execute(mUrl, GetTask.URI_VERSION, mApiKey);
     }
 
     /**
