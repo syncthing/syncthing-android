@@ -72,6 +72,18 @@ public class RestApiTest extends AndroidTestCase {
         latch.await(1, TimeUnit.SECONDS);
     }
 
+    public void testGetSystemVersion() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        mApi.getSystemVersion(new RestApi.OnReceiveSystemVersionListener() {
+            @Override
+            public void onReceiveSystemVersion(RestApi.SystemVersion info) {
+                assertNotNull(info);
+                latch.countDown();
+            }
+        });
+        latch.await(1, TimeUnit.SECONDS);
+    }
+
     public void testGetFolders() {
         assertNotNull(mApi.getFolders());
     }
