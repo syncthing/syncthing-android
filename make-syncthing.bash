@@ -2,8 +2,6 @@
 
 set -e
 
-RESET=1
-
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JNIDIR="/src/main/jniLibs"
 
@@ -54,15 +52,11 @@ mkdir -p ${TARGETDIR}
 mv syncthing ${TARGETDIR}/libsyncthing.so
 chmod 644 ${TARGETDIR}/libsyncthing.so
 
-if [[ RESET -eq 1 && -e ./build.go ]]; then
+if [[ -e ./build.go ]]; then
     git clean -f
 fi
 
 popd
-
-if [ $RESET -eq 1 ]; then
-    git submodule update --init ext/syncthing/src/github.com/syncthing/syncthing
-fi
 
 echo "Build Complete"
 
