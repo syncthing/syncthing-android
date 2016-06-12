@@ -182,18 +182,21 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         }
     }
 
-    private void notify(String title, PendingIntent pi) {
+    private void notify(String text, PendingIntent pi) {
         NotificationManager nm = (NotificationManager)
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification n = new NotificationCompat.Builder(mContext)
-                .setContentTitle(title)
+                .setContentTitle(mContext.getString(R.string.app_name))
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(text))
                 .setContentIntent(pi)
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setAutoCancel(true)
                 .build();
         // HACK: Use a random, deterministic ID between 1000 and 2000 to avoid duplicate
         //       notifications.
-        int notificationId = 1000 + title.hashCode() % 1000;
+        int notificationId = 1000 + text.hashCode() % 1000;
         nm.notify(notificationId, n);
     }
 }
