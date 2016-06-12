@@ -94,6 +94,11 @@
                 android:inputType="textNoSuggestions" />
 
             <CheckBoxPreference
+                android:key="relaysEnabled"
+                android:title="@string/enable_relaying"
+                android:persistent="false" />
+
+            <CheckBoxPreference
                 android:key="urAccepted"
                 android:title="@string/usage_reporting"
                 android:persistent="false" />

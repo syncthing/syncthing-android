@@ -278,6 +278,8 @@ Please report any problems you encounter via Github.</string>
 
     <string name="global_announce_server">Global Discovery Server</string>
 
+    <string name="enable_relaying">Enable Relaying</string>
+
     <string name="usage_reporting">Anonymous Usage Reporting</string>
 
     <string name="syncthing_gui">Syncthing GUI</string>
