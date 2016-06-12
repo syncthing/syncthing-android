@@ -37,10 +37,6 @@ unset GOPATH #Set by build.go
 export GOROOT=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
 export PATH=${GOROOT}/bin:${PATH}
 
-if [ $RESET -eq 1 ]; then
-    git submodule update --init ext/syncthing/src/github.com/syncthing/syncthing
-fi
-
 pushd ext/syncthing/src/github.com/syncthing/syncthing
 
 _GOOS=$GOOS
