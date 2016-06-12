@@ -12,6 +12,14 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">로드 중...</string>
   <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까?</string>
+  <string name="usage_reporting_dialog_description">암호화된 사용 리포트를 매일 보냅니다. 이것은 일반적 플랫폼, 폴더 크기, 앱의 버전을 추적하는데 사용됩니다. 보고된 데이터 설정이 변경된 경우 이 대화 상자가 다시 표시됩니다.\n\n수집된 통계는 https://data.syncthing.net에서 공개되고 있습니다.</string>
+  <string name="yes">예</string>
+  <string name="no">아니오</string>
+  <string name="off">끄기</string>
+  <string name="open_website">웹사이트 열기</string>
+  <string name="toast_write_storage_permission_required">스토리지 쓰기 권한이 필요합니다</string>
+  <string name="device_rejected">%1$s 장치가 연결을 원하고 있습니다</string>
+  <string name="folder_rejected">%1$s 장치가 %2$s 폴더를 공유하길 원하고 있습니다</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
@@ -43,10 +51,12 @@
   <string name="ram_usage">RAM 사용량</string>
   <!--Title for announce server status-->
   <string name="announce_server">익명 서버</string>
+  <string name="restart">재시작</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">폴더 ID</string>
   <!--Setting title-->
+  <string name="folder_label">폴더 라벨</string>
   <!--Setting title-->
   <string name="directory">디렉토리</string>
   <!--Setting title-->
@@ -64,7 +74,9 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">생성</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">정말로 이 폴더를 삭제하시겠습니까?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">폴더 ID는 공백으로 둘 수 없습니다.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <!--Dialog shown before config export-->
@@ -83,7 +95,13 @@
   <!--Setting title-->
   <string name="compression">압축</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>안함</item>
+    <item>메타데이터</item>
+    <item>항상</item>
+  </string-array>
   <!--Setting title-->
+  <string name="introducer">Introducer</string>
   <!--ActionBar item-->
   <string name="delete_device">기기 삭제</string>
   <string name="add_device">기기 추가</string>
@@ -92,11 +110,13 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">기기 수정</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">정말로 이 기기를 삭제하시겠습니까?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR 코드 스캔</string>
   <!--Toast show if we could not get root permissions-->
+  <string name="toast_root_denied">root 권한을 얻는데 실패하였습니다</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">웹 GUI</string>
@@ -122,8 +142,14 @@
   <string name="always_run_in_background_disabled">Syncthing은 제대로 시작된 경우에만 작동하며, 메뉴 버튼을 눌러 정지할 수 있습니다.</string>
   <string name="sync_only_charging">충전 중일 때만 동기화</string>
   <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
+  <string name="sync_only_wifi_ssids">특정 WI-FI 네트워크로 제한하기</string>
+  <string name="sync_only_wifi_ssids_all">모든 WI-FI 네트워크에서 동기화</string>
+  <string name="sync_only_wifi_ssids_values">%1$s에 연결되어 있을 때만 동기화</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
   <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
   <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
+  <string name="use_root_title">Syncthing을 Superuser로 실행</string>
+  <string name="use_root_summary">이 기능은 Syncthing과 당신의 기기에 다양한 문제를 야기할 수 있습니다. 사용하는 것은 전적으로 당신의 책임입니다.</string>
   <string name="notification_type_title">알림</string>
   <string name="notification_type_summary">알림 종류를 선택하세요</string>
   <string-array name="notification_type_entries">
@@ -149,6 +175,7 @@
   <string name="export_config">설정 내보내기</string>
   <string name="experimental_settings">실험적인 기능</string>
   <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
+  <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
   <string name="import_config">설정 불러오기</string>
@@ -165,8 +192,12 @@
   <!--Toast after entering invalid password-->
   <string name="toast_invalid_password">문자 :와 \'은 비밀번호로 사용할 수 없습니다</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="streset_title">데이터베이스 리셋</string>
   <!--Syncthing was reset-->
+  <string name="streset_question">이 행동은 우리의 지원팀이 권장한 경우에만 시도하세요.
+\n정말로 Syncthing의 인덱스 데이터베이스를 지우시겠습니까?</string>
   <!--Syncthing was reset-->
+  <string name="streset_done">Syncthing의 데이터베이스가 성공적으로 리셋되었습니다</string>
   <string name="category_about">정보</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">로그 열기</string>
@@ -179,6 +210,7 @@
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">기부하기</string>
+  <string name="donate_summary">도메인과 호스팅 요금을 위해 저희를 도와주세요</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 버전</string>
   <!--Title of the preference showing this app's version name-->
@@ -216,14 +248,20 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing이 작동 중입니다</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
+  <string name="toast_folder_observer_stack_overflow">폴더의 계층이 너무 깊습니다. 심볼릭 링크의 순환을 확인해주세요.</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Syncthing 설정을 작성하는데 실패하였습니다. 로그 내역을 확인해 주세요.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">카메라</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-사진</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">재시작 필요</string>
   <!--Text for positive button in restart dialog-->
+  <string name="restart_now">지금 재시작</string>
   <!--Text for the dismiss button of the restart Activity-->
+  <string name="restart_later">나중에</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Syncthing을 재시작하려면 이곳을 클릭하세요</string>
   <!--Shown when a device ID is copied to the clipboard-->
@@ -237,11 +275,21 @@
     <item>TiB</item>
   </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>B/s</item>
+    <item>KiB/s</item>
+    <item>MiB/s</item>
+    <item>GiB/s</item>
+    <item>TiB/s</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">대기</string>
   <string name="state_scanning">스캔 중</string>
   <string name="state_cleaning">지우는 중</string>
   <string name="state_syncing">동기화 중 (%1$d%%)</string>
+  <string name="state_error">오류</string>
   <string name="state_unknown">알 수 없음</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">백그라운드에서 실행이 활성화되어 있을 때는 Syncthing 중단은 지원되지 않습니다.</string>
 </resources>

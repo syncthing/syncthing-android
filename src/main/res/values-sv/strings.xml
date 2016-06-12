@@ -25,7 +25,7 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Inga kataloger hittades</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d Filer</string>
+  <string name="files">%1$d/%2$d filer</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Enheter</string>
   <!--Shown if no devices exist-->
@@ -142,8 +142,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="always_run_in_background_disabled">Syncthing körs bara när den uttryckligen har startats, och kan stoppas genom menyknappen.</string>
   <string name="sync_only_charging">Synkronisera endast vid laddning</string>
   <string name="sync_only_wifi">Synkronisera endast trådlöst</string>
-  <string name="sync_only_wifi_ssids">Begränsa till vissa WiFi nätverk</string>
-  <string name="sync_only_wifi_ssids_all">Synkronisera på alla WiFi nätverk</string>
+  <string name="sync_only_wifi_ssids">Begränsa till vissa WiFi-nätverk</string>
+  <string name="sync_only_wifi_ssids_all">Synkronisera på alla WiFi-nätverk</string>
   <string name="sync_only_wifi_ssids_values">Synkronisera endast när den är ansluten till: %1$s</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på WiFi för att välja nätverk.</string>
   <string name="advanced_folder_picker">Använd avancerade katalog-väljaren</string>
@@ -217,9 +217,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="app_version_title">Syncthing-Android version</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Katalog-väljare</string>
+  <string name="folder_picker_title">Katalog väljare</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Varning: Din Android version tillåter inte synkronisering till externa lagringsenheter</string>
+  <string name="kitkat_external_storage_warning">Varning: Din Android-version tillåter inte synkronisering till externa lagringsenheter</string>
   <!--ListView empty text-->
   <string name="directory_empty">Katalogen är tom</string>
   <!--Menu item to create folder on the file system-->

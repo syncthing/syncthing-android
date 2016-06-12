@@ -56,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">Map-ID</string>
   <!--Setting title-->
+  <string name="folder_label">Maplabel</string>
   <!--Setting title-->
   <string name="directory">Map</string>
   <!--Setting title-->
@@ -251,6 +252,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Aanmaken van een Syncthing-config mislukt. Controleer de logs.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Camera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
@@ -289,4 +291,5 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="state_unknown">Onbekend</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Syncthing stoppen terwijl uitvoeren in achtergrond is ingeschakeld wordt niet ondersteund.</string>
 </resources>
