@@ -55,6 +55,9 @@ public class FolderFragment extends Fragment
     public static final String EXTRA_FOLDER_ID =
             "com.nutomic.syncthingandroid.fragments.FolderFragment.FOLDER_ID";
 
+    public static final String EXTRA_FOLDER_LABEL =
+            "com.nutomic.syncthingandroid.fragments.FolderFragment.FOLDER_LABEL";
+
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.fragments.FolderFragment.DEVICE_ID";
 
@@ -362,6 +365,7 @@ public class FolderFragment extends Fragment
     private void initFolder() {
         mFolder = new RestApi.Folder();
         mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
+        mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);;
         mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
         mFolder.deviceIds = new ArrayList<>();

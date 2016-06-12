@@ -109,13 +109,15 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             case "FolderRejected":
                 deviceId = data.getString("device");
                 String folderId = data.getString("folder");
+                String folderLabel = data.getString("folderLabel");
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
                 intent = new Intent(mContext, SettingsActivity.class)
                         .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
                         .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
                         .putExtra(FolderFragment.EXTRA_DEVICE_ID, deviceId)
-                        .putExtra(FolderFragment.EXTRA_FOLDER_ID, folderId);
+                        .putExtra(FolderFragment.EXTRA_FOLDER_ID, folderId)
+                        .putExtra(FolderFragment.EXTRA_FOLDER_LABEL, folderLabel);
                 pi = PendingIntent.getActivity(mContext, 0, intent, 0);
 
                 String deviceName = null;
@@ -123,7 +125,8 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                     if (d.deviceID.equals(deviceId))
                         deviceName = RestApi.getDeviceDisplayName(d);
                 }
-                title = mContext.getString(R.string.folder_rejected, deviceName, folderId);
+                title = mContext.getString(R.string.folder_rejected, deviceName,
+                        folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
 
                 notify(title, pi);
                 break;
