@@ -2,8 +2,6 @@
 
 set -e
 
-RESET=1
-
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export CGO_ENABLED=0
@@ -43,11 +41,6 @@ case "$1" in
         exit 1
 esac
 
-#TODO figure out why --depth 1 never works right
-if [ $RESET -eq 1 ]; then
-    git submodule update --init ext/golang/go
-fi
-
 unset GOPATH
 
 export GOROOT_FINAL=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
@@ -82,17 +75,13 @@ cp -a ../bin "${GOROOT_FINAL}"/
 cp -a ../pkg "${GOROOT_FINAL}"/
 cp -a ../src "${GOROOT_FINAL}"/
 
-if [[ $RESET -eq 1 && -e ./make.bash ]]; then
+if [[ -e ./make.bash ]]; then
     pushd ../
     git clean -f
     popd
 fi
 
 popd
-
-if [ $RESET -eq 1 ]; then
-    git submodule update --init ext/golang/go
-fi
 
 echo "Complete"
 
