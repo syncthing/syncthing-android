@@ -83,7 +83,7 @@
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="upnpEnabled"
+                android:key="natEnabled"
                 android:title="@string/upnp_enabled"
                 android:persistent="false"/>
 
