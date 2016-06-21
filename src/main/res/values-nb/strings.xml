@@ -165,7 +165,6 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="max_send_kbps">Grense for utgående trafikk (KiB/s)</string>
   <string name="global_announce_enabled">Global søking</string>
   <string name="local_announce_enabled">Lokal søking</string>
-  <string name="upnp_enabled">Aktiver UPnP</string>
   <string name="global_announce_server">Global søketjener</string>
   <string name="usage_reporting">Anonym bruksrapportering</string>
   <string name="syncthing_gui">Syncthing-GUI</string>

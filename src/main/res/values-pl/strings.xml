@@ -158,7 +158,6 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
   <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
-  <string name="upnp_enabled">Włączenie UPnP</string>
   <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="syncthing_gui">Syncthing GUI</string>

@@ -165,7 +165,6 @@
   <string name="max_send_kbps">업로드 속도 제한 (KiB/s)</string>
   <string name="global_announce_enabled">글로벌 탐색</string>
   <string name="local_announce_enabled">로컬 탐색</string>
-  <string name="upnp_enabled">UPnP 활성화 </string>
   <string name="global_announce_server">글로벌 탐색 서버</string>
   <string name="usage_reporting">익명 사용 기록 </string>
   <string name="syncthing_gui">Syncthing GUI</string>

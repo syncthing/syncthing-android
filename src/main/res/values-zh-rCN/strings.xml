@@ -165,7 +165,6 @@
   <string name="max_send_kbps">上传限速（KiB/s）</string>
   <string name="global_announce_enabled">在互联网中寻找节点</string>
   <string name="local_announce_enabled">在局域网中寻找节点</string>
-  <string name="upnp_enabled">启用 UPnP</string>
   <string name="global_announce_server">用以在互联网上寻找节点的发布服务器地址</string>
   <string name="usage_reporting">匿名使用报告</string>
   <string name="syncthing_gui">Syncthing 管理页</string>

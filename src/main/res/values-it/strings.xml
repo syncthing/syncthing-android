@@ -165,7 +165,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="max_send_kbps">Limite Velocità in Uscita (KiB/s)</string>
   <string name="global_announce_enabled">Individuazione Globale</string>
   <string name="local_announce_enabled">Individuazione Locale</string>
-  <string name="upnp_enabled">Abilita UPnP</string>
   <string name="global_announce_server">Server Individuazione Globale</string>
   <string name="usage_reporting">Statistiche Anonime Utilizzo</string>
   <string name="syncthing_gui">Interfaccia Grafica di Syncthing</string>

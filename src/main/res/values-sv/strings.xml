@@ -165,7 +165,6 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
   <string name="global_announce_enabled">Global upptäckt</string>
   <string name="local_announce_enabled">Lokal upptäckt</string>
-  <string name="upnp_enabled">Aktivera UPnP</string>
   <string name="global_announce_server">Global upptäktsserver</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
   <string name="syncthing_gui">Syncthing GUI</string>

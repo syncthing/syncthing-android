@@ -165,7 +165,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="max_send_kbps">Omezení odchozí rychlosti (KiB/s)</string>
   <string name="global_announce_enabled">Globální oznamování</string>
   <string name="local_announce_enabled">Místní oznamování</string>
-  <string name="upnp_enabled">Povolit UPnP</string>
   <string name="global_announce_server">Server globálního oznamování</string>
   <string name="usage_reporting">Anonymní hlášení o používání</string>
   <string name="syncthing_gui">Syncthing GUI</string>

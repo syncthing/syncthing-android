@@ -159,7 +159,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="max_send_kbps">Giden Hız Sınırı (KiB/s)</string>
   <string name="global_announce_enabled">Küresel Bulunabilirlik</string>
   <string name="local_announce_enabled">Yerel Bulunabilirlik</string>
-  <string name="upnp_enabled">UPnP Etkinleştir</string>
   <string name="global_announce_server">Küresel Bulunabilirlik Sunucusu</string>
   <string name="usage_reporting">Anonim olarak Kullanım Raporlama</string>
   <string name="syncthing_gui">Syncthing Arayüzü</string>

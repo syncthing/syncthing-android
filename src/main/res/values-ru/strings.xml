@@ -163,7 +163,6 @@
   <string name="max_send_kbps">Лимит Загрузки (КБ/с)</string>
   <string name="global_announce_enabled">Глобальное Обнаружение</string>
   <string name="local_announce_enabled">Локальное Обнаружение</string>
-  <string name="upnp_enabled">Включить UPnP</string>
   <string name="global_announce_server">Сервер Глобального Обнаружения</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="syncthing_gui">Syncthing GUI</string>

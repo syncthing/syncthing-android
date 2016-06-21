@@ -165,7 +165,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="max_send_kbps">Limite du débit d\'émission (Ko/s)</string>
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
-  <string name="upnp_enabled">Activer UPnP</string>
   <string name="global_announce_server">Serveur de découverte globale</string>
   <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="syncthing_gui">Interface WEB Syncthing</string>

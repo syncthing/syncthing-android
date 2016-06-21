@@ -159,7 +159,6 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <string name="max_send_kbps">Limitar la Tasa de Tráfico Saliente (KiB/s)</string>
   <string name="global_announce_enabled">Descubrimiento Global</string>
   <string name="local_announce_enabled">Descubrimiento Local</string>
-  <string name="upnp_enabled">Activar UPnP</string>
   <string name="global_announce_server">Servidor de Descubrimiento Global</string>
   <string name="usage_reporting">Reportar Uso Anónimo</string>
   <string name="syncthing_gui">Syncthing GUI</string>

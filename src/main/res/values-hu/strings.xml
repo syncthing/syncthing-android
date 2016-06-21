@@ -130,7 +130,6 @@
   <string name="device_name">Eszköz név</string>
   <string name="global_announce_enabled">Globális felfedezés</string>
   <string name="local_announce_enabled">Helyi felfedezés</string>
-  <string name="upnp_enabled">UPnP engedélyezése</string>
   <string name="global_announce_server">Globális felfedező szerver</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="export_config">Beállítások mentése</string>
