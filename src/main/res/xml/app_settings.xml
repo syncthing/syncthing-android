@@ -84,7 +84,7 @@
 
             <CheckBoxPreference
                 android:key="natEnabled"
-                android:title="@string/nat_enabled"
+                android:title="@string/enable_nat_traversal"
                 android:persistent="false"/>
 
             <EditTextPreference
