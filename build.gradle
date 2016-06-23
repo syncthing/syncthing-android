@@ -45,7 +45,10 @@ android {
         testHandleProfiling true
         testFunctionalTest true
     }
-
+    // Without this parameter, all builds fail with error:
+    //     Execution failed for task ':mergeArmeabiDebugResources'.
+    //     > Some file crunching failed, see logs for details
+    // https://code.google.com/p/android/issues/detail?id=163378
     aaptOptions.setProperty("cruncherEnabled", false)
 
     // We haven't upgraded to the new HTTP library yet.
