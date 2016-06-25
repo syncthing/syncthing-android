@@ -19,6 +19,7 @@
   <string name="open_website">Otwórz stronę internetową</string>
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
+  <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
   <!--Shown if no folders exist-->
@@ -55,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">Identyfikator katalogu</string>
   <!--Setting title-->
+  <string name="folder_label">Etykieta katalogu</string>
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
