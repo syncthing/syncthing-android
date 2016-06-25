@@ -163,7 +163,6 @@
   <string name="max_send_kbps">Лимит на скоростта за качване (KiB/s)</string>
   <string name="global_announce_enabled">Глобално откриване</string>
   <string name="local_announce_enabled">Локално откриване</string>
-  <string name="upnp_enabled">Включи UPnP</string>
   <string name="global_announce_server">Сървър за глобално откриване</string>
   <string name="usage_reporting"> Анонимен доклад за ползване на програмата</string>
   <string name="syncthing_gui">Потребителски интерфейс на Syncthing</string>

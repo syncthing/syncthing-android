@@ -152,7 +152,6 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <string name="max_send_kbps">Limit Rýchlosti Odosielania (KiB/s)</string>
   <string name="global_announce_enabled">Globálne Vyhľadávanie</string>
   <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
-  <string name="upnp_enabled">Povoliť UPnP</string>
   <string name="global_announce_server">Adresa Serveru pre Globálne Vyhľadávanie</string>
   <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
   <string name="syncthing_gui">Syncthing GUI</string>

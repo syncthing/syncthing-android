@@ -83,8 +83,8 @@
                 android:persistent="false" />
 
             <CheckBoxPreference
-                android:key="upnpEnabled"
-                android:title="@string/upnp_enabled"
+                android:key="natEnabled"
+                android:title="@string/enable_nat_traversal"
                 android:persistent="false"/>
 
             <EditTextPreference

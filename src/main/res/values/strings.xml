@@ -274,7 +274,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="local_announce_enabled">Local Discovery</string>
 
-    <string name="upnp_enabled">Enable UPnP</string>
+    <string name="enable_nat_traversal">Enable NAT Traversal</string>
 
     <string name="global_announce_server">Global Discovery Server</string>
 

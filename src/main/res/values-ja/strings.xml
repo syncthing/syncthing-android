@@ -165,7 +165,6 @@
   <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
   <string name="global_announce_enabled">グローバル探索</string>
   <string name="local_announce_enabled">ローカル探索</string>
-  <string name="upnp_enabled">UPnP を有効にする</string>
   <string name="global_announce_server">グローバル探索サーバー</string>
   <string name="usage_reporting">匿名使用状況レポート</string>
   <string name="syncthing_gui">同期中 GUI</string>

@@ -164,7 +164,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="max_send_kbps">Ausgehende Datenrate Limite (KiB/s)</string>
   <string name="global_announce_enabled">Globale Auffindung</string>
   <string name="local_announce_enabled">Lokale Auffindung</string>
-  <string name="upnp_enabled">UPnP aktivieren</string>
   <string name="global_announce_server">Globaler Indexserver</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
   <string name="syncthing_gui">Syncthing-Weboberfläche</string>

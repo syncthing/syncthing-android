@@ -165,7 +165,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="max_send_kbps">Limite de velocidade de envio (KiB/s)</string>
   <string name="global_announce_enabled">Descoberta global</string>
   <string name="local_announce_enabled">Descoberta local</string>
-  <string name="upnp_enabled">Habilitar UPnP</string>
   <string name="global_announce_server">Descoberta global</string>
   <string name="usage_reporting">Relatório anônimo de uso</string>
   <string name="syncthing_gui">Interface do Syncthing</string>

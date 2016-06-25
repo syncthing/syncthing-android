@@ -164,7 +164,6 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="max_send_kbps">Giới hạn t.độ đầu ra (KiB/s)</string>
   <string name="global_announce_enabled">Dò tìm toàn cầu</string>
   <string name="local_announce_enabled">Dò tìm cục bộ</string>
-  <string name="upnp_enabled">Bật UPnP</string>
   <string name="global_announce_server">Máy chủ dò tìm toàn cầu</string>
   <string name="usage_reporting">Báo cáo sử dụng ẩn danh</string>
   <string name="syncthing_gui">GUI Syncthing</string>
