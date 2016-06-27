@@ -52,8 +52,6 @@ mkdir -p "$GOROOT_FINAL"
 
 pushd ext/golang/go/src
 
-git reset --hard HEAD
-
 # Apply patches to Golang
 for PATCH in $MYDIR/patches/golang/all/*.patch; do
     echo "Applying $PATCH"
