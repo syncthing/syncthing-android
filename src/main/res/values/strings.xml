@@ -246,7 +246,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_root_title">Run Syncthing as Superuser</string>
 
-    <string name="use_root_summary">This may cause various problems with Syncthing and with your device. Use at your own risk.</string>
+    <string name="use_root_summary">This is an unstable feature that may cause problems with Syncthing and with your device. If you encounter problems, you may have to reinstall Syncthing.</string>
 
     <string name="notification_type_title">Notification</string>
 
