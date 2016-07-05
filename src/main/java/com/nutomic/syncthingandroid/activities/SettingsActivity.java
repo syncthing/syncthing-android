@@ -44,6 +44,7 @@ public class SettingsActivity extends SyncthingActivity {
                     savedInstanceState.getString("fragment_name"));
         } else {
             String action = getIntent().getAction();
+
             if (action == null) {
                 action = ACTION_APP_SETTINGS;
             }
