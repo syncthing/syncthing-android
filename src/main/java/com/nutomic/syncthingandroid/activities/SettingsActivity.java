@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.nutomic.syncthingandroid.R;
@@ -42,7 +43,13 @@ public class SettingsActivity extends SyncthingActivity {
             mFragment = fm.getFragment(savedInstanceState,
                     savedInstanceState.getString("fragment_name"));
         } else {
-            switch (getIntent().getAction()) {
+            String action = getIntent().getAction();
+
+            if (action == null) {
+                action = ACTION_APP_SETTINGS;
+            }
+
+            switch (action) {
                 case ACTION_APP_SETTINGS:
                     setTitle(R.string.settings_title);
                     mFragment = new SettingsFragment();
