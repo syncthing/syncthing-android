@@ -189,7 +189,7 @@
     <string name="scan_qr_code_description">Scan QR Code</string>
 
     <!-- Toast show if we could not get root permissions -->
-    <string name="toast_root_denied">"Did not get root permissions"</string>
+    <string name="toast_root_denied">Did not get root permissions</string>
 
     <!-- WebGuiActivity -->
 
