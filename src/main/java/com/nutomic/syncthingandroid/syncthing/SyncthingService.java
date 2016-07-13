@@ -97,6 +97,7 @@ public class SyncthingService extends Service implements
     public static final String PREF_USE_ROOT                 = "use_root";
     private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
     public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
+    public static final String PREF_FOREGROUND_SERVICE       = "run_as_foreground_service";
 
     private static final int NOTIFICATION_ACTIVE = 1;
 
@@ -291,6 +292,13 @@ public class SyncthingService extends Service implements
     private void updateNotification() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         String type = sp.getString(PREF_NOTIFICATION_TYPE, "low_priority");
+        boolean foreground = sp.getBoolean(PREF_FOREGROUND_SERVICE, false);
+        if ("none".equals(type) && foreground) {
+            // foreground priority requires any notification
+            // so this ensures that we either have a "default" or "low_priority" notification,
+            // but not "none".
+            type = "low_priority";
+        }
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
                 !type.equals("none")) {
@@ -304,15 +312,23 @@ public class SyncthingService extends Service implements
             if (type.equals("low_priority"))
                 builder.setPriority(NotificationCompat.PRIORITY_MIN);
 
-            nm.notify(NOTIFICATION_ACTIVE, builder.build());
+            if (foreground) {
+                builder.setContentText(getString(R.string.syncthing_active_foreground));
+                startForeground(NOTIFICATION_ACTIVE, builder.build());
+            } else {
+                stopForeground(false); // ensure no longer running with foreground priority
+                nm.notify(NOTIFICATION_ACTIVE, builder.build());
+            }
         } else {
+            // ensure no longer running with foreground priority
+            stopForeground(false);
             nm.cancel(NOTIFICATION_ACTIVE);
         }
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PREF_NOTIFICATION_TYPE))
+        if (key.equals(PREF_NOTIFICATION_TYPE) || key.equals(PREF_FOREGROUND_SERVICE))
             updateNotification();
         else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI)
                 || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS))
@@ -464,6 +480,7 @@ public class SyncthingService extends Service implements
             mApi.shutdown();
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        stopForeground(false);
         nm.cancel(NOTIFICATION_ACTIVE);
 
         for (FolderObserver ro : mObservers) {
