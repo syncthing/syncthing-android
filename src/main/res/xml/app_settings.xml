@@ -162,6 +162,12 @@
                 android:summary="@string/keep_wakelock_while_binary_running_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference
+                android:key="run_as_foreground_service"
+                android:title="@string/run_as_foreground_service"
+                android:summary="@string/run_as_foreground_service_summary"
+                android:defaultValue="false" />
+
         </PreferenceScreen>
 
     </PreferenceCategory>
