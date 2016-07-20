@@ -7,7 +7,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
     }
 }
@@ -21,10 +21,10 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'eu.chainfire:libsuperuser:1.0.0.201602271131'
-    compile 'com.android.support:design:24.0.0'
+    compile 'eu.chainfire:libsuperuser:1.0.0.201607041850'
+    compile 'com.android.support:design:24.1.0'
     compile 'com.google.zxing:android-integration:3.2.1'
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.google.code.gson:gson:2.7'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
 
