@@ -592,38 +592,6 @@ public class SyncthingService extends Service implements
         }
     }
 
-    /**
-     * Dialog to be shown when attempting to start syncthing while it is disabled according
-     * to settings (because the device is not charging or wifi is disconnected).
-     */
-    public static AlertDialog showDisabledDialog(final Activity activity) {
-        AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setTitle(R.string.syncthing_disabled_title)
-                .setMessage(R.string.syncthing_disabled_message)
-                .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                activity.finish();
-                                Intent intent = new Intent(activity, SettingsActivity.class)
-                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS);
-                                activity.startActivity(intent);
-                            }
-                        }
-                )
-                .setNegativeButton(R.string.exit,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                activity.finish();
-                            }
-                        }
-                )
-                .show();
-        dialog.setCancelable(false);
-        return dialog;
-    }
-
     public String getWebGuiUrl() {
         return mConfig.getWebGuiUrl();
     }

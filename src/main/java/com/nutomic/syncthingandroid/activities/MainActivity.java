@@ -123,7 +123,7 @@ public class MainActivity extends SyncthingActivity
             case DISABLED:
                 dismissLoadingDialog();
                 if (!isFinishing()) {
-                    mDisabledDialog = SyncthingService.showDisabledDialog(MainActivity.this);
+                    showDisabledDialog();
                 }
                 break;
         }
@@ -326,6 +326,39 @@ public class MainActivity extends SyncthingActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void showDisabledDialog() {
+        mDisabledDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.syncthing_disabled_title)
+                .setMessage(R.string.syncthing_disabled_message)
+                .setPositiveButton(R.string.syncthing_disabled_change_settings,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
+                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS);
+                                startActivity(intent);
+                            }
+                        }
+                )
+                .setNegativeButton(R.string.exit,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }
+                )
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                })
+                .show();
+        mDisabledDialog.setCanceledOnTouchOutside(false);
     }
 
     @Override

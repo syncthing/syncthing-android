@@ -304,7 +304,6 @@ public class FolderPickerActivity extends SyncthingActivity
     public void onApiChange(SyncthingService.State currentState) {
         if (!isFinishing() && currentState != SyncthingService.State.ACTIVE) {
             setResult(Activity.RESULT_CANCELED);
-            SyncthingService.showDisabledDialog(this);
             finish();
         }
     }
