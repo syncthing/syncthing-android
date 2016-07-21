@@ -149,7 +149,6 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
   <string name="advanced_folder_picker_summary">Vel kva mappe som helst for synkronisering</string>
   <string name="use_root_title">Køyr Syncthing som superbrukar</string>
-  <string name="use_root_summary">Dette kan føre til fleire problem med Syncthing og eininga di. Bruk på eigen risiko.</string>
   <string name="notification_type_title">Varsling</string>
   <string name="notification_type_summary">Vel varslingstype</string>
   <string-array name="notification_type_entries">

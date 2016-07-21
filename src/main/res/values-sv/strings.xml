@@ -19,19 +19,19 @@
   <string name="open_website">Öppna hemsida</string>
   <string name="toast_write_storage_permission_required">Skrivlagrings tillstånd krävs för denna applikation</string>
   <string name="device_rejected">Enhet %1$s vill ansluta</string>
-  <string name="folder_rejected">Enhet %1$s vill dela katalogen %2$s</string>
+  <string name="folder_rejected">Enhet %1$s vill dela katalog %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Kataloger</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Inga kataloger hittades</string>
+  <string name="folder_list_empty">Inga kataloger hittade</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d/%2$d filer</string>
+  <string name="files">%1$d / %2$d filer</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Enheter</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Inga enheter hittades</string>
+  <string name="devices_list_empty">Inga enheter hittade</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Aktuell</string>
+  <string name="device_up_to_date">Uppdaterad</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synkroniserar (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
@@ -46,9 +46,9 @@
   <!--Same as upload_title with a colon and space appended-->
   <string name="upload_title_colon">Ladda upp:\u0020</string>
   <!--Title for current CPU usage-->
-  <string name="cpu_usage">CPU användning</string>
+  <string name="cpu_usage">CPU-användning</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">RAM användning</string>
+  <string name="ram_usage">RAM-användning</string>
   <!--Title for announce server status-->
   <string name="announce_server">Annonserings server</string>
   <string name="restart">Omstart</string>
@@ -135,7 +135,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="settings_title">Inställningar</string>
   <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
-  <string name="always_run_in_background">Kör alltid i bakgrunden</string>
+  <string name="always_run_in_background">Körs alltid i bakgrunden</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing körs alltid i bakgrunden, enligt inställningar nedan.</string>
   <!--Preference summary in case it is disabled-->
@@ -149,7 +149,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="advanced_folder_picker">Använd avancerade katalog-väljaren</string>
   <string name="advanced_folder_picker_summary">Välj en katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör Syncthing som superanvändare</string>
-  <string name="use_root_summary">Detta kan orsaka olika problem med Syncthing och din enhet. Använd på egen risk.</string>
+  <string name="use_root_summary">Detta är en instabil funktion som kan orsaka problem med Syncthing och med enheten. Om du stöter på problem, kan du behöva installera om Syncthing.</string>
   <string name="notification_type_title">Avisering</string>
   <string name="notification_type_summary">Välj aviseringstyp</string>
   <string-array name="notification_type_entries">
@@ -165,15 +165,17 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
   <string name="global_announce_enabled">Global upptäckt</string>
   <string name="local_announce_enabled">Lokal upptäckt</string>
+  <string name="enable_nat_traversal">Aktivera NAT traversering</string>
   <string name="global_announce_server">Global upptäktsserver</string>
+  <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
   <string name="syncthing_gui">Syncthing GUI</string>
-  <string name="gui_address">GUI avlyssningsadresser</string>
-  <string name="gui_user">GUI autentiseringsanvändare</string>
-  <string name="gui_password">GUI autentiseringslösenord</string>
+  <string name="gui_address">Avlyssningsadresser för GUI</string>
+  <string name="gui_user">Autentiseringsanvändare för GUI</string>
+  <string name="gui_password">Autentiseringslösenord för GUI</string>
   <string name="export_config">Exportera konfiguration</string>
   <string name="experimental_settings">Experimentell</string>
-  <string name="keep_wakelock_while_binary_running">Håll CPU vaken medan Syncthing körs</string>
+  <string name="keep_wakelock_while_binary_running">Håll CPU:n vaken medan Syncthing körs</string>
   <string name="keep_wakelock_while_binary_running_summary">Använd den här inställningen om du får oväntade frånkopplingar under batteridrift. Detta kommer att resultera i ökad batteriförbrukning.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exporterades till %1$s</string>
@@ -183,7 +185,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna är i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Felsök alternativ</string>
+  <string name="sttrace_title">Felsöksalternativ</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Endast a-z och \',\' är tillåtna i STTRACE alternativ</string>
   <!--Toast after entering invalid username-->
@@ -220,7 +222,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Varning: Din Android-version tillåter inte synkronisering till externa lagringsenheter</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Katalogen är tom</string>
+  <string name="directory_empty">Katalog är tom</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Skapa ny katalog</string>
   <!--Menu item to select the current folder-->

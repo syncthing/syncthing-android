@@ -143,7 +143,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için cihazdan herhangi bir klasör seçin</string>
   <string name="use_root_title">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>
-  <string name="use_root_summary">Syncthing ve cihazınızla ilgili çeşitli sorunlara neden olabilir. Kullanırken risk alıyorsunuz.</string>
   <string name="notification_type_title">Bildirimler</string>
   <string name="notification_type_summary">Bildirim türünü seçin</string>
   <string-array name="notification_type_entries">

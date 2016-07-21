@@ -149,7 +149,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Executar como Superusuário</string>
-  <string name="use_root_summary">Isto pode causar alguns problemas com o Syncthing e com seu aparelho. Use por sua conta e risco.</string>
+  <string name="use_root_summary">Este é um recurso instável que pode causar problemas com o Syncthing e seu dispositivo. Caso você encontre problemas, pode ser necessária a reinstalação do Syncthing.</string>
   <string name="notification_type_title">Notificação</string>
   <string name="notification_type_summary">Escolha o tipo da notificação</string>
   <string-array name="notification_type_entries">
@@ -165,7 +165,9 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="max_send_kbps">Limite de velocidade de envio (KiB/s)</string>
   <string name="global_announce_enabled">Descoberta global</string>
   <string name="local_announce_enabled">Descoberta local</string>
+  <string name="enable_nat_traversal">Habilitar NAT</string>
   <string name="global_announce_server">Descoberta global</string>
+  <string name="enable_relaying">Habilitar retransmissão</string>
   <string name="usage_reporting">Relatório anônimo de uso</string>
   <string name="syncthing_gui">Interface do Syncthing</string>
   <string name="gui_address">Endereços de escuta da interface</string>

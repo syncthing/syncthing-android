@@ -149,7 +149,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Syncthing uitvoeren als superuser</string>
-  <string name="use_root_summary">Dit kan verschillende Syncthing- of apparaatproblemen veroorzaken. Gebruik op eigen risico.</string>
+  <string name="use_root_summary">Dit is een onstabiele functie die problemen kan veroorzaken met Syncthing en je apparaat. Als je problemen zou tegenkomen is het mogelijk dat je Syncthing opnieuw moet installeren.</string>
   <string name="notification_type_title">Melding</string>
   <string name="notification_type_summary">Kies het meldingstype</string>
   <string-array name="notification_type_entries">
@@ -165,7 +165,9 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="max_send_kbps">Uitgaande snelheidslimiet (KiB/s)</string>
   <string name="global_announce_enabled">Globale ontdekking</string>
   <string name="local_announce_enabled">Lokale ontdekking</string>
+  <string name="enable_nat_traversal">NAT-traversal inschakelen</string>
   <string name="global_announce_server">Globale ontdekkingsserver</string>
+  <string name="enable_relaying">Relayen inschakelen</string>
   <string name="usage_reporting">Anoniem gebruiksrapportage</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
   <string name="gui_address">GUI luister-adressen</string>

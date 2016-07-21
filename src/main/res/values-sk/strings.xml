@@ -136,7 +136,6 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <string name="advanced_folder_picker">Použiť rozšírený dialóg pre volbu adresára</string>
   <string name="advanced_folder_picker_summary">Vyberte ľubovolný adresár pre synchronizáciu</string>
   <string name="use_root_title">Spúšťať Syncthing s root oprávneniami</string>
-  <string name="use_root_summary">Toto nastavenia môže spôsobiť rôzne problémy so Syncthing alebo s Vaším zariadením. Použitie na vlastné riziko.</string>
   <string name="notification_type_title">Notifikácie</string>
   <string name="notification_type_summary">Zvolte si druh notifikácií</string>
   <string-array name="notification_type_entries">

@@ -149,7 +149,7 @@
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">スーパーユーザーとして同期を実行します</string>
-  <string name="use_root_summary">これは Syncthing とお使いのデバイスで様々な問題が発生する可能性があります。ご自分のリスクでご利用ください。</string>
+  <string name="use_root_summary">これは Syncthing と、お使いのデバイスとに問題が発生する可能性がある、安定していない機能です。問題が発生した場合は、Syncthing を再インストールする必要があるかもしれません。</string>
   <string name="notification_type_title">通知</string>
   <string name="notification_type_summary">通知の種類を選択します</string>
   <string-array name="notification_type_entries">
@@ -165,7 +165,9 @@
   <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
   <string name="global_announce_enabled">グローバル探索</string>
   <string name="local_announce_enabled">ローカル探索</string>
+  <string name="enable_nat_traversal">NAT トラバーサルを有効にする</string>
   <string name="global_announce_server">グローバル探索サーバー</string>
+  <string name="enable_relaying">リレーを有効にする</string>
   <string name="usage_reporting">匿名使用状況レポート</string>
   <string name="syncthing_gui">同期中 GUI</string>
   <string name="gui_address">GUI リスンアドレス</string>

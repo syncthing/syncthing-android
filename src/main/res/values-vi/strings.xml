@@ -148,7 +148,6 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="advanced_folder_picker">S.dụng trình chọn th.mục nâng cao</string>
   <string name="advanced_folder_picker_summary">Chọn bất kỳ th.mục nào trên th.bị để đồng bộ</string>
   <string name="use_root_title">Chạy Syncthing với quyền Superuser</string>
-  <string name="use_root_summary">Thao tác này có thể gây ra nhiều vấn đề cho Syncthing và thiết bị của bạn. Hãy thận trọng.</string>
   <string name="notification_type_title">Thông báo</string>
   <string name="notification_type_summary">Chọn dạng thông báo</string>
   <string-array name="notification_type_entries">

@@ -149,7 +149,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Esegui Syncthing come Superutente</string>
-  <string name="use_root_summary">Questo può causare numerosi problemi con Syncthing ed il tuo dispositivo. Usa a tuo rischio.</string>
   <string name="notification_type_title">Notifica</string>
   <string name="notification_type_summary">Scegli tipo di notifica</string>
   <string-array name="notification_type_entries">

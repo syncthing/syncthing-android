@@ -148,7 +148,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="advanced_folder_picker">Erweiterte Verzeichnisauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="use_root_title">Syncthing mit Superuser Rechten ausführen</string>
-  <string name="use_root_summary">Dies könnte verschiedene Probleme mit Syncthing und deinem Gerät nach sich ziehen. Benutzung auf eigene Gefahr.</string>
   <string name="notification_type_title">Permanente Benachrichtigung</string>
   <string name="notification_type_summary">Wähle die Art der Benachrichtigung</string>
   <string-array name="notification_type_entries">

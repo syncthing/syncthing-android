@@ -149,7 +149,6 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
-  <string name="use_root_summary">To może spowodować różne problemy z Syncthing i urządzeniem. Proszę używać na własne ryzyko.</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
   <string name="category_syncthing">Syncthing</string>

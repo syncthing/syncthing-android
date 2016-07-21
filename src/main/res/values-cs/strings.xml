@@ -149,7 +149,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Spustit syncthing jako superuživatel</string>
-  <string name="use_root_summary">Toto může způsobit různé problémy se Syncthing a s vaším zařízením. Pouze na vlastní riziko.</string>
+  <string name="use_root_summary">Toto je nestabilní funkce, které může způsobit problémy se Syncthing a s vaším zařízením. Pokud narazíte na problémy, může být třeba přeinstalovat Syncthing.</string>
   <string name="notification_type_title">Upozornění</string>
   <string name="notification_type_summary">Vybrat typ upozornění</string>
   <string-array name="notification_type_entries">
@@ -165,7 +165,9 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="max_send_kbps">Omezení odchozí rychlosti (KiB/s)</string>
   <string name="global_announce_enabled">Globální oznamování</string>
   <string name="local_announce_enabled">Místní oznamování</string>
+  <string name="enable_nat_traversal">Povolit NAT traversal</string>
   <string name="global_announce_server">Server globálního oznamování</string>
+  <string name="enable_relaying">Povolit relaying</string>
   <string name="usage_reporting">Anonymní hlášení o používání</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adresy naslouchání GUI</string>

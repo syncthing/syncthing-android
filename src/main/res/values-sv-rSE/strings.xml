@@ -46,9 +46,9 @@
   <!--Same as upload_title with a colon and space appended-->
   <string name="upload_title_colon">Ladda upp:\u0020</string>
   <!--Title for current CPU usage-->
-  <string name="cpu_usage">CPU användning</string>
+  <string name="cpu_usage">CPU-användning</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">RAM användning</string>
+  <string name="ram_usage">RAM-användning</string>
   <!--Title for announce server status-->
   <string name="announce_server">Annonsera server</string>
   <string name="restart">Starta om</string>
@@ -149,7 +149,6 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="advanced_folder_picker">Använd avancerad katalog-väljare</string>
   <string name="advanced_folder_picker_summary">Välj en katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör Syncthing som superanvändare</string>
-  <string name="use_root_summary">Detta kan orsaka olika problem med Syncthing och med enheten. Använd på egen risk.</string>
   <string name="notification_type_title">Aviseringar</string>
   <string name="notification_type_summary">Välj typ aviseringstyp</string>
   <string-array name="notification_type_entries">

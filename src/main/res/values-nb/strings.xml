@@ -149,7 +149,6 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="advanced_folder_picker">Bruk avansert mappevelger</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
   <string name="use_root_title">Kjør Syncthing som superbruker</string>
-  <string name="use_root_summary">Dette kan forårsake diverse problemer med Syncthing og din enhet. Bruk på eget ansvar.</string>
   <string name="notification_type_title">Varsler</string>
   <string name="notification_type_summary">Velg varslingstype</string>
   <string-array name="notification_type_entries">

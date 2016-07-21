@@ -148,7 +148,6 @@ Por favor reporte cualquier problema que encuentre por medio de Github.</string>
   <string name="advanced_folder_picker">Usar el avanzado Seleccionador de Carpetas</string>
   <string name="advanced_folder_picker_summary">Seleccionar cualquier carpeta en el dispositivo para sincronizar</string>
   <string name="use_root_title">Ejecutar Syncthing como Superusuario</string>
-  <string name="use_root_summary">Esto puede causar varios problemas con Syncthing y con su dispositivo. Usar bajo su propio riesgo.</string>
   <string name="notification_type_title">Notificación</string>
   <string name="notification_type_summary">Escoger el tipo de notificación</string>
   <string-array name="notification_type_entries">

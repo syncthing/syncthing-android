@@ -149,7 +149,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
   <string name="use_root_title">Faire fonctionner syncthing en super-utilisateur</string>
-  <string name="use_root_summary">Ceci peut causer divers problèmes entre Syncthing et votre machine. A utiliser à vos risques.</string>
+  <string name="use_root_summary">Ceci est une fonction instable qui peut causer des problèmes entre Syncthing et votre machine. Si vous rencontrez des problèmes, vous devrez réinstaller Syncthing.</string>
   <string name="notification_type_title">Notification</string>
   <string name="notification_type_summary">Choisissez le mode de notification</string>
   <string-array name="notification_type_entries">
@@ -165,7 +165,9 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="max_send_kbps">Limite du débit d\'émission (Ko/s)</string>
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
+  <string name="enable_nat_traversal">Activer transfert d\'adresses (NAT)</string>
   <string name="global_announce_server">Serveur de découverte globale</string>
+  <string name="enable_relaying">Activer le relayage</string>
   <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="syncthing_gui">Interface WEB Syncthing</string>
   <string name="gui_address">Adresse pour l\'interface WEB</string>
@@ -173,7 +175,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
   <string name="export_config">Exporter la configuration</string>
   <string name="experimental_settings">Expérimental</string>
-  <string name="keep_wakelock_while_binary_running">Maintient le CPU en éveil quand Syncthing est en marche.</string>
+  <string name="keep_wakelock_while_binary_running">Garder le CPU en éveil quand Syncthing fonctionne.</string>
   <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuration a été exportée dans %1$s</string>

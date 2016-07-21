@@ -10,7 +10,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Отправить ID устройства</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Ожидайте...</string>
+  <string name="api_loading">Загружается...</string>
   <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику?</string>
   <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
   <string name="yes">Да</string>
@@ -19,6 +19,7 @@
   <string name="open_website">Открыть сайт</string>
   <string name="toast_write_storage_permission_required">Приложению требуется право на запись</string>
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
+  <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -38,12 +39,12 @@
   <!--Title for current download rate-->
   <string name="download_title">Скачивание</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Загрузка</string>
+  <string name="upload_title">Отдача</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Скачивание:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Загрузка:\u0020</string>
+  <string name="upload_title_colon">Отдача:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Загрузка процессора</string>
   <!--Title for current RAM usage-->
@@ -55,6 +56,7 @@
   <!--Setting title-->
   <string name="folder_id">ID папки</string>
   <!--Setting title-->
+  <string name="folder_label">Ярлык папки</string>
   <!--Setting title-->
   <string name="directory">Папка</string>
   <!--Setting title-->
@@ -99,7 +101,7 @@
     <item>Всегда</item>
   </string-array>
   <!--Setting title-->
-  <string name="introducer">Интродюсер</string>
+  <string name="introducer">Рекомендатель</string>
   <!--ActionBar item-->
   <string name="delete_device">Удалить устройство</string>
   <string name="add_device">Доб устройство</string>
@@ -146,8 +148,8 @@
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
-  <string name="use_root_title">Запуск Syncthing как Superuser</string>
-  <string name="use_root_summary">Это может вызвать проблемы в работе Syncthing и вашего устройства. Используйте на свой страх и риск.</string>
+  <string name="use_root_title">Запуск Syncthing с рут-правами</string>
+  <string name="use_root_summary">Это нестабильная опция, которая может вызвать проблемы как с Syncthing так и с вашим устройством. Если вы столкнетесь с проблемами, переустановите Syncthing.</string>
   <string name="notification_type_title">Уведомление</string>
   <string name="notification_type_summary">Выбор метода уведомления</string>
   <string-array name="notification_type_entries">
@@ -160,16 +162,19 @@
   <string name="device_name">Имя устройства</string>
   <string name="listen_address">Адрес Ожидания Протокола Синхронизации</string>
   <string name="max_recv_kbps">Лимит Скачивания (КБ/с)</string>
-  <string name="max_send_kbps">Лимит Загрузки (КБ/с)</string>
+  <string name="max_send_kbps">Лимит Отдачи (КБ/с)</string>
   <string name="global_announce_enabled">Глобальное Обнаружение</string>
   <string name="local_announce_enabled">Локальное Обнаружение</string>
-  <string name="global_announce_server">Сервер Глобального Обнаружения</string>
+  <string name="enable_nat_traversal">Включить NAT-T обход</string>
+  <string name="global_announce_server">Глобальный сервер обнаружения</string>
+  <string name="enable_relaying">Включить релеи</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Адрес Ожидания GUI</string>
   <string name="gui_user">Пользователь Идентификации GUI</string>
   <string name="gui_password">Пароль Идентификации GUI</string>
   <string name="export_config">Экспорт настроек</string>
+  <string name="keep_wakelock_while_binary_running">Поддерживать CPU включенным, пока Syncthing работает</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройки экспортированы в %1$s</string>
   <string name="import_config">Импорт настроек</string>
@@ -193,7 +198,7 @@
     </string>
   <!--Syncthing was reset-->
   <string name="streset_done">БД Syncthing успешно сброшена</string>
-  <string name="category_about">Информация</string>
+  <string name="category_about">О програме</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Открыть лог</string>
   <!--Summary for the log activity-->
@@ -205,6 +210,7 @@
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Пожертвовать</string>
+  <string name="donate_summary">Внесите вклад в поддержку хостинга проекта.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия ядра</string>
   <!--Title of the preference showing this app's version name-->
@@ -246,6 +252,7 @@
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Не смог создать конфигурацию Syncthing. Посмотрите журнал.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Камера</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s фото</string>
   <!--RestApi-->
