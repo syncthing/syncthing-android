@@ -117,6 +117,9 @@ public class SyncthingRunnable implements Runnable {
             Map<String, String> env = pb.environment();
             // Set home directory to data folder for web GUI folder picker.
             env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
+            // workaround for #706 (building the binary with arm/linux instead of arm/android)
+            Log.d(TAG, "Using " + mContext.getCacheDir().getAbsolutePath() + " as TMPDIR");
+            env.put("TMPDIR", mContext.getCacheDir().getAbsolutePath());
             env.put("STTRACE", sp.getString("sttrace", ""));
             env.put("STNORESTART", "1");
             env.put("STNOUPGRADE", "1");
