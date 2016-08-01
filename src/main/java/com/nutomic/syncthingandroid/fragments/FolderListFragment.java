@@ -29,10 +29,16 @@ import java.util.TimerTask;
 public class FolderListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
+    /**
+     * Compares folders by labels, uses the folder ID as fallback if the label is empty
+     */
     private final static Comparator<RestApi.Folder> FOLDERS_COMPARATOR = new Comparator<RestApi.Folder>() {
         @Override
         public int compare(RestApi.Folder lhs, RestApi.Folder rhs) {
-            return lhs.id.compareTo(rhs.id);
+            String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
+            String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
+
+            return lhsLabel.compareTo(rhsLabel);
         }
     };
 
