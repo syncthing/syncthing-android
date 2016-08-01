@@ -169,7 +169,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="global_announce_server">Global upptäktsserver</string>
   <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
+  <string name="syncthing_gui">Syncthing-GUI</string>
   <string name="gui_address">Avlyssningsadresser för GUI</string>
   <string name="gui_user">Autentiseringsanvändare för GUI</string>
   <string name="gui_password">Autentiseringslösenord för GUI</string>
@@ -177,6 +177,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="experimental_settings">Experimentell</string>
   <string name="keep_wakelock_while_binary_running">Håll CPU:n vaken medan Syncthing körs</string>
   <string name="keep_wakelock_while_binary_running_summary">Använd den här inställningen om du får oväntade frånkopplingar under batteridrift. Detta kommer att resultera i ökad batteriförbrukning.</string>
+  <string name="run_as_foreground_service">Kör tjänst med förgrundsprioritet</string>
+  <string name="run_as_foreground_service_summary">Om aktiverad, kommer Syncthing köra med förgrundsprioritet och är mindre sannolikt att bli stoppad av Android. Detta kan leda till att andra tjänster stoppas om tillgängligt minne är lågt.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exporterades till %1$s</string>
   <string name="import_config">Importera konfiguration</string>
@@ -248,6 +250,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="exit">Avsluta</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing körs</string>
+  <string name="syncthing_active_foreground">Tjänsten körs med förgrundsprioritet.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Katalogträd för djupt. Kontrollera efter cyclic symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->

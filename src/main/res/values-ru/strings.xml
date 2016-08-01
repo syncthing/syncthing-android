@@ -175,6 +175,7 @@
   <string name="gui_password">Пароль Идентификации GUI</string>
   <string name="export_config">Экспорт настроек</string>
   <string name="keep_wakelock_while_binary_running">Поддерживать CPU включенным, пока Syncthing работает</string>
+  <string name="run_as_foreground_service">Запуск сервиса с повышенным приоритетом</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройки экспортированы в %1$s</string>
   <string name="import_config">Импорт настроек</string>
@@ -183,7 +184,7 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Неудачное импортирование настроек, убедитесь что файлы находятся в %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Опции Отладки</string>
+  <string name="sttrace_title">Настройки режима отладки</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">В настройках STTRACE можно использовать только символы a-z и \',\'</string>
   <!--Toast after entering invalid username-->
