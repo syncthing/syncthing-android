@@ -1,8 +1,10 @@
 package com.nutomic.syncthingandroid.syncthing;
 
+import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -129,6 +132,13 @@ public class SyncthingService extends Service implements
     private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
         @Override
         public void onStatusChanged(int i) {
+            updateState();
+        }
+    };
+
+    private final BroadcastReceiver mPowerSaveModeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
             updateState();
         }
     };
@@ -301,6 +311,7 @@ public class SyncthingService extends Service implements
      * Starts the native binary.
      */
     @Override
+    @TargetApi(21)
     public void onCreate() {
         PRNGFixes.apply();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -321,6 +332,11 @@ public class SyncthingService extends Service implements
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            registerReceiver(mPowerSaveModeChangedReceiver,
+                    new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+        }
+
         new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
         sp.registerOnSharedPreferenceChangeListener(this);
         ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS,
@@ -432,6 +448,8 @@ public class SyncthingService extends Service implements
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
         ContentResolver.removeStatusChangeListener(mSyncStatusObserver);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
+            unregisterReceiver(mPowerSaveModeChangedReceiver);
     }
 
     private void shutdown() {
