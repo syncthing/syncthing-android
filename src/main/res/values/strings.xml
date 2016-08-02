@@ -92,6 +92,8 @@
 
     <string name="restart">Restart</string>
 
+    <string name="dialog_confirm_restart">Do you want to restart Syncthing?</string>
+
     <!-- FolderSettingsFragment -->
 
 

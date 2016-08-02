@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -212,9 +214,18 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionRestart:
-                getContext().startService(new Intent(getContext(), SyncthingService.class)
-                        .setAction(SyncthingService.ACTION_RESTART));
                 mActivity.closeDrawer();
+                new AlertDialog.Builder(getContext())
+                        .setMessage(R.string.dialog_confirm_restart)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                getContext().startService(new Intent(getContext(), SyncthingService.class)
+                                        .setAction(SyncthingService.ACTION_RESTART));
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
                 break;
             case R.id.drawerActionExit:
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
