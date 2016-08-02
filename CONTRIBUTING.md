@@ -1,65 +1,47 @@
-## Reporting An Issue
+## Reporting Bugs
 
-Please search for existing issues before opening a new one.
+Please file bugs in the [Github Issue
+Tracker](https://github.com/syncthing/syncthing-android/issues). Bugs that
+are not specific to Syncthing-Android should be reported to the
+[main project](https://github.com/syncthing/syncthing/issues) instead.
+Include at least the following in your issue report:
 
-### Where To Report
+ - What happened
 
-Issues might be related either to Syncthing, syncthing-android or both. The general rule of thumb is this:
-If the issue has to do with synchronization, discovery, the web interface, or can be reproduced on a desktop, it should be posted at [syncthing](https://github.com/calmh/syncthing/issues).
+ - What did you expect to happen instead of what *did* happen, if it's
+   not crazy obvious
 
-If the issue is related to the Android UI, background service, or can't be reproduced on a desktop running the same Syncthing version, it should be posted here.
+ - What version of Android, Syncthing and Syncthing-Android you are
+   running
 
-For general usage help or questions, you should post to [discourse](http://discourse.syncthing.net/category/support).
+ - Screenshot if the issue concerns something visible in the GUI
 
-### Bug Reports
+ - Console log entries, where possible and relevant
 
-A bug report should include the following information:
+You can get logs in various ways:
 
-Description of the problem.
+ - Log window in the app: Settings -> Open Log -> Android Log
 
-Steps to reproduce:
+ - In the terminal over USB: `adb logcat`
 
-1. This is the first step
-2. This is the second step
-3. Further steps, etc.
+ - Using one of the various "logcat apps" on Google Play and F-Droid
 
-Observed behaviour and expected behaviour.
+## Contributing Translations
 
-syncthing-android version: x.x.x
+All translations are done via
+[Transifex](https://www.transifex.com/projects/p/syncthing-android/). If you
+wish to contribute to a translation, just head over there and sign up.
+Before every release, the language resources are updated from the
+latest info on Transifex.
 
-Device name and Android version:
+## Contributing Code
 
-versions of involved Syncthing nodes: vx.x.x, ...
+Every contribution is welcome. If you want to contribute but are unsure
+where to start, any open issues are fair game!
 
-logcat: *link to file*: Use the log window (Settings -> Open Log -> Android Log -> Share)
+Code should follow the
+[Android Code Style Guidelines](https://source.android.com/source/code-style.html#java-language-rules),
+which are used by default in Android Studio.
 
-config.xml: *link to file* (if it might be related, located in `/data/data/com.nutomic.syncthingandroid`, use the export functionality and fetch the file at /sdcard/backups/syncthing/config.xml)
-
-screenshots: *link to file* (only for UI problems)
-
-
-## Running Syncthing directly
-
-If you can't start the app, you may be asked to execute the Syncthing binary from a command line.
-
-This requires root permissions!
-
-First, open a shell on you device, either through adb or with an app. Then, execute the following commands:
-```
-cd data/data/com.nutomic.syncthingandroid/lib/
-./libsyncthing.so -home data/data/com.nutomic.syncthingandroid/files/
-```
-
-You can also pass [environment variables](http://docs.syncthing.net/dev/debugging.html#debugging) to Syncthing.
-
-
-
-## Pull Requests
-
-Always welcome.
-
-Code should follow the [Android Code Style Guidelines](https://source.android.com/source/code-style.html#java-language-rules). This can be done automatically in Android Studio.
-
-Unit tests are available, and can be executed with `gradle connectedAndroidTest`, or from Android Studio. New code should always come with tests.
-
-Lint warnings should be fixed. If that's not possible, they should be ignored as specifically as possible.
+Unit tests are available, and can be executed from Android Studio, or from
+the terminal with `gradle connectedAndroidTest`.
