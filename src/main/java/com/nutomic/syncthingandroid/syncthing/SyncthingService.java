@@ -1,12 +1,9 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -22,7 +19,6 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 import com.nutomic.syncthingandroid.util.PRNGFixes;
@@ -194,23 +190,8 @@ public class SyncthingService extends Service implements
      * called.
      */
     public void updateState() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean shouldRun;
-        if (!alwaysRunInBackground(this)) {
-            // Always run, ignoring wifi/charging state.
-            shouldRun = true;
-        }
-        else {
-            // Check wifi/charging state against preferences and start if ok.
-            boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
-            boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
-
-            shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
-                    (!prefStopMobileData || isAllowedWifiConnected());
-        }
-
         // Start syncthing.
-        if (shouldRun) {
+        if (mDeviceStateHolder.shouldRun()) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
                 mStopScheduled = false;
                 return;
@@ -255,34 +236,6 @@ public class SyncthingService extends Service implements
             shutdown();
         }
         onApiChange();
-    }
-
-    private boolean isAllowedWifiConnected() {
-        boolean wifiConnected = mDeviceStateHolder.isWifiConnected();
-        if (wifiConnected) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            Set<String> ssids = sp.getStringSet(PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<String>());
-            if (ssids.isEmpty()) {
-                Log.d(TAG, "All SSIDs allowed for syncing");
-                return true;
-            } else {
-                String ssid = mDeviceStateHolder.getWifiSsid();
-                if (ssid != null) {
-                    if (ssids.contains(ssid)) {
-                        Log.d(TAG, "SSID [" + ssid + "] found in whitelist: " + ssids);
-                        return true;
-                    }
-                    Log.i(TAG, "SSID [" + ssid + "] not whitelisted: " + ssids);
-                    return false;
-                } else {
-                    // Don't know the SSID (yet) (should not happen?!), so not allowing
-                    Log.w(TAG, "SSID unknown (yet), cannot check SSID whitelist. Disallowing sync.");
-                    return false;
-                }
-            }
-        }
-        Log.d(TAG, "Wifi not connected");
-        return false;
     }
 
     /**
