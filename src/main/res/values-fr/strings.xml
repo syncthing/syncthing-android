@@ -191,9 +191,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Seuls, les caractères a-z et \',\' sont autorisés dans les options STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Les caractères : et \' ne sont pas autorisés dans le nom d\'utilisateur</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Les caractères : et \' ne sont pas autorisés dans le mot de passe</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Remise à zéro de la base de données</string>
   <!--Syncthing was reset-->

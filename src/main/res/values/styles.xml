@@ -41,11 +41,6 @@
         <item name="android:background">@null</item>
     </style>
 
-    <style name="Widget.Syncthing.Switch" parent="@style/Widget.AppCompat.CompoundButton.Switch" >
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:minHeight">48dp</item>
-    </style>
-
     <style name="Widget.Syncthing.DrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>
         <item name="color">@android:color/white</item>

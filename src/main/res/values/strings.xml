@@ -325,12 +325,6 @@ Please report any problems you encounter via Github.</string>
     <!-- Toast after entering invalid STTRACE params -->
     <string name="toast_invalid_sttrace">Only a-z and \',\' are allowed in STTRACE options</string>
 
-    <!-- Toast after entering invalid username -->
-    <string name="toast_invalid_username">Characters : and \' are not allowed in username</string>
-
-    <!-- Toast after entering invalid password -->
-    <string name="toast_invalid_password">Characters : and \' are not allowed in password</string>
-
     <!-- Title for the preference to reset Syncthing indexes -->
     <string name="streset_title">Reset Database</string>
 

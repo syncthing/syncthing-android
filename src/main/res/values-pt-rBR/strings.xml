@@ -194,9 +194,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Somente a-z e \",\" (vírgula) são permitidos nas opções do STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Caracteres \":\" (dois-pontos) e \"\'\" (apóstrofo) não são permitidos no nome de usuário</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Caracteres \":\" (dois-pontos) e \"\'\" (apóstrofo) não são permitidos na senha</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Limpar banco de dados</string>
   <!--Syncthing was reset-->

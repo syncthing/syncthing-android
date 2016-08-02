@@ -6,7 +6,6 @@
     tools:context=".fragments.FolderFragment">
 
     <LinearLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="?android:listDivider"

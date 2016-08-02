@@ -170,9 +170,7 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">V STTRACE options sú povolené iba znaky a-z a \',\'</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Dvojbodka a apostrof nie sú v uživatelskom mene povolené</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Dvojbodka a apostrof nie sú v hesle povolené</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovať Databázu</string>
   <!--Syncthing was reset-->

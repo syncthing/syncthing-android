@@ -194,9 +194,7 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Berre a-z og \',\' er tillatne i STTRACE-alternativ</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Teikna : og \' er ikkje tillatne i brukernamn</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Teikna : og \' er ikkje tillatne i passord</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nullstill database</string>
   <!--Syncthing was reset-->
