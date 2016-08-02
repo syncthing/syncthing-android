@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.syncthing;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -103,9 +104,14 @@ public class DeviceStateHolder extends BroadcastReceiver {
         return mWifiSsid;
     }
 
+    /**
+     * Determines if Syncthing should currently run.
+     */
     public boolean shouldRun() {
-        if (SyncthingService.alwaysRunInBackground(mContext)) {
-            // Always run, ignoring wifi/charging state.
+        if (!ContentResolver.getMasterSyncAutomatically()) {
+            return false;
+        }
+        else if (SyncthingService.alwaysRunInBackground(mContext)) {
             return true;
         }
         else {
