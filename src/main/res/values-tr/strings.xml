@@ -177,9 +177,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE seçenekleri içinde sadece a-z ve \',\' karakterleri kullanabilirsiniz</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Kullanıcı adı içinde : ve \' karakterleri kullanamazsınız</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Parola içinde : ve \' karakterleri kullanamazsınız</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Veritabanını Sıfırla</string>
   <!--Syncthing was reset-->

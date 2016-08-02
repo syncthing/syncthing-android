@@ -182,9 +182,7 @@
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">В настройките на STTRACE са разрешени само символите a-z и \',\'</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Символите : и \' ме могат да бъдат ползвани като част от потребителско име</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Символите : и \' ме могат да бъдат ползвани като част от парола</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Нулиране на базата данни</string>
   <!--Syncthing was reset-->

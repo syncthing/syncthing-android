@@ -194,9 +194,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">V STTRACE jsou povoleny pouze znaky a-z a \',\'</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">V uživatelském jménu nejsou povoleny znaky : a \'</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">V heslu nejsou povoleny znaky : a \'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovat databázi</string>
   <!--Syncthing was reset-->

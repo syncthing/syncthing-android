@@ -181,9 +181,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Tylko znaki a-z oraz „,” są dopuszczalne w STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Znaki „:” oraz „\'” są niedozwolone w nazwie użytkownika</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Znaki „:” oraz „\'” są niedozwolone w haśle</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Przywróć pierwotny stan bazy danych</string>
   <!--Syncthing was reset-->

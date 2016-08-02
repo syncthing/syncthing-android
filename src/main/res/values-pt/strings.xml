@@ -172,9 +172,7 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Apenas é permitido usar a-z e \';\' nas opções do STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Os caracteres : e \' não são permitidos no nome de utilizador</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Os caracteres : e \' não são permitidos na senha</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->

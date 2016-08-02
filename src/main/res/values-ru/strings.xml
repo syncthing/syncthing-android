@@ -188,9 +188,7 @@
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">В настройках STTRACE можно использовать только символы a-z и \',\'</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Символы : и \' запрещено использовать в имени пользователя</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Символы : и \' запрещено использовать в пароле</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Сбросить базу данных</string>
   <!--Syncthing was reset-->

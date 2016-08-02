@@ -194,9 +194,7 @@
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE 选项仅允许 a-z 与逗号</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">用户名不允许存在符号 \'</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">密码不允许存在符号 \'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->

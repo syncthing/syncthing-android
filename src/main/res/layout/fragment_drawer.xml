@@ -100,7 +100,6 @@
                 android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
                 <TextView
-                    android:id="@+id/cpu_usage_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cpu_usage"
@@ -124,7 +123,6 @@
                 android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
                 <TextView
-                    android:id="@+id/ram_usage_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ram_usage"
@@ -196,7 +194,6 @@
                 android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
                 <TextView
-                    android:id="@+id/announce_server_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/announce_server"

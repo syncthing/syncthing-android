@@ -3,11 +3,13 @@ package com.nutomic.syncthingandroid.util;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +18,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -96,6 +99,7 @@ public class ConfigXml {
 
         if (isFirstStart) {
             changeDefaultFolder();
+            generateLoginInfo();
         }
         updateIfNeeded();
     }
@@ -114,6 +118,10 @@ public class ConfigXml {
 
     public String getApiKey() {
         return getGuiElement().getElementsByTagName("apikey").item(0).getTextContent();
+    }
+
+    public String getUserName() {
+        return getGuiElement().getElementsByTagName("user").item(0).getTextContent();
     }
 
     /**
@@ -225,7 +233,7 @@ public class ConfigXml {
     /**
      * Change default folder id to camera and path to camera folder path.
      */
-    public void changeDefaultFolder() {
+    private void changeDefaultFolder() {
         Element folder = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("folder").item(0);
         String model = Build.MODEL
@@ -238,6 +246,36 @@ public class ConfigXml {
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("type", "readonly");
         saveChanges();
+    }
+
+    /**
+     * Generates username and config, stores them in config and preferences.
+     *
+     * We have to store the plaintext password in preferences, because we need it in
+     * WebGuiActivity. The password in the config is hashed, so we can't use it directly.
+     */
+    private void generateLoginInfo() {
+        char[] chars =
+                "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
+        StringBuilder password = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < 20; i++)
+            password.append(chars[random.nextInt(chars.length)]);
+
+        String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
+        Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
+
+        Node userNode = mConfig.createElement("user");
+        getGuiElement().appendChild(userNode);
+        userNode.setTextContent(user);
+
+        Node passwordNode = mConfig.createElement("password");
+        getGuiElement().appendChild(passwordNode);
+        String hashed = BCrypt.hashpw(password.toString(), BCrypt.gensalt());
+        passwordNode.setTextContent(hashed);
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                .putString("web_gui_password", password.toString())
+                .apply();
     }
 
     /**

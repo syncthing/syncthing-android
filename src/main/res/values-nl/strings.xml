@@ -194,9 +194,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Enkel a-z en \',\' zijn toegestaan in STTRACE-opties</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Tekens : en \' zijn niet toegestaan in gebruikersnaam</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Tekens : en \' zijn niet toegestaan in wachtwoord</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->
