@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
@@ -33,9 +34,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.security.SecureRandom;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -307,6 +313,7 @@ public class SyncthingService extends Service implements
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
+                    .setContentText(formatOngoingSyncInfo())
                     .setContentIntent(PendingIntent.getActivity(appContext, 0,
                             new Intent(appContext, MainActivity.class), 0));
             if (type.equals("low_priority"))
@@ -324,6 +331,76 @@ public class SyncthingService extends Service implements
             stopForeground(false);
             nm.cancel(NOTIFICATION_ACTIVE);
         }
+    }
+
+    private CharSequence formatOngoingSyncInfo() {
+        EventBasedModel.Snapshot m = mEventProcessor.createEventBasedModelSnapshot();
+        if (m.isInitializing())
+            return "Initializing...";
+        if (!m.isStillValid())
+            return "ERROR: Event Model out-of-sync!";
+
+        StringBuilder sb = new StringBuilder();
+
+        List<String> nonIdleFolders = formatNonIdleStates(m);
+        sb.append(TextUtils.join(", ", nonIdleFolders));
+
+        List<String> uploads = formatOngoingUploads(m);
+        if (uploads.size() > 0 && sb.length() > 0) sb.append(", ");
+        sb.append(TextUtils.join(", ", uploads));
+
+        if (sb.length() > 0) sb.append(", ");
+        int devices = m.getConnections().size();
+        sb.append(devices != 1 ?
+                MessageFormat.format("{0} devices connected", devices) : MessageFormat.format("{0} device connected", devices));
+        return sb.length() > 0 ? sb.toString() : null;
+    }
+
+    /**
+     * Textual representations of folder state.
+     * Sorted alphabetically.
+     */
+    private List<String> formatNonIdleStates(EventBasedModel.Snapshot m) {
+        ArrayList<String> states = new ArrayList<>();
+        for (Map.Entry<String, String> entries : m.getFolderState().entrySet()) {
+            String folderName = entries.getKey();
+            String state = entries.getValue();
+            if (!"idle".equalsIgnoreCase(state)) {
+                states.add(MessageFormat.format("{0} ({1})", folderName, state));
+            }
+        }
+        Collections.sort(states);
+        return states;
+    }
+
+    /**
+     * Textual representations of ongoing uploads. Average over all completions of a device.
+     * Currently, the lowest folder's progression is used.
+     * Sorted alphabetically.
+     */
+    private List<String> formatOngoingUploads(EventBasedModel.Snapshot m) {
+        ArrayList<String> uploads = new ArrayList<>();
+        Map<String, RestApi.Device> devices = m.getDevices();
+        for (Map.Entry<String, Map<String, Double>> folderCompletions : m.getDeviceFolderCompletion().entrySet()) {
+            String deviceId = folderCompletions.getKey();
+            int min = 100;
+            int count = 0;
+            for (Map.Entry<String, Double> completions : folderCompletions.getValue().entrySet()) {
+                if (completions.getValue() < 100d) {
+                    min = Math.min(min, completions.getValue().intValue());
+                    count++;
+                }
+            }
+            if (count > 0) {
+                if (min < 100) {
+                    RestApi.Device d = devices.get(deviceId);
+                    String deviceName = d != null ? d.name : deviceId;
+                    uploads.add(MessageFormat.format("{0} ({1}%)", deviceName, min));
+                }
+            }
+        }
+        Collections.sort(uploads);
+        return uploads;
     }
 
     @Override
@@ -431,6 +508,13 @@ public class SyncthingService extends Service implements
             });
 
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+            mEventProcessor.addOnEventBasedModelChangedListener(new EventBasedModel.OnEventBasedModelChangedListener() {
+                @Override
+                public void onEventBasedModelChanged(EventBasedModel model) {
+                    // TODO: needs to run on main thread!
+                    updateNotification();
+                }
+            });
 
             registerOnWebGuiAvailableListener(mApi);
             registerOnWebGuiAvailableListener(mEventProcessor);

@@ -17,6 +17,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
+import com.nutomic.syncthingandroid.activities.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      * Minimum interval in seconds at which the events are polled from syncthing and processed.
      * This intervall will not wake up the device to save battery power.
      */
-    public static final long EVENT_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(15);
+    public static final long EVENT_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(5);
 
     /**
      * Use the MainThread for all callbacks and message handling
@@ -53,9 +54,12 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     private final Context mContext;
     private final RestApi mApi;
 
+    private EventBasedModel mEventBasedModel;
+
     public EventProcessor(Context context, RestApi api) {
         mContext = context;
         mApi = api;
+        mEventBasedModel = new EventBasedModel(api);
     }
 
     @Override
@@ -76,7 +80,10 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
 
             @Override
             public void onDone(long lastId) {
-                if (lastId < mLastEventId) mLastEventId = 0;
+                if (lastId < mLastEventId) {
+                    mEventBasedModel.reset();
+                    mLastEventId = 0;
+                }
 
                 Log.d(TAG, "Reading events starting with id " + mLastEventId);
 
@@ -90,6 +97,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      */
     @Override
     public void onEvent(long id, String type, JSONObject data) throws JSONException {
+        mEventBasedModel.updateByEvent(id, type, data, false);
         switch (type) {
             case "DeviceRejected":
                 String deviceId = data.getString("device");
@@ -166,6 +174,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             if (!mShutdown) {
                 mMainThreadHandler.removeCallbacks(this);
                 mMainThreadHandler.postDelayed(this, EVENT_UPDATE_INTERVAL);
+                mEventBasedModel.firePendingOnEventBasedModelChanged();
+            } else {
+                mEventBasedModel.reset();
             }
         }
     }
@@ -188,6 +199,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         synchronized (mMainThreadHandler) {
             mShutdown = true;
             mMainThreadHandler.removeCallbacks(this);
+            mEventBasedModel.reset();
         }
     }
 
@@ -207,5 +219,17 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         //       notifications.
         int notificationId = 1000 + text.hashCode() % 1000;
         nm.notify(notificationId, n);
+    }
+
+    public EventBasedModel.Snapshot createEventBasedModelSnapshot() {
+        return mEventBasedModel.createSnapshot();
+    }
+
+    public void addOnEventBasedModelChangedListener(EventBasedModel.OnEventBasedModelChangedListener l) {
+        mEventBasedModel.addOnEventBasedModelChangedListener(l);
+    }
+
+    public void removeOnEventBasedModelChangedListener(EventBasedModel.OnEventBasedModelChangedListener l) {
+        mEventBasedModel.removeOnEventBasedModelChangedListener(l);
     }
 }
