@@ -269,10 +269,10 @@ public class SyncthingService extends Service implements
                 String ssid = mDeviceStateHolder.getWifiSsid();
                 if (ssid != null) {
                     if (ssids.contains(ssid)) {
-                        Log.d(TAG, "SSID " + ssid + " found in whitelist");
+                        Log.d(TAG, "SSID [" + ssid + "] found in whitelist: " + ssids);
                         return true;
                     }
-                    Log.i(TAG, "SSID " + ssid + " not whitelisted");
+                    Log.i(TAG, "SSID [" + ssid + "] not whitelisted: " + ssids);
                     return false;
                 } else {
                     // Don't know the SSID (yet) (should not happen?!), so not allowing
