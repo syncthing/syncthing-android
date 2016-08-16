@@ -112,7 +112,7 @@ public class DeviceStateHolder extends BroadcastReceiver {
     @TargetApi(21)
     public boolean shouldRun() {
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB && pm.isPowerSaveMode()) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && pm.isPowerSaveMode()) {
             return false;
         }
         else if (!ContentResolver.getMasterSyncAutomatically()) {
