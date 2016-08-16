@@ -1,19 +1,21 @@
 package com.nutomic.syncthingandroid.syncthing;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.SyncStatusObserver;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -22,7 +24,6 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 import com.nutomic.syncthingandroid.util.PRNGFixes;
@@ -128,6 +129,20 @@ public class SyncthingService extends Service implements
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
             new HashSet<>();
 
+    private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
+        @Override
+        public void onStatusChanged(int i) {
+            updateState();
+        }
+    };
+
+    private final BroadcastReceiver mPowerSaveModeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateState();
+        }
+    };
+
     /**
      * INIT: Service is starting up and initializing.
      * STARTING: Syncthing binary is starting (but the API is not yet ready).
@@ -194,23 +209,8 @@ public class SyncthingService extends Service implements
      * called.
      */
     public void updateState() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean shouldRun;
-        if (!alwaysRunInBackground(this)) {
-            // Always run, ignoring wifi/charging state.
-            shouldRun = true;
-        }
-        else {
-            // Check wifi/charging state against preferences and start if ok.
-            boolean prefStopMobileData = prefs.getBoolean(PREF_SYNC_ONLY_WIFI, false);
-            boolean prefStopNotCharging = prefs.getBoolean(PREF_SYNC_ONLY_CHARGING, false);
-
-            shouldRun = (mDeviceStateHolder.isCharging() || !prefStopNotCharging) &&
-                    (!prefStopMobileData || isAllowedWifiConnected());
-        }
-
         // Start syncthing.
-        if (shouldRun) {
+        if (mDeviceStateHolder.shouldRun()) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
                 mStopScheduled = false;
                 return;
@@ -255,34 +255,6 @@ public class SyncthingService extends Service implements
             shutdown();
         }
         onApiChange();
-    }
-
-    private boolean isAllowedWifiConnected() {
-        boolean wifiConnected = mDeviceStateHolder.isWifiConnected();
-        if (wifiConnected) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            Set<String> ssids = sp.getStringSet(PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<String>());
-            if (ssids.isEmpty()) {
-                Log.d(TAG, "All SSIDs allowed for syncing");
-                return true;
-            } else {
-                String ssid = mDeviceStateHolder.getWifiSsid();
-                if (ssid != null) {
-                    if (ssids.contains(ssid)) {
-                        Log.d(TAG, "SSID [" + ssid + "] found in whitelist: " + ssids);
-                        return true;
-                    }
-                    Log.i(TAG, "SSID [" + ssid + "] not whitelisted: " + ssids);
-                    return false;
-                } else {
-                    // Don't know the SSID (yet) (should not happen?!), so not allowing
-                    Log.w(TAG, "SSID unknown (yet), cannot check SSID whitelist. Disallowing sync.");
-                    return false;
-                }
-            }
-        }
-        Log.d(TAG, "Wifi not connected");
-        return false;
     }
 
     /**
@@ -339,6 +311,7 @@ public class SyncthingService extends Service implements
      * Starts the native binary.
      */
     @Override
+    @TargetApi(21)
     public void onCreate() {
         PRNGFixes.apply();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -359,8 +332,15 @@ public class SyncthingService extends Service implements
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            registerReceiver(mPowerSaveModeChangedReceiver,
+                    new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+        }
+
         new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
         sp.registerOnSharedPreferenceChangeListener(this);
+        ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS,
+                                                mSyncStatusObserver);
     }
 
     /**
@@ -467,6 +447,9 @@ public class SyncthingService extends Service implements
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
+        ContentResolver.removeStatusChangeListener(mSyncStatusObserver);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
+            unregisterReceiver(mPowerSaveModeChangedReceiver);
     }
 
     private void shutdown() {
