@@ -122,6 +122,10 @@ public class SyncthingRunnable implements Runnable {
             env.put("STNOUPGRADE", "1");
             env.put("STGUIAUTH", sp.getString("gui_user", "") + ":" +
                     sp.getString("gui_password", ""));
+            if (sp.getBoolean("use_tor", false)) {
+                env.put("all_proxy", "socks5://localhost:9050");
+                env.put("ALL_PROXY_NO_FALLBACK", "1");
+            }
             process = pb.start();
             mSyncthing.set(process);
 
