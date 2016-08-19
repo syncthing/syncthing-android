@@ -7,6 +7,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -834,8 +835,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param device Settings of the device to edit. To create a device, pass a non-existant device ID.
      * @param listener for the normalized device ID (may be null).
      */
-    public void editDevice(final Device device, final Activity activity,
-            final OnDeviceIdNormalizedListener listener) {
+    public void editDevice(@NonNull final Device device, final Activity activity,
+                           final OnDeviceIdNormalizedListener listener) {
         normalizeDeviceId(device.deviceID,
                 new RestApi.OnDeviceIdNormalizedListener() {
                     @Override

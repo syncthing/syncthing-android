@@ -397,7 +397,7 @@ public class DeviceFragment extends Fragment implements
      * Sends the updated device info if in edit mode.
      */
     private void updateDevice() {
-        if (!mIsCreateMode && mDeviceNeedsToUpdate) {
+        if (!mIsCreateMode && mDeviceNeedsToUpdate && mDevice != null) {
             mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
         }
     }
