@@ -52,6 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serveur d\'annonce</string>
   <string name="restart">Redémarrer</string>
+  <string name="dialog_confirm_restart">Voulez-vous redémarrer Syncthing ?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID du dossier</string>
@@ -178,7 +179,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="keep_wakelock_while_binary_running">Garder le CPU en éveil quand Syncthing fonctionne.</string>
   <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>
   <string name="run_as_foreground_service">Fonctionner avec prioriré de premier plan</string>
-  <string name="run_as_foreground_service_summary">Si activé, Syncthing fonctionnera avec une priorité de premier plan et sera moins susceptible d\'être arrêté par Android. Cela pourrait provoquer l\'arrêt d\'autres services si la mémoire disponible devient faible.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuration a été exportée dans %1$s</string>
   <string name="import_config">Importer la configuration</string>

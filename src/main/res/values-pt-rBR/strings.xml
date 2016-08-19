@@ -178,7 +178,6 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada</string>
   <string name="keep_wakelock_while_binary_running_summary">Marque esta opção se você observar desconexões inesperadas enquanto a bateria do dispositivo não está sendo carregada. Isto resultará em maior uso da bateria.</string>
   <string name="run_as_foreground_service">Rodar serviço com prioridade de primeiro plano</string>
-  <string name="run_as_foreground_service_summary">Se habilitado, o Syncthing rodará com prioridade de primeiro plano e é menos provável de ser parado pelo Android. Isto pode fazer com que outros apps sejam parados se a memória disponível estiver baixa.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">A configuração foi salva em %1$s</string>
   <string name="import_config">Importar configuração</string>

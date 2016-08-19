@@ -52,6 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Mededelingsserver</string>
   <string name="restart">Herstarten</string>
+  <string name="dialog_confirm_restart">Wil je Syncthing herstarten?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Map-ID</string>

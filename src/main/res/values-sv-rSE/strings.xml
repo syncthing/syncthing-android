@@ -6,13 +6,13 @@
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lägg till katalog</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Dela enhets-ID</string>
+  <string name="share_device_id">Dela enhets ID</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Skicka enhets-ID till</string>
+  <string name="send_device_id_to">Skicka enhets ID till</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laddar...</string>
   <string name="usage_reporting_dialog_title">Tillåt anonym användningsrapportering?</string>
-  <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra gemensamma plattformar, katalogstorlekar och appversioner. Om de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\n Den aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, katalog storlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="off">av</string>
@@ -31,27 +31,28 @@
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">Ingen enhet funnen</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Aktuell</string>
+  <string name="device_up_to_date">Uppdaterad</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synkroniserar (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Frånkopplad</string>
   <!--Title for current download rate-->
-  <string name="download_title">Ladda ner</string>
+  <string name="download_title">Nedladdning</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Ladda upp</string>
+  <string name="upload_title">Uppladdning</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Ladda ner:\u0020</string>
+  <string name="download_title_colon">Nedladdning:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Ladda upp:\u0020</string>
+  <string name="upload_title_colon">Uppladdning:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">CPU-användning</string>
   <!--Title for current RAM usage-->
   <string name="ram_usage">RAM-användning</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Annonsera server</string>
+  <string name="announce_server">Annonseringsservrar</string>
   <string name="restart">Starta om</string>
+  <string name="dialog_confirm_restart">Vill du starta om Syncthing?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Katalog-ID</string>
@@ -60,7 +61,7 @@
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
-  <string name="folder_master">Katalog master</string>
+  <string name="folder_master">Huvudkatalog</string>
   <!--Setting title-->
   <string name="devices">Enheter</string>
   <!--Setting title-->
@@ -78,20 +79,20 @@
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">Katalog-ID kan inte vara tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Katalog-sökväg kan inte vara tom</string>
+  <string name="folder_path_required">Katalogsökvägen kan inte vara tom</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vill du verkligen vill exportera konfigurationen? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
+  <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Vill du verkligen vill importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
+  <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
   <!--DeviceSettingsFragment-->
   <!--Setting title-->
-  <string name="device_id">Enhets-ID</string>
+  <string name="device_id">Enhets ID</string>
   <!--Setting title-->
   <string name="name">Namn</string>
   <!--Setting title-->
   <string name="addresses">Adresser</string>
   <!--Setting title-->
-  <string name="current_address">Nuvarande adress</string>
+  <string name="current_address">Aktuell adress</string>
   <!--Setting title-->
   <string name="compression">Kompression</string>
   <!--Strings representing compression options-->
@@ -112,11 +113,11 @@
   <!--Dialog shown when attempting to remove a device-->
   <string name="remove_device_confirm">Är du säker på att du vill ta bort enheten?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">Enhets-ID kan inte vara tom</string>
+  <string name="device_id_required">Enhets ID kan inte vara tom</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Skanna QR Code</string>
   <!--Toast show if we could not get root permissions-->
-  <string name="toast_root_denied">Fick inte root tillstånd</string>
+  <string name="toast_root_denied">Fick inte root behörigheter</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webb-GUI</string>
@@ -128,7 +129,7 @@
   <string name="welcome_title">Välkommen till Syncthing för Android</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Syncthing är en filsynkronisering app med öppen källkod.\n\n\
-För att dela data med andra enheter, måste du lägga till deras unika enhets-ID till enhetslistan. Efteråt kan du välja vilka kataloger som ska delas med vilka enheter.\n\n
+För att dela data med andra enheter, måste du lägga till deras unika enhets ID till enhetslistan. Efteråt kan du välja vilka kataloger som ska delas med vilka enheter.\n\n
 Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
@@ -146,11 +147,12 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="sync_only_wifi_ssids_all">Synkronisera på alla WiFi-nätverk</string>
   <string name="sync_only_wifi_ssids_values">Synkronisera endast när den är ansluten till: %1$s</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Sätt på WiFi för att välja nätverk.</string>
-  <string name="advanced_folder_picker">Använd avancerad katalog-väljare</string>
-  <string name="advanced_folder_picker_summary">Välj en katalog på enheten för synkronisering</string>
+  <string name="advanced_folder_picker">Använd avancerad katalogväljare</string>
+  <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör Syncthing som superanvändare</string>
+  <string name="use_root_summary">Detta är en instabil funktion som kan orsaka problem med Syncthing och med enheten. Om du stöter på problem, kan du behöva installera om Syncthing.</string>
   <string name="notification_type_title">Aviseringar</string>
-  <string name="notification_type_summary">Välj typ aviseringstyp</string>
+  <string name="notification_type_summary">Välj typ aviseringstypen</string>
   <string-array name="notification_type_entries">
     <item>Normal</item>
     <item>Låg prioritet</item>
@@ -158,22 +160,25 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing alternativ</string>
-  <string name="device_name">Enhetens namn</string>
-  <string name="listen_address">Synkroniseringsprotokoll avlyssningsadresser</string>
+  <string name="device_name">Enhets namn</string>
+  <string name="listen_address">Lyssnaradresser för synkroniseringsprotokoll</string>
   <string name="max_recv_kbps">Inkommande hastighetsbegränsning (KiB/s)</string>
   <string name="max_send_kbps">Utgående hastighetsbegränsning (KiB/s)</string>
   <string name="global_announce_enabled">Global upptäckt</string>
   <string name="local_announce_enabled">Lokal upptäckt</string>
+  <string name="enable_nat_traversal">Aktivera NAT traversering</string>
   <string name="global_announce_server">Global upptäktsserver</string>
+  <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
   <string name="syncthing_gui">Syncting-GUI</string>
-  <string name="gui_address">GUI avlyssningsadresser</string>
+  <string name="gui_address">Lyssnaradresser för GUI</string>
   <string name="gui_user">GUI autentiseringsanvändare</string>
   <string name="gui_password">GUI autentiseringslösenord</string>
   <string name="export_config">Exportera konfiguration</string>
   <string name="experimental_settings">Experimentell</string>
   <string name="keep_wakelock_while_binary_running">Håll CPU vaken medan Syncthing körs</string>
   <string name="keep_wakelock_while_binary_running_summary">Använd den här inställningen om du får oväntade frånkopplingar under batteridrift. Detta kommer att resultera i ökad batteriförbrukning .</string>
+  <string name="run_as_foreground_service">Kör tjänst med förgrundsprioritet</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exporterades till %1$s</string>
   <string name="import_config">Importera konfiguration</string>
@@ -215,7 +220,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="app_version_title">Syncthing-Android version</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Katalog-väljare</string>
+  <string name="folder_picker_title">Katalogväljare</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Varning: Din Android-version tillåter inte synkronisering till externa lagringsenheter</string>
   <!--ListView empty text-->
@@ -224,7 +229,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="create_fs_folder">Skapa ny katalog</string>
   <!--Menu item to select the current folder-->
   <string name="select_folder">Välj katalog</string>
-  <string name="create_folder_failed">Det gick inte att skapa katalogen</string>
+  <string name="create_folder_failed">Det gick inte att skapa katalog</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
   <string name="log_title">Logg</string>
@@ -245,10 +250,11 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="exit">Avsluta</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing körs</string>
+  <string name="syncthing_active_foreground">Tjänst körs med förgrundsprioritet.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Katalogträd för djupt. Kontrollera cyclic symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Det gick inte att skapa en Syncthing konfiguration. Kontrollera loggarna.</string>
+  <string name="config_create_failed">Det gick inte att skapa en Syncthing konfiguration. Vänligen kontrollera loggarna.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -263,7 +269,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Klicka här för att starta om Syncthing nu</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">Enhets-ID kopierades till urklipp</string>
+  <string name="device_id_copied_to_clipboard">Enhets ID kopierades till urklipp</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>

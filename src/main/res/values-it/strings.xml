@@ -52,6 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Server Presenza Globale</string>
   <string name="restart">Riavvia ora</string>
+  <string name="dialog_confirm_restart">Vuoi riavviare Syncthing?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Cartella</string>

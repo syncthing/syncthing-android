@@ -52,6 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Globální oznamování</string>
   <string name="restart">Restart</string>
+  <string name="dialog_confirm_restart">Opravdu chcete restartovat Syncthing?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresáře</string>
