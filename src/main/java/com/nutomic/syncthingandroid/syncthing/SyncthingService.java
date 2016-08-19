@@ -129,6 +129,7 @@ public class SyncthingService extends Service implements
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
             new HashSet<>();
 
+    private Object mSyncStatusHandle;
     private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
         @Override
         public void onStatusChanged(int i) {
@@ -339,8 +340,8 @@ public class SyncthingService extends Service implements
 
         new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
         sp.registerOnSharedPreferenceChangeListener(this);
-        ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS,
-                                                mSyncStatusObserver);
+        mSyncStatusHandle = ContentResolver.addStatusChangeListener(
+                ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, mSyncStatusObserver);
     }
 
     /**
@@ -447,7 +448,7 @@ public class SyncthingService extends Service implements
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
-        ContentResolver.removeStatusChangeListener(mSyncStatusObserver);
+        ContentResolver.removeStatusChangeListener(mSyncStatusHandle);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             unregisterReceiver(mPowerSaveModeChangedReceiver);
     }
