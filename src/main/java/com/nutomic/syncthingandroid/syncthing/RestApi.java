@@ -422,7 +422,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 n.deviceID = json.getString("deviceID");
                 n.compression = json.getString("compression");
                 n.introducer = json.getBoolean("introducer");
-                if (includeLocal || !mLocalDeviceId.equals(n.deviceID)) {
+                // Use null-save check because mLocalDeviceId might not be initialized yet.
+                // Should be replaced with Object.equals() when that becomes available in Android.
+                boolean sameId = (mLocalDeviceId == n.deviceID) ||
+                        (mLocalDeviceId != null && mLocalDeviceId.equals(n.deviceID));
+                if (includeLocal || !sameId) {
                     ret.add(n);
                 }
             }
