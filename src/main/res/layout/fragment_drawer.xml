@@ -22,7 +22,9 @@
             android:layout_height="48dp"
             android:drawableLeft="@drawable/ic_settings_black_24dp"
             android:drawableStart="@drawable/ic_settings_black_24dp"
-            android:text="@string/settings_title" />
+            android:text="@string/settings_title"
+            android:clickable="true"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/drawerActionExit"
@@ -32,7 +34,9 @@
             android:drawableLeft="@drawable/ic_close_black_24dp"
             android:drawableStart="@drawable/ic_close_black_24dp"
             android:text="@string/exit"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true" />
 
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -67,13 +71,16 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <TextView
+                    style="@style/Widget.Syncthing.TextView.Label"
                     android:id="@+id/device_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:drawableRight="@drawable/ic_content_copy_black_24dp"
-                    android:drawableEnd="@drawable/ic_content_copy_black_24dp" />
+                    android:drawableEnd="@drawable/ic_content_copy_black_24dp"
+                    android:clickable="true"
+                    android:focusable="true" />
             </LinearLayout>
 
             <View
@@ -241,7 +248,9 @@
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_web_black_24dp"
                 android:drawableStart="@drawable/ic_web_black_24dp"
-                android:text="@string/web_gui_title" />
+                android:text="@string/web_gui_title"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/drawerActionShareId"
@@ -250,7 +259,9 @@
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_share_black_24dp"
                 android:drawableStart="@drawable/ic_share_black_24dp"
-                android:text="@string/share_device_id" />
+                android:text="@string/share_device_id"
+                android:clickable="true"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/drawerActionRestart"
@@ -259,7 +270,9 @@
                 android:layout_height="48dp"
                 android:drawableLeft="@drawable/ic_autorenew_black_24dp"
                 android:drawableStart="@drawable/ic_autorenew_black_24dp"
-                android:text="@string/restart" />
+                android:text="@string/restart"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
