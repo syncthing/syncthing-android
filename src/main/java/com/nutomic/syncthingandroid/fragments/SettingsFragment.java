@@ -108,7 +108,6 @@ public class SettingsFragment extends PreferenceFragment
     private void applyPreference(Preference pref, String value) {
         if (pref instanceof EditTextPreference) {
             ((EditTextPreference) pref).setText(value);
-            pref.setSummary(value);
         } else if (pref instanceof CheckBoxPreference) {
             ((CheckBoxPreference) pref).setChecked(Boolean.parseBoolean(value));
         }
@@ -163,13 +162,6 @@ public class SettingsFragment extends PreferenceFragment
         user.setOnPreferenceChangeListener(this);
         password.setOnPreferenceChangeListener(this);
         sttrace.setOnPreferenceChangeListener(this);
-
-        // Force summary update and wifi/charging preferences enable/disable.
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        onPreferenceChange(mAlwaysRunInBackground, mAlwaysRunInBackground.isChecked());
-        onPreferenceChange(mSyncOnlyOnSSIDs, sp.getStringSet("sync_only_wifi_ssids_set", new TreeSet<String>()));
-        user.setSummary(sp.getString("gui_user", ""));
-        sttrace.setSummary(sp.getString("sttrace", ""));
     }
 
     /**
@@ -225,21 +217,6 @@ public class SettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        // Convert new value to integer if input type is number.
-        if (preference instanceof EditTextPreference && !preference.getKey().equals(GUI_PASSWORD)) {
-            EditTextPreference pref = (EditTextPreference) preference;
-            if ((pref.getEditText().getInputType() & InputType.TYPE_CLASS_NUMBER) > 0) {
-                try {
-                    o = Integer.parseInt((String) o);
-                    o = o.toString();
-                } catch (NumberFormatException e) {
-                    Log.w(TAG, "invalid number: " + o);
-                    return false;
-                }
-            }
-            pref.setSummary((String) o);
-        }
-
         boolean requireRestart = false;
 
         if (preference.equals(mAlwaysRunInBackground)) {
@@ -257,11 +234,6 @@ public class SettingsFragment extends PreferenceFragment
             }
         } else if (preference.equals(mSyncOnlyWifi)) {
             mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
-        } else if (preference.equals(mSyncOnlyOnSSIDs)) {
-            String ssids = formatWifiNameList((Set<String>) o);
-            mSyncOnlyOnSSIDs.setSummary(ssids.isEmpty()
-                    ? getString(R.string.sync_only_wifi_ssids_all)
-                    : getString(R.string.sync_only_wifi_ssids_values, ssids));
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
             RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
             RestApi.Device updated = new RestApi.Device();
