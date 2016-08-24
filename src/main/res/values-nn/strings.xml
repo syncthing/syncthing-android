@@ -52,6 +52,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Søketener</string>
   <string name="restart">Omstart</string>
+  <string name="dialog_confirm_restart">Vil du starte om att Syncthing?</string>
   <!--FolderSettingsFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappe-ID</string>
@@ -149,6 +150,7 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
   <string name="advanced_folder_picker_summary">Vel kva mappe som helst for synkronisering</string>
   <string name="use_root_title">Køyr Syncthing som superbrukar</string>
+  <string name="use_root_summary">Dette er ein ustabil funksjon som kan forårsake problem med Syncthing og med din eining. Hvis det oppstår problem kan du bli nøydd til å installere Syncthing på nytt.</string>
   <string name="notification_type_title">Varsling</string>
   <string name="notification_type_summary">Vel varslingstype</string>
   <string-array name="notification_type_entries">
@@ -164,7 +166,9 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="max_send_kbps">Opplastingsgrense (KiB/s)</string>
   <string name="global_announce_enabled">Global søketeneste</string>
   <string name="local_announce_enabled">Lokal søketeneste</string>
+  <string name="enable_nat_traversal">Slå på NAT-gjennomgang</string>
   <string name="global_announce_server">Tener for global søketeneste</string>
+  <string name="enable_relaying">Aktiver Reléer</string>
   <string name="usage_reporting">Anonym rapportering av bruk</string>
   <string name="syncthing_gui">Grafisk grensesnitt for Syncthing</string>
   <string name="gui_address">Grensesnitt: lytteadresser</string>
@@ -174,6 +178,10 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="experimental_settings">Eksperiment</string>
   <string name="keep_wakelock_while_binary_running">Hald prosessoren vaken medan Syncthing køyrer</string>
   <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillinga om du opplever uventa avkoplingar medan du køyrer på batteri. Dette vil føre til auka batteriforbruk.</string>
+  <string name="run_as_foreground_service">Køyr tenesten med forgrunnsprioritet</string>
+  <string name="run_as_foreground_service_summary">Dersom aktivert vil Syncthing køyre med forgrunnsprioritet og det er mindre sannsynleg at den blir stoppa av Android. Dette kan føre til at andre tenester vert stoppa i staden, dersom det blir lite tilgjengeleg minne. Ein notifikasjon med låg prioritet må alltid visast, uavhengig av \"Notifikasjon\" innstillingen på grunn av krav fra Android.</string>
+  <string name="use_tor_title">Bruk TOR</string>
+  <string name="use_tor_summary">Tving all trafikk gjennom TOR for auka privatliv</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Innstillingar vart eksportert til %1$s</string>
   <string name="import_config">Importer innstillingar</string>
@@ -245,6 +253,7 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="exit">Avslutt</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing køyrer</string>
+  <string name="syncthing_active_foreground">Tenesten køyrer med forgrunnsprioritet.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Mappetreet er for djupt. Sjekk om det finst sykliske symbolske lenkjer</string>
   <!--Toast shown if syncthing failed to create a config-->

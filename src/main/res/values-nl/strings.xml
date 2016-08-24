@@ -179,7 +179,9 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="keep_wakelock_while_binary_running">Laat de CPU niet slapen wanneer Syncthing wordt uitgevoerd</string>
   <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als je onverwacht losgekoppeld wordt wanneer je op batterij werkt. Dit zal leiden tot verhoogd batterijverbruik.</string>
   <string name="run_as_foreground_service">Dienst uitvoeren met voorgrondprioriteit</string>
-  <string name="run_as_foreground_service_summary">Indien ingeschakeld zal Syncthing worden uitgevoerd met voorgrondprioriteit, waardoor de kans kleiner wordt dat Android het stopt. Dit kan ertoe leiden dat andere diensten worden gestopt wanneer het beschikbare geheugen laag is.</string>
+  <string name="run_as_foreground_service_summary">Indien ingeschakeld zal Syncthing worden uitgevoerd met voorgrondprioriteit, waardoor de kans kleiner wordt dat het door Android wordt gestopt. Dit kan ertoe leiden dat andere diensten worden gestopt wanneer het beschikbare geheugen laag is. Een melding met lage prioriteit wordt door Android vereist weergegeven, onafhankelijk van de \"Melding\"-instelling.</string>
+  <string name="use_tor_title">Gebruik Tor</string>
+  <string name="use_tor_summary">Dwing alle verkeer door Tor voor verhoogde privacy</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Configuratie is geëxporteerd naar %1$s</string>
   <string name="import_config">Configuratie importeren</string>
