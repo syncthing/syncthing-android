@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.syncthing;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -113,9 +112,6 @@ public class DeviceStateHolder extends BroadcastReceiver {
     public boolean shouldRun() {
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && pm.isPowerSaveMode()) {
-            return false;
-        }
-        else if (!ContentResolver.getMasterSyncAutomatically()) {
             return false;
         }
         else if (SyncthingService.alwaysRunInBackground(mContext)) {
