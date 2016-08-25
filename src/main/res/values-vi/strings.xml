@@ -185,9 +185,7 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Chỉ cho phép a-z và \',\' trong tuỳ chọn STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">Không cho phép : và \' trong tên người dùng</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">Không cho phép : và \' trong mật khẩu</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Cài lại CSDL</string>
   <!--Syncthing was reset-->

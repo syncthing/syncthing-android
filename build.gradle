@@ -25,6 +25,7 @@ dependencies {
     compile 'com.android.support:design:24.1.1'
     compile 'com.google.zxing:android-integration:3.2.1'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'org.mindrot:jbcrypt:0.3m'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
 

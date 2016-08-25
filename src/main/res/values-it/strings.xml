@@ -194,9 +194,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Solo le lettere da a-z e la virgola \',\' sono consentiti nelle opzioni STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">I caratteri : (duepunti) e \' (apostrofo) non sono consentiti nel nome utente</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">I caratteri : (duepunti) e \' (apostrofo) non sono consentiti nella password</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reset del Database</string>
   <!--Syncthing was reset-->

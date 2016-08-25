@@ -116,12 +116,13 @@
                 android:inputType="textNoSuggestions" />
 
             <EditTextPreference
-                android:key="gui_user"
+                android:key="user"
                 android:title="@string/gui_user"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:persistent="false" />
 
             <EditTextPreference
-                android:key="gui_password"
+                android:key="web_gui_password"
                 android:title="@string/gui_password"
                 android:inputType="textVisiblePassword" />
 

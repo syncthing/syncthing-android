@@ -177,9 +177,7 @@ Por favor informe de qualquier problema que encuentres via Github.</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Sólo se permiten a-z y \',\' en las opciones STTRACE</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">No se permiten los carácteres : y \' en el nombre de usuario</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">No se permiten los carácteres : y \' en la contraseña</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Restablecer base de datos</string>
   <!--Syncthing was reset-->

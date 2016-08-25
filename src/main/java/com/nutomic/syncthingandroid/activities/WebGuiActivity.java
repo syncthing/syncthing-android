@@ -7,6 +7,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
@@ -16,6 +17,7 @@ import android.webkit.WebViewClient;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,6 +46,8 @@ public class WebGuiActivity extends SyncthingActivity
 
     private X509Certificate mCaCert;
 
+    private ConfigXml mConfig;
+
     /**
      * Hides the loading screen and shows the WebView once it is fully loaded.
      */
@@ -53,7 +57,7 @@ public class WebGuiActivity extends SyncthingActivity
          * Catch (self-signed) SSL errors and test if they correspond to Syncthing's certificate.
          */
         @Override
-        public void onReceivedSslError (WebView view, SslErrorHandler handler, SslError error) {
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             try {
                 int sdk = android.os.Build.VERSION.SDK_INT;
                 if (sdk >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -82,8 +86,10 @@ public class WebGuiActivity extends SyncthingActivity
             }
         }
 
-        public void onReceivedHttpAuthRequest (WebView view, HttpAuthHandler handler, String host, String realm) {
-            handler.proceed(getService().getApi().getGuiUser(), getService().getApi().getGuiPassword());
+        public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
+            String password = PreferenceManager.getDefaultSharedPreferences(WebGuiActivity.this)
+                    .getString("web_gui_password", "");
+            handler.proceed(mConfig.getUserName(), password);
         }
 
         @Override
@@ -106,6 +112,7 @@ public class WebGuiActivity extends SyncthingActivity
         setContentView(R.layout.activity_web_gui);
 
         mLoadingView = findViewById(R.id.loading);
+        mConfig = new ConfigXml(this);
         loadCaCert();
 
         mWebView = (WebView) findViewById(R.id.webview);

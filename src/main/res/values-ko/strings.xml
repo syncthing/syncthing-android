@@ -193,9 +193,7 @@
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE 옵션에서는 a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
   <!--Toast after entering invalid username-->
-  <string name="toast_invalid_username">문자 :와 \'은 사용자명으로 사용할 수 없습니다</string>
   <!--Toast after entering invalid password-->
-  <string name="toast_invalid_password">문자 :와 \'은 비밀번호로 사용할 수 없습니다</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">데이터베이스 리셋</string>
   <!--Syncthing was reset-->

@@ -7,7 +7,6 @@
     android:theme="?alertDialogTheme">
 
     <ProgressBar
-        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"

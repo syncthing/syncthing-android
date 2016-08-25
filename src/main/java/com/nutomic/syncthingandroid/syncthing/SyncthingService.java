@@ -305,22 +305,8 @@ public class SyncthingService extends Service implements
     @Override
     @TargetApi(21)
     public void onCreate() {
+        super.onCreate();
         PRNGFixes.apply();
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (isFirstStart()) {
-            char[] chars =
-                    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
-            StringBuilder sb = new StringBuilder();
-            SecureRandom random = new SecureRandom();
-            for (int i = 0; i < 20; i++)
-                sb.append(chars[random.nextInt(chars.length)]);
-
-            String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
-            Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
-            sp.edit().putString("gui_user", user)
-                     .putString("gui_password", sb.toString()).apply();
-        }
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -328,9 +314,9 @@ public class SyncthingService extends Service implements
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
-
-        new StartupTask(sp.getString("gui_user",""), sp.getString("gui_password","")).execute();
-        sp.registerOnSharedPreferenceChangeListener(this);
+        new StartupTask().execute();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -339,13 +325,6 @@ public class SyncthingService extends Service implements
      * {@code Pair<String, String>}.
      */
     private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
-        String mGuiUser;
-        String mGuiPassword;
-
-        public StartupTask(String guiUser, String guiPassword) {
-            mGuiUser = guiUser;
-            mGuiPassword = guiPassword;
-        }
 
         @Override
         protected Pair<String, String> doInBackground(Void... voids) {
@@ -368,7 +347,6 @@ public class SyncthingService extends Service implements
             }
 
             mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
-                    mGuiUser, mGuiPassword,
                     new RestApi.OnApiAvailableListener() {
                 @Override
                 public void onApiAvailable() {
