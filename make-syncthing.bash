@@ -13,6 +13,13 @@ case "$1" in
         export GOARM=5
         export TARGETDIR=$MYDIR$JNIDIR/armeabi
         ;;
+    arm64)
+        export CGO_ENABLED=0
+        export GOOS=linux
+        export GOARCH=arm64
+        export GOARM=8
+        export TARGETDIR=$MYDIR$JNIDIR/arm64-v8a
+        ;;
     386)
         export CGO_ENABLED=0
         export GOOS=linux
@@ -20,14 +27,8 @@ case "$1" in
         export GO386=387
         export TARGETDIR=$MYDIR$JNIDIR/x86
         ;;
-    amd64)
-        export CGO_ENABLED=0
-        export GOOS=linux
-        export GOARCH=amd64
-        export TARGETDIR=$MYDIR$JNIDIR/x86_64
-        ;;
     *)
-        echo "Must specify either arm or 386 or amd64"
+        echo "Invalid architecture"
         exit 1
 esac
 

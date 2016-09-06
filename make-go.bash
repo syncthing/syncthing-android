@@ -27,17 +27,18 @@ case "$1" in
         export GOARCH=arm
         export GOARM=5
         ;;
+    arm64)
+        export GOOS=linux
+        export GOARCH=arm64
+        export GOARM=8
+        ;;
     386)
         export GOOS=linux
         export GOARCH=386
         export GO386=387
         ;;
-    amd64)
-        export GOOS=linux
-        export GOARCH=amd64
-        ;;
     *)
-        echo "Must specify either arm or 386 or amd64"
+        echo "Invalid architecture"
         exit 1
 esac
 
