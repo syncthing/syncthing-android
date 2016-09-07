@@ -6,7 +6,7 @@
     <item
         android:id="@+id/create"
         android:title="@string/add"
-        android:icon="@drawable/ic_save_white_24dp_active"
+        android:icon="@drawable/ic_done_white_24dp"
         app:showAsAction="always" />
 
     <item

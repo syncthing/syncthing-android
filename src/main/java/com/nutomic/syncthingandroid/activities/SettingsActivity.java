@@ -2,9 +2,9 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-
+import android.support.v7.app.AlertDialog;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
@@ -89,5 +89,24 @@ public class SettingsActivity extends SyncthingActivity {
 
     public boolean getIsCreate() {
         return getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getIsCreate() && (mFragment instanceof DeviceFragment || mFragment instanceof FolderFragment)) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.dialog_discard_changes)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+        }
+        else {
+            finish();
+        }
     }
 }

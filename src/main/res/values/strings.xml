@@ -113,7 +113,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="dialog_confirm_restart">Do you want to restart Syncthing?</string>
 
-    <!-- FolderSettingsFragment -->
+    <!-- FolderFragment -->
 
 
     <!-- Setting title -->
@@ -155,13 +155,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Toast shown when trying to create a folder with an empty path -->
     <string name="folder_path_required">The folder path must not be empty</string>
 
-    <!-- Dialog shown before config export -->
-    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
+    <string name="dialog_discard_changes">Discard your changes?</string>
 
-    <!-- Dialog shown before config import -->
-    <string name="dialog_confirm_import">Do you really want to import a new configuration? Existing files will be overwritten.</string>
-
-    <!-- DeviceSettingsFragment -->
+    <!-- DeviceFragment -->
 
 
     <!-- Setting title -->
@@ -312,6 +308,12 @@ Please report any problems you encounter via Github.</string>
     <string name="use_tor_title">Use Tor</string>
 
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot</string>
+
+    <!-- Dialog shown before config export -->
+    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
+
+    <!-- Dialog shown before config import -->
+    <string name="dialog_confirm_import">Do you really want to import a new configuration? Existing files will be overwritten.</string>
 
     <!-- Toast shown after config was successfully exported -->
     <string name="config_export_successful">Config was exported to %1$s</string>
