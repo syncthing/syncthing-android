@@ -157,6 +157,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         public long inSyncFiles;
         public long needBytes;
         public long needFiles;
+        public long needDeletes;
         public String state;
         public String invalid;
     }
@@ -666,6 +667,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private int getDeviceCompletion(String deviceId) {
         int folderCount = 0;
         float percentageSum = 0;
+        // Syncthing UI limits pending deletes to 95% completion of a device
+        int maxPercentage = 100;
         for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
             boolean isShared = false;
             outerloop:
@@ -681,6 +684,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             if (isShared) {
                 long global = modelInfo.getValue().globalBytes;
                 long local = modelInfo.getValue().inSyncBytes;
+                if (modelInfo.getValue().needFiles == 0 && modelInfo.getValue().needDeletes > 0)
+                    maxPercentage = 95;
                 percentageSum += (global != 0)
                         ? (local * 100f) / global
                         : 100f;
@@ -688,7 +693,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             }
         }
         return (folderCount != 0)
-                ? Math.round(percentageSum / folderCount)
+                ? Math.min(Math.round(percentageSum / folderCount), maxPercentage)
                 : 100;
     }
 
@@ -744,6 +749,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     m.inSyncFiles = json.getLong("inSyncFiles");
                     m.needBytes = json.getLong("needBytes");
                     m.needFiles = json.getLong("needFiles");
+                    m.needDeletes = json.getLong("needDeletes");
                     m.state = json.getString("state");
                     m.invalid = json.optString("invalid");
                     mCachedModelInfo.put(folderId, m);
