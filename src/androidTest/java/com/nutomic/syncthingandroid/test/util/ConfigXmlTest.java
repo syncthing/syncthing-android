@@ -38,17 +38,4 @@ public class ConfigXmlTest extends AndroidTestCase {
         assertTrue(mConfig.getWebGuiUrl().startsWith("https://127.0.0.1:"));
     }
 
-    /**
-     * Just make sure the file is actually changed.
-     *
-     * This is not ideal, but way less complicated than starting up syncthing and accessing the API.
-     */
-    public void testCreateCameraFolder() {
-        long oldTime = ConfigXml.getConfigFile(mContext).lastModified();
-        long oldSize = ConfigXml.getConfigFile(mContext).length();
-        mConfig.changeDefaultFolder();
-        assertNotSame(oldTime, ConfigXml.getConfigFile(mContext).lastModified());
-        assertNotSame(oldSize, ConfigXml.getConfigFile(mContext).lastModified());
-    }
-
 }
