@@ -69,6 +69,7 @@ OLD_VERSION_NAME=$(grep "versionName" "build.gradle" | awk '{print $2}')
 sed -i "s/$OLD_VERSION_NAME/\"$1\"/" build.gradle
 git add "build.gradle"
 git commit -m "Bumped version to $NEW_VERSION_NAME"
+git tag $NEW_VERSION_NAME
 
 echo "
 Update ready.
