@@ -26,7 +26,6 @@ public class RestApiTest extends AndroidTestCase {
         new SyncthingRunnable(new MockContext(getContext()), SyncthingRunnable.Command.main);
 
         ConfigXml config = new ConfigXml(new MockContext(getContext()));
-        config.changeDefaultFolder();
 
         String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
@@ -39,7 +38,6 @@ public class RestApiTest extends AndroidTestCase {
             }
         }.execute(config.getWebGuiUrl());
         mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
-                null, null,
                 new RestApi.OnApiAvailableListener() {
             @Override
             public void onApiAvailable() {

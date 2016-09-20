@@ -26,6 +26,8 @@ dependencies {
     compile 'com.google.zxing:android-integration:3.2.1'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.mindrot:jbcrypt:0.3m'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.1.2'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
 

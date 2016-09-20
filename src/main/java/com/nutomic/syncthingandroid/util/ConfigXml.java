@@ -59,8 +59,6 @@ public class ConfigXml {
      */
     public static final String CONFIG_FILE = "config.xml";
 
-    private static final String INVALID_CONFIG_FILE = "config.xml.invalid";
-
     private static final int OPEN_CONFIG_MAX_TRIES = 10;
 
     private final Context mContext;
@@ -83,19 +81,9 @@ public class ConfigXml {
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 mConfig = db.parse(mConfigFile);
             } catch (SAXException | ParserConfigurationException | IOException e) {
-                Log.w(TAG, "Failed to open config, moving to " + INVALID_CONFIG_FILE +
-                        " and creating blank config");
-                File dest = new File(mConfigFile.getParent(), INVALID_CONFIG_FILE);
-                if (dest.exists())
-                    dest.delete();
-                mConfigFile.renameTo(dest);
-                generateKeysConfig(context);
-                isFirstStart = true;
-                mConfigFile = getConfigFile(context);
+                throw new OpenConfigException();
             }
         }
-        if (mConfig == null)
-            throw new OpenConfigException();
 
         if (isFirstStart) {
             changeDefaultFolder();
