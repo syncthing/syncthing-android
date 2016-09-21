@@ -141,9 +141,7 @@
   <string name="sync_only_charging">Само по време на зареждане</string>
   <string name="sync_only_wifi">Само чрез WiFi</string>
   <string name="sync_only_wifi_ssids">Ограничаване до определени WiFi мрежи</string>
-  <string name="sync_only_wifi_ssids_all">Синхронизиране чрез всяка WiFi мрежа</string>
-  <string name="sync_only_wifi_ssids_values">Синхронизиране само чрез: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
   <string name="advanced_folder_picker">Избор на папка, за напреднали</string>
   <string name="advanced_folder_picker_summary">Изберете папка, от устройството, за синхронизиране</string>
   <string name="use_root_title">Стартира Syncthing с права на Superuser</string>

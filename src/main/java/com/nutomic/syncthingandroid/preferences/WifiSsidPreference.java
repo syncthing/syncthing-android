@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +52,7 @@ public class WifiSsidPreference extends MultiSelectListPreference {
     protected void showDialog(Bundle state) {
         WifiConfiguration[] networks = loadConfiguredNetworksSorted();
         if (networks != null) {
-            Set<String> selected = getSharedPreferences().getStringSet(getKey(), new HashSet<String>());
+            Set<String> selected = getSharedPreferences().getStringSet(getKey(), new HashSet<>());
             // from JavaDoc: Note that you must not modify the set instance returned by this call.
             // therefore required to make a defensive copy of the elements
             selected = new HashSet<>(selected);
@@ -114,14 +113,11 @@ public class WifiSsidPreference extends MultiSelectListPreference {
             // if WiFi is turned off, getConfiguredNetworks returns null on many devices
             if (configuredNetworks != null) {
                 WifiConfiguration[] result = configuredNetworks.toArray(new WifiConfiguration[configuredNetworks.size()]);
-                Arrays.sort(result, new Comparator<WifiConfiguration>() {
-                    @Override
-                    public int compare(WifiConfiguration lhs, WifiConfiguration rhs) {
-                        // See #620: There may be null-SSIDs
-                        String l = lhs.SSID != null ? lhs.SSID : "";
-                        String r = rhs.SSID != null ? rhs.SSID : "";
-                        return l.compareToIgnoreCase(r);
-                    }
+                Arrays.sort(result, (lhs, rhs) -> {
+                    // See #620: There may be null-SSIDs
+                    String l = lhs.SSID != null ? lhs.SSID : "";
+                    String r = rhs.SSID != null ? rhs.SSID : "";
+                    return l.compareToIgnoreCase(r);
                 });
                 return result;
             }

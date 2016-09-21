@@ -144,9 +144,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="sync_only_charging">Sincr. solo in Ricarica</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="sync_only_wifi_ssids">Solo determinate reti wifi</string>
-  <string name="sync_only_wifi_ssids_all">Sincronizzazione su tutte le reti wifi</string>
-  <string name="sync_only_wifi_ssids_values">Sincronizzazione solo quando connessi a: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Esegui Syncthing come Superutente</string>

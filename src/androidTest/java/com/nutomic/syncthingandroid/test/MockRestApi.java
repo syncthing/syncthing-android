@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.test;
 import android.app.Activity;
 import android.content.Context;
 
+import android.support.annotation.NonNull;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public void editDevice(Device device, Activity activity, OnDeviceIdNormalizedListener listener) {
+    public void editDevice(@NonNull Device device, Activity activity, OnDeviceIdNormalizedListener listener) {
         throw new UnsupportedOperationException();
     }
 

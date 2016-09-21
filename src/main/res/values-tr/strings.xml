@@ -137,9 +137,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_charging">Sadece şarj edilirken eşzamanlama yap</string>
   <string name="sync_only_wifi">Sadece kablosuz ağ üzerindeyken eşzamanlama yap</string>
   <string name="sync_only_wifi_ssids">Belirlenmiş kablosuz ağlarla sınırlandır.</string>
-  <string name="sync_only_wifi_ssids_all">Herhangi bir kablosuz ağ üzerindeyken eşzamanlama yap</string>
-  <string name="sync_only_wifi_ssids_values">Sadece %1$s\'e bağlıyken eşzamanlama yap</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için cihazdan herhangi bir klasör seçin</string>
   <string name="use_root_title">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>

@@ -13,7 +13,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import com.nutomic.syncthingandroid.BuildConfig;
@@ -170,7 +169,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     private String mVersion;
 
-    private String mUrl;
+    private final String mUrl;
 
     private final String mApiKey;
 
@@ -197,12 +196,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Stores the latest result of {@link #getModel(String, OnReceiveModelListener)} for each folder,
      * for calculating device percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
      */
-    private HashMap<String, Model> mCachedModelInfo = new HashMap<>();
+    private final HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
     /**
      * Stores a hash map to resolve folders to paths for events.
      */
-    private final Map<String, String> mCacheFolderPathLookup = new HashMap<String, String>();
+    private final Map<String, String> mCacheFolderPathLookup = new HashMap<>();
 
     public RestApi(Context context, String url, String apiKey, OnApiAvailableListener apiListener,
                    OnConfigChangedListener configListener) {
@@ -214,14 +213,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mOnConfigChangedListener = configListener;
     }
 
-    public void setWebGuiUrl(String newUrl) {
-        mUrl = newUrl;
-    }
-
     /**
      * Number of previous calls to {@link #tryIsAvailable()}.
      */
-    private AtomicInteger mAvailableCount = new AtomicInteger(0);
+    private final AtomicInteger mAvailableCount = new AtomicInteger(0);
 
     /**
      * Number of asynchronous calls performed in {@link #onWebGuiAvailable()}.
@@ -270,12 +265,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
             }
         }.execute(mUrl, GetTask.URI_CONFIG, mApiKey);
-        getSystemInfo(new OnReceiveSystemInfoListener() {
-            @Override
-            public void onReceiveSystemInfo(SystemInfo info) {
-                mLocalDeviceId = info.myID;
-                tryIsAvailable();
-            }
+        getSystemInfo(info -> {
+            mLocalDeviceId = info.myID;
+            tryIsAvailable();
         });
     }
 
@@ -712,12 +704,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
          * Called for each event.
          *
          * Events with a "folder" field in the data have an extra "folderpath" element added.
-         *
-         * @param id ID of the event. Monotonously increasing.
-         * @param eventType Name of the event. (See Syncthing documentation)
+         *  @param eventType Name of the event. (See Syncthing documentation)
          * @param data Contains the data fields of the event.
          */
-        void onEvent(long id, String eventType, JSONObject data) throws JSONException;
+        void onEvent(String eventType, JSONObject data) throws JSONException;
 
         /**
          * Called after all available events have been processed.
@@ -816,7 +806,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                             data.put("folderpath", folderPath);
                         }
 
-                        listener.onEvent(id, type, data);
+                        listener.onEvent(type, data);
                     }
 
                     listener.onDone(lastId);
@@ -838,46 +828,43 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public void editDevice(@NonNull final Device device, final Activity activity,
                            final OnDeviceIdNormalizedListener listener) {
         normalizeDeviceId(device.deviceID,
-                new RestApi.OnDeviceIdNormalizedListener() {
-                    @Override
-                    public void onDeviceIdNormalized(String normalizedId, String error) {
-                        if (listener != null) listener.onDeviceIdNormalized(normalizedId, error);
-                        if (normalizedId == null)
-                            return;
+                (normalizedId, error) -> {
+                    if (listener != null) listener.onDeviceIdNormalized(normalizedId, error);
+                    if (normalizedId == null)
+                        return;
 
-                        device.deviceID = normalizedId;
-                        // If the device already exists, just update it.
-                        boolean create = true;
-                        for (RestApi.Device n : getDevices(true)) {
-                            if (n.deviceID.equals(device.deviceID)) {
-                                create = false;
-                            }
+                    device.deviceID = normalizedId;
+                    // If the device already exists, just update it.
+                    boolean create = true;
+                    for (Device n : getDevices(true)) {
+                        if (n.deviceID.equals(device.deviceID)) {
+                            create = false;
                         }
+                    }
 
-                        try {
-                            JSONArray devices = mConfig.getJSONArray("devices");
-                            JSONObject n = null;
-                            if (create) {
-                                n = new JSONObject();
-                                devices.put(n);
-                            } else {
-                                for (int i = 0; i < devices.length(); i++) {
-                                    JSONObject json = devices.getJSONObject(i);
-                                    if (device.deviceID.equals(json.getString("deviceID"))) {
-                                        n = devices.getJSONObject(i);
-                                        break;
-                                    }
+                    try {
+                        JSONArray devices = mConfig.getJSONArray("devices");
+                        JSONObject n = null;
+                        if (create) {
+                            n = new JSONObject();
+                            devices.put(n);
+                        } else {
+                            for (int i = 0; i < devices.length(); i++) {
+                                JSONObject json = devices.getJSONObject(i);
+                                if (device.deviceID.equals(json.getString("deviceID"))) {
+                                    n = devices.getJSONObject(i);
+                                    break;
                                 }
                             }
-                            n.put("deviceID", device.deviceID);
-                            n.put("name", device.name);
-                            n.put("addresses", new JSONArray(device.addresses));
-                            n.put("compression", device.compression);
-                            n.put("introducer", device.introducer);
-                            requireRestart(activity);
-                        } catch (JSONException e) {
-                            Log.w(TAG, "Failed to read devices", e);
                         }
+                        n.put("deviceID", device.deviceID);
+                        n.put("name", device.name);
+                        n.put("addresses", new JSONArray(device.addresses));
+                        n.put("compression", device.compression);
+                        n.put("introducer", device.introducer);
+                        requireRestart(activity);
+                    } catch (JSONException e) {
+                        Log.w(TAG, "Failed to read devices", e);
                     }
                 }
         );
@@ -909,7 +896,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     /**
      * Updates or creates the given device.
      */
-    public boolean editFolder(Folder folder, boolean create, Activity activity) {
+    public void editFolder(Folder folder, boolean create, Activity activity) {
         try {
             JSONArray folders = mConfig.getJSONArray("folders");
             JSONObject r = null;
@@ -950,11 +937,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             requireRestart(activity);
         } catch (JSONException e) {
             Log.w(TAG, "Failed to edit folder " + folder.id + " at " + folder.path, e);
-            return false;
+            return;
         }
 
         clearFolderCache();
-        return true;
     }
 
     /**

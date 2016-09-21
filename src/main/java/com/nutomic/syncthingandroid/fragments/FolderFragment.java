@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -71,9 +70,9 @@ public class FolderFragment extends Fragment
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
 
-    private KeepVersionsDialogFragment mKeepVersionsDialogFragment = new KeepVersionsDialogFragment();
+    private final KeepVersionsDialogFragment mKeepVersionsDialogFragment = new KeepVersionsDialogFragment();
 
-    private TextWatcher mTextWatcher = new TextWatcherAdapter() {
+    private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
             mFolder.label        = mLabelView.getText().toString();
@@ -83,7 +82,7 @@ public class FolderFragment extends Fragment
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener mCheckedListener =
+    private final CompoundButton.OnCheckedChangeListener mCheckedListener =
             new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton view, boolean isChecked) {
@@ -105,7 +104,7 @@ public class FolderFragment extends Fragment
         }
     };
 
-    private KeepVersionsDialogFragment.OnValueChangeListener mOnValueChangeListener =
+    private final KeepVersionsDialogFragment.OnValueChangeListener mOnValueChangeListener =
             new KeepVersionsDialogFragment.OnValueChangeListener() {
         @Override
         public void onValueChange(int intValue) {
@@ -121,7 +120,7 @@ public class FolderFragment extends Fragment
         }
     };
 
-    private View.OnClickListener mPathViewClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mPathViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), FolderPickerActivity.class);
@@ -197,12 +196,7 @@ public class FolderFragment extends Fragment
         mDevicesContainer = (ViewGroup) view.findViewById(R.id.devicesContainer);
 
         mPathView.setOnClickListener(mPathViewClickListener);
-        view.findViewById(R.id.versioningContainer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG);
-            }
-        });
+        view.findViewById(R.id.versioningContainer).setOnClickListener(v -> mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG));
 
         if (mIsCreateMode) {
             // Open keyboard on label view in edit mode.
@@ -326,12 +320,7 @@ public class FolderFragment extends Fragment
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_folder_confirm)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                mSyncthingService.getApi().deleteFolder(mFolder, getActivity());
-                            }
-                        })
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteFolder(mFolder, getActivity()))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -355,7 +344,7 @@ public class FolderFragment extends Fragment
     private void initFolder() {
         mFolder = new RestApi.Folder();
         mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
-        mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);;
+        mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
         mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
         mFolder.deviceIds = new ArrayList<>();

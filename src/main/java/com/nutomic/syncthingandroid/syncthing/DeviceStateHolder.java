@@ -40,7 +40,7 @@ public class DeviceStateHolder extends BroadcastReceiver {
     public static final String EXTRA_IS_CHARGING =
             "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.IS_CHARGING";
 
-    private Context mContext;
+    private final Context mContext;
 
     private boolean mIsWifiConnected = false;
 
@@ -132,7 +132,7 @@ public class DeviceStateHolder extends BroadcastReceiver {
         boolean wifiConnected = isWifiConnected();
         if (wifiConnected) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-            Set<String> ssids = sp.getStringSet(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<String>());
+            Set<String> ssids = sp.getStringSet(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
             if (ssids.isEmpty()) {
                 Log.d(TAG, "All SSIDs allowed for syncing");
                 return true;

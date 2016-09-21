@@ -144,9 +144,7 @@ Vennligst rapporter eventuelle problemer som oppstår via GitHub.</string>
   <string name="sync_only_charging">Synkroniser kun ved lading</string>
   <string name="sync_only_wifi">Synkroniser kun over WiFi</string>
   <string name="sync_only_wifi_ssids">Begrens til visse wifi-nettverk</string>
-  <string name="sync_only_wifi_ssids_all">Synkroniser på alle wifi-nettverk</string>
-  <string name="sync_only_wifi_ssids_values">Synkroniser bare når koblet til: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vennligst skru på WiFi for å velge nettverk.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vennligst skru på WiFi for å velge nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappevelger</string>
   <string name="advanced_folder_picker_summary">Velg en mappe på enheten for synkronisering</string>
   <string name="use_root_title">Kjør Syncthing som superbruker</string>

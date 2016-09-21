@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.util;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -61,13 +62,14 @@ public class CustomX509TrustManager implements X509TrustManager {
         }
     }
 
-    private String mHttpsCertPath;
+    private final String mHttpsCertPath;
 
     public CustomX509TrustManager(String httpsCertPath) {
         mHttpsCertPath = httpsCertPath;
     }
 
     @Override
+    @SuppressLint("TrustAllX509TrustManager")
     public void checkClientTrusted(X509Certificate[] chain, String authType)
             throws CertificateException {
     }

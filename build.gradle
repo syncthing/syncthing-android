@@ -47,6 +47,10 @@ android {
         testInstrumentationRunner 'android.test.InstrumentationTestRunner'
         testHandleProfiling true
         testFunctionalTest true
+        jackOptions {
+            enabled true
+        }
+
     }
     // Without this parameter, all builds fail with error:
     //     Execution failed for task ':mergeArmeabiDebugResources'.
@@ -98,6 +102,10 @@ android {
         fat {
             versionCode Integer.parseInt("0" + defaultConfig.versionCode)
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class MockSyncthingService extends SyncthingService {
 
-    private LinkedList<OnApiChangeListener> mOnApiChangedListeners = new LinkedList<>();
+    private final LinkedList<OnApiChangeListener> mOnApiChangedListeners = new LinkedList<>();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

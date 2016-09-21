@@ -143,9 +143,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="sync_only_charging">Synchronizowanie tylko podczas ładowania</string>
   <string name="sync_only_wifi">Synchronizowanie tylko przy użyciu Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Ogranicz do określonych sieci WiFi</string>
-  <string name="sync_only_wifi_ssids_all">Synchronizowanie przy użyciu wszystkich sieci wifi</string>
-  <string name="sync_only_wifi_ssids_values">Synchronizuj jedynie gdy połączono z: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>

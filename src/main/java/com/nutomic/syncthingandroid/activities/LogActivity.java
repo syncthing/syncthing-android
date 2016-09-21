@@ -91,18 +91,13 @@ public class LogActivity extends SyncthingActivity {
     }
 
     private void scrollToBottom() {
-        mScrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                mScrollView.scrollTo(0, mLog.getBottom());
-            }
-        });
+        mScrollView.post(() -> mScrollView.scrollTo(0, mLog.getBottom()));
     }
 
     private void updateLog() {
         if (mFetchLogTask != null)
             mFetchLogTask.cancel(true);
-        mLog.setText("Retrieving logs...");
+        mLog.setText(R.string.retrieving_logs);
         mFetchLogTask = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -137,7 +132,7 @@ public class LogActivity extends SyncthingActivity {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(process.getInputStream(), "UTF-8"), 8192);
             StringBuilder log = new StringBuilder();
-            String line = "";
+            String line;
             String sep = System.getProperty("line.separator");
             while ((line = bufferedReader.readLine()) != null) {
                 log.append(line);

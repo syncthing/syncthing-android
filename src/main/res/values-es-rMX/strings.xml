@@ -142,9 +142,7 @@ Por favor reporte cualquier problema que encuentre por medio de Github.</string>
   <string name="sync_only_charging">Sincronizar sólo cuando se está cargando</string>
   <string name="sync_only_wifi">Sincronizar sólo por wifi</string>
   <string name="sync_only_wifi_ssids">Restringir a ciertas redes wifi</string>
-  <string name="sync_only_wifi_ssids_all">Sincronizar en todas las redes wifi</string>
-  <string name="sync_only_wifi_ssids_values">Sincronizar sólo cuando esté conectado a: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor encienda el WiFi para seleccionar redes.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor encienda el WiFi para seleccionar redes.</string>
   <string name="advanced_folder_picker">Usar el avanzado Seleccionador de Carpetas</string>
   <string name="advanced_folder_picker_summary">Seleccionar cualquier carpeta en el dispositivo para sincronizar</string>
   <string name="use_root_title">Ejecutar Syncthing como Superusuario</string>

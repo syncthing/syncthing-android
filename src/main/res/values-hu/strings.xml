@@ -120,8 +120,7 @@
   <string name="sync_only_charging">Csak töltés közbeni szinkronizálás</string>
   <string name="sync_only_wifi">Szinkronizálás csak WiFi-n keresztül</string>
   <string name="sync_only_wifi_ssids">Korlátozás bizonyos wifi hálózatokra</string>
-  <string name="sync_only_wifi_ssids_all">Szinkronizálás minden wifi hálózaton</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hálózat választásához kapcsold be a wifit.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hálózat választásához kapcsold be a wifit.</string>
   <string name="use_root_title">Syncthing futtatása Superuser-ként</string>
   <string name="notification_type_title">Értesítés</string>
   <string name="notification_type_summary">Értesítés típusának kiválasztása</string>

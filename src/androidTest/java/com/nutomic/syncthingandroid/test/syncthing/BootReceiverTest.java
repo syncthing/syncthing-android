@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.test.syncthing;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
 
 import com.nutomic.syncthingandroid.syncthing.BootReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;

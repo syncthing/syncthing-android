@@ -144,9 +144,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="sync_only_wifi_ssids">Omezit na vybrané sítě wifi</string>
-  <string name="sync_only_wifi_ssids_all">Synchronizovat na všech wifi sítích</string>
-  <string name="sync_only_wifi_ssids_values">Synchronizovat pouze při připojení k: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Spustit syncthing jako superuživatel</string>

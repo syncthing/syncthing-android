@@ -22,7 +22,7 @@ public class PostConfigTask extends AsyncTask<String, Void, Boolean> {
 
     public static final String URI_CONFIG = "/rest/system/config";
 
-    private String mHttpsCertPath;
+    private final String mHttpsCertPath;
 
     public PostConfigTask(String httpsCertPath) {
         mHttpsCertPath = httpsCertPath;

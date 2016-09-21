@@ -32,14 +32,11 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     /**
      * Compares folders by labels, uses the folder ID as fallback if the label is empty
      */
-    private final static Comparator<RestApi.Folder> FOLDERS_COMPARATOR = new Comparator<RestApi.Folder>() {
-        @Override
-        public int compare(RestApi.Folder lhs, RestApi.Folder rhs) {
-            String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
-            String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
+    private final static Comparator<RestApi.Folder> FOLDERS_COMPARATOR = (lhs, rhs) -> {
+        String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
+        String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
 
-            return lhsLabel.compareTo(rhsLabel);
-        }
+        return lhsLabel.compareTo(rhsLabel);
     };
 
     private FoldersAdapter mAdapter;
@@ -53,12 +50,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateList();
-                    }
-                });
+                getActivity().runOnUiThread(FolderListFragment.this::updateList);
             }
 
         }, 0, SyncthingService.GUI_UPDATE_INTERVAL);

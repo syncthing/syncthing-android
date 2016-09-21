@@ -16,7 +16,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class KeepVersionsDialogFragment extends DialogFragment {
 
-    private OnValueChangeListener mOnValueChangeListener = OnValueChangeListener.NO_OP;
+    private OnValueChangeListener mOnValueChangeListener;
 
     private NumberPicker mNumberPickerView;
 
@@ -28,7 +28,8 @@ public class KeepVersionsDialogFragment extends DialogFragment {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     mValue = mNumberPickerView.getValue();
-                    mOnValueChangeListener.onValueChange(mValue);
+                    if (mOnValueChangeListener != null)
+                        mOnValueChangeListener.onValueChange(mValue);
                     break;
             }
         }
@@ -47,10 +48,6 @@ public class KeepVersionsDialogFragment extends DialogFragment {
     }
 
     public void setOnValueChangeListener(OnValueChangeListener onValueChangeListener) {
-        if (onValueChangeListener == null) {
-            onValueChangeListener = OnValueChangeListener.NO_OP;
-        }
-
         mOnValueChangeListener = onValueChangeListener;
     }
 
@@ -73,11 +70,6 @@ public class KeepVersionsDialogFragment extends DialogFragment {
     }
 
     public interface OnValueChangeListener {
-        OnValueChangeListener NO_OP = new OnValueChangeListener() {
-            @Override
-            public void onValueChange(int value) {}
-        };
-
         void onValueChange(int value);
     }
 }

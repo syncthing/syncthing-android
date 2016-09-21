@@ -142,9 +142,7 @@ Xin báo cáo mọi vấn đề phát sinh thông qua Github.</string>
   <string name="sync_only_charging">Chỉ đ.bộ khi sạc pin</string>
   <string name="sync_only_wifi">Chỉ đ.bộ khi dùng wifi</string>
   <string name="sync_only_wifi_ssids">Hạn chế với vài mạng wifi nhất định</string>
-  <string name="sync_only_wifi_ssids_all">Đồng bộ trên t.cả mạng wifi</string>
-  <string name="sync_only_wifi_ssids_values">Chỉ đồng bộ khi kết nối đến: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hãy bật WiFi để lựa chọn mạng.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hãy bật WiFi để lựa chọn mạng.</string>
   <string name="advanced_folder_picker">S.dụng trình chọn th.mục nâng cao</string>
   <string name="advanced_folder_picker_summary">Chọn bất kỳ th.mục nào trên th.bị để đồng bộ</string>
   <string name="use_root_title">Chạy Syncthing với quyền Superuser</string>

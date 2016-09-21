@@ -1,8 +1,6 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.nutomic.syncthingandroid.syncthing.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -38,12 +36,7 @@ public class RestApiTest extends AndroidTestCase {
             }
         }.execute(config.getWebGuiUrl());
         mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
-                new RestApi.OnApiAvailableListener() {
-            @Override
-            public void onApiAvailable() {
-                latch.countDown();
-            }
-        }, null);
+                latch::countDown, null);
         latch.await(1, TimeUnit.SECONDS);
     }
 

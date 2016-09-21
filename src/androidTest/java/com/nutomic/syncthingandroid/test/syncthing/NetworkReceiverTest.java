@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
 
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
 import com.nutomic.syncthingandroid.syncthing.NetworkReceiver;

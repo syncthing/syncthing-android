@@ -144,9 +144,7 @@
   <string name="sync_only_charging">충전 중일 때만 동기화</string>
   <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
   <string name="sync_only_wifi_ssids">특정 WI-FI 네트워크로 제한하기</string>
-  <string name="sync_only_wifi_ssids_all">모든 WI-FI 네트워크에서 동기화</string>
-  <string name="sync_only_wifi_ssids_values">%1$s에 연결되어 있을 때만 동기화</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
   <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
   <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
   <string name="use_root_title">Syncthing을 Superuser로 실행</string>

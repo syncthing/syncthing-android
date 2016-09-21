@@ -144,9 +144,7 @@ Gelieve alle problemen die je tegenkomt via GitHub te melden.</string>
   <string name="sync_only_charging">Synchroniseer alleen tijdens opladen</string>
   <string name="sync_only_wifi">Synchroniseer alleen via Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Tot bepaalde Wi-Fi-netwerken beperken</string>
-  <string name="sync_only_wifi_ssids_all">Synchroniseer op alle Wi-Fi-netwerken</string>
-  <string name="sync_only_wifi_ssids_values">Louter synchroniseren terwijl verbonden met: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Wi-Fi aanzetten t.b.v. netwerkselectie.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Wi-Fi aanzetten t.b.v. netwerkselectie.</string>
   <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Syncthing uitvoeren als superuser</string>

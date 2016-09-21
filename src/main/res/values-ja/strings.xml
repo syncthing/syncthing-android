@@ -144,9 +144,7 @@
   <string name="sync_only_charging">充電中のみ同期</string>
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
   <string name="sync_only_wifi_ssids">特定の WiFi ネットワークに制限する</string>
-  <string name="sync_only_wifi_ssids_all">すべての WiFi ネットワークで共有する</string>
-  <string name="sync_only_wifi_ssids_values">%1$s に接続時のみ同期する</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">スーパーユーザーとして同期を実行します</string>

@@ -143,9 +143,7 @@
   <string name="sync_only_charging">Синхронизация только во время зарядки</string>
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
   <string name="sync_only_wifi_ssids">Ограничить определёнными wifi сетями</string>
-  <string name="sync_only_wifi_ssids_all">Синхронизировать в любых wifi сетях</string>
-  <string name="sync_only_wifi_ssids_values">Синхронизировать только в: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
   <string name="use_root_title">Запуск Syncthing с рут-правами</string>

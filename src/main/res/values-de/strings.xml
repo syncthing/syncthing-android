@@ -142,9 +142,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="sync_only_charging">Sync nur mit Ladegerät</string>
   <string name="sync_only_wifi">Sync nur im WLAN</string>
   <string name="sync_only_wifi_ssids">Nur in bestimmten WLAN Netzwerken</string>
-  <string name="sync_only_wifi_ssids_all">Synchronisiere in allen WLAN Netzwerken</string>
-  <string name="sync_only_wifi_ssids_values">Synchronisiere nur in folgendem WLAN: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
   <string name="advanced_folder_picker">Erweiterte Verzeichnisauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="use_root_title">Syncthing mit Superuser Rechten ausführen</string>

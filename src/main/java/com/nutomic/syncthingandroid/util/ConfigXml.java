@@ -63,7 +63,7 @@ public class ConfigXml {
 
     private final Context mContext;
 
-    private File mConfigFile;
+    private final File mConfigFile;
 
     private Document mConfig;
 

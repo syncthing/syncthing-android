@@ -42,7 +42,7 @@ public class SyncthingRunnable implements Runnable {
 
     private final Context mContext;
 
-    private String mSyncthingBinary;
+    private final String mSyncthingBinary;
 
     private String[] mCommand;
 
@@ -91,7 +91,7 @@ public class SyncthingRunnable implements Runnable {
     @Override
     public void run() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        int ret = 1;
+        int ret;
         // Make sure Syncthing is executable
         try {
             ProcessBuilder pb = new ProcessBuilder("chmod", "500", mSyncthingBinary);
@@ -313,22 +313,19 @@ public class SyncthingRunnable implements Runnable {
      * @param saveLog True if the log should be stored to {@link #mErrorLog}.
      */
     private Thread log(final InputStream is, final int priority, final boolean saveLog) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-                    BufferedReader br = new BufferedReader(isr);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        Log.println(priority, TAG_NATIVE, line);
+        Thread t = new Thread(() -> {
+            try {
+                InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+                BufferedReader br = new BufferedReader(isr);
+                String line;
+                while ((line = br.readLine()) != null) {
+                    Log.println(priority, TAG_NATIVE, line);
 
-                        if (saveLog)
-                            mErrorLog += line + "\n";
-                    }
-                } catch (IOException e) {
-                    Log.w(TAG, "Failed to read Syncthing's command line output", e);
+                    if (saveLog)
+                        mErrorLog += line + "\n";
                 }
+            } catch (IOException e) {
+                Log.w(TAG, "Failed to read Syncthing's command line output", e);
             }
         });
         t.start();

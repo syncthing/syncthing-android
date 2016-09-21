@@ -49,12 +49,7 @@ public class SyncthingServiceTest {
     @Test
     public void testBindService() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
-        mService.registerOnWebGuiAvailableListener(new SyncthingService.OnWebGuiAvailableListener() {
-            @Override
-            public void onWebGuiAvailable() {
-                latch.countDown();
-            }
-        });
+        mService.registerOnWebGuiAvailableListener(latch::countDown);
         mService.registerOnApiChangeListener(new SyncthingService.OnApiChangeListener() {
             @Override
             public void onApiChange(SyncthingService.State currentState) {

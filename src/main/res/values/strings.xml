@@ -237,10 +237,6 @@ Please report any problems you encounter via Github.</string>
 
     <string name="sync_only_wifi_ssids">Restrict to certain wifi networks</string>
 
-    <string name="sync_only_wifi_ssids_all">Sync on all wifi networks</string>
-
-    <string name="sync_only_wifi_ssids_values">Sync only while connected to: %1$s</string>
-
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Please turn on WiFi to select networks.</string>
 
     <string name="advanced_folder_picker">Use advanced Folder Picker</string>
@@ -405,6 +401,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the "log Syncthing" menu button -->
     <string name="log_syncthing_title">View Syncthing Log</string>
+
+    <string name="retrieving_logs">Retrieving logs…</string>
 
     <!-- Title of the "share log" menu button -->
     <string name="share_title">Share</string>

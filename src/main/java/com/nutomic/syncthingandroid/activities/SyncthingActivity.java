@@ -20,7 +20,7 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
 
     private SyncthingService mSyncthingService;
 
-    private LinkedList<OnServiceConnectedListener> mServiceConnectedListeners = new LinkedList<>();
+    private final LinkedList<OnServiceConnectedListener> mServiceConnectedListeners = new LinkedList<>();
 
     /**
      * To be used for Fragments.

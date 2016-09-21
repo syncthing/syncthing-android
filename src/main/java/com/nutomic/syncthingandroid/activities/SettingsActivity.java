@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import com.nutomic.syncthingandroid.R;
@@ -96,12 +95,7 @@ public class SettingsActivity extends SyncthingActivity {
         if (getIsCreate() && (mFragment instanceof DeviceFragment || mFragment instanceof FolderFragment)) {
             new AlertDialog.Builder(this)
                     .setMessage(R.string.dialog_discard_changes)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
         }

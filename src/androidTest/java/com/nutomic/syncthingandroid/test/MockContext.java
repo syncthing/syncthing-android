@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class MockContext extends ContextWrapper {
 
-    private ArrayList<Intent> mReceivedIntents = new ArrayList<>();
-    private ArrayList<Intent> mStopServiceIntents = new ArrayList<>();
+    private final ArrayList<Intent> mReceivedIntents = new ArrayList<>();
+    private final ArrayList<Intent> mStopServiceIntents = new ArrayList<>();
 
     /**
      * Use the actual context for calls that aren't easily mocked. May be null if those

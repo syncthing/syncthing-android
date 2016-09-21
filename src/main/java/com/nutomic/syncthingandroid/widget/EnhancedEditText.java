@@ -34,11 +34,9 @@ public class EnhancedEditText extends EditText {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isEnabled()) {
-            return super.onTouchEvent(event);
-        } else {
-            return false;
-        }
+        return (isEnabled())
+            ? super.onTouchEvent(event)
+            : false;
     }
 
     @Override

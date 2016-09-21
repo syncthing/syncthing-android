@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -30,26 +29,17 @@ public class RestartActivity extends SyncthingActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.restart_title)
-                .setPositiveButton(R.string.restart_now, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        getService().getApi().updateConfig();
-                        finish();
-                    }
+                .setPositiveButton(R.string.restart_now, (dialogInterface, i) -> {
+                    getService().getApi().updateConfig();
+                    finish();
                 })
-                .setNegativeButton(R.string.restart_later, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        createRestartNotification();
-                        finish();
-                    }
+                .setNegativeButton(R.string.restart_later, (dialogInterface, i) -> {
+                    createRestartNotification();
+                    finish();
                 })
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        createRestartNotification();
-                        finish();
-                    }
+                .setOnCancelListener(dialog -> {
+                    createRestartNotification();
+                    finish();
                 })
                 .show();
     }

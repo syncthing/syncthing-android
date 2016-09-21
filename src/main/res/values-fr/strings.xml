@@ -144,9 +144,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="sync_only_charging">Synchro uniquement sur chargeur</string>
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="sync_only_wifi_ssids">Limiter à certains réseaux WiFi</string>
-  <string name="sync_only_wifi_ssids_all">Synchroniser sur tous réseaux WiFi</string>
-  <string name="sync_only_wifi_ssids_values">Synchroniser seulement si connecté à: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">S\'il vous plait, activer le WiFi pour sélectionner un réseau</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">S\'il vous plait, activer le WiFi pour sélectionner un réseau</string>
   <string name="advanced_folder_picker">Choix étendu des dossiers</string>
   <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
   <string name="use_root_title">Faire fonctionner syncthing en super-utilisateur</string>

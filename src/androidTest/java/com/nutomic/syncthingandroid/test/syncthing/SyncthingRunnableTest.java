@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.test.MockContext;

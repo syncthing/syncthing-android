@@ -1,9 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +9,8 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,7 +22,6 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -284,14 +278,6 @@ public class SettingsFragment extends PreferenceFragment
         return true;
     }
 
-    private String formatWifiNameList(Set<String> ssids) {
-        Set<String> formatted = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        for (String ssid : ssids) {
-            formatted.add(ssid.replaceFirst("^\"", "").replaceFirst("\"$", ""));
-        }
-        return TextUtils.join(", ", formatted);
-    }
-
     /**
      * Changes the owner of syncthing files so they can be accessed without root.
      */
@@ -324,15 +310,12 @@ public class SettingsFragment extends PreferenceFragment
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.dialog_confirm_export)
                         .setPositiveButton(android.R.string.yes,
-                                new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mSyncthingService.exportConfig();
-                                Toast.makeText(getActivity(),
-                                        getString(R.string.config_export_successful,
-                                        SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
-                            }
-                        })
+                                (dialog, which) -> {
+                                    mSyncthingService.exportConfig();
+                                    Toast.makeText(getActivity(),
+                                            getString(R.string.config_export_successful,
+                                            SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                                })
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -340,22 +323,19 @@ public class SettingsFragment extends PreferenceFragment
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.dialog_confirm_import)
                         .setPositiveButton(android.R.string.yes,
-                                new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (mSyncthingService.importConfig()) {
-                                    Toast.makeText(getActivity(),
-                                            getString(R.string.config_imported_successful),
-                                            Toast.LENGTH_SHORT).show();
-                                    // No need to restart, as we shutdown to import the config, and
-                                    // then have to start Syncthing again.
-                                } else {
-                                    Toast.makeText(getActivity(),
-                                            getString(R.string.config_import_failed,
-                                            SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
+                                (dialog, which) -> {
+                                    if (mSyncthingService.importConfig()) {
+                                        Toast.makeText(getActivity(),
+                                                getString(R.string.config_imported_successful),
+                                                Toast.LENGTH_SHORT).show();
+                                        // No need to restart, as we shutdown to import the config, and
+                                        // then have to start Syncthing again.
+                                    } else {
+                                        Toast.makeText(getActivity(),
+                                                getString(R.string.config_import_failed,
+                                                SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                                    }
+                                })
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -366,17 +346,11 @@ public class SettingsFragment extends PreferenceFragment
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.streset_title)
                         .setMessage(R.string.streset_question)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                getActivity().startService(intent);
-                                Toast.makeText(getActivity(), R.string.streset_done, Toast.LENGTH_LONG).show();
-                            }
+                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                            getActivity().startService(intent);
+                            Toast.makeText(getActivity(), R.string.streset_done, Toast.LENGTH_LONG).show();
                         })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                            }
+                        .setNegativeButton(android.R.string.no, (dialogInterface, i) -> {
                         })
                         .show();
                 return true;

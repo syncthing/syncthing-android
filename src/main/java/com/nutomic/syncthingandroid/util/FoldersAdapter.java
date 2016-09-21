@@ -24,8 +24,8 @@ import static com.nutomic.syncthingandroid.syncthing.RestApi.readableFileSize;
 public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         implements RestApi.OnReceiveModelListener {
 
-    private HashMap<String, RestApi.Model> mModels = new HashMap<>();
-    private LayoutInflater mInflater;
+    private final HashMap<String, RestApi.Model> mModels = new HashMap<>();
+    private final LayoutInflater mInflater;
 
     public FoldersAdapter(Context context) {
         super(context, R.layout.item_folder_list);

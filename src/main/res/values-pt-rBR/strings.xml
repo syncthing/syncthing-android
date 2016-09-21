@@ -144,9 +144,7 @@ Por favor, informe-nos sobre quaisquer problemas via Github.</string>
   <string name="sync_only_charging">Somente durante o carregamento</string>
   <string name="sync_only_wifi">Somente conectado ao WiFi</string>
   <string name="sync_only_wifi_ssids">Limitar a certas redes WiFi</string>
-  <string name="sync_only_wifi_ssids_all">Sincronizar em todas as redes WiFi</string>
-  <string name="sync_only_wifi_ssids_values">Sincronizar somente quando conectado a %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Executar como Superusuário</string>

@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.net.Uri;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
 
 import com.nutomic.syncthingandroid.syncthing.GetTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;

@@ -28,14 +28,14 @@ public abstract class PollWebGuiAvailableTask extends AsyncTask<String, Void, Vo
      */
     private static final long WEB_GUI_POLL_INTERVAL = 100;
 
-    private String mHttpsCertPath;
+    private final String mHttpsCertPath;
 
     public PollWebGuiAvailableTask(String httpsCertPath) {
         mHttpsCertPath = httpsCertPath;
     }
 
     /**
-     * @param @url The URL of the web GUI (eg 127.0.0.1:8384).
+     * @param url The URL of the web GUI (eg 127.0.0.1:8384).
      */
     @Override
     protected Void doInBackground(String... url) {

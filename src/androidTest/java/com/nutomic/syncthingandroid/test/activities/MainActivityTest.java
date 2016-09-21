@@ -10,7 +10,7 @@ import com.nutomic.syncthingandroid.test.MockSyncthingService;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private MockSyncthingService mService = new MockSyncthingService();
+    private final MockSyncthingService mService = new MockSyncthingService();
 
     public MainActivityTest() {
         super(MainActivity.class);

@@ -83,7 +83,7 @@ public class DeviceFragment extends Fragment implements
 
     private boolean mDeviceNeedsToUpdate;
 
-    private DialogInterface.OnClickListener mCompressionEntrySelectedListener = new DialogInterface.OnClickListener() {
+    private final DialogInterface.OnClickListener mCompressionEntrySelectedListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
@@ -99,7 +99,7 @@ public class DeviceFragment extends Fragment implements
         }
     };
 
-    private TextWatcher mIdTextWatcher = new TextWatcherAdapter() {
+    private final TextWatcher mIdTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(mDevice.deviceID)) {
@@ -110,7 +110,7 @@ public class DeviceFragment extends Fragment implements
         }
     };
 
-    private TextWatcher mNameTextWatcher = new TextWatcherAdapter() {
+    private final TextWatcher mNameTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(mDevice.name)) {
@@ -121,7 +121,7 @@ public class DeviceFragment extends Fragment implements
         }
     };
 
-    private TextWatcher mAddressesTextWatcher = new TextWatcherAdapter() {
+    private final TextWatcher mAddressesTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(displayableAddresses())) {
@@ -132,7 +132,7 @@ public class DeviceFragment extends Fragment implements
         }
     };
 
-    private CompoundButton.OnCheckedChangeListener mIntroducerCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener mIntroducerCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (mDevice.introducer != isChecked) {
@@ -262,10 +262,10 @@ public class DeviceFragment extends Fragment implements
         if (!mIsCreateMode) {
             List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
             mDevice = null;
-            for (int i = 0; i < devices.size(); i++) {
-                if (devices.get(i).deviceID.equals(
+            for (RestApi.Device device : devices) {
+                if (device.deviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
-                    mDevice = devices.get(i);
+                    mDevice = device;
                     break;
                 }
             }
@@ -327,12 +327,7 @@ public class DeviceFragment extends Fragment implements
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_device_confirm)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                mSyncthingService.getApi().deleteDevice(mDevice, getActivity());
-                            }
-                        })
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteDevice(mDevice, getActivity()))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;

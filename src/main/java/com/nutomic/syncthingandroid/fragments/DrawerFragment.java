@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -156,12 +155,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
             return;
 
         mDeviceId.setText(info.myID);
-        mDeviceId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActivity.getApi().copyDeviceId(mDeviceId.getText().toString());
-            }
-        });
+        mDeviceId.setOnClickListener(v -> mActivity.getApi().copyDeviceId(mDeviceId.getText().toString()));
         mCpuUsage.setText(new DecimalFormat("0.00").format(info.cpuPercent) + "%");
         mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
         mAnnounceServer.setText(Integer.toString(info.extAnnounceConnected) + "/" +
@@ -217,13 +211,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
                 mActivity.closeDrawer();
                 new AlertDialog.Builder(getContext())
                         .setMessage(R.string.dialog_confirm_restart)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                getContext().startService(new Intent(getContext(), SyncthingService.class)
-                                        .setAction(SyncthingService.ACTION_RESTART));
-                            }
-                        })
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i1) -> getContext().startService(new Intent(getContext(), SyncthingService.class)
+                                .setAction(SyncthingService.ACTION_RESTART)))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 break;

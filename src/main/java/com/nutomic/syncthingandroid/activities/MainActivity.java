@@ -286,30 +286,17 @@ public class MainActivity extends SyncthingActivity
                 .setTitle(R.string.syncthing_disabled_title)
                 .setMessage(R.string.syncthing_disabled_message)
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
-                                        .setAction(SettingsActivity.ACTION_APP_SETTINGS);
-                                startActivity(intent);
-                            }
+                        (dialogInterface, i) -> {
+                            finish();
+                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
+                                    .setAction(SettingsActivity.ACTION_APP_SETTINGS);
+                            startActivity(intent);
                         }
                 )
                 .setNegativeButton(R.string.exit,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        }
+                        (dialogInterface, i) -> finish()
                 )
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        finish();
-                    }
-                })
+                .setOnCancelListener(dialogInterface -> finish())
                 .show();
         mDisabledDialog.setCanceledOnTouchOutside(false);
     }
@@ -402,43 +389,37 @@ public class MainActivity extends SyncthingActivity
      * Displays dialog asking user to accept/deny usage reporting.
      */
     private void showUsageReportingDialog() {
-        final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_ACCEPTED,
-                                                        MainActivity.this);
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_DENIED,
-                                                        MainActivity.this);
-                        break;
-                    case DialogInterface.BUTTON_NEUTRAL:
-                        Uri uri = Uri.parse("https://data.syncthing.net");
-                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                        break;
-                }
-
+        final DialogInterface.OnClickListener listener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_ACCEPTED,
+                                                    MainActivity.this);
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_DENIED,
+                                                    MainActivity.this);
+                    break;
+                case DialogInterface.BUTTON_NEUTRAL:
+                    Uri uri = Uri.parse("https://data.syncthing.net");
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    break;
             }
+
         };
 
-        getApi().getUsageReport(new RestApi.OnReceiveUsageReportListener() {
-            @Override
-            public void onReceiveUsageReport(String report) {
-                @SuppressLint("InflateParams")
-                View v = LayoutInflater.from(MainActivity.this)
-                        .inflate(R.layout.dialog_usage_reporting, null);
-                TextView tv = (TextView) v.findViewById(R.id.example);
-                tv.setText(report);
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(R.string.usage_reporting_dialog_title)
-                        .setView(v)
-                        .setPositiveButton(R.string.yes, listener)
-                        .setNegativeButton(R.string.no, listener)
-                        .setNeutralButton(R.string.open_website, listener)
-                        .show();
-            }
+        getApi().getUsageReport(report -> {
+            @SuppressLint("InflateParams")
+            View v = LayoutInflater.from(MainActivity.this)
+                    .inflate(R.layout.dialog_usage_reporting, null);
+            TextView tv = (TextView) v.findViewById(R.id.example);
+            tv.setText(report);
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle(R.string.usage_reporting_dialog_title)
+                    .setView(v)
+                    .setPositiveButton(R.string.yes, listener)
+                    .setNegativeButton(R.string.no, listener)
+                    .setNeutralButton(R.string.open_website, listener)
+                    .show();
         });
     }
 

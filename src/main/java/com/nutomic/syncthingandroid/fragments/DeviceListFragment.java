@@ -29,12 +29,7 @@ import java.util.TimerTask;
 public class DeviceListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         ListView.OnItemClickListener {
 
-    private final static Comparator<RestApi.Device> DEVICES_COMPARATOR = new Comparator<RestApi.Device>() {
-        @Override
-        public int compare(RestApi.Device lhs, RestApi.Device rhs) {
-            return lhs.name.compareTo(rhs.name);
-        }
-    };
+    private final static Comparator<RestApi.Device> DEVICES_COMPARATOR = (lhs, rhs) -> lhs.name.compareTo(rhs.name);
 
     private DevicesAdapter mAdapter;
 
@@ -47,12 +42,7 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateList();
-                    }
-                });
+                getActivity().runOnUiThread(DeviceListFragment.this::updateList);
             }
 
         }, 0, SyncthingService.GUI_UPDATE_INTERVAL);

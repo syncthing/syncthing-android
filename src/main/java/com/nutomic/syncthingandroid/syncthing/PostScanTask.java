@@ -26,7 +26,7 @@ public class PostScanTask extends AsyncTask<String, Void, Void> {
 
     public static final String URI_SCAN = "/rest/db/scan";
 
-    private String mHttpsCertPath;
+    private final String mHttpsCertPath;
 
     public PostScanTask(String httpsCertPath) {
         mHttpsCertPath = httpsCertPath;

@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -31,7 +30,6 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.TreeSet;
 
 /**
@@ -90,13 +88,10 @@ public class FolderPickerActivity extends SyncthingActivity
     @SuppressLint("NewApi")
     private void populateRoots() {
         // Use own comparator to handle null values.
-        TreeSet<File> roots = new TreeSet<>(new Comparator<File>() {
-            @Override
-            public int compare(File lhs, File rhs) {
-                if (lhs == null | rhs == null)
-                    return 0;
-                return lhs.compareTo(rhs);
-            }
+        TreeSet<File> roots = new TreeSet<>((lhs, rhs) -> {
+            if (lhs == null | rhs == null)
+                return 0;
+            return lhs.compareTo(rhs);
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -152,22 +147,12 @@ public class FolderPickerActivity extends SyncthingActivity
                         .setTitle(R.string.create_folder)
                         .setView(et)
                         .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        createFolder(et.getText().toString());
-                                    }
-                                }
+                                (dialogInterface, i) -> createFolder(et.getText().toString())
                         )
                         .setNegativeButton(android.R.string.cancel, null)
                         .create();
-                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialogInterface) {
-                        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
-                                .showSoftInput(et, InputMethodManager.SHOW_IMPLICIT);
-                    }
-                });
+                dialog.setOnShowListener(dialogInterface -> ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                        .showSoftInput(et, InputMethodManager.SHOW_IMPLICIT));
                 dialog.show();
                 return true;
             case R.id.select:
@@ -207,14 +192,12 @@ public class FolderPickerActivity extends SyncthingActivity
         if (contents == null)
             contents = new File[]{};
 
-        Arrays.sort(contents, new Comparator<File>() {
-            public int compare(File f1, File f2) {
-                if (f1.isDirectory() && f2.isFile())
-                    return -1;
-                if (f1.isFile() && f2.isDirectory())
-                    return 1;
-                return f1.getName().compareTo(f2.getName());
-            }
+        Arrays.sort(contents, (f1, f2) -> {
+            if (f1.isDirectory() && f2.isFile())
+                return -1;
+            if (f1.isFile() && f2.isDirectory())
+                return 1;
+            return f1.getName().compareTo(f2.getName());
         });
 
         for (File f : contents) {

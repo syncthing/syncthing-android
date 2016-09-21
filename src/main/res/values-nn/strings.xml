@@ -144,9 +144,7 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="sync_only_charging">Synkroniser berre mens eg laddar</string>
   <string name="sync_only_wifi">Synkroniser berre over WiFi</string>
   <string name="sync_only_wifi_ssids">Avgrens til visse WiFi-nettverk</string>
-  <string name="sync_only_wifi_ssids_all">Synkroniser på alle WiFi-nettverk</string>
-  <string name="sync_only_wifi_ssids_values">Synkroniser berre på: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
   <string name="advanced_folder_picker_summary">Vel kva mappe som helst for synkronisering</string>
   <string name="use_root_title">Køyr Syncthing som superbrukar</string>

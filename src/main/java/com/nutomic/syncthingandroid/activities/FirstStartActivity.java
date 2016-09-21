@@ -17,8 +17,6 @@ import com.nutomic.syncthingandroid.R;
 
 public class FirstStartActivity extends Activity implements Button.OnClickListener {
 
-    private static final String TAG = "FirstStartActivity";
-
     private static final int REQUEST_WRITE_STORAGE = 142;
 
     private SharedPreferences mPreferences;

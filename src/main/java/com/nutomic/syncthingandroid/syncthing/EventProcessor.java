@@ -70,7 +70,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         // If that's the case we've to start at zero because syncthing was restarted.
         mApi.getEvents(0, 1, new RestApi.OnReceiveEventListener() {
             @Override
-            public void onEvent(long id, String eventType, JSONObject data) throws JSONException {
+            public void onEvent(String eventType, JSONObject data) throws JSONException {
 
             }
 
@@ -89,7 +89,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      * Performs the actual event handling.
      */
     @Override
-    public void onEvent(long id, String type, JSONObject data) throws JSONException {
+    public void onEvent(String type, JSONObject data) throws JSONException {
         switch (type) {
             case "DeviceRejected":
                 String deviceId = data.getString("device");
@@ -159,7 +159,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
 
             //noinspection CommitPrefEdits
-            sp.edit().putLong(PREF_LAST_SYNC_ID, mLastEventId).commit();
+            sp.edit().putLong(PREF_LAST_SYNC_ID, mLastEventId).apply();
         }
 
         synchronized (mMainThreadHandler) {

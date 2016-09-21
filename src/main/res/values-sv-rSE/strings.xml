@@ -144,9 +144,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="sync_only_charging">Synkronisera endast vid laddning</string>
   <string name="sync_only_wifi">Synkronisera endast trådlöst</string>
   <string name="sync_only_wifi_ssids">Begränsa till vissa WiFi-nätverk</string>
-  <string name="sync_only_wifi_ssids_all">Synkronisera på alla WiFi-nätverk</string>
-  <string name="sync_only_wifi_ssids_values">Synkronisera endast när den är ansluten till: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Sätt på WiFi för att välja nätverk.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Sätt på WiFi för att välja nätverk.</string>
   <string name="advanced_folder_picker">Använd avancerad katalogväljare</string>
   <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör Syncthing som superanvändare</string>

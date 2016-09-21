@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -32,11 +31,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -107,7 +104,7 @@ public class SyncthingService extends Service implements
 
     private EventProcessor mEventProcessor;
 
-    private LinkedList<FolderObserver> mObservers = new LinkedList<>();
+    private final LinkedList<FolderObserver> mObservers = new LinkedList<>();
 
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -347,14 +344,10 @@ public class SyncthingService extends Service implements
             }
 
             mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
-                    new RestApi.OnApiAvailableListener() {
-                @Override
-                public void onApiAvailable() {
-                    mCurrentState = State.ACTIVE;
-                    onApiChange();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
+                    () -> {
+                        mCurrentState = State.ACTIVE;
+                        onApiChange();
+                        new Thread(() -> {
                             for (RestApi.Folder r : mApi.getFolders()) {
                                 try {
                                     mObservers.add(new FolderObserver(mApi, r));
@@ -368,15 +361,8 @@ public class SyncthingService extends Service implements
                                             .show();
                                 }
                             }
-                        }
-                    }).start();
-                }
-            }, new RestApi.OnConfigChangedListener() {
-                @Override
-                public void onConfigChanged() {
-                    onApiChange();
-                }
-            });
+                        }).start();
+                    }, SyncthingService.this::onApiChange);
 
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
 
@@ -472,7 +458,7 @@ public class SyncthingService extends Service implements
      * The listener is called immediately with the current state, and again whenever the state
      * changes. The call is always from the GUI thread.
      *
-     * @see {@link #unregisterOnApiChangeListener}
+     * @see #unregisterOnApiChangeListener
      */
     public void registerOnApiChangeListener(OnApiChangeListener listener) {
         // Make sure we don't send an invalid state or syncthing might show a "disabled" message
@@ -484,7 +470,7 @@ public class SyncthingService extends Service implements
     /**
      * Unregisters a previously registered listener.
      *
-     * @see {@link #registerOnApiChangeListener}
+     * @see #registerOnApiChangeListener
      */
     public void unregisterOnApiChangeListener(OnApiChangeListener listener) {
         mOnApiChangeListeners.remove(listener);

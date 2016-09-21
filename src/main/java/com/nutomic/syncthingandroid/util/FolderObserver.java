@@ -6,7 +6,6 @@ import android.util.Log;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +34,7 @@ public class FolderObserver extends FileObserver {
 
     public class FolderNotExistingException extends Exception {
 
-        private String mPath;
+        private final String mPath;
 
         public FolderNotExistingException(String path) {
             mPath = path;
@@ -69,12 +68,7 @@ public class FolderObserver extends FileObserver {
         if (!currentFolder.exists()) {
             throw new FolderNotExistingException(currentFolder.getAbsolutePath());
         }
-        File[] directories = currentFolder.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                return new File(current, name).isDirectory();
-            }
-        });
+        File[] directories = currentFolder.listFiles((current, name) -> new File(current, name).isDirectory());
 
         if (directories != null) {
             for (File f : directories) {
