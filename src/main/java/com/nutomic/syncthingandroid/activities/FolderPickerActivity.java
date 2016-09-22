@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -236,7 +237,7 @@ public class FolderPickerActivity extends SyncthingActivity
             int textColor = (f.isDirectory())
                     ? android.R.color.primary_text_light
                     : android.R.color.tertiary_text_light;
-            title.setTextColor(getContext().getResources().getColor(textColor));
+            title.setTextColor(ContextCompat.getColor(getContext(), textColor));
 
             return convertView;
         }

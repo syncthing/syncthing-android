@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,11 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         if (conn != null && conn.connected) {
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
-                status.setTextColor(r.getColor(R.color.text_green));
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
             }
             else {
                 status.setText(r.getString(R.string.device_syncing, conn.completion));
-                status.setTextColor(r.getColor(R.color.text_blue));
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
             download.setText(RestApi.readableTransferRate(getContext(), conn.inBits));
             upload.setText(RestApi.readableTransferRate(getContext(), conn.outBits));
@@ -61,7 +62,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
             download.setText(RestApi.readableTransferRate(getContext(), 0));
             upload.setText(RestApi.readableTransferRate(getContext(), 0));
             status.setText(r.getString(R.string.device_disconnected));
-            status.setTextColor(r.getColor(R.color.text_red));
+            status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
         }
 
         return convertView;

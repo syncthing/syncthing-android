@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
@@ -53,7 +54,8 @@ public class DeviceStateHolder extends BroadcastReceiver {
         mContext = context;
         ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mIsWifiConnected = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        mIsWifiConnected = ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI && ni.isConnected();
         if (android.os.Build.VERSION.SDK_INT >= 16 && cm.isActiveNetworkMetered())
             mIsWifiConnected = false;
         if (mIsWifiConnected) {

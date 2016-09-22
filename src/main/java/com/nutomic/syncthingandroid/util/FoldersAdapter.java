@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         RestApi.Folder folder = getItem(position);
         RestApi.Model model = mModels.get(folder.id);
         label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
-        state.setTextColor(getContext().getResources().getColor(R.color.text_green));
+        state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
         directory.setText(folder.path);
         if (model != null) {
             int percentage = (model.globalBytes != 0)

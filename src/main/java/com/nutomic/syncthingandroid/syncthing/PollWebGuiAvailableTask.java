@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.syncthing;
 
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.nutomic.syncthingandroid.util.Https;
 
@@ -53,7 +52,7 @@ public abstract class PollWebGuiAvailableTask extends AsyncTask<String, Void, Vo
                 // We catch this in every call, as long as the service is not online,
                 // so we ignore and continue.
             } catch (IOException|InterruptedException|IllegalArgumentException e) {
-                Log.w(TAG, "Failed to poll for web interface", e);
+                //Log.w(TAG, "Failed to poll for web interface", e);
             }
         } while (status != HttpStatus.SC_OK && status != HttpStatus.SC_UNAUTHORIZED);
         return null;

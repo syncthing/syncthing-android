@@ -221,7 +221,7 @@ public class MainActivity extends SyncthingActivity
                 .commit();
         mDrawerToggle = new Toggle(this, mDrawerLayout);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
         setOptimalDrawerWidth(findViewById(R.id.drawer));
 
         onNewIntent(getIntent());
