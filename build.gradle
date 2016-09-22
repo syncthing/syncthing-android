@@ -28,7 +28,6 @@ dependencies {
     compile 'org.mindrot:jbcrypt:0.3m'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.1.2'
-    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
 }
 
 project.archivesBaseName = 'syncthing'

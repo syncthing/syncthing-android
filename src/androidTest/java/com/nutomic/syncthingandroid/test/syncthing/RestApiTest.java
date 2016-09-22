@@ -2,7 +2,7 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.test.AndroidTestCase;
 
-import com.nutomic.syncthingandroid.syncthing.PollWebGuiAvailableTask;
+import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -28,13 +28,13 @@ public class RestApiTest extends AndroidTestCase {
         String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(2);
-        new PollWebGuiAvailableTask(httpsCertPath) {
+        new PollWebGuiAvailableTask(config.getWebGuiUrl(), httpsCertPath, config.getApiKey()) {
             @Override
             protected void onPostExecute(Void aVoid) {
                 mApi.onWebGuiAvailable();
                 latch.countDown();
             }
-        }.execute(config.getWebGuiUrl());
+        }.execute();
         mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
                 latch::countDown, null);
         latch.await(1, TimeUnit.SECONDS);

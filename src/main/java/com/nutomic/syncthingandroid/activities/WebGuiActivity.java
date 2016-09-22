@@ -129,7 +129,7 @@ public class WebGuiActivity extends SyncthingActivity
 
     @Override
     public void onWebGuiAvailable() {
-        mWebView.loadUrl(getService().getWebGuiUrl());
+        mWebView.loadUrl(getService().getWebGuiUrl().toString());
     }
 
     /**

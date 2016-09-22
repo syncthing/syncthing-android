@@ -18,6 +18,8 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Locale;
@@ -96,8 +98,12 @@ public class ConfigXml {
         return new File(context.getFilesDir(), CONFIG_FILE);
     }
 
-    public String getWebGuiUrl() {
-        return "https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent();
+    public URL getWebGuiUrl() {
+        try {
+            return new URL("https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Failed to parse web interface URL", e);
+        }
     }
 
     public String getApiKey() {

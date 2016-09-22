@@ -11,26 +11,23 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.RestartActivity;
+import com.nutomic.syncthingandroid.http.GetTask;
+import com.nutomic.syncthingandroid.http.PostTask;
 import com.nutomic.syncthingandroid.util.FolderObserver;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -169,7 +166,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     private String mVersion;
 
-    private final String mUrl;
+    private final URL mUrl;
 
     private final String mApiKey;
 
@@ -203,7 +200,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     private final Map<String, String> mCacheFolderPathLookup = new HashMap<>();
 
-    public RestApi(Context context, String url, String apiKey, OnApiAvailableListener apiListener,
+    public RestApi(Context context, URL url, String apiKey, OnApiAvailableListener apiListener,
                    OnConfigChangedListener configListener) {
         mContext = context;
         mUrl = url;
@@ -237,7 +234,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     @Override
     public void onWebGuiAvailable() {
         mAvailableCount.set(0);
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -253,8 +250,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to parse config", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_VERSION, mApiKey);
-        new GetTask(mHttpsCertPath) {
+        }.execute();
+        new GetTask(mUrl, GetTask.URI_CONFIG, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String config) {
                 try {
@@ -264,7 +261,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to parse config", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_CONFIG, mApiKey);
+        }.execute();
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
             tryIsAvailable();
@@ -367,7 +364,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void requireRestart(Activity activity) {
         if (mRestartPostponed) {
-            new PostConfigTask(mHttpsCertPath).execute(mUrl, mApiKey, mConfig.toString());
+            new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey).execute(mConfig.toString());
         } else {
             activity.startActivity(new Intent(mContext, RestartActivity.class));
         }
@@ -380,13 +377,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * This executes a restart immediately, and does not show a dialog.
      */
     public void updateConfig() {
-        new PostConfigTask(mHttpsCertPath) {
+        new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey) {
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
+            protected void onPostExecute(Boolean b) {
                 mContext.startService(new Intent(mContext, SyncthingService.class)
                         .setAction(SyncthingService.ACTION_RESTART));
             }
-        }.execute(mUrl, mApiKey, mConfig.toString());
+        }.execute(mConfig.toString());
 
     }
 
@@ -445,7 +442,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param listener Callback invoked when the result is received.
      */
     public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -472,7 +469,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to read system info", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_SYSTEM, mApiKey);
+        }.execute();
     }
 
     /**
@@ -481,7 +478,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param listener Callback invoked when the result is received.
      */
     public void getSystemVersion(final OnReceiveSystemVersionListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String response) {
                 if (response == null) {
@@ -495,7 +492,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to read system info", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_VERSION, mApiKey);
+        }.execute();
     }
 
     /**
@@ -594,7 +591,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Use the key {@link #TOTAL_STATS} to get connection info for the local device.
      */
     public void getConnections(final OnReceiveConnectionsListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_CONNECTIONS, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -650,7 +647,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to parse connections", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_CONNECTIONS, mApiKey);
+        }.execute();
     }
 
     /**
@@ -720,7 +717,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns status information about the folder with the given id.
      */
     public void getModel(final String folderId, final OnReceiveModelListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -748,7 +745,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to read folder info", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_MODEL, mApiKey, "folder", folderId);
+        }.execute("folder", folderId);
     }
 
     /**
@@ -779,7 +776,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * The OnReceiveEventListeners onEvent method is called for each event.
      */
     public final void getEvents(final long sinceId, final long limit, final OnReceiveEventListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_EVENTS, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 if (s == null)
@@ -815,7 +812,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     Log.w(TAG, "Failed to read events", e);
                 }
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mUrl, GetTask.URI_EVENTS, mApiKey,
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
                 "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
     }
 
@@ -998,7 +995,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Normalizes a given device ID.
      */
     public void normalizeDeviceId(final String id, final OnDeviceIdNormalizedListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_DEVICEID, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -1016,7 +1013,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 }
                 listener.onDeviceIdNormalized(normalized, error);
             }
-        }.execute(mUrl, GetTask.URI_DEVICEID, mApiKey, "id", id);
+        }.execute("id", id);
     }
 
     /**
@@ -1050,7 +1047,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
-        new PostScanTask(mHttpsCertPath).execute(mUrl, mApiKey, folderId, relativePath);
+        new PostTask(mUrl, PostTask.URI_SCAN, mHttpsCertPath, mApiKey).execute(folderId, relativePath);
     }
 
     /**
@@ -1109,7 +1106,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns prettyfied usage report.
      */
     public void getUsageReport(final OnReceiveUsageReportListener listener) {
-        new GetTask(mHttpsCertPath) {
+        new GetTask(mUrl, GetTask.URI_REPORT, mHttpsCertPath, mApiKey) {
             @Override
             protected void onPostExecute(String s) {
                 try {
@@ -1121,7 +1118,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                     throw new RuntimeException("Failed to prettify usage report", e);
                 }
             }
-        }.execute(mUrl, GetTask.URI_REPORT, mApiKey);
+        }.execute();
     }
 
     /**

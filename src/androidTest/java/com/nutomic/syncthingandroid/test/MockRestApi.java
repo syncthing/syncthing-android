@@ -6,12 +6,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MockRestApi extends RestApi {
 
-    public MockRestApi(Context context, String url, String apiKey,
+    public MockRestApi(Context context, URL url, String apiKey,
                        OnApiAvailableListener listener) {
         super(context, url, apiKey, listener, null);
     }
@@ -76,7 +77,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public boolean editFolder(Folder folder, boolean create, Activity activity) {
+    public void editFolder(Folder folder, boolean create, Activity activity) {
         throw new UnsupportedOperationException();
     }
 

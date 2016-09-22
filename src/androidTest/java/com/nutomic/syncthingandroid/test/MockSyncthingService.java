@@ -6,6 +6,7 @@ import android.os.IBinder;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
+import java.net.URL;
 import java.util.LinkedList;
 
 public class MockSyncthingService extends SyncthingService {
@@ -67,7 +68,7 @@ public class MockSyncthingService extends SyncthingService {
     }
 
     @Override
-    public String getWebGuiUrl() {
+    public URL getWebGuiUrl() {
         throw new UnsupportedOperationException();
     }
 

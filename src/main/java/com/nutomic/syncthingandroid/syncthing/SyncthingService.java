@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 import com.nutomic.syncthingandroid.util.PRNGFixes;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -226,8 +228,8 @@ public class SyncthingService extends Service implements
                     registerOnWebGuiAvailableListener(mApi);
                 if (mEventProcessor != null)
                     registerOnWebGuiAvailableListener(mEventProcessor);
-                new PollWebGuiAvailableTaskImpl(getFilesDir() + "/" + HTTPS_CERT_FILE)
-                        .execute(mConfig.getWebGuiUrl());
+                new PollWebGuiAvailableTaskImpl(getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE, mConfig.getApiKey())
+                        .execute();
                 mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
                 new Thread(mRunnable).start();
                 updateNotification();
@@ -321,10 +323,10 @@ public class SyncthingService extends Service implements
      * version, and reads syncthing URL and API key (these are passed internally as
      * {@code Pair<String, String>}.
      */
-    private class StartupTask extends AsyncTask<Void, Void, Pair<String, String>> {
+    private class StartupTask extends AsyncTask<Void, Void, Pair<URL, String>> {
 
         @Override
-        protected Pair<String, String> doInBackground(Void... voids) {
+        protected Pair<URL, String> doInBackground(Void... voids) {
             try {
                 mConfig = new ConfigXml(SyncthingService.this);
                 return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
@@ -334,7 +336,7 @@ public class SyncthingService extends Service implements
         }
 
         @Override
-        protected void onPostExecute(Pair<String, String> urlAndKey) {
+        protected void onPostExecute(Pair<URL, String> urlAndKey) {
             if (urlAndKey == null) {
                 Toast.makeText(SyncthingService.this, R.string.config_create_failed,
                         Toast.LENGTH_LONG).show();
@@ -478,8 +480,8 @@ public class SyncthingService extends Service implements
 
     private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
 
-        public PollWebGuiAvailableTaskImpl(String httpsCertPath) {
-            super(httpsCertPath);
+        public PollWebGuiAvailableTaskImpl(URL url, String httpsCertPath, String apiKey) {
+            super(url, httpsCertPath, apiKey);
         }
 
         /**
@@ -528,7 +530,7 @@ public class SyncthingService extends Service implements
         }
     }
 
-    public String getWebGuiUrl() {
+    public URL getWebGuiUrl() {
         return mConfig.getWebGuiUrl();
     }
 

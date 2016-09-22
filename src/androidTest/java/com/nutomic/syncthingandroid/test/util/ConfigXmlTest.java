@@ -29,7 +29,7 @@ public class ConfigXmlTest extends AndroidTestCase {
     }
 
     public void testGetWebGuiUrl() {
-        assertTrue(mConfig.getWebGuiUrl().startsWith("https://127.0.0.1:"));
+        assertTrue(mConfig.getWebGuiUrl().toString().startsWith("https://127.0.0.1:"));
     }
 
 }
