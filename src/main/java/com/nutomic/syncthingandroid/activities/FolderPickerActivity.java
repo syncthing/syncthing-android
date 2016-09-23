@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -229,7 +230,8 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
             TextView title = (TextView) convertView.findViewById(android.R.id.text1);
             File f = getItem(position);
@@ -250,7 +252,8 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        @NonNull
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
             TextView title = (TextView) convertView.findViewById(android.R.id.text1);
             title.setText(getItem(position).getAbsolutePath());

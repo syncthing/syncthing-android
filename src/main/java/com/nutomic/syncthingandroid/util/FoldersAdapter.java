@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -34,7 +35,8 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
             convertView = mInflater.inflate(R.layout.item_folder_list, parent, false);
 

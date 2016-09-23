@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,8 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
