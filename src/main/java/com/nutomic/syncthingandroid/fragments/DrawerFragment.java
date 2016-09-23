@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
@@ -17,7 +16,8 @@ import com.nutomic.syncthingandroid.activities.WebGuiActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -157,15 +157,16 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
 
         mDeviceId.setText(info.myID);
         mDeviceId.setOnClickListener(v -> mActivity.getApi().copyDeviceId(mDeviceId.getText().toString()));
-        mCpuUsage.setText(new DecimalFormat("0.00").format(info.cpuPercent) + "%");
+        NumberFormat percentFormat = NumberFormat.getPercentInstance();
+        percentFormat.setMaximumFractionDigits(2);
+        mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
         mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
-        mAnnounceServer.setText(Integer.toString(info.extAnnounceConnected) + "/" +
-                Integer.toString(info.extAnnounceTotal));
-        if (info.extAnnounceConnected > 0) {
-            mAnnounceServer.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
-        } else {
-            mAnnounceServer.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
-        }
+        mAnnounceServer.setText(String.format(Locale.getDefault(), "%1$d/%2$d",
+                                              info.extAnnounceConnected, info.extAnnounceTotal));
+        int color = (info.extAnnounceConnected > 0)
+                ? R.color.text_green
+                : R.color.text_red;
+        mAnnounceServer.setTextColor(ContextCompat.getColor(getContext(), color));
     }
 
     /**
