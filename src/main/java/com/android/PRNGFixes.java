@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.util;
+package com.android;
 
 /*
  * This software is provided 'as-is', without any express or implied
