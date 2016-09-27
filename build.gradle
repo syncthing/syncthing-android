@@ -1,10 +1,7 @@
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
-
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
@@ -17,9 +14,9 @@ apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.triplet.play'
 
 repositories {
-    mavenCentral()
     jcenter()
 }
+
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201608240809'
     compile 'com.android.support:design:24.2.1'
