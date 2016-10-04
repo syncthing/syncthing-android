@@ -2,34 +2,43 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Une application ouverte, fiable et décentralisée pour synchroniser des fichiers.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">Continuer</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">En attente de l\'interface WEB</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Génération des clefs de sécurité. Cela peut prendre quelques minutes.</string>
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Ajouter dossier</string>
+  <string name="add_folder">Ajouter un partage</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Partager ID machine</string>
+  <string name="share_device_id">Partager ID appareil</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Envoyer ID machine à</string>
+  <string name="send_device_id_to">Envoyer ID appareil à</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Chargement...</string>
   <string name="usage_reporting_dialog_title">Autoriser l\'envoi anonyme de rapports d\'utilisation ?</string>
-  <string name="usage_reporting_dialog_description">Le rapport crypté des usages est envoyé tous les jours. Il est utilisé pour recueillir les types de plateformes, la tailles des dossiers et les versions d\'applications. Si le type de données envoyées dans les rapports est modifié, vous verrez à nouveau cette boite de dialogue.\n\nL\'agrégation des statistiques est publique, et disponible sur https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Le rapport crypté des usages est envoyé tous les jours. Il est utilisé pour recueillir les types de plates-formes, la tailles des partages et les versions d\'applications. Si le type de données envoyées dans les rapports est modifié, vous verrez à nouveau cette boite de dialogue.\n\nL\'agrégation des statistiques est publique, et disponible sur https://data.syncthing.net.</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <string name="off">Arrêt</string>
   <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
-  <string name="device_rejected">La machine %1$s veut se connecter</string>
-  <string name="folder_rejected">La machine %1$s veut partager le dossier %2$s</string>
+  <string name="device_rejected">L\'appareil %1$s veut se connecter</string>
+  <string name="folder_rejected">L\'appareil %1$s veut partager %2$s</string>
   <!--FoldersFragment-->
-  <string name="folders_fragment_title">Dossiers</string>
+  <string name="folders_fragment_title">Partages</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Aucun dossier trouvé</string>
+  <string name="folder_list_empty">Aucun partage trouvé</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d fichiers</string>
   <!--DevicesFragment-->
-  <string name="devices_fragment_title">Machines</string>
+  <string name="devices_fragment_title">Appareils</string>
   <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Aucune machine trouvée</string>
+  <string name="devices_list_empty">Aucun appareil trouvé</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Synchronisé</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
@@ -44,7 +53,7 @@
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Réception:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Emission:\u0020</string>
+  <string name="upload_title_colon">Émission:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Utilisation du CPU</string>
   <!--Title for current RAM usage-->
@@ -53,42 +62,39 @@
   <string name="announce_server">Serveur d\'annonce</string>
   <string name="restart">Redémarrer</string>
   <string name="dialog_confirm_restart">Voulez-vous redémarrer Syncthing ?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
-  <string name="folder_id">ID du dossier</string>
+  <string name="folder_id">ID du partage</string>
   <!--Setting title-->
   <string name="folder_label">Étiquette du répertoire</string>
   <!--Setting title-->
-  <string name="directory">Dossier</string>
+  <string name="directory">Répertoire</string>
   <!--Setting title-->
-  <string name="folder_master">Dossier maitre</string>
+  <string name="folder_master">Partage maître</string>
   <!--Setting title-->
-  <string name="devices">Machines</string>
+  <string name="devices">Appareils</string>
   <!--Setting title-->
   <string name="keep_versions">Conserver les versions</string>
   <!--Setting title-->
-  <string name="delete_folder">Supprimer le dossier</string>
+  <string name="delete_folder">Supprimer le partage</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Création d\'un dossier</string>
+  <string name="create_folder">Création d\'un partage</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Édition du dossier</string>
+  <string name="edit_folder">Modification du partage</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Créer</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Voulez-vous vraiment enlever ce dossier de Syncthing ?</string>
+  <string name="remove_folder_confirm">Voulez-vous vraiment enlever ce partage de Syncthing ?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">L\'ID du dossier ne doit pas être vide</string>
+  <string name="folder_id_required">L\'ID du partage ne doit pas être vide</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Le chemin du dossier ne doit pas être vide</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Voulez-vous vraiment exporter votre configuration ? Les fichiers existants seront écrasés.\n\n ATTENTION ! D\'autres applications pourraient lire la clé privée située à l\'emplacement de sauvegarde et l\'utiliser pour télécharger/modifier les fichiers synchronisés.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Voulez-vous vraiment importer la nouvelle configuration ? Les paramètres existants seront écrasés.</string>
-  <!--DeviceSettingsFragment-->
+  <string name="folder_path_required">Le chemin du répertoire ne doit pas être vide</string>
+  <string name="dialog_discard_changes">Annuler vos modifications ?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
-  <string name="device_id">ID machine</string>
+  <string name="device_id">Mon ID</string>
   <!--Setting title-->
-  <string name="name">Nom</string>
+  <string name="name">Nom convivial optionnel</string>
   <!--Setting title-->
   <string name="addresses">Adresses</string>
   <!--Setting title-->
@@ -104,16 +110,16 @@
   <!--Setting title-->
   <string name="introducer">Initiateur</string>
   <!--ActionBar item-->
-  <string name="delete_device">Supprimer la machine</string>
-  <string name="add_device">Ajout d\'une machine</string>
+  <string name="delete_device">Supprimer l\'appareil</string>
+  <string name="add_device">Ajout d\'un appareil</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Ajouter</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Edition de la machine</string>
+  <string name="edit_device">Modification de l\'appareil</string>
   <!--Dialog shown when attempting to remove a device-->
-  <string name="remove_device_confirm">Voulez-vous vraiment enlever cette machine ?</string>
+  <string name="remove_device_confirm">Voulez-vous vraiment enlever cet appareil ?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">L\'ID machine ne peut pas être vide</string>
+  <string name="device_id_required">L\'ID d\'appareil ne peut pas être vide</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Scanner un QR Code</string>
   <!--Toast show if we could not get root permissions-->
@@ -121,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface WEB</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">En attente de l\'interface WEB</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Génération des clefs de sécurité. Cela peut prendre quelques minutes.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing est une application \"open-source\" de synchronisation de fichiers.\n\n\
-Pour partager des données avec une autre machine, vous devez ajouter l\'identifiant unique machine (ID), sur chacune d\'elles dans la liste des machines. Ensuite, vous pourrez sélectionner quel dossier partager avec quelle machine.\n\n
-S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Paramètres</string>
@@ -144,11 +140,11 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="sync_only_charging">Synchro uniquement sur chargeur</string>
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="sync_only_wifi_ssids">Limiter à certains réseaux WiFi</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">S\'il vous plait, activer le WiFi pour sélectionner un réseau</string>
-  <string name="advanced_folder_picker">Choix étendu des dossiers</string>
-  <string name="advanced_folder_picker_summary">Autorise la sélection n\'importe quel dossier de cette machine pour la synchronisation</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le WiFi pour sélectionner un réseau</string>
+  <string name="advanced_folder_picker">Choix étendu des répertoires</string>
+  <string name="advanced_folder_picker_summary">Permettre la sélection de n\'importe quel répertoire de cet appareil pour créer les partages</string>
   <string name="use_root_title">Faire fonctionner syncthing en super-utilisateur</string>
-  <string name="use_root_summary">Ceci est une fonction instable qui peut causer des problèmes entre Syncthing et votre machine. Si vous rencontrez des problèmes, vous devrez réinstaller Syncthing.</string>
+  <string name="use_root_summary">Ceci est une fonction instable qui peut causer des problèmes entre Syncthing et votre appareil. Si vous rencontrez des problèmes, vous devrez réinstaller Syncthing.</string>
   <string name="notification_type_title">Notification</string>
   <string name="notification_type_summary">Choisissez le mode de notification</string>
   <string-array name="notification_type_entries">
@@ -158,7 +154,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Options Syncthing</string>
-  <string name="device_name">Nom de machine</string>
+  <string name="device_name">Nom de l\'appareil</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
   <string name="max_recv_kbps">Limite du débit de réception (Ko/s)</string>
   <string name="max_send_kbps">Limite du débit d\'émission (Ko/s)</string>
@@ -177,6 +173,13 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="keep_wakelock_while_binary_running">Garder le CPU en éveil quand Syncthing fonctionne.</string>
   <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>
   <string name="run_as_foreground_service">Fonctionner avec prioriré de premier plan</string>
+  <string name="run_as_foreground_service_summary">Si activé, Syncthing fonctionnera avec une priorité de premier plan et est moins susceptible d\'être arrêté par Android. Cela peut provoquer l\'arrêt d\'autres services si la mémoire disponible devient faible. En raison des exigences d\'Android, quel que soit le réglage \"Notification\", une notification de faible priorité devra être affichée.</string>
+  <string name="use_tor_title">Utiliser Tor</string>
+  <string name="use_tor_summary">Forcer tout le trafic à passer par Tor pour plus de discrétion. Nécessite Orbot.</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Voulez-vous vraiment exporter votre configuration ? Les fichiers existants seront écrasés.\n\n ATTENTION ! D\'autres applications pourraient lire la clé privée située à l\'emplacement de sauvegarde et l\'utiliser pour télécharger/modifier les fichiers synchronisés.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Voulez-vous vraiment importer la nouvelle configuration ? Les paramètres existants seront écrasés.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuration a été exportée dans %1$s</string>
   <string name="import_config">Importer la configuration</string>
@@ -188,8 +191,6 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="sttrace_title">Options de débuggage</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Seuls, les caractères a-z et \',\' sont autorisés dans les options STTRACE</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Remise à zéro de la base de données</string>
   <!--Syncthing was reset-->
@@ -217,16 +218,16 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="app_version_title">Version de Syncthing pour Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Sélection du dossier</string>
+  <string name="folder_picker_title">Sélection du répertoire</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Attention: votre version Android n\'autorise pas la synchronisation avec des périphériques de stockages externes.</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Le dossier est vide</string>
+  <string name="directory_empty">Le répertoire est vide</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Créer un nouveau dossier</string>
+  <string name="create_fs_folder">Créer un nouveau partage</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Sélectionner ce dossier</string>
-  <string name="create_folder_failed">Echec de création du dossier</string>
+  <string name="select_folder">Choisir ce répertoire</string>
+  <string name="create_folder_failed">Échec de création du partage</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
   <string name="log_title">Journal</string>
@@ -234,6 +235,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <string name="log_android_title">Voir le journal Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Voir le journal Syncthing</string>
+  <string name="retrieving_logs">Récupération des journaux....</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Partage</string>
   <!--SyncthingService-->
@@ -266,7 +268,7 @@ S\'il vous plait, signalez les problèmes que vous rencontrez via Gihub.</string
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Cliquez ici pour redémarrer Syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">L\'ID machine est copié dans le bloc-notes</string>
+  <string name="device_id_copied_to_clipboard">L\'ID d\'appareil est copié dans le bloc-notes</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>o</item>

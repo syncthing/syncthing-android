@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Eine offene, vertrauenswürdige und dezentralisierte Anwendung zur Dateisynchronisation.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Willkommen bei Syncthing für Android</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">Weiter</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Warte auf Weboberfläche</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
   <!--Title of the "share device id" menu action-->
@@ -52,10 +61,12 @@
   <!--Title for announce server status-->
   <string name="announce_server">Indexserver</string>
   <string name="restart">Neustart</string>
-  <!--FolderSettingsFragment-->
+  <string name="dialog_confirm_restart">Möchtest du Syncthing neu starten?</string>
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Verzeichnis-ID</string>
   <!--Setting title-->
+  <string name="folder_label">Verzeichnisbezeichnung</string>
   <!--Setting title-->
   <string name="directory">Verzeichnis</string>
   <!--Setting title-->
@@ -78,11 +89,8 @@
   <string name="folder_id_required">Die Verzeichnis ID darf nicht leer sein</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Der Verzeichnispfad darf nicht leer sein</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">Deine Änderungen verwerfen?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Geräte-ID</string>
   <!--Setting title-->
@@ -119,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Weboberfläche</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Warte auf Weboberfläche</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Willkommen bei Syncthing für Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing ist eine quell offene Applikation zum Synchronisieren von Dateien.\n\n\
-Um Daten mit anderen Geräten zu teilen musst du deren Geräte ID in die Liste der Geräte hinzufügen. Danach kannst du die Verzeichnisse auswählen, welche mit den Geräten geteilt werden sollen.\n\n
-Bitte auftretenden Probleme via Github melden.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
@@ -142,10 +140,11 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="sync_only_charging">Sync nur mit Ladegerät</string>
   <string name="sync_only_wifi">Sync nur im WLAN</string>
   <string name="sync_only_wifi_ssids">Nur in bestimmten WLAN Netzwerken</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
   <string name="advanced_folder_picker">Erweiterte Verzeichnisauswahl benutzen</string>
   <string name="advanced_folder_picker_summary">Alle Verzeichnisse auf dem Gerät für Synchronisation auswählbar</string>
   <string name="use_root_title">Syncthing mit Superuser Rechten ausführen</string>
+  <string name="use_root_summary">Dies ist eine instabile Funktion, welche Probleme mit Syncthing und deinem Gerät verursachen könnte. Wenn du Probleme feststellst, musst du Syncthing möglicherweise neu installieren.</string>
   <string name="notification_type_title">Permanente Benachrichtigung</string>
   <string name="notification_type_summary">Wähle die Art der Benachrichtigung</string>
   <string-array name="notification_type_entries">
@@ -159,9 +158,11 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
   <string name="max_recv_kbps">Eingehende Datenrate Limite (KiB/s)</string>
   <string name="max_send_kbps">Ausgehende Datenrate Limite (KiB/s)</string>
-  <string name="global_announce_enabled">Globale Auffindung</string>
-  <string name="local_announce_enabled">Lokale Auffindung</string>
+  <string name="global_announce_enabled">Globale Gerätesuche</string>
+  <string name="local_announce_enabled">Lokale Gerätesuche</string>
+  <string name="enable_nat_traversal">NAT-Traversal aktivieren</string>
   <string name="global_announce_server">Globaler Indexserver</string>
+  <string name="enable_relaying">Weiterleitung aktivieren</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
   <string name="syncthing_gui">Syncthing-Weboberfläche</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
@@ -171,6 +172,14 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="experimental_settings">Experimentell</string>
   <string name="keep_wakelock_while_binary_running">Prozessor wach halten während Syncthing läuft.</string>
   <string name="keep_wakelock_while_binary_running_summary">Nutze dieses Einstellung, wenn du unerwartete Verbindungsabbrüche hast, während du im Batteriebetrieb arbeitest. Das wird zu einem erhöhten Energieverbrauch führen.</string>
+  <string name="run_as_foreground_service">Führe Dienst mit Vordergrund-Priorität aus</string>
+  <string name="run_as_foreground_service_summary">Wenn aktiviert, wird Syncthing mit Vordergrund-Priorität ausgeführt und weniger wahrscheinlich durch Android gestoppt. Dies könnte das Stoppen anderer Dienste verursachen, wenn der verfügbare Speicher gering ist. Das Anzeigen einer Benachrichtigung niedriger Priorität wird hierfür von Android erfordert, ungeachtet der Benachrichtigung-Einstellung.</string>
+  <string name="use_tor_title">Tor benutzen</string>
+  <string name="use_tor_summary">Der gesamte Netzwerkverkehr wird zur Erhöhung der Privatsphäre über Tor geleitet. Benötigt Orbot.</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Soll wirlkich eine neue Konfiguration importiert werden? Vorhandene Dateien werden überschrieben.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exportiert nach %1$s</string>
   <string name="import_config">Konfiguration importieren</string>
@@ -182,8 +191,6 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Nur a-z und \',\' sind in STTRACE Optionen errlaubt</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->
@@ -227,6 +234,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="log_android_title">Zeige Android-Log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zeige Syncthing-Log</string>
+  <string name="retrieving_logs">Rufe Protokoll ab...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>
   <!--SyncthingService-->
@@ -240,6 +248,7 @@ Bitte auftretenden Probleme via Github melden.</string>
   <string name="exit">Beenden</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing läuft</string>
+  <string name="syncthing_active_foreground">Dienst wird mit Vordergrund-Priorität ausgeführt.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Verzeichnisbaum zu verschachtelt. Auf zyklische symlinks prüfen</string>
   <!--Toast shown if syncthing failed to create a config-->

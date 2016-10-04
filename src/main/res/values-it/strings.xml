@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Un\'applicazione affidabile, decentralizzata e aperta per la sincronizzazione di file.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Benvenuto in Syncthing per Android</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">Continua</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Caricamento Interfaccia Web</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generazione delle chiavi in corso. Potrebbe essere necessario qualche minuto.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Nuova Cartella</string>
   <!--Title of the "share device id" menu action-->
@@ -51,9 +60,9 @@
   <string name="ram_usage">Utilizzo RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Server Presenza Globale</string>
-  <string name="restart">Riavvia ora</string>
+  <string name="restart">Riavvia</string>
   <string name="dialog_confirm_restart">Vuoi riavviare Syncthing?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Cartella</string>
   <!--Setting title-->
@@ -80,11 +89,8 @@
   <string name="folder_id_required">L\'ID Cartella non può essere vuoto</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Il percorso della cartella non può essere vuoto</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione? I files esistenti verranno sovrascritti.n\nATTENZIONE! Le altre applicazioni potrebbero non essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Vuoi realmente importare una nuova configurazione? I files esistenti verranno sovrascritti.</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">Annullare le modifiche?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID Dispositivo</string>
   <!--Setting title-->
@@ -121,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaccia Web</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Caricamento Interfaccia Web</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generazione delle chiavi in corso. Potrebbe essere necessario qualche minuto.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Benvenuto in Syncthing per Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing è un\'applicazione open-source per la sincronizzazione di file.\n\n
-Per condividere dati con altri dispositivi devi aggiungere il loro ID dispositivo alla lista. Fatto ciò potrai selezionare quali cartelle condividere, e con quali dispositivi.\n\n
-Riferisci tramite Github i problemi che incontri.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Impostazioni</string>
@@ -144,7 +140,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="sync_only_charging">Sincr. solo in Ricarica</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="sync_only_wifi_ssids">Solo determinate reti wifi</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Esegui Syncthing come Superutente</string>
@@ -178,8 +174,12 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="keep_wakelock_while_binary_running_summary">Usa questa impostazione se rilevi disconnessioni inaspettate durante il funzionamento a batteria. Questo aumenterà il consumo della batteria.</string>
   <string name="run_as_foreground_service">Esegui il servizio con la priorità di primo piano</string>
   <string name="run_as_foreground_service_summary">Se abilitato, Syncthing verrà eseguito con la priorità di primo piano e ha meno probabilità di essere fermato da Android. Ciò potrebbe causare l\'arresto di altri servizi se la memoria disponibile è scarsa. Una notifica a bassa priorità deve essere visualizzata a causa di requisiti di Android, a prescindere dall\'impostazione \"Notifica\".</string>
-  <string name="use_tor_title">Utilizza TOR</string>
-  <string name="use_tor_summary">Forzare tutto il traffico attraverso TOR per maggiore privacy</string>
+  <string name="use_tor_title">Utilizza Tor</string>
+  <string name="use_tor_summary">Forza tutto il traffico attraverso Tor per una maggiore privacy. Richiede Orbot</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione? I files esistenti verranno sovrascritti.n\nATTENZIONE! Le altre applicazioni potrebbero non essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Vuoi realmente importare una nuova configurazione? I files esistenti verranno sovrascritti.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Config è stata esportata in %1$s</string>
   <string name="import_config">Importa Configurazione</string>
@@ -191,8 +191,6 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="sttrace_title">Opzioni di Debug</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Solo le lettere da a-z e la virgola \',\' sono consentiti nelle opzioni STTRACE</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reset del Database</string>
   <!--Syncthing was reset-->
@@ -237,6 +235,7 @@ Riferisci tramite Github i problemi che incontri.</string>
   <string name="log_android_title">Mostra Registro di Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Mostra Registro di Syncthing</string>
+  <string name="retrieving_logs">Recupero log...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Condividi</string>
   <!--SyncthingService-->

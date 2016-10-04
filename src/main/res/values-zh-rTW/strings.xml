@@ -1,7 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">正在等待 GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">增加資料夾</string>
   <!--Title of the "share device id" menu action-->
@@ -40,7 +46,7 @@
   <string name="ram_usage">記憶體使用率</string>
   <!--Title for announce server status-->
   <string name="announce_server">發布伺服器</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">資料夾識別碼</string>
   <!--Setting title-->
@@ -65,9 +71,7 @@
   <string name="folder_id_required">資料夾識別碼不得為空</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">資料夾路徑不得為空</string>
-  <!--Dialog shown before config export-->
-  <!--Dialog shown before config import-->
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">裝置識別碼</string>
   <!--Setting title-->
@@ -97,11 +101,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">正在等待 GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <!--Title for dialog displayed on first start-->
-  <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
@@ -125,14 +124,14 @@
   <string name="gui_address">GUI 監聽位址</string>
   <string name="gui_user">GUI 認證使用者名稱</string>
   <string name="gui_password">GUI 認證密碼</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">除錯選項</string>
   <!--Toast after entering invalid STTRACE params-->
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->

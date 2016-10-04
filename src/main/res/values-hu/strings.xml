@@ -2,7 +2,14 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Egy nyílt, megbízható és decentralizált fájl szinkronizáló alkalmazás.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Üdvözöl az androidos Syncthing.</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Várakozás a felületre</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Mappa hozzáadása</string>
   <!--Title of the "share device id" menu action-->
@@ -46,7 +53,7 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappa azonosító</string>
   <!--Setting title-->
@@ -71,9 +78,7 @@
   <string name="folder_id_required">A mappaazonosító nem lehet üres</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">A mappaútvonal nem lehet üres</string>
-  <!--Dialog shown before config export-->
-  <!--Dialog shown before config import-->
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Eszköz azonosító</string>
   <!--Setting title-->
@@ -103,12 +108,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Várakozás a felületre</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Üdvözöl az androidos Syncthing.</string>
-  <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Beállítások</string>
@@ -120,7 +119,7 @@
   <string name="sync_only_charging">Csak töltés közbeni szinkronizálás</string>
   <string name="sync_only_wifi">Szinkronizálás csak WiFi-n keresztül</string>
   <string name="sync_only_wifi_ssids">Korlátozás bizonyos wifi hálózatokra</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hálózat választásához kapcsold be a wifit.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hálózat választásához kapcsold be a wifit.</string>
   <string name="use_root_title">Syncthing futtatása Superuser-ként</string>
   <string name="notification_type_title">Értesítés</string>
   <string name="notification_type_summary">Értesítés típusának kiválasztása</string>
@@ -132,14 +131,14 @@
   <string name="global_announce_server">Globális felfedező szerver</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="export_config">Beállítások mentése</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--Toast shown after config was successfully exported-->
   <string name="import_config">Beállítások betöltése</string>
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Toast after entering invalid STTRACE params-->
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->

@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Açık, güvenilir ve merkezi olmayan bir dosya eşzamanlama uygulaması.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Android için Syncthing\'e Hoşgeldiniz</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Arayüz Bekleniyor</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Gücenli anahtarlar üretiliyor. Birkaç dakika zaman alabilir.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Klasör Ekleme</string>
   <!--Title of the "share device id" menu action-->
@@ -49,7 +57,7 @@
   <string name="ram_usage">RAM Kullanımı</string>
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>
   <!--Setting title-->
@@ -74,11 +82,7 @@
   <string name="folder_id_required">Klasör ID\'si boş bırakılamaz</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Klasör yolu boş olmamalı</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musun? Varolan dosyaların üzerine yazılacak.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme yapılan yerden okuyabilir ve eşzamanlaması yapılan dosyaları indirmek/değiştirmek için kullanabilir.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Yeni yapılandırmayı gerçekten içe aktarmak istiyor musun? Varolan dosyaların üzerine yazılacak.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Cihaz ID</string>
   <!--Setting title-->
@@ -114,16 +118,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web Arayüzü</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Arayüz Bekleniyor</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Gücenli anahtarlar üretiliyor. Birkaç dakika zaman alabilir.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Android için Syncthing\'e Hoşgeldiniz</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing, açık kaynaklı bir dosya eşzamanlama uygulamasıdır.\n\n\
-Diğer cihazlar ile veri paylaşmak için, cihaz listenize onların benzersiz cihaz ID\'lerini eklemeniz gerekir. Devamında hangi klasörleri, hangi cihazlar ile paylaşacağınızı  seçebilirsiniz.\n\n
-Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildirin.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ayarlar</string>
@@ -137,7 +131,7 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sync_only_charging">Sadece şarj edilirken eşzamanlama yap</string>
   <string name="sync_only_wifi">Sadece kablosuz ağ üzerindeyken eşzamanlama yap</string>
   <string name="sync_only_wifi_ssids">Belirlenmiş kablosuz ağlarla sınırlandır.</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici Kullan</string>
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için cihazdan herhangi bir klasör seçin</string>
   <string name="use_root_title">Syncthing\'i Superuser/Ayrıcalıklı Kullanıcı olarak Çalıştır</string>
@@ -163,6 +157,10 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>
   <string name="gui_password">Arayüz Kullanıcı Doğrulaması için Kullanıcı Parolası</string>
   <string name="export_config">Yapılandırmayı Dışa Aktar</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musun? Varolan dosyaların üzerine yazılacak.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme yapılan yerden okuyabilir ve eşzamanlaması yapılan dosyaları indirmek/değiştirmek için kullanabilir.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Yeni yapılandırmayı gerçekten içe aktarmak istiyor musun? Varolan dosyaların üzerine yazılacak.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Yapılandırma %1$s dışa aktarıldı</string>
   <string name="import_config">Yapılandırmayı İçe Aktar</string>
@@ -174,8 +172,6 @@ Lütfen, herhangi bir sorunla karşılaştığınızda Github üzerinden bildiri
   <string name="sttrace_title">Hata Ayıklama Seçenekleri</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE seçenekleri içinde sadece a-z ve \',\' karakterleri kullanabilirsiniz</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Veritabanını Sıfırla</string>
   <!--Syncthing was reset-->

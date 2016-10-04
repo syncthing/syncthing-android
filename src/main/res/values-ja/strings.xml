@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">オープンで、信頼できる、分散されたファイル同期アプリケーション。</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Syncthing for Android にようこそ</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">続行</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI を待機中</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">フォルダーを追加</string>
   <!--Title of the "share device id" menu action-->
@@ -53,7 +62,7 @@
   <string name="announce_server">アナウンスサーバー</string>
   <string name="restart">再起動</string>
   <string name="dialog_confirm_restart">Syncthing を再起動しますか?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">フォルダー ID</string>
   <!--Setting title-->
@@ -80,11 +89,8 @@
   <string name="folder_id_required">フォルダー ID は空にできません</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">変更を破棄しますか?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">デバイス ID</string>
   <!--Setting title-->
@@ -121,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">GUI を待機中</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Syncthing for Android にようこそ</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing は、オープンソースのファイル同期アプリケーションです。\n\n
-他のデバイスとデータを共有するには、デバイスリストにその一意のデバイスIDを追加する必要があります。その後で、そのデバイスと共有するフォルダーを選択することができます。\n\n
-発生した問題はすべて GitHub で報告してください。</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">設定</string>
@@ -144,7 +140,7 @@
   <string name="sync_only_charging">充電中のみ同期</string>
   <string name="sync_only_wifi">Wifi 時のみ同期</string>
   <string name="sync_only_wifi_ssids">特定の WiFi ネットワークに制限する</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
   <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
   <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
   <string name="use_root_title">スーパーユーザーとして同期を実行します</string>
@@ -178,8 +174,12 @@
   <string name="keep_wakelock_while_binary_running_summary">バッテリーで動作しているときに予期しない接続の切断が発生した場合、この設定を使用します。これは、バッテリー消費を増やします。</string>
   <string name="run_as_foreground_service">フォアグラウンドの優先度でサービスを実行する</string>
   <string name="run_as_foreground_service_summary">有効にした場合、Syncthing はフォアグラウンドの優先度で実行し、Android によって停止される可能性が低くなります。使用可能なメモリが不足している場合、他のサービスが停止されることがあります。「通知」の設定にかかわらず、Android の要求に起因して低い優先度の通知が表示される必要があります。</string>
-  <string name="use_tor_title">TOR を使用する</string>
-  <string name="use_tor_summary">プライバシー保護のため、強制的にすべてのトラフィックを TOR を介します</string>
+  <string name="use_tor_title">Tor を使用する</string>
+  <string name="use_tor_summary">プライバシー保護のため、強制的にすべてのトラフィックを Tor を介します。Orbot が必要です</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">設定を %1$s にエクスポートしました</string>
   <string name="import_config">設定をインポート</string>
@@ -191,8 +191,6 @@
   <string name="sttrace_title">デバッグオプション</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE オプションでは、a-z および \',\' のみ使用できます。</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">データベースをリセット</string>
   <!--Syncthing was reset-->
@@ -236,6 +234,7 @@
   <string name="log_android_title">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing ログを表示</string>
+  <string name="retrieving_logs">ログの取得中…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">共有</string>
   <!--SyncthingService-->

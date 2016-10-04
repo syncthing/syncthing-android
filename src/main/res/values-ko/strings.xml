@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">공개되어 믿을 수 있는, 분산 파일 동기화 응용 프로그램.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">계속</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI를 기다리는 중</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">폴더 추가</string>
   <!--Title of the "share device id" menu action-->
@@ -53,7 +62,7 @@
   <string name="announce_server">익명 서버</string>
   <string name="restart">재시작</string>
   <string name="dialog_confirm_restart">정말로 Syncthing을 재시작하시겠습니까?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">폴더 ID</string>
   <!--Setting title-->
@@ -80,11 +89,8 @@
   <string name="folder_id_required">폴더 ID는 공백으로 둘 수 없습니다.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">설정 변경을 취소합니까?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">기기 ID</string>
   <!--Setting title-->
@@ -121,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">웹 GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">GUI를 기다리는 중</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing은 오픈 소스 파일 동기화 응용 프로그램입니다.\n\n\
-다른 기기와 데이터를 공유하려면, 기기 목록에 해당 기기의 고유한 기기 ID를 추가해야 합니다. 이후, 해당 기기와 공유할 폴더를 선택할 수 있습니다.\n\n\
-문제가 발생하는 경우 Github를 통해 문의해 주세요.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">설정</string>
@@ -144,7 +140,7 @@
   <string name="sync_only_charging">충전 중일 때만 동기화</string>
   <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
   <string name="sync_only_wifi_ssids">특정 WI-FI 네트워크로 제한하기</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
   <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
   <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
   <string name="use_root_title">Syncthing을 Superuser로 실행</string>
@@ -177,8 +173,12 @@
   <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
   <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
   <string name="run_as_foreground_service">서비스를 포그라운드로 실행</string>
-  <string name="use_tor_title">TOR 사용</string>
-  <string name="use_tor_summary">프라이버시 보호를 위하여 모든 트래픽을 TOR로 통과시킵니다</string>
+  <string name="use_tor_title">Tor 사용</string>
+  <string name="use_tor_summary">프라이버시 향상을 위해 모든 트래픽을 Tor로 통과시킵니다. Orbot이 필요합니다</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
   <string name="import_config">설정 불러오기</string>
@@ -190,8 +190,6 @@
   <string name="sttrace_title">디버그 옵션</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE 옵션에서는 a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">데이터베이스 리셋</string>
   <!--Syncthing was reset-->

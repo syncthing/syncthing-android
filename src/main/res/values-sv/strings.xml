@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">En öppen, pålitlig och decentraliserad filsynkroniserings applikation.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Välkommen till Syncthing för Android</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">Fortsätt</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Väntar på GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Genererar säkra nycklar. Detta kan ta några minuter.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lägg till katalog</string>
   <!--Title of the "share device id" menu action-->
@@ -12,7 +21,7 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laddar...</string>
   <string name="usage_reporting_dialog_title">Tillåt anonym användningsrapportering?</string>
-  <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, katalog storlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, katalogstorlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
   <string name="off">av</string>
@@ -50,10 +59,10 @@
   <!--Title for current RAM usage-->
   <string name="ram_usage">RAM-användning</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Annonseringsservrar</string>
+  <string name="announce_server">Annonseringsserver</string>
   <string name="restart">Omstart</string>
   <string name="dialog_confirm_restart">Vill du starta om Syncthing?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Katalog-ID</string>
   <!--Setting title-->
@@ -80,11 +89,8 @@
   <string name="folder_id_required">Katalog-ID får inte vara tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Katalogsökvägen får inte vara tom</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vill du verkligen vill exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">Kassera dina ändringar?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Enhets ID</string>
   <!--Setting title-->
@@ -120,17 +126,7 @@
   <string name="toast_root_denied">Fick inte root behörigheter</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Syncthing-GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Väntar på GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Genererar säkra nycklar. Detta kan ta några minuter.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Välkommen till Syncthing för Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing är en filsynkroniserings app med öppen källkod.\n\n\
-För att dela data med andra enheter, måste du lägga till deras unika enhets ID till enhetslistan. Efteråt kan du välja vilka kataloger som ska delas med vilka enheter.\n\n
-Vänligen rapportera eventuella problem du stöter på via Github.</string>
+  <string name="web_gui_title">Webb-GUI</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Inställningar</string>
@@ -144,7 +140,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="sync_only_charging">Synkronisera endast vid laddning</string>
   <string name="sync_only_wifi">Synkronisera endast trådlöst</string>
   <string name="sync_only_wifi_ssids">Begränsa till vissa WiFi-nätverk</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på WiFi för att välja nätverk.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på WiFi för att välja nätverk.</string>
   <string name="advanced_folder_picker">Använd avancerade katalogväljaren</string>
   <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör Syncthing som superanvändare</string>
@@ -159,7 +155,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Syncthing alternativ</string>
   <string name="device_name">Enhets namn</string>
-  <string name="listen_address">Lyssnaradresser för synkroniseringsprotokoll</string>
+  <string name="listen_address">Synkroniseringsprotokollets lyssnaradresser</string>
   <string name="max_recv_kbps">Inkommande hastighetsgräns (KiB/s)</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
   <string name="global_announce_enabled">Global annonsering</string>
@@ -169,37 +165,39 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
   <string name="syncthing_gui">Syncthing-GUI</string>
-  <string name="gui_address">Lyssnardresser för GUI</string>
-  <string name="gui_user">Autentiseringsanvändare för GUI</string>
-  <string name="gui_password">Autentiseringslösenord för GUI</string>
+  <string name="gui_address">GUI lyssnaradresser</string>
+  <string name="gui_user">GUI autentiseringsanvändare</string>
+  <string name="gui_password">GUI autentiseringslösenord</string>
   <string name="export_config">Exportera konfiguration</string>
   <string name="experimental_settings">Experimentell</string>
   <string name="keep_wakelock_while_binary_running">Håll CPU:n vaken medan Syncthing körs</string>
   <string name="keep_wakelock_while_binary_running_summary">Använd den här inställningen om du får oväntade frånkopplingar under batteridrift. Detta kommer att resultera i ökad batteriförbrukning.</string>
   <string name="run_as_foreground_service">Kör tjänst med förgrundsprioritet</string>
-  <string name="run_as_foreground_service_summary">Om aktiverad, kommer Syncthing köra med förgrundsprioritet och är mindre sannolikt att stoppas av Android. Detta kan leda till att andra tjänster stoppas om tillgängligt minne är låg. En låg prioritet notering måste uppfyllas på grund av Android krav, oavsett av \"noterings\" inställning.</string>
-  <string name="use_tor_title">Använd TOR</string>
-  <string name="use_tor_summary">Tvinga all trafik genom TOR för ökad integritet</string>
+  <string name="run_as_foreground_service_summary">Om aktiverad, kommer Syncthing köra med förgrundsprioritet och är mindre sannolikt att stoppas av Android. Detta kan leda till att andra tjänster stoppas om tillgängligt minne är lågt. En låg prioritetsnotering måste visas på grund av Androidkrav, oavsett av \"noterings\"-inställning.</string>
+  <string name="use_tor_title">Använd Tor</string>
+  <string name="use_tor_summary">Tvinga all trafik genom Tor för ökad integritet. Kräver Orbot</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Vill du verkligen vill exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfiguration exporterades till %1$s</string>
   <string name="import_config">Importera konfiguration</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Konfigurationen importerades</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna är i %1$s</string>
+  <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna finns i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Felsöksalternativ</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Endast a-z och \',\' är tillåtna i STTRACE alternativ</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Återställ databas</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">Denna åtgärd får endast utföras baserad på en rekommendation från vår support grupp.
-\nÄr du säker på att du vill rensa Syncthings index databas?</string>
+  <string name="streset_question">Denna åtgärd bör endast utföras baserad på en rekommendation från vår support grupp.
+\nÄr du säker på att du vill rensa Syncthings indexdatabas?</string>
   <!--Syncthing was reset-->
-  <string name="streset_done">Syncthings databas återställd</string>
+  <string name="streset_done">Syncthings databas återställdes</string>
   <string name="category_about">Om</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Öppna logg</string>
@@ -236,6 +234,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="log_android_title">Visa Android logg</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Visa Syncthing logg</string>
+  <string name="retrieving_logs">Hämtar loggar...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Dela</string>
   <!--SyncthingService-->

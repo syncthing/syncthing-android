@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Ein open, påliteleg og desentralisert app for filsynkronisering.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Velkommen til Synchting for Android</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Venter på grafisk grensesnitt</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Snikrar sikre nøklar. Dette kan da nokre minutt.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Legg til mappe</string>
   <!--Title of the "share device id" menu action-->
@@ -53,7 +61,7 @@
   <string name="announce_server">Søketener</string>
   <string name="restart">Omstart</string>
   <string name="dialog_confirm_restart">Vil du starte om att Syncthing?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Mappe-ID</string>
   <!--Setting title-->
@@ -80,11 +88,7 @@
   <string name="folder_id_required">Mappe-ID kan ikkje vere tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappestien kan ikkje vere tom</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vil du verkeleg eksportere innstillingane? Eksisterande filer vil verte skrivne over. \n\nÅTVARING: Andre appar kan vere i stand til å lese den private nøkkelen frå tryggingskopien, og bruke den til å laste ned eller endre synkroniserte filer.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Vil du verkeleg importere ei ny innstillingsfil? Eksisterande filer vil verte skrivne over.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Einings-ID</string>
   <!--Setting title-->
@@ -121,16 +125,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Grafisk grensesnitt på verdsveven</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Venter på grafisk grensesnitt</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Snikrar sikre nøklar. Dette kan da nokre minutt.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Velkommen til Synchting for Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing er ein filsynkroniseringsapplikasjon med open kjeldekode.\n\n
-For å dele data med andre einingar, må du legge til deira unike enings-ID i eningslista. Etterpå kan du velje kva mapper du ønskjer å dele med kva einingar.\n\n
-Om du skulle støyte på problem, ver snill å rapportere dei via Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Innstillingar</string>
@@ -144,7 +138,7 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="sync_only_charging">Synkroniser berre mens eg laddar</string>
   <string name="sync_only_wifi">Synkroniser berre over WiFi</string>
   <string name="sync_only_wifi_ssids">Avgrens til visse WiFi-nettverk</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
   <string name="advanced_folder_picker_summary">Vel kva mappe som helst for synkronisering</string>
   <string name="use_root_title">Køyr Syncthing som superbrukar</string>
@@ -178,8 +172,10 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillinga om du opplever uventa avkoplingar medan du køyrer på batteri. Dette vil føre til auka batteriforbruk.</string>
   <string name="run_as_foreground_service">Køyr tenesten med forgrunnsprioritet</string>
   <string name="run_as_foreground_service_summary">Dersom aktivert vil Syncthing køyre med forgrunnsprioritet og det er mindre sannsynleg at den blir stoppa av Android. Dette kan føre til at andre tenester vert stoppa i staden, dersom det blir lite tilgjengeleg minne. Ein notifikasjon med låg prioritet må alltid visast, uavhengig av \"Notifikasjon\" innstillingen på grunn av krav fra Android.</string>
-  <string name="use_tor_title">Bruk TOR</string>
-  <string name="use_tor_summary">Tving all trafikk gjennom TOR for auka privatliv</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Vil du verkeleg eksportere innstillingane? Eksisterande filer vil verte skrivne over. \n\nÅTVARING: Andre appar kan vere i stand til å lese den private nøkkelen frå tryggingskopien, og bruke den til å laste ned eller endre synkroniserte filer.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Vil du verkeleg importere ei ny innstillingsfil? Eksisterande filer vil verte skrivne over.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Innstillingar vart eksportert til %1$s</string>
   <string name="import_config">Importer innstillingar</string>
@@ -191,8 +187,6 @@ Om du skulle støyte på problem, ver snill å rapportere dei via Github.</strin
   <string name="sttrace_title">Alternativ for feilsøking</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Berre a-z og \',\' er tillatne i STTRACE-alternativ</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nullstill database</string>
   <!--Syncthing was reset-->

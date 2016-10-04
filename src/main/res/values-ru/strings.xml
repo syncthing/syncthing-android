@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Открытое, надёжное и децентрализованное приложение для синхронизации файлов.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Добро пожаловать в Syncthing для Android</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Ожидание GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Генерируем ключи. Это может занять несколько минут.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Доб папку</string>
   <!--Title of the "share device id" menu action-->
@@ -52,7 +60,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Сервера анонсов</string>
   <string name="restart">Перезагрузить</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID папки</string>
   <!--Setting title-->
@@ -79,11 +87,7 @@
   <string name="folder_id_required">ID папки не может быть пустым</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Путь к папке не может быть пустым</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию? Существующие файлы будут перезаписаны.\n\nОСТОРОЖНО! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы загрузить/изменить синхронизируемые файлы.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Действительно хотите импортировать новую конфигурацию? Существующие файлы будут перезаписаны.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID устройства</string>
   <!--Setting title-->
@@ -120,16 +124,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Веб-интерфейс</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Ожидание GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Генерируем ключи. Это может занять несколько минут.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Добро пожаловать в Syncthing для Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing это открытое приложение для синхронизации файлов.\n\n\
-Для того, чтобы синхронизировать данные с другими устройствами, вам необходимо добавить их уникальные идентификаторы в список устройств. Затем вы сможете выбрать папки для синхронизации с другими устройствами.\n\n
-По поводу всех возникших проблем пишите на Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Настройки</string>
@@ -143,7 +137,7 @@
   <string name="sync_only_charging">Синхронизация только во время зарядки</string>
   <string name="sync_only_wifi">Синхронизация только по WIFI</string>
   <string name="sync_only_wifi_ssids">Ограничить определёнными wifi сетями</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>
   <string name="advanced_folder_picker_summary">Выберите любую папку на устройстве для синхронизации</string>
   <string name="use_root_title">Запуск Syncthing с рут-правами</string>
@@ -174,6 +168,11 @@
   <string name="export_config">Экспорт настроек</string>
   <string name="keep_wakelock_while_binary_running">Поддерживать CPU включенным, пока Syncthing работает</string>
   <string name="run_as_foreground_service">Запуск сервиса с повышенным приоритетом</string>
+  <string name="use_tor_title">Использовать Tor</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию? Существующие файлы будут перезаписаны.\n\nОСТОРОЖНО! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы загрузить/изменить синхронизируемые файлы.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Действительно хотите импортировать новую конфигурацию? Существующие файлы будут перезаписаны.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройки экспортированы в %1$s</string>
   <string name="import_config">Импорт настроек</string>
@@ -185,8 +184,6 @@
   <string name="sttrace_title">Настройки режима отладки</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">В настройках STTRACE можно использовать только символы a-z и \',\'</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Сбросить базу данных</string>
   <!--Syncthing was reset-->

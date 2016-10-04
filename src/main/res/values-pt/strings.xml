@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Uma aplicação de sincronização de ficheiros aberta, fiável e descentralizada.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Bem vindo(a) ao Syncthing para Android</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Aguardando a interface web</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Gerando chaves seguras. Isto pode demorar uns minutos.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
@@ -49,7 +57,7 @@
   <string name="ram_usage">Utilização da RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
   <!--Setting title-->
@@ -74,10 +82,7 @@
   <string name="folder_id_required">O ID da pasta não pode estar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
-  <!--Dialog shown before config export-->
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Quer mesmo importar a sua configuração? Os ficheiros existentes vão ser sobrepostos.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
   <!--Setting title-->
@@ -113,16 +118,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface Web</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Aguardando a interface web</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Gerando chaves seguras. Isto pode demorar uns minutos.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Bem vindo(a) ao Syncthing para Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing é uma aplicação em código aberto de sincronização de ficheiros.\n\n\
-Para partilhar dados com outros dispositivos, tem que adicionar o ID único de cada dispositivo à lista de dispositivos. Depois pode seleccionar que pastas pretende partilhar com que dispositivos.\n\n
-Relate quaisquer problemas que encontre via Github, por favor.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
@@ -160,6 +155,9 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="gui_user">Utilizador da autenticação na interface gráfica</string>
   <string name="gui_password">Senha da autenticação na interface gráfica</string>
   <string name="export_config">Exportar configuração</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Quer mesmo importar a sua configuração? Os ficheiros existentes vão ser sobrepostos.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">A configuração foi exportada para %1$s</string>
   <string name="import_config">Importar configuração</string>
@@ -171,8 +169,6 @@ Relate quaisquer problemas que encontre via Github, por favor.</string>
   <string name="sttrace_title">Opções da despistagem de erros</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Apenas é permitido usar a-z e \';\' nas opções do STTRACE</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->

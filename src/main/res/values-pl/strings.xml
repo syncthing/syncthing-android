@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Otwarty, godny zaufania oraz zdecentralizowany program do synchronizacji plików.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Witamy w Syncthing dla systemu Android</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Dodaj katalog</string>
   <!--Title of the "share device id" menu action-->
@@ -52,7 +60,8 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serwer ogłoszeniowy</string>
   <string name="restart">Uruchom ponownie</string>
-  <!--FolderSettingsFragment-->
+  <string name="dialog_confirm_restart">Czy zrestartować Syncthing?</string>
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Identyfikator katalogu</string>
   <!--Setting title-->
@@ -79,11 +88,7 @@
   <string name="folder_id_required">Identyfikator katalogu nie może być pusty</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka katalogu nie może być pusta</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Zaimportować nowe ustawienia? Istniejące pliki zostaną zastąpione.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Identyfikator urządzenia</string>
   <!--Setting title-->
@@ -120,16 +125,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfejs internetowy</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Witamy w Syncthing dla systemu Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing to otwaroźródłowy program do synchronizacji plików.\n\n
-Aby współdzielić pliki z innym urządzeniem, należy dodać jego unikalny identyfikator do listy urządzeń. W następnym kroku można wybrać katalogi, które zostaną udostępnione wskazanym urządzeniom.\n\n
-Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
@@ -143,7 +138,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="sync_only_charging">Synchronizowanie tylko podczas ładowania</string>
   <string name="sync_only_wifi">Synchronizowanie tylko przy użyciu Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Ogranicz do określonych sieci WiFi</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
@@ -157,7 +152,9 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
   <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
+  <string name="enable_nat_traversal">Włącz NAT</string>
   <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
+  <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adres GUI</string>
@@ -167,6 +164,13 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="experimental_settings">Eksperymelne!</string>
   <string name="keep_wakelock_while_binary_running">Utrzymuj CPU wybudzony podczas działania Syncthing.</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
+  <string name="run_as_foreground_service">Uruchom serwis z pierwszoplanowym priorytetem</string>
+  <string name="use_tor_title">Korzystaj z Tor</string>
+  <string name="use_tor_summary">Wymuszaj cały ruch przez Tor dla zwiększenia prywatności. Wymaga Orbot</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Zaimportować nowe ustawienia? Istniejące pliki zostaną zastąpione.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Wyeksportowano ustawienia do %1$s</string>
   <string name="import_config">Importuj ustawienia</string>
@@ -178,8 +182,6 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="sttrace_title">Opcje diagnozowania błędów</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Tylko znaki a-z oraz „,” są dopuszczalne w STTRACE</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Przywróć pierwotny stan bazy danych</string>
   <!--Syncthing was reset-->
@@ -200,6 +202,7 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Wspomóż</string>
+  <string name="donate_summary">Pomóż nam opłacić domeny i hosting</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Wersja Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -236,11 +239,13 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="exit">Zakończ</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing jest uruchomiony</string>
+  <string name="syncthing_active_foreground">Serwis działa z pierwszoplanowym priorytetem</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Drzewo katalogów jest zbyt głębokie. Proszę je sprawdzić pod kątem obecności zapętlonych dowiązań symbolicznych.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Nie udało się utworzyć pliku konfiguracyjnego. Proszę sprawdzić dziennik.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-zdjęcia</string>
   <!--RestApi-->
@@ -279,4 +284,5 @@ Proszę zgłaszać błędy programu w serwisie Github.</string>
   <string name="state_unknown">Nieznany</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Zatrzymywanie Syncthing nie jest wspierane, gdy działa w tle.</string>
 </resources>

@@ -2,7 +2,12 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Terbuka, dapat dipercaya dan terdesentralisasi aplikasi sinkronisasi berkas</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tambah Folder</string>
   <!--Title of the "share device id" menu action-->
@@ -45,7 +50,7 @@
   <string name="ram_usage">Penggunaan RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Server Penyiaran</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID Folder</string>
   <!--Setting title-->
@@ -63,9 +68,7 @@
   <!--Dialog shown when attempting to remove a folder-->
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
-  <!--Dialog shown before config export-->
-  <!--Dialog shown before config import-->
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
@@ -82,23 +85,19 @@
   <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <!--Text for WebGuiActivity loading view-->
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <!--Title for dialog displayed on first start-->
-  <!--Text for dialog displayed on first start-->
   <!--SettingsFragment-->
   <!--Activity title-->
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
   <string name="category_syncthing">Syncthing</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
   <!--Toast shown after config was successfully exported-->
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
   <!--Toast after entering invalid STTRACE params-->
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->

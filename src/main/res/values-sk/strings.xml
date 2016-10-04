@@ -2,7 +2,15 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Otvorená, dôveryhodná a decentralizovaná aplikácia pre synchronizáciu súborov.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Víta Vás Syncthing pre Android</string>
+  <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Čakám na GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Syncthing generuje RSA klúč a certifikát. Táto operácia môže chvíľu trvať.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Pridať Adresár</string>
   <!--Title of the "share device id" menu action-->
@@ -49,7 +57,7 @@
   <string name="ram_usage">Využitie RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ohlasovací server</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresára</string>
   <!--Setting title-->
@@ -73,10 +81,7 @@
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáru nemôže byť prázdna</string>
-  <!--Dialog shown before config export-->
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>
-  <!--DeviceSettingsFragment-->
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID Zariadenia</string>
   <!--Setting title-->
@@ -112,15 +117,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webové GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Čakám na GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Syncthing generuje RSA klúč a certifikát. Táto operácia môže chvíľu trvať.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Víta Vás Syncthing pre Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing je open-source nástroj na synchronizáciu súborov.\n\n
-Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať ich unikátne ID do zoznamu zariadení. Potom budete môcť zvoliť ktoré adresáre sa budú zdielať s ktorým zariadením.\n\nAk by ste mali problémy, nahláste ich, prosím, prostredníctvom GitHubu.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavenia</string>
@@ -158,6 +154,9 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <string name="gui_user">Užívateľské Meno pre GUI</string>
   <string name="gui_password">Užívateľské Heslo pre GUI</string>
   <string name="export_config">Exportovať Konfiguráciu</string>
+  <!--Dialog shown before config export-->
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfigurácia bola exportovaná do %1$s</string>
   <string name="import_config">Importovať Konfiguráciu</string>
@@ -169,8 +168,6 @@ Aby ste mohli zdielať dáta s ostatnými zariadeniami, musíte najprv pridať i
   <string name="sttrace_title">Nastavenia pre Ladenie</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">V STTRACE options sú povolené iba znaky a-z a \',\'</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovať Databázu</string>
   <!--Syncthing was reset-->

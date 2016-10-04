@@ -2,7 +2,16 @@
 <resources>
   <string name="app_name">Syncthing</string>
   <string name="app_description">Otevřená, důvěryhodná a decentralizovaná aplikace pro sdílení souborů.</string>
+  <!--FirstStartActivity-->
+  <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">Vítejte v Syncthing pro Android</string>
+  <!--Text for dialog displayed on first start-->
+  <string name="cont">Pokračovat</string>
   <!--MainActivity-->
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Čeká se na Syncthing GUI</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generování bezpečnostních klíčů. Toto může trvat pár minut.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
@@ -53,7 +62,7 @@
   <string name="announce_server">Globální oznamování</string>
   <string name="restart">Restart</string>
   <string name="dialog_confirm_restart">Opravdu chcete restartovat Syncthing?</string>
-  <!--FolderSettingsFragment-->
+  <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID adresáře</string>
   <!--Setting title-->
@@ -80,11 +89,8 @@
   <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci? Existující soubory budou přepsány.</string>
-  <!--DeviceSettingsFragment-->
+  <string name="dialog_discard_changes">Zrušit změny?</string>
+  <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID přístroje</string>
   <!--Setting title-->
@@ -121,16 +127,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Syncthing GUI</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Čeká se na Syncthing GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generování bezpečnostních klíčů. Toto může trvat pár minut.</string>
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Vítejte v Syncthing pro Android</string>
-  <!--Text for dialog displayed on first start-->
-  <string name="welcome_text">Syncthing je open-source aplikace pro sdílení souborů.\n\n
-Pro sdílení dat s jinými zařízeními budete potřebovat přidat jejich unikátní ID zařízení do svého listu zařízení. Poté můžete vybrat, které adresáře chcete sdílet s kterým zařízením.\n\n
-Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</string>
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavení</string>
@@ -144,7 +140,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
   <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="sync_only_wifi_ssids">Omezit na vybrané sítě wifi</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
   <string name="advanced_folder_picker_summary">Vyberte jakýkoliv adresář v přístroji pro synchronizaci</string>
   <string name="use_root_title">Spustit syncthing jako superuživatel</string>
@@ -178,8 +174,12 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="keep_wakelock_while_binary_running_summary">Použijte toto nastavení pokud zaznamenáváte neočekávaná ukončení spojení při běhu na baterii. Toto bude mít za následek vyšší spotřebu energie.</string>
   <string name="run_as_foreground_service">Spustit službu na popředí</string>
   <string name="run_as_foreground_service_summary">Pokud je povoleno, Syncthing poběží na popředí a bude méně pravděpodobné, že bude zastaven systémem Android. Toto může způsobit zastavení jiných služeb v případě nedostatku paměti. Android přesto vyžaduje zobrazení upozornění s nízkou prioritou, bez ohledu na zvolená nastavení \"Upozornění\".</string>
-  <string name="use_tor_title">Použít TOR</string>
-  <string name="use_tor_summary">Pro zvýšení bezpečnosti použít výhradně přenosy po síti TOR</string>
+  <string name="use_tor_title">Použít Tor</string>
+  <string name="use_tor_summary">Pro zvýšení bezpečnosti použít výhradně přenosy po síti TOR. Vyžadován Orbot</string>
+  <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
+  <!--Dialog shown before config import-->
+  <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci? Existující soubory budou přepsány.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Nastavení bylo zálohováno do %1$s</string>
   <string name="import_config">Nahrát nastavení</string>
@@ -191,8 +191,6 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="sttrace_title">Možnosti ladění</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">V STTRACE jsou povoleny pouze znaky a-z a \',\'</string>
-  <!--Toast after entering invalid username-->
-  <!--Toast after entering invalid password-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovat databázi</string>
   <!--Syncthing was reset-->
@@ -236,6 +234,7 @@ Všechny problémy, se kterými se setkáte, nahlašte prosím přes Github.</st
   <string name="log_android_title">Zobrazit log pro Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Zobrazit log pro Syncthing</string>
+  <string name="retrieving_logs">Získávám logy...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Sdílet</string>
   <!--SyncthingService-->
