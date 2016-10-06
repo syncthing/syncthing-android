@@ -13,7 +13,7 @@
 
     <!-- Text for dialog displayed on first start -->
     <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
-To share data with other devices, you need to add their unique device ID to the device list. Afterwards you can select which folders to share with which devices.\n\
+To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
 Please report any problems you encounter via Github.</string>
 
     <string name="cont">Continue</string>
