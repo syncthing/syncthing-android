@@ -1,49 +1,55 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.test.syncthing;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import com.nutomic.syncthingandroid.BuildConfig;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ServiceTestRule;
+
+import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.*;
+import java.util.concurrent.TimeoutException;
 
 /**
  * These tests assume that syncthing keys have already been generated. If not, tests may fail
  * because startup takes too long.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
 public class SyncthingServiceTest {
+
+    @Rule
+    public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
     private SyncthingService mService;
 
     @Before
-    public void setup() {
-        mService = Robolectric.buildService(SyncthingService.class).get();
-        mService.onCreate();
+    public void setup() throws TimeoutException {
+        Intent intent =
+                new Intent(InstrumentationRegistry.getTargetContext(), SyncthingService.class);
+        SyncthingServiceBinder binder = (SyncthingServiceBinder) mServiceRule.bindService(intent);
+        mService = binder.getService();
     }
 
     @Test
     public void testFirstStart() {
-        assertTrue(mService.isFirstStart());
+        Assert.assertTrue(mService.isFirstStart());
     }
 
     @Test
     public void testNotFirstStart() throws IOException {
         new File(mService.getFilesDir(), SyncthingService.PUBLIC_KEY_FILE).createNewFile();
-        assertFalse(mService.isFirstStart());
+        Assert.assertFalse(mService.isFirstStart());
     }
 
     @Test
@@ -57,7 +63,7 @@ public class SyncthingServiceTest {
             }
         });
         latch.await(1, TimeUnit.SECONDS);
-        assertNotNull(mService);
+        Assert.assertNotNull(mService);
     }
 
     @Test
@@ -71,7 +77,7 @@ public class SyncthingServiceTest {
             privateKey.createNewFile();
             publicKey.createNewFile();
         } catch (IOException e) {
-            fail();
+            Assert.fail();
         }
 
         mService.exportConfig();
@@ -80,10 +86,10 @@ public class SyncthingServiceTest {
         privateKey.delete();
         publicKey.delete();
 
-        assertTrue(mService.importConfig());
-        assertTrue(config.exists());
-        assertTrue(privateKey.exists());
-        assertTrue(publicKey.exists());
+        Assert.assertTrue(mService.importConfig());
+        Assert.assertTrue(config.exists());
+        Assert.assertTrue(privateKey.exists());
+        Assert.assertTrue(publicKey.exists());
     }
 
     @Test
@@ -92,8 +98,8 @@ public class SyncthingServiceTest {
             @Override
             public void run() {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mService);
-                assertNotNull(sp.getString("gui_user", null));
-                assertEquals(20, sp.getString("gui_password", null).length());
+                Assert.assertNotNull(sp.getString("gui_user", null));
+                Assert.assertEquals(20, sp.getString("gui_password", null).length());
             }
         }, 5000);
     }
