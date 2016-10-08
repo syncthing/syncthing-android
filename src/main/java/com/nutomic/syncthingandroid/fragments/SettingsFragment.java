@@ -264,7 +264,7 @@ public class SettingsFragment extends PreferenceFragment
 
         // Avoid any code injection.
         if (preference.getKey().equals(STTRACE)) {
-            if (((String) o).matches("[a-z, ]*"))
+            if (((String) o).matches("[0-9a-z, ]*"))
                 requireRestart = true;
             else {
                 Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT).show();

@@ -326,7 +326,7 @@ Please report any problems you encounter via Github.</string>
     <string name="sttrace_title">Debug Options</string>
 
     <!-- Toast after entering invalid STTRACE params -->
-    <string name="toast_invalid_sttrace">Only a-z and \',\' are allowed in STTRACE options</string>
+    <string name="toast_invalid_sttrace">Only 0-9, a-z and \',\' are allowed in STTRACE options</string>
 
     <!-- Title for the preference to reset Syncthing indexes -->
     <string name="streset_title">Reset Database</string>
