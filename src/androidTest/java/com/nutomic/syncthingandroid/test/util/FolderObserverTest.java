@@ -78,24 +78,6 @@ public class FolderObserverTest extends AndroidTestCase
         fo.stopWatching();
     }
 
-    public void testMoveDirectoryOut() throws IOException, InterruptedException,
-            FolderObserver.FolderNotExistingException {
-        mCurrentTest = "testMoveDirectory";
-        File subFolder = new File(mTestFolder, "subfolder");
-        subFolder.mkdir();
-        FolderObserver fo = new FolderObserver(this, createFolder(mCurrentTest));
-
-        File movedSubFolder = new File(getContext().getFilesDir(), subFolder.getName());
-        subFolder.renameTo(movedSubFolder);
-        File testFile = new File(movedSubFolder, "should-not-notify");
-        mLatch = new CountDownLatch(1);
-        testFile.createNewFile();
-        mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(1, mLatch.getCount());
-
-        fo.stopWatching();
-    }
-
     public void testAddDirectory() throws IOException, InterruptedException,
             FolderObserver.FolderNotExistingException {
         mCurrentTest = "testAddDirectory";
