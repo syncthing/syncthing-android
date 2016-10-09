@@ -8,8 +8,10 @@ android:
     - tools
     - platform-tools
     - build-tools-24.0.2
+    - android-22
     - android-24
     - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-22
 
 # Install Golang
 before_install:
@@ -25,8 +27,20 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+#  Create, start, and wait for emulator
+# https://docs.travis-ci.com/user/languages/android/#How-to-Create-and-Start-an-Emulator
+before_script:
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
+# Limit memory usage so travis doesn't kill us
+env:
+- GRADLE_OPTS=-Xmx2048m
+
 script:
   # Lint fails because travis doesn't have platform-tools 24
   # https://github.com/travis-ci/travis-ci/issues/6699
   #- ./gradlew lint
-  - ./gradlew buildNative assembleDebug
+  - ./gradlew buildNative connectedFatDebugAndroidTest
