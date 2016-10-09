@@ -1,6 +1,7 @@
 # syncthing-android
 
 [![Build Status](https://travis-ci.org/syncthing/syncthing-android.svg?branch=master)](https://travis-ci.org/syncthing/syncthing-android)
+[![License: MPLv2](https://img.shields.io/badge/License-MPLv2-blue.svg)](https://opensource.org/licenses/MPL-2.0)
 
 A wrapper of [Syncthing](https://github.com/syncthing/syncthing) for Android.
 
