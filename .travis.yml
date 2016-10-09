@@ -1,0 +1,32 @@
+sudo: required
+language: android
+jdk: oraclejdk8
+
+# Install Android SDK
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-24.0.2
+    - android-24
+    - extra-android-m2repository
+
+# Install Golang
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install golang -y
+
+# Cache gradle dependencies
+# https://docs.travis-ci.com/user/languages/android/#Caching
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+script:
+  # Lint fails because travis doesn't have platform-tools 24
+  # https://github.com/travis-ci/travis-ci/issues/6699
+  #- ./gradlew lint
+  - ./gradlew buildNative assembleDebug

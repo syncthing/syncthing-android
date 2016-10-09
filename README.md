@@ -1,6 +1,6 @@
 # syncthing-android
 
-[![Build Status](http://android.syncthing.net/job/Syncthing-Android/badge/icon)](http://android.syncthing.net/job/Syncthing-Android/)
+[![Build Status](https://travis-ci.org/syncthing/syncthing-android.svg?branch=master)](https://travis-ci.org/syncthing/syncthing-android)
 
 A wrapper of [Syncthing](https://github.com/syncthing/syncthing) for Android.
 
