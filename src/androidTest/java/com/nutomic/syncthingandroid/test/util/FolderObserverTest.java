@@ -1,19 +1,28 @@
 package com.nutomic.syncthingandroid.test.util;
 
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.test.Util;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class FolderObserverTest extends AndroidTestCase
-        implements FolderObserver.OnFolderFileChangeListener {
+public class FolderObserverTest implements FolderObserver.OnFolderFileChangeListener {
+
+    @Rule
+    public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
     private File mTestFolder;
 
@@ -21,24 +30,22 @@ public class FolderObserverTest extends AndroidTestCase
 
     private CountDownLatch mLatch;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        mTestFolder = new File(new MockContext(getContext()).getFilesDir(), "observer-test");
+    @Before
+    public void setUp() throws Exception {
+        mTestFolder = new File(new MockContext(InstrumentationRegistry.getTargetContext()).getFilesDir(), "observer-test");
         mTestFolder.mkdir();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         Util.deleteRecursive(mTestFolder);
-        super.tearDown();
     }
 
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
         mLatch.countDown();
-        assertEquals(mCurrentTest, folderId);
-        assertFalse(relativePath.endsWith("should-not-notifiy"));
+        Assert.assertEquals(mCurrentTest, folderId);
+        Assert.assertFalse(relativePath.endsWith("should-not-notifiy"));
     }
 
     private RestApi.Folder createFolder(String id) {
@@ -48,6 +55,7 @@ public class FolderObserverTest extends AndroidTestCase
         return r;
     }
 
+    @Test
     public void testRecursion() throws IOException, InterruptedException,
             FolderObserver.FolderNotExistingException {
         mCurrentTest = "testRecursion";
@@ -58,11 +66,12 @@ public class FolderObserverTest extends AndroidTestCase
 
         mLatch = new CountDownLatch(1);
         testFile.createNewFile();
-        mLatch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(mLatch.await(1, TimeUnit.SECONDS));
 
         fo.stopWatching();
     }
 
+    @Test
     public void testRemoveFile() throws IOException, InterruptedException,
             FolderObserver.FolderNotExistingException {
         mCurrentTest = "testRemoveFile";
@@ -72,12 +81,13 @@ public class FolderObserverTest extends AndroidTestCase
 
         mLatch = new CountDownLatch(1);
         test.delete();
-        mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(0, mLatch.getCount());
+        Assert.assertTrue(mLatch.await(1, TimeUnit.SECONDS));
+        Assert.assertEquals(0, mLatch.getCount());
 
         fo.stopWatching();
     }
 
+    @Test
     public void testAddDirectory() throws IOException, InterruptedException,
             FolderObserver.FolderNotExistingException {
         mCurrentTest = "testAddDirectory";
@@ -88,21 +98,22 @@ public class FolderObserverTest extends AndroidTestCase
 
         mLatch = new CountDownLatch(1);
         testFile.createNewFile();
-        mLatch.await(1, TimeUnit.SECONDS);
-        assertEquals(0, mLatch.getCount());
+        Assert.assertTrue(mLatch.await(1, TimeUnit.SECONDS));
+        Assert.assertEquals(0, mLatch.getCount());
 
         fo.stopWatching();
     }
 
+    @Test
     public void testNotExisting() throws IOException, InterruptedException {
         RestApi.Folder r = new RestApi.Folder();
-        r.path = new File(new MockContext(getContext()).getFilesDir(), "not-existing").getPath();
+        r.path = new File(new MockContext(InstrumentationRegistry.getTargetContext()).getFilesDir(), "not-existing").getPath();
         r.id = "testNotExisting";
         try {
             new FolderObserver(this, r);
-            fail("Expected FolderNotExistingException");
+            Assert.fail("Expected FolderNotExistingException");
         } catch (FolderObserver.FolderNotExistingException e) {
-            assertTrue(e.getMessage().contains(r.path));
+            Assert.assertTrue(e.getMessage().contains(r.path));
         }
     }
 

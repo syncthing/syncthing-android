@@ -2,71 +2,82 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.syncthing.BatteryReceiver;
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 
-public class BatteryReceiverTest extends AndroidTestCase {
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+public class BatteryReceiverTest {
+
+    @Rule
+    public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
     private BatteryReceiver mReceiver;
     private MockContext mContext;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         mReceiver = new BatteryReceiver();
-        mContext = new MockContext(getContext());
+        mContext = new MockContext(InstrumentationRegistry.getTargetContext());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit().clear().commit();
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit().clear().apply();
     }
 
+    @Test
     public void testOnReceiveCharging() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
-                .commit();
+                .apply();
         Intent intent = new Intent(Intent.ACTION_POWER_CONNECTED);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals(1, mContext.getReceivedIntents().size());
+        Assert.assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
-        assertTrue(receivedIntent.getBooleanExtra(DeviceStateHolder.EXTRA_IS_CHARGING, false));
+        Assert.assertTrue(receivedIntent.getBooleanExtra(DeviceStateHolder.EXTRA_IS_CHARGING, false));
         mContext.clearReceivedIntents();
     }
 
+    @Test
     public void testOnReceiveNotCharging() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
-                .commit();
+                .apply();
         Intent intent = new Intent(Intent.ACTION_POWER_DISCONNECTED);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals(1, mContext.getReceivedIntents().size());
+        Assert.assertEquals(1, mContext.getReceivedIntents().size());
 
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
-        assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
-        assertFalse(receivedIntent.getBooleanExtra(DeviceStateHolder.EXTRA_IS_CHARGING, true));
+        Assert.assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
+        Assert.assertFalse(receivedIntent.getBooleanExtra(DeviceStateHolder.EXTRA_IS_CHARGING, true));
         mContext.clearReceivedIntents();
     }
 
+    @Test
     public void testOnlyRunInForeground() {
-        PreferenceManager.getDefaultSharedPreferences(getContext())
+        PreferenceManager.getDefaultSharedPreferences(InstrumentationRegistry.getTargetContext())
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, false)
-                .commit();
+                .apply();
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_POWER_CONNECTED));
-        assertEquals(0, mContext.getReceivedIntents().size());
+        Assert.assertEquals(0, mContext.getReceivedIntents().size());
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_POWER_DISCONNECTED));
-        assertEquals(0, mContext.getReceivedIntents().size());
+        Assert.assertEquals(0, mContext.getReceivedIntents().size());
     }
 
 }

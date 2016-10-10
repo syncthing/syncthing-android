@@ -128,7 +128,7 @@ public class MainActivity extends SyncthingActivity
      * Shows the loading dialog with the correct text ("creating keys" or "loading").
      */
     private void showLoadingDialog() {
-        if (mLoadingDialog != null)
+        if (isFinishing() || mLoadingDialog != null)
             return;
 
         LayoutInflater inflater = getLayoutInflater();

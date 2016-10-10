@@ -39,7 +39,7 @@ android {
         versionCode 105
         versionName "0.8.6"
         testApplicationId 'com.nutomic.syncthingandroid.test'
-        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         testHandleProfiling true
         testFunctionalTest true
         jackOptions {

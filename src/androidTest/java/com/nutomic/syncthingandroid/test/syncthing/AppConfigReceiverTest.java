@@ -2,32 +2,39 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.syncthing.AppConfigReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
 /**
  * Test the correct behaviour of the AppConfigReceiver
- *
- * Created by sqrt-1674 on 27.03.16.
  */
-public class AppConfigReceiverTest extends AndroidTestCase {
+public class AppConfigReceiverTest {
+
+    @Rule
+    public final ServiceTestRule mServiceRule = new ServiceTestRule();
+
     private AppConfigReceiver mReceiver;
     private MockContext mContext;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         mReceiver = new AppConfigReceiver();
-        mContext = new MockContext(getContext());
+        mContext = new MockContext(InstrumentationRegistry.getTargetContext());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit().clear().commit();
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit().clear().apply();
     }
 
 
@@ -35,18 +42,19 @@ public class AppConfigReceiverTest extends AndroidTestCase {
      * Test starting the Syncthing-Service if "always run in background" is enabled
      * In this case starting the service is allowed
      */
+    @Test
     public void testStartSyncthingServiceBackground() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
-                .commit();
+                .apply();
 
         Intent intent = new Intent(new Intent(mContext, AppConfigReceiver.class));
         intent.setAction(AppConfigReceiver.ACTION_START);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals("Start SyncthingService Background", 1, mContext.getReceivedIntents().size());
-        assertEquals("Start SyncthingService Background", SyncthingService.class.getName(),
+        Assert.assertEquals("Start SyncthingService Background", 1, mContext.getReceivedIntents().size());
+        Assert.assertEquals("Start SyncthingService Background", SyncthingService.class.getName(),
                         mContext.getReceivedIntents().get(0).getComponent().getClassName());
     }
 
@@ -54,35 +62,37 @@ public class AppConfigReceiverTest extends AndroidTestCase {
      * Test stopping the service if "alway run in background" is enabled.
      * Stopping the service in this mode is not allowed, so no stopService-intent may be issued.
      */
+    @Test
     public void testStopSyncthingServiceBackground() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, true)
-                .commit();
+                .apply();
 
         Intent intent = new Intent(new Intent(mContext, AppConfigReceiver.class));
         intent.setAction(AppConfigReceiver.ACTION_STOP);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals("Stop SyncthingService Background", 0, mContext.getStopServiceIntents().size());
+        Assert.assertEquals("Stop SyncthingService Background", 0, mContext.getStopServiceIntents().size());
     }
 
     /**
      * Test starting the Syncthing-Service if "always run in background" is disabled
      * In this case starting the service is allowed
      */
+    @Test
     public void testStartSyncthingServiceForeground() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, false)
-                .commit();
+                .apply();
 
         Intent intent = new Intent(new Intent(mContext, AppConfigReceiver.class));
         intent.setAction(AppConfigReceiver.ACTION_START);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals("Start SyncthingService Foreround", 1, mContext.getReceivedIntents().size());
-        assertEquals("Start SyncthingService Foreround", SyncthingService.class.getName(),
+        Assert.assertEquals("Start SyncthingService Foreround", 1, mContext.getReceivedIntents().size());
+        Assert.assertEquals("Start SyncthingService Foreround", SyncthingService.class.getName(),
                             mContext.getReceivedIntents().get(0).getComponent().getClassName());
     }
 
@@ -90,19 +100,20 @@ public class AppConfigReceiverTest extends AndroidTestCase {
      * Test stopping the Syncthing-Service if "always run in background" is disabled
      * In this case stopping the service is allowed
      */
+    @Test
     public void testStopSyncthingServiceForeground() {
         PreferenceManager.getDefaultSharedPreferences(mContext)
                 .edit()
                 .putBoolean(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND, false)
-                .commit();
+                .apply();
 
         Intent intent = new Intent(new Intent(mContext, AppConfigReceiver.class));
         intent.setAction(AppConfigReceiver.ACTION_STOP);
 
         mReceiver.onReceive(mContext, intent);
-        assertEquals("Stop SyncthingService Foreround", 1, mContext.getStopServiceIntents().size());
+        Assert.assertEquals("Stop SyncthingService Foreround", 1, mContext.getStopServiceIntents().size());
         Intent receivedIntent = mContext.getStopServiceIntents().get(0);
-        assertEquals("Stop SyncthingService Foreround", SyncthingService.class.getName(),
+        Assert.assertEquals("Stop SyncthingService Foreround", SyncthingService.class.getName(),
                                                 receivedIntent.getComponent().getClassName());
     }
 }

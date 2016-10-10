@@ -1,6 +1,6 @@
 package com.nutomic.syncthingandroid.test.activities;
 
-import android.test.ActivityInstrumentationTestCase2;
+import android.support.test.rule.ActivityTestRule;
 
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
@@ -8,19 +8,23 @@ import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.test.MockSyncthingService;
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+
+public class MainActivityTest {
+
+    @Rule
+    public final ActivityTestRule<MainActivity> mRule = new ActivityTestRule<>(MainActivity.class);
 
     private final MockSyncthingService mService = new MockSyncthingService();
 
-    public MainActivityTest() {
-        super(MainActivity.class);
-    }
-
+    @Test
     public void testOnServiceConnected() {
-        getActivity().onServiceConnected(null, new SyncthingServiceBinder(mService));
-        assertTrue(mService.containsListenerInstance(MainActivity.class));
-        assertTrue(mService.containsListenerInstance(FolderListFragment.class));
-        assertTrue(mService.containsListenerInstance(DeviceListFragment.class));
+        mRule.getActivity().onServiceConnected(null, new SyncthingServiceBinder(mService));
+        Assert.assertTrue(mService.containsListenerInstance(MainActivity.class));
+        Assert.assertTrue(mService.containsListenerInstance(FolderListFragment.class));
+        Assert.assertTrue(mService.containsListenerInstance(DeviceListFragment.class));
     }
 
 }

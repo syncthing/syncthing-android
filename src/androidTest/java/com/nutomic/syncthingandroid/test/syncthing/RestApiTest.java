@@ -1,6 +1,8 @@
 package com.nutomic.syncthingandroid.test.syncthing;
 
-import android.test.AndroidTestCase;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
@@ -9,23 +11,31 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
-import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class RestApiTest extends AndroidTestCase {
+public class RestApiTest {
+
+    @Rule
+    public final ServiceTestRule mServiceRule = new ServiceTestRule();
 
     private RestApi mApi;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
+        Context context = InstrumentationRegistry.getTargetContext();
 
-        new SyncthingRunnable(new MockContext(getContext()), SyncthingRunnable.Command.main);
+        new SyncthingRunnable(context, SyncthingRunnable.Command.main);
 
-        ConfigXml config = new ConfigXml(new MockContext(getContext()));
+        ConfigXml config = new ConfigXml(context);
 
-        String httpsCertPath = getContext().getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+        String httpsCertPath = context.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(2);
         new PollWebGuiAvailableTask(config.getWebGuiUrl(), httpsCertPath, config.getApiKey()) {
@@ -35,96 +45,96 @@ public class RestApiTest extends AndroidTestCase {
                 latch.countDown();
             }
         }.execute();
-        mApi = new RestApi(getContext(), config.getWebGuiUrl(), config.getApiKey(),
-                latch::countDown, null);
-        latch.await(1, TimeUnit.SECONDS);
+        mApi = new RestApi(context, config.getWebGuiUrl(), config.getApiKey(),
+                new RestApi.OnApiAvailableListener() {
+                    @Override
+                    public void onApiAvailable() {
+                        latch.countDown();
+                    }
+                }, null);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-        // TODO: Unit tests fail when Syncthing is killed SyncthingRunnable.killSyncthing();
-        ConfigXml.getConfigFile(new MockContext(getContext())).delete();
+    @After
+    public void tearDown() throws Exception {
+        // TODO: Unit tests fail when Syncthing is killed
+        // SyncthingRunnable.killSyncthing();
+        Context context = InstrumentationRegistry.getTargetContext();
+        ConfigXml.getConfigFile(new MockContext(context)).delete();
     }
 
+    @Test
     public void testGetDevices() {
-        assertNotNull(mApi.getDevices(false));
+        Assert.assertNotNull(mApi.getDevices(false));
     }
 
+    @Test
     public void testGetSystemInfo() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.getSystemInfo(new RestApi.OnReceiveSystemInfoListener() {
-            @Override
-            public void onReceiveSystemInfo(RestApi.SystemInfo info) {
-                assertNotNull(info);
-                latch.countDown();
-            }
+        mApi.getSystemInfo((info) -> {
+            Assert.assertNotNull(info);
+            latch.countDown();
         });
-        latch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
+    @Test
     public void testGetSystemVersion() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.getSystemVersion(new RestApi.OnReceiveSystemVersionListener() {
-            @Override
-            public void onReceiveSystemVersion(RestApi.SystemVersion info) {
-                assertNotNull(info);
-                latch.countDown();
-            }
+        mApi.getSystemVersion(info -> {
+            Assert.assertNotNull(info);
+            latch.countDown();
         });
-        latch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
+    @Test
     public void testGetFolders() {
-        assertNotNull(mApi.getFolders());
+        Assert.assertNotNull(mApi.getFolders());
     }
-    
+
+    @Test
     public void testConvertNotCrashing() {
         long[] values = new long[]{-1, 0, 1, 2, 4, 8, 16, 1024, 2^10, 2^15, 2^20, 2^25, 2^30};
         for (long l : values) {
-            assertNotSame("", RestApi.readableFileSize(getContext(), l));
-            assertNotSame("", RestApi.readableTransferRate(getContext(), l));
+            Assert.assertNotSame("", RestApi.readableFileSize(InstrumentationRegistry.getTargetContext(), l));
+            Assert.assertNotSame("", RestApi.readableTransferRate(InstrumentationRegistry.getTargetContext(), l));
         }
     }
 
+    @Test
     public void testGetConnections() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.getConnections(new RestApi.OnReceiveConnectionsListener() {
-            @Override
-            public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-                assertNotNull(connections);
-                latch.countDown();
-            }
+        mApi.getConnections(connections -> {
+            Assert.assertNotNull(connections);
+            latch.countDown();
         });
-        latch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
+    @Test
     public void testGetModel() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.getModel("camera", new RestApi.OnReceiveModelListener() {
-            @Override
-            public void onReceiveModel(String folderId, RestApi.Model model) {
-                assertNotNull(model);
-                latch.countDown();
-            }
+        mApi.getModel("camera", (folderId, model) -> {
+            Assert.assertNotNull(model);
+            latch.countDown();
         });
-        latch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
+    @Test
     public void testNormalizeDeviceId() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         mApi.normalizeDeviceId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq",
-                new RestApi.OnDeviceIdNormalizedListener() {
-            @Override
-            public void onDeviceIdNormalized(String normalizedId, String error) {
-                assertEquals("P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2",
-                        normalizedId);
-                latch.countDown();
-            }
+                (normalizedId, error) -> {
+            Assert.assertEquals("P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2",
+                    normalizedId);
+            latch.countDown();
         });
-        latch.await(1, TimeUnit.SECONDS);
+        Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
     }
 
+    @Test
     public void testGetValueEarly() {
         // Should never throw an exception.
         mApi.getValue("Options", "ListenAddress");
