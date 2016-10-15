@@ -19,7 +19,7 @@
             android:title="@string/sync_only_wifi"
             android:defaultValue="false" />
 
-        <com.nutomic.syncthingandroid.preferences.WifiSsidPreference
+        <com.nutomic.syncthingandroid.views.WifiSsidPreference
             android:key="sync_only_wifi_ssids_set"
             android:title="@string/sync_only_wifi_ssids" />
 

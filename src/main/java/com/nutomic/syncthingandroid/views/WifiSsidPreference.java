@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.preferences;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;

@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.widget;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

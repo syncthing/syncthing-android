@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.util;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,6 +15,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.HashMap;
 

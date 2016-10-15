@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Device;
-import com.nutomic.syncthingandroid.preferences.WifiSsidPreference;
+import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
