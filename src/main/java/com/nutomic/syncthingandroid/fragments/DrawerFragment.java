@@ -161,9 +161,11 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
         mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
+        int announceTotal = info.discoveryMethods;
+        int announceConnected = announceTotal - info.discoveryErrors.size();
         mAnnounceServer.setText(String.format(Locale.getDefault(), "%1$d/%2$d",
-                                              info.extAnnounceConnected, info.extAnnounceTotal));
-        int color = (info.extAnnounceConnected > 0)
+                                              announceConnected, announceTotal));
+        int color = (announceConnected > 0)
                 ? R.color.text_green
                 : R.color.text_red;
         mAnnounceServer.setTextColor(ContextCompat.getColor(getContext(), color));

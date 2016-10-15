@@ -13,13 +13,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -70,7 +68,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
         // If that's the case we've to start at zero because syncthing was restarted.
         mApi.getEvents(0, 1, new RestApi.OnReceiveEventListener() {
             @Override
-            public void onEvent(String eventType, JSONObject data) throws JSONException {
+            public void onEvent(String eventType, JsonObject data) {
 
             }
 
@@ -89,10 +87,10 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      * Performs the actual event handling.
      */
     @Override
-    public void onEvent(String type, JSONObject data) throws JSONException {
+    public void onEvent(String type, JsonObject data) {
         switch (type) {
             case "DeviceRejected":
-                String deviceId = data.getString("device");
+                String deviceId = data.get("device").getAsString();
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
 
                 Intent intent = new Intent(mContext, SettingsActivity.class)
@@ -110,9 +108,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 notify(title, pi);
                 break;
             case "FolderRejected":
-                deviceId = data.getString("device");
-                String folderId = data.getString("folder");
-                String folderLabel = data.getString("folderLabel");
+                deviceId = data.get("device").getAsString();
+                String folderId = data.get("folder").getAsString();
+                String folderLabel = data.get("folderLabel").getAsString();
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
                 intent = new Intent(mContext, SettingsActivity.class)
@@ -137,7 +135,8 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 notify(title, pi);
                 break;
             case "ItemFinished":
-                File updatedFile = new File(data.getString("folderpath"), data.getString("item"));
+                File updatedFile = new File(data.get("folderpath").getAsString(),
+                                            data.get("item").getAsString());
                 Log.i(TAG, "Notified media scanner about " + updatedFile.toString());
                 mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                         Uri.fromFile(updatedFile)));

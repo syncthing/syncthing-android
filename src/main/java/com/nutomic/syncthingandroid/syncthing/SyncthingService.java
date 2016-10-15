@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
+import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 import com.android.PRNGFixes;
@@ -350,7 +351,7 @@ public class SyncthingService extends Service implements
                         mCurrentState = State.ACTIVE;
                         onApiChange();
                         new Thread(() -> {
-                            for (RestApi.Folder r : mApi.getFolders()) {
+                            for (Folder r : mApi.getFolders()) {
                                 try {
                                     mObservers.add(new FolderObserver(mApi, r));
                                 } catch (FolderObserver.FolderNotExistingException e) {
