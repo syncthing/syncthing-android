@@ -49,7 +49,7 @@ public class DevicesAdapter extends ArrayAdapter<Device>
         String deviceId = getItem(position).deviceID;
         Connection conn = mConnections.get(deviceId);
 
-        name.setText(RestApi.getDeviceDisplayName(getItem(position)));
+        name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
         if (conn != null && conn.connected) {
             if (conn.completion == 100) {

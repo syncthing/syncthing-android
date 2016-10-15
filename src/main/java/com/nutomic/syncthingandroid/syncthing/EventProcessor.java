@@ -128,7 +128,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 String deviceName = null;
                 for (Device d : mApi.getDevices(false)) {
                     if (d.deviceID.equals(deviceId))
-                        deviceName = RestApi.getDeviceDisplayName(d);
+                        deviceName = d.getDisplayName();
                 }
                 title = mContext.getString(R.string.folder_rejected, deviceName,
                         folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");

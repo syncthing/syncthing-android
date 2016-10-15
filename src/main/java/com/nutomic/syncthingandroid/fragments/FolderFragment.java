@@ -396,7 +396,7 @@ public class FolderFragment extends Fragment
         inflater.inflate(R.layout.item_device_form, mDevicesContainer);
         SwitchCompat deviceView = (SwitchCompat) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
         deviceView.setChecked(mFolder.getDevices().contains(device.deviceID));
-        deviceView.setText(RestApi.getDeviceDisplayName(device));
+        deviceView.setText(device.getDisplayName());
         deviceView.setTag(device);
         deviceView.setOnCheckedChangeListener(mCheckedListener);
     }
