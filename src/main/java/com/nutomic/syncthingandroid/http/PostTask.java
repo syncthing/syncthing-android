@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.http;
 
 import android.util.Log;
+import android.util.Pair;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -19,8 +20,9 @@ public class PostTask extends RestTask<String, Void, Boolean> {
     public static final String URI_CONFIG = "/rest/system/config";
     public static final String URI_SCAN   = "/rest/db/scan";
 
-    public PostTask(URL url, String path, String httpsCertPath, String apiKey) {
-        super(url, path, httpsCertPath, apiKey);
+    public PostTask(URL url, String path, String httpsCertPath, String apiKey,
+                    OnSuccessListener<Boolean> listener) {
+        super(url, path, httpsCertPath, apiKey, listener);
     }
 
     /**
@@ -29,7 +31,7 @@ public class PostTask extends RestTask<String, Void, Boolean> {
      * For {@link #URI_SCAN}, params[0] must contain the folder, and params[1] the subfolder.
      */
     @Override
-    protected Boolean doInBackground(String... params) {
+    protected Pair<Boolean, Boolean> doInBackground(String... params) {
         try {
             HttpsURLConnection connection = (mPath.equals(URI_SCAN))
                     ? openConnection("folder", params[0], "sub", params[1])
@@ -50,10 +52,10 @@ public class PostTask extends RestTask<String, Void, Boolean> {
             }
             br.close();
             Log.v(TAG, "API call result: " + result);
-            return true;
+            return new Pair<>(true, true);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call rest api", e);
-            return false;
+            return new Pair<>(false, null);
         }
     }
 

@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Pair;
+
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import javax.net.ssl.*;
@@ -18,20 +20,28 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
-public abstract class RestTask<A, B, C> extends AsyncTask<A, B, C> {
+public abstract class RestTask<Params, Progress, Result> extends
+        AsyncTask<Params, Progress, Pair<Boolean, Result>> {
 
     private static final String TAG = "RestTask";
+
+    public interface OnSuccessListener<Result> {
+        public void onSuccess(Result result);
+    }
 
     private final URL mUrl;
     protected final String mPath;
     private final String mHttpsCertPath;
     private final String mApiKey;
+    private final OnSuccessListener<Result> mListener;
 
-    public RestTask(URL url, String path, String httpsCertPath, String apiKey) {
+    public RestTask(URL url, String path, String httpsCertPath, String apiKey,
+                    OnSuccessListener<Result> listener) {
         mUrl           = url;
         mPath          = path;
         mHttpsCertPath = httpsCertPath;
         mApiKey        = apiKey;
+        mListener      = listener;
     }
 
     protected HttpsURLConnection openConnection(String... params) throws IOException {
@@ -48,6 +58,13 @@ public abstract class RestTask<A, B, C> extends AsyncTask<A, B, C> {
         connection.setHostnameVerifier((h, s) -> true);
         connection.setSSLSocketFactory(getSslSocketFactory());
         return connection;
+    }
+
+    protected void onPostExecute(Pair<Boolean, Result> result) {
+        if (mListener == null)
+            return;
+
+        mListener.onSuccess(result.second);
     }
 
     private SSLSocketFactory getSslSocketFactory() {

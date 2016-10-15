@@ -10,6 +10,7 @@ import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.Util;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -38,13 +39,10 @@ public class RestApiTest {
         String httpsCertPath = context.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(2);
-        new PollWebGuiAvailableTask(config.getWebGuiUrl(), httpsCertPath, config.getApiKey()) {
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                mApi.onWebGuiAvailable();
-                latch.countDown();
-            }
-        }.execute();
+        new PollWebGuiAvailableTask(config.getWebGuiUrl(), httpsCertPath, config.getApiKey(), result -> {
+            mApi.onWebGuiAvailable();
+            latch.countDown();
+        }).execute();
         mApi = new RestApi(context, config.getWebGuiUrl(), config.getApiKey(),
                 new RestApi.OnApiAvailableListener() {
                     @Override
@@ -97,8 +95,8 @@ public class RestApiTest {
     public void testConvertNotCrashing() {
         long[] values = new long[]{-1, 0, 1, 2, 4, 8, 16, 1024, 2^10, 2^15, 2^20, 2^25, 2^30};
         for (long l : values) {
-            Assert.assertNotSame("", RestApi.readableFileSize(InstrumentationRegistry.getTargetContext(), l));
-            Assert.assertNotSame("", RestApi.readableTransferRate(InstrumentationRegistry.getTargetContext(), l));
+            Assert.assertNotSame("", Util.readableFileSize(InstrumentationRegistry.getTargetContext(), l));
+            Assert.assertNotSame("", Util.readableTransferRate(InstrumentationRegistry.getTargetContext(), l));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.http;
 
 import android.util.Log;
+import android.util.Pair;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -26,15 +27,16 @@ public class GetTask extends RestTask<String, Void, String> {
     public static final String URI_REPORT      = "/rest/svc/report";
     public static final String URI_EVENTS      = "/rest/events";
 
-    public GetTask(URL url, String path, String httpsCertPath, String apiKey) {
-        super(url, path, httpsCertPath, apiKey);
+    public GetTask(URL url, String path, String httpsCertPath, String apiKey,
+                   OnSuccessListener<String> listener) {
+        super(url, path, httpsCertPath, apiKey, listener);
     }
 
     /**
      * @param params Keys and values for the query string.
      */
     @Override
-    protected String doInBackground(String... params) {
+    protected Pair<Boolean, String> doInBackground(String... params) {
         try {
             HttpsURLConnection connection = openConnection(params);
             Log.v(TAG, "Calling Rest API at " + connection.getURL());
@@ -47,10 +49,10 @@ public class GetTask extends RestTask<String, Void, String> {
             }
             br.close();
             Log.v(TAG, "API call result: " + result);
-            return result;
+            return new Pair<>(true, result);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call rest api", e);
-            return null;
+            return new Pair<>(false, null);
         }
     }
 

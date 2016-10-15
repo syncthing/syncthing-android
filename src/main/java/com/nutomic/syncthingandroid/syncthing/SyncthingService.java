@@ -20,6 +20,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.android.PRNGFixes;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
@@ -27,14 +28,10 @@ import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
-import com.android.PRNGFixes;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.channels.FileChannel;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -160,7 +157,7 @@ public class SyncthingService extends Service implements
 
     /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
-     * {@link PollWebGuiAvailableTaskImpl}.
+     * {@link #pollWebGui}.
      */
     private boolean mStopScheduled = false;
 
@@ -230,8 +227,7 @@ public class SyncthingService extends Service implements
                     registerOnWebGuiAvailableListener(mApi);
                 if (mEventProcessor != null)
                     registerOnWebGuiAvailableListener(mEventProcessor);
-                new PollWebGuiAvailableTaskImpl(getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE, mConfig.getApiKey())
-                        .execute();
+                pollWebGui();
                 mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
                 new Thread(mRunnable).start();
                 updateNotification();
@@ -480,21 +476,16 @@ public class SyncthingService extends Service implements
         mOnApiChangeListeners.remove(listener);
     }
 
-    private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
-
-        public PollWebGuiAvailableTaskImpl(URL url, String httpsCertPath, String apiKey) {
-            super(url, httpsCertPath, apiKey);
-        }
-
-        /**
-         * Wait for the web-gui of the native syncthing binary to come online.
-         *
-         * In case the binary is to be stopped, also be aware that another thread could request
-         * to stop the binary in the time while waiting for the GUI to become active. See the comment
-         * for SyncthingService.onDestroy for details.
-         */
-        @Override
-        protected void onPostExecute(Void aVoid) {
+    /**
+     * Wait for the web-gui of the native syncthing binary to come online.
+     *
+     * In case the binary is to be stopped, also be aware that another thread could request
+     * to stop the binary in the time while waiting for the GUI to become active. See the comment
+     * for SyncthingService.onDestroy for details.
+     */
+    private void pollWebGui() {
+        new PollWebGuiAvailableTask(getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE,
+                                    mConfig.getApiKey(), result -> {
             synchronized (stateLock) {
                 if (mStopScheduled) {
                     mCurrentState = State.DISABLED;
@@ -512,7 +503,7 @@ public class SyncthingService extends Service implements
                 listener.onWebGuiAvailable();
             }
             mOnWebGuiAvailableListeners.clear();
-        }
+        }).execute();
     }
 
     /**

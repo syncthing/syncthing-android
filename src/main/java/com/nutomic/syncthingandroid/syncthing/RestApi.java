@@ -152,29 +152,20 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     @Override
     public void onWebGuiAvailable() {
         mAvailableCount.set(0);
-        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null)
-                    return;
-
-                JsonObject json = new JsonParser().parse(s).getAsJsonObject();
-                mVersion = json.get("version").getAsString();
-                Log.i(TAG, "Syncthing version is " + mVersion);
+        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey, result -> {
+            JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+            mVersion = json.get("version").getAsString();
+            Log.i(TAG, "Syncthing version is " + mVersion);
+            tryIsAvailable();
+        }).execute();
+        new GetTask(mUrl, GetTask.URI_CONFIG, mHttpsCertPath, mApiKey, result -> {
+            try {
+                mConfig = new JSONObject(result);
                 tryIsAvailable();
+            } catch (JSONException e) {
+                Log.w(TAG, "Failed to parse config", e);
             }
-        }.execute();
-        new GetTask(mUrl, GetTask.URI_CONFIG, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String config) {
-                try {
-                    mConfig = new JSONObject(config);
-                    tryIsAvailable();
-                } catch (JSONException e) {
-                    Log.w(TAG, "Failed to parse config", e);
-                }
-            }
-        }.execute();
+        }).execute();
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
             tryIsAvailable();
@@ -277,7 +268,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void requireRestart(Activity activity) {
         if (mRestartPostponed) {
-            new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey).execute(mConfig.toString());
+            new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, null)
+                    .execute(mConfig.toString());
         } else {
             activity.startActivity(new Intent(mContext, RestartActivity.class));
         }
@@ -290,13 +282,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * This executes a restart immediately, and does not show a dialog.
      */
     public void updateConfig() {
-        new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(Boolean b) {
-                mContext.startService(new Intent(mContext, SyncthingService.class)
-                        .setAction(SyncthingService.ACTION_RESTART));
-            }
-        }.execute(mConfig.toString());
+        new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, result -> {
+            mContext.startService(new Intent(mContext, SyncthingService.class)
+                    .setAction(SyncthingService.ACTION_RESTART));
+        }).execute(mConfig.toString());
 
     }
 
@@ -348,15 +337,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param listener Callback invoked when the result is received.
      */
     public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
-        new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null)
-                    return;
-
-                listener.onReceiveSystemInfo(new Gson().fromJson(s, SystemInfo.class));
-            }
-        }.execute();
+        new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey, result -> {
+                listener.onReceiveSystemInfo(new Gson().fromJson(result, SystemInfo.class));
+        }).execute();
     }
 
     /**
@@ -365,21 +348,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param listener Callback invoked when the result is received.
      */
     public void getSystemVersion(final OnReceiveSystemVersionListener listener) {
-        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String response) {
-                if (response == null) {
-                    return;
-                }
-
-                try {
-                    SystemVersion systemVersion = new Gson().fromJson(response, SystemVersion.class);
-                    listener.onReceiveSystemVersion(systemVersion);
-                } catch (JsonSyntaxException e) {
-                    Log.w(TAG, "Failed to read system info", e);
-                }
+        new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey, result -> {
+            try {
+                SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
+                listener.onReceiveSystemVersion(systemVersion);
+            } catch (JsonSyntaxException e) {
+                Log.w(TAG, "Failed to read system info", e);
             }
-        }.execute();
+        }).execute();
     }
 
     /**
@@ -418,63 +394,57 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Use the key {@link #TOTAL_STATS} to get connection info for the local device.
      */
     public void getConnections(final OnReceiveConnectionsListener listener) {
-        new GetTask(mUrl, GetTask.URI_CONNECTIONS, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null)
-                    return;
-
-                Long now = System.currentTimeMillis();
-                Long timeElapsed = (now - mPreviousConnectionTime) / 1000;
-                if (timeElapsed < 1) {
-                    listener.onReceiveConnections(mPreviousConnections);
-                    return;
-                }
-
-                try {
-                    JSONObject json = new JSONObject(s);
-                    Map<String, JSONObject> jsonConnections = new HashMap<>();
-                    jsonConnections.put(TOTAL_STATS, json.getJSONObject(TOTAL_STATS));
-                    JSONArray extConnections = json.getJSONObject("connections").names();
-                    if (extConnections != null) {
-                        for (int i = 0; i < extConnections.length(); i++) {
-                            String deviceId = extConnections.get(i).toString();
-                            jsonConnections.put(deviceId, json.getJSONObject("connections").getJSONObject(deviceId));
-                        }
-                    }
-                    Map<String, Connection> connections = new HashMap<>();
-                    for (Map.Entry<String, JSONObject> jsonConnection : jsonConnections.entrySet()) {
-                        String deviceId = jsonConnection.getKey();
-                        Connection c = new Connection();
-                        JSONObject conn = jsonConnection.getValue();
-                        c.address = deviceId;
-                        c.at = conn.getString("at");
-                        c.inBytesTotal = conn.getLong("inBytesTotal");
-                        c.outBytesTotal = conn.getLong("outBytesTotal");
-                        c.address = conn.getString("address");
-                        c.clientVersion = conn.getString("clientVersion");
-                        c.completion = getDeviceCompletion(deviceId);
-                        c.connected = conn.getBoolean("connected");
-
-                        Connection prev = (mPreviousConnections.containsKey(deviceId))
-                                ? mPreviousConnections.get(deviceId)
-                                : new Connection();
-                        mPreviousConnectionTime = now;
-                        c.inBits = Math.max(0, 8 *
-                                (conn.getLong("inBytesTotal") - prev.inBytesTotal) / timeElapsed);
-                        c.outBits = Math.max(0, 8 *
-                                (conn.getLong("outBytesTotal") - prev.outBytesTotal) / timeElapsed);
-
-                        connections.put(deviceId, c);
-
-                    }
-                    mPreviousConnections = connections;
-                    listener.onReceiveConnections(mPreviousConnections);
-                } catch (JSONException e) {
-                    Log.w(TAG, "Failed to parse connections", e);
-                }
+        new GetTask(mUrl, GetTask.URI_CONNECTIONS, mHttpsCertPath, mApiKey, result -> {
+            Long now = System.currentTimeMillis();
+            Long timeElapsed = (now - mPreviousConnectionTime) / 1000;
+            if (timeElapsed < 1) {
+                listener.onReceiveConnections(mPreviousConnections);
+                return;
             }
-        }.execute();
+
+            try {
+                JSONObject json = new JSONObject(result);
+                Map<String, JSONObject> jsonConnections = new HashMap<>();
+                jsonConnections.put(TOTAL_STATS, json.getJSONObject(TOTAL_STATS));
+                JSONArray extConnections = json.getJSONObject("connections").names();
+                if (extConnections != null) {
+                    for (int i = 0; i < extConnections.length(); i++) {
+                        String deviceId = extConnections.get(i).toString();
+                        jsonConnections.put(deviceId, json.getJSONObject("connections").getJSONObject(deviceId));
+                    }
+                }
+                Map<String, Connection> connections = new HashMap<>();
+                for (Map.Entry<String, JSONObject> jsonConnection : jsonConnections.entrySet()) {
+                    String deviceId = jsonConnection.getKey();
+                    Connection c = new Connection();
+                    JSONObject conn = jsonConnection.getValue();
+                    c.address = deviceId;
+                    c.at = conn.getString("at");
+                    c.inBytesTotal = conn.getLong("inBytesTotal");
+                    c.outBytesTotal = conn.getLong("outBytesTotal");
+                    c.address = conn.getString("address");
+                    c.clientVersion = conn.getString("clientVersion");
+                    c.completion = getDeviceCompletion(deviceId);
+                    c.connected = conn.getBoolean("connected");
+
+                    Connection prev = (mPreviousConnections.containsKey(deviceId))
+                            ? mPreviousConnections.get(deviceId)
+                            : new Connection();
+                    mPreviousConnectionTime = now;
+                    c.inBits = Math.max(0, 8 *
+                            (conn.getLong("inBytesTotal") - prev.inBytesTotal) / timeElapsed);
+                    c.outBits = Math.max(0, 8 *
+                            (conn.getLong("outBytesTotal") - prev.outBytesTotal) / timeElapsed);
+
+                    connections.put(deviceId, c);
+
+                }
+                mPreviousConnections = connections;
+                listener.onReceiveConnections(mPreviousConnections);
+            } catch (JSONException e) {
+                Log.w(TAG, "Failed to parse connections", e);
+            }
+        }).execute();
     }
 
     /**
@@ -543,17 +513,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns status information about the folder with the given id.
      */
     public void getModel(final String folderId, final OnReceiveModelListener listener) {
-        new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null)
-                    return;
-
-                Model m = new Gson().fromJson(s, Model.class);
-                mCachedModelInfo.put(folderId, m);
-                listener.onReceiveModel(folderId, m);
-            }
-        }.execute("folder", folderId);
+        new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey, result -> {
+            Model m = new Gson().fromJson(result, Model.class);
+            mCachedModelInfo.put(folderId, m);
+            listener.onReceiveModel(folderId, m);
+        }).execute("folder", folderId);
     }
 
     /**
@@ -584,40 +548,34 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * The OnReceiveEventListeners onEvent method is called for each event.
      */
     public final void getEvents(final long sinceId, final long limit, final OnReceiveEventListener listener) {
-        new GetTask(mUrl, GetTask.URI_EVENTS, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                if (s == null)
-                    return;
+        new GetTask(mUrl, GetTask.URI_EVENTS, mHttpsCertPath, mApiKey, result -> {
+            JsonArray jsonEvents = new JsonParser().parse(result).getAsJsonArray();
+            long lastId = 0;
 
-                JsonArray jsonEvents = new JsonParser().parse(s).getAsJsonArray();
-                long lastId = 0;
+            for (int i = 0; i < jsonEvents.size(); i++) {
+                JsonObject json = jsonEvents.get(i).getAsJsonObject();
+                String type     = json.get("type").getAsString();
+                long id         = json.get("id").getAsLong();
 
-                for (int i = 0; i < jsonEvents.size(); i++) {
-                    JsonObject json = jsonEvents.get(i).getAsJsonObject();
-                    String type     = json.get("type").getAsString();
-                    long id         = json.get("id").getAsLong();
+                if (lastId < id)
+                    lastId = id;
 
-                    if (lastId < id)
-                        lastId = id;
+                JsonObject data = null;
+                if (json.has("data"))
+                    data = json.get("data").getAsJsonObject();
 
-                    JsonObject data = null;
-                    if (json.has("data"))
-                        data = json.get("data").getAsJsonObject();
-
-                    // Add folder path to data.
-                    if (data != null && data.has("folder")) {
-                        String folder = data.get("folder").getAsString();
-                        String folderPath = getPathForFolder(folder);
-                        data.addProperty("folderpath", folderPath);
-                    }
-
-                    listener.onEvent(type, data);
+                // Add folder path to data.
+                if (data != null && data.has("folder")) {
+                    String folder = data.get("folder").getAsString();
+                    String folderPath = getPathForFolder(folder);
+                    data.addProperty("folderpath", folderPath);
                 }
 
-                listener.onDone(lastId);
+                listener.onEvent(type, data);
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+
+            listener.onDone(lastId);
+        }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
                 "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
     }
 
@@ -800,22 +758,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Normalizes a given device ID.
      */
     public void normalizeDeviceId(final String id, final OnDeviceIdNormalizedListener listener) {
-        new GetTask(mUrl, GetTask.URI_DEVICEID, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                if (s == null)
-                    return;
-
-                JsonObject json = new JsonParser().parse(s).getAsJsonObject();
-                JsonElement id = json.get("id");
-                JsonElement error = json.get("error");
-                if (id != null)
-                    listener.onDeviceIdNormalized(id.getAsString(), null);
-                if (error != null)
-                    listener.onDeviceIdNormalized(null, error.getAsString());
-            }
-        }.execute("id", id);
+        new GetTask(mUrl, GetTask.URI_DEVICEID, mHttpsCertPath, mApiKey, result -> {
+            JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+            JsonElement normalizedId = json.get("id");
+            JsonElement error = json.get("error");
+            if (normalizedId != null)
+                listener.onDeviceIdNormalized(normalizedId.getAsString(), null);
+            if (error != null)
+                listener.onDeviceIdNormalized(null, error.getAsString());
+        }).execute("id", id);
     }
 
     /**
@@ -823,7 +774,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
-        new PostTask(mUrl, PostTask.URI_SCAN, mHttpsCertPath, mApiKey).execute(folderId, relativePath);
+        new PostTask(mUrl, PostTask.URI_SCAN, mHttpsCertPath, mApiKey, null)
+                .execute(folderId, relativePath);
     }
 
     /**
@@ -882,19 +834,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns prettyfied usage report.
      */
     public void getUsageReport(final OnReceiveUsageReportListener listener) {
-        new GetTask(mUrl, GetTask.URI_REPORT, mHttpsCertPath, mApiKey) {
-            @Override
-            protected void onPostExecute(String s) {
-                try {
-                    if (s == null)
-                        return;
-
-                    listener.onReceiveUsageReport(new JSONObject(s).toString(4));
-                } catch (JSONException e) {
-                    throw new RuntimeException("Failed to prettify usage report", e);
-                }
+        new GetTask(mUrl, GetTask.URI_REPORT, mHttpsCertPath, mApiKey, result -> {
+            try {
+                listener.onReceiveUsageReport(new JSONObject(result).toString(4));
+            } catch (JSONException e) {
+                throw new RuntimeException("Failed to prettify usage report", e);
             }
-        }.execute();
+        }).execute();
     }
 
     /**
