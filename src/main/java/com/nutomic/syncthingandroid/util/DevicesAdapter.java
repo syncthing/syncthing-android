@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.util.HashMap;
@@ -19,10 +21,10 @@ import java.util.Map;
 /**
  * Generates item views for device items.
  */
-public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
+public class DevicesAdapter extends ArrayAdapter<Device>
         implements RestApi.OnReceiveConnectionsListener {
 
-    private Map<String, RestApi.Connection> mConnections =
+    private Map<String, Connection> mConnections =
             new HashMap<>();
 
     public DevicesAdapter(Context context) {
@@ -44,7 +46,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
         String deviceId = getItem(position).deviceID;
-        RestApi.Connection conn = mConnections.get(deviceId);
+        Connection conn = mConnections.get(deviceId);
 
         name.setText(RestApi.getDeviceDisplayName(getItem(position)));
         Resources r = getContext().getResources();
@@ -80,7 +82,7 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
     }
 
     @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
+    public void onReceiveConnections(Map<String, Connection> connections) {
         mConnections = connections;
         notifyDataSetChanged();
     }

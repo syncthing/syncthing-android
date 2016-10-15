@@ -19,7 +19,12 @@ import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.activities.RestartActivity;
 import com.nutomic.syncthingandroid.http.GetTask;
 import com.nutomic.syncthingandroid.http.PostTask;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.SystemInfo;
+import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import org.json.JSONArray;
@@ -69,61 +74,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public static final int USAGE_REPORTING_DENIED    = -1;
     private static final List<Integer> USAGE_REPORTING_DECIDED =
             Arrays.asList(USAGE_REPORTING_ACCEPTED, USAGE_REPORTING_DENIED);
-
-    public static class Device implements Serializable {
-        public List<String> addresses;
-        public String name;
-        public String deviceID;
-        public String compression;
-        public boolean introducer;
-    }
-
-    public static class SystemInfo {
-        public long alloc;
-        public double cpuPercent;
-        public int goroutines;
-        public String myID;
-        public long sys;
-        public boolean discoveryEnabled;
-        public int discoveryMethods;
-        public Map<String, String> discoveryErrors;
-    }
-
-    public static class SystemVersion {
-        public String arch;
-        public String codename;
-        public String longVersion;
-        public String os;
-        public String version;
-    }
-
-    public static class Connection {
-        public String at;
-        public long inBytesTotal;
-        public long outBytesTotal;
-        public long inBits;
-        public long outBits;
-        public String address;
-        public String clientVersion;
-        public int completion;
-        public boolean connected;
-    }
-
-    public static class Model {
-        public long globalBytes;
-        public long globalDeleted;
-        public long globalFiles;
-        public long localBytes;
-        public long localDeleted;
-        public long localFiles;
-        public long inSyncBytes;
-        public long inSyncFiles;
-        public long needBytes;
-        public long needFiles;
-        public long needDeletes;
-        public String state;
-        public String invalid;
-    }
 
     public interface OnConfigChangedListener {
         void onConfigChanged();

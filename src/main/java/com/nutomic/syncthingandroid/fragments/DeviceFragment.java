@@ -24,6 +24,8 @@ import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
@@ -59,7 +61,7 @@ public class DeviceFragment extends Fragment implements
 
     private SyncthingService mSyncthingService;
 
-    private RestApi.Device mDevice;
+    private Device mDevice;
 
     private View mIdContainer;
 
@@ -157,7 +159,7 @@ public class DeviceFragment extends Fragment implements
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
-                mDevice = (RestApi.Device) savedInstanceState.getSerializable("device");
+                mDevice = (Device) savedInstanceState.getSerializable("device");
             }
             if (mDevice == null) {
                 initDevice();
@@ -244,7 +246,7 @@ public class DeviceFragment extends Fragment implements
      * version/address changes.
      */
     @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
+    public void onReceiveConnections(Map<String, Connection> connections) {
         boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
         if (viewsExist && connections.containsKey(mDevice.deviceID)) {
             mCurrentAddressView.setVisibility(VISIBLE);
@@ -262,9 +264,9 @@ public class DeviceFragment extends Fragment implements
         }
 
         if (!mIsCreateMode) {
-            List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
+            List<Device> devices = mSyncthingService.getApi().getDevices(false);
             mDevice = null;
-            for (RestApi.Device device : devices) {
+            for (Device device : devices) {
                 if (device.deviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
                     mDevice = device;
@@ -365,7 +367,7 @@ public class DeviceFragment extends Fragment implements
     }
 
     private void initDevice() {
-        mDevice = new RestApi.Device();
+        mDevice = new Device();
         mDevice.name = "";
         mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;

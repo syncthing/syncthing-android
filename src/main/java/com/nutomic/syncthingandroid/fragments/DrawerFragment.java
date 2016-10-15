@@ -13,6 +13,9 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.SystemInfo;
+import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
@@ -152,7 +155,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
     @Override
-    public void onReceiveSystemInfo(RestApi.SystemInfo info) {
+    public void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
 
@@ -176,7 +179,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
     @Override
-    public void onReceiveSystemVersion(RestApi.SystemVersion info) {
+    public void onReceiveSystemVersion(SystemVersion info) {
         if (getActivity() == null)
             return;
 
@@ -187,8 +190,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
      * Populates views with status received via {@link RestApi#getConnections}.
      */
     @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-        RestApi.Connection c = connections.get(RestApi.TOTAL_STATS);
+    public void onReceiveConnections(Map<String, Connection> connections) {
+        Connection c = connections.get(RestApi.TOTAL_STATS);
         mDownload.setText(Util.readableTransferRate(mActivity, c.inBits));
         mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
+import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.preferences.WifiSsidPreference;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
@@ -233,8 +234,8 @@ public class SettingsFragment extends PreferenceFragment
         } else if (preference.equals(mSyncOnlyWifi)) {
             mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
         } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
-            RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
-            RestApi.Device updated = new RestApi.Device();
+            Device old = mSyncthingService.getApi().getLocalDevice();
+            Device updated = new Device();
             updated.addresses = old.addresses;
             updated.compression = old.compression;
             updated.deviceID = old.deviceID;

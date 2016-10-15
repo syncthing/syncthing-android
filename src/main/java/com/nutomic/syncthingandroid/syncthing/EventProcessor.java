@@ -18,6 +18,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
+import com.nutomic.syncthingandroid.model.Device;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -125,7 +126,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
 
                 String deviceName = null;
-                for (RestApi.Device d : mApi.getDevices(false)) {
+                for (Device d : mApi.getDevices(false)) {
                     if (d.deviceID.equals(deviceId))
                         deviceName = RestApi.getDeviceDisplayName(d);
                 }

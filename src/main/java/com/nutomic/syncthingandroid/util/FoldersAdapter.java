@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import static android.view.View.VISIBLE;
 public class FoldersAdapter extends ArrayAdapter<Folder>
         implements RestApi.OnReceiveModelListener {
 
-    private final HashMap<String, RestApi.Model> mModels = new HashMap<>();
+    private final HashMap<String, Model> mModels = new HashMap<>();
     private final LayoutInflater mInflater;
 
     public FoldersAdapter(Context context) {
@@ -48,7 +49,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder>
         TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
         Folder folder = getItem(position);
-        RestApi.Model model = mModels.get(folder.id);
+        Model model = mModels.get(folder.id);
         label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
         directory.setText(folder.path);
@@ -103,7 +104,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder>
     }
 
     @Override
-    public void onReceiveModel(String folderId, RestApi.Model model) {
+    public void onReceiveModel(String folderId, Model model) {
         mModels.put(folderId, model);
         notifyDataSetChanged();
     }
