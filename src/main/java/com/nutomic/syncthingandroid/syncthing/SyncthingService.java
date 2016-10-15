@@ -20,6 +20,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
@@ -548,12 +549,16 @@ public class SyncthingService extends Service implements
      */
     public void exportConfig() {
         EXPORT_PATH.mkdirs();
-        copyFile(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
-                new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
-        copyFile(new File(getFilesDir(), PRIVATE_KEY_FILE),
-                new File(EXPORT_PATH, PRIVATE_KEY_FILE));
-        copyFile(new File(getFilesDir(), PUBLIC_KEY_FILE),
-                new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+        try {
+            Files.copy(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
+                    new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
+            Files.copy(new File(getFilesDir(), PRIVATE_KEY_FILE),
+                    new File(EXPORT_PATH, PRIVATE_KEY_FILE));
+            Files.copy(new File(getFilesDir(), PUBLIC_KEY_FILE),
+                    new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to export config", e);
+        }
     }
 
     /**
@@ -570,35 +575,15 @@ public class SyncthingService extends Service implements
         if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
 
-        copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
-        copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
-        copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+        try {
+            Files.copy(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
+            Files.copy(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
+            Files.copy(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to import config", e);
+        }
         mCurrentState = State.INIT;
         updateState();
         return true;
-    }
-
-    /**
-     * Copies files between different storage devices.
-     */
-    private void copyFile(File source, File dest) {
-        FileChannel is = null;
-        FileChannel os = null;
-        try {
-            is = new FileInputStream(source).getChannel();
-            os = new FileOutputStream(dest).getChannel();
-            is.transferTo(0, is.size(), os);
-        } catch (IOException e) {
-            Log.w(TAG, "Failed to copy file", e);
-        } finally {
-            try {
-                if (is != null)
-                    is.close();
-                if (os != null)
-                    os.close();
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close stream", e);
-            }
-        }
     }
 }

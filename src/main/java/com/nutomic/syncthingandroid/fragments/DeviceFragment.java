@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,7 @@ import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -322,7 +324,7 @@ public class DeviceFragment extends Fragment implements
                 getActivity().finish();
                 return true;
             case R.id.share_device_id:
-                RestApi.shareDeviceId(getActivity(), mDevice.deviceID);
+                shareDeviceId(getActivity(), mDevice.deviceID);
                 return true;
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
@@ -417,7 +419,19 @@ public class DeviceFragment extends Fragment implements
             IntentIntegrator integrator = new IntentIntegrator(DeviceFragment.this);
             integrator.initiateScan();
         } else if (v.equals(mIdContainer)) {
-            mSyncthingService.getApi().copyDeviceId(mDevice.deviceID);
+            Util.copyDeviceId(getActivity(), mDevice.deviceID);
         }
+    }
+
+    /**
+     * Shares the given device ID via Intent. Must be called from an Activity.
+     */
+    private void shareDeviceId(Context context, String id) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
+        context.startActivity(Intent.createChooser(
+                shareIntent, context.getString(R.string.send_device_id_to)));
     }
 }

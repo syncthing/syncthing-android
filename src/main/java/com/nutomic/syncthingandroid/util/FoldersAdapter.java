@@ -19,7 +19,6 @@ import java.util.HashMap;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.nutomic.syncthingandroid.syncthing.RestApi.readableFileSize;
 
 /**
  * Generates item views for folder items.
@@ -63,8 +62,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder>
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
             size.setVisibility(VISIBLE);
             size.setText(getContext().getString(R.string.folder_size_format,
-                    readableFileSize(getContext(), model.inSyncBytes),
-                    readableFileSize(getContext(), model.globalBytes)));
+                    Util.readableFileSize(getContext(), model.inSyncBytes),
+                    Util.readableFileSize(getContext(), model.globalBytes)));
             setTextOrHide(invalid, model.invalid);
         } else {
             items.setVisibility(GONE);

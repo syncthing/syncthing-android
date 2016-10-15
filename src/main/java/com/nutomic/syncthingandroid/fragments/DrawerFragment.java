@@ -15,6 +15,7 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -156,11 +157,11 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
             return;
 
         mDeviceId.setText(info.myID);
-        mDeviceId.setOnClickListener(v -> mActivity.getApi().copyDeviceId(mDeviceId.getText().toString()));
+        mDeviceId.setOnClickListener(v -> Util.copyDeviceId(getActivity(), mDeviceId.getText().toString()));
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
-        mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
+        mRamUsage.setText(Util.readableFileSize(mActivity, info.sys));
         int announceTotal = info.discoveryMethods;
         int announceConnected = announceTotal - info.discoveryErrors.size();
         mAnnounceServer.setText(String.format(Locale.getDefault(), "%1$d/%2$d",
@@ -188,8 +189,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     @Override
     public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
         RestApi.Connection c = connections.get(RestApi.TOTAL_STATS);
-        mDownload.setText(RestApi.readableTransferRate(mActivity, c.inBits));
-        mUpload.setText(RestApi.readableTransferRate(mActivity, c.outBits));
+        mDownload.setText(Util.readableTransferRate(mActivity, c.inBits));
+        mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }
 
     @Override

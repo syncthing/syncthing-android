@@ -57,12 +57,12 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
                 status.setText(r.getString(R.string.device_syncing, conn.completion));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
-            download.setText(RestApi.readableTransferRate(getContext(), conn.inBits));
-            upload.setText(RestApi.readableTransferRate(getContext(), conn.outBits));
+            download.setText(Util.readableTransferRate(getContext(), conn.inBits));
+            upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
         }
         else {
-            download.setText(RestApi.readableTransferRate(getContext(), 0));
-            upload.setText(RestApi.readableTransferRate(getContext(), 0));
+            download.setText(Util.readableTransferRate(getContext(), 0));
+            upload.setText(Util.readableTransferRate(getContext(), 0));
             status.setText(r.getString(R.string.device_disconnected));
             status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
         }
