@@ -7,7 +7,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
-import com.nutomic.syncthingandroid.syncthing.NetworkReceiver;
+import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 
@@ -19,7 +19,7 @@ import org.junit.Test;
 
 /**
  * Tests for correct extras on the Intent sent by
- * {@link com.nutomic.syncthingandroid.syncthing.NetworkReceiver}.
+ * {@link NetworkReceiver}.
  *
  * Does not test for correct result value, as that would require mocking
  * {@link android.net.ConnectivityManager} (or replacing it with an interface).

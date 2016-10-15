@@ -81,12 +81,12 @@
 
         <service android:name=".syncthing.SyncthingService" />
 
-        <receiver android:name=".syncthing.NetworkReceiver">
+        <receiver android:name=".receiver.NetworkReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.BatteryReceiver">
+        <receiver android:name=".receiver.BatteryReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -97,7 +97,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.AppConfigReceiver"
+        <receiver android:name=".receiver.AppConfigReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.nutomic.syncthingandroid.action.START" />

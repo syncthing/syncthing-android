@@ -1,9 +1,12 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
+import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 /**
  * Receives battery plug/unplug intents and sends the charging state to {@link SyncthingService}.

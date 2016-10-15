@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,10 +41,10 @@ import java.util.List;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.nutomic.syncthingandroid.syncthing.SyncthingService.State.ACTIVE;
-import static com.nutomic.syncthingandroid.util.DpConverter.dp;
 import static java.lang.String.valueOf;
 
 /**
@@ -379,7 +380,8 @@ public class FolderFragment extends Fragment
     }
 
     private void addEmptyDeviceListView() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, dp(48, getActivity()));
+        int height = (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, 48, getResources().getDisplayMetrics());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, height);
         int dividerInset = getResources().getDimensionPixelOffset(R.dimen.material_divider_inset);
         int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
         setMarginStart(params, dividerInset);
