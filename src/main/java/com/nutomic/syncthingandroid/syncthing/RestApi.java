@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -31,11 +31,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -309,25 +310,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             return new ArrayList<>();
 
         try {
-            JSONArray devices = mConfig.getJSONArray("devices");
-            List<Device> ret = new ArrayList<>(devices.length());
-            for (int i = 0; i < devices.length(); i++) {
-                JSONObject json = devices.getJSONObject(i);
-                Device n = new Device();
-                n.addresses = jsonToList(json.optJSONArray("addresses"));
-                n.name = json.getString("name");
-                n.deviceID = json.getString("deviceID");
-                n.compression = json.getString("compression");
-                n.introducer = json.getBoolean("introducer");
-                // Use null-save check because mLocalDeviceId might not be initialized yet.
-                // Should be replaced with Object.equals() when that becomes available in Android.
-                boolean sameId = (mLocalDeviceId == n.deviceID) ||
-                        (mLocalDeviceId != null && mLocalDeviceId.equals(n.deviceID));
-                if (includeLocal || !sameId) {
-                    ret.add(n);
-                }
+            String json = mConfig.getJSONArray("devices").toString();
+            List<Device> devices = new ArrayList<>();
+            Collections.addAll(devices, new Gson().fromJson(json, Device[].class));
+
+            Iterator<Device> it = devices.iterator();
+            while (it.hasNext()) {
+                Device device = it.next();
+                boolean isLocalDevice = Objects.equal(mLocalDeviceId, device.deviceID);
+                if (!includeLocal && isLocalDevice)
+                    it.remove();
             }
-            return ret;
+            return devices;
         } catch (JSONException e) {
             Log.w(TAG, "Failed to read devices", e);
             return new ArrayList<>();

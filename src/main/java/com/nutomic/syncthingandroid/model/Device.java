@@ -6,10 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Device implements Serializable {
-    public List<String> addresses;
-    public String name;
     public String deviceID;
+    public String name;
+    public List<String> addresses;
     public String compression;
+    public String certName;
     public boolean introducer;
 
     /**
