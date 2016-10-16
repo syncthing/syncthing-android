@@ -30,3 +30,4 @@ script:
   # https://github.com/travis-ci/travis-ci/issues/6699
   #- ./gradlew lint
   - ./gradlew buildNative assembleDebug
+  - ./gradlew compileFatDebugAndroidTestSources
