@@ -3,18 +3,17 @@ package com.nutomic.syncthingandroid.http;
 import android.util.Log;
 import android.util.Pair;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Performs a GET request to the Syncthing API
  * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
  * returns the result as a String.
  */
-public class GetTask extends RestTask<String, Void, String> {
+public class GetTask extends RestTask<String, Void> {
 
     private static final String TAG = "GetTask";
 
@@ -28,7 +27,7 @@ public class GetTask extends RestTask<String, Void, String> {
     public static final String URI_EVENTS      = "/rest/events";
 
     public GetTask(URL url, String path, String httpsCertPath, String apiKey,
-                   OnSuccessListener<String> listener) {
+                   OnSuccessListener listener) {
         super(url, path, httpsCertPath, apiKey, listener);
     }
 
@@ -40,16 +39,7 @@ public class GetTask extends RestTask<String, Void, String> {
         try {
             HttpsURLConnection connection = openConnection(params);
             Log.v(TAG, "Calling Rest API at " + connection.getURL());
-            connection.connect();
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            String line;
-            String result = "";
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            br.close();
-            Log.v(TAG, "API call result: " + result);
-            return new Pair<>(true, result);
+            return connect(connection);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call rest api", e);
             return new Pair<>(false, null);

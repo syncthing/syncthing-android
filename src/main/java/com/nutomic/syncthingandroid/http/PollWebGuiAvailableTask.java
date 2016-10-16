@@ -4,14 +4,15 @@ package com.nutomic.syncthingandroid.http;
 import android.util.Log;
 import android.util.Pair;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Polls to load the web interface, until we receive http status 200.
  */
-public class PollWebGuiAvailableTask extends RestTask<Void, Void, Void> {
+public class PollWebGuiAvailableTask extends RestTask<Void, Void> {
 
     private static final String TAG = "PollWebGuiAvailableTask";
 
@@ -22,12 +23,12 @@ public class PollWebGuiAvailableTask extends RestTask<Void, Void, Void> {
     private static final long WEB_GUI_POLL_INTERVAL = 100;
 
     public PollWebGuiAvailableTask(URL url, String httpsCertPath, String apiKey,
-                                   OnSuccessListener<Void> listener) {
+                                   OnSuccessListener listener) {
         super(url, "", httpsCertPath, apiKey, listener);
     }
 
     @Override
-    protected Pair<Boolean, Void> doInBackground(Void... aVoid) {
+    protected Pair<Boolean, String> doInBackground(Void... aVoid) {
         int status = 0;
         do {
             try {

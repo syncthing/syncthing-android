@@ -7,36 +7,49 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.ByteSource;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 
-import javax.net.ssl.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
+import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
-public abstract class RestTask<Params, Progress, Result> extends
-        AsyncTask<Params, Progress, Pair<Boolean, Result>> {
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+public abstract class RestTask<Params, Progress> extends
+        AsyncTask<Params, Progress, Pair<Boolean, String>> {
 
     private static final String TAG = "RestTask";
 
-    public interface OnSuccessListener<Result> {
-        public void onSuccess(Result result);
+    public interface OnSuccessListener {
+        public void onSuccess(String result);
     }
 
     private final URL mUrl;
     protected final String mPath;
     private final String mHttpsCertPath;
     private final String mApiKey;
-    private final OnSuccessListener<Result> mListener;
+    private final OnSuccessListener mListener;
 
     public RestTask(URL url, String path, String httpsCertPath, String apiKey,
-                    OnSuccessListener<Result> listener) {
+                    OnSuccessListener listener) {
         mUrl           = url;
         mPath          = path;
         mHttpsCertPath = httpsCertPath;
@@ -60,8 +73,34 @@ public abstract class RestTask<Params, Progress, Result> extends
         return connection;
     }
 
-    protected void onPostExecute(Pair<Boolean, Result> result) {
-        if (mListener == null)
+    /**
+     * Opens the connection, then returns success status and response string.
+     */
+    protected Pair<Boolean, String> connect(HttpsURLConnection connection) throws IOException {
+        connection.connect();
+        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            int responseCode = connection.getResponseCode();
+            String responseMessage = connection.getResponseMessage();
+            Log.i(TAG, "Request to " + connection.getURL() + " failed, code: " + responseCode +
+                    ", message: " + responseMessage);
+            return new Pair<>(false, streamToString(connection.getErrorStream()));
+        }
+        return new Pair<>(true, streamToString(connection.getInputStream()));
+    }
+
+    private String streamToString(InputStream is) throws IOException {
+        ByteSource byteSource = new ByteSource() {
+            @Override
+            public InputStream openStream() throws IOException {
+                return is;
+            }
+        };
+        return byteSource.asCharSource(Charsets.UTF_8).read();
+    }
+
+
+    protected void onPostExecute(Pair<Boolean, String> result) {
+        if (mListener == null || !result.first)
             return;
 
         mListener.onSuccess(result.second);

@@ -3,17 +3,16 @@ package com.nutomic.syncthingandroid.http;
 import android.util.Log;
 import android.util.Pair;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Sends a POST request to the Syncthing API.
  */
-public class PostTask extends RestTask<String, Void, Boolean> {
+public class PostTask extends RestTask<String, Void> {
 
     private static final String TAG = "PostTask";
 
@@ -21,7 +20,7 @@ public class PostTask extends RestTask<String, Void, Boolean> {
     public static final String URI_SCAN   = "/rest/db/scan";
 
     public PostTask(URL url, String path, String httpsCertPath, String apiKey,
-                    OnSuccessListener<Boolean> listener) {
+                    OnSuccessListener listener) {
         super(url, path, httpsCertPath, apiKey, listener);
     }
 
@@ -31,7 +30,7 @@ public class PostTask extends RestTask<String, Void, Boolean> {
      * For {@link #URI_SCAN}, params[0] must contain the folder, and params[1] the subfolder.
      */
     @Override
-    protected Pair<Boolean, Boolean> doInBackground(String... params) {
+    protected Pair<Boolean, String> doInBackground(String... params) {
         try {
             HttpsURLConnection connection = (mPath.equals(URI_SCAN))
                     ? openConnection("folder", params[0], "sub", params[1])
@@ -43,16 +42,7 @@ public class PostTask extends RestTask<String, Void, Boolean> {
                 OutputStream os = connection.getOutputStream();
                 os.write(params[0].getBytes("UTF-8"));
             }
-            connection.connect();
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            String line;
-            String result = "";
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            br.close();
-            Log.v(TAG, "API call result: " + result);
-            return new Pair<>(true, true);
+            return connect(connection);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call rest api", e);
             return new Pair<>(false, null);
