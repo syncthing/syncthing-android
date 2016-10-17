@@ -26,19 +26,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.TreeSet;
+import java.util.Iterator;
 
 /**
  * Activity that allows selecting a directory in the local file system.
  */
 public class FolderPickerActivity extends SyncthingActivity
         implements AdapterView.OnItemClickListener, SyncthingService.OnApiChangeListener {
+
+    private static final String TAG = "FolderPickerActivity";
 
     public static final String EXTRA_INITIAL_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
@@ -89,33 +93,35 @@ public class FolderPickerActivity extends SyncthingActivity
      */
     @SuppressLint("NewApi")
     private void populateRoots() {
-        // Use own comparator to handle null values.
-        TreeSet<File> roots = new TreeSet<>((lhs, rhs) -> {
-            if (lhs == null | rhs == null)
-                return 0;
-            return lhs.compareTo(rhs);
-        });
-
+        ArrayList<File> roots = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
+            roots.remove(getExternalFilesDir(null));
         }
         roots.add(Environment.getExternalStorageDirectory());
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC));
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
+        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
-        // Add all sd cards. These might already be in {@link getExternalFilesDirs}, and might not
-        // be writable.
-        File storage = new File("/storage/");
-        if (storage.exists() && storage.isDirectory())
-            Collections.addAll(roots, storage.listFiles());
-
+        // Add paths that might not be accessible to Syncthing.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getBoolean("advanced_folder_picker", false)) {
+            Collections.addAll(roots, new File("/storage/").listFiles());
             roots.add(new File("/"));
         }
 
-        for (File f : roots) {
-            if (f != null)
-                mRootsAdapter.add(f);
+        // Remove any invalid directories.
+        Iterator<File> it = roots.iterator();
+        while (it.hasNext()) {
+            File f = it.next();
+            if (f == null || !f.exists() || !f.isDirectory()) {
+                it.remove();
+            }
         }
+        mRootsAdapter.addAll(Sets.newTreeSet(roots));
     }
 
     @Override
