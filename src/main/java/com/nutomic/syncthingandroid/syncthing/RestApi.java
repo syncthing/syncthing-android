@@ -5,24 +5,26 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.common.base.Objects;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.activities.RestartActivity;
 import com.nutomic.syncthingandroid.http.GetTask;
 import com.nutomic.syncthingandroid.http.PostTask;
+import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
@@ -31,10 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -50,50 +50,23 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private static final String TAG = "RestApi";
 
     /**
-     * Parameter for {@link #getValue} or {@link #setValue} referring to "options" config item.
-     */
-    public static final String TYPE_OPTIONS = "options";
-
-    /**
-     * Parameter for {@link #getValue} or {@link #setValue} referring to "gui" config item.
-     */
-    public static final String TYPE_GUI = "gui";
-
-    /**
-     * The name of the HTTP header used for the syncthing API key.
-     */
-    public static final String HEADER_API_KEY = "X-API-Key";
-
-    /**
      * Key of the map element containing connection info for the local device, in the return
      * value of {@link #getConnections}
      */
     public static final String TOTAL_STATS = "total";
-
-    public static final int USAGE_REPORTING_UNDECIDED = 0;
-    public static final int USAGE_REPORTING_ACCEPTED  = 2;
-    public static final int USAGE_REPORTING_DENIED    = -1;
-    private static final List<Integer> USAGE_REPORTING_DECIDED =
-            Arrays.asList(USAGE_REPORTING_ACCEPTED, USAGE_REPORTING_DENIED);
 
     public interface OnConfigChangedListener {
         void onConfigChanged();
     }
 
     private final Context mContext;
-
-    private String mVersion;
-
     private final URL mUrl;
-
     private final String mApiKey;
-
     private final String mHttpsCertPath;
 
-    private JSONObject mConfig;
-
+    private String mVersion;
+    private Config mConfig;
     private String mLocalDeviceId;
-
     private boolean mRestartPostponed = false;
 
     /**
@@ -112,11 +85,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * for calculating device percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
      */
     private final HashMap<String, Model> mCachedModelInfo = new HashMap<>();
-
-    /**
-     * Stores a hash map to resolve folders to paths for events.
-     */
-    private final Map<String, String> mCacheFolderPathLookup = new HashMap<>();
 
     public RestApi(Context context, URL url, String apiKey, OnApiAvailableListener apiListener,
                    OnConfigChangedListener configListener) {
@@ -159,12 +127,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             tryIsAvailable();
         }).execute();
         new GetTask(mUrl, GetTask.URI_CONFIG, mHttpsCertPath, mApiKey, result -> {
-            try {
-                mConfig = new JSONObject(result);
-                tryIsAvailable();
-            } catch (JSONException e) {
-                Log.w(TAG, "Failed to parse config", e);
-            }
+            mConfig = new Gson().fromJson(result, Config.class);
+            tryIsAvailable();
         }).execute();
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
@@ -197,69 +161,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Stops syncthing and cancels notification. For use by {@link SyncthingService}.
      */
     public void shutdown() {
-        // Happens in unit tests.
-        if (mContext == null)
-            return;
-
         NotificationManager nm = (NotificationManager)
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(RestartActivity.NOTIFICATION_RESTART);
         mRestartPostponed = false;
-    }
-
-    /**
-     * Gets a value from config,
-     *
-     * Booleans are returned as {@link }Boolean#toString}, arrays as space seperated string.
-     *
-     * @param name {@link #TYPE_OPTIONS} or {@link #TYPE_GUI}
-     * @param key  The key to read from.
-     * @return The value as a String, or null on failure.
-     */
-    public String getValue(String name, String key) {
-        // Happens if this functions is called before class is fully initialized.
-        if (mConfig == null)
-            return "";
-
-        try {
-            Object value = mConfig.getJSONObject(name).get(key);
-            return (value instanceof JSONArray)
-                    ? ((JSONArray) value).join(", ").replace("\"", "").replace("\\", "")
-                    : value.toString();
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to get value for " + key, e);
-            return "";
-        }
-    }
-
-    /**
-     * Sets a value to config and sends it via Rest API.
-     * <p/>
-     * Booleans must be passed as {@link Boolean}, arrays as space seperated string
-     * with isArray true.
-     *
-     * @param name    {@link #TYPE_OPTIONS} or {@link #TYPE_GUI}
-     * @param key     The key to write to.
-     * @param value   The new value to set, either String, Boolean or Integer.
-     * @param isArray True if value is a space seperated String that should be converted to array.
-     */
-    public <T> void setValue(String name, String key, T value, boolean isArray, Activity activity) {
-        try {
-            mConfig.getJSONObject(name).put(key, (isArray)
-                    ? new JSONArray(Arrays.asList(((String) value).split(",")))
-                    : value);
-            requireRestart(activity);
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to set value for " + key, e);
-        }
-    }
-
-    private List<String> jsonToList(JSONArray array) throws JSONException {
-        ArrayList<String> list = new ArrayList<>(array.length());
-        for (int i = 0; i < array.length(); i++) {
-            list.add(array.getString(i));
-        }
-        return list;
     }
 
     /**
@@ -277,16 +182,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Sends the current config to Syncthing and restarts it.
-     *
-     * This executes a restart immediately, and does not show a dialog.
+     * Immediately restarts Syncthing, without confirmation.
      */
-    public void updateConfig() {
+    public void restart() {
         new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, result -> {
-            mContext.startService(new Intent(mContext, SyncthingService.class)
-                    .setAction(SyncthingService.ACTION_RESTART));
+            Intent intent = new Intent(mContext, SyncthingService.class)
+                    .setAction(SyncthingService.ACTION_RESTART);
+            mContext.startService(intent);
         }).execute(mConfig.toString());
-
     }
 
     /**
@@ -295,26 +198,89 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * @param includeLocal True if the local device should be included in the result.
      */
     public List<Device> getDevices(boolean includeLocal) {
-        if (mConfig == null)
-            return new ArrayList<>();
+        List<Device> devices = deepCopy(mConfig.devices, new TypeToken<List<Device>>(){}.getType());
 
-        try {
-            String json = mConfig.getJSONArray("devices").toString();
-            List<Device> devices = new ArrayList<>();
-            Collections.addAll(devices, new Gson().fromJson(json, Device[].class));
-
-            Iterator<Device> it = devices.iterator();
-            while (it.hasNext()) {
-                Device device = it.next();
-                boolean isLocalDevice = Objects.equal(mLocalDeviceId, device.deviceID);
-                if (!includeLocal && isLocalDevice)
-                    it.remove();
-            }
-            return devices;
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to read devices", e);
-            return new ArrayList<>();
+        Iterator<Device> it = devices.iterator();
+        while (it.hasNext()) {
+            Device device = it.next();
+            boolean isLocalDevice = Objects.equal(mLocalDeviceId, device.deviceID);
+            if (!includeLocal && isLocalDevice)
+                it.remove();
         }
+        return devices;
+    }
+
+    public Options getOptions() {
+        return deepCopy(mConfig.options, Options.class);
+    }
+
+    public Config.Gui getGui() {
+        return deepCopy(mConfig.gui, Config.Gui.class);
+    }
+
+    /**
+     * Returns a deep copy of object.
+     *
+     * This method uses Gson and only works with objects that can be converted with Gson.
+     */
+    public <T> T deepCopy(T object, Type type) {
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(object, type), type);
+    }
+
+    public void removeDevice(String deviceId) {
+        Iterator<Device> it = mConfig.devices.iterator();
+        while (it.hasNext()) {
+            Device d = it.next();
+            if (d.deviceID.equals(deviceId)) {
+                it.remove();
+            }
+        }
+    }
+
+    public void removeFolder(String id) {
+        Iterator<Folder> it = mConfig.folders.iterator();
+        while (it.hasNext()) {
+            Folder f = it.next();
+            if (f.id.equals(id)) {
+                it.remove();
+            }
+        }
+    }
+
+    public void addDevice(Device device, OnDeviceIdNormalizedListener listener) {
+        normalizeDeviceId(device.deviceID, ((normalizedId, error) -> {
+            if (error == null) {
+                mConfig.devices.add(device);
+            }
+            else {
+                listener.onDeviceIdNormalized(normalizedId, error);
+            }
+        }));
+    }
+
+    public void addFolder(Folder folder) {
+        mConfig.folders.add(folder);
+    }
+
+    public void editDevice(Device newDevice) {
+        removeDevice(newDevice.deviceID);
+        addDevice(newDevice, null);
+    }
+
+    public void editFolder(Folder newFolder) {
+        removeFolder(newFolder.id);
+        addFolder(newFolder);
+    }
+
+    public void editGui(Config.Gui newGui, Activity activity) {
+        mConfig.gui = newGui;
+        requireRestart(activity);
+    }
+
+    public void editOptions(Options newOptions, Activity activity) {
+        mConfig.options = newOptions;
+        requireRestart(activity);
     }
 
     /**
@@ -338,7 +304,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
         new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey, result -> {
-                listener.onReceiveSystemInfo(new Gson().fromJson(result, SystemInfo.class));
+            listener.onReceiveSystemInfo(new Gson().fromJson(result, SystemInfo.class));
         }).execute();
     }
 
@@ -349,12 +315,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void getSystemVersion(final OnReceiveSystemVersionListener listener) {
         new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey, result -> {
-            try {
-                SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
-                listener.onReceiveSystemVersion(systemVersion);
-            } catch (JsonSyntaxException e) {
-                Log.w(TAG, "Failed to read system info", e);
-            }
+            SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
+            listener.onReceiveSystemVersion(systemVersion);
         }).execute();
     }
 
@@ -362,16 +324,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns a list of all existing folders.
      */
     public List<Folder> getFolders() {
-        if (mConfig == null)
-            return new ArrayList<>();
-
-        try {
-            String foldersJson = mConfig.getJSONArray("folders").toString();
-            return Arrays.asList(new Gson().fromJson(foldersJson, Folder[].class));
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to read devices", e);
-            return new ArrayList<>();
-        }
+        return deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
     }
 
     /**
@@ -521,28 +474,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Refreshes the lookup table to convert folder names to paths for events.
-     */
-    private String getPathForFolder(String folderName) {
-        synchronized(mCacheFolderPathLookup) {
-            if (!mCacheFolderPathLookup.containsKey(folderName)) {
-                mCacheFolderPathLookup.clear();
-                for (Folder folder : getFolders()) {
-                    mCacheFolderPathLookup.put(folder.id, folder.path);
-                }
-            }
-
-            return mCacheFolderPathLookup.get(folderName);
-        }
-    }
-
-    private void clearFolderCache() {
-        synchronized(mCacheFolderPathLookup) {
-            mCacheFolderPathLookup.clear();
-        }
-    }
-
-    /**
      * Retrieves the events that have accumulated since the given event id.
      *
      * The OnReceiveEventListeners onEvent method is called for each event.
@@ -567,7 +498,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
                 // Add folder path to data.
                 if (data != null && data.has("folder")) {
                     String folder = data.get("folder").getAsString();
-                    String folderPath = getPathForFolder(folder);
+                    String folderPath = null;
+                    for (Folder f : mConfig.folders) {
+                        if (f.id.equals(folder)) {
+                            folderPath = f.path;
+                        }
+                    }
                     data.addProperty("folderpath", folderPath);
                 }
 
@@ -577,168 +513,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             listener.onDone(lastId);
         }).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
                 "since", String.valueOf(sinceId), "limit", String.valueOf(limit));
-    }
-
-    /**
-     * Updates or creates the given device, depending on whether it already exists.
-     *
-     * @param device Settings of the device to edit. To create a device, pass a non-existant device ID.
-     * @param listener for the normalized device ID (may be null).
-     */
-    public void editDevice(@NonNull final Device device, final Activity activity,
-                           final OnDeviceIdNormalizedListener listener) {
-        normalizeDeviceId(device.deviceID,
-                (normalizedId, error) -> {
-                    if (listener != null) listener.onDeviceIdNormalized(normalizedId, error);
-                    if (normalizedId == null)
-                        return;
-
-                    device.deviceID = normalizedId;
-                    // If the device already exists, just update it.
-                    boolean create = true;
-                    for (Device n : getDevices(true)) {
-                        if (n.deviceID.equals(device.deviceID)) {
-                            create = false;
-                        }
-                    }
-
-                    try {
-                        JSONArray devices = mConfig.getJSONArray("devices");
-                        JSONObject n = null;
-                        if (create) {
-                            n = new JSONObject();
-                            devices.put(n);
-                        } else {
-                            for (int i = 0; i < devices.length(); i++) {
-                                JSONObject json = devices.getJSONObject(i);
-                                if (device.deviceID.equals(json.getString("deviceID"))) {
-                                    n = devices.getJSONObject(i);
-                                    break;
-                                }
-                            }
-                        }
-                        n.put("deviceID", device.deviceID);
-                        n.put("name", device.name);
-                        n.put("addresses", new JSONArray(device.addresses));
-                        n.put("compression", device.compression);
-                        n.put("introducer", device.introducer);
-                        requireRestart(activity);
-                    } catch (JSONException e) {
-                        Log.w(TAG, "Failed to read devices", e);
-                    }
-                }
-        );
-    }
-
-    /**
-     * Deletes the given device from syncthing.
-     */
-    public boolean deleteDevice(Device device, Activity activity) {
-        try {
-            JSONArray devices = mConfig.getJSONArray("devices");
-
-            for (int i = 0; i < devices.length(); i++) {
-                JSONObject json = devices.getJSONObject(i);
-                if (device.deviceID.equals(json.getString("deviceID"))) {
-                    mConfig.remove("devices");
-                    mConfig.put("devices", delete(devices, devices.getJSONObject(i)));
-                    break;
-                }
-            }
-            requireRestart(activity);
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to edit folder", e);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Updates or creates the given device.
-     */
-    public void editFolder(Folder folder, boolean create, Activity activity) {
-        try {
-            JSONArray folders = mConfig.getJSONArray("folders");
-            JSONObject r = null;
-            if (create) {
-                r = new JSONObject();
-                folders.put(r);
-            } else {
-                for (int i = 0; i < folders.length(); i++) {
-                    JSONObject json = folders.getJSONObject(i);
-                    if (folder.id.equals(json.getString("id"))) {
-                        r = folders.getJSONObject(i);
-                        break;
-                    }
-                }
-            }
-            r.put("path", folder.path);
-            r.put("label", folder.label);
-            r.put("id", folder.id);
-            r.put("ignorePerms", true);
-            r.put("type", folder.type);
-
-            JSONArray devices = new JSONArray();
-            for (String n : folder.getDevices()) {
-                JSONObject element = new JSONObject();
-                element.put("deviceID", n);
-                devices.put(element);
-            }
-            r.put("devices", devices);
-            JSONObject versioning = new JSONObject();
-            versioning.put("type", folder.versioning.type);
-            JSONObject params = new JSONObject();
-            versioning.put("params", params);
-            for (String key : folder.versioning.params.keySet()) {
-                params.put(key, folder.versioning.params.get(key));
-            }
-            r.put("rescanIntervalS", folder.rescanIntervalS);
-            r.put("versioning", versioning);
-            requireRestart(activity);
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to edit folder " + folder.id + " at " + folder.path, e);
-            return;
-        }
-
-        clearFolderCache();
-    }
-
-    /**
-     * Deletes the given folder from syncthing.
-     */
-    public boolean deleteFolder(Folder folder, Activity activity) {
-        try {
-            JSONArray folders = mConfig.getJSONArray("folders");
-
-            for (int i = 0; i < folders.length(); i++) {
-                JSONObject json = folders.getJSONObject(i);
-                if (folder.id.equals(json.getString("id"))) {
-                    mConfig.remove("folders");
-                    mConfig.put("folders", delete(folders, folders.getJSONObject(i)));
-                    break;
-                }
-            }
-            requireRestart(activity);
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to edit folder", e);
-            return false;
-        }
-
-        clearFolderCache();
-        return true;
-    }
-
-    /**
-     * Replacement for {@link org.json.JSONArray#remove(int)}, which is not available on older APIs.
-     */
-    private JSONArray delete(JSONArray array, JSONObject delete) throws JSONException {
-        JSONArray newArray = new JSONArray();
-        for (int i = 0; i < array.length(); i++) {
-            if (!array.getJSONObject(i).equals(delete)) {
-                newArray.put(array.get(i));
-            }
-        }
-        return newArray;
     }
 
     /**
@@ -784,43 +558,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public Device getLocalDevice() {
         for (Device d : getDevices(true)) {
             if (d.deviceID.equals(mLocalDeviceId)) {
-                return d;
+                return deepCopy(d, Device.class);
             }
         }
-        return new Device();
-    }
-
-    /**
-     * Returns value of usage reporting preference.
-     */
-    public int getUsageReportAccepted() {
-        try {
-            int value = mConfig.getJSONObject(TYPE_OPTIONS).getInt("urAccepted");
-            if (value > USAGE_REPORTING_ACCEPTED)
-                throw new RuntimeException("Inalid usage reporting value");
-            if (!USAGE_REPORTING_DECIDED.contains(value))
-                value = USAGE_REPORTING_UNDECIDED;
-
-            return value;
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to read usage report value", e);
-            return USAGE_REPORTING_DENIED;
-        }
-    }
-
-    /**
-     * Sets new value for usage reporting preference.
-     */
-    public void setUsageReportAccepted(int value, Activity activity) {
-        if (BuildConfig.DEBUG && !USAGE_REPORTING_DECIDED.contains(value))
-            throw new IllegalArgumentException("Invalid value for usage report");
-
-        try {
-            mConfig.getJSONObject(TYPE_OPTIONS).put("urAccepted", value);
-        } catch (JSONException e) {
-            Log.w(TAG, "Failed to set usage report value", e);
-        }
-        requireRestart(activity);
+        throw new RuntimeException();
     }
 
     /**
@@ -835,11 +576,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void getUsageReport(final OnReceiveUsageReportListener listener) {
         new GetTask(mUrl, GetTask.URI_REPORT, mHttpsCertPath, mApiKey, result -> {
-            try {
-                listener.onReceiveUsageReport(new JSONObject(result).toString(4));
-            } catch (JSONException e) {
-                throw new RuntimeException("Failed to prettify usage report", e);
-            }
+            JsonElement json = new JsonParser().parse(result);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            listener.onReceiveUsageReport(gson.toJson(json));
         }).execute();
     }
 

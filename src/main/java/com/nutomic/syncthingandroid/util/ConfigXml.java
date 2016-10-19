@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;

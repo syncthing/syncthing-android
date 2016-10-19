@@ -30,7 +30,7 @@ public class RestartActivity extends SyncthingActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.restart_title)
                 .setPositiveButton(R.string.restart_now, (dialogInterface, i) -> {
-                    getService().getApi().updateConfig();
+                    getService().getApi().restart();
                     finish();
                 })
                 .setNegativeButton(R.string.restart_later, (dialogInterface, i) -> {

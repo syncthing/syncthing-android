@@ -38,6 +38,11 @@ public abstract class RestTask<Params, Progress> extends
 
     private static final String TAG = "RestTask";
 
+    /**
+     * The name of the HTTP header used for the syncthing API key.
+     */
+    private static final String HEADER_API_KEY = "X-API-Key";
+
     public interface OnSuccessListener {
         public void onSuccess(String result);
     }
@@ -67,7 +72,7 @@ public abstract class RestTask<Params, Progress> extends
         URL url = new URL(uriBuilder.build().toString());
 
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setRequestProperty(RestApi.HEADER_API_KEY, mApiKey);
+        connection.setRequestProperty(HEADER_API_KEY, mApiKey);
         connection.setHostnameVerifier((h, s) -> true);
         connection.setSSLSocketFactory(getSslSocketFactory());
         return connection;

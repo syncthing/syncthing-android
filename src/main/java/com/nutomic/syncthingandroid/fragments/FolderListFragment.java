@@ -74,17 +74,10 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHasOptionsMenu(true);
         setEmptyText(getString(R.string.folder_list_empty));
         getListView().setOnItemClickListener(this);
         getListView().setOnItemLongClickListener(this);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        updateList();
-        setHasOptionsMenu(true);
     }
 
     /**

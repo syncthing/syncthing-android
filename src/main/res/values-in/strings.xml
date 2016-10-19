@@ -90,7 +90,6 @@
   <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
-  <string name="category_syncthing">Syncthing</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
   <!--Toast shown after config was successfully exported-->

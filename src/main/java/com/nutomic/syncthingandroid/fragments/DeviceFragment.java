@@ -19,6 +19,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
@@ -159,7 +161,7 @@ public class DeviceFragment extends Fragment implements
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
-                mDevice = (Device) savedInstanceState.getSerializable("device");
+                mDevice = new Gson().fromJson(savedInstanceState.getString("device"), Device.class);
             }
             if (mDevice == null) {
                 initDevice();
@@ -192,7 +194,7 @@ public class DeviceFragment extends Fragment implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("device", mDevice);
+        outState.putString("device", new Gson().toJson(mDevice));
     }
 
     @Nullable
@@ -322,7 +324,7 @@ public class DeviceFragment extends Fragment implements
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
+                mSyncthingService.getApi().addDevice(mDevice, this);
                 getActivity().finish();
                 return true;
             case R.id.share_device_id:
@@ -331,7 +333,8 @@ public class DeviceFragment extends Fragment implements
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_device_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteDevice(mDevice, getActivity()))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
+                                mSyncthingService.getApi().removeDevice(mDevice.deviceID))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -391,7 +394,7 @@ public class DeviceFragment extends Fragment implements
      */
     private void updateDevice() {
         if (!mIsCreateMode && mDeviceNeedsToUpdate && mDevice != null) {
-            mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
+            mSyncthingService.getApi().editDevice(mDevice);
         }
     }
 

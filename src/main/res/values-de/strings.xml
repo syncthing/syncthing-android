@@ -130,7 +130,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Einstellungen</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Immer im Hintergrund ausführen</string>
   <!--Preference summary in case it is enabled-->
@@ -152,8 +151,7 @@
     <item>Geringe Priorität</item>
     <item>Keine Priorität</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing-Optionen</string>
+  <string name="category_syncthing_options">Syncthing-Optionen</string>
   <string name="device_name">Gerätename</string>
   <string name="listen_address">Adresse(n) für das Synchronisierungsprotokoll</string>
   <string name="max_recv_kbps">Eingehende Datenrate Limite (KiB/s)</string>
@@ -164,12 +162,11 @@
   <string name="global_announce_server">Globaler Indexserver</string>
   <string name="enable_relaying">Weiterleitung aktivieren</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
-  <string name="syncthing_gui">Syncthing-Weboberfläche</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
   <string name="gui_user">Nutzername für Weboberfläche</string>
   <string name="gui_password">Passwort für Weboberfläche</string>
   <string name="export_config">Konfiguration exportieren</string>
-  <string name="experimental_settings">Experimentell</string>
+  <string name="category_experimental">Experimentell</string>
   <string name="keep_wakelock_while_binary_running">Prozessor wach halten während Syncthing läuft.</string>
   <string name="keep_wakelock_while_binary_running_summary">Nutze dieses Einstellung, wenn du unerwartete Verbindungsabbrüche hast, während du im Batteriebetrieb arbeitest. Das wird zu einem erhöhten Energieverbrauch führen.</string>
   <string name="run_as_foreground_service">Führe Dienst mit Vordergrund-Priorität aus</string>

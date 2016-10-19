@@ -127,7 +127,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Настройки</string>
-  <string name="category_syncthing_android">Настройки приложения</string>
   <!--Preference title-->
   <string name="always_run_in_background">Фоновый режим</string>
   <!--Preference summary in case it is enabled-->
@@ -149,8 +148,7 @@
     <item>Низкий</item>
     <item>Никогда</item>
   </string-array>
-  <string name="category_syncthing">Общие настройки Syncthing</string>
-  <string name="syncthing_options">Настройки устройства</string>
+  <string name="category_syncthing_options">Настройки устройства</string>
   <string name="device_name">Имя устройства</string>
   <string name="listen_address">Адрес Ожидания Протокола Синхронизации</string>
   <string name="max_recv_kbps">Лимит Скачивания (КБ/с)</string>
@@ -161,7 +159,6 @@
   <string name="global_announce_server">Глобальный сервер обнаружения</string>
   <string name="enable_relaying">Включить релеи</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Адрес Ожидания GUI</string>
   <string name="gui_user">Пользователь Идентификации GUI</string>
   <string name="gui_password">Пароль Идентификации GUI</string>

@@ -121,7 +121,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ayarlar</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Arkaplanda herzaman çalış</string>
   <!--Preference summary in case it is enabled-->
@@ -142,8 +141,7 @@
     <item>Düşük Öncelikli</item>
     <item>Hiçbiri</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing Seçenekler</string>
+  <string name="category_syncthing_options">Syncthing Seçenekler</string>
   <string name="device_name">Cihaz Adı</string>
   <string name="listen_address">Eşzamanlama Protokolü Dinleme/Bağlanma Adresleri</string>
   <string name="max_recv_kbps">Gelen Hız Sınırı (KiB/s)</string>
@@ -152,7 +150,6 @@
   <string name="local_announce_enabled">Yerel Bulunabilirlik</string>
   <string name="global_announce_server">Küresel Bulunabilirlik Sunucusu</string>
   <string name="usage_reporting">Anonim olarak Kullanım Raporlama</string>
-  <string name="syncthing_gui">Syncthing Arayüzü</string>
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
   <string name="gui_user">Arayüz Kullanıcı Doğrulaması için Kullanıcı Adı</string>
   <string name="gui_password">Arayüz Kullanıcı Doğrulaması için Kullanıcı Parolası</string>

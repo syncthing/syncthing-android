@@ -120,7 +120,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Nastavenia</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Vždy bežať na pozadí</string>
   <!--Preference summary in case it is enabled-->
@@ -139,8 +138,7 @@
     <item>S nízkou prioritou</item>
     <item>Žiadne</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Nastavenia Syncthing</string>
+  <string name="category_syncthing_options">Nastavenia Syncthing</string>
   <string name="device_name">Názov Zariadenia</string>
   <string name="listen_address">Adresa pre Sync Protokol</string>
   <string name="max_recv_kbps">Limit Rýchlosti Sťahovania (KiB/s)</string>
@@ -149,7 +147,6 @@
   <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
   <string name="global_announce_server">Adresa Serveru pre Globálne Vyhľadávanie</string>
   <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">Adresa pre GUI</string>
   <string name="gui_user">Užívateľské Meno pre GUI</string>
   <string name="gui_password">Užívateľské Heslo pre GUI</string>

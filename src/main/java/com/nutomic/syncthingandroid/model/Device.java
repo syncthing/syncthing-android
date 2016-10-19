@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import java.io.Serializable;
 import java.util.List;
 
-public class Device implements Serializable {
+public class Device {
     public String deviceID;
     public String name;
     public List<String> addresses;

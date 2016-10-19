@@ -217,12 +217,15 @@ Please report any problems you encounter via Github.</string>
     <!-- SettingsFragment -->
 
 
-    <!-- Activity title -->
     <string name="settings_title">Settings</string>
 
-    <string name="category_syncthing_android">Syncthing-Android</string>
+    <string name="category_run_conditions">Run Conditions</string>
+    <string name="category_behaviour">Behaviour</string>
+    <string name="category_syncthing_options">Syncthing Options</string>
+    <string name="category_backup">Backup</string>
+    <string name="category_debug">Debug</string>
+    <string name="category_experimental">Experimental</string>
 
-    <!-- Preference title -->
     <string name="always_run_in_background">Always run in background</string>
 
     <!-- Preference summary in case it is enabled -->
@@ -257,10 +260,6 @@ Please report any problems you encounter via Github.</string>
         <item>None</item>
     </string-array>
 
-    <string name="category_syncthing">Syncthing</string>
-
-    <string name="syncthing_options">Syncthing Options</string>
-
     <string name="device_name">Device Name</string>
 
     <string name="listen_address">Sync Protocol Listen Addresses</string>
@@ -275,13 +274,11 @@ Please report any problems you encounter via Github.</string>
 
     <string name="enable_nat_traversal">Enable NAT Traversal</string>
 
-    <string name="global_announce_server">Global Discovery Server</string>
+    <string name="global_announce_server">Global Discovery Servers</string>
 
     <string name="enable_relaying">Enable Relaying</string>
 
     <string name="usage_reporting">Anonymous Usage Reporting</string>
-
-    <string name="syncthing_gui">Syncthing GUI</string>
 
     <string name="gui_address">GUI Listen Addresses</string>
 
@@ -290,8 +287,6 @@ Please report any problems you encounter via Github.</string>
     <string name="gui_password">GUI Authentication Password</string>
 
     <string name="export_config">Export Configuration</string>
-
-    <string name="experimental_settings">Experimental</string>
 
     <string name="keep_wakelock_while_binary_running">Keep the CPU awake while Syncthing is running</string>
 

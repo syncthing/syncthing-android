@@ -128,7 +128,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Innstillingar</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Køyr alltid i bakgrunnen</string>
   <!--Preference summary in case it is enabled-->
@@ -150,8 +149,7 @@
     <item>Låg prioritet</item>
     <item>Ingen</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing-innstillingar</string>
+  <string name="category_syncthing_options">Syncthing-innstillingar</string>
   <string name="device_name">Einingsnamn</string>
   <string name="listen_address">Lytteadresse for synkroniseringsprotokoll</string>
   <string name="max_recv_kbps">Nedlastingsgrense (KiB/s)</string>
@@ -162,12 +160,11 @@
   <string name="global_announce_server">Tener for global søketeneste</string>
   <string name="enable_relaying">Aktiver Reléer</string>
   <string name="usage_reporting">Anonym rapportering av bruk</string>
-  <string name="syncthing_gui">Grafisk grensesnitt for Syncthing</string>
   <string name="gui_address">Grensesnitt: lytteadresser</string>
   <string name="gui_user">Grensesnitt: Brukarnamn</string>
   <string name="gui_password">Grensesnitt: Passord</string>
   <string name="export_config">Eksporter innstillingar</string>
-  <string name="experimental_settings">Eksperiment</string>
+  <string name="category_experimental">Eksperiment</string>
   <string name="keep_wakelock_while_binary_running">Hald prosessoren vaken medan Syncthing køyrer</string>
   <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillinga om du opplever uventa avkoplingar medan du køyrer på batteri. Dette vil føre til auka batteriforbruk.</string>
   <string name="run_as_foreground_service">Køyr tenesten med forgrunnsprioritet</string>

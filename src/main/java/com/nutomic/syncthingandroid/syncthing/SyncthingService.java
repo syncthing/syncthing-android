@@ -343,8 +343,7 @@ public class SyncthingService extends Service implements
                 return;
             }
 
-            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
-                    () -> {
+            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second, () -> {
                         mCurrentState = State.ACTIVE;
                         onApiChange();
                         new Thread(() -> {

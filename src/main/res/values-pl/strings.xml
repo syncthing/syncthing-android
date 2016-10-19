@@ -130,7 +130,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Działanie w tle</string>
   <!--Preference summary in case it is enabled-->
@@ -146,8 +145,7 @@
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Ustawienia Syncthing</string>
+  <string name="category_syncthing_options">Ustawienia Syncthing</string>
   <string name="device_name">Nazwa urządzenia</string>
   <string name="listen_address">Adres nasłuchiwania protokołu</string>
   <string name="max_recv_kbps">Limit pobierania (KiB/s)</string>
@@ -165,6 +163,7 @@
   <string name="export_config">Eksportuj ustawienia</string>
   <string name="experimental_settings">Eksperymentalne</string>
   <string name="keep_wakelock_while_binary_running">Utrzymywanie wybudzonego CPU podczas działania</string>
+  <string name="category_experimental">Eksperymelne!</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
   <string name="run_as_foreground_service">Pierwszoplanowy priorytet usługi</string>
   <string name="use_tor_title">Korzystanie z Tor</string>

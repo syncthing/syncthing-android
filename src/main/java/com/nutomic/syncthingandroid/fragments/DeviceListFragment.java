@@ -66,16 +66,9 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHasOptionsMenu(true);
         setEmptyText(getString(R.string.devices_list_empty));
         getListView().setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        updateList();
-        setHasOptionsMenu(true);
     }
 
     /**

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
@@ -156,7 +157,7 @@ public class FolderFragment extends Fragment
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
-                mFolder = (Folder) savedInstanceState.getSerializable("folder");
+                mFolder = new Gson().fromJson(savedInstanceState.getString("folder"), Folder.class);
             }
             if (mFolder == null) {
                 initFolder();
@@ -189,7 +190,7 @@ public class FolderFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("folder", mFolder);
+        outState.putString("folder", new Gson().toJson(mFolder));
     }
 
     @Override
@@ -327,13 +328,14 @@ public class FolderFragment extends Fragment
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editFolder(mFolder, true, getActivity());
+                mSyncthingService.getApi().addFolder(mFolder);
                 getActivity().finish();
                 return true;
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_folder_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteFolder(mFolder, getActivity()))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
+                                mSyncthingService.getApi().removeFolder(mFolder.id))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -403,7 +405,7 @@ public class FolderFragment extends Fragment
 
     private void updateFolder() {
         if (!mIsCreateMode) {
-            mSyncthingService.getApi().editFolder(mFolder, false, getActivity());
+            mSyncthingService.getApi().editFolder(mFolder);
         }
     }
 }
