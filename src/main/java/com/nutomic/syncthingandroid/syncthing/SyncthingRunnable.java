@@ -118,6 +118,7 @@ public class SyncthingRunnable implements Runnable {
             // Set home directory to data folder for web GUI folder picker.
             env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
             env.put("STTRACE", sp.getString("sttrace", ""));
+            env.put("STGUIASSETS", getExternalFilesDir(null).getAbsolutePath() + "/gui");
             env.put("STNORESTART", "1");
             env.put("STNOUPGRADE", "1");
             if (sp.getBoolean("use_tor", false)) {
