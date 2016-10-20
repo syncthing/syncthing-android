@@ -13,6 +13,7 @@ import com.nutomic.syncthingandroid.BuildConfig;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -118,7 +119,9 @@ public class SyncthingRunnable implements Runnable {
             // Set home directory to data folder for web GUI folder picker.
             env.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
             env.put("STTRACE", sp.getString("sttrace", ""));
-            env.put("STGUIASSETS", mContext.getExternalFilesDir(null).getAbsolutePath() + "/gui");
+            File externalFilesDir = mContext.getExternalFilesDir(null);
+            if (externalFilesDir != null)
+                env.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
             env.put("STNORESTART", "1");
             env.put("STNOUPGRADE", "1");
             if (sp.getBoolean("use_tor", false)) {
