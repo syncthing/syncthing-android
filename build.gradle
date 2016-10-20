@@ -6,12 +6,14 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
+        classpath 'me.tatarka:gradle-retrolambda:3.3.0'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.triplet.play'
+apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
     jcenter()
@@ -43,10 +45,6 @@ android {
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         testHandleProfiling true
         testFunctionalTest true
-        jackOptions {
-            enabled true
-        }
-
     }
 
     signingConfigs {
@@ -88,10 +86,6 @@ android {
         fat {
             versionCode Integer.parseInt("0" + defaultConfig.versionCode)
         }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
