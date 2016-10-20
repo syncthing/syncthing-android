@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
     }
@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201608240809'
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:design:25.0.0'
     compile 'com.google.zxing:android-integration:3.3.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.mindrot:jbcrypt:0.3m'
@@ -30,13 +30,13 @@ dependencies {
 project.archivesBaseName = 'syncthing'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 11
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 105
         versionName "0.8.6"
         testApplicationId 'com.nutomic.syncthingandroid.test'
