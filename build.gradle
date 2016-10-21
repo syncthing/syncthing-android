@@ -47,27 +47,9 @@ android {
         testFunctionalTest true
     }
 
-    signingConfigs {
-        release {
-            if (System.getenv("key_alias")) {
-                storeFile = file(System.getenv("key_store"))
-                storePassword = System.getenv("key_store_password")
-                keyAlias = System.getenv("key_alias")
-                keyPassword = System.getenv("key_alias_password")
-            }
-       }
-    }
-
-    buildTypes {
-        debug {
-            applicationIdSuffix ".debug"
-            debuggable true
-        }
-        release {
-            if (System.getenv("key_alias")) {
-                signingConfig signingConfigs.release
-            }
-        }
+    buildTypes.debug {
+        applicationIdSuffix ".debug"
+        debuggable true
     }
 
     productFlavors {
