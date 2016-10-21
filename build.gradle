@@ -29,11 +29,10 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.5'
 }
 
-project.archivesBaseName = 'syncthing'
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
+    buildTypes.debug.applicationIdSuffix ".debug"
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
@@ -43,13 +42,6 @@ android {
         versionName "0.8.6"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        testHandleProfiling true
-        testFunctionalTest true
-    }
-
-    buildTypes.debug {
-        applicationIdSuffix ".debug"
-        debuggable true
     }
 
     productFlavors {
@@ -69,6 +61,7 @@ android {
             versionCode Integer.parseInt("0" + defaultConfig.versionCode)
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
