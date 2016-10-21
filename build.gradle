@@ -87,6 +87,10 @@ android {
             versionCode Integer.parseInt("0" + defaultConfig.versionCode)
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 task buildNative(type: Exec) {
