@@ -6,11 +6,12 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Bienvenido a Syncthing para Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="cont">Continuar</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Esperando la interfaz gráfica</string>
+  <string name="web_gui_loading">Esperando a la interfaz gráfica</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generando llaves seguras. Esto puede tomar un tiempo.</string>
+  <string name="web_gui_creating_key">Generando claves seguras. Esto puede llevar algún tiempo.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -20,24 +21,26 @@
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Cargando...</string>
   <string name="usage_reporting_dialog_title">¿Permitir informes anónimos de uso?</string>
-  <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utilitza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si el conjunto de datos del informe es modificado serás notificado de nuevo con este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utiliza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si se modifica el conjunto de datos del informe se te presentará de nuevo este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="off">apagar</string>
   <string name="open_website">Sitio abierto</string>
-  <string name="toast_write_storage_permission_required">Hace falta permiso de escritura a disco para esta app.</string>
+  <string name="toast_write_storage_permission_required">Esta app necesita permiso para escribir al sistema de almacenamiento</string>
+  <string name="device_rejected">El dispositivo %1$s desea conectar</string>
+  <string name="folder_rejected">El dispositivo %1$s desea compartir la carpeta %2$s</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">No se encontraron carpetas</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d Archivos</string>
+  <string name="files">%1$d / %2$d archivos</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivos</string>
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">No se encontraron dispositivos</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Al día</string>
+  <string name="device_up_to_date">Actualizado</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Sincronizando (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
@@ -45,50 +48,55 @@
   <!--Title for current download rate-->
   <string name="download_title">Descarga</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Subir</string>
+  <string name="upload_title">Subida</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Descarga:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Subir:\u0020</string>
+  <string name="upload_title_colon">Subida:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Uso de CPU</string>
   <!--Title for current RAM usage-->
   <string name="ram_usage">Uso de RAM</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Servidor de Anuncio</string>
+  <string name="announce_server">Servidor de anuncio</string>
+  <string name="restart">Reiniciar</string>
+  <string name="dialog_confirm_restart">¿Quieres reiniciar Syncthing?</string>
   <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">ID de carpeta</string>
   <!--Setting title-->
+  <string name="folder_label">Etiqueta de carpeta</string>
   <!--Setting title-->
   <string name="directory">Directorio</string>
   <!--Setting title-->
-  <string name="folder_master">Carpeta Maestra</string>
+  <string name="folder_master">Carpeta maestra</string>
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
-  <string name="keep_versions">Versiones a Mantener</string>
+  <string name="keep_versions">Versiones a mantener</string>
   <!--Setting title-->
-  <string name="delete_folder">Eliminar Carpeta</string>
+  <string name="delete_folder">Eliminar carpeta</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Crear Carpeta</string>
+  <string name="create_folder">Crear carpeta</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Editar Carpeta</string>
+  <string name="edit_folder">Editar carpeta</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Crear</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">¿Realmente quieres excluir esta carpeta de Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">El ID de carpeta no debe estar vacío</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">La ruta a la carpeta no puede estar vacia</string>
+  <string name="folder_path_required">La ruta a la carpeta no debe estar vacía</string>
+  <string name="dialog_discard_changes">¿Descartar tus cambios?</string>
   <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">ID del dispositivo</string>
   <!--Setting title-->
   <string name="name">Nombre</string>
   <!--Setting title-->
-  <string name="addresses">Dirección</string>
+  <string name="addresses">Direcciones</string>
   <!--Setting title-->
   <string name="current_address">Dirección actual</string>
   <!--Setting title-->
@@ -109,12 +117,13 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Editar dispositivo</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">¿Realmente quieres excluir este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">El ID de dispositivo no debe estar vacío</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Escanear código QR</string>
   <!--Toast show if we could not get root permissions-->
-  <string name="toast_root_denied">No obtuvimos permisos de root</string>
+  <string name="toast_root_denied">No se obtuvieron permisos de root</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>
@@ -125,58 +134,67 @@
   <!--Preference title-->
   <string name="always_run_in_background">Ejecutar siempre en segundo plano</string>
   <!--Preference summary in case it is enabled-->
-  <string name="always_run_in_background_enabled">Syncthing se ejecutará siempre en segundo plano, de acuerdo a la configuración.</string>
+  <string name="always_run_in_background_enabled">Syncthing se ejecutará siempre en segundo plano, de acuerdo a la siguiente configuración.</string>
   <!--Preference summary in case it is disabled-->
-  <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explícitamente, puede ser detenido a través del botón del menú.</string>
-  <string name="sync_only_charging">Sincronizar solo cuando esté cargando</string>
-  <string name="sync_only_wifi">Sincronizar sólo en wifi</string>
-  <string name="sync_only_wifi_ssids">Restringir a algunas redes wifi</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor enciende el WIFI en las redes seleccionadas.</string>
-  <string name="advanced_folder_picker">Usar Selección Avanzada de carpeta</string>
-  <string name="advanced_folder_picker_summary">Escoja una carpeta del dispositivo para sincronizar</string>
-  <string name="use_root_title">Ejecutar Syncthing como Superusuario</string>
+  <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explícitamente, y puede ser detenido por el botón de menú.</string>
+  <string name="sync_only_charging">Sincronizar solo durante la carga</string>
+  <string name="sync_only_wifi">Sincronizar sólo con wifi</string>
+  <string name="sync_only_wifi_ssids">Restringir a determinadas redes wifi</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor enciende el wifi para seleccionar redes.</string>
+  <string name="advanced_folder_picker">Usar selección avanzada de carpeta</string>
+  <string name="advanced_folder_picker_summary">Escoja alguna carpeta del dispositivo para sincronizar</string>
+  <string name="use_root_title">Ejecutar Syncthing como superusuario</string>
+  <string name="use_root_summary">Esta es una característica inestable que podría causar problemas con Syncthing y con tu dispositivo. Si aparecieran problemas podrías tener que reinstalar Syncthing.</string>
   <string name="notification_type_title">Notificación</string>
   <string name="notification_type_summary">Elige el tipo de notificación</string>
   <string-array name="notification_type_entries">
     <item>Normal</item>
-    <item>Baja Prioridad</item>
-    <item>Ninguno</item>
+    <item>Baja prioridad</item>
+    <item>Ninguna</item>
   </string-array>
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opciones de Syncthing</string>
-  <string name="device_name">Nombre del Dispositivo</string>
+  <string name="device_name">Nombre del dispositivo</string>
   <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
-  <string name="max_recv_kbps">Limitar la Tasa de Tráfico Entrante (KiB/s)</string>
-  <string name="max_send_kbps">Limitar la Tasa de Tráfico Saliente (KiB/s)</string>
-  <string name="global_announce_enabled">Descubrimiento Global</string>
-  <string name="local_announce_enabled">Descubrimiento Local</string>
-  <string name="global_announce_server">Servidor de Descubrimiento Global</string>
-  <string name="usage_reporting">Reportar Uso Anónimo</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
-  <string name="gui_address">Direcciones de escucha GUI</string>
-  <string name="gui_user">Usuario de Autenticación GUI</string>
-  <string name="gui_password">Contraseña de Autenticación GUI</string>
-  <string name="export_config">Exportar Configuración</string>
+  <string name="max_recv_kbps">Límite de tráfico de entrada (KiB/s)</string>
+  <string name="max_send_kbps">Límite de tráfico de salida (KiB/s)</string>
+  <string name="global_announce_enabled">Descubrimiento global</string>
+  <string name="local_announce_enabled">Descubrimiento local</string>
+  <string name="enable_nat_traversal">Permitir NAT Traversal</string>
+  <string name="global_announce_server">Servidor de descubrimiento global</string>
+  <string name="enable_relaying">Activar retransmisión (Relaying)</string>
+  <string name="usage_reporting">Informe de uso anónimo</string>
+  <string name="syncthing_gui">Interfaz gráfica de Syncthing</string>
+  <string name="gui_address">Direcciones de escucha de la interfaz</string>
+  <string name="gui_user">Usuario de autenticación de la interfaz</string>
+  <string name="gui_password">Contraseña de autenticación de la interfaz</string>
+  <string name="export_config">Exportar configuración</string>
+  <string name="experimental_settings">Experimental</string>
+  <string name="keep_wakelock_while_binary_running">Mantener la CPU activa mientras se ejecuta Syncthing</string>
+  <string name="keep_wakelock_while_binary_running_summary">Usa este ajuste si experimentas desconexiones inesperadas mientras funcionas con la batería. Esto resultará en un incremento del consumo de batería.</string>
+  <string name="run_as_foreground_service">Ejecutar el servicio con prioridad de primer plano</string>
+  <string name="run_as_foreground_service_summary">Al activarse, Syncthing se ejecutará con prioridad de primer plano y es más improbable que Android lo detenga. Esto podría detener otros servicios cuando la memoria disponible sea escasa. Se mostrará una notificación de baja prioridad debido a los requerimientos de Android e independientemente de la configuración de las notificaciones.</string>
+  <string name="use_tor_title">Usar Tor</string>
+  <string name="use_tor_summary">Desviar todo el tráfico a través de Tor para incrementar la privacidad. Requiere Orbot</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Realmente quieres exportar tu configuración? Los ficheros existentes seran sobrescritos.\n\nAVISO! Otras aplicaciones puede pueden leer la llave privada del sitio de backup y usarla para descargar/modificar ficheros sincronizados.</string>
+  <string name="dialog_confirm_export">¿Realmente quieres exportar tu configuración? Se sobreescribirán los ficheros existentes.\n\n¡ADVERTENCIA! Otras aplicaciones podrían leer la clave privada localizada en la ubicación de la copia y usarla para descargar/modificar ficheros sincronizados.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">¿Realmente desea importar una nueva configuración? Se sobrescribirán los archivos existentes.</string>
+  <string name="dialog_confirm_import">¿Realmente deseas importar una nueva configuración? Se sobrescribirán los archivos existentes.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">La configuración fue exportada a %1$s</string>
-  <string name="import_config">Importar Configuración</string>
+  <string name="import_config">Importar configuración</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Configuración importada</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Importación de la configuración fallida, comprueba que los ficheros estan en %1$s</string>
+  <string name="config_import_failed">Importación de la configuración fallida, comprueba que los ficheros están en %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opciones de depuración</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Sólo se permiten a-z y \',\' en las opciones STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Restablecer base de datos</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">Esta acción sólo se debería realizar basandose en las recomendaciones de nuestro equipo de soporte.
-\n¿Estás seguro que quieres borrar el índice de la base de datos de Syncthing?</string>
+  <string name="streset_question">Esta acción sólo se debería realizar por recomendación de nuestro equipo de soporte.
+\n¿Estás seguro de que quieres limpiar la base de datos de índices de Syncthing?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Base de datos de Syncthing restablecida con éxito</string>
   <string name="category_about">Acerca de</string>
@@ -185,23 +203,24 @@
   <!--Summary for the log activity-->
   <string name="open_log_summary">Abrir ventana de registro de Syncthing y Android</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Reportar Problema</string>
+  <string name="report_issue_title">Informar de un problema</string>
   <!--Summary for the issue tracker settings item-->
   <string name="report_issue_summary">Abrir el seguimiento de incidencias Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Donar</string>
+  <string name="donate_summary">Ayúdanos a pagar los costes de dominios y servidores web</string>
   <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Versión Syncthing</string>
+  <string name="syncthing_version_title">Versión de Syncthing</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Versión Syncthing-Android</string>
+  <string name="app_version_title">Versión de Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Seleccionador de Carpeta</string>
+  <string name="folder_picker_title">Seleccionador de carpetas</string>
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Aviso: Tu versión de Android no permite la sincronización con dispositivos de almacenamiento externos</string>
   <!--ListView empty text-->
-  <string name="directory_empty">El Directorio esta vacío</string>
+  <string name="directory_empty">El directorio esta vacío</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Crear nueva carpeta</string>
   <!--Menu item to select the current folder-->
@@ -214,24 +233,27 @@
   <string name="log_android_title">Mostrar registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Mostrar registro de Syncthing</string>
+  <string name="retrieving_logs">Recuperando los registros...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartir</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing está deshabilitado</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">¿Quiere cambiar sus preferencias?</string>
+  <string name="syncthing_disabled_message">¿Quieres cambiar tus preferencias?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Cambiar la configuración</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Salir</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing se está ejecutando</string>
+  <string name="syncthing_active_foreground">El servicio se está ejecutando con prioridad de primer plano.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">Arbol de directorio demasiado profundo. Comprobar enlaces simbólicos cíclicos</string>
+  <string name="toast_folder_observer_stack_overflow">Árbol de directorios demasiado profundo. Comprueba enlaces simbólicos cíclicos</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Error al crear la configuración de Syncthing. Por favor, comprueba el registro.</string>
   <!--Label of the default folder created of first start (camera folder).-->
+  <string name="default_folder_label">Cámara</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <!--RestApi-->
@@ -244,7 +266,7 @@
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Haga clic aquí para reiniciar Syncthing ahora</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">El ID de Dispositivo se copió al portapapéles</string>
+  <string name="device_id_copied_to_clipboard">ID de dispositivo copiado al portapapeles</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -263,10 +285,12 @@
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inactivo</string>
-  <string name="state_scanning">Escaneado</string>
+  <string name="state_scanning">Escaneando</string>
   <string name="state_cleaning">Limpiando</string>
   <string name="state_syncing">Sincronizando (%1$d%%)</string>
   <string name="state_error">Error</string>
   <string name="state_unknown">Desconocido</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">No está soportado detener Syncthing mientras está activada la ejecución en segundo plano.</string>
 </resources>

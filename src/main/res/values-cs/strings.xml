@@ -190,7 +190,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Možnosti ladění</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">V STTRACE jsou povoleny pouze znaky a-z a \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovat databázi</string>
   <!--Syncthing was reset-->

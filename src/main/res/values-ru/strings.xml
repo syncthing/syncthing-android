@@ -183,7 +183,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Настройки режима отладки</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">В настройках STTRACE можно использовать только символы a-z и \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Сбросить базу данных</string>
   <!--Syncthing was reset-->

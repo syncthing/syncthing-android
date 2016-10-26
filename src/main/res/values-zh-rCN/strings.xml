@@ -190,7 +190,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">调试选项</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE 选项仅允许 a-z 与逗号</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->

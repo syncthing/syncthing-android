@@ -168,7 +168,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções da despistagem de erros</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Apenas é permitido usar a-z e \';\' nas opções do STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->

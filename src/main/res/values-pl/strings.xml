@@ -6,6 +6,7 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Witamy w Syncthing dla systemu Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="cont">Kontynuuj</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
@@ -60,7 +61,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Serwer ogłoszeniowy</string>
   <string name="restart">Uruchom ponownie</string>
-  <string name="dialog_confirm_restart">Czy zrestartować Syncthing?</string>
+  <string name="dialog_confirm_restart">Uruchomić program ponownie?</string>
   <!--FolderFragment-->
   <!--Setting title-->
   <string name="folder_id">Identyfikator katalogu</string>
@@ -88,6 +89,7 @@
   <string name="folder_id_required">Identyfikator katalogu nie może być pusty</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Ścieżka katalogu nie może być pusta</string>
+  <string name="dialog_discard_changes">Porzucić zmiany?</string>
   <!--DeviceFragment-->
   <!--Setting title-->
   <string name="device_id">Identyfikator urządzenia</string>
@@ -109,7 +111,7 @@
   <string name="introducer">Wprowadzający</string>
   <!--ActionBar item-->
   <string name="delete_device">Usuń urządzenie</string>
-  <string name="add_device">Dodawanie urządzenia</string>
+  <string name="add_device">Dodaj urządzenie</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Dodaj</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
@@ -152,21 +154,21 @@
   <string name="max_send_kbps">Limit wysyłania (KiB/s)</string>
   <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
-  <string name="enable_nat_traversal">Włącz NAT</string>
+  <string name="enable_nat_traversal">Trawersowanie NAT</string>
   <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
   <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
-  <string name="gui_address">Adres GUI</string>
-  <string name="gui_user">Użytkownik GUI</string>
-  <string name="gui_password">Hasło GUI</string>
+  <string name="syncthing_gui">Interfejs graficzny Syncthing</string>
+  <string name="gui_address">Adres nasłuchiwania</string>
+  <string name="gui_user">Nazwa użytkownika</string>
+  <string name="gui_password">Hasło</string>
   <string name="export_config">Eksportuj ustawienia</string>
-  <string name="experimental_settings">Eksperymelne!</string>
-  <string name="keep_wakelock_while_binary_running">Utrzymuj CPU wybudzony podczas działania Syncthing.</string>
+  <string name="experimental_settings">Eksperymentalne</string>
+  <string name="keep_wakelock_while_binary_running">Utrzymywanie wybudzonego CPU podczas działania</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
-  <string name="run_as_foreground_service">Uruchom serwis z pierwszoplanowym priorytetem</string>
-  <string name="use_tor_title">Korzystaj z Tor</string>
-  <string name="use_tor_summary">Wymuszaj cały ruch przez Tor dla zwiększenia prywatności. Wymaga Orbot</string>
+  <string name="run_as_foreground_service">Pierwszoplanowy priorytet usługi</string>
+  <string name="use_tor_title">Korzystanie z Tor</string>
+  <string name="use_tor_summary">Wymusza cały ruch przez Tor dla zwiększenia prywatności. Wymaga Orbot.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
   <!--Dialog shown before config import-->
@@ -181,7 +183,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opcje diagnozowania błędów</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Tylko znaki a-z oraz „,” są dopuszczalne w STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Przywróć pierwotny stan bazy danych</string>
   <!--Syncthing was reset-->
@@ -226,6 +227,7 @@
   <string name="log_android_title">Wyświetl dziennik systemu</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Wyświetl dziennik programu</string>
+  <string name="retrieving_logs">Uzyskiwanie dzienników…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Udostępnij</string>
   <!--SyncthingService-->
@@ -256,7 +258,7 @@
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Później</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Proszę kliknąć, aby zrestartować syncthing</string>
+  <string name="restart_notification_text">Proszę kliknąć, aby uruchomić program ponownie</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">Skopiowano do schowka identyfikator urządzenia</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -284,5 +286,5 @@
   <string name="state_unknown">Nieznany</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
-  <string name="appconfig_receiver_background_enabled">Zatrzymywanie Syncthing nie jest wspierane, gdy działa w tle.</string>
+  <string name="appconfig_receiver_background_enabled">Zatrzymywanie programu nie jest obsługiwane podczas działania w tle.</string>
 </resources>

@@ -190,7 +190,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções de depuração</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Somente a-z e \",\" (vírgula) são permitidos nas opções do STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Limpar banco de dados</string>
   <!--Syncthing was reset-->

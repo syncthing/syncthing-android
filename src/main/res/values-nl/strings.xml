@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Een open, betrouwbare en gedecentraliseerde applicatie voor bestandssynchronisatie.</string>
+  <string name="app_description">Open bestandssynchronisatie: betrouwbaar en decentraal</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
@@ -190,7 +190,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug-opties</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Enkel a-z en \',\' zijn toegestaan in STTRACE-opties</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->

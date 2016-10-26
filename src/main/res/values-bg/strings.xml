@@ -176,7 +176,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Настройки за дебъгване</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">В настройките на STTRACE са разрешени само символите a-z и \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Нулиране на базата данни</string>
   <!--Syncthing was reset-->

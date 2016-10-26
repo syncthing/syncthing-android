@@ -186,7 +186,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Feilsøkingsvalg</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Bare a-z og \',\' er tillatt som STTRACE-valg</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nullstill database</string>
   <!--Syncthing was reset-->

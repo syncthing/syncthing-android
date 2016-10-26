@@ -190,7 +190,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Options de débuggage</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Seuls, les caractères a-z et \',\' sont autorisés dans les options STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Remise à zéro de la base de données</string>
   <!--Syncthing was reset-->

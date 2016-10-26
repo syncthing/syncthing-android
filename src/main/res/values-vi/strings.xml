@@ -179,7 +179,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Tuỳ chọn dò lỗi</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Chỉ cho phép a-z và \',\' trong tuỳ chọn STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Cài lại CSDL</string>
   <!--Syncthing was reset-->

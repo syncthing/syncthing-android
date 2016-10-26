@@ -189,7 +189,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">디버그 옵션</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE 옵션에서는 a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">데이터베이스 리셋</string>
   <!--Syncthing was reset-->
@@ -233,6 +232,7 @@
   <string name="log_android_title">Android 로그 보기</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Syncthing 로그 보기</string>
+  <string name="retrieving_logs">로그를 받아오는중...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">공유</string>
   <!--SyncthingService-->

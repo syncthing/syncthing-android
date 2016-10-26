@@ -171,7 +171,6 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Hata Ayıklama Seçenekleri</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE seçenekleri içinde sadece a-z ve \',\' karakterleri kullanabilirsiniz</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Veritabanını Sıfırla</string>
   <!--Syncthing was reset-->
