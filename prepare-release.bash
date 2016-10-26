@@ -54,7 +54,6 @@ Running Tests
 "
 ./gradlew lint
 ./gradlew connectedFatDebugAndroidTest
-./gradlew testFatDebugUnitTest
 
 echo "
 
@@ -75,6 +74,6 @@ echo "
 Update ready.
 1. Run \`git push --follow-tags\`
 2. Enter release notes at https://github.com/syncthing/syncthing-android/releases
-3. Enter release notes at https://android.syncthing.net/job/Syncthing-Android-Release/configure
-4. Start build at https://android.syncthing.net/job/Syncthing-Android-Release
+3. Build signed APK in Android Studio
+4. Upload APKs to Google Play
 "
