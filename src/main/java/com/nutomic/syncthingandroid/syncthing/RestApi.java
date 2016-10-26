@@ -274,12 +274,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         addFolder(newFolder);
     }
 
-    public void editGui(Config.Gui newGui, Activity activity) {
+    public void editSettings(Config.Gui newGui, Options newOptions, Activity activity) {
         mConfig.gui = newGui;
-        requireRestart(activity);
-    }
-
-    public void editOptions(Options newOptions, Activity activity) {
         mConfig.options = newOptions;
         requireRestart(activity);
     }

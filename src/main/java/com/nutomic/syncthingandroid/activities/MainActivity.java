@@ -404,7 +404,7 @@ public class MainActivity extends SyncthingActivity
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     break;
             }
-            getApi().editOptions(options, this);
+            getApi().editSettings(getApi().getGui(), options, this);
         };
 
         getApi().getUsageReport(report -> {

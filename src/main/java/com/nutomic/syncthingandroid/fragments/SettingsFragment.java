@@ -165,7 +165,7 @@ public class SettingsFragment extends PreferenceFragment
         mGui = mApi.getGui();
 
         Joiner joiner = Joiner.on(", ");
-        mDeviceName.setTitle(mApi.getLocalDevice().name);
+        //mDeviceName.setTitle(mApi.getLocalDevice().name);
         mListenAddresses.setText(joiner.join(mOptions.listenAddresses));
         mMaxRecvKbps.setText(Integer.toString(mOptions.maxRecvKbps));
         mMaxSendKbps.setText(Integer.toString(mOptions.maxSendKbps));
@@ -219,8 +219,7 @@ public class SettingsFragment extends PreferenceFragment
                                             ? Options.USAGE_REPORTING_ACCEPTED
                                             : Options.USAGE_REPORTING_DENIED;
 
-        mApi.editOptions(mOptions, getActivity());
-        mApi.editGui(mGui, getActivity());
+        mApi.editSettings(mGui, mOptions, getActivity());
         return true;
     }
 
