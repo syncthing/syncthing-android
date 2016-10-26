@@ -22,6 +22,7 @@ import com.nutomic.syncthingandroid.http.PostTask;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.model.Options;
@@ -448,12 +449,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public interface OnReceiveEventListener {
         /**
          * Called for each event.
-         *
-         * Events with a "folder" field in the data have an extra "folderpath" element added.
-         *  @param eventType Name of the event. (See Syncthing documentation)
-         * @param data Contains the data fields of the event.
          */
-        void onEvent(String eventType, JsonObject data);
+        void onEvent(Event event);
 
         /**
          * Called after all available events have been processed.
@@ -484,30 +481,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             long lastId = 0;
 
             for (int i = 0; i < jsonEvents.size(); i++) {
-                JsonObject json = jsonEvents.get(i).getAsJsonObject();
-                String type     = json.get("type").getAsString();
-                long id         = json.get("id").getAsLong();
+                JsonElement json = jsonEvents.get(i);
+                Event event = new Gson().fromJson(json, Event.class);
 
-                if (lastId < id)
-                    lastId = id;
+                if (lastId < event.id)
+                    lastId = event.id;
 
-                JsonObject data = null;
-                if (json.has("data"))
-                    data = json.get("data").getAsJsonObject();
-
-                // Add folder path to data.
-                if (data != null && data.has("folder")) {
-                    String folder = data.get("folder").getAsString();
-                    String folderPath = null;
-                    for (Folder f : mConfig.folders) {
-                        if (f.id.equals(folder)) {
-                            folderPath = f.path;
-                        }
-                    }
-                    data.addProperty("folderpath", folderPath);
-                }
-
-                listener.onEvent(type, data);
+                listener.onEvent(event);
             }
 
             listener.onDone(lastId);
