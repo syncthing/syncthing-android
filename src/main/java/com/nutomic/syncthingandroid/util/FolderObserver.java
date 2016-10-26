@@ -61,7 +61,7 @@ public class FolderObserver extends FileObserver {
         mListener = listener;
         mFolder = folder;
         mPath = path;
-        Log.v(TAG, "observer created for " + path + " in " + folder.id);
+        Log.v(TAG, "observer created for " + new File(mFolder.path, mPath).toString() + " (folder " + folder.id + ")");
         startWatching();
 
         File currentFolder = new File(folder.path, path);
