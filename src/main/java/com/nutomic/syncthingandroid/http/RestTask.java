@@ -83,14 +83,19 @@ public abstract class RestTask<Params, Progress> extends
      */
     protected Pair<Boolean, String> connect(HttpsURLConnection connection) throws IOException {
         connection.connect();
+        Pair<Boolean, String> result;
         if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
             int responseCode = connection.getResponseCode();
             String responseMessage = connection.getResponseMessage();
             Log.i(TAG, "Request to " + connection.getURL() + " failed, code: " + responseCode +
                     ", message: " + responseMessage);
-            return new Pair<>(false, streamToString(connection.getErrorStream()));
+            result = new Pair<>(false, streamToString(connection.getErrorStream()));
         }
-        return new Pair<>(true, streamToString(connection.getInputStream()));
+        else {
+            result = new Pair<>(true, streamToString(connection.getInputStream()));
+        }
+        connection.disconnect();
+        return result;
     }
 
     private String streamToString(InputStream is) throws IOException {
