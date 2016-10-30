@@ -165,7 +165,7 @@ public class SettingsFragment extends PreferenceFragment
         mGui = mApi.getGui();
 
         Joiner joiner = Joiner.on(", ");
-        //mDeviceName.setTitle(mApi.getLocalDevice().name);
+        mDeviceName.setText(mApi.getLocalDevice().name);
         mListenAddresses.setText(joiner.join(mOptions.listenAddresses));
         mMaxRecvKbps.setText(Integer.toString(mOptions.maxRecvKbps));
         mMaxSendKbps.setText(Integer.toString(mOptions.maxSendKbps));

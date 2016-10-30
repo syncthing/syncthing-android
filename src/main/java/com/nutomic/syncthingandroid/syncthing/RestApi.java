@@ -282,7 +282,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     public void editDevice(Device newDevice) {
         removeDeviceInternal(newDevice.deviceID);
-        addDevice(newDevice, null);
+        mConfig.devices.add(newDevice);
+        sendConfig();
     }
 
     public void editFolder(Folder newFolder) {
