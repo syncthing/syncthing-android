@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -232,7 +231,7 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     public boolean onRequireRestart(Preference preference, Object o) {
-        mSyncthingService.getApi().requireRestart(getActivity());
+        mSyncthingService.getApi().showRestartDialog(getActivity());
         return true;
     }
 
@@ -262,7 +261,7 @@ public class SettingsFragment extends PreferenceFragment
                 break;
             case KEY_STTRACE:
                 if (((String) o).matches("[0-9a-z, ]*"))
-                    mSyncthingService.getApi().requireRestart(getActivity());
+                    mSyncthingService.getApi().showRestartDialog(getActivity());
                 else {
                     Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
                             .show();
@@ -284,7 +283,7 @@ public class SettingsFragment extends PreferenceFragment
                     new TestRootTask().execute();
                 } else {
                     new Thread(new ChownFilesRunnable()).start();
-                    mSyncthingService.getApi().requireRestart(getActivity());
+                    mSyncthingService.getApi().showRestartDialog(getActivity());
                 }
                 return true;
             case KEY_EXPORT_CONFIG:
@@ -350,7 +349,7 @@ public class SettingsFragment extends PreferenceFragment
         @Override
         protected void onPostExecute(Boolean haveRoot) {
             if (haveRoot) {
-                mSyncthingService.getApi().requireRestart(getActivity());
+                mSyncthingService.getApi().showRestartDialog(getActivity());
                 mUseRoot.setChecked(true);
             } else {
                 Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)

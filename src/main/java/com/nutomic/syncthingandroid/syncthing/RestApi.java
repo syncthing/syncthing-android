@@ -29,6 +29,7 @@ import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
+import com.nutomic.syncthingandroid.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +61,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         void onConfigChanged();
     }
 
+    public interface OnResultListener1<T> {
+        public void onResult(T t);
+    }
+
+    public interface OnResultListener2<T, R> {
+        public void onResult(T t, R r);
+    }
+
     private final Context mContext;
     private final URL mUrl;
     private final String mApiKey;
@@ -82,8 +91,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private long mPreviousConnectionTime = 0;
 
     /**
-     * Stores the latest result of {@link #getModel(String, OnReceiveModelListener)} for each folder,
-     * for calculating device percentage in {@link #getConnections(OnReceiveConnectionsListener)}.
+     * Stores the latest result of {@link #getModel} for each folder, for calculating device
+     * percentage in {@link #getConnections}.
      */
     private final HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
@@ -172,7 +181,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Either shows a restart dialog, or only updates the config, depending on
      * {@link #mRestartPostponed}.
      */
-    public void requireRestart(Activity activity) {
+    public void showRestartDialog(Activity activity) {
         if (mRestartPostponed) {
             sendConfig();
         } else {
@@ -181,13 +190,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mOnConfigChangedListener.onConfigChanged();
     }
 
+    /**
+     * Sends current config to Syncthing.
+     */
     private void sendConfig() {
         new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, null)
                 .execute(new Gson().toJson(mConfig));
     }
 
     /**
-     * Immediately restarts Syncthing, without confirmation.
+     * Sends current config and restarts Syncthing.
      */
     public void restart() {
         new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, result -> {
@@ -263,16 +275,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }
     }
 
-    public void addDevice(Device device, OnDeviceIdNormalizedListener listener) {
-        normalizeDeviceId(device.deviceID, ((normalizedId, error) -> {
-            if (error == null) {
+    public void addDevice(Device device, OnResultListener1<String> errorListener) {
+        normalizeDeviceId(device.deviceID, normalizedId -> {
                 mConfig.devices.add(device);
                 sendConfig();
-            }
-            else {
-                listener.onDeviceIdNormalized(normalizedId, error);
-            }
-        }));
+            }, errorListener);
     }
 
     public void addFolder(Folder folder) {
@@ -294,21 +301,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public void editSettings(Config.Gui newGui, Options newOptions, Activity activity) {
         mConfig.gui = newGui;
         mConfig.options = newOptions;
-        requireRestart(activity);
-    }
-
-    /**
-     * Result listener for {@link #getSystemInfo(OnReceiveSystemInfoListener)}.
-     */
-    public interface OnReceiveSystemInfoListener {
-        public void onReceiveSystemInfo(SystemInfo info);
-    }
-
-    /**
-     * Result listener for {@link #getSystemVersion(OnReceiveSystemVersionListener)}.
-     */
-    public interface OnReceiveSystemVersionListener {
-        void onReceiveSystemVersion(SystemVersion version);
+        showRestartDialog(activity);
     }
 
     /**
@@ -316,9 +309,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      *
      * @param listener Callback invoked when the result is received.
      */
-    public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
+    public void getSystemInfo(OnResultListener1<SystemInfo> listener) {
         new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey, result -> {
-            listener.onReceiveSystemInfo(new Gson().fromJson(result, SystemInfo.class));
+            listener.onResult(new Gson().fromJson(result, SystemInfo.class));
         }).execute();
     }
 
@@ -327,10 +320,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      *
      * @param listener Callback invoked when the result is received.
      */
-    public void getSystemVersion(final OnReceiveSystemVersionListener listener) {
+    public void getSystemVersion(OnResultListener1<SystemVersion> listener) {
         new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey, result -> {
             SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
-            listener.onReceiveSystemVersion(systemVersion);
+            listener.onResult(systemVersion);
         }).execute();
     }
 
@@ -342,30 +335,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Listener for {@link #getConnections}.
-     */
-    public interface OnReceiveConnectionsListener {
-
-        /**
-         * @param connections Map from Device id to {@link Connection}.
-         *                    <p/>
-         *                    NOTE: The parameter connections is cached internally. Do not modify it or
-         *                    any of its contents.
-         */
-        public void onReceiveConnections(Map<String, Connection> connections);
-    }
-
-    /**
      * Returns connection info for the local device and all connected devices.
      * <p/>
      * Use the key {@link #TOTAL_STATS} to get connection info for the local device.
+     *
+     * The result is cached internally. Do not modify it or any of its contents.
      */
-    public void getConnections(final OnReceiveConnectionsListener listener) {
+    public void getConnections(final OnResultListener1<Map<String, Connection>> listener) {
         new GetTask(mUrl, GetTask.URI_CONNECTIONS, mHttpsCertPath, mApiKey, result -> {
             Long now = System.currentTimeMillis();
             Long timeElapsed = (now - mPreviousConnectionTime) / 1000;
             if (timeElapsed < 1) {
-                listener.onReceiveConnections(mPreviousConnections);
+                listener.onResult(mPreviousConnections);
                 return;
             }
 
@@ -407,7 +388,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
                 }
                 mPreviousConnections = connections;
-                listener.onReceiveConnections(mPreviousConnections);
+                listener.onResult(mPreviousConnections);
             } catch (JSONException e) {
                 Log.w(TAG, "Failed to parse connections", e);
             }
@@ -450,13 +431,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Listener for {@link #getModel}.
-     */
-    public interface OnReceiveModelListener {
-        public void onReceiveModel(String folderId, Model model);
-    }
-
-    /**
      * Listener for {@link #getEvents}.
      */
     public interface OnReceiveEventListener {
@@ -472,14 +446,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
          */
         void onDone(long lastId);
     }
+
     /**
      * Returns status information about the folder with the given id.
      */
-    public void getModel(final String folderId, final OnReceiveModelListener listener) {
+    public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
         new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey, result -> {
             Model m = new Gson().fromJson(result, Model.class);
             mCachedModelInfo.put(folderId, m);
-            listener.onReceiveModel(folderId, m);
+            listener.onResult(folderId, m);
         }).execute("folder", folderId);
     }
 
@@ -509,30 +484,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Result listener for {@link #normalizeDeviceId(String, OnDeviceIdNormalizedListener)}.
-     */
-    public interface OnDeviceIdNormalizedListener {
-        /**
-         * On any call, exactly one parameter will be null.
-         *
-         * @param normalizedId The normalized device ID, or null on error.
-         * @param error        An error message, or null on success.
-         */
-        public void onDeviceIdNormalized(String normalizedId, String error);
-    }
-
-    /**
      * Normalizes a given device ID.
      */
-    public void normalizeDeviceId(final String id, final OnDeviceIdNormalizedListener listener) {
+    public void normalizeDeviceId(String id, OnResultListener1<String> listener,
+                                  OnResultListener1<String> errorListener) {
         new GetTask(mUrl, GetTask.URI_DEVICEID, mHttpsCertPath, mApiKey, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             JsonElement normalizedId = json.get("id");
             JsonElement error = json.get("error");
             if (normalizedId != null)
-                listener.onDeviceIdNormalized(normalizedId.getAsString(), null);
+                listener.onResult(normalizedId.getAsString());
             if (error != null)
-                listener.onDeviceIdNormalized(null, error.getAsString());
+                errorListener.onResult(error.getAsString());
         }).execute("id", id);
     }
 
@@ -558,20 +521,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Callback for {@link #getUsageReport}.
-     */
-    public interface OnReceiveUsageReportListener {
-        public void onReceiveUsageReport(String report);
-    }
-
-    /**
      * Returns prettyfied usage report.
      */
-    public void getUsageReport(final OnReceiveUsageReportListener listener) {
+    public void getUsageReport(final OnResultListener1<String> listener) {
         new GetTask(mUrl, GetTask.URI_REPORT, mHttpsCertPath, mApiKey, result -> {
             JsonElement json = new JsonParser().parse(result);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            listener.onReceiveUsageReport(gson.toJson(json));
+            listener.onResult(gson.toJson(json));
         }).execute();
     }
 

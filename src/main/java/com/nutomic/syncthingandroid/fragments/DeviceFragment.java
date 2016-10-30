@@ -49,10 +49,7 @@ import static com.nutomic.syncthingandroid.util.Compression.METADATA;
 /**
  * Shows device details and allows changing them.
  */
-public class DeviceFragment extends Fragment implements
-        SyncthingActivity.OnServiceConnectedListener, RestApi.OnReceiveConnectionsListener,
-        SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener,
-        View.OnClickListener {
+public class DeviceFragment extends Fragment implements View.OnClickListener {
 
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.fragments.DeviceFragment.DEVICE_ID";
@@ -155,7 +152,7 @@ public class DeviceFragment extends Fragment implements
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mIsCreateMode = activity.getIsCreate();
-        activity.registerOnServiceConnectedListener(this);
+        activity.registerOnServiceConnectedListener(this::onServiceConnected);
         activity.setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
         setHasOptionsMenu(true);
 
@@ -173,7 +170,7 @@ public class DeviceFragment extends Fragment implements
     public void onDestroy() {
         super.onDestroy();
         if (mSyncthingService != null) {
-            mSyncthingService.unregisterOnApiChangeListener(this);
+            mSyncthingService.unregisterOnApiChangeListener(this::onApiChange);
         }
     }
 
@@ -235,10 +232,9 @@ public class DeviceFragment extends Fragment implements
         mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
     }
 
-    @Override
     public void onServiceConnected() {
         mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-        mSyncthingService.registerOnApiChangeListener(this);
+        mSyncthingService.registerOnApiChangeListener(this::onApiChange);
     }
 
     /**
@@ -247,7 +243,6 @@ public class DeviceFragment extends Fragment implements
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
-    @Override
     public void onReceiveConnections(Map<String, Connection> connections) {
         boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
         if (viewsExist && connections.containsKey(mDevice.deviceID)) {
@@ -258,7 +253,6 @@ public class DeviceFragment extends Fragment implements
         }
     }
 
-    @Override
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
             getActivity().finish();
@@ -282,7 +276,7 @@ public class DeviceFragment extends Fragment implements
             }
         }
 
-        mSyncthingService.getApi().getConnections(this);
+        mSyncthingService.getApi().getConnections(this::onReceiveConnections);
 
         updateViewsAndSetListeners();
     }
@@ -324,7 +318,8 @@ public class DeviceFragment extends Fragment implements
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().addDevice(mDevice, this);
+                mSyncthingService.getApi().addDevice(mDevice, error ->
+                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show());
                 getActivity().finish();
                 return true;
             case R.id.share_device_id:
@@ -355,17 +350,6 @@ public class DeviceFragment extends Fragment implements
         if (scanResult != null) {
             mDevice.deviceID = scanResult.getContents();
             mIdView.setText(mDevice.deviceID);
-        }
-    }
-
-    /**
-     * Callback for {@link RestApi#editDevice}.
-     * Displays an error toast if error message present.
-     */
-    @Override
-    public void onDeviceIdNormalized(String normalizedId, String error) {
-        if (error != null) {
-            Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
         }
     }
 

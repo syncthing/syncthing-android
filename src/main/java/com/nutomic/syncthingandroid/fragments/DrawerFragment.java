@@ -31,10 +31,7 @@ import java.util.TimerTask;
 /**
  * Displays information about the local device.
  */
-public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemInfoListener,
-                                                        RestApi.OnReceiveConnectionsListener,
-                                                        RestApi.OnReceiveSystemVersionListener,
-                                                        View.OnClickListener {
+public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private TextView mDeviceId;
     private TextView mCpuUsage;
@@ -139,9 +136,9 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     private void updateGui() {
         if (mActivity.getApi() == null || getActivity() == null || getActivity().isFinishing())
             return;
-        mActivity.getApi().getSystemInfo(this);
-        mActivity.getApi().getSystemVersion(this);
-        mActivity.getApi().getConnections(this);
+        mActivity.getApi().getSystemInfo(this::onReceiveSystemInfo);
+        mActivity.getApi().getSystemVersion(this::onReceiveSystemVersion);
+        mActivity.getApi().getConnections(this::onReceiveConnections);
     }
 
     /**
@@ -156,7 +153,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    @Override
     public void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
@@ -181,7 +177,6 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    @Override
     public void onReceiveSystemVersion(SystemVersion info) {
         if (getActivity() == null)
             return;
@@ -192,8 +187,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getConnections}.
      */
-    @Override
-    public void onReceiveConnections(Map<String, Connection> connections) {
+    private void onReceiveConnections(Map<String, Connection> connections) {
         Connection c = connections.get(RestApi.TOTAL_STATS);
         mDownload.setText(Util.readableTransferRate(mActivity, c.inBits));
         mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));

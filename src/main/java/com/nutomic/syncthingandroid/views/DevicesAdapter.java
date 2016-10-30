@@ -22,8 +22,7 @@ import java.util.Map;
 /**
  * Generates item views for device items.
  */
-public class DevicesAdapter extends ArrayAdapter<Device>
-        implements RestApi.OnReceiveConnectionsListener {
+public class DevicesAdapter extends ArrayAdapter<Device> {
 
     private Map<String, Connection> mConnections =
             new HashMap<>();
@@ -78,11 +77,10 @@ public class DevicesAdapter extends ArrayAdapter<Device>
      */
     public void updateConnections(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            api.getConnections(this);
+            api.getConnections(this::onReceiveConnections);
         }
     }
 
-    @Override
     public void onReceiveConnections(Map<String, Connection> connections) {
         mConnections = connections;
         notifyDataSetChanged();

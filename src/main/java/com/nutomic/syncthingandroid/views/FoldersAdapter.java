@@ -25,8 +25,7 @@ import static android.view.View.VISIBLE;
 /**
  * Generates item views for folder items.
  */
-public class FoldersAdapter extends ArrayAdapter<Folder>
-        implements RestApi.OnReceiveModelListener {
+public class FoldersAdapter extends ArrayAdapter<Folder> {
 
     private final HashMap<String, Model> mModels = new HashMap<>();
     private final LayoutInflater mInflater;
@@ -100,11 +99,10 @@ public class FoldersAdapter extends ArrayAdapter<Folder>
      */
     public void updateModel(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            api.getModel(getItem(i).id, this);
+            api.getModel(getItem(i).id, this::onReceiveModel);
         }
     }
 
-    @Override
     public void onReceiveModel(String folderId, Model model) {
         mModels.put(folderId, model);
         notifyDataSetChanged();
