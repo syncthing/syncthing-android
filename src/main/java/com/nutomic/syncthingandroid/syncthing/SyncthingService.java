@@ -311,7 +311,7 @@ public class SyncthingService extends Service implements
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
-        new StartupTask().execute();
+        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
     }
