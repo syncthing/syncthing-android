@@ -1,10 +1,15 @@
 package com.nutomic.syncthingandroid.http;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Pair;
 
+import com.google.common.base.Optional;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -13,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
  * returns the result as a String.
  */
-public class GetTask extends RestTask<String, Void> {
+public class GetTask extends RestTask<Void, Void> {
 
     private static final String TAG = "GetTask";
 
@@ -26,18 +31,18 @@ public class GetTask extends RestTask<String, Void> {
     public static final String URI_REPORT      = "/rest/svc/report";
     public static final String URI_EVENTS      = "/rest/events";
 
+    private final Map<String, String> mParams;
+
     public GetTask(URL url, String path, String httpsCertPath, String apiKey,
-                   OnSuccessListener listener) {
+                   @Nullable Map<String, String> params, OnSuccessListener listener) {
         super(url, path, httpsCertPath, apiKey, listener);
+        mParams = Optional.fromNullable(params).or(Collections.emptyMap());
     }
 
-    /**
-     * @param params Keys and values for the query string.
-     */
     @Override
-    protected Pair<Boolean, String> doInBackground(String... params) {
+    protected Pair<Boolean, String> doInBackground(Void... aVoid) {
         try {
-            HttpsURLConnection connection = openConnection(params);
+            HttpsURLConnection connection = openConnection(mParams);
             Log.v(TAG, "Calling Rest API at " + connection.getURL());
             return connect(connection);
         } catch (IOException e) {

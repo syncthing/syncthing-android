@@ -4,8 +4,11 @@ package com.nutomic.syncthingandroid.http;
 import android.util.Log;
 import android.util.Pair;
 
+import com.google.common.collect.Maps;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -32,7 +35,7 @@ public class PollWebGuiAvailableTask extends RestTask<Void, Void> {
         int status = 0;
         do {
             try {
-                HttpsURLConnection connection = openConnection();
+                HttpsURLConnection connection = openConnection(Collections.emptyMap());
                 connection.connect();
                 status = connection.getResponseCode();
             } catch (IOException e) {

@@ -4,6 +4,7 @@ package com.nutomic.syncthingandroid.http;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Pair;
 
@@ -26,6 +27,7 @@ import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -62,14 +64,15 @@ public abstract class RestTask<Params, Progress> extends
         mListener      = listener;
     }
 
-    protected HttpsURLConnection openConnection(String... params) throws IOException {
+    protected HttpsURLConnection openConnection(Map<String, String> params) throws IOException {
         Uri.Builder uriBuilder = Uri.parse(mUrl.toString())
                 .buildUpon()
                 .path(mPath);
-        for (int paramCounter = 0; paramCounter + 1 < params.length; ) {
-            uriBuilder.appendQueryParameter(params[paramCounter++], params[paramCounter++]);
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            uriBuilder.appendQueryParameter(entry.getKey(), entry.getValue());
         }
         URL url = new URL(uriBuilder.build().toString());
+        Log.v(TAG, "Calling Rest API at " + url);
 
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestProperty(HEADER_API_KEY, mApiKey);
