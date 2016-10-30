@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
@@ -166,7 +168,8 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
         mRamUsage.setText(Util.readableFileSize(mActivity, info.sys));
         int announceTotal = info.discoveryMethods;
-        int announceConnected = announceTotal - info.discoveryErrors.size();
+        int announceConnected =
+                announceTotal - Optional.fromNullable(info.discoveryErrors).transform(Map::size).or(0);
         mAnnounceServer.setText(String.format(Locale.getDefault(), "%1$d/%2$d",
                                               announceConnected, announceTotal));
         int color = (announceConnected > 0)
