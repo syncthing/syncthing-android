@@ -26,6 +26,7 @@ import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 import com.nutomic.syncthingandroid.syncthing.RestApi;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -196,28 +197,35 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     public boolean onSyncthingPreferenceChange(Preference preference, Object o) {
-        Device localDevice = mApi.getLocalDevice();
-        localDevice.name = mDeviceName.getText();
-        mApi.editDevice(localDevice);
-
         Splitter splitter = Splitter.on(",").trimResults().omitEmptyStrings();
-
-        mOptions.listenAddresses       = Iterables.toArray(
-                                            splitter.split(mListenAddresses.getText()), String.class);
-        mOptions.maxRecvKbps           = Integer.valueOf(mMaxRecvKbps.getText());
-        mOptions.maxRecvKbps           = Integer.valueOf(mMaxSendKbps.getText());
-        mOptions.natEnabled            = mNatEnabled.isChecked();
-        mOptions.localAnnounceEnabled  = mLocalAnnounceEnabled.isChecked();
-        mOptions.globalAnnounceEnabled = mGlobalAnnounceEnabled.isChecked();
-        mOptions.relaysEnabled         = mRelaysEnabled.isChecked();
-        mOptions.globalAnnounceServers = Iterables.toArray(
-                                            splitter.split(mGlobalAnnounceServers.getText()), String.class);
-        mGui.address                   = mAddress.getText();
-        mGui.user                      = mUser.getText();
-        mGui.password                  = mPassword.getText();
-        mOptions.urAccepted            = (mUrAccepted.isChecked())
-                                            ? Options.USAGE_REPORTING_ACCEPTED
-                                            : Options.USAGE_REPORTING_DENIED;
+        switch (preference.getKey()) {
+            case "deviceName":
+                Device localDevice = mApi.getLocalDevice();
+                localDevice.name = (String) o;
+                mApi.editDevice(localDevice);
+                break;
+            case "listenAddresses":
+                mOptions.listenAddresses = Iterables.toArray(splitter.split((String) o), String.class);
+                break;
+            case "maxRecvKbps":           mOptions.maxRecvKbps = (int) o;               break;
+            case "maxSendKbps":           mOptions.maxRecvKbps = (int) o;               break;
+            case "natEnabled":            mOptions.natEnabled = (boolean) o;            break;
+            case "localAnnounceEnabled":  mOptions.localAnnounceEnabled = (boolean) o;  break;
+            case "globalAnnounceEnabled": mOptions.globalAnnounceEnabled = (boolean) o; break;
+            case "relaysEnabled":         mOptions.relaysEnabled = (boolean) o;         break;
+            case "globalAnnounceServers":
+                mOptions.globalAnnounceServers = Iterables.toArray(splitter.split((String) o), String.class);
+                break;
+            case "address":               mGui.address = (String) o;                    break;
+            case "user":                  mGui.user = (String) o;                       break;
+            case "password":              mGui.password = (String) o;                   break;
+            case "urAccepted":
+                mOptions.urAccepted = ((boolean) o)
+                        ? Options.USAGE_REPORTING_ACCEPTED
+                        : Options.USAGE_REPORTING_DENIED;
+                break;
+            default: throw new InvalidParameterException();
+        }
 
         mApi.editSettings(mGui, mOptions, getActivity());
         return true;
