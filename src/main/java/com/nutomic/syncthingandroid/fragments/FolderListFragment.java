@@ -58,6 +58,9 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
+                if (getActivity() == null)
+                    return;
+
                 getActivity().runOnUiThread(FolderListFragment.this::updateList);
             }
 
@@ -81,8 +84,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
      */
     private void updateList() {
         SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || activity.getApi() == null || getView() == null ||
-                activity.isFinishing())
+        if (activity.getApi() == null || getView() == null || activity.isFinishing())
             return;
 
         if (mAdapter == null) {

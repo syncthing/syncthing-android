@@ -12,7 +12,7 @@ public class Folder {
     public String label;
     public String path;
     public String type;
-    private transient List<Map<String, String>> devices;
+    private transient List<Map<String, String>> devices = new ArrayList<>();
     public int rescanIntervalS;
     public boolean ignorePerms;
     public boolean autoNormalize;
@@ -47,9 +47,9 @@ public class Folder {
         return devicesList;
     }
 
-    public void setDevices(List<String> newDvices) {
+    public void setDevices(List<String> newDevices) {
         devices.clear();
-        for (String d : newDvices) {
+        for (String d : newDevices) {
             Map<String, String> map = new HashMap<>();
             map.put("deviceID", d);
             devices.add(map);

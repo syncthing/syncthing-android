@@ -174,12 +174,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void requireRestart(Activity activity) {
         if (mRestartPostponed) {
-            new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, null)
-                    .execute(mConfig.toString());
+            sendConfig();
         } else {
             activity.startActivity(new Intent(mContext, RestartActivity.class));
         }
         mOnConfigChangedListener.onConfigChanged();
+    }
+
+    private void sendConfig() {
+        new PostTask(mUrl, PostTask.URI_CONFIG, mHttpsCertPath, mApiKey, null)
+                .execute(new Gson().toJson(mConfig));
     }
 
     /**
@@ -190,7 +194,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             Intent intent = new Intent(mContext, SyncthingService.class)
                     .setAction(SyncthingService.ACTION_RESTART);
             mContext.startService(intent);
-        }).execute(mConfig.toString());
+        }).execute(new Gson().toJson(mConfig));
     }
 
     /**
@@ -230,6 +234,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     public void removeDevice(String deviceId) {
+        removeDeviceInternal(deviceId);
+        sendConfig();
+    }
+
+    private void removeDeviceInternal(String deviceId) {
         Iterator<Device> it = mConfig.devices.iterator();
         while (it.hasNext()) {
             Device d = it.next();
@@ -240,6 +249,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     public void removeFolder(String id) {
+        removeFolderInternal(id);
+        sendConfig();
+    }
+
+    private void removeFolderInternal(String id) {
         Iterator<Folder> it = mConfig.folders.iterator();
         while (it.hasNext()) {
             Folder f = it.next();
@@ -253,6 +267,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         normalizeDeviceId(device.deviceID, ((normalizedId, error) -> {
             if (error == null) {
                 mConfig.devices.add(device);
+                sendConfig();
             }
             else {
                 listener.onDeviceIdNormalized(normalizedId, error);
@@ -262,15 +277,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     public void addFolder(Folder folder) {
         mConfig.folders.add(folder);
+        sendConfig();
     }
 
     public void editDevice(Device newDevice) {
-        removeDevice(newDevice.deviceID);
+        removeDeviceInternal(newDevice.deviceID);
         addDevice(newDevice, null);
     }
 
     public void editFolder(Folder newFolder) {
-        removeFolder(newFolder.id);
+        removeFolderInternal(newFolder.id);
         addFolder(newFolder);
     }
 

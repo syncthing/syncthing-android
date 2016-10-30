@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
@@ -272,7 +273,7 @@ public class FolderFragment extends Fragment
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
-        mFolderMasterView.setChecked(mFolder.type.equals("readonly"));
+        mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         List<Device> devicesList = mSyncthingService.getApi().getDevices(false);
 
         mDevicesContainer.removeAllViews();
@@ -284,7 +285,7 @@ public class FolderFragment extends Fragment
             }
         }
 
-        boolean versioningEnabled = mFolder.versioning.type.equals("simple");
+        boolean versioningEnabled = Objects.equal(mFolder.versioning.type, "simple");
         int versions = 0;
         if (versioningEnabled) {
             versions = Integer.valueOf(mFolder.versioning.params.get("keep"));
@@ -360,9 +361,7 @@ public class FolderFragment extends Fragment
         mFolder = new Folder();
         mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
         mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
-        mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
-        mFolder.setDevices(new ArrayList<>());
         mFolder.versioning = new Folder.Versioning();
         String deviceId = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
         if (deviceId != null) {
