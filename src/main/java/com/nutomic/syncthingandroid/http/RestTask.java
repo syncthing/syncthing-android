@@ -35,8 +35,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public abstract class RestTask<Params, Progress> extends
-        AsyncTask<Params, Progress, Pair<Boolean, String>> {
+public abstract class RestTask extends
+        AsyncTask<Void, Void, Pair<Boolean, String>> {
 
     private static final String TAG = "RestTask";
 
@@ -62,6 +62,10 @@ public abstract class RestTask<Params, Progress> extends
         mHttpsCertPath = httpsCertPath;
         mApiKey        = apiKey;
         mListener      = listener;
+    }
+
+    public void execute() {
+        super.executeOnExecutor(THREAD_POOL_EXECUTOR);
     }
 
     protected HttpsURLConnection openConnection(Map<String, String> params) throws IOException {

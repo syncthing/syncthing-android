@@ -10,7 +10,7 @@ import java.util.Collections;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class PostConfigTask extends RestTask<Void, Void> {
+public class PostConfigTask extends RestTask {
 
     private static final String TAG = "PostConfigTask";
 

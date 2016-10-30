@@ -15,7 +15,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Polls to load the web interface, until we receive http status 200.
  */
-public class PollWebGuiAvailableTask extends RestTask<Void, Void> {
+public class PollWebGuiAvailableTask extends RestTask {
 
     private static final String TAG = "PollWebGuiAvailableTask";
 

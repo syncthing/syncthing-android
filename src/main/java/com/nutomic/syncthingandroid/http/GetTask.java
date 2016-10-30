@@ -18,7 +18,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
  * returns the result as a String.
  */
-public class GetTask extends RestTask<Void, Void> {
+public class GetTask extends RestTask {
 
     private static final String TAG = "GetTask";
 
