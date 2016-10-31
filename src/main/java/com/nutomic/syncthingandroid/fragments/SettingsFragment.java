@@ -112,7 +112,7 @@ public class SettingsFragment extends PreferenceFragment
         Preference stTrace      = findPreference("sttrace");
         Preference stReset      = findPreference("streset");
 
-        mUseRoot                     = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
+        mUseRoot              = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
         Preference useWakelock       = findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
         Preference foregroundService = findPreference("run_as_foreground_service");
         Preference useTor            = findPreference("use_tor");
@@ -120,6 +120,7 @@ public class SettingsFragment extends PreferenceFragment
         mSyncthingVersion       = findPreference("syncthing_version");
         Preference appVersion   = screen.findPreference("app_version");
 
+        mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
         setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
 
         setPreferenceCategoryChangeListener(
