@@ -123,19 +123,11 @@ public class RestApiTest {
     @Test
     public void testNormalizeDeviceId() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        mApi.normalizeDeviceId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq",
-                (normalizedId, error) -> {
-            Assert.assertEquals("P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2",
-                    normalizedId);
+        mApi.normalizeDeviceId("p56ioi7m--zjnu2iq-gdr-eydm-2mgtmgl3bxnpq6w5btbbz4tjxzwicq", id -> {
+            Assert.assertEquals("P56IOI7-MZJNU2Y-IQGDREY-DM2MGTI-MGL3BXN-PQ6W5BM-TBBZ4TJ-XZWICQ2", id);
             latch.countDown();
-        });
+        }, error -> Assert.fail());
         Assert.assertTrue(latch.await(1, TimeUnit.SECONDS));
-    }
-
-    @Test
-    public void testGetValueEarly() {
-        // Should never throw an exception.
-        mApi.getValue("Options", "ListenAddress");
     }
 
 }

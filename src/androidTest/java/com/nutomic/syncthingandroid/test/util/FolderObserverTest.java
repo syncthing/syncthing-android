@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.test.util;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
+import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.test.Util;
@@ -48,8 +49,8 @@ public class FolderObserverTest implements FolderObserver.OnFolderFileChangeList
         Assert.assertFalse(relativePath.endsWith("should-not-notifiy"));
     }
 
-    private RestApi.Folder createFolder(String id) {
-        RestApi.Folder r = new RestApi.Folder();
+    private Folder createFolder(String id) {
+        Folder r = new Folder();
         r.path = mTestFolder.getPath();
         r.id = id;
         return r;
@@ -106,7 +107,7 @@ public class FolderObserverTest implements FolderObserver.OnFolderFileChangeList
 
     @Test
     public void testNotExisting() throws IOException, InterruptedException {
-        RestApi.Folder r = new RestApi.Folder();
+        Folder r = new Folder();
         r.path = new File(new MockContext(InstrumentationRegistry.getTargetContext()).getFilesDir(), "not-existing").getPath();
         r.id = "testNotExisting";
         try {

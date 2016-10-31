@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.service.RestApi;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MockRestApi extends RestApi {
 
@@ -33,66 +39,52 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public String getValue(String name, String key) {
-        return "";
-    }
-
-    @Override
-    public <T> void setValue(String name, String key, T value, boolean isArray, Activity activity) {
+    public List<Device> getDevices(boolean includeLocal) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<Device> getDevices(boolean includeLocal) {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void getSystemInfo(final OnReceiveSystemInfoListener listener) {
+    public void getSystemInfo(OnResultListener1<SystemInfo> listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public List<Folder> getFolders() {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void getConnections(final OnReceiveConnectionsListener listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void getModel(final String folderId, final OnReceiveModelListener listener) {
-    }
-
-    @Override
-    public void editDevice(@NonNull Device device, Activity activity, OnDeviceIdNormalizedListener listener) {
+    public void getConnections(OnResultListener1<Map<String, Connection>> listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteDevice(Device device, Activity activity) {
+    public void getModel(String folderId, OnResultListener2<String, Model> listener) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void editFolder(Folder folder, boolean create, Activity activity) {
+    public void editDevice(Device newDevice) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteFolder(Folder folder, Activity activity) {
+    public void removeDevice(String deviceId) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void normalizeDeviceId(String id, final OnDeviceIdNormalizedListener listener) {
+    public void editFolder(Folder newFolder) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void copyDeviceId(String id) {
+    public void removeFolder(String id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void normalizeDeviceId(String id, OnResultListener1<String> listener, OnResultListener1<String> errorListener) {
         throw new UnsupportedOperationException();
     }
 
