@@ -4,13 +4,11 @@ package com.nutomic.syncthingandroid.http;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Pair;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

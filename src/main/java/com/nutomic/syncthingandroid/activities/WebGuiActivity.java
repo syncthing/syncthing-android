@@ -16,7 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.io.FileInputStream;

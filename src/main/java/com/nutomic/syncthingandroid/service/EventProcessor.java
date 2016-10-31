@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,7 +13,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.gson.JsonObject;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;

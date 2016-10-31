@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.HashMap;

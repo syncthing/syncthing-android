@@ -5,7 +5,7 @@ import android.os.BatteryManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
-import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
+import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.test.MockContext;
 
 import org.junit.Assert;

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.service.RestApi;
 
 import java.net.URL;
 import java.util.ArrayList;

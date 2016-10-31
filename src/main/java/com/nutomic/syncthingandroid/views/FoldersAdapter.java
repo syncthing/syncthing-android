@@ -14,7 +14,7 @@ import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.HashMap;

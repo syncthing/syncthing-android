@@ -28,8 +28,7 @@ import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
@@ -43,7 +42,7 @@ import static android.text.TextUtils.isEmpty;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
-import static com.nutomic.syncthingandroid.syncthing.SyncthingService.State.ACTIVE;
+import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
 import static com.nutomic.syncthingandroid.util.Compression.METADATA;
 
 /**

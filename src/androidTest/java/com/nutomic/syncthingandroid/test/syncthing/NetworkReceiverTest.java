@@ -6,9 +6,9 @@ import android.preference.PreferenceManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
-import com.nutomic.syncthingandroid.syncthing.DeviceStateHolder;
+import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 
 import org.junit.After;

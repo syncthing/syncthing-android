@@ -30,8 +30,7 @@ import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.model.Options;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

@@ -22,8 +22,8 @@ import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.security.InvalidParameterException;
 import java.util.List;

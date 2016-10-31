@@ -12,7 +12,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 /**
  * Broadcast-receiver to control and configure SyncThing remotely

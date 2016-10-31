@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
+import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.Document;

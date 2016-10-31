@@ -7,9 +7,9 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 
 import java.util.LinkedList;
 

@@ -3,7 +3,7 @@ package com.nutomic.syncthingandroid.test.syncthing;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
-import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
+import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 import com.nutomic.syncthingandroid.test.MockContext;
 
 import org.junit.Assert;

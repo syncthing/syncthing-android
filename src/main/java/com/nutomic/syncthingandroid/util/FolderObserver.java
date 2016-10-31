@@ -4,7 +4,6 @@ import android.os.FileObserver;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
 
 import java.io.File;
 import java.util.ArrayList;

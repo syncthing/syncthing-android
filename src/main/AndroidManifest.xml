@@ -79,7 +79,7 @@
             android:theme="@style/Theme.Syncthing.Translucent"
             android:launchMode="singleTop"/>
 
-        <service android:name=".syncthing.SyncthingService" />
+        <service android:name=".service.SyncthingService" />
 
         <receiver android:name=".receiver.NetworkReceiver">
             <intent-filter>

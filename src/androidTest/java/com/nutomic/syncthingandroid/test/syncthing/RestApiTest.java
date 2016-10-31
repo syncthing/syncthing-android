@@ -5,9 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingRunnable;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingRunnable;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.Util;
