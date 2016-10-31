@@ -104,7 +104,9 @@ public class FolderPickerActivity extends SyncthingActivity
         roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
         roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
         roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
+        }
 
         // Add paths that might not be accessible to Syncthing.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
