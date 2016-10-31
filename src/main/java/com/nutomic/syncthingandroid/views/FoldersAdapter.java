@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.util;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,21 +12,22 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.HashMap;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.nutomic.syncthingandroid.syncthing.RestApi.readableFileSize;
 
 /**
  * Generates item views for folder items.
  */
-public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
-        implements RestApi.OnReceiveModelListener {
+public class FoldersAdapter extends ArrayAdapter<Folder> {
 
-    private final HashMap<String, RestApi.Model> mModels = new HashMap<>();
+    private final HashMap<String, Model> mModels = new HashMap<>();
     private final LayoutInflater mInflater;
 
     public FoldersAdapter(Context context) {
@@ -47,8 +48,8 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
         TextView size = (TextView) convertView.findViewById(R.id.size);
         TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
 
-        RestApi.Folder folder = getItem(position);
-        RestApi.Model model = mModels.get(folder.id);
+        Folder folder = getItem(position);
+        Model model = mModels.get(folder.id);
         label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
         directory.setText(folder.path);
@@ -62,8 +63,8 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
             size.setVisibility(VISIBLE);
             size.setText(getContext().getString(R.string.folder_size_format,
-                    readableFileSize(getContext(), model.inSyncBytes),
-                    readableFileSize(getContext(), model.globalBytes)));
+                    Util.readableFileSize(getContext(), model.inSyncBytes),
+                    Util.readableFileSize(getContext(), model.globalBytes)));
             setTextOrHide(invalid, model.invalid);
         } else {
             items.setVisibility(GONE);
@@ -98,12 +99,11 @@ public class FoldersAdapter extends ArrayAdapter<RestApi.Folder>
      */
     public void updateModel(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            api.getModel(getItem(i).id, this);
+            api.getModel(getItem(i).id, this::onReceiveModel);
         }
     }
 
-    @Override
-    public void onReceiveModel(String folderId, RestApi.Model model) {
+    public void onReceiveModel(String folderId, Model model) {
         mModels.put(folderId, model);
         notifyDataSetChanged();
     }

@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.service;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;

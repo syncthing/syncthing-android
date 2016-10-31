@@ -10,19 +10,23 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
-import com.nutomic.syncthingandroid.preferences.WifiSsidPreference;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.model.Config;
+import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.model.Options;
+import com.nutomic.syncthingandroid.views.WifiSsidPreference;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
+import java.security.InvalidParameterException;
 import java.util.List;
-import java.util.TreeSet;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -32,89 +36,39 @@ public class SettingsFragment extends PreferenceFragment
         Preference.OnPreferenceClickListener {
 
     private static final String TAG = "SettingsFragment";
-
-    private static final String SYNCTHING_OPTIONS_KEY = "syncthing_options";
-    private static final String SYNCTHING_GUI_KEY     = "syncthing_gui";
-    private static final String DEVICE_NAME_KEY       = "deviceName";
-    private static final String USAGE_REPORT_ACCEPTED = "urAccepted";
-    private static final String ADDRESS               = "address";
-    private static final String USER                  = "user";
-    // Note that this preference is seperate from the syncthing config value. While Syncthing
-    // stores a password hash, we store the plaintext password in the Android preferences.
-    private static final String PASSWORD              = "web_gui_password";
-    private static final String EXPORT_CONFIG         = "export_config";
-    private static final String IMPORT_CONFIG         = "import_config";
-    private static final String STTRACE               = "sttrace";
-    private static final String SYNCTHING_RESET       = "streset";
-    private static final String SYNCTHING_VERSION_KEY = "syncthing_version";
-    private static final String APP_VERSION_KEY       = "app_version";
+    private static final String KEY_STTRACE = "sttrace";
+    private static final String KEY_EXPORT_CONFIG = "export_config";
+    private static final String KEY_IMPORT_CONFIG = "import_config";
+    private static final String KEY_STRESET = "streset";
 
     private CheckBoxPreference mAlwaysRunInBackground;
     private CheckBoxPreference mSyncOnlyCharging;
     private CheckBoxPreference mSyncOnlyWifi;
     private WifiSsidPreference mSyncOnlyOnSSIDs;
+
+    private EditTextPreference mDeviceName;
+    private EditTextPreference mListenAddresses;
+    private EditTextPreference mMaxRecvKbps;
+    private EditTextPreference mMaxSendKbps;
+    private CheckBoxPreference mNatEnabled;
+    private CheckBoxPreference mLocalAnnounceEnabled;
+    private CheckBoxPreference mGlobalAnnounceEnabled;
+    private CheckBoxPreference mRelaysEnabled;
+    private EditTextPreference mGlobalAnnounceServers;
+    private EditTextPreference mAddress;
+    private EditTextPreference mUser;
+    private EditTextPreference mPassword;
+    private CheckBoxPreference mUrAccepted;
+
     private CheckBoxPreference mUseRoot;
-    private CheckBoxPreference mKeepWakelock;
-    private PreferenceScreen mOptionsScreen;
-    private PreferenceScreen mGuiScreen;
+
+    private Preference mSyncthingVersion;
+
     private SyncthingService mSyncthingService;
+    private RestApi mApi;
 
-    @Override
-    public void onApiChange(SyncthingService.State currentState) {
-        boolean enabled = currentState == SyncthingService.State.ACTIVE;
-        mOptionsScreen.setEnabled(enabled);
-        mGuiScreen.setEnabled(enabled);
-        mUseRoot.setEnabled(enabled);
-        mKeepWakelock.setEnabled(enabled);
-
-        if (currentState == SyncthingService.State.ACTIVE) {
-            Preference syncthingVersion = getPreferenceScreen().findPreference(SYNCTHING_VERSION_KEY);
-            syncthingVersion.setSummary(mSyncthingService.getApi().getVersion());
-            RestApi api = mSyncthingService.getApi();
-            for (int i = 0; i < mOptionsScreen.getPreferenceCount(); i++) {
-                final Preference pref = mOptionsScreen.getPreference(i);
-                pref.setOnPreferenceChangeListener(SettingsFragment.this);
-                String value;
-                switch (pref.getKey()) {
-                    case DEVICE_NAME_KEY:
-                        value = api.getLocalDevice().name;
-                        break;
-                    case USAGE_REPORT_ACCEPTED:
-                        int setting = api.getUsageReportAccepted();
-                        value = Boolean.toString(setting == RestApi.USAGE_REPORTING_ACCEPTED);
-                        break;
-                    default:
-                        value = api.getValue(RestApi.TYPE_OPTIONS, pref.getKey());
-                }
-                applyPreference(pref, value);
-            }
-
-            Preference address = mGuiScreen.findPreference(ADDRESS);
-            address.setOnPreferenceChangeListener(this);
-            applyPreference(address, api.getValue(RestApi.TYPE_GUI, ADDRESS));
-
-            Preference user = mGuiScreen.findPreference(USER);
-            user.setOnPreferenceChangeListener(this);
-            applyPreference(user, api.getValue(RestApi.TYPE_GUI, USER));
-
-            Preference password = mGuiScreen.findPreference(PASSWORD);
-            password.setOnPreferenceChangeListener(this);
-        }
-    }
-
-    /**
-     * Applies the given value to the preference.
-     *
-     * If pref is an EditTextPreference, setText is used and the value shown as summary. If pref is
-     * a CheckBoxPreference, setChecked is used (by parsing value as Boolean).
-     */
-    private void applyPreference(Preference pref, String value) {
-        if (pref instanceof EditTextPreference) {
-            ((EditTextPreference) pref).setText(value);
-        } else if (pref instanceof CheckBoxPreference) {
-            ((CheckBoxPreference) pref).setChecked(Boolean.parseBoolean(value));
-        }
-    }
+    private Options mOptions;
+    private Config.Gui mGui;
 
     /**
      * Loads layout, sets version from Rest API.
@@ -128,20 +82,60 @@ public class SettingsFragment extends PreferenceFragment
         ((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
 
         addPreferencesFromResource(R.xml.app_settings);
-        final PreferenceScreen screen = getPreferenceScreen();
-        mAlwaysRunInBackground = (CheckBoxPreference)
-                findPreference(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND);
-        mSyncOnlyCharging = (CheckBoxPreference)
-                findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
-        mSyncOnlyWifi = (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
-        mSyncOnlyOnSSIDs = (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
-        mSyncOnlyOnSSIDs.setDefaultValue(new TreeSet<String>()); // default to empty list
-        mUseRoot = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
-        mKeepWakelock = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
-        Preference appVersion = screen.findPreference(APP_VERSION_KEY);
-        mOptionsScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_OPTIONS_KEY);
-        mGuiScreen = (PreferenceScreen) screen.findPreference(SYNCTHING_GUI_KEY);
-        Preference sttrace = findPreference(STTRACE);
+        PreferenceScreen screen = getPreferenceScreen();
+        mAlwaysRunInBackground =
+                (CheckBoxPreference) findPreference(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND);
+        mSyncOnlyCharging =
+                (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
+        mSyncOnlyWifi =
+                (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+        mSyncOnlyOnSSIDs =
+                (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
+
+        mDeviceName             = (EditTextPreference) findPreference("deviceName");
+        mListenAddresses        = (EditTextPreference) findPreference("listenAddresses");
+        mMaxRecvKbps            = (EditTextPreference) findPreference("maxRecvKbps");
+        mMaxSendKbps            = (EditTextPreference) findPreference("maxSendKbps");
+        mNatEnabled             = (CheckBoxPreference) findPreference("natEnabled");
+        mLocalAnnounceEnabled   = (CheckBoxPreference) findPreference("localAnnounceEnabled");
+        mGlobalAnnounceEnabled  = (CheckBoxPreference) findPreference("globalAnnounceEnabled");
+        mRelaysEnabled          = (CheckBoxPreference) findPreference("relaysEnabled");
+        mGlobalAnnounceServers  = (EditTextPreference) findPreference("globalAnnounceServers");
+        mAddress                = (EditTextPreference) findPreference("address");
+        mUser                   = (EditTextPreference) findPreference("user");
+        mPassword               = (EditTextPreference) findPreference("password");
+        mUrAccepted             = (CheckBoxPreference) findPreference("urAccepted");
+
+        Preference exportConfig = findPreference("export_config");
+        Preference importConfig = findPreference("import_config");
+
+        Preference stTrace      = findPreference("sttrace");
+        Preference stReset      = findPreference("streset");
+
+        mUseRoot              = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
+        Preference useWakelock       = findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
+        Preference foregroundService = findPreference("run_as_foreground_service");
+        Preference useTor            = findPreference("use_tor");
+
+        mSyncthingVersion       = findPreference("syncthing_version");
+        Preference appVersion   = screen.findPreference("app_version");
+
+        mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+        setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
+
+        setPreferenceCategoryChangeListener(
+                findPreference("category_syncthing_options"), this::onSyncthingPreferenceChange);
+
+        exportConfig.setOnPreferenceClickListener(this);
+        importConfig.setOnPreferenceClickListener(this);
+
+        stTrace.setOnPreferenceChangeListener(this);
+        stReset.setOnPreferenceClickListener(this);
+
+        mUseRoot.setOnPreferenceChangeListener(this);
+        useWakelock.setOnPreferenceChangeListener(this::onRequireRestart);
+        foregroundService.setOnPreferenceChangeListener(this::onRequireRestart);
+        useTor.setOnPreferenceChangeListener(this::onRequireRestart);
 
         try {
             appVersion.setSummary(getActivity().getPackageManager()
@@ -149,44 +143,42 @@ public class SettingsFragment extends PreferenceFragment
         } catch (PackageManager.NameNotFoundException e) {
             Log.d(TAG, "Failed to get app version name");
         }
-
-        mAlwaysRunInBackground.setOnPreferenceChangeListener(this);
-        mSyncOnlyCharging.setOnPreferenceChangeListener(this);
-        mSyncOnlyWifi.setOnPreferenceChangeListener(this);
-        mSyncOnlyOnSSIDs.setOnPreferenceChangeListener(this);
-        mUseRoot.setOnPreferenceClickListener(this);
-        mKeepWakelock.setOnPreferenceClickListener(this);
-        screen.findPreference(EXPORT_CONFIG).setOnPreferenceClickListener(this);
-        screen.findPreference(IMPORT_CONFIG).setOnPreferenceClickListener(this);
-        screen.findPreference(SYNCTHING_RESET).setOnPreferenceClickListener(this);
-        sttrace.setOnPreferenceChangeListener(this);
-    }
-
-    /**
-     * Enables or disables {@link #mUseRoot} preference depending whether root is available.
-     */
-    private class TestRootTask extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return Shell.SU.available();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean haveRoot) {
-            if (haveRoot) {
-                mSyncthingService.getApi().requireRestart(getActivity());
-                mUseRoot.setChecked(true);
-            } else {
-                Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
     }
 
     @Override
     public void onServiceConnected() {
         mSyncthingService = ((SyncthingActivity) getActivity()).getService();
         mSyncthingService.registerOnApiChangeListener(this);
+        mGui = mSyncthingService.getApi().getGui();
+        mOptions = mSyncthingService.getApi().getOptions();
+    }
+
+    @Override
+    public void onApiChange(SyncthingService.State currentState) {
+        boolean enabled = currentState == SyncthingService.State.ACTIVE;
+        getPreferenceScreen().setEnabled(enabled);
+        if (!enabled)
+            return;
+
+        mApi = mSyncthingService.getApi();
+        mSyncthingVersion.setSummary(mApi.getVersion());
+        mOptions = mApi.getOptions();
+        mGui = mApi.getGui();
+
+        Joiner joiner = Joiner.on(", ");
+        mDeviceName.setText(mApi.getLocalDevice().name);
+        mListenAddresses.setText(joiner.join(mOptions.listenAddresses));
+        mMaxRecvKbps.setText(Integer.toString(mOptions.maxRecvKbps));
+        mMaxSendKbps.setText(Integer.toString(mOptions.maxSendKbps));
+        mNatEnabled.setChecked(mOptions.natEnabled);
+        mLocalAnnounceEnabled.setChecked(mOptions.localAnnounceEnabled);
+        mGlobalAnnounceEnabled.setChecked(mOptions.globalAnnounceEnabled);
+        mRelaysEnabled.setChecked(mOptions.relaysEnabled);
+        mGlobalAnnounceServers.setText(joiner.join(mOptions.globalAnnounceServers));
+        mAddress.setText(mGui.address);
+        mUser.setText(mGui.user);
+        mPassword.setText(mGui.password);
+        mUrAccepted.setChecked(mOptions.getUsageReportValue() == Options.USAGE_REPORTING_ACCEPTED);
     }
 
     @Override
@@ -195,18 +187,53 @@ public class SettingsFragment extends PreferenceFragment
         mSyncthingService.unregisterOnApiChangeListener(this);
     }
 
-    /**
-     * Handles ActionBar back selected.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    private void setPreferenceCategoryChangeListener(
+            Preference category, Preference.OnPreferenceChangeListener listener) {
+        PreferenceScreen ps = (PreferenceScreen) category;
+        for (int i = 0; i < ps.getPreferenceCount(); i++) {
+            Preference p = ps.getPreference(i);
+            p.setOnPreferenceChangeListener(listener);
         }
+    }
+
+    public boolean onSyncthingPreferenceChange(Preference preference, Object o) {
+        Splitter splitter = Splitter.on(",").trimResults().omitEmptyStrings();
+        switch (preference.getKey()) {
+            case "deviceName":
+                Device localDevice = mApi.getLocalDevice();
+                localDevice.name = (String) o;
+                mApi.editDevice(localDevice);
+                break;
+            case "listenAddresses":
+                mOptions.listenAddresses = Iterables.toArray(splitter.split((String) o), String.class);
+                break;
+            case "maxRecvKbps":           mOptions.maxRecvKbps = (int) o;               break;
+            case "maxSendKbps":           mOptions.maxRecvKbps = (int) o;               break;
+            case "natEnabled":            mOptions.natEnabled = (boolean) o;            break;
+            case "localAnnounceEnabled":  mOptions.localAnnounceEnabled = (boolean) o;  break;
+            case "globalAnnounceEnabled": mOptions.globalAnnounceEnabled = (boolean) o; break;
+            case "relaysEnabled":         mOptions.relaysEnabled = (boolean) o;         break;
+            case "globalAnnounceServers":
+                mOptions.globalAnnounceServers = Iterables.toArray(splitter.split((String) o), String.class);
+                break;
+            case "address":               mGui.address = (String) o;                    break;
+            case "user":                  mGui.user = (String) o;                       break;
+            case "password":              mGui.password = (String) o;                   break;
+            case "urAccepted":
+                mOptions.urAccepted = ((boolean) o)
+                        ? Options.USAGE_REPORTING_ACCEPTED
+                        : Options.USAGE_REPORTING_DENIED;
+                break;
+            default: throw new InvalidParameterException();
+        }
+
+        mApi.editSettings(mGui, mOptions, getActivity());
+        return true;
+    }
+
+    public boolean onRequireRestart(Preference preference, Object o) {
+        mSyncthingService.getApi().showRestartDialog(getActivity());
+        return true;
     }
 
     /**
@@ -215,79 +242,36 @@ public class SettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        boolean requireRestart = false;
-
-        if (preference.equals(mAlwaysRunInBackground)) {
-            boolean value = (Boolean) o;
-            preference.setSummary((value)
-                    ? R.string.always_run_in_background_enabled
-                    : R.string.always_run_in_background_disabled);
-            mSyncOnlyCharging.setEnabled(value);
-            mSyncOnlyWifi.setEnabled(value);
-            mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
-            // Uncheck items when disabled, so it is clear they have no effect.
-            if (!value) {
-                mSyncOnlyCharging.setChecked(false);
-                mSyncOnlyWifi.setChecked(false);
-            }
-        } else if (preference.equals(mSyncOnlyWifi)) {
-            mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
-        } else if (preference.getKey().equals(DEVICE_NAME_KEY)) {
-            RestApi.Device old = mSyncthingService.getApi().getLocalDevice();
-            RestApi.Device updated = new RestApi.Device();
-            updated.addresses = old.addresses;
-            updated.compression = old.compression;
-            updated.deviceID = old.deviceID;
-            updated.introducer = old.introducer;
-            updated.name = (String) o;
-            mSyncthingService.getApi().editDevice(updated, getActivity(), null);
-        } else if (preference.getKey().equals(USAGE_REPORT_ACCEPTED)) {
-            int setting = ((Boolean) o)
-                    ? RestApi.USAGE_REPORTING_ACCEPTED
-                    : RestApi.USAGE_REPORTING_DENIED;
-            mSyncthingService.getApi().setUsageReportAccepted(setting, getActivity());
-        } else if (mOptionsScreen.findPreference(preference.getKey()) != null) {
-            boolean isArray = preference.getKey().equals("listenAddress") ||
-                    preference.getKey().equals("globalAnnounceServers");
-            mSyncthingService.getApi().setValue(RestApi.TYPE_OPTIONS, preference.getKey(), o,
-                    isArray, getActivity());
-        } else if (preference.getKey().equals(ADDRESS)) {
-            mSyncthingService.getApi().setValue(
-                    RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
-        } else if (preference.getKey().equals(USER)) {
-            mSyncthingService.getApi().setValue(
-                    RestApi.TYPE_GUI, preference.getKey(), o, false, getActivity());
-        } else if (preference.getKey().equals(PASSWORD)) {
-            mSyncthingService.getApi().setValue(
-                    RestApi.TYPE_GUI, "password", o, false, getActivity());
+        switch (preference.getKey()) {
+            case SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND:
+                boolean value = (Boolean) o;
+                mAlwaysRunInBackground.setSummary((value)
+                        ? R.string.always_run_in_background_enabled
+                        : R.string.always_run_in_background_disabled);
+                mSyncOnlyCharging.setEnabled(value);
+                mSyncOnlyWifi.setEnabled(value);
+                mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+                // Uncheck items when disabled, so it is clear they have no effect.
+                if (!value) {
+                    mSyncOnlyCharging.setChecked(false);
+                    mSyncOnlyWifi.setChecked(false);
+                }
+                break;
+            case SyncthingService.PREF_SYNC_ONLY_WIFI:
+                mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
+                break;
+            case KEY_STTRACE:
+                if (((String) o).matches("[0-9a-z, ]*"))
+                    mSyncthingService.getApi().showRestartDialog(getActivity());
+                else {
+                    Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
+                            .show();
+                    return false;
+                }
+                break;
         }
-
-        // Avoid any code injection.
-        if (preference.getKey().equals(STTRACE)) {
-            if (((String) o).matches("[0-9a-z, ]*"))
-                requireRestart = true;
-            else {
-                Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-
-        if (requireRestart)
-            mSyncthingService.getApi().requireRestart(getActivity());
 
         return true;
-    }
-
-    /**
-     * Changes the owner of syncthing files so they can be accessed without root.
-     */
-    private class ChownFilesRunnable implements Runnable {
-        @Override
-        public void run() {
-            String f = getActivity().getFilesDir().getAbsolutePath();
-            List<String> out = Shell.SU.run("chown -R --reference=" + f + " " + f);
-            Log.i(TAG, "Changed owner of syncthing files, output: " + out);
-        }
     }
 
     @Override
@@ -300,17 +284,13 @@ public class SettingsFragment extends PreferenceFragment
                     new TestRootTask().execute();
                 } else {
                     new Thread(new ChownFilesRunnable()).start();
-                    mSyncthingService.getApi().requireRestart(getActivity());
+                    mSyncthingService.getApi().showRestartDialog(getActivity());
                 }
                 return true;
-            case SyncthingService.PREF_USE_WAKE_LOCK:
-                mSyncthingService.getApi().requireRestart(getActivity());
-                return true;
-            case EXPORT_CONFIG:
+            case KEY_EXPORT_CONFIG:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.dialog_confirm_export)
-                        .setPositiveButton(android.R.string.yes,
-                                (dialog, which) -> {
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                                     mSyncthingService.exportConfig();
                                     Toast.makeText(getActivity(),
                                             getString(R.string.config_export_successful,
@@ -319,11 +299,10 @@ public class SettingsFragment extends PreferenceFragment
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
-            case IMPORT_CONFIG:
+            case KEY_IMPORT_CONFIG:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.dialog_confirm_import)
-                        .setPositiveButton(android.R.string.yes,
-                                (dialog, which) -> {
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                                     if (mSyncthingService.importConfig()) {
                                         Toast.makeText(getActivity(),
                                                 getString(R.string.config_imported_successful),
@@ -339,7 +318,7 @@ public class SettingsFragment extends PreferenceFragment
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
-            case SYNCTHING_RESET:
+            case KEY_STRESET:
                 final Intent intent = new Intent(getActivity(), SyncthingService.class)
                         .setAction(SyncthingService.ACTION_RESET);
 
@@ -356,6 +335,39 @@ public class SettingsFragment extends PreferenceFragment
                 return true;
             default:
                 return false;
+        }
+    }
+
+    /**
+     * Enables or disables {@link #mUseRoot} preference depending whether root is available.
+     */
+    private class TestRootTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return Shell.SU.available();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean haveRoot) {
+            if (haveRoot) {
+                mSyncthingService.getApi().showRestartDialog(getActivity());
+                mUseRoot.setChecked(true);
+            } else {
+                Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    /**
+     * Changes the owner of syncthing files so they can be accessed without root.
+     */
+    private class ChownFilesRunnable implements Runnable {
+        @Override
+        public void run() {
+            String f = getActivity().getFilesDir().getAbsolutePath();
+            List<String> out = Shell.SU.run("chown -R --reference=" + f + " " + f);
+            Log.i(TAG, "Changed owner of syncthing files, output: " + out);
         }
     }
 

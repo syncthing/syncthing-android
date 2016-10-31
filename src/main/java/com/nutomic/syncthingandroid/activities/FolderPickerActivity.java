@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.io.File;
 import java.util.ArrayList;

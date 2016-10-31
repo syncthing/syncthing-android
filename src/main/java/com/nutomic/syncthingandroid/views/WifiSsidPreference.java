@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.preferences;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * MultiSelectListPreference which allows the user to select on which WiFi networks (based on SSID)
@@ -34,10 +35,11 @@ public class WifiSsidPreference extends MultiSelectListPreference {
 
     public WifiSsidPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setDefaultValue(new TreeSet<String>());
     }
 
     public WifiSsidPreference(Context context) {
-        super(context);
+        this(context, null);
     }
 
     /**

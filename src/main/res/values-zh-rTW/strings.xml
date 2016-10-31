@@ -113,14 +113,12 @@
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
   <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing 選項</string>
+  <string name="category_syncthing_options">Syncthing 選項</string>
   <string name="listen_address">同步通訊協定監聽位址</string>
   <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
   <string name="max_send_kbps">上傳速率限制(KiB/s)</string>
   <string name="global_announce_enabled">全域探索</string>
   <string name="local_announce_enabled">本地探索</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
   <string name="gui_address">GUI 監聽位址</string>
   <string name="gui_user">GUI 認證使用者名稱</string>
   <string name="gui_password">GUI 認證密碼</string>

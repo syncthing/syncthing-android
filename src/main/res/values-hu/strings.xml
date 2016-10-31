@@ -111,7 +111,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Beállítások</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Mindig fusson a háttérben</string>
   <!--Preference summary in case it is enabled-->
@@ -123,13 +122,11 @@
   <string name="use_root_title">Syncthing futtatása Superuser-ként</string>
   <string name="notification_type_title">Értesítés</string>
   <string name="notification_type_summary">Értesítés típusának kiválasztása</string>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Syncthing beállításai</string>
+  <string name="category_syncthing_options">Syncthing beállításai</string>
   <string name="device_name">Eszköz név</string>
   <string name="global_announce_enabled">Globális felfedezés</string>
   <string name="local_announce_enabled">Helyi felfedezés</string>
   <string name="global_announce_server">Globális felfedező szerver</string>
-  <string name="syncthing_gui">Syncthing GUI</string>
   <string name="export_config">Beállítások mentése</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->

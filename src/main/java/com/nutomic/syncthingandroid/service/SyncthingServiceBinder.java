@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.service;
 
 import android.os.Binder;
 

@@ -11,28 +11,40 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.RestApi.SimpleVersioning;
-import com.nutomic.syncthingandroid.syncthing.RestApi.Versioning;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.nutomic.syncthingandroid.syncthing.SyncthingService.State.ACTIVE;
-import static com.nutomic.syncthingandroid.util.DpConverter.dp;
+import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
 import static java.lang.String.valueOf;
 
 /**
@@ -58,7 +70,7 @@ public class FolderFragment extends Fragment
 
     private SyncthingService mSyncthingService;
 
-    private RestApi.Folder mFolder;
+    private Folder mFolder;
 
     private EditText mLabelView;
     private EditText mIdView;
@@ -88,16 +100,18 @@ public class FolderFragment extends Fragment
         public void onCheckedChanged(CompoundButton view, boolean isChecked) {
             switch (view.getId()) {
                 case R.id.master:
-                    mFolder.readOnly = isChecked;
+                    mFolder.type = (isChecked) ? "readonly" : "readwrite";
                     mFolderNeedsToUpdate = true;
                     break;
                 case R.id.device_toggle:
-                    RestApi.Device device = (RestApi.Device) view.getTag();
+                    List<String> devicesList = mFolder.getDevices();
+                    Device device = (Device) view.getTag();
                     if (isChecked) {
-                        mFolder.deviceIds.add(device.deviceID);
+                        devicesList.add(device.deviceID);
                     } else {
-                        mFolder.deviceIds.remove(device.deviceID);
+                        devicesList.remove(device.deviceID);
                     }
+                    mFolder.setDevices(devicesList);
                     mFolderNeedsToUpdate = true;
                     break;
             }
@@ -109,11 +123,11 @@ public class FolderFragment extends Fragment
         @Override
         public void onValueChange(int intValue) {
             if (intValue == 0) {
-                mFolder.versioning = new Versioning();
+                mFolder.versioning = new Folder.Versioning();
                 mVersioningKeepView.setText(R.string.off);
             } else {
-                mFolder.versioning = new SimpleVersioning();
-                ((SimpleVersioning) mFolder.versioning).setParams(intValue);
+                mFolder.versioning.type = "simple";
+                mFolder.versioning.params.put("keep", valueOf(intValue));
                 mVersioningKeepView.setText(valueOf(intValue));
             }
             mFolderNeedsToUpdate = true;
@@ -143,7 +157,7 @@ public class FolderFragment extends Fragment
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
-                mFolder = (RestApi.Folder) savedInstanceState.getSerializable("folder");
+                mFolder = new Gson().fromJson(savedInstanceState.getString("folder"), Folder.class);
             }
             if (mFolder == null) {
                 initFolder();
@@ -176,7 +190,7 @@ public class FolderFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("folder", mFolder);
+        outState.putString("folder", new Gson().toJson(mFolder));
     }
 
     @Override
@@ -228,10 +242,10 @@ public class FolderFragment extends Fragment
         }
 
         if (!mIsCreateMode) {
-            List<RestApi.Folder> folders = mSyncthingService.getApi().getFolders();
+            List<Folder> folders = mSyncthingService.getApi().getFolders();
             String passedId = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
             mFolder = null;
-            for (RestApi.Folder currentFolder : folders) {
+            for (Folder currentFolder : folders) {
                 if (currentFolder.id.equals(passedId)) {
                     mFolder = currentFolder;
                     break;
@@ -258,22 +272,22 @@ public class FolderFragment extends Fragment
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
-        mFolderMasterView.setChecked(mFolder.readOnly);
-        List<RestApi.Device> devicesList = mSyncthingService.getApi().getDevices(false);
+        mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
+        List<Device> devicesList = mSyncthingService.getApi().getDevices(false);
 
         mDevicesContainer.removeAllViews();
         if (devicesList.isEmpty()) {
             addEmptyDeviceListView();
         } else {
-            for (RestApi.Device n : devicesList) {
+            for (Device n : devicesList) {
                 addDeviceViewAndSetListener(n, LayoutInflater.from(getActivity()));
             }
         }
 
-        boolean versioningEnabled = mFolder.versioning instanceof SimpleVersioning;
+        boolean versioningEnabled = Objects.equal(mFolder.versioning.type, "simple");
         int versions = 0;
         if (versioningEnabled) {
-            versions = Integer.valueOf(mFolder.versioning.getParams().get("keep"));
+            versions = Integer.valueOf(mFolder.versioning.params.get("keep"));
             mVersioningKeepView.setText(valueOf(versions));
         } else {
             mVersioningKeepView.setText(R.string.off);
@@ -314,13 +328,14 @@ public class FolderFragment extends Fragment
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editFolder(mFolder, true, getActivity());
+                mSyncthingService.getApi().addFolder(mFolder);
                 getActivity().finish();
                 return true;
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_folder_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteFolder(mFolder, getActivity()))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
+                                mSyncthingService.getApi().removeFolder(mFolder.id))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -342,16 +357,19 @@ public class FolderFragment extends Fragment
     }
 
     private void initFolder() {
-        mFolder = new RestApi.Folder();
+        mFolder = new Folder();
         mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
         mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
-        mFolder.path = "";
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
-        mFolder.deviceIds = new ArrayList<>();
-        mFolder.versioning = new Versioning();
+        mFolder.versioning = new Folder.Versioning();
         String deviceId = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
-        if (deviceId != null)
-            mFolder.deviceIds.add(deviceId);
+        if (deviceId != null) {
+            List<String> devices = ImmutableList.<String>builder()
+                    .addAll(mFolder.getDevices())
+                    .add(deviceId)
+                    .build();
+            mFolder.setDevices(devices);
+        }
     }
 
     private void prepareEditMode() {
@@ -362,7 +380,8 @@ public class FolderFragment extends Fragment
     }
 
     private void addEmptyDeviceListView() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, dp(48, getActivity()));
+        int height = (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, 48, getResources().getDisplayMetrics());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, height);
         int dividerInset = getResources().getDimensionPixelOffset(R.dimen.material_divider_inset);
         int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
         setMarginStart(params, dividerInset);
@@ -373,18 +392,18 @@ public class FolderFragment extends Fragment
         mDevicesContainer.addView(emptyView, params);
     }
 
-    private void addDeviceViewAndSetListener(RestApi.Device device, LayoutInflater inflater) {
+    private void addDeviceViewAndSetListener(Device device, LayoutInflater inflater) {
         inflater.inflate(R.layout.item_device_form, mDevicesContainer);
         SwitchCompat deviceView = (SwitchCompat) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
-        deviceView.setChecked(mFolder.deviceIds.contains(device.deviceID));
-        deviceView.setText(RestApi.getDeviceDisplayName(device));
+        deviceView.setChecked(mFolder.getDevices().contains(device.deviceID));
+        deviceView.setText(device.getDisplayName());
         deviceView.setTag(device);
         deviceView.setOnCheckedChangeListener(mCheckedListener);
     }
 
     private void updateFolder() {
         if (!mIsCreateMode) {
-            mSyncthingService.getApi().editFolder(mFolder, false, getActivity());
+            mSyncthingService.getApi().editFolder(mFolder);
         }
     }
 }

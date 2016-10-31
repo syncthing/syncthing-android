@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.util;
+package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,7 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +22,9 @@ import java.util.Map;
 /**
  * Generates item views for device items.
  */
-public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
-        implements RestApi.OnReceiveConnectionsListener {
+public class DevicesAdapter extends ArrayAdapter<Device> {
 
-    private Map<String, RestApi.Connection> mConnections =
+    private Map<String, Connection> mConnections =
             new HashMap<>();
 
     public DevicesAdapter(Context context) {
@@ -44,9 +46,9 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
         String deviceId = getItem(position).deviceID;
-        RestApi.Connection conn = mConnections.get(deviceId);
+        Connection conn = mConnections.get(deviceId);
 
-        name.setText(RestApi.getDeviceDisplayName(getItem(position)));
+        name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
         if (conn != null && conn.connected) {
             if (conn.completion == 100) {
@@ -57,12 +59,12 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
                 status.setText(r.getString(R.string.device_syncing, conn.completion));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
-            download.setText(RestApi.readableTransferRate(getContext(), conn.inBits));
-            upload.setText(RestApi.readableTransferRate(getContext(), conn.outBits));
+            download.setText(Util.readableTransferRate(getContext(), conn.inBits));
+            upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
         }
         else {
-            download.setText(RestApi.readableTransferRate(getContext(), 0));
-            upload.setText(RestApi.readableTransferRate(getContext(), 0));
+            download.setText(Util.readableTransferRate(getContext(), 0));
+            upload.setText(Util.readableTransferRate(getContext(), 0));
             status.setText(r.getString(R.string.device_disconnected));
             status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
         }
@@ -75,12 +77,11 @@ public class DevicesAdapter extends ArrayAdapter<RestApi.Device>
      */
     public void updateConnections(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            api.getConnections(this);
+            api.getConnections(this::onReceiveConnections);
         }
     }
 
-    @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
+    public void onReceiveConnections(Map<String, Connection> connections) {
         mConnections = connections;
         notifyDataSetChanged();
     }

@@ -13,9 +13,9 @@ import android.widget.AdapterView;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.util.FoldersAdapter;
+import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.views.FoldersAdapter;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,7 +32,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     /**
      * Compares folders by labels, uses the folder ID as fallback if the label is empty
      */
-    private final static Comparator<RestApi.Folder> FOLDERS_COMPARATOR = (lhs, rhs) -> {
+    private final static Comparator<Folder> FOLDERS_COMPARATOR = (lhs, rhs) -> {
         String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
         String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
 
@@ -42,19 +42,6 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     private FoldersAdapter mAdapter;
 
     private Timer mTimer;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                getActivity().runOnUiThread(FolderListFragment.this::updateList);
-            }
-
-        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
-    }
 
     @Override
     public void onPause() {
@@ -67,24 +54,27 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         if (currentState != SyncthingService.State.ACTIVE)
             return;
 
-        updateList();
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (getActivity() == null)
+                    return;
+
+                getActivity().runOnUiThread(FolderListFragment.this::updateList);
+            }
+
+        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHasOptionsMenu(true);
         setEmptyText(getString(R.string.folder_list_empty));
         getListView().setOnItemClickListener(this);
         getListView().setOnItemLongClickListener(this);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        updateList();
-        setHasOptionsMenu(true);
     }
 
     /**
@@ -94,8 +84,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
      */
     private void updateList() {
         SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || activity.getApi() == null || getView() == null ||
-                activity.isFinishing())
+        if (activity.getApi() == null || getView() == null || activity.isFinishing())
             return;
 
         if (mAdapter == null) {
@@ -106,7 +95,7 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         // Prevent scroll position reset due to list update from clear().
         mAdapter.setNotifyOnChange(false);
         mAdapter.clear();
-        List<RestApi.Folder> folders = activity.getApi().getFolders();
+        List<Folder> folders = activity.getApi().getFolders();
         Collections.sort(folders, FOLDERS_COMPARATOR);
         mAdapter.addAll(folders);
         mAdapter.updateModel(activity.getApi());

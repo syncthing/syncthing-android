@@ -125,7 +125,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Настройки</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Постоянна работа на заден план</string>
   <!--Preference summary in case it is enabled-->
@@ -146,8 +145,7 @@
     <item>С нисък приоритет</item>
     <item>Без известия</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Настройки на Syncthing</string>
+  <string name="category_syncthing_options">Настройки на Syncthing</string>
   <string name="device_name">Име на устройството</string>
   <string name="listen_address">Адрес за слушане на синхронизиращия протокол</string>
   <string name="max_recv_kbps">Лимит на скоростта за сваляне (KiB/s)</string>
@@ -156,12 +154,11 @@
   <string name="local_announce_enabled">Локално откриване</string>
   <string name="global_announce_server">Сървър за глобално откриване</string>
   <string name="usage_reporting"> Анонимен доклад за ползване на програмата</string>
-  <string name="syncthing_gui">Потребителски интерфейс на Syncthing</string>
   <string name="gui_address">Адрес за свързване с потребителския интерфейс</string>
   <string name="gui_user">Потребител за потребителския интерфейс</string>
   <string name="gui_password">Парола за потребителския интерфейс</string>
   <string name="export_config">Изнасяне на настройките</string>
-  <string name="experimental_settings">Експериментално</string>
+  <string name="category_experimental">Експериментално</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Програми могат да извлекат частния ви ключ от генерирания файл, а чрез него да свалят и синхронизират файлове.</string>
   <!--Dialog shown before config import-->

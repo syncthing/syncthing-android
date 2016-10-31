@@ -130,7 +130,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ajustes</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Ejecutar siempre en segundo plano</string>
   <!--Preference summary in case it is enabled-->
@@ -155,6 +154,7 @@
   <string name="category_syncthing">Syncthing</string>
   <string name="syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del dispositivo</string>
+  <string name="category_syncthing_options">Opciones de Syncthing</string>
   <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
   <string name="max_recv_kbps">Límite de tráfico de entrada (KiB/s)</string>
   <string name="max_send_kbps">Límite de tráfico de salida (KiB/s)</string>

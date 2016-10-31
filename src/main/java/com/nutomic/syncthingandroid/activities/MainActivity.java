@@ -29,8 +29,8 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.model.Options;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -87,7 +87,7 @@ public class MainActivity extends SyncthingActivity
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
                 if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
-                        getApi().getUsageReportAccepted() == RestApi.USAGE_REPORTING_UNDECIDED) {
+                        getApi().getOptions().getUsageReportValue() == Options.USAGE_REPORTING_UNDECIDED) {
                     showUsageReportingDialog();
                 }
                 break;
@@ -390,21 +390,20 @@ public class MainActivity extends SyncthingActivity
      */
     private void showUsageReportingDialog() {
         final DialogInterface.OnClickListener listener = (dialog, which) -> {
+            Options options = getApi().getOptions();
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
-                    getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_ACCEPTED,
-                                                    MainActivity.this);
+                    options.urAccepted = Options.USAGE_REPORTING_ACCEPTED;
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
-                    getApi().setUsageReportAccepted(RestApi.USAGE_REPORTING_DENIED,
-                                                    MainActivity.this);
+                    options.urAccepted = Options.USAGE_REPORTING_DENIED;
                     break;
                 case DialogInterface.BUTTON_NEUTRAL:
                     Uri uri = Uri.parse("https://data.syncthing.net");
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     break;
             }
-
+            getApi().editSettings(getApi().getGui(), options, this);
         };
 
         getApi().getUsageReport(report -> {

@@ -3,8 +3,8 @@ package com.nutomic.syncthingandroid.test;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.net.URL;
 import java.util.LinkedList;

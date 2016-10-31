@@ -126,7 +126,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configuración</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Siempre ejecutar en el fondo</string>
   <!--Preference summary in case it is enabled-->
@@ -147,8 +146,7 @@
     <item>Baja Prioridad</item>
     <item>Ninguna</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Opciones de Syncthing</string>
+  <string name="category_syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del dispositivo</string>
   <string name="listen_address">Direcciones de escucha del Protocolo de Sincronización</string>
   <string name="max_recv_kbps">Límite de Tasa de Entrada (KiB/s)</string>
@@ -157,12 +155,11 @@
   <string name="local_announce_enabled">Descubrimiento Local</string>
   <string name="global_announce_server">Servidor de Descubrimiento Global</string>
   <string name="usage_reporting">Reporte de uso anónimo</string>
-  <string name="syncthing_gui">Interfaz gráfica de Syncthing</string>
   <string name="gui_address">Direcciones de escucha de la interfaz gráfica</string>
   <string name="gui_user">Autenticación del Usuario en la Interfaz Gráfica</string>
   <string name="gui_password">Autenticación de la Contraseña en la Interfaz Gráfica</string>
   <string name="export_config">Exportar Configuración</string>
-  <string name="experimental_settings">Experimental</string>
+  <string name="category_experimental">Experimental</string>
   <string name="keep_wakelock_while_binary_running">Mantener el CPU encendido mientras Syncthing está en ejecución</string>
   <string name="keep_wakelock_while_binary_running_summary">Use estos ajustes si experimenta desconexiones inesperadas mientras opera con la batería. Esto resultará en un consumo elevado de batería.</string>
   <!--Dialog shown before config export-->

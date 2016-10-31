@@ -3,7 +3,7 @@ package com.nutomic.syncthingandroid.util;
 import android.os.FileObserver;
 import android.util.Log;
 
-import com.nutomic.syncthingandroid.syncthing.RestApi;
+import com.nutomic.syncthingandroid.model.Folder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class FolderObserver extends FileObserver {
 
     private final OnFolderFileChangeListener mListener;
 
-    private final RestApi.Folder mFolder;
+    private final Folder mFolder;
 
     private final String mPath;
 
@@ -27,7 +27,7 @@ public class FolderObserver extends FileObserver {
         public void onFolderFileChange(String folderId, String relativePath);
     }
 
-    public FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder)
+    public FolderObserver(OnFolderFileChangeListener listener, Folder folder)
             throws FolderNotExistingException {
         this(listener, folder, "");
     }
@@ -53,7 +53,7 @@ public class FolderObserver extends FileObserver {
      * @param folder The folder where this folder belongs to.
      * @param path path to the monitored folder, relative to folder root.
      */
-    private FolderObserver(OnFolderFileChangeListener listener, RestApi.Folder folder, String path)
+    private FolderObserver(OnFolderFileChangeListener listener, Folder folder, String path)
             throws FolderNotExistingException {
         super(folder.path + "/" + path,
                 ATTRIB | CLOSE_WRITE | CREATE | DELETE | DELETE_SELF | MOVED_FROM |

@@ -130,7 +130,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Sempre rodar em segundo plano</string>
   <!--Preference summary in case it is enabled-->
@@ -152,8 +151,7 @@
     <item>Baixa prioridade</item>
     <item>Nenhuma</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Opções do Syncthing</string>
+  <string name="category_syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
@@ -164,12 +162,11 @@
   <string name="global_announce_server">Descoberta global</string>
   <string name="enable_relaying">Habilitar retransmissão</string>
   <string name="usage_reporting">Relatório anônimo de uso</string>
-  <string name="syncthing_gui">Interface do Syncthing</string>
   <string name="gui_address">Endereços de escuta da interface</string>
   <string name="gui_user">Nome de usuário da interface</string>
   <string name="gui_password">Senha da interface</string>
   <string name="export_config">Exportar configuração</string>
-  <string name="experimental_settings">Configurações experimentais</string>
+  <string name="category_experimental">Configurações experimentais</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada</string>
   <string name="keep_wakelock_while_binary_running_summary">Marque esta opção se você observar desconexões inesperadas enquanto a bateria do dispositivo não está sendo carregada. Isto resultará em maior uso da bateria.</string>
   <string name="run_as_foreground_service">Rodar serviço com prioridade de primeiro plano</string>

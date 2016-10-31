@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -18,15 +19,19 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,16 +42,13 @@ import static android.text.TextUtils.isEmpty;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
-import static com.nutomic.syncthingandroid.syncthing.SyncthingService.State.ACTIVE;
+import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
 import static com.nutomic.syncthingandroid.util.Compression.METADATA;
 
 /**
  * Shows device details and allows changing them.
  */
-public class DeviceFragment extends Fragment implements
-        SyncthingActivity.OnServiceConnectedListener, RestApi.OnReceiveConnectionsListener,
-        SyncthingService.OnApiChangeListener, RestApi.OnDeviceIdNormalizedListener,
-        View.OnClickListener {
+public class DeviceFragment extends Fragment implements View.OnClickListener {
 
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.fragments.DeviceFragment.DEVICE_ID";
@@ -57,7 +59,7 @@ public class DeviceFragment extends Fragment implements
 
     private SyncthingService mSyncthingService;
 
-    private RestApi.Device mDevice;
+    private Device mDevice;
 
     private View mIdContainer;
 
@@ -149,13 +151,13 @@ public class DeviceFragment extends Fragment implements
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mIsCreateMode = activity.getIsCreate();
-        activity.registerOnServiceConnectedListener(this);
+        activity.registerOnServiceConnectedListener(this::onServiceConnected);
         activity.setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
         setHasOptionsMenu(true);
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
-                mDevice = (RestApi.Device) savedInstanceState.getSerializable("device");
+                mDevice = new Gson().fromJson(savedInstanceState.getString("device"), Device.class);
             }
             if (mDevice == null) {
                 initDevice();
@@ -167,7 +169,7 @@ public class DeviceFragment extends Fragment implements
     public void onDestroy() {
         super.onDestroy();
         if (mSyncthingService != null) {
-            mSyncthingService.unregisterOnApiChangeListener(this);
+            mSyncthingService.unregisterOnApiChangeListener(this::onApiChange);
         }
     }
 
@@ -188,7 +190,7 @@ public class DeviceFragment extends Fragment implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("device", mDevice);
+        outState.putString("device", new Gson().toJson(mDevice));
     }
 
     @Nullable
@@ -229,10 +231,9 @@ public class DeviceFragment extends Fragment implements
         mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
     }
 
-    @Override
     public void onServiceConnected() {
         mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-        mSyncthingService.registerOnApiChangeListener(this);
+        mSyncthingService.registerOnApiChangeListener(this::onApiChange);
     }
 
     /**
@@ -241,8 +242,7 @@ public class DeviceFragment extends Fragment implements
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
-    @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
+    public void onReceiveConnections(Map<String, Connection> connections) {
         boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
         if (viewsExist && connections.containsKey(mDevice.deviceID)) {
             mCurrentAddressView.setVisibility(VISIBLE);
@@ -252,7 +252,6 @@ public class DeviceFragment extends Fragment implements
         }
     }
 
-    @Override
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
             getActivity().finish();
@@ -260,9 +259,9 @@ public class DeviceFragment extends Fragment implements
         }
 
         if (!mIsCreateMode) {
-            List<RestApi.Device> devices = mSyncthingService.getApi().getDevices(false);
+            List<Device> devices = mSyncthingService.getApi().getDevices(false);
             mDevice = null;
-            for (RestApi.Device device : devices) {
+            for (Device device : devices) {
                 if (device.deviceID.equals(
                         getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
                     mDevice = device;
@@ -276,7 +275,7 @@ public class DeviceFragment extends Fragment implements
             }
         }
 
-        mSyncthingService.getApi().getConnections(this);
+        mSyncthingService.getApi().getConnections(this::onReceiveConnections);
 
         updateViewsAndSetListeners();
     }
@@ -318,16 +317,18 @@ public class DeviceFragment extends Fragment implements
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
+                mSyncthingService.getApi().addDevice(mDevice, error ->
+                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show());
                 getActivity().finish();
                 return true;
             case R.id.share_device_id:
-                RestApi.shareDeviceId(getActivity(), mDevice.deviceID);
+                shareDeviceId(getActivity(), mDevice.deviceID);
                 return true;
             case R.id.remove:
                 new AlertDialog.Builder(getActivity())
                         .setMessage(R.string.remove_device_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> mSyncthingService.getApi().deleteDevice(mDevice, getActivity()))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
+                                mSyncthingService.getApi().removeDevice(mDevice.deviceID))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
@@ -351,19 +352,8 @@ public class DeviceFragment extends Fragment implements
         }
     }
 
-    /**
-     * Callback for {@link RestApi#editDevice}.
-     * Displays an error toast if error message present.
-     */
-    @Override
-    public void onDeviceIdNormalized(String normalizedId, String error) {
-        if (error != null) {
-            Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
-        }
-    }
-
     private void initDevice() {
-        mDevice = new RestApi.Device();
+        mDevice = new Device();
         mDevice.name = "";
         mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;
@@ -387,7 +377,7 @@ public class DeviceFragment extends Fragment implements
      */
     private void updateDevice() {
         if (!mIsCreateMode && mDeviceNeedsToUpdate && mDevice != null) {
-            mSyncthingService.getApi().editDevice(mDevice, getActivity(), this);
+            mSyncthingService.getApi().editDevice(mDevice);
         }
     }
 
@@ -417,7 +407,19 @@ public class DeviceFragment extends Fragment implements
             IntentIntegrator integrator = new IntentIntegrator(DeviceFragment.this);
             integrator.initiateScan();
         } else if (v.equals(mIdContainer)) {
-            mSyncthingService.getApi().copyDeviceId(mDevice.deviceID);
+            Util.copyDeviceId(getActivity(), mDevice.deviceID);
         }
+    }
+
+    /**
+     * Shares the given device ID via Intent. Must be called from an Activity.
+     */
+    private void shareDeviceId(Context context, String id) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
+        context.startActivity(Intent.createChooser(
+                shareIntent, context.getString(R.string.send_device_id_to)));
     }
 }

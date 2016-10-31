@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.test.MockSyncthingService;
 
 import org.junit.Assert;

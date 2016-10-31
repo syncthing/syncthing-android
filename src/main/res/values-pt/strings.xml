@@ -121,7 +121,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Configurações</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Correr sempre em segundo plano</string>
   <!--Preference summary in case it is enabled-->
@@ -140,8 +139,7 @@
     <item>Baixa prioridade</item>
     <item>Nenhuma</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Opções do Syncthing</string>
+  <string name="category_syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
@@ -150,7 +148,6 @@
   <string name="local_announce_enabled">Busca local</string>
   <string name="global_announce_server">Servidor da busca global</string>
   <string name="usage_reporting">Enviar relatórios anónimos de utilização</string>
-  <string name="syncthing_gui">Interface gráfica do Syncthing</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>
   <string name="gui_user">Utilizador da autenticação na interface gráfica</string>
   <string name="gui_password">Senha da autenticação na interface gráfica</string>

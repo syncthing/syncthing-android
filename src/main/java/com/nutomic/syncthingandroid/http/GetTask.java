@@ -1,19 +1,24 @@
 package com.nutomic.syncthingandroid.http;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.Pair;
+
+import com.google.common.base.Optional;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 /**
  * Performs a GET request to the Syncthing API
  * Performs a GET request with no parameters to the URL in uri[0] with the path in uri[1] and
  * returns the result as a String.
  */
-public class GetTask extends RestTask<String, Void, String> {
+public class GetTask extends RestTask {
 
     private static final String TAG = "GetTask";
 
@@ -26,31 +31,23 @@ public class GetTask extends RestTask<String, Void, String> {
     public static final String URI_REPORT      = "/rest/svc/report";
     public static final String URI_EVENTS      = "/rest/events";
 
-    public GetTask(URL url, String path, String httpsCertPath, String apiKey) {
-        super(url, path, httpsCertPath, apiKey);
+    private final Map<String, String> mParams;
+
+    public GetTask(URL url, String path, String httpsCertPath, String apiKey,
+                   @Nullable Map<String, String> params, OnSuccessListener listener) {
+        super(url, path, httpsCertPath, apiKey, listener);
+        mParams = Optional.fromNullable(params).or(Collections.emptyMap());
     }
 
-    /**
-     * @param params Keys and values for the query string.
-     */
     @Override
-    protected String doInBackground(String... params) {
+    protected Pair<Boolean, String> doInBackground(Void... aVoid) {
         try {
-            HttpsURLConnection connection = openConnection(params);
+            HttpsURLConnection connection = openConnection(mParams);
             Log.v(TAG, "Calling Rest API at " + connection.getURL());
-            connection.connect();
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            String line;
-            String result = "";
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            br.close();
-            Log.v(TAG, "API call result: " + result);
-            return result;
+            return connect(connection);
         } catch (IOException e) {
             Log.w(TAG, "Failed to call rest api", e);
-            return null;
+            return new Pair<>(false, null);
         }
     }
 

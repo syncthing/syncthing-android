@@ -9,12 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
-import com.nutomic.syncthingandroid.syncthing.RestApi;
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
+import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.SystemInfo;
+import com.nutomic.syncthingandroid.model.SystemVersion;
+import com.nutomic.syncthingandroid.service.RestApi;
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -25,10 +31,7 @@ import java.util.TimerTask;
 /**
  * Displays information about the local device.
  */
-public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemInfoListener,
-                                                        RestApi.OnReceiveConnectionsListener,
-                                                        RestApi.OnReceiveSystemVersionListener,
-                                                        View.OnClickListener {
+public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private TextView mDeviceId;
     private TextView mCpuUsage;
@@ -133,9 +136,9 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     private void updateGui() {
         if (mActivity.getApi() == null || getActivity() == null || getActivity().isFinishing())
             return;
-        mActivity.getApi().getSystemInfo(this);
-        mActivity.getApi().getSystemVersion(this);
-        mActivity.getApi().getConnections(this);
+        mActivity.getApi().getSystemInfo(this::onReceiveSystemInfo);
+        mActivity.getApi().getSystemVersion(this::onReceiveSystemVersion);
+        mActivity.getApi().getConnections(this::onReceiveConnections);
     }
 
     /**
@@ -150,20 +153,22 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    @Override
-    public void onReceiveSystemInfo(RestApi.SystemInfo info) {
+    public void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
 
         mDeviceId.setText(info.myID);
-        mDeviceId.setOnClickListener(v -> mActivity.getApi().copyDeviceId(mDeviceId.getText().toString()));
+        mDeviceId.setOnClickListener(v -> Util.copyDeviceId(getActivity(), mDeviceId.getText().toString()));
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
-        mRamUsage.setText(RestApi.readableFileSize(mActivity, info.sys));
+        mRamUsage.setText(Util.readableFileSize(mActivity, info.sys));
+        int announceTotal = info.discoveryMethods;
+        int announceConnected =
+                announceTotal - Optional.fromNullable(info.discoveryErrors).transform(Map::size).or(0);
         mAnnounceServer.setText(String.format(Locale.getDefault(), "%1$d/%2$d",
-                                              info.extAnnounceConnected, info.extAnnounceTotal));
-        int color = (info.extAnnounceConnected > 0)
+                                              announceConnected, announceTotal));
+        int color = (announceConnected > 0)
                 ? R.color.text_green
                 : R.color.text_red;
         mAnnounceServer.setTextColor(ContextCompat.getColor(getContext(), color));
@@ -172,8 +177,7 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    @Override
-    public void onReceiveSystemVersion(RestApi.SystemVersion info) {
+    public void onReceiveSystemVersion(SystemVersion info) {
         if (getActivity() == null)
             return;
 
@@ -183,11 +187,10 @@ public class DrawerFragment extends Fragment implements RestApi.OnReceiveSystemI
     /**
      * Populates views with status received via {@link RestApi#getConnections}.
      */
-    @Override
-    public void onReceiveConnections(Map<String, RestApi.Connection> connections) {
-        RestApi.Connection c = connections.get(RestApi.TOTAL_STATS);
-        mDownload.setText(RestApi.readableTransferRate(mActivity, c.inBits));
-        mUpload.setText(RestApi.readableTransferRate(mActivity, c.outBits));
+    private void onReceiveConnections(Map<String, Connection> connections) {
+        Connection c = connections.get(RestApi.TOTAL_STATS);
+        mDownload.setText(Util.readableTransferRate(mActivity, c.inBits));
+        mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }
 
     @Override

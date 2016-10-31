@@ -2,8 +2,8 @@ package com.nutomic.syncthingandroid.test.syncthing;
 
 import android.support.test.rule.ServiceTestRule;
 
-import com.nutomic.syncthingandroid.syncthing.SyncthingService;
-import com.nutomic.syncthingandroid.syncthing.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 
 import org.junit.Assert;
 import org.junit.Rule;

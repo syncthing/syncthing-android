@@ -79,25 +79,25 @@
             android:theme="@style/Theme.Syncthing.Translucent"
             android:launchMode="singleTop"/>
 
-        <service android:name=".syncthing.SyncthingService" />
+        <service android:name=".service.SyncthingService" />
 
-        <receiver android:name=".syncthing.NetworkReceiver">
+        <receiver android:name=".receiver.NetworkReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.BatteryReceiver">
+        <receiver android:name=".receiver.BatteryReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.BootReceiver">
+        <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".syncthing.AppConfigReceiver"
+        <receiver android:name=".receiver.AppConfigReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.nutomic.syncthingandroid.action.START" />

@@ -1,4 +1,4 @@
-package com.nutomic.syncthingandroid.syncthing;
+package com.nutomic.syncthingandroid.service;
 
 import android.annotation.TargetApi;
 import android.app.NotificationManager;
@@ -20,19 +20,18 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.android.PRNGFixes;
+import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
+import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
-import com.android.PRNGFixes;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.channels.FileChannel;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -83,11 +82,6 @@ public class SyncthingService extends Service implements
      */
     public static final File EXPORT_PATH =
             new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
-
-    /**
-     * path to the native, integrated syncthing binary, relative to the data folder
-     */
-    public static final String BINARY_NAME = "lib/libsyncthing.so";
 
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
     public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
@@ -158,7 +152,7 @@ public class SyncthingService extends Service implements
 
     /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
-     * {@link PollWebGuiAvailableTaskImpl}.
+     * {@link #pollWebGui}.
      */
     private boolean mStopScheduled = false;
 
@@ -228,8 +222,7 @@ public class SyncthingService extends Service implements
                     registerOnWebGuiAvailableListener(mApi);
                 if (mEventProcessor != null)
                     registerOnWebGuiAvailableListener(mEventProcessor);
-                new PollWebGuiAvailableTaskImpl(getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE, mConfig.getApiKey())
-                        .execute();
+                pollWebGui();
                 mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
                 new Thread(mRunnable).start();
                 updateNotification();
@@ -313,7 +306,7 @@ public class SyncthingService extends Service implements
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
-        new StartupTask().execute();
+        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
     }
@@ -345,12 +338,11 @@ public class SyncthingService extends Service implements
                 return;
             }
 
-            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second,
-                    () -> {
+            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second, () -> {
                         mCurrentState = State.ACTIVE;
                         onApiChange();
                         new Thread(() -> {
-                            for (RestApi.Folder r : mApi.getFolders()) {
+                            for (Folder r : mApi.getFolders()) {
                                 try {
                                     mObservers.add(new FolderObserver(mApi, r));
                                 } catch (FolderObserver.FolderNotExistingException e) {
@@ -478,21 +470,16 @@ public class SyncthingService extends Service implements
         mOnApiChangeListeners.remove(listener);
     }
 
-    private class PollWebGuiAvailableTaskImpl extends PollWebGuiAvailableTask {
-
-        public PollWebGuiAvailableTaskImpl(URL url, String httpsCertPath, String apiKey) {
-            super(url, httpsCertPath, apiKey);
-        }
-
-        /**
-         * Wait for the web-gui of the native syncthing binary to come online.
-         *
-         * In case the binary is to be stopped, also be aware that another thread could request
-         * to stop the binary in the time while waiting for the GUI to become active. See the comment
-         * for SyncthingService.onDestroy for details.
-         */
-        @Override
-        protected void onPostExecute(Void aVoid) {
+    /**
+     * Wait for the web-gui of the native syncthing binary to come online.
+     *
+     * In case the binary is to be stopped, also be aware that another thread could request
+     * to stop the binary in the time while waiting for the GUI to become active. See the comment
+     * for SyncthingService.onDestroy for details.
+     */
+    private void pollWebGui() {
+        new PollWebGuiAvailableTask(getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE,
+                                    mConfig.getApiKey(), result -> {
             synchronized (stateLock) {
                 if (mStopScheduled) {
                     mCurrentState = State.DISABLED;
@@ -510,7 +497,7 @@ public class SyncthingService extends Service implements
                 listener.onWebGuiAvailable();
             }
             mOnWebGuiAvailableListeners.clear();
-        }
+        }).execute();
     }
 
     /**
@@ -547,12 +534,16 @@ public class SyncthingService extends Service implements
      */
     public void exportConfig() {
         EXPORT_PATH.mkdirs();
-        copyFile(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
-                new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
-        copyFile(new File(getFilesDir(), PRIVATE_KEY_FILE),
-                new File(EXPORT_PATH, PRIVATE_KEY_FILE));
-        copyFile(new File(getFilesDir(), PUBLIC_KEY_FILE),
-                new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+        try {
+            Files.copy(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
+                    new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
+            Files.copy(new File(getFilesDir(), PRIVATE_KEY_FILE),
+                    new File(EXPORT_PATH, PRIVATE_KEY_FILE));
+            Files.copy(new File(getFilesDir(), PUBLIC_KEY_FILE),
+                    new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to export config", e);
+        }
     }
 
     /**
@@ -569,35 +560,15 @@ public class SyncthingService extends Service implements
         if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
 
-        copyFile(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
-        copyFile(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
-        copyFile(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+        try {
+            Files.copy(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
+            Files.copy(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
+            Files.copy(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to import config", e);
+        }
         mCurrentState = State.INIT;
         updateState();
         return true;
-    }
-
-    /**
-     * Copies files between different storage devices.
-     */
-    private void copyFile(File source, File dest) {
-        FileChannel is = null;
-        FileChannel os = null;
-        try {
-            is = new FileInputStream(source).getChannel();
-            os = new FileOutputStream(dest).getChannel();
-            is.transferTo(0, is.size(), os);
-        } catch (IOException e) {
-            Log.w(TAG, "Failed to copy file", e);
-        } finally {
-            try {
-                if (is != null)
-                    is.close();
-                if (os != null)
-                    os.close();
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close stream", e);
-            }
-        }
     }
 }
