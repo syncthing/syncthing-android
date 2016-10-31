@@ -151,8 +151,6 @@
     <item>Baja prioridad</item>
     <item>Ninguna</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del dispositivo</string>
   <string name="category_syncthing_options">Opciones de Syncthing</string>
   <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
@@ -164,12 +162,10 @@
   <string name="global_announce_server">Servidor de descubrimiento global</string>
   <string name="enable_relaying">Activar retransmisión (Relaying)</string>
   <string name="usage_reporting">Informe de uso anónimo</string>
-  <string name="syncthing_gui">Interfaz gráfica de Syncthing</string>
   <string name="gui_address">Direcciones de escucha de la interfaz</string>
   <string name="gui_user">Usuario de autenticación de la interfaz</string>
   <string name="gui_password">Contraseña de autenticación de la interfaz</string>
   <string name="export_config">Exportar configuración</string>
-  <string name="experimental_settings">Experimental</string>
   <string name="keep_wakelock_while_binary_running">Mantener la CPU activa mientras se ejecuta Syncthing</string>
   <string name="keep_wakelock_while_binary_running_summary">Usa este ajuste si experimentas desconexiones inesperadas mientras funcionas con la batería. Esto resultará en un incremento del consumo de batería.</string>
   <string name="run_as_foreground_service">Ejecutar el servicio con prioridad de primer plano</string>

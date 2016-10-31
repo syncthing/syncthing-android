@@ -156,12 +156,10 @@
   <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
   <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
-  <string name="syncthing_gui">Interfejs graficzny Syncthing</string>
   <string name="gui_address">Adres nasłuchiwania</string>
   <string name="gui_user">Nazwa użytkownika</string>
   <string name="gui_password">Hasło</string>
   <string name="export_config">Eksportuj ustawienia</string>
-  <string name="experimental_settings">Eksperymentalne</string>
   <string name="keep_wakelock_while_binary_running">Utrzymywanie wybudzonego CPU podczas działania</string>
   <string name="category_experimental">Eksperymelne!</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>

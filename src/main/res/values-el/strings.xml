@@ -133,7 +133,6 @@
   <!--SettingsFragment-->
   <!--Activity title-->
   <string name="settings_title">Ρυθμίσεις</string>
-  <string name="category_syncthing_android">Syncthing-Android</string>
   <!--Preference title-->
   <string name="always_run_in_background">Να εκτελείται πάντα στο παρασκήνιο</string>
   <!--Preference summary in case it is enabled-->
@@ -155,8 +154,6 @@
     <item>Χαμηλής προτεραιότητας</item>
     <item>Καμία</item>
   </string-array>
-  <string name="category_syncthing">Syncthing</string>
-  <string name="syncthing_options">Επιλογές Syncthing</string>
   <string name="device_name">Όνομα συσκευής</string>
   <string name="listen_address">Διευθύνσεις ακρόασης πρωτοκόλλου συγχρονισμού</string>
   <string name="max_recv_kbps">Περιορισμός ταχύτητας λήψης (KiB/s)</string>
@@ -167,12 +164,10 @@
   <string name="global_announce_server">Διακομιστής καθολικής ανεύρεσης κόμβων</string>
   <string name="enable_relaying">Ενεργοποίηση αναμετάδοσης</string>
   <string name="usage_reporting">Ανώνυμη αναφορά δεδομένων χρήσης</string>
-  <string name="syncthing_gui">GUI του Syncthing</string>
   <string name="gui_address">Διευθύνσεις ακρόασης του GUI</string>
   <string name="gui_user">Όνομα χρήστη του GUI</string>
   <string name="gui_password">Κωδικός πρόσβασης του GUI</string>
   <string name="export_config">Εξαγωγή ρυθμίσεων</string>
-  <string name="experimental_settings">Πειραματικά</string>
   <string name="keep_wakelock_while_binary_running">Διατήρηση της CPU σε ενεργό κατάσταση όσο εκτελείται το Syncthing</string>
   <string name="keep_wakelock_while_binary_running_summary">Χρησιμοποιήστε αυτή την επιλογή αν παρατηρείτε απρόσμενες αποσυνδέσεις κατά τη λειτουργία με μπαταρία. Θα έχει ως συνέπεια την υψηλότερη κατανάλωση ενέργειας.</string>
   <string name="run_as_foreground_service">Εκτέλεση της υπηρεσίας με προτεραιότητα προσκηνίου.</string>
