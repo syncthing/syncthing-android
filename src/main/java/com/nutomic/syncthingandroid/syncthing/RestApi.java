@@ -161,23 +161,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Returns the version name, or a (text) error message on failure.
-     */
-    public String getVersion() {
-        return mVersion;
-    }
-
-    /**
-     * Stops syncthing and cancels notification. For use by {@link SyncthingService}.
-     */
-    public void shutdown() {
-        NotificationManager nm = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancel(RestartActivity.NOTIFICATION_RESTART);
-        mRestartPostponed = false;
-    }
-
-    /**
      * Either shows a restart dialog, or only updates the config, depending on
      * {@link #mRestartPostponed}.
      */
@@ -210,54 +193,34 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Returns a list of all existing devices.
-     *
-     * @param includeLocal True if the local device should be included in the result.
+     * Stops syncthing and cancels notification.
      */
-    public List<Device> getDevices(boolean includeLocal) {
-        List<Device> devices = deepCopy(mConfig.devices, new TypeToken<List<Device>>(){}.getType());
-
-        Iterator<Device> it = devices.iterator();
-        while (it.hasNext()) {
-            Device device = it.next();
-            boolean isLocalDevice = Objects.equal(mLocalDeviceId, device.deviceID);
-            if (!includeLocal && isLocalDevice)
-                it.remove();
-        }
-        return devices;
-    }
-
-    public Options getOptions() {
-        return deepCopy(mConfig.options, Options.class);
-    }
-
-    public Config.Gui getGui() {
-        return deepCopy(mConfig.gui, Config.Gui.class);
+    public void shutdown() {
+        NotificationManager nm = (NotificationManager)
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.cancel(RestartActivity.NOTIFICATION_RESTART);
+        mRestartPostponed = false;
     }
 
     /**
-     * Returns a deep copy of object.
-     *
-     * This method uses Gson and only works with objects that can be converted with Gson.
+     * Returns the version name, or a (text) error message on failure.
      */
-    public <T> T deepCopy(T object, Type type) {
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(object, type), type);
+    public String getVersion() {
+        return mVersion;
     }
 
-    public void removeDevice(String deviceId) {
-        removeDeviceInternal(deviceId);
+    public List<Folder> getFolders() {
+        return deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
+    }
+
+    public void addFolder(Folder folder) {
+        mConfig.folders.add(folder);
         sendConfig();
     }
 
-    private void removeDeviceInternal(String deviceId) {
-        Iterator<Device> it = mConfig.devices.iterator();
-        while (it.hasNext()) {
-            Device d = it.next();
-            if (d.deviceID.equals(deviceId)) {
-                it.remove();
-            }
-        }
+    public void editFolder(Folder newFolder) {
+        removeFolderInternal(newFolder.id);
+        addFolder(newFolder);
     }
 
     public void removeFolder(String id) {
@@ -275,16 +238,38 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }
     }
 
-    public void addDevice(Device device, OnResultListener1<String> errorListener) {
-        normalizeDeviceId(device.deviceID, normalizedId -> {
-                mConfig.devices.add(device);
-                sendConfig();
-            }, errorListener);
+    /**
+     * Returns a list of all existing devices.
+     *
+     * @param includeLocal True if the local device should be included in the result.
+     */
+    public List<Device> getDevices(boolean includeLocal) {
+        List<Device> devices = deepCopy(mConfig.devices, new TypeToken<List<Device>>(){}.getType());
+
+        Iterator<Device> it = devices.iterator();
+        while (it.hasNext()) {
+            Device device = it.next();
+            boolean isLocalDevice = Objects.equal(mLocalDeviceId, device.deviceID);
+            if (!includeLocal && isLocalDevice)
+                it.remove();
+        }
+        return devices;
     }
 
-    public void addFolder(Folder folder) {
-        mConfig.folders.add(folder);
-        sendConfig();
+    public Device getLocalDevice() {
+        for (Device d : getDevices(true)) {
+            if (d.deviceID.equals(mLocalDeviceId)) {
+                return deepCopy(d, Device.class);
+            }
+        }
+        throw new RuntimeException();
+    }
+
+    public void addDevice(Device device, OnResultListener1<String> errorListener) {
+        normalizeDeviceId(device.deviceID, normalizedId -> {
+            mConfig.devices.add(device);
+            sendConfig();
+        }, errorListener);
     }
 
     public void editDevice(Device newDevice) {
@@ -293,9 +278,27 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         sendConfig();
     }
 
-    public void editFolder(Folder newFolder) {
-        removeFolderInternal(newFolder.id);
-        addFolder(newFolder);
+    public void removeDevice(String deviceId) {
+        removeDeviceInternal(deviceId);
+        sendConfig();
+    }
+
+    private void removeDeviceInternal(String deviceId) {
+        Iterator<Device> it = mConfig.devices.iterator();
+        while (it.hasNext()) {
+            Device d = it.next();
+            if (d.deviceID.equals(deviceId)) {
+                it.remove();
+            }
+        }
+    }
+
+    public Options getOptions() {
+        return deepCopy(mConfig.options, Options.class);
+    }
+
+    public Config.Gui getGui() {
+        return deepCopy(mConfig.gui, Config.Gui.class);
     }
 
     public void editSettings(Config.Gui newGui, Options newOptions, Activity activity) {
@@ -305,9 +308,17 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Requests and parses information about current system status and resource usage.
+     * Returns a deep copy of object.
      *
-     * @param listener Callback invoked when the result is received.
+     * This method uses Gson and only works with objects that can be converted with Gson.
+     */
+    public <T> T deepCopy(T object, Type type) {
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(object, type), type);
+    }
+
+    /**
+     * Requests and parses information about current system status and resource usage.
      */
     public void getSystemInfo(OnResultListener1<SystemInfo> listener) {
         new GetTask(mUrl, GetTask.URI_SYSTEM, mHttpsCertPath, mApiKey, null, result -> {
@@ -317,21 +328,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Requests and parses system version information.
-     *
-     * @param listener Callback invoked when the result is received.
      */
     public void getSystemVersion(OnResultListener1<SystemVersion> listener) {
         new GetTask(mUrl, GetTask.URI_VERSION, mHttpsCertPath, mApiKey, null, result -> {
             SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
             listener.onResult(systemVersion);
         }).execute();
-    }
-
-    /**
-     * Returns a list of all existing folders.
-     */
-    public List<Folder> getFolders() {
-        return deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
     }
 
     /**
@@ -431,6 +433,18 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
+     * Returns status information about the folder with the given id.
+     */
+    public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
+        new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey,
+                    ImmutableMap.of("folder", folderId), result -> {
+            Model m = new Gson().fromJson(result, Model.class);
+            mCachedModelInfo.put(folderId, m);
+            listener.onResult(folderId, m);
+        }).execute();
+    }
+
+    /**
      * Listener for {@link #getEvents}.
      */
     public interface OnReceiveEventListener {
@@ -445,18 +459,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
          *               the next round of event processing.
          */
         void onDone(long lastId);
-    }
-
-    /**
-     * Returns status information about the folder with the given id.
-     */
-    public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
-        new GetTask(mUrl, GetTask.URI_MODEL, mHttpsCertPath, mApiKey,
-                    ImmutableMap.of("folder", folderId), result -> {
-            Model m = new Gson().fromJson(result, Model.class);
-            mCachedModelInfo.put(folderId, m);
-            listener.onResult(folderId, m);
-        }).execute();
     }
 
     /**
@@ -512,18 +514,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     /**
-     * Returns the object representing the local device.
-     */
-    public Device getLocalDevice() {
-        for (Device d : getDevices(true)) {
-            if (d.deviceID.equals(mLocalDeviceId)) {
-                return deepCopy(d, Device.class);
-            }
-        }
-        throw new RuntimeException();
-    }
-
-    /**
      * Returns prettyfied usage report.
      */
     public void getUsageReport(final OnResultListener1<String> listener) {
@@ -534,9 +524,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }).execute();
     }
 
-    /**
-     * Sets {@link #mRestartPostponed} to true.
-     */
     public void setRestartPostponed() {
         mRestartPostponed = true;
     }
