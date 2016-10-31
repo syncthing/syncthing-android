@@ -39,6 +39,11 @@ public class SyncthingRunnable implements Runnable {
 
     public static final String UNIT_TEST_PATH = "was running";
 
+    /**
+     * Path to the native, integrated syncthing binary, relative to the data folder
+     */
+    public static final String BINARY_NAME = "lib/libsyncthing.so";
+
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
 
     private final Context mContext;
@@ -62,7 +67,7 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, Command command) {
         mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
+        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + BINARY_NAME;
         switch (command) {
             case generate:
                 mCommand = new String[]{ mSyncthingBinary, "-generate", mContext.getFilesDir().toString() };
@@ -85,7 +90,7 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, String[] manualCommand) {
         mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + SyncthingService.BINARY_NAME;
+        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + BINARY_NAME;
         mCommand = manualCommand;
     }
 

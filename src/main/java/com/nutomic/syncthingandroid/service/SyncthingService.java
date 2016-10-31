@@ -83,11 +83,6 @@ public class SyncthingService extends Service implements
     public static final File EXPORT_PATH =
             new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
 
-    /**
-     * path to the native, integrated syncthing binary, relative to the data folder
-     */
-    public static final String BINARY_NAME = "lib/libsyncthing.so";
-
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
     public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
     public static final String PREF_SYNC_ONLY_WIFI_SSIDS     = "sync_only_wifi_ssids_set";
