@@ -5,7 +5,7 @@ import android.preference.PreferenceManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
-import com.nutomic.syncthingandroid.syncthing.BootReceiver;
+import com.nutomic.syncthingandroid.receiver.BootReceiver;
 import com.nutomic.syncthingandroid.syncthing.SyncthingService;
 import com.nutomic.syncthingandroid.test.MockContext;
 
@@ -16,7 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests that {@link com.nutomic.syncthingandroid.syncthing.BootReceiver} starts the right service
+ * Tests that {@link BootReceiver} starts the right service
  * ({@link com.nutomic.syncthingandroid.syncthing.SyncthingService}.
  */
 public class BootReceiverTest {
