@@ -568,7 +568,8 @@ public class SyncthingService extends Service implements
             Log.w(TAG, "Failed to import config", e);
         }
         mCurrentState = State.INIT;
-        updateState();
+        onApiChange();
+        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         return true;
     }
 }
