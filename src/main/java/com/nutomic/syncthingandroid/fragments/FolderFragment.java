@@ -138,7 +138,7 @@ public class FolderFragment extends Fragment
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), FolderPickerActivity.class);
-            if (mFolder.path.length() > 0) {
+            if (!TextUtils.isEmpty(mFolder.path)) {
                 intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.path);
             }
             startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
