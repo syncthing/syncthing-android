@@ -21,9 +21,9 @@ import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Options;
-import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -149,16 +149,23 @@ public class SettingsFragment extends PreferenceFragment
     public void onServiceConnected() {
         mSyncthingService = ((SyncthingActivity) getActivity()).getService();
         mSyncthingService.registerOnApiChangeListener(this);
-        mGui = mSyncthingService.getApi().getGui();
-        mOptions = mSyncthingService.getApi().getOptions();
+        if (mSyncthingService.getApi().isConfigLoaded()) {
+            mGui = mSyncthingService.getApi().getGui();
+            mOptions = mSyncthingService.getApi().getOptions();
+        }
     }
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
         boolean enabled = currentState == SyncthingService.State.ACTIVE;
-        getPreferenceScreen().setEnabled(enabled);
-        if (!enabled)
+        if (!enabled || !mSyncthingService.getApi().isConfigLoaded()) {
+            PreferenceScreen ps = getPreferenceScreen();
+            for (int i = 0; i < ps.getPreferenceCount(); i++) {
+                Preference p = ps.getPreference(i);
+                p.setEnabled("category_run_conditions".equals(p.getKey()));
+            }
             return;
+        }
 
         mApi = mSyncthingService.getApi();
         mSyncthingVersion.setSummary(mApi.getVersion());

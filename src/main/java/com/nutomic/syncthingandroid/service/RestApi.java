@@ -326,6 +326,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         }).execute();
     }
 
+    public boolean isConfigLoaded() {
+        return mConfig != null;
+    }
+
     /**
      * Requests and parses system version information.
      */
