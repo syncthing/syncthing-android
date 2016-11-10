@@ -1,16 +1,23 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PowerManager;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,8 +30,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
@@ -84,6 +96,7 @@ public class MainActivity extends SyncthingActivity
             case ACTIVE:
                 dismissDisabledDialog();
                 dismissLoadingDialog();
+                showBatteryOptimizationDialogIfNecessary();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
                 if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
@@ -101,6 +114,31 @@ public class MainActivity extends SyncthingActivity
                 }
                 break;
         }
+    }
+
+    @TargetApi(23)
+    private void showBatteryOptimizationDialogIfNecessary() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        boolean dontShowAgain = sp.getBoolean("battery_optimization_dont_show_again", false);
+        if (dontShowAgain || Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                pm.isIgnoringBatteryOptimizations(getPackageName())) {
+            return;
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_disable_battery_optimization_title)
+                .setMessage(R.string.dialog_disable_battery_optimization_message)
+                .setPositiveButton(R.string.dialog_disable_battery_optimization_turn_off, (d, i) -> {
+                    Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    startActivity(intent);
+                })
+                .setNeutralButton(R.string.dialog_disable_battery_optimization_later, null)
+                .setNegativeButton(R.string.dialog_disable_battery_optimization_dont_show_again, (d, i) -> {
+                    sp.edit().putBoolean("battery_optimization_dont_show_again", true).apply();
+                })
+                .show();
     }
 
     private void dismissDisabledDialog() {

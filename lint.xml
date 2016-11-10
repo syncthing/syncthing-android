@@ -15,6 +15,9 @@
 	<!-- We don't care about Google App Indexing -->
 	<issue id="GoogleAppIndexingWarning" severity="ignore" />
 
+	<!-- Disabling battery optimizations is optional, so this warning doesn't apply to us -->
+	<issue id="BatteryLife" severity="ignore" />
+
 	<!-- Ignore types in translations (not handled by us) -->
 	<issue id="Typos">
 		<ignore path="src/main/res/values-ar" />
