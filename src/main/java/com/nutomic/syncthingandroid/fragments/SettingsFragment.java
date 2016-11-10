@@ -92,6 +92,10 @@ public class SettingsFragment extends PreferenceFragment
         mSyncOnlyOnSSIDs =
                 (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
 
+        mSyncOnlyCharging.setEnabled(mAlwaysRunInBackground.isChecked());
+        mSyncOnlyWifi.setEnabled(mAlwaysRunInBackground.isChecked());
+        mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+
         mDeviceName             = (EditTextPreference) findPreference("deviceName");
         mListenAddresses        = (EditTextPreference) findPreference("listenAddresses");
         mMaxRecvKbps            = (EditTextPreference) findPreference("maxRecvKbps");
