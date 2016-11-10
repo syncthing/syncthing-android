@@ -26,6 +26,8 @@ Translations can be updated using the [Transifex client](http://docs.transifex.c
 
 ### Build instructions
 
+This repository is using external dependencies so you have to initialize all submodules with --recursive option first time: `git clone https://github.com/syncthing/syncthing-android.git --recursive`.
+
 Set the `ANDROID_NDK` environment variable to the Android NDK folder (e.g. `export ANDROID_NDK=/opt/android_ndk`).
 Build Go and Syncthing using `./make-all.bash`.
 Use `./gradlew assembleDebug` in the project directory to compile the APK.
