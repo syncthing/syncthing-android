@@ -65,7 +65,7 @@
   <string name="announce_server">Διακομιστής ανακοίνωσης</string>
   <string name="restart">Επανεκκίνηση</string>
   <string name="dialog_confirm_restart">Επιθυμείτε να επανεκκινήσετε το Syncthing;</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID φακέλου</string>
   <!--Setting title-->
@@ -93,7 +93,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Το μονοπάτι του φακέλου δεν μπορεί να είναι κενό</string>
   <string name="dialog_discard_changes">Να απορριφθούν οι αλλαγές που κάνατε;</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID συσκευής</string>
   <!--Setting title-->

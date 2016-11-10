@@ -57,7 +57,7 @@
   <string name="ram_usage">Utilização da RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Servidor de busca global</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID da pasta</string>
   <!--Setting title-->
@@ -82,7 +82,7 @@
   <string name="folder_id_required">O ID da pasta não pode estar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
   <!--Setting title-->

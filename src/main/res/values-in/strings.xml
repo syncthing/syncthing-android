@@ -50,7 +50,7 @@
   <string name="ram_usage">Penggunaan RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Server Penyiaran</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID Folder</string>
   <!--Setting title-->
@@ -68,7 +68,7 @@
   <!--Dialog shown when attempting to remove a folder-->
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->

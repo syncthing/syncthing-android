@@ -60,7 +60,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Máy chủ th.báo</string>
   <string name="restart">Kh.chạy lại</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID thư mục</string>
   <!--Setting title-->
@@ -86,7 +86,7 @@
   <string name="folder_id_required">Không được để trống ID thư mục</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Không được để trống đường dẫn thư mục</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID thiết bị</string>
   <!--Setting title-->

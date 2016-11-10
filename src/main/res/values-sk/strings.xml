@@ -57,7 +57,7 @@
   <string name="ram_usage">Využitie RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ohlasovací server</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID adresára</string>
   <!--Setting title-->
@@ -81,7 +81,7 @@
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáru nemôže byť prázdna</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID Zariadenia</string>
   <!--Setting title-->

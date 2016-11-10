@@ -62,7 +62,7 @@
   <string name="announce_server">익명 서버</string>
   <string name="restart">재시작</string>
   <string name="dialog_confirm_restart">정말로 Syncthing을 재시작하시겠습니까?</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">폴더 ID</string>
   <!--Setting title-->
@@ -90,7 +90,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <string name="dialog_discard_changes">설정 변경을 취소합니까?</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">기기 ID</string>
   <!--Setting title-->

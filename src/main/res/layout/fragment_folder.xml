@@ -1,103 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FolderFragment">
+    tools:context=".activities.FolderActivity">
 
-    <LinearLayout
+    <include layout="@layout/widget_toolbar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:showDividers="middle"
-        android:focusableInTouchMode="true">
-
-        <EditText
-            android:id="@+id/label"
-            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_label_outline_black_24dp"
-            android:drawableStart="@drawable/ic_label_outline_black_24dp"
-            android:hint="@string/folder_label"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords|textNoSuggestions" />
-
-        <EditText
-            android:id="@+id/id"
-            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
-            android:drawableStart="@drawable/ic_vpn_key_black_24dp"
-            android:hint="@string/folder_id"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords" />
-
-        <TextView
-            android:id="@+id/directory"
-            style="@style/Widget.Syncthing.TextView.Label.Details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_folder_black_24dp"
-            android:drawableStart="@drawable/ic_folder_black_24dp"
-            android:focusable="true"
-            android:hint="@string/directory" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/devicesContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:showDividers="middle"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/label"
+                style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_label_outline_black_24dp"
+                android:drawableStart="@drawable/ic_label_outline_black_24dp"
+                android:hint="@string/folder_label"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|textNoSuggestions" />
+
+            <EditText
+                android:id="@+id/id"
+                style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+                android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+                android:hint="@string/folder_id"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords" />
 
             <TextView
+                android:id="@+id/directory"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_device_hub_black_24dp_active"
-                android:drawableStart="@drawable/ic_device_hub_black_24dp_active"
-                android:text="@string/devices" />
-        </LinearLayout>
+                android:drawableLeft="@drawable/ic_folder_black_24dp"
+                android:drawableStart="@drawable/ic_folder_black_24dp"
+                android:focusable="true"
+                android:hint="@string/directory" />
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/master"
-            style="@style/Widget.Syncthing.TextView.Label.Details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:drawableLeft="@drawable/ic_lock_black_24dp_active"
-            android:drawableStart="@drawable/ic_lock_black_24dp_active"
-            android:text="@string/folder_master" />
+            <LinearLayout
+                android:id="@+id/devicesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/versioningContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:orientation="horizontal">
+                <TextView
+                    style="@style/Widget.Syncthing.TextView.Label.Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_device_hub_black_24dp_active"
+                    android:drawableStart="@drawable/ic_device_hub_black_24dp_active"
+                    android:text="@string/devices" />
+            </LinearLayout>
 
-            <TextView
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/master"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_history_black_24dp_active"
-                android:drawableStart="@drawable/ic_history_black_24dp_active"
-                android:text="@string/keep_versions" />
+                android:drawableLeft="@drawable/ic_lock_black_24dp_active"
+                android:drawableStart="@drawable/ic_lock_black_24dp_active"
+                android:text="@string/folder_master" />
 
-            <TextView
-                android:id="@+id/versioningKeep"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/versioningContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
-                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                tools:ignore="HardcodedText" />
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Widget.Syncthing.TextView.Label.Details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/ic_history_black_24dp_active"
+                    android:drawableStart="@drawable/ic_history_black_24dp_active"
+                    android:text="@string/keep_versions" />
+
+                <TextView
+                    android:id="@+id/versioningKeep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                    android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+</LinearLayout>

@@ -14,7 +14,6 @@ import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
-import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.SystemInfo;

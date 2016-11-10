@@ -1,12 +1,10 @@
-package com.nutomic.syncthingandroid.fragments;
+package com.nutomic.syncthingandroid.activities;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
@@ -24,8 +22,6 @@ import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
-import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -48,16 +44,16 @@ import static com.nutomic.syncthingandroid.util.Compression.METADATA;
 /**
  * Shows device details and allows changing them.
  */
-public class DeviceFragment extends Fragment implements View.OnClickListener {
+public class DeviceActivity extends SyncthingActivity implements View.OnClickListener {
 
     public static final String EXTRA_DEVICE_ID =
-            "com.nutomic.syncthingandroid.fragments.DeviceFragment.DEVICE_ID";
+            "com.nutomic.syncthingandroid.activities.DeviceActivity.DEVICE_ID";
+    public static final String EXTRA_IS_CREATE =
+            "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
 
     private static final String TAG = "DeviceSettingsFragment";
 
     public static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
-
-    private SyncthingService mSyncthingService;
 
     private Device mDevice;
 
@@ -92,11 +88,11 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
 
             Compression compression = Compression.fromIndex(which);
             // Don't pop the restart dialog unless the value is actually different.
-            if (compression != Compression.fromValue(getActivity(), mDevice.compression)) {
+            if (compression != Compression.fromValue(DeviceActivity.this, mDevice.compression)) {
                 mDeviceNeedsToUpdate = true;
 
-                mDevice.compression = compression.getValue(getActivity());
-                mCompressionValueView.setText(compression.getTitle(getActivity()));
+                mDevice.compression = compression.getValue(DeviceActivity.this);
+                mCompressionValueView.setText(compression.getTitle(DeviceActivity.this));
             }
         }
     };
@@ -148,12 +144,25 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_device);
 
-        SyncthingSettingsActivity activity = (SyncthingSettingsActivity) getActivity();
-        mIsCreateMode = activity.getIsCreate();
-        activity.registerOnServiceConnectedListener(this::onServiceConnected);
-        activity.setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
-        setHasOptionsMenu(true);
+        mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
+        registerOnServiceConnectedListener(this::onServiceConnected);
+        setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
+
+        mIdContainer = findViewById(R.id.idContainer);
+        mIdView = (EditText) findViewById(R.id.id);
+        mQrButton = findViewById(R.id.qrButton);
+        mNameView = (EditText) findViewById(R.id.name);
+        mAddressesView = (EditText) findViewById(R.id.addresses);
+        mCurrentAddressView = (TextView) findViewById(R.id.currentAddress);
+        mCompressionContainer = findViewById(R.id.compressionContainer);
+        mCompressionValueView = (TextView) findViewById(R.id.compressionValue);
+        mIntroducerView = (SwitchCompat) findViewById(R.id.introducer);
+        mSyncthingVersionView = (TextView) findViewById(R.id.syncthingVersion);
+
+        mQrButton.setOnClickListener(this);
+        mCompressionContainer.setOnClickListener(this);
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -163,14 +172,20 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
                 initDevice();
             }
         }
+        else {
+            prepareEditMode();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mSyncthingService != null) {
-            mSyncthingService.unregisterOnApiChangeListener(this::onApiChange);
+        if (getService() != null) {
+            getService().unregisterOnApiChangeListener(this::onApiChange);
         }
+        mIdView.removeTextChangedListener(mIdTextWatcher);
+        mNameView.removeTextChangedListener(mNameTextWatcher);
+        mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
     }
 
     @Override
@@ -193,47 +208,8 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
         outState.putString("device", new Gson().toJson(mDevice));
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_device, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mIdContainer = view.findViewById(R.id.idContainer);
-        mIdView = (EditText) view.findViewById(R.id.id);
-        mQrButton = view.findViewById(R.id.qrButton);
-        mNameView = (EditText) view.findViewById(R.id.name);
-        mAddressesView = (EditText) view.findViewById(R.id.addresses);
-        mCurrentAddressView = (TextView) view.findViewById(R.id.currentAddress);
-        mCompressionContainer = view.findViewById(R.id.compressionContainer);
-        mCompressionValueView = (TextView) view.findViewById(R.id.compressionValue);
-        mIntroducerView = (SwitchCompat) view.findViewById(R.id.introducer);
-        mSyncthingVersionView = (TextView) view.findViewById(R.id.syncthingVersion);
-
-        mQrButton.setOnClickListener(this);
-        mCompressionContainer.setOnClickListener(this);
-
-        if (!mIsCreateMode) {
-            prepareEditMode();
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        mIdView.removeTextChangedListener(mIdTextWatcher);
-        mNameView.removeTextChangedListener(mNameTextWatcher);
-        mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
-    }
-
     public void onServiceConnected() {
-        mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-        mSyncthingService.registerOnApiChangeListener(this::onApiChange);
+        getService().registerOnApiChangeListener(this::onApiChange);
     }
 
     /**
@@ -254,28 +230,27 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
 
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
-            getActivity().finish();
+            finish();
             return;
         }
 
         if (!mIsCreateMode) {
-            List<Device> devices = mSyncthingService.getApi().getDevices(false);
+            List<Device> devices = getApi().getDevices(false);
             mDevice = null;
             for (Device device : devices) {
-                if (device.deviceID.equals(
-                        getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
+                if (device.deviceID.equals(getIntent().getStringExtra(EXTRA_DEVICE_ID))) {
                     mDevice = device;
                     break;
                 }
             }
             if (mDevice == null) {
                 Log.w(TAG, "Device not found in API update, maybe it was deleted?");
-                getActivity().finish();
+                finish();
                 return;
             }
         }
 
-        mSyncthingService.getApi().getConnections(this::onReceiveConnections);
+        getApi().getConnections(this::onReceiveConnections);
 
         updateViewsAndSetListeners();
     }
@@ -285,7 +260,7 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
         mIdView.setText(mDevice.deviceID);
         mNameView.setText(mDevice.name);
         mAddressesView.setText(displayableAddresses());
-        mCompressionValueView.setText(Compression.fromValue(getActivity(), mDevice.compression).getTitle(getActivity()));
+        mCompressionValueView.setText(Compression.fromValue(this, mDevice.compression).getTitle(this));
         mIntroducerView.setChecked(mDevice.introducer);
 
         // Keep state updated
@@ -296,16 +271,17 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.device_settings, menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.device_settings, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.create).setVisible(mIsCreateMode);
         menu.findItem(R.id.share_device_id).setVisible(!mIsCreateMode);
         menu.findItem(R.id.remove).setVisible(!mIsCreateMode);
+        return true;
     }
 
     @Override
@@ -313,27 +289,27 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
         switch (item.getItemId()) {
             case R.id.create:
                 if (isEmpty(mDevice.deviceID)) {
-                    Toast.makeText(getActivity(), R.string.device_id_required, Toast.LENGTH_LONG)
+                    Toast.makeText(this, R.string.device_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().addDevice(mDevice, error ->
-                        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show());
-                getActivity().finish();
+                getApi().addDevice(mDevice, error ->
+                        Toast.makeText(this, error, Toast.LENGTH_LONG).show());
+                finish();
                 return true;
             case R.id.share_device_id:
-                shareDeviceId(getActivity(), mDevice.deviceID);
+                shareDeviceId(this, mDevice.deviceID);
                 return true;
             case R.id.remove:
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder(this)
                         .setMessage(R.string.remove_device_confirm)
                         .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
-                                mSyncthingService.getApi().removeDevice(mDevice.deviceID))
+                                getApi().removeDevice(mDevice.deviceID))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
             case android.R.id.home:
-                getActivity().onBackPressed();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -355,16 +331,16 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
     private void initDevice() {
         mDevice = new Device();
         mDevice.name = "";
-        mDevice.deviceID = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
+        mDevice.deviceID = getIntent().getStringExtra(EXTRA_DEVICE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;
-        mDevice.compression = METADATA.getValue(getActivity());
+        mDevice.compression = METADATA.getValue(this);
         mDevice.introducer = false;
     }
 
     private void prepareEditMode() {
-        getActivity().getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        Drawable dr = ContextCompat.getDrawable(getActivity(), R.drawable.ic_content_copy_black_24dp);
+        Drawable dr = ContextCompat.getDrawable(this, R.drawable.ic_content_copy_black_24dp);
         mIdView.setCompoundDrawablesWithIntrinsicBounds(null, null, dr, null);
         mIdView.setEnabled(false);
         mQrButton.setVisibility(GONE);
@@ -377,7 +353,7 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
      */
     private void updateDevice() {
         if (!mIsCreateMode && mDeviceNeedsToUpdate && mDevice != null) {
-            mSyncthingService.getApi().editDevice(mDevice);
+            getApi().editDevice(mDevice);
         }
     }
 
@@ -397,17 +373,17 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.equals(mCompressionContainer)) {
-            new AlertDialog.Builder(getActivity())
+            new AlertDialog.Builder(this)
                     .setTitle(R.string.compression)
                     .setSingleChoiceItems(R.array.compress_entries,
-                            Compression.fromValue(getActivity(), mDevice.compression).getIndex(),
+                            Compression.fromValue(this, mDevice.compression).getIndex(),
                             mCompressionEntrySelectedListener)
                     .show();
         } else if (v.equals(mQrButton)){
-            IntentIntegrator integrator = new IntentIntegrator(DeviceFragment.this);
+            IntentIntegrator integrator = new IntentIntegrator(DeviceActivity.this);
             integrator.initiateScan();
         } else if (v.equals(mIdContainer)) {
-            Util.copyDeviceId(getActivity(), mDevice.deviceID);
+            Util.copyDeviceId(this, mDevice.deviceID);
         }
     }
 
@@ -421,5 +397,19 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, id);
         context.startActivity(Intent.createChooser(
                 shareIntent, context.getString(R.string.send_device_id_to)));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsCreateMode) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.dialog_discard_changes)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

@@ -60,7 +60,7 @@
   <!--Title for announce server status-->
   <string name="announce_server">Сървър за откриване на устройства</string>
   <string name="restart">Рестартиране</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">Идентификатор на папката</string>
   <!--Setting title-->
@@ -86,7 +86,7 @@
   <string name="folder_id_required">Наложително е да въведете идентификатор на папката</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Наложително е да въведете път до папката</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Идентификатор на устройството</string>
   <!--Setting title-->

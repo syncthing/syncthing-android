@@ -57,7 +57,7 @@
   <string name="ram_usage">RAM Kullanımı</string>
   <!--Title for announce server status-->
   <string name="announce_server">Bildirim Sunucusu</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">Klasör ID</string>
   <!--Setting title-->
@@ -82,7 +82,7 @@
   <string name="folder_id_required">Klasör ID\'si boş bırakılamaz</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Klasör yolu boş olmamalı</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Cihaz ID</string>
   <!--Setting title-->

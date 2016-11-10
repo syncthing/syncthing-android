@@ -1,11 +1,9 @@
-package com.nutomic.syncthingandroid.fragments;
+package com.nutomic.syncthingandroid.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +25,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
-import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
-import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -50,25 +44,23 @@ import static java.lang.String.valueOf;
 /**
  * Shows folder details and allows changing them.
  */
-public class FolderFragment extends Fragment
+public class FolderActivity extends SyncthingActivity
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
 
+    public static final String EXTRA_IS_CREATE =
+            "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
     public static final String EXTRA_FOLDER_ID =
-            "com.nutomic.syncthingandroid.fragments.FolderFragment.FOLDER_ID";
-
+            "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_ID";
     public static final String EXTRA_FOLDER_LABEL =
-            "com.nutomic.syncthingandroid.fragments.FolderFragment.FOLDER_LABEL";
-
+            "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_LABEL";
     public static final String EXTRA_DEVICE_ID =
-            "com.nutomic.syncthingandroid.fragments.FolderFragment.DEVICE_ID";
+            "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
     private static final int DIRECTORY_REQUEST_CODE = 234;
 
     private static final String TAG = "EditFolderFragment";
 
     public static final String KEEP_VERSIONS_DIALOG_TAG = "KeepVersionsDialogFragment";
-
-    private SyncthingService mSyncthingService;
 
     private Folder mFolder;
 
@@ -137,7 +129,7 @@ public class FolderFragment extends Fragment
     private final View.OnClickListener mPathViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), FolderPickerActivity.class);
+            Intent intent = new Intent(FolderActivity.this, FolderPickerActivity.class);
             if (!TextUtils.isEmpty(mFolder.path)) {
                 intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.path);
             }
@@ -148,12 +140,22 @@ public class FolderFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_folder);
 
-        SyncthingSettingsActivity activity = (SyncthingSettingsActivity) getActivity();
-        mIsCreateMode = activity.getIsCreate();
-        activity.setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
-        activity.registerOnServiceConnectedListener(this);
-        setHasOptionsMenu(true);
+        mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
+        setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
+        registerOnServiceConnectedListener(this);
+
+        mLabelView = (EditText) findViewById(R.id.label);
+        mIdView = (EditText) findViewById(R.id.id);
+        mPathView = (TextView) findViewById(R.id.directory);
+        mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
+        mVersioningKeepView = (TextView) findViewById(R.id.versioningKeep);
+        mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
+
+        mPathView.setOnClickListener(mPathViewClickListener);
+        findViewById(R.id.versioningContainer).setOnClickListener(v ->
+                mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG));
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -162,15 +164,23 @@ public class FolderFragment extends Fragment
             if (mFolder == null) {
                 initFolder();
             }
+            // Open keyboard on label view in edit mode.
+            mLabelView.requestFocus();
+        }
+        else {
+            prepareEditMode();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mSyncthingService != null) {
-            mSyncthingService.unregisterOnApiChangeListener(this);
+        if (getService() != null) {
+            getService().unregisterOnApiChangeListener(this);
         }
+        mLabelView.removeTextChangedListener(mTextWatcher);
+        mIdView.removeTextChangedListener(mTextWatcher);
+        mPathView.removeTextChangedListener(mTextWatcher);
     }
 
     @Override
@@ -194,56 +204,20 @@ public class FolderFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_folder, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mLabelView = (EditText) view.findViewById(R.id.label);
-        mIdView = (EditText) view.findViewById(R.id.id);
-        mPathView = (TextView) view.findViewById(R.id.directory);
-        mFolderMasterView = (SwitchCompat) view.findViewById(R.id.master);
-        mVersioningKeepView = (TextView) view.findViewById(R.id.versioningKeep);
-        mDevicesContainer = (ViewGroup) view.findViewById(R.id.devicesContainer);
-
-        mPathView.setOnClickListener(mPathViewClickListener);
-        view.findViewById(R.id.versioningContainer).setOnClickListener(v -> mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG));
-
-        if (mIsCreateMode) {
-            // Open keyboard on label view in edit mode.
-            mLabelView.requestFocus();
-        } else {
-            prepareEditMode();
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mLabelView.removeTextChangedListener(mTextWatcher);
-        mIdView.removeTextChangedListener(mTextWatcher);
-        mPathView.removeTextChangedListener(mTextWatcher);
-    }
-
-    @Override
     public void onServiceConnected() {
-        mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-        mSyncthingService.registerOnApiChangeListener(this);
+        getService().registerOnApiChangeListener(this);
     }
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
-            getActivity().finish();
+            finish();
             return;
         }
 
         if (!mIsCreateMode) {
-            List<Folder> folders = mSyncthingService.getApi().getFolders();
-            String passedId = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
+            List<Folder> folders = getApi().getFolders();
+            String passedId = getIntent().getStringExtra(EXTRA_FOLDER_ID);
             mFolder = null;
             for (Folder currentFolder : folders) {
                 if (currentFolder.id.equals(passedId)) {
@@ -253,7 +227,7 @@ public class FolderFragment extends Fragment
             }
             if (mFolder == null) {
                 Log.w(TAG, "Folder not found in API update, maybe it was deleted?");
-                getActivity().finish();
+                finish();
                 return;
             }
         }
@@ -273,14 +247,14 @@ public class FolderFragment extends Fragment
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
-        List<Device> devicesList = mSyncthingService.getApi().getDevices(false);
+        List<Device> devicesList = getApi().getDevices(false);
 
         mDevicesContainer.removeAllViews();
         if (devicesList.isEmpty()) {
             addEmptyDeviceListView();
         } else {
             for (Device n : devicesList) {
-                addDeviceViewAndSetListener(n, LayoutInflater.from(getActivity()));
+                addDeviceViewAndSetListener(n, getLayoutInflater());
             }
         }
 
@@ -303,15 +277,16 @@ public class FolderFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.folder_settings, menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.folder_settings, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.create).setVisible(mIsCreateMode);
         menu.findItem(R.id.remove).setVisible(!mIsCreateMode);
+        return true;
     }
 
     @Override
@@ -319,28 +294,28 @@ public class FolderFragment extends Fragment
         switch (item.getItemId()) {
             case R.id.create:
                 if (TextUtils.isEmpty(mFolder.id)) {
-                    Toast.makeText(getActivity(), R.string.folder_id_required, Toast.LENGTH_LONG)
+                    Toast.makeText(this, R.string.folder_id_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
                 if (TextUtils.isEmpty(mFolder.path)) {
-                    Toast.makeText(getActivity(), R.string.folder_path_required, Toast.LENGTH_LONG)
+                    Toast.makeText(this, R.string.folder_path_required, Toast.LENGTH_LONG)
                             .show();
                     return true;
                 }
-                mSyncthingService.getApi().addFolder(mFolder);
-                getActivity().finish();
+                getApi().addFolder(mFolder);
+                finish();
                 return true;
             case R.id.remove:
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder(this)
                         .setMessage(R.string.remove_folder_confirm)
                         .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
-                                mSyncthingService.getApi().removeFolder(mFolder.id))
+                                getApi().removeFolder(mFolder.id))
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
             case android.R.id.home:
-                getActivity().onBackPressed();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -358,11 +333,11 @@ public class FolderFragment extends Fragment
 
     private void initFolder() {
         mFolder = new Folder();
-        mFolder.id = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_ID);
-        mFolder.label = getActivity().getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
+        mFolder.id = getIntent().getStringExtra(EXTRA_FOLDER_ID);
+        mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
         mFolder.rescanIntervalS = 259200; // Scan every 3 days (in case inotify dropped some changes)
         mFolder.versioning = new Folder.Versioning();
-        String deviceId = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ID);
+        String deviceId = getIntent().getStringExtra(EXTRA_DEVICE_ID);
         if (deviceId != null) {
             List<String> devices = ImmutableList.<String>builder()
                     .addAll(mFolder.getDevices())
@@ -403,7 +378,21 @@ public class FolderFragment extends Fragment
 
     private void updateFolder() {
         if (!mIsCreateMode) {
-            mSyncthingService.getApi().editFolder(mFolder);
+            getApi().editFolder(mFolder);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsCreateMode) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.dialog_discard_changes)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+        }
+        else {
+            super.onBackPressed();
         }
     }
 }

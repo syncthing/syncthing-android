@@ -26,7 +26,7 @@
   <!--Title for current CPU usage-->
   <!--Title for current RAM usage-->
   <!--Title for announce server status-->
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->
@@ -40,7 +40,7 @@
   <!--Dialog shown when attempting to remove a folder-->
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title-->

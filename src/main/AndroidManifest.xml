@@ -50,24 +50,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SyncthingSettingsActivity"
-            android:label="@string/settings_title"
-            android:parentActivityName=".activities.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
         <activity
             android:name=".activities.LogActivity"
             android:label="@string/log_title"
-            android:parentActivityName=".activities.SyncthingSettingsActivity">
+            android:parentActivityName=".activities.SettingsActivity">
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.SyncthingSettingsActivity" />
+                android:value=".activities.SettingsActivity" />
         </activity>
         <activity
             android:name=".activities.FolderPickerActivity"
@@ -79,6 +72,18 @@
         <activity android:name=".activities.RestartActivity"
             android:theme="@style/Theme.Syncthing.Translucent"
             android:launchMode="singleTop"/>
+        <activity android:name=".activities.DeviceActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.FolderActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
         <activity android:name=".activities.SettingsActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data

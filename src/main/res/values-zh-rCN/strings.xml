@@ -62,7 +62,7 @@
   <string name="announce_server">宣告服务器</string>
   <string name="restart">重启</string>
   <string name="dialog_confirm_restart">您想要重启 Syncthing 吗？</string>
-  <!--FolderFragment-->
+  <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">文件夹标识</string>
   <!--Setting title-->
@@ -90,7 +90,7 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">文件夹路径不得为空</string>
   <string name="dialog_discard_changes">放弃所做的更改？</string>
-  <!--DeviceFragment-->
+  <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">设备标识</string>
   <!--Setting title-->

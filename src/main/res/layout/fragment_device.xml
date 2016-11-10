@@ -1,134 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.DeviceFragment">
+    tools:context=".activities.DeviceActivity">
 
-    <LinearLayout
+    <include layout="@layout/widget_toolbar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="?android:listDivider"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:showDividers="middle">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/idContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:orientation="horizontal">
+            android:divider="?android:listDivider"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:showDividers="middle">
 
-            <com.nutomic.syncthingandroid.views.EnhancedEditText
-                android:id="@+id/id"
+            <LinearLayout
+                android:id="@+id/idContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal">
+
+                <com.nutomic.syncthingandroid.views.EnhancedEditText
+                    android:id="@+id/id"
+                    style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_cellphone_black_24dp"
+                    android:drawableStart="@drawable/ic_cellphone_black_24dp"
+                    android:hint="@string/device_id"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions|textMultiLine"
+                    android:nextFocusForward="@+id/name" />
+
+                <ImageView
+                    android:id="@+id/qrButton"
+                    style="?actionButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                    android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                    android:contentDescription="@string/scan_qr_code_description"
+                    android:src="@drawable/ic_qrcode_black_24dp_active" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/name"
                 style="@style/Widget.Syncthing.TextView.Label.Details.Field"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_cellphone_black_24dp"
-                android:drawableStart="@drawable/ic_cellphone_black_24dp"
-                android:hint="@string/device_id"
+                android:drawableLeft="@drawable/ic_tag_text_outline_black_24dp_active"
+                android:drawableStart="@drawable/ic_tag_text_outline_black_24dp_active"
+                android:hint="@string/name"
                 android:imeOptions="actionNext"
-                android:inputType="textNoSuggestions|textMultiLine"
-                android:nextFocusForward="@+id/name" />
+                android:inputType="textCapWords" />
 
-            <ImageView
-                android:id="@+id/qrButton"
-                style="?actionButtonStyle"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/addresses"
+                style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
-                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
-                android:contentDescription="@string/scan_qr_code_description"
-                android:src="@drawable/ic_qrcode_black_24dp_active" />
-        </LinearLayout>
+                android:drawableLeft="@drawable/ic_link_black_24dp_active"
+                android:drawableStart="@drawable/ic_link_black_24dp_active"
+                android:hint="@string/addresses"
+                android:imeOptions="actionDone"
+                android:inputType="textNoSuggestions"/>
 
-        <EditText
-            android:id="@+id/name"
-            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_tag_text_outline_black_24dp_active"
-            android:drawableStart="@drawable/ic_tag_text_outline_black_24dp_active"
-            android:hint="@string/name"
-            android:imeOptions="actionNext"
-            android:inputType="textCapWords" />
+            <LinearLayout
+                android:id="@+id/compressionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/addresses"
-            style="@style/Widget.Syncthing.TextView.Label.Details.Field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_link_black_24dp_active"
-            android:drawableStart="@drawable/ic_link_black_24dp_active"
-            android:hint="@string/addresses"
-            android:imeOptions="actionDone"
-            android:inputType="textNoSuggestions"/>
+                <TextView
+                    style="@style/Widget.Syncthing.TextView.Label.Details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/ic_zip_box_black_24dp_active"
+                    android:drawableStart="@drawable/ic_zip_box_black_24dp_active"
+                    android:text="@string/compression" />
 
-        <LinearLayout
-            android:id="@+id/compressionContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/compressionValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                    android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
 
-            <TextView
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/introducer"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_zip_box_black_24dp_active"
-                android:drawableStart="@drawable/ic_zip_box_black_24dp_active"
-                android:text="@string/compression" />
+                android:drawableLeft="@drawable/ic_phonelink_black_24dp_active"
+                android:drawableStart="@drawable/ic_phonelink_black_24dp_active"
+                android:text="@string/introducer" />
 
             <TextView
-                android:id="@+id/compressionValue"
-                android:layout_width="wrap_content"
+                android:id="@+id/currentAddress"
+                style="@style/Widget.Syncthing.TextView.Label.Details"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
-                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                tools:ignore="HardcodedText" />
+                android:drawableLeft="@drawable/ic_info_black_24dp_inactive"
+                android:drawableStart="@drawable/ic_info_black_24dp_inactive"
+                android:enabled="false"
+                android:hint="@string/current_address"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/syncthingVersion"
+                style="@style/Widget.Syncthing.TextView.Label.Details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="72dp"
+                android:paddingStart="72dp"
+                android:enabled="false"
+                android:hint="@string/syncthing_version_title"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:ignore="RtlSymmetry"/>
         </LinearLayout>
+    </ScrollView>
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/introducer"
-            style="@style/Widget.Syncthing.TextView.Label.Details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:drawableLeft="@drawable/ic_phonelink_black_24dp_active"
-            android:drawableStart="@drawable/ic_phonelink_black_24dp_active"
-            android:text="@string/introducer" />
-
-        <TextView
-            android:id="@+id/currentAddress"
-            style="@style/Widget.Syncthing.TextView.Label.Details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_info_black_24dp_inactive"
-            android:drawableStart="@drawable/ic_info_black_24dp_inactive"
-            android:enabled="false"
-            android:hint="@string/current_address"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/syncthingVersion"
-            style="@style/Widget.Syncthing.TextView.Label.Details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="72dp"
-            android:paddingStart="72dp"
-            android:enabled="false"
-            android:hint="@string/syncthing_version_title"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:ignore="RtlSymmetry"/>
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
