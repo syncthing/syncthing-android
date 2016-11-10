@@ -157,15 +157,16 @@ public class SettingsFragment extends PreferenceFragment
 
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        boolean enabled = currentState == SyncthingService.State.ACTIVE;
-        if (!enabled || !mSyncthingService.getApi().isConfigLoaded()) {
-            PreferenceScreen ps = getPreferenceScreen();
-            for (int i = 0; i < ps.getPreferenceCount(); i++) {
-                Preference p = ps.getPreference(i);
-                p.setEnabled("category_run_conditions".equals(p.getKey()));
-            }
-            return;
+        boolean syncthingActive = currentState == SyncthingService.State.ACTIVE;
+        boolean enableAllPrefs = syncthingActive && mSyncthingService.getApi().isConfigLoaded();
+        PreferenceScreen ps = getPreferenceScreen();
+        for (int i = 0; i < ps.getPreferenceCount(); i++) {
+            Preference p = ps.getPreference(i);
+            p.setEnabled(enableAllPrefs || "category_run_conditions".equals(p.getKey()));
         }
+
+        if (!enableAllPrefs)
+            return;
 
         mApi = mSyncthingService.getApi();
         mSyncthingVersion.setSummary(mApi.getVersion());
