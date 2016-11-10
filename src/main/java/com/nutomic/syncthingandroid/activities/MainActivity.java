@@ -290,9 +290,7 @@ public class MainActivity extends SyncthingActivity
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
                         (dialogInterface, i) -> {
                             finish();
-                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
-                                    .setAction(SettingsActivity.ACTION_APP_SETTINGS);
-                            startActivity(intent);
+                            startActivity(new Intent(this, SettingsActivity.class));
                         }
                 )
                 .setNegativeButton(R.string.exit,

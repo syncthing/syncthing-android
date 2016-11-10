@@ -50,7 +50,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SettingsActivity"
+        <activity android:name=".activities.SyncthingSettingsActivity"
             android:label="@string/settings_title"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
@@ -60,14 +60,14 @@
         <activity
             android:name=".activities.LogActivity"
             android:label="@string/log_title"
-            android:parentActivityName=".activities.SettingsActivity">
+            android:parentActivityName=".activities.SyncthingSettingsActivity">
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.SettingsActivity" />
+                android:value=".activities.SyncthingSettingsActivity" />
         </activity>
         <activity
             android:name=".activities.FolderPickerActivity"
@@ -79,7 +79,12 @@
         <activity android:name=".activities.RestartActivity"
             android:theme="@style/Theme.Syncthing.Translucent"
             android:launchMode="singleTop"/>
-
+        <activity android:name=".activities.SettingsActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
         <service android:name=".service.SyncthingService" />
 
         <receiver android:name=".receiver.NetworkReceiver">

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -107,9 +107,9 @@ public class FolderListFragment extends ListFragment implements SyncthingService
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent intent = new Intent(getActivity(), SettingsActivity.class)
-                .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
-                .putExtra(SettingsActivity.EXTRA_IS_CREATE, false)
+        Intent intent = new Intent(getActivity(), SyncthingSettingsActivity.class)
+                .setAction(SyncthingSettingsActivity.ACTION_FOLDER_SETTINGS)
+                .putExtra(SyncthingSettingsActivity.EXTRA_IS_CREATE, false)
                 .putExtra(FolderFragment.EXTRA_FOLDER_ID, mAdapter.getItem(i).id);
         startActivity(intent);
     }
@@ -135,9 +135,9 @@ public class FolderListFragment extends ListFragment implements SyncthingService
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_folder:
-                Intent intent = new Intent(getActivity(), SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
-                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true);
+                Intent intent = new Intent(getActivity(), SyncthingSettingsActivity.class)
+                        .setAction(SyncthingSettingsActivity.ACTION_FOLDER_SETTINGS)
+                        .putExtra(SyncthingSettingsActivity.EXTRA_IS_CREATE, true);
                 startActivity(intent);
                 return true;
             default:

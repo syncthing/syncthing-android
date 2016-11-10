@@ -14,6 +14,7 @@ import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.SystemInfo;
@@ -208,8 +209,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionSettings:
-                startActivity(new Intent(mActivity, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_APP_SETTINGS));
+                startActivity(new Intent(mActivity, SettingsActivity.class));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionRestart:

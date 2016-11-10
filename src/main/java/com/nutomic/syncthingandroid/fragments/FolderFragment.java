@@ -29,7 +29,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
 import com.nutomic.syncthingandroid.model.Device;
@@ -149,7 +149,7 @@ public class FolderFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsActivity activity = (SettingsActivity) getActivity();
+        SyncthingSettingsActivity activity = (SyncthingSettingsActivity) getActivity();
         mIsCreateMode = activity.getIsCreate();
         activity.setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
         activity.registerOnServiceConnectedListener(this);

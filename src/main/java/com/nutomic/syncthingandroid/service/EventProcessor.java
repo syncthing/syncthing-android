@@ -14,7 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.fragments.DeviceFragment;
 import com.nutomic.syncthingandroid.fragments.FolderFragment;
 import com.nutomic.syncthingandroid.model.Device;
@@ -94,9 +94,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 String deviceId = (String) event.data.get("device");
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
 
-                Intent intent = new Intent(mContext, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_DEVICE_SETTINGS)
-                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
+                Intent intent = new Intent(mContext, SyncthingSettingsActivity.class)
+                        .setAction(SyncthingSettingsActivity.ACTION_DEVICE_SETTINGS)
+                        .putExtra(SyncthingSettingsActivity.EXTRA_IS_CREATE, true)
                         .putExtra(DeviceFragment.EXTRA_DEVICE_ID, deviceId);
                 // HACK: Use a random, deterministic ID to make multiple PendingIntents
                 //       distinguishable
@@ -114,9 +114,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 String folderLabel = (String) event.data.get("folderLabel");
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
-                intent = new Intent(mContext, SettingsActivity.class)
-                        .setAction(SettingsActivity.ACTION_FOLDER_SETTINGS)
-                        .putExtra(SettingsActivity.EXTRA_IS_CREATE, true)
+                intent = new Intent(mContext, SyncthingSettingsActivity.class)
+                        .setAction(SyncthingSettingsActivity.ACTION_FOLDER_SETTINGS)
+                        .putExtra(SyncthingSettingsActivity.EXTRA_IS_CREATE, true)
                         .putExtra(FolderFragment.EXTRA_DEVICE_ID, deviceId)
                         .putExtra(FolderFragment.EXTRA_FOLDER_ID, folderId)
                         .putExtra(FolderFragment.EXTRA_FOLDER_LABEL, folderLabel);

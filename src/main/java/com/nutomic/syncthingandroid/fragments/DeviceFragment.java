@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.SyncthingSettingsActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Connection;
 import com.nutomic.syncthingandroid.model.Device;
@@ -149,7 +149,7 @@ public class DeviceFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsActivity activity = (SettingsActivity) getActivity();
+        SyncthingSettingsActivity activity = (SyncthingSettingsActivity) getActivity();
         mIsCreateMode = activity.getIsCreate();
         activity.registerOnServiceConnectedListener(this::onServiceConnected);
         activity.setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
