@@ -2,7 +2,7 @@ package com.nutomic.syncthingandroid.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public class Folder {
     public String label;
     public String path;
     public String type;
-    private transient List<Map<String, String>> devices = new ArrayList<>();
+    public List<Device> devices = new ArrayList<>();
     public int rescanIntervalS;
     public boolean ignorePerms;
     public boolean autoNormalize;
@@ -36,23 +36,27 @@ public class Folder {
         public Map<String, String> params;
     }
 
-    public List<String> getDevices() {
-        if (devices == null)
-            return new ArrayList<>();
-
-        List<String> devicesList = new ArrayList<>();
-        for (Map<String, String> map : devices) {
-            devicesList.addAll(map.values());
-        }
-        return devicesList;
+    public void addDevice(String deviceId) {
+        Device d = new Device();
+        d.deviceID = deviceId;
+        devices.add(d);
     }
 
-    public void setDevices(List<String> newDevices) {
-        devices.clear();
-        for (String d : newDevices) {
-            Map<String, String> map = new HashMap<>();
-            map.put("deviceID", d);
-            devices.add(map);
+    public Device getDevice(String deviceId) {
+        for (Device d : devices) {
+            if (d.deviceID.equals(deviceId)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public void removeDevice(String deviceId) {
+        for (Iterator<Device> it = devices.iterator(); it.hasNext();) {
+            String currentId = it.next().deviceID;
+            if (currentId.equals(deviceId)) {
+                it.remove();
+            }
         }
     }
 }

@@ -371,13 +371,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         int maxPercentage = 100;
         for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
             boolean isShared = false;
-            outerloop:
             for (Folder r : getFolders()) {
-                for (String n : r.getDevices()) {
-                    if (n.equals(deviceId)) {
-                        isShared = true;
-                        break outerloop;
-                    }
+                if (r.getDevice(deviceId) != null) {
+                    isShared = true;
+                    break;
                 }
             }
             if (isShared) {

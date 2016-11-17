@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
@@ -96,14 +95,12 @@ public class FolderActivity extends SyncthingActivity
                     mFolderNeedsToUpdate = true;
                     break;
                 case R.id.device_toggle:
-                    List<String> devicesList = mFolder.getDevices();
                     Device device = (Device) view.getTag();
                     if (isChecked) {
-                        devicesList.add(device.deviceID);
+                        mFolder.addDevice(device.deviceID);
                     } else {
-                        devicesList.remove(device.deviceID);
+                        mFolder.removeDevice(device.deviceID);
                     }
-                    mFolder.setDevices(devicesList);
                     mFolderNeedsToUpdate = true;
                     break;
             }
@@ -339,11 +336,7 @@ public class FolderActivity extends SyncthingActivity
         mFolder.versioning = new Folder.Versioning();
         String deviceId = getIntent().getStringExtra(EXTRA_DEVICE_ID);
         if (deviceId != null) {
-            List<String> devices = ImmutableList.<String>builder()
-                    .addAll(mFolder.getDevices())
-                    .add(deviceId)
-                    .build();
-            mFolder.setDevices(devices);
+            mFolder.addDevice(deviceId);
         }
     }
 
@@ -370,7 +363,7 @@ public class FolderActivity extends SyncthingActivity
     private void addDeviceViewAndSetListener(Device device, LayoutInflater inflater) {
         inflater.inflate(R.layout.item_device_form, mDevicesContainer);
         SwitchCompat deviceView = (SwitchCompat) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
-        deviceView.setChecked(mFolder.getDevices().contains(device.deviceID));
+        deviceView.setChecked(mFolder.getDevice(device.deviceID) != null);
         deviceView.setText(device.getDisplayName());
         deviceView.setTag(device);
         deviceView.setOnCheckedChangeListener(mCheckedListener);
