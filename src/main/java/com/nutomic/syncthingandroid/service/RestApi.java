@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -21,7 +22,7 @@ import com.nutomic.syncthingandroid.http.GetTask;
 import com.nutomic.syncthingandroid.http.PostConfigTask;
 import com.nutomic.syncthingandroid.http.PostScanTask;
 import com.nutomic.syncthingandroid.model.Config;
-import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -30,10 +31,6 @@ import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -50,12 +47,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         FolderObserver.OnFolderFileChangeListener {
 
     private static final String TAG = "RestApi";
-
-    /**
-     * Key of the map element containing connection info for the local device, in the return
-     * value of {@link #getConnections}
-     */
-    public static final String TOTAL_STATS = "total";
 
     public interface OnConfigChangedListener {
         void onConfigChanged();
@@ -83,7 +74,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Stores the result of the last successful request to {@link GetTask#URI_CONNECTIONS},
      * or an empty Map.
      */
-    private Map<String, Connection> mPreviousConnections = new HashMap<>();
+    private Optional<Connections> mPreviousConnections = Optional.absent();
 
     /**
      * Stores the timestamp of the last successful request to {@link GetTask#URI_CONNECTIONS}.
@@ -342,62 +333,31 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Returns connection info for the local device and all connected devices.
-     * <p/>
-     * Use the key {@link #TOTAL_STATS} to get connection info for the local device.
-     *
-     * The result is cached internally. Do not modify it or any of its contents.
      */
-    public void getConnections(final OnResultListener1<Map<String, Connection>> listener) {
+    public void getConnections(final OnResultListener1<Connections> listener) {
         new GetTask(mUrl, GetTask.URI_CONNECTIONS, mHttpsCertPath, mApiKey, null, result -> {
             Long now = System.currentTimeMillis();
-            Long timeElapsed = (now - mPreviousConnectionTime) / 1000;
-            if (timeElapsed < 1) {
-                listener.onResult(mPreviousConnections);
+            Long msElapsed = now - mPreviousConnectionTime;
+            if (msElapsed < SyncthingService.GUI_UPDATE_INTERVAL) {
+                listener.onResult(deepCopy(mPreviousConnections.get(), Connections.class));
                 return;
             }
 
-            try {
-                JSONObject json = new JSONObject(result);
-                Map<String, JSONObject> jsonConnections = new HashMap<>();
-                jsonConnections.put(TOTAL_STATS, json.getJSONObject(TOTAL_STATS));
-                JSONArray extConnections = json.getJSONObject("connections").names();
-                if (extConnections != null) {
-                    for (int i = 0; i < extConnections.length(); i++) {
-                        String deviceId = extConnections.get(i).toString();
-                        jsonConnections.put(deviceId, json.getJSONObject("connections").getJSONObject(deviceId));
-                    }
-                }
-                Map<String, Connection> connections = new HashMap<>();
-                for (Map.Entry<String, JSONObject> jsonConnection : jsonConnections.entrySet()) {
-                    String deviceId = jsonConnection.getKey();
-                    Connection c = new Connection();
-                    JSONObject conn = jsonConnection.getValue();
-                    c.address = deviceId;
-                    c.at = conn.getString("at");
-                    c.inBytesTotal = conn.getLong("inBytesTotal");
-                    c.outBytesTotal = conn.getLong("outBytesTotal");
-                    c.address = conn.getString("address");
-                    c.clientVersion = conn.getString("clientVersion");
-                    c.completion = getDeviceCompletion(deviceId);
-                    c.connected = conn.getBoolean("connected");
+            mPreviousConnectionTime = now;
+            Connections connections = new Gson().fromJson(result, Connections.class);
+            for (Map.Entry<String, Connections.Connection> e : connections.connections.entrySet()) {
+                e.getValue().completion = getDeviceCompletion(e.getKey());
 
-                    Connection prev = (mPreviousConnections.containsKey(deviceId))
-                            ? mPreviousConnections.get(deviceId)
-                            : new Connection();
-                    mPreviousConnectionTime = now;
-                    c.inBits = Math.max(0, 8 *
-                            (conn.getLong("inBytesTotal") - prev.inBytesTotal) / timeElapsed);
-                    c.outBits = Math.max(0, 8 *
-                            (conn.getLong("outBytesTotal") - prev.outBytesTotal) / timeElapsed);
-
-                    connections.put(deviceId, c);
-
-                }
-                mPreviousConnections = connections;
-                listener.onResult(mPreviousConnections);
-            } catch (JSONException e) {
-                Log.w(TAG, "Failed to parse connections", e);
+                Connections.Connection prev = mPreviousConnections
+                        .transform(c -> c.connections.get(e.getKey()))
+                        .or(new Connections.Connection());
+                e.getValue().setTransferRate(prev, msElapsed);
             }
+            Connections.Connection prev =
+                    mPreviousConnections.transform(c -> c.total).or(new Connections.Connection());
+            connections.total.setTransferRate(prev, msElapsed);
+            mPreviousConnections = Optional.of(connections);
+            listener.onResult(deepCopy(connections, Connections.class));
         }).execute();
     }
 

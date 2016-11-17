@@ -10,22 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.util.Util;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Generates item views for device items.
  */
 public class DevicesAdapter extends ArrayAdapter<Device> {
 
-    private Map<String, Connection> mConnections =
-            new HashMap<>();
+    private Optional<Connections> mConnections = Optional.absent();
 
     public DevicesAdapter(Context context) {
         super(context, R.layout.item_device_list);
@@ -46,21 +43,21 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
         String deviceId = getItem(position).deviceID;
-        Connection conn = mConnections.get(deviceId);
+        Optional<Connections.Connection> conn = mConnections.transform(a -> a.connections.get(deviceId));
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
-        if (conn != null && conn.connected) {
-            if (conn.completion == 100) {
+        if (conn.isPresent() && conn.get().connected) {
+            if (conn.get().completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
             }
             else {
-                status.setText(r.getString(R.string.device_syncing, conn.completion));
+                status.setText(r.getString(R.string.device_syncing, conn.get().completion));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
-            download.setText(Util.readableTransferRate(getContext(), conn.inBits));
-            upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
+            download.setText(Util.readableTransferRate(getContext(), conn.get().inBits));
+            upload.setText(Util.readableTransferRate(getContext(), conn.get().outBits));
         }
         else {
             download.setText(Util.readableTransferRate(getContext(), 0));
@@ -81,8 +78,8 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         }
     }
 
-    public void onReceiveConnections(Map<String, Connection> connections) {
-        mConnections = connections;
+    public void onReceiveConnections(Connections connections) {
+        mConnections = Optional.of(connections);
         notifyDataSetChanged();
     }
 }

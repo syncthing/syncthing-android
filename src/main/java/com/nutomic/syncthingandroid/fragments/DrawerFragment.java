@@ -15,7 +15,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
-import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.service.RestApi;
@@ -187,8 +187,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     /**
      * Populates views with status received via {@link RestApi#getConnections}.
      */
-    private void onReceiveConnections(Map<String, Connection> connections) {
-        Connection c = connections.get(RestApi.TOTAL_STATS);
+    private void onReceiveConnections(Connections connections) {
+        Connections.Connection c = connections.total;
         mDownload.setText(Util.readableTransferRate(mActivity, c.inBits));
         mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }

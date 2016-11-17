@@ -12,7 +12,9 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,7 +24,7 @@ import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
@@ -32,7 +34,6 @@ import com.nutomic.syncthingandroid.util.Util;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static android.text.TextUtils.isEmpty;
 import static android.view.View.GONE;
@@ -218,13 +219,13 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
-    public void onReceiveConnections(Map<String, Connection> connections) {
+    public void onReceiveConnections(Connections connections) {
         boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
-        if (viewsExist && connections.containsKey(mDevice.deviceID)) {
+        if (viewsExist && connections.connections.containsKey(mDevice.deviceID)) {
             mCurrentAddressView.setVisibility(VISIBLE);
             mSyncthingVersionView.setVisibility(VISIBLE);
-            mCurrentAddressView.setText(connections.get(mDevice.deviceID).address);
-            mSyncthingVersionView.setText(connections.get(mDevice.deviceID).clientVersion);
+            mCurrentAddressView.setText(connections.connections.get(mDevice.deviceID).address);
+            mSyncthingVersionView.setText(connections.connections.get(mDevice.deviceID).clientVersion);
         }
     }
 

@@ -1,10 +1,8 @@
 package com.nutomic.syncthingandroid.test;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
-import com.nutomic.syncthingandroid.model.Connection;
+import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
@@ -12,7 +10,6 @@ import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.service.RestApi;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +51,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public void getConnections(OnResultListener1<Map<String, Connection>> listener) {
+    public void getConnections(OnResultListener1<Map<String, Connections>> listener) {
         throw new UnsupportedOperationException();
     }
 
