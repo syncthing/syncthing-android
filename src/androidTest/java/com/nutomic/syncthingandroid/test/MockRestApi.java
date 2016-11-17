@@ -51,7 +51,7 @@ public class MockRestApi extends RestApi {
     }
 
     @Override
-    public void getConnections(OnResultListener1<Map<String, Connections>> listener) {
+    public void getConnections(OnResultListener1<Connections> listener) {
         throw new UnsupportedOperationException();
     }
 
