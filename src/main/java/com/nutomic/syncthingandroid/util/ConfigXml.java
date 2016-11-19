@@ -122,17 +122,6 @@ public class ConfigXml {
                 changed = true;
             }
 
-            // FileObserver does not work correctly on Android Marshmallow.
-            // Nougat seems to have the same problem in emulator, but we should check this again.
-            // https://code.google.com/p/android/issues/detail?id=189231
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!r.getAttribute("rescanIntervalS").equals("60")) {
-                    Log.i(TAG, "Set 60s rescan interval on folder " + r.getAttribute("id"));
-                    r.setAttribute("rescanIntervalS", "60");
-                    changed = true;
-                }
-            }
-
             if (applyHashers(r)) {
                 changed = true;
             }
