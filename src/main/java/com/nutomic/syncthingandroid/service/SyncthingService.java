@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
@@ -26,6 +27,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
@@ -103,6 +105,8 @@ public class SyncthingService extends Service implements
     private final LinkedList<FolderObserver> mObservers = new LinkedList<>();
 
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
+
+    private final NetworkReceiver mNetworkReceiver = new NetworkReceiver();
 
     /**
      * Callback for when the Syncthing web interface becomes first available after service start.
@@ -306,6 +310,13 @@ public class SyncthingService extends Service implements
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
+        // Android 7 ignores network receiver that was set in manifest
+        // https://github.com/syncthing/syncthing-android/issues/783
+        // https://developer.android.com/about/versions/nougat/android-7.0-changes.html#bg-opt
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            registerReceiver(mNetworkReceiver,
+                    new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }
         new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
@@ -397,6 +408,8 @@ public class SyncthingService extends Service implements
         sp.unregisterOnSharedPreferenceChangeListener(this);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             unregisterReceiver(mPowerSaveModeChangedReceiver);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N)
+            unregisterReceiver(mNetworkReceiver);
     }
 
     private void shutdown() {
