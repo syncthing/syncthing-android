@@ -333,14 +333,13 @@ public class FolderActivity extends SyncthingActivity
         mFolder = new Folder();
         mFolder.id = getIntent().getStringExtra(EXTRA_FOLDER_ID);
         mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M) {
             // Scan every 3 days (in case inotify dropped some changes)
             mFolder.rescanIntervalS = 259200;
         }
         else {
-            // FileObserver does not work correctly on Android Marshmallow.
-            // Nougat seems to have the same problem in emulator, but we should check this again.
-            // https://code.google.com/p/android/issues/detail?id=189231
+            // FileObserver is broken on Marshmallow.
+            // https://github.com/syncthing/syncthing-android/issues/787
             mFolder.rescanIntervalS = 60;
         }
         mFolder.versioning = new Folder.Versioning();
