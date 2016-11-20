@@ -102,9 +102,8 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">設定</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Syncthing 選項</string>
   <string name="always_run_in_background">永遠在背景執行</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">根據下列的偏好設定，Syncthing 會永遠在背景執行。</string>
@@ -113,7 +112,6 @@
   <string name="sync_only_charging">只在充電時同步</string>
   <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
   <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
-  <string name="category_syncthing_options">Syncthing 選項</string>
   <string name="listen_address">同步通訊協定監聽位址</string>
   <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
   <string name="max_send_kbps">上傳速率限制(KiB/s)</string>

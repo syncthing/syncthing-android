@@ -28,6 +28,7 @@
   <string name="toast_write_storage_permission_required">Skriverettigheter til lagringsenheten kreves av denne appen</string>
   <string name="device_rejected">Enheten %1$s ønsker å koble til</string>
   <string name="folder_rejected">Enheten %1$s ønsker å dele mappen %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Senere</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Shown if no folders exist-->
@@ -126,9 +127,9 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webgrensesnitt</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Innstillinger</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Valg for Syncthing</string>
+  <string name="category_experimental">Eksperimentelt</string>
   <string name="always_run_in_background">Kjør alltid i bakgrunnen</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing kjører alltid i bakgrunnen, i henhold til valgene nedenfor.</string>
@@ -149,7 +150,6 @@
     <item>Lav prioritet</item>
     <item>Ingen</item>
   </string-array>
-  <string name="category_syncthing_options">Valg for Syncthing</string>
   <string name="device_name">Enhetsnavn</string>
   <string name="listen_address">Lytteadresser for synkeprotokoll</string>
   <string name="max_recv_kbps">Grense for innkommende trafikk (KiB/s)</string>
@@ -157,14 +157,12 @@
   <string name="global_announce_enabled">Global søking</string>
   <string name="local_announce_enabled">Lokal søking</string>
   <string name="enable_nat_traversal">Slå på NAT traversering</string>
-  <string name="global_announce_server">Global søketjener</string>
   <string name="enable_relaying">Aktiver relésending</string>
   <string name="usage_reporting">Anonym bruksrapportering</string>
   <string name="gui_address">GUI Lytteadresser</string>
   <string name="gui_user">GUI Autentiseringsbruker</string>
   <string name="gui_password">GUI Autentiseringspassord</string>
   <string name="export_config">Eksporter innstillinger</string>
-  <string name="category_experimental">Eksperimentelt</string>
   <string name="keep_wakelock_while_binary_running">Hold prosessoren våken mens Syncthing kjører</string>
   <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillingen dersom du opplever uventede frakoblinger mens enheten går på batteri. Dette vil medføre økt batteriforbruk.</string>
   <string name="run_as_foreground_service">Kjør tjenesten med forgrunnsprioritet</string>

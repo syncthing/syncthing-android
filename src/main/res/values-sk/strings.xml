@@ -26,6 +26,7 @@
   <string name="off">vypnuté</string>
   <string name="open_website">Otvoriť Webovú Stránku</string>
   <string name="toast_write_storage_permission_required">Táto aplikácia potrebuje práva pre zápis na úložisko</string>
+  <string name="dialog_disable_battery_optimization_later">Neskôr</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáre</string>
   <!--Shown if no folders exist-->
@@ -118,9 +119,8 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webové GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Nastavenia</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Nastavenia Syncthing</string>
   <string name="always_run_in_background">Vždy bežať na pozadí</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing vždy beží na pozadí, podla nasledovných nastavení.</string>
@@ -138,14 +138,12 @@
     <item>S nízkou prioritou</item>
     <item>Žiadne</item>
   </string-array>
-  <string name="category_syncthing_options">Nastavenia Syncthing</string>
   <string name="device_name">Názov Zariadenia</string>
   <string name="listen_address">Adresa pre Sync Protokol</string>
   <string name="max_recv_kbps">Limit Rýchlosti Sťahovania (KiB/s)</string>
   <string name="max_send_kbps">Limit Rýchlosti Odosielania (KiB/s)</string>
   <string name="global_announce_enabled">Globálne Vyhľadávanie</string>
   <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
-  <string name="global_announce_server">Adresa Serveru pre Globálne Vyhľadávanie</string>
   <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
   <string name="gui_address">Adresa pre GUI</string>
   <string name="gui_user">Užívateľské Meno pre GUI</string>

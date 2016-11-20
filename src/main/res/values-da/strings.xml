@@ -58,8 +58,6 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <!--SettingsFragment-->
-  <!--Activity title-->
-  <!--Preference title-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
   <!--Dialog shown before config export-->

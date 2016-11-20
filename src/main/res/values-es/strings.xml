@@ -29,6 +29,7 @@
   <string name="toast_write_storage_permission_required">Esta app necesita permiso para escribir al sistema de almacenamiento</string>
   <string name="device_rejected">El dispositivo %1$s desea conectar</string>
   <string name="folder_rejected">El dispositivo %1$s desea compartir la carpeta %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Después</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Shown if no folders exist-->
@@ -128,9 +129,9 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Ajustes</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Opciones de Syncthing</string>
+  <string name="category_experimental">Experimental</string>
   <string name="always_run_in_background">Ejecutar siempre en segundo plano</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing se ejecutará siempre en segundo plano, de acuerdo a la siguiente configuración.</string>
@@ -152,14 +153,12 @@
     <item>Ninguna</item>
   </string-array>
   <string name="device_name">Nombre del dispositivo</string>
-  <string name="category_syncthing_options">Opciones de Syncthing</string>
   <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
   <string name="max_recv_kbps">Límite de tráfico de entrada (KiB/s)</string>
   <string name="max_send_kbps">Límite de tráfico de salida (KiB/s)</string>
   <string name="global_announce_enabled">Descubrimiento global</string>
   <string name="local_announce_enabled">Descubrimiento local</string>
   <string name="enable_nat_traversal">Permitir NAT Traversal</string>
-  <string name="global_announce_server">Servidor de descubrimiento global</string>
   <string name="enable_relaying">Activar retransmisión (Relaying)</string>
   <string name="usage_reporting">Informe de uso anónimo</string>
   <string name="gui_address">Direcciones de escucha de la interfaz</string>

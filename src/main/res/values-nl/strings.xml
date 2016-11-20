@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing is een open-bron-bestandssynchronisatietoepassing.\n\
+Om gegevens met andere apparaten te delen moet je hun unieke apparaats-ID toevoegen aan de lijst met apparaten. Nadien kan je kiezen welke mappen je met welke apparaten wil delen.\n\
+Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="cont">Verder</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
   <string name="device_rejected">Apparaat %1$s wil verbinding maken</string>
   <string name="folder_rejected">Apparaat %1$s wil map %2$s delen</string>
+  <string name="dialog_disable_battery_optimization_later">Later</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Instellingen</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">Uitvoervoorwaarden</string>
+  <string name="category_behaviour">Gedrag</string>
+  <string name="category_syncthing_options">Syncthing-opties</string>
+  <string name="category_backup">Back-up</string>
+  <string name="category_debug">Debug</string>
+  <string name="category_experimental">Experimenteel</string>
   <string name="always_run_in_background">Altijd draaien in achtergrond</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing draait altijd in de achtergrond, volgens de hieronder weergegeven voorkeuren.</string>
@@ -151,7 +159,6 @@
     <item>Lage prioriteit</item>
     <item>Geen</item>
   </string-array>
-  <string name="category_syncthing_options">Syncthing-opties</string>
   <string name="device_name">Apparaatnaam</string>
   <string name="listen_address">Synchronisatieprotocol luister-adressen</string>
   <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">Globale ontdekking</string>
   <string name="local_announce_enabled">Lokale ontdekking</string>
   <string name="enable_nat_traversal">NAT-traversal inschakelen</string>
-  <string name="global_announce_server">Globale ontdekkingsserver</string>
+  <string name="global_announce_server">Globale ontdekkingsservers</string>
   <string name="enable_relaying">Relayen inschakelen</string>
   <string name="usage_reporting">Anoniem gebruiksrapportage</string>
   <string name="gui_address">GUI luister-adressen</string>
   <string name="gui_user">GUI-authenticatie gebruiker</string>
   <string name="gui_password">GUI-authenticatie wachtwoord</string>
   <string name="export_config">Configuratie exporteren</string>
-  <string name="category_experimental">Experimenteel</string>
   <string name="keep_wakelock_while_binary_running">Laat de CPU niet slapen wanneer Syncthing wordt uitgevoerd</string>
   <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als je onverwacht losgekoppeld wordt wanneer je op batterij werkt. Dit zal leiden tot verhoogd batterijverbruik.</string>
   <string name="run_as_foreground_service">Dienst uitvoeren met voorgrondprioriteit</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug-opties</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Enkel 0-9, a-z en \',\' zijn toegestaan in STTRACE-opties</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->

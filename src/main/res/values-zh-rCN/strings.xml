@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">欢迎使用 Android 版 Syncthing</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing 是一个开源的文件同步处理应用程序。
+若要与其他设备分享数据，你需要添加他们的唯一设备 ID 到设备列表。之后你就可以选择要分享哪些文件夹至该设备上。
+请通过 GitHub 报告任何你遇到的问题。</string>
   <string name="cont">继续</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
   <string name="device_rejected">%1$s 想要连接</string>
   <string name="folder_rejected">设备 %1$s 想要分享文件夹 %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">稍后重启</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">文件夹</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">网页管理页面</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">设置</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">运行条件</string>
+  <string name="category_behaviour">行为</string>
+  <string name="category_syncthing_options">同步设置</string>
+  <string name="category_backup">备份</string>
+  <string name="category_debug">调试</string>
+  <string name="category_experimental">实验性</string>
   <string name="always_run_in_background">总是在后台运行</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing 会根据下方的偏好运行在后台</string>
@@ -151,7 +159,6 @@
     <item>低优先级</item>
     <item>隐藏</item>
   </string-array>
-  <string name="category_syncthing_options">同步设置</string>
   <string name="device_name">设备名称</string>
   <string name="listen_address">同步协议监听地址</string>
   <string name="max_recv_kbps">下载限速（KiB/s）</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">在互联网中寻找节点</string>
   <string name="local_announce_enabled">在局域网中寻找节点</string>
   <string name="enable_nat_traversal">启用 NAT 穿透</string>
-  <string name="global_announce_server">用以在互联网上寻找节点的发布服务器地址</string>
+  <string name="global_announce_server">全局发现服务器</string>
   <string name="enable_relaying">启用中继</string>
   <string name="usage_reporting">匿名使用报告</string>
   <string name="gui_address">管理页监听地址</string>
   <string name="gui_user">管理页认证用户</string>
   <string name="gui_password">管理页认证密码</string>
   <string name="export_config">导出设置</string>
-  <string name="category_experimental">实验性</string>
   <string name="keep_wakelock_while_binary_running">当 Syncthing 正在运行时保持 CPU 唤醒</string>
   <string name="keep_wakelock_while_binary_running_summary">使用此设置如果您在电池上运行时遇到意外的断开连接。这将会导致电量消耗的增加。</string>
   <string name="run_as_foreground_service">以前台优先级运行服务</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">调试选项</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE 选项仅允许 0-9、a-z 与半角逗号“,”</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->

@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Syncthing for Android にようこそ</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing は、オープンソースのファイル同期アプリケーションです。\n\
+他のデバイスとデータを共有するには、デバイスリストにその一意のデバイス ID を追加する必要があります。その後で、そのデバイスと共有するフォルダーを選択することができます。\n\
+発生した問題は何でも Github で報告してください。</string>
   <string name="cont">続行</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
+  <string name="dialog_disable_battery_optimization_later">後で</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">設定</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">実行条件</string>
+  <string name="category_behaviour">動作</string>
+  <string name="category_syncthing_options">同期オプション</string>
+  <string name="category_backup">バックアップ</string>
+  <string name="category_debug">デバッグ</string>
+  <string name="category_experimental">実験的</string>
   <string name="always_run_in_background">常にバックグラウンドで実行</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">以下のプリファレンスに応じて、常にバックグラウンドで実行されます。</string>
@@ -151,7 +159,6 @@
     <item>優先度低</item>
     <item>なし</item>
   </string-array>
-  <string name="category_syncthing_options">同期オプション</string>
   <string name="device_name">デバイス名</string>
   <string name="listen_address">同期プロトコル リスンアドレス</string>
   <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">グローバル探索</string>
   <string name="local_announce_enabled">ローカル探索</string>
   <string name="enable_nat_traversal">NAT トラバーサルを有効にする</string>
-  <string name="global_announce_server">グローバル探索サーバー</string>
+  <string name="global_announce_server">グローバル検索サーバー</string>
   <string name="enable_relaying">リレーを有効にする</string>
   <string name="usage_reporting">匿名使用状況レポート</string>
   <string name="gui_address">GUI リスンアドレス</string>
   <string name="gui_user">GUI 認証ユーザー</string>
   <string name="gui_password">GUI 認証パスワード</string>
   <string name="export_config">設定をエクスポート</string>
-  <string name="category_experimental">実験的</string>
   <string name="keep_wakelock_while_binary_running">Syncthing の実行中、CPU をオンのままにする</string>
   <string name="keep_wakelock_while_binary_running_summary">バッテリーで動作しているときに予期しない接続の切断が発生した場合、この設定を使用します。これは、バッテリー消費を増やします。</string>
   <string name="run_as_foreground_service">フォアグラウンドの優先度でサービスを実行する</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">デバッグオプション</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">STTRACE オプションでは、0-9、a-z および \',\' のみ使用できます。</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">データベースをリセット</string>
   <!--Syncthing was reset-->

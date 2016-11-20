@@ -29,6 +29,7 @@
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
   <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Później</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
   <!--Shown if no folders exist-->
@@ -128,9 +129,9 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfejs internetowy</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Ustawienia</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Ustawienia Syncthing</string>
+  <string name="category_experimental">Eksperymentalne</string>
   <string name="always_run_in_background">Działanie w tle</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Uruchamia program w tle zgodnie z poniższymi preferencjami</string>
@@ -145,7 +146,6 @@
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
-  <string name="category_syncthing_options">Ustawienia Syncthing</string>
   <string name="device_name">Nazwa urządzenia</string>
   <string name="listen_address">Adres nasłuchiwania protokołu</string>
   <string name="max_recv_kbps">Limit pobierania (KiB/s)</string>
@@ -153,7 +153,6 @@
   <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
   <string name="enable_nat_traversal">Trawersowanie NAT</string>
-  <string name="global_announce_server">Serwer globalnego wyszukiwania</string>
   <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="gui_address">Adres nasłuchiwania</string>
@@ -161,7 +160,6 @@
   <string name="gui_password">Hasło</string>
   <string name="export_config">Eksportuj ustawienia</string>
   <string name="keep_wakelock_while_binary_running">Utrzymywanie wybudzonego CPU podczas działania</string>
-  <string name="category_experimental">Eksperymelne!</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
   <string name="run_as_foreground_service">Pierwszoplanowy priorytet usługi</string>
   <string name="use_tor_title">Korzystanie z Tor</string>

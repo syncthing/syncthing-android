@@ -28,6 +28,7 @@
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
   <string name="device_rejected">Thiết bị %1$s muốn kết nối</string>
   <string name="folder_rejected">Thiết bị %1$s muốn chia sẻ thư mục %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Để sau</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Các thư mục</string>
   <!--Shown if no folders exist-->
@@ -124,9 +125,9 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">GUI web</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Cài đặt</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Tuỳ chọn Syncthing</string>
+  <string name="category_experimental">Thực nghiệm</string>
   <string name="always_run_in_background">Luôn chạy nền</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing luôn chạy nền theo như tuỳ chỉnh bên dưới.</string>
@@ -146,20 +147,17 @@
     <item>Ưu tiên thấp</item>
     <item>Không thông báo</item>
   </string-array>
-  <string name="category_syncthing_options">Tuỳ chọn Syncthing</string>
   <string name="device_name">Tên thiết bị</string>
   <string name="listen_address">Đồng bộ các đ.chỉ lắng nghe giao thức</string>
   <string name="max_recv_kbps">Giới hạn t.độ đầu vào (KiB/s)</string>
   <string name="max_send_kbps">Giới hạn t.độ đầu ra (KiB/s)</string>
   <string name="global_announce_enabled">Dò tìm toàn cầu</string>
   <string name="local_announce_enabled">Dò tìm cục bộ</string>
-  <string name="global_announce_server">Máy chủ dò tìm toàn cầu</string>
   <string name="usage_reporting">Báo cáo sử dụng ẩn danh</string>
   <string name="gui_address">Các đ.chỉ lắng nghe GUI</string>
   <string name="gui_user">Người dùng xác thực GUI</string>
   <string name="gui_password">Mật khẩu xác thực GUI</string>
   <string name="export_config">Xuất cấu hình</string>
-  <string name="category_experimental">Thực nghiệm</string>
   <string name="keep_wakelock_while_binary_running">Giữ CPU thức khi Syncthing đang chạy</string>
   <string name="keep_wakelock_while_binary_running_summary">Dùng tuỳ chỉnh này nếu bạn bị mất kết nối bất ngờ khi đang dùng pin. Nó sẽ tiêu thụ nhiều pin hơn.</string>
   <!--Dialog shown before config export-->

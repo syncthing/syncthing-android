@@ -28,6 +28,7 @@
   <string name="toast_write_storage_permission_required">Esta aplicación requiere permiso para escribir en el almacenamiento</string>
   <string name="device_rejected">El dispositivo %1$s quiere conectarse</string>
   <string name="folder_rejected">El dispositivo %1$s quiere compartir la carpeta %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Después</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Shown if no folders exist-->
@@ -124,9 +125,9 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz Web</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Configuración</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Opciones de Syncthing</string>
+  <string name="category_experimental">Experimental</string>
   <string name="always_run_in_background">Siempre ejecutar en el fondo</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing siempre se ejecuta en el fondo, de acuerdo a las preferencias debajo.</string>
@@ -146,20 +147,17 @@
     <item>Baja Prioridad</item>
     <item>Ninguna</item>
   </string-array>
-  <string name="category_syncthing_options">Opciones de Syncthing</string>
   <string name="device_name">Nombre del dispositivo</string>
   <string name="listen_address">Direcciones de escucha del Protocolo de Sincronización</string>
   <string name="max_recv_kbps">Límite de Tasa de Entrada (KiB/s)</string>
   <string name="max_send_kbps">Límite de Tasa de Salida (KiB/s)</string>
   <string name="global_announce_enabled">Descubrimiento Global</string>
   <string name="local_announce_enabled">Descubrimiento Local</string>
-  <string name="global_announce_server">Servidor de Descubrimiento Global</string>
   <string name="usage_reporting">Reporte de uso anónimo</string>
   <string name="gui_address">Direcciones de escucha de la interfaz gráfica</string>
   <string name="gui_user">Autenticación del Usuario en la Interfaz Gráfica</string>
   <string name="gui_password">Autenticación de la Contraseña en la Interfaz Gráfica</string>
   <string name="export_config">Exportar Configuración</string>
-  <string name="category_experimental">Experimental</string>
   <string name="keep_wakelock_while_binary_running">Mantener el CPU encendido mientras Syncthing está en ejecución</string>
   <string name="keep_wakelock_while_binary_running_summary">Use estos ajustes si experimenta desconexiones inesperadas mientras opera con la batería. Esto resultará en un consumo elevado de batería.</string>
   <!--Dialog shown before config export-->

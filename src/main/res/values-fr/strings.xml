@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing est une application, à code source ouvert, de synchronisation de fichiers.\n\
+Pour partager des données avec d\'autres appareils, vous devez ajouter leur identifiant unique à la liste des appareils. Ensuite, vous pouvez sélectionner quels dossiers partager avec quels appareils..\n\
+S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</string>
   <string name="cont">Continuer</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
   <string name="device_rejected">L\'appareil %1$s veut se connecter</string>
   <string name="folder_rejected">L\'appareil %1$s veut partager %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Plus tard</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Partages</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface WEB</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Paramètres</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">Conditions d\'exécution</string>
+  <string name="category_behaviour">Comportement</string>
+  <string name="category_syncthing_options">Options Syncthing</string>
+  <string name="category_backup">Sauvegarde</string>
+  <string name="category_debug">Debug</string>
+  <string name="category_experimental">Expérimental</string>
   <string name="always_run_in_background">Fonctionner en tâche de fond.</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing continue à fonctionner en tâche de fond, selon les réglages dans les paramètres.</string>
@@ -151,7 +159,6 @@
     <item>Discrète</item>
     <item>Aucune</item>
   </string-array>
-  <string name="category_syncthing_options">Options Syncthing</string>
   <string name="device_name">Nom de l\'appareil</string>
   <string name="listen_address">Adresse d\'écoute pour la synchro</string>
   <string name="max_recv_kbps">Limite du débit de réception (Ko/s)</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">Recherche globale</string>
   <string name="local_announce_enabled">Recherche locale</string>
   <string name="enable_nat_traversal">Activer transfert d\'adresses (NAT)</string>
-  <string name="global_announce_server">Serveur de découverte globale</string>
+  <string name="global_announce_server">Serveurs de découverte globale</string>
   <string name="enable_relaying">Activer le relayage</string>
   <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="gui_address">Adresse pour l\'interface WEB</string>
   <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
   <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
   <string name="export_config">Exporter la configuration</string>
-  <string name="category_experimental">Expérimental</string>
   <string name="keep_wakelock_while_binary_running">Garder le CPU en éveil quand Syncthing fonctionne.</string>
   <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>
   <string name="run_as_foreground_service">Fonctionner avec prioriré de premier plan</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Options de débuggage</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Seulement 0-9, a-z et \',\' sont autorisés dans les options STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Remise à zéro de la base de données</string>
   <!--Syncthing was reset-->

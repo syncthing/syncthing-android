@@ -24,6 +24,7 @@
   <string name="off">kikapcsolva</string>
   <string name="open_website">Weblap megnyitása</string>
   <string name="toast_write_storage_permission_required">Ehhez az alkalmazáshoz írási jogra van szükség.</string>
+  <string name="dialog_disable_battery_optimization_later">Később</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappák</string>
   <!--Shown if no folders exist-->
@@ -109,9 +110,8 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Beállítások</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Syncthing beállításai</string>
   <string name="always_run_in_background">Mindig fusson a háttérben</string>
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
@@ -122,11 +122,9 @@
   <string name="use_root_title">Syncthing futtatása Superuser-ként</string>
   <string name="notification_type_title">Értesítés</string>
   <string name="notification_type_summary">Értesítés típusának kiválasztása</string>
-  <string name="category_syncthing_options">Syncthing beállításai</string>
   <string name="device_name">Eszköz név</string>
   <string name="global_announce_enabled">Globális felfedezés</string>
   <string name="local_announce_enabled">Helyi felfedezés</string>
-  <string name="global_announce_server">Globális felfedező szerver</string>
   <string name="export_config">Beállítások mentése</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->

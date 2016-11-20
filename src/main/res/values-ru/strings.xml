@@ -28,6 +28,7 @@
   <string name="toast_write_storage_permission_required">Приложению требуется право на запись</string>
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
   <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Позже</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -125,9 +126,8 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Веб-интерфейс</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Настройки</string>
-  <!--Preference title-->
+  <string name="category_syncthing_options">Настройки устройства</string>
   <string name="always_run_in_background">Фоновый режим</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Автозапуск при перезагрузке устройства и работа в фоне</string>
@@ -148,7 +148,6 @@
     <item>Низкий</item>
     <item>Никогда</item>
   </string-array>
-  <string name="category_syncthing_options">Настройки устройства</string>
   <string name="device_name">Имя устройства</string>
   <string name="listen_address">Адрес Ожидания Протокола Синхронизации</string>
   <string name="max_recv_kbps">Лимит Скачивания (КБ/с)</string>
@@ -156,7 +155,6 @@
   <string name="global_announce_enabled">Глобальное Обнаружение</string>
   <string name="local_announce_enabled">Локальное Обнаружение</string>
   <string name="enable_nat_traversal">Включить NAT-T обход</string>
-  <string name="global_announce_server">Глобальный сервер обнаружения</string>
   <string name="enable_relaying">Включить релеи</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="gui_address">Адрес Ожидания GUI</string>

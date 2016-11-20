@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Vítejte v Syncthing pro Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing je synchronizační aplikace s otevřeným zdrojovým kódem.\n\
+Pro sdílení dat s dalšími přístroji je třeba přidat jejich unikátní ID do seznamu. Poté lze určovat, které adresáře jsou sdíleny s kterými přístroji.\n\
+Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="cont">Pokračovat</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
   <string name="device_rejected">Přístroj %1$s žádá o připojení</string>
   <string name="folder_rejected">Přístroj %1$s chce sdílet adresář %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Později</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Syncthing GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Nastavení</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">Podmínky spuštění</string>
+  <string name="category_behaviour">Chování</string>
+  <string name="category_syncthing_options">Nastavení Syncthing</string>
+  <string name="category_backup">Záloha</string>
+  <string name="category_debug">Ladění</string>
+  <string name="category_experimental">Experimentální</string>
   <string name="always_run_in_background">Vždy spuštěné na pozadí</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing poběží vždy v pozadí, podle nastavení níže.</string>
@@ -151,7 +159,6 @@
     <item>Nízká priorita</item>
     <item>Źádné</item>
   </string-array>
-  <string name="category_syncthing_options">Nastavení Syncthing</string>
   <string name="device_name">Jméno přístroje</string>
   <string name="listen_address">Adresy naslouchání protokolu synchronizace</string>
   <string name="max_recv_kbps">Omezení příchozí rychlosti (KiB/s)</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">Globální oznamování</string>
   <string name="local_announce_enabled">Místní oznamování</string>
   <string name="enable_nat_traversal">Povolit NAT traversal</string>
-  <string name="global_announce_server">Server globálního oznamování</string>
+  <string name="global_announce_server">Servery globálního oznamování</string>
   <string name="enable_relaying">Povolit relaying</string>
   <string name="usage_reporting">Anonymní hlášení o používání</string>
   <string name="gui_address">Adresy naslouchání GUI</string>
   <string name="gui_user">Přihlašovací jméno pro GUI</string>
   <string name="gui_password">Přihlašovací heslo pro GUI</string>
   <string name="export_config">Zálohovat nastavení</string>
-  <string name="category_experimental">Experimentální</string>
   <string name="keep_wakelock_while_binary_running">Udržovat CPU aktivní pokud běží Syncthing</string>
   <string name="keep_wakelock_while_binary_running_summary">Použijte toto nastavení pokud zaznamenáváte neočekávaná ukončení spojení při běhu na baterii. Toto bude mít za následek vyšší spotřebu energie.</string>
   <string name="run_as_foreground_service">Spustit službu na popředí</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Možnosti ladění</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">V STTRACE jsou povoleny pouze znaky \'0-9\', \'a-z\' a \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Resetovat databázi</string>
   <!--Syncthing was reset-->

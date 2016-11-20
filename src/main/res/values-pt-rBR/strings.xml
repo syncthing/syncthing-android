@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Bem vindo(a) ao Syncthing for Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.\n\
+Para compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará\n\
+Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
   <string name="cont">Continuar</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,6 +32,7 @@
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
   <string name="device_rejected">O dispositivo %1$s quer se conectar</string>
   <string name="folder_rejected">O dispostivo %1$s quer compartilhar a pasta %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Depois</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Shown if no folders exist-->
@@ -128,9 +132,13 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interface web</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Configurações</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">Condições de execução</string>
+  <string name="category_behaviour">Comportamento</string>
+  <string name="category_syncthing_options">Opções do Syncthing</string>
+  <string name="category_backup">Backup</string>
+  <string name="category_debug">Depuração</string>
+  <string name="category_experimental">Configurações experimentais</string>
   <string name="always_run_in_background">Sempre rodar em segundo plano</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">O Syncthing sempre rodará em segundo plano de acordo com as preferências abaixo.</string>
@@ -151,7 +159,6 @@
     <item>Baixa prioridade</item>
     <item>Nenhuma</item>
   </string-array>
-  <string name="category_syncthing_options">Opções do Syncthing</string>
   <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
   <string name="max_recv_kbps">Limite de velocidade de recepção (KiB/s)</string>
@@ -159,14 +166,13 @@
   <string name="global_announce_enabled">Descoberta global</string>
   <string name="local_announce_enabled">Descoberta local</string>
   <string name="enable_nat_traversal">Habilitar NAT</string>
-  <string name="global_announce_server">Descoberta global</string>
+  <string name="global_announce_server">Servidores de descoberta global</string>
   <string name="enable_relaying">Habilitar retransmissão</string>
   <string name="usage_reporting">Relatório anônimo de uso</string>
   <string name="gui_address">Endereços de escuta da interface</string>
   <string name="gui_user">Nome de usuário da interface</string>
   <string name="gui_password">Senha da interface</string>
   <string name="export_config">Exportar configuração</string>
-  <string name="category_experimental">Configurações experimentais</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada</string>
   <string name="keep_wakelock_while_binary_running_summary">Marque esta opção se você observar desconexões inesperadas enquanto a bateria do dispositivo não está sendo carregada. Isto resultará em maior uso da bateria.</string>
   <string name="run_as_foreground_service">Rodar serviço com prioridade de primeiro plano</string>
@@ -187,6 +193,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções de depuração</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Somente os caracteres 0-9, a-z e vírgula são permitidos nas opções de STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Limpar banco de dados</string>
   <!--Syncthing was reset-->

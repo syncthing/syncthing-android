@@ -32,6 +32,7 @@
   <string name="toast_write_storage_permission_required">Απαιτείται η άδεια αποθήκευσης δεδομένων για αυτή την εφαρμογή</string>
   <string name="device_rejected">Η συσκευή %1$s επιθυμεί να συνδεθεί</string>
   <string name="folder_rejected">Η συσκευή %1$s επιθυμεί να διαμοιραστεί τον φάκελο %2$s</string>
+  <string name="dialog_disable_battery_optimization_later">Αργότερα</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Φάκελοι</string>
   <!--Shown if no folders exist-->
@@ -49,14 +50,14 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Αποσυνδεδεμένο</string>
   <!--Title for current download rate-->
-  <string name="download_title">Κατέβασμα</string>
+  <string name="download_title">Λήψη</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Ανέβασμα</string>
+  <string name="upload_title">Αποστολή</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Κατέβασμα:\u0020</string>
+  <string name="download_title_colon">Λήψη:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Ανέβασμα:\u0020</string>
+  <string name="upload_title_colon">Αποστολή:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Χρήση CPU</string>
   <!--Title for current RAM usage-->
@@ -131,12 +132,16 @@
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
   <!--SettingsFragment-->
-  <!--Activity title-->
   <string name="settings_title">Ρυθμίσεις</string>
-  <!--Preference title-->
+  <string name="category_run_conditions">Συνθήκες εκτέλεσης</string>
+  <string name="category_behaviour">Συμπεριφορά</string>
+  <string name="category_syncthing_options">Επιλογές Syncthing</string>
+  <string name="category_backup">Αντίγραφο ασφαλείας</string>
+  <string name="category_debug">Αποσφαλμάτωση</string>
+  <string name="category_experimental">Πειραματικά</string>
   <string name="always_run_in_background">Να εκτελείται πάντα στο παρασκήνιο</string>
   <!--Preference summary in case it is enabled-->
-  <string name="always_run_in_background_enabled">Το Syncthing θα εκτελείται πάντα στο παρασκήνιο βάσει των παρακάτω ρυθμίσεων.</string>
+  <string name="always_run_in_background_enabled">Το Syncthing θα εκτελείται συνεχώς στο παρασκήνιο σύμφωνα με τις παρακάτω ρυθμίσεις.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Το Syncthing θα εκτελείται μόνο αν εκκινηθεί από τον χρήστη και μπορεί να τερματιστεί από το κουμπί του μενού.</string>
   <string name="sync_only_charging">Συγχρονισμός μόνο κατά τη φόρτιση.</string>
@@ -161,7 +166,7 @@
   <string name="global_announce_enabled">Καθολική ανεύρεση</string>
   <string name="local_announce_enabled">Τοπική ανεύρεση</string>
   <string name="enable_nat_traversal">Ενεργοποίηση διάσχισης NAT</string>
-  <string name="global_announce_server">Διακομιστής καθολικής ανεύρεσης κόμβων</string>
+  <string name="global_announce_server">Διακομιστές καθολικής ανεύρεσης κόμβων</string>
   <string name="enable_relaying">Ενεργοποίηση αναμετάδοσης</string>
   <string name="usage_reporting">Ανώνυμη αναφορά δεδομένων χρήσης</string>
   <string name="gui_address">Διευθύνσεις ακρόασης του GUI</string>
@@ -213,7 +218,7 @@
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Έκδοση Syncthing</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Έκδοσης Syncthing-Android</string>
+  <string name="app_version_title">Έκδοση Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Επιλογέας φακέλων</string>
@@ -249,7 +254,7 @@
   <string name="syncthing_active">Το Syncthing εκτελείται</string>
   <string name="syncthing_active_foreground">Η υπηρεσία εκτελείται με προτεραιότητα προσκηνίου</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">Η ιεραρχία των φακέλων έχει υπερβολικό βάθος. Ελέγξτε αν υπάρχουν κυκλικοί συμβολικοί σύνδεσμοι</string>
+  <string name="toast_folder_observer_stack_overflow">Η ιεραρχία των φακέλων έχει υπερβολικά μεγάλο βάθος. Ελέγξτε αν υπάρχουν κυκλικοί συμβολικοί σύνδεσμοι</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Η δημιουργία των ρυθμίσεων του Syncthing απέτυχε. Παρακαλώ ελέγξτε την καταγραφή συμβάντων.</string>
   <!--Label of the default folder created of first start (camera folder).-->
