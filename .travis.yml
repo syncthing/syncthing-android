@@ -5,10 +5,10 @@ jdk: oraclejdk8
 # Install Android SDK
 android:
   components:
+    - android-25
     - tools
     - platform-tools
     - build-tools-25.0.0
-    - android-25
     - extra-android-m2repository
 
 # Install Golang
@@ -28,6 +28,6 @@ cache:
 script:
   # Lint fails because travis doesn't have platform-tools 24
   # https://github.com/travis-ci/travis-ci/issues/6699
-  #- ./gradlew lint
+  - ./gradlew lint
   - ./gradlew buildNative assembleDebug
   - ./gradlew compileFatDebugAndroidTestSources
