@@ -27,6 +27,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew clean lint buildNative assembleDebug compileFatDebugAndroidTestSources
+  - ./gradlew clean lint
   - ./gradlew buildNative assembleDebug
   - ./gradlew compileFatDebugAndroidTestSources
