@@ -5,10 +5,10 @@ jdk: oraclejdk8
 # Install Android SDK
 android:
   components:
+    - build-tools-25.0.0
     - android-25
     - tools
     - platform-tools
-    - build-tools-25.0.0
     - extra-android-m2repository
 
 # Install Golang
