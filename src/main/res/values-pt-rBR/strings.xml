@@ -32,7 +32,11 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
   <string name="device_rejected">O dispositivo %1$s quer se conectar</string>
   <string name="folder_rejected">O dispostivo %1$s quer compartilhar a pasta %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
+  <string name="dialog_disable_battery_optimization_message">O Android poderá parar a sincronização após algum tempo. Para evitar isso, desligue a otimização de bateria</string>
   <string name="dialog_disable_battery_optimization_later">Depois</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Shown if no folders exist-->

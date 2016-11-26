@@ -32,7 +32,11 @@
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
+  <string name="dialog_disable_battery_optimization_title">バッテリー最適化</string>
+  <string name="dialog_disable_battery_optimization_message">しばらくすると Android は同期を停止することがあります。 これを防ぐには、バッテリの最適化をオフにしてください</string>
   <string name="dialog_disable_battery_optimization_later">後で</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">再度表示しない</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Syncthing のためにオフにします</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Shown if no folders exist-->

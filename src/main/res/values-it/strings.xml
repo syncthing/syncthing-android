@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Benvenuto in Syncthing per Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing è un\'applicazione open-source di sincronizzazione file.\n\
+Per condividere i dati con altri dispositivi, è necessario aggiungere il rispettivo ID Dispositivo nell\'elenco dei dispositivi. Successivamente è possibile selezionare quali cartelle condividere con quali dispositivi.\n\
+Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="cont">Continua</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,7 +32,11 @@
   <string name="toast_write_storage_permission_required">E\' richiesto il permesso di scrittura per questa app</string>
   <string name="device_rejected">Dispositivo %1$s vuole connettersi</string>
   <string name="folder_rejected">Il dispositivo %1$s desidera condividere la cartella %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Ottimizzazione della batteria</string>
+  <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria</string>
   <string name="dialog_disable_battery_optimization_later">Più tardi</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Non mostrare più</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Spegnere per Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Cartelle</string>
   <!--Shown if no folders exist-->
@@ -130,7 +137,11 @@
   <string name="web_gui_title">Interfaccia Web</string>
   <!--SettingsFragment-->
   <string name="settings_title">Impostazioni</string>
+  <string name="category_run_conditions">Condizioni di funzionamento</string>
+  <string name="category_behaviour">Comportamento</string>
   <string name="category_syncthing_options">Opzioni di Syncthing</string>
+  <string name="category_backup">Backup</string>
+  <string name="category_debug">Debug</string>
   <string name="category_experimental">Sperimentale</string>
   <string name="always_run_in_background">Sempre in background</string>
   <!--Preference summary in case it is enabled-->
@@ -159,6 +170,7 @@
   <string name="global_announce_enabled">Individuazione Globale</string>
   <string name="local_announce_enabled">Individuazione Locale</string>
   <string name="enable_nat_traversal">Abilita NAT Traversal</string>
+  <string name="global_announce_server">Server di Individuazione Globale</string>
   <string name="enable_relaying">Abilita Reindirizzamento</string>
   <string name="usage_reporting">Statistiche Anonime Utilizzo</string>
   <string name="gui_address">Indirizzi Interfaccia Grafica</string>
@@ -185,6 +197,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opzioni di Debug</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Solo 0-9, a-z e \',\' sono consentiti nelle opzioni STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reset del Database</string>
   <!--Syncthing was reset-->

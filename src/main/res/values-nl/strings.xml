@@ -33,6 +33,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="device_rejected">Apparaat %1$s wil verbinding maken</string>
   <string name="folder_rejected">Apparaat %1$s wil map %2$s delen</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->

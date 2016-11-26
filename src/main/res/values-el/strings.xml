@@ -32,7 +32,11 @@
   <string name="toast_write_storage_permission_required">Απαιτείται η άδεια αποθήκευσης δεδομένων για αυτή την εφαρμογή</string>
   <string name="device_rejected">Η συσκευή %1$s επιθυμεί να συνδεθεί</string>
   <string name="folder_rejected">Η συσκευή %1$s επιθυμεί να διαμοιραστεί τον φάκελο %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Βελτιστοποίηση μπαταρίας</string>
+  <string name="dialog_disable_battery_optimization_message">Το Android ενδέχεται να σταματήσει τον συγχρονισμό μετά από κάποιο χρονικό διάστημα. Για να αποφευχθεί αυτό, απενεργοποιήστε τη βελτιστοποίηση μπαταρίας.</string>
   <string name="dialog_disable_battery_optimization_later">Αργότερα</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Να μην εμφανιστεί ξανά</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Να απενεργοποιηθεί για το Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Φάκελοι</string>
   <!--Shown if no folders exist-->
