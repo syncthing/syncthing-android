@@ -348,9 +348,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
             for (Map.Entry<String, Connections.Connection> e : connections.connections.entrySet()) {
                 e.getValue().completion = getDeviceCompletion(e.getKey());
 
-                Connections.Connection prev = mPreviousConnections
-                        .transform(c -> c.connections.get(e.getKey()))
-                        .or(new Connections.Connection());
+                Connections.Connection prev =
+                        (mPreviousConnections.isPresent() && mPreviousConnections.get().connections.containsKey(e.getKey()))
+                                ? mPreviousConnections.get().connections.get(e.getKey())
+                                : new Connections.Connection();
                 e.getValue().setTransferRate(prev, msElapsed);
             }
             Connections.Connection prev =

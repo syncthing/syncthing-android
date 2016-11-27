@@ -43,21 +43,21 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         TextView upload = (TextView) convertView.findViewById(R.id.upload);
 
         String deviceId = getItem(position).deviceID;
-        Optional<Connections.Connection> conn = mConnections.transform(a -> a.connections.get(deviceId));
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
-        if (conn.isPresent() && conn.get().connected) {
-            if (conn.get().completion == 100) {
+        if (mConnections.isPresent() && mConnections.get().connections.containsKey(deviceId)) {
+            Connections.Connection conn = mConnections.get().connections.get(deviceId);
+            if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
             }
             else {
-                status.setText(r.getString(R.string.device_syncing, conn.get().completion));
+                status.setText(r.getString(R.string.device_syncing, conn.completion));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
-            download.setText(Util.readableTransferRate(getContext(), conn.get().inBits));
-            upload.setText(Util.readableTransferRate(getContext(), conn.get().outBits));
+            download.setText(Util.readableTransferRate(getContext(), conn.inBits));
+            upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
         }
         else {
             download.setText(Util.readableTransferRate(getContext(), 0));
