@@ -62,10 +62,6 @@ public abstract class RestTask extends
         mListener      = listener;
     }
 
-    public void execute() {
-        super.executeOnExecutor(THREAD_POOL_EXECUTOR);
-    }
-
     protected HttpsURLConnection openConnection(Map<String, String> params) throws IOException {
         Uri.Builder uriBuilder = Uri.parse(mUrl.toString())
                 .buildUpon()
