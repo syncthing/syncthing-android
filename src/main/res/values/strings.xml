@@ -306,6 +306,10 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot</string>
 
+    <string name="use_legacy_hashing_title">Use legacy hashing</string>
+
+    <string name="use_legacy_hashing_summary">Force syncthing to use legacy hashing package for compatibility purposes</string>
+
     <!-- Dialog shown before config export -->
     <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
 

@@ -188,6 +188,11 @@
             android:title="@string/use_tor_title"
             android:summary="@string/use_tor_summary" />
 
+        <CheckBoxPreference
+            android:key="use_legacy_hashing"
+            android:title="@string/use_legacy_hashing_title"
+            android:summary="@string/use_legacy_hashing_summary" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
