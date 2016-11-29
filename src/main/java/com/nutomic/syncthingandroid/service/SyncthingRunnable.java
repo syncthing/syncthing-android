@@ -133,6 +133,9 @@ public class SyncthingRunnable implements Runnable {
                 env.put("all_proxy", "socks5://localhost:9050");
                 env.put("ALL_PROXY_NO_FALLBACK", "1");
             }
+            if (sp.getBoolean("use_legacy_hashing", false))
+                env.put("STHASHING", "standard");
+
             process = pb.start();
             mSyncthing.set(process);
 
