@@ -70,12 +70,20 @@ if [ ! -e ../VERSION ]; then
     echo "$(git describe --tags)" > ../VERSION
 fi
 
-./make.bash --no-banner
+BUILDER_EXT=bash
+case "$(uname)" in
+    *MINGW* | *WIN32* | *CYGWIN*)
+        BUILDER_EXT=bat
+        ;;
+esac
+
+./make.${BUILDER_EXT} --no-banner
+
 cp -a ../bin "${GOROOT_FINAL}"/
 cp -a ../pkg "${GOROOT_FINAL}"/
 cp -a ../src "${GOROOT_FINAL}"/
 
-if [[ -e ./make.bash ]]; then
+if [[ -e ./make.${BUILDER_EXT} ]]; then
     pushd ../
     git clean -f
     popd

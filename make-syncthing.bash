@@ -35,6 +35,12 @@ unset GOPATH #Set by build.go
 export GOROOT=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
 export PATH=${GOROOT}/bin:${PATH}
 
+case "$(uname)" in
+    *CYGWIN*)
+        export GOROOT=`cygpath -w $GOROOT`
+        ;;
+esac
+
 pushd ext/syncthing/src/github.com/syncthing/syncthing
 
 _GOOS=$GOOS
