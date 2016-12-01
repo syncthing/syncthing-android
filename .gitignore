@@ -39,7 +39,8 @@ gradle/wrapper/gradle/
 gradle/wrapper/gradlew*
 
 # Go native dependencies
-ext/golang/dist
+ext/golang
+go*.tar.gz
 
 # Syncthing native dependencies
 ext/syncthing/pkg/
