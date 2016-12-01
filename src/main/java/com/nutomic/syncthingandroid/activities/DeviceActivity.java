@@ -304,8 +304,10 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             case R.id.remove:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.remove_device_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
-                                getApi().removeDevice(mDevice.deviceID))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                            getApi().removeDevice(mDevice.deviceID);
+                            finish();
+                        })
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;

@@ -307,8 +307,10 @@ public class FolderActivity extends SyncthingActivity
             case R.id.remove:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.remove_folder_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) ->
-                                getApi().removeFolder(mFolder.id))
+                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                            getApi().removeFolder(mFolder.id);
+                            finish();
+                        })
                         .setNegativeButton(android.R.string.no, null)
                         .show();
                 return true;
