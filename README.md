@@ -5,8 +5,8 @@
 
 A wrapper of [Syncthing](https://github.com/syncthing/syncthing) for Android.
 
-<img src="src/fat/play/en-GB/listing/phoneScreenshots/screenshot_phone_1.png" alt="screenshot 1" width="200" /> 
-<img src="src/fat/play/en-GB/listing/phoneScreenshots/screenshot_phone_2.png" alt="screenshot 2" width="200" /> 
+<img src="src/fat/play/en-GB/listing/phoneScreenshots/screenshot_phone_1.png" alt="screenshot 1" width="200" />
+<img src="src/fat/play/en-GB/listing/phoneScreenshots/screenshot_phone_2.png" alt="screenshot 2" width="200" />
 <img src="src/fat/play/en-GB/listing/phoneScreenshots/screenshot_phone_3.png" alt="screenshot 3" width="200" />
 
 [<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80">](https://play.google.com/store/apps/details?id=com.nutomic.syncthingandroid) [<img alt="Get it on F-Droid" src="https://f-droid.org/badge/get-it-on.png" height="80">](https://f-droid.org/app/com.nutomic.syncthingandroid)
@@ -39,9 +39,13 @@ To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additi
 
 ### Building on Windows
 
-To build the Syncthing app on Windows we need to include the native Syncthing binaries:
-- Download the `syncthing-linux-386` and `syncthing-linux-arm` archives from [Syncthing releases](https://github.com/syncthing/syncthing/releases) and extract them. In each there is a `syncthing` executable. Rename and place both of these to `libs/x86/libsyncthing.so` and `libs/armeabi/libsyncthing.so` respectively.
-Use `./gradlew assembleDebug` in the project directory to compile the APK.
+To build the Syncthing app on Windows we need to have cygwin installed.
+
+From a cygwin shell in the project directory, build Go using `./make-go.bash [arch]`
+After Go is built, compile syncthing using `./make-syncthing.bash [arch]`
+
+Lastly, use `./gradlew assembleDebug` in the project directory to compile the APK,
+or use Android Studio to build/deploy the APK.
 
 # License
 
