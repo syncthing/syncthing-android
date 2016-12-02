@@ -1,37 +1,22 @@
-diff --git a/net/dnsclient_unix.go b/net/dnsclient_unix.go
-index 17188f0..15a1663 100644
---- a/net/dnsclient_unix.go
-+++ b/net/dnsclient_unix.go
-@@ -279,12 +279,6 @@ func (conf *resolverConfig) tryUpdate(name string) {
- 			return
- 		}
- 		conf.modTime = fi.ModTime()
--	} else {
--		// If modTime wasn't set prior, assume nothing has changed.
--		if conf.modTime.IsZero() {
--			return
--		}
--		conf.modTime = time.Time{}
- 	}
- 
- 	dnsConf := dnsReadConfig(name)
-diff --git a/net/dnsconfig_unix.go b/net/dnsconfig_unix.go
-index 6073fdb..bd6ca41 100644
---- a/net/dnsconfig_unix.go
-+++ b/net/dnsconfig_unix.go
-@@ -8,7 +8,53 @@
- 
+--- /net/dnsconfig_unix.go	2016-08-20 08:14:05.763235602 -0400
++++ /net/dnsconfig_unix.go	2016-08-20 08:14:05.763235602 -0400
+@@ -9,15 +9,58 @@
  package net
  
--var defaultNS = []string{"127.0.0.1", "::1"}
-+import (
+ import (
 +	"fmt"
+ 	"os"
 +	"os/exec"
 +	"strings"
-+)
-+
-+var currentNS []string
-+
+ 	"time"
+ )
+ 
+ var (
+-	defaultNS   = []string{"127.0.0.1:53", "[::1]:53"}
++	currentNS   []string
+ 	getHostname = os.Hostname // variable for testing
+ )
+ 
 +func getDefaultNS() []string {
 +	var servers []string
 +	for _, prop := range []string{"net.dns1", "net.dns2"} {
@@ -42,12 +27,12 @@ index 6073fdb..bd6ca41 100644
 +		}
 +		output := strings.Trim(string(outputBytes), "\n")
 +		if ParseIP(output) != nil {
-+			servers = append(servers, output)
++			servers = append(servers, output + ":53")
 +		}
 +	}
 +
 +	if len(servers) == 0 {
-+		servers = []string{"8.8.8.8", "8.8.4.4", "4.2.2.1"}
++		servers = []string{"8.8.8.8:53", "8.8.4.4:53", "4.2.2.1:53"}
 +	}
 +
 +	if !slicesEqual(currentNS, servers) {
@@ -71,24 +56,34 @@ index 6073fdb..bd6ca41 100644
 +
 +	return true
 +}
- 
++
  type dnsConfig struct {
- 	servers    []string // servers to use
-@@ -33,7 +79,7 @@ func dnsReadConfig(filename string) *dnsConfig {
+ 	servers    []string      // server addresses (in host:port form) to use
+ 	search     []string      // rooted suffixes to append to local name
+@@ -40,7 +83,7 @@
  	}
  	file, err := open(filename)
  	if err != nil {
 -		conf.servers = defaultNS
 +		conf.servers = getDefaultNS()
+ 		conf.search = dnsDefaultSearch()
  		conf.err = err
  		return conf
- 	}
-@@ -110,7 +156,7 @@ func dnsReadConfig(filename string) *dnsConfig {
+@@ -49,7 +92,7 @@
+ 	if fi, err := file.file.Stat(); err == nil {
+ 		conf.mtime = fi.ModTime()
+ 	} else {
+-		conf.servers = defaultNS
++		conf.servers = getDefaultNS()
+ 		conf.search = dnsDefaultSearch()
+ 		conf.err = err
+ 		return conf
+@@ -126,7 +169,7 @@
  		}
  	}
  	if len(conf.servers) == 0 {
 -		conf.servers = defaultNS
 +		conf.servers = getDefaultNS()
  	}
- 	return conf
- }
+ 	if len(conf.search) == 0 {
+ 		conf.search = dnsDefaultSearch()
