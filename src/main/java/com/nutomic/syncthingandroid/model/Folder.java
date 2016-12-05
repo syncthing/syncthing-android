@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class Folder {
 
     public static class Versioning implements Serializable {
         public String type;
-        public Map<String, String> params;
+        public Map<String, String> params = new HashMap<>();
     }
 
     public void addDevice(String deviceId) {
