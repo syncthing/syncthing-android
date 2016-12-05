@@ -22,7 +22,8 @@ You can get logs in various ways:
 
  - Log window in the app: Settings -> Open Log -> Android Log
 
- - In the terminal over USB: `adb logcat`
+ - Install [adb](http://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/), 
+   and run `adb logcat`. To see only info about crashes, run `adb logcat -s *:E`.
 
  - Using one of the various "logcat apps" on Google Play and F-Droid
 
