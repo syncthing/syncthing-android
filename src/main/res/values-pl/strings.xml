@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Witamy w Syncthing dla systemu Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing jest programem do synchronizacji plików o otwartych źródłach.\n\
+Aby udostępnić dane innemu urządzeniu, należy dodać jego unikalny identyfikator do listy urządzeń. Następnie wymagane jest wskazanie katalogów udostępnianych urządzeniu.\n\
+Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.</string>
   <string name="cont">Kontynuuj</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,7 +32,11 @@
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
   <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Optymalizacja akumulatora</string>
+  <string name="dialog_disable_battery_optimization_message">System Android może zatrzymać synchronizowanie po jakimś czasie. Aby temu zapobiec, należy wyłączyć optymalizacje akumulatora.</string>
   <string name="dialog_disable_battery_optimization_later">Później</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Nie pokazuj ponownie</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Wyłącz dla Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
   <!--Shown if no folders exist-->
@@ -130,7 +137,11 @@
   <string name="web_gui_title">Interfejs internetowy</string>
   <!--SettingsFragment-->
   <string name="settings_title">Ustawienia</string>
+  <string name="category_run_conditions">Warunki działania</string>
+  <string name="category_behaviour">Zachowanie</string>
   <string name="category_syncthing_options">Ustawienia Syncthing</string>
+  <string name="category_backup">Kopia zapasowa</string>
+  <string name="category_debug">Diagnozowanie błędów</string>
   <string name="category_experimental">Eksperymentalne</string>
   <string name="always_run_in_background">Działanie w tle</string>
   <!--Preference summary in case it is enabled-->
@@ -144,6 +155,7 @@
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>
   <string name="advanced_folder_picker_summary">Wskazuje dowolny katalog na urządzeniu do zsynchronizowania</string>
   <string name="use_root_title">Synchronizuje zawartość z uprawnieniami użytkownika Superuser</string>
+  <string name="use_root_summary">To jest niestabilna funkcja, która może sprawiać problemy z Syncthing i urządzeniami. W przypadku napotkania błędów możliwe, że niezbędne będzie przeinstalowanie programu. </string>
   <string name="notification_type_title">Powiadomienie</string>
   <string name="notification_type_summary">Wybiera rodzaj powiadomienia</string>
   <string name="device_name">Nazwa urządzenia</string>
@@ -153,6 +165,7 @@
   <string name="global_announce_enabled">Globalne wyszukiwanie</string>
   <string name="local_announce_enabled">Lokalne wyszukiwanie</string>
   <string name="enable_nat_traversal">Trawersowanie NAT</string>
+  <string name="global_announce_server">Globalne serwery odkrywające</string>
   <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="gui_address">Adres nasłuchiwania</string>
@@ -198,7 +211,7 @@
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Wspomóż</string>
-  <string name="donate_summary">Pomóż nam opłacić domeny i hosting</string>
+  <string name="donate_summary">Pomaga nam opłacić domeny i hosting</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Wersja Syncthing</string>
   <!--Title of the preference showing this app's version name-->
