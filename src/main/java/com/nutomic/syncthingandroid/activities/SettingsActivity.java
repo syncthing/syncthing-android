@@ -160,6 +160,9 @@ public class SettingsActivity extends SyncthingActivity {
 
         @Override
         public void onServiceConnected() {
+            if (getActivity() == null)
+                return;
+
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
             mSyncthingService.registerOnApiChangeListener(this);
             if (mSyncthingService.getApi().isConfigLoaded()) {
@@ -205,7 +208,8 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public void onDestroy() {
             super.onDestroy();
-            mSyncthingService.unregisterOnApiChangeListener(this);
+            if (mSyncthingService != null)
+                mSyncthingService.unregisterOnApiChangeListener(this);
         }
 
         private void setPreferenceCategoryChangeListener(
