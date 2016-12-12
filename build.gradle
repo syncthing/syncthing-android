@@ -3,10 +3,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
-        classpath 'me.tatarka:gradle-retrolambda:3.3.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
     }
 }
 
@@ -21,11 +21,11 @@ repositories {
 
 dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201608240809'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:design:25.0.1'
     compile 'com.google.zxing:android-integration:3.3.0'
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'org.mindrot:jbcrypt:0.3m'
-    compile 'com.google.guava:guava:19.0'
+    compile 'com.google.guava:guava:20.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
 }
 
