@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.google.common.base.Optional;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
@@ -22,7 +21,7 @@ import com.nutomic.syncthingandroid.util.Util;
  */
 public class DevicesAdapter extends ArrayAdapter<Device> {
 
-    private Optional<Connections> mConnections = Optional.absent();
+    private Connections mConnections;
 
     public DevicesAdapter(Context context) {
         super(context, R.layout.item_device_list);
@@ -46,8 +45,8 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
-        if (mConnections.isPresent() && mConnections.get().connections.containsKey(deviceId)) {
-            Connections.Connection conn = mConnections.get().connections.get(deviceId);
+        if (mConnections != null && mConnections.connections.get(deviceId).connected) {
+            Connections.Connection conn = mConnections.connections.get(deviceId);
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
@@ -79,7 +78,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
     }
 
     public void onReceiveConnections(Connections connections) {
-        mConnections = Optional.of(connections);
+        mConnections = connections;
         notifyDataSetChanged();
     }
 }
