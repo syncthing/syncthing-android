@@ -38,7 +38,7 @@ Updating Translations
 "
 tx push -s
 tx pull -a
-./gradlew deleteUnsupportedPlayTranslations publishListingFatRelease
+./gradlew deleteUnsupportedPlayTranslations
 git add -A "src/fat/play/"
 git add -A "src/main/res/values-*/strings.xml"
 if ! git diff --cached --exit-code;
@@ -70,9 +70,5 @@ git commit -m "Bumped version to $NEW_VERSION_NAME"
 git tag $NEW_VERSION_NAME
 
 echo "
-Update ready.
-1. Run \`git push --follow-tags\`
-2. Enter release notes at https://github.com/syncthing/syncthing-android/releases
-3. Build signed APK in Android Studio
-4. Upload APKs to Google Play
+Update ready. Now run `release.bash` to publish.
 "
