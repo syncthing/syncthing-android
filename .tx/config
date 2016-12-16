@@ -21,3 +21,10 @@ source_file = src/main/play/en-GB/listing/shortdescription
 source_lang = en_GB
 type = TXT
 lang_map = ja: ja-JP, sv: sv-SE, da: da-DK, de: de-DE, el: el-EL, es: es-ES, fi: fi-FI, it: it-IT, pl: pl-PL, nl: nl-NL, ru: ru-RU, no: no-NO, pt: pt-PT, ko: ko-KR, cs: cs-CZ, hu: hu-HU, fr: fr-FR, tr: tr-TR
+
+[syncthing-android.titletxt]
+file_filter = src/main/play/<lang>/listing/title
+source_file = src/main/play/en-GB/listing/title
+source_lang = en_GB
+type = TXT
+lang_map = ja: ja-JP, sv: sv-SE, da: da-DK, de: de-DE, el: el-EL, es: es-ES, fi: fi-FI, it: it-IT, pl: pl-PL, nl: nl-NL, ru: ru-RU, no: no-NO, pt: pt-PT, ko: ko-KR, cs: cs-CZ, hu: hu-HU, fr: fr-FR, tr: tr-TR
