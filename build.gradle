@@ -44,6 +44,8 @@ android {
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
+    // Disabled because it breaks travis.ci
+    /*
     signingConfigs {
         release {
             storeFile file(RELEASE_STORE_FILE)
@@ -52,11 +54,8 @@ android {
             keyPassword RELEASE_KEY_PASSWORD
         }
     }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
+    buildTypes.release.signingConfig signingConfigs.release
+    */
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
