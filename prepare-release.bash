@@ -53,7 +53,6 @@ Running Tests
 -----------------------------
 "
 ./gradlew lint
-./gradlew connectedFatDebugAndroidTest
 
 echo "
 
