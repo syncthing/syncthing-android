@@ -39,28 +39,10 @@ android {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 11
         targetSdkVersion 25
-        versionCode 112
+        versionCode 4112
         versionName "0.9.2"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-    }
-
-    productFlavors {
-        x86 {
-            versionCode Integer.parseInt("4" + defaultConfig.versionCode)
-            ndk {
-                abiFilter "x86"
-            }
-        }
-        armeabi {
-            versionCode Integer.parseInt("3" + defaultConfig.versionCode)
-            ndk {
-                abiFilter "armeabi"
-            }
-        }
-        fat {
-            versionCode Integer.parseInt("0" + defaultConfig.versionCode)
-        }
     }
 
     compileOptions {
