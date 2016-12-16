@@ -183,6 +183,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="run_as_foreground_service_summary">Pokud je povoleno, Syncthing poběží na popředí a bude méně pravděpodobné, že bude zastaven systémem Android. Toto může způsobit zastavení jiných služeb v případě nedostatku paměti. Android přesto vyžaduje zobrazení upozornění s nízkou prioritou, bez ohledu na zvolená nastavení \"Upozornění\".</string>
   <string name="use_tor_title">Použít Tor</string>
   <string name="use_tor_summary">Pro zvýšení bezpečnosti použít výhradně přenosy po síti TOR. Vyžadován Orbot</string>
+  <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
+  <string name="use_legacy_hashing_summary">Vynutí použití standardního kontrolního součtu při problémech s kompatibilitou</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
   <!--Dialog shown before config import-->

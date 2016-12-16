@@ -32,6 +32,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
   <string name="device_rejected">Apparaat %1$s wil verbinding maken</string>
   <string name="folder_rejected">Apparaat %1$s wil map %2$s delen</string>
+  <string name="dialog_disable_battery_optimization_title">Batterijoptimalisatie</string>
+  <string name="dialog_disable_battery_optimization_message">Android kan je synchronisatie na een tijdje stoppen. Om dit te voorkomen kan je batterijoptimalisatie uitschakelen</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
@@ -181,10 +183,12 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="run_as_foreground_service_summary">Indien ingeschakeld zal Syncthing worden uitgevoerd met voorgrondprioriteit, waardoor de kans kleiner wordt dat het door Android wordt gestopt. Dit kan ertoe leiden dat andere diensten worden gestopt wanneer het beschikbare geheugen laag is. Een melding met lage prioriteit wordt door Android vereist weergegeven, onafhankelijk van de \"Melding\"-instelling.</string>
   <string name="use_tor_title">Gebruik Tor</string>
   <string name="use_tor_summary">Dwing alle verkeer door Tor voor verhoogde privacy</string>
+  <string name="use_legacy_hashing_title">Gebruik verouderde hashing</string>
+  <string name="use_legacy_hashing_summary">Dwing Syncthing om het verouderd hashingpakket te gebruiken voor compatibiliteitsredenen</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Wil je jouw configuratie echt exporteren? Bestaande bestanden worden overschreven.\n\nWAARSCHUWING: Andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesyncte bestanden downloaden/wijzigen.</string>
+  <string name="dialog_confirm_export">Wil je je configuratie echt exporteren? Bestaande bestanden worden overschreven.\n\nWAARSCHUWING: Andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesyncte bestanden downloaden/wijzigen.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Wil je echt importeren? Huidige configuratie wordt vervangen.</string>
+  <string name="dialog_confirm_import">Wil je een nieuwe configuratie echt importeren? Bestaande bestanden zullen worden overschreven.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Configuratie is geëxporteerd naar %1$s</string>
   <string name="import_config">Configuratie importeren</string>

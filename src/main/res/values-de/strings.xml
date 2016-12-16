@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Willkommen bei Syncthing für Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing ist eine quelloffene Software zur Datensynchronisierung.\n\
+Um Daten mit anderen Geräten zu teilen, müssen Sie deren eindeutige Geräte IDs zu Geräteliste hinzufügen.\n\
+Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="cont">Weiter</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -29,7 +32,11 @@
   <string name="toast_write_storage_permission_required">Diese App benötigt Schreibzugriff auf den Gerätespeicher</string>
   <string name="device_rejected">Gerät %1$s möchte sich verbinden</string>
   <string name="folder_rejected">Gerät %1$s möchte Verzeichnis %2$s teilen</string>
+  <string name="dialog_disable_battery_optimization_title">Batterielaufzeit Optimierung</string>
+  <string name="dialog_disable_battery_optimization_message">Android kann die Synchronisierung nach einiger Zeit stoppen. Um dies zu verhindern, müssen Sie die Batterielaufzeit Optimierung abstellen.</string>
   <string name="dialog_disable_battery_optimization_later">Später</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Nicht mehr zeigen.</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Für Syncthing abstellen.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Shown if no folders exist-->
@@ -130,7 +137,11 @@
   <string name="web_gui_title">Weboberfläche</string>
   <!--SettingsFragment-->
   <string name="settings_title">Einstellungen</string>
+  <string name="category_run_conditions">Laufkonditionen</string>
+  <string name="category_behaviour">Verhalten</string>
   <string name="category_syncthing_options">Syncthing-Optionen</string>
+  <string name="category_backup">Datensicherung</string>
+  <string name="category_debug">Fehleranalyse</string>
   <string name="category_experimental">Experimentell</string>
   <string name="always_run_in_background">Immer im Hintergrund ausführen</string>
   <!--Preference summary in case it is enabled-->
@@ -159,6 +170,7 @@
   <string name="global_announce_enabled">Globale Gerätesuche</string>
   <string name="local_announce_enabled">Lokale Gerätesuche</string>
   <string name="enable_nat_traversal">NAT-Traversal aktivieren</string>
+  <string name="global_announce_server">Globale Auffindungs Server</string>
   <string name="enable_relaying">Weiterleitung aktivieren</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
@@ -171,6 +183,8 @@
   <string name="run_as_foreground_service_summary">Wenn aktiviert, wird Syncthing mit Vordergrund-Priorität ausgeführt und weniger wahrscheinlich durch Android gestoppt. Dies könnte das Stoppen anderer Dienste verursachen, wenn der verfügbare Speicher gering ist. Das Anzeigen einer Benachrichtigung niedriger Priorität wird hierfür von Android erfordert, ungeachtet der Benachrichtigung-Einstellung.</string>
   <string name="use_tor_title">Tor benutzen</string>
   <string name="use_tor_summary">Der gesamte Netzwerkverkehr wird zur Erhöhung der Privatsphäre über Tor geleitet. Benötigt Orbot.</string>
+  <string name="use_legacy_hashing_title">Nutze veraltetes Hashing</string>
+  <string name="use_legacy_hashing_summary">Syncthing zwingen veraltetes Hashing zu nutzen aus Kompatibilitätsgründen</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, um synchronisierte Dateien herunterzuladen und zu verändern.</string>
   <!--Dialog shown before config import-->
@@ -185,6 +199,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Nur 0-9, a-z und \',\' sind erlaubt in STTRACE Optionen</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->

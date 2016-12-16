@@ -6,6 +6,10 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Добро пожаловать в Syncthing для Android</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing - это открытое приложение для синхронизации файлов.\n
+Для того чтобы синхронизировать данные с другими устройствами, вам необходимо добавить их уникальные идентификаторы в список устройств. Затем вы сможете выбрать папки для синхронизации с другими устройствами.\n
+Пожалуйста, сообщайте о возникших проблемах через Github.</string>
+  <string name="cont">Продолжить</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Ожидание GUI</string>
@@ -28,7 +32,11 @@
   <string name="toast_write_storage_permission_required">Приложению требуется право на запись</string>
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
   <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Оптимизация батареи</string>
+  <string name="dialog_disable_battery_optimization_message">Android может остановить синхронизацию через некоторое время. Для того, чтобы избежать этого, выключите оптимизацию батареи.</string>
   <string name="dialog_disable_battery_optimization_later">Позже</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Больше не показывать</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Отключить для Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -57,10 +65,11 @@
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Загрузка процессора</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">Объём памяти</string>
+  <string name="ram_usage">Использование памяти</string>
   <!--Title for announce server status-->
   <string name="announce_server">Сервера анонсов</string>
-  <string name="restart">Перезагрузить</string>
+  <string name="restart">Перезапустить</string>
+  <string name="dialog_confirm_restart">Вы хотите перезапустить Syncthing?</string>
   <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID папки</string>
@@ -88,6 +97,7 @@
   <string name="folder_id_required">ID папки не может быть пустым</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Путь к папке не может быть пустым</string>
+  <string name="dialog_discard_changes">Отменить внесённые изменения?</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID устройства</string>
@@ -96,7 +106,7 @@
   <!--Setting title-->
   <string name="addresses">Адреса</string>
   <!--Setting title-->
-  <string name="current_address">Текущий Адрес</string>
+  <string name="current_address">Текущий адрес</string>
   <!--Setting title-->
   <string name="compression">Сжатие</string>
   <!--Strings representing compression options-->
@@ -127,7 +137,12 @@
   <string name="web_gui_title">Веб-интерфейс</string>
   <!--SettingsFragment-->
   <string name="settings_title">Настройки</string>
+  <string name="category_run_conditions">Условия выполнения</string>
+  <string name="category_behaviour">Поведение</string>
   <string name="category_syncthing_options">Настройки устройства</string>
+  <string name="category_backup">Резервная копия</string>
+  <string name="category_debug">Отладка</string>
+  <string name="category_experimental">Экспериментальное</string>
   <string name="always_run_in_background">Фоновый режим</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Автозапуск при перезагрузке устройства и работа в фоне</string>
@@ -155,6 +170,7 @@
   <string name="global_announce_enabled">Глобальное Обнаружение</string>
   <string name="local_announce_enabled">Локальное Обнаружение</string>
   <string name="enable_nat_traversal">Включить NAT-T обход</string>
+  <string name="global_announce_server">Серверы Глобального Обнаружения</string>
   <string name="enable_relaying">Включить релеи</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="gui_address">Адрес Ожидания GUI</string>
@@ -162,8 +178,13 @@
   <string name="gui_password">Пароль Идентификации GUI</string>
   <string name="export_config">Экспорт настроек</string>
   <string name="keep_wakelock_while_binary_running">Поддерживать CPU включенным, пока Syncthing работает</string>
+  <string name="keep_wakelock_while_binary_running_summary">Используйте эту опцию, если у вас происходят потери соединения при работе от батареи. Эта опция увеличит расход заряда батареи.</string>
   <string name="run_as_foreground_service">Запуск сервиса с повышенным приоритетом</string>
+  <string name="run_as_foreground_service_summary">Если включено, Syncthing будет выполняться с высоким приоритетом и, скорее всего, Android не будет его останавливать. Это может вызвать остановку других сервисов в случае нехватки памяти. Уведомления с низким приоритетом должны быть показаны в связи с требованиями Android независимо от настроек \"Уведомлений\".</string>
   <string name="use_tor_title">Использовать Tor</string>
+  <string name="use_tor_summary">Пропускать весь трафик через Tor для улучшения приватности. Требует установленный Orbot.</string>
+  <string name="use_legacy_hashing_title">Использовать старый алгоритм хеширования</string>
+  <string name="use_legacy_hashing_summary">Использовать старый алгоритм хеширования в целях совместимости.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию? Существующие файлы будут перезаписаны.\n\nОСТОРОЖНО! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы загрузить/изменить синхронизируемые файлы.</string>
   <!--Dialog shown before config import-->
@@ -178,6 +199,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Настройки режима отладки</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_sttrace">Только 0-9, a-z и \',\' допустимы для параметра STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Сбросить базу данных</string>
   <!--Syncthing was reset-->
@@ -186,7 +208,7 @@
     </string>
   <!--Syncthing was reset-->
   <string name="streset_done">БД Syncthing успешно сброшена</string>
-  <string name="category_about">О програме</string>
+  <string name="category_about">О программе</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Открыть лог</string>
   <!--Summary for the log activity-->
@@ -198,7 +220,7 @@
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Пожертвовать</string>
-  <string name="donate_summary">Внесите вклад в поддержку хостинга проекта.</string>
+  <string name="donate_summary">Внесите вклад в поддержку хостинга проекта</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия ядра</string>
   <!--Title of the preference showing this app's version name-->
@@ -209,12 +231,12 @@
   <!--Toast shown on devices with kitkat or higher-->
   <string name="kitkat_external_storage_warning">Внимание: Ваша версия Android не позволяет синхронизацию на внешние хранилища</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Папка Пуста</string>
+  <string name="directory_empty">Папка пуста</string>
   <!--Menu item to create folder on the file system-->
   <string name="create_fs_folder">Создать новую папку</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Выбрать Папку</string>
-  <string name="create_folder_failed">Неудачное создание папки</string>
+  <string name="select_folder">Выбрать папку</string>
+  <string name="create_folder_failed">Не удалось создать папку</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
   <string name="log_title">Лог</string>
@@ -222,6 +244,7 @@
   <string name="log_android_title">Логи Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="log_syncthing_title">Логи Syncthing</string>
+  <string name="retrieving_logs">Получение логов...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Поделиться</string>
   <!--SyncthingService-->
@@ -230,11 +253,12 @@
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Вы хотите изменить ваши настройки?</string>
   <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Изменить Настройки</string>
+  <string name="syncthing_disabled_change_settings">Изменить настройки</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Выход</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing запущен</string>
+  <string name="syncthing_active_foreground">Сервис выполняется с высоким приоритетом.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Слишком глубокая папка. Проверьте на цикличные симлинки</string>
   <!--Toast shown if syncthing failed to create a config-->
@@ -245,13 +269,13 @@
   <string name="default_folder_id">%1$s фото</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Необходим Перезапуск</string>
+  <string name="restart_title">Необходим перезапуск</string>
   <!--Text for positive button in restart dialog-->
   <string name="restart_now">Перезапустить сейчас</string>
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">Позже</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Нажмите здесь чтобы перезагрузить syncthing</string>
+  <string name="restart_notification_text">Нажмите здесь чтобы перезапустить Syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">ID устройства копирован в буфер обмена</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -279,4 +303,5 @@
   <string name="state_unknown">Неизвестно</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Остановка Syncthing не поддерживается, если включено выполнение в фоновом режиме.</string>
 </resources>

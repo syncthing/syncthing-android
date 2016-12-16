@@ -183,6 +183,8 @@
   <string name="run_as_foreground_service_summary">有効にした場合、Syncthing はフォアグラウンドの優先度で実行し、Android によって停止される可能性が低くなります。使用可能なメモリが不足している場合、他のサービスが停止されることがあります。「通知」の設定にかかわらず、Android の要求に起因して低い優先度の通知が表示される必要があります。</string>
   <string name="use_tor_title">Tor を使用する</string>
   <string name="use_tor_summary">プライバシー保護のため、強制的にすべてのトラフィックを Tor を介します。Orbot が必要です</string>
+  <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
+  <string name="use_legacy_hashing_summary">互換性のために、強制的にsyncthingが従来のハッシュパッケージを使用するようにします</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
   <!--Dialog shown before config import-->
