@@ -31,4 +31,4 @@ cache:
 script:
   - ./gradlew clean lint
   - ./gradlew buildNative assembleDebug
-  - ./gradlew compileFatDebugAndroidTestSources
+  - ./gradlew compileDebugAndroidTestSources
