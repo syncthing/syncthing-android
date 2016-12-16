@@ -44,6 +44,19 @@ android {
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -71,17 +84,17 @@ play {
  * Some languages are not supported by Google Play, so we ignore them.
  */
 task deleteUnsupportedPlayTranslations(type: Delete) {
-    delete 'src/fat/play/en/'
-    delete 'src/fat/play/da_DK'
-    delete 'src/fat/play/el-EL'
-    delete 'src/fat/play/es_EC'
-    delete 'src/fat/play/es_MX'
-    delete 'src/fat/play/fr_FR'
-    delete 'src/fat/play/no_NO'
-    delete 'src/fat/play/zh_TW'
-    delete 'src/fat/play/zh_CN'
-    delete 'src/fat/play/pt_BR'
-    delete 'src/fat/play/pl_PL'
-    delete 'src/fat/play/nb'
-    delete 'src/fat/play/nn'
+    delete 'src/main/play/en/'
+    delete 'src/main/play/da_DK'
+    delete 'src/main/play/el-EL'
+    delete 'src/main/play/es_EC'
+    delete 'src/main/play/es_MX'
+    delete 'src/main/play/fr_FR'
+    delete 'src/main/play/no_NO'
+    delete 'src/main/play/zh_TW'
+    delete 'src/main/play/zh_CN'
+    delete 'src/main/play/pt_BR'
+    delete 'src/main/play/pl_PL'
+    delete 'src/main/play/nb'
+    delete 'src/main/play/nn'
 }
