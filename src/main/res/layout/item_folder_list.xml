@@ -31,6 +31,16 @@
             android:layout_alignParentRight="true"
             android:textAppearance="?textAppearanceListItemSmall" />
 
+        <ImageButton
+            android:id="@+id/open_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_folder_black_24dp"
+            android:background="@null"/>
+
         <TextView
             android:id="@+id/directory"
             android:layout_width="wrap_content"

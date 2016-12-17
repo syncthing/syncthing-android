@@ -1,7 +1,9 @@
 package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -19,6 +21,7 @@ import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static android.view.View.GONE;
@@ -47,6 +50,12 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
         binding.directory.setText(folder.path);
+        binding.openFolder.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(new File(folder.path)), "resource/folder");
+            getContext().startActivity(intent);
+        });
+
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? Math.round(100 * model.inSyncBytes / model.globalBytes)
