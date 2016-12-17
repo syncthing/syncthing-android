@@ -34,6 +34,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     buildTypes.debug.applicationIdSuffix ".debug"
+    dataBinding.enabled = true
 
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"

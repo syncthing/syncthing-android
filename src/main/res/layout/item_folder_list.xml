@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
-    android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-    android:paddingRight="@dimen/abc_action_bar_content_inset_material"
-    android:paddingTop="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/state"
-        android:layout_toStartOf="@+id/state"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textAppearance="?textAppearanceListItemPrimary" />
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+        android:paddingRight="@dimen/abc_action_bar_content_inset_material"
+        android:paddingTop="8dp">
 
-    <TextView
-        android:id="@+id/state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/id"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:textAppearance="?textAppearanceListItemSmall" />
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/state"
+            android:layout_toStartOf="@+id/state"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceListItemPrimary" />
 
-    <TextView
-        android:id="@+id/directory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/state"
-        android:ellipsize="end"
-        android:textAppearance="?textAppearanceListItemSecondary" />
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/id"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:textAppearance="?textAppearanceListItemSmall" />
 
-    <TextView
-        android:id="@+id/items"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/directory"
-        android:textAppearance="?textAppearanceListItemSecondary" />
+        <TextView
+            android:id="@+id/directory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/state"
+            android:ellipsize="end"
+            android:textAppearance="?textAppearanceListItemSecondary" />
 
-    <TextView
-        android:id="@+id/size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/items"
-        android:textAppearance="?textAppearanceListItemSecondary" />
+        <TextView
+            android:id="@+id/items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/directory"
+            android:textAppearance="?textAppearanceListItemSecondary" />
 
-    <TextView
-        android:id="@+id/invalid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/size"
-        android:textAppearance="?textAppearanceListItemSecondary"
-        android:textColor="@color/text_red" />
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/items"
+            android:textAppearance="?textAppearanceListItemSecondary" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/invalid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/size"
+            android:textAppearance="?textAppearanceListItemSecondary"
+            android:textColor="@color/text_red" />
+
+    </RelativeLayout>
+
+</layout>

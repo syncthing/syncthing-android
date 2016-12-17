@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ItemFolderListBinding;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.service.RestApi;
@@ -28,51 +30,43 @@ import static android.view.View.VISIBLE;
 public class FoldersAdapter extends ArrayAdapter<Folder> {
 
     private final HashMap<String, Model> mModels = new HashMap<>();
-    private final LayoutInflater mInflater;
 
     public FoldersAdapter(Context context) {
-        super(context, R.layout.item_folder_list);
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        super(context, 0);
     }
 
     @Override
     @NonNull
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        if (convertView == null)
-            convertView = mInflater.inflate(R.layout.item_folder_list, parent, false);
-
-        TextView label = (TextView) convertView.findViewById(R.id.label);
-        TextView state = (TextView) convertView.findViewById(R.id.state);
-        TextView directory = (TextView) convertView.findViewById(R.id.directory);
-        TextView items = (TextView) convertView.findViewById(R.id.items);
-        TextView size = (TextView) convertView.findViewById(R.id.size);
-        TextView invalid = (TextView) convertView.findViewById(R.id.invalid);
+        ItemFolderListBinding binding = (convertView == null)
+                ? DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_folder_list, parent, false)
+                : DataBindingUtil.bind(convertView);
 
         Folder folder = getItem(position);
         Model model = mModels.get(folder.id);
-        label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
-        state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
-        directory.setText(folder.path);
+        binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
+        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
+        binding.directory.setText(folder.path);
         if (model != null) {
             int percentage = (model.globalBytes != 0)
                     ? Math.round(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
-            state.setText(getLocalizedState(getContext(), model.state, percentage));
-            items.setVisibility(VISIBLE);
-            items.setText(getContext()
+            binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
+            binding.items.setVisibility(VISIBLE);
+            binding.items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.globalFiles));
-            size.setVisibility(VISIBLE);
-            size.setText(getContext().getString(R.string.folder_size_format,
+            binding.size.setVisibility(VISIBLE);
+            binding.size.setText(getContext().getString(R.string.folder_size_format,
                     Util.readableFileSize(getContext(), model.inSyncBytes),
                     Util.readableFileSize(getContext(), model.globalBytes)));
-            setTextOrHide(invalid, model.invalid);
+            setTextOrHide(binding.invalid, model.invalid);
         } else {
-            items.setVisibility(GONE);
-            size.setVisibility(GONE);
-            setTextOrHide(invalid, folder.invalid);
+            binding.items.setVisibility(GONE);
+            binding.size.setVisibility(GONE);
+            setTextOrHide(binding.invalid, folder.invalid);
         }
 
-        return convertView;
+        return binding.getRoot();
     }
 
     /**
