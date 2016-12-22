@@ -8,7 +8,8 @@
         android:paddingBottom="8dp"
         android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
         android:paddingRight="@dimen/abc_action_bar_content_inset_material"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:descendantFocusability="blocksDescendants">
 
         <TextView
             android:id="@+id/label"
