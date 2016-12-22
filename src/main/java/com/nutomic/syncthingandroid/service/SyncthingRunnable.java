@@ -151,7 +151,6 @@ public class SyncthingRunnable implements Runnable {
 
             switch (ret) {
                 case 0:
-                case 2:
                 case 4:
                     // Valid exit codes, ignored.
                     break;
