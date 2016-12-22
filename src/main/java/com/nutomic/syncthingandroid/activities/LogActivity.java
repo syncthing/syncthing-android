@@ -123,9 +123,9 @@ public class LogActivity extends SyncthingActivity {
         try {
             ProcessBuilder pb;
             if (syncthingLog) {
-                pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-s", "SyncthingNativeCode");
+                pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-v", "raw", "-s", "SyncthingNativeCode");
             } else {
-                pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "'*'");
+                pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-v", "time", "'*'");
             }
             pb.redirectErrorStream(true);
             process = pb.start();
