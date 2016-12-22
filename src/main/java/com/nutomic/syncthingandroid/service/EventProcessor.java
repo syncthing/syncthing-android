@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
 import com.nutomic.syncthingandroid.activities.FolderActivity;
@@ -112,8 +113,10 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 String folderLabel = (String) event.data.get("folderLabel");
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
+                boolean isNewFolder = Stream.of(mApi.getFolders())
+                        .noneMatch(f -> f.id.equals(folderId));
                 intent = new Intent(mContext, FolderActivity.class)
-                        .putExtra(FolderActivity.EXTRA_IS_CREATE, true)
+                        .putExtra(FolderActivity.EXTRA_IS_CREATE, isNewFolder)
                         .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
                         .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
                         .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);

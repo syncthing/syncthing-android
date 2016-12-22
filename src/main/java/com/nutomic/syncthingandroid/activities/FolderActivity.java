@@ -229,6 +229,10 @@ public class FolderActivity extends SyncthingActivity
                 return;
             }
         }
+        if (getIntent().hasExtra(EXTRA_DEVICE_ID)) {
+            mFolder.addDevice(getIntent().getStringExtra(EXTRA_DEVICE_ID));
+            mFolderNeedsToUpdate = true;
+        }
 
         updateViewsAndSetListeners();
     }
@@ -345,10 +349,6 @@ public class FolderActivity extends SyncthingActivity
             mFolder.rescanIntervalS = 60;
         }
         mFolder.versioning = new Folder.Versioning();
-        String deviceId = getIntent().getStringExtra(EXTRA_DEVICE_ID);
-        if (deviceId != null) {
-            mFolder.addDevice(deviceId);
-        }
     }
 
     private void prepareEditMode() {
