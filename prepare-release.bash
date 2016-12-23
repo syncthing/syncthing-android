@@ -52,7 +52,7 @@ echo "
 Running Tests
 -----------------------------
 "
-./gradlew lint
+./gradlew clean lint
 
 echo "
 
