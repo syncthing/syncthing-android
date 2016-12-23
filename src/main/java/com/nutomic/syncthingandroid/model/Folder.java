@@ -15,7 +15,7 @@ public class Folder {
     public String type;
     public List<Device> devices = new ArrayList<>();
     public int rescanIntervalS;
-    public boolean ignorePerms;
+    public final boolean ignorePerms = true;
     public boolean autoNormalize;
     public int minDiskFreePct;
     public Versioning versioning;
