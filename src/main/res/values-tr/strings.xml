@@ -34,7 +34,6 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="device_rejected">%1$s aygıtı bağlanmak istiyor</string>
   <string name="folder_rejected">%1$s aygıtı %2$s klasörünü paylaşmak istiyor</string>
   <string name="dialog_disable_battery_optimization_title">Batarya İyileştirme</string>
-  <string name="dialog_disable_battery_optimization_message">Android, birkaç zaman sonra eşzamanlamayı durdurabilir. Bunu önlemek için batarya iyileştirmesini kapat.</string>
   <string name="dialog_disable_battery_optimization_later">Daha sonra</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Yeniden gösterme</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing için kapat</string>

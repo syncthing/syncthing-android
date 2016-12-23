@@ -33,7 +33,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="device_rejected">Dispositivo %1$s vuole connettersi</string>
   <string name="folder_rejected">Il dispositivo %1$s desidera condividere la cartella %2$s</string>
   <string name="dialog_disable_battery_optimization_title">Ottimizzazione della batteria</string>
-  <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria</string>
   <string name="dialog_disable_battery_optimization_later">Più tardi</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Non mostrare più</string>
   <string name="dialog_disable_battery_optimization_turn_off">Spegnere per Syncthing</string>
@@ -183,6 +182,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="run_as_foreground_service_summary">Se abilitato, Syncthing verrà eseguito con la priorità di primo piano e ha meno probabilità di essere fermato da Android. Ciò potrebbe causare l\'arresto di altri servizi se la memoria disponibile è scarsa. Una notifica a bassa priorità deve essere visualizzata a causa di requisiti di Android, a prescindere dall\'impostazione \"Notifica\".</string>
   <string name="use_tor_title">Utilizza Tor</string>
   <string name="use_tor_summary">Forza tutto il traffico attraverso Tor per una maggiore privacy. Richiede Orbot</string>
+  <string name="use_legacy_hashing_title">Utilizza la funzione di hash precedente</string>
+  <string name="use_legacy_hashing_summary">Forza syncthing ad utilizzare il pacchetto di hash precedente per ragioni di compatibilità</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione? I files esistenti verranno sovrascritti.n\nATTENZIONE! Le altre applicazioni potrebbero non essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
   <!--Dialog shown before config import-->

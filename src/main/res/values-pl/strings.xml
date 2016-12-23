@@ -33,7 +33,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
   <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>
   <string name="dialog_disable_battery_optimization_title">Optymalizacja akumulatora</string>
-  <string name="dialog_disable_battery_optimization_message">System Android może zatrzymać synchronizowanie po jakimś czasie. Aby temu zapobiec, należy wyłączyć optymalizacje akumulatora.</string>
   <string name="dialog_disable_battery_optimization_later">Później</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Nie pokazuj ponownie</string>
   <string name="dialog_disable_battery_optimization_turn_off">Wyłącz dla Syncthing</string>

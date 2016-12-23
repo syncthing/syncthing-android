@@ -33,7 +33,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="device_rejected">O dispositivo %1$s quer se conectar</string>
   <string name="folder_rejected">O dispostivo %1$s quer compartilhar a pasta %2$s</string>
   <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
-  <string name="dialog_disable_battery_optimization_message">O Android poderá parar a sincronização após algum tempo. Para evitar isso, desligue a otimização de bateria</string>
+  <string name="dialog_disable_battery_optimization_message">O Android poder parar a sincronização após algum tempo. Para evitar isto, desabilite a otimização de bateria.\n\nAlguns dispositivos possuem  aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas brancas deles.</string>
   <string name="dialog_disable_battery_optimization_later">Depois</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
   <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
