@@ -39,7 +39,7 @@ Updating Translations
 tx push -s
 tx pull -a
 ./gradlew deleteUnsupportedPlayTranslations
-git add -A "src/fat/play/"
+git add -A "src/main/play/"
 git add -A "src/main/res/values-*/strings.xml"
 if ! git diff --cached --exit-code;
 then
@@ -52,7 +52,7 @@ echo "
 Running Tests
 -----------------------------
 "
-./gradlew lint
+./gradlew clean lint
 
 echo "
 
@@ -70,5 +70,5 @@ git commit -m "Bumped version to $NEW_VERSION_NAME"
 git tag $NEW_VERSION_NAME
 
 echo "
-Update ready. Now run `release.bash` to publish.
+Update ready.
 "
