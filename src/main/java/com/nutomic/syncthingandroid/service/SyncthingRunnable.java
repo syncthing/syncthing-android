@@ -151,20 +151,15 @@ public class SyncthingRunnable implements Runnable {
 
             switch (ret) {
                 case 0:
-                case 4:
-                    // Valid exit codes, ignored.
+                case 137:
+                    // Syncthing was shut down (via API or SIGKILL), do nothing.
                     break;
                 case 3:
-                    // Restart if that was requested via Rest API call.
+                    // Restart was requested via Rest API call.
                     Log.i(TAG, "Restarting syncthing");
                     mContext.startService(new Intent(mContext, SyncthingService.class)
                             .setAction(SyncthingService.ACTION_RESTART));
                     break;
-                case 137:
-                    // Ignore SIGKILL that we use to stop Syncthing.
-                    break;
-                case 1:
-                    // fallthrough
                 default:
                     // Report Syncthing crashes, using Exception in debug mode or log in release mode.
                     String message = "Syncthing binary crashed with error code " +
