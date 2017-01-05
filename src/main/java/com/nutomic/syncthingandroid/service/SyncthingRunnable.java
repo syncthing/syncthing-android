@@ -37,10 +37,7 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_NICE = "SyncthingRunnableIoNice";
     private static final String TAG_KILL = "SyncthingRunnableKill";
     public static final String UNIT_TEST_PATH = "was running";
-    /**
-     * Path to the native, integrated syncthing binary, relative to the data folder
-     */
-    public static final String BINARY_NAME = "lib/libsyncthing.so";
+    public static final String BINARY_NAME = "libsyncthing.so";
     private static final int LOG_FILE_MAX_LINES = 1000;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
@@ -63,7 +60,7 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, Command command) {
         mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + BINARY_NAME;
+        mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
         switch (command) {
             case generate:
@@ -87,7 +84,7 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, String[] manualCommand) {
         mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().dataDir + "/" + BINARY_NAME;
+        mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mCommand = manualCommand;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
     }
