@@ -33,7 +33,6 @@
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
   <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>
   <string name="dialog_disable_battery_optimization_title">Оптимизация батареи</string>
-  <string name="dialog_disable_battery_optimization_message">Android может остановить синхронизацию через некоторое время. Для того, чтобы избежать этого, выключите оптимизацию батареи.</string>
   <string name="dialog_disable_battery_optimization_later">Позже</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Больше не показывать</string>
   <string name="dialog_disable_battery_optimization_turn_off">Отключить для Syncthing</string>

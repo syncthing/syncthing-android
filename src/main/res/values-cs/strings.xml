@@ -33,7 +33,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="device_rejected">Přístroj %1$s žádá o připojení</string>
   <string name="folder_rejected">Přístroj %1$s chce sdílet adresář %2$s</string>
   <string name="dialog_disable_battery_optimization_title">Optimalizace využití baterie</string>
-  <string name="dialog_disable_battery_optimization_message">Po nějaké době může Android zastavit synchronizaci. Abyste tomu zabránili, vypněte optimalizaci využití baterie.</string>
   <string name="dialog_disable_battery_optimization_later">Později</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Znovu neukazovat</string>
   <string name="dialog_disable_battery_optimization_turn_off">Vypnout pro Syncthing</string>
