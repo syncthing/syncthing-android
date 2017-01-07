@@ -1,7 +1,0 @@
-- sort folders and devices (@nutomic)
-- change default compression to metadata only (@nutomic)
-- fixed chmod problem with syncthing binary (@zillode)
-- fixed dialog background on pre-Lollipop (@veniosg)
-- various design improvements (@veniosg)
-- imported translations
-- updated syncthing to v0.11.22

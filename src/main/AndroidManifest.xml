@@ -40,7 +40,9 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            >
         </activity>
         <activity
             android:name=".activities.WebGuiActivity"
