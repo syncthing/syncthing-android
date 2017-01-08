@@ -2,13 +2,19 @@ package com.nutomic.syncthingandroid.http;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.Pair;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.ByteSource;
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,16 +33,17 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public abstract class RestTask extends
-        AsyncTask<Void, Void, Pair<Boolean, String>> {
+public abstract class ApiRequest {
 
-    private static final String TAG = "RestTask";
+    private static final String TAG = "ApiRequest";
 
     /**
      * The name of the HTTP header used for the syncthing API key.
@@ -47,74 +54,91 @@ public abstract class RestTask extends
         public void onSuccess(String result);
     }
 
+    public interface OnErrorListener {
+        public void onError(VolleyError error);
+    }
+
+    private static RequestQueue sVolleyQueue;
+
+    private RequestQueue getVolleyQueue() {
+        if (sVolleyQueue == null) {
+            Context context = mContext.getApplicationContext();
+            sVolleyQueue = Volley.newRequestQueue(context, new NetworkStack());
+        }
+        return sVolleyQueue;
+    }
+
+    private final Context mContext;
     private final URL mUrl;
     protected final String mPath;
     private final String mHttpsCertPath;
     private final String mApiKey;
-    private final OnSuccessListener mListener;
 
-    public RestTask(URL url, String path, String httpsCertPath, String apiKey,
-                    OnSuccessListener listener) {
+    public ApiRequest(Context context, URL url, String path, String httpsCertPath, String apiKey) {
+        mContext = context;
         mUrl           = url;
         mPath          = path;
         mHttpsCertPath = httpsCertPath;
         mApiKey        = apiKey;
-        mListener      = listener;
     }
 
-    protected HttpsURLConnection openConnection(Map<String, String> params) throws IOException {
+    protected Uri buildUri(Map<String, String> params) {
         Uri.Builder uriBuilder = Uri.parse(mUrl.toString())
                 .buildUpon()
                 .path(mPath);
         for (Map.Entry<String, String> entry : params.entrySet()) {
             uriBuilder.appendQueryParameter(entry.getKey(), entry.getValue());
         }
-        URL url = new URL(uriBuilder.build().toString());
-        Log.v(TAG, "Calling Rest API at " + url);
-
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setRequestProperty(HEADER_API_KEY, mApiKey);
-        connection.setHostnameVerifier((h, s) -> true);
-        connection.setSSLSocketFactory(getSslSocketFactory());
-        return connection;
+        return uriBuilder.build();
     }
 
     /**
      * Opens the connection, then returns success status and response string.
      */
-    protected Pair<Boolean, String> connect(HttpsURLConnection connection) throws IOException {
-        connection.connect();
-        Pair<Boolean, String> result;
-        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-            int responseCode = connection.getResponseCode();
-            String responseMessage = connection.getResponseMessage();
-            Log.i(TAG, "Request to " + connection.getURL() + " failed, code: " + responseCode +
-                    ", message: " + responseMessage);
-            result = new Pair<>(false, streamToString(connection.getErrorStream()));
-        }
-        else {
-            result = new Pair<>(true, streamToString(connection.getInputStream()));
-        }
-        connection.disconnect();
-        return result;
-    }
+    protected void connect(int requestMethod, Uri uri, @Nullable String requestBody,
+                           @Nullable OnSuccessListener listener, @Nullable OnErrorListener errorListener) {
+        StringRequest request = new StringRequest(requestMethod, uri.toString(), reply -> {
+            if (listener != null)
+                listener.onSuccess(reply);
+        }, error -> {
+            if (errorListener != null)
+                errorListener.onError(error);
 
-    private String streamToString(InputStream is) throws IOException {
-        ByteSource byteSource = new ByteSource() {
+            Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
+        }) {
             @Override
-            public InputStream openStream() throws IOException {
-                return is;
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return ImmutableMap.of(HEADER_API_KEY, mApiKey);
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
             }
         };
-        return byteSource.asCharSource(Charsets.UTF_8).read();
+        getVolleyQueue().add(request);
     }
 
+    /**
+     * Extends {@link HurlStack}, uses {@link #getSslSocketFactory()} and disables hostname
+     * verification.
+     */
+    private class NetworkStack extends HurlStack {
 
-    protected void onPostExecute(Pair<Boolean, String> result) {
-        if (mListener == null || !result.first)
-            return;
-
-        mListener.onSuccess(result.second);
+        public NetworkStack() {
+            super(null, getSslSocketFactory());
+        }
+        @Override
+        protected HttpURLConnection createConnection(URL url) throws IOException {
+            HttpsURLConnection connection = (HttpsURLConnection) super.createConnection(url);
+            connection.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+            return connection;
+        }
     }
 
     private SSLSocketFactory getSslSocketFactory() {

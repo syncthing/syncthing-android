@@ -1,21 +1,20 @@
 package com.nutomic.syncthingandroid.http;
 
 
-import android.util.Log;
-import android.util.Pair;
+import android.content.Context;
+import android.net.Uri;
+import android.os.Handler;
 
-import com.google.common.collect.Maps;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 
-import javax.net.ssl.HttpsURLConnection;
-
 /**
- * Polls to load the web interface, until we receive http status 200.
+ * Polls to load the web interface, until it is available.
  */
-public class PollWebGuiAvailableTask extends RestTask {
+public class PollWebGuiAvailableTask extends ApiRequest {
 
     private static final String TAG = "PollWebGuiAvailableTask";
 
@@ -25,29 +24,23 @@ public class PollWebGuiAvailableTask extends RestTask {
      */
     private static final long WEB_GUI_POLL_INTERVAL = 100;
 
-    public PollWebGuiAvailableTask(URL url, String httpsCertPath, String apiKey,
+    private final OnSuccessListener mListener;
+    private final Handler mHandler = new Handler();
+
+    public PollWebGuiAvailableTask(Context context, URL url, String httpsCertPath, String apiKey,
                                    OnSuccessListener listener) {
-        super(url, "", httpsCertPath, apiKey, listener);
+        super(context, url, "", httpsCertPath, apiKey);
+        mListener = listener;
+        performRequest();
     }
 
-    @Override
-    protected Pair<Boolean, String> doInBackground(Void... aVoid) {
-        int status = 0;
-        do {
-            try {
-                HttpsURLConnection connection = openConnection(Collections.emptyMap());
-                connection.connect();
-                status = connection.getResponseCode();
-            } catch (IOException e) {
-                // We catch this in every call, as long as the service is not online, so we ignore and continue.
-                try {
-                    Thread.sleep(WEB_GUI_POLL_INTERVAL);
-                } catch (InterruptedException e2) {
-                    Log.w(TAG, "Failed to sleep", e2);
-                }
-            }
-        } while (status != HttpsURLConnection.HTTP_OK);
-        return new Pair<>(true, null);
+    private void performRequest() {
+        Uri uri = buildUri(Collections.emptyMap());
+        connect(Request.Method.GET, uri, null, mListener, this::onError);
+    }
+
+    private void onError(VolleyError error) {
+        mHandler.postDelayed(this::performRequest, WEB_GUI_POLL_INTERVAL);
     }
 
 }

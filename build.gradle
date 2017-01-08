@@ -27,6 +27,7 @@ dependencies {
     compile 'org.mindrot:jbcrypt:0.3m'
     compile 'com.google.guava:guava:20.0'
     compile 'com.annimon:stream:1.1.4'
+    compile 'com.android.volley:volley:1.0.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
 }
 
