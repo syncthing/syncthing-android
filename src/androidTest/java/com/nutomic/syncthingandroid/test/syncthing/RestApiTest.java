@@ -39,10 +39,10 @@ public class RestApiTest {
         String httpsCertPath = context.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
 
         final CountDownLatch latch = new CountDownLatch(2);
-        new PollWebGuiAvailableTask(config.getWebGuiUrl(), httpsCertPath, config.getApiKey(), result -> {
+        new PollWebGuiAvailableTask(context, config.getWebGuiUrl(), httpsCertPath, config.getApiKey(), result -> {
             mApi.onWebGuiAvailable();
             latch.countDown();
-        }).execute();
+        });
         mApi = new RestApi(context, config.getWebGuiUrl(), config.getApiKey(),
                 new RestApi.OnApiAvailableListener() {
                     @Override
