@@ -73,18 +73,18 @@
             android:id="@+id/open_folder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_folder_black_24dp"
-            android:background="@null"
-            android:paddingLeft="25dp"
-            android:paddingRight="20dp"
             android:layout_alignBottom="@+id/inner"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/inner"
-            android:paddingTop="5dp"
+            android:background="@null"
             android:paddingBottom="5dp"
             android:paddingEnd="20dp"
-            android:paddingStart="30dp" />
+            android:paddingLeft="25dp"
+            android:paddingRight="20dp"
+            android:paddingStart="30dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/ic_folder_black_24dp" />
 
     </RelativeLayout>
 
