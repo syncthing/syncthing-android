@@ -5,32 +5,69 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-        android:paddingRight="@dimen/abc_action_bar_content_inset_material"
-        android:paddingTop="8dp"
         android:descendantFocusability="blocksDescendants">
 
-        <TextView
-            android:id="@+id/label"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/inner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/state"
-            android:layout_toStartOf="@+id/state"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="?textAppearanceListItemPrimary" />
+            android:paddingBottom="8dp"
+            android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+            android:paddingRight="@dimen/abc_action_bar_content_inset_material"
+            android:paddingTop="8dp">
 
-        <TextView
-            android:id="@+id/state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/id"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textAppearance="?textAppearanceListItemSmall" />
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/state"
+                android:layout_toStartOf="@+id/state"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?textAppearanceListItemPrimary" />
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/id"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textAppearance="?textAppearanceListItemSmall" />
+
+            <TextView
+                android:id="@+id/directory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/state"
+                android:ellipsize="end"
+                android:textAppearance="?textAppearanceListItemSecondary" />
+
+            <TextView
+                android:id="@+id/items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/directory"
+                android:textAppearance="?textAppearanceListItemSecondary" />
+
+            <TextView
+                android:id="@+id/size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/items"
+                android:textAppearance="?textAppearanceListItemSecondary" />
+
+            <TextView
+                android:id="@+id/invalid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/size"
+                android:textAppearance="?textAppearanceListItemSecondary"
+                android:textColor="@color/text_red" />
+
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/open_folder"
@@ -38,45 +75,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:src="@drawable/ic_folder_black_24dp"
             android:background="@null"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
+            android:paddingLeft="25dp"
+            android:paddingRight="20dp"
+            android:layout_alignBottom="@+id/inner"
+            android:layout_alignTop="@+id/inner"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp" />
-
-        <TextView
-            android:id="@+id/directory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/state"
-            android:ellipsize="end"
-            android:textAppearance="?textAppearanceListItemSecondary" />
-
-        <TextView
-            android:id="@+id/items"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/directory"
-            android:textAppearance="?textAppearanceListItemSecondary" />
-
-        <TextView
-            android:id="@+id/size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/items"
-            android:textAppearance="?textAppearanceListItemSecondary" />
-
-        <TextView
-            android:id="@+id/invalid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/size"
-            android:textAppearance="?textAppearanceListItemSecondary"
-            android:textColor="@color/text_red" />
+            android:paddingEnd="20dp"
+            android:paddingStart="30dp" />
 
     </RelativeLayout>
 
