@@ -45,7 +45,9 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
-        if (mConnections != null && mConnections.connections.get(deviceId).connected) {
+        boolean haveInfo = mConnections != null && mConnections.connections.containsKey(deviceId) &&
+                mConnections.connections.get(deviceId).connected;
+        if (haveInfo) {
             Connections.Connection conn = mConnections.connections.get(deviceId);
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
