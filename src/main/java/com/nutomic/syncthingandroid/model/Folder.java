@@ -17,7 +17,7 @@ public class Folder {
     public int rescanIntervalS;
     public final boolean ignorePerms = true;
     public boolean autoNormalize;
-    public int minDiskFreePct;
+    public float minDiskFreePct;
     public Versioning versioning;
     public int copiers;
     public int pullers;
