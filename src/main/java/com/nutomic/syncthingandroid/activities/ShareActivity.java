@@ -17,8 +17,9 @@ import com.nutomic.syncthingandroid.service.SyncthingService;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -38,13 +39,8 @@ public class ShareActivity extends SyncthingActivity
 
         List<Folder> folders = getApi().getFolders();
 
-        List<String> spinnerArray = new ArrayList<String>();
-        for(Folder item : folders){
-            spinnerArray.add(item.label);
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<Folder> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, folders);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) findViewById(R.id.folders_spinner);
@@ -66,27 +62,16 @@ public class ShareActivity extends SyncthingActivity
         Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders_spinner);
         Button mShareButton = (Button) findViewById(R.id.share_button);
         mShareButton.setOnClickListener(view -> {
-            String label = (String) mFoldersSpinner.getSelectedItem();
-            List<Folder> folders = getApi().getFolders();
-            Folder folder = null;
-            for(Folder item : folders){
-                if (item.label.equals(label))
-                {
-                    folder = item;
-                    break;
-                }
-            }
-            if (folder == null)
-                return;
+            Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
             Uri in = (Uri) getIntent().getExtras().get(Intent.EXTRA_STREAM);
             if (in == null)
                 return;
-            String inFile = getPath(in);
+            Map fileInfo = getPath(in);
             FileChannel source = null;
             FileChannel destination = null;
             try {
-                source = new FileInputStream(inFile).getChannel();
-                destination = new FileOutputStream(folder.path+"asd.mp3").getChannel();
+                source = new FileInputStream((String) fileInfo.get("path")).getChannel();
+                destination = new FileOutputStream(folder.path+((String) fileInfo.get("name"))+".mp3").getChannel();
                 if (source != null) {
                     destination.transferFrom(source, 0, source.size());
                 }
@@ -100,12 +85,16 @@ public class ShareActivity extends SyncthingActivity
         });
     }
 
-    private String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+    private Map getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA, MediaStore.Images.Media.TITLE };
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int nameIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.TITLE);
         cursor.moveToFirst();
-        return cursor.getString(column_index);
+        Map<String, String> map = new HashMap<>();
+        map.put("name", cursor.getString(nameIndex));
+        map.put("path", cursor.getString(column_index));
+        return map;
     }
 }
 

@@ -60,4 +60,8 @@ public class Folder {
             }
         }
     }
+
+    public String toString() {
+        return label;
+    }
 }
