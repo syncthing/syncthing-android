@@ -1,17 +1,22 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,30 +27,19 @@ public class ShareActivity extends SyncthingActivity
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
     @Override
     public void onApiChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE)
+        if (currentState != SyncthingService.State.ACTIVE || getApi() == null)
             return;
 
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
-        if (getApi() == null)
-            return;
-
-        Toast.makeText(this, "test1", Toast.LENGTH_SHORT).show();
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
-        Toast.makeText(this, action, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, type, Toast.LENGTH_SHORT).show();
-        Object test = TextUtils.join(",", intent.getExtras().keySet());
-        Toast.makeText(this, test != null ? test.toString() : "null", Toast.LENGTH_LONG).show();
-        Uri test1 = (Uri) intent.getExtras().get(Intent.EXTRA_STREAM);
-        Toast.makeText(this, test1 != null ? test1.toString() : "null", Toast.LENGTH_SHORT).show();
+        Object extras = TextUtils.join(",", intent.getExtras().keySet());
+        Uri path = (Uri) intent.getExtras().get(Intent.EXTRA_STREAM);
 
         List<Folder> folders = getApi().getFolders();
 
         List<String> spinnerArray = new ArrayList<String>();
         for(Folder item : folders){
-            Toast.makeText(this, item.label, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, item.id, Toast.LENGTH_LONG).show();
             spinnerArray.add(item.label);
         }
 
@@ -53,7 +47,7 @@ public class ShareActivity extends SyncthingActivity
                 this, android.R.layout.simple_spinner_item, spinnerArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+        Spinner sItems = (Spinner) findViewById(R.id.folders_spinner);
         sItems.setAdapter(adapter);
     }
 
@@ -69,32 +63,49 @@ public class ShareActivity extends SyncthingActivity
 
         registerOnServiceConnectedListener(this);
 
-        /*// Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
+        Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders_spinner);
+        Button mShareButton = (Button) findViewById(R.id.share_button);
+        mShareButton.setOnClickListener(view -> {
+            String label = (String) mFoldersSpinner.getSelectedItem();
+            List<Folder> folders = getApi().getFolders();
+            Folder folder = null;
+            for(Folder item : folders){
+                if (item.label.equals(label))
+                {
+                    folder = item;
+                    break;
                 }
-                return false;
+            }
+            if (folder == null)
+                return;
+            Uri in = (Uri) getIntent().getExtras().get(Intent.EXTRA_STREAM);
+            if (in == null)
+                return;
+            String inFile = getPath(in);
+            FileChannel source = null;
+            FileChannel destination = null;
+            try {
+                source = new FileInputStream(inFile).getChannel();
+                destination = new FileOutputStream(folder.path+"asd.mp3").getChannel();
+                if (source != null) {
+                    destination.transferFrom(source, 0, source.size());
+                }
+                if (source != null) {
+                    source.close();
+                }
+                destination.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
+    }
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);*/
+    private String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 }
 
