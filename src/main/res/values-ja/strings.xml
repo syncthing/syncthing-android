@@ -33,7 +33,7 @@
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
   <string name="dialog_disable_battery_optimization_title">バッテリー最適化</string>
-  <string name="dialog_disable_battery_optimization_message">しばらくすると Android は同期を停止することがあります。 これを防ぐには、バッテリの最適化をオフにしてください</string>
+  <string name="dialog_disable_battery_optimization_message">Android はしばらくすると同期を停止することがあります。 これを防ぐには、バッテリーの最適化をオフにしてください。\n\n一部のデバイスには、タスクを終了させる追加のアプリがプリインストールされています。 同様に、ホワイトリストに Syncthing を追加する必要があります。</string>
   <string name="dialog_disable_battery_optimization_later">後で</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">再度表示しない</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing のためにオフにします</string>
@@ -43,6 +43,7 @@
   <string name="folder_list_empty">フォルダーがありません</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d ファイル</string>
+  <string name="toast_no_file_manager">互換性のあるファイルマネージャーが見つかりません</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">デバイス</string>
   <!--Shown if no devices exist-->

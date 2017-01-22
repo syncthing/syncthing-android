@@ -6,6 +6,9 @@
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
   <!--Text for dialog displayed on first start-->
+  <string name="welcome_text">Syncthing은 오픈소스 파일 동기화 어플리케이션입니다.\n\
+다른 장치들과 데이터를 공유하기 위해서는 기기 목록에 고유 기기 ID를 추가해야 합니다. 그 후에 기기와 공유하는 폴더를 선택할 수 있습니다.\n\
+발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
   <string name="cont">계속</string>
   <!--MainActivity-->
   <!--Text for WebGuiActivity loading view-->
@@ -30,15 +33,17 @@
   <string name="device_rejected">%1$s 장치가 연결을 원하고 있습니다</string>
   <string name="folder_rejected">%1$s 장치가 %2$s 폴더를 공유하길 원하고 있습니다</string>
   <string name="dialog_disable_battery_optimization_title">배터리 최적화</string>
-  <string name="dialog_disable_battery_optimization_message">시간이 지나면 안드로이드가 동기화를 멈추게 할 수도 있습니다. 이것을 막으려면 배터리 최적화를 꺼주세요</string>
+  <string name="dialog_disable_battery_optimization_message">안드로이드 운영체제는 시간이 지나면 동기화를 정지시킬 수도 있습니다. 이를 막기 위해 배터리 최적화 기능을 꺼주시기 바랍니다.\n\n몇몇 기기들은 추가적인 태스크 관리 앱이 선탑재되어 있습니다. 태스크 관리 앱의 신뢰목록에 등록함으로써 역시 문제를 해결하실 수 있습니다.</string>
   <string name="dialog_disable_battery_optimization_later">나중에</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">폴더를 찾을 수 없습니다</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d 파일</string>
+  <string name="toast_no_file_manager">호환되는 파일 매니저를 찾을 수 없습니다</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">기기</string>
   <!--Shown if no devices exist-->
@@ -133,6 +138,8 @@
   <string name="web_gui_title">웹 GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">설정</string>
+  <string name="category_run_conditions">작동 상태</string>
+  <string name="category_behaviour">동작</string>
   <string name="category_syncthing_options">Syncthing 옵션 </string>
   <string name="category_backup">백업</string>
   <string name="category_debug">디버그</string>
@@ -174,8 +181,11 @@
   <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
   <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
   <string name="run_as_foreground_service">서비스를 포그라운드로 실행</string>
+  <string name="run_as_foreground_service_summary">이 기능을 활성화하면 Syncthing은 우선순위로 작동하며 이는 Android 운영체계에 의해 중지될 가능성을 줄여줍니다. 그러나 가용 가능한 메모리가 부족할 경우 다른 서비스들이 중지될 수도 있습니다.</string>
   <string name="use_tor_title">Tor 사용</string>
   <string name="use_tor_summary">프라이버시 향상을 위해 모든 트래픽을 Tor로 통과시킵니다. Orbot이 필요합니다</string>
+  <string name="use_legacy_hashing_title">레가시 해싱 쓰기</string>
+  <string name="use_legacy_hashing_summary">호환성의 목적을 위하여 Syncthing이 레가시 해싱 패키지를 쓰도록 강제합니다</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
   <!--Dialog shown before config import-->

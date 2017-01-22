@@ -33,7 +33,9 @@
   <string name="device_rejected">%1$s 想要连接</string>
   <string name="folder_rejected">设备 %1$s 想要分享文件夹 %2$s</string>
   <string name="dialog_disable_battery_optimization_title">电池优化</string>
-  <string name="dialog_disable_battery_optimization_message">Android 可能会在一段时间后停止同步。以防此种情况，关闭电池优化</string>
+  <string name="dialog_disable_battery_optimization_message">Android 可能会在一段时间后停止同步。为防这种情况，请关闭电池优化。
+
+有些设备预装了额外的查杀任务应用。您也应该添加 Syncthing 到他们的白名单上。</string>
   <string name="dialog_disable_battery_optimization_later">稍后重启</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">不再显示</string>
   <string name="dialog_disable_battery_optimization_turn_off">为 Syncthing 关闭</string>
@@ -43,6 +45,7 @@
   <string name="folder_list_empty">无文件夹</string>
   <!--Format string for folder file count-->
   <string name="files">%2$d 中的 %1$d 个文件</string>
+  <string name="toast_no_file_manager">未找到兼容的文件管理器</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">设备</string>
   <!--Shown if no devices exist-->
