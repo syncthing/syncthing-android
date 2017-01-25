@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +33,13 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Button cont = (Button) findViewById(R.id.cont);
         cont.setOnClickListener(this);
+
+        // Set VM policy to avoid crash when sending folder URI to file manager.
+        StrictMode.VmPolicy policy = new StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build();
+        StrictMode.setVmPolicy(policy);
 
         if (!isFirstStart()) {
             if (haveStoragePermission()) {
