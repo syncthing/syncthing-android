@@ -62,7 +62,7 @@ public class SyncthingService extends Service implements
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
      */
-    public static final long GUI_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(2);
+    public static final long GUI_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(5);
 
     /**
      * name of the public key file in the data directory.
