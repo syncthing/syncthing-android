@@ -1,12 +1,10 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
@@ -32,10 +31,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Shares incoming files to syncthing folders.
  */
 public class ShareActivity extends SyncthingActivity
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
+
+    private static final String TAG = "ShareActivity";
+
     @Override
     public void onApiChange(SyncthingService.State currentState) {
         if (currentState != SyncthingService.State.ACTIVE || getApi() == null)
@@ -47,7 +49,7 @@ public class ShareActivity extends SyncthingActivity
                 this, android.R.layout.simple_spinner_item, folders);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.folders_spinner);
+        Spinner sItems = (Spinner) findViewById(R.id.folders);
         sItems.setAdapter(adapter);
     }
 
@@ -57,15 +59,24 @@ public class ShareActivity extends SyncthingActivity
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
         registerOnServiceConnectedListener(this);
 
-        Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders_spinner);
+        Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders);
         Button mShareButton = (Button) findViewById(R.id.share_button);
-        EditText mShareName = (EditText) findViewById(R.id.share_name);
+        EditText mShareName = (EditText) findViewById(R.id.name);
+        TextView mShareTitle = (TextView) findViewById(R.id.namesTitle);
 
         // TODO: add support for EXTRA_TEXT (notes, memos sharing)
         ArrayList<Uri> extrasToCopy = new ArrayList<>();
@@ -103,7 +114,8 @@ public class ShareActivity extends SyncthingActivity
         mShareName.setText(TextUtils.join("\n", files.values()));
         if (files.size() > 1)
             mShareName.setEnabled(false);
-
+        mShareTitle.setText(getResources().getQuantityString(R.plurals.file_name_title,
+            files.size() > 1 ? 2 : 1));
         mShareButton.setOnClickListener(view -> {
             if (files.size() == 1)
                 files.entrySet().iterator().next().setValue(mShareName.getText().toString());
@@ -114,7 +126,7 @@ public class ShareActivity extends SyncthingActivity
                 FileChannel destination = null;
                 try {
                     source = new FileInputStream(entry.getKey()).getChannel();
-                    destination = new FileOutputStream(folder.path+entry.getValue()).getChannel();
+                    destination = new FileOutputStream(folder.path + entry.getValue()).getChannel();
                     if (source != null) {
                         destination.transferFrom(source, 0, source.size());
                     }
@@ -128,43 +140,35 @@ public class ShareActivity extends SyncthingActivity
                     Toast.makeText(this, "Exception", Toast.LENGTH_SHORT).show();
                 }
             }
-            Toast.makeText(this, copied+" files copied to folder \""+folder.label+"\"",
+            Toast.makeText(this, copied + " files copied to folder \"" + folder.label + "\"",
                 Toast.LENGTH_SHORT).show();
             finish();
         });
     }
 
     private String getPath(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
 
-    // copyright owncloud
+    // Check CREDITS for ownCloud Android
     private String generateDisplayName() {
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateTimeInstance();
-        return "new_file-" + df.format(date);
+        return String.format(getResources().getString(R.string.file_name_template),
+            df.format(date));
     }
 
     private String getDisplayNameForUri(Uri uri) {
-
-        if (uri == null) {
-            throw new IllegalArgumentException("Received NULL!");
-        }
-
-        String displayName = null;
+        String displayName;
 
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-            displayName = uri.getLastPathSegment();     // ready to return
-
+            displayName = uri.getLastPathSegment();
         } else {
-            // content: URI
-
             displayName = getDisplayNameFromContentResolver(uri);
-
             try {
                 if (displayName == null) {
                     // last chance to have a name
@@ -173,24 +177,23 @@ public class ShareActivity extends SyncthingActivity
 
                 // Add best possible extension
                 int index = displayName.lastIndexOf(".");
-                if (index == -1 || MimeTypeMap.getSingleton().
-                        getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
+                if (index == -1 || MimeTypeMap.getSingleton()
+                        .getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
                     String mimeType = this.getContentResolver().getType(uri);
-                    String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+                    String extension = MimeTypeMap.getSingleton()
+                        .getExtensionFromMimeType(mimeType);
                     if (extension != null) {
                         displayName += "." + extension;
                     }
                 }
-
             } catch (Exception e) {
-                //Log_OC.e(TAG, "No way to get a display name for " + uri.toString());
+                Log.e(TAG, "No way to get a display name for " + uri.toString(), e);
             }
         }
 
         // Replace path separator characters to avoid inconsistent paths
         return displayName.replaceAll("/", "-");
     }
-
 
     private String getDisplayNameFromContentResolver(Uri uri) {
         String displayName = null;
@@ -199,7 +202,6 @@ public class ShareActivity extends SyncthingActivity
             String displayNameColumn;
             if (mimeType.toLowerCase().startsWith("image/")) {
                 displayNameColumn = MediaStore.Images.ImageColumns.DISPLAY_NAME;
-
             } else if (mimeType.toLowerCase().startsWith("video/")) {
                 displayNameColumn = MediaStore.Video.VideoColumns.DISPLAY_NAME;
 
@@ -213,21 +215,19 @@ public class ShareActivity extends SyncthingActivity
             Cursor cursor = null;
             try {
                 cursor = getContentResolver().query(
-                        uri,
-                        new String[]{displayNameColumn},
-                        null,
-                        null,
-                        null
+                    uri,
+                    new String[]{displayNameColumn},
+                    null,
+                    null,
+                    null
                 );
                 if (cursor != null) {
                     cursor.moveToFirst();
                     displayName = cursor.getString(cursor.getColumnIndex(displayNameColumn));
                 }
-
             } catch (Exception e) {
-                //Log_OC.e(TAG, "Could not retrieve display name for " + uri.toString());
+                Log.e(TAG, "Could not retrieve display name for " + uri.toString(), e);
                 // nothing else, displayName keeps null
-
             } finally {
                 if (cursor != null) {
                     cursor.close();
