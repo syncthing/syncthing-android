@@ -128,12 +128,12 @@ public class ShareActivity extends SyncthingActivity
                 FileChannel destination = null;
                 String outPath = folder.path + entry.getValue();
                 try {
-                    source = new FileInputStream(entry.getKey()).getChannel();
-                    destination = new FileOutputStream(outPath).getChannel();
                     if ((new File(outPath)).isFile()) {
                         ignored++;
                         continue;
                     }
+                    source = new FileInputStream(entry.getKey()).getChannel();
+                    destination = new FileOutputStream(outPath).getChannel();
                     if (source != null) {
                         destination.transferFrom(source, 0, source.size());
                     }
