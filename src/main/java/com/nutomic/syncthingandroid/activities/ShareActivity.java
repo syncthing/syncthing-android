@@ -20,6 +20,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
@@ -92,7 +93,7 @@ public class ShareActivity extends SyncthingActivity
         }
 
         if (extrasToCopy.isEmpty()) {
-            Toast.makeText(this, "Nothing to share", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.nothing_share), Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -116,18 +117,23 @@ public class ShareActivity extends SyncthingActivity
         if (files.size() > 1)
             mShareName.setEnabled(false);
         mShareTitle.setText(getResources().getQuantityString(R.plurals.file_name_title,
-            files.size() > 1 ? 2 : 1));
+                files.size() > 1 ? 2 : 1));
         mShareButton.setOnClickListener(view -> {
             if (files.size() == 1)
                 files.entrySet().iterator().next().setValue(mShareName.getText().toString());
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
-            int copied = 0;
+            int copied = 0, ignored = 0;
             for (Map.Entry<String, String> entry : files.entrySet()) {
                 FileChannel source = null;
                 FileChannel destination = null;
+                String outPath = folder.path + entry.getValue();
                 try {
                     source = new FileInputStream(entry.getKey()).getChannel();
-                    destination = new FileOutputStream(folder.path + entry.getValue()).getChannel();
+                    destination = new FileOutputStream(outPath).getChannel();
+                    if ((new File(outPath)).isFile()) {
+                        ignored++;
+                        continue;
+                    }
                     if (source != null) {
                         destination.transferFrom(source, 0, source.size());
                     }
@@ -141,8 +147,8 @@ public class ShareActivity extends SyncthingActivity
                     Toast.makeText(this, "Exception", Toast.LENGTH_SHORT).show();
                 }
             }
-            Toast.makeText(this, copied + " files copied to folder \"" + folder.label + "\"",
-                Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.copy_success, copied, folder.label, ignored),
+                    Toast.LENGTH_SHORT).show();
             finish();
         });
         mCancelButton.setOnClickListener(view -> finish());
@@ -161,7 +167,7 @@ public class ShareActivity extends SyncthingActivity
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateTimeInstance();
         return String.format(getResources().getString(R.string.file_name_template),
-            df.format(date));
+                df.format(date));
     }
 
     private String getDisplayNameForUri(Uri uri) {
@@ -183,7 +189,7 @@ public class ShareActivity extends SyncthingActivity
                         .getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
                     String mimeType = this.getContentResolver().getType(uri);
                     String extension = MimeTypeMap.getSingleton()
-                        .getExtensionFromMimeType(mimeType);
+                            .getExtensionFromMimeType(mimeType);
                     if (extension != null) {
                         displayName += "." + extension;
                     }
@@ -217,11 +223,11 @@ public class ShareActivity extends SyncthingActivity
             Cursor cursor = null;
             try {
                 cursor = getContentResolver().query(
-                    uri,
-                    new String[]{displayNameColumn},
-                    null,
-                    null,
-                    null
+                        uri,
+                        new String[]{displayNameColumn},
+                        null,
+                        null,
+                        null
                 );
                 if (cursor != null) {
                     cursor.moveToFirst();
@@ -239,4 +245,3 @@ public class ShareActivity extends SyncthingActivity
         return displayName;
     }
 }
-

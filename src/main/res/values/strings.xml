@@ -430,7 +430,13 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_title">Folder</string>
 
     <!-- New file name template -->
-    <string name="file_name_template">New file %1s</string>
+    <string name="file_name_template">New file %1$s</string>
+
+    <!-- Nothing to share toast -->
+    <string name="nothing_share">Nothing to share</string>
+
+    <!-- Copy success toast -->
+    <string name="copy_success">%1$d files copied to folder "%2$s", %3$d ignored</string>
 
     <plurals name="file_name_title">
         <item quantity="one">File Name</item>
