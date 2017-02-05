@@ -75,6 +75,7 @@ public class ShareActivity extends SyncthingActivity
 
         Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders);
         Button mShareButton = (Button) findViewById(R.id.share_button);
+        Button mCancelButton = (Button) findViewById(R.id.cancel_button);
         EditText mShareName = (EditText) findViewById(R.id.name);
         TextView mShareTitle = (TextView) findViewById(R.id.namesTitle);
 
@@ -144,6 +145,7 @@ public class ShareActivity extends SyncthingActivity
                 Toast.LENGTH_SHORT).show();
             finish();
         });
+        mCancelButton.setOnClickListener(view -> finish());
     }
 
     private String getPath(Uri uri) {

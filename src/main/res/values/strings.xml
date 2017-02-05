@@ -423,6 +423,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Title of the "save" button -->
     <string name="save_title">Save</string>
 
+    <!-- Title of the "cancel" button -->
+    <string name="cancel_title">Cancel</string>
+
     <!-- Title of the "save" button -->
     <string name="folder_title">Folder</string>
 
