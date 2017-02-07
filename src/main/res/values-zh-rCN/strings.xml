@@ -186,8 +186,8 @@
   <string name="run_as_foreground_service_summary">如果启用，Syncthing 将以后台优先级运行，可以更少地被 Android 停止。这也可能在可用内存过低时引起其他服务关闭。因为 Android 的要求，会忽略“通知”的设置而显示一个低优先级的通知。</string>
   <string name="use_tor_title">使用 Tor</string>
   <string name="use_tor_summary">强制所有流量通过 TOR 以提高保密性。需要 Orbot</string>
-  <string name="use_legacy_hashing_title">使用旧版哈希</string>
-  <string name="use_legacy_hashing_summary">强制 syncthing 使用旧版哈希包出于兼容目的</string>
+  <string name="use_legacy_hashing_title">使用传统哈希</string>
+  <string name="use_legacy_hashing_summary">强制 syncthing 使用传统哈希包出于兼容目的</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">您确定要导出您的配置？若您之前导出过配置，则文件会被当前导出的配置所覆盖。\n\n 警告！其他应用程序可以从您导出的配置文件中获取到您的密钥，并且可以通过它来下载或者修改您的同步文件。</string>
   <!--Dialog shown before config import-->

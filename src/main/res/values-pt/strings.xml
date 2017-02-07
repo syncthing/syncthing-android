@@ -32,13 +32,18 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="toast_write_storage_permission_required">Esta aplicação precisa de permissão de escrita no armazenamento</string>
   <string name="device_rejected">O dispositivo %1$s quer conectar-se</string>
   <string name="folder_rejected">O dispositivo %1$s quer partilhar a pasta %2$s</string>
+  <string name="dialog_disable_battery_optimization_title">Optimização da bateria</string>
+  <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização passado algum tempo. Para prevenir isso, desligue a optimização da bateria.\n\nAlguns dispositivos têm aplicações adicionais pré-instaladas para matar tarefas. Deve adicionar o Syncthing à lista de excepções dessas aplicações.</string>
   <string name="dialog_disable_battery_optimization_later">Mais tarde</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Não apresentar novamente</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Não foram encontradas quaisquer pastas</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d ficheiros</string>
+  <string name="toast_no_file_manager">Não foi encontrado um gestor de ficheiros compatível</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivos</string>
   <!--Shown if no devices exist-->
@@ -179,6 +184,8 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="run_as_foreground_service_summary">Se estiver activado, o Syncthing irá correr com prioridade de primeiro plano e tem menos probabilidades de ser parado pelo Android. Isto pode fazer com que outros serviços parem se a memória estiver baixa. Uma notificação de baixa prioridade tem que ser apresentada por causa de exigências do Android, independentemente da definição de \"Notificação\".</string>
   <string name="use_tor_title">Utilizar o Tor</string>
   <string name="use_tor_summary">Forçar todo o tráfego através do Tor para aumentar a privacidade. Exige Orbot</string>
+  <string name="use_legacy_hashing_title">Usar verificação antiga</string>
+  <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar um pacote de verificação antiga por questões de compatabilidade</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Tem a certeza de que quer exportar a sua configuração? Ficheiros existentes serão sobrescritos.\n\nAVISO! Outras aplicações poderão ler a chave privada da localização da cópia de segurança e utilizá-la para descarregar/modificar os ficheiros sincronizados.</string>
   <!--Dialog shown before config import-->

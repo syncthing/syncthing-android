@@ -185,7 +185,7 @@
   <string name="use_tor_title">Tor を使用する</string>
   <string name="use_tor_summary">プライバシー保護のため、強制的にすべてのトラフィックを Tor を介します。Orbot が必要です</string>
   <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
-  <string name="use_legacy_hashing_summary">互換性のために、強制的にsyncthingが従来のハッシュパッケージを使用するようにします</string>
+  <string name="use_legacy_hashing_summary">互換性のため、Syncthingが強制的に従来のハッシュパッケージを使用するようにします</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
   <!--Dialog shown before config import-->

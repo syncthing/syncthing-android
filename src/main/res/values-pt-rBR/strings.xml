@@ -185,7 +185,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="use_tor_title">Usar Tor</string>
   <string name="use_tor_summary">Forçar o tráfego de dados pela rede Tor para maior privacidade. Orbot deve ser instalado</string>
   <string name="use_legacy_hashing_title">Usar hashing legado</string>
-  <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar o hashing legado para fins de compatibilidade</string>
+  <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar hashing legado para fins de compatibilidade</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Quer mesmo exportar a configuração? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
   <!--Dialog shown before config import-->

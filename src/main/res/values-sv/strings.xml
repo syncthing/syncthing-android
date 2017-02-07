@@ -138,7 +138,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="web_gui_title">Webb-GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Inställningar</string>
-  <string name="category_run_conditions">Körningsbetingelser</string>
+  <string name="category_run_conditions">Körbetingelser</string>
   <string name="category_behaviour">Beteende</string>
   <string name="category_syncthing_options">Syncthing alternativ</string>
   <string name="category_backup">Säkerhetskopiera</string>
@@ -150,12 +150,12 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing körs bara när den uttryckligen har startats, och kan stoppas genom menyknapp.</string>
   <string name="sync_only_charging">Synkronisera endast vid laddning</string>
-  <string name="sync_only_wifi">Synkronisera endast på WiFi</string>
-  <string name="sync_only_wifi_ssids">Begränsa till vissa WiFi-nätverk</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på WiFi för att välja nätverk.</string>
-  <string name="advanced_folder_picker">Använd avancerade katalogväljaren</string>
+  <string name="sync_only_wifi">Synkronisera endast via wifi</string>
+  <string name="sync_only_wifi_ssids">Begränsa till vissa wifi-nätverk</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på wifi för att välja nätverk.</string>
+  <string name="advanced_folder_picker">Använd avancerad katalogväljaren</string>
   <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
-  <string name="use_root_title">Kör Syncthing som superanvändare</string>
+  <string name="use_root_title">Kör som superanvändare</string>
   <string name="use_root_summary">Detta är en instabil funktion som kan orsaka problem med Syncthing och med din enhet enhet. Om du stöter på problem, kan du behöva installera om Syncthing.</string>
   <string name="notification_type_title">Avisering</string>
   <string name="notification_type_summary">Välj aviseringstypen</string>
@@ -185,9 +185,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="use_tor_title">Använd Tor</string>
   <string name="use_tor_summary">Tvinga all trafik genom Tor för ökad integritet. Kräver Orbot</string>
   <string name="use_legacy_hashing_title">Använd legacy hashing</string>
-  <string name="use_legacy_hashing_summary">Tvinga syncthing att använda legacy hashingspaket för kompatibilitetsändamål</string>
+  <string name="use_legacy_hashing_summary">Tvinga Syncthing att använda legacy hashningspaket för kompatibilitetsändamål</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vill du verkligen vill exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
+  <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
   <!--Toast shown after config was successfully exported-->
@@ -198,14 +198,14 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna finns i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Felsöksalternativ</string>
+  <string name="sttrace_title">Felsök alternativ</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">Endast 0-9, a-z och \',\' är tillåtna i STTRACE alternativ</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Återställ databas</string>
   <!--Syncthing was reset-->
   <string name="streset_question">Denna åtgärd bör endast utföras baserad på en rekommendation från vår support grupp.
-\nÄr du säker på att du vill rensa Syncthings indexdatabas?</string>
+\nÄr du säker på att du vill rensa Syncthings index databas?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Syncthings databas återställdes</string>
   <string name="category_about">Om</string>
