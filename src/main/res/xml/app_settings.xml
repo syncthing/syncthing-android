@@ -199,6 +199,14 @@
         android:title="@string/category_about">
 
         <Preference
+            android:title="@string/syncthing_forum_title"
+            android:summary="@string/syncthing_forum_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/syncthing_forum_url" />
+        </Preference>
+
+        <Preference
             android:title="@string/report_issue_title"
             android:summary="@string/report_issue_summary">
             <intent
@@ -216,13 +224,11 @@
 
         <Preference
             android:key="syncthing_version"
-            android:title="@string/syncthing_version_title"
-            style="?android:preferenceInformationStyle" />
+            android:title="@string/syncthing_version_title" />
 
         <Preference
             android:key="app_version"
-            android:title="@string/app_version_title"
-            style="?android:preferenceInformationStyle" />
+            android:title="@string/app_version_title" />
 
     </PreferenceScreen>
 
