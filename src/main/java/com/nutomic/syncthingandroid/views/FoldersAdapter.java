@@ -63,17 +63,17 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         });
 
         if (model != null) {
-            int percentage = (model.globalBytes != 0)
-                    ? Math.round(100 * model.inSyncBytes / model.globalBytes)
+            int percentage = (model.localBytes != 0)
+                    ? Math.round(100 * model.inSyncBytes / model.localBytes)
                     : 100;
             binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
             binding.items.setVisibility(VISIBLE);
             binding.items.setText(getContext()
-                    .getString(R.string.files, model.inSyncFiles, model.globalFiles));
+                    .getString(R.string.files, model.inSyncFiles, model.localFiles));
             binding.size.setVisibility(VISIBLE);
             binding.size.setText(getContext().getString(R.string.folder_size_format,
                     Util.readableFileSize(getContext(), model.inSyncBytes),
-                    Util.readableFileSize(getContext(), model.globalBytes)));
+                    Util.readableFileSize(getContext(), model.localBytes)));
             setTextOrHide(binding.invalid, model.invalid);
         } else {
             binding.items.setVisibility(GONE);
