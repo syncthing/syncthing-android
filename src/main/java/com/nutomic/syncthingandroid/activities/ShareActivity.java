@@ -163,7 +163,7 @@ public class ShareActivity extends SyncthingActivity
         }
 
         // Replace path separator characters to avoid inconsistent paths
-        return displayName.replaceAll("/", "-");
+        return displayName != null ? displayName.replaceAll("/", "-") : null;
     }
 
     private String getDisplayNameFromContentResolver(Uri uri) {
