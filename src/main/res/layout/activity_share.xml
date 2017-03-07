@@ -39,8 +39,7 @@
                 android:inputType="text|textMultiLine"
                 android:layout_below="@+id/namesTitle"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:maxLines="3" />
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:text="@string/folder_title"

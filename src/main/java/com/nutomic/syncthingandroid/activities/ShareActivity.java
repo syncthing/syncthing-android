@@ -1,9 +1,11 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -21,9 +23,10 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,69 +100,29 @@ public class ShareActivity extends SyncthingActivity
             finish();
         }
 
-        Map<String, String> files = new HashMap<>();
+        Map<Uri, String> files = new HashMap<>();
         for (Uri sourceUri : extrasToCopy) {
             String displayName = getDisplayNameForUri(sourceUri);
             if (displayName == null) {
                 displayName = generateDisplayName();
             }
-            String path = null;
-            if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
-                path = getPath(sourceUri);
-            } else if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
-                path = sourceUri.getPath();
-            }
-
-            files.put(path, displayName);
+            files.put(sourceUri, displayName);
         }
 
         mShareName.setText(TextUtils.join("\n", files.values()));
-        if (files.size() > 1)
-            mShareName.setEnabled(false);
+        if (files.size() > 1) {
+            mShareName.setFocusable(false);
+            mShareName.setKeyListener(null);
+        }
         mShareTitle.setText(getResources().getQuantityString(R.plurals.file_name_title,
                 files.size() > 1 ? 2 : 1));
         mShareButton.setOnClickListener(view -> {
             if (files.size() == 1)
                 files.entrySet().iterator().next().setValue(mShareName.getText().toString());
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
-            int copied = 0, ignored = 0;
-            for (Map.Entry<String, String> entry : files.entrySet()) {
-                FileChannel source = null;
-                FileChannel destination = null;
-                String outPath = folder.path + entry.getValue();
-                try {
-                    if ((new File(outPath)).isFile()) {
-                        ignored++;
-                        continue;
-                    }
-                    source = new FileInputStream(entry.getKey()).getChannel();
-                    destination = new FileOutputStream(outPath).getChannel();
-                    if (source != null) {
-                        destination.transferFrom(source, 0, source.size());
-                    }
-                    if (source != null) {
-                        source.close();
-                    }
-                    destination.close();
-                    copied++;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Exception", Toast.LENGTH_SHORT).show();
-                }
-            }
-            Toast.makeText(this, getString(R.string.copy_success, copied, folder.label, ignored),
-                    Toast.LENGTH_SHORT).show();
-            finish();
+            new CopyFilesTask(files, folder).execute();
         });
         mCancelButton.setOnClickListener(view -> finish());
-    }
-
-    private String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
     }
 
     // Check CREDITS for ownCloud Android
@@ -243,5 +206,77 @@ public class ShareActivity extends SyncthingActivity
             }
         }
         return displayName;
+    }
+
+    private class CopyFilesTask extends AsyncTask<Void, Void, Boolean> {
+        ProgressDialog progress;
+        Map<Uri, String> files;
+        Folder folder;
+        int copied = 0, ignored = 0;
+
+        CopyFilesTask(Map<Uri, String> files, Folder folder) {
+            this.files = files;
+            this.folder = folder;
+        }
+
+        protected void onPreExecute() {
+            progress = ProgressDialog.show(ShareActivity.this, null,
+                    getString(R.string.copy_progress), true);
+        }
+
+        protected Boolean doInBackground(Void... params) {
+            boolean isError = false;
+            for (Map.Entry<Uri, String> entry : files.entrySet()) {
+                InputStream inputStream = null;
+                FileOutputStream outputStream = null;
+                String outPath = folder.path + entry.getValue();
+                try {
+                    if ((new File(outPath)).isFile()) {
+                        ignored++;
+                        continue;
+                    }
+                    inputStream = getContentResolver().openInputStream(entry.getKey());
+                    outputStream = new FileOutputStream(outPath);
+                    byte[] buffer = new byte[4096];
+                    int count;
+                    while ((count = inputStream.read(buffer)) > 0) {
+                        outputStream.write(buffer, 0, count);
+                    }
+                    copied++;
+                } catch (FileNotFoundException e) {
+                    Log.e(TAG, String.format("Can't find input file \"%s\" to copy",
+                            entry.getKey()), e);
+                    isError = true;
+                } catch (IOException e) {
+                    Log.e(TAG, String.format("IO exception during file \"%s\" sharing",
+                            entry.getKey()), e);
+                    isError = true;
+                } finally {
+                    try {
+                        if (inputStream != null)
+                            inputStream.close();
+                        if (outputStream != null)
+                            outputStream.close();
+                    } catch (Exception e) {
+                        Log.w(TAG, "Exception on input/output stream close", e);
+                    }
+                }
+            }
+            return isError;
+        }
+
+        protected void onPostExecute(Boolean isError) {
+            progress.dismiss();
+            Toast.makeText(ShareActivity.this, ignored > 0 ?
+                    getString(R.string.copy_success_partially, copied, folder.label, ignored) :
+                    getResources().getQuantityString(R.plurals.copy_success, copied, copied,
+                            folder.label),
+                    Toast.LENGTH_LONG).show();
+            if (isError) {
+                Toast.makeText(ShareActivity.this, getString(R.string.copy_exception),
+                        Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        }
     }
 }
