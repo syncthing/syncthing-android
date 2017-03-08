@@ -1,6 +1,6 @@
 --- /net/dnsconfig_unix.go	2016-08-20 08:14:05.763235602 -0400
 +++ /net/dnsconfig_unix.go	2016-08-20 08:14:05.763235602 -0400
-@@ -9,15 +9,58 @@
+@@ -9,16 +9,59 @@
  package net
  
  import (
@@ -8,6 +8,7 @@
  	"os"
 +	"os/exec"
 +	"strings"
+ 	"sync/atomic"
  	"time"
  )
  
@@ -27,7 +28,7 @@
 +		}
 +		output := strings.Trim(string(outputBytes), "\n")
 +		if ParseIP(output) != nil {
-+			servers = append(servers, output + ":53")
++			servers = append(servers, JoinHostPort(output, "53"))
 +		}
 +	}
 +
@@ -60,7 +61,7 @@
  type dnsConfig struct {
  	servers    []string      // server addresses (in host:port form) to use
  	search     []string      // rooted suffixes to append to local name
-@@ -40,7 +83,7 @@
+@@ -42,7 +85,7 @@ func dnsReadConfig(filename string) *dnsConfig {
  	}
  	file, err := open(filename)
  	if err != nil {
@@ -69,7 +70,7 @@
  		conf.search = dnsDefaultSearch()
  		conf.err = err
  		return conf
-@@ -49,7 +92,7 @@
+@@ -51,7 +94,7 @@ func dnsReadConfig(filename string) *dnsConfig {
  	if fi, err := file.file.Stat(); err == nil {
  		conf.mtime = fi.ModTime()
  	} else {
@@ -78,7 +79,7 @@
  		conf.search = dnsDefaultSearch()
  		conf.err = err
  		return conf
-@@ -126,7 +169,7 @@
+@@ -130,7 +173,7 @@ func dnsReadConfig(filename string) *dnsConfig {
  		}
  	}
  	if len(conf.servers) == 0 {
