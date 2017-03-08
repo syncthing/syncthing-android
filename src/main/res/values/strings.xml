@@ -437,14 +437,14 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Copy success toast partially -->
     <plurals name="copy_success_partially">
-        <item quantity="one">%1$d file copied to folder "%2$s", %3$d already exist</item>
-        <item quantity="other">%1$d files copied to folder "%2$s", %3$d already exist</item>
+        <item quantity="one">%1$d file copied to folder \"%2$s\", %3$d already exist</item>
+        <item quantity="other">%1$d files copied to folder \"%2$s\", %3$d already exist</item>
     </plurals>
 
     <!-- Copy success toast -->
     <plurals name="copy_success">
-        <item quantity="one">%1$d file copied to folder "%2$s"</item>
-        <item quantity="other">%1$d files copied to folder "%2$s"</item>
+        <item quantity="one">%1$d file copied to folder \"%2$s\"</item>
+        <item quantity="other">%1$d files copied to folder \"%2$s\"</item>
     </plurals>
 
     <!-- Copy exception toast -->
