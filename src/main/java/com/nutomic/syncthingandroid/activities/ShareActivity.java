@@ -269,7 +269,7 @@ public class ShareActivity extends SyncthingActivity
             progress.dismiss();
             Toast.makeText(ShareActivity.this, ignored > 0 ?
                     getResources().getQuantityString(R.plurals.copy_success_partially, copied,
-                            folder.label, ignored) :
+                            copied, folder.label, ignored) :
                     getResources().getQuantityString(R.plurals.copy_success, copied, copied,
                             folder.label),
                     Toast.LENGTH_LONG).show();
