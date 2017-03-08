@@ -1,18 +1,23 @@
 package com.nutomic.syncthingandroid.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.annimon.stream.Stream;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.nutomic.syncthingandroid.BuildConfig;
+import com.nutomic.syncthingandroid.R;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -37,8 +42,9 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_NICE = "SyncthingRunnableIoNice";
     private static final String TAG_KILL = "SyncthingRunnableKill";
     public static final String UNIT_TEST_PATH = "was running";
-    public static final String BINARY_NAME = "libsyncthing.so";
+    private static final String BINARY_NAME = "libsyncthing.so";
     private static final int LOG_FILE_MAX_LINES = 10000;
+    private static final int NOTIFICATION_ID_CRASH = 9;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
     private final Context mContext;
@@ -158,13 +164,20 @@ public class SyncthingRunnable implements Runnable {
                             .setAction(SyncthingService.ACTION_RESTART));
                     break;
                 default:
-                    // Report Syncthing crashes, using Exception in debug mode or log in release mode.
-                    String message = "Syncthing binary crashed with error code " +
-                            Integer.toString(ret) + ", output:\n" + mErrorLog;
-                    if (BuildConfig.DEBUG)
-                        throw new RuntimeException(message);
-                    else
-                        Log.e(TAG, message);
+                    // Show notification to inform user about crash.
+                    Intent intent = new Intent();
+                    intent.setAction(android.content.Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
+                    Notification n = new NotificationCompat.Builder(mContext)
+                            .setContentTitle(mContext.getString(R.string.notification_crash_title))
+                            .setContentText(mContext.getString(R.string.notification_crash_text))
+                            .setSmallIcon(R.drawable.ic_stat_notify)
+                            .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
+                            .setAutoCancel(true)
+                            .build();
+                    NotificationManager nm = (NotificationManager)
+                            mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                    nm.notify(NOTIFICATION_ID_CRASH, n);
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
