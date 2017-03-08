@@ -436,7 +436,10 @@ Please report any problems you encounter via Github.</string>
     <string name="nothing_share">Nothing to share</string>
 
     <!-- Copy success toast partially -->
-    <string name="copy_success_partially">%1$d files copied to folder "%2$s", %3$d already exist</string>
+    <plurals name="copy_success_partially">
+        <item quantity="one">%1$d file copied to folder "%2$s", %3$d already exist</item>
+        <item quantity="other">%1$d files copied to folder "%2$s", %3$d already exist</item>
+    </plurals>
 
     <!-- Copy success toast -->
     <plurals name="copy_success">

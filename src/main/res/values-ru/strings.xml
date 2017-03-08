@@ -247,19 +247,6 @@
   <string name="retrieving_logs">Получение логов...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Поделиться</string>
-  <!-- ShareActivity -->
-  <!-- Title of the "share" activity -->
-  <string name="share_activity_title">Сохранить в Syncthing</string>
-  <!-- Title of the "save" button -->
-  <string name="save_title">Сохранить</string>
-  <!-- Title of the "save" button -->
-  <string name="folder_title">Папка</string>
-  <!-- New file name template -->
-  <string name="file_name_template">Новый файл %1s</string>
-  <plurals name="file_name_title">
-    <item quantity="one">Имя файла</item>
-    <item quantity="other">Список файлов</item>
-  </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing выключен</string>

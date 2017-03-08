@@ -171,12 +171,12 @@ public class ShareActivity extends SyncthingActivity
         String mimeType = getContentResolver().getType(uri);
         if (mimeType != null) {
             String displayNameColumn;
-            if (mimeType.toLowerCase().startsWith("image/")) {
+            if (mimeType.startsWith("image/")) {
                 displayNameColumn = MediaStore.Images.ImageColumns.DISPLAY_NAME;
-            } else if (mimeType.toLowerCase().startsWith("video/")) {
+            } else if (mimeType.startsWith("video/")) {
                 displayNameColumn = MediaStore.Video.VideoColumns.DISPLAY_NAME;
 
-            } else if (mimeType.toLowerCase().startsWith("audio/")) {
+            } else if (mimeType.startsWith("audio/")) {
                 displayNameColumn = MediaStore.Audio.AudioColumns.DISPLAY_NAME;
 
             } else {
@@ -268,7 +268,8 @@ public class ShareActivity extends SyncthingActivity
         protected void onPostExecute(Boolean isError) {
             progress.dismiss();
             Toast.makeText(ShareActivity.this, ignored > 0 ?
-                    getString(R.string.copy_success_partially, copied, folder.label, ignored) :
+                    getResources().getQuantityString(R.plurals.copy_success_partially, copied,
+                            folder.label, ignored) :
                     getResources().getQuantityString(R.plurals.copy_success, copied, copied,
                             folder.label),
                     Toast.LENGTH_LONG).show();
