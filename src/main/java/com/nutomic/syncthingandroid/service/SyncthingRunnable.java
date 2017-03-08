@@ -38,7 +38,7 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_KILL = "SyncthingRunnableKill";
     public static final String UNIT_TEST_PATH = "was running";
     public static final String BINARY_NAME = "libsyncthing.so";
-    private static final int LOG_FILE_MAX_LINES = 1000;
+    private static final int LOG_FILE_MAX_LINES = 10000;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
     private final Context mContext;
