@@ -30,7 +30,7 @@ case "$1" in
     arm64)
         export GOOS=linux
         export GOARCH=arm64
-        export GOARM=8
+        unset GOARM
         ;;
     386)
         export GOOS=linux
