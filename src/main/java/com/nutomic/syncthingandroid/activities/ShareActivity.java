@@ -18,13 +18,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -125,7 +125,8 @@ public class ShareActivity extends SyncthingActivity
         mCancelButton.setOnClickListener(view -> finish());
     }
 
-    // Check CREDITS for ownCloud Android
+    // Taken from ownCloud Android
+    // (GNU GPL v2.0 https://github.com/owncloud/android/blob/master/LICENSE.txt)
     private String generateDisplayName() {
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateTimeInstance();
@@ -209,40 +210,35 @@ public class ShareActivity extends SyncthingActivity
     }
 
     private class CopyFilesTask extends AsyncTask<Void, Void, Boolean> {
-        ProgressDialog progress;
-        Map<Uri, String> files;
-        Folder folder;
-        int copied = 0, ignored = 0;
+        private ProgressDialog mProgress;
+        private Map<Uri, String> mFiles;
+        private Folder mFolder;
+        private int mCopied = 0, mIgnored = 0;
 
         CopyFilesTask(Map<Uri, String> files, Folder folder) {
-            this.files = files;
-            this.folder = folder;
+            this.mFiles = files;
+            this.mFolder = folder;
         }
 
         protected void onPreExecute() {
-            progress = ProgressDialog.show(ShareActivity.this, null,
+            mProgress = ProgressDialog.show(ShareActivity.this, null,
                     getString(R.string.copy_progress), true);
         }
 
         protected Boolean doInBackground(Void... params) {
             boolean isError = false;
-            for (Map.Entry<Uri, String> entry : files.entrySet()) {
+            for (Map.Entry<Uri, String> entry : mFiles.entrySet()) {
                 InputStream inputStream = null;
-                FileOutputStream outputStream = null;
-                String outPath = folder.path + entry.getValue();
+                String outPath = mFolder.path + entry.getValue();
                 try {
-                    if ((new File(outPath)).isFile()) {
-                        ignored++;
+                    File outFile = new File(outPath);
+                    if (outFile.isFile()) {
+                        mIgnored++;
                         continue;
                     }
                     inputStream = getContentResolver().openInputStream(entry.getKey());
-                    outputStream = new FileOutputStream(outPath);
-                    byte[] buffer = new byte[4096];
-                    int count;
-                    while ((count = inputStream.read(buffer)) > 0) {
-                        outputStream.write(buffer, 0, count);
-                    }
-                    copied++;
+                    Files.asByteSink(outFile).writeFrom(inputStream);
+                    mCopied++;
                 } catch (FileNotFoundException e) {
                     Log.e(TAG, String.format("Can't find input file \"%s\" to copy",
                             entry.getKey()), e);
@@ -255,8 +251,6 @@ public class ShareActivity extends SyncthingActivity
                     try {
                         if (inputStream != null)
                             inputStream.close();
-                        if (outputStream != null)
-                            outputStream.close();
                     } catch (Exception e) {
                         Log.w(TAG, "Exception on input/output stream close", e);
                     }
@@ -266,12 +260,12 @@ public class ShareActivity extends SyncthingActivity
         }
 
         protected void onPostExecute(Boolean isError) {
-            progress.dismiss();
-            Toast.makeText(ShareActivity.this, ignored > 0 ?
-                    getResources().getQuantityString(R.plurals.copy_success_partially, copied,
-                            copied, folder.label, ignored) :
-                    getResources().getQuantityString(R.plurals.copy_success, copied, copied,
-                            folder.label),
+            mProgress.dismiss();
+            Toast.makeText(ShareActivity.this, mIgnored > 0 ?
+                    getResources().getQuantityString(R.plurals.copy_success_partially, mCopied,
+                            mCopied, mFolder.label, mIgnored) :
+                    getResources().getQuantityString(R.plurals.copy_success, mCopied, mCopied,
+                            mFolder.label),
                     Toast.LENGTH_LONG).show();
             if (isError) {
                 Toast.makeText(ShareActivity.this, getString(R.string.copy_exception),
