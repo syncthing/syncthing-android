@@ -27,7 +27,7 @@
 +		}
 +		output := strings.Trim(string(outputBytes), "\n")
 +		if ParseIP(output) != nil {
-+			servers = append(servers, output + ":53")
++			servers = append(servers, JoinHostPort(output, "53"))
 +		}
 +	}
 +
