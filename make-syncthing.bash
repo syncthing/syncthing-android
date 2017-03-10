@@ -17,7 +17,7 @@ case "$1" in
         export CGO_ENABLED=0
         export GOOS=linux
         export GOARCH=arm64
-        export GOARM=8
+        unset GOARM
         export TARGETDIR=$MYDIR$JNIDIR/arm64-v8a
         ;;
     386)
