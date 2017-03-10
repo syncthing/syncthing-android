@@ -19,7 +19,7 @@ PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "ext/syncthing/src/github.com/syncthing/syncthing/"
 git fetch
 CURRENT_TAG=$(git describe)
-LATEST_TAG=$(git describe $(git rev-list --tags --max-count=1))
+LATEST_TAG=$(git tag --sort=taggerdate | awk '!/rc/' | tail -1)
 if [ $CURRENT_TAG != $LATEST_TAG ]
 then
     git checkout -f $LATEST_TAG
