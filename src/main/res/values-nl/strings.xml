@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Open bestandssynchronisatie: betrouwbaar en decentraal</string>
+  <string name="app_description">Een open, betrouwbare en gedecentraliseerde applicatie voor bestandssynchronisatie.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
@@ -87,7 +87,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Setting title-->
   <string name="delete_folder">Map verwijderen</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Map creeëren</string>
+  <string name="create_folder">Map aanmaken</string>
   <!--Title for FolderSettingsFragment in edit mode-->
   <string name="edit_folder">Map bewerken</string>
   <!--Menu item to confirm folder creation-->
@@ -150,10 +150,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing draait enkel wanneer expliciet gestart, en kan gestopt worden door de menu-knop.</string>
   <string name="sync_only_charging">Synchroniseer alleen tijdens opladen</string>
-  <string name="sync_only_wifi">Synchroniseer alleen via Wi-Fi</string>
-  <string name="sync_only_wifi_ssids">Tot bepaalde Wi-Fi-netwerken beperken</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Wi-Fi aanzetten t.b.v. netwerkselectie.</string>
-  <string name="advanced_folder_picker">Gebruik geavanceerd map-kiezer</string>
+  <string name="sync_only_wifi">Synchroniseer alleen via wifi</string>
+  <string name="sync_only_wifi_ssids">Beperken tot bepaalde wifinetwerken</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
+  <string name="advanced_folder_picker">Gebruik geavanceerde mapkiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Syncthing uitvoeren als superuser</string>
   <string name="use_root_summary">Dit is een onstabiele functie die problemen kan veroorzaken met Syncthing en je apparaat. Als je problemen zou tegenkomen is het mogelijk dat je Syncthing opnieuw moet installeren.</string>
@@ -165,7 +165,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
     <item>Geen</item>
   </string-array>
   <string name="device_name">Apparaatnaam</string>
-  <string name="listen_address">Synchronisatieprotocol luister-adressen</string>
+  <string name="listen_address">Luisteradressen voor synchronisatieprotocol</string>
   <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
   <string name="max_send_kbps">Uitgaande snelheidslimiet (KiB/s)</string>
   <string name="global_announce_enabled">Globale ontdekking</string>
@@ -174,7 +174,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="global_announce_server">Globale ontdekkingsservers</string>
   <string name="enable_relaying">Relayen inschakelen</string>
   <string name="usage_reporting">Anoniem gebruiksrapportage</string>
-  <string name="gui_address">GUI luister-adressen</string>
+  <string name="gui_address">GUI-luisteradressen</string>
   <string name="gui_user">GUI-authenticatie gebruiker</string>
   <string name="gui_password">GUI-authenticatie wachtwoord</string>
   <string name="export_config">Configuratie exporteren</string>
@@ -213,6 +213,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="open_log">Log openen</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Open het Syncthing- en Android-logvenster</string>
+  <string name="syncthing_forum_title">Syncthing-forum</string>
+  <string name="syncthing_forum_summary">Ga naar het forum van Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Probleem rapporteren</string>
   <!--Summary for the issue tracker settings item-->
@@ -224,7 +226,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Synthing-versie</string>
   <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Syncthing-Android versie</string>
+  <string name="app_version_title">Syncthing-Android-versie</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
   <string name="folder_picker_title">Mapkiezer</string>
@@ -260,13 +262,15 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="syncthing_active">Syncthing draait</string>
   <string name="syncthing_active_foreground">Dienst wordt uitgevoerd met voorgrondprioriteit.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">Directorystructuur te diep. Controleer op cyclische symlinks</string>
+  <string name="toast_folder_observer_stack_overflow">Mapstructuur te diep. Controleer op cyclische symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Aanmaken van een Syncthing-config mislukt. Controleer de logs.</string>
+  <string name="config_create_failed">Aanmaken van een Syncthing-configuratie mislukt. Controleer de logs.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Camera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
-  <string name="default_folder_id">%1$s-photos</string>
+  <string name="default_folder_id">%1$s-foto\'s</string>
+  <string name="notification_crash_title">Syncthing is gecrasht</string>
+  <string name="notification_crash_text">Tik om logboeken te bekijken</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Herstart vereist</string>

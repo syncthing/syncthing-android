@@ -44,6 +44,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="folder_list_empty">Klasör bulunamadı</string>
   <!--Format string for folder file count-->
   <string name="files">%1$d / %2$d Dosya</string>
+  <string name="toast_no_file_manager">Uyumlu dosya yöneticisi bulunamadı</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Aygıtlar</string>
   <!--Shown if no devices exist-->
@@ -170,6 +171,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="max_send_kbps">Giden Hız Sınırı (KiB/s)</string>
   <string name="global_announce_enabled">Küresel Bulunabilirlik</string>
   <string name="local_announce_enabled">Yerel Bulunabilirlik</string>
+  <string name="enable_nat_traversal">NAT Çaprazlamasını Etkinleştir</string>
   <string name="global_announce_server">Küresel Bulunabilirlik Sunucuları</string>
   <string name="usage_reporting">Anonim Kullanım Raporlama</string>
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
@@ -209,6 +211,8 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="open_log">Günlüğü Aç</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Syncthing ve Android günlük kayıtları penceresini aç</string>
+  <string name="syncthing_forum_title">Syncthing Forumu</string>
+  <string name="syncthing_forum_summary">Syncthing Forumu\'na git</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Hata Bildir</string>
   <!--Summary for the issue tracker settings item-->
@@ -262,6 +266,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+  <string name="default_folder_id">%1$s-fotograflar</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Yeniden Başlatma Gerekli</string>

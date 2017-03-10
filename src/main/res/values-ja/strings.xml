@@ -213,6 +213,8 @@
   <string name="open_log">ログを開く</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Syncthing と Android のログ ウインドウを開く</string>
+  <string name="syncthing_forum_title">Syncthing フォーラム</string>
+  <string name="syncthing_forum_summary">Syncthing フォーラムに移動します</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">問題を報告</string>
   <!--Summary for the issue tracker settings item-->
@@ -267,6 +269,8 @@
   <string name="default_folder_label">カメラ</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-写真</string>
+  <string name="notification_crash_title">Syncthing がクラッシュしました</string>
+  <string name="notification_crash_text">クリックするとログを表示します</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>

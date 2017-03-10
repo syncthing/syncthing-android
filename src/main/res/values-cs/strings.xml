@@ -185,6 +185,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="use_tor_title">Použít Tor</string>
   <string name="use_tor_summary">Pro zvýšení bezpečnosti použít výhradně přenosy po síti TOR. Vyžadován Orbot</string>
   <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
+  <string name="use_legacy_hashing_summary">Vynutit použití původního hashovacího algoritmu pro lepší kompatibilitu</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
   <!--Dialog shown before config import-->
@@ -212,6 +213,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="open_log">Otevřít log</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Otevřít okno logu pro Syncthing a Android</string>
+  <string name="syncthing_forum_title">Syncthing fórum</string>
+  <string name="syncthing_forum_summary">Jdi na Syncthing fórum</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Nahlásit chybu</string>
   <!--Summary for the issue tracker settings item-->

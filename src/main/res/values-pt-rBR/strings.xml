@@ -98,7 +98,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="folder_id_required">O ID da pasta não pode ficar vazio</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
-  <string name="dialog_discard_changes">Descartas as alterações?</string>
+  <string name="dialog_discard_changes">Descartar as alterações?</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -214,6 +214,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="open_log">Abrir log</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Abrir a janela de log do Syncthing e do Android</string>
+  <string name="syncthing_forum_title">Fórum do Syncthing</string>
+  <string name="syncthing_forum_summary">Ir para o Fórum do Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar problema</string>
   <!--Summary for the issue tracker settings item-->

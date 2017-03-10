@@ -214,6 +214,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="open_log">Ouvrir le journal</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Ouvre la fenêtre du journal de Syncthing et Android</string>
+  <string name="syncthing_forum_title">Forum Syncthing</string>
+  <string name="syncthing_forum_summary">Aller sur le forum Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Signaler un problème</string>
   <!--Summary for the issue tracker settings item-->
@@ -268,6 +270,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="default_folder_label">Caméra</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
+  <string name="notification_crash_title">Syncthing s\'est planté</string>
+  <string name="notification_crash_text">Cliquer pour voir les journaux</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Redémarrage requis</string>

@@ -215,6 +215,8 @@
   <string name="open_log">打开日志</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">打开 Syncthing 与 Android 系统日志窗口</string>
+  <string name="syncthing_forum_title">Syncthing 论坛</string>
+  <string name="syncthing_forum_summary">转到 Syncthing 论坛</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">回报问题</string>
   <!--Summary for the issue tracker settings item-->
@@ -269,6 +271,8 @@
   <string name="default_folder_label">摄像机</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-照片</string>
+  <string name="notification_crash_title">Syncthing 已崩溃</string>
+  <string name="notification_crash_text">点击查看日志</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">需要重启以应用</string>
