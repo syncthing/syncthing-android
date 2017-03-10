@@ -127,6 +127,9 @@ public class ShareActivity extends SyncthingActivity
 
     // Taken from ownCloud Android
     // (GNU GPL v2.0 https://github.com/owncloud/android/blob/master/LICENSE.txt)
+    /**
+     * Generate file name for new file.
+     */
     private String generateDisplayName() {
         Date date = new Date(System.currentTimeMillis());
         DateFormat df = DateFormat.getDateTimeInstance();
@@ -134,6 +137,9 @@ public class ShareActivity extends SyncthingActivity
                 df.format(date));
     }
 
+    /**
+     * Get file name from uri.
+     */
     private String getDisplayNameForUri(Uri uri) {
         String displayName;
 
@@ -167,6 +173,9 @@ public class ShareActivity extends SyncthingActivity
         return displayName != null ? displayName.replaceAll("/", "-") : null;
     }
 
+    /**
+     * Get file name from content uri (content://).
+     */
     private String getDisplayNameFromContentResolver(Uri uri) {
         String displayName = null;
         String mimeType = getContentResolver().getType(uri);
