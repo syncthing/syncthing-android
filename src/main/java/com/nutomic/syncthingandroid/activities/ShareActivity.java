@@ -147,25 +147,21 @@ public class ShareActivity extends SyncthingActivity
             displayName = uri.getLastPathSegment();
         } else {
             displayName = getDisplayNameFromContentResolver(uri);
-            try {
-                if (displayName == null) {
-                    // last chance to have a name
-                    displayName = uri.getLastPathSegment().replaceAll("\\s", "");
-                }
+            if (displayName == null) {
+                // last chance to have a name
+                displayName = uri.getLastPathSegment().replaceAll("\\s", "");
+            }
 
-                // Add best possible extension
-                int index = displayName.lastIndexOf(".");
-                if (index == -1 || MimeTypeMap.getSingleton()
-                        .getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
-                    String mimeType = this.getContentResolver().getType(uri);
-                    String extension = MimeTypeMap.getSingleton()
-                            .getExtensionFromMimeType(mimeType);
-                    if (extension != null) {
-                        displayName += "." + extension;
-                    }
+            // Add best possible extension
+            int index = displayName.lastIndexOf(".");
+            if (index == -1 || MimeTypeMap.getSingleton()
+                    .getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
+                String mimeType = this.getContentResolver().getType(uri);
+                String extension = MimeTypeMap.getSingleton()
+                        .getExtensionFromMimeType(mimeType);
+                if (extension != null) {
+                    displayName += "." + extension;
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "No way to get a display name for " + uri.toString(), e);
             }
         }
 
