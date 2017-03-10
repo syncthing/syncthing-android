@@ -62,6 +62,6 @@ public class Folder {
     }
 
     public String toString() {
-        return label;
+        return label != null ? label : id;
     }
 }
