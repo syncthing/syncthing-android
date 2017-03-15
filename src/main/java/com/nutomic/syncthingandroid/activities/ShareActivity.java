@@ -189,26 +189,19 @@ public class ShareActivity extends SyncthingActivity
                 displayNameColumn = MediaStore.Files.FileColumns.DISPLAY_NAME;
             }
 
-            Cursor cursor = null;
-            try {
-                cursor = getContentResolver().query(
-                        uri,
-                        new String[]{displayNameColumn},
-                        null,
-                        null,
-                        null
-                );
-                if (cursor != null) {
-                    cursor.moveToFirst();
-                    displayName = cursor.getString(cursor.getColumnIndex(displayNameColumn));
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Could not retrieve display name for " + uri.toString(), e);
-                // nothing else, displayName keeps null
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
+            Cursor cursor = getContentResolver().query(
+                    uri,
+                    new String[]{displayNameColumn},
+                    null,
+                    null,
+                    null
+            );
+            if (cursor != null) {
+                cursor.moveToFirst();
+                displayName = cursor.getString(cursor.getColumnIndex(displayNameColumn));
+            }
+            if (cursor != null) {
+                cursor.close();
             }
         }
         return displayName;
