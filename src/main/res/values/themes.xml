@@ -24,12 +24,6 @@
         <item name="android:spinnerItemStyle">@style/Widget.Syncthing.TextView.SpinnerItem</item>
     </style>
 
-    <style name="Widget.Syncthing.TextView.SpinnerItem" parent="Widget.AppCompat.TextView.SpinnerItem">
-        <item name="android:textSize">18sp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-    </style>
-
     <style name="Theme.Syncthing" parent="Theme.Syncthing.Base"/>
 
     <style name="Theme.Syncthing.Translucent">
