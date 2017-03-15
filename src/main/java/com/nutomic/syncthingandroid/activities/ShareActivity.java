@@ -249,7 +249,7 @@ public class ShareActivity extends SyncthingActivity
                     try {
                         if (inputStream != null)
                             inputStream.close();
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                         Log.w(TAG, "Exception on input/output stream close", e);
                     }
                 }
