@@ -19,11 +19,6 @@ public class MockSyncthingService extends SyncthingService {
     }
 
     @Override
-    public void updateState() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void onCreate() {
         throw new UnsupportedOperationException();
     }
