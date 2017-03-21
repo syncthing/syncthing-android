@@ -89,6 +89,7 @@ public class SyncthingService extends Service implements
     public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
     public static final String PREF_SYNC_ONLY_WIFI_SSIDS     = "sync_only_wifi_ssids_set";
     public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
+    public static final String PREF_RESPECT_BATTERY_SAVING   = "respect_battery_saving";
     public static final String PREF_USE_ROOT                 = "use_root";
     private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
     public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
@@ -197,7 +198,7 @@ public class SyncthingService extends Service implements
      * Depending on the result, syncthing is started or stopped, and {@link #onApiChange()} is
      * called.
      */
-    public void updateState() {
+    private void updateState() {
         // Start syncthing.
         if (mDeviceStateHolder.shouldRun()) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
@@ -291,8 +292,9 @@ public class SyncthingService extends Service implements
         if (key.equals(PREF_NOTIFICATION_TYPE) || key.equals(PREF_FOREGROUND_SERVICE))
             updateNotification();
         else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI)
-                || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS))
+                || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS) || key.equals(PREF_RESPECT_BATTERY_SAVING)) {
             updateState();
+        }
     }
 
     /**

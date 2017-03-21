@@ -250,6 +250,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Please turn on WiFi to select networks.</string>
 
+    <string name="respect_battery_saving_title">Respect Android battery saving setting</string>
+    <string name="respect_battery_saving_summary">Disable Syncthing if battery saving is active</string>
+
     <string name="advanced_folder_picker">Use advanced Folder Picker</string>
 
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>

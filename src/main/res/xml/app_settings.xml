@@ -24,6 +24,12 @@
             android:key="sync_only_wifi_ssids_set"
             android:title="@string/sync_only_wifi_ssids" />
 
+        <CheckBoxPreference
+            android:key="respect_battery_saving"
+            android:title="@string/respect_battery_saving_title"
+            android:summary="@string/respect_battery_saving_summary"
+            android:defaultValue="true" />
+
     </PreferenceScreen>
 
     <PreferenceScreen

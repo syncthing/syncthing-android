@@ -95,7 +95,8 @@ public class DeviceStateHolder extends BroadcastReceiver {
 
     public void updateWifiSsid() {
         mWifiSsid = null;
-        WifiManager wifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager =
+                (WifiManager) mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         // may be null, if WiFi has been turned off in meantime
         if (wifiInfo != null) {
@@ -112,12 +113,14 @@ public class DeviceStateHolder extends BroadcastReceiver {
      */
     @TargetApi(21)
     public boolean shouldRun() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && pm.isPowerSaveMode()) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP &&
+                prefs.getBoolean("respect_battery_saving", true) &&
+                pm.isPowerSaveMode()) {
             return false;
         }
         else if (SyncthingService.alwaysRunInBackground(mContext)) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
             // Check wifi/charging state against preferences and start if ok.
             boolean prefStopMobileData = prefs.getBoolean(SyncthingService.PREF_SYNC_ONLY_WIFI, false);
             boolean prefStopNotCharging = prefs.getBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, false);
