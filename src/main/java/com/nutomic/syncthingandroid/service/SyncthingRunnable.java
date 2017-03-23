@@ -14,17 +14,20 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.annimon.stream.Stream;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -43,7 +46,7 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_KILL = "SyncthingRunnableKill";
     public static final String UNIT_TEST_PATH = "was running";
     private static final String BINARY_NAME = "libsyncthing.so";
-    private static final int LOG_FILE_MAX_LINES = 10000;
+    private static final int LOG_FILE_MAX_LINES = 10;
     private static final int NOTIFICATION_ID_CRASH = 9;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
@@ -354,10 +357,27 @@ public class SyncthingRunnable implements Runnable {
      */
     private void trimLogFile() {
         try {
-            String lines = Stream.of(Files.readLines(mLogFile, Charsets.UTF_8))
-                    .limit(LOG_FILE_MAX_LINES)
-                    .reduce("", (a, b) -> a + b + "\n");
-            Files.write(lines, mLogFile, Charsets.UTF_8);
+            LineNumberReader lnr = new LineNumberReader(new FileReader(mLogFile));
+            lnr.skip(Long.MAX_VALUE);
+
+            int lineCount = lnr.getLineNumber();
+            lnr.close();
+
+            File tempFile = new File(mContext.getExternalFilesDir(null), "syncthing.log.tmp");
+
+            BufferedReader reader = new BufferedReader(new FileReader(mLogFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+            int startFrom = lineCount - LOG_FILE_MAX_LINES;
+            for (int i = 0; (currentLine = reader.readLine()) != null; i++) {
+                if (i > startFrom) {
+                    writer.write(currentLine + "\n");
+                }
+            }
+            writer.close();
+            reader.close();
+            tempFile.renameTo(mLogFile);
         } catch (IOException e) {
             Log.w(TAG, "Failed to trim log file", e);
         }
