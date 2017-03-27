@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.model;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +63,8 @@ public class Folder {
         }
     }
 
+    @Override
     public String toString() {
-        return label != null ? label : id;
+        return !TextUtils.isEmpty(label) ? label : id;
     }
 }
