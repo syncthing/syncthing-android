@@ -144,7 +144,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="category_backup">Säkerhetskopiera</string>
   <string name="category_debug">Felsök</string>
   <string name="category_experimental">Experimentell</string>
-  <string name="always_run_in_background">Körs alltid i bakgrunden</string>
+  <string name="always_run_in_background">Kör alltid i bakgrunden</string>
   <!--Preference summary in case it is enabled-->
   <string name="always_run_in_background_enabled">Syncthing körs alltid i bakgrunden, enligt inställningar nedan.</string>
   <!--Preference summary in case it is disabled-->
@@ -153,6 +153,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="sync_only_wifi">Synkronisera endast via wifi</string>
   <string name="sync_only_wifi_ssids">Begränsa till vissa wifi-nätverk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på wifi för att välja nätverk.</string>
+  <string name="respect_battery_saving_title">Respektera Android-batterisparinställning</string>
+  <string name="respect_battery_saving_summary">Avaktivera Syncthing om batterispara är aktiv</string>
   <string name="advanced_folder_picker">Använd avancerad katalogväljaren</string>
   <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör som superanvändare</string>
@@ -187,7 +189,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="use_legacy_hashing_title">Använd legacy hashing</string>
   <string name="use_legacy_hashing_summary">Tvinga Syncthing att använda legacy hashningspaket för kompatibilitetsändamål</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att ladda ner/ändra synkroniserade filer.</string>
+  <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att hämta/ändra synkroniserade filer.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
   <!--Toast shown after config was successfully exported-->
@@ -205,7 +207,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="streset_title">Återställ databas</string>
   <!--Syncthing was reset-->
   <string name="streset_question">Denna åtgärd bör endast utföras baserad på en rekommendation från vår support grupp.
-\nÄr du säker på att du vill rensa Syncthings index databas?</string>
+\nÄr du säker på att du vill rensa Syncthings index-databas?</string>
   <!--Syncthing was reset-->
   <string name="streset_done">Syncthings databas återställdes</string>
   <string name="category_about">Om</string>
@@ -213,8 +215,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="open_log">Öppna logg</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Öppna Syncthing och Android loggfönstret</string>
-  <string name="syncthing_forum_title">Syncthing-forum</string>
-  <string name="syncthing_forum_summary">Gå till Syncthing-forumet</string>
+  <string name="syncthing_forum_title">Syncthing Forum</string>
+  <string name="syncthing_forum_summary">Gå till Syncthingforumet</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Rapportera problem</string>
   <!--Summary for the issue tracker settings item-->

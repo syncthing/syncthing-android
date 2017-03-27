@@ -153,6 +153,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="sync_only_wifi">Synchro uniquement en WiFi</string>
   <string name="sync_only_wifi_ssids">Limiter à certains réseaux WiFi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le WiFi pour sélectionner un réseau</string>
+  <string name="respect_battery_saving_title">Sauvegarde batterie selon les réglages Android</string>
+  <string name="respect_battery_saving_summary">Désactiver Synthing si la sauvegarde batterie est active.</string>
   <string name="advanced_folder_picker">Choix étendu des répertoires</string>
   <string name="advanced_folder_picker_summary">Permettre la sélection de n\'importe quel répertoire de cet appareil pour créer les partages</string>
   <string name="use_root_title">Faire fonctionner syncthing en super-utilisateur</string>

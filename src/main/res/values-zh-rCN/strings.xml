@@ -155,6 +155,8 @@
   <string name="sync_only_wifi">仅在无线网络下同步</string>
   <string name="sync_only_wifi_ssids">对某些无线网络下限制同步</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开无线网络连接并选择网络</string>
+  <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
+  <string name="respect_battery_saving_summary">禁用 Syncthing 如果省电模式已启用</string>
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
   <string name="use_root_title">Syncthing 运行于超级用户</string>

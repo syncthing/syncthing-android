@@ -153,6 +153,8 @@
   <string name="sync_only_wifi">Συγχρονισμός μόνο μέσω WiFi</string>
   <string name="sync_only_wifi_ssids">Περιορισμός σε συγκεκριμένα δίκτυα WiFi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Παρακαλώ ενεργοποιήστε το WiFi για να επιλέξετε δίκτυα.</string>
+  <string name="respect_battery_saving_title">Υπακοή στη ρύθμιση εξοικονόμησης ενέργειας του Android</string>
+  <string name="respect_battery_saving_summary">Απενεργοποίηση του Syncthing όταν είναι ενεργή η λειτουργία εξοικονόμησης ενέργειας</string>
   <string name="advanced_folder_picker">Χρήση προχωρημένου επιλογέα φακέλων</string>
   <string name="advanced_folder_picker_summary">Επιλογή οποιουδήποτε φακέλου στη συσκευή για συγχρονισμό</string>
   <string name="use_root_title">Εκτέλεση του Syncthing ως υπερχρήστης</string>
@@ -214,6 +216,8 @@
   <string name="open_log">Άνοιγμα καταγραφής συμβάντων</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Άνοιγμα του παραθύρου καταγραφής συμβάντων του Syncthing και Android</string>
+  <string name="syncthing_forum_title">Φόρουμ του Syncthing</string>
+  <string name="syncthing_forum_summary">Μετάβαση στο φόρουμ του Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Αναφορά προβλήματος</string>
   <!--Summary for the issue tracker settings item-->
@@ -268,6 +272,8 @@
   <string name="default_folder_label">Φωτογραφική μηχανή</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
+  <string name="notification_crash_title">Το Syncthing κατέρρευσε</string>
+  <string name="notification_crash_text">Πατήστε για να δείτε την καταγραφή συμβάντων</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Απαιτείται επανεκκίνηση</string>

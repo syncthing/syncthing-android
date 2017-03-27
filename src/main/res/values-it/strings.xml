@@ -153,6 +153,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="sync_only_wifi_ssids">Solo determinate reti wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
+  <string name="respect_battery_saving_title">Rispetta l\'impostazione di risparmio batteria di Android</string>
+  <string name="respect_battery_saving_summary">Disabilitare Syncthing se il risparmio della batteria è attivo</string>
   <string name="advanced_folder_picker">Selettore Cartella Avanzato</string>
   <string name="advanced_folder_picker_summary">Selezionare una cartella sul dispositivo per la sincronizzazione</string>
   <string name="use_root_title">Esegui Syncthing come Superutente</string>
@@ -185,6 +187,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="use_tor_title">Utilizza Tor</string>
   <string name="use_tor_summary">Forza tutto il traffico attraverso Tor per una maggiore privacy. Richiede Orbot</string>
   <string name="use_legacy_hashing_title">Utilizza la funzione di hash precedente</string>
+  <string name="use_legacy_hashing_summary">Forza Syncthing ad utilizzare il pacchetto di hash precedente per scopi di compatibilità</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione? I files esistenti verranno sovrascritti.n\nATTENZIONE! Le altre applicazioni potrebbero non essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
   <!--Dialog shown before config import-->
@@ -213,6 +216,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="open_log">Apri Registro</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Apre la finestra di log di Syncthing e Android</string>
+  <string name="syncthing_forum_title">Forum di Syncthing</string>
+  <string name="syncthing_forum_summary">Vai al Forum di Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Segnala Problema</string>
   <!--Summary for the issue tracker settings item-->
@@ -267,6 +272,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="default_folder_label">Camera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
+  <string name="notification_crash_title">Syncthing è andato in crash</string>
+  <string name="notification_crash_text">Clicca per visualizzare i log</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Riavvio Necessario</string>

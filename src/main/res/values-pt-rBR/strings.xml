@@ -153,6 +153,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="sync_only_wifi">Somente conectado ao WiFi</string>
   <string name="sync_only_wifi_ssids">Limitar a certas redes WiFi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
+  <string name="respect_battery_saving_title">Honrar a configuração de economia de bateria do Android</string>
+  <string name="respect_battery_saving_summary">Desabilitar Syncthing caso a economia de bateria esteja ativa</string>
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
   <string name="use_root_title">Executar como Superusuário</string>
@@ -270,6 +272,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="default_folder_label">Câmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-fotos</string>
+  <string name="notification_crash_title">O Syncthing fechou inesperadamente</string>
+  <string name="notification_crash_text">Clique para ver os logs</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>

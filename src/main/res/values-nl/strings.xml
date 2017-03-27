@@ -153,6 +153,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="sync_only_wifi">Synchroniseer alleen via wifi</string>
   <string name="sync_only_wifi_ssids">Beperken tot bepaalde wifinetwerken</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
+  <string name="respect_battery_saving_title">Eerbiedig de batterijbesparingsinstellingen van Android</string>
+  <string name="respect_battery_saving_summary">Schakel Syncthing uit wanneer batterijbesparing actief is</string>
   <string name="advanced_folder_picker">Gebruik geavanceerde mapkiezer</string>
   <string name="advanced_folder_picker_summary">Selecteer een map op het toestel om te synchroniseren</string>
   <string name="use_root_title">Syncthing uitvoeren als superuser</string>
