@@ -36,6 +36,9 @@ import java.util.Map;
 
 /**
  * Shares incoming files to syncthing folders.
+ *
+ * {@link #getDisplayNameForUri} and {@link #getDisplayNameFromContentResolver} are taken from
+ * ownCloud Android {@see https://github.com/owncloud/android/blob/79664304fdb762b2e04f1ac505f50d0923ddd212/src/com/owncloud/android/utils/UriUtils.java#L193}
  */
 public class ShareActivity extends SyncthingActivity
         implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
@@ -125,8 +128,6 @@ public class ShareActivity extends SyncthingActivity
         mCancelButton.setOnClickListener(view -> finish());
     }
 
-    // Taken from ownCloud Android
-    // (GNU GPL v2.0 https://github.com/owncloud/android/blob/master/LICENSE.txt)
     /**
      * Generate file name for new file.
      */
