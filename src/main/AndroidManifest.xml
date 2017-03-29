@@ -51,6 +51,22 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
+            android:name=".activities.ShareActivity"
+            android:label="@string/share_activity_title"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.LogActivity"
             android:label="@string/log_title"
             android:parentActivityName=".activities.SettingsActivity">
