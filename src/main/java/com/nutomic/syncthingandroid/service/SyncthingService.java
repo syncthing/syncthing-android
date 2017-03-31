@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.android.PRNGFixes;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -264,12 +265,15 @@ public class SyncthingService extends Service implements
         if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
                 !type.equals("none")) {
             Context appContext = getApplicationContext();
+            // Launch FirstStartActivity instead of MainActivity so we can request permission if
+            // necessary.
+            PendingIntent pi = PendingIntent.getActivity(appContext, 0,
+                    new Intent(appContext, FirstStartActivity.class), 0);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext)
                     .setContentTitle(getString(R.string.syncthing_active))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
-                    .setContentIntent(PendingIntent.getActivity(appContext, 0,
-                            new Intent(appContext, MainActivity.class), 0));
+                    .setContentIntent(pi);
             if (type.equals("low_priority"))
                 builder.setPriority(NotificationCompat.PRIORITY_MIN);
 
