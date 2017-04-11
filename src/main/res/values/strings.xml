@@ -357,6 +357,10 @@ Please report any problems you encounter via Github.</string>
     <!-- Summary for the log activity -->
     <string name="open_log_summary">Open the Syncthing and Android log window</string>
 
+    <string name="notify_crashes_title">Notify about Syncthing crashes</string>
+
+    <string name="notify_crashes_summary">Show a notification whenever a Syncthing crash is detected</string>
+
     <string name="syncthing_forum_title">Syncthing Forum</string>
     <string name="syncthing_forum_summary">Go to the Syncthing Forum</string>
     <string name="syncthing_forum_url" translatable="false">https://forum.syncthing.net/</string>

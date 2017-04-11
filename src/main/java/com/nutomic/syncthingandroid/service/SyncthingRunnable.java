@@ -55,6 +55,7 @@ public class SyncthingRunnable implements Runnable {
     private String[] mCommand;
     private String mErrorLog;
     private final File mLogFile;
+    private final SharedPreferences mPreferences;
 
     public enum Command {
         generate, // Generate keys, a config file and immediately exit.
@@ -71,6 +72,7 @@ public class SyncthingRunnable implements Runnable {
         mContext = context;
         mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         switch (command) {
             case generate:
                 mCommand = new String[]{ mSyncthingBinary, "-generate", mContext.getFilesDir().toString() };
@@ -96,6 +98,7 @@ public class SyncthingRunnable implements Runnable {
         mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mCommand = manualCommand;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     @Override
@@ -167,20 +170,23 @@ public class SyncthingRunnable implements Runnable {
                             .setAction(SyncthingService.ACTION_RESTART));
                     break;
                 default:
-                    // Show notification to inform user about crash.
-                    Intent intent = new Intent();
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
-                    Notification n = new NotificationCompat.Builder(mContext)
-                            .setContentTitle(mContext.getString(R.string.notification_crash_title))
-                            .setContentText(mContext.getString(R.string.notification_crash_text))
-                            .setSmallIcon(R.drawable.ic_stat_notify)
-                            .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
-                            .setAutoCancel(true)
-                            .build();
-                    NotificationManager nm = (NotificationManager)
-                            mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                    nm.notify(NOTIFICATION_ID_CRASH, n);
+                    Log.w(TAG, "Syncthing has crashed (exit code " + ret + ")");
+                    if (mPreferences.getBoolean("notify_crashes", false)) {
+                        // Show notification to inform user about crash.
+                        Intent intent = new Intent();
+                        intent.setAction(android.content.Intent.ACTION_VIEW);
+                        intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
+                        Notification n = new NotificationCompat.Builder(mContext)
+                                .setContentTitle(mContext.getString(R.string.notification_crash_title))
+                                .setContentText(mContext.getString(R.string.notification_crash_text))
+                                .setSmallIcon(R.drawable.ic_stat_notify)
+                                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
+                                .setAutoCancel(true)
+                                .build();
+                        NotificationManager nm = (NotificationManager)
+                                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                        nm.notify(NOTIFICATION_ID_CRASH, n);
+                    }
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
@@ -196,16 +202,14 @@ public class SyncthingRunnable implements Runnable {
      * Returns true if root is available and enabled in settings.
      */
     private boolean useRoot() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sp.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
+        return mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
     }
 
     /**
      * Returns true if the experimental setting for using wake locks has been enabled in settings.
      */
     private boolean useWakeLock() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sp.getBoolean(SyncthingService.PREF_USE_WAKE_LOCK, false);
+        return mPreferences.getBoolean(SyncthingService.PREF_USE_WAKE_LOCK, false);
     }
 
     /**
