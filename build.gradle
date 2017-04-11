@@ -3,10 +3,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
-        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+        classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
 
@@ -20,15 +20,16 @@ repositories {
 }
 
 dependencies {
-    compile 'eu.chainfire:libsuperuser:1.0.0.201608240809'
-    compile 'com.android.support:design:25.1.0'
+    compile 'eu.chainfire:libsuperuser:1.0.0.201704021214'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.google.zxing:android-integration:3.3.0'
     compile 'com.google.code.gson:gson:2.8.0'
-    compile 'org.mindrot:jbcrypt:0.3m'
+    compile 'org.mindrot:jbcrypt:0.4'
     compile 'com.google.guava:guava:20.0'
-    compile 'com.annimon:stream:1.1.4'
+    compile 'com.annimon:stream:1.1.7'
     compile 'com.android.volley:volley:1.0.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support:support-annotations:25.3.1'
 }
 
 android {
@@ -46,18 +47,6 @@ android {
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
-    // Disabled because it breaks travis.ci
-    /*
-    signingConfigs {
-        release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
-    buildTypes.release.signingConfig signingConfigs.release
-    */
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
