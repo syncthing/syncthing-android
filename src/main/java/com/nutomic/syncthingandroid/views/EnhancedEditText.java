@@ -1,11 +1,11 @@
 package com.nutomic.syncthingandroid.views;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.widget.EditText;
 
 import static android.view.inputmethod.EditorInfo.IME_FLAG_NO_ENTER_ACTION;
 
@@ -18,7 +18,7 @@ import static android.view.inputmethod.EditorInfo.IME_FLAG_NO_ENTER_ACTION;
  * of the IME action button with the new line character. This allows rendering soft wraps on single
  * line input.
  */
-public class EnhancedEditText extends EditText {
+public class EnhancedEditText extends AppCompatEditText {
 
     public EnhancedEditText(Context context) {
         super(context);

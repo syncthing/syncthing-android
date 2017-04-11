@@ -109,7 +109,8 @@ public class WifiSsidPreference extends MultiSelectListPreference {
      * @return a sorted array of WifiConfiguration, or null, if data cannot be retrieved
      */
     private WifiConfiguration[] loadConfiguredNetworksSorted() {
-        WifiManager wifiManager = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)
+                getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null) {
             List<WifiConfiguration> configuredNetworks = wifiManager.getConfiguredNetworks();
             // if WiFi is turned off, getConfiguredNetworks returns null on many devices
