@@ -242,6 +242,17 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="retrieving_logs">Uzyskiwanie dzienników…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Udostępnij</string>
+  <!--ShareActivity-->
+  <!--Title of the "share" activity-->
+  <!--Title of the "save" button-->
+  <!--Title of the "cancel" button-->
+  <!--Title of the "save" button-->
+  <!--New file name template-->
+  <!--Nothing to share toast-->
+  <!--Copy success toast partially-->
+  <!--Copy success toast-->
+  <!--Copy exception toast-->
+  <!--Copy progress dialog text-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing jest wyłączony</string>

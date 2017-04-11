@@ -244,6 +244,17 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="retrieving_logs">Rufe Protokoll ab...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>
+  <!--ShareActivity-->
+  <!--Title of the "share" activity-->
+  <!--Title of the "save" button-->
+  <!--Title of the "cancel" button-->
+  <!--Title of the "save" button-->
+  <!--New file name template-->
+  <!--Nothing to share toast-->
+  <!--Copy success toast partially-->
+  <!--Copy success toast-->
+  <!--Copy exception toast-->
+  <!--Copy progress dialog text-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing is deaktiviert</string>

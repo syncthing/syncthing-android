@@ -153,9 +153,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="sync_only_wifi">Synkronisera endast via wifi</string>
   <string name="sync_only_wifi_ssids">Begränsa till vissa wifi-nätverk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på wifi för att välja nätverk.</string>
-  <string name="respect_battery_saving_title">Respektera Android-batterisparinställning</string>
+  <string name="respect_battery_saving_title">Respektera Android-batterisparainställning</string>
   <string name="respect_battery_saving_summary">Avaktivera Syncthing om batterispara är aktiv</string>
-  <string name="advanced_folder_picker">Använd avancerad katalogväljaren</string>
+  <string name="advanced_folder_picker">Använd avancerad katalogväljare</string>
   <string name="advanced_folder_picker_summary">Välj någon katalog på enheten för synkronisering</string>
   <string name="use_root_title">Kör som superanvändare</string>
   <string name="use_root_summary">Detta är en instabil funktion som kan orsaka problem med Syncthing och med din enhet enhet. Om du stöter på problem, kan du behöva installera om Syncthing.</string>
@@ -215,7 +215,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="open_log">Öppna logg</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Öppna Syncthing och Android loggfönstret</string>
-  <string name="syncthing_forum_title">Syncthing Forum</string>
+  <string name="syncthing_forum_title">Syncthing forum</string>
   <string name="syncthing_forum_summary">Gå till Syncthingforumet</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Rapportera problem</string>
@@ -251,6 +251,17 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="retrieving_logs">Hämtar loggar...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Dela</string>
+  <!--ShareActivity-->
+  <!--Title of the "share" activity-->
+  <!--Title of the "save" button-->
+  <!--Title of the "cancel" button-->
+  <!--Title of the "save" button-->
+  <!--New file name template-->
+  <!--Nothing to share toast-->
+  <!--Copy success toast partially-->
+  <!--Copy success toast-->
+  <!--Copy exception toast-->
+  <!--Copy progress dialog text-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing är inaktiverad</string>
