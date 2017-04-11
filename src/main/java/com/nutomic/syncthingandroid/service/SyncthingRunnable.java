@@ -163,6 +163,10 @@ public class SyncthingRunnable implements Runnable {
                 case 137:
                     // Syncthing was shut down (via API or SIGKILL), do nothing.
                     break;
+                case 1:
+                    // Syncthing is already running, kill it and try again.
+                    killSyncthing();
+                    //fallthrough
                 case 3:
                     // Restart was requested via Rest API call.
                     Log.i(TAG, "Restarting syncthing");
