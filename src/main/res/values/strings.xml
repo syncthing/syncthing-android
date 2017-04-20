@@ -134,7 +134,7 @@ Please report any problems you encounter via Github.</string>
     <string name="directory">Directory</string>
 
     <!-- Setting title -->
-    <string name="folder_master">Receive Changes?</string>
+    <string name="folder_master">Send Only</string>
 
     <!-- Setting title -->
     <string name="devices">Devices</string>
