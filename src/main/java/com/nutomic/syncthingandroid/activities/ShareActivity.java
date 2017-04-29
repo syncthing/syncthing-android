@@ -228,7 +228,7 @@ public class ShareActivity extends SyncthingActivity
             boolean isError = false;
             for (Map.Entry<Uri, String> entry : mFiles.entrySet()) {
                 InputStream inputStream = null;
-                String outPath = mFolder.path + entry.getValue();
+                String outPath = mFolder.path + "/" + entry.getValue();
                 try {
                     File outFile = new File(outPath);
                     if (outFile.isFile()) {
