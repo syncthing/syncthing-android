@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mVersion;
 
     private TextView mExitButton;
+
+
 
     private Timer mTimer;
 
@@ -212,13 +215,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionRestart:
+                mActivity.showRestartDialog();
                 mActivity.closeDrawer();
-                new AlertDialog.Builder(getContext())
-                        .setMessage(R.string.dialog_confirm_restart)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i1) -> getContext().startService(new Intent(getContext(), SyncthingService.class)
-                                .setAction(SyncthingService.ACTION_RESTART)))
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
                 break;
             case R.id.drawerActionExit:
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
@@ -227,4 +225,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
 }

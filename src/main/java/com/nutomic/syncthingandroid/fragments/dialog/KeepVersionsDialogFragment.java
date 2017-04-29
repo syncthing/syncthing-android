@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.NumberPicker;
 
@@ -15,6 +16,8 @@ import static android.view.Gravity.CENTER;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class KeepVersionsDialogFragment extends DialogFragment {
+
+    private static String KEEP_VERSION_VALUE = "com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment.KEEP_VERSION_KEY";
 
     private OnValueChangeListener mOnValueChangeListener;
 
@@ -38,6 +41,10 @@ public class KeepVersionsDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            setValue(savedInstanceState.getInt(KEEP_VERSION_VALUE));
+        }
+
         mNumberPickerView = createNumberPicker();
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.keep_versions)
@@ -46,6 +53,14 @@ public class KeepVersionsDialogFragment extends DialogFragment {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEEP_VERSION_VALUE, getValue());
+    }
+
+
 
     public void setOnValueChangeListener(OnValueChangeListener onValueChangeListener) {
         mOnValueChangeListener = onValueChangeListener;
@@ -57,6 +72,15 @@ public class KeepVersionsDialogFragment extends DialogFragment {
         if (mNumberPickerView != null) {
             mNumberPickerView.setValue(value);
         }
+        Log.d("folder", "setValue: "+value);
+    }
+
+    private int getValue(){
+        int value = 0;
+        if (mNumberPickerView != null){
+            value = mNumberPickerView.getValue();
+        }
+        return value;
     }
 
     private NumberPicker createNumberPicker() {
@@ -66,6 +90,7 @@ public class KeepVersionsDialogFragment extends DialogFragment {
         picker.setMaxValue(5);
         picker.setValue(mValue);
         picker.setWrapSelectorWheel(false);
+        Log.d("folder fragment", "create number picker "+mValue);
         return picker;
     }
 
