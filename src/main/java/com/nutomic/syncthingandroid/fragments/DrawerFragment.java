@@ -41,10 +41,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mUpload;
     private TextView mAnnounceServer;
     private TextView mVersion;
-
     private TextView mExitButton;
-
-
 
     private Timer mTimer;
 
@@ -225,6 +222,4 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-
-
 }

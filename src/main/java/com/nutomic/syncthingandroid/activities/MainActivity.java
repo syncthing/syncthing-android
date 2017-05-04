@@ -59,10 +59,8 @@ public class MainActivity extends SyncthingActivity
         implements SyncthingService.OnApiChangeListener {
 
     private static final String TAG = "MainActivity";
-    private static final String IS_SHOWING_RESTART_DIALOG =
-            "com.nutomic.syncthingandroid.activities.MainActivity.RESTART_DIALOG_STATE";
-    private static final String BATTERY_DIALOG_DISMISSED =
-            "com.nutomic.syncthingandroid.activities.MainActivity.BATTERY_DIALOG_STATE";
+    private static final String IS_SHOWING_RESTART_DIALOG = "RESTART_DIALOG_STATE";
+    private static final String BATTERY_DIALOG_DISMISSED = "BATTERY_DIALOG_STATE";
 
     /**
      * Time after first start when usage reporting dialog should be shown.
@@ -73,12 +71,9 @@ public class MainActivity extends SyncthingActivity
 
     private AlertDialog mDisabledDialog;
     private AlertDialog mBatteryOptimizationsDialog;
-
     private Dialog mRestartDialog;
 
-    private boolean mIsShowingRestartDialog;
     private boolean mBatteryOptimizationDialogDismissed;
-
 
     private ViewPager mViewPager;
 
@@ -225,9 +220,7 @@ public class MainActivity extends SyncthingActivity
             mDrawerFragment = (DrawerFragment) fm.getFragment(
                     savedInstanceState, DrawerFragment.class.getName());
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
-
-            mIsShowingRestartDialog = savedInstanceState.getBoolean(IS_SHOWING_RESTART_DIALOG);
-            if (mIsShowingRestartDialog){
+            if (savedInstanceState.getBoolean(IS_SHOWING_RESTART_DIALOG)){
                 showRestartDialog();
             }
             mBatteryOptimizationDialogDismissed = savedInstanceState.getBoolean(BATTERY_DIALOG_DISMISSED);
@@ -281,13 +274,11 @@ public class MainActivity extends SyncthingActivity
             fm.putFragment(outState, DeviceListFragment.class.getName(), mDeviceListFragment);
             fm.putFragment(outState, DrawerFragment.class.getName(), mDrawerFragment);
             outState.putInt("currentTab", mViewPager.getCurrentItem());
-            outState.putBoolean(BATTERY_DIALOG_DISMISSED, mBatteryOptimizationDialogDismissed);
-
-            outState.putBoolean(IS_SHOWING_RESTART_DIALOG, mIsShowingRestartDialog);
+            outState.putBoolean(BATTERY_DIALOG_DISMISSED, mBatteryOptimizationsDialog == null || !mBatteryOptimizationsDialog.isShowing());
+            outState.putBoolean(IS_SHOWING_RESTART_DIALOG, mRestartDialog != null && mRestartDialog.isShowing());
             if (mRestartDialog != null){
                 mRestartDialog.cancel();
             }
-
         }
     }
 
@@ -330,7 +321,6 @@ public class MainActivity extends SyncthingActivity
     public void showRestartDialog(){
         mRestartDialog = createRestartDialog();
         mRestartDialog.show();
-        mIsShowingRestartDialog = true;
     }
 
     private Dialog createRestartDialog(){
@@ -338,8 +328,7 @@ public class MainActivity extends SyncthingActivity
                 .setMessage(R.string.dialog_confirm_restart)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i1) -> this.startService(new Intent(this, SyncthingService.class)
                         .setAction(SyncthingService.ACTION_RESTART)))
-                .setNegativeButton(android.R.string.no, (dialog, which) -> {mIsShowingRestartDialog = false; })
-                .setOnCancelListener(dialog -> {mIsShowingRestartDialog = false; })
+                .setNegativeButton(android.R.string.no, null)
                 .create();
     }
 

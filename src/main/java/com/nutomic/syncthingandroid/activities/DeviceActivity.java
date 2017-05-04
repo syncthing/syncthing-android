@@ -55,12 +55,9 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
 
     private static final String TAG = "DeviceSettingsFragment";
-    private static final String IS_SHOWING_DISCARD_DIALOG =
-            "com.nutomic.syncthingandroid.activities.DeviceActivity.DISCARD_FOLDER_DIALOG_STATE";
-    private static final String IS_SHOWING_COMPRESSION_DIALOG =
-            "com.nutomic.syncthingandroid.activities.DeviceActivity.COMPRESSION_FOLDER_DIALOG_STATE";
-    private static final String IS_SHOWING_DELETE_DIALOG =
-            "com.nutomic.syncthingandroid.activities.DeviceActivity.DELETE_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_COMPRESSION_DIALOG = "COMPRESSION_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
 
     public static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
 
@@ -90,21 +87,14 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private boolean mDeviceNeedsToUpdate;
 
-    private boolean mIsShowingDiscardDialog;
-    private boolean mIsShowingCompressionDialog;
-    private boolean mIsShowingDeleteDialog;
-
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
     private Dialog mCompressionDialog;
-
-
 
     private final DialogInterface.OnClickListener mCompressionEntrySelectedListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
-            mIsShowingCompressionDialog = false;
             Compression compression = Compression.fromIndex(which);
             // Don't pop the restart dialog unless the value is actually different.
             if (compression != Compression.fromValue(DeviceActivity.this, mDevice.compression)) {
@@ -189,8 +179,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             }
             restoreDialogStates(savedInstanceState);
         }
-
-
         if (mIsCreateMode) {
            if (mDevice == null) {
                 initDevice();
@@ -198,24 +186,20 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
         else {
             prepareEditMode();
-
         }
-
     }
 
     private void restoreDialogStates(Bundle savedInstanceState) {
-        mIsShowingCompressionDialog = savedInstanceState.getBoolean(IS_SHOWING_COMPRESSION_DIALOG);
-        if (mIsShowingCompressionDialog){
+        if (savedInstanceState.getBoolean(IS_SHOWING_COMPRESSION_DIALOG)){
             showCompressionDialog();
         }
-        mIsShowingDeleteDialog = savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG);
-        if (mIsShowingDeleteDialog){
+
+        if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
             showDeleteDialog();
         }
 
         if (mIsCreateMode){
-            mIsShowingDiscardDialog = savedInstanceState.getBoolean(IS_SHOWING_DISCARD_DIALOG);
-            if (mIsShowingDiscardDialog){
+            if (savedInstanceState.getBoolean(IS_SHOWING_DISCARD_DIALOG)){
                 showDiscardDialog();
             }
         }
@@ -251,20 +235,18 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         super.onSaveInstanceState(outState);
         outState.putString("device", new Gson().toJson(mDevice));
         if (mIsCreateMode){
-            outState.putBoolean(IS_SHOWING_DISCARD_DIALOG, mIsShowingDiscardDialog);
+            outState.putBoolean(IS_SHOWING_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
             if(mDiscardDialog != null){
                 mDiscardDialog.cancel();
             }
         }
 
-        outState.putBoolean(IS_SHOWING_COMPRESSION_DIALOG, mIsShowingCompressionDialog);
+        outState.putBoolean(IS_SHOWING_COMPRESSION_DIALOG, mCompressionDialog != null && mCompressionDialog.isShowing());
         if(mCompressionDialog != null){
             mCompressionDialog.cancel();
         }
 
-
-
-        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mIsShowingDeleteDialog);
+        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
         if (mDeleteDialog != null) {
             mDeleteDialog.cancel();
         }
@@ -375,7 +357,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
 
     private void showDeleteDialog(){
-        mIsShowingDeleteDialog = true;
         mDeleteDialog = createDeleteDialog();
         mDeleteDialog.show();
     }
@@ -387,10 +368,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
                     getApi().removeDevice(mDevice.deviceID);
                     finish();
                 })
-                .setNegativeButton(android.R.string.no, (dialog, which) -> mIsShowingDeleteDialog = false)
-                .setOnCancelListener(dialog -> mIsShowingDeleteDialog = false)
+                .setNegativeButton(android.R.string.no, null)
                 .create();
-
     }
 
     /**
@@ -460,7 +439,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private void showCompressionDialog(){
-        mIsShowingCompressionDialog = true;
         mCompressionDialog = createCompressionDialog();
         mCompressionDialog.show();
     }
@@ -471,7 +449,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
                 .setSingleChoiceItems(R.array.compress_entries,
                         Compression.fromValue(this, mDevice.compression).getIndex(),
                         mCompressionEntrySelectedListener)
-                .setOnCancelListener(dialog -> mIsShowingCompressionDialog = false)
                 .create();
     }
 
@@ -500,15 +477,13 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private void showDiscardDialog(){
         mDiscardDialog = createDiscardDialog();
         mDiscardDialog.show();
-        mIsShowingDiscardDialog = true;
     }
 
     private Dialog createDiscardDialog() {
         return new android.app.AlertDialog.Builder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> mIsShowingDiscardDialog = false)
-                .setOnCancelListener((dialog -> mIsShowingDiscardDialog = false))
+                .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
 }

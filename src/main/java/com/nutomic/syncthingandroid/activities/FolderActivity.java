@@ -64,10 +64,8 @@ public class FolderActivity extends SyncthingActivity
     private static final String TAG = "EditFolderFragment";
 
     public static final String KEEP_VERSIONS_DIALOG_TAG = "KeepVersionsDialogFragment";
-    private static final String IS_SHOWING_DELETE_DIALOG =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.DELETE_FOLDER_DIALOG_STATE";
-    private static final String IS_SHOW_DISCARD_DIALOG =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.DISCARD_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
 
     private Folder mFolder;
 
@@ -80,8 +78,6 @@ public class FolderActivity extends SyncthingActivity
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
-    private boolean mIsShowingDeleteDialog;
-    private boolean mIsShowingDiscardDialog;
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
@@ -170,15 +166,13 @@ public class FolderActivity extends SyncthingActivity
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
                 mFolder = new Gson().fromJson(savedInstanceState.getString("folder"), Folder.class);
-                mIsShowingDiscardDialog = savedInstanceState.getBoolean(IS_SHOW_DISCARD_DIALOG);
-                if (mIsShowingDiscardDialog){
+                if (savedInstanceState.getBoolean(IS_SHOW_DISCARD_DIALOG)){
                     showDiscardDialog();
                 }
             }
             if (mFolder == null) {
                 initFolder();
             }
-
             // Open keyboard on label view in edit mode.
             mLabelView.requestFocus();
         }
@@ -187,8 +181,7 @@ public class FolderActivity extends SyncthingActivity
         }
 
         if (savedInstanceState != null){
-            mIsShowingDeleteDialog = savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG);
-            if (mIsShowingDeleteDialog){
+            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
                 showDeleteDialog();
             }
         }
@@ -219,27 +212,22 @@ public class FolderActivity extends SyncthingActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("save", mIsShowingDeleteDialog+"");
-        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mIsShowingDeleteDialog);
+        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
         if (mDeleteDialog != null) {
             mDeleteDialog.cancel();
         }
 
         if (mIsCreateMode){
-            outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mIsShowingDiscardDialog);
+            outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
             if(mDiscardDialog != null){
                 mDiscardDialog.cancel();
             }
         }
     }
 
-
     /**
      * Save current settings in case we are in create mode and they aren't yet stored in the config.
      */
-
-
-
     @Override
     public void onServiceConnected() {
         getService().registerOnApiChangeListener(this);
@@ -359,7 +347,6 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void showDeleteDialog(){
-        mIsShowingDeleteDialog = true;
         mDeleteDialog = createDeleteDialog();
         mDeleteDialog.show();
     }
@@ -371,10 +358,8 @@ public class FolderActivity extends SyncthingActivity
                     getApi().removeFolder(mFolder.id);
                     finish();
                 })
-                .setNegativeButton(android.R.string.no, (dialog, which) -> mIsShowingDeleteDialog = false)
-                .setOnCancelListener(dialog -> mIsShowingDeleteDialog = false)
+                .setNegativeButton(android.R.string.no, null)
                 .create();
-
     }
 
     @Override
@@ -450,15 +435,13 @@ public class FolderActivity extends SyncthingActivity
     private void showDiscardDialog(){
         mDiscardDialog = createDiscardDialog();
         mDiscardDialog.show();
-        mIsShowingDiscardDialog = true;
     }
 
     private Dialog createDiscardDialog() {
         return new AlertDialog.Builder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {mIsShowingDiscardDialog = false;})
-                .setOnCancelListener((dialog -> {mIsShowingDiscardDialog = false;}))
+                .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
 }
