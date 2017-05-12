@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +55,9 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
 
     private static final String TAG = "DeviceSettingsFragment";
+    private static final String IS_SHOWING_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_COMPRESSION_DIALOG = "COMPRESSION_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
 
     public static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
 
@@ -82,11 +87,14 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private boolean mDeviceNeedsToUpdate;
 
+    private Dialog mDeleteDialog;
+    private Dialog mDiscardDialog;
+    private Dialog mCompressionDialog;
+
     private final DialogInterface.OnClickListener mCompressionEntrySelectedListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
-
             Compression compression = Compression.fromIndex(which);
             // Don't pop the restart dialog unless the value is actually different.
             if (compression != Compression.fromValue(DeviceActivity.this, mDevice.compression)) {
@@ -165,16 +173,35 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mQrButton.setOnClickListener(this);
         mCompressionContainer.setOnClickListener(this);
 
-        if (mIsCreateMode) {
-            if (savedInstanceState != null) {
+        if (savedInstanceState != null){
+            if (mDevice == null) {
                 mDevice = new Gson().fromJson(savedInstanceState.getString("device"), Device.class);
             }
-            if (mDevice == null) {
+            restoreDialogStates(savedInstanceState);
+        }
+        if (mIsCreateMode) {
+           if (mDevice == null) {
                 initDevice();
             }
         }
         else {
             prepareEditMode();
+        }
+    }
+
+    private void restoreDialogStates(Bundle savedInstanceState) {
+        if (savedInstanceState.getBoolean(IS_SHOWING_COMPRESSION_DIALOG)){
+            showCompressionDialog();
+        }
+
+        if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+            showDeleteDialog();
+        }
+
+        if (mIsCreateMode){
+            if (savedInstanceState.getBoolean(IS_SHOWING_DISCARD_DIALOG)){
+                showDiscardDialog();
+            }
         }
     }
 
@@ -207,6 +234,22 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("device", new Gson().toJson(mDevice));
+        if (mIsCreateMode){
+            outState.putBoolean(IS_SHOWING_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
+            if(mDiscardDialog != null){
+                mDiscardDialog.cancel();
+            }
+        }
+
+        outState.putBoolean(IS_SHOWING_COMPRESSION_DIALOG, mCompressionDialog != null && mCompressionDialog.isShowing());
+        if(mCompressionDialog != null){
+            mCompressionDialog.cancel();
+        }
+
+        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
+        if (mDeleteDialog != null) {
+            mDeleteDialog.cancel();
+        }
     }
 
     public void onServiceConnected() {
@@ -302,14 +345,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
                 shareDeviceId(this, mDevice.deviceID);
                 return true;
             case R.id.remove:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.remove_device_confirm)
-                        .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
-                            getApi().removeDevice(mDevice.deviceID);
-                            finish();
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
+               showDeleteDialog();
                 return true;
             case android.R.id.home:
                 onBackPressed();
@@ -317,6 +353,23 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    private void showDeleteDialog(){
+        mDeleteDialog = createDeleteDialog();
+        mDeleteDialog.show();
+    }
+
+    private Dialog createDeleteDialog(){
+        return new android.app.AlertDialog.Builder(this)
+                .setMessage(R.string.remove_device_confirm)
+                .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                    getApi().removeDevice(mDevice.deviceID);
+                    finish();
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .create();
     }
 
     /**
@@ -376,18 +429,27 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v.equals(mCompressionContainer)) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.compression)
-                    .setSingleChoiceItems(R.array.compress_entries,
-                            Compression.fromValue(this, mDevice.compression).getIndex(),
-                            mCompressionEntrySelectedListener)
-                    .show();
+            showCompressionDialog();
         } else if (v.equals(mQrButton)){
             IntentIntegrator integrator = new IntentIntegrator(DeviceActivity.this);
             integrator.initiateScan();
         } else if (v.equals(mIdContainer)) {
             Util.copyDeviceId(this, mDevice.deviceID);
         }
+    }
+
+    private void showCompressionDialog(){
+        mCompressionDialog = createCompressionDialog();
+        mCompressionDialog.show();
+    }
+
+    private Dialog createCompressionDialog(){
+        return new AlertDialog.Builder(this)
+                .setTitle(R.string.compression)
+                .setSingleChoiceItems(R.array.compress_entries,
+                        Compression.fromValue(this, mDevice.compression).getIndex(),
+                        mCompressionEntrySelectedListener)
+                .create();
     }
 
     /**
@@ -405,14 +467,23 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         if (mIsCreateMode) {
-            new AlertDialog.Builder(this)
-                    .setMessage(R.string.dialog_discard_changes)
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
+            showDiscardDialog();
         }
         else {
             super.onBackPressed();
         }
+    }
+
+    private void showDiscardDialog(){
+        mDiscardDialog = createDiscardDialog();
+        mDiscardDialog.show();
+    }
+
+    private Dialog createDiscardDialog() {
+        return new android.app.AlertDialog.Builder(this)
+                .setMessage(R.string.dialog_discard_changes)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
     }
 }
