@@ -19,7 +19,7 @@ public class Folder {
     public int rescanIntervalS;
     public final boolean ignorePerms = true;
     public boolean autoNormalize;
-    public float minDiskFreePct;
+    public MinDiskFree minDiskFree;
     public Versioning versioning;
     public int copiers;
     public int pullers;
@@ -37,6 +37,11 @@ public class Folder {
     public static class Versioning implements Serializable {
         public String type;
         public Map<String, String> params = new HashMap<>();
+    }
+
+    public static class MinDiskFree {
+        public int value;
+        public String unit;
     }
 
     public void addDevice(String deviceId) {
