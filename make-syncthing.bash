@@ -7,15 +7,19 @@ JNIDIR="/src/main/jniLibs"
 
 case "$1" in
     arm)
-        export CGO_ENABLED=0
-        export GOOS=linux
+        export CGO_ENABLED=1
+	# The executable "arm-linux-androideabi-gcc" can be found in the bin folder of your standalone android ndk toolchain
+	export CC=arm-linux-androideabi-gcc
+        export GOOS=android
         export GOARCH=arm
         export GOARM=5
         export TARGETDIR=$MYDIR$JNIDIR/armeabi
         ;;
     arm64)
-        export CGO_ENABLED=0
-        export GOOS=linux
+        export CGO_ENABLED=1
+	# The executable "aarch64-linux-android-gcc" can be found in the bin folder of your standalone android ndk toolchain
+	export CC=aarch64-linux-android-gcc
+        export GOOS=android
         export GOARCH=arm64
         unset GOARM
         export TARGETDIR=$MYDIR$JNIDIR/arm64-v8a
@@ -33,14 +37,7 @@ case "$1" in
 esac
 
 unset GOPATH #Set by build.go
-export GOROOT=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
 export PATH=${GOROOT}/bin:${PATH}
-
-case "$(uname)" in
-    *CYGWIN*)
-        export GOROOT=`cygpath -w $GOROOT`
-        ;;
-esac
 
 pushd ext/syncthing/src/github.com/syncthing/syncthing
 
