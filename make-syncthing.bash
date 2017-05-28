@@ -12,7 +12,7 @@ x86AndroidGcc="x86-gcc"
 
 function checkAndroidToolchain() {
         set +e
-        $1
+        `$1 > /dev/null 2>&1`
         if [ $? == 127 ]; then
                 printf "\nYou need to install a standalone android ndk toolchain to build Syncthing for Android. If you have already installed it, please add its bin folder to your PATH.\n\n"
                 echo "For a fresh installation refer the following links:"
