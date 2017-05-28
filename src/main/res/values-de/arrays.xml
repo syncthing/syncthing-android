@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources translatable="false">
+
+    <string-array name="compress_values">
+        <item>Niemals</item>
+        <item>Metadaten</item>
+        <item>Immer</item>
+    </string-array>
+
+    <string-array name="notification_type_entry_values">
+        <item>Normale Priorität</item>
+        <item>Niedrige Priorität</item>
+        <item>Keine Priorität</item>
+    </string-array>
+
+</resources>
