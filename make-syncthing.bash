@@ -8,7 +8,7 @@ JNIDIR="/src/main/jniLibs"
 # The following android gcc executables can be found in the bin folder of your standalone android ndk toolchain
 armAndroidGcc="arm-linux-androideabi-gcc"
 arm64AndroidGcc="aarch64-linux-android-gcc"
-#x86AndroidGcc="x86-gcc"
+x86AndroidGcc="x86-gcc"
 
 function checkAndroidToolchain() {
         set +e
@@ -44,10 +44,10 @@ case "$1" in
         export TARGETDIR=$MYDIR$JNIDIR/arm64-v8a
         ;;
     386)
-        export CGO_ENABLED=0 # change this to 1
-        #checkAndroidToolchain $x86AndroidGcc
-        #export CC=$x86AndroidGcc
-        export GOOS=linux # change this to android
+        export CGO_ENABLED=1
+        checkAndroidToolchain $x86AndroidGcc
+        export CC=$x86AndroidGcc
+        export GOOS=android
         export GOARCH=386
         export GO386=387
         export TARGETDIR=$MYDIR$JNIDIR/x86
