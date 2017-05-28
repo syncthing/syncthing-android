@@ -40,7 +40,9 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"
+            >
         </activity>
         <activity
             android:name=".activities.WebGuiActivity"
@@ -89,13 +91,17 @@
             android:theme="@style/Theme.Syncthing.Translucent"
             android:launchMode="singleTop"/>
         <activity android:name=".activities.DeviceActivity"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity"
+            android:configChanges="orientation|screenSize"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
         <activity android:name=".activities.FolderActivity"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity"
+            android:configChanges="orientation|screenSize"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
