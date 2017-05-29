@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/staggered_versioning_description"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/maximum_age"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="0dp" />
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.nutomic.syncthingandroid.fragments.NumberPickerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:tag="numberpicker_staggered_versioning"
+            tools:layout="@layout/numberpicker_fragment" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/maximum_age_description"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/versions_path"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <fragment
+            android:id="@+id/fragmentVersionsPath"
+            android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="fragmentFolderPath"
+            tools:layout="@layout/fragment_directory_text_view" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/versions_path_description" />
+
+</LinearLayout>

@@ -1,12 +1,10 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -16,7 +14,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -27,7 +24,7 @@ import android.widget.Toast;
 import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
+import com.nutomic.syncthingandroid.fragments.dialog.VersioningDialogFragment;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -35,6 +32,7 @@ import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Map;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
@@ -42,13 +40,12 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
-import static java.lang.String.valueOf;
 
 /**
  * Shows folder details and allows changing them.
  */
 public class FolderActivity extends SyncthingActivity
-        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
+        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener, VersioningDialogFragment.VersioningDialogInterface {
 
     public static final String EXTRA_IS_CREATE =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
@@ -59,12 +56,8 @@ public class FolderActivity extends SyncthingActivity
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
-
-    private static final int DIRECTORY_REQUEST_CODE = 234;
-
     private static final String TAG = "EditFolderFragment";
 
-    public static final String KEEP_VERSIONS_DIALOG_TAG = "KeepVersionsDialogFragment";
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
 
@@ -75,7 +68,7 @@ public class FolderActivity extends SyncthingActivity
     private TextView mPathView;
     private SwitchCompat mFolderMasterView;
     private ViewGroup mDevicesContainer;
-    private TextView mVersioningKeepView;
+    private TextView mVersioningDescriptionView;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
@@ -83,7 +76,7 @@ public class FolderActivity extends SyncthingActivity
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
 
-    private final KeepVersionsDialogFragment mKeepVersionsDialogFragment = new KeepVersionsDialogFragment();
+    private final VersioningDialogFragment mVersioningDialogFragment = new VersioningDialogFragment();
 
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
@@ -117,33 +110,6 @@ public class FolderActivity extends SyncthingActivity
         }
     };
 
-    private final KeepVersionsDialogFragment.OnValueChangeListener mOnValueChangeListener =
-            new KeepVersionsDialogFragment.OnValueChangeListener() {
-        @Override
-        public void onValueChange(int intValue) {
-            if (intValue == 0) {
-                mFolder.versioning = new Folder.Versioning();
-                mVersioningKeepView.setText(R.string.off);
-            } else {
-                mFolder.versioning.type = "simple";
-                mFolder.versioning.params.put("keep", valueOf(intValue));
-                mVersioningKeepView.setText(valueOf(intValue));
-            }
-            mFolderNeedsToUpdate = true;
-        }
-    };
-
-    private final View.OnClickListener mPathViewClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(FolderActivity.this, FolderPickerActivity.class);
-            if (!TextUtils.isEmpty(mFolder.path)) {
-                intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.path);
-            }
-            startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,14 +121,12 @@ public class FolderActivity extends SyncthingActivity
 
         mLabelView = (EditText) findViewById(R.id.label);
         mIdView = (EditText) findViewById(R.id.id);
-        mPathView = (TextView) findViewById(R.id.directory);
+        mPathView = (TextView) findViewById(R.id.fragment_folder_path);
         mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
-        mVersioningKeepView = (TextView) findViewById(R.id.versioningKeep);
+        mVersioningDescriptionView = (TextView) findViewById(R.id.versioningDescription);
         mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
 
-        mPathView.setOnClickListener(mPathViewClickListener);
-        findViewById(R.id.versioningContainer).setOnClickListener(v ->
-                mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG));
+        findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -186,6 +150,27 @@ public class FolderActivity extends SyncthingActivity
                 showDeleteDialog();
             }
         }
+
+        if (savedInstanceState != null){
+            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+                showDeleteDialog();
+            }
+        }
+    }
+
+    private void showVersioningDialog() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        mVersioningDialogFragment.setArguments(getVersioningBundle());
+        mVersioningDialogFragment.show(transaction, "versioningDialog");
+    }
+
+    private Bundle getVersioningBundle() {
+        Bundle bundle = new Bundle();
+        for (Map.Entry<String, String> entry: mFolder.versioning.params.entrySet()){
+            bundle.putString(entry.getKey(), entry.getValue());
+        }
+        bundle.putString("type", mFolder.versioning.type);
+        return bundle;
     }
 
     @Override
@@ -270,12 +255,12 @@ public class FolderActivity extends SyncthingActivity
         mIdView.removeTextChangedListener(mTextWatcher);
         mPathView.removeTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(null);
-        mKeepVersionsDialogFragment.setOnValueChangeListener(null);
 
         // Update views
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
+        mVersioningDescriptionView.setText(getVersioningDescription());
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         List<Device> devicesList = getApi().getDevices(false);
 
@@ -288,22 +273,11 @@ public class FolderActivity extends SyncthingActivity
             }
         }
 
-        boolean versioningEnabled = Objects.equal(mFolder.versioning.type, "simple");
-        int versions = 0;
-        if (versioningEnabled) {
-            versions = Integer.valueOf(mFolder.versioning.params.get("keep"));
-            mVersioningKeepView.setText(valueOf(versions));
-        } else {
-            mVersioningKeepView.setText(R.string.off);
-        }
-        mKeepVersionsDialogFragment.setValue(versions);
-
         // Keep state updated
         mLabelView.addTextChangedListener(mTextWatcher);
         mIdView.addTextChangedListener(mTextWatcher);
         mPathView.addTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(mCheckedListener);
-        mKeepVersionsDialogFragment.setOnValueChangeListener(mOnValueChangeListener);
     }
 
     @Override
@@ -361,15 +335,6 @@ public class FolderActivity extends SyncthingActivity
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .create();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
-            mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
-            mPathView.setText(mFolder.path);
-            mFolderNeedsToUpdate = true;
-        }
     }
 
     private String generateRandomFolderId() {
@@ -459,5 +424,65 @@ public class FolderActivity extends SyncthingActivity
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
+    }
+
+    @Override
+    public void onDialogClosed(Bundle arguments) {
+        updateVersioning(arguments);
+    }
+
+    private void updateVersioning(Bundle arguments) {
+        String type = arguments.getString("type");
+        arguments.remove("type");
+
+        if (type.equals("none")){
+            mFolder.versioning = new Folder.Versioning();
+        }else {
+            mFolder.versioning.type = type;
+
+            for (String key : arguments.keySet()) {
+                mFolder.versioning.params.put(key, arguments.getString(key));
+            }
+        }
+        mVersioningDescriptionView.setText(getVersioningDescription());
+        mFolderNeedsToUpdate = true;
+    }
+
+    private String getVersioningDescription() {
+        String description = getString(R.string.none);
+
+        if (mFolder == null || mFolder.versioning.type == null){
+            return description;
+        }
+
+        switch (mFolder.versioning.type) {
+            case "simple":
+                description = getString(R.string.type) + ": " + getString(R.string.simple) + "\n"
+                        + getString(R.string.keep_versions) +": " + mFolder.versioning.params.get("keep");
+                break;
+            case "trashcan":
+                description = getString(R.string.type) + ": " + getString(R.string.trashcan) + "\n"
+                        + getString(R.string.clean_out_after) +": " + mFolder.versioning.params.get("cleanoutDays");
+                break;
+            case "staggered":
+                int maxAge = getMaxAgeInDays();
+                description = getString(R.string.type) + ": " + getString(R.string.staggered) + "\n"
+                        + getString(R.string.maximum_age) + ": " + (maxAge == 0 ? getString(R.string.never_delete) : maxAge) + "\n"
+                        + getString(R.string.versions_path)+ ": " + mFolder.versioning.params.get("versionsPath");
+                break;
+            case "external":
+                description = getString(R.string.type) + ": " + getString(R.string.external) + "\n"
+                        + getString(R.string.command) + ": " + mFolder.versioning.params.get("command");
+                break;
+        }
+
+        return description;
+    }
+
+    //MaxAge is stored in seconds, since Syncthing requires it in seconds, but it is displayed in days. Hence the conversion below.
+    private int getMaxAgeInDays() {
+        int secInADay = 86400;
+
+        return Integer.valueOf(mFolder.versioning.params.get("maxAge"))/secInADay;
     }
 }
