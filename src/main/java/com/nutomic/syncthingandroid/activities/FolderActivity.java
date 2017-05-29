@@ -34,6 +34,7 @@ import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
 import java.util.List;
+import java.util.Random;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
@@ -371,9 +372,24 @@ public class FolderActivity extends SyncthingActivity
         }
     }
 
+    private String generateRandomFolderId() {
+        char[] chars = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            if (i == 5) {
+                sb.append("-");
+            }
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+    }
     private void initFolder() {
         mFolder = new Folder();
-        mFolder.id = getIntent().getStringExtra(EXTRA_FOLDER_ID);
+        mFolder.id = (getIntent().hasExtra(EXTRA_FOLDER_ID))
+                ? getIntent().getStringExtra(EXTRA_FOLDER_ID)
+                : generateRandomFolderId();
         mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M) {
             // Scan every 3 days (in case inotify dropped some changes)
