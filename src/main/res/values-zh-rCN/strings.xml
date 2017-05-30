@@ -81,7 +81,7 @@
   <!--Setting title-->
   <string name="directory">目录</string>
   <!--Setting title-->
-  <string name="folder_master">主文件夹</string>
+  <string name="folder_master">仅发送</string>
   <!--Setting title-->
   <string name="devices">设备</string>
   <!--Setting title-->
@@ -217,6 +217,8 @@
   <string name="open_log">打开日志</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">打开 Syncthing 与 Android 系统日志窗口</string>
+  <string name="notify_crashes_title">通知 Syncthing 崩溃</string>
+  <string name="notify_crashes_summary">当检查到 Syncthing 崩溃时显示通知</string>
   <string name="syncthing_forum_title">Syncthing 论坛</string>
   <string name="syncthing_forum_summary">转到 Syncthing 论坛</string>
   <!--Settings item that opens issue tracker-->
@@ -255,15 +257,32 @@
   <string name="share_title">日志</string>
   <!--ShareActivity-->
   <!--Title of the "share" activity-->
+  <string name="share_activity_title">保存到 Syncthing</string>
   <!--Title of the "save" button-->
+  <string name="save_title">保存</string>
   <!--Title of the "cancel" button-->
+  <string name="cancel_title">取消</string>
   <!--Title of the "save" button-->
+  <string name="folder_title">文件夹</string>
   <!--New file name template-->
+  <string name="file_name_template">新文件 %1$s</string>
   <!--Nothing to share toast-->
+  <string name="nothing_share">无可共享</string>
   <!--Copy success toast partially-->
+  <plurals name="copy_success_partially">
+    <item quantity="other">已复制 %1$d 个文件到文件夹“%2$s”，已存在 %3$d 个</item>
+  </plurals>
   <!--Copy success toast-->
+  <plurals name="copy_success">
+    <item quantity="other">已复制 %1$d 个文件到文件夹“%2$s”</item>
+  </plurals>
   <!--Copy exception toast-->
+  <string name="copy_exception">共享出现错误，检查应用程序日志</string>
   <!--Copy progress dialog text-->
+  <string name="copy_progress">共享文件中…</string>
+  <plurals name="file_name_title">
+    <item quantity="other">文件列表</item>
+  </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已禁用</string>
