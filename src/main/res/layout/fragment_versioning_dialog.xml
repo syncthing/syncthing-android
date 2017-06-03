@@ -3,23 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="@string/file_versioning"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:textSize="24sp" />
 
     <Spinner
         android:id="@+id/versioningTypeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/versioning_types" />
+        android:entries="@array/versioning_types"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +30,10 @@
                 android:id="@+id/finish_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/finish" />
+                android:text="@string/finish"
+                android:textColor="@color/primary_dark"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                />
 
         </LinearLayout>
     </ScrollView>

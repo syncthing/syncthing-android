@@ -584,4 +584,5 @@ Please report any problems you encounter via Github.</string>
     <string name="none">None</string>
     <string name="staggered">Staggered</string>
     <string name="external">External</string>
+    <string name="title_activity_versioning_dialog">VersioningDialogActivity</string>
 </resources>

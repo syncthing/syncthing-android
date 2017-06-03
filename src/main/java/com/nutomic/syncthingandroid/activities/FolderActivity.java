@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -45,7 +46,7 @@ import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE
  * Shows folder details and allows changing them.
  */
 public class FolderActivity extends SyncthingActivity
-        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener, VersioningDialogFragment.VersioningDialogInterface {
+        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener, VersioningDialogActivity.VersioningDialogInterface {
 
     public static final String EXTRA_IS_CREATE =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
@@ -75,8 +76,6 @@ public class FolderActivity extends SyncthingActivity
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
-
-    private final VersioningDialogFragment mVersioningDialogFragment = new VersioningDialogFragment();
 
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
@@ -159,9 +158,9 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void showVersioningDialog() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        mVersioningDialogFragment.setArguments(getVersioningBundle());
-        mVersioningDialogFragment.show(transaction, "versioningDialog");
+        Intent intent = new Intent(this, VersioningDialogActivity.class);
+        intent.putExtras(getVersioningBundle());
+        startActivity(intent);
     }
 
     private Bundle getVersioningBundle() {
