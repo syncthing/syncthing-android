@@ -34,6 +34,8 @@ import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -47,6 +49,16 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         FolderObserver.OnFolderFileChangeListener {
 
     private static final String TAG = "RestApi";
+
+    /**
+     * Compares folders by labels, uses the folder ID as fallback if the label is empty
+     */
+    private final static Comparator<Folder> FOLDERS_COMPARATOR = (lhs, rhs) -> {
+        String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
+        String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
+
+        return lhsLabel.compareTo(rhsLabel);
+    };
 
     public interface OnConfigChangedListener {
         void onConfigChanged();
@@ -200,7 +212,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     public List<Folder> getFolders() {
-        return deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
+        List<Folder> folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
+        Collections.sort(folders, FOLDERS_COMPARATOR);
+        return folders;
     }
 
     public void addFolder(Folder folder) {

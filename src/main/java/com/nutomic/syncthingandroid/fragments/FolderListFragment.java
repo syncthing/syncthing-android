@@ -16,8 +16,6 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.views.FoldersAdapter;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,16 +25,6 @@ import java.util.TimerTask;
  */
 public class FolderListFragment extends ListFragment implements SyncthingService.OnApiChangeListener,
         AdapterView.OnItemClickListener {
-
-    /**
-     * Compares folders by labels, uses the folder ID as fallback if the label is empty
-     */
-    private final static Comparator<Folder> FOLDERS_COMPARATOR = (lhs, rhs) -> {
-        String lhsLabel = lhs.label != null && !lhs.label.isEmpty() ? lhs.label : lhs.id;
-        String rhsLabel = rhs.label != null && !rhs.label.isEmpty() ? rhs.label : rhs.id;
-
-        return lhsLabel.compareTo(rhsLabel);
-    };
 
     private FoldersAdapter mAdapter;
 
@@ -96,7 +84,6 @@ public class FolderListFragment extends ListFragment implements SyncthingService
         mAdapter.setNotifyOnChange(false);
         mAdapter.clear();
         List<Folder> folders = activity.getApi().getFolders();
-        Collections.sort(folders, FOLDERS_COMPARATOR);
         mAdapter.addAll(folders);
         mAdapter.updateModel(activity.getApi());
         mAdapter.notifyDataSetChanged();
