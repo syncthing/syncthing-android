@@ -49,6 +49,10 @@ unset GOOS
 _GOARCH=$GOARCH
 unset GOARCH
 
+# Make sure all tags are available for git describe
+# https://github.com/syncthing/syncthing-android/issues/872
+git fetch --tags
+
 go run build.go -goos=${_GOOS} -goarch=${_GOARCH} clean
 go run build.go -goos=${_GOOS} -goarch=${_GOARCH} -no-upgrade build
 
