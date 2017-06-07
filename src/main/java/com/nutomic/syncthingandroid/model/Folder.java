@@ -40,7 +40,7 @@ public class Folder {
     }
 
     public static class MinDiskFree {
-        public int value;
+        public float value;
         public String unit;
     }
 
