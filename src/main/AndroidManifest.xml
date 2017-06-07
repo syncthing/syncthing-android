@@ -152,7 +152,7 @@
         <activity
             android:name=".activities.VersioningDialogActivity"
             android:label="@string/title_activity_versioning_dialog"
-            android:theme="@style/Base.V21.Theme.AppCompat.Light.Dialog"
+            android:theme="@style/Theme.Syncthing.Dialog"
             android:parentActivityName=".activities.FolderActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

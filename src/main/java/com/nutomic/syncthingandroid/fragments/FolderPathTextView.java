@@ -45,7 +45,7 @@ public class FolderPathTextView extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (isDirectoryResult(requestCode, resultCode)) {
+        if (isCorrectResult(requestCode, resultCode)) {
             updateFolderPath(data);
         }
     }
@@ -58,7 +58,7 @@ public class FolderPathTextView extends Fragment {
         return mFolderPathView.getText().toString();
     }
 
-    private boolean isDirectoryResult(int requestCode, int resultCode) {
+    private boolean isCorrectResult(int requestCode, int resultCode) {
         return resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE;
     }
 }

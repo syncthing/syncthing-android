@@ -1,9 +1,12 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,23 +28,37 @@ public class VersioningDialogActivity extends AppCompatActivity {
 
     Fragment mCurrentFragment;
 
-    VersioningDialogFragment.VersioningDialogInterface mVersioningDialogInterface;
+    List<String> mTypes = Arrays.asList("none", "simple", "trashcan", "staggered", "external");
 
-    List<String> mTypes = Arrays.asList( "none", "simple", "trashcan", "staggered", "external");
+    Bundle mArguments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_versioning_dialog);
 
+        if (savedInstanceState != null) {
+            mArguments = savedInstanceState.getBundle("arguments");
+        } else {
+            mArguments = getIntent().getExtras();
+        }
+
         initiateFinishBtn();
         initiateSpinner();
     }
 
-
     private void initiateFinishBtn() {
         Button finishBtn = (Button) findViewById(R.id.finish_btn);
-        finishBtn.setOnClickListener(v -> this.finish());
+        finishBtn.setOnClickListener(v -> {
+            saveConfiguration();
+            finish();
+        });
+    }
+
+    private void saveConfiguration() {
+        Intent intent = new Intent();
+        intent.putExtras(mCurrentFragment.getArguments());
+        setResult(Activity.RESULT_OK, intent);
     }
 
     private void initiateSpinner() {
@@ -62,18 +79,20 @@ public class VersioningDialogActivity extends AppCompatActivity {
     }
 
     private void updateVersioningType(int position) {
-       getIntent().getExtras().putString("type", mTypes.get(position).toLowerCase());
+        mArguments.putString("type", mTypes.get(position));
     }
 
     private void updateFragmentView(int selection) {
+        if (mCurrentFragment != null){
+            mArguments = mCurrentFragment.getArguments();
+        }
         mCurrentFragment = getFragment(selection);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        //This Fragment (VersioningDialogFragment) contains all the file versioning parameters that have been passed from the FolderActivity, so we simply
+        //This Activtiy (VersioningDialogActivity) contains all the file versioning parameters that have been passed from the FolderActivity in the intent extras, so we simply
         // pass that to the currentfragment.
-        mCurrentFragment.setArguments(getIntent().getExtras());
+        mCurrentFragment.setArguments(mArguments);
         transaction.replace(R.id.versioningFragmentContainer, mCurrentFragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -101,13 +120,16 @@ public class VersioningDialogActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        mVersioningDialogInterface.onDialogClosed(mCurrentFragment.getArguments());
-        super.onStop();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle("arguments", mCurrentFragment.getArguments());
     }
 
-    public interface VersioningDialogInterface {
-        void onDialogClosed(Bundle arguments);
+    @Override
+    public void onBackPressed() {
+        saveConfiguration();
+        super.onBackPressed();
     }
+
 
 }

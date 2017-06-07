@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.fragments.dialog.VersioningDialogFragment;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -46,7 +44,7 @@ import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE
  * Shows folder details and allows changing them.
  */
 public class FolderActivity extends SyncthingActivity
-        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener, VersioningDialogActivity.VersioningDialogInterface {
+        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnApiChangeListener {
 
     public static final String EXTRA_IS_CREATE =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
@@ -61,6 +59,8 @@ public class FolderActivity extends SyncthingActivity
 
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
+
+    private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
 
     private Folder mFolder;
 
@@ -160,7 +160,7 @@ public class FolderActivity extends SyncthingActivity
     private void showVersioningDialog() {
         Intent intent = new Intent(this, VersioningDialogActivity.class);
         intent.putExtras(getVersioningBundle());
-        startActivity(intent);
+        startActivityForResult(intent, FILE_VERSIONING_DIALOG_REQUEST);
     }
 
     private Bundle getVersioningBundle() {
@@ -168,7 +168,11 @@ public class FolderActivity extends SyncthingActivity
         for (Map.Entry<String, String> entry: mFolder.versioning.params.entrySet()){
             bundle.putString(entry.getKey(), entry.getValue());
         }
-        bundle.putString("type", mFolder.versioning.type);
+        if (TextUtils.isEmpty(mFolder.versioning.type)){
+            bundle.putString("type", "none");
+        } else{
+            bundle.putString("type", mFolder.versioning.type);
+        }
         return bundle;
     }
 
@@ -225,6 +229,8 @@ public class FolderActivity extends SyncthingActivity
             return;
         }
 
+        Log.d(TAG, "onApiChange: ");
+
         if (!mIsCreateMode) {
             List<Folder> folders = getApi().getFolders();
             String passedId = getIntent().getStringExtra(EXTRA_FOLDER_ID);
@@ -259,7 +265,7 @@ public class FolderActivity extends SyncthingActivity
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
-        mVersioningDescriptionView.setText(getVersioningDescription());
+        mVersioningDescriptionView.setText(getVersioningDescription(mFolder.versioning));
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         List<Device> devicesList = getApi().getDevices(false);
 
@@ -398,6 +404,7 @@ public class FolderActivity extends SyncthingActivity
 
     private void updateFolder() {
         if (!mIsCreateMode) {
+            Log.d(TAG, "updateFolder: ");
             getApi().editFolder(mFolder);
         }
     }
@@ -426,52 +433,59 @@ public class FolderActivity extends SyncthingActivity
     }
 
     @Override
-    public void onDialogClosed(Bundle arguments) {
-        updateVersioning(arguments);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == FILE_VERSIONING_DIALOG_REQUEST && resultCode == RESULT_OK){
+            updateVersioning(data.getExtras());
+        }
     }
 
     private void updateVersioning(Bundle arguments) {
+        Folder.Versioning versioning = new Folder.Versioning();
         String type = arguments.getString("type");
         arguments.remove("type");
-
         if (type.equals("none")){
             mFolder.versioning = new Folder.Versioning();
         }else {
-            mFolder.versioning.type = type;
+            Log.d(TAG, "updateVersioning: "+versioning.type);
+            versioning.type = type;
 
             for (String key : arguments.keySet()) {
-                mFolder.versioning.params.put(key, arguments.getString(key));
+                versioning.params.put(key, arguments.getString(key));
             }
         }
-        mVersioningDescriptionView.setText(getVersioningDescription());
+        mVersioningDescriptionView.setText(getVersioningDescription(versioning));
+        if (mFolder != null){
+            mFolder.versioning = versioning;
+        }
         mFolderNeedsToUpdate = true;
     }
 
-    private String getVersioningDescription() {
+    private String getVersioningDescription(Folder.Versioning versioning) {
         String description = getString(R.string.none);
 
-        if (mFolder == null || mFolder.versioning.type == null){
+        if (mFolder == null || versioning.type == null){
             return description;
         }
 
-        switch (mFolder.versioning.type) {
+        switch (versioning.type) {
             case "simple":
                 description = getString(R.string.type) + ": " + getString(R.string.simple) + "\n"
-                        + getString(R.string.keep_versions) +": " + mFolder.versioning.params.get("keep");
+                        + getString(R.string.keep_versions) +": " +versioning.params.get("keep");
                 break;
             case "trashcan":
                 description = getString(R.string.type) + ": " + getString(R.string.trashcan) + "\n"
-                        + getString(R.string.clean_out_after) +": " + mFolder.versioning.params.get("cleanoutDays");
+                        + getString(R.string.clean_out_after) +": " + versioning.params.get("cleanoutDays");
                 break;
             case "staggered":
-                int maxAge = getMaxAgeInDays();
+                int maxAge = getMaxAgeInDays(versioning);
                 description = getString(R.string.type) + ": " + getString(R.string.staggered) + "\n"
                         + getString(R.string.maximum_age) + ": " + (maxAge == 0 ? getString(R.string.never_delete) : maxAge) + "\n"
-                        + getString(R.string.versions_path)+ ": " + mFolder.versioning.params.get("versionsPath");
+                        + getString(R.string.versions_path)+ ": " + versioning.params.get("versionsPath");
                 break;
             case "external":
                 description = getString(R.string.type) + ": " + getString(R.string.external) + "\n"
-                        + getString(R.string.command) + ": " + mFolder.versioning.params.get("command");
+                        + getString(R.string.command) + ": " + versioning.params.get("command");
                 break;
         }
 
@@ -479,9 +493,9 @@ public class FolderActivity extends SyncthingActivity
     }
 
     //MaxAge is stored in seconds, since Syncthing requires it in seconds, but it is displayed in days. Hence the conversion below.
-    private int getMaxAgeInDays() {
+    private int getMaxAgeInDays(Folder.Versioning versioning) {
         int secInADay = 86400;
 
-        return Integer.valueOf(mFolder.versioning.params.get("maxAge"))/secInADay;
+        return Integer.valueOf(versioning.params.get("maxAge"))/secInADay;
     }
 }
