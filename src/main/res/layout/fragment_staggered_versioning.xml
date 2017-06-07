@@ -52,7 +52,7 @@
 
         <fragment
             android:id="@+id/fragmentVersionsPath"
-            android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextView"
+            android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextViewFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:tag="fragmentFolderPath"

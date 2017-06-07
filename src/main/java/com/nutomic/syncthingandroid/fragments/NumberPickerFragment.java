@@ -16,7 +16,7 @@ import com.nutomic.syncthingandroid.R;
 
 public class NumberPickerFragment extends Fragment {
 
-    NumberPicker mNumberPicker;
+    private NumberPicker mNumberPicker;
 
     @Nullable
     @Override
@@ -27,7 +27,7 @@ public class NumberPickerFragment extends Fragment {
         return mNumberPicker;
     }
 
-    public void setValueChangeLisenter(NumberPicker.OnValueChangeListener onValueChangeListener){
+    public void setOnValueChangedLisenter(NumberPicker.OnValueChangeListener onValueChangeListener){
         mNumberPicker.setOnValueChangedListener(onValueChangeListener);
     }
 

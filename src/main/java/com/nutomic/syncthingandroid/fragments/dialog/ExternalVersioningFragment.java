@@ -17,6 +17,7 @@ import com.nutomic.syncthingandroid.R;
  */
 
 public class ExternalVersioningFragment extends Fragment {
+
     private View mView;
 
     private Bundle mArguments;

@@ -3,31 +3,28 @@ package com.nutomic.syncthingandroid.fragments.dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
 
-import static android.content.ContentValues.TAG;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Contains the configuration options for Staggered file versioning.
  */
 
 public class StaggeredVersioningFragment extends Fragment {
+
     private View mView;
 
     private Bundle mArguments;
-
-    private int mSecInADay = 86400;
 
     @Nullable
     @Override
@@ -56,7 +53,7 @@ public class StaggeredVersioningFragment extends Fragment {
     private void updateNumberPicker() {
         NumberPickerFragment numberPicker = (NumberPickerFragment) getChildFragmentManager().findFragmentByTag("numberpicker_staggered_versioning");
         numberPicker.updateNumberPicker(100, 0, getMaxAgeInDays());
-        numberPicker.setValueChangeLisenter((picker, oldVal, newVal) -> updatePreference("maxAge", (String.valueOf(convertToSeconds(newVal)))));
+        numberPicker.setOnValueChangedLisenter((picker, oldVal, newVal) -> updatePreference("maxAge", (String.valueOf(TimeUnit.DAYS.toSeconds(newVal)))));
     }
 
     private void initiateVersionsPathTextView() {
@@ -89,15 +86,6 @@ public class StaggeredVersioningFragment extends Fragment {
     }
 
     private int getMaxAgeInDays() {
-        int maxAgeInSeconds = Integer.valueOf(mArguments.getString("maxAge"));
-        return convertToDays(maxAgeInSeconds);
-    }
-
-    private int convertToSeconds(int days) {
-        return days * mSecInADay;
-    }
-
-    private int convertToDays(int seconds){
-        return seconds != 0 ? seconds/mSecInADay : 0;
+        return (int) TimeUnit.SECONDS.toDays(Long.valueOf(mArguments.getString("maxAge")));
     }
 }

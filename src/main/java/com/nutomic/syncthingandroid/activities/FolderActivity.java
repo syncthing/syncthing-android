@@ -29,9 +29,12 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
@@ -70,12 +73,15 @@ public class FolderActivity extends SyncthingActivity
     private SwitchCompat mFolderMasterView;
     private ViewGroup mDevicesContainer;
     private TextView mVersioningDescriptionView;
+    private TextView mVersioningTypeView;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
+
+    private Folder.Versioning mVersioning;
 
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
@@ -123,6 +129,7 @@ public class FolderActivity extends SyncthingActivity
         mPathView = (TextView) findViewById(R.id.fragment_folder_path);
         mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
         mVersioningDescriptionView = (TextView) findViewById(R.id.versioningDescription);
+        mVersioningTypeView = (TextView) findViewById(R.id.versioningType);
         mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
@@ -168,11 +175,13 @@ public class FolderActivity extends SyncthingActivity
         for (Map.Entry<String, String> entry: mFolder.versioning.params.entrySet()){
             bundle.putString(entry.getKey(), entry.getValue());
         }
+
         if (TextUtils.isEmpty(mFolder.versioning.type)){
             bundle.putString("type", "none");
         } else{
             bundle.putString("type", mFolder.versioning.type);
         }
+
         return bundle;
     }
 
@@ -229,8 +238,6 @@ public class FolderActivity extends SyncthingActivity
             return;
         }
 
-        Log.d(TAG, "onApiChange: ");
-
         if (!mIsCreateMode) {
             List<Folder> folders = getApi().getFolders();
             String passedId = getIntent().getStringExtra(EXTRA_FOLDER_ID);
@@ -252,7 +259,19 @@ public class FolderActivity extends SyncthingActivity
             mFolderNeedsToUpdate = true;
         }
 
+        attemptToApplyVersioningConfig();
+
         updateViewsAndSetListeners();
+    }
+
+    //If the FolderActivity gets recreated after the VersioningDialogActivity is closed, then the result from the VersioningDialogActivity will be received before
+    // the mFolder variable has been recreated, so the versioning config will be stored in the mVersioning variable until the mFolder variable has been
+    // recreated in the onApiChange(). This has been observed to happen after the screen orientation has changed while the VersioningDialogActivity was open.
+    private void attemptToApplyVersioningConfig() {
+        if (mFolder != null && mVersioning != null){
+            mFolder.versioning = mVersioning;
+            mVersioning = null;
+        }
     }
 
     private void updateViewsAndSetListeners() {
@@ -265,7 +284,7 @@ public class FolderActivity extends SyncthingActivity
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
-        mVersioningDescriptionView.setText(getVersioningDescription(mFolder.versioning));
+        updateVersioningDescription();
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         List<Device> devicesList = getApi().getDevices(false);
 
@@ -404,7 +423,6 @@ public class FolderActivity extends SyncthingActivity
 
     private void updateFolder() {
         if (!mIsCreateMode) {
-            Log.d(TAG, "updateFolder: ");
             getApi().editFolder(mFolder);
         }
     }
@@ -436,66 +454,67 @@ public class FolderActivity extends SyncthingActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FILE_VERSIONING_DIALOG_REQUEST && resultCode == RESULT_OK){
-            updateVersioning(data.getExtras());
+            saveVersioningConfig(data.getExtras());
         }
     }
 
-    private void updateVersioning(Bundle arguments) {
-        Folder.Versioning versioning = new Folder.Versioning();
+    private void saveVersioningConfig(Bundle arguments) {
+        if (mFolder != null){
+            mVersioning = mFolder.versioning;
+        } else {
+            mVersioning = new Folder.Versioning();
+        }
+
         String type = arguments.getString("type");
         arguments.remove("type");
-        if (type.equals("none")){
-            mFolder.versioning = new Folder.Versioning();
-        }else {
-            Log.d(TAG, "updateVersioning: "+versioning.type);
-            versioning.type = type;
 
+        if (type.equals("none")){
+            mVersioning = new Folder.Versioning();
+        } else {
             for (String key : arguments.keySet()) {
-                versioning.params.put(key, arguments.getString(key));
+                mVersioning.params.put(key, arguments.getString(key));
             }
+            mVersioning.type = type;
         }
-        mVersioningDescriptionView.setText(getVersioningDescription(versioning));
-        if (mFolder != null){
-            mFolder.versioning = versioning;
-        }
+
+        attemptToApplyVersioningConfig();
+        updateVersioningDescription();
         mFolderNeedsToUpdate = true;
     }
 
-    private String getVersioningDescription(Folder.Versioning versioning) {
-        String description = getString(R.string.none);
-
-        if (mFolder == null || versioning.type == null){
-            return description;
+    private void updateVersioningDescription() {
+        if (mFolder == null){
+            return;
         }
 
-        switch (versioning.type) {
+        if (TextUtils.isEmpty(mFolder.versioning.type)) {
+            setVersioningDescription(getString(R.string.none), "");
+            return;
+        }
+
+        switch (mFolder.versioning.type) {
             case "simple":
-                description = getString(R.string.type) + ": " + getString(R.string.simple) + "\n"
-                        + getString(R.string.keep_versions) +": " +versioning.params.get("keep");
+                setVersioningDescription(getString(R.string.type_simple),
+                        getString(R.string.simple_versioning_info, mFolder.versioning.params.get("keep")));
                 break;
             case "trashcan":
-                description = getString(R.string.type) + ": " + getString(R.string.trashcan) + "\n"
-                        + getString(R.string.clean_out_after) +": " + versioning.params.get("cleanoutDays");
+                setVersioningDescription(getString(R.string.type_trashcan),
+                        getString(R.string.trashcan_versioning_info, mFolder.versioning.params.get("cleanoutDays")));
                 break;
             case "staggered":
-                int maxAge = getMaxAgeInDays(versioning);
-                description = getString(R.string.type) + ": " + getString(R.string.staggered) + "\n"
-                        + getString(R.string.maximum_age) + ": " + (maxAge == 0 ? getString(R.string.never_delete) : maxAge) + "\n"
-                        + getString(R.string.versions_path)+ ": " + versioning.params.get("versionsPath");
+                int maxAge = (int) TimeUnit.SECONDS.toDays(Long.valueOf(mFolder.versioning.params.get("maxAge")));
+                setVersioningDescription(getString(R.string.type_staggered),
+                        getString(R.string.staggered_versioning_info, maxAge, mFolder.versioning.params.get("versionsPath")));
                 break;
             case "external":
-                description = getString(R.string.type) + ": " + getString(R.string.external) + "\n"
-                        + getString(R.string.command) + ": " + versioning.params.get("command");
+                setVersioningDescription(getString(R.string.type_external),
+                        getString(R.string.external_versioning_info, mFolder.versioning.params.get("command")));
                 break;
         }
-
-        return description;
     }
 
-    //MaxAge is stored in seconds, since Syncthing requires it in seconds, but it is displayed in days. Hence the conversion below.
-    private int getMaxAgeInDays(Folder.Versioning versioning) {
-        int secInADay = 86400;
-
-        return Integer.valueOf(versioning.params.get("maxAge"))/secInADay;
+    private void setVersioningDescription(String type, String description) {
+        mVersioningTypeView.setText(type);
+        mVersioningDescriptionView.setText(description);
     }
 }

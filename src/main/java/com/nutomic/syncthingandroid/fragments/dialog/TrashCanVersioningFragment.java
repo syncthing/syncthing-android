@@ -3,16 +3,12 @@ package com.nutomic.syncthingandroid.fragments.dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Contains the configuration options for trashcan file versioning.
@@ -20,7 +16,7 @@ import static android.content.ContentValues.TAG;
 
 public class TrashCanVersioningFragment extends Fragment {
 
-    View mView;
+    private View mView;
 
     private Bundle mArguments;
 
@@ -48,7 +44,7 @@ public class TrashCanVersioningFragment extends Fragment {
     private void updateNumberPicker() {
         NumberPickerFragment numberPicker = (NumberPickerFragment) getChildFragmentManager().findFragmentByTag("numberpicker_trashcan_versioning");
         numberPicker.updateNumberPicker(100, 0, getCleanoutDays());
-        numberPicker.setValueChangeLisenter((picker, oldVal, newVal) -> updateCleanoutDays((String.valueOf(newVal))));
+        numberPicker.setOnValueChangedLisenter((picker, oldVal, newVal) -> updateCleanoutDays((String.valueOf(newVal))));
     }
 
     private int getCleanoutDays() {

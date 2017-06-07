@@ -31,12 +31,12 @@
 
             <Button
                 android:id="@+id/finish_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/finish"
-                android:textColor="@color/primary_dark"
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:text="@string/finish"
+                android:textColor="@color/primary_dark" />
 
         </LinearLayout>
     </ScrollView>

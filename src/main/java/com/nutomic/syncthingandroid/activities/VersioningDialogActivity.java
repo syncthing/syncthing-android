@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,20 +16,17 @@ import com.nutomic.syncthingandroid.fragments.dialog.NoVersioningFragment;
 import com.nutomic.syncthingandroid.fragments.dialog.SimpleVersioningFragment;
 import com.nutomic.syncthingandroid.fragments.dialog.StaggeredVersioningFragment;
 import com.nutomic.syncthingandroid.fragments.dialog.TrashCanVersioningFragment;
-import com.nutomic.syncthingandroid.fragments.dialog.VersioningDialogFragment;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class VersioningDialogActivity extends AppCompatActivity {
 
-    Spinner mVersioningTypeSpinner;
+    private Fragment mCurrentFragment;
 
-    Fragment mCurrentFragment;
+    private List<String> mTypes = Arrays.asList("none", "trashcan", "simple", "staggered", "external");
 
-    List<String> mTypes = Arrays.asList("none", "simple", "trashcan", "staggered", "external");
-
-    Bundle mArguments;
+    private Bundle mArguments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +58,9 @@ public class VersioningDialogActivity extends AppCompatActivity {
     }
 
     private void initiateSpinner() {
-        mVersioningTypeSpinner = (Spinner) findViewById(R.id.versioningTypeSpinner);
-        mVersioningTypeSpinner.setSelection(mTypes.indexOf(getIntent().getExtras().getString("type")));
-        mVersioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner versioningTypeSpinner = (Spinner) findViewById(R.id.versioningTypeSpinner);
+        versioningTypeSpinner.setSelection(mTypes.indexOf(getIntent().getExtras().getString("type")));
+        versioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateVersioningType(position);
@@ -86,6 +82,7 @@ public class VersioningDialogActivity extends AppCompatActivity {
         if (mCurrentFragment != null){
             mArguments = mCurrentFragment.getArguments();
         }
+
         mCurrentFragment = getFragment(selection);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -98,15 +95,16 @@ public class VersioningDialogActivity extends AppCompatActivity {
 
     private Fragment getFragment(int selection) {
         Fragment fragment = null;
+
         switch (selection) {
             case 0:
                 fragment = new NoVersioningFragment();
                 break;
             case 1:
-                fragment = new SimpleVersioningFragment();
+                fragment = new TrashCanVersioningFragment();
                 break;
             case 2:
-                fragment = new TrashCanVersioningFragment();
+                fragment = new SimpleVersioningFragment();
                 break;
             case 3:
                 fragment = new StaggeredVersioningFragment();
@@ -130,6 +128,4 @@ public class VersioningDialogActivity extends AppCompatActivity {
         saveConfiguration();
         super.onBackPressed();
     }
-
-
 }

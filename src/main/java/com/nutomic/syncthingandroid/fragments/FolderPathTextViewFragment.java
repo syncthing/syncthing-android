@@ -20,7 +20,8 @@ import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
  * The selected path can be accessed by adding a textwatcher in the parent activity/fragment to fragment_directory_text_view.
  */
 
-public class FolderPathTextView extends Fragment {
+public class FolderPathTextViewFragment extends Fragment {
+
     private static final int DIRECTORY_REQUEST_CODE = 234;
 
     private TextView mFolderPathView;

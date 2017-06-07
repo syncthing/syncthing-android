@@ -47,7 +47,7 @@
 
             <fragment
                 android:id="@+id/fragment_folder_path"
-                android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextView"
+                android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextViewFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_directory_text_view"
@@ -99,12 +99,21 @@
                     android:text="@string/file_versioning" />
 
                 <TextView
-                    android:id="@+id/versioningDescription"
+                    android:id="@+id/versioningType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="75dp"
                     android:layout_marginStart="75dp"
                     android:layout_marginTop="-20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/versioningDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginStart="75dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     tools:ignore="HardcodedText" />
 

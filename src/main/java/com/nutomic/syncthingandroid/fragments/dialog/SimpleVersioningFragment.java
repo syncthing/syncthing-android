@@ -18,6 +18,7 @@ import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
  */
 
 public class SimpleVersioningFragment extends Fragment {
+
     private View mView;
 
     private Bundle mArguments;
@@ -46,7 +47,7 @@ public class SimpleVersioningFragment extends Fragment {
     private void updateNumberPicker() {
         NumberPickerFragment numberPicker = (NumberPickerFragment) getChildFragmentManager().findFragmentByTag("numberpicker_simple_versioning");
         numberPicker.updateNumberPicker(100000, 1, getKeepVersions());
-        numberPicker.setValueChangeLisenter((picker, oldVal, newVal) -> updateKeepVersions((String.valueOf(newVal))));
+        numberPicker.setOnValueChangedLisenter((picker, oldVal, newVal) -> updateKeepVersions((String.valueOf(newVal))));
     }
 
     private void updateKeepVersions(String newValue) {
