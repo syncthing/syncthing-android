@@ -39,6 +39,7 @@ public class VersioningDialogActivity extends AppCompatActivity {
             mArguments = getIntent().getExtras();
         }
 
+        updateFragmentView(mTypes.indexOf(getIntent().getExtras().getString("type")));
         initiateFinishBtn();
         initiateSpinner();
     }
@@ -63,8 +64,10 @@ public class VersioningDialogActivity extends AppCompatActivity {
         versioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updateVersioningType(position);
-                updateFragmentView(position);
+                if (position != mTypes.indexOf(getIntent().getExtras().getString("type"))) {
+                    updateVersioningType(position);
+                    updateFragmentView(position);
+                }
             }
 
             @Override
