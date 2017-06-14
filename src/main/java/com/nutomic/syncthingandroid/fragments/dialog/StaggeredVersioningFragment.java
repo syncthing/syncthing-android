@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.fragments.dialog;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
 
 import java.util.concurrent.TimeUnit;
@@ -25,6 +28,8 @@ public class StaggeredVersioningFragment extends Fragment {
     private View mView;
 
     private Bundle mArguments;
+
+    private TextView mPathView;
 
     @Nullable
     @Override
@@ -57,24 +62,25 @@ public class StaggeredVersioningFragment extends Fragment {
     }
 
     private void initiateVersionsPathTextView() {
-        TextView directoryTextView = (TextView) mView.findViewById(R.id.fragmentVersionsPath);
-        directoryTextView.setText(getVersionsPath());
-        directoryTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        mPathView = (TextView) mView.findViewById(R.id.directoryTextView);
+        String currentPath = getVersionsPath();
 
-            }
+        mPathView.setText(currentPath);
+        mPathView.setOnClickListener(view ->
+            startActivityForResult(FolderPickerActivity.createIntent(getContext(), currentPath), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
+    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                updatePreference("versionsPath", s.toString());
-            }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE ) {
+            updatePath(data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY));
+        }
+    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+    private void updatePath(String directory) {
+        mPathView.setText(directory);
+        updatePreference("versionsPath", directory);
     }
 
     private String getVersionsPath() {

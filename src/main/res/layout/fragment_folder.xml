@@ -44,14 +44,15 @@
                 android:imeOptions="actionDone"
                 android:inputType="textCapWords" />
 
-
-            <fragment
-                android:id="@+id/fragment_folder_path"
-                android:name="com.nutomic.syncthingandroid.fragments.FolderPathTextViewFragment"
+            <TextView
+                android:id="@+id/directoryTextView"
+                style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_directory_text_view"
-                />
+                android:drawableLeft="@drawable/ic_folder_black_24dp"
+                android:drawableStart="@drawable/ic_folder_black_24dp"
+                android:focusable="true"
+                android:hint="@string/directory"/>
 
             <LinearLayout
                 android:id="@+id/devicesContainer"

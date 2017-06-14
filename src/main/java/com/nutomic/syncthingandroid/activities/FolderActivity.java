@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -126,11 +128,14 @@ public class FolderActivity extends SyncthingActivity
 
         mLabelView = (EditText) findViewById(R.id.label);
         mIdView = (EditText) findViewById(R.id.id);
-        mPathView = (TextView) findViewById(R.id.fragment_folder_path);
+        mPathView = (TextView) findViewById(R.id.directoryTextView);
         mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
         mVersioningDescriptionView = (TextView) findViewById(R.id.versioningDescription);
         mVersioningTypeView = (TextView) findViewById(R.id.versioningType);
         mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
+
+        mPathView.setOnClickListener(view ->
+                startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
 
@@ -264,7 +269,7 @@ public class FolderActivity extends SyncthingActivity
         updateViewsAndSetListeners();
     }
 
-    //If the FolderActivity gets recreated after the VersioningDialogActivity is closed, then the result from the VersioningDialogActivity will be received before
+    // If the FolderActivity gets recreated after the VersioningDialogActivity is closed, then the result from the VersioningDialogActivity will be received before
     // the mFolder variable has been recreated, so the versioning config will be stored in the mVersioning variable until the mFolder variable has been
     // recreated in the onApiChange(). This has been observed to happen after the screen orientation has changed while the VersioningDialogActivity was open.
     private void attemptToApplyVersioningConfig() {
@@ -361,6 +366,17 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
+            mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
+            mPathView.setText(mFolder.path);
+            mFolderNeedsToUpdate = true;
+        } else if (resultCode == Activity.RESULT_OK && requestCode == FILE_VERSIONING_DIALOG_REQUEST) {
+            updateVersioning(data.getExtras());
+        }
+    }
+
     private String generateRandomFolderId() {
         char[] chars = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -450,15 +466,7 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == FILE_VERSIONING_DIALOG_REQUEST && resultCode == RESULT_OK){
-            saveVersioningConfig(data.getExtras());
-        }
-    }
-
-    private void saveVersioningConfig(Bundle arguments) {
+    private void updateVersioning(Bundle arguments) {
         if (mFolder != null){
             mVersioning = mFolder.versioning;
         } else {
