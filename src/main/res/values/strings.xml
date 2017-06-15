@@ -591,8 +591,8 @@ Please report any problems you encounter via Github.</string>
     <string name="type_external">Type: External</string>
 
     <!-- Information displayed about the current file versioning configuration in the folder activity -->
-    <string name="trashcan_versioning_info" formatted="false">Cleanout after: %1$s</string>
-    <string name="staggered_versioning_info" formatted="false">Maximum Age: %1$d \nVersions Path: %2$s</string>
-    <string name="external_versioning_info" formatted="false">Command: %1$s</string>
+    <string name="trashcan_versioning_info">Cleanout after: %1$s</string>
+    <string name="staggered_versioning_info">Maximum Age: %1$d \nVersions Path: %2$s</string>
+    <string name="external_versioning_info">Command: %1$s</string>
     <string name="simple_versioning_info">Keep versions: %1$s</string>
 </resources>
