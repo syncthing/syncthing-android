@@ -28,6 +28,7 @@ dependencies {
     compile 'com.google.guava:guava:20.0'
     compile 'com.annimon:stream:1.1.7'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support:support-annotations:25.3.1'
 }

@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,14 +26,17 @@ import android.widget.Toast;
 import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.fragments.dialog.KeepVersionsDialogFragment;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.Random;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
@@ -42,7 +44,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
-import static java.lang.String.valueOf;
 
 /**
  * Shows folder details and allows changing them.
@@ -59,14 +60,12 @@ public class FolderActivity extends SyncthingActivity
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
-
-    private static final int DIRECTORY_REQUEST_CODE = 234;
-
     private static final String TAG = "EditFolderFragment";
 
-    public static final String KEEP_VERSIONS_DIALOG_TAG = "KeepVersionsDialogFragment";
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
+
+    private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
 
     private Folder mFolder;
 
@@ -75,7 +74,8 @@ public class FolderActivity extends SyncthingActivity
     private TextView mPathView;
     private SwitchCompat mFolderMasterView;
     private ViewGroup mDevicesContainer;
-    private TextView mVersioningKeepView;
+    private TextView mVersioningDescriptionView;
+    private TextView mVersioningTypeView;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
@@ -83,7 +83,7 @@ public class FolderActivity extends SyncthingActivity
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
 
-    private final KeepVersionsDialogFragment mKeepVersionsDialogFragment = new KeepVersionsDialogFragment();
+    private Folder.Versioning mVersioning;
 
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
@@ -117,33 +117,6 @@ public class FolderActivity extends SyncthingActivity
         }
     };
 
-    private final KeepVersionsDialogFragment.OnValueChangeListener mOnValueChangeListener =
-            new KeepVersionsDialogFragment.OnValueChangeListener() {
-        @Override
-        public void onValueChange(int intValue) {
-            if (intValue == 0) {
-                mFolder.versioning = new Folder.Versioning();
-                mVersioningKeepView.setText(R.string.off);
-            } else {
-                mFolder.versioning.type = "simple";
-                mFolder.versioning.params.put("keep", valueOf(intValue));
-                mVersioningKeepView.setText(valueOf(intValue));
-            }
-            mFolderNeedsToUpdate = true;
-        }
-    };
-
-    private final View.OnClickListener mPathViewClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(FolderActivity.this, FolderPickerActivity.class);
-            if (!TextUtils.isEmpty(mFolder.path)) {
-                intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, mFolder.path);
-            }
-            startActivityForResult(intent, DIRECTORY_REQUEST_CODE);
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,14 +128,16 @@ public class FolderActivity extends SyncthingActivity
 
         mLabelView = (EditText) findViewById(R.id.label);
         mIdView = (EditText) findViewById(R.id.id);
-        mPathView = (TextView) findViewById(R.id.directory);
+        mPathView = (TextView) findViewById(R.id.directoryTextView);
         mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
-        mVersioningKeepView = (TextView) findViewById(R.id.versioningKeep);
+        mVersioningDescriptionView = (TextView) findViewById(R.id.versioningDescription);
+        mVersioningTypeView = (TextView) findViewById(R.id.versioningType);
         mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
 
-        mPathView.setOnClickListener(mPathViewClickListener);
-        findViewById(R.id.versioningContainer).setOnClickListener(v ->
-                mKeepVersionsDialogFragment.show(getFragmentManager(), KEEP_VERSIONS_DIALOG_TAG));
+        mPathView.setOnClickListener(view ->
+                startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
+
+        findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -186,6 +161,33 @@ public class FolderActivity extends SyncthingActivity
                 showDeleteDialog();
             }
         }
+
+        if (savedInstanceState != null){
+            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+                showDeleteDialog();
+            }
+        }
+    }
+
+    private void showVersioningDialog() {
+        Intent intent = new Intent(this, VersioningDialogActivity.class);
+        intent.putExtras(getVersioningBundle());
+        startActivityForResult(intent, FILE_VERSIONING_DIALOG_REQUEST);
+    }
+
+    private Bundle getVersioningBundle() {
+        Bundle bundle = new Bundle();
+        for (Map.Entry<String, String> entry: mFolder.versioning.params.entrySet()){
+            bundle.putString(entry.getKey(), entry.getValue());
+        }
+
+        if (TextUtils.isEmpty(mFolder.versioning.type)){
+            bundle.putString("type", "none");
+        } else{
+            bundle.putString("type", mFolder.versioning.type);
+        }
+
+        return bundle;
     }
 
     @Override
@@ -262,7 +264,19 @@ public class FolderActivity extends SyncthingActivity
             mFolderNeedsToUpdate = true;
         }
 
+        attemptToApplyVersioningConfig();
+
         updateViewsAndSetListeners();
+    }
+
+    // If the FolderActivity gets recreated after the VersioningDialogActivity is closed, then the result from the VersioningDialogActivity will be received before
+    // the mFolder variable has been recreated, so the versioning config will be stored in the mVersioning variable until the mFolder variable has been
+    // recreated in the onApiChange(). This has been observed to happen after the screen orientation has changed while the VersioningDialogActivity was open.
+    private void attemptToApplyVersioningConfig() {
+        if (mFolder != null && mVersioning != null){
+            mFolder.versioning = mVersioning;
+            mVersioning = null;
+        }
     }
 
     private void updateViewsAndSetListeners() {
@@ -270,12 +284,12 @@ public class FolderActivity extends SyncthingActivity
         mIdView.removeTextChangedListener(mTextWatcher);
         mPathView.removeTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(null);
-        mKeepVersionsDialogFragment.setOnValueChangeListener(null);
 
         // Update views
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         mPathView.setText(mFolder.path);
+        updateVersioningDescription();
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         List<Device> devicesList = getApi().getDevices(false);
 
@@ -288,22 +302,11 @@ public class FolderActivity extends SyncthingActivity
             }
         }
 
-        boolean versioningEnabled = Objects.equal(mFolder.versioning.type, "simple");
-        int versions = 0;
-        if (versioningEnabled) {
-            versions = Integer.valueOf(mFolder.versioning.params.get("keep"));
-            mVersioningKeepView.setText(valueOf(versions));
-        } else {
-            mVersioningKeepView.setText(R.string.off);
-        }
-        mKeepVersionsDialogFragment.setValue(versions);
-
         // Keep state updated
         mLabelView.addTextChangedListener(mTextWatcher);
         mIdView.addTextChangedListener(mTextWatcher);
         mPathView.addTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(mCheckedListener);
-        mKeepVersionsDialogFragment.setOnValueChangeListener(mOnValueChangeListener);
     }
 
     @Override
@@ -365,10 +368,12 @@ public class FolderActivity extends SyncthingActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == DIRECTORY_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
             mFolderNeedsToUpdate = true;
+        } else if (resultCode == Activity.RESULT_OK && requestCode == FILE_VERSIONING_DIALOG_REQUEST) {
+            updateVersioning(data.getExtras());
         }
     }
 
@@ -459,5 +464,65 @@ public class FolderActivity extends SyncthingActivity
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
+    }
+
+    private void updateVersioning(Bundle arguments) {
+        if (mFolder != null){
+            mVersioning = mFolder.versioning;
+        } else {
+            mVersioning = new Folder.Versioning();
+        }
+
+        String type = arguments.getString("type");
+        arguments.remove("type");
+
+        if (type.equals("none")){
+            mVersioning = new Folder.Versioning();
+        } else {
+            for (String key : arguments.keySet()) {
+                mVersioning.params.put(key, arguments.getString(key));
+            }
+            mVersioning.type = type;
+        }
+
+        attemptToApplyVersioningConfig();
+        updateVersioningDescription();
+        mFolderNeedsToUpdate = true;
+    }
+
+    private void updateVersioningDescription() {
+        if (mFolder == null){
+            return;
+        }
+
+        if (TextUtils.isEmpty(mFolder.versioning.type)) {
+            setVersioningDescription(getString(R.string.none), "");
+            return;
+        }
+
+        switch (mFolder.versioning.type) {
+            case "simple":
+                setVersioningDescription(getString(R.string.type_simple),
+                        getString(R.string.simple_versioning_info, mFolder.versioning.params.get("keep")));
+                break;
+            case "trashcan":
+                setVersioningDescription(getString(R.string.type_trashcan),
+                        getString(R.string.trashcan_versioning_info, mFolder.versioning.params.get("cleanoutDays")));
+                break;
+            case "staggered":
+                int maxAge = (int) TimeUnit.SECONDS.toDays(Long.valueOf(mFolder.versioning.params.get("maxAge")));
+                setVersioningDescription(getString(R.string.type_staggered),
+                        getString(R.string.staggered_versioning_info, maxAge, mFolder.versioning.params.get("versionsPath")));
+                break;
+            case "external":
+                setVersioningDescription(getString(R.string.type_external),
+                        getString(R.string.external_versioning_info, mFolder.versioning.params.get("command")));
+                break;
+        }
+    }
+
+    private void setVersioningDescription(String type, String description) {
+        mVersioningTypeView.setText(type);
+        mVersioningDescriptionView.setText(description);
     }
 }

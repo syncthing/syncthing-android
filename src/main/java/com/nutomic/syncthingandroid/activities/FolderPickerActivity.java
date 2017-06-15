@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +51,8 @@ public class FolderPickerActivity extends SyncthingActivity
     public static final String EXTRA_RESULT_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.RESULT_DIRECTORY";
 
+    public static final int DIRECTORY_REQUEST_CODE = 234;
+
     private ListView mListView;
 
     private FileAdapter mFilesAdapter;
@@ -60,6 +63,16 @@ public class FolderPickerActivity extends SyncthingActivity
      * Location of null means that the list of roots is displayed.
      */
     private File mLocation;
+
+    public static Intent createIntent(Context context, String currentPath) {
+        Intent intent = new Intent(context, FolderPickerActivity.class);
+
+        if (!TextUtils.isEmpty(currentPath)) {
+            intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, currentPath);
+        }
+
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

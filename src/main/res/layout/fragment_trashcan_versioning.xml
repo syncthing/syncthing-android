@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trashcan_versioning_description"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clean_out_after"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"/>
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.nutomic.syncthingandroid.fragments.NumberPickerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:tag="numberpicker_trashcan_versioning"
+            tools:layout="@layout/numberpicker_fragment" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cleanout_after_description"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
+</ScrollView>
