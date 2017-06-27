@@ -3,14 +3,17 @@ package com.nutomic.syncthingandroid.http;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
@@ -52,6 +55,10 @@ public abstract class ApiRequest {
 
     public interface OnSuccessListener {
         public void onSuccess(String result);
+    }
+
+    public interface OnImageSuccessListener {
+        public void onImageSuccess(Bitmap result);
     }
 
     public interface OnErrorListener {
@@ -96,10 +103,11 @@ public abstract class ApiRequest {
      * Opens the connection, then returns success status and response string.
      */
     protected void connect(int requestMethod, Uri uri, @Nullable String requestBody,
-                           @Nullable OnSuccessListener listener, @Nullable OnErrorListener errorListener) {
+                           @Nullable OnSuccessListener listener, @Nullable OnImageSuccessListener imageListener, @Nullable OnErrorListener errorListener) {
         StringRequest request = new StringRequest(requestMethod, uri.toString(), reply -> {
-            if (listener != null)
+            if (listener != null) {
                 listener.onSuccess(reply);
+            }
         }, error -> {
             if (errorListener != null)
                 errorListener.onError(error);
@@ -116,6 +124,14 @@ public abstract class ApiRequest {
                 return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
             }
         };
+
+        ImageRequest imageRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+               imageListener.onImageSuccess(bitmap);
+            }
+        }, 0, 0, null);
+
         getVolleyQueue().add(request);
     }
 

@@ -1,19 +1,30 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
+import com.nutomic.syncthingandroid.http.GetRequest;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
@@ -21,11 +32,18 @@ import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Displays information about the local device.
@@ -221,8 +239,39 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionShowQrCode:
-                mActivity.showQrCode();
+                new getQrCode().execute();
                 break;
         }
     }
+
+    class getQrCode extends AsyncTask<Object, Void, Drawable> {
+
+        @Override
+        protected Drawable doInBackground(Object... object) {
+            String imageURL = "https://"+mActivity.getApi().getGui().address+"/qr/?text="+mActivity.getApi().getGui().apiKey;
+            final BitmapDrawable[] bmd = {null};
+            try {
+                new GetRequest(mActivity, new URL("https://"+mActivity.getApi().getGui().address), "/qr/?text="+"test", mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey, null, result-> {
+                    bmd[0] = new BitmapDrawable(result);
+                    Log.i("drawer", "Syncthing version is " + encodeByte + " " + result + " ");
+
+                });
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            return bmd[0];
+        }
+
+        @Override
+        protected void onPostExecute(Drawable drawable) {
+            super.onPostExecute(drawable);
+            try {
+                mActivity.showQrCode(drawable);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

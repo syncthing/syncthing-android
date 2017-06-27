@@ -12,6 +12,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,6 +49,11 @@ import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -337,9 +346,10 @@ public class MainActivity extends SyncthingActivity
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-    public void showQrCode() {
+    public void showQrCode(Drawable drawable) throws IOException {
         new AlertDialog.Builder(this)
-                .setMessage("Qr code")
+                .setMessage("Qr code " )
+                .setIcon(drawable)
                 .create()
                 .show();
     }

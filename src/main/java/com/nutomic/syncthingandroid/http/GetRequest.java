@@ -25,12 +25,21 @@ public class GetRequest extends ApiRequest {
     public static final String URI_REPORT      = "/rest/svc/report";
     public static final String URI_EVENTS      = "/rest/events";
 
+
     public GetRequest(Context context, URL url, String path, String httpsCertPath, String apiKey,
                       @Nullable Map<String, String> params, OnSuccessListener listener) {
         super(context, url, path, httpsCertPath, apiKey);
         Map<String, String> safeParams = Optional.fromNullable(params).or(Collections.emptyMap());
         Uri uri = buildUri(safeParams);
-        connect(Request.Method.GET, uri, null, listener, null);
+        connect(Request.Method.GET, uri, null, listener, null, null);
+    }
+
+    public QrCodeGetRequest(Context context, URL url, String path, String httpsCertPath, String apiKey,
+                            @Nullable Map<String, String> params, OnImageSuccessListener listener) {
+        super(context, url, path, httpsCertPath, apiKey);
+        Map<String, String> safeParams = Optional.fromNullable(params).or(Collections.emptyMap());
+        Uri uri = buildUri(safeParams);
+        connect(Request.Method.GET, uri, null, null, listener, null);
     }
 
 }
