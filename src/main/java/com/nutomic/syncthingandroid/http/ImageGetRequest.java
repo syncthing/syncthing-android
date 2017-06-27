@@ -17,20 +17,13 @@ import java.util.Map;
 
 public class ImageGetRequest extends ApiRequest {
 
-    public static final String URI_CONFIG      = "/rest/system/config";
-    public static final String URI_VERSION     = "/rest/system/version";
-    public static final String URI_SYSTEM      = "/rest/system/status";
-    public static final String URI_CONNECTIONS = "/rest/system/connections";
-    public static final String URI_MODEL       = "/rest/db/status";
-    public static final String URI_DEVICEID    = "/rest/svc/deviceid";
-    public static final String URI_REPORT      = "/rest/svc/report";
-    public static final String URI_EVENTS      = "/rest/events";
+    public static String QR_CODE_GENERATOR = "/qr/";
 
     public ImageGetRequest(Context context, URL url, String path, String httpsCertPath, String apiKey,
-                           @Nullable Map<String, String> params, OnImageSuccessListener listener) {
+                           @Nullable Map<String, String> params, OnImageSuccessListener onSuccessListener, OnErrorListener onErrorListener) {
         super(context, url, path, httpsCertPath, apiKey);
         Map<String, String> safeParams = Optional.fromNullable(params).or(Collections.emptyMap());
         Uri uri = buildUri(safeParams);
-        connect(Request.Method.GET, uri, null, null, listener, null);
+        MakeImageRequest(uri, onSuccessListener, onErrorListener);
     }
 }

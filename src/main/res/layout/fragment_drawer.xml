@@ -53,35 +53,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                style="@style/Widget.Syncthing.TextView.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingBottom="6dp"
-                android:paddingTop="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/device_id"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                <TextView
-                    style="@style/Widget.Syncthing.TextView.Label"
-                    android:id="@+id/device_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    android:drawableRight="@drawable/ic_content_copy_black_24dp"
-                    android:drawableEnd="@drawable/ic_content_copy_black_24dp"
-                    android:clickable="true"
-                    android:focusable="true" />
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -243,11 +214,11 @@
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableLeft="@drawable/ic_web_black_24dp"
-                android:drawableStart="@drawable/ic_web_black_24dp"
-                android:text="@string/web_gui_title"
                 android:clickable="true"
-                android:focusable="true" />
+                android:drawableLeft="@drawable/ic_qrcode_black_24dp_active"
+                android:drawableStart="@drawable/ic_qrcode_black_24dp_active"
+                android:focusable="true"
+                android:text="@string/show_device_id" />
 
             <TextView
                 android:id="@+id/drawerActionWebGui"

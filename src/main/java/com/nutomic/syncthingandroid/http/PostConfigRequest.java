@@ -16,7 +16,7 @@ public class PostConfigRequest extends ApiRequest {
                              OnSuccessListener listener) {
         super(context, url, URI_CONFIG, httpsCertPath, apiKey);
         Uri uri = buildUri(Collections.emptyMap());
-        connect(Request.Method.POST, uri, config, listener, null, null);
+        connect(Request.Method.POST, uri, config, listener, null);
     }
 
 }

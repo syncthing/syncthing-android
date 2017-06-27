@@ -1,32 +1,21 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.ArrayMap;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
-import com.nutomic.syncthingandroid.http.ApiRequest;
-import com.nutomic.syncthingandroid.http.GetRequest;
 import com.nutomic.syncthingandroid.http.ImageGetRequest;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
@@ -35,9 +24,6 @@ import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.NumberFormat;
@@ -46,14 +32,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.net.ssl.HttpsURLConnection;
-
 /**
  * Displays information about the local device.
  */
 public class DrawerFragment extends Fragment implements View.OnClickListener {
 
-    private TextView mDeviceId;
     private TextView mCpuUsage;
     private TextView mRamUsage;
     private TextView mDownload;
@@ -61,6 +44,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mAnnounceServer;
     private TextView mVersion;
     private TextView mExitButton;
+
+    private String mDeviceId;
 
     private Timer mTimer;
 
@@ -106,7 +91,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mDeviceId       = (TextView) view.findViewById(R.id.device_id);
         mCpuUsage       = (TextView) view.findViewById(R.id.cpu_usage);
         mRamUsage       = (TextView) view.findViewById(R.id.ram_usage);
         mDownload       = (TextView) view.findViewById(R.id.download);
@@ -177,9 +161,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     public void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
-
-        mDeviceId.setText(info.myID);
-        mDeviceId.setOnClickListener(v -> Util.copyDeviceId(getActivity(), mDeviceId.getText().toString()));
+        mDeviceId = info.myID;
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
@@ -214,6 +196,28 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }
 
+    /**
+     * Gets QRCode and displays it in a Dialog.
+     */
+
+    private void attemptToShowQrCode() {
+        try {
+            showQrCode();
+        } catch (MalformedURLException e) {
+            Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showQrCode() throws MalformedURLException {
+        //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
+        Map<String, String> params = new ArrayMap<>();
+        params.put("text", mDeviceId);
+        new ImageGetRequest(mActivity, new URL("https://" + mActivity.getApi().getGui().address), ImageGetRequest.QR_CODE_GENERATOR, mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey, params, qrCodeBitmap -> {
+            mActivity.showQrCodeDialog(mDeviceId, qrCodeBitmap);
+            mActivity.closeDrawer();
+        }, error -> Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show());
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -224,7 +228,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
             case R.id.drawerActionShareId:
                 Intent i = new Intent(android.content.Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId.getText());
+                i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId);
                 startActivity(Intent.createChooser(i, "Share device ID with"));
                 mActivity.closeDrawer();
                 break;
@@ -242,30 +246,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionShowQrCode:
-                try {
-                    preformImageGet();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+                attemptToShowQrCode();
                 break;
         }
     }
-
-    private void preformImageGet() throws MalformedURLException {
-        Map<String, String> params = new ArrayMap<>();
-        params.put("text", "test");
-        new ImageGetRequest(mActivity, new URL("https://" + mActivity.getApi().getGui().address), "/qr/", mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey,  params,new ApiRequest.OnImageSuccessListener() {
-            @Override
-            public void onImageSuccess(Bitmap result) {
-                Log.d("drawer ", "bitmap: " + result);
-                try {
-                    mActivity.showQrCode(result);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
 }

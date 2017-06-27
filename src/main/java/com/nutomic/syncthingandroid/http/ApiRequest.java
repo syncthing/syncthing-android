@@ -108,82 +108,51 @@ public abstract class ApiRequest {
      * Opens the connection, then returns success status and response string.
      */
     protected void connect(int requestMethod, Uri uri, @Nullable String requestBody,
-                           @Nullable OnSuccessListener listener, @Nullable OnImageSuccessListener imageListener, @Nullable OnErrorListener errorListener) {
-        ImageRequest jsonRequest = null;
-        StringRequest request = null;
-        if(imageListener == null) {
-            request = new StringRequest(requestMethod, uri.toString(), reply -> {
-                if (listener != null) {
-                    listener.onSuccess(reply);
-                }
-            }, error -> {
-                if (errorListener != null)
-                    errorListener.onError(error);
+                           @Nullable OnSuccessListener listener, @Nullable OnErrorListener errorListener) {
+        StringRequest request = new StringRequest(requestMethod, uri.toString(), reply -> {
+            if (listener != null)
+                listener.onSuccess(reply);
+        }, error -> {
+            if (errorListener != null)
+                errorListener.onError(error);
 
-                Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    return ImmutableMap.of(HEADER_API_KEY, mApiKey);
-                }
-
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
-                }
-            };
-        } else {
-
-            jsonRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap bitmap) {
-                    if (imageListener != null) {
-                        imageListener.onImageSuccess(bitmap);
-
-                    }
-                    Log.d(TAG, "onResponse: image" + bitmap);
-                }
-            }, 0, 0, ImageView.ScaleType.CENTER,Bitmap.Config.RGB_565, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    Log.d(TAG, "onErrorResponse: " + volleyError);
-                }
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    return ImmutableMap.of(HEADER_API_KEY, mApiKey);
-                }
-
-                @Override
-                public byte[] getBody() {
-                    return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
-                }
-            };
-        }
-        /*ImageRequest imageRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
+            Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
+        }) {
             @Override
-            public void onResponse(Bitmap bitmap) {
-                if (imageListener != null) {
-                    imageListener.onImageSuccess(bitmap);
-
-                }
-                Log.d(TAG, "onResponse: image" + bitmap);
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return ImmutableMap.of(HEADER_API_KEY, mApiKey);
             }
-        }, 0, 0, ImageView.ScaleType.CENTER,Bitmap.Config.RGB_565, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.d(TAG, "onErrorResponse: " + volleyError);
+            public byte[] getBody() throws AuthFailureError {
+                return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
             }
-        });
-        */
+        };
+        getVolleyQueue().add(request);
+    }
 
-        if(listener != null) {
-            getVolleyQueue().add(request);
-        }
+    /**
+     * Opens the connection, then returns success status and response bitmap.
+     */
+    protected void MakeImageRequest(Uri uri, @Nullable OnImageSuccessListener imageListener,
+                                    @Nullable OnErrorListener errorListener) {
+        ImageRequest imageRequest =  new ImageRequest(uri.toString(), bitmap -> {
+            if (imageListener != null) {
+                imageListener.onImageSuccess(bitmap);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.RGB_565, volleyError -> {
+            if(errorListener != null) {
+                errorListener.onError(volleyError);
+            }
+            Log.d(TAG, "onErrorResponse: " + volleyError);
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return ImmutableMap.of(HEADER_API_KEY, mApiKey);
+            }
+        };
 
-        if(imageListener != null) {
-            getVolleyQueue().add(jsonRequest);
-        }
+        getVolleyQueue().add(imageRequest);
     }
 
     /**
