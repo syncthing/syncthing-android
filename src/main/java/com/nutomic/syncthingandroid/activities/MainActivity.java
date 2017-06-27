@@ -40,6 +40,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
@@ -346,10 +347,12 @@ public class MainActivity extends SyncthingActivity
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-    public void showQrCode(Drawable drawable) throws IOException {
+    public void showQrCode(Bitmap bitmap) throws IOException {
+        ImageView imageView = new ImageView(this);
+        imageView.setImageBitmap(bitmap);
         new AlertDialog.Builder(this)
                 .setMessage("Qr code " )
-                .setIcon(drawable)
+                .setView(imageView)
                 .create()
                 .show();
     }

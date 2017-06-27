@@ -16,7 +16,7 @@ public class PostScanRequest extends ApiRequest {
                            String folder, String sub) {
         super(context, url, URI_SCAN, httpsCertPath, apiKey);
         Uri uri = buildUri(ImmutableMap.of("folder", folder, "sub", sub));
-        connect(Request.Method.POST, uri, null, null, null);
+        connect(Request.Method.POST, uri, null, null, null, null);
     }
 
 }

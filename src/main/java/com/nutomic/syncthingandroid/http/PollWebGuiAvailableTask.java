@@ -36,7 +36,7 @@ public class PollWebGuiAvailableTask extends ApiRequest {
 
     private void performRequest() {
         Uri uri = buildUri(Collections.emptyMap());
-        connect(Request.Method.GET, uri, null, mListener, this::onError);
+        connect(Request.Method.GET, uri, null, mListener, null,this::onError);
     }
 
     private void onError(VolleyError error) {

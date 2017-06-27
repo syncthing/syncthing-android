@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.ArrayMap;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,9 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
+import com.nutomic.syncthingandroid.http.ApiRequest;
 import com.nutomic.syncthingandroid.http.GetRequest;
+import com.nutomic.syncthingandroid.http.ImageGetRequest;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
@@ -239,38 +242,29 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionShowQrCode:
-                new getQrCode().execute();
+                try {
+                    preformImageGet();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
 
-    class getQrCode extends AsyncTask<Object, Void, Drawable> {
-
-        @Override
-        protected Drawable doInBackground(Object... object) {
-            String imageURL = "https://"+mActivity.getApi().getGui().address+"/qr/?text="+mActivity.getApi().getGui().apiKey;
-            final BitmapDrawable[] bmd = {null};
-            try {
-                new GetRequest(mActivity, new URL("https://"+mActivity.getApi().getGui().address), "/qr/?text="+"test", mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey, null, result-> {
-                    bmd[0] = new BitmapDrawable(result);
-                    Log.i("drawer", "Syncthing version is " + encodeByte + " " + result + " ");
-
-                });
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+    private void preformImageGet() throws MalformedURLException {
+        Map<String, String> params = new ArrayMap<>();
+        params.put("text", "test");
+        new ImageGetRequest(mActivity, new URL("https://" + mActivity.getApi().getGui().address), "/qr/", mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey,  params,new ApiRequest.OnImageSuccessListener() {
+            @Override
+            public void onImageSuccess(Bitmap result) {
+                Log.d("drawer ", "bitmap: " + result);
+                try {
+                    mActivity.showQrCode(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            return bmd[0];
-        }
-
-        @Override
-        protected void onPostExecute(Drawable drawable) {
-            super.onPostExecute(drawable);
-            try {
-                mActivity.showQrCode(drawable);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        });
     }
 
 

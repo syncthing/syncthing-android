@@ -7,17 +7,22 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -104,35 +109,81 @@ public abstract class ApiRequest {
      */
     protected void connect(int requestMethod, Uri uri, @Nullable String requestBody,
                            @Nullable OnSuccessListener listener, @Nullable OnImageSuccessListener imageListener, @Nullable OnErrorListener errorListener) {
-        StringRequest request = new StringRequest(requestMethod, uri.toString(), reply -> {
-            if (listener != null) {
-                listener.onSuccess(reply);
-            }
-        }, error -> {
-            if (errorListener != null)
-                errorListener.onError(error);
+        ImageRequest jsonRequest = null;
+        StringRequest request = null;
+        if(imageListener == null) {
+            request = new StringRequest(requestMethod, uri.toString(), reply -> {
+                if (listener != null) {
+                    listener.onSuccess(reply);
+                }
+            }, error -> {
+                if (errorListener != null)
+                    errorListener.onError(error);
 
-            Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return ImmutableMap.of(HEADER_API_KEY, mApiKey);
-            }
+                Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return ImmutableMap.of(HEADER_API_KEY, mApiKey);
+                }
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
-            }
-        };
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
+                }
+            };
+        } else {
 
-        ImageRequest imageRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
+            jsonRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap bitmap) {
+                    if (imageListener != null) {
+                        imageListener.onImageSuccess(bitmap);
+
+                    }
+                    Log.d(TAG, "onResponse: image" + bitmap);
+                }
+            }, 0, 0, ImageView.ScaleType.CENTER,Bitmap.Config.RGB_565, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.d(TAG, "onErrorResponse: " + volleyError);
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return ImmutableMap.of(HEADER_API_KEY, mApiKey);
+                }
+
+                @Override
+                public byte[] getBody() {
+                    return Optional.fromNullable(requestBody).transform(String::getBytes).orNull();
+                }
+            };
+        }
+        /*ImageRequest imageRequest =  new ImageRequest(uri.toString(), new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap bitmap) {
-               imageListener.onImageSuccess(bitmap);
-            }
-        }, 0, 0, null);
+                if (imageListener != null) {
+                    imageListener.onImageSuccess(bitmap);
 
-        getVolleyQueue().add(request);
+                }
+                Log.d(TAG, "onResponse: image" + bitmap);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER,Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d(TAG, "onErrorResponse: " + volleyError);
+            }
+        });
+        */
+
+        if(listener != null) {
+            getVolleyQueue().add(request);
+        }
+
+        if(imageListener != null) {
+            getVolleyQueue().add(jsonRequest);
+        }
     }
 
     /**
