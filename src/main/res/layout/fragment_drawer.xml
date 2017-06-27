@@ -239,6 +239,17 @@
                 android:background="@drawable/list_divider" />
 
             <TextView
+                android:id="@+id/drawerActionShowQrCode"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_web_black_24dp"
+                android:drawableStart="@drawable/ic_web_black_24dp"
+                android:text="@string/web_gui_title"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
                 android:id="@+id/drawerActionWebGui"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"

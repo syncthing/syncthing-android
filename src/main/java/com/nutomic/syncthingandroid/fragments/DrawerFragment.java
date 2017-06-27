@@ -1,7 +1,5 @@
 package com.nutomic.syncthingandroid.fragments;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -103,6 +101,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.drawerActionRestart)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionSettings)
+                .setOnClickListener(this);
+        view.findViewById(R.id.drawerActionShowQrCode)
                 .setOnClickListener(this);
         mExitButton.setOnClickListener(this);
 
@@ -219,6 +219,9 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
                 mActivity.finish();
                 mActivity.closeDrawer();
+                break;
+            case R.id.drawerActionShowQrCode:
+                mActivity.showQrCode();
                 break;
         }
     }

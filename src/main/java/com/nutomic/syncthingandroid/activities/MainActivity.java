@@ -337,6 +337,13 @@ public class MainActivity extends SyncthingActivity
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
+    public void showQrCode() {
+        new AlertDialog.Builder(this)
+                .setMessage("Qr code")
+                .create()
+                .show();
+    }
+
     /**
      * Handles drawer opened and closed events, toggling option menu state.
      */
