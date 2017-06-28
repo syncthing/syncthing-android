@@ -101,8 +101,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.drawerActionWebGui)
                 .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionShareId)
-                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionRestart)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionSettings)
@@ -223,13 +221,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.drawerActionWebGui:
                 startActivity(new Intent(mActivity, WebGuiActivity.class));
-                mActivity.closeDrawer();
-                break;
-            case R.id.drawerActionShareId:
-                Intent i = new Intent(android.content.Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId);
-                startActivity(Intent.createChooser(i, "Share device ID with"));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionSettings:

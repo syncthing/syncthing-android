@@ -375,13 +375,22 @@ public class MainActivity extends SyncthingActivity
     private View createQrCodeView(String deviceId, Bitmap qrCode) {
         View qrCodeDialogView = this.getLayoutInflater().inflate(R.layout.dialog_qrcode, null);
         TextView deviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.device_id);
+        TextView shareDeviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.actionShareId);
         ImageView qrCodeImageView = (ImageView) qrCodeDialogView.findViewById(R.id.qrcode_image_view);
 
         deviceIdTextView.setText(deviceId);
         deviceIdTextView.setOnClickListener(v -> Util.copyDeviceId(this, deviceIdTextView.getText().toString()));
+        shareDeviceIdTextView.setOnClickListener(v -> shareDeviceId(deviceId));
         qrCodeImageView.setImageBitmap(qrCode);
 
         return qrCodeDialogView;
+    }
+
+    private void shareDeviceId(String deviceId) {
+        Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, deviceId);
+        startActivity(Intent.createChooser(shareIntent, "Share device ID with"));
     }
 
     @Override
