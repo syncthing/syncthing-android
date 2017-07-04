@@ -360,19 +360,6 @@ public class MainActivity extends SyncthingActivity
     }
 
     public void showQrCodeDialog(String deviceId, Bitmap qrCode) {
-        mQrCodeDialog = createQrCodeDialog(createQrCodeView(deviceId, qrCode));
-        mQrCodeDialog.show();
-    }
-
-    private AlertDialog createQrCodeDialog(View view) {
-        return new AlertDialog.Builder(this)
-                .setTitle(R.string.device_id)
-                .setView(view)
-                .setPositiveButton(R.string.finish, null)
-                .create();
-    }
-
-    private View createQrCodeView(String deviceId, Bitmap qrCode) {
         View qrCodeDialogView = this.getLayoutInflater().inflate(R.layout.dialog_qrcode, null);
         TextView deviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.device_id);
         TextView shareDeviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.actionShareId);
@@ -383,7 +370,13 @@ public class MainActivity extends SyncthingActivity
         shareDeviceIdTextView.setOnClickListener(v -> shareDeviceId(deviceId));
         qrCodeImageView.setImageBitmap(qrCode);
 
-        return qrCodeDialogView;
+        mQrCodeDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.device_id)
+                .setView(qrCodeDialogView)
+                .setPositiveButton(R.string.finish, null)
+                .create();
+
+        mQrCodeDialog.show();
     }
 
     private void shareDeviceId(String deviceId) {

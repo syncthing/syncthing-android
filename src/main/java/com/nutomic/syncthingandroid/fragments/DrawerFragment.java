@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
@@ -198,19 +199,13 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
      * Gets QRCode and displays it in a Dialog.
      */
 
-    private void attemptToShowQrCode() {
-        try {
-            showQrCode();
-        } catch (MalformedURLException e) {
-            Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void showQrCode() throws MalformedURLException {
+    private void showQrCode() {
         //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
-        Map<String, String> params = new ArrayMap<>();
-        params.put("text", mDeviceId);
-        new ImageGetRequest(mActivity, new URL("https://" + mActivity.getApi().getGui().address), ImageGetRequest.QR_CODE_GENERATOR, mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE, mActivity.getApi().getGui().apiKey, params, qrCodeBitmap -> {
+        String httpsCertPath = mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+        String apiKey = mActivity.getApi().getGui().apiKey;
+        URL url = mActivity.getApi().getUrl();
+        new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, httpsCertPath,
+                apiKey, ImmutableMap.of("text", mDeviceId),qrCodeBitmap -> {
             mActivity.showQrCodeDialog(mDeviceId, qrCodeBitmap);
             mActivity.closeDrawer();
         }, error -> Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show());
@@ -237,7 +232,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionShowQrCode:
-                attemptToShowQrCode();
+                showQrCode();
                 break;
         }
     }

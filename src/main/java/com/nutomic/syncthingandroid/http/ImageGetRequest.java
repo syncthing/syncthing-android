@@ -24,6 +24,6 @@ public class ImageGetRequest extends ApiRequest {
         super(context, url, path, httpsCertPath, apiKey);
         Map<String, String> safeParams = Optional.fromNullable(params).or(Collections.emptyMap());
         Uri uri = buildUri(safeParams);
-        MakeImageRequest(uri, onSuccessListener, onErrorListener);
+        makeImageRequest(uri, onSuccessListener, onErrorListener);
     }
 }

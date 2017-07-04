@@ -134,7 +134,7 @@ public abstract class ApiRequest {
     /**
      * Opens the connection, then returns success status and response bitmap.
      */
-    protected void MakeImageRequest(Uri uri, @Nullable OnImageSuccessListener imageListener,
+    protected void makeImageRequest(Uri uri, @Nullable OnImageSuccessListener imageListener,
                                     @Nullable OnErrorListener errorListener) {
         ImageRequest imageRequest =  new ImageRequest(uri.toString(), bitmap -> {
             if (imageListener != null) {

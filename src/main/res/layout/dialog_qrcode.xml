@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
 
-        <TextView
-            android:id="@+id/device_id"
-            style="@style/Widget.Syncthing.TextView.Label"
-            android:layout_weight="85"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:drawableEnd="@drawable/ic_content_copy_black_24dp"
-            android:drawableRight="@drawable/ic_content_copy_black_24dp"
-            android:focusable="true"
-            android:fontFamily="monospace"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/actionShareId"
-            style="@style/Widget.Syncthing.TextView.Label"
-            android:layout_width="0dp"
-            android:layout_weight="15"
-            android:layout_height="match_parent"
-            android:drawableRight="@drawable/ic_share_black_24dp"
-            android:drawableEnd="@drawable/ic_share_black_24dp"
-            android:clickable="true"
-            android:focusable="true" />
+            <TextView
+                android:id="@+id/device_id"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_content_copy_black_24dp"
+                android:drawableRight="@drawable/ic_content_copy_black_24dp"
+                android:focusable="true"
+                android:fontFamily="monospace"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="ASD1ASD-ASD1ASD-ASD1ASD-ASD1ASD-ASD1ASD-ASD1ASD-ASD1ASD-ASD1ASD"/>
+
+            <TextView
+                android:id="@+id/actionShareId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:drawableRight="@drawable/ic_share_black_24dp"
+                android:drawableEnd="@drawable/ic_share_black_24dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/qrcode_image_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            tools:src="@drawable/ic_launcher"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/qrcode_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-</LinearLayout>
+</ScrollView>
