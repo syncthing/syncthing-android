@@ -29,10 +29,11 @@ public class Folder {
     public int scanProgressIntervalS;
     public int pullerSleepS;
     public int pullerPauseS;
-    public int maxConflicts;
+    public int maxConflicts = 10;
     public boolean disableSparseFiles;
     public boolean disableTempIndexes;
     public String invalid;
+    public boolean fsync = true;
 
     public static class Versioning implements Serializable {
         public String type;
