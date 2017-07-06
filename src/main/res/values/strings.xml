@@ -595,4 +595,9 @@ Please report any problems you encounter via Github.</string>
     <string name="staggered_versioning_info">Maximum Age: %1$d \nVersions Path: %2$s</string>
     <string name="external_versioning_info">Command: %1$s</string>
     <string name="simple_versioning_info">Keep versions: %1$s</string>
+    <string name="show_device_id">Show device ID</string>
+
+    <!-- error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+    <string name="could_not_access_deviceid">Could not access device ID.</string>
+
 </resources>

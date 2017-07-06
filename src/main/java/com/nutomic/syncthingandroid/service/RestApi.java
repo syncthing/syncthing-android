@@ -501,4 +501,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public void setRestartPostponed() {
         mRestartPostponed = true;
     }
+
+    public URL getUrl() {
+        return mUrl;
+    }
 }

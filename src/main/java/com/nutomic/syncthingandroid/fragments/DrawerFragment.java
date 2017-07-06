@@ -1,21 +1,23 @@
 package com.nutomic.syncthingandroid.fragments;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
 import com.nutomic.syncthingandroid.activities.WebGuiActivity;
+import com.nutomic.syncthingandroid.http.ImageGetRequest;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
@@ -23,6 +25,8 @@ import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
@@ -34,7 +38,6 @@ import java.util.TimerTask;
  */
 public class DrawerFragment extends Fragment implements View.OnClickListener {
 
-    private TextView mDeviceId;
     private TextView mCpuUsage;
     private TextView mRamUsage;
     private TextView mDownload;
@@ -42,6 +45,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mAnnounceServer;
     private TextView mVersion;
     private TextView mExitButton;
+
+    private String mDeviceId;
 
     private Timer mTimer;
 
@@ -87,7 +92,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mDeviceId       = (TextView) view.findViewById(R.id.device_id);
         mCpuUsage       = (TextView) view.findViewById(R.id.cpu_usage);
         mRamUsage       = (TextView) view.findViewById(R.id.ram_usage);
         mDownload       = (TextView) view.findViewById(R.id.download);
@@ -98,11 +102,11 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.drawerActionWebGui)
                 .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionShareId)
-                .setOnClickListener(this);
         view.findViewById(R.id.drawerActionRestart)
                 .setOnClickListener(this);
         view.findViewById(R.id.drawerActionSettings)
+                .setOnClickListener(this);
+        view.findViewById(R.id.drawerActionShowQrCode)
                 .setOnClickListener(this);
         mExitButton.setOnClickListener(this);
 
@@ -156,9 +160,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     public void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
-
-        mDeviceId.setText(info.myID);
-        mDeviceId.setOnClickListener(v -> Util.copyDeviceId(getActivity(), mDeviceId.getText().toString()));
+        mDeviceId = info.myID;
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
@@ -193,18 +195,27 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         mUpload.setText(Util.readableTransferRate(mActivity, c.outBits));
     }
 
+    /**
+     * Gets QRCode and displays it in a Dialog.
+     */
+
+    private void showQrCode() {
+        //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
+        String httpsCertPath = mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+        String apiKey = mActivity.getApi().getGui().apiKey;
+        URL url = mActivity.getApi().getUrl();
+        new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, httpsCertPath,
+                apiKey, ImmutableMap.of("text", mDeviceId),qrCodeBitmap -> {
+            mActivity.showQrCodeDialog(mDeviceId, qrCodeBitmap);
+            mActivity.closeDrawer();
+        }, error -> Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show());
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.drawerActionWebGui:
                 startActivity(new Intent(mActivity, WebGuiActivity.class));
-                mActivity.closeDrawer();
-                break;
-            case R.id.drawerActionShareId:
-                Intent i = new Intent(android.content.Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(android.content.Intent.EXTRA_TEXT, mDeviceId.getText());
-                startActivity(Intent.createChooser(i, "Share device ID with"));
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionSettings:
@@ -219,6 +230,9 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.stopService(new Intent(mActivity, SyncthingService.class));
                 mActivity.finish();
                 mActivity.closeDrawer();
+                break;
+            case R.id.drawerActionShowQrCode:
+                showQrCode();
                 break;
         }
     }

@@ -3,18 +3,26 @@ package com.nutomic.syncthingandroid.http;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,6 +60,10 @@ public abstract class ApiRequest {
 
     public interface OnSuccessListener {
         public void onSuccess(String result);
+    }
+
+    public interface OnImageSuccessListener {
+        public void onImageSuccess(Bitmap result);
     }
 
     public interface OnErrorListener {
@@ -117,6 +129,30 @@ public abstract class ApiRequest {
             }
         };
         getVolleyQueue().add(request);
+    }
+
+    /**
+     * Opens the connection, then returns success status and response bitmap.
+     */
+    protected void makeImageRequest(Uri uri, @Nullable OnImageSuccessListener imageListener,
+                                    @Nullable OnErrorListener errorListener) {
+        ImageRequest imageRequest =  new ImageRequest(uri.toString(), bitmap -> {
+            if (imageListener != null) {
+                imageListener.onImageSuccess(bitmap);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.RGB_565, volleyError -> {
+            if(errorListener != null) {
+                errorListener.onError(volleyError);
+            }
+            Log.d(TAG, "onErrorResponse: " + volleyError);
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return ImmutableMap.of(HEADER_API_KEY, mApiKey);
+            }
+        };
+
+        getVolleyQueue().add(imageRequest);
     }
 
     /**
