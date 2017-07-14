@@ -60,7 +60,7 @@ public class WebGuiActivity extends SyncthingActivity
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             try {
                 int sdk = android.os.Build.VERSION.SDK_INT;
-                if (sdk >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                if (sdk < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                     // The mX509Certificate field is not available for ICS- devices
                     Log.w(TAG, "Skipping certificate check for devices <ICS");
                     handler.proceed();
