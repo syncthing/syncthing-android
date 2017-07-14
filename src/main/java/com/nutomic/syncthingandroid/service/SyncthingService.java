@@ -319,7 +319,7 @@ public class SyncthingService extends Service implements
         // Android 7 ignores network receiver that was set in manifest
         // https://github.com/syncthing/syncthing-android/issues/783
         // https://developer.android.com/about/versions/nougat/android-7.0-changes.html#bg-opt
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             registerReceiver(mNetworkReceiver,
                     new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
@@ -414,7 +414,7 @@ public class SyncthingService extends Service implements
         sp.unregisterOnSharedPreferenceChangeListener(this);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
             unregisterReceiver(mPowerSaveModeChangedReceiver);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             unregisterReceiver(mNetworkReceiver);
     }
 
