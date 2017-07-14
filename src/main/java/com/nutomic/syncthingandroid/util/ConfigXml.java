@@ -217,12 +217,9 @@ public class ConfigXml {
      * The password in the config is hashed, so we can't use it directly.
      */
     private void generateLoginInfo() {
-        String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
-        Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
-
         Node userNode = mConfig.createElement("user");
         getGuiElement().appendChild(userNode);
-        userNode.setTextContent(user);
+        userNode.setTextContent("syncthing");
 
         Node passwordNode = mConfig.createElement("password");
         getGuiElement().appendChild(passwordNode);
