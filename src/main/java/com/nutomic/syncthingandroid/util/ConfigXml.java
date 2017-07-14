@@ -211,19 +211,12 @@ public class ConfigXml {
     }
 
     /**
-     * Generates username and config, stores them in config and preferences.
+     * Generates username and password, stores them in config.
      *
-     * We have to store the plaintext password in preferences, because we need it in
-     * WebGuiActivity. The password in the config is hashed, so we can't use it directly.
+     * The API key is used as the password, because we need it in WebGuiActivity.
+     * The password in the config is hashed, so we can't use it directly.
      */
     private void generateLoginInfo() {
-        char[] chars =
-                "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
-        StringBuilder password = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-        for (int i = 0; i < 20; i++)
-            password.append(chars[random.nextInt(chars.length)]);
-
         String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
         Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
 
@@ -233,11 +226,8 @@ public class ConfigXml {
 
         Node passwordNode = mConfig.createElement("password");
         getGuiElement().appendChild(passwordNode);
-        String hashed = BCrypt.hashpw(password.toString(), BCrypt.gensalt());
+        String hashed = BCrypt.hashpw(getApiKey(), BCrypt.gensalt());
         passwordNode.setTextContent(hashed);
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
-                .putString("web_gui_password", password.toString())
-                .apply();
     }
 
     /**
