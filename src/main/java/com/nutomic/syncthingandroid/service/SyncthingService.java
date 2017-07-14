@@ -312,7 +312,7 @@ public class SyncthingService extends Service implements
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
         registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
@@ -412,7 +412,7 @@ public class SyncthingService extends Service implements
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.unregisterOnSharedPreferenceChangeListener(this);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             unregisterReceiver(mPowerSaveModeChangedReceiver);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N)
             unregisterReceiver(mNetworkReceiver);
