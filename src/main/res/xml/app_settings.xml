@@ -113,17 +113,6 @@
             android:persistent="false"
             android:inputType="textNoSuggestions" />
 
-        <EditTextPreference
-            android:key="user"
-            android:title="@string/gui_user"
-            android:inputType="textCapWords"
-            android:persistent="false" />
-
-        <EditTextPreference
-            android:key="password"
-            android:title="@string/gui_password"
-            android:inputType="textVisiblePassword" />
-
         <CheckBoxPreference
             android:key="urAccepted"
             android:title="@string/usage_reporting"
