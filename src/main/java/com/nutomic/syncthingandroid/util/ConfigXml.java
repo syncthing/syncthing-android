@@ -138,6 +138,32 @@ public class ConfigXml {
             changed = true;
         }
 
+        // Update old configurations with a randomized password:
+        // Set the user to "syncthing" and password to the API key.
+        // Configurations with a custom password are not changed.
+        String storedPassword = PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getString("web_gui_password", null);
+        if (storedPassword != null) {
+            PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                    .remove("web_gui_password")
+                    .apply();
+            Node password = gui.getElementsByTagName("password").item(0);
+            boolean storedPasswordOk;
+            try {
+                storedPasswordOk = password != null && BCrypt.checkpw(storedPassword, password.getTextContent());
+            } catch (RuntimeException e) {
+                Log.w(TAG, e);
+                storedPasswordOk = false;
+            }
+            if (storedPasswordOk) {
+                Node user = gui.getElementsByTagName("user").item(0);
+                if (user != null && user.getTextContent().length() != 0)
+                    user.setTextContent("syncthing");
+                password.setTextContent(BCrypt.hashpw(getApiKey(), BCrypt.gensalt()));
+                changed = true;
+            }
+        }
+
         if (changed) {
             saveChanges();
         }
