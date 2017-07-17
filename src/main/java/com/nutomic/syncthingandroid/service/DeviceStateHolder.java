@@ -115,7 +115,7 @@ public class DeviceStateHolder extends BroadcastReceiver {
     public boolean shouldRun() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP &&
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                 prefs.getBoolean("respect_battery_saving", true) &&
                 pm.isPowerSaveMode()) {
             return false;
