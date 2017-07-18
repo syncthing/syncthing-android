@@ -63,8 +63,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         });
 
         if (model != null) {
-            int percentage = (model.localBytes != 0)
-                    ? Math.round(100 * model.inSyncBytes / model.localBytes)
+            int percentage = (model.globalBytes != 0)
+                    ? Math.round(100 * model.inSyncBytes / model.globalBytes)
                     : 100;
             binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
             binding.items.setVisibility(VISIBLE);
