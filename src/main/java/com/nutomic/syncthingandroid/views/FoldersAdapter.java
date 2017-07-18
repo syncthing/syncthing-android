@@ -69,11 +69,11 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
             binding.items.setVisibility(VISIBLE);
             binding.items.setText(getContext()
-                    .getString(R.string.files, model.inSyncFiles, model.localFiles));
+                    .getString(R.string.files, model.inSyncFiles, model.globalFiles));
             binding.size.setVisibility(VISIBLE);
             binding.size.setText(getContext().getString(R.string.folder_size_format,
                     Util.readableFileSize(getContext(), model.inSyncBytes),
-                    Util.readableFileSize(getContext(), model.localBytes)));
+                    Util.readableFileSize(getContext(), model.globalBytes)));
             setTextOrHide(binding.invalid, model.invalid);
         } else {
             binding.items.setVisibility(GONE);
