@@ -312,6 +312,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="state_syncing">Eşzamanlama gerçekleştiriliyor (%1$d%%)</string>
   <string name="state_error">Hata</string>
   <string name="state_unknown">Bilinmiyor</string>
+  <string name="status_outofsync">Eşzamanlama Dışı</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Arka planda çalışma etkinken Syncthing\'i durdurma desteklenmiyor.</string>

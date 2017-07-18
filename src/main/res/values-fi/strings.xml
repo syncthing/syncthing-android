@@ -305,6 +305,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="state_syncing">Synkronoidaan (%1$d%%)</string>
   <string name="state_error">Virhe</string>
   <string name="state_unknown">Tuntematon</string>
+  <string name="status_outofsync">Ei ajan tasalla</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Syncthingin pysäyttäminen ei ole käytettävissä kun käynti taustalla on valittuna.</string>

@@ -337,6 +337,7 @@
   <string name="state_syncing">동기화 중 (%1$d%%)</string>
   <string name="state_error">오류</string>
   <string name="state_unknown">알 수 없음</string>
+  <string name="status_outofsync">동기화 오류</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">백그라운드에서 실행이 활성화되어 있을 때는 Syncthing 중단은 지원되지 않습니다.</string>

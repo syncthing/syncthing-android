@@ -291,6 +291,7 @@
   <string name="state_syncing">Synkroniserer (%1$d%%)</string>
   <string name="state_error">Feil</string>
   <string name="state_unknown">Ukjent</string>
+  <string name="status_outofsync">Ikke synkronisert</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Du kan ikke stoppe Syncthing når «kjør i bakgrunnen» er skrudd på.</string>

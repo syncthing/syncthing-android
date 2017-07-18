@@ -307,6 +307,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="state_syncing">Synchronizowanie (%1$d%%)</string>
   <string name="state_error">Błąd</string>
   <string name="state_unknown">Nieznany</string>
+  <string name="status_outofsync">Niezsynchronizowane</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Zatrzymywanie programu nie jest obsługiwane podczas działania w tle.</string>

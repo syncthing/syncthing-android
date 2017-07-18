@@ -314,6 +314,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="state_syncing">Synchronizuje se (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámý</string>
+  <string name="status_outofsync">Nesesynchronizováno</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Syncthing nelze zastavit když je povolený běh na pozadí.</string>
