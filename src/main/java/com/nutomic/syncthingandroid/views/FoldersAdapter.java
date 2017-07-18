@@ -66,7 +66,12 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             int percentage = (model.localBytes != 0)
                     ? Math.round(100 * model.inSyncBytes / model.localBytes)
                     : 100;
-            binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
+            long neededItems = model.needFiles + model.needDirectories + model.needSymlinks + model.needDeletes;
+            if (model.state.equals("idle") && neededItems > 0) {
+                binding.state.setText(getContext().getString(R.string.status_outofsync));
+            } else {
+                binding.state.setText(getLocalizedState(getContext(), model.state, percentage));
+            }
             binding.items.setVisibility(VISIBLE);
             binding.items.setText(getContext()
                     .getString(R.string.files, model.inSyncFiles, model.localFiles));
