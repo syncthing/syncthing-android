@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.receiver;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -35,7 +34,6 @@ public class AppConfigReceiver extends BroadcastReceiver {
     public static final String ACTION_STOP  = "com.nutomic.syncthingandroid.action.STOP";
 
     @Override
-    @TargetApi(21)
     public void onReceive(Context context, Intent intent) {
         switch (intent.getAction()) {
             case ACTION_START:

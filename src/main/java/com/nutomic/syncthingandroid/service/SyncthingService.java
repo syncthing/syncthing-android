@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -305,7 +304,6 @@ public class SyncthingService extends Service implements
      * Starts the native binary.
      */
     @Override
-    @TargetApi(21)
     public void onCreate() {
         super.onCreate();
         PRNGFixes.apply();
