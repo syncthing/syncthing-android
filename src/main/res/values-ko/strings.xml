@@ -166,6 +166,13 @@
     <item>우선 순위 낮음</item>
     <item>사용 안 함</item>
   </string-array>
+  <string-array name="versioning_types">
+    <item>없음</item>
+    <item>휴지통</item>
+    <item>단순</item>
+    <item>교차</item>
+    <item>외부</item>
+  </string-array>
   <string name="device_name">기기명</string>
   <string name="listen_address">동기화 프로토콜 수신 주소</string>
   <string name="max_recv_kbps">다운로드 속도 제한 (KiB/s)</string>
@@ -341,4 +348,35 @@
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">백그라운드에서 실행이 활성화되어 있을 때는 Syncthing 중단은 지원되지 않습니다.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">최대 저장 기간</string>
+  <string name="versions_path_title">버전을 저장할 경로</string>
+  <string name="clean_out_after">다음 기간 후 제거</string>
+  <string name="file_versioning">파일 버전</string>
+  <string name="finish">완료</string>
+  <string name="none">없음</string>
+  <string name="versions_path">버전을 저장할 경로</string>
+  <string name="command">명령</string>
+  <string name="type">유형</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">파일 당 보존 할 이전 버전 수.</string>
+  <string name="simple_file_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리의 날짜 스탬프 버전으로 이동됩니다.</string>
+  <string name="trashcan_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리로 이동됩니다.</string>
+  <string name="staggered_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리의 날짜 스탬프 버전으로 이동 됩니다. 버전이 최대 사용 기간보다 오래되었거나 해당 기간에 허용 된 파일 수를 초과하면 버전이 자동으로 삭제됩니다. \n\n다음 간격이 사용됩니다. 처음 1 시간 동안 버전이 매 30 초마다 유지됩니다. 버전은 매 시간 유지됩니다. 처음 30 일 동안은 버전이 매일 보관되고 최대 버전은 버전으로 유지됩니다. 매주 마다 보관됩니다.</string>
+  <string name="maximum_age_description">버전을 보관할 수 있는 최대 시간 (일 단위로 영원히 버전을 유지하려면 0으로 설정).</string>
+  <string name="versions_path_description">버전을 저장해야하는 경로 (공유 폴더의 기본 .stversions 디렉토리는 비워 두십시오).</string>
+  <string name="cleanout_after_description">휴지통에 보관할 일 수. 제로는 무한을 의미합니다.</string>
+  <string name="external_versioning_description">첫 번째 명령 줄 매개 변수는 폴더 경로이고 두 번째 매개 변수는 폴더의 상대 경로입니다.</string>
+  <string name="no_versioning_description">버전 관리를 사용하려면 버전 유형을 선택하십시오.</string>
+  <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">유형: 단순</string>
+  <string name="type_trashcan">유형: 휴지통</string>
+  <string name="type_staggered">유형: 교차</string>
+  <string name="type_external">유형 : 외부</string>
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">다음 기간 후 제거: %1$s</string>
+  <string name="staggered_versioning_info">최대 저장 기간: %1$d \n버전을 저장할 경로: %2$s</string>
+  <string name="external_versioning_info">명령: %1$s</string>
+  <string name="simple_versioning_info">버전 보호: %1$s</string>
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

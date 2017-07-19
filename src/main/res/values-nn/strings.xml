@@ -294,4 +294,9 @@
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Du kan ikkje stoppe Syncthing når «køyr i bakgrunnen» er skrudd på.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

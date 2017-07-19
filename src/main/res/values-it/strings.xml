@@ -79,7 +79,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--Setting title-->
   <string name="directory">Cartella</string>
   <!--Setting title-->
-  <string name="folder_master">Cartella Principale</string>
+  <string name="folder_master">Invia Soltanto</string>
   <!--Setting title-->
   <string name="devices">Dispositivi</string>
   <!--Setting title-->
@@ -166,6 +166,13 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <item>Bassa priorità</item>
     <item>Nessuno</item>
   </string-array>
+  <string-array name="versioning_types">
+    <item>Nessono</item>
+    <item>Cestino</item>
+    <item>Semplice</item>
+    <item>Cadenzato</item>
+    <item>Esterno</item>
+  </string-array>
   <string name="device_name">Nome Dispositivo</string>
   <string name="listen_address">Indirizzi Protocollo Sincronizzazione</string>
   <string name="max_recv_kbps">Limite Velocità in Ingresso (KiB/s)</string>
@@ -216,6 +223,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="open_log">Apri Registro</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Apre la finestra di log di Syncthing e Android</string>
+  <string name="notify_crashes_title">Notifica i crash di Syncthing</string>
+  <string name="notify_crashes_summary">Mostra una notifica ogni volta che viene rilevato un crash di Syncthing</string>
   <string name="syncthing_forum_title">Forum di Syncthing</string>
   <string name="syncthing_forum_summary">Vai al Forum di Syncthing</string>
   <!--Settings item that opens issue tracker-->
@@ -254,15 +263,35 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="share_title">Condividi</string>
   <!--ShareActivity-->
   <!--Title of the "share" activity-->
+  <string name="share_activity_title">Salva in Syncthing</string>
   <!--Title of the "save" button-->
+  <string name="save_title">Salva</string>
   <!--Title of the "cancel" button-->
+  <string name="cancel_title">Annulla</string>
   <!--Title of the "save" button-->
+  <string name="folder_title">Cartella</string>
   <!--New file name template-->
+  <string name="file_name_template">Nuovo file %1$s</string>
   <!--Nothing to share toast-->
+  <string name="nothing_share">Niente da condividere</string>
   <!--Copy success toast partially-->
+  <plurals name="copy_success_partially">
+    <item quantity="one">%1$d file copiato nella cartella \"%2$s\", %3$d esistono già</item>
+    <item quantity="other">%1$d file copiati nella cartella \"%2$s\", %3$d esistono già</item>
+  </plurals>
   <!--Copy success toast-->
+  <plurals name="copy_success">
+    <item quantity="one">%1$d file copiato nella cartella \"%2$s\"</item>
+    <item quantity="other">%1$d file copiati nella cartella \"%2$s\"</item>
+  </plurals>
   <!--Copy exception toast-->
+  <string name="copy_exception">Si è verificato un errore durante la condivisione, controllare il log dell\'applicazione</string>
   <!--Copy progress dialog text-->
+  <string name="copy_progress">Condivisione file...</string>
+  <plurals name="file_name_title">
+    <item quantity="one">Nome File</item>
+    <item quantity="other">Lista File</item>
+  </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing è disabilitato</string>
@@ -323,4 +352,34 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Arrestare Syncthing non è  possibile quando è abilitato il funzionamento in background.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">Età Massima</string>
+  <string name="versions_path_title">Percorso versioni</string>
+  <string name="clean_out_after">Pulire dopo</string>
+  <string name="file_versioning">Controllo Versione File</string>
+  <string name="none">Nessuno</string>
+  <string name="versions_path">Percorso Versioni</string>
+  <string name="command">Comando</string>
+  <string name="type">Tipo</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">Il numero di vecchie versioni di mantenere, per ogni file.</string>
+  <string name="simple_file_versioning_description">I file vengono spostati con la data di versione in una cartella .stversions quando sostituiti o eliminati da Syncthing.</string>
+  <string name="trashcan_versioning_description">I file vengono spostati in una cartella .stversions quando sostituiti o eliminati da Syncthing.</string>
+  <string name="staggered_versioning_description">I file vengono spostati con la data di versione in una cartella .stversions quando sostituiti o eliminati da Syncthing. Le versioni vengono automaticamente eliminate se sono di età superiore all\'età massima o superano il numero di file consentiti in un intervallo.\n\nI seguenti intervalli sono utilizzati: Per la prima ora una versione viene mantenuta ogni 30 secondi, per il primo giorno una versione viene mantenuta ogni ora, per i primi 30 giorni una versione viene mantenuta ogni giorno, fino all\'età massima una versione è mantenuto ogni settimana.</string>
+  <string name="maximum_age_description">Il tempo massimo di mantenimento di una versione (in giorni, imposta su 0 per mantenere le versioni per sempre).</string>
+  <string name="versions_path_description">Percorso in cui devono essere conservate le versioni (lasciare vuoto per la directory di default .stversions nella cartella condivisa).</string>
+  <string name="cleanout_after_description">Il numero di giorni di mantenimento dei file nel cestino. Zero significa per sempre</string>
+  <string name="external_versioning_description">Il primo parametro di riga di comando è il percorso della cartella e il secondo parametro è il percorso relativo nella cartella.</string>
+  <string name="no_versioning_description">Selezionare un tipo di controllo delle versioni per abilitarlo.</string>
+  <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Tipo: Semplice</string>
+  <string name="type_trashcan">Tipo: Cestino</string>
+  <string name="type_staggered">Tipo: Cadenzato</string>
+  <string name="type_external">Tipo: Esterno</string>
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">Ripulire dopo: %1$s</string>
+  <string name="staggered_versioning_info">Età Massima: %1$d \nPercorso Versioni: %2$s</string>
+  <string name="external_versioning_info">Comando: %1$s</string>
+  <string name="simple_versioning_info">Mantenere versioni: %1$s</string>
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

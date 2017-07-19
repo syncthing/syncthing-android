@@ -79,7 +79,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Setting title-->
   <string name="directory">Adresář</string>
   <!--Setting title-->
-  <string name="folder_master">Master adresář</string>
   <!--Setting title-->
   <string name="devices">Přístroje</string>
   <!--Setting title-->
@@ -318,4 +317,10 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Syncthing nelze zastavit když je povolený běh na pozadí.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="file_versioning">Verze souborů</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

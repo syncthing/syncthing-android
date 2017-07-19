@@ -79,7 +79,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title-->
-  <string name="folder_master">Pasta Mestre</string>
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
@@ -317,4 +316,10 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Parar o Syncthing não é suportado quando está activada a opção para correr em segundo plano.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="file_versioning">Gestão de versões</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

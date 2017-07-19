@@ -77,7 +77,6 @@
   <!--Setting title-->
   <string name="directory">Директория</string>
   <!--Setting title-->
-  <string name="folder_master">Главна папка</string>
   <!--Setting title-->
   <string name="devices">Устройства</string>
   <!--Setting title-->
@@ -307,4 +306,10 @@
   <string name="status_outofsync">Несинхронизирано</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="file_versioning">Версии на файловете</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

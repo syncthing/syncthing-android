@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <string name="app_name">Syncthing</string>
-  <string name="app_description">オープンで、信頼できる、分散されたファイル同期アプリケーション。</string>
+  <string name="app_description">オープンで、信頼できる、分散型ファイル同期アプリケーション。</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Syncthing for Android にようこそ</string>
@@ -23,8 +23,8 @@
   <string name="send_device_id_to">デバイス ID を送信…</string>
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">ロード中…</string>
-  <string name="usage_reporting_dialog_title">匿名使用状況レポートを許可しますか?</string>
-  <string name="usage_reporting_dialog_description">暗号化された使用状況レポートを毎日送信します。これは、一般的なプラットフォーム、フォルダーのサイズ、およびアプリケーションのバージョンを追跡するために使用します。報告されたデータセットが変更された場合、このダイアログボックスを再度表示します。\n\n集計された統計は https://data.syncthing.net で公開されています。</string>
+  <string name="usage_reporting_dialog_title">匿名での使用状況レポートを許可しますか?</string>
+  <string name="usage_reporting_dialog_description">使用状況レポートは暗号化されて毎日送信されます。この情報はプラットフォーム、フォルダーのサイズ、アプリケーションのバージョンを調査するために使われます。送信するデータセットが変更された場合、このダイアログで再度確認が求められます。\n\n集計結果は https://data.syncthing.net で公開されています。</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="off">オフ</string>
@@ -33,7 +33,7 @@
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
   <string name="dialog_disable_battery_optimization_title">バッテリー最適化</string>
-  <string name="dialog_disable_battery_optimization_message">Android はしばらくすると同期を停止することがあります。 これを防ぐには、バッテリーの最適化をオフにしてください。\n\n一部のデバイスには、タスクを終了させる追加のアプリがプリインストールされています。 同様に、ホワイトリストに Syncthing を追加する必要があります。</string>
+  <string name="dialog_disable_battery_optimization_message">Android はしばらくすると同期を停止することがあります。 これを防ぐには、バッテリーの最適化をオフにしてください。\n\n一部のデバイスには、タスク終了アプリが別途プリインストールされています。 これらのホワイトリストにも Syncthing を追加する必要があります。</string>
   <string name="dialog_disable_battery_optimization_later">後で</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">再度表示しない</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing のためにオフにします</string>
@@ -49,11 +49,11 @@
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">デバイスがありません</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">最新です</string>
+  <string name="device_up_to_date">最新</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">同期中 (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">切断されました</string>
+  <string name="device_disconnected">切断中</string>
   <!--Title for current download rate-->
   <string name="download_title">ダウンロード</string>
   <!--Title for current upload rate-->
@@ -64,9 +64,9 @@
   <!--Same as upload_title with a colon and space appended-->
   <string name="upload_title_colon">アップロード:\u0020</string>
   <!--Title for current CPU usage-->
-  <string name="cpu_usage">CPU 使用</string>
+  <string name="cpu_usage">CPU 使用率</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">RAM 使用</string>
+  <string name="ram_usage">メモリ使用量</string>
   <!--Title for announce server status-->
   <string name="announce_server">アナウンスサーバー</string>
   <string name="restart">再起動</string>
@@ -83,7 +83,7 @@
   <!--Setting title-->
   <string name="devices">デバイス</string>
   <!--Setting title-->
-  <string name="keep_versions">保持バージョン</string>
+  <string name="keep_versions">保持するバージョン数</string>
   <!--Setting title-->
   <string name="delete_folder">フォルダーを削除</string>
   <!--Title for FolderSettingsFragment in create mode-->
@@ -112,12 +112,12 @@
   <string name="compression">圧縮</string>
   <!--Strings representing compression options-->
   <string-array name="compress_entries">
-    <item>なし</item>
-    <item>メタデータ</item>
-    <item>つねに</item>
+    <item>オフ</item>
+    <item>メタデータのみ</item>
+    <item>全てのデータ</item>
   </string-array>
   <!--Setting title-->
-  <string name="introducer">紹介者</string>
+  <string name="introducer">紹介者デバイス</string>
   <!--ActionBar item-->
   <string name="delete_device">デバイスを削除</string>
   <string name="add_device">デバイスを追加</string>
@@ -146,55 +146,62 @@
   <string name="category_experimental">実験的</string>
   <string name="always_run_in_background">常にバックグラウンドで実行</string>
   <!--Preference summary in case it is enabled-->
-  <string name="always_run_in_background_enabled">以下のプリファレンスに応じて、常にバックグラウンドで実行されます。</string>
+  <string name="always_run_in_background_enabled">以下の設定に応じて常にバックグラウンドで実行されます。</string>
   <!--Preference summary in case it is disabled-->
-  <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューボタンで停止することができます。</string>
+  <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューから停止することができます。</string>
   <string name="sync_only_charging">充電中のみ同期</string>
-  <string name="sync_only_wifi">Wifi 時のみ同期</string>
-  <string name="sync_only_wifi_ssids">特定の WiFi ネットワークに制限する</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために WiFi をオンにしてください。</string>
-  <string name="respect_battery_saving_title">Android のバッテリー節約設定を尊重する</string>
+  <string name="sync_only_wifi">Wi-Fi 接続時のみ同期</string>
+  <string name="sync_only_wifi_ssids">特定の Wi-Fi ネットワークに制限する</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために Wi-Fi をオンにしてください。</string>
+  <string name="respect_battery_saving_title">Android の節電設定に従う</string>
   <string name="respect_battery_saving_summary">バッテリー節約が有効な場合は、Syncthing を無効にします</string>
-  <string name="advanced_folder_picker">高度なフォルダー選択を使用する</string>
-  <string name="advanced_folder_picker_summary">同期するデバイスのフォルダーを選択してください</string>
-  <string name="use_root_title">スーパーユーザーとして同期を実行します</string>
-  <string name="use_root_summary">これは Syncthing と、お使いのデバイスとに問題が発生する可能性がある、安定していない機能です。問題が発生した場合は、Syncthing を再インストールする必要があるかもしれません。</string>
+  <string name="advanced_folder_picker">高度なフォルダー選択を使用</string>
+  <string name="advanced_folder_picker_summary">デバイス上の任意のフォルダーを選択できます</string>
+  <string name="use_root_title">スーパーユーザーとして実行</string>
+  <string name="use_root_summary">これは Syncthing とお使いのデバイスに問題が生じる可能性のある、安定していない機能です。問題が発生した場合は、Syncthing の再インストールが必要な場合があります。</string>
   <string name="notification_type_title">通知</string>
-  <string name="notification_type_summary">通知の種類を選択します</string>
+  <string name="notification_type_summary">通知のタイプを選択します</string>
   <string-array name="notification_type_entries">
     <item>通常</item>
     <item>優先度低</item>
     <item>なし</item>
   </string-array>
+  <string-array name="versioning_types">
+    <item>なし</item>
+    <item>ゴミ箱</item>
+    <item>シンプル</item>
+    <item>ジグザグ</item>
+    <item>外部</item>
+  </string-array>
   <string name="device_name">デバイス名</string>
-  <string name="listen_address">同期プロトコル リスンアドレス</string>
-  <string name="max_recv_kbps">着信レート制限 (KiB/秒)</string>
-  <string name="max_send_kbps">発信レート制限 (KiB/秒)</string>
+  <string name="listen_address">同期プロトコルの待ち受けアドレス</string>
+  <string name="max_recv_kbps">下り帯域制限 (KiB/秒)</string>
+  <string name="max_send_kbps">上り帯域制限 (KiB/秒)</string>
   <string name="global_announce_enabled">グローバル探索</string>
   <string name="local_announce_enabled">ローカル探索</string>
   <string name="enable_nat_traversal">NAT トラバーサルを有効にする</string>
-  <string name="global_announce_server">グローバル検索サーバー</string>
+  <string name="global_announce_server">グローバル探索サーバー</string>
   <string name="enable_relaying">リレーを有効にする</string>
-  <string name="usage_reporting">匿名使用状況レポート</string>
-  <string name="gui_address">GUI リスンアドレス</string>
+  <string name="usage_reporting">匿名での使用状況レポート</string>
+  <string name="gui_address">GUI 待ち受けアドレス</string>
   <string name="gui_user">GUI 認証ユーザー</string>
   <string name="gui_password">GUI 認証パスワード</string>
-  <string name="export_config">設定をエクスポート</string>
-  <string name="keep_wakelock_while_binary_running">Syncthing の実行中、CPU をオンのままにする</string>
-  <string name="keep_wakelock_while_binary_running_summary">バッテリーで動作しているときに予期しない接続の切断が発生した場合、この設定を使用します。これは、バッテリー消費を増やします。</string>
+  <string name="export_config">設定のエクスポート</string>
+  <string name="keep_wakelock_while_binary_running">実行中は CPU をオンのままにする</string>
+  <string name="keep_wakelock_while_binary_running_summary">バッテリーでの動作中に予期しない切断が発生する場合オンにしてください。バッテリー消費量が増える場合があります。</string>
   <string name="run_as_foreground_service">フォアグラウンドの優先度でサービスを実行する</string>
-  <string name="run_as_foreground_service_summary">有効にした場合、Syncthing はフォアグラウンドの優先度で実行し、Android によって停止される可能性が低くなります。使用可能なメモリが不足している場合、他のサービスが停止されることがあります。「通知」の設定にかかわらず、Android の要求に起因して低い優先度の通知が表示される必要があります。</string>
+  <string name="run_as_foreground_service_summary">オンにすると Syncthing はフォアグラウンドの優先度で実行され、Android によって停止されにくくなります。使用可能なメモリが少ない場合、他のサービスが停止されることがあります。Android の仕様上、「通知」の設定にかかわらず低優先度の通知が表示されます。</string>
   <string name="use_tor_title">Tor を使用する</string>
   <string name="use_tor_summary">プライバシー保護のため、強制的にすべてのトラフィックを Tor を介します。Orbot が必要です</string>
   <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
-  <string name="use_legacy_hashing_summary">互換性のため、Syncthingが強制的に従来のハッシュパッケージを使用するようにします</string>
+  <string name="use_legacy_hashing_summary">互換性のため従来のハッシュパッケージの使用を強制</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">設定を %1$s にエクスポートしました</string>
-  <string name="import_config">設定をインポート</string>
+  <string name="import_config">設定のインポート</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">設定をインポートしました</string>
   <!--Toast shown after config was successfully imported-->
@@ -204,25 +211,25 @@
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace">STTRACE オプションでは、0-9、a-z および \',\' のみ使用できます。</string>
   <!--Title for the preference to reset Syncthing indexes-->
-  <string name="streset_title">データベースをリセット</string>
+  <string name="streset_title">データベースをリセットする</string>
   <!--Syncthing was reset-->
-  <string name="streset_question">この操作は、私たちサポートチームが推奨した場合にのみ行ってください。
+  <string name="streset_question">この操作は、サポートチームに推奨された場合にのみ行ってください。
 \n本当に Syncthing のインデックスデータベースをクリアしてもよろしいですか?</string>
   <!--Syncthing was reset-->
-  <string name="streset_done">政情に Syncthing のデータベースをリセットしました</string>
+  <string name="streset_done">正常に Syncthing のデータベースをリセットしました</string>
   <string name="category_about">アプリについて</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">ログを開く</string>
   <!--Summary for the log activity-->
-  <string name="open_log_summary">Syncthing と Android のログ ウインドウを開く</string>
-  <string name="notify_crashes_title">Syncthing のクラッシュに関して通知</string>
-  <string name="notify_crashes_summary">Syncthing がクラッシュしたことを検知したときに通知を表示します</string>
+  <string name="open_log_summary">Syncthing と Android のログウインドウを開く</string>
+  <string name="notify_crashes_title">Syncthing のクラッシュを通知</string>
+  <string name="notify_crashes_summary">Syncthing のクラッシュを検知した時に通知を表示します</string>
   <string name="syncthing_forum_title">Syncthing フォーラム</string>
   <string name="syncthing_forum_summary">Syncthing フォーラムに移動します</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">問題を報告</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Syncthing-Android 問題トラッカーを開く</string>
+  <string name="report_issue_summary">Syncthing-Android 課題管理システムを開く</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">寄付</string>
@@ -233,9 +240,9 @@
   <string name="app_version_title">Syncthing-Android バージョン</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">フォルダー選択</string>
+  <string name="folder_picker_title">フォルダーを選択</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">警告: お使いの Android のバージョンは外部ストレージデバイスに同期することができません</string>
+  <string name="kitkat_external_storage_warning">警告: お使いの Android のバージョンは外部ストレージに同期することができません</string>
   <!--ListView empty text-->
   <string name="directory_empty">ディレクトリーは空です</string>
   <!--Menu item to create folder on the file system-->
@@ -292,9 +299,9 @@
   <string name="exit">終了</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
-  <string name="syncthing_active_foreground">フォアグラウンドの優先度でサービスを実行しています</string>
+  <string name="syncthing_active_foreground">フォアグラウンドの優先度でサービスを実行中です</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-  <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの巡回を確認してください</string>
+  <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの循環を確認してください</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Syncthing 設定の作成に失敗しました。ログを確認してください。</string>
   <!--Label of the default folder created of first start (camera folder).-->
@@ -302,7 +309,7 @@
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-写真</string>
   <string name="notification_crash_title">Syncthing がクラッシュしました</string>
-  <string name="notification_crash_text">クリックするとログを表示します</string>
+  <string name="notification_crash_text">クリックしてログを表示</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">再起動が必要です</string>
@@ -311,7 +318,7 @@
   <!--Text for the dismiss button of the restart Activity-->
   <string name="restart_later">後で</string>
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">ここをクリックして、今すぐ Syncthing を再起動してください</string>
+  <string name="restart_notification_text">今すぐ Syncthing を再起動する</string>
   <!--Shown when a device ID is copied to the clipboard-->
   <string name="device_id_copied_to_clipboard">デバイス ID をクリップボードにコピーしました</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
@@ -340,5 +347,36 @@
   <string name="status_outofsync">未同期</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
-  <string name="appconfig_receiver_background_enabled">バックグラウンドでの実行が有効になっているとき、Syncthing の停止はサポートされていません。</string>
+  <string name="appconfig_receiver_background_enabled">バックグラウンドでの実行が有効になっている場合、Syncthing の停止はサポートされていません。</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">最大保存日数</string>
+  <string name="versions_path_title">古いバージョンを保存するパス</string>
+  <string name="clean_out_after">以下の期間後に完全に削除</string>
+  <string name="file_versioning">バージョン管理</string>
+  <string name="finish">完了</string>
+  <string name="none">なし</string>
+  <string name="versions_path">古いバージョンを保存するパス</string>
+  <string name="command">コマンド</string>
+  <string name="type">タイプ</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">ファイルごとの古いバージョンを保持する日数</string>
+  <string name="simple_file_versioning_description">Syncthingによって置き換えられたり削除されたファイルは、タイムスタンプ付きのファイル名で .stversions ディレクトリに移動します。</string>
+  <string name="trashcan_versioning_description">Syncthingによって置き換えられたり削除されたファイルは、.stversions ディレクトリに移動します。</string>
+  <string name="staggered_versioning_description">Syncthing によって置き換えられたり削除されたりすると、ファイルは .stversions ディレクトリの日付スタンプ付きバージョンに移動されます。 バージョンが最大有効期限を超えているか、その期間に許可されたファイルの数を超えた場合、バージョンは自動的に削除されます。\n\n次の期間が使用されます: 最初の 1 時間はバージョンが 30 秒ごとに保持され、最初の 1 日はバージョンが 1 時間ごとに保持され、最初の 30 日はバージョンが毎日保持され、最大有効期限までバージョンは毎週保持されます。</string>
+  <string name="maximum_age_description">古いバージョンを保持する最大日数 (0で無期限)</string>
+  <string name="versions_path_description">古いバージョンを保存するパス (空欄の場合、デフォルトで共有フォルダー内の .stversions ディレクトリ)</string>
+  <string name="cleanout_after_description">ゴミ箱でファイルを保持する日数 (0で無期限)</string>
+  <string name="external_versioning_description">最初のコマンドラインパラメータはフォルダのパスで、2 番目のパラメータはフォルダ内の相対パスです。</string>
+  <string name="no_versioning_description">バージョン管理を有効にするにはバージョン管理タイプを選択してください。</string>
+  <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">タイプ: シンプル</string>
+  <string name="type_trashcan">タイプ: ゴミ箱</string>
+  <string name="type_staggered">タイプ: ジグザグ</string>
+  <string name="type_external">タイプ: 外部</string>
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">以下の期間後に完全に削除: %1$s</string>
+  <string name="staggered_versioning_info">最大保存期間: %1$d \nバージョンパス: %2$s</string>
+  <string name="external_versioning_info">コマンド: %1$s</string>
+  <string name="simple_versioning_info">保持するバージョン数: %1$s</string>
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

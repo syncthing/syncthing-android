@@ -53,7 +53,6 @@
   <!--Setting title-->
   <string name="directory">資料夾</string>
   <!--Setting title-->
-  <string name="folder_master">主資料夾</string>
   <!--Setting title-->
   <string name="devices">裝置</string>
   <!--Setting title-->
@@ -202,4 +201,10 @@
   <string name="state_cleaning">正在清理</string>
   <string name="state_syncing">正在同步 (%1$d%%)</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="file_versioning">檔案版本控制</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

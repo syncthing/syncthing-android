@@ -168,6 +168,13 @@
     <item>低优先级</item>
     <item>隐藏</item>
   </string-array>
+  <string-array name="versioning_types">
+    <item>无</item>
+    <item>垃圾桶</item>
+    <item>简单</item>
+    <item>交错</item>
+    <item>外部</item>
+  </string-array>
   <string name="device_name">设备名称</string>
   <string name="listen_address">同步协议监听地址</string>
   <string name="max_recv_kbps">下载限速（KiB/s）</string>
@@ -343,4 +350,37 @@
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">当启用后台运行时不支持停止 Syncthing。</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">最长保留时间</string>
+  <string name="versions_path_title">历史版本路径</string>
+  <string name="clean_out_after">在该时间后清除</string>
+  <string name="file_versioning">版本控制</string>
+  <string name="finish">完成</string>
+  <string name="none">无</string>
+  <string name="versions_path">历史版本路径</string>
+  <string name="command">命令</string>
+  <string name="type">类型</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">每个文件保留的版本数量上限。</string>
+  <string name="simple_file_versioning_description">当某个文件在其他设备被替换或删除时，本设备将在 .stversions 目录中保留该文件的备份，并在文件名中加入时间戳信息。</string>
+  <string name="trashcan_versioning_description">当文件被 Syncthing 替换或删除时，将被移动到 .stversions 目录。</string>
+  <string name="staggered_versioning_description">当某个文件在其他设备被替换或删除时，本设备将在 .stversions 目录中保留该文件的备份，并在文件名中加入时间戳信息。超过最长保留时间，或者不满足下列条件的历史版本，将会被删除。
+
+保留的历史版本会遵循以下条件：最近一小时内的历史版本，更新间隔小于三十秒的仅保留一份。最近一天内的历史版本，更新间隔小于一小时的仅保留一份。最近一个月内的历史版本，更新间隔小于一天的仅保留一份。距离现在超过一个月且小于最长保留时间的，更新间隔小于一周的仅保留一份。</string>
+  <string name="maximum_age_description">历史版本保留的最长天数，0 为永久保存。</string>
+  <string name="versions_path_description">历史版本储存路径（留空则会默认存储在共享文件夹中的 .stversions 目录）。</string>
+  <string name="cleanout_after_description">文件保存在回收站的天数。零表示永久。</string>
+  <string name="external_versioning_description">命令行的第一个参数是文件夹的路径，第二个参数是文件夹内的相对路径。</string>
+  <string name="no_versioning_description">选择要启用的版本控制类型。</string>
+  <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">类型：简单</string>
+  <string name="type_trashcan">类型：垃圾桶</string>
+  <string name="type_staggered">类型：交错</string>
+  <string name="type_external">类型：外部</string>
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">在该时间后清除：%1$s</string>
+  <string name="staggered_versioning_info">最长保留时间：%1$d \n历史版本路径：%2$s</string>
+  <string name="external_versioning_info">命令：%1$s</string>
+  <string name="simple_versioning_info">保留版本数量：%1$s</string>
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

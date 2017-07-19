@@ -270,4 +270,9 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <string name="state_unknown">Neznámy</string>
   <string name="status_outofsync">Nesynchronizované</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

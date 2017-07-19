@@ -70,7 +70,6 @@
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title-->
-  <string name="folder_master">Originalmappe - skrivebeskyttet</string>
   <!--Setting title-->
   <string name="devices">Enheter</string>
   <!--Setting title-->
@@ -295,4 +294,10 @@
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Du kan ikke stoppe Syncthing når «kjør i bakgrunnen» er skrudd på.</string>
+  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="file_versioning">Versjonering av filer</string>
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--Displays the current file versioning type in the Folder activity-->
+  <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>
