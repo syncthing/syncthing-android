@@ -67,8 +67,6 @@ public class SettingsActivity extends SyncthingActivity {
         private CheckBoxPreference mRelaysEnabled;
         private EditTextPreference mGlobalAnnounceServers;
         private EditTextPreference mAddress;
-        private EditTextPreference mUser;
-        private EditTextPreference mPassword;
         private CheckBoxPreference mUrAccepted;
 
         private CheckBoxPreference mUseRoot;
@@ -127,8 +125,6 @@ public class SettingsActivity extends SyncthingActivity {
             mRelaysEnabled          = (CheckBoxPreference) findPreference("relaysEnabled");
             mGlobalAnnounceServers  = (EditTextPreference) findPreference("globalAnnounceServers");
             mAddress                = (EditTextPreference) findPreference("address");
-            mUser                   = (EditTextPreference) findPreference("user");
-            mPassword               = (EditTextPreference) findPreference("password");
             mUrAccepted             = (CheckBoxPreference) findPreference("urAccepted");
 
             Preference exportConfig = findPreference("export_config");
@@ -212,8 +208,6 @@ public class SettingsActivity extends SyncthingActivity {
             mRelaysEnabled.setChecked(mOptions.relaysEnabled);
             mGlobalAnnounceServers.setText(joiner.join(mOptions.globalAnnounceServers));
             mAddress.setText(mGui.address);
-            mUser.setText(mGui.user);
-            mPassword.setText(mGui.password);
             mUrAccepted.setChecked(mOptions.getUsageReportValue() == Options.USAGE_REPORTING_ACCEPTED);
         }
 
@@ -254,8 +248,6 @@ public class SettingsActivity extends SyncthingActivity {
                     mOptions.globalAnnounceServers = Iterables.toArray(splitter.split((String) o), String.class);
                     break;
                 case "address":               mGui.address = (String) o;  break;
-                case "user":                  mGui.user = (String) o;     break;
-                case "password":              mGui.password = (String) o; break;
                 case "urAccepted":
                     mOptions.urAccepted = ((boolean) o)
                             ? Options.USAGE_REPORTING_ACCEPTED
