@@ -319,6 +319,7 @@
   <string name="state_syncing">Синхронизация (%1$d%%)</string>
   <string name="state_error">Ошибка</string>
   <string name="state_unknown">Неизвестно</string>
+  <string name="status_outofsync">Нет синхронизации</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Остановка Syncthing не поддерживается, если включено выполнение в фоновом режиме.</string>

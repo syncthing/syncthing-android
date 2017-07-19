@@ -283,6 +283,7 @@
   <string name="state_syncing">Đang đ.bộ (%1$d%%)</string>
   <string name="state_error">Lỗi</string>
   <string name="state_unknown">Không rõ</string>
+  <string name="status_outofsync">Mất đồng bộ</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
 </resources>

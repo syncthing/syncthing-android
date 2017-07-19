@@ -318,6 +318,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="state_syncing">Bezig met synchroniseren (%1$d%%)</string>
   <string name="state_error">Fout</string>
   <string name="state_unknown">Onbekend</string>
+  <string name="status_outofsync">Niet gesynchroniseerd</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Syncthing stoppen terwijl uitvoeren in achtergrond is ingeschakeld wordt niet ondersteund.</string>

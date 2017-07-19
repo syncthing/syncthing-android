@@ -319,6 +319,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="state_syncing">Sincronizzazione (%1$d%%)</string>
   <string name="state_error">Errore</string>
   <string name="state_unknown">Sconosciuto</string>
+  <string name="status_outofsync">Non sincronizzato</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Arrestare Syncthing non è  possibile quando è abilitato il funzionamento in background.</string>

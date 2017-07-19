@@ -310,6 +310,7 @@
   <string name="state_syncing">Sincronizando (%1$d%%)</string>
   <string name="state_error">Error</string>
   <string name="state_unknown">Desconocido</string>
+  <string name="status_outofsync">No sincronizado</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">No está soportado detener Syncthing mientras está activada la ejecución en segundo plano.</string>

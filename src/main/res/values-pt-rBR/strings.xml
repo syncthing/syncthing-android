@@ -319,6 +319,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="state_syncing">Sincronizando (%1$d%%)</string>
   <string name="state_error">Erro</string>
   <string name="state_unknown">Desconhecido</string>
+  <string name="status_outofsync">Fora de sincronia</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Não é possível parar o Syncthing enquanto ele estiver configurado para rodar em segundo plano.</string>

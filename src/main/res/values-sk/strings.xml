@@ -268,5 +268,6 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <string name="state_syncing">Synchronizuje sa (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámy</string>
+  <string name="status_outofsync">Nesynchronizované</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

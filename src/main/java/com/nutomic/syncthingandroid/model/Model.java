@@ -12,6 +12,8 @@ public class Model {
     public long needBytes;
     public long needFiles;
     public long needDeletes;
+    public long needDirectories;
+    public long needSymlinks;
     public String state;
     public String invalid;
 }

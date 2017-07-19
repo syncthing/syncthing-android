@@ -340,6 +340,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="state_syncing">Synkroniserar (%1$d%%)</string>
   <string name="state_error">Fel</string>
   <string name="state_unknown">Okänd</string>
+  <string name="status_outofsync">Osynkroniserad</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Det går inte att stoppa Syncthing när körning i bakgrunden är aktiverad.</string>

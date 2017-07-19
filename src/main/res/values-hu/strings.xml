@@ -224,5 +224,6 @@
   <string name="state_syncing">Szinkronizálás (%1$d%%)</string>
   <string name="state_error">Hiba</string>
   <string name="state_unknown">Ismeretlen</string>
+  <string name="status_outofsync">Nincs szinkronban</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
 </resources>

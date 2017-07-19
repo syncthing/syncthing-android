@@ -319,6 +319,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="state_syncing">Synchronisation (%1$d%%)</string>
   <string name="state_error">Erreur</string>
   <string name="state_unknown">Inconnu</string>
+  <string name="status_outofsync">Désynchronisé</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">L\'arrêt de Syncthing n\'est pas supporté quand le fonctionnement en tâche de fond est activé.</string>
