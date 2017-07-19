@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -22,6 +23,7 @@ import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Languages;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
 import java.security.InvalidParameterException;
@@ -104,6 +106,16 @@ public class SettingsActivity extends SyncthingActivity {
             mSyncOnlyCharging.setEnabled(mAlwaysRunInBackground.isChecked());
             mSyncOnlyWifi.setEnabled(mAlwaysRunInBackground.isChecked());
             mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+
+            ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
+            Languages languages = new Languages(getActivity());
+            languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
+            languagePref.setEntries(languages.getAllNames());
+            languagePref.setEntryValues(languages.getSupportedLocales());
+            languagePref.setOnPreferenceChangeListener((p, o) -> {
+                languages.forceChangeLanguage(getActivity(), (String) o);
+                return false;
+            });
 
             mDeviceName             = (EditTextPreference) findPreference("deviceName");
             mListenAddresses        = (EditTextPreference) findPreference("listenAddresses");

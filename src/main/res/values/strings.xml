@@ -271,6 +271,12 @@ Please report any problems you encounter via Github.</string>
         <item>None</item>
     </string-array>
 
+    <string name="preference_language_title">Language</string>
+
+    <string name="preference_language_summary">Change the app language</string>
+
+    <string name="pref_language_default">Default Language</string>
+
     <string-array name="versioning_types">
         <item>None</item>
         <item>TrashCan</item>
