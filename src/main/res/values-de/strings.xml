@@ -27,8 +27,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, werden Sie erneut um Erlaubnis gefragt. Die zusammengeführten Statistiken sind unter https://data.syncthing.net zu finden.</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
-  <string name="off">aus</string>
-  <string name="open_website">Webseite öffnen</string>
+    <string name="open_website">Webseite öffnen</string>
   <string name="toast_write_storage_permission_required">Diese App benötigt Schreibzugriff auf den Gerätespeicher</string>
   <string name="device_rejected">Gerät %1$s möchte sich verbinden</string>
   <string name="folder_rejected">Gerät %1$s möchte Verzeichnis %2$s teilen</string>

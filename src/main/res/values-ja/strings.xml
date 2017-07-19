@@ -27,8 +27,7 @@
   <string name="usage_reporting_dialog_description">使用状況レポートは暗号化されて毎日送信されます。この情報はプラットフォーム、フォルダーのサイズ、アプリケーションのバージョンを調査するために使われます。送信するデータセットが変更された場合、このダイアログで再度確認が求められます。\n\n集計結果は https://data.syncthing.net で公開されています。</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
-  <string name="off">オフ</string>
-  <string name="open_website">Web サイトを開く</string>
+    <string name="open_website">Web サイトを開く</string>
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
@@ -350,14 +349,12 @@
   <string name="appconfig_receiver_background_enabled">バックグラウンドでの実行が有効になっている場合、Syncthing の停止はサポートされていません。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最大保存日数</string>
-  <string name="versions_path_title">古いバージョンを保存するパス</string>
-  <string name="clean_out_after">以下の期間後に完全に削除</string>
+    <string name="clean_out_after">以下の期間後に完全に削除</string>
   <string name="file_versioning">バージョン管理</string>
   <string name="finish">完了</string>
   <string name="none">なし</string>
   <string name="versions_path">古いバージョンを保存するパス</string>
   <string name="command">コマンド</string>
-  <string name="type">タイプ</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">ファイルごとの古いバージョンを保持する日数</string>
   <string name="simple_file_versioning_description">Syncthingによって置き換えられたり削除されたファイルは、タイムスタンプ付きのファイル名で .stversions ディレクトリに移動します。</string>

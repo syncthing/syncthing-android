@@ -23,8 +23,7 @@
   <string name="usage_reporting_dialog_description">Báo cáo s.dụng đã mã hoá sẽ được gửi đi hằng ngày. Nó được dùng để theo dõi các HĐH thông dụng, kích cỡ th.mục và ph.bản ứng dụng. Nếu bộ d.liệu báo cáo có th.đổi gì, bạn sẽ được nhắc lại bằng h.thoại này.\n\nThống kê t.hợp được đăng công khai tại https://data.syncthing.net.</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
-  <string name="off">tắt</string>
-  <string name="open_website">Mở trang web</string>
+    <string name="open_website">Mở trang web</string>
   <string name="toast_write_storage_permission_required">Ứng dụng này cần được phép chép vào ổ lưu trữ</string>
   <string name="device_rejected">Thiết bị %1$s muốn kết nối</string>
   <string name="folder_rejected">Thiết bị %1$s muốn chia sẻ thư mục %2$s</string>

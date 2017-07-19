@@ -85,8 +85,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 }
             }
             binding.items.setVisibility(VISIBLE);
-            binding.items.setText(getContext()
-                    .getString(R.string.files, model.inSyncFiles, model.globalFiles));
+            binding.items.setText(getContext().getResources()
+                    .getQuantityString(R.plurals.files, (int) model.inSyncFiles, model.inSyncFiles, model.globalFiles));
             binding.size.setVisibility(VISIBLE);
             binding.size.setText(getContext().getString(R.string.folder_size_format,
                     Util.readableFileSize(getContext(), model.inSyncBytes),

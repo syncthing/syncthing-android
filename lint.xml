@@ -50,4 +50,7 @@
 		<ignore path="src/main/res/values-zh-rCN" />
 		<ignore path="src/main/res/values-zh-rTW" />
 	</issue>
+
+	<!-- Don't fail lint on translation errors -->
+	<issue id="ImpliedQuantity" severity="warning" />
 </lint>

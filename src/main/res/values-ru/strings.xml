@@ -27,8 +27,7 @@
   <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
-  <string name="off">выкл</string>
-  <string name="open_website">Открыть сайт</string>
+    <string name="open_website">Открыть сайт</string>
   <string name="toast_write_storage_permission_required">Приложению требуется право на запись</string>
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
   <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>

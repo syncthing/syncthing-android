@@ -47,8 +47,6 @@ Please report any problems you encounter via Github.</string>
 
     <string name="no">No</string>
 
-    <string name="off">off</string>
-
     <string name="open_website">Open Website</string>
 
     <string name="toast_write_storage_permission_required">Write storage permission is required for this app</string>
@@ -72,7 +70,10 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_list_empty">No folders found</string>
 
     <!-- Format string for folder file count -->
-    <string name="files">%1$d / %2$d Files</string>
+    <plurals name="files">
+        <item quantity="one">%1$d / %2$d File</item>
+        <item quantity="other">%1$d / %2$d Files</item>
+    </plurals>
 
     <string name="toast_no_file_manager">No compatible file manager found</string>
 
@@ -571,14 +572,12 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Titles used in the file versioning dialog and file versioning button in the folder activity -->
     <string name="maximum_age">Maximum Age</string>
-    <string name="versions_path_title">Versions Path</string>
     <string name="clean_out_after">Clean out after</string>
     <string name="file_versioning">File Versioning</string>
     <string name="finish">Finish</string>
     <string name="none"> None</string>
     <string name="versions_path">Versions Path</string>
     <string name="command">Command</string>
-    <string name="type">Type</string>
 
     <!-- File versioning dialog descriptions for file versioning types and file versioning configuration options. -->
     <string name="keep_versions_description">The number of old versions to keep, per file.</string>

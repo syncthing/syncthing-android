@@ -27,8 +27,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="usage_reporting_dialog_description">Het versleuteld gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en applicatieversies te volgen. Indien de gerapporteerde gegevensset wordt veranderd zal je deze dialoog opnieuw te zien krijgen.\n\nDe geaggregeerde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
-  <string name="off">uit</string>
-  <string name="open_website">Website openen</string>
+    <string name="open_website">Website openen</string>
   <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
   <string name="device_rejected">Apparaat %1$s wil verbinding maken</string>
   <string name="folder_rejected">Apparaat %1$s wil map %2$s delen</string>
@@ -349,8 +348,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="file_versioning">Bestandsversies</string>
   <string name="none">Geen</string>
   <string name="command">Opdracht</string>
-  <string name="type">Type</string>
-  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <!--Displays the current file versioning type in the Folder activity-->
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="external_versioning_info">Opdracht: %1$s</string>

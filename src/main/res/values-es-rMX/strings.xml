@@ -23,8 +23,7 @@
   <string name="usage_reporting_dialog_description">El reporte de uso encriptado es enviado diariamente. Es usado para rastrear plataformas comunes, tamaño de carpetas y versiones de la aplicación. Si se cambia el conjunto de datos reportados, se le presentará este diálogo de nuevo.\n\nLas estadísticas agregadas se encuentran disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Si</string>
   <string name="no">No</string>
-  <string name="off">Apagar</string>
-  <string name="open_website">Abrir Sitio web</string>
+    <string name="open_website">Abrir Sitio web</string>
   <string name="toast_write_storage_permission_required">Esta aplicación requiere permiso para escribir en el almacenamiento</string>
   <string name="device_rejected">El dispositivo %1$s quiere conectarse</string>
   <string name="folder_rejected">El dispositivo %1$s quiere compartir la carpeta %2$s</string>

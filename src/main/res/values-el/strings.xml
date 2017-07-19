@@ -27,8 +27,7 @@
   <string name="usage_reporting_dialog_description">Η κρυπτογραφημένη αναφορά χρήσης αποστέλλεται καθημερινά. Χρησιμοποιείται για την καταγραφή πλατφορμών, μεγεθών φακέλων και εκδόσεων της εφαρμογής. Αν υπάρξει κάποια μεταβολή στο σύνολο δεδομένων που συλλέγονται, θα ειδοποιηθείτε και πάλι με αυτό το παράθυρο.\n\nΤα ομαδοποιημένα στατιστικά στοιχεία είναι ελεύθερα προσβάσιμα στο https://data.syncthing.net.</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
-  <string name="off">απενεργοποιημένο</string>
-  <string name="open_website">Άνοιγμα ιστοσελίδας</string>
+    <string name="open_website">Άνοιγμα ιστοσελίδας</string>
   <string name="toast_write_storage_permission_required">Απαιτείται η άδεια αποθήκευσης δεδομένων για αυτή την εφαρμογή</string>
   <string name="device_rejected">Η συσκευή %1$s επιθυμεί να συνδεθεί</string>
   <string name="folder_rejected">Η συσκευή %1$s επιθυμεί να διαμοιραστεί τον φάκελο %2$s</string>
@@ -354,15 +353,13 @@
   <string name="appconfig_receiver_background_enabled">Ο τερματισμός του Syncthing δεν υποστηρίζεται όταν έχει ενεργοποιηθεί η εκτέλεση στο παρασκήνιο.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Μέγιστη ηλικία</string>
-  <string name="versions_path_title">Φάκελος τήρησης εκδόσεων</string>
-  <string name="clean_out_after">Εκκαθάριση μετά από</string>
+    <string name="clean_out_after">Εκκαθάριση μετά από</string>
   <string name="file_versioning">Τήρηση εκδόσεων αρχείων</string>
   <string name="finish">Τέλος</string>
   <string name="none">Απενεργοποιημένη</string>
   <string name="versions_path">Φάκελος τήρησης εκδόσεων</string>
   <string name="command">Εντολή</string>
-  <string name="type">Τύπος</string>
-  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Πλήθος εκδόσεων ανά αρχείο προς τήρηση.</string>
   <string name="simple_file_versioning_description">Τα αρχεία αποθηκεύονται ως χρονοσημασμένες εκδόσεις στον κατάλογο .stversions όταν αντικαθίστανται ή διαγράφονται από το Syncthing.</string>
   <string name="trashcan_versioning_description">Τα αρχεία μετακινούνται στον κατάλογο .stversions όταν αντικαθίστανται ή διαγράφονται από το Syncthing.</string>

@@ -27,8 +27,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="usage_reporting_dialog_description">Codziennie wysyłany jest zaszyfrowany raport statystyk użycia. Zawarte w nim są informacje o platformie użytkownika, rozmiarach folderów i wersji aplikacji. Jeśli zestaw pobieranych danych zmieni się to okno zostanie ponownie wyświetlone .\n\nZebrane statystyki są dostępne dla każdego na https://data.syncthing.net.</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
-  <string name="off">wył</string>
-  <string name="open_website">Otwórz stronę internetową</string>
+    <string name="open_website">Otwórz stronę internetową</string>
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
   <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>

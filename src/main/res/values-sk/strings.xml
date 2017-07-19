@@ -23,8 +23,7 @@
   <string name="usage_reporting_dialog_description">Šifrované dáta o používaní sú zasielané denne. Sú používané na získavanie štatistík o platformách, veľkostiach zdielaných adresárov a verziách aplikácie. Ak sa rozsah zbieraných údajov v budúcnosti zmení, budete na zmenu upozornený opätovným zobrazením tohoto dialógu.\n\nSúhrn získaných štatistýk je verejne dostupný na https://data.syncthing.net.</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
-  <string name="off">vypnuté</string>
-  <string name="open_website">Otvoriť Webovú Stránku</string>
+    <string name="open_website">Otvoriť Webovú Stránku</string>
   <string name="toast_write_storage_permission_required">Táto aplikácia potrebuje práva pre zápis na úložisko</string>
   <string name="dialog_disable_battery_optimization_later">Neskôr</string>
   <!--FoldersFragment-->

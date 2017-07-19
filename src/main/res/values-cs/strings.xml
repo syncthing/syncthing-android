@@ -27,8 +27,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
-  <string name="off">vypnuto</string>
-  <string name="open_website">Otevřít webovou stránku</string>
+    <string name="open_website">Otevřít webovou stránku</string>
   <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
   <string name="device_rejected">Přístroj %1$s žádá o připojení</string>
   <string name="folder_rejected">Přístroj %1$s chce sdílet adresář %2$s</string>

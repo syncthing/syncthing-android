@@ -25,8 +25,7 @@
   <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utiliza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si se modifica el conjunto de datos del informe se te presentará de nuevo este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
-  <string name="off">apagar</string>
-  <string name="open_website">Sitio abierto</string>
+    <string name="open_website">Sitio abierto</string>
   <string name="toast_write_storage_permission_required">Esta app necesita permiso para escribir al sistema de almacenamiento</string>
   <string name="device_rejected">El dispositivo %1$s desea conectar</string>
   <string name="folder_rejected">El dispositivo %1$s desea compartir la carpeta %2$s</string>
@@ -344,8 +343,7 @@
   <string name="appconfig_receiver_background_enabled">No está soportado detener Syncthing mientras está activada la ejecución en segundo plano.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Antigüedad Máxima</string>
-  <string name="versions_path_title">Ruta de Versiones</string>
-  <string name="file_versioning">Versionado de Archivos</string>
+    <string name="file_versioning">Versionado de Archivos</string>
   <string name="finish">Finalizar</string>
   <string name="none">Ninguno/a</string>
   <string name="versions_path">Ruta de Versiones</string>

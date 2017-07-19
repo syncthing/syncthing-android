@@ -23,8 +23,7 @@
   <string name="usage_reporting_dialog_description">Den krypterte rapporten over bruk sendes daglig. Den brukes til å spore felles plattformer, mappestørrelser og versjoner av appen. Hvis datasettet endres vil du bli vist denne dialogen på nytt.\n\nDen aggregerte statistikken er offentlig tilgjengelig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
-  <string name="off">av</string>
-  <string name="open_website">Åpne nettsted</string>
+    <string name="open_website">Åpne nettsted</string>
   <string name="toast_write_storage_permission_required">Skriverettigheter til lagringsenheten kreves av denne appen</string>
   <string name="device_rejected">Enheten %1$s ønsker å koble til</string>
   <string name="folder_rejected">Enheten %1$s ønsker å dele mappen %2$s</string>

@@ -27,8 +27,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
-  <string name="off">nenhuma</string>
-  <string name="open_website">Abrir site</string>
+    <string name="open_website">Abrir site</string>
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
   <string name="device_rejected">O dispositivo %1$s quer se conectar</string>
   <string name="folder_rejected">O dispostivo %1$s quer compartilhar a pasta %2$s</string>

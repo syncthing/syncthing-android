@@ -27,8 +27,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="usage_reporting_dialog_description">Le rapport crypté des usages est envoyé tous les jours. Il est utilisé pour recueillir les types de plates-formes, la tailles des partages et les versions d\'applications. Si le type de données envoyées dans les rapports est modifié, vous verrez à nouveau cette boite de dialogue.\n\nL\'agrégation des statistiques est publique, et disponible sur https://data.syncthing.net.</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
-  <string name="off">Arrêt</string>
-  <string name="open_website">Ouvrir le site WEB</string>
+    <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
   <string name="device_rejected">L\'appareil %1$s veut se connecter</string>
   <string name="folder_rejected">L\'appareil %1$s veut partager %2$s</string>
@@ -354,15 +353,13 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="appconfig_receiver_background_enabled">L\'arrêt de Syncthing n\'est pas supporté quand le fonctionnement en tâche de fond est activé.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Age maximum</string>
-  <string name="versions_path_title">Emplacement des versions</string>
-  <string name="clean_out_after">Nettoyer après</string>
+    <string name="clean_out_after">Nettoyer après</string>
   <string name="file_versioning">Gestion des versions</string>
   <string name="finish">Terminé</string>
   <string name="none">Aucun</string>
   <string name="versions_path">Emplacement des versions</string>
   <string name="command">Commande</string>
-  <string name="type">Type</string>
-  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Nombre d\'anciennes version à conserver, par fichier.</string>
   <string name="simple_file_versioning_description">Les fichiers sont transférés, avec ajout de la date, dans un répertoire .stversions lorsqu\'ils sont remplacés ou supprimés par Syncthing.</string>
   <string name="trashcan_versioning_description">Les fichiers sont déplacés vers le répertoire .stversions lorsqu\'ils sont remplacés ou supprimés par Syncthing.</string>

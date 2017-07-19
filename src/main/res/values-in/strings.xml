@@ -27,7 +27,6 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="usage_reporting_dialog_description">Laporan penggunaan terenkripsi dikirim harian. Digunakan untuk melihat jenis platform, ukuran folder dan versi aplikasi. Jika data yang terkirim berubah maka akan muncul dialog ini kembali.\n\nAgregat statistik dipublikasikan di https://data.syncthing.net</string>
   <string name="yes">Ya</string>
   <string name="no">Tidak</string>
-  <string name="off">mati</string>
   <string name="open_website">Buka Situs</string>
   <string name="toast_write_storage_permission_required">Aplikasi ini membutuuhkan kewenangan penulisan storage.</string>
   <string name="device_rejected">Perangkat %1$s ingin tersambung</string>
