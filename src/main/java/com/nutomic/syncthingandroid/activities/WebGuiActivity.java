@@ -87,9 +87,7 @@ public class WebGuiActivity extends SyncthingActivity
         }
 
         public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-            String password = PreferenceManager.getDefaultSharedPreferences(WebGuiActivity.this)
-                    .getString("web_gui_password", "");
-            handler.proceed(mConfig.getUserName(), password);
+            handler.proceed(mConfig.getUserName(), mConfig.getApiKey());
         }
 
         @Override

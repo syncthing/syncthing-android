@@ -138,6 +138,32 @@ public class ConfigXml {
             changed = true;
         }
 
+        // Update old configurations with a randomized password:
+        // Set the user to "syncthing" and password to the API key.
+        // Configurations with a custom password are not changed.
+        String storedPassword = PreferenceManager.getDefaultSharedPreferences(mContext)
+                .getString("web_gui_password", null);
+        if (storedPassword != null) {
+            PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                    .remove("web_gui_password")
+                    .apply();
+            Node password = gui.getElementsByTagName("password").item(0);
+            boolean storedPasswordOk;
+            try {
+                storedPasswordOk = password != null && BCrypt.checkpw(storedPassword, password.getTextContent());
+            } catch (RuntimeException e) {
+                Log.w(TAG, e);
+                storedPasswordOk = false;
+            }
+            if (storedPasswordOk) {
+                Node user = gui.getElementsByTagName("user").item(0);
+                if (user != null && user.getTextContent().length() != 0)
+                    user.setTextContent("syncthing");
+                password.setTextContent(BCrypt.hashpw(getApiKey(), BCrypt.gensalt()));
+                changed = true;
+            }
+        }
+
         if (changed) {
             saveChanges();
         }
@@ -211,33 +237,20 @@ public class ConfigXml {
     }
 
     /**
-     * Generates username and config, stores them in config and preferences.
+     * Generates username and password, stores them in config.
      *
-     * We have to store the plaintext password in preferences, because we need it in
-     * WebGuiActivity. The password in the config is hashed, so we can't use it directly.
+     * The API key is used as the password, because we need it in WebGuiActivity.
+     * The password in the config is hashed, so we can't use it directly.
      */
     private void generateLoginInfo() {
-        char[] chars =
-                "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
-        StringBuilder password = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-        for (int i = 0; i < 20; i++)
-            password.append(chars[random.nextInt(chars.length)]);
-
-        String user = Build.MODEL.replaceAll("[^a-zA-Z0-9 ]", "");
-        Log.i(TAG, "Generated GUI username and password (username is " + user + ")");
-
         Node userNode = mConfig.createElement("user");
         getGuiElement().appendChild(userNode);
-        userNode.setTextContent(user);
+        userNode.setTextContent("syncthing");
 
         Node passwordNode = mConfig.createElement("password");
         getGuiElement().appendChild(passwordNode);
-        String hashed = BCrypt.hashpw(password.toString(), BCrypt.gensalt());
+        String hashed = BCrypt.hashpw(getApiKey(), BCrypt.gensalt());
         passwordNode.setTextContent(hashed);
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
-                .putString("web_gui_password", password.toString())
-                .apply();
     }
 
     /**
