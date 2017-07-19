@@ -170,9 +170,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="enable_relaying">Włącz przekazywanie</string>
   <string name="usage_reporting">Anonimowe statystyki użycia</string>
   <string name="gui_address">Adres nasłuchiwania</string>
-  <string name="gui_user">Nazwa użytkownika</string>
-  <string name="gui_password">Hasło</string>
-  <string name="export_config">Eksportuj ustawienia</string>
+    <string name="export_config">Eksportuj ustawienia</string>
   <string name="keep_wakelock_while_binary_running">Utrzymywanie wybudzonego CPU podczas działania</string>
   <string name="keep_wakelock_while_binary_running_summary">Używaj, jeśli doświadczasz nieoczekiwanych rozłączeń w trakcie działania na baterii. Spowoduje to zwiększone jej zużycie.</string>
   <string name="run_as_foreground_service">Pierwszoplanowy priorytet usługi</string>

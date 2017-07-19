@@ -172,9 +172,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="enable_relaying">Permitir retransmissão</string>
   <string name="usage_reporting">Enviar relatórios anónimos de utilização</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>
-  <string name="gui_user">Utilizador da autenticação na interface gráfica</string>
-  <string name="gui_password">Senha da autenticação na interface gráfica</string>
-  <string name="export_config">Exportar configuração</string>
+    <string name="export_config">Exportar configuração</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada enquanto o Syncthing está a correr</string>
   <string name="keep_wakelock_while_binary_running_summary">Use esta definição se experimentar desconectações inesperadas enquanto estiver a trabalhar com a bateria. Isto irá resultar num aumento do consumo da carga da bateria.</string>
   <string name="run_as_foreground_service">Correr o serviço com prioridade de primeiro plano</string>

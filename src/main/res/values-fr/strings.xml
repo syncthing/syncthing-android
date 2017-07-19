@@ -182,8 +182,6 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="enable_relaying">Activer le relayage</string>
   <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="gui_address">Adresse pour l\'interface WEB</string>
-  <string name="gui_user">Nom d\'authentification pour l\'interface WEB</string>
-  <string name="gui_password">Mot de passe d\'authentification pour l\'interface WEB</string>
   <string name="export_config">Exporter la configuration</string>
   <string name="keep_wakelock_while_binary_running">Garder le CPU en éveil quand Syncthing fonctionne.</string>
   <string name="keep_wakelock_while_binary_running_summary">Utilisez ce paramètre si vous rencontrez des déconnexions inattendues en fonctionnant sur batterie. Il en résultera une augmentation de la consommation de la batterie.</string>

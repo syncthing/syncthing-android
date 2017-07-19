@@ -308,10 +308,6 @@ Please report any problems you encounter via Github.</string>
 
     <string name="gui_address">GUI Listen Addresses</string>
 
-    <string name="gui_user">GUI Authentication User</string>
-
-    <string name="gui_password">GUI Authentication Password</string>
-
     <string name="export_config">Export Configuration</string>
 
     <string name="keep_wakelock_while_binary_running">Keep the CPU awake while Syncthing is running</string>

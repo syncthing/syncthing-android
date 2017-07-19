@@ -174,9 +174,7 @@
   <string name="enable_relaying">Включить релеи</string>
   <string name="usage_reporting">Анонимные Отчёты Использования</string>
   <string name="gui_address">Адрес Ожидания GUI</string>
-  <string name="gui_user">Пользователь Идентификации GUI</string>
-  <string name="gui_password">Пароль Идентификации GUI</string>
-  <string name="export_config">Экспорт настроек</string>
+    <string name="export_config">Экспорт настроек</string>
   <string name="keep_wakelock_while_binary_running">Поддерживать CPU включенным, пока Syncthing работает</string>
   <string name="keep_wakelock_while_binary_running_summary">Используйте эту опцию, если у вас происходят потери соединения при работе от батареи. Эта опция увеличит расход заряда батареи.</string>
   <string name="run_as_foreground_service">Запуск сервиса с повышенным приоритетом</string>

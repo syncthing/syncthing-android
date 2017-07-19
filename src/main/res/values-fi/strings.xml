@@ -169,9 +169,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="enable_relaying">Aktivoi yhteyden välitys</string>
   <string name="usage_reporting">Anonyymi käytönseuranta</string>
   <string name="gui_address">Käyttöliittymän kuunteluosoite</string>
-  <string name="gui_user">Käyttöliittymän käyttäjätunnus</string>
-  <string name="gui_password">Käyttöliittymän salasana</string>
-  <string name="export_config">Vie asetukset</string>
+    <string name="export_config">Vie asetukset</string>
   <string name="keep_wakelock_while_binary_running">Pidä suoritin hereillä kun Syncthing on käynnissä</string>
   <string name="keep_wakelock_while_binary_running_summary">Käytä tätä asetusta, jos yhteydet katkeilevat odottamattomasti laitteen käydessä akkuvirralla. Tämä lisää virran kulutusta.</string>
   <string name="run_as_foreground_service">Käynnistä palvelu etualan tärkeydellä</string>

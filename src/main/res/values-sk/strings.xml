@@ -143,9 +143,7 @@
   <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
   <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
   <string name="gui_address">Adresa pre GUI</string>
-  <string name="gui_user">Užívateľské Meno pre GUI</string>
-  <string name="gui_password">Užívateľské Heslo pre GUI</string>
-  <string name="export_config">Exportovať Konfiguráciu</string>
+    <string name="export_config">Exportovať Konfiguráciu</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>

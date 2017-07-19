@@ -175,9 +175,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="enable_relaying">Aktfikan Relay</string>
   <string name="usage_reporting">Laporan Penggunaan Anonim</string>
   <string name="gui_address">Alamat Listen GUI</string>
-  <string name="gui_user">Otentikasi Pengguna GUI</string>
-  <string name="gui_password">Password Otentikasi GUI</string>
-  <string name="export_config">Ekspor Konfigurasi</string>
+    <string name="export_config">Ekspor Konfigurasi</string>
   <string name="keep_wakelock_while_binary_running">Buat CPU tetap aktif saat Syncthing berjalan</string>
   <string name="keep_wakelock_while_binary_running_summary">Gunakan pengaturan ini jika anda mengalami pemutusan sambungan saat beroperasi dengan baterai. Ini akan menghasilkan peningkatan konsumsi baterai.</string>
   <string name="run_as_foreground_service">Jalankan service dengan prioritas foreground</string>
