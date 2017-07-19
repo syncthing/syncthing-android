@@ -4,9 +4,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.1'
     }
 }
 
@@ -23,10 +23,10 @@ dependencies {
     compile 'eu.chainfire:libsuperuser:1.0.0.201704021214'
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.zxing:android-integration:3.3.0'
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.google.code.gson:gson:2.8.1'
     compile 'org.mindrot:jbcrypt:0.4'
     compile 'com.google.guava:guava:20.0'
-    compile 'com.annimon:stream:1.1.7'
+    compile 'com.annimon:stream:1.1.8'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile 'com.android.support.test:rules:0.5'
