@@ -31,7 +31,7 @@ Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</stri
 Az összesített statisztika nyilvánosan elérhető a https://data.syncthing.net linken.</string>
   <string name="yes">Igen</string>
   <string name="no">Nem</string>
-    <string name="open_website">Weblap megnyitása</string>
+  <string name="open_website">Weblap megnyitása</string>
   <string name="toast_write_storage_permission_required">Az alkalmazás használatához háttértár-hozzáférési jogra van szükség</string>
   <string name="device_rejected">A %1$s eszköz csatlakozni szeretne</string>
   <string name="folder_rejected">A %1$s eszköz szeretné megosztani a következő mappát: %2$s</string>
@@ -47,7 +47,6 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nem található mappa</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d fájl</string>
   <string name="toast_no_file_manager">Nem található kompatibilis fájlkezelő</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Eszközök</string>
@@ -361,13 +360,13 @@ Biztosan törölni szeretnéd a Syncthing index adatbázisát?</string>
   <string name="appconfig_receiver_background_enabled">A Syncthing leállítása nem támogatott, ha engedélyezve van a háttérben futás</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Maximális kor</string>
-    <string name="clean_out_after">Takarítás ennyi idő után</string>
+  <string name="clean_out_after">Takarítás ennyi idő után</string>
   <string name="file_versioning">Fájl verziózás</string>
   <string name="finish">Befejezés</string>
   <string name="none">Semmi</string>
   <string name="versions_path">Verziók útvonala</string>
   <string name="command">Parancs</string>
-    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Fájlonként megtartandó korábbi verziók száma</string>
   <string name="simple_file_versioning_description">Fájlok cseréje vagy törlése esetén az időpecséttel ellátott változatok a .stversions könyvtárba kerülnek.</string>
   <string name="trashcan_versioning_description">Fájlok cseréje vagy törlése esetén a fájlok az .stversions könyvtárba kerülnek.</string>

@@ -27,7 +27,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, mappstorlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
-    <string name="open_website">Öppna hemsida</string>
+  <string name="open_website">Öppna hemsida</string>
   <string name="toast_write_storage_permission_required">Skrivlagringstillstånd krävs för denna applikation</string>
   <string name="device_rejected">Enhet %1$s vill ansluta</string>
   <string name="folder_rejected">Enhet %1$s vill dela mapp %2$s</string>
@@ -41,7 +41,6 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Inga mappar hittade</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d filer</string>
   <string name="toast_no_file_manager">Ingen kompatibel filhanterare hittad</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Enheter</string>
@@ -349,7 +348,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="file_versioning">Filversionshantering</string>
   <string name="finish">Färdig</string>
   <string name="none">Inga</string>
-    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <!--Displays the current file versioning type in the Folder activity-->
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="trashcan_versioning_info">Rensa upp efter: %1$s</string>

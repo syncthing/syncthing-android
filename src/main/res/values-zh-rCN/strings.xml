@@ -27,7 +27,7 @@
   <string name="usage_reporting_dialog_description">每天发送加密过的使用情况报告。它被用来跟踪在何种平台、文件夹大小和应用程序的版本。如果报告所需收集的数据有改变，您将会再次看到本提醒对话框。\n\n汇总统计数据公开于 https://data.syncthing.net</string>
   <string name="yes">是</string>
   <string name="no">否</string>
-    <string name="open_website">打开主页</string>
+  <string name="open_website">打开主页</string>
   <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
   <string name="device_rejected">%1$s 想要连接</string>
   <string name="folder_rejected">设备 %1$s 想要分享文件夹 %2$s</string>
@@ -43,7 +43,6 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">无文件夹</string>
   <!--Format string for folder file count-->
-  <string name="files">%2$d 中的 %1$d 个文件</string>
   <string name="toast_no_file_manager">未找到兼容的文件管理器</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">设备</string>
@@ -351,7 +350,7 @@
   <string name="appconfig_receiver_background_enabled">当启用后台运行时不支持停止 Syncthing。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最长保留时间</string>
-    <string name="clean_out_after">在该时间后清除</string>
+  <string name="clean_out_after">在该时间后清除</string>
   <string name="file_versioning">版本控制</string>
   <string name="finish">完成</string>
   <string name="none">无</string>

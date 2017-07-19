@@ -27,7 +27,7 @@
   <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
-    <string name="open_website">Открыть сайт</string>
+  <string name="open_website">Открыть сайт</string>
   <string name="toast_write_storage_permission_required">Приложению требуется право на запись</string>
   <string name="device_rejected">Устройство %1$s запрашивает подключение</string>
   <string name="folder_rejected">Устройство %1$s предлагает расшаренную папку %2$s</string>
@@ -41,7 +41,6 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Папки не найдены</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d файлов</string>
   <string name="toast_no_file_manager">Не найдено совместимого файлового менеджера</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Устройства</string>

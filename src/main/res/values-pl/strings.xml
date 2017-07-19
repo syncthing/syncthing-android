@@ -27,7 +27,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="usage_reporting_dialog_description">Codziennie wysyłany jest zaszyfrowany raport statystyk użycia. Zawarte w nim są informacje o platformie użytkownika, rozmiarach folderów i wersji aplikacji. Jeśli zestaw pobieranych danych zmieni się to okno zostanie ponownie wyświetlone .\n\nZebrane statystyki są dostępne dla każdego na https://data.syncthing.net.</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
-    <string name="open_website">Otwórz stronę internetową</string>
+  <string name="open_website">Otwórz stronę internetową</string>
   <string name="toast_write_storage_permission_required">Wymagane zezwolenie na zapisywanie do pamięci zewnętrznej</string>
   <string name="device_rejected">Urządzenie %1$s chce nawiązać połączenie</string>
   <string name="folder_rejected">Urządzenie %1$s chce udostępnić katalog %2$s</string>
@@ -41,7 +41,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nie odnaleziono katalogów</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d plików</string>
   <string name="toast_no_file_manager">Nie znaleziono kompatybilnego menadżera plików</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Urządzenia</string>

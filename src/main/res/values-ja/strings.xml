@@ -27,7 +27,7 @@
   <string name="usage_reporting_dialog_description">使用状況レポートは暗号化されて毎日送信されます。この情報はプラットフォーム、フォルダーのサイズ、アプリケーションのバージョンを調査するために使われます。送信するデータセットが変更された場合、このダイアログで再度確認が求められます。\n\n集計結果は https://data.syncthing.net で公開されています。</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
-    <string name="open_website">Web サイトを開く</string>
+  <string name="open_website">Web サイトを開く</string>
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
   <string name="device_rejected">デバイス %1$s が接続を求めています</string>
   <string name="folder_rejected">デバイス %1$s がフォルダー %2$s の共有を求めています</string>
@@ -41,7 +41,6 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">フォルダーがありません</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d ファイル</string>
   <string name="toast_no_file_manager">互換性のあるファイルマネージャーが見つかりません</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">デバイス</string>
@@ -349,7 +348,7 @@
   <string name="appconfig_receiver_background_enabled">バックグラウンドでの実行が有効になっている場合、Syncthing の停止はサポートされていません。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最大保存日数</string>
-    <string name="clean_out_after">以下の期間後に完全に削除</string>
+  <string name="clean_out_after">以下の期間後に完全に削除</string>
   <string name="file_versioning">バージョン管理</string>
   <string name="finish">完了</string>
   <string name="none">なし</string>

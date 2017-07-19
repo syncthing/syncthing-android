@@ -27,7 +27,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="usage_reporting_dialog_description">O relatório de utilização cifrado é enviado diariamente. É usado para rastrear plataformas comuns, tamanhos de pastas e versões da aplicação. Se o conjunto de dados do relatório for alterado, este diálogo será apresentado novamente.\n\nAs estatísticas agregadas estão disponíveis publicamente em </string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
-    <string name="open_website">Abrir Website</string>
+  <string name="open_website">Abrir Website</string>
   <string name="toast_write_storage_permission_required">Esta aplicação precisa de permissão de escrita no armazenamento</string>
   <string name="device_rejected">O dispositivo %1$s quer conectar-se</string>
   <string name="folder_rejected">O dispositivo %1$s quer partilhar a pasta %2$s</string>
@@ -41,7 +41,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Não foram encontradas quaisquer pastas</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d ficheiros</string>
   <string name="toast_no_file_manager">Não foi encontrado um gestor de ficheiros compatível</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivos</string>

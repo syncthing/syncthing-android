@@ -20,7 +20,6 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">未找到資料夾</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d 個檔案</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">裝置</string>
   <!--Shown if no devices exist-->

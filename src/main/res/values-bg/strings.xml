@@ -27,7 +27,7 @@
   <string name="usage_reporting_dialog_description">Криптираният доклад се изпраща ежедневно. Използва се, за отичане на ползваните платформи, размер на папки и версии на приложението. Ако събираните данни се променят, ще бъдете информиран с подобен на този диалог.\n\nОбобщената статистика ще намерите на https://data.syncthing.net.</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
-    <string name="open_website">Отвори уеб сайта</string>
+  <string name="open_website">Отвори уеб сайта</string>
   <string name="toast_write_storage_permission_required">Приложението изисква права за записване в хранилището на данни</string>
   <string name="device_rejected">Заявка за връзка от %1$s</string>
   <string name="folder_rejected">Устройство %1$s споделя папка %2$s</string>
@@ -40,7 +40,6 @@
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Не са открити папки</string>
   <!--Format string for folder file count-->
-  <string name="files">%1$d / %2$d файла</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Устройства</string>
   <!--Shown if no devices exist-->
