@@ -2,12 +2,13 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
@@ -91,6 +92,17 @@ public class WebGuiActivity extends SyncthingActivity
         }
 
         @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Uri uri = Uri.parse(url);
+            if(uri.getHost().equals("127.0.0.1")) {
+                return false;
+            } else {
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                return true;
+            }
+        }
+
+        @Override
         public void onPageFinished(WebView view, String url) {
             mWebView.setVisibility(View.VISIBLE);
             mLoadingView.setVisibility(View.GONE);
@@ -128,6 +140,15 @@ public class WebGuiActivity extends SyncthingActivity
     @Override
     public void onWebGuiAvailable() {
         mWebView.loadUrl(getService().getWebGuiUrl().toString());
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     /**
