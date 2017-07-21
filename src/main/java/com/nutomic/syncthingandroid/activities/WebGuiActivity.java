@@ -94,7 +94,7 @@ public class WebGuiActivity extends SyncthingActivity
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Uri uri = Uri.parse(url);
-            if(uri.getHost().equals("127.0.0.1")) {
+            if(uri.getHost().equals(getService().getWebGuiUrl().getHost())) {
                 return false;
             } else {
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
