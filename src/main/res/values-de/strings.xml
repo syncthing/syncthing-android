@@ -168,7 +168,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
     <item>Keine</item>
     <item>Papierkorb</item>
     <item>Einfach</item>
-    <item>Stufenweis</item>
+    <item>Stufenweise</item>
     <item>Extern</item>
   </string-array>
   <string name="device_name">Gerätename</string>
@@ -289,7 +289,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing is deaktiviert</string>
+  <string name="syncthing_disabled_title">Syncthing ist deaktiviert</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Sollen die Voreinstellungen ändern werden?</string>
   <!--Button text on the "syncthing disabled" dialog-->
@@ -346,10 +346,15 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="status_outofsync">Nicht synchronisiert</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
-  <string name="appconfig_receiver_background_enabled">Syncthing zu stoppen wird nicht unterstützt solange das Ausführen im Hintergrund aktiviert ist.</string>
+  <string name="appconfig_receiver_background_enabled">Syncthing zu stoppen wird nicht unterstützt, solange das Ausführen im Hintergrund aktiviert ist.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Höchstalter</string>
-  <string name="file_versioning">Dateiversionierung</string>
+  <string name="clean_out_after">Aufräumen nach</string> 
+  <string name="file_versioning">Dateiversionierung</string> 
+  <string name="finish">Fertig</string> 
+  <string name="none"> Keine</string> 
+  <string name="versions_path">Versionspfad</string> 
+  <string name="command">Befehl</string> 
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Anzahl der alten Versionen, die von jeder Datei behalten werden sollen.</string>
   <string name="simple_file_versioning_description">Dateien werden mit einem Datumsstempel im Namen versehen und in ein .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden.</string>
@@ -358,7 +363,19 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="maximum_age_description">Die längste Zeit, die alte Versionen vorgehalten werden (in Tagen, 0 um alte Versionen für immer zu behalten).</string>
   <string name="versions_path_description">Pfad, in dem Versionen gespeichert werden sollen (leer lassen, wenn das Standard-.stversions-Verzeichnis im geteilten Ordner verwendet werden soll).</string>
   <string name="cleanout_after_description">Dauer in Tagen für welche die Dateien aufgehoben werden sollen. 0 bedeutet für immer.</string>
+  <string name="external_versioning_description">Der erste Kommandozeilenparamter ist der Ordnerpfad und der zweite der relative Pfad im Ordner.</string> 
+  <string name="no_versioning_description">Eine Dateiversionierung auswählen um Dateiversionierung zu beginnen.</string> 
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Typ: Einfach</string> 
+  <string name="type_trashcan">Type: Papierkorb</string> 
+  <string name="type_staggered">Type: Stufenweise</string> 
+  <string name="type_external">Type: Extern</string> 
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">Aufräumen nach: %1$s</string> 
+  <string name="staggered_versioning_info">Höchstalter: %1$d \nVersionspfad: %2$s</string> 
+  <string name="external_versioning_info">Befehl: %1$s</string> 
+  <string name="simple_versioning_info">Versionen behalten: %1$s</string> 
+  <string name="show_device_id">Zeige Geräte-ID</string> 
+
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>
