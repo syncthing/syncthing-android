@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -383,6 +383,9 @@ public class FolderActivity extends SyncthingActivity
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
                     getApi().removeFolder(mFolder.id);
+                    //Remove saved data from share activity for this folder.
+                    SharedPreferences prefs = this.getSharedPreferences(ShareActivity.SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE);
+                    prefs.edit().remove(mFolder.id).apply();
                     finish();
                 })
                 .setNegativeButton(android.R.string.no, null)

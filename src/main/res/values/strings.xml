@@ -501,6 +501,9 @@ Please report any problems you encounter via Github.</string>
         <item quantity="other">Files List</item>
     </plurals>
 
+    <!-- Sub Folder title -->
+    <string name="sub_folder">Sub folder</string>
+
     <!-- SyncthingService -->
 
 

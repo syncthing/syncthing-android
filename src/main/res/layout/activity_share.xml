@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.nutomic.syncthingandroid.activities.ShareActivity"
     android:id="@+id/drawer_layout"
@@ -57,7 +58,9 @@
                 android:layout_below="@+id/folder_title"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <Button
                 android:id="@+id/share_button"
@@ -85,6 +88,31 @@
                 android:layout_toStartOf="@+id/share_button"
                 android:layout_marginRight="14dp"
                 android:layout_marginEnd="14dp" />
+
+            <TextView
+                android:text="@string/sub_folder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sub_folder_title"
+                android:layout_below="@+id/folders"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/sub_directory_Textview"
+                style="@style/Widget.Syncthing.TextView.Label.Details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_folder_black_24dp"
+                android:drawableStart="@drawable/ic_folder_black_24dp"
+                android:focusable="true"
+                android:hint="browse"
+                android:layout_below="@+id/sub_folder_title"
+                android:layout_alignStart="@id/folders"
+                android:layout_alignEnd="@id/folders"
+                android:layout_alignLeft="@id/folders"
+                android:layout_alignRight="@id/folders" />
 
         </RelativeLayout>
     </LinearLayout>

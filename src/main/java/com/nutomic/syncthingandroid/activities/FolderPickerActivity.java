@@ -11,9 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +50,9 @@ public class FolderPickerActivity extends SyncthingActivity
     private static final String EXTRA_INITIAL_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
 
+    public static final String EXTRA_ROOT_DIRECTORY =
+            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.ROT_DIRECTORY";
+
     public static final String EXTRA_RESULT_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.RESULT_DIRECTORY";
 
@@ -56,7 +61,6 @@ public class FolderPickerActivity extends SyncthingActivity
     private ListView mListView;
     private FileAdapter mFilesAdapter;
     private RootsAdapter mRootsAdapter;
-    @Inject SharedPreferences mPreferences;
 
     /**
      * Location of null means that the list of roots is displayed.
@@ -68,6 +72,17 @@ public class FolderPickerActivity extends SyncthingActivity
 
         if (!TextUtils.isEmpty(currentPath)) {
             intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, currentPath);
+        }
+
+        return intent;
+    }
+
+    //Creates intent with a specified root directory that is used to limit what directories the user can browse.
+    public static Intent createIntentWithRootDir(Context context, String currentPath, String rootDir) {
+        Intent intent = createIntent(context, currentPath);
+
+        if(!TextUtils.isEmpty(rootDir)) {
+            intent.putExtra(EXTRA_ROOT_DIRECTORY, rootDir);
         }
 
         return intent;
@@ -101,7 +116,8 @@ public class FolderPickerActivity extends SyncthingActivity
     }
 
     /**
-     * Reads available storage devices/folders from various APIs and inserts them into
+     * If a root directory is specefied it is added to {@link #mRootsAdapter} otherwise
+     * all available storage devices/folders from various APIs are inserted into
      * {@link #mRootsAdapter}.
      */
     @SuppressLint("NewApi")
@@ -111,22 +127,29 @@ public class FolderPickerActivity extends SyncthingActivity
             roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
             roots.remove(getExternalFilesDir(null));
         }
-        roots.add(Environment.getExternalStorageDirectory());
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC));
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
-        roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
-        }
 
-        // Add paths that might not be accessible to Syncthing.
-        if (mPreferences.getBoolean("advanced_folder_picker", false)) {
-            Collections.addAll(roots, new File("/storage/").listFiles());
-            roots.add(new File("/"));
-        }
+        String rootDir = getIntent().getStringExtra(EXTRA_ROOT_DIRECTORY);
+        if (getIntent().hasExtra(EXTRA_ROOT_DIRECTORY) && !TextUtils.isEmpty(rootDir)) {
+            roots.add(new File(rootDir));
+        } else {
+            roots.add(Environment.getExternalStorageDirectory());
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC));
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
+            }
 
+            // Add paths that might not be accessible to Syncthing.
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            if (sp.getBoolean("advanced_folder_picker", false)) {
+                Collections.addAll(roots, new File("/storage/").listFiles());
+                roots.add(new File("/"));
+            }
+
+        }
         // Remove any invalid directories.
         Iterator<File> it = roots.iterator();
         while (it.hasNext()) {
