@@ -17,6 +17,7 @@ import com.nutomic.syncthingandroid.R;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -42,8 +43,13 @@ public final class Languages {
 
     public Languages(Context context) {
         Map<String, String> tmpMap = new TreeMap<>();
-        for (Locale locale : Arrays.asList(LOCALES_TO_TEST)) {
-            tmpMap.put(locale.getLanguage(), locale.getDisplayLanguage(locale));
+        List<Locale> locales = Arrays.asList(LOCALES_TO_TEST);
+        // Capitalize language names
+        Collections.sort(locales, (l1, l2) -> l1.getDisplayLanguage().compareTo(l2.getDisplayLanguage()));
+        for (Locale locale : locales) {
+            String displayLanguage = locale.getDisplayLanguage(locale);
+            displayLanguage = displayLanguage.substring(0, 1).toUpperCase() + displayLanguage.substring(1);
+            tmpMap.put(locale.getLanguage(), displayLanguage);
         }
 
         // remove the current system language from the menu
