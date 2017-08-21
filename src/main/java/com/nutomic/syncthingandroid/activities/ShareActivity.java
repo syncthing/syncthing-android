@@ -66,7 +66,7 @@ public class ShareActivity extends StateDialogActivity
 
         List<Folder> folders = getApi().getFolders();
 
-        //Get the index of the previously selected folder.
+        // Get the index of the previously selected folder.
         int folderIndex = 0;
         String savedFolderId = getSharedPreferences(SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE)
                 .getString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, "");

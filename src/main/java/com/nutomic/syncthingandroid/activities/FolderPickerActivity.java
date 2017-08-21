@@ -51,7 +51,7 @@ public class FolderPickerActivity extends SyncthingActivity
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
 
     public static final String EXTRA_ROOT_DIRECTORY =
-            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.ROT_DIRECTORY";
+            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.ROOT_DIRECTORY";
 
     public static final String EXTRA_RESULT_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.RESULT_DIRECTORY";
@@ -116,7 +116,7 @@ public class FolderPickerActivity extends SyncthingActivity
     }
 
     /**
-     * If a root directory is specefied it is added to {@link #mRootsAdapter} otherwise
+     * If a root directory is specified it is added to {@link #mRootsAdapter} otherwise
      * all available storage devices/folders from various APIs are inserted into
      * {@link #mRootsAdapter}.
      */
