@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +33,8 @@ import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -67,22 +70,15 @@ public class FolderPickerActivity extends SyncthingActivity
      */
     private File mLocation;
 
-    public static Intent createIntent(Context context, String currentPath) {
+    public static Intent createIntent(Context context, String initialDirectory, @Nullable String rootDirectory) {
         Intent intent = new Intent(context, FolderPickerActivity.class);
 
-        if (!TextUtils.isEmpty(currentPath)) {
-            intent.putExtra(FolderPickerActivity.EXTRA_INITIAL_DIRECTORY, currentPath);
+        if (!TextUtils.isEmpty(initialDirectory)) {
+            intent.putExtra(EXTRA_INITIAL_DIRECTORY, initialDirectory);
         }
 
-        return intent;
-    }
-
-    //Creates intent with a specified root directory that is used to limit what directories the user can browse.
-    public static Intent createIntentWithRootDir(Context context, String currentPath, String rootDir) {
-        Intent intent = createIntent(context, currentPath);
-
-        if(!TextUtils.isEmpty(rootDir)) {
-            intent.putExtra(EXTRA_ROOT_DIRECTORY, rootDir);
+        if (!TextUtils.isEmpty(rootDirectory)) {
+            intent.putExtra(EXTRA_ROOT_DIRECTORY, rootDirectory);
         }
 
         return intent;
@@ -148,7 +144,6 @@ public class FolderPickerActivity extends SyncthingActivity
                 Collections.addAll(roots, new File("/storage/").listFiles());
                 roots.add(new File("/"));
             }
-
         }
         // Remove any invalid directories.
         Iterator<File> it = roots.iterator();
@@ -158,6 +153,7 @@ public class FolderPickerActivity extends SyncthingActivity
                 it.remove();
             }
         }
+
         mRootsAdapter.addAll(Sets.newTreeSet(roots));
     }
 

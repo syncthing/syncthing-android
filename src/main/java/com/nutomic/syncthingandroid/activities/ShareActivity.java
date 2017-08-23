@@ -53,7 +53,7 @@ public class ShareActivity extends StateDialogActivity
     private static final String TAG = "ShareActivity";
     private static final String PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER = "previously_selected_syncthing_folder";
 
-    public static final String SHARED_PREFS_SAVED_DIRECTORIES = "com.nutomic.syncthingandroid.activities.ShareActivity.saved_directories";
+    public static final String PREF_FOLDER_SAVED_SUBDIRECTORY = "saved_sub_directory_";
 
     private TextView mSubDirectoryTextView;
 
@@ -68,7 +68,7 @@ public class ShareActivity extends StateDialogActivity
 
         // Get the index of the previously selected folder.
         int folderIndex = 0;
-        String savedFolderId = getSharedPreferences(SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE)
+        String savedFolderId = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, "");
         for (Folder folder: folders) {
             if (folder.id.equals(savedFolderId)) {
@@ -151,11 +151,8 @@ public class ShareActivity extends StateDialogActivity
             if (files.size() == 1)
                 files.entrySet().iterator().next().setValue(mShareName.getText().toString());
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
-            String path = folder.path;
-            if (!TextUtils.isEmpty(mSubDirectoryTextView.getText())) {
-                path += mSubDirectoryTextView.getText();
-            }
-            new CopyFilesTask(files, folder, path).execute();
+            File directory = new File(folder.path, getSavedSubDirectory());
+            new CopyFilesTask(files, folder, directory).execute();
         });
 
         mFoldersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -170,14 +167,12 @@ public class ShareActivity extends StateDialogActivity
             }
         });
 
-        String savedSubfolder = getSavedSubDirectory();
-        if (!TextUtils.isEmpty(savedSubfolder)) {
-            mSubDirectoryTextView.setText(savedSubfolder);
-        }
+        mSubDirectoryTextView.setText(getSavedSubDirectory());
         mSubDirectoryTextView.setOnClickListener(view -> {
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
-            startActivityForResult(FolderPickerActivity.createIntentWithRootDir(getApplicationContext(),
-                    folder.path + mSubDirectoryTextView.getText().toString(), folder.path),
+            File initialDirectory = new File(folder.path, getSavedSubDirectory());
+            startActivityForResult(FolderPickerActivity.createIntent(getApplicationContext(),
+                    initialDirectory.getAbsolutePath(), folder.path),
                     FolderPickerActivity.DIRECTORY_REQUEST_CODE);
         });
         mCancelButton.setOnClickListener(view -> finish());
@@ -268,8 +263,8 @@ public class ShareActivity extends StateDialogActivity
         String savedSubDirectory = "";
 
         if (selectedFolder != null) {
-            savedSubDirectory = getSharedPreferences(SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE)
-                    .getString(selectedFolder.id, "");
+            savedSubDirectory = PreferenceManager.getDefaultSharedPreferences(this)
+                    .getString(PREF_FOLDER_SAVED_SUBDIRECTORY+selectedFolder.id, "");
         }
 
         return savedSubDirectory;
@@ -279,13 +274,13 @@ public class ShareActivity extends StateDialogActivity
         private ProgressDialog mProgress;
         private Map<Uri, String> mFiles;
         private Folder mFolder;
-        private String mPath;
+        private File mDirectory;
         private int mCopied = 0, mIgnored = 0;
 
-        CopyFilesTask(Map<Uri, String> files, Folder folder, String path) {
+        CopyFilesTask(Map<Uri, String> files, Folder folder, File directory) {
             this.mFiles = files;
             this.mFolder = folder;
-            this.mPath = path;
+            this.mDirectory = directory;
         }
 
         protected void onPreExecute() {
@@ -298,7 +293,7 @@ public class ShareActivity extends StateDialogActivity
             for (Map.Entry<Uri, String> entry : mFiles.entrySet()) {
                 InputStream inputStream = null;
                 try {
-                    File outFile = new File(mPath, entry.getValue());
+                    File outFile = new File(mDirectory, entry.getValue());
                     if (outFile.isFile()) {
                         mIgnored++;
                         continue;
@@ -347,8 +342,8 @@ public class ShareActivity extends StateDialogActivity
         super.onPause();
         if (mFoldersSpinner.getSelectedItem() != null) {
             Folder selectedFolder = (Folder) mFoldersSpinner.getSelectedItem();
-            SharedPreferences prefs = this.getSharedPreferences(SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE);
-            prefs.edit().putString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, selectedFolder.id)
+            PreferenceManager.getDefaultSharedPreferences(this).edit()
+                    .putString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, selectedFolder.id)
                     .apply();
         }
     }
@@ -371,8 +366,8 @@ public class ShareActivity extends StateDialogActivity
 
             mSubDirectoryTextView.setText(subDirectory);
 
-           getSharedPreferences(SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE)
-                   .edit().putString(selectedFolder.id, subDirectory)
+           PreferenceManager.getDefaultSharedPreferences(this)
+                   .edit().putString(PREF_FOLDER_SAVED_SUBDIRECTORY+selectedFolder.id, subDirectory)
                    .apply();
         }
     }

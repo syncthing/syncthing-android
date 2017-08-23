@@ -141,7 +141,7 @@ public class FolderActivity extends SyncthingActivity
         mEditIgnores = findViewById(R.id.edit_ignores);
 
         mPathView.setOnClickListener(view ->
-                startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
+                startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
         mEditIgnores.setOnClickListener(v -> editIgnores());
@@ -383,9 +383,6 @@ public class FolderActivity extends SyncthingActivity
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
                     getApi().removeFolder(mFolder.id);
-                    //Remove saved data from share activity for this folder.
-                    SharedPreferences prefs = this.getSharedPreferences(ShareActivity.SHARED_PREFS_SAVED_DIRECTORIES, MODE_PRIVATE);
-                    prefs.edit().remove(mFolder.id).apply();
                     finish();
                 })
                 .setNegativeButton(android.R.string.no, null)
