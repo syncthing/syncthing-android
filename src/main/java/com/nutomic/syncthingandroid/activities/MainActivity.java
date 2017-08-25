@@ -159,7 +159,7 @@ public class MainActivity extends SyncthingActivity
     }
 
     private void dismissDisabledDialog() {
-        if (mDisabledDialog != null) {
+        if (mDisabledDialog != null && mDisabledDialog.isShowing()) {
             mDisabledDialog.dismiss();
             mDisabledDialog = null;
         }
