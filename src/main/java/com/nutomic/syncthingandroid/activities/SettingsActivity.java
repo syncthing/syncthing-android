@@ -130,10 +130,11 @@ public class SettingsActivity extends SyncthingActivity {
             Preference exportConfig = findPreference("export_config");
             Preference importConfig = findPreference("import_config");
 
-            Preference stTrace      = findPreference("sttrace");
-            Preference stReset      = findPreference("streset");
+            Preference stTrace              = findPreference("sttrace");
+            Preference environmentVariables = findPreference("environment_variables");
+            Preference stReset              = findPreference("streset");
 
-            mUseRoot              = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
+            mUseRoot                     = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
             Preference useWakelock       = findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
             Preference foregroundService = findPreference("run_as_foreground_service");
             Preference useTor            = findPreference("use_tor");
@@ -151,6 +152,7 @@ public class SettingsActivity extends SyncthingActivity {
             importConfig.setOnPreferenceClickListener(this);
 
             stTrace.setOnPreferenceChangeListener(this);
+            environmentVariables.setOnPreferenceChangeListener(this);
             stReset.setOnPreferenceClickListener(this);
 
             mUseRoot.setOnPreferenceChangeListener(this);
@@ -294,6 +296,16 @@ public class SettingsActivity extends SyncthingActivity {
                         mSyncthingService.getApi().showRestartDialog(getActivity());
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
+                                .show();
+                        return false;
+                    }
+                    break;
+                case "environment_variables":
+                    if (((String) o).matches("^(\\w+=[\\w:/\\.]+)?( \\w+=[\\w:/\\.]+)*$")) {
+                        mSyncthingService.getApi().showRestartDialog(getActivity());
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.toast_invalid_environment_variables, Toast.LENGTH_SHORT)
                                 .show();
                         return false;
                     }

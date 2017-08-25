@@ -159,6 +159,12 @@
             android:singleLine="true"
             android:inputType="textNoSuggestions"/>
 
+        <EditTextPreference
+            android:key="environment_variables"
+            android:title="@string/environment_variables"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"/>
+
         <Preference
             android:key="streset"
             android:title="@string/streset_title"

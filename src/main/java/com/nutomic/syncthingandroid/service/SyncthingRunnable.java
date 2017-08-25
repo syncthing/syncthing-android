@@ -142,6 +142,7 @@ public class SyncthingRunnable implements Runnable {
             }
             if (sp.getBoolean("use_legacy_hashing", false))
                 env.put("STHASHING", "standard");
+            putCustomEnvironmentVariables(env, sp);
 
             process = pb.start();
             mSyncthing.set(process);
@@ -197,6 +198,17 @@ public class SyncthingRunnable implements Runnable {
                 wakeLock.release();
             if (process != null)
                 process.destroy();
+        }
+    }
+
+    private void putCustomEnvironmentVariables(Map<String, String> environment, SharedPreferences sp) {
+        String customEnvironment = sp.getString("environment_variables", null);
+        if (TextUtils.isEmpty(customEnvironment))
+            return;
+
+        for (String e : customEnvironment.split(" ")) {
+            String[] e2 = e.split("=");
+            environment.put(e2[0], e2[1]);
         }
     }
 
