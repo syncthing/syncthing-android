@@ -60,11 +60,18 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         if (isFirstStart) {
             mPreferences.edit().putBoolean("first_start", false).apply();
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MainActivity.EXTRA_FIRST_START, isFirstStart);
-        startActivity(intent);
-        finish();
 
+        // In case start_into_web_gui option is enabled, start both activities so that back
+        // navigation works as expected.
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        mainIntent.putExtra(MainActivity.EXTRA_FIRST_START, isFirstStart);
+        Intent webIntent = new Intent(this, WebGuiActivity.class);
+        if (mPreferences.getBoolean("start_into_web_gui", false)) {
+            startActivities(new Intent[] {mainIntent, webIntent});
+        } else {
+            startActivity(mainIntent);
+        }
+        finish();
     }
 
     private boolean haveStoragePermission() {
