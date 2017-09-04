@@ -1,11 +1,13 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.LayoutInflater;
@@ -127,6 +129,17 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
     private void showLoadingDialog() {
         if (isFinishing() || mLoadingDialog != null)
             return;
+
+        // Try to fix WindowManager$BadTokenException crashes on Android 7.
+        // https://stackoverflow.com/q/46030692/1837158
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
+            ActivityManager.getMyMemoryState(myProcess);
+            boolean isInBackground =
+                    myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+            if (isInBackground)
+                return;
+        }
 
         LayoutInflater inflater = getLayoutInflater();
         @SuppressLint("InflateParams")
