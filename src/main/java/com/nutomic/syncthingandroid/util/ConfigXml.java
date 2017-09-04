@@ -121,31 +121,17 @@ public class ConfigXml {
                 changed = true;
             }
 
-            if (applyHashers(r)) {
-                changed = true;
-            }
+            // Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
+            // given folder.
+            changed = setConfigElement(r, "hashers", "1") || changed;
         }
 
         // Enforce TLS.
-        Element gui = (Element) mConfig.getDocumentElement()
-                .getElementsByTagName("gui").item(0);
-        boolean tls = Boolean.parseBoolean(gui.getAttribute("tls"));
-        if (!tls) {
-            Log.i(TAG, "Enforce TLS");
-            gui.setAttribute("tls", Boolean.toString(true));
-            changed = true;
-        }
+        Element gui = getGuiElement();
+        changed = setConfigElement(gui, "tls", "true") || changed;
 
         // Set user to "syncthing"
-        Node user = gui.getElementsByTagName("user").item(0);
-        if (user == null) {
-            user = mConfig.createElement("user");
-            gui.appendChild(user);
-        }
-        if (!user.getTextContent().equals("syncthing")) {
-            user.setTextContent("syncthing");
-            changed = true;
-        }
+        changed = setConfigElement(gui, "user", "syncthing") || changed;
 
         // Set password to the API key
         Node password = gui.getElementsByTagName("password").item(0);
@@ -163,49 +149,32 @@ public class ConfigXml {
             changed = true;
         }
 
+        // Disable weak hash benchmark for faster startup.
+        // https://github.com/syncthing/syncthing/issues/4348
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
-        Node weakHash = options.getElementsByTagName("weakHashSelectionMethod").item(0);
-        if (!weakHash.getTextContent().equals("never")) {
-            weakHash.setTextContent("never");
-            changed = true;
-        }
+        changed = setConfigElement(options, "weakHashSelectionMethod", "never") || changed;
 
         if (changed) {
             saveChanges();
         }
     }
 
-    /**
-     * Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
-     * given folder.
-     *
-     * @return True if the XML was changed.
-     */
-    private boolean applyHashers(Element folder) {
-        NodeList childs = folder.getChildNodes();
-        for (int i = 0; i < childs.getLength(); i++) {
-            Node item = childs.item(i);
-            if (item.getNodeName().equals("hashers")) {
-                if (item.getTextContent().equals(Integer.toString(0))) {
-                    item.setTextContent(Integer.toString(1));
-                    return true;
-                }
-                return false;
-            }
+    private boolean setConfigElement(Element parent, String tagName, String textContent) {
+        Node element = parent.getElementsByTagName(tagName).item(0);
+        if (element == null) {
+            element = mConfig.createElement(tagName);
+            parent.appendChild(element);
         }
-
-        // XML tag does not exist, create it.
-        Log.i(TAG, "Set 'hashers' on folder " + folder.getAttribute("id"));
-        Element newElem = mConfig.createElement("hashers");
-        newElem.setTextContent(Integer.toString(1));
-        folder.appendChild(newElem);
-        return true;
+        if (!textContent.equals(element.getTextContent())) {
+            element.setTextContent(textContent);
+            return true;
+        }
+        return false;
     }
 
     private Element getGuiElement() {
-        return (Element) mConfig.getDocumentElement()
-                .getElementsByTagName("gui").item(0);
+        return (Element) mConfig.getDocumentElement().getElementsByTagName("gui").item(0);
     }
 
     /**

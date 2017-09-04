@@ -136,6 +136,8 @@ public class SyncthingRunnable implements Runnable {
                 env.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
             env.put("STNORESTART", "1");
             env.put("STNOUPGRADE", "1");
+            // Disable hash benchmark for faster startup.
+            // https://github.com/syncthing/syncthing/issues/4348
             env.put("STHASHING", "minio");
             if (sp.getBoolean("use_tor", false)) {
                 env.put("all_proxy", "socks5://localhost:9050");
