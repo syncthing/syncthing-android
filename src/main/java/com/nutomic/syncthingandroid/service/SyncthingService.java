@@ -21,10 +21,10 @@ import android.util.Pair;
 import android.widget.Toast;
 
 import com.android.PRNGFixes;
+import com.annimon.stream.Stream;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
-import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
@@ -113,14 +113,14 @@ public class SyncthingService extends Service implements
      * Callback for when the Syncthing web interface becomes first available after service start.
      */
     public interface OnWebGuiAvailableListener {
-        public void onWebGuiAvailable();
+        void onWebGuiAvailable();
     }
 
     private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
             new HashSet<>();
 
     public interface OnApiChangeListener {
-        public void onApiChange(State currentState);
+        void onApiChange(State currentState);
     }
 
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
@@ -431,9 +431,7 @@ public class SyncthingService extends Service implements
         stopForeground(false);
         nm.cancel(NOTIFICATION_ACTIVE);
 
-        for (FolderObserver ro : mObservers) {
-            ro.stopWatching();
-        }
+        Stream.of(mObservers).forEach(FolderObserver::stopWatching);
         mObservers.clear();
     }
 
@@ -511,9 +509,7 @@ public class SyncthingService extends Service implements
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
             mCurrentState = State.STARTING;
             onApiChange();
-            for (OnWebGuiAvailableListener listener : mOnWebGuiAvailableListeners) {
-                listener.onWebGuiAvailable();
-            }
+            Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
             mOnWebGuiAvailableListeners.clear();
         });
     }

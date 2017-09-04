@@ -3,6 +3,7 @@ package com.nutomic.syncthingandroid.util;
 import android.os.FileObserver;
 import android.util.Log;
 
+import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.model.Folder;
 
 import java.io.File;
@@ -24,7 +25,7 @@ public class FolderObserver extends FileObserver {
     private final ArrayList<FolderObserver> mChilds = new ArrayList<>();
 
     public interface OnFolderFileChangeListener {
-        public void onFolderFileChange(String folderId, String relativePath);
+        void onFolderFileChange(String folderId, String relativePath);
     }
 
     public FolderObserver(OnFolderFileChangeListener listener, Folder folder)
@@ -129,8 +130,6 @@ public class FolderObserver extends FileObserver {
     @Override
     public void stopWatching() {
         super.stopWatching();
-        for (FolderObserver ro : mChilds) {
-            ro.stopWatching();
-        }
+        Stream.of(mChilds).forEach(FolderObserver::stopWatching);
     }
 }

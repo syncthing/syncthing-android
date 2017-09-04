@@ -3,12 +3,9 @@ package com.nutomic.syncthingandroid.fragments.dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
@@ -19,18 +16,16 @@ import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
 
 public class SimpleVersioningFragment extends Fragment {
 
-    private View mView;
-
     private Bundle mArguments;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_simple_versioning, container, false);
+        View view = inflater.inflate(R.layout.fragment_simple_versioning, container, false);
         mArguments = getArguments();
         fillArguments();
         updateNumberPicker();
-        return mView;
+        return view;
     }
 
     private void fillArguments() {

@@ -4,7 +4,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ServiceTestRule;
 
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.test.MockContext;
 import com.nutomic.syncthingandroid.test.Util;
 import com.nutomic.syncthingandroid.util.FolderObserver;

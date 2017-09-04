@@ -13,10 +13,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,11 +50,6 @@ import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -160,9 +152,8 @@ public class MainActivity extends SyncthingActivity
                     }
                 })
                 .setNeutralButton(R.string.dialog_disable_battery_optimization_later, (d, i) -> mBatteryOptimizationDialogDismissed = true)
-                .setNegativeButton(R.string.dialog_disable_battery_optimization_dont_show_again, (d, i) -> {
-                    sp.edit().putBoolean("battery_optimization_dont_show_again", true).apply();
-                })
+                .setNegativeButton(R.string.dialog_disable_battery_optimization_dont_show_again, (d, i) ->
+                        sp.edit().putBoolean("battery_optimization_dont_show_again", true).apply())
                 .setOnCancelListener(d -> mBatteryOptimizationDialogDismissed = true)
                 .show();
     }
@@ -368,6 +359,7 @@ public class MainActivity extends SyncthingActivity
     }
 
     public void showQrCodeDialog(String deviceId, Bitmap qrCode) {
+        @SuppressLint("InflateParams")
         View qrCodeDialogView = this.getLayoutInflater().inflate(R.layout.dialog_qrcode, null);
         TextView deviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.device_id);
         TextView shareDeviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.actionShareId);

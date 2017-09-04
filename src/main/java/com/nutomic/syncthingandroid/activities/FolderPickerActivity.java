@@ -43,9 +43,7 @@ import java.util.Iterator;
 public class FolderPickerActivity extends SyncthingActivity
         implements AdapterView.OnItemClickListener, SyncthingService.OnApiChangeListener {
 
-    private static final String TAG = "FolderPickerActivity";
-
-    public static final String EXTRA_INITIAL_DIRECTORY =
+    private static final String EXTRA_INITIAL_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
 
     public static final String EXTRA_RESULT_DIRECTORY =

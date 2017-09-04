@@ -91,7 +91,7 @@ public class DeviceStateHolder extends BroadcastReceiver {
         }
     }
 
-    public void updateWifiSsid() {
+    private void updateWifiSsid() {
         mWifiSsid = null;
         WifiManager wifiManager =
                 (WifiManager) mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);

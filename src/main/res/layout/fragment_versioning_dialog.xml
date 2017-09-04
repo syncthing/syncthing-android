@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="?dialogPreferredPadding"
-    style="@style/Theme.Syncthing.Dialog"
-    >
+    style="@style/Theme.Syncthing.Dialog">
 
 
     <Spinner
@@ -12,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/versioning_types"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
-        />
+        style="@style/Widget.AppCompat.Spinner.Underlined" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +32,7 @@
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:text="@string/finish"
                 android:textColor="@color/primary_dark" />
 

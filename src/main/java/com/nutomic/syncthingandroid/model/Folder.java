@@ -15,7 +15,7 @@ public class Folder {
     public String label;
     public String path;
     public String type;
-    public List<Device> devices = new ArrayList<>();
+    private List<Device> devices = new ArrayList<>();
     public int rescanIntervalS;
     public final boolean ignorePerms = true;
     public boolean autoNormalize = true;

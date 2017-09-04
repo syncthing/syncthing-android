@@ -10,19 +10,14 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
-
-import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -59,15 +54,15 @@ public abstract class ApiRequest {
     private static final String HEADER_API_KEY = "X-API-Key";
 
     public interface OnSuccessListener {
-        public void onSuccess(String result);
+        void onSuccess(String result);
     }
 
     public interface OnImageSuccessListener {
-        public void onImageSuccess(Bitmap result);
+        void onImageSuccess(Bitmap result);
     }
 
     public interface OnErrorListener {
-        public void onError(VolleyError error);
+        void onError(VolleyError error);
     }
 
     private static RequestQueue sVolleyQueue;
@@ -82,7 +77,7 @@ public abstract class ApiRequest {
 
     private final Context mContext;
     private final URL mUrl;
-    protected final String mPath;
+    private final String mPath;
     private final String mHttpsCertPath;
     private final String mApiKey;
 
@@ -168,6 +163,7 @@ public abstract class ApiRequest {
         protected HttpURLConnection createConnection(URL url) throws IOException {
             HttpsURLConnection connection = (HttpsURLConnection) super.createConnection(url);
             connection.setHostnameVerifier(new HostnameVerifier() {
+                @SuppressLint("BadHostnameVerifier")
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
                     return true;

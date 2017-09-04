@@ -79,7 +79,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         }
     }
 
-    public void onReceiveConnections(Connections connections) {
+    private void onReceiveConnections(Connections connections) {
         mConnections = connections;
         notifyDataSetChanged();
     }

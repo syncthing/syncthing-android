@@ -27,7 +27,7 @@ import java.util.TreeMap;
  * Based on https://gitlab.com/fdroid/fdroidclient/blob/master/app/src/main/java/org/fdroid/fdroid/Languages.java
  */
 public final class Languages {
-    public static final String TAG = "Languages";
+    private static final String TAG = "Languages";
 
     public static final String USE_SYSTEM_DEFAULT = "";
 
@@ -48,7 +48,7 @@ public final class Languages {
         Collections.sort(locales, (l1, l2) -> l1.getDisplayLanguage().compareTo(l2.getDisplayLanguage()));
         for (Locale locale : locales) {
             String displayLanguage = locale.getDisplayLanguage(locale);
-            displayLanguage = displayLanguage.substring(0, 1).toUpperCase() + displayLanguage.substring(1);
+            displayLanguage = displayLanguage.substring(0, 1).toUpperCase(locale) + displayLanguage.substring(1);
             tmpMap.put(locale.getLanguage(), displayLanguage);
         }
 
@@ -142,11 +142,7 @@ public final class Languages {
         return keys.toArray(new String[keys.size()]);
     }
 
-    private String capitalize(final String line) {
-        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
-    }
-
-    public static final Locale[] LOCALES_TO_TEST = {
+    private static final Locale[] LOCALES_TO_TEST = {
             Locale.ENGLISH,
             Locale.FRENCH,
             Locale.GERMAN,

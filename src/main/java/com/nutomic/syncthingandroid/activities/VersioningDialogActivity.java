@@ -24,7 +24,7 @@ public class VersioningDialogActivity extends AppCompatActivity {
 
     private Fragment mCurrentFragment;
 
-    private List<String> mTypes = Arrays.asList("none", "trashcan", "simple", "staggered", "external");
+    private static final List<String> mTypes = Arrays.asList("none", "trashcan", "simple", "staggered", "external");
 
     private Bundle mArguments;
 

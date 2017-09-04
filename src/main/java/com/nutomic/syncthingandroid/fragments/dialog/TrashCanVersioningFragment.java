@@ -16,18 +16,16 @@ import com.nutomic.syncthingandroid.fragments.NumberPickerFragment;
 
 public class TrashCanVersioningFragment extends Fragment {
 
-    private View mView;
-
     private Bundle mArguments;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_trashcan_versioning, container, false);
+        View view = inflater.inflate(R.layout.fragment_trashcan_versioning, container, false);
         mArguments = getArguments();
         fillArguments();
         updateNumberPicker();
-        return mView;
+        return view;
     }
 
     private void fillArguments() {

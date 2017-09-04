@@ -104,7 +104,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
     /**
      * Returns the folder's state as a localized string.
      */
-    public static String getLocalizedState(Context c, String state, int percentage) {
+    private static String getLocalizedState(Context c, String state, int percentage) {
         switch (state) {
             case "idle":     return c.getString(R.string.state_idle);
             case "scanning": return c.getString(R.string.state_scanning);
@@ -129,7 +129,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         }
     }
 
-    public void onReceiveModel(String folderId, Model model) {
+    private void onReceiveModel(String folderId, Model model) {
         mModels.put(folderId, model);
         notifyDataSetChanged();
     }

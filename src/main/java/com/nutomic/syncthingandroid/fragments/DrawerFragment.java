@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -157,7 +155,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    public void onReceiveSystemInfo(SystemInfo info) {
+    private void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
         mDeviceId = info.myID;
@@ -179,7 +177,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     /**
      * Populates views with status received via {@link RestApi#getSystemInfo}.
      */
-    public void onReceiveSystemVersion(SystemVersion info) {
+    private void onReceiveSystemVersion(SystemVersion info) {
         if (getActivity() == null)
             return;
 

@@ -11,7 +11,6 @@ import com.nutomic.syncthingandroid.service.RestApi;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class MockRestApi extends RestApi {
 

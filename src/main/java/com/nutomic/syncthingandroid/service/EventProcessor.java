@@ -39,7 +39,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      * Minimum interval in seconds at which the events are polled from syncthing and processed.
      * This intervall will not wake up the device to save battery power.
      */
-    public static final long EVENT_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(15);
+    private static final long EVENT_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(15);
 
     /**
      * Use the MainThread for all callbacks and message handling

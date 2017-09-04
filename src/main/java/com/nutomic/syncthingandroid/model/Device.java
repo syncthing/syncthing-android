@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.model;
 
 import android.text.TextUtils;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class Device {

@@ -16,8 +16,6 @@ import java.util.Collections;
  */
 public class PollWebGuiAvailableTask extends ApiRequest {
 
-    private static final String TAG = "PollWebGuiAvailableTask";
-
     /**
      * Interval in ms, at which connections to the web gui are performed on first start
      * to find out if it's online.

@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.util;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;

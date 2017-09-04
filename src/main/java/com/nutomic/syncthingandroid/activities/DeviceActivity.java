@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -59,7 +58,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private static final String IS_SHOWING_COMPRESSION_DIALOG = "COMPRESSION_FOLDER_DIALOG_STATE";
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
 
-    public static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
+    private static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
 
     private Device mDevice;
 
@@ -252,7 +251,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
     }
 
-    public void onServiceConnected() {
+    private void onServiceConnected() {
         getService().registerOnApiChangeListener(this::onApiChange);
     }
 
@@ -262,7 +261,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
      * NOTE: This is only called once on startup, should be called more often to properly display
      * version/address changes.
      */
-    public void onReceiveConnections(Connections connections) {
+    private void onReceiveConnections(Connections connections) {
         boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
         if (viewsExist && connections.connections.containsKey(mDevice.deviceID)) {
             mCurrentAddressView.setVisibility(VISIBLE);
@@ -272,7 +271,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
     }
 
-    public void onApiChange(SyncthingService.State currentState) {
+    private void onApiChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
             finish();
             return;

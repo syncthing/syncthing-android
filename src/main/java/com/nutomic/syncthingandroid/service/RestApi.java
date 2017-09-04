@@ -65,11 +65,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     }
 
     public interface OnResultListener1<T> {
-        public void onResult(T t);
+        void onResult(T t);
     }
 
     public interface OnResultListener2<T, R> {
-        public void onResult(T t, R r);
+        void onResult(T t, R r);
     }
 
     private final Context mContext;
@@ -120,7 +120,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private static final int TOTAL_STARTUP_CALLS = 3;
 
     public interface OnApiAvailableListener {
-        public void onApiAvailable();
+        void onApiAvailable();
     }
 
     private final OnApiAvailableListener mOnApiAvailableListener;
@@ -316,7 +316,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      *
      * This method uses Gson and only works with objects that can be converted with Gson.
      */
-    public <T> T deepCopy(T object, Type type) {
+    private <T> T deepCopy(T object, Type type) {
         Gson gson = new Gson();
         return gson.fromJson(gson.toJson(object, type), type);
     }
@@ -325,9 +325,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Requests and parses information about current system status and resource usage.
      */
     public void getSystemInfo(OnResultListener1<SystemInfo> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_SYSTEM, mHttpsCertPath, mApiKey, null, result -> {
-            listener.onResult(new Gson().fromJson(result, SystemInfo.class));
-        });
+        new GetRequest(mContext, mUrl, GetRequest.URI_SYSTEM, mHttpsCertPath, mApiKey, null, result ->
+                listener.onResult(new Gson().fromJson(result, SystemInfo.class)));
     }
 
     public boolean isConfigLoaded() {

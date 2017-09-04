@@ -210,8 +210,8 @@ public class ShareActivity extends SyncthingActivity
 
     private class CopyFilesTask extends AsyncTask<Void, Void, Boolean> {
         private ProgressDialog mProgress;
-        private Map<Uri, String> mFiles;
-        private Folder mFolder;
+        private final Map<Uri, String> mFiles;
+        private final Folder mFolder;
         private int mCopied = 0, mIgnored = 0;
 
         CopyFilesTask(Map<Uri, String> files, Folder folder) {
