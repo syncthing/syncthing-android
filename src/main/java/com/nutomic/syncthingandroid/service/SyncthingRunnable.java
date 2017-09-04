@@ -136,6 +136,7 @@ public class SyncthingRunnable implements Runnable {
                 env.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
             env.put("STNORESTART", "1");
             env.put("STNOUPGRADE", "1");
+            env.put("STHASHING", "minio");
             if (sp.getBoolean("use_tor", false)) {
                 env.put("all_proxy", "socks5://localhost:9050");
                 env.put("ALL_PROXY_NO_FALLBACK", "1");

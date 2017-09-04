@@ -103,8 +103,8 @@ public class ConfigXml {
     /**
      * Updates the config file.
      *
-     * Sets ignorePerms flag to true on every folder, force enables TLS, and sets the
-     * username/password.
+     * Sets ignorePerms flag to true on every folder, force enables TLS, sets the
+     * username/password, and disables weak hash checking.
      */
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
@@ -160,6 +160,14 @@ public class ConfigXml {
         if (!passwordOk) {
             Log.i(TAG, "Updating password");
             password.setTextContent(BCrypt.hashpw(apikey, BCrypt.gensalt(4)));
+            changed = true;
+        }
+
+        Element options = (Element) mConfig.getDocumentElement()
+                .getElementsByTagName("options").item(0);
+        Node weakHash = options.getElementsByTagName("weakHashSelectionMethod").item(0);
+        if (!weakHash.getTextContent().equals("never")) {
+            weakHash.setTextContent("never");
             changed = true;
         }
 
