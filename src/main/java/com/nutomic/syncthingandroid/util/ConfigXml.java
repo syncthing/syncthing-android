@@ -157,14 +157,8 @@ public class ConfigXml {
         }
         String apikey = getApiKey();
         boolean passwordOk;
-        // Version 0.9.12 used the default work factor of 10. If this is set, regenerate the
-        // password with the minimum factor of 4, to speed up loading.
         String pw = password.getTextContent();
-        if (TextUtils.isEmpty(pw) || pw.substring(4, 6).equals("10")) {
-            passwordOk = false;
-        } else {
-            passwordOk = BCrypt.checkpw(apikey, pw);
-        }
+        passwordOk = !TextUtils.isEmpty(pw) && BCrypt.checkpw(apikey, pw);
         if (!passwordOk) {
             Log.i(TAG, "Updating password");
             password.setTextContent(BCrypt.hashpw(apikey, BCrypt.gensalt(4)));
