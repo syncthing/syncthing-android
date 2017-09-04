@@ -20,7 +20,7 @@ public class PollWebGuiAvailableTask extends ApiRequest {
      * Interval in ms, at which connections to the web gui are performed on first start
      * to find out if it's online.
      */
-    private static final long WEB_GUI_POLL_INTERVAL = 100;
+    private static final long WEB_GUI_POLL_INTERVAL = 10;
 
     private final OnSuccessListener mListener;
     private final Handler mHandler = new Handler();
