@@ -337,6 +337,7 @@ public class SyncthingService extends Service implements
         protected Pair<URL, String> doInBackground(Void... voids) {
             try {
                 mConfig = new ConfigXml(SyncthingService.this);
+                mConfig.updateIfNeeded();
                 return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
             } catch (ConfigXml.OpenConfigException e) {
                 return null;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
@@ -75,7 +76,6 @@ public class ConfigXml {
             changeLocalDeviceName();
             changeDefaultFolder();
         }
-        updateIfNeeded();
     }
 
     private void generateKeysConfig(Context context) {
@@ -104,11 +104,12 @@ public class ConfigXml {
 
     /**
      * Updates the config file.
-     * <p/>
-     * Sets ignorePerms flag to true on every folder.
+     *
+     * Sets ignorePerms flag to true on every folder, force enables TLS, and sets the
+     * username/password.
      */
     @SuppressWarnings("SdCardPath")
-    private void updateIfNeeded() {
+    public void updateIfNeeded() {
         Log.i(TAG, "Checking for needed config updates");
         boolean changed = false;
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
@@ -156,14 +157,17 @@ public class ConfigXml {
         }
         String apikey = getApiKey();
         boolean passwordOk;
-        try {
-            passwordOk = BCrypt.checkpw(apikey, password.getTextContent());
-        } catch (RuntimeException e) {
-            Log.w(TAG, e);
+        // Version 0.9.12 used the default work factor of 10. If this is set, regenerate the
+        // password with the minimum factor of 4, to speed up loading.
+        String pw = password.getTextContent();
+        if (TextUtils.isEmpty(pw) || pw.substring(4, 6).equals("10")) {
             passwordOk = false;
+        } else {
+            passwordOk = BCrypt.checkpw(apikey, pw);
         }
         if (!passwordOk) {
-            password.setTextContent(BCrypt.hashpw(apikey, BCrypt.gensalt()));
+            Log.i(TAG, "Updating password");
+            password.setTextContent(BCrypt.hashpw(apikey, BCrypt.gensalt(4)));
             changed = true;
         }
 
