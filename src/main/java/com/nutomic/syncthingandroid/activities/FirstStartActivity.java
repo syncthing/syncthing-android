@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.service.SyncthingService;
 
 public class FirstStartActivity extends Activity implements Button.OnClickListener {
 
@@ -28,20 +29,22 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_start);
-
+        startService(new Intent(this, SyncthingService.class));
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Button cont = (Button) findViewById(R.id.cont);
-        cont.setOnClickListener(this);
 
         if (!isFirstStart()) {
             if (haveStoragePermission()) {
                 startApp();
+                return;
             }
             else {
                 requestStoragePermission();
             }
         }
+
+        setContentView(R.layout.activity_first_start);
+        Button cont = (Button) findViewById(R.id.cont);
+        cont.setOnClickListener(this);
     }
 
     private boolean isFirstStart() {

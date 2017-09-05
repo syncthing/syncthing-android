@@ -41,12 +41,6 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        startService(new Intent(this, SyncthingService.class));
-    }
-
-    @Override
     protected void onPause() {
         unbindService(this);
         super.onPause();
