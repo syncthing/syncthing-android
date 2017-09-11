@@ -41,7 +41,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".activities.WebGuiActivity"
