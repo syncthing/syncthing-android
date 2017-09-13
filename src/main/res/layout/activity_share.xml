@@ -104,15 +104,25 @@
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="@string/no_sub_folder_is_selected"
                 android:drawableLeft="@drawable/ic_folder_black_24dp"
                 android:drawableStart="@drawable/ic_folder_black_24dp"
-                android:focusable="true"
-                android:hint="browse"
                 android:layout_below="@+id/sub_folder_title"
                 android:layout_alignStart="@id/folders"
-                android:layout_alignEnd="@id/folders"
                 android:layout_alignLeft="@id/folders"
-                android:layout_alignRight="@id/folders" />
+                android:layout_toLeftOf="@+id/browse_button"
+                android:layout_toStartOf="@+id/browse_button" />
+
+            <Button
+                android:id="@+id/browse_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/browse"
+                android:layout_alignBottom="@+id/sub_directory_Textview"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/sub_directory_Textview" />
 
         </RelativeLayout>
     </LinearLayout>

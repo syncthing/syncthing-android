@@ -108,6 +108,7 @@ public class ShareActivity extends StateDialogActivity
 
         Button mShareButton = (Button) findViewById(R.id.share_button);
         Button mCancelButton = (Button) findViewById(R.id.cancel_button);
+        Button browseButton = (Button) findViewById(R.id.browse_button);
         EditText mShareName = (EditText) findViewById(R.id.name);
         TextView mShareTitle = (TextView) findViewById(R.id.namesTitle);
 
@@ -167,15 +168,16 @@ public class ShareActivity extends StateDialogActivity
             }
         });
 
-        mSubDirectoryTextView.setText(getSavedSubDirectory());
-        mSubDirectoryTextView.setOnClickListener(view -> {
+        browseButton.setOnClickListener(view -> {
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
             File initialDirectory = new File(folder.path, getSavedSubDirectory());
             startActivityForResult(FolderPickerActivity.createIntent(getApplicationContext(),
                     initialDirectory.getAbsolutePath(), folder.path),
                     FolderPickerActivity.DIRECTORY_REQUEST_CODE);
         });
+
         mCancelButton.setOnClickListener(view -> finish());
+        mSubDirectoryTextView.setText(getSavedSubDirectory());
     }
 
     /**
@@ -258,6 +260,9 @@ public class ShareActivity extends StateDialogActivity
         return displayName;
     }
 
+    /**
+     * Get the previously selected sub directory for the currently selected Syncthing folder.
+     */
     private String getSavedSubDirectory() {
         Folder selectedFolder = (Folder) mFoldersSpinner.getSelectedItem();
         String savedSubDirectory = "";
@@ -360,9 +365,10 @@ public class ShareActivity extends StateDialogActivity
             if (!folderDirectory.endsWith("/")) {
                 folderDirectory += "/";
             }
-            String subDirectory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
+
+            String subDirectory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY) + "/";
             //Remove the parent directory from the string, so it is only the Sub directory that is displayed to the user.
-            subDirectory = (subDirectory).replace(folderDirectory.substring(0, folderDirectory.length()-1), "");
+            subDirectory = (subDirectory).replace(folderDirectory.substring(0, folderDirectory.length()), "");
 
             mSubDirectoryTextView.setText(subDirectory);
 
