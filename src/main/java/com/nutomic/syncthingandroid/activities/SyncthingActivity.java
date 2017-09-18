@@ -1,15 +1,13 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +23,8 @@ import java.util.LinkedList;
  * Connects to {@link SyncthingService} and provides access to it.
  */
 public abstract class SyncthingActivity extends ToolbarBindingActivity implements ServiceConnection {
+
+    private static final String TAG = "SyncthingActivity";
 
     public static final String EXTRA_FIRST_START = "com.nutomic.syncthing-android.SyncthingActivity.FIRST_START";
 
@@ -124,17 +124,6 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
         if (isFinishing() || mLoadingDialog != null)
             return;
 
-        // Try to fix WindowManager$BadTokenException crashes on Android 7.
-        // https://stackoverflow.com/q/46030692/1837158
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();
-            ActivityManager.getMyMemoryState(myProcess);
-            boolean isInBackground =
-                    myProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
-            if (isInBackground)
-                return;
-        }
-
         LayoutInflater inflater = getLayoutInflater();
         @SuppressLint("InflateParams")
         View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
@@ -143,10 +132,15 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);
 
-        mLoadingDialog = new AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setView(dialogLayout)
-                .show();
+        try {
+            mLoadingDialog = new AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setView(dialogLayout)
+                    .show();
+        } catch (RuntimeException e) {
+            // Catch and do nothing, workaround for https://stackoverflow.com/q/46030692/1837158
+            Log.w(TAG, e);
+        }
     }
 
     private void dismissLoadingDialog() {
