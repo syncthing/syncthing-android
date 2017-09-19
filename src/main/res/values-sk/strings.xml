@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Otvorená, dôveryhodná a decentralizovaná aplikácia pre synchronizáciu súborov.</string>
   <!--FirstStartActivity-->
@@ -143,7 +143,7 @@
   <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
   <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
   <string name="gui_address">Adresa pre GUI</string>
-    <string name="export_config">Exportovať Konfiguráciu</string>
+  <string name="export_config">Exportovať Konfiguráciu</string>
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>

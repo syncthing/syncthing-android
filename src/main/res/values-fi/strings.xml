@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Avoin, luotettava ja hajautettu tiedostojensynkronointisovellus.</string>
   <!--FirstStartActivity-->
@@ -41,6 +41,10 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Kansioita ei löydy</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d tiedosto</item>
+    <item quantity="other">%1$d / %2$d tiedostoa</item>
+  </plurals>
   <string name="toast_no_file_manager">Yhteensopivaa tiedostonhallintaa ei löydy</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Laitteet</string>
@@ -77,6 +81,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <!--Setting title-->
   <string name="directory">Hakemisto</string>
   <!--Setting title-->
+  <string name="folder_master">Vain lähetys</string>
   <!--Setting title-->
   <string name="devices">Laitteet</string>
   <!--Setting title-->
@@ -158,6 +163,9 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="use_root_summary">Tämä on epävakaa ominaisuus joka voi aiheuttaa ongelmia Synthingin ja laitteesi kanssa. Jos sinulle tulee vastaan ongelmia, voit joutua asentamaan Syncthingin uudelleen.</string>
   <string name="notification_type_title">Ilmoitus</string>
   <string name="notification_type_summary">Valitse ilmoituksen tyyppi</string>
+  <string name="preference_language_title">Kieli</string>
+  <string name="preference_language_summary">Muuta sovelluksen kieli</string>
+  <string name="pref_language_default">Oletuskieli</string>
   <string name="device_name">Laitteen nimi</string>
   <string name="listen_address"> Synkronointiprotokollan kuunteluosoite</string>
   <string name="max_recv_kbps">Sisääntulevan liikenteen rajoitus (KiB/s)</string>
@@ -169,7 +177,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="enable_relaying">Aktivoi yhteyden välitys</string>
   <string name="usage_reporting">Anonyymi käytönseuranta</string>
   <string name="gui_address">Käyttöliittymän kuunteluosoite</string>
-    <string name="export_config">Vie asetukset</string>
+  <string name="export_config">Vie asetukset</string>
   <string name="keep_wakelock_while_binary_running">Pidä suoritin hereillä kun Syncthing on käynnissä</string>
   <string name="keep_wakelock_while_binary_running_summary">Käytä tätä asetusta, jos yhteydet katkeilevat odottamattomasti laitteen käydessä akkuvirralla. Tämä lisää virran kulutusta.</string>
   <string name="run_as_foreground_service">Käynnistä palvelu etualan tärkeydellä</string>
@@ -177,6 +185,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="use_tor_title">Käytä Tor-verkkoa</string>
   <string name="use_tor_summary">Pakota kaikki liikenne Tor-verkkoon yksityisyyden parantamiseksi. Vaatii Orbot-sovelluksen.</string>
   <string name="use_legacy_hashing_title">Käytä vanhaa tarkistussumman laskentaa</string>
+  <string name="use_legacy_hashing_summary">Pakota Syncthing käyttämään vanhaa tarkistussumman laskentapakettia yhteensopivuuden parantamiseksi</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Haluatko varmasti viedä asetuksesi? Vanhat tiedostot ylikirjoitetaan.\n\nVAROITUS! Muut sovellukset saattavat voida lukea yksityisen avaimen varmuuskopiosta ja käyttää sitä synkronoitujan tiedostojen lataamiseen tai muokkaamiseen.</string>
   <!--Dialog shown before config import-->
@@ -191,7 +200,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Vianhakutoiminnot</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Vain 0-9, a-z ja \',\' ovat sallittuja STTRACE valintoja</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Vain 0-9, a-z ja \',\' ovat sallittuja STTRACE valintoja</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nollaa tietokanta</string>
   <!--Syncthing was reset-->
@@ -281,6 +290,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-kuvat</string>
+  <string name="notification_crash_title">Syncthing kaatui</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Uudelleenkäynnistys tarvitaan</string>
@@ -320,8 +330,19 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Syncthingin pysäyttäminen ei ole käytettävissä kun käynti taustalla on valittuna.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">Maksimi ikä</string>
+  <string name="file_versioning">Tiedostoversiointi</string>
+  <string name="finish">Valmis</string>
+  <string name="none">Ei mitään</string>
+  <string name="command">Komento</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="no_versioning_description">Ota versiointi käyttöön valitsemalla versioinnin tyyppi.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Tyyppi: Yksinkertainen</string>
+  <string name="type_staggered">Tyyppi: Porrastettu</string>
+  <string name="type_external">Tyyppi: Ulkoinen</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="external_versioning_info">Komento: %1$s</string>
+  <string name="show_device_id">Näytä laitteen tunnus</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

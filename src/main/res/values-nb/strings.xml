@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">En åpen, pålitelig og desentralisert filsynkroniseringsapplikasjon.</string>
   <!--FirstStartActivity-->
@@ -157,7 +157,7 @@
   <string name="enable_relaying">Aktiver relésending</string>
   <string name="usage_reporting">Anonym bruksrapportering</string>
   <string name="gui_address">GUI Lytteadresser</string>
-    <string name="export_config">Eksporter innstillinger</string>
+  <string name="export_config">Eksporter innstillinger</string>
   <string name="keep_wakelock_while_binary_running">Hold prosessoren våken mens Syncthing kjører</string>
   <string name="keep_wakelock_while_binary_running_summary">Bruk denne innstillingen dersom du opplever uventede frakoblinger mens enheten går på batteri. Dette vil medføre økt batteriforbruk.</string>
   <string name="run_as_foreground_service">Kjør tjenesten med forgrunnsprioritet</string>

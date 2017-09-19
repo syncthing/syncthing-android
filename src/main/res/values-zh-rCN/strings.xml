@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">开放、分布式且值得信赖的文件同步应用。</string>
   <!--FirstStartActivity-->
@@ -38,11 +38,15 @@
   <string name="dialog_disable_battery_optimization_later">稍后重启</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">不再显示</string>
   <string name="dialog_disable_battery_optimization_turn_off">为 Syncthing 关闭</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">您的设备不支持禁用电池优化</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">文件夹</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">无文件夹</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="other">%1$d / %2$d 个文件</item>
+  </plurals>
   <string name="toast_no_file_manager">未找到兼容的文件管理器</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">设备</string>
@@ -166,6 +170,11 @@
     <item>低优先级</item>
     <item>隐藏</item>
   </string-array>
+  <string name="preference_language_title">语言</string>
+  <string name="preference_language_summary">更改应用语言</string>
+  <string name="start_into_web_gui_title">启动直接进入 Web GUI</string>
+  <string name="start_into_web_gui_summary">启动应用时，打开网页图形用户界面而不是打开主屏幕</string>
+  <string name="pref_language_default">默认语言</string>
   <string-array name="versioning_types">
     <item>无</item>
     <item>垃圾桶</item>
@@ -184,7 +193,7 @@
   <string name="enable_relaying">启用中继</string>
   <string name="usage_reporting">匿名使用报告</string>
   <string name="gui_address">管理页监听地址</string>
-    <string name="export_config">导出设置</string>
+  <string name="export_config">导出设置</string>
   <string name="keep_wakelock_while_binary_running">当 Syncthing 正在运行时保持 CPU 唤醒</string>
   <string name="keep_wakelock_while_binary_running_summary">使用此设置如果您在电池上运行时遇到意外的断开连接。这将会导致电量消耗的增加。</string>
   <string name="run_as_foreground_service">以前台优先级运行服务</string>
@@ -206,8 +215,10 @@
   <string name="config_import_failed">设置导入失败，请确保文件位于 %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">调试选项</string>
+  <string name="environment_variables">环境变量</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE 选项仅允许 0-9、a-z 与半角逗号“,”</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">STTRACE 选项仅允许 0-9、a-z 与半角逗号“,”</string>
+  <string name="toast_invalid_environment_variables">该值不是有效的环境变量字符串</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">重置数据库</string>
   <!--Syncthing was reset-->
@@ -376,5 +387,7 @@
   <string name="staggered_versioning_info">最长保留时间：%1$d \n历史版本路径：%2$s</string>
   <string name="external_versioning_info">命令：%1$s</string>
   <string name="simple_versioning_info">保留版本数量：%1$s</string>
+  <string name="show_device_id">显示设备 ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">无法获取设备 ID。</string>
 </resources>

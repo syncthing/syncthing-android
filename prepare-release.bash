@@ -37,7 +37,9 @@ Updating Translations
 -----------------------------
 "
 tx push -s
-tx pull -a
+# Force push/pull to make sure this is executed. Apparently tx only compares timestamps, not file
+# contents. So if a file was `touch`ed, it won't be updated by default.
+tx pull -a -f
 ./gradlew deleteUnsupportedPlayTranslations
 git add -A "src/main/play/"
 git add -A "src/main/res/values-*/strings.xml"

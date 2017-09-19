@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Une application ouverte, fiable et décentralisée pour synchroniser des fichiers.</string>
   <!--FirstStartActivity-->
@@ -7,7 +7,7 @@
   <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
   <!--Text for dialog displayed on first start-->
   <string name="welcome_text">Syncthing est une application, à code source ouvert, de synchronisation de fichiers.\n\
-Pour partager des données avec d\'autres appareils, vous devez ajouter leur identifiant unique à la liste des appareils. Ensuite, vous pouvez sélectionner quels dossiers partager avec quels appareils..\n\
+Pour partager des données avec d\'autres appareils, vous devez ajouter leur identifiant unique à la liste des appareils. Ensuite, vous pouvez sélectionner quels répertoires partager avec quels appareils..\n\
 S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</string>
   <string name="cont">Continuer</string>
   <!--MainActivity-->
@@ -36,11 +36,16 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="dialog_disable_battery_optimization_later">Plus tard</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Ne pas afficher la prochaine fois</string>
   <string name="dialog_disable_battery_optimization_turn_off">Mettre à l\'arrêt pour Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Votre appareil ne prend pas en charge la désactivation des optimisations de la batterie.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Partages</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Aucun partage trouvé</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d Fichier</item>
+    <item quantity="other">%1$d / %2$d Fichiers</item>
+  </plurals>
   <string name="toast_no_file_manager">Aucun gestionnaire de fichiers compatible n\'a été trouvé</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Appareils</string>
@@ -73,7 +78,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Setting title-->
   <string name="folder_id">ID du partage</string>
   <!--Setting title-->
-  <string name="folder_label">Étiquette du répertoire</string>
+  <string name="folder_label">Nom local du partage</string>
   <!--Setting title-->
   <string name="directory">Répertoire</string>
   <!--Setting title-->
@@ -164,6 +169,11 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
     <item>Discrète</item>
     <item>Aucune</item>
   </string-array>
+  <string name="preference_language_title">Langue</string>
+  <string name="preference_language_summary">Changer la langue de l\'application</string>
+  <string name="start_into_web_gui_title">Démarrer directement dans l\'interface WEB</string>
+  <string name="start_into_web_gui_summary">Au lancement de l\'application, ouvre l\'interface WEB au lieu de l\'écran d\'accueil.</string>
+  <string name="pref_language_default">Langue par défaut</string>
   <string-array name="versioning_types">
     <item>Aucun</item>
     <item>Corbeille</item>
@@ -203,9 +213,11 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Echec de l\'import de la configuration, assurez-vous que les fichiers sont dans %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Options de débuggage</string>
+  <string name="sttrace_title">Options de débogage</string>
+  <string name="environment_variables">Variables d\'environnement</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Seulement 0-9, a-z et \',\' sont autorisés dans les options STTRACE</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Seulement 0-9, a-z et \',\' sont autorisés dans les options STTRACE</string>
+  <string name="toast_invalid_environment_variables">La valeur n\'est pas une chaîne de variable d\'environnement valide</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Remise à zéro de la base de données</string>
   <!--Syncthing was reset-->
@@ -362,9 +374,9 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="trashcan_versioning_description">Les fichiers sont déplacés vers le répertoire .stversions lorsqu\'ils sont remplacés ou supprimés par Syncthing.</string>
   <string name="staggered_versioning_description">Les fichiers sont transférés, avec ajout de la date de version, dans un répertoire .stversions lorsqu\'ils sont remplacés ou supprimés par Syncthing. Les versions sont automatiquement supprimées si elles sont antérieures à l\'ancienneté maximum ou dépassent le nombre de fichiers autorisés dans un intervalle. \ N \ nLes intervalles suivants sont utilisés: pour la première heure, une version est conservée toutes les 30 secondes, pour le premier jour, une version est conservé toutes les heures, pendant les 30 premiers jours, une version est conservée tous les jours. Pour l\'ancienneté maximum, une version est conservée chaque semaine.</string>
   <string name="maximum_age_description">Durée maximum de conservation des versions (en jour, mettre 0 pour conserver sans limite)</string>
-  <string name="versions_path_description">Emplacement où les versions seront stockées (laisser vide pour utiliser le chemin par défaut dans le dossier partagé).</string>
+  <string name="versions_path_description">Emplacement où les versions seront stockées (laisser vide pour utiliser le répertoire par défaut .stversions dans le partage).</string>
   <string name="cleanout_after_description">Nombre de jours de conservation des fichiers dans la corbeille. Zéro signifie illimité.</string>
-  <string name="external_versioning_description">Le premier paramètre de ligne de commande est le chemin du dossier et le second paramètre est le chemin relatif dans le dossier.</string>
+  <string name="external_versioning_description">Le premier paramètre de ligne de commande est le chemin du répertoire partagé, et le second est le chemin relatif dans le répertoire.</string>
   <string name="no_versioning_description">Choisir un type d\'archivage pour activer l\'archivage.</string>
   <!--Displays the current file versioning type in the Folder activity-->
   <string name="type_simple">Type: Simple</string>
@@ -376,5 +388,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="staggered_versioning_info">Age maximum: %1$d \nEmplacement des versions: %2$s</string>
   <string name="external_versioning_info">Commande: %1$s</string>
   <string name="simple_versioning_info">Versions à conserver: %1$s</string>
+  <string name="show_device_id">Afficher l\'ID de l\'appareil</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Impossible d\'accéder à l\'ID de l\'appareil.</string>
 </resources>

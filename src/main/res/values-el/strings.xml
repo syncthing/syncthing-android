@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Μια ανοιχτή, αξιόπιστη και αποκεντρωμένη εφαρμογή συγχρονισμού αρχείων.</string>
   <!--FirstStartActivity-->
@@ -36,11 +36,16 @@
   <string name="dialog_disable_battery_optimization_later">Αργότερα</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Να μην εμφανιστεί ξανά</string>
   <string name="dialog_disable_battery_optimization_turn_off">Να απενεργοποιηθεί για το Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Η συσκευή σας δεν επιτρέπει την απενεργοποίηση των βελτιστοποιήσεων μπαταρίας</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Φάκελοι</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Δε βρέθηκαν φάκελοι</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d αρχείο</item>
+    <item quantity="other">%1$d / %2$d αρχεία</item>
+  </plurals>
   <string name="toast_no_file_manager">Δεν βρέθηκε συμβατός διαχειριστής αρχείων</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Συσκευές</string>
@@ -164,6 +169,11 @@
     <item>Χαμηλής προτεραιότητας</item>
     <item>Καμία</item>
   </string-array>
+  <string name="preference_language_title">Γλώσσα</string>
+  <string name="preference_language_summary">Αλλαγή γλώσσας της εφαρμογής</string>
+  <string name="start_into_web_gui_title">Άνοιγμα απευθείας στο web GUI</string>
+  <string name="start_into_web_gui_summary">Κατά την εκκίνηση της εφαρμογής, να ανοίγει το web GUI αντί της κεντρικής οθόνης</string>
+  <string name="pref_language_default">Προεπιλεγμένη γλώσσα</string>
   <string-array name="versioning_types">
     <item>Καμία</item>
     <item>Κάδος ανακύκλωσης</item>
@@ -182,7 +192,7 @@
   <string name="enable_relaying">Ενεργοποίηση αναμετάδοσης</string>
   <string name="usage_reporting">Ανώνυμη αναφορά δεδομένων χρήσης</string>
   <string name="gui_address">Διευθύνσεις ακρόασης του GUI</string>
-    <string name="export_config">Εξαγωγή ρυθμίσεων</string>
+  <string name="export_config">Εξαγωγή ρυθμίσεων</string>
   <string name="keep_wakelock_while_binary_running">Διατήρηση της CPU σε ενεργό κατάσταση όσο εκτελείται το Syncthing</string>
   <string name="keep_wakelock_while_binary_running_summary">Χρησιμοποιήστε αυτή την επιλογή αν παρατηρείτε απρόσμενες αποσυνδέσεις κατά τη λειτουργία με μπαταρία. Θα έχει ως συνέπεια την υψηλότερη κατανάλωση ενέργειας.</string>
   <string name="run_as_foreground_service">Εκτέλεση της υπηρεσίας με προτεραιότητα προσκηνίου.</string>
@@ -204,8 +214,10 @@
   <string name="config_import_failed">Η εισαγωγή ρυθμίσεων απέτυχε, σιγουρευτείτε ότι τα αρχεία βρίσκονται στο %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Επιλογές αποσφαλμάτωσης</string>
+  <string name="environment_variables">Μεταβλητές περιβάλλοντος</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Οι αποδεκτοί χαρακτήρες στις επιλογές STTRACE είναι τα 0-9, a-z και το \',\'.</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Οι αποδεκτοί χαρακτήρες στις επιλογές STTRACE είναι τα 0-9, a-z και το \',\'.</string>
+  <string name="toast_invalid_environment_variables">Η τιμή δεν είναι έγκυρη συμβολοσειρά μεταβλητής περιβάλλοντος</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Επαναφορά βάσης δεδομένων</string>
   <!--Syncthing was reset-->
@@ -376,5 +388,7 @@
   <string name="staggered_versioning_info">Μέγιστη ηλικία: %1$d\nΦάκελος τήρησης εκδόσεων: %2$s</string>
   <string name="external_versioning_info">Εντολή: %1$s</string>
   <string name="simple_versioning_info">Εκδόσεις προς τήρηση: %1$s</string>
+  <string name="show_device_id">Εμφάνιση ID συσκευής</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Δεν ήταν δυνατή η ανάγνωση του ID της συσκευής.</string>
 </resources>
