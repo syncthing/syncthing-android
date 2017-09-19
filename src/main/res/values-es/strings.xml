@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Una aplicación de sincronización de ficheros abierta, de confianza y descentralizada.</string>
   <!--FirstStartActivity-->
@@ -162,6 +162,9 @@
     <item>Baja prioridad</item>
     <item>Ninguna</item>
   </string-array>
+  <string name="preference_language_title">Idioma</string>
+  <string name="preference_language_summary">Cambiar el idioma de la aplicación</string>
+  <string name="pref_language_default">Idioma predeterminado</string>
   <string name="device_name">Nombre del dispositivo</string>
   <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
   <string name="max_recv_kbps">Límite de tráfico de entrada (KiB/s)</string>
@@ -173,7 +176,7 @@
   <string name="enable_relaying">Activar retransmisión (Relaying)</string>
   <string name="usage_reporting">Informe de uso anónimo</string>
   <string name="gui_address">Direcciones de escucha de la interfaz</string>
-    <string name="export_config">Exportar configuración</string>
+  <string name="export_config">Exportar configuración</string>
   <string name="keep_wakelock_while_binary_running">Mantener la CPU activa mientras se ejecuta Syncthing</string>
   <string name="keep_wakelock_while_binary_running_summary">Usa este ajuste si experimentas desconexiones inesperadas mientras funcionas con la batería. Esto resultará en un incremento del consumo de batería.</string>
   <string name="run_as_foreground_service">Ejecutar el servicio con prioridad de primer plano</string>
@@ -196,7 +199,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opciones de depuración</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Sólo se permite 0-9, a-z y coma (\',\') en las opciones de STTRACE</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Sólo se permite 0-9, a-z y coma (\',\') en las opciones de STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Restablecer base de datos</string>
   <!--Syncthing was reset-->
@@ -346,6 +349,8 @@
   <string name="versions_path">Ruta de Versiones</string>
   <string name="command">Comando</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="cleanout_after_description">El número de días para guardar los archivos en la papelera. Cero significa para siempre</string>
+  <string name="external_versioning_description">El primer parámetro de línea de comandos es la ruta de la carpeta y el segundo parámetro es la ruta relativa en la carpeta.</string>
   <string name="no_versioning_description">Seleccione un tipo de versionado para habilitar el versionado.</string>
   <!--Displays the current file versioning type in the Folder activity-->
   <string name="type_simple">Tipo: Simple</string>
@@ -357,5 +362,7 @@
   <string name="staggered_versioning_info">Antigüedad Máxima: %1$d \nRuta de Versiones: %2$s</string>
   <string name="external_versioning_info">Comando: %1$s</string>
   <string name="simple_versioning_info">Conservar versiones: %1$s</string>
+  <string name="show_device_id">Mostrar ID del dispositivo</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Mostrar ID del dispositivo</string>
 </resources>

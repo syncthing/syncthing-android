@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Отворено и заслужаващо доверие приложение за децентрализирано синхронизиране на файлове.</string>
   <!--FirstStartActivity-->
@@ -170,7 +170,7 @@
   <string name="enable_relaying">Разрешава препращане</string>
   <string name="usage_reporting"> Анонимен доклад за ползване на програмата</string>
   <string name="gui_address">Адрес за свързване с потребителския интерфейс</string>
-    <string name="export_config">Изнасяне на настройките</string>
+  <string name="export_config">Изнасяне на настройките</string>
   <string name="use_tor_title">Ползване на Tor</string>
   <string name="use_tor_summary">Пренасочва целия трафик през Tor. Изисква Orbot.</string>
   <!--Dialog shown before config export-->
@@ -187,7 +187,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Настройки за дебъгване</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">В настройките на STTRACE са разрешени само символите 0-9, a-z и \',\'</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">В настройките на STTRACE са разрешени само символите 0-9, a-z и \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Нулиране на базата данни</string>
   <!--Syncthing was reset-->

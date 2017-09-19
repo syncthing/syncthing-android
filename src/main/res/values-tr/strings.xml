@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Açık, güvenilir ve merkezi olmayan bir dosya eşzamanlama uygulaması.</string>
   <!--FirstStartActivity-->
@@ -172,7 +172,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="global_announce_server">Küresel Bulunabilirlik Sunucuları</string>
   <string name="usage_reporting">Anonim Kullanım Raporlama</string>
   <string name="gui_address">Arayüz Dinleme Adresleri</string>
-    <string name="export_config">Yapılandırmayı Dışa Aktar</string>
+  <string name="export_config">Yapılandırmayı Dışa Aktar</string>
   <string name="keep_wakelock_while_binary_running">Syncthing çalışırken CPU\'yu uyanık tut</string>
   <string name="keep_wakelock_while_binary_running_summary">Eğer batarya üzerinde çalışırken beklenmedik kopmalar yaşıyorsanız bu ayarı kullanın. Bu artırılmış batarya tüketimiyle sonuçlanacak.</string>
   <string name="run_as_foreground_service">Hizmeti ön plan önceliğiyle çalıştır</string>
@@ -193,7 +193,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Hata Ayıklama Seçenekleri</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE seçeneklerinde yalnızca 0-9, a-z ve \",\" karakterlerine izin verilir</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">STTRACE seçeneklerinde yalnızca 0-9, a-z ve \",\" karakterlerine izin verilir</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Veritabanını Sıfırla</string>
   <!--Syncthing was reset-->

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">En öppen, pålitlig och decentraliserad filsynkroniserings applikation.</string>
   <!--FirstStartActivity-->
@@ -36,11 +36,16 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="dialog_disable_battery_optimization_later">Senare</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Visa inte igen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Stäng av för Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Din enhet har inte stöd för att inaktivera batterioptimeringar</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappar</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Inga mappar hittade</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d fil</item>
+    <item quantity="other">%1$d / %2$d filer</item>
+  </plurals>
   <string name="toast_no_file_manager">Ingen kompatibel filhanterare hittad</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Enheter</string>
@@ -164,6 +169,18 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
     <item>Låg prioritet</item>
     <item>Ingen</item>
   </string-array>
+  <string name="preference_language_title">Språk</string>
+  <string name="preference_language_summary">Ändra appens språk</string>
+  <string name="start_into_web_gui_title">Starta direkt i webb-GUI</string>
+  <string name="start_into_web_gui_summary">När du startar appen öppnar du webb-GUI istället för huvudskärmen</string>
+  <string name="pref_language_default">Standardspråk</string>
+  <string-array name="versioning_types">
+    <item>Ingen</item>
+    <item>Papperskorg</item>
+    <item>Enkel</item>
+    <item>Förskutna</item>
+    <item>Extern</item>
+  </string-array>
   <string name="device_name">Enhetsnamn</string>
   <string name="listen_address">Synkroniseringsprotokollets lyssnaradresser</string>
   <string name="max_recv_kbps">Inkommande hastighetsgräns (KiB/s)</string>
@@ -175,7 +192,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
   <string name="gui_address">GUI lyssnaradresser</string>
-    <string name="export_config">Exportera konfiguration</string>
+  <string name="export_config">Exportera konfiguration</string>
   <string name="keep_wakelock_while_binary_running">Håll CPU:n vaken medan Syncthing körs</string>
   <string name="keep_wakelock_while_binary_running_summary">Använd den här inställningen om du får oväntade frånkopplingar under batteridrift. Detta kommer att resultera i ökad batteriförbrukning.</string>
   <string name="run_as_foreground_service">Kör tjänst med förgrundsprioritet</string>
@@ -197,8 +214,10 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna finns i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Felsök alternativ</string>
+  <string name="environment_variables">Miljövariabler</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Endast 0-9, a-z och \',\' är tillåtna i STTRACE alternativ</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Endast 0-9, a-z och \',\' är tillåtna i STTRACE alternativ</string>
+  <string name="toast_invalid_environment_variables">Värdet är inte en giltig miljövariabel sträng</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Återställ databas</string>
   <!--Syncthing was reset-->
@@ -346,10 +365,29 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="file_versioning">Filversionshantering</string>
   <string name="finish">Färdig</string>
   <string name="none">Inga</string>
+  <string name="versions_path">Versioner sökväg</string>
+  <string name="command">Kommando</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">Antalet gamla versioner som ska behållas, per fil.</string>
+  <string name="simple_file_versioning_description">Filer flyttas till datumstämplade versioner i en .stversions-katalog när de ersätts eller tas bort av Syncthing.</string>
+  <string name="trashcan_versioning_description">Filer flyttas till .stversions-katalogen när de ersätts eller tas bort av Syncthing.</string>
+  <string name="staggered_versioning_description">Filer flyttas till datumstämplade versioner i en .stversions-katalog när de ersätts eller tas bort av Syncthing. Versioner tas bort automatiskt om de är äldre än den maximala åldern eller överstiger antalet tillåtna filer i ett intervall.\n\nFör följande intervall används: För den första timmen hålls en version var 30: e sekund, för första dagen hålls en version varje timme, för de första 30 dagarna hålls en version varje dag, tills den maximala åldern hålls en version varje vecka.</string>
+  <string name="maximum_age_description">Den maximala tiden för att hålla en version (i dagar, sätt till 0 för att hålla versioner för evigt).</string>
+  <string name="versions_path_description">Sökväg där versioner ska lagras (lämna tom för standard .stversions-katalogen i den delade mappen).</string>
+  <string name="cleanout_after_description">Antalet dagar att behålla filer i papperskorgen. Noll betyder för evigt</string>
+  <string name="external_versioning_description">Den första kommandoradsparametern är mappsökvägen och den andra parametern är den relativa sökvägen i mappen.</string>
+  <string name="no_versioning_description">Välj ett versions typ för att aktivera versionshantering.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Typ: Enkel</string>
+  <string name="type_trashcan">Typ: Papperskorg</string>
+  <string name="type_staggered">Typ: Förskjutna</string>
+  <string name="type_external">Typ: Extern</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="trashcan_versioning_info">Rensa upp efter: %1$s</string>
+  <string name="staggered_versioning_info">Maximal ålder: %1$d \nVersioner sökväg: %2$s</string>
+  <string name="external_versioning_info">Kommando: %1$s</string>
   <string name="simple_versioning_info">Behåll versioner: %1$s</string>
+  <string name="show_device_id">Visa enhetens ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Det gick inte att komma åt enhetens ID.</string>
 </resources>

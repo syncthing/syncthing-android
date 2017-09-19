@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Egy nyílt, megbízható és decentralizált fájl szinkronizáló alkalmazás.</string>
   <!--FirstStartActivity-->
@@ -42,11 +42,16 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="dialog_disable_battery_optimization_later">Később</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Ne jelenjen meg újra</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing kivételezése</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Az eszközöd nem támogatja az akkumulátor optimalizálás letiltását</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappák</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Nem található mappa</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d fájl</item>
+    <item quantity="other">%1$d / %2$d fájl</item>
+  </plurals>
   <string name="toast_no_file_manager">Nem található kompatibilis fájlkezelő</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Eszközök</string>
@@ -170,6 +175,11 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <item>Alacsony prioritású</item>
     <item>Semmilyen</item>
   </string-array>
+  <string name="preference_language_title">Nyelv</string>
+  <string name="preference_language_summary">Alkalmazás nyelvének megváltoztatása</string>
+  <string name="start_into_web_gui_title">A webes felület legyen a kezdőképernyő</string>
+  <string name="start_into_web_gui_summary">Az app indításakor a főképernyő helyett a webes felület jelenjen meg</string>
+  <string name="pref_language_default">Alapértelmezett nyelv</string>
   <string-array name="versioning_types">
     <item>Kikapcsolva</item>
     <item>Lomtár</item>
@@ -188,7 +198,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="enable_relaying">Relaying engedélyezése</string>
   <string name="usage_reporting">Anonim használati statisztikák küldése</string>
   <string name="gui_address">GUI IP címe</string>
-    <string name="export_config">Beállítások mentése</string>
+  <string name="export_config">Beállítások mentése</string>
   <string name="keep_wakelock_while_binary_running">CPU ébren tartása a Syncthing futása során</string>
   <string name="keep_wakelock_while_binary_running_summary">Ezt a beállítást akkor használd, ha váratlan szakadásokat tapasztalsz akkumulátoros üzemben. Ennek hatására megnő az alkalmazás energiafelhasználása.</string>
   <string name="run_as_foreground_service">Szolgáltatás futtatása előtérben</string>
@@ -212,8 +222,10 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <string name="config_import_failed">Nem sikerült a konfiguráció importálása. Győzödj meg róla, hogy a fájlok itt találhatóak: %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug beállítások</string>
+  <string name="environment_variables">Környezeti változók</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Az STTRACE beállítás csak 0-9, a-z és \',\' karaktereket tartalmazhat</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Az STTRACE beállítás csak 0-9, a-z és \',\' karaktereket tartalmazhat</string>
+  <string name="toast_invalid_environment_variables">Az érték nem egy érvényes környezeti változó string</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Adatbázis törlése</string>
   <!--Syncthing was reset-->
@@ -384,5 +396,7 @@ Biztosan törölni szeretnéd a Syncthing index adatbázisát?</string>
   <string name="staggered_versioning_info">Maximális kor: %1$d\nVerziók útvonala: %2$s</string>
   <string name="external_versioning_info">Parancs: %1$s</string>
   <string name="simple_versioning_info">Verziók megtartása: %1$s</string>
+  <string name="show_device_id">Eszközazonosító megjelenítése</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Nem sikerült hozzáférni az eszközazonosítóhoz</string>
 </resources>

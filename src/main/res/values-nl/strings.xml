@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Een open, betrouwbare en gedecentraliseerde applicatie voor bestandssynchronisatie.</string>
   <!--FirstStartActivity-->
@@ -41,6 +41,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Geen mappen gevonden</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d bestand</item>
+    <item quantity="other">%1$d / %2$d bestanden</item>
+  </plurals>
   <string name="toast_no_file_manager">Geen compatibele bestandsbeheerder gevonden</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Apparaten</string>
@@ -164,6 +168,9 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
     <item>Lage prioriteit</item>
     <item>Geen</item>
   </string-array>
+  <string name="preference_language_title">Taal</string>
+  <string name="preference_language_summary">Wijzig de taal van de app</string>
+  <string name="pref_language_default">Standaardtaal</string>
   <string name="device_name">Apparaatnaam</string>
   <string name="listen_address">Luisteradressen voor synchronisatieprotocol</string>
   <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
@@ -175,7 +182,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="enable_relaying">Relayen inschakelen</string>
   <string name="usage_reporting">Anoniem gebruiksrapportage</string>
   <string name="gui_address">GUI-luisteradressen</string>
-    <string name="export_config">Configuratie exporteren</string>
+  <string name="export_config">Configuratie exporteren</string>
   <string name="keep_wakelock_while_binary_running">Laat de CPU niet slapen wanneer Syncthing wordt uitgevoerd</string>
   <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als je onverwacht losgekoppeld wordt wanneer je op batterij werkt. Dit zal leiden tot verhoogd batterijverbruik.</string>
   <string name="run_as_foreground_service">Dienst uitvoeren met voorgrondprioriteit</string>
@@ -198,7 +205,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug-opties</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Enkel 0-9, a-z en \',\' zijn toegestaan in STTRACE-opties</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Enkel 0-9, a-z en \',\' zijn toegestaan in STTRACE-opties</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->
@@ -342,12 +349,16 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="appconfig_receiver_background_enabled">Syncthing stoppen terwijl uitvoeren in achtergrond is ingeschakeld wordt niet ondersteund.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Maximumleeftijd</string>
+  <string name="clean_out_after">Legen na</string>
   <string name="file_versioning">Bestandsversies</string>
+  <string name="finish">Voltooien</string>
   <string name="none">Geen</string>
   <string name="command">Opdracht</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <!--Displays the current file versioning type in the Folder activity-->
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="external_versioning_info">Opdracht: %1$s</string>
+  <string name="show_device_id">Apparaat-ID weergeven</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Kon apparaat-ID niet lezen.</string>
 </resources>

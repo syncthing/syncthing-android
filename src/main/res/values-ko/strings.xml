@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">공개되어 믿을 수 있는, 분산 파일 동기화 응용 프로그램.</string>
   <!--FirstStartActivity-->
@@ -36,11 +36,15 @@
   <string name="dialog_disable_battery_optimization_later">나중에</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">기기가 배터리 최적화 비활성화를 지원하지 않습니다.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">폴더를 찾을 수 없습니다</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="other">%1$d / %2$d 파일</item>
+  </plurals>
   <string name="toast_no_file_manager">호환되는 파일 매니저를 찾을 수 없습니다</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">기기</string>
@@ -164,6 +168,11 @@
     <item>우선 순위 낮음</item>
     <item>사용 안 함</item>
   </string-array>
+  <string name="preference_language_title">언어</string>
+  <string name="preference_language_summary">언어 변경하기</string>
+  <string name="start_into_web_gui_title">웹 GUI로 바로 시작하기</string>
+  <string name="start_into_web_gui_summary">앱을 시작할 때 기본 화면 대신 웹 GUI로 엽니다.</string>
+  <string name="pref_language_default">기본 언어</string>
   <string-array name="versioning_types">
     <item>없음</item>
     <item>휴지통</item>
@@ -182,7 +191,7 @@
   <string name="enable_relaying">Relaying 활성화</string>
   <string name="usage_reporting">익명 사용 기록 </string>
   <string name="gui_address">접속 대기 주소</string>
-    <string name="export_config">설정 내보내기</string>
+  <string name="export_config">설정 내보내기</string>
   <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
   <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
   <string name="run_as_foreground_service">서비스를 포그라운드로 실행</string>
@@ -204,8 +213,10 @@
   <string name="config_import_failed">설정을 불러오지 못했습니다, 파일이 %1$s에 있는지 확인해 주세요</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">디버그 옵션</string>
+  <string name="environment_variables">환경 변수</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">STTRACE 옵션에서는 0-9, a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">STTRACE 옵션에서는 0-9, a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
+  <string name="toast_invalid_environment_variables">값이 유효한 환경 변수 문자열이 아닙니다</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">데이터베이스 리셋</string>
   <!--Syncthing was reset-->
@@ -372,5 +383,7 @@
   <string name="staggered_versioning_info">최대 저장 기간: %1$d \n버전을 저장할 경로: %2$s</string>
   <string name="external_versioning_info">명령: %1$s</string>
   <string name="simple_versioning_info">버전 보호: %1$s</string>
+  <string name="show_device_id">기기 ID 보기</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">기기 ID에 접근 할 수 없습니다.</string>
 </resources>

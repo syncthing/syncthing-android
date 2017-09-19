@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Eine offene, vertrauenswürdige und dezentralisierte Anwendung zur Dateisynchronisation.</string>
   <!--FirstStartActivity-->
@@ -41,6 +41,10 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Keine Verzeichnisse gefunden</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d Datei</item>
+    <item quantity="other">%1$d / %2$d Dateien</item>
+  </plurals>
   <string name="toast_no_file_manager">Kein kompatibler Dateimanager gefunden</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Geräte</string>
@@ -164,6 +168,9 @@ Bitte melden Sie auftretende Probleme via Github.</string>
     <item>Geringe Priorität</item>
     <item>Keine Priorität</item>
   </string-array>
+  <string name="preference_language_title">Sprache</string>
+  <string name="preference_language_summary">Anwendungssprache ändern</string>
+  <string name="pref_language_default">Standardsprache</string>
   <string-array name="versioning_types">
     <item>Keine</item>
     <item>Papierkorb</item>
@@ -182,7 +189,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="enable_relaying">Weiterleitung aktivieren</string>
   <string name="usage_reporting">Anonymer Nutzungsbericht</string>
   <string name="gui_address">Adressen für Weboberfläche</string>
-    <string name="export_config">Konfiguration exportieren</string>
+  <string name="export_config">Konfiguration exportieren</string>
   <string name="keep_wakelock_while_binary_running">Prozessor wach halten während Syncthing läuft.</string>
   <string name="keep_wakelock_while_binary_running_summary">Nutze dieses Einstellung, wenn du unerwartete Verbindungsabbrüche hast, während du im Batteriebetrieb arbeitest. Das wird zu einem erhöhten Energieverbrauch führen.</string>
   <string name="run_as_foreground_service">Führe Dienst mit Vordergrund-Priorität aus</string>
@@ -205,7 +212,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Fehlersuchoptionen</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Nur 0-9, a-z und \',\' sind erlaubt in STTRACE Optionen</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Nur 0-9, a-z und \',\' sind erlaubt in STTRACE Optionen</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->
@@ -289,7 +296,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing is deaktiviert</string>
+  <string name="syncthing_disabled_title">Syncthing ist deaktiviert</string>
   <!--Message of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_message">Sollen die Voreinstellungen ändern werden?</string>
   <!--Button text on the "syncthing disabled" dialog-->
@@ -349,7 +356,10 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="appconfig_receiver_background_enabled">Syncthing zu stoppen wird nicht unterstützt solange das Ausführen im Hintergrund aktiviert ist.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Höchstalter</string>
+  <string name="clean_out_after">Aufräumen nach</string>
   <string name="file_versioning">Dateiversionierung</string>
+  <string name="none">Keine</string>
+  <string name="command">Befehl</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Anzahl der alten Versionen, die von jeder Datei behalten werden sollen.</string>
   <string name="simple_file_versioning_description">Dateien werden mit einem Datumsstempel im Namen versehen und in ein .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden.</string>
@@ -358,7 +368,11 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="maximum_age_description">Die längste Zeit, die alte Versionen vorgehalten werden (in Tagen, 0 um alte Versionen für immer zu behalten).</string>
   <string name="versions_path_description">Pfad, in dem Versionen gespeichert werden sollen (leer lassen, wenn das Standard-.stversions-Verzeichnis im geteilten Ordner verwendet werden soll).</string>
   <string name="cleanout_after_description">Dauer in Tagen für welche die Dateien aufgehoben werden sollen. 0 bedeutet für immer.</string>
+  <string name="external_versioning_description">Der erste Kommandozeilenparameter ist der Ordnerpfad und der zweite Parameter ist der relative Pfad innerhalb des Ordners</string>
+  <string name="no_versioning_description">Dateiversionierungstyp auswählen um Dateiversionierung zu aktivieren.</string>
   <!--Displays the current file versioning type in the Folder activity-->
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="external_versioning_info">Befehl: %1$s</string>
+  <string name="show_device_id">Zeige Geräte-ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
 </resources>

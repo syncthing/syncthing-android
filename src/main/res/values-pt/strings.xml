@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
   <string name="app_description">Uma aplicação de sincronização de ficheiros aberta, fiável e descentralizada.</string>
   <!--FirstStartActivity-->
@@ -172,7 +172,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="enable_relaying">Permitir retransmissão</string>
   <string name="usage_reporting">Enviar relatórios anónimos de utilização</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>
-    <string name="export_config">Exportar configuração</string>
+  <string name="export_config">Exportar configuração</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada enquanto o Syncthing está a correr</string>
   <string name="keep_wakelock_while_binary_running_summary">Use esta definição se experimentar desconectações inesperadas enquanto estiver a trabalhar com a bateria. Isto irá resultar num aumento do consumo da carga da bateria.</string>
   <string name="run_as_foreground_service">Correr o serviço com prioridade de primeiro plano</string>
@@ -195,7 +195,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Opções da despistagem de erros</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_sttrace">Nas opções STTRACE apenas é permitido 0-9, a-z e \',\'</string>
+  <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Nas opções STTRACE apenas é permitido 0-9, a-z e \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->
