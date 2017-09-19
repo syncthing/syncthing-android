@@ -1,6 +1,8 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -18,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.DataOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -31,6 +34,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import eu.chainfire.libsuperuser.Shell;
 /**
  * Provides direct access to the config.xml file in the file system.
  *
@@ -63,18 +67,74 @@ public class ConfigXml {
             generateKeysConfig(context);
         }
 
-        try {
-            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            mConfig = db.parse(mConfigFile);
-        } catch (SAXException | ParserConfigurationException | IOException e) {
-            throw new OpenConfigException();
-        }
+	readConfig();
 
         if (isFirstStart) {
             changeLocalDeviceName();
             changeDefaultFolder();
         }
     }
+
+    private void readConfig() {
+	if (!mConfigFile.canRead() && !checkPermConfigFile()) {
+	    throw new OpenConfigException();
+	}
+        try {
+            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	    Log.d(TAG,"Trying to read '" + mConfigFile + "'");
+            mConfig = db.parse(mConfigFile);
+        } catch (SAXException | ParserConfigurationException | IOException e) {
+	  Log.w(TAG,"Cannot read '" + mConfigFile + "'",e);
+	  throw new OpenConfigException();
+	}
+    }
+
+    private boolean checkPermConfigFile() {
+	// Since either readConfig or saveChanges called this method, the permissions of config.xml got messed up. 
+	// For now, the only way to do so is to run Syncthing as root, because the config file resides in the application's data directory.
+	// That directory is only writeable by this application, and root of course. Syncthing will save it's config as root with 0600.
+	// We can safely assume that root magic is somehow available.
+	// Be paranoid :) and check if su binary is available.
+	if (!Shell.SU.available()) {
+	    Log.e(TAG,"Su is not available. Cannot fix permssions ");
+	    return false;
+	}
+
+	try {
+		ApplicationInfo appInfo = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(),0);
+		Log.d(TAG,"Uid of '" + mContext.getPackageName() + "' is " + appInfo.uid);
+		try {
+		    Process fixPerm = Runtime.getRuntime().exec("su");
+		    DataOutputStream fixPermOut = new DataOutputStream(fixPerm.getOutputStream());
+		    String cmd = "chown " + appInfo.uid + ":" + appInfo.uid + " " + mConfigFile + "\n";
+		    Log.d(TAG,"Running: '" + cmd);
+		    fixPermOut.writeBytes(cmd);
+		    // For now, we assume that a file's type should *always* be 'u:object_r:app_data_file:s0:c512,c768'.
+		    // Running syncthing as root, makes it 'u:object_r:app_data_file:s0'.
+		    // Simply reverting the type to it's default should do the trick.
+		    cmd = "restorecon " + mConfigFile + "\n";
+		    Log.d(TAG,"Running: '" + cmd);
+		    fixPermOut.writeBytes(cmd);
+		    fixPermOut.writeBytes("sleep 2\n");
+		    fixPermOut.writeBytes("exit\n");
+		    fixPermOut.flush();
+		    if (fixPerm.waitFor() == 0) {
+			Log.d(TAG,mConfigFile + ": Can read? " + mConfigFile.canRead() + ", Can write? " + mConfigFile.canWrite());
+			Log.i(TAG,"Successfully changed the owner of the config file.");
+			return true;
+		    } else {
+			return false;
+		    }
+		} catch (Exception e) {
+		    Log.w(TAG,"Cannot chown config file",e);
+		}
+	} catch (NameNotFoundException e) {
+		// This should not happen!
+		Log.w(TAG,"This should not happen",e);
+	}
+	return false;
+    }
+
 
     private void generateKeysConfig(Context context) {
         new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
@@ -216,6 +276,10 @@ public class ConfigXml {
      * Writes updated mConfig back to file.
      */
     private void saveChanges() {
+	if (!mConfigFile.canWrite() && !checkPermConfigFile()) {
+	    Log.w(TAG,"Failed to save updated config. Cannot change the owner of the config file.");
+	    return;
+	}
         try {
             Log.i(TAG, "Writing updated config back to file");
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
