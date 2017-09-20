@@ -155,7 +155,7 @@ public class SettingsActivity extends SyncthingActivity {
             environmentVariables.setOnPreferenceChangeListener(this);
             stReset.setOnPreferenceClickListener(this);
 
-            mUseRoot.setOnPreferenceChangeListener(this);
+            mUseRoot.setOnPreferenceClickListener(this);
             useWakelock.setOnPreferenceChangeListener(this::onRequireRestart);
             foregroundService.setOnPreferenceChangeListener(this::onRequireRestart);
             useTor.setOnPreferenceChangeListener(this::onRequireRestart);
