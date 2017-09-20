@@ -102,9 +102,8 @@ public class Util {
             cmd = "restorecon -R " + dir + "\n";
             Log.d(TAG,"Running: '" + cmd);
             fixPermOut.writeBytes(cmd);
-            fixPermOut.writeBytes("sleep 2\n");
-            fixPermOut.writeBytes("exit\n");
             fixPermOut.flush();
+            fixPermOut.close();
             if (fixPerm.waitFor() == 0) {
                 Log.i(TAG,"Successfully changed the owner, the group and the SELinux context of '" + dir + "'.");
                 return true;
