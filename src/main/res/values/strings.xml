@@ -349,7 +349,7 @@ Please report any problems you encounter via Github.</string>
     <string name="config_import_failed">Config import failed, make sure files are in %1$s</string>
 
     <!-- Title for the preference to set STTRACE parameters -->
-    <string name="sttrace_title">Debug Options</string>
+    <string name="sttrace_title">STTRACE Options</string>
 
     <string name="environment_variables">Environment variables</string>
 
