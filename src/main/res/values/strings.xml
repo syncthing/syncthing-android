@@ -244,9 +244,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Preference summary in case it is disabled -->
     <string name="always_run_in_background_disabled">Syncthing only runs when explicitly started, and can be stopped by menu button.</string>
 
-    <string name="sync_only_charging">Sync only when charging</string>
+    <string name="sync_only_charging">Run only when charging</string>
 
-    <string name="sync_only_wifi">Sync only on wifi</string>
+    <string name="sync_only_wifi">Run only on wifi</string>
 
     <string name="sync_only_wifi_ssids">Restrict to certain wifi networks</string>
 
