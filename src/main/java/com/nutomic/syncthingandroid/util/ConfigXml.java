@@ -13,6 +13,7 @@ import android.util.Log;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.Document;
@@ -82,7 +83,7 @@ public class ConfigXml {
     }
 
     private void readConfig() {
-        if (!mConfigFile.canRead() && !checkPermConfigFile()) {
+        if (!mConfigFile.canRead() && !Util.fixAppDataPermissions(mContext)) {
             throw new OpenConfigException();
         }
         try {
@@ -235,7 +236,7 @@ public class ConfigXml {
      * Writes updated mConfig back to file.
      */
     private void saveChanges() {
-        if (!mConfigFile.canWrite() && !checkPermConfigFile()) {
+        if (!mConfigFile.canWrite() && !Util.fixAppDataPermissions(mContext)) {
             Log.w(TAG,"Failed to save updated config. Cannot change the owner of the config file.");
             return;
         }
@@ -249,66 +250,5 @@ public class ConfigXml {
         } catch (TransformerException e) {
             Log.w(TAG, "Failed to save updated config", e);
         }
-    }
-
-    /**
-     * Normally an application's data directory is only accessible by the corresponding application.
-     * Therefore, every file is owned by an application's user and group. When running Syncthing as root,
-     * it writes its config to the application's data directory. This leaves a file owned by root having 0600.
-     * Moreover, writing this file as root changes a file's type in terms of SELinux.
-     * A subsequent start of Syncthing will fail due to insufficient permissions.
-     * Hence, this method fixes the owner, group and the file's type of the config.xml.
-     * 
-     * @return true if the operation was successfully performed. False otherwise.
-     */
-    private boolean checkPermConfigFile() {
-        // We can safely assume that root magic is somehow available, because readConfig and saveChanges check for
-        // read and write access before calling us.
-        // Be paranoid :) and check if root is available.
-        if (useRoot()) {
-            Log.e(TAG,"Root is not available. Cannot fix permssions ");
-            return false;
-        }
-
-        try {
-            ApplicationInfo appInfo = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(),0);
-            Log.d(TAG,"Uid of '" + mContext.getPackageName() + "' is " + appInfo.uid);
-            Process fixPerm = Runtime.getRuntime().exec("su");
-            DataOutputStream fixPermOut = new DataOutputStream(fixPerm.getOutputStream());
-            String cmd = "chown " + appInfo.uid + ":" + appInfo.uid + " " + mConfigFile + "\n";
-            Log.d(TAG,"Running: '" + cmd);
-            fixPermOut.writeBytes(cmd);
-            // For now, we assume that a file's type should *always* be 'u:object_r:app_data_file:s0:c512,c768'.
-            // At least for those files residing in an application's data folder.
-            // Running syncthing as root, makes it 'u:object_r:app_data_file:s0'.
-            // Simply reverting the type to its default should do the trick.
-            cmd = "restorecon " + mConfigFile + "\n";
-            Log.d(TAG,"Running: '" + cmd);
-            fixPermOut.writeBytes(cmd);
-            fixPermOut.writeBytes("sleep 2\n");
-            fixPermOut.writeBytes("exit\n");
-            fixPermOut.flush();
-            if (fixPerm.waitFor() == 0) {
-                Log.d(TAG,mConfigFile + ": Can read? " + mConfigFile.canRead() + ", Can write? " + mConfigFile.canWrite());
-                Log.i(TAG,"Successfully changed the owner of the config file.");
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IOException | InterruptedException e) {
-            Log.w(TAG,"Cannot chown config file",e);
-        } catch (NameNotFoundException e) {
-            // This should not happen!
-            // One should always be able to retrieve the application info for its own package.
-            Log.w(TAG,"This should not happen",e);
-        }
-        return false;
-    }
-
-    /**
-     * Returns true if root is available and enabled in settings.
-     */
-    private boolean useRoot() {
-        return mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
     }
 }

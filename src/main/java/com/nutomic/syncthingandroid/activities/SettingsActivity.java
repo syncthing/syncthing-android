@@ -24,6 +24,7 @@ import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Languages;
+import com.nutomic.syncthingandroid.util.Util;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
 import java.security.InvalidParameterException;
@@ -406,9 +407,7 @@ public class SettingsActivity extends SyncthingActivity {
         private class ChownFilesRunnable implements Runnable {
             @Override
             public void run() {
-                String f = getActivity().getFilesDir().getAbsolutePath();
-                List<String> out = Shell.SU.run("chown -R --reference=" + f + " " + f);
-                Log.i(TAG, "Changed owner of syncthing files, output: " + out);
+                Util.fixAppDataPermissions(getActivity());
             }
         }
 
