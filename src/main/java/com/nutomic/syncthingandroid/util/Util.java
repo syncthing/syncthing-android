@@ -80,42 +80,40 @@ public class Util {
         // We can safely assume that root magic is somehow available, because readConfig and saveChanges check for
         // read and write access before calling us.
         // Be paranoid :) and check if root is available.
-        // Ignore the 'use_root' preference, because TODO
+        // Ignore the 'use_root' preference, because we might want to fix ther permission
+        // just after the root option has been disabled.
         if (!Shell.SU.available()) {
-            Log.e(TAG,"Root is not available. Cannot fix permssions ");
+            Log.e(TAG, "Root is not available. Cannot fix permssions.");
             return false;
         }
 
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(),0);
-            Log.d(TAG,"Uid of '" + context.getPackageName() + "' is " + appInfo.uid);
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
+            Log.d(TAG, "Uid of '" + context.getPackageName() + "' is " + appInfo.uid);
             Process fixPerm = Runtime.getRuntime().exec("su");
             DataOutputStream fixPermOut = new DataOutputStream(fixPerm.getOutputStream());
             String dir = context.getFilesDir().getAbsolutePath();
             String cmd = "chown -R " + appInfo.uid + ":" + appInfo.uid + " " + dir + "\n";
-            Log.d(TAG,"Running: '" + cmd);
+            Log.d(TAG, "Running: '" + cmd);
             fixPermOut.writeBytes(cmd);
-            // For now, we assume that a file's type should *always* be 'u:object_r:app_data_file:s0:c512,c768'.
+            // Running Syncthing as root might change a file's or directories type in terms of SELinux.
+            // Leaving them as they are, the Android service won't be able to access them.
             // At least for those files residing in an application's data folder.
-            // Running syncthing as root, makes it 'u:object_r:app_data_file:s0'.
             // Simply reverting the type to its default should do the trick.
             cmd = "restorecon -R " + dir + "\n";
-            Log.d(TAG,"Running: '" + cmd);
+            Log.d(TAG, "Running: '" + cmd);
             fixPermOut.writeBytes(cmd);
             fixPermOut.flush();
             fixPermOut.close();
-            if (fixPerm.waitFor() == 0) {
-                Log.i(TAG,"Successfully changed the owner, the group and the SELinux context of '" + dir + "'.");
-                return true;
-            } else {
-                return false;
-            }
+            int ret = fixPerm.waitFor();
+            Log.i(TAG, "Changed the owner, the group and the SELinux context of '" + dir + "'. Result: " + ret);
+            return ret == 0;
         } catch (IOException | InterruptedException e) {
-            Log.w(TAG,"Cannot chown data directory",e);
+            Log.w(TAG, "Cannot chown data directory", e);
         } catch (NameNotFoundException e) {
             // This should not happen!
             // One should always be able to retrieve the application info for its own package.
-            Log.w(TAG,"This should not happen",e);
+            Log.w(TAG, "This should not happen", e);
         }
         return false;
     }

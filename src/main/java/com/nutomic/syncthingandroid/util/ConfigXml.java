@@ -6,7 +6,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -62,12 +61,9 @@ public class ConfigXml {
 
     private Document mConfig;
 
-    private final SharedPreferences mPreferences;
-
     public ConfigXml(Context context) throws OpenConfigException {
         mContext = context;
         mConfigFile = getConfigFile(context);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
@@ -88,10 +84,10 @@ public class ConfigXml {
         }
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Log.d(TAG,"Trying to read '" + mConfigFile + "'");
+            Log.d(TAG, "Trying to read '" + mConfigFile + "'");
             mConfig = db.parse(mConfigFile);
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            Log.w(TAG,"Cannot read '" + mConfigFile + "'",e);
+            Log.w(TAG, "Cannot read '" + mConfigFile + "'", e);
             throw new OpenConfigException();
         }
     }
@@ -237,7 +233,7 @@ public class ConfigXml {
      */
     private void saveChanges() {
         if (!mConfigFile.canWrite() && !Util.fixAppDataPermissions(mContext)) {
-            Log.w(TAG,"Failed to save updated config. Cannot change the owner of the config file.");
+            Log.w(TAG, "Failed to save updated config. Cannot change the owner of the config file.");
             return;
         }
         try {
