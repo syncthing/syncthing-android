@@ -55,6 +55,7 @@ public class SyncthingRunnable implements Runnable {
     private String[] mCommand;
     private final File mLogFile;
     private final SharedPreferences mPreferences;
+    private final boolean mUseRoot;
 
     public enum Command {
         generate, // Generate keys, a config file and immediately exit.
@@ -72,6 +73,7 @@ public class SyncthingRunnable implements Runnable {
         mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mUseRoot = mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
             case generate:
                 mCommand = new String[]{ mSyncthingBinary, "-generate", mContext.getFilesDir().toString() };
@@ -98,6 +100,7 @@ public class SyncthingRunnable implements Runnable {
         mCommand = manualCommand;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mUseRoot = false;
     }
 
     @Override
@@ -123,7 +126,7 @@ public class SyncthingRunnable implements Runnable {
         try {
             if (wakeLock != null)
                 wakeLock.acquire();
-            ProcessBuilder pb = (useRoot())
+            ProcessBuilder pb = (mUseRoot)
                     ? new ProcessBuilder("su", "-c", TextUtils.join(" ", mCommand))
                     : new ProcessBuilder(mCommand);
 
@@ -216,13 +219,6 @@ public class SyncthingRunnable implements Runnable {
     }
 
     /**
-     * Returns true if root is available and enabled in settings.
-     */
-    private boolean useRoot() {
-        return mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
-    }
-
-    /**
      * Returns true if the experimental setting for using wake locks has been enabled in settings.
      */
     private boolean useWakeLock() {
@@ -240,7 +236,7 @@ public class SyncthingRunnable implements Runnable {
                 int ret = 1;
                 try {
                     Thread.sleep(1000); // Wait a second before getting the pid
-                    nice = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
+                    nice = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
                     niceOut = new DataOutputStream(nice.getOutputStream());
                     niceOut.writeBytes("set `ps | grep libsyncthing.so`\n");
                     niceOut.writeBytes("ionice $2 be 7\n"); // best-effort, low priority
@@ -279,7 +275,7 @@ public class SyncthingRunnable implements Runnable {
             Process ps = null;
             DataOutputStream psOut = null;
             try {
-                ps = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
+                ps = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
                 psOut = new DataOutputStream(ps.getOutputStream());
                 psOut.writeBytes("ps | grep libsyncthing.so\n");
                 psOut.writeBytes("exit\n");
@@ -317,7 +313,7 @@ public class SyncthingRunnable implements Runnable {
         Process kill = null;
         DataOutputStream killOut = null;
         try {
-            kill = Runtime.getRuntime().exec((useRoot()) ? "su" : "sh");
+            kill = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
             killOut = new DataOutputStream(kill.getOutputStream());
             if (!force) {
                 killOut.writeBytes("kill -SIGINT " + id + "\n");
