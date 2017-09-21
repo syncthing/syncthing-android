@@ -106,7 +106,6 @@ public class SyncthingRunnable implements Runnable {
 
     @Override
     public void run() {
-        boolean useRoot = useRoot();
         trimLogFile();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         int ret;
@@ -133,45 +132,10 @@ public class SyncthingRunnable implements Runnable {
                     ? new ProcessBuilder("su")
                     : new ProcessBuilder(mCommand);
 
-            HashMap<String, String> targetEnv = new HashMap<String, String>();
-            // Set home directory to data folder for web GUI folder picker.
-            targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
-            targetEnv.put("STTRACE", sp.getString("sttrace", ""));
-            File externalFilesDir = mContext.getExternalFilesDir(null);
-            if (externalFilesDir != null)
-                targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
-            targetEnv.put("STNORESTART", "1");
-            targetEnv.put("STNOUPGRADE", "1");
-            // Disable hash benchmark for faster startup.
-            // https://github.com/syncthing/syncthing/issues/4348
-            targetEnv.put("STHASHING", "minio");
-            if (sp.getBoolean("use_tor", false)) {
-                targetEnv.put("all_proxy", "socks5://localhost:9050");
-                targetEnv.put("ALL_PROXY_NO_FALLBACK", "1");
-            }
-            if (sp.getBoolean("use_legacy_hashing", false))
-                targetEnv.put("STHASHING", "standard");
-            putCustomEnvironmentVariables(targetEnv, sp);
+            HashMap<String, String> targetEnv = buildEnvironment(sp);
+            process = setupAndLaunch(pb, targetEnv);
+            targetEnv = null;
 
-
-            if (useRoot) {
-                process = pb.start();
-                // The su binary prohibits the inheritance of environment variables.
-                // Even with --preserve-environment the environment gets messed up.
-                // We therefore start a root shell, and set all the environment variables manually.
-                DataOutputStream suOut = new DataOutputStream(process.getOutputStream());
-                for (Map.Entry<String, String> entry : targetEnv.entrySet()) {
-                    suOut.writeBytes("export " + entry.getKey() + "=\"" + entry.getValue() + "\"\n");
-                }
-                suOut.flush();
-                // Exec into Synchting, because we want to wait for Syncthing.
-                // Exec will replace the su process by Syncthing.
-                suOut.writeBytes("exec " + TextUtils.join(" ", mCommand) + "\n");
-            } else {
-                pb.environment().putAll(targetEnv);
-                Log.d(TAG,java.util.Arrays.toString(pb.environment().entrySet().toArray()));
-                process = pb.start();
-            }
             mSyncthing.set(process);
 
             Thread lInfo = log(process.getInputStream(), Log.INFO, true);
@@ -420,4 +384,49 @@ public class SyncthingRunnable implements Runnable {
         }
     }
 
+    private HashMap<String, String> buildEnvironment(SharedPreferences sp) {
+            HashMap<String, String> targetEnv = new HashMap<String, String>();
+            // Set home directory to data folder for web GUI folder picker.
+            targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
+            targetEnv.put("STTRACE", sp.getString("sttrace", ""));
+            File externalFilesDir = mContext.getExternalFilesDir(null);
+            if (externalFilesDir != null)
+                targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
+            targetEnv.put("STNORESTART", "1");
+            targetEnv.put("STNOUPGRADE", "1");
+            // Disable hash benchmark for faster startup.
+            // https://github.com/syncthing/syncthing/issues/4348
+            targetEnv.put("STHASHING", "minio");
+            if (sp.getBoolean("use_tor", false)) {
+                targetEnv.put("all_proxy", "socks5://localhost:9050");
+                targetEnv.put("ALL_PROXY_NO_FALLBACK", "1");
+            }
+            if (sp.getBoolean("use_legacy_hashing", false))
+                targetEnv.put("STHASHING", "standard");
+            putCustomEnvironmentVariables(targetEnv, sp);
+            return targetEnv;
+    }
+
+    private Process setupAndLaunch(ProcessBuilder pb, HashMap<String, String> env) throws IOException {
+        Process process = null;
+        if (mUseRoot) {
+            process = pb.start();
+            // The su binary prohibits the inheritance of environment variables.
+            // Even with --preserve-environment the environment gets messed up.
+            // We therefore start a root shell, and set all the environment variables manually.
+            DataOutputStream suOut = new DataOutputStream(process.getOutputStream());
+            for (Map.Entry<String, String> entry : env.entrySet()) {
+                suOut.writeBytes(String.format("export %s=\"%s\"\n", entry.getKey(), entry.getValue()));
+            }
+            suOut.flush();
+            // Exec into Synchting, because we want to wait for Syncthing.
+            // Exec will replace the su process by Syncthing.
+            suOut.writeBytes("exec " + TextUtils.join(" ", mCommand) + "\n");
+            suOut = null;
+        } else {
+            pb.environment().putAll(env);
+            process = pb.start();
+        }
+        return process;
+    }
 }
