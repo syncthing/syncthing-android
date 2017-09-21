@@ -1,6 +1,9 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -8,6 +11,8 @@ import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
+import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.Document;
@@ -18,6 +23,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.DataOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -31,6 +37,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import eu.chainfire.libsuperuser.Shell;
 /**
  * Provides direct access to the config.xml file in the file system.
  *
@@ -63,16 +70,25 @@ public class ConfigXml {
             generateKeysConfig(context);
         }
 
-        try {
-            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            mConfig = db.parse(mConfigFile);
-        } catch (SAXException | ParserConfigurationException | IOException e) {
-            throw new OpenConfigException();
-        }
+        readConfig();
 
         if (isFirstStart) {
             changeLocalDeviceName();
             changeDefaultFolder();
+        }
+    }
+
+    private void readConfig() {
+        if (!mConfigFile.canRead() && !Util.fixAppDataPermissions(mContext)) {
+            throw new OpenConfigException();
+        }
+        try {
+            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Log.d(TAG, "Trying to read '" + mConfigFile + "'");
+            mConfig = db.parse(mConfigFile);
+        } catch (SAXException | ParserConfigurationException | IOException e) {
+            Log.w(TAG, "Cannot read '" + mConfigFile + "'", e);
+            throw new OpenConfigException();
         }
     }
 
@@ -216,6 +232,10 @@ public class ConfigXml {
      * Writes updated mConfig back to file.
      */
     private void saveChanges() {
+        if (!mConfigFile.canWrite() && !Util.fixAppDataPermissions(mContext)) {
+            Log.w(TAG, "Failed to save updated config. Cannot change the owner of the config file.");
+            return;
+        }
         try {
             Log.i(TAG, "Writing updated config back to file");
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -227,5 +247,4 @@ public class ConfigXml {
             Log.w(TAG, "Failed to save updated config", e);
         }
     }
-
 }
