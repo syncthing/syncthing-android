@@ -419,8 +419,10 @@ public class SyncthingRunnable implements Runnable {
                 suOut.writeBytes(String.format("export %s=\"%s\"\n", entry.getKey(), entry.getValue()));
             }
             suOut.flush();
-            // Exec into Synchting, because we want to wait for Syncthing.
-            // Exec will replace the su process by Syncthing.
+            // Exec will replace the su process image by Syncthing as execlp in C does.
+            // Without using exec, the process will drop to the root shell as soon as Syncthing terminates like a normal shell does.
+            // If we did not use exec, we would wait infinitely for the process to terminate (ret = process.waitFor(); in run()).
+            // With exec the whole process terminates when Syncthing exits.
             suOut.writeBytes("exec " + TextUtils.join(" ", mCommand) + "\n");
             suOut = null;
         } else {
