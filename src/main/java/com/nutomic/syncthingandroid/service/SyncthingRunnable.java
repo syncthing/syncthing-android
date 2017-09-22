@@ -130,7 +130,6 @@ public class SyncthingRunnable implements Runnable {
 
             HashMap<String, String> targetEnv = buildEnvironment(sp);
             process = setupAndLaunch(targetEnv);
-            targetEnv = null;
 
             mSyncthing.set(process);
 
@@ -381,26 +380,26 @@ public class SyncthingRunnable implements Runnable {
     }
 
     private HashMap<String, String> buildEnvironment(SharedPreferences sp) {
-            HashMap<String, String> targetEnv = new HashMap<String, String>();
-            // Set home directory to data folder for web GUI folder picker.
-            targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
-            targetEnv.put("STTRACE", sp.getString("sttrace", ""));
-            File externalFilesDir = mContext.getExternalFilesDir(null);
-            if (externalFilesDir != null)
-                targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
-            targetEnv.put("STNORESTART", "1");
-            targetEnv.put("STNOUPGRADE", "1");
-            // Disable hash benchmark for faster startup.
-            // https://github.com/syncthing/syncthing/issues/4348
-            targetEnv.put("STHASHING", "minio");
-            if (sp.getBoolean("use_tor", false)) {
-                targetEnv.put("all_proxy", "socks5://localhost:9050");
-                targetEnv.put("ALL_PROXY_NO_FALLBACK", "1");
-            }
-            if (sp.getBoolean("use_legacy_hashing", false))
-                targetEnv.put("STHASHING", "standard");
-            putCustomEnvironmentVariables(targetEnv, sp);
-            return targetEnv;
+        HashMap<String, String> targetEnv = new HashMap<String, String>();
+        // Set home directory to data folder for web GUI folder picker.
+        targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
+        targetEnv.put("STTRACE", sp.getString("sttrace", ""));
+        File externalFilesDir = mContext.getExternalFilesDir(null);
+        if (externalFilesDir != null)
+            targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
+        targetEnv.put("STNORESTART", "1");
+        targetEnv.put("STNOUPGRADE", "1");
+        // Disable hash benchmark for faster startup.
+        // https://github.com/syncthing/syncthing/issues/4348
+        targetEnv.put("STHASHING", "minio");
+        if (sp.getBoolean("use_tor", false)) {
+            targetEnv.put("all_proxy", "socks5://localhost:9050");
+            targetEnv.put("ALL_PROXY_NO_FALLBACK", "1");
+        }
+        if (sp.getBoolean("use_legacy_hashing", false))
+            targetEnv.put("STHASHING", "standard");
+        putCustomEnvironmentVariables(targetEnv, sp);
+        return targetEnv;
     }
 
     private Process setupAndLaunch(HashMap<String, String> env) throws IOException {
