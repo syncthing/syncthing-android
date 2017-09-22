@@ -128,12 +128,8 @@ public class SyncthingRunnable implements Runnable {
             if (wakeLock != null)
                 wakeLock.acquire();
 
-            ProcessBuilder pb = (mUseRoot)
-                    ? new ProcessBuilder("su")
-                    : new ProcessBuilder(mCommand);
-
             HashMap<String, String> targetEnv = buildEnvironment(sp);
-            process = setupAndLaunch(pb, targetEnv);
+            process = setupAndLaunch(targetEnv);
             targetEnv = null;
 
             mSyncthing.set(process);
@@ -407,8 +403,13 @@ public class SyncthingRunnable implements Runnable {
             return targetEnv;
     }
 
-    private Process setupAndLaunch(ProcessBuilder pb, HashMap<String, String> env) throws IOException {
+    private Process setupAndLaunch(HashMap<String, String> env) throws IOException {
         Process process = null;
+
+        ProcessBuilder pb = (mUseRoot)
+                ? new ProcessBuilder("su")
+                : new ProcessBuilder(mCommand);
+
         if (mUseRoot) {
             process = pb.start();
             // The su binary prohibits the inheritance of environment variables.
