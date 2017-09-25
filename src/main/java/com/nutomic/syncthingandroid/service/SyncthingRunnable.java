@@ -405,11 +405,8 @@ public class SyncthingRunnable implements Runnable {
     private Process setupAndLaunch(HashMap<String, String> env) throws IOException {
         Process process = null;
 
-        ProcessBuilder pb = (mUseRoot)
-                ? new ProcessBuilder("su")
-                : new ProcessBuilder(mCommand);
-
         if (mUseRoot) {
+            ProcessBuilder pb = new ProcessBuilder("su");
             process = pb.start();
             // The su binary prohibits the inheritance of environment variables.
             // Even with --preserve-environment the environment gets messed up.
@@ -426,6 +423,7 @@ public class SyncthingRunnable implements Runnable {
             suOut.writeBytes("exec " + TextUtils.join(" ", mCommand) + "\n");
             suOut = null;
         } else {
+            ProcessBuilder pb = new ProcessBuilder(mCommand);
             pb.environment().putAll(env);
             process = pb.start();
         }
