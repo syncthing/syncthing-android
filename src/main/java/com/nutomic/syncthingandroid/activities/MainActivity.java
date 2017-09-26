@@ -60,7 +60,7 @@ import static java.lang.Math.min;
  * {@link DeviceListFragment} in different tabs, and
  * {@link DrawerFragment} in the navigation drawer.
  */
-public class MainActivity extends SyncthingActivity
+public class MainActivity extends StateDialogActivity
         implements SyncthingService.OnApiChangeListener {
 
     private static final String TAG = "MainActivity";
@@ -77,7 +77,6 @@ public class MainActivity extends SyncthingActivity
      */
     private static final long USAGE_REPORTING_DIALOG_DELAY = TimeUnit.DAYS.toMillis(3);
 
-    private AlertDialog mDisabledDialog;
     private AlertDialog mBatteryOptimizationsDialog;
     private AlertDialog mQrCodeDialog;
     private Dialog mRestartDialog;
@@ -100,10 +99,8 @@ public class MainActivity extends SyncthingActivity
     public void onApiChange(SyncthingService.State currentState) {
         switch (currentState) {
             case STARTING:
-                dismissDisabledDialog();
                 break;
             case ACTIVE:
-                dismissDisabledDialog();
                 showBatteryOptimizationDialogIfNecessary();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
@@ -116,9 +113,6 @@ public class MainActivity extends SyncthingActivity
                 finish();
                 break;
             case DISABLED:
-                if (!isFinishing()) {
-                    showDisabledDialog();
-                }
                 break;
         }
     }
@@ -156,13 +150,6 @@ public class MainActivity extends SyncthingActivity
                         sp.edit().putBoolean("battery_optimization_dont_show_again", true).apply())
                 .setOnCancelListener(d -> mBatteryOptimizationDialogDismissed = true)
                 .show();
-    }
-
-    private void dismissDisabledDialog() {
-        if (mDisabledDialog != null && mDisabledDialog.isShowing()) {
-            mDisabledDialog.dismiss();
-            mDisabledDialog = null;
-        }
     }
 
     /**
@@ -264,7 +251,6 @@ public class MainActivity extends SyncthingActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        dismissDisabledDialog();
         if (getService() != null) {
             getService().unregisterOnApiChangeListener(this);
             getService().unregisterOnApiChangeListener(mFolderListFragment);
@@ -324,24 +310,6 @@ public class MainActivity extends SyncthingActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    private void showDisabledDialog() {
-        mDisabledDialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.syncthing_disabled_title)
-                .setMessage(R.string.syncthing_disabled_message)
-                .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                        (dialogInterface, i) -> {
-                            finish();
-                            startActivity(new Intent(this, SettingsActivity.class));
-                        }
-                )
-                .setNegativeButton(R.string.exit,
-                        (dialogInterface, i) -> finish()
-                )
-                .setOnCancelListener(dialogInterface -> finish())
-                .show();
-        mDisabledDialog.setCanceledOnTouchOutside(false);
     }
 
     public void showRestartDialog(){

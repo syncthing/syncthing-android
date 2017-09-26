@@ -36,7 +36,7 @@ import java.security.cert.X509Certificate;
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
-public class WebGuiActivity extends SyncthingActivity
+public class WebGuiActivity extends StateDialogActivity
         implements SyncthingService.OnWebGuiAvailableListener {
 
     private static final String TAG = "WebGuiActivity";
