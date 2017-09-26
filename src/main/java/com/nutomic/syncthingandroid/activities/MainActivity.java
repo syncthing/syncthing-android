@@ -206,12 +206,12 @@ public class MainActivity extends StateDialogActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabContainer);
+        TabLayout tabLayout = findViewById(R.id.tabContainer);
         tabLayout.setupWithViewPager(mViewPager);
 
         if (savedInstanceState != null) {
@@ -283,8 +283,8 @@ public class MainActivity extends StateDialogActivity
             outState.putBoolean(IS_SHOWING_RESTART_DIALOG, mRestartDialog != null && mRestartDialog.isShowing());
             if(mQrCodeDialog != null && mQrCodeDialog.isShowing()) {
                 outState.putBoolean(IS_QRCODE_DIALOG_DISPLAYED, true);
-                ImageView qrCode = (ImageView) mQrCodeDialog.findViewById(R.id.qrcode_image_view);
-                TextView deviceID = (TextView) mQrCodeDialog.findViewById(R.id.device_id);
+                ImageView qrCode = mQrCodeDialog.findViewById(R.id.qrcode_image_view);
+                TextView deviceID = mQrCodeDialog.findViewById(R.id.device_id);
                 outState.putParcelable(QRCODE_BITMAP_KEY, ((BitmapDrawable) qrCode.getDrawable()).getBitmap());
                 outState.putString(DEVICEID_KEY, deviceID.getText().toString());
             }
@@ -329,9 +329,9 @@ public class MainActivity extends StateDialogActivity
     public void showQrCodeDialog(String deviceId, Bitmap qrCode) {
         @SuppressLint("InflateParams")
         View qrCodeDialogView = this.getLayoutInflater().inflate(R.layout.dialog_qrcode, null);
-        TextView deviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.device_id);
-        TextView shareDeviceIdTextView = (TextView) qrCodeDialogView.findViewById(R.id.actionShareId);
-        ImageView qrCodeImageView = (ImageView) qrCodeDialogView.findViewById(R.id.qrcode_image_view);
+        TextView deviceIdTextView = qrCodeDialogView.findViewById(R.id.device_id);
+        TextView shareDeviceIdTextView = qrCodeDialogView.findViewById(R.id.actionShareId);
+        ImageView qrCodeImageView = qrCodeDialogView.findViewById(R.id.qrcode_image_view);
 
         deviceIdTextView.setText(deviceId);
         deviceIdTextView.setOnClickListener(v -> Util.copyDeviceId(this, deviceIdTextView.getText().toString()));
@@ -463,7 +463,7 @@ public class MainActivity extends StateDialogActivity
             @SuppressLint("InflateParams")
             View v = LayoutInflater.from(MainActivity.this)
                     .inflate(R.layout.dialog_usage_reporting, null);
-            TextView tv = (TextView) v.findViewById(R.id.example);
+            TextView tv = v.findViewById(R.id.example);
             tv.setText(report);
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle(R.string.usage_reporting_dialog_title)

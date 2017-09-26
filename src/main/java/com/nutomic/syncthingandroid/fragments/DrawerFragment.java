@@ -90,13 +90,13 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mCpuUsage       = (TextView) view.findViewById(R.id.cpu_usage);
-        mRamUsage       = (TextView) view.findViewById(R.id.ram_usage);
-        mDownload       = (TextView) view.findViewById(R.id.download);
-        mUpload         = (TextView) view.findViewById(R.id.upload);
-        mAnnounceServer = (TextView) view.findViewById(R.id.announce_server);
-        mVersion        = (TextView) view.findViewById(R.id.version);
-        mExitButton     = (TextView) view.findViewById(R.id.drawerActionExit);
+        mCpuUsage       = view.findViewById(R.id.cpu_usage);
+        mRamUsage       = view.findViewById(R.id.ram_usage);
+        mDownload       = view.findViewById(R.id.download);
+        mUpload         = view.findViewById(R.id.upload);
+        mAnnounceServer = view.findViewById(R.id.announce_server);
+        mVersion        = view.findViewById(R.id.version);
+        mExitButton     = view.findViewById(R.id.drawerActionExit);
 
         view.findViewById(R.id.drawerActionWebGui)
                 .setOnClickListener(this);

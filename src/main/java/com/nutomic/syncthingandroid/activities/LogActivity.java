@@ -45,8 +45,8 @@ public class LogActivity extends SyncthingActivity {
             invalidateOptionsMenu();
         }
 
-        mLog = (TextView) findViewById(R.id.log);
-        mScrollView = (ScrollView) findViewById(R.id.scroller);
+        mLog = findViewById(R.id.log);
+        mScrollView = findViewById(R.id.scroller);
 
         updateLog();
     }

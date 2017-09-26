@@ -125,7 +125,7 @@ public class WebGuiActivity extends StateDialogActivity
         mConfig = new ConfigXml(this);
         loadCaCert();
 
-        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView = findViewById(R.id.webview);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(mWebViewClient);
         mWebView.clearCache(true);

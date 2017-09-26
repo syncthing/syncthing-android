@@ -56,7 +56,7 @@ public class ShareActivity extends StateDialogActivity
                 this, android.R.layout.simple_spinner_item, folders);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.folders);
+        Spinner sItems = findViewById(R.id.folders);
         sItems.setAdapter(adapter);
     }
 
@@ -80,11 +80,11 @@ public class ShareActivity extends StateDialogActivity
 
         registerOnServiceConnectedListener(this);
 
-        Spinner mFoldersSpinner = (Spinner) findViewById(R.id.folders);
-        Button mShareButton = (Button) findViewById(R.id.share_button);
-        Button mCancelButton = (Button) findViewById(R.id.cancel_button);
-        EditText mShareName = (EditText) findViewById(R.id.name);
-        TextView mShareTitle = (TextView) findViewById(R.id.namesTitle);
+        Spinner mFoldersSpinner = findViewById(R.id.folders);
+        Button mShareButton = findViewById(R.id.share_button);
+        Button mCancelButton = findViewById(R.id.cancel_button);
+        EditText mShareName = findViewById(R.id.name);
+        TextView mShareTitle = findViewById(R.id.namesTitle);
 
         // TODO: add support for EXTRA_TEXT (notes, memos sharing)
         ArrayList<Uri> extrasToCopy = new ArrayList<>();

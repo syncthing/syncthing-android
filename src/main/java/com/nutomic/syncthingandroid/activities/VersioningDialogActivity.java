@@ -45,7 +45,7 @@ public class VersioningDialogActivity extends AppCompatActivity {
     }
 
     private void initiateFinishBtn() {
-        Button finishBtn = (Button) findViewById(R.id.finish_btn);
+        Button finishBtn = findViewById(R.id.finish_btn);
         finishBtn.setOnClickListener(v -> {
             saveConfiguration();
             finish();
@@ -59,7 +59,7 @@ public class VersioningDialogActivity extends AppCompatActivity {
     }
 
     private void initiateSpinner() {
-        Spinner versioningTypeSpinner = (Spinner) findViewById(R.id.versioningTypeSpinner);
+        Spinner versioningTypeSpinner = findViewById(R.id.versioningTypeSpinner);
         versioningTypeSpinner.setSelection(mTypes.indexOf(getIntent().getExtras().getString("type")));
         versioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

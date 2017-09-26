@@ -60,7 +60,7 @@ public class StaggeredVersioningFragment extends Fragment {
     }
 
     private void initiateVersionsPathTextView() {
-        mPathView = (TextView) mView.findViewById(R.id.directoryTextView);
+        mPathView = mView.findViewById(R.id.directoryTextView);
         String currentPath = getVersionsPath();
 
         mPathView.setText(currentPath);

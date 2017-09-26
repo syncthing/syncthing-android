@@ -159,15 +159,15 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
 
         mIdContainer = findViewById(R.id.idContainer);
-        mIdView = (EditText) findViewById(R.id.id);
+        mIdView = findViewById(R.id.id);
         mQrButton = findViewById(R.id.qrButton);
-        mNameView = (EditText) findViewById(R.id.name);
-        mAddressesView = (EditText) findViewById(R.id.addresses);
-        mCurrentAddressView = (TextView) findViewById(R.id.currentAddress);
+        mNameView = findViewById(R.id.name);
+        mAddressesView = findViewById(R.id.addresses);
+        mCurrentAddressView = findViewById(R.id.currentAddress);
         mCompressionContainer = findViewById(R.id.compressionContainer);
-        mCompressionValueView = (TextView) findViewById(R.id.compressionValue);
-        mIntroducerView = (SwitchCompat) findViewById(R.id.introducer);
-        mSyncthingVersionView = (TextView) findViewById(R.id.syncthingVersion);
+        mCompressionValueView = findViewById(R.id.compressionValue);
+        mIntroducerView = findViewById(R.id.introducer);
+        mSyncthingVersionView = findViewById(R.id.syncthingVersion);
 
         mQrButton.setOnClickListener(this);
         mCompressionContainer.setOnClickListener(this);

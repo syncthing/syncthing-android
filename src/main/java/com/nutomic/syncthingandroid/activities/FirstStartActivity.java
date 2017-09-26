@@ -43,7 +43,7 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         }
 
         setContentView(R.layout.activity_first_start);
-        Button cont = (Button) findViewById(R.id.cont);
+        Button cont = findViewById(R.id.cont);
         cont.setOnClickListener(this);
     }
 

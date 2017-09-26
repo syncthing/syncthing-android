@@ -27,9 +27,8 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerOnServiceConnectedListener(() -> {
-            getService().registerOnApiChangeListener(this::onApiChange);
-        });
+        registerOnServiceConnectedListener(() ->
+                getService().registerOnApiChangeListener(this::onApiChange));
     }
 
     @Override
@@ -96,7 +95,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         LayoutInflater inflater = getLayoutInflater();
         @SuppressLint("InflateParams")
         View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
-        TextView loadingText = (TextView) dialogLayout.findViewById(R.id.loading_text);
+        TextView loadingText = dialogLayout.findViewById(R.id.loading_text);
         loadingText.setText((getIntent().getBooleanExtra(EXTRA_FIRST_START, false))
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);

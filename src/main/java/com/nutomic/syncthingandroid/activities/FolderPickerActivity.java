@@ -77,7 +77,7 @@ public class FolderPickerActivity extends SyncthingActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_folder_picker);
-        mListView = (ListView) findViewById(android.R.id.list);
+        mListView = findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);
         mListView.setEmptyView(findViewById(android.R.id.empty));
         mFilesAdapter = new FileAdapter(this);
@@ -252,7 +252,7 @@ public class FolderPickerActivity extends SyncthingActivity
         @NonNull
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
-            TextView title = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView title = convertView.findViewById(android.R.id.text1);
             File f = getItem(position);
             title.setText(f.getName());
             int textColor = (f.isDirectory())
@@ -274,7 +274,7 @@ public class FolderPickerActivity extends SyncthingActivity
         @NonNull
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             convertView = super.getView(position, convertView, parent);
-            TextView title = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView title = convertView.findViewById(android.R.id.text1);
             title.setText(getItem(position).getAbsolutePath());
             return convertView;
         }

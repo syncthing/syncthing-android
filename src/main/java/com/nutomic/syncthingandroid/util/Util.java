@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.util;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.widget.Toast;
 import android.util.Log;
 import android.content.Context;

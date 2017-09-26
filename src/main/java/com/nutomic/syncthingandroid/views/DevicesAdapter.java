@@ -36,10 +36,10 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
             convertView = inflater.inflate(R.layout.item_device_list, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView status = (TextView) convertView.findViewById(R.id.status);
-        TextView download = (TextView) convertView.findViewById(R.id.download);
-        TextView upload = (TextView) convertView.findViewById(R.id.upload);
+        TextView name = convertView.findViewById(R.id.name);
+        TextView status = convertView.findViewById(R.id.status);
+        TextView download = convertView.findViewById(R.id.download);
+        TextView upload = convertView.findViewById(R.id.upload);
 
         String deviceId = getItem(position).deviceID;
 

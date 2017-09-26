@@ -46,9 +46,7 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         SyncthingServiceBinder binder = (SyncthingServiceBinder) iBinder;
         mSyncthingService = binder.getService();
-        for (OnServiceConnectedListener listener : mServiceConnectedListeners) {
-            listener.onServiceConnected();
-        }
+        mServiceConnectedListeners.forEach(OnServiceConnectedListener::onServiceConnected);
         mServiceConnectedListeners.clear();
     }
 

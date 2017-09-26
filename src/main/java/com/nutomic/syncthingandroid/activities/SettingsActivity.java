@@ -28,7 +28,6 @@ import com.nutomic.syncthingandroid.util.Util;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
 import java.security.InvalidParameterException;
-import java.util.List;
 
 import eu.chainfire.libsuperuser.Shell;
 

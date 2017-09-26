@@ -43,7 +43,7 @@ public class ExternalVersioningFragment extends Fragment {
     }
 
     private void initateTextView() {
-        TextView commandTextView = (TextView) mView.findViewById(R.id.commandTextView);
+        TextView commandTextView = mView.findViewById(R.id.commandTextView);
 
         commandTextView.setText(getCommand());
         commandTextView.addTextChangedListener(new TextWatcher() {

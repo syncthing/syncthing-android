@@ -123,13 +123,13 @@ public class FolderActivity extends SyncthingActivity
         setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
         registerOnServiceConnectedListener(this);
 
-        mLabelView = (EditText) findViewById(R.id.label);
-        mIdView = (EditText) findViewById(R.id.id);
-        mPathView = (TextView) findViewById(R.id.directoryTextView);
-        mFolderMasterView = (SwitchCompat) findViewById(R.id.master);
-        mVersioningDescriptionView = (TextView) findViewById(R.id.versioningDescription);
-        mVersioningTypeView = (TextView) findViewById(R.id.versioningType);
-        mDevicesContainer = (ViewGroup) findViewById(R.id.devicesContainer);
+        mLabelView = findViewById(R.id.label);
+        mIdView = findViewById(R.id.id);
+        mPathView = findViewById(R.id.directoryTextView);
+        mFolderMasterView = findViewById(R.id.master);
+        mVersioningDescriptionView = findViewById(R.id.versioningDescription);
+        mVersioningTypeView = findViewById(R.id.versioningType);
+        mDevicesContainer = findViewById(R.id.devicesContainer);
 
         mPathView.setOnClickListener(view ->
                 startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
