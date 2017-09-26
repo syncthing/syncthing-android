@@ -55,7 +55,7 @@ public class NetworkReceiverTest {
         Intent receivedIntent = mContext.getReceivedIntents().get(0);
         Assert.assertEquals(SyncthingService.class.getName(), receivedIntent.getComponent().getClassName());
         Assert.assertNull(receivedIntent.getAction());
-        Assert.assertTrue(receivedIntent.hasExtra(DeviceStateHolder.EXTRA_HAS_WIFI));
+        Assert.assertTrue(receivedIntent.hasExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION));
         mContext.clearReceivedIntents();
     }
 

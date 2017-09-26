@@ -42,29 +42,13 @@ public class DeviceStateHolderTest {
     @Test
     public void testWifiConnected() {
         Intent i = new Intent();
-        i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, false);
+        i.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, false);
         mReceiver.update(i);
-        Assert.assertFalse(mReceiver.isWifiConnected());
+        Assert.assertFalse(mReceiver.isAllowedNetworkConnection());
 
-        i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, true);
+        i.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, true);
         mReceiver.update(i);
-        Assert.assertTrue(mReceiver.isWifiConnected());
-    }
-
-    @Test
-    public void testonReceiveInitialChargingState() {
-        Intent i = new Intent();
-        mReceiver.onReceive(mContext, i);
-        Assert.assertFalse(mReceiver.isCharging());
-        Assert.assertEquals(mContext.getLastUnregistered(), mReceiver);
-
-        i.putExtra(BatteryManager.EXTRA_PLUGGED, 0);
-        mReceiver.onReceive(mContext, i);
-        Assert.assertFalse(mReceiver.isCharging());
-
-        i.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
-        mReceiver.onReceive(mContext, i);
-        Assert.assertTrue(mReceiver.isCharging());
+        Assert.assertTrue(mReceiver.isAllowedNetworkConnection());
     }
 
 }

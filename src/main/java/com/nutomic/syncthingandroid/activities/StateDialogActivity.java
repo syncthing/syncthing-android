@@ -73,9 +73,8 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 .setNegativeButton(R.string.exit,
                         (dialogInterface, i) -> ActivityCompat.finishAffinity(this)
                 )
-                .setOnCancelListener(dialogInterface -> ActivityCompat.finishAffinity(this))
+                .setCancelable(false)
                 .show();
-        mDisabledDialog.setCanceledOnTouchOutside(false);
     }
 
     private void dismissDisabledDialog() {

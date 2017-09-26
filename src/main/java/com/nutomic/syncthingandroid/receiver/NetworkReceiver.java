@@ -1,10 +1,12 @@
 package com.nutomic.syncthingandroid.receiver;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
@@ -25,14 +27,22 @@ public class NetworkReceiver extends BroadcastReceiver {
         if (!SyncthingService.alwaysRunInBackground(context))
             return;
 
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        updateNetworkStatus(context);
+    }
+
+    @TargetApi(16)
+    public static void updateNetworkStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
-        boolean isWifiConnected = ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI && ni.isConnected();
-        Log.v(TAG, "Received wifi " + (isWifiConnected ? "connected" : "disconnected") + " event");
-        Intent i = new Intent(context, SyncthingService.class);
-        i.putExtra(DeviceStateHolder.EXTRA_HAS_WIFI, isWifiConnected);
-        context.startService(i);
+        boolean isOffline = ni == null;
+        boolean isWifi = ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI && ni.isConnected();
+        boolean isNetworkMetered = (Build.VERSION.SDK_INT >= 16) ? cm.isActiveNetworkMetered() : false;
+        boolean isAllowedConnection =  isOffline || (isWifi && !isNetworkMetered);
+
+        Intent intent = new Intent(context, SyncthingService.class);
+        intent.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, isAllowedConnection);
+        context.startService(intent);
     }
 
 }

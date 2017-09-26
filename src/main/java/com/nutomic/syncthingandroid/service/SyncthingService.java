@@ -167,8 +167,8 @@ public class SyncthingService extends Service implements
 
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
-     * {@link DeviceStateHolder#EXTRA_HAS_WIFI} or {@link DeviceStateHolder#EXTRA_IS_CHARGING}
-     * (which are handled by {@link DeviceStateHolder}.
+     * {@link DeviceStateHolder#EXTRA_IS_ALLOWED_NETWORK_CONNECTION} or
+     * {@link DeviceStateHolder#EXTRA_IS_CHARGING} (which are handled by {@link DeviceStateHolder}.
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -184,7 +184,7 @@ public class SyncthingService extends Service implements
             new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
             mCurrentState = State.INIT;
             updateState();
-        } else if (mCurrentState != State.INIT) {
+        } else {
             mDeviceStateHolder.update(intent);
             updateState();
         }
@@ -309,7 +309,6 @@ public class SyncthingService extends Service implements
         PRNGFixes.apply();
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this);
-        registerReceiver(mDeviceStateHolder, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
