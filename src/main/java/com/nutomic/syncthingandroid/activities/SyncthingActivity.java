@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
@@ -46,7 +47,7 @@ public abstract class SyncthingActivity extends ToolbarBindingActivity implement
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         SyncthingServiceBinder binder = (SyncthingServiceBinder) iBinder;
         mSyncthingService = binder.getService();
-        mServiceConnectedListeners.forEach(OnServiceConnectedListener::onServiceConnected);
+        Stream.of(mServiceConnectedListeners).forEach(OnServiceConnectedListener::onServiceConnected);
         mServiceConnectedListeners.clear();
     }
 

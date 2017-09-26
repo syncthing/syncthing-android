@@ -3,7 +3,9 @@ package com.nutomic.syncthingandroid.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -30,6 +32,8 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Map;
@@ -64,6 +68,8 @@ public class FolderActivity extends SyncthingActivity
 
     private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
 
+    private static final String IGNORE_FILE_NAME = ".stignore";
+
     private Folder mFolder;
 
     private EditText mLabelView;
@@ -73,6 +79,7 @@ public class FolderActivity extends SyncthingActivity
     private ViewGroup mDevicesContainer;
     private TextView mVersioningDescriptionView;
     private TextView mVersioningTypeView;
+    private TextView mEditIgnores;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate;
@@ -130,11 +137,13 @@ public class FolderActivity extends SyncthingActivity
         mVersioningDescriptionView = findViewById(R.id.versioningDescription);
         mVersioningTypeView = findViewById(R.id.versioningType);
         mDevicesContainer = findViewById(R.id.devicesContainer);
+        mEditIgnores = findViewById(R.id.edit_ignores);
 
         mPathView.setOnClickListener(view ->
                 startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
+        mEditIgnores.setOnClickListener(v -> editIgnores());
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -148,6 +157,7 @@ public class FolderActivity extends SyncthingActivity
             }
             // Open keyboard on label view in edit mode.
             mLabelView.requestFocus();
+            mEditIgnores.setEnabled(false);
         }
         else {
             prepareEditMode();
@@ -163,6 +173,25 @@ public class FolderActivity extends SyncthingActivity
             if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
                 showDeleteDialog();
             }
+        }
+    }
+
+    private void editIgnores() {
+        try {
+            File ignoreFile = new File(mFolder.path, IGNORE_FILE_NAME);
+            if (!ignoreFile.exists() && !ignoreFile.createNewFile()) {
+                Toast.makeText(this, R.string.create_ignore_file_error, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(Intent.ACTION_EDIT);
+            Uri uri = Uri.fromFile(ignoreFile);
+            intent.setDataAndType(uri, "text/plain");
+            startActivity(intent);
+        } catch (IOException e) {
+            Log.w(TAG, e);
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, e);
+            Toast.makeText(this, R.string.edit_ignore_file_error, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -369,6 +398,7 @@ public class FolderActivity extends SyncthingActivity
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
             mFolderNeedsToUpdate = true;
+            mEditIgnores.setEnabled(true);
         } else if (resultCode == Activity.RESULT_OK && requestCode == FILE_VERSIONING_DIALOG_REQUEST) {
             updateVersioning(data.getExtras());
         }

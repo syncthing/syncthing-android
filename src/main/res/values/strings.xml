@@ -167,6 +167,12 @@ Please report any problems you encounter via Github.</string>
 
     <string name="dialog_discard_changes">Discard your changes?</string>
 
+    <string name="ignore_patterns">Ignore Patterns</string>
+
+    <string name="create_ignore_file_error">Failed to create ignore file. Is the directory writable?</string>
+
+    <string name="edit_ignore_file_error">No text editor found</string>
+
     <!-- DeviceActivity -->
 
 

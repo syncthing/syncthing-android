@@ -99,8 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
                     android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    tools:ignore="HardcodedText" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
             </LinearLayout>
 
             <android.support.v7.widget.SwitchCompat
