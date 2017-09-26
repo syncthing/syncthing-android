@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.service;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -70,11 +69,7 @@ public class DeviceStateHolder {
         Log.i(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
                 ", charging: " + mIsCharging);
 
-        if (mIsAllowedNetworkConnection) {
-            updateWifiSsid();
-        } else {
-            mWifiSsid = null;
-        }
+        updateWifiSsid();
     }
 
     private void updateWifiSsid() {
@@ -86,10 +81,6 @@ public class DeviceStateHolder {
         if (wifiInfo != null) {
             mWifiSsid = wifiInfo.getSSID();
         }
-    }
-
-    private String getWifiSsid() {
-        return mWifiSsid;
     }
 
     /**
@@ -108,14 +99,14 @@ public class DeviceStateHolder {
             boolean prefStopNotCharging = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, false);
 
             return (isCharging() || !prefStopNotCharging) &&
-                    (!prefStopMobileData || isAllowedWifiConnected());
+                    (!prefStopMobileData || isWhitelistedNetworkConnection());
         }
         else {
             return true;
         }
     }
 
-    private boolean isAllowedWifiConnected() {
+    private boolean isWhitelistedNetworkConnection() {
         boolean wifiConnected = isAllowedNetworkConnection();
         if (wifiConnected) {
             Set<String> ssids = mPreferences.getStringSet(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
@@ -123,17 +114,11 @@ public class DeviceStateHolder {
                 Log.d(TAG, "All SSIDs allowed for syncing");
                 return true;
             } else {
-                String ssid = getWifiSsid();
-                if (ssid != null) {
-                    if (ssids.contains(ssid)) {
-                        Log.d(TAG, "SSID [" + ssid + "] found in whitelist: " + ssids);
-                        return true;
-                    }
-                    Log.i(TAG, "SSID [" + ssid + "] not whitelisted: " + ssids);
-                    return false;
+                if (mWifiSsid != null && ssids.contains(mWifiSsid)) {
+                    Log.d(TAG, "SSID [" + mWifiSsid + "] found in whitelist: " + ssids);
+                    return true;
                 } else {
-                    // Don't know the SSID (yet) (should not happen?!), so not allowing
-                    Log.w(TAG, "SSID unknown (yet), cannot check SSID whitelist. Disallowing sync.");
+                    Log.w(TAG, "SSID [" + mWifiSsid + "] unknown or not whitelisted, disallowing sync.");
                     return false;
                 }
             }
