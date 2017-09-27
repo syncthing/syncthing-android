@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.views;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -54,9 +53,9 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         binding.openFolder.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(new File(folder.path)), "resource/folder");
-            try {
+            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                 getContext().startActivity(intent);
-            } catch (ActivityNotFoundException e) {
+            } else {
                 Toast.makeText(getContext(), R.string.toast_no_file_manager, Toast.LENGTH_SHORT).show();
             }
         });
