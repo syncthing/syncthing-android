@@ -42,6 +42,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.function.Consumer;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
@@ -272,24 +273,28 @@ public class MainActivity extends StateDialogActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Avoid crash if called during startup.
-        if (mFolderListFragment != null && mDeviceListFragment != null && mDrawerFragment != null) {
-            FragmentManager fm = getSupportFragmentManager();
-            fm.putFragment(outState, FolderListFragment.class.getName(), mFolderListFragment);
-            fm.putFragment(outState, DeviceListFragment.class.getName(), mDeviceListFragment);
-            fm.putFragment(outState, DrawerFragment.class.getName(), mDrawerFragment);
-            outState.putInt("currentTab", mViewPager.getCurrentItem());
-            outState.putBoolean(BATTERY_DIALOG_DISMISSED, mBatteryOptimizationsDialog == null || !mBatteryOptimizationsDialog.isShowing());
-            outState.putBoolean(IS_SHOWING_RESTART_DIALOG, mRestartDialog != null && mRestartDialog.isShowing());
-            if(mQrCodeDialog != null && mQrCodeDialog.isShowing()) {
-                outState.putBoolean(IS_QRCODE_DIALOG_DISPLAYED, true);
-                ImageView qrCode = mQrCodeDialog.findViewById(R.id.qrcode_image_view);
-                TextView deviceID = mQrCodeDialog.findViewById(R.id.device_id);
-                outState.putParcelable(QRCODE_BITMAP_KEY, ((BitmapDrawable) qrCode.getDrawable()).getBitmap());
-                outState.putString(DEVICEID_KEY, deviceID.getText().toString());
+
+        FragmentManager fm = getSupportFragmentManager();
+        Consumer<Fragment> putFragment = fragment -> {
+            if (fragment != null && fragment.isAdded()) {
+                fm.putFragment(outState, fragment.getClass().getName(), fragment);
             }
-            Util.dismissDialogSafe(mRestartDialog, this);
+        };
+        putFragment.accept(mFolderListFragment);
+        putFragment.accept(mDeviceListFragment);
+        putFragment.accept(mDrawerFragment);
+
+        outState.putInt("currentTab", mViewPager.getCurrentItem());
+        outState.putBoolean(BATTERY_DIALOG_DISMISSED, mBatteryOptimizationsDialog == null || !mBatteryOptimizationsDialog.isShowing());
+        outState.putBoolean(IS_SHOWING_RESTART_DIALOG, mRestartDialog != null && mRestartDialog.isShowing());
+        if(mQrCodeDialog != null && mQrCodeDialog.isShowing()) {
+            outState.putBoolean(IS_QRCODE_DIALOG_DISPLAYED, true);
+            ImageView qrCode = mQrCodeDialog.findViewById(R.id.qrcode_image_view);
+            TextView deviceID = mQrCodeDialog.findViewById(R.id.device_id);
+            outState.putParcelable(QRCODE_BITMAP_KEY, ((BitmapDrawable) qrCode.getDrawable()).getBitmap());
+            outState.putString(DEVICEID_KEY, deviceID.getText().toString());
         }
+        Util.dismissDialogSafe(mRestartDialog, this);
     }
 
     @Override
