@@ -44,8 +44,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mVersion;
     private TextView mExitButton;
 
-    private String mDeviceId;
-
     private Timer mTimer;
 
     private MainActivity mActivity;
@@ -158,7 +156,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private void onReceiveSystemInfo(SystemInfo info) {
         if (getActivity() == null)
             return;
-        mDeviceId = info.myID;
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
         mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
@@ -201,10 +198,11 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
         String httpsCertPath = mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
         String apiKey = mActivity.getApi().getGui().apiKey;
+        String deviceId = mActivity.getApi().getLocalDevice().deviceID;
         URL url = mActivity.getApi().getUrl();
         new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, httpsCertPath,
-                apiKey, ImmutableMap.of("text", mDeviceId),qrCodeBitmap -> {
-            mActivity.showQrCodeDialog(mDeviceId, qrCodeBitmap);
+                apiKey, ImmutableMap.of("text", deviceId),qrCodeBitmap -> {
+            mActivity.showQrCodeDialog(deviceId, qrCodeBitmap);
             mActivity.closeDrawer();
         }, error -> Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show());
     }
