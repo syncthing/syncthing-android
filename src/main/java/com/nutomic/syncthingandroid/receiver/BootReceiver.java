@@ -10,7 +10,8 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED))
+        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) &&
+                !intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED))
             return;
 
         if (!SyncthingService.alwaysRunInBackground(context))
@@ -18,5 +19,4 @@ public class BootReceiver extends BroadcastReceiver {
 
         context.startService(new Intent(context, SyncthingService.class));
     }
-
 }
