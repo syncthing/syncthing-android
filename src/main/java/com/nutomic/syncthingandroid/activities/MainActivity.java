@@ -288,9 +288,7 @@ public class MainActivity extends StateDialogActivity
                 outState.putParcelable(QRCODE_BITMAP_KEY, ((BitmapDrawable) qrCode.getDrawable()).getBitmap());
                 outState.putString(DEVICEID_KEY, deviceID.getText().toString());
             }
-            if (mRestartDialog != null){
-                mRestartDialog.cancel();
-            }
+            Util.dismissDialogSafe(mRestartDialog, this);
         }
     }
 

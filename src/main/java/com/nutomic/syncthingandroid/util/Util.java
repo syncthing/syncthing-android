@@ -1,19 +1,22 @@
 package com.nutomic.syncthingandroid.util;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.widget.Toast;
-import android.util.Log;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-
-import java.io.IOException;
-import java.io.DataOutputStream;
+import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
+
 import eu.chainfire.libsuperuser.Shell;
 
 public class Util {
@@ -115,5 +118,22 @@ public class Util {
             Log.w(TAG, "This should not happen", e);
         }
         return false;
+    }
+
+    /**
+     * Make sure that dialog is showing and activity is valid before dismissing dialog, to prevent
+     * various crashes.
+     */
+    public static void dismissDialogSafe(Dialog dialog, Activity activity) {
+        if (dialog == null || !dialog.isShowing())
+            return;
+
+        if (activity.isFinishing())
+            return;
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN && activity.isDestroyed())
+            return;
+
+        dialog.dismiss();
     }
 }

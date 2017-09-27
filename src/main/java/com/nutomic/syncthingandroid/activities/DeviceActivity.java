@@ -235,20 +235,14 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         outState.putString("device", new Gson().toJson(mDevice));
         if (mIsCreateMode){
             outState.putBoolean(IS_SHOWING_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
-            if(mDiscardDialog != null){
-                mDiscardDialog.cancel();
-            }
+            Util.dismissDialogSafe(mDiscardDialog, this);
         }
 
         outState.putBoolean(IS_SHOWING_COMPRESSION_DIALOG, mCompressionDialog != null && mCompressionDialog.isShowing());
-        if(mCompressionDialog != null){
-            mCompressionDialog.cancel();
-        }
+        Util.dismissDialogSafe(mCompressionDialog, this);
 
         outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
-        if (mDeleteDialog != null) {
-            mDeleteDialog.cancel();
-        }
+        Util.dismissDialogSafe(mDeleteDialog, this);
     }
 
     private void onServiceConnected() {

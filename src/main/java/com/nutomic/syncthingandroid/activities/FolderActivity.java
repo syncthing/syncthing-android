@@ -31,6 +31,7 @@ import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -242,15 +243,11 @@ public class FolderActivity extends SyncthingActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
-        if (mDeleteDialog != null) {
-            mDeleteDialog.cancel();
-        }
+        Util.dismissDialogSafe(mDeleteDialog, this);
 
         if (mIsCreateMode){
             outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
-            if(mDiscardDialog != null){
-                mDiscardDialog.cancel();
-            }
+            Util.dismissDialogSafe(mDiscardDialog, this);
         }
     }
 

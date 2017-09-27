@@ -22,6 +22,7 @@ import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -258,7 +259,7 @@ public class ShareActivity extends StateDialogActivity
         }
 
         protected void onPostExecute(Boolean isError) {
-            mProgress.dismiss();
+            Util.dismissDialogSafe(mProgress, ShareActivity.this);
             Toast.makeText(ShareActivity.this, mIgnored > 0 ?
                     getResources().getQuantityString(R.plurals.copy_success_partially, mCopied,
                             mCopied, mFolder.label, mIgnored) :

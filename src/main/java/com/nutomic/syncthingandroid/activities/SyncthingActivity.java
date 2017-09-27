@@ -10,6 +10,7 @@ import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.LinkedList;
 

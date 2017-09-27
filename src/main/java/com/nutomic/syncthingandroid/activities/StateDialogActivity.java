@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 /**
  * Handles loading/disabled dialogs.
@@ -78,10 +79,8 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     }
 
     private void dismissDisabledDialog() {
-        if (mDisabledDialog != null && mDisabledDialog.isShowing()) {
-            mDisabledDialog.dismiss();
-            mDisabledDialog = null;
-        }
+        Util.dismissDialogSafe(mDisabledDialog, this);
+        mDisabledDialog = null;
     }
 
     /**
@@ -111,9 +110,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     }
 
     private void dismissLoadingDialog() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
-            mLoadingDialog = null;
-        }
+        Util.dismissDialogSafe(mLoadingDialog, this);
+        mLoadingDialog = null;
     }
 }
