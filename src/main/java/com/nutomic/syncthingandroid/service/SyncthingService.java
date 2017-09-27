@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.Pair;
@@ -457,7 +458,7 @@ public class SyncthingService extends Service implements
         return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
     }
 
-    public RestApi getApi() {
+    public @Nullable RestApi getApi() {
         return mApi;
     }
 

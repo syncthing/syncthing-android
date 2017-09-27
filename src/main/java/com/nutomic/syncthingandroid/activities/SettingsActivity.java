@@ -175,10 +175,14 @@ public class SettingsActivity extends SyncthingActivity {
 
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
             mSyncthingService.registerOnApiChangeListener(this);
-            if (mSyncthingService.getApi().isConfigLoaded()) {
-                mGui = mSyncthingService.getApi().getGui();
-                mOptions = mSyncthingService.getApi().getOptions();
-            }
+            // Use callback to make sure getApi() doesn't return null.
+            mSyncthingService.registerOnWebGuiAvailableListener(() -> {
+                if (mSyncthingService.getApi().isConfigLoaded()) {
+                    mGui = mSyncthingService.getApi().getGui();
+                    mOptions = mSyncthingService.getApi().getOptions();
+                }
+
+            });
         }
 
         @Override
