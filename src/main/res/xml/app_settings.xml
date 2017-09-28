@@ -33,6 +33,7 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:key="category_behaviour"
         android:title="@string/category_behaviour">
 
         <CheckBoxPreference

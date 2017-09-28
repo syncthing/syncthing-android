@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -106,14 +108,19 @@ public class SettingsActivity extends SyncthingActivity {
             mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
 
             ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
-            Languages languages = new Languages(getActivity());
-            languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
-            languagePref.setEntries(languages.getAllNames());
-            languagePref.setEntryValues(languages.getSupportedLocales());
-            languagePref.setOnPreferenceChangeListener((p, o) -> {
-                languages.forceChangeLanguage(getActivity(), (String) o);
-                return false;
-            });
+            if (Build.VERSION.SDK_INT >= 24) {
+                PreferenceScreen category = (PreferenceScreen) findPreference("category_behaviour");
+                category.removePreference(languagePref);
+            } else {
+                Languages languages = new Languages(getActivity());
+                languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
+                languagePref.setEntries(languages.getAllNames());
+                languagePref.setEntryValues(languages.getSupportedLocales());
+                languagePref.setOnPreferenceChangeListener((p, o) -> {
+                    languages.forceChangeLanguage(getActivity(), (String) o);
+                    return false;
+                });
+            }
 
             mDeviceName             = (EditTextPreference) findPreference("deviceName");
             mListenAddresses        = (EditTextPreference) findPreference("listenAddresses");

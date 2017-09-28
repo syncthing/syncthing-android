@@ -68,11 +68,6 @@ public final class Languages {
      */
     @TargetApi(17)
     public void setLanguage(Context context) {
-        if (Build.VERSION.SDK_INT >= 24) {
-            Log.d(TAG, "Languages.setLanguage() ignored on >= android-24");
-            mPreferences.edit().remove(PREFERENCE_LANGUAGE).apply();
-            return;
-        }
         String language = mPreferences.getString(PREFERENCE_LANGUAGE, null);
         Locale locale;
         if (TextUtils.equals(language, DEFAULT_LOCALE.getLanguage())) {
@@ -111,10 +106,6 @@ public final class Languages {
     public void forceChangeLanguage(Activity activity, String newLanguage) {
         mPreferences.edit().putString(PREFERENCE_LANGUAGE, newLanguage).commit();
         setLanguage(activity);
-        if (Build.VERSION.SDK_INT >= 24) {
-            Log.d(TAG, "Languages.forceChangeLanguage() ignored on >= android-24");
-            return;
-        }
         Intent intent = activity.getIntent();
         if (intent == null) { // when launched as LAUNCHER
             return;
