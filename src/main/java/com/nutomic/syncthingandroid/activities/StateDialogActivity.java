@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -98,15 +97,10 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);
 
-        try {
-            mLoadingDialog = new AlertDialog.Builder(this)
-                    .setCancelable(false)
-                    .setView(dialogLayout)
-                    .show();
-        } catch (RuntimeException e) {
-            // Catch and do nothing, workaround for https://stackoverflow.com/q/46030692/1837158
-            Log.w(TAG, e);
-        }
+        mLoadingDialog = new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setView(dialogLayout)
+                .show();
     }
 
     private void dismissLoadingDialog() {

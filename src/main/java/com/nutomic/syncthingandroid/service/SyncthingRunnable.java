@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -149,8 +149,7 @@ public class SyncthingRunnable implements Runnable {
                     // Syncthing was shut down (via API or SIGKILL), do nothing.
                     break;
                 case 1:
-                    // Syncthing is already running, kill it and try again.
-                    killSyncthing();
+                    Log.w(TAG, "Another Syncthing instance is already running, requesting restart via SyncthingService intent");
                     //fallthrough
                 case 3:
                     // Restart was requested via Rest API call.
@@ -246,42 +245,48 @@ public class SyncthingRunnable implements Runnable {
         }.start();
     }
 
+    public interface OnSyncthingKilled {
+        void onKilled();
+    }
     /**
      * Look for running libsyncthing.so processes and kill them.
      * Try a SIGINT first, then try again with SIGKILL.
      */
-    public void killSyncthing() {
-        for (int i = 0; i < 2; i++) {
-            Process ps = null;
-            DataOutputStream psOut = null;
-            try {
-                ps = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
-                psOut = new DataOutputStream(ps.getOutputStream());
-                psOut.writeBytes("ps | grep libsyncthing.so\n");
-                psOut.writeBytes("exit\n");
-                psOut.flush();
-                ps.waitFor();
-                InputStreamReader isr = new InputStreamReader(ps.getInputStream(), "UTF-8");
-                BufferedReader br = new BufferedReader(isr);
-                String id;
-                while ((id = br.readLine()) != null) {
-                    id = id.trim().split("\\s+")[1];
-                    killProcessId(id, i > 0);
-                }
-            } catch (IOException | InterruptedException e) {
-                Log.w(TAG_KILL, "Failed list Syncthing processes", e);
-            } finally {
+    public void killSyncthing(OnSyncthingKilled onKilledListener) {
+        new Thread(() -> {
+            for (int i = 0; i < 2; i++) {
+                Process ps = null;
+                DataOutputStream psOut = null;
                 try {
-                    if (psOut != null)
-                        psOut.close();
-                } catch (IOException e) {
-                    Log.w(TAG_KILL, "Failed close the psOut stream", e);
-                }
-                if (ps != null) {
-                    ps.destroy();
+                    ps = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
+                    psOut = new DataOutputStream(ps.getOutputStream());
+                    psOut.writeBytes("ps | grep libsyncthing.so\n");
+                    psOut.writeBytes("exit\n");
+                    psOut.flush();
+                    ps.waitFor();
+                    InputStreamReader isr = new InputStreamReader(ps.getInputStream(), "UTF-8");
+                    BufferedReader br = new BufferedReader(isr);
+                    String id;
+                    while ((id = br.readLine()) != null) {
+                        id = id.trim().split("\\s+")[1];
+                        killProcessId(id, i > 0);
+                    }
+                } catch (IOException | InterruptedException e) {
+                    Log.w(TAG_KILL, "Failed list Syncthing processes", e);
+                } finally {
+                    try {
+                        if (psOut != null)
+                            psOut.close();
+                    } catch (IOException e) {
+                        Log.w(TAG_KILL, "Failed close the psOut stream", e);
+                    }
+                    if (ps != null) {
+                        ps.destroy();
+                    }
                 }
             }
-        }
+            onKilledListener.onKilled();
+        }).start();
     }
 
     /**
@@ -403,11 +408,9 @@ public class SyncthingRunnable implements Runnable {
     }
 
     private Process setupAndLaunch(HashMap<String, String> env) throws IOException {
-        Process process = null;
-
         if (mUseRoot) {
             ProcessBuilder pb = new ProcessBuilder("su");
-            process = pb.start();
+            Process process = pb.start();
             // The su binary prohibits the inheritance of environment variables.
             // Even with --preserve-environment the environment gets messed up.
             // We therefore start a root shell, and set all the environment variables manually.
@@ -421,12 +424,11 @@ public class SyncthingRunnable implements Runnable {
             // If we did not use exec, we would wait infinitely for the process to terminate (ret = process.waitFor(); in run()).
             // With exec the whole process terminates when Syncthing exits.
             suOut.writeBytes("exec " + TextUtils.join(" ", mCommand) + "\n");
-            suOut = null;
+            return process;
         } else {
             ProcessBuilder pb = new ProcessBuilder(mCommand);
             pb.environment().putAll(env);
-            process = pb.start();
+            return pb.start();
         }
-        return process;
     }
 }

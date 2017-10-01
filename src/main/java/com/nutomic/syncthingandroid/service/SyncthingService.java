@@ -18,7 +18,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.util.Pair;
 import android.widget.Toast;
 
 import com.android.PRNGFixes;
@@ -39,6 +38,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -126,7 +126,7 @@ public class SyncthingService extends Service implements
 
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
             new HashSet<>();
-
+    
     private final BroadcastReceiver mPowerSaveModeChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -135,17 +135,19 @@ public class SyncthingService extends Service implements
     };
 
     /**
-     * INIT: Service is starting up and initializing.
-     * STARTING: Syncthing binary is starting (but the API is not yet ready).
-     * ACTIVE: Syncthing binary is up and running.
-     * DISABLED: Syncthing binary is stopped according to user preferences.
+     * Indicates the current state of SyncthingService and of Syncthing itself.
      */
     public enum State {
+        /** Service is initializing, Syncthing was not started yet. */
         INIT,
+        /** Syncthing binary is starting. */
         STARTING,
+        /** Syncthing binary is running, API is available. */
         ACTIVE,
+        /** Syncthing is stopped according to user preferences. */
         DISABLED,
-        ERROR
+        /** There is some problem that prevents Syncthing from running. */
+        ERROR,
     }
 
     private State mCurrentState = State.INIT;
@@ -164,7 +166,7 @@ public class SyncthingService extends Service implements
 
     private DeviceStateHolder mDeviceStateHolder;
 
-    private SyncthingRunnable mRunnable;
+    private SyncthingRunnable mSyncthingRunnable;
 
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
@@ -177,14 +179,12 @@ public class SyncthingService extends Service implements
             return START_STICKY;
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            shutdown();
-            mCurrentState = State.INIT;
-            updateState();
+            shutdown(State.INIT, () -> new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR));
         } else if (ACTION_RESET.equals(intent.getAction())) {
-            shutdown();
-            new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
-            mCurrentState = State.INIT;
-            updateState();
+            shutdown(State.INIT, () -> {
+                new SyncthingRunnable(this, SyncthingRunnable.Command.reset).run();
+                new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            });
         } else {
             mDeviceStateHolder.update(intent);
             updateState();
@@ -196,7 +196,7 @@ public class SyncthingService extends Service implements
      * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
      * or not.
      *
-     * Depending on the result, syncthing is started or stopped, and {@link #onApiChange()} is
+     * Depending on the result, syncthing is started or stopped, and {@link #onApiChange} is
      * called.
      */
     private void updateState() {
@@ -209,30 +209,10 @@ public class SyncthingService extends Service implements
 
             // HACK: Make sure there is no syncthing binary left running from an improper
             // shutdown (eg Play Store update).
-            // NOTE: This will log an exception if syncthing is not actually running.
-            shutdown();
-
-            Log.i(TAG, "Starting syncthing according to current state and preferences");
-            mConfig = null;
-            try {
-                mConfig = new ConfigXml(SyncthingService.this);
-            } catch (ConfigXml.OpenConfigException e) {
-                mCurrentState = State.ERROR;
-                Toast.makeText(this, R.string.config_create_failed, Toast.LENGTH_LONG).show();
-            }
-
-            if (mConfig != null) {
-                mCurrentState = State.STARTING;
-
-                if (mApi != null)
-                    registerOnWebGuiAvailableListener(mApi);
-                if (mEventProcessor != null)
-                    registerOnWebGuiAvailableListener(mEventProcessor);
-                pollWebGui();
-                mRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
-                new Thread(mRunnable).start();
-                updateNotification();
-            }
+            shutdown(State.INIT, () -> {
+                Log.i(TAG, "Starting syncthing according to current state and preferences");
+                new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            });
         }
         // Stop syncthing.
         else {
@@ -240,11 +220,8 @@ public class SyncthingService extends Service implements
                 return;
 
             Log.i(TAG, "Stopping syncthing according to current state and preferences");
-            mCurrentState = State.DISABLED;
-
-            shutdown();
+            shutdown(State.DISABLED, () -> {});
         }
-        onApiChange();
     }
 
     /**
@@ -321,66 +298,72 @@ public class SyncthingService extends Service implements
             registerReceiver(mNetworkReceiver,
                     new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
-        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        updateState();
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
-     * Sets up the initial configuration, updates the config when coming from an old
-     * version, and reads syncthing URL and API key (these are passed internally as
-     * {@code Pair<String, String>}.
+     * Sets up the initial configuration, and updates the config when coming from an old
+     * version.
      */
-    private class StartupTask extends AsyncTask<Void, Void, Pair<URL, String>> {
+    private class StartupTask extends AsyncTask<Void, Void, Void> {
+
+        public StartupTask() {
+            mCurrentState = State.STARTING;
+        }
 
         @Override
-        protected Pair<URL, String> doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
             try {
                 mConfig = new ConfigXml(SyncthingService.this);
                 mConfig.updateIfNeeded();
-                return new Pair<>(mConfig.getWebGuiUrl(), mConfig.getApiKey());
             } catch (ConfigXml.OpenConfigException e) {
-                return null;
+                Toast.makeText(SyncthingService.this, R.string.config_create_failed,
+                        Toast.LENGTH_LONG).show();
+                onApiChange(State.ERROR);
+                cancel(true);
             }
+            return null;
         }
 
         @Override
-        protected void onPostExecute(Pair<URL, String> urlAndKey) {
-            if (urlAndKey == null) {
-                Toast.makeText(SyncthingService.this, R.string.config_create_failed,
-                        Toast.LENGTH_LONG).show();
-                mCurrentState = State.ERROR;
-                onApiChange();
-                return;
-            }
-
-            mApi = new RestApi(SyncthingService.this, urlAndKey.first, urlAndKey.second, () -> {
-                        mCurrentState = State.ACTIVE;
-                        onApiChange();
-                        new Thread(() -> {
-                            for (Folder r : mApi.getFolders()) {
-                                try {
-                                    mObservers.add(new FolderObserver(mApi, r));
-                                } catch (FolderObserver.FolderNotExistingException e) {
-                                    Log.w(TAG, "Failed to add observer for folder", e);
-                                } catch (StackOverflowError e) {
-                                    Log.w(TAG, "Failed to add folder observer", e);
-                                    Toast.makeText(SyncthingService.this,
-                                            R.string.toast_folder_observer_stack_overflow,
-                                            Toast.LENGTH_LONG)
-                                            .show();
-                                }
-                            }
-                        }).start();
-                    }, SyncthingService.this::onApiChange);
+        protected void onPostExecute(Void aVoid) {
+            mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
+                    SyncthingService.this::onSyncthingStarted, () -> onApiChange(mCurrentState));
 
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
 
-            registerOnWebGuiAvailableListener(mApi);
-            registerOnWebGuiAvailableListener(mEventProcessor);
+            if (mApi != null)
+                registerOnWebGuiAvailableListener(mApi);
+            if (mEventProcessor != null)
+                registerOnWebGuiAvailableListener(mEventProcessor);
             Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
-            updateState();
+
+            pollWebGui();
+            mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
+            new Thread(mSyncthingRunnable).start();
+            updateNotification();
         }
+    }
+
+    private void onSyncthingStarted() {
+        onApiChange(State.ACTIVE);
+        new Thread(() -> {
+            for (Folder r : mApi.getFolders()) {
+                try {
+                    mObservers.add(new FolderObserver(mApi, r));
+                } catch (FolderObserver.FolderNotExistingException e) {
+                    Log.w(TAG, "Failed to add observer for folder", e);
+                } catch (StackOverflowError e) {
+                    Log.w(TAG, "Failed to add folder observer", e);
+                    Toast.makeText(SyncthingService.this,
+                            R.string.toast_folder_observer_stack_overflow,
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -405,7 +388,7 @@ public class SyncthingService extends Service implements
 
             } else {
                 Log.i(TAG, "Shutting down service immediately");
-                shutdown();
+                shutdown(State.DISABLED, () -> {});
             }
         }
 
@@ -417,12 +400,16 @@ public class SyncthingService extends Service implements
             unregisterReceiver(mNetworkReceiver);
     }
 
-    private void shutdown() {
+    /**
+     * Stop Syncthing and all helpers like event processor, api handler and folder observers.
+     *
+     * Sets {@link #mCurrentState} to newState, and calls onKilledListener once Syncthing is killed.
+     */
+    private void shutdown(State newState, SyncthingRunnable.OnSyncthingKilled onKilledListener) {
+        onApiChange(newState);
+
         if (mEventProcessor != null)
             mEventProcessor.shutdown();
-
-        if (mRunnable != null)
-            mRunnable.killSyncthing();
 
         if (mApi != null)
             mApi.shutdown();
@@ -433,6 +420,13 @@ public class SyncthingService extends Service implements
 
         Stream.of(mObservers).forEach(FolderObserver::stopWatching);
         mObservers.clear();
+
+        if (mSyncthingRunnable != null) {
+            mSyncthingRunnable.killSyncthing(onKilledListener);
+            mSyncthingRunnable = null;
+        } else {
+            onKilledListener.onKilled();
+        }
     }
 
     /**
@@ -498,17 +492,14 @@ public class SyncthingService extends Service implements
                                     mConfig.getApiKey(), result -> {
             synchronized (stateLock) {
                 if (mStopScheduled) {
-                    mCurrentState = State.DISABLED;
-                    onApiChange();
-                    shutdown();
+                    shutdown(State.DISABLED, () -> {});
                     mStopScheduled = false;
                     stopSelf();
                     return;
                 }
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-            mCurrentState = State.STARTING;
-            onApiChange();
+            onApiChange(State.STARTING);
             Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
             mOnWebGuiAvailableListeners.clear();
         });
@@ -519,7 +510,8 @@ public class SyncthingService extends Service implements
      *
      * Must only be called from SyncthingService or {@link RestApi} on the main thread.
      */
-    private void onApiChange() {
+    private void onApiChange(State newState) {
+        mCurrentState = newState;
         for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
              i.hasNext(); ) {
             OnApiChangeListener listener = i.next();
@@ -566,24 +558,21 @@ public class SyncthingService extends Service implements
      * @return True if the import was successful, false otherwise (eg if files aren't found).
      */
     public boolean importConfig() {
-        mCurrentState = State.DISABLED;
-        shutdown();
         File config = new File(EXPORT_PATH, ConfigXml.CONFIG_FILE);
         File privateKey = new File(EXPORT_PATH, PRIVATE_KEY_FILE);
         File publicKey = new File(EXPORT_PATH, PUBLIC_KEY_FILE);
         if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
-
-        try {
-            Files.copy(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
-            Files.copy(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
-            Files.copy(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
-        } catch (IOException e) {
-            Log.w(TAG, "Failed to import config", e);
-        }
-        mCurrentState = State.INIT;
-        onApiChange();
-        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        shutdown(State.INIT, () -> {
+            try {
+                Files.copy(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
+                Files.copy(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
+                Files.copy(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+            } catch (IOException e) {
+                Log.w(TAG, "Failed to import config", e);
+            }
+            new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        });
         return true;
     }
 }
