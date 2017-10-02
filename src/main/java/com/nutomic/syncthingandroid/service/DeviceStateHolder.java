@@ -54,14 +54,6 @@ public class DeviceStateHolder {
         NetworkReceiver.updateNetworkStatus(mContext);
     }
 
-    public boolean isCharging() {
-        return mIsCharging;
-    }
-
-    public boolean isAllowedNetworkConnection() {
-        return mIsAllowedNetworkConnection;
-    }
-
     public void update(Intent intent) {
         mIsAllowedNetworkConnection =
                 intent.getBooleanExtra(EXTRA_IS_ALLOWED_NETWORK_CONNECTION, mIsAllowedNetworkConnection);
@@ -98,7 +90,7 @@ public class DeviceStateHolder {
             boolean prefStopMobileData = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_WIFI, false);
             boolean prefStopNotCharging = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, false);
 
-            return (isCharging() || !prefStopNotCharging) &&
+            return (mIsCharging || !prefStopNotCharging) &&
                     (!prefStopMobileData || isWhitelistedNetworkConnection());
         }
         else {
@@ -107,7 +99,7 @@ public class DeviceStateHolder {
     }
 
     private boolean isWhitelistedNetworkConnection() {
-        boolean wifiConnected = isAllowedNetworkConnection();
+        boolean wifiConnected = mIsAllowedNetworkConnection;
         if (wifiConnected) {
             Set<String> ssids = mPreferences.getStringSet(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
             if (ssids.isEmpty()) {

@@ -11,7 +11,6 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 
@@ -27,7 +26,6 @@ import java.util.TreeMap;
  * Based on https://gitlab.com/fdroid/fdroidclient/blob/master/app/src/main/java/org/fdroid/fdroid/Languages.java
  */
 public final class Languages {
-    private static final String TAG = "Languages";
 
     public static final String USE_SYSTEM_DEFAULT = "";
 

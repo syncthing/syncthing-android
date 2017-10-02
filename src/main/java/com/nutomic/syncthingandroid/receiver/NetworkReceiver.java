@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.util.Log;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -16,8 +15,6 @@ import com.nutomic.syncthingandroid.service.SyncthingService;
  * Receives network connection change intents and sends the wifi state to {@link SyncthingService}.
  */
 public class NetworkReceiver extends BroadcastReceiver {
-
-    private static final String TAG = "NetworkReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {

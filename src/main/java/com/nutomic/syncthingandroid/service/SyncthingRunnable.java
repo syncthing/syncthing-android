@@ -45,7 +45,6 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_NATIVE = "SyncthingNativeCode";
     private static final String TAG_NICE = "SyncthingRunnableIoNice";
     private static final String TAG_KILL = "SyncthingRunnableKill";
-    public static final String UNIT_TEST_PATH = "was running";
     private static final String BINARY_NAME = "libsyncthing.so";
     private static final int LOG_FILE_MAX_LINES = 10;
     private static final int NOTIFICATION_ID_CRASH = 9;
@@ -88,20 +87,6 @@ public class SyncthingRunnable implements Runnable {
             default:
                 Log.w(TAG, "Unknown command option");
         }
-    }
-
-    /**
-     * Constructs instance.
-     *
-     * @param manualCommand The exact command to be executed on the shell. Used for tests only.
-     */
-    public SyncthingRunnable(Context context, String[] manualCommand) {
-        mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
-        mCommand = manualCommand;
-        mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        mUseRoot = false;
     }
 
     @Override

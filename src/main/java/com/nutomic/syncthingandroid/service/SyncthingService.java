@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -441,15 +440,6 @@ public class SyncthingService extends Service implements
         } else {
             mOnWebGuiAvailableListeners.add(listener);
         }
-    }
-
-    /**
-     * Returns true if this service has not been started before (ie config.xml does not exist).
-     *
-     * This will return true until the public key file has been generated.
-     */
-    public boolean isFirstStart() {
-        return !new File(getFilesDir(), PUBLIC_KEY_FILE).exists();
     }
 
     public @Nullable RestApi getApi() {
