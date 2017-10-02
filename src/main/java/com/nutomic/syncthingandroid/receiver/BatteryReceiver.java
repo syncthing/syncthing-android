@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -24,9 +25,13 @@ public class BatteryReceiver extends BroadcastReceiver {
             return;
 
         boolean isCharging = Intent.ACTION_POWER_CONNECTED.equals(intent.getAction());
-        Intent i = new Intent(context, SyncthingService.class);
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
+        Intent i = new Intent(DeviceStateHolder.ACTION_DEVICE_STATE_CHANGED);
         i.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, isCharging);
-        context.startService(i);
+        lbm.sendBroadcast(i);
+
+        // Make sure service is running.
+        context.startService(new Intent(context, SyncthingService.class));
     }
 
     /**
@@ -38,9 +43,10 @@ public class BatteryReceiver extends BroadcastReceiver {
         boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
 
-        Intent intent = new Intent(context, SyncthingService.class);
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
+        Intent intent = new Intent(DeviceStateHolder.ACTION_DEVICE_STATE_CHANGED);
         intent.putExtra(DeviceStateHolder.EXTRA_IS_CHARGING, isCharging);
-        context.startService(intent);
+        lbm.sendBroadcast(intent);
     }
 
 }

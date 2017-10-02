@@ -1,30 +1,39 @@
 package com.nutomic.syncthingandroid.service;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.google.common.base.Joiner;
 import com.nutomic.syncthingandroid.receiver.BatteryReceiver;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
+import com.nutomic.syncthingandroid.receiver.PowerSaveModeChangedReceiver;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Holds information about the current wifi and charging state of the device.
  *
- * This information is actively read on construction, and then updated from intents that are passed
- * to {@link #update(android.content.Intent)}.
+ * This information is actively read on instance creation, and then updated from intents
+ * that are passed with {@link #ACTION_DEVICE_STATE_CHANGED}.
  */
 public class DeviceStateHolder {
 
     private static final String TAG = "DeviceStateHolder";
+
+    public static final String ACTION_DEVICE_STATE_CHANGED =
+            "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.DEVICE_STATE_CHANGED";
 
     /**
      * Intent extra containing a boolean saying whether wifi is connected or not.
@@ -39,29 +48,53 @@ public class DeviceStateHolder {
     public static final String EXTRA_IS_CHARGING =
             "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.IS_CHARGING";
 
+    public static final String EXTRA_IS_POWER_SAVING =
+            "com.nutomic.syncthingandroid.syncthing.DeviceStateHolder.IS_POWER_SAVING";
+
+    public interface OnDeviceStateChangedListener {
+        void onDeviceStateChanged();
+    }
+
     private final Context mContext;
     private final SharedPreferences mPreferences;
+    private final LocalBroadcastManager mBroadcastManager;
+    private final DeviceStateChangedReceiver mReceiver = new DeviceStateChangedReceiver();
+    private final OnDeviceStateChangedListener mListener;
 
     private boolean mIsAllowedNetworkConnection = false;
     private String mWifiSsid;
     private boolean mIsCharging = false;
+    private boolean mIsPowerSaving = true;
 
-    public DeviceStateHolder(Context context) {
+    public DeviceStateHolder(Context context, OnDeviceStateChangedListener listener) {
         mContext = context;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+        mBroadcastManager.registerReceiver(mReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
+        mListener = listener;
 
         BatteryReceiver.updateInitialChargingStatus(mContext);
         NetworkReceiver.updateNetworkStatus(mContext);
+        PowerSaveModeChangedReceiver.updatePowerSavingState(mContext);
     }
 
-    public void update(Intent intent) {
-        mIsAllowedNetworkConnection =
-                intent.getBooleanExtra(EXTRA_IS_ALLOWED_NETWORK_CONNECTION, mIsAllowedNetworkConnection);
-        mIsCharging = intent.getBooleanExtra(EXTRA_IS_CHARGING, mIsCharging);
-        Log.i(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
-                ", charging: " + mIsCharging);
+    public void shutdown() {
+        mBroadcastManager.unregisterReceiver(mReceiver);
+    }
 
-        updateWifiSsid();
+    private class DeviceStateChangedReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mIsAllowedNetworkConnection =
+                    intent.getBooleanExtra(EXTRA_IS_ALLOWED_NETWORK_CONNECTION, mIsAllowedNetworkConnection);
+            mIsCharging = intent.getBooleanExtra(EXTRA_IS_CHARGING, mIsCharging);
+            mIsPowerSaving = intent.getBooleanExtra(EXTRA_IS_POWER_SAVING, mIsPowerSaving);
+            Log.i(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
+                    ", charging: " + mIsCharging + ", power saving: " + mIsPowerSaving);
+
+            updateWifiSsid();
+            mListener.onDeviceStateChanged();
+        }
     }
 
     private void updateWifiSsid() {
@@ -69,7 +102,7 @@ public class DeviceStateHolder {
         WifiManager wifiManager =
                 (WifiManager) mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        // may be null, if WiFi has been turned off in meantime
+        // May be null, if WiFi has been turned off in meantime.
         if (wifiInfo != null) {
             mWifiSsid = wifiInfo.getSSID();
         }
@@ -78,24 +111,23 @@ public class DeviceStateHolder {
     /**
      * Determines if Syncthing should currently run.
      */
-    public boolean shouldRun() {
-        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                mPreferences.getBoolean("respect_battery_saving", true) &&
-                pm.isPowerSaveMode()) {
+    boolean shouldRun() {
+        boolean prefRespectPowerSaving = mPreferences.getBoolean("respect_battery_saving", true);
+        if (prefRespectPowerSaving && mIsPowerSaving)
             return false;
-        }
-        else if (SyncthingService.alwaysRunInBackground(mContext)) {
-            // Check wifi/charging state against preferences and start if ok.
+
+        if (SyncthingService.alwaysRunInBackground(mContext)) {
             boolean prefStopMobileData = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_WIFI, false);
             boolean prefStopNotCharging = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, false);
 
-            return (mIsCharging || !prefStopNotCharging) &&
-                    (!prefStopMobileData || isWhitelistedNetworkConnection());
+            if (prefStopMobileData && !isWhitelistedNetworkConnection())
+                return false;
+
+            if (prefStopNotCharging && !mIsCharging)
+                return false;
         }
-        else {
-            return true;
-        }
+
+        return true;
     }
 
     private boolean isWhitelistedNetworkConnection() {

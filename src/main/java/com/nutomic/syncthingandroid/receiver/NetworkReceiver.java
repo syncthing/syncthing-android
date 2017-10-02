@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -37,9 +39,13 @@ public class NetworkReceiver extends BroadcastReceiver {
         boolean isNetworkMetered = (Build.VERSION.SDK_INT >= 16) ? cm.isActiveNetworkMetered() : false;
         boolean isAllowedConnection =  isOffline || (isWifi && !isNetworkMetered);
 
-        Intent intent = new Intent(context, SyncthingService.class);
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
+        Intent intent = new Intent(DeviceStateHolder.ACTION_DEVICE_STATE_CHANGED);
         intent.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, isAllowedConnection);
-        context.startService(intent);
+        lbm.sendBroadcast(intent);
+
+        // Make sure service is running.
+        context.startService(new Intent(context, SyncthingService.class));
     }
 
 }
