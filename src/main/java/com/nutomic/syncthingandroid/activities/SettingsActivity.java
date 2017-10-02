@@ -334,7 +334,7 @@ public class SettingsActivity extends SyncthingActivity {
                         mUseRoot.setChecked(false);
                         new TestRootTask().execute();
                     } else {
-                        new Thread(new ChownFilesRunnable()).start();
+                        new Thread(() -> Util.fixAppDataPermissions(getActivity())).start();
                         mSyncthingService.getApi().showRestartDialog(getActivity());
                     }
                     return true;
@@ -409,16 +409,5 @@ public class SettingsActivity extends SyncthingActivity {
                 }
             }
         }
-
-        /**
-         * Changes the owner of syncthing files so they can be accessed without root.
-         */
-        private class ChownFilesRunnable implements Runnable {
-            @Override
-            public void run() {
-                Util.fixAppDataPermissions(getActivity());
-            }
-        }
-
     }
 }

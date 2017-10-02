@@ -24,6 +24,7 @@ import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.io.File;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -196,7 +197,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private void showQrCode() {
         //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
-        String httpsCertPath = mActivity.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+        File httpsCertPath = new File(mActivity.getFilesDir(), SyncthingService.HTTPS_CERT_FILE);
         String apiKey = mActivity.getApi().getGui().apiKey;
         String deviceId = mActivity.getApi().getLocalDevice().deviceID;
         URL url = mActivity.getApi().getUrl();

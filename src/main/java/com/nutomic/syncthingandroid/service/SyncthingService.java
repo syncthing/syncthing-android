@@ -471,7 +471,7 @@ public class SyncthingService extends Service implements
      * for SyncthingService.onDestroy for details.
      */
     private void pollWebGui() {
-        new PollWebGuiAvailableTask(this, getWebGuiUrl(), getFilesDir() + "/" + HTTPS_CERT_FILE,
+        new PollWebGuiAvailableTask(this, getWebGuiUrl(), new File(getFilesDir(), HTTPS_CERT_FILE),
                                     mConfig.getApiKey(), result -> {
             synchronized (stateLock) {
                 if (mStopScheduled) {

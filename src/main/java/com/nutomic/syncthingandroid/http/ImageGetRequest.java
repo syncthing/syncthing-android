@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.google.common.base.Optional;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class ImageGetRequest extends ApiRequest {
 
     public static final String QR_CODE_GENERATOR = "/qr/";
 
-    public ImageGetRequest(Context context, URL url, String path, String httpsCertPath, String apiKey,
+    public ImageGetRequest(Context context, URL url, String path, File httpsCertPath, String apiKey,
                            @Nullable Map<String, String> params, OnImageSuccessListener onSuccessListener, OnErrorListener onErrorListener) {
         super(context, url, path, httpsCertPath, apiKey);
         Map<String, String> safeParams = Optional.fromNullable(params).or(Collections.emptyMap());

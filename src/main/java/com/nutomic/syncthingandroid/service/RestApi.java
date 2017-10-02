@@ -32,6 +32,7 @@ import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Collections;
@@ -75,7 +76,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private final Context mContext;
     private final URL mUrl;
     private final String mApiKey;
-    private final String mHttpsCertPath;
+    private final File mHttpsCertPath;
 
     private String mVersion;
     private Config mConfig;
@@ -104,7 +105,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
-        mHttpsCertPath = mContext.getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+        mHttpsCertPath = new File(mContext.getFilesDir(), SyncthingService.HTTPS_CERT_FILE);
         mOnApiAvailableListener = apiListener;
         mOnConfigChangedListener = configListener;
     }
@@ -151,7 +152,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
 
     /**
      * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS,
-     * calls {@link SyncthingService#onApiChange()}.
+     * calls {@link SyncthingService#onApiChange}.
      */
     private void tryIsAvailable() {
         int value = mAvailableCount.incrementAndGet();

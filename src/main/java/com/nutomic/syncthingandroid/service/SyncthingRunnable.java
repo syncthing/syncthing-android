@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -85,7 +86,7 @@ public class SyncthingRunnable implements Runnable {
                 mCommand = new String[]{ mSyncthingBinary, "-home", mContext.getFilesDir().toString(), "-reset" };
                 break;
             default:
-                Log.w(TAG, "Unknown command option");
+                throw new InvalidParameterException("Unknown command option");
         }
     }
 
@@ -342,6 +343,9 @@ public class SyncthingRunnable implements Runnable {
      * Only keep last {@link #LOG_FILE_MAX_LINES} lines in log file, to avoid bloat.
      */
     private void trimLogFile() {
+        if (!mLogFile.exists())
+            return;
+
         try {
             LineNumberReader lnr = new LineNumberReader(new FileReader(mLogFile));
             lnr.skip(Long.MAX_VALUE);

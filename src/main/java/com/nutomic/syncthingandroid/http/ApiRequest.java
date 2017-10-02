@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -78,10 +79,10 @@ public abstract class ApiRequest {
     private final Context mContext;
     private final URL mUrl;
     private final String mPath;
-    private final String mHttpsCertPath;
+    private final File mHttpsCertPath;
     private final String mApiKey;
 
-    public ApiRequest(Context context, URL url, String path, String httpsCertPath, String apiKey) {
+    public ApiRequest(Context context, URL url, String path, File httpsCertPath, String apiKey) {
         mContext = context;
         mUrl           = url;
         mPath          = path;
@@ -176,7 +177,7 @@ public abstract class ApiRequest {
     private SSLSocketFactory getSslSocketFactory() {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, new TrustManager[]{new SyncthingTrustManager()},
+            sslContext.init(null, new TrustManager[]{new SyncthingTrustManager(mHttpsCertPath)},
                     new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
@@ -184,51 +185,4 @@ public abstract class ApiRequest {
             return null;
         }
     }
-
-    /*
-     * TrustManager checking against the local Syncthing instance's https public key.
-     *
-     * Based on http://stackoverflow.com/questions/16719959#16759793
-     */
-    private class SyncthingTrustManager implements X509TrustManager {
-
-        private static final String TAG = "SyncthingTrustManager";
-
-        @Override
-        @SuppressLint("TrustAllX509TrustManager")
-        public void checkClientTrusted(X509Certificate[] chain, String authType)
-                throws CertificateException {
-        }
-
-        /**
-         * Verifies certs against public key of the local syncthing instance
-         */
-        @Override
-        public void checkServerTrusted(X509Certificate[] certs,
-                                       String authType) throws CertificateException {
-            InputStream is = null;
-            try {
-                is = new FileInputStream(mHttpsCertPath);
-                CertificateFactory cf = CertificateFactory.getInstance("X.509");
-                X509Certificate ca = (X509Certificate) cf.generateCertificate(is);
-                for (X509Certificate cert : certs) {
-                    cert.verify(ca.getPublicKey());
-                }
-            } catch (FileNotFoundException | NoSuchAlgorithmException | InvalidKeyException |
-                    NoSuchProviderException | SignatureException e) {
-                throw new CertificateException("Untrusted Certificate!", e);
-            } finally {
-                try {
-                    if (is != null)
-                        is.close();
-                } catch (IOException e) {
-                    Log.w(TAG, e);
-                }
-            }
-        }
-        public X509Certificate[] getAcceptedIssuers() {
-            return null;
-        }
-    }
-
 }
