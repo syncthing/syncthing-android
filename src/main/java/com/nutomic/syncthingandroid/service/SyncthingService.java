@@ -24,6 +24,7 @@ import com.android.PRNGFixes;
 import com.annimon.stream.Stream;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -39,6 +40,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 /**
  * Holds the native syncthing instance and provides an API to access it.
@@ -162,6 +165,8 @@ public class SyncthingService extends Service implements
 
     private SyncthingRunnable mSyncthingRunnable;
 
+    @Inject SharedPreferences mPreferences;
+
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
      * {@link DeviceStateHolder#EXTRA_IS_ALLOWED_NETWORK_CONNECTION} or
@@ -220,9 +225,8 @@ public class SyncthingService extends Service implements
      * {@link #PREF_NOTIFICATION_TYPE}.
      */
     private void updateNotification() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String type = sp.getString(PREF_NOTIFICATION_TYPE, "low_priority");
-        boolean foreground = sp.getBoolean(PREF_FOREGROUND_SERVICE, false);
+        String type = mPreferences.getString(PREF_NOTIFICATION_TYPE, "low_priority");
+        boolean foreground = mPreferences.getBoolean(PREF_FOREGROUND_SERVICE, false);
         if ("none".equals(type) && foreground) {
             // foreground priority requires any notification
             // so this ensures that we either have a "default" or "low_priority" notification,
@@ -276,6 +280,7 @@ public class SyncthingService extends Service implements
     public void onCreate() {
         super.onCreate();
         PRNGFixes.apply();
+        ((SyncthingApp) getApplication()).component().inject(this);
 
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::updateState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -290,8 +295,7 @@ public class SyncthingService extends Service implements
                     new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
         updateState();
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this);
+        mPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -383,8 +387,7 @@ public class SyncthingService extends Service implements
             }
         }
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        sp.unregisterOnSharedPreferenceChangeListener(this);
+        mPreferences.unregisterOnSharedPreferenceChangeListener(this);
         mDeviceStateHolder.shutdown();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             unregisterReceiver(mPowerSaveModeChangedReceiver);

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -15,13 +14,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+
+import javax.inject.Inject;
 
 public class FirstStartActivity extends Activity implements Button.OnClickListener {
 
     private static final int REQUEST_WRITE_STORAGE = 142;
 
-    private SharedPreferences mPreferences;
+    @Inject SharedPreferences mPreferences;
 
     /**
      * Handles activity behaviour depending on {@link #isFirstStart()} and {@link #haveStoragePermission()}.
@@ -29,8 +31,8 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SyncthingApp) getApplication()).component().inject(this);
         startService(new Intent(this, SyncthingService.class));
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!isFirstStart()) {
             if (haveStoragePermission()) {

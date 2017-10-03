@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -29,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import java.io.File;
@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+
+import javax.inject.Inject;
 
 /**
  * Activity that allows selecting a directory in the local file system.
@@ -52,10 +54,9 @@ public class FolderPickerActivity extends SyncthingActivity
     public static final int DIRECTORY_REQUEST_CODE = 234;
 
     private ListView mListView;
-
     private FileAdapter mFilesAdapter;
-
     private RootsAdapter mRootsAdapter;
+    @Inject SharedPreferences mPreferences;
 
     /**
      * Location of null means that the list of roots is displayed.
@@ -75,6 +76,7 @@ public class FolderPickerActivity extends SyncthingActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SyncthingApp) getApplication()).component().inject(this);
 
         setContentView(R.layout.activity_folder_picker);
         mListView = findViewById(android.R.id.list);
@@ -120,8 +122,7 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         // Add paths that might not be accessible to Syncthing.
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getBoolean("advanced_folder_picker", false)) {
+        if (mPreferences.getBoolean("advanced_folder_picker", false)) {
             Collections.addAll(roots, new File("/storage/").listFiles());
             roots.add(new File("/"));
         }

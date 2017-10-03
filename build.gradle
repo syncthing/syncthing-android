@@ -33,6 +33,8 @@ dependencies {
     compile 'com.annimon:stream:1.1.8'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.google.dagger:dagger:2.11"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
     androidTestCompile 'com.android.support.test:rules:1.0.1'
     androidTestCompile 'com.android.support:support-annotations:26.1.0'
 }

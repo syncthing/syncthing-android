@@ -7,20 +7,18 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.os.PowerManager;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.google.common.base.Joiner;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.receiver.BatteryReceiver;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
 import com.nutomic.syncthingandroid.receiver.PowerSaveModeChangedReceiver;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.inject.Inject;
 
 /**
  * Holds information about the current wifi and charging state of the device.
@@ -56,10 +54,10 @@ public class DeviceStateHolder {
     }
 
     private final Context mContext;
-    private final SharedPreferences mPreferences;
     private final LocalBroadcastManager mBroadcastManager;
     private final DeviceStateChangedReceiver mReceiver = new DeviceStateChangedReceiver();
     private final OnDeviceStateChangedListener mListener;
+    @Inject SharedPreferences mPreferences;
 
     private boolean mIsAllowedNetworkConnection = false;
     private String mWifiSsid;
@@ -67,8 +65,8 @@ public class DeviceStateHolder {
     private boolean mIsPowerSaving = true;
 
     public DeviceStateHolder(Context context, OnDeviceStateChangedListener listener) {
+        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
         mBroadcastManager.registerReceiver(mReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
         mListener = listener;

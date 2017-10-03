@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.util.Log;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,6 +32,8 @@ import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javax.inject.Inject;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -55,7 +57,7 @@ public class SyncthingRunnable implements Runnable {
     private final String mSyncthingBinary;
     private String[] mCommand;
     private final File mLogFile;
-    private final SharedPreferences mPreferences;
+    @Inject SharedPreferences mPreferences;
     private final boolean mUseRoot;
 
     public enum Command {
@@ -70,10 +72,10 @@ public class SyncthingRunnable implements Runnable {
      * @param command Which type of Syncthing command to execute.
      */
     public SyncthingRunnable(Context context, Command command) {
+        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mUseRoot = mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
             case generate:
@@ -93,7 +95,6 @@ public class SyncthingRunnable implements Runnable {
     @Override
     public void run() {
         trimLogFile();
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         int ret;
         // Make sure Syncthing is executable
         try {
@@ -114,7 +115,7 @@ public class SyncthingRunnable implements Runnable {
             if (wakeLock != null)
                 wakeLock.acquire();
 
-            HashMap<String, String> targetEnv = buildEnvironment(sp);
+            HashMap<String, String> targetEnv = buildEnvironment();
             process = setupAndLaunch(targetEnv);
 
             mSyncthing.set(process);
@@ -373,11 +374,11 @@ public class SyncthingRunnable implements Runnable {
         }
     }
 
-    private HashMap<String, String> buildEnvironment(SharedPreferences sp) {
+    private HashMap<String, String> buildEnvironment() {
         HashMap<String, String> targetEnv = new HashMap<String, String>();
         // Set home directory to data folder for web GUI folder picker.
         targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
-        targetEnv.put("STTRACE", sp.getString("sttrace", ""));
+        targetEnv.put("STTRACE", mPreferences.getString("sttrace", ""));
         File externalFilesDir = mContext.getExternalFilesDir(null);
         if (externalFilesDir != null)
             targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
@@ -386,13 +387,13 @@ public class SyncthingRunnable implements Runnable {
         // Disable hash benchmark for faster startup.
         // https://github.com/syncthing/syncthing/issues/4348
         targetEnv.put("STHASHING", "minio");
-        if (sp.getBoolean("use_tor", false)) {
+        if (mPreferences.getBoolean("use_tor", false)) {
             targetEnv.put("all_proxy", "socks5://localhost:9050");
             targetEnv.put("ALL_PROXY_NO_FALLBACK", "1");
         }
-        if (sp.getBoolean("use_legacy_hashing", false))
+        if (mPreferences.getBoolean("use_legacy_hashing", false))
             targetEnv.put("STHASHING", "standard");
-        putCustomEnvironmentVariables(targetEnv, sp);
+        putCustomEnvironmentVariables(targetEnv, mPreferences);
         return targetEnv;
     }
 
