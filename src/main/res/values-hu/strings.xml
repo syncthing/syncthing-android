@@ -269,11 +269,10 @@ Biztosan törölni szeretnéd a Syncthing index adatbázisát?</string>
   <string name="create_folder_failed">Nem sikerült létrehozni a mappát</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Napló</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Android napló megtekintése</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Android napló megtekintése</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Syncthing napló megtekintése</string>
+  <string name="view_syncthing_log">Syncthing napló megtekintése</string>
   <string name="retrieving_logs">Naplók betöltése...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Megosztás</string>

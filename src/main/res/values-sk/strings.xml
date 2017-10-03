@@ -194,11 +194,10 @@ Naozaj chcete resetovať databázu s indexom súborov?</string>
   <string name="create_folder_failed">Nepodarilo sa vytvoriť adresár</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Záznam</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Zobraziť záznam Androidu</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Zobraziť záznam Androidu</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Zobraziť záznam Syncthing</string>
+  <string name="view_syncthing_log">Zobraziť záznam Syncthing</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Zdielať</string>
   <!--ShareActivity-->

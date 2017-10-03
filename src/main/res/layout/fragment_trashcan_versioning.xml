@@ -11,14 +11,12 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/trashcan_versioning_description"
             android:layout_margin="10dp" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/clean_out_after"
@@ -37,7 +35,6 @@
             tools:layout="@layout/numberpicker_fragment" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cleanout_after_description"

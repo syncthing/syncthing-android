@@ -214,11 +214,10 @@
   <string name="create_folder_failed">Feil ved opprettelse av mappe</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Logg</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Vis Android-logg</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Vis Android-logg</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Vis Syncthing-logg</string>
+  <string name="view_syncthing_log">Vis Syncthing-logg</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Del</string>
   <!--ShareActivity-->

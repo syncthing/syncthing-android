@@ -242,11 +242,10 @@
   <string name="create_folder_failed">Error al crear la carpeta</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Registro</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Mostrar registro de Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Mostrar registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Mostrar registro de Syncthing</string>
+  <string name="view_syncthing_log">Mostrar registro de Syncthing</string>
   <string name="retrieving_logs">Recuperando los registros...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartir</string>

@@ -208,11 +208,10 @@
   <string name="create_folder_failed">Tạo thư mục thất bại</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Lịch sử</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Xem lịch sử Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Xem lịch sử Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Xem lịch sử Syncthing</string>
+  <string name="view_syncthing_log">Xem lịch sử Syncthing</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Chia sẻ</string>
   <!--ShareActivity-->

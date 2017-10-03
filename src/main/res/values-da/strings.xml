@@ -248,11 +248,10 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="create_folder_failed">Det lykkedes ikke at oprette en ny mappe</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Log</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Vis Android Log</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Vis Android Log</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Vis Syncthing Log</string>
+  <string name="view_syncthing_log">Vis Syncthing Log</string>
   <string name="retrieving_logs">Indhenter logs...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Del</string>

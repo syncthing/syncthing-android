@@ -5,7 +5,6 @@
     android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/staggered_versioning_description"
@@ -31,7 +30,6 @@
             tools:layout="@layout/numberpicker_fragment" />
 
         <TextView
-            android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/maximum_age_description"
@@ -39,7 +37,6 @@
             />
 
         <TextView
-            android:id="@+id/textView13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -61,7 +58,6 @@
             android:hint="@string/directory"/>
 
         <TextView
-            android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

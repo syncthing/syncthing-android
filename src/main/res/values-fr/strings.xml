@@ -261,11 +261,10 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="create_folder_failed">Échec de création du partage</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Journal</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Voir le journal Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Voir le journal Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Voir le journal Syncthing</string>
+  <string name="view_syncthing_log">Voir le journal Syncthing</string>
   <string name="retrieving_logs">Récupération des journaux....</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Partage</string>

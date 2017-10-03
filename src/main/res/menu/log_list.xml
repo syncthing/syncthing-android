@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/switch_logs"
-        android:title="@string/log_android_title"
+        android:title="@string/view_android_log"
         app:showAsAction="ifRoom" />
 
       <item

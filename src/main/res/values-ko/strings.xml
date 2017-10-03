@@ -259,11 +259,10 @@
   <string name="create_folder_failed">폴더를 생성할 수 없었습니다</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">로그</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Android 로그 보기</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Android 로그 보기</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Syncthing 로그 보기</string>
+  <string name="view_syncthing_log">Syncthing 로그 보기</string>
   <string name="retrieving_logs">로그를 받아오는중...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">공유</string>

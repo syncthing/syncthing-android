@@ -237,11 +237,10 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="create_folder_failed">Nie udało się utworzyć katalogu</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Dziennik</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Wyświetl dziennik systemu</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Wyświetl dziennik systemu</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Wyświetl dziennik programu</string>
+  <string name="view_syncthing_log">Wyświetl dziennik programu</string>
   <string name="retrieving_logs">Uzyskiwanie dzienników…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Udostępnij</string>

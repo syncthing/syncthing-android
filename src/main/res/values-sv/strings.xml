@@ -260,11 +260,10 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="create_folder_failed">Det gick inte att skapa mapp</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Logg</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Visa Android logg</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Visa Android logg</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Visa Syncthing logg</string>
+  <string name="view_syncthing_log">Visa Syncthing logg</string>
   <string name="retrieving_logs">Hämtar loggar...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Dela</string>

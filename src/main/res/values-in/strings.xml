@@ -241,11 +241,10 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="create_folder_failed">Gagal membuat folder</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Log</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Lihat Log Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Lihat Log Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Lihat Log Syncthing</string>
+  <string name="view_syncthing_log">Lihat Log Syncthing</string>
   <string name="retrieving_logs">Memuat log...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Bagikan</string>

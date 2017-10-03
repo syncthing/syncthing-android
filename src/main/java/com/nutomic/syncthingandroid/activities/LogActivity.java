@@ -39,6 +39,7 @@ public class LogActivity extends SyncthingActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_log);
+        setTitle(R.string.syncthing_log_title);
 
         if (savedInstanceState != null) {
             mSyncthingLog = savedInstanceState.getBoolean("syncthingLog");
@@ -63,7 +64,7 @@ public class LogActivity extends SyncthingActivity {
         inflater.inflate(R.menu.log_list, menu);
 
         MenuItem switchLog = menu.findItem(R.id.switch_logs);
-        switchLog.setTitle(mSyncthingLog ? R.string.log_android_title : R.string.log_syncthing_title);
+        switchLog.setTitle(mSyncthingLog ? R.string.view_android_log : R.string.view_syncthing_log);
 
         // Add the share button
         MenuItem shareItem = menu.findItem(R.id.menu_share);
@@ -82,7 +83,13 @@ public class LogActivity extends SyncthingActivity {
         switch (item.getItemId()) {
             case R.id.switch_logs:
                 mSyncthingLog = !mSyncthingLog;
-                item.setTitle(mSyncthingLog ? R.string.log_android_title : R.string.log_syncthing_title);
+                if (mSyncthingLog) {
+                    item.setTitle(R.string.view_android_log);
+                    setTitle(R.string.syncthing_log_title);
+                } else {
+                    item.setTitle(R.string.view_syncthing_log);
+                    setTitle(R.string.android_log_title);
+                }
                 updateLog();
                 return true;
             default:

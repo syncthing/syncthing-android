@@ -261,11 +261,10 @@
   <string name="create_folder_failed">Η δημιουργία φακέλου απέτυχε</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Καταγραφή συμβάντων</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Εμφάνιση καταγραφής Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Εμφάνιση καταγραφής Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Εμφάνιση καταγραφής Syncthing</string>
+  <string name="view_syncthing_log">Εμφάνιση καταγραφής Syncthing</string>
   <string name="retrieving_logs">Ανάκτηση καταγραφών...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Κοινή χρήση</string>

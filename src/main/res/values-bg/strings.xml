@@ -227,11 +227,10 @@
   <string name="create_folder_failed">Създаването на нова папка се провали</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Журнал</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Към журнала на Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Към журнала на Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Към журнала на Syncthing</string>
+  <string name="view_syncthing_log">Към журнала на Syncthing</string>
   <string name="retrieving_logs">Извличане на журналите...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Сподели</string>

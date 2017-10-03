@@ -248,11 +248,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="create_folder_failed">Aanmaken van map mislukt</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Log</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Bekijk Android-log</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Bekijk Android-log</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Bekijk Syncthing-log</string>
+  <string name="view_syncthing_log">Bekijk Syncthing-log</string>
   <string name="retrieving_logs">Logs worden opgehaald…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Delen</string>

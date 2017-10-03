@@ -208,11 +208,10 @@
   <string name="create_folder_failed">Fallo al crear carpeta</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Registro</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Ver registro de Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Ver registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Ver registro de Syncthing</string>
+  <string name="view_syncthing_log">Ver registro de Syncthing</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Compartir</string>
   <!--ShareActivity-->

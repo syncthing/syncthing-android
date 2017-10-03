@@ -259,11 +259,10 @@
   <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">ログ</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Android ログを表示</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Syncthing ログを表示</string>
+  <string name="view_syncthing_log">Syncthing ログを表示</string>
   <string name="retrieving_logs">ログの取得中…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">共有</string>

@@ -258,11 +258,10 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="create_folder_failed">Impossibile creare la cartella</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Registro</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Mostra Registro di Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Mostra Registro di Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Mostra Registro di Syncthing</string>
+  <string name="view_syncthing_log">Mostra Registro di Syncthing</string>
   <string name="retrieving_logs">Recupero log...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Condividi</string>

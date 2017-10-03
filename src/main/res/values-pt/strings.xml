@@ -235,11 +235,10 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="create_folder_failed">Falhou a criação da pasta</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Registo</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Ver registo do Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Ver registo do Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Ver o registo do Syncthing</string>
+  <string name="view_syncthing_log">Ver o registo do Syncthing</string>
   <string name="retrieving_logs">Obtendo registos...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Partilhar</string>

@@ -241,11 +241,10 @@
   <string name="create_folder_failed">Не удалось создать папку</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Лог</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Логи Android</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Логи Android</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Логи Syncthing</string>
+  <string name="view_syncthing_log">Логи Syncthing</string>
   <string name="retrieving_logs">Получение логов...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Поделиться</string>

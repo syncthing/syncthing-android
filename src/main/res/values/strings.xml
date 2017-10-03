@@ -437,14 +437,14 @@ Please report any problems you encounter via Github.</string>
     <!-- LogActivity -->
 
 
-    <!-- Title of the "log" activity -->
-    <string name="log_title">Log</string>
+    <string name="syncthing_log_title">Syncthing Log</string>
+    <string name="android_log_title">Android Log</string>
 
     <!-- Title of the "log android" menu button -->
-    <string name="log_android_title">View Android Log</string>
+    <string name="view_android_log">View Android Log</string>
 
     <!-- Title of the "log Syncthing" menu button -->
-    <string name="log_syncthing_title">View Syncthing Log</string>
+    <string name="view_syncthing_log">View Syncthing Log</string>
 
     <string name="retrieving_logs">Retrieving logs…</string>
 

@@ -255,11 +255,10 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="create_folder_failed">Verzeichniserstellung fehlgeschlagen</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">Log</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">Zeige Android-Log</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">Zeige Android-Log</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">Zeige Syncthing-Log</string>
+  <string name="view_syncthing_log">Zeige Syncthing-Log</string>
   <string name="retrieving_logs">Rufe Protokoll ab...</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">Teilen</string>

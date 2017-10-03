@@ -261,11 +261,10 @@
   <string name="create_folder_failed">新建文件夹失败</string>
   <!--LogActivity-->
   <!--Title of the "log" activity-->
-  <string name="log_title">日志</string>
-  <!--Title of the "log android" menu button-->
-  <string name="log_android_title">查看 Android 系统日志</string>
+    <!--Title of the "log android" menu button-->
+  <string name="view_android_log">查看 Android 系统日志</string>
   <!--Title of the "log Syncthing" menu button-->
-  <string name="log_syncthing_title">查看 Syncthing 日志</string>
+  <string name="view_syncthing_log">查看 Syncthing 日志</string>
   <string name="retrieving_logs">正在检索日志…</string>
   <!--Title of the "share log" menu button-->
   <string name="share_title">日志</string>
