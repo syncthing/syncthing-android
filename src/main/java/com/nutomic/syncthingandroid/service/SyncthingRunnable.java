@@ -1,21 +1,16 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 
 import java.io.BufferedReader;
@@ -50,7 +45,6 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_KILL = "SyncthingRunnableKill";
     private static final String BINARY_NAME = "libsyncthing.so";
     private static final int LOG_FILE_MAX_LINES = 10;
-    private static final int NOTIFICATION_ID_CRASH = 9;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
     private final Context mContext;
@@ -59,6 +53,7 @@ public class SyncthingRunnable implements Runnable {
     private final File mLogFile;
     @Inject SharedPreferences mPreferences;
     private final boolean mUseRoot;
+    @Inject NotificationHandler mNotificationHandler;
 
     public enum Command {
         generate, // Generate keys, a config file and immediately exit.
@@ -146,22 +141,10 @@ public class SyncthingRunnable implements Runnable {
                     break;
                 default:
                     Log.w(TAG, "Syncthing has crashed (exit code " + ret + ")");
-                    if (mPreferences.getBoolean("notify_crashes", false)) {
-                        // Show notification to inform user about crash.
-                        Intent intent = new Intent();
-                        intent.setAction(android.content.Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
-                        Notification n = new NotificationCompat.Builder(mContext)
-                                .setContentTitle(mContext.getString(R.string.notification_crash_title))
-                                .setContentText(mContext.getString(R.string.notification_crash_text))
-                                .setSmallIcon(R.drawable.ic_stat_notify)
-                                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
-                                .setAutoCancel(true)
-                                .build();
-                        NotificationManager nm = (NotificationManager)
-                                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                        nm.notify(NOTIFICATION_ID_CRASH, n);
-                    }
+                    // Show notification to inform user about crash.
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
+                    mNotificationHandler.showCrashedNotification(intent);
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);

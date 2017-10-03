@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.service;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nutomic.syncthingandroid.BuildConfig;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.RestartActivity;
 import com.nutomic.syncthingandroid.http.GetRequest;
 import com.nutomic.syncthingandroid.http.PostConfigRequest;
@@ -42,6 +42,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.inject.Inject;
 
 /**
  * Provides functions to interact with the syncthing REST API.
@@ -100,8 +102,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     private final HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
+    @Inject NotificationHandler mNotificationHandler;
+
     public RestApi(Context context, URL url, String apiKey, OnApiAvailableListener apiListener,
                    OnConfigChangedListener configListener) {
+        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
@@ -195,13 +200,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         });
     }
 
-    /**
-     * Stops syncthing and cancels notification.
-     */
     public void shutdown() {
-        NotificationManager nm = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.cancel(RestartActivity.NOTIFICATION_RESTART);
+        mNotificationHandler.cancelRestartNotification();
         mRestartPostponed = false;
     }
 

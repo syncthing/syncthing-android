@@ -1,17 +1,14 @@
 package com.nutomic.syncthingandroid.receiver;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 
-import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+
+import javax.inject.Inject;
 
 /**
  * Broadcast-receiver to control and configure SyncThing remotely
@@ -19,7 +16,6 @@ import com.nutomic.syncthingandroid.service.SyncthingService;
  * Created by sqrt-1764 on 25.03.16.
  */
 public class AppConfigReceiver extends BroadcastReceiver {
-    private static final int ID_NOTIFICATION_BACKGROUND_ACTIVE = 3;
 
     /**
      * Start the Syncthing-Service
@@ -33,8 +29,11 @@ public class AppConfigReceiver extends BroadcastReceiver {
      */
     public static final String ACTION_STOP  = "com.nutomic.syncthingandroid.action.STOP";
 
+    @Inject NotificationHandler mNotificationHandler;
+
     @Override
     public void onReceive(Context context, Intent intent) {
+        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         switch (intent.getAction()) {
             case ACTION_START:
                 context.startService(new Intent(context, SyncthingService.class));
@@ -42,31 +41,7 @@ public class AppConfigReceiver extends BroadcastReceiver {
 
             case ACTION_STOP:
                 if (SyncthingService.alwaysRunInBackground(context)) {
-                    final String msg = context.getString(R.string.appconfig_receiver_background_enabled);
-
-                    Context appContext = context.getApplicationContext();
-
-                    NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
-                            .setContentText(msg)
-                            .setTicker(msg)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                            .setContentTitle(context.getText(context.getApplicationInfo().labelRes))
-                            .setSmallIcon(R.drawable.ic_stat_notify)
-                            .setAutoCancel(true)
-                            .setContentIntent(PendingIntent.getActivity(appContext,
-                                                        0,
-                                                        new Intent(appContext, MainActivity.class),
-                                                        PendingIntent.FLAG_UPDATE_CURRENT));
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        nb.setCategory(Notification.CATEGORY_ERROR);        // Only supported in API 21 or better
-                    }
-
-                    NotificationManager nm =
-                            (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                    nm.notify(ID_NOTIFICATION_BACKGROUND_ACTIVE, nb.build());
-
+                    mNotificationHandler.showStopSyncthingWarningNotification();
                 } else {
                     context.stopService(new Intent(context, SyncthingService.class));
                 }

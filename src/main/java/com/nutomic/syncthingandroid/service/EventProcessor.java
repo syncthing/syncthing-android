@@ -1,7 +1,5 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.annimon.stream.Stream;
@@ -56,6 +52,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     private final Context mContext;
     private final RestApi mApi;
     @Inject SharedPreferences mPreferences;
+    @Inject NotificationHandler mNotificationHandler;
 
     public EventProcessor(Context context, RestApi api) {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
@@ -200,20 +197,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     }
 
     private void notify(String text, PendingIntent pi) {
-        NotificationManager nm = (NotificationManager)
-                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification n = new NotificationCompat.Builder(mContext)
-                .setContentTitle(mContext.getString(R.string.app_name))
-                .setContentText(text)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text))
-                .setContentIntent(pi)
-                .setSmallIcon(R.drawable.ic_stat_notify)
-                .setAutoCancel(true)
-                .build();
         // HACK: Use a random, deterministic ID between 1000 and 2000 to avoid duplicate
         //       notifications.
         int notificationId = 1000 + text.hashCode() % 1000;
-        nm.notify(notificationId, n);
+        mNotificationHandler.showEventNotification(text, pi, notificationId);
     }
 }

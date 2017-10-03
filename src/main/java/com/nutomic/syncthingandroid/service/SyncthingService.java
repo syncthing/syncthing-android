@@ -1,7 +1,5 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,7 +14,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,7 +22,6 @@ import com.annimon.stream.Stream;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
-import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
@@ -95,11 +91,9 @@ public class SyncthingService extends Service implements
     public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
     public static final String PREF_RESPECT_BATTERY_SAVING   = "respect_battery_saving";
     public static final String PREF_USE_ROOT                 = "use_root";
-    private static final String PREF_NOTIFICATION_TYPE       = "notification_type";
+    public static final String PREF_NOTIFICATION_TYPE        = "notification_type";
     public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
     public static final String PREF_FOREGROUND_SERVICE       = "run_as_foreground_service";
-
-    private static final int NOTIFICATION_ACTIVE = 1;
 
     /**
      * Callback for when the Syncthing web interface becomes first available after service start.
@@ -148,6 +142,8 @@ public class SyncthingService extends Service implements
 
     private final NetworkReceiver mNetworkReceiver = new NetworkReceiver();
     private final BroadcastReceiver mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
+
+    @Inject NotificationHandler mNotificationHandler;
 
     /**
      * Object that can be locked upon when accessing mCurrentState
@@ -220,53 +216,10 @@ public class SyncthingService extends Service implements
         }
     }
 
-    /**
-     * Shows or hides the persistent notification based on running state and
-     * {@link #PREF_NOTIFICATION_TYPE}.
-     */
-    private void updateNotification() {
-        String type = mPreferences.getString(PREF_NOTIFICATION_TYPE, "low_priority");
-        boolean foreground = mPreferences.getBoolean(PREF_FOREGROUND_SERVICE, false);
-        if ("none".equals(type) && foreground) {
-            // foreground priority requires any notification
-            // so this ensures that we either have a "default" or "low_priority" notification,
-            // but not "none".
-            type = "low_priority";
-        }
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if ((mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) &&
-                !type.equals("none")) {
-            Context appContext = getApplicationContext();
-            // Launch FirstStartActivity instead of MainActivity so we can request permission if
-            // necessary.
-            PendingIntent pi = PendingIntent.getActivity(appContext, 0,
-                    new Intent(appContext, FirstStartActivity.class), 0);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext)
-                    .setContentTitle(getString(R.string.syncthing_active))
-                    .setSmallIcon(R.drawable.ic_stat_notify)
-                    .setOngoing(true)
-                    .setContentIntent(pi);
-            if (type.equals("low_priority"))
-                builder.setPriority(NotificationCompat.PRIORITY_MIN);
-
-            if (foreground) {
-                builder.setContentText(getString(R.string.syncthing_active_foreground));
-                startForeground(NOTIFICATION_ACTIVE, builder.build());
-            } else {
-                stopForeground(false); // ensure no longer running with foreground priority
-                nm.notify(NOTIFICATION_ACTIVE, builder.build());
-            }
-        } else {
-            // ensure no longer running with foreground priority
-            stopForeground(false);
-            nm.cancel(NOTIFICATION_ACTIVE);
-        }
-    }
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(PREF_NOTIFICATION_TYPE) || key.equals(PREF_FOREGROUND_SERVICE))
-            updateNotification();
+            mNotificationHandler.updatePersistentNotification(this, mCurrentState);
         else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI)
                 || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS) || key.equals(PREF_RESPECT_BATTERY_SAVING)) {
             updateState();
@@ -338,7 +291,6 @@ public class SyncthingService extends Service implements
             pollWebGui();
             mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
             new Thread(mSyncthingRunnable).start();
-            updateNotification();
         }
     }
 
@@ -409,9 +361,7 @@ public class SyncthingService extends Service implements
         if (mApi != null)
             mApi.shutdown();
 
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        stopForeground(false);
-        nm.cancel(NOTIFICATION_ACTIVE);
+        mNotificationHandler.cancelPersistentNotification(this);
 
         Stream.of(mObservers).forEach(FolderObserver::stopWatching);
         mObservers.clear();
@@ -498,6 +448,7 @@ public class SyncthingService extends Service implements
      */
     private void onApiChange(State newState) {
         mCurrentState = newState;
+        mNotificationHandler.updatePersistentNotification(this, mCurrentState);
         for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
              i.hasNext(); ) {
             OnApiChangeListener listener = i.next();

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
-import com.nutomic.syncthingandroid.util.Util;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.Document;
