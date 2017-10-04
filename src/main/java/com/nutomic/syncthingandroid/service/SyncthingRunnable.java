@@ -43,12 +43,11 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG_NATIVE = "SyncthingNativeCode";
     private static final String TAG_NICE = "SyncthingRunnableIoNice";
     private static final String TAG_KILL = "SyncthingRunnableKill";
-    private static final String BINARY_NAME = "libsyncthing.so";
     private static final int LOG_FILE_MAX_LINES = 10;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
     private final Context mContext;
-    private final String mSyncthingBinary;
+    private final File mSyncthingBinary;
     private String[] mCommand;
     private final File mLogFile;
     @Inject SharedPreferences mPreferences;
@@ -69,18 +68,18 @@ public class SyncthingRunnable implements Runnable {
     public SyncthingRunnable(Context context, Command command) {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
-        mSyncthingBinary = mContext.getApplicationInfo().nativeLibraryDir + "/" + BINARY_NAME;
+        mSyncthingBinary = Constants.getSyncthingBinary(mContext);
         mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
-        mUseRoot = mPreferences.getBoolean(SyncthingService.PREF_USE_ROOT, false) && Shell.SU.available();
+        mUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
             case generate:
-                mCommand = new String[]{ mSyncthingBinary, "-generate", mContext.getFilesDir().toString() };
+                mCommand = new String[]{ mSyncthingBinary.getPath(), "-generate", mContext.getFilesDir().toString() };
                 break;
             case main:
-                mCommand = new String[]{ mSyncthingBinary, "-home", mContext.getFilesDir().toString(), "-no-browser" };
+                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-no-browser" };
                 break;
             case reset:
-                mCommand = new String[]{ mSyncthingBinary, "-home", mContext.getFilesDir().toString(), "-reset" };
+                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-reset" };
                 break;
             default:
                 throw new InvalidParameterException("Unknown command option");
@@ -93,7 +92,7 @@ public class SyncthingRunnable implements Runnable {
         int ret;
         // Make sure Syncthing is executable
         try {
-            ProcessBuilder pb = new ProcessBuilder("chmod", "500", mSyncthingBinary);
+            ProcessBuilder pb = new ProcessBuilder("chmod", "500", mSyncthingBinary.getPath());
             Process p = pb.start();
             p.waitFor();
         } catch (IOException|InterruptedException e) {
@@ -171,7 +170,7 @@ public class SyncthingRunnable implements Runnable {
      * Returns true if the experimental setting for using wake locks has been enabled in settings.
      */
     private boolean useWakeLock() {
-        return mPreferences.getBoolean(SyncthingService.PREF_USE_WAKE_LOCK, false);
+        return mPreferences.getBoolean(Constants.PREF_USE_WAKE_LOCK, false);
     }
 
     /**

@@ -115,8 +115,8 @@ public class DeviceStateHolder {
             return false;
 
         if (SyncthingService.alwaysRunInBackground(mContext)) {
-            boolean prefStopMobileData = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_WIFI, false);
-            boolean prefStopNotCharging = mPreferences.getBoolean(SyncthingService.PREF_SYNC_ONLY_CHARGING, false);
+            boolean prefStopMobileData = mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false);
+            boolean prefStopNotCharging = mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false);
 
             if (prefStopMobileData && !isWhitelistedNetworkConnection())
                 return false;
@@ -131,7 +131,7 @@ public class DeviceStateHolder {
     private boolean isWhitelistedNetworkConnection() {
         boolean wifiConnected = mIsAllowedNetworkConnection;
         if (wifiConnected) {
-            Set<String> ssids = mPreferences.getStringSet(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
+            Set<String> ssids = mPreferences.getStringSet(Constants.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
             if (ssids.isEmpty()) {
                 Log.d(TAG, "All SSIDs allowed for syncing");
                 return true;

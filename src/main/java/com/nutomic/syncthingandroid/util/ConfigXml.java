@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -43,11 +44,6 @@ public class ConfigXml {
 
     private static final String TAG = "ConfigXml";
 
-    /**
-     * File in the config folder that contains configuration.
-     */
-    public static final String CONFIG_FILE = "config.xml";
-
     private final Context mContext;
 
     private final File mConfigFile;
@@ -56,7 +52,7 @@ public class ConfigXml {
 
     public ConfigXml(Context context) throws OpenConfigException {
         mContext = context;
-        mConfigFile = getConfigFile(context);
+        mConfigFile = Constants.getConfigFile(mContext);
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
@@ -87,10 +83,6 @@ public class ConfigXml {
 
     private void generateKeysConfig(Context context) {
         new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
-    }
-
-    public static File getConfigFile(Context context) {
-        return new File(context.getFilesDir(), CONFIG_FILE);
     }
 
     public URL getWebGuiUrl() {

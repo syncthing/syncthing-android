@@ -17,9 +17,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -157,7 +159,7 @@ public class WebGuiActivity extends StateDialogActivity
     private void loadCaCert() {
         InputStream inStream = null;
         try {
-            String httpsCertPath = getFilesDir() + "/" + SyncthingService.HTTPS_CERT_FILE;
+            File httpsCertPath = Constants.getHttpsCertFile(this);
             inStream = new FileInputStream(httpsCertPath);
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             mCaCert = (X509Certificate)

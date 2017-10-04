@@ -18,23 +18,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+import com.nutomic.syncthingandroid.service.Constants;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
-import java.security.SignatureException;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -43,7 +35,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 public abstract class ApiRequest {
 
@@ -79,14 +70,12 @@ public abstract class ApiRequest {
     private final Context mContext;
     private final URL mUrl;
     private final String mPath;
-    private final File mHttpsCertPath;
     private final String mApiKey;
 
-    public ApiRequest(Context context, URL url, String path, File httpsCertPath, String apiKey) {
+    public ApiRequest(Context context, URL url, String path, String apiKey) {
         mContext = context;
         mUrl           = url;
         mPath          = path;
-        mHttpsCertPath = httpsCertPath;
         mApiKey        = apiKey;
     }
 
@@ -177,7 +166,8 @@ public abstract class ApiRequest {
     private SSLSocketFactory getSslSocketFactory() {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, new TrustManager[]{new SyncthingTrustManager(mHttpsCertPath)},
+            File httpsCertPath = Constants.getHttpsCertFile(mContext);
+            sslContext.init(null, new TrustManager[]{new SyncthingTrustManager(httpsCertPath)},
                     new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {

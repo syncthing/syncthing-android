@@ -14,6 +14,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.views.DevicesAdapter;
 
@@ -58,7 +59,7 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
                 getActivity().runOnUiThread(DeviceListFragment.this::updateList);
             }
 
-        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+        }, 0, Constants.GUI_UPDATE_INTERVAL);
     }
 
     @Override

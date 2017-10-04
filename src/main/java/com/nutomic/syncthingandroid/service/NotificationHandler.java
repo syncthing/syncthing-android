@@ -35,11 +35,11 @@ public class NotificationHandler {
 
     /**
      * Shows or hides the persistent notification based on running state and
-     * {@link SyncthingService#PREF_NOTIFICATION_TYPE}.
+     * {@link Constants#PREF_NOTIFICATION_TYPE}.
      */
     public void updatePersistentNotification(SyncthingService service, SyncthingService.State currentState) {
-        String type = mPreferences.getString(SyncthingService.PREF_NOTIFICATION_TYPE, "low_priority");
-        boolean foreground = mPreferences.getBoolean(SyncthingService.PREF_FOREGROUND_SERVICE, false);
+        String type = mPreferences.getString(Constants.PREF_NOTIFICATION_TYPE, "low_priority");
+        boolean foreground = mPreferences.getBoolean(Constants.PREF_FOREGROUND_SERVICE, false);
         if ("none".equals(type) && foreground) {
             // foreground priority requires any notification
             // so this ensures that we either have a "default" or "low_priority" notification,

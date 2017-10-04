@@ -22,6 +22,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Options;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Languages;
@@ -94,13 +95,13 @@ public class SettingsActivity extends SyncthingActivity {
             addPreferencesFromResource(R.xml.app_settings);
             PreferenceScreen screen = getPreferenceScreen();
             mAlwaysRunInBackground =
-                    (CheckBoxPreference) findPreference(SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND);
+                    (CheckBoxPreference) findPreference(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND);
             mSyncOnlyCharging =
-                    (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_CHARGING);
+                    (CheckBoxPreference) findPreference(Constants.PREF_SYNC_ONLY_CHARGING);
             mSyncOnlyWifi =
-                    (CheckBoxPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI);
+                    (CheckBoxPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI);
             mSyncOnlyOnSSIDs =
-                    (WifiSsidPreference) findPreference(SyncthingService.PREF_SYNC_ONLY_WIFI_SSIDS);
+                    (WifiSsidPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
 
             mSyncOnlyCharging.setEnabled(mAlwaysRunInBackground.isChecked());
             mSyncOnlyWifi.setEnabled(mAlwaysRunInBackground.isChecked());
@@ -140,8 +141,8 @@ public class SettingsActivity extends SyncthingActivity {
             Preference environmentVariables = findPreference("environment_variables");
             Preference stReset              = findPreference("streset");
 
-            mUseRoot                     = (CheckBoxPreference) findPreference(SyncthingService.PREF_USE_ROOT);
-            Preference useWakelock       = findPreference(SyncthingService.PREF_USE_WAKE_LOCK);
+            mUseRoot                     = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
+            Preference useWakelock       = findPreference(Constants.PREF_USE_WAKE_LOCK);
             Preference foregroundService = findPreference("run_as_foreground_service");
             Preference useTor            = findPreference("use_tor");
 
@@ -284,7 +285,7 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
-                case SyncthingService.PREF_ALWAYS_RUN_IN_BACKGROUND:
+                case Constants.PREF_ALWAYS_RUN_IN_BACKGROUND:
                     boolean value = (Boolean) o;
                     mAlwaysRunInBackground.setSummary((value)
                             ? R.string.always_run_in_background_enabled
@@ -298,7 +299,7 @@ public class SettingsActivity extends SyncthingActivity {
                         mSyncOnlyWifi.setChecked(false);
                     }
                     break;
-                case SyncthingService.PREF_SYNC_ONLY_WIFI:
+                case Constants.PREF_SYNC_ONLY_WIFI:
                     mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
                     break;
                 case KEY_STTRACE:
@@ -328,7 +329,7 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             switch (preference.getKey()) {
-                case SyncthingService.PREF_USE_ROOT:
+                case Constants.PREF_USE_ROOT:
                     if (mUseRoot.isChecked()) {
                         // Only check preference after root was granted.
                         mUseRoot.setChecked(false);
@@ -345,7 +346,7 @@ public class SettingsActivity extends SyncthingActivity {
                                         mSyncthingService.exportConfig();
                                         Toast.makeText(getActivity(),
                                                 getString(R.string.config_export_successful,
-                                                SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                                                Constants.EXPORT_PATH), Toast.LENGTH_LONG).show();
                                     })
                             .setNegativeButton(android.R.string.no, null)
                             .show();
@@ -363,7 +364,7 @@ public class SettingsActivity extends SyncthingActivity {
                                         } else {
                                             Toast.makeText(getActivity(),
                                                     getString(R.string.config_import_failed,
-                                                    SyncthingService.EXPORT_PATH), Toast.LENGTH_LONG).show();
+                                                    Constants.EXPORT_PATH), Toast.LENGTH_LONG).show();
                                         }
                                     })
                             .setNegativeButton(android.R.string.no, null)

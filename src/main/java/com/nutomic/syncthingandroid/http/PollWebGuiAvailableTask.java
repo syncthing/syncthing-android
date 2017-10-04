@@ -8,7 +8,6 @@ import android.os.Handler;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Collections;
 
@@ -26,9 +25,9 @@ public class PollWebGuiAvailableTask extends ApiRequest {
     private final OnSuccessListener mListener;
     private final Handler mHandler = new Handler();
 
-    public PollWebGuiAvailableTask(Context context, URL url, File httpsCertPath, String apiKey,
+    public PollWebGuiAvailableTask(Context context, URL url, String apiKey,
                                    OnSuccessListener listener) {
-        super(context, url, "", httpsCertPath, apiKey);
+        super(context, url, "", apiKey);
         mListener = listener;
         performRequest();
     }

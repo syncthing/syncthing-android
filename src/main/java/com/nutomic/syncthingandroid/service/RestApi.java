@@ -32,7 +32,6 @@ import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
 import com.nutomic.syncthingandroid.util.FolderObserver;
 
-import java.io.File;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Collections;
@@ -78,7 +77,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     private final Context mContext;
     private final URL mUrl;
     private final String mApiKey;
-    private final File mHttpsCertPath;
 
     private String mVersion;
     private Config mConfig;
@@ -110,7 +108,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
-        mHttpsCertPath = new File(mContext.getFilesDir(), SyncthingService.HTTPS_CERT_FILE);
         mOnApiAvailableListener = apiListener;
         mOnConfigChangedListener = configListener;
     }
@@ -139,13 +136,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     @Override
     public void onWebGuiAvailable() {
         mAvailableCount.set(0);
-        new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mHttpsCertPath, mApiKey, null, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();
             Log.i(TAG, "Syncthing version is " + mVersion);
             tryIsAvailable();
         });
-        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mHttpsCertPath, mApiKey, null, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             mConfig = new Gson().fromJson(result, Config.class);
             tryIsAvailable();
         });
@@ -186,14 +183,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Sends current config to Syncthing.
      */
     private void sendConfig() {
-        new PostConfigRequest(mContext, mUrl, mHttpsCertPath, mApiKey, new Gson().toJson(mConfig), null);
+        new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), null);
     }
 
     /**
      * Sends current config and restarts Syncthing.
      */
     public void restart() {
-        new PostConfigRequest(mContext, mUrl, mHttpsCertPath, mApiKey, new Gson().toJson(mConfig), result -> {
+        new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), result -> {
             Intent intent = new Intent(mContext, SyncthingService.class)
                     .setAction(SyncthingService.ACTION_RESTART);
             mContext.startService(intent);
@@ -326,7 +323,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Requests and parses information about current system status and resource usage.
      */
     public void getSystemInfo(OnResultListener1<SystemInfo> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_SYSTEM, mHttpsCertPath, mApiKey, null, result ->
+        new GetRequest(mContext, mUrl, GetRequest.URI_SYSTEM, mApiKey, null, result ->
                 listener.onResult(new Gson().fromJson(result, SystemInfo.class)));
     }
 
@@ -338,7 +335,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Requests and parses system version information.
      */
     public void getSystemVersion(OnResultListener1<SystemVersion> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mHttpsCertPath, mApiKey, null, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             SystemVersion systemVersion = new Gson().fromJson(result, SystemVersion.class);
             listener.onResult(systemVersion);
         });
@@ -348,10 +345,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns connection info for the local device and all connected devices.
      */
     public void getConnections(final OnResultListener1<Connections> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_CONNECTIONS, mHttpsCertPath, mApiKey, null, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_CONNECTIONS, mApiKey, null, result -> {
             Long now = System.currentTimeMillis();
             Long msElapsed = now - mPreviousConnectionTime;
-            if (msElapsed < SyncthingService.GUI_UPDATE_INTERVAL) {
+            if (msElapsed < Constants.GUI_UPDATE_INTERVAL) {
                 listener.onResult(deepCopy(mPreviousConnections.get(), Connections.class));
                 return;
             }
@@ -411,7 +408,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      * Returns status information about the folder with the given id.
      */
     public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_MODEL, mHttpsCertPath, mApiKey,
+        new GetRequest(mContext, mUrl, GetRequest.URI_MODEL, mApiKey,
                     ImmutableMap.of("folder", folderId), result -> {
             Model m = new Gson().fromJson(result, Model.class);
             mCachedModelInfo.put(folderId, m);
@@ -444,7 +441,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
     public final void getEvents(final long sinceId, final long limit, final OnReceiveEventListener listener) {
         Map<String, String> params =
                 ImmutableMap.of("since", String.valueOf(sinceId), "limit", String.valueOf(limit));
-        new GetRequest(mContext, mUrl, GetRequest.URI_EVENTS, mHttpsCertPath, mApiKey, params, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_EVENTS, mApiKey, params, result -> {
             JsonArray jsonEvents = new JsonParser().parse(result).getAsJsonArray();
             long lastId = 0;
 
@@ -467,7 +464,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     public void normalizeDeviceId(String id, OnResultListener1<String> listener,
                                   OnResultListener1<String> errorListener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_DEVICEID, mHttpsCertPath, mApiKey,
+        new GetRequest(mContext, mUrl, GetRequest.URI_DEVICEID, mApiKey,
                 ImmutableMap.of("id", id), result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             JsonElement normalizedId = json.get("id");
@@ -484,14 +481,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
      */
     @Override
     public void onFolderFileChange(String folderId, String relativePath) {
-        new PostScanRequest(mContext, mUrl, mHttpsCertPath, mApiKey, folderId, relativePath);
+        new PostScanRequest(mContext, mUrl, mApiKey, folderId, relativePath);
     }
 
     /**
      * Returns prettyfied usage report.
      */
     public void getUsageReport(final OnResultListener1<String> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_REPORT, mHttpsCertPath, mApiKey, null, result -> {
+        new GetRequest(mContext, mUrl, GetRequest.URI_REPORT, mApiKey, null, result -> {
             JsonElement json = new JsonParser().parse(result);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             listener.onResult(gson.toJson(json));

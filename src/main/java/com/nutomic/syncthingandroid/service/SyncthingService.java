@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -35,7 +34,6 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -60,42 +58,6 @@ public class SyncthingService extends Service implements
             "com.nutomic.syncthingandroid.service.SyncthingService.RESET";
 
     /**
-     * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
-     */
-    public static final long GUI_UPDATE_INTERVAL = TimeUnit.SECONDS.toMillis(5);
-
-    /**
-     * name of the public key file in the data directory.
-     */
-    public static final String PUBLIC_KEY_FILE = "cert.pem";
-
-    /**
-     * name of the private key file in the data directory.
-     */
-    public static final String PRIVATE_KEY_FILE = "key.pem";
-
-    /**
-     * name of the public HTTPS CA file in the data directory.
-     */
-    public static final String HTTPS_CERT_FILE = "https-cert.pem";
-
-    /**
-     * Directory where config is exported to and imported from.
-     */
-    public static final File EXPORT_PATH =
-            new File(Environment.getExternalStorageDirectory(), "backups/syncthing");
-
-    public static final String PREF_ALWAYS_RUN_IN_BACKGROUND = "always_run_in_background";
-    public static final String PREF_SYNC_ONLY_WIFI           = "sync_only_wifi";
-    public static final String PREF_SYNC_ONLY_WIFI_SSIDS     = "sync_only_wifi_ssids_set";
-    public static final String PREF_SYNC_ONLY_CHARGING       = "sync_only_charging";
-    public static final String PREF_RESPECT_BATTERY_SAVING   = "respect_battery_saving";
-    public static final String PREF_USE_ROOT                 = "use_root";
-    public static final String PREF_NOTIFICATION_TYPE        = "notification_type";
-    public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
-    public static final String PREF_FOREGROUND_SERVICE       = "run_as_foreground_service";
-
-    /**
      * Callback for when the Syncthing web interface becomes first available after service start.
      */
     public interface OnWebGuiAvailableListener {
@@ -108,9 +70,6 @@ public class SyncthingService extends Service implements
     public interface OnApiChangeListener {
         void onApiChange(State currentState);
     }
-
-    private final HashSet<OnApiChangeListener> mOnApiChangeListeners =
-            new HashSet<>();
 
     /**
      * Indicates the current state of SyncthingService and of Syncthing itself.
@@ -131,37 +90,31 @@ public class SyncthingService extends Service implements
     private State mCurrentState = State.INIT;
 
     private ConfigXml mConfig;
-
     private RestApi mApi;
-
     private EventProcessor mEventProcessor;
+    private DeviceStateHolder mDeviceStateHolder;
+    private SyncthingRunnable mSyncthingRunnable;
 
     private final LinkedList<FolderObserver> mObservers = new LinkedList<>();
-
+    private final HashSet<OnApiChangeListener> mOnApiChangeListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
-
     private final NetworkReceiver mNetworkReceiver = new NetworkReceiver();
     private final BroadcastReceiver mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
 
     @Inject NotificationHandler mNotificationHandler;
+    @Inject SharedPreferences mPreferences;
 
     /**
      * Object that can be locked upon when accessing mCurrentState
      * Currently used to male onDestroy() and PollWebGuiAvailableTaskImpl.onPostExcecute() tread-safe
      */
-    private final Object stateLock = new Object();
+    private final Object mStateLock = new Object();
 
     /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
      * {@link #pollWebGui}.
      */
     private boolean mStopScheduled = false;
-
-    private DeviceStateHolder mDeviceStateHolder;
-
-    private SyncthingRunnable mSyncthingRunnable;
-
-    @Inject SharedPreferences mPreferences;
 
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
@@ -218,10 +171,10 @@ public class SyncthingService extends Service implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PREF_NOTIFICATION_TYPE) || key.equals(PREF_FOREGROUND_SERVICE))
+        if (key.equals(Constants.PREF_NOTIFICATION_TYPE) || key.equals(Constants.PREF_FOREGROUND_SERVICE))
             mNotificationHandler.updatePersistentNotification(this, mCurrentState);
-        else if (key.equals(PREF_SYNC_ONLY_CHARGING) || key.equals(PREF_SYNC_ONLY_WIFI)
-                || key.equals(PREF_SYNC_ONLY_WIFI_SSIDS) || key.equals(PREF_RESPECT_BATTERY_SAVING)) {
+        else if (key.equals(Constants.PREF_SYNC_ONLY_CHARGING) || key.equals(Constants.PREF_SYNC_ONLY_WIFI)
+                || key.equals(Constants.PREF_SYNC_ONLY_WIFI_SSIDS) || key.equals(Constants.PREF_RESPECT_BATTERY_SAVING)) {
             updateState();
         }
     }
@@ -328,7 +281,7 @@ public class SyncthingService extends Service implements
     @Override
     public void onDestroy() {
 
-        synchronized (stateLock) {
+        synchronized (mStateLock) {
             if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
                 Log.i(TAG, "Delay shutting down service until initialisation of Syncthing finished");
                 mStopScheduled = true;
@@ -424,9 +377,8 @@ public class SyncthingService extends Service implements
      * for SyncthingService.onDestroy for details.
      */
     private void pollWebGui() {
-        new PollWebGuiAvailableTask(this, getWebGuiUrl(), new File(getFilesDir(), HTTPS_CERT_FILE),
-                                    mConfig.getApiKey(), result -> {
-            synchronized (stateLock) {
+        new PollWebGuiAvailableTask(this, getWebGuiUrl(), mConfig.getApiKey(), result -> {
+            synchronized (mStateLock) {
                 if (mStopScheduled) {
                     shutdown(State.DISABLED, () -> {});
                     mStopScheduled = false;
@@ -469,42 +421,42 @@ public class SyncthingService extends Service implements
      */
     public static boolean alwaysRunInBackground(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getBoolean(PREF_ALWAYS_RUN_IN_BACKGROUND, false);
+        return sp.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
     }
 
     /**
-     * Exports the local config and keys to {@link #EXPORT_PATH}.
+     * Exports the local config and keys to {@link Constants#EXPORT_PATH}.
      */
     public void exportConfig() {
-        EXPORT_PATH.mkdirs();
+        Constants.EXPORT_PATH.mkdirs();
         try {
-            Files.copy(new File(getFilesDir(), ConfigXml.CONFIG_FILE),
-                    new File(EXPORT_PATH, ConfigXml.CONFIG_FILE));
-            Files.copy(new File(getFilesDir(), PRIVATE_KEY_FILE),
-                    new File(EXPORT_PATH, PRIVATE_KEY_FILE));
-            Files.copy(new File(getFilesDir(), PUBLIC_KEY_FILE),
-                    new File(EXPORT_PATH, PUBLIC_KEY_FILE));
+            Files.copy(Constants.getConfigFile(this),
+                    new File(Constants.EXPORT_PATH, Constants.CONFIG_FILE));
+            Files.copy(Constants.getPrivateKeyFile(this),
+                    new File(Constants.EXPORT_PATH, Constants.PRIVATE_KEY_FILE));
+            Files.copy(Constants.getPublicKeyFile(this),
+                    new File(Constants.EXPORT_PATH, Constants.PUBLIC_KEY_FILE));
         } catch (IOException e) {
             Log.w(TAG, "Failed to export config", e);
         }
     }
 
     /**
-     * Imports config and keys from {@link #EXPORT_PATH}.
+     * Imports config and keys from {@link Constants#EXPORT_PATH}.
      *
      * @return True if the import was successful, false otherwise (eg if files aren't found).
      */
     public boolean importConfig() {
-        File config = new File(EXPORT_PATH, ConfigXml.CONFIG_FILE);
-        File privateKey = new File(EXPORT_PATH, PRIVATE_KEY_FILE);
-        File publicKey = new File(EXPORT_PATH, PUBLIC_KEY_FILE);
+        File config = new File(Constants.EXPORT_PATH, Constants.CONFIG_FILE);
+        File privateKey = new File(Constants.EXPORT_PATH, Constants.PRIVATE_KEY_FILE);
+        File publicKey = new File(Constants.EXPORT_PATH, Constants.PUBLIC_KEY_FILE);
         if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
         shutdown(State.INIT, () -> {
             try {
-                Files.copy(config, new File(getFilesDir(), ConfigXml.CONFIG_FILE));
-                Files.copy(privateKey, new File(getFilesDir(), PRIVATE_KEY_FILE));
-                Files.copy(publicKey, new File(getFilesDir(), PUBLIC_KEY_FILE));
+                Files.copy(config, Constants.getConfigFile(this));
+                Files.copy(privateKey, Constants.getPrivateKeyFile(this));
+                Files.copy(publicKey, Constants.getPublicKeyFile(this));
             } catch (IOException e) {
                 Log.w(TAG, "Failed to import config", e);
             }

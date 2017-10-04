@@ -20,11 +20,11 @@ import com.nutomic.syncthingandroid.http.ImageGetRequest;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.io.File;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -57,7 +57,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 updateGui();
             }
 
-        }, 0, SyncthingService.GUI_UPDATE_INTERVAL);
+        }, 0, Constants.GUI_UPDATE_INTERVAL);
     }
 
     @Override
@@ -197,12 +197,11 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private void showQrCode() {
         //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
-        File httpsCertPath = new File(mActivity.getFilesDir(), SyncthingService.HTTPS_CERT_FILE);
         String apiKey = mActivity.getApi().getGui().apiKey;
         String deviceId = mActivity.getApi().getLocalDevice().deviceID;
         URL url = mActivity.getApi().getUrl();
-        new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, httpsCertPath,
-                apiKey, ImmutableMap.of("text", deviceId),qrCodeBitmap -> {
+        new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, apiKey,
+                ImmutableMap.of("text", deviceId),qrCodeBitmap -> {
             mActivity.showQrCodeDialog(deviceId, qrCodeBitmap);
             mActivity.closeDrawer();
         }, error -> Toast.makeText(mActivity, R.string.could_not_access_deviceid, Toast.LENGTH_SHORT).show());
