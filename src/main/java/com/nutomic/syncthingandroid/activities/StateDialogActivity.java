@@ -1,25 +1,27 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.DialogLoadingBinding;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Handles loading/disabled dialogs.
  */
 public abstract class StateDialogActivity extends SyncthingActivity {
 
-    private static final String TAG = "StateDialogActivity";
+    private static final long SLOW_LOADING_TIME = TimeUnit.SECONDS.toMillis(30);
 
     private AlertDialog mLoadingDialog;
     private AlertDialog mDisabledDialog;
@@ -89,18 +91,29 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         if (isFinishing() || mLoadingDialog != null)
             return;
 
-        LayoutInflater inflater = getLayoutInflater();
-        @SuppressLint("InflateParams")
-        View dialogLayout = inflater.inflate(R.layout.dialog_loading, null);
-        TextView loadingText = dialogLayout.findViewById(R.id.loading_text);
-        loadingText.setText((getIntent().getBooleanExtra(EXTRA_FIRST_START, false))
+        DialogLoadingBinding binding = DataBindingUtil.inflate(
+                getLayoutInflater(), R.layout.dialog_loading, null, false);
+        boolean isFirstStart = getIntent().getBooleanExtra(EXTRA_FIRST_START, false);
+        binding.loadingText.setText((isFirstStart)
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);
 
         mLoadingDialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
-                .setView(dialogLayout)
+                .setView(binding.getRoot())
                 .show();
+
+        if (!isFirstStart) {
+            new Handler().postDelayed(() -> {
+                if (isFinishing() || mLoadingDialog == null)
+                    return;
+
+                binding.loadingSlowMessage.setVisibility(View.VISIBLE);
+                binding.viewLogs.setOnClickListener(v -> {
+                    startActivity(new Intent(this, LogActivity.class));
+                });
+            }, SLOW_LOADING_TIME);
+        }
     }
 
     private void dismissLoadingDialog() {
