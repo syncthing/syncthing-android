@@ -154,7 +154,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 // Ignored.
                 break;
             default:
-                Log.i(TAG, "Unhandled event " + event.type);
+                Log.v(TAG, "Unhandled event " + event.type);
         }
     }
 

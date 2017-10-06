@@ -306,6 +306,7 @@ public class SyncthingService extends Service implements
      * Sets {@link #mCurrentState} to newState, and calls onKilledListener once Syncthing is killed.
      */
     private void shutdown(State newState, SyncthingRunnable.OnSyncthingKilled onKilledListener) {
+        Log.i(TAG, "Shutting down background service");
         onApiChange(newState);
 
         if (mEventProcessor != null)

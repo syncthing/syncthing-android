@@ -31,6 +31,7 @@ public class FolderObserver extends FileObserver {
     public FolderObserver(OnFolderFileChangeListener listener, Folder folder)
             throws FolderNotExistingException {
         this(listener, folder, "");
+        Log.i(TAG, "Observer created for (folder " + folder.id + ")");
     }
 
     public class FolderNotExistingException extends Exception {
@@ -62,7 +63,7 @@ public class FolderObserver extends FileObserver {
         mListener = listener;
         mFolder = folder;
         mPath = path;
-        Log.v(TAG, "observer created for " + new File(mFolder.path, mPath).toString() + " (folder " + folder.id + ")");
+        Log.v(TAG, "Observer created for " + new File(mFolder.path, mPath).toString() + " (folder " + folder.id + ")");
         startWatching();
 
         File currentFolder = new File(folder.path, path);

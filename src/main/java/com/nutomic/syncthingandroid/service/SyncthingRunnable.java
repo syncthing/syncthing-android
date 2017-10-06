@@ -120,6 +120,7 @@ public class SyncthingRunnable implements Runnable {
             niceSyncthing();
 
             ret = process.waitFor();
+            Log.i(TAG, "Syncthing exited with code " + ret);
             mSyncthing.set(null);
             lInfo.join();
             lWarn.join();

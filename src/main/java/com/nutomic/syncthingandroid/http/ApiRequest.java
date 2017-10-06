@@ -100,8 +100,8 @@ public abstract class ApiRequest {
         }, error -> {
             if (errorListener != null)
                 errorListener.onError(error);
-
-            Log.w(TAG, "Request to " + uri + " failed: " + error.getMessage());
+            else
+                Log.w(TAG, "Request to " + uri + " failed", error);
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

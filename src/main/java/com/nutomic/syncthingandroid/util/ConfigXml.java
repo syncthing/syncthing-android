@@ -79,6 +79,7 @@ public class ConfigXml {
             Log.w(TAG, "Cannot read '" + mConfigFile + "'", e);
             throw new OpenConfigException();
         }
+        Log.i(TAG, "Loaded Syncthing config file");
     }
 
     private void generateKeysConfig(Context context) {
