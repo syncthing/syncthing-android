@@ -45,6 +45,11 @@ android {
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true
 
+    playAccountConfigs {
+        defaultAccountConfig {
+            jsonFile = file('keys.json')
+        }
+    }
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 14
@@ -53,6 +58,21 @@ android {
         versionName "0.9.15"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword System.getenv("SIGNING_PASSWORD") ?: ""
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword System.getenv("SIGNING_PASSWORD") ?: ""
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
     }
 
     compileOptions {
@@ -75,6 +95,7 @@ task cleanNative(type: Delete) {
 play {
     jsonFile = file('keys.json')
     uploadImages = false
+    track = 'beta'
 }
 
 /**
