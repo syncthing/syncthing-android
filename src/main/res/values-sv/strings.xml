@@ -11,18 +11,12 @@ För att dela data med andra enheter måste du lägga till deras unika enhet-ID 
 Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="cont">Fortsätt</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Väntar på GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Genererar säkra nycklar. Detta kan ta några minuter.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lägg till mapp</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Dela enhet-ID</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Skicka enhet-ID till</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Laddar...</string>
   <string name="usage_reporting_dialog_title">Tillåt anonym användningsrapportering?</string>
   <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, mappstorlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
@@ -37,6 +31,11 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Visa inte igen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Stäng av för Syncthing</string>
   <string name="dialog_disable_battery_optimizations_not_supported">Din enhet har inte stöd för att inaktivera batterioptimeringar</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Laddar...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Genererar säkra nycklar. Detta kan ta några minuter.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappar</string>
   <!--Shown if no folders exist-->
@@ -102,6 +101,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mapp-sökvägen får inte vara tom</string>
   <string name="dialog_discard_changes">Kassera dina ändringar?</string>
+  <string name="ignore_patterns">Ignorera mönster</string>
+  <string name="create_ignore_file_error">Misslyckades med att skapa ignorera-fil. Är katalogen skrivbar?</string>
+  <string name="edit_ignore_file_error">Ingen textredigerare hittades</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Enhet-ID</string>
@@ -139,6 +141,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Webb-GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Väntar på GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Inställningar</string>
   <string name="category_run_conditions">Körbetingelser</string>
@@ -152,8 +156,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="always_run_in_background_enabled">Syncthing körs alltid i bakgrunden, enligt inställningar nedan.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing körs bara när den uttryckligen har startats, och kan stoppas genom menyknapp.</string>
-  <string name="sync_only_charging">Synkronisera endast vid laddning</string>
-  <string name="sync_only_wifi">Synkronisera endast via wifi</string>
+  <string name="sync_only_charging">Kör endast vid laddning</string>
+  <string name="sync_only_wifi">Kör endast på wifi</string>
   <string name="sync_only_wifi_ssids">Begränsa till vissa wifi-nätverk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på wifi för att välja nätverk.</string>
   <string name="respect_battery_saving_title">Respektera Android-batterisparainställning</string>
@@ -181,7 +185,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
     <item>Förskutna</item>
     <item>Extern</item>
   </string-array>
-  <string name="device_name">Enhetsnamn</string>
+  <string name="device_name">Enhetens namn</string>
   <string name="listen_address">Synkroniseringsprotokollets lyssnaradresser</string>
   <string name="max_recv_kbps">Inkommande hastighetsgräns (KiB/s)</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
@@ -213,7 +217,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna finns i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Felsök alternativ</string>
+  <string name="sttrace_title">STTRACE-alternativ</string>
   <string name="environment_variables">Miljövariabler</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Endast 0-9, a-z och \',\' är tillåtna i STTRACE alternativ</string>
@@ -259,8 +263,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="select_folder">Välj mapp</string>
   <string name="create_folder_failed">Det gick inte att skapa mapp</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Visa Android logg</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Visa Syncthing logg</string>

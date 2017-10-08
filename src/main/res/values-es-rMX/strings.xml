@@ -7,18 +7,12 @@
   <string name="welcome_title">Bienvenido a Syncthing para Android</string>
   <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Esperando por la Interfaz</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generando llaves seguras. Esto pude tomar algunos minutos.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Compartir ID del dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar ID del dispositivo</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Cargando...</string>
   <string name="usage_reporting_dialog_title">¿Permitir reportes de uso anónimos?</string>
   <string name="usage_reporting_dialog_description">El reporte de uso encriptado es enviado diariamente. Es usado para rastrear plataformas comunes, tamaño de carpetas y versiones de la aplicación. Si se cambia el conjunto de datos reportados, se le presentará este diálogo de nuevo.\n\nLas estadísticas agregadas se encuentran disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Si</string>
@@ -28,6 +22,11 @@
   <string name="device_rejected">El dispositivo %1$s quiere conectarse</string>
   <string name="folder_rejected">El dispositivo %1$s quiere compartir la carpeta %2$s</string>
   <string name="dialog_disable_battery_optimization_later">Después</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Cargando...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generando llaves seguras. Esto pude tomar algunos minutos.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Shown if no folders exist-->
@@ -121,6 +120,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz Web</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Esperando por la Interfaz</string>
   <!--SettingsFragment-->
   <string name="settings_title">Configuración</string>
   <string name="category_syncthing_options">Opciones de Syncthing</string>
@@ -130,8 +131,6 @@
   <string name="always_run_in_background_enabled">Syncthing siempre se ejecuta en el fondo, de acuerdo a las preferencias debajo.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing sólo se ejecuta cuando es explícitamente iniciado, y puede ser detenido usando el botón en el menú.</string>
-  <string name="sync_only_charging">Sincronizar sólo cuando se está cargando</string>
-  <string name="sync_only_wifi">Sincronizar sólo por wifi</string>
   <string name="sync_only_wifi_ssids">Restringir a ciertas redes wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor encienda el WiFi para seleccionar redes.</string>
   <string name="advanced_folder_picker">Usar el avanzado Seleccionador de Carpetas</string>
@@ -167,7 +166,6 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Importar la configuración falló, asegúrese que los archivos están en %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opciones de depuración</string>
   <!--Toast after entering invalid STTRACE params-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Reiniciar Base de Datos</string>
@@ -207,8 +205,7 @@
   <string name="select_folder">Seleccionar Carpeta</string>
   <string name="create_folder_failed">Fallo al crear carpeta</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Ver registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Ver registro de Syncthing</string>

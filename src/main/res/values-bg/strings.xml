@@ -11,18 +11,12 @@
 Ако срещнете проблем моля докладвайте в Github.</string>
   <string name="cont">Напред</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Изчакване на потребителския интерфейс</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Генериране на ключове за сигурност. Може да отнеме няколко минути.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добави папка</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Сподели идентификатора</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Изпращане на идентификатора чрез</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Зареждане...</string>
   <string name="usage_reporting_dialog_title">Разреши анонимно докладване за употребата на програмата?</string>
   <string name="usage_reporting_dialog_description">Криптираният доклад се изпраща ежедневно. Използва се, за отичане на ползваните платформи, размер на папки и версии на приложението. Ако събираните данни се променят, ще бъдете информиран с подобен на този диалог.\n\nОбобщената статистика ще намерите на https://data.syncthing.net.</string>
   <string name="yes">Да</string>
@@ -35,6 +29,11 @@
   <string name="dialog_disable_battery_optimization_later">По-късно</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Без повторно запитване</string>
   <string name="dialog_disable_battery_optimization_turn_off">Изключване за синхронизирането</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Зареждане...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Генериране на ключове за сигурност. Може да отнеме няколко минути.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -131,6 +130,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Уеб интерфейс</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Изчакване на потребителския интерфейс</string>
   <!--SettingsFragment-->
   <string name="settings_title">Настройки</string>
   <string name="category_run_conditions">Условия на работа</string>
@@ -144,8 +145,6 @@
   <string name="always_run_in_background_enabled">Постоянно синхронизиране, според следващите опции.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Синхронизиране само след стартиране на Syncthing. Може бъде спряно от меню бутона \"Изход\".</string>
-  <string name="sync_only_charging">Само по време на зареждане</string>
-  <string name="sync_only_wifi">Само чрез WiFi</string>
   <string name="sync_only_wifi_ssids">Ограничаване до определени WiFi мрежи</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
   <string name="advanced_folder_picker">Избор на папка, за напреднали</string>
@@ -185,7 +184,6 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Внасянето на настройките се провали. Уверете се, че файловете са в %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Настройки за дебъгване</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">В настройките на STTRACE са разрешени само символите 0-9, a-z и \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -226,8 +224,7 @@
   <string name="select_folder">Избери папката</string>
   <string name="create_folder_failed">Създаването на нова папка се провали</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Към журнала на Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Към журнала на Syncthing</string>

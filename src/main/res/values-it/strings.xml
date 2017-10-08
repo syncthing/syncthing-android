@@ -11,18 +11,12 @@ Per condividere i dati con altri dispositivi, è necessario aggiungere il rispet
 Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="cont">Continua</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Caricamento Interfaccia Web</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generazione delle chiavi in corso. Potrebbe essere necessario qualche minuto.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Nuova Cartella</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Condividi ID Dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Invia ID Dispositivo a</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Caricamento...</string>
   <string name="usage_reporting_dialog_title">Abilitare Statistiche Anonime di Utilizzo?</string>
   <string name="usage_reporting_dialog_description">Quotidianamente il software invia le statistiche di utilizzo in forma criptata. Questi dati riguardano i sistemi operativi utilizzati, le dimensioni delle cartelle e le versioni del software. Se i dati riportati sono cambiati, verrà mostrata di nuovo questa finestra di dialogo.\n\nDati statistici in forma aggregata sono disponibili pubblicamente su https://data.syncthing.net.</string>
   <string name="yes">Sì</string>
@@ -37,6 +31,11 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Non mostrare più</string>
   <string name="dialog_disable_battery_optimization_turn_off">Spegnere per Syncthing</string>
   <string name="dialog_disable_battery_optimizations_not_supported">Il tuo dispositivo non supporta disabilitazione delle ottimizzazioni della batteria</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Caricamento...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generazione delle chiavi in corso. Potrebbe essere necessario qualche minuto.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Cartelle</string>
   <!--Shown if no folders exist-->
@@ -139,6 +138,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaccia Web</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Caricamento Interfaccia Web</string>
   <!--SettingsFragment-->
   <string name="settings_title">Impostazioni</string>
   <string name="category_run_conditions">Condizioni di funzionamento</string>
@@ -152,8 +153,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="always_run_in_background_enabled">Syncthing è sempre in esecuzione in modalità background.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing si attiva solo quando viene avviato manualmente e si arresta utilizzando il pulsante del menu.</string>
-  <string name="sync_only_charging">Sincr. solo in Ricarica</string>
-  <string name="sync_only_wifi">Sincr. solo in Wifi</string>
   <string name="sync_only_wifi_ssids">Solo determinate reti wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Prego accendere wifi per selezionare reti.</string>
   <string name="respect_battery_saving_title">Rispetta l\'impostazione di risparmio batteria di Android</string>
@@ -211,7 +210,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Importazione della configurazione fallita. Assicurarsi che i file siano in %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opzioni di Debug</string>
   <string name="environment_variables">Variabili d\'ambiente</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Solo 0-9, a-z e \',\' sono consentiti nelle opzioni STTRACE</string>
@@ -257,8 +255,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="select_folder">Seleziona Cartella</string>
   <string name="create_folder_failed">Impossibile creare la cartella</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Mostra Registro di Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Mostra Registro di Syncthing</string>

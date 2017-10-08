@@ -11,18 +11,12 @@ Om gegevens met andere apparaten te delen moet je hun unieke apparaats-ID toevoe
 Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="cont">Verder</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Wachten op interface</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Bezig met aanmaken van veilige sleutels. Dit kan enkele minuten duren.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Map toevoegen</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Apparaat-ID delen</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Apparaat-ID versturen naar</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Laden…</string>
   <string name="usage_reporting_dialog_title">Anoniem gebruiksrapportage toestaan?</string>
   <string name="usage_reporting_dialog_description">Het versleuteld gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en applicatieversies te volgen. Indien de gerapporteerde gegevensset wordt veranderd zal je deze dialoog opnieuw te zien krijgen.\n\nDe geaggregeerde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
@@ -36,6 +30,11 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Laden…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Bezig met aanmaken van veilige sleutels. Dit kan enkele minuten duren.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->
@@ -138,6 +137,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web-interface</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Wachten op interface</string>
   <!--SettingsFragment-->
   <string name="settings_title">Instellingen</string>
   <string name="category_run_conditions">Uitvoervoorwaarden</string>
@@ -151,8 +152,6 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="always_run_in_background_enabled">Syncthing draait altijd in de achtergrond, volgens de hieronder weergegeven voorkeuren.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing draait enkel wanneer expliciet gestart, en kan gestopt worden door de menu-knop.</string>
-  <string name="sync_only_charging">Synchroniseer alleen tijdens opladen</string>
-  <string name="sync_only_wifi">Synchroniseer alleen via wifi</string>
   <string name="sync_only_wifi_ssids">Beperken tot bepaalde wifinetwerken</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
   <string name="respect_battery_saving_title">Eerbiedig de batterijbesparingsinstellingen van Android</string>
@@ -203,7 +202,6 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Importeren van configuratie mislukt, zorg dat de bestanden zich in %1$s bevinden</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Debug-opties</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Enkel 0-9, a-z en \',\' zijn toegestaan in STTRACE-opties</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -247,8 +245,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="select_folder">Map selecteren</string>
   <string name="create_folder_failed">Aanmaken van map mislukt</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Bekijk Android-log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Bekijk Syncthing-log</string>

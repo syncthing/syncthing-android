@@ -11,18 +11,12 @@ Per compartir dades amb altres dispositius, cal que afegiu els seus identificado
 Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="cont">Continua</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Esperant interfície gràfica</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generant claus segures. Pot trigar uns minuts.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Afegeix una carpeta</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Comparteix ID del dispositiu</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Envia ID del dispositiu a</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Carregant…</string>
   <string name="usage_reporting_dialog_title">Permeteu els informes d\'ús anònims?</string>
   <string name="usage_reporting_dialog_description">L\'informe d\'ús s\'envia de manera xifrada cada dia. L\'utilitzem per fer un seguiment de les plataformes més comuns, la mida de les carpetes i les versions de l\'aplicació. Si mai canviem el contingut dels informes us tornarem a mostrar aquest missatge.\n\nLes estadístiques globals estan disponibles públicament a https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
@@ -37,6 +31,11 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">No ho tornis a mostrar</string>
   <string name="dialog_disable_battery_optimization_turn_off">Desactiva per al Syncthing</string>
   <string name="dialog_disable_battery_optimizations_not_supported">El teu dispositiu no permet desactivar les optimitzacions de bateria</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Carregant…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generant claus segures. Pot trigar uns minuts.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetes</string>
   <!--Shown if no folders exist-->
@@ -102,6 +101,9 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">El camí de la carpeta no pot ser buit</string>
   <string name="dialog_discard_changes">Voleu descartar els canvis?</string>
+  <string name="ignore_patterns">Patrons a ignorar</string>
+  <string name="create_ignore_file_error">No s\'ha pogut crear el fitxer d\'ignorats. Es pot escriure al directori?</string>
+  <string name="edit_ignore_file_error">No hi ha cap editor de text</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID del dispositiu</string>
@@ -139,6 +141,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfície web</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Esperant interfície gràfica</string>
   <!--SettingsFragment-->
   <string name="settings_title">Configuració</string>
   <string name="category_run_conditions">Condicions d\'execució</string>
@@ -152,8 +156,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="always_run_in_background_enabled">El Syncthing s\'executa contínuament en segon pla i seguint les preferències indicades a sota.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">El Syncthing només s\'executa quan l\'inicieu manualment, i es pot aturar amb el botó del menú.</string>
-  <string name="sync_only_charging">Sincronitza només durant la càrrega</string>
-  <string name="sync_only_wifi">Sincronitza només amb wifi</string>
+  <string name="sync_only_charging">Executa només durant la càrrega</string>
+  <string name="sync_only_wifi">Executa només amb wifi</string>
   <string name="sync_only_wifi_ssids">Restringeix a xarxes wifi concretes</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Enceneu el WiFi per seleccionar xarxes.</string>
   <string name="respect_battery_saving_title">Respecta la configuració d\'estalvi de bateria de l\'Android</string>
@@ -184,7 +188,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="device_name">Nom del dispositiu</string>
   <string name="listen_address">Adreces d\'escolta del protocol de sincronització</string>
   <string name="max_recv_kbps">Límit de transferència entrant (KiB/s)</string>
-  <string name="max_send_kbps">Límit de transferència sorting (KiB/s)</string>
+  <string name="max_send_kbps">Límit de transferència sortint (KiB/s)</string>
   <string name="global_announce_enabled">Descoberta Global</string>
   <string name="local_announce_enabled">Descoberta Local</string>
   <string name="enable_nat_traversal">Permet recorregut NAT</string>
@@ -213,7 +217,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Ha fallat la importació de la configuració, verifiqueu que els fitxers siguin a  %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opcions de depuració</string>
+  <string name="sttrace_title">Opcions de STTRACE</string>
   <string name="environment_variables">Variables d\'entorn</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Només es permet utilitzar 0-9, a-z i \',\' a les opcions de STTRACE</string>
@@ -260,8 +264,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="select_folder">Selecciona la carpeta</string>
   <string name="create_folder_failed">No s\'ha pogut crear la carpeta</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Mostra el registre de l\'Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Mostra el registre del Syncthing</string>

@@ -11,18 +11,12 @@ Pro sdílení dat s dalšími přístroji je třeba přidat jejich unikátní ID
 Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="cont">Pokračovat</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Čeká se na Syncthing GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generování bezpečnostních klíčů. Toto může trvat pár minut.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Sdílet ID přístroje</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Poslat ID přístroje přes</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Načítání…</string>
   <string name="usage_reporting_dialog_title">Povolit anonymní hlášení o používání?</string>
   <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
   <string name="yes">Ano</string>
@@ -36,6 +30,11 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="dialog_disable_battery_optimization_later">Později</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Znovu neukazovat</string>
   <string name="dialog_disable_battery_optimization_turn_off">Vypnout pro Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Načítání…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generování bezpečnostních klíčů. Toto může trvat pár minut.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáře</string>
   <!--Shown if no folders exist-->
@@ -133,6 +132,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Syncthing GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Čeká se na Syncthing GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Nastavení</string>
   <string name="category_run_conditions">Podmínky spuštění</string>
@@ -146,8 +147,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="always_run_in_background_enabled">Syncthing poběží vždy v pozadí, podle nastavení níže.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing poběží pouze pokud bude ručně spuštěn a může být ukončen tlačítkem z menu.</string>
-  <string name="sync_only_charging">Synchronizovat pouze při nabíjení</string>
-  <string name="sync_only_wifi">Synchronizovat pouze přes wifi</string>
   <string name="sync_only_wifi_ssids">Omezit na vybrané sítě wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
@@ -193,7 +192,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Nahrání nastavení selhalo, ujistěte se, že soubory jsou v %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Možnosti ladění</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">V STTRACE jsou povoleny pouze znaky \'0-9\', \'a-z\' a \',\'</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -235,8 +233,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="select_folder">Vybrat adresář</string>
   <string name="create_folder_failed">Vytvoření adresáře selhalo</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Zobrazit log pro Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Zobrazit log pro Syncthing</string>

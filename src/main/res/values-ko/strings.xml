@@ -11,18 +11,12 @@
 발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
   <string name="cont">계속</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">GUI를 기다리는 중</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">폴더 추가</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">기기 ID 공유</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">로드 중...</string>
   <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까?</string>
   <string name="usage_reporting_dialog_description">암호화된 사용 리포트를 매일 보냅니다. 이것은 일반적 플랫폼, 폴더 크기, 앱의 버전을 추적하는데 사용됩니다. 보고된 데이터 설정이 변경된 경우 이 대화 상자가 다시 표시됩니다.\n\n수집된 통계는 https://data.syncthing.net에서 공개되고 있습니다.</string>
   <string name="yes">예</string>
@@ -37,6 +31,11 @@
   <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
   <string name="dialog_disable_battery_optimizations_not_supported">기기가 배터리 최적화 비활성화를 지원하지 않습니다.</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">로드 중...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
@@ -101,6 +100,9 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <string name="dialog_discard_changes">설정 변경을 취소합니까?</string>
+  <string name="ignore_patterns">패턴 무시하기</string>
+  <string name="create_ignore_file_error">무시 파일을 만들지 못했습니다. 디렉토리가 쓰기 가능합니까?</string>
+  <string name="edit_ignore_file_error">텍스트 편집기를 찾을 수 없습니다</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">기기 ID</string>
@@ -138,6 +140,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">웹 GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI를 기다리는 중</string>
   <!--SettingsFragment-->
   <string name="settings_title">설정</string>
   <string name="category_run_conditions">작동 상태</string>
@@ -151,8 +155,8 @@
   <string name="always_run_in_background_enabled">Syncthing이 항상 백그라운드에서 실행되도록, 다음의 설정을 변경할 수 있습니다.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing은 제대로 시작된 경우에만 작동하며, 메뉴 버튼을 눌러 정지할 수 있습니다.</string>
-  <string name="sync_only_charging">충전 중일 때만 동기화</string>
-  <string name="sync_only_wifi">Wi-Fi에서만 동기화</string>
+  <string name="sync_only_charging">충전시에만 작동</string>
+  <string name="sync_only_wifi">WiFi에서만 작동</string>
   <string name="sync_only_wifi_ssids">특정 WI-FI 네트워크로 제한하기</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">WI-FI를 활성화하고 네트워크를 선택해주세요.</string>
   <string name="respect_battery_saving_title">안드로이드 배터리 절약 설정 우선</string>
@@ -212,7 +216,7 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">설정을 불러오지 못했습니다, 파일이 %1$s에 있는지 확인해 주세요</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">디버그 옵션</string>
+  <string name="sttrace_title">STTRACE 옵션</string>
   <string name="environment_variables">환경 변수</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">STTRACE 옵션에서는 0-9, a-z 와 \'.\' 외의 문자를 사용할 수 없습니다.</string>
@@ -258,8 +262,7 @@
   <string name="select_folder">폴더 선택</string>
   <string name="create_folder_failed">폴더를 생성할 수 없었습니다</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Android 로그 보기</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Syncthing 로그 보기</string>

@@ -11,18 +11,12 @@ For at dele data med andre enheder, skal du tilføje deres enheds unikke ID til 
 Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="cont">Fortsæt</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Venter på GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Genererer sikre nøgler. Dette kan tage et par minutter.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tilføj mappe</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Del Enheds-ID</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Send Enheds-ID til</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Loader...</string>
   <string name="usage_reporting_dialog_title">Tillad Anonym Forbrugsrapportering</string>
   <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.\n\nDe aggregerede statistikker er offentligt tilgængelige her  https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
@@ -36,11 +30,21 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="dialog_disable_battery_optimization_later">Senere</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Vis ikke igen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Sluk for Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Din enhed understøtter ikke at slå batterioptimeringer fra.</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Loader...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Genererer sikre nøgler. Dette kan tage et par minutter.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Ingen mapper fundet</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d/%2$d Fil</item>
+    <item quantity="other">%1$d/%2$d Filer</item>
+  </plurals>
   <string name="toast_no_file_manager">Ingen kompatibel file manager fundet</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Enheder</string>
@@ -97,6 +101,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mappens sti må ikke være tom</string>
   <string name="dialog_discard_changes">Slet dine ændringer?</string>
+  <string name="ignore_patterns">Ignorer-mønstre</string>
+  <string name="create_ignore_file_error">Kunne ikke danne ignorer-filen. Er mappen skrivebeskyttet?</string>
+  <string name="edit_ignore_file_error">Intet tekstbehandlingsprogram blev fundet</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Enheds-ID</string>
@@ -134,6 +141,8 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Venter på GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Indstillinger</string>
   <string name="category_run_conditions">Kør betingelser</string>
@@ -147,8 +156,8 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="always_run_in_background_enabled">Syncthing kører altid i baggrunden, ifølge nedenstående indstillinger.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing kører kun hvis eksplicit staret og kan stoppes gennem menu knappen.</string>
-  <string name="sync_only_charging">Synkroniser kun under opladning</string>
-  <string name="sync_only_wifi">Synkroniser kun gennem wifi</string>
+  <string name="sync_only_charging">Synkronisér kun under opladning</string>
+  <string name="sync_only_wifi">Synkronisér kun gennem WiFi</string>
   <string name="sync_only_wifi_ssids">Begræns til specifikke netværk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vær venlig at slukke WiFi for at vælge netværk.</string>
   <string name="respect_battery_saving_title">Respekter Android battery saving indstillinger</string>
@@ -164,6 +173,11 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <item>Lav prioritet</item>
     <item>Ingen</item>
   </string-array>
+  <string name="preference_language_title">Sprog</string>
+  <string name="preference_language_summary">Ændr app sproget</string>
+  <string name="start_into_web_gui_title">Start direkte i webinterfacet</string>
+  <string name="start_into_web_gui_summary">Når app\'en starter, åben webinterfacet i stedet for hovedskærmen</string>
+  <string name="pref_language_default">Default Sprog</string>
   <string-array name="versioning_types">
     <item>Ingen</item>
     <item>Skraldespand</item>
@@ -204,8 +218,10 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="config_import_failed">Import af konfigurationen slog fjel, vær sikker på at filer er i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">Debug Muligheder</string>
+  <string name="environment_variables">Miljøvariabler</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Kun 0-9, a-z og \',\' er tilladte i STTRACE options</string>
+  <string name="toast_invalid_environment_variables">Værdien er ugyldig som miljøvariablestreng</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nulstil database</string>
   <!--Syncthing was reset-->
@@ -247,8 +263,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="select_folder">Vælg Mappe</string>
   <string name="create_folder_failed">Det lykkedes ikke at oprette en ny mappe</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Vis Android Log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Vis Syncthing Log</string>
@@ -269,11 +284,23 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Nothing to share toast-->
   <string name="nothing_share">Intet at dele</string>
   <!--Copy success toast partially-->
+  <plurals name="copy_success_partially">
+    <item quantity="one">%1$d fil kopieret til mappen \"%2$s\", %3$d eksisterer allerede</item>
+    <item quantity="other">%1$d filer kopieret til mappen \"%2$s\", %3$d eksisterer allerede</item>
+  </plurals>
   <!--Copy success toast-->
+  <plurals name="copy_success">
+    <item quantity="one">%1$d filer kopieret til mappen \"%2$s\"</item>
+    <item quantity="other">%1$d filer kopieret til mappen \"%2$s\"</item>
+  </plurals>
   <!--Copy exception toast-->
   <string name="copy_exception">Der opstod en fejl under delingen, check applikationens logs</string>
   <!--Copy progress dialog text-->
   <string name="copy_progress">Deler filer...</string>
+  <plurals name="file_name_title">
+    <item quantity="one">Filnavn</item>
+    <item quantity="other">Filliste</item>
+  </plurals>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing er slået fra</string>
@@ -330,6 +357,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="state_syncing">Synkroniserer (%1$d%%)</string>
   <string name="state_error">Fejl</string>
   <string name="state_unknown">Ukendt</string>
+  <string name="status_outofsync">Usynkroniseret</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">At stoppe Syncthing er ikke understøttet når kørsel i baggrunden er aktiveret.</string>
@@ -361,5 +389,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="staggered_versioning_info">Maksimal Alder: %1$d \nVersionerings Sti: %2$s</string>
   <string name="external_versioning_info">Kommando: %1$s</string>
   <string name="simple_versioning_info">Behold versioner: %1$s</string>
+  <string name="show_device_id">Vis endheds-ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Kunne ikke tilgå enheds-ID.</string>
 </resources>

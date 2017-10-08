@@ -7,18 +7,12 @@
   <string name="welcome_title">Velkommen til Synchting for Android</string>
   <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Venter på grafisk grensesnitt</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Snikrar sikre nøklar. Dette kan da nokre minutt.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Legg til mappe</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Del einings-ID</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Send einings-ID til</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Laster…</string>
   <string name="usage_reporting_dialog_title">Tillate anonym rapportering av bruk?</string>
   <string name="usage_reporting_dialog_description">Den krypterte rapporten blir send dagleg. Den brukast til å spore felles plattformer. mappestorleikar og app-versjonar. Om dataa som sendast blir endra, blir du spurt på ny.\n\nDei aggregerte statistikkane er offentlege på https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
@@ -28,6 +22,11 @@
   <string name="device_rejected">Eininga %1$s vil kople til</string>
   <string name="folder_rejected">Eininga %1$s vil dele mappa %2$s</string>
   <string name="dialog_disable_battery_optimization_later">Seinare</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Laster…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Snikrar sikre nøklar. Dette kan da nokre minutt.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mapper</string>
   <!--Shown if no folders exist-->
@@ -123,6 +122,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Grafisk grensesnitt på verdsveven</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Venter på grafisk grensesnitt</string>
   <!--SettingsFragment-->
   <string name="settings_title">Innstillingar</string>
   <string name="category_syncthing_options">Syncthing-innstillingar</string>
@@ -132,8 +133,6 @@
   <string name="always_run_in_background_enabled">Syncthing køyrer alltid i bakgrunnen, i tråd med innstillingane under.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing køyrer berre når ho blir uttrykkeleg starta, og kan bli stoppa frå menyen.</string>
-  <string name="sync_only_charging">Synkroniser berre mens eg laddar</string>
-  <string name="sync_only_wifi">Synkroniser berre over WiFi</string>
   <string name="sync_only_wifi_ssids">Avgrens til visse WiFi-nettverk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
@@ -174,7 +173,6 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Import av innstillingar mislukkast. Pass på at filene er i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Alternativ for feilsøking</string>
   <!--Toast after entering invalid STTRACE params-->
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Nullstill database</string>
@@ -213,8 +211,7 @@
   <string name="select_folder">Vel mappe</string>
   <string name="create_folder_failed">Lukkast ikkje med å lage mappe</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Vis Android-logg</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Vis Synchting-logg</string>

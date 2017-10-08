@@ -11,18 +11,12 @@ Untuk berbagi data dengan perangkat lain, anda perlu menambah ID masing-masing p
 Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="cont">Lanjutkan</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Memuat GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Membuat kunci aman. Ini mungkin perlu beberapa menit.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tambah Folder</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Bagikan ID Perangkat</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Kirim ID Perangkat ke</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Memuat...</string>
   <string name="usage_reporting_dialog_title">Perbolehkan Pelaporan Penggunaan Anonim?</string>
   <string name="usage_reporting_dialog_description">Laporan penggunaan terenkripsi dikirim harian. Digunakan untuk melihat jenis platform, ukuran folder dan versi aplikasi. Jika data yang terkirim berubah maka akan muncul dialog ini kembali.\n\nAgregat statistik dipublikasikan di https://data.syncthing.net</string>
   <string name="yes">Ya</string>
@@ -36,6 +30,11 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="dialog_disable_battery_optimization_later">Nanti</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Jangan tampilkan lagi</string>
   <string name="dialog_disable_battery_optimization_turn_off">Matikan untuk Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Memuat...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Membuat kunci aman. Ini mungkin perlu beberapa menit.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Folder</string>
   <!--Shown if no folders exist-->
@@ -134,6 +133,8 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Memuat GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Pengaturan</string>
   <string name="category_run_conditions">Syarat Operasi</string>
@@ -147,8 +148,6 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="always_run_in_background_enabled">Syncthing selalu berjalan di background, menurut pengaturan di bawah.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing hanya berjalan jika diaktifkan, dan bisa dihentikan lewat tombol menu.</string>
-  <string name="sync_only_charging">Selaraskan hanya saat mengisi baterai</string>
-  <string name="sync_only_wifi">Selaraskan hanya lewat wifi</string>
   <string name="sync_only_wifi_ssids">Batasi pada jaringan wifi tertentu</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Mohon aktifkan WiFi untuk memilih jaringan.</string>
   <string name="respect_battery_saving_title">Ikuti pengaturan penghematan baterai Android</string>
@@ -196,7 +195,6 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Impor konfig gagal, pastikan berkasnya dalam %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opsi Debug</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Hanya 0-9, a-z dan \',\' yang dibolehkan dalam opsi STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -240,8 +238,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="select_folder">Pilih Folder</string>
   <string name="create_folder_failed">Gagal membuat folder</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Lihat Log Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Lihat Log Syncthing</string>

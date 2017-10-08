@@ -11,18 +11,12 @@
 Пожалуйста, сообщайте о возникших проблемах через Github.</string>
   <string name="cont">Продолжить</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Ожидание GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Генерируем ключи. Это может занять несколько минут.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добавить папку</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Поделиться ID устройства</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Отправить ID устройства</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Загрузка...</string>
   <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику?</string>
   <string name="usage_reporting_dialog_description">Зашифрованный ежедневный отчет отправлен. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, то это диалог появится вновь. \n\nОбобщенная статистика доступна на  https://data.syncthing.net.</string>
   <string name="yes">Да</string>
@@ -36,6 +30,11 @@
   <string name="dialog_disable_battery_optimization_later">Позже</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Больше не показывать</string>
   <string name="dialog_disable_battery_optimization_turn_off">Отключить для Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Загрузка...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Генерируем ключи. Это может занять несколько минут.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Папки</string>
   <!--Shown if no folders exist-->
@@ -133,6 +132,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Веб-интерфейс</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Ожидание GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Настройки</string>
   <string name="category_run_conditions">Условия выполнения</string>
@@ -146,8 +147,6 @@
   <string name="always_run_in_background_enabled">Автозапуск при перезагрузке устройства и работа в фоне</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing работает только когда запущен специально и может быть остановлен кнопкой в меню.</string>
-  <string name="sync_only_charging">Синхронизация только во время зарядки</string>
-  <string name="sync_only_wifi">Синхронизация только по WIFI</string>
   <string name="sync_only_wifi_ssids">Ограничить определёнными wifi сетями</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="respect_battery_saving_title">Учитывать настройки энергосбережения Android</string>
@@ -195,7 +194,6 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Неудачное импортирование настроек, убедитесь что файлы находятся в %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Настройки режима отладки</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Только 0-9, a-z и \',\' допустимы для параметра STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -240,8 +238,7 @@
   <string name="select_folder">Выбрать папку</string>
   <string name="create_folder_failed">Не удалось создать папку</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Логи Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Логи Syncthing</string>

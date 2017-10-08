@@ -9,18 +9,12 @@
   <string name="welcome_text">Syncthing es una aplicación para sincronización de ficheros de fuentes abiertas.\nPara compartir datos con otros dispisitivos, necesitas añadir sus identificadores únicos de dispositivo a la lista de dispositivos. Después, puedes seleccionar qué carpetas vas a compartir con qué dispositivos.\nPor favor, informa de cualquier problema que te encuentres vía Github.</string>
   <string name="cont">Continuar</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Esperando a la interfaz gráfica</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generando claves seguras. Esto puede llevar algún tiempo.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Compartir el ID del dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Enviar el ID del dispositivo a</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Cargando...</string>
   <string name="usage_reporting_dialog_title">¿Permitir informes anónimos de uso?</string>
   <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utiliza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si se modifica el conjunto de datos del informe se te presentará de nuevo este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
@@ -34,6 +28,11 @@
   <string name="dialog_disable_battery_optimization_later">Después</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">No volver a mostrar.</string>
   <string name="dialog_disable_battery_optimization_turn_off">Deshabilitar para Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Cargando...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generando claves seguras. Esto puede llevar algún tiempo.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Carpetas</string>
   <!--Shown if no folders exist-->
@@ -132,6 +131,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfaz gráfica web</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Esperando a la interfaz gráfica</string>
   <!--SettingsFragment-->
   <string name="settings_title">Ajustes</string>
   <string name="category_run_conditions">Condiciones de ejecución</string>
@@ -145,8 +146,6 @@
   <string name="always_run_in_background_enabled">Syncthing se ejecutará siempre en segundo plano, de acuerdo a la siguiente configuración.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing sólo se ejecutará cuando se inicie explícitamente, y puede ser detenido por el botón de menú.</string>
-  <string name="sync_only_charging">Sincronizar solo durante la carga</string>
-  <string name="sync_only_wifi">Sincronizar sólo con wifi</string>
   <string name="sync_only_wifi_ssids">Restringir a determinadas redes wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor enciende el wifi para seleccionar redes.</string>
   <string name="respect_battery_saving_title">Respeta la configuración de ahorro de batería de Android</string>
@@ -197,7 +196,6 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Importación de la configuración fallida, comprueba que los ficheros están en %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opciones de depuración</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Sólo se permite 0-9, a-z y coma (\',\') en las opciones de STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -241,8 +239,7 @@
   <string name="select_folder">Seleccionar carpeta</string>
   <string name="create_folder_failed">Error al crear la carpeta</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Mostrar registro de Android</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Mostrar registro de Syncthing</string>

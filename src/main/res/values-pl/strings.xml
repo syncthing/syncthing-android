@@ -11,18 +11,12 @@ Aby udostępnić dane innemu urządzeniu, należy dodać jego unikalny identyfik
 Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.</string>
   <string name="cont">Kontynuuj</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Dodaj katalog</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Udostępnij ID urządzenia</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Wyślij ID urządzenia do</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Wczytywanie...</string>
   <string name="usage_reporting_dialog_title">Zezwolić na wysyłanie anonimowych statystyk użycia?</string>
   <string name="usage_reporting_dialog_description">Codziennie wysyłany jest zaszyfrowany raport statystyk użycia. Zawarte w nim są informacje o platformie użytkownika, rozmiarach folderów i wersji aplikacji. Jeśli zestaw pobieranych danych zmieni się to okno zostanie ponownie wyświetlone .\n\nZebrane statystyki są dostępne dla każdego na https://data.syncthing.net.</string>
   <string name="yes">Tak</string>
@@ -36,6 +30,11 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="dialog_disable_battery_optimization_later">Później</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Nie pokazuj ponownie</string>
   <string name="dialog_disable_battery_optimization_turn_off">Wyłącz dla Syncthing</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Wczytywanie...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Generowanie kluczy bezpieczeństwa. To może zająć kilka minut.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Katalogi</string>
   <!--Shown if no folders exist-->
@@ -134,6 +133,8 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Interfejs internetowy</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Oczekiwanie na interfejs użytkownika</string>
   <!--SettingsFragment-->
   <string name="settings_title">Ustawienia</string>
   <string name="category_run_conditions">Warunki działania</string>
@@ -147,8 +148,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="always_run_in_background_enabled">Uruchamia program w tle zgodnie z poniższymi preferencjami</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Uruchamia program ręcznie i kończy jego działanie przyciskiem w menu</string>
-  <string name="sync_only_charging">Synchronizowanie tylko podczas ładowania</string>
-  <string name="sync_only_wifi">Synchronizowanie tylko przy użyciu Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Ogranicz do określonych sieci WiFi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="respect_battery_saving_title">Respektuj ustawienia oszczędzania energii Androida</string>
@@ -191,7 +190,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Nie udało się zaimportować ustawień. Proszę upewnić się, że pliki znajdują się w położeniu %1$s.</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Opcje diagnozowania błędów</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Tylko 0-9, a-z i \",\" są dozwolone w opcjach STTRACE</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -236,8 +234,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="select_folder">Wybierz katalog</string>
   <string name="create_folder_failed">Nie udało się utworzyć katalogu</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Wyświetl dziennik systemu</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Wyświetl dziennik programu</string>

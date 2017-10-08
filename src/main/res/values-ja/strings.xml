@@ -11,18 +11,12 @@
 発生した問題は何でも Github で報告してください。</string>
   <string name="cont">続行</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">GUI を待機中</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">フォルダーを追加</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">デバイス ID を共有</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">デバイス ID を送信…</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">ロード中…</string>
   <string name="usage_reporting_dialog_title">匿名での使用状況レポートを許可しますか?</string>
   <string name="usage_reporting_dialog_description">使用状況レポートは暗号化されて毎日送信されます。この情報はプラットフォーム、フォルダーのサイズ、アプリケーションのバージョンを調査するために使われます。送信するデータセットが変更された場合、このダイアログで再度確認が求められます。\n\n集計結果は https://data.syncthing.net で公開されています。</string>
   <string name="yes">はい</string>
@@ -37,6 +31,11 @@
   <string name="dialog_disable_battery_optimization_dont_show_again">再度表示しない</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing のためにオフにします</string>
   <string name="dialog_disable_battery_optimizations_not_supported">お使いのデバイスはバッテリーの最適化を無効にできません</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">ロード中…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Shown if no folders exist-->
@@ -101,6 +100,9 @@
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <string name="dialog_discard_changes">変更を破棄しますか?</string>
+  <string name="ignore_patterns">無視するパターン</string>
+  <string name="create_ignore_file_error">無視ファイルの作成に失敗しました。ディレクトリは書き込み可能ですか?</string>
+  <string name="edit_ignore_file_error">テキストエディタが見つかりません</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">デバイス ID</string>
@@ -138,6 +140,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Web GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">GUI を待機中</string>
   <!--SettingsFragment-->
   <string name="settings_title">設定</string>
   <string name="category_run_conditions">実行条件</string>
@@ -151,8 +155,8 @@
   <string name="always_run_in_background_enabled">以下の設定に応じて常にバックグラウンドで実行されます。</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">明示的に開始したときのみ同期を実行し、メニューから停止することができます。</string>
-  <string name="sync_only_charging">充電中のみ同期</string>
-  <string name="sync_only_wifi">Wi-Fi 接続時のみ同期</string>
+  <string name="sync_only_charging">充電中のみ実行</string>
+  <string name="sync_only_wifi">Wi-Fi 接続時のみ実行</string>
   <string name="sync_only_wifi_ssids">特定の Wi-Fi ネットワークに制限する</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために Wi-Fi をオンにしてください。</string>
   <string name="respect_battery_saving_title">Android の節電設定に従う</string>
@@ -212,7 +216,7 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">設定のインポートに失敗しました。%1$s にファイルがあるか確認してください</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">デバッグオプション</string>
+  <string name="sttrace_title">STTRACE オプション</string>
   <string name="environment_variables">環境変数</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">STTRACE オプションでは、0-9、a-z および \',\' のみ使用できます。</string>
@@ -258,8 +262,7 @@
   <string name="select_folder">フォルダーを選択</string>
   <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Syncthing ログを表示</string>

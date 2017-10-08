@@ -6,21 +6,21 @@
   <!--Text for dialog displayed on first start-->
   <string name="cont">استمرار</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">إضافة مجلد</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">مشاركة معرف الجهاز</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">مشاركة معرف الجهاز إلى</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">تحميل ...</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
   <string name="open_website">فتح موقع الويب</string>
   <string name="dialog_disable_battery_optimization_later">فيما بعد</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">لا تظهر ثانيةً</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">تحميل ...</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--FoldersFragment-->
   <!--Shown if no folders exist-->
   <!--Format string for folder file count-->
@@ -69,6 +69,7 @@
   <!--Toast show if we could not get root permissions-->
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
+  <!--Text for WebGuiActivity loading view-->
   <!--SettingsFragment-->
   <!--Preference summary in case it is enabled-->
   <!--Preference summary in case it is disabled-->
@@ -97,7 +98,6 @@
   <!--Menu item to create folder on the file system-->
   <!--Menu item to select the current folder-->
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
   <!--Title of the "share log" menu button-->

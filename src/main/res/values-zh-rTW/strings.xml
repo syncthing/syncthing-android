@@ -5,16 +5,15 @@
   <!--Title for dialog displayed on first start-->
   <!--Text for dialog displayed on first start-->
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">正在等待 GUI</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">增加資料夾</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">分享裝置識別碼</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">傳送裝置識別碼給</string>
+  <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--FoldersFragment-->
   <string name="folders_fragment_title">資料夾</string>
   <!--Shown if no folders exist-->
@@ -99,6 +98,8 @@
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">網頁 GUI</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">正在等待 GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">設定</string>
   <string name="category_syncthing_options">Syncthing 選項</string>
@@ -107,8 +108,6 @@
   <string name="always_run_in_background_enabled">根據下列的偏好設定，Syncthing 會永遠在背景執行。</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing 只會在明確地被要求時才會啟動，且可透過選單的按鈕停止。</string>
-  <string name="sync_only_charging">只在充電時同步</string>
-  <string name="sync_only_wifi">只透過 Wi-Fi 網路同步</string>
   <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
   <string name="listen_address">同步通訊協定監聽位址</string>
   <string name="max_recv_kbps">下載速率限制(KiB/s)</string>
@@ -122,7 +121,6 @@
   <!--Toast shown after config was successfully imported-->
   <!--Toast shown after config was successfully imported-->
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">除錯選項</string>
   <!--Toast after entering invalid STTRACE params-->
   <!--Title for the preference to reset Syncthing indexes-->
   <!--Syncthing was reset-->
@@ -151,7 +149,6 @@
   <string name="select_folder">選擇資料夾</string>
   <string name="create_folder_failed">建立資料夾時失敗</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
   <!--Title of the "log android" menu button-->
   <!--Title of the "log Syncthing" menu button-->
   <!--Title of the "share log" menu button-->

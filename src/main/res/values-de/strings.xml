@@ -11,18 +11,12 @@ Um Daten mit anderen Geräten zu teilen, müssen Sie deren eindeutige Geräte ID
 Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="cont">Weiter</string>
   <!--MainActivity-->
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Warte auf Weboberfläche</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Verzeichnis hinzufügen</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Geräte-ID teilen</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Geräte-ID senden an</string>
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Ladevorgang…</string>
   <string name="usage_reporting_dialog_title">anonymen Nutzungsbericht erlauben?</string>
   <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, werden Sie erneut um Erlaubnis gefragt. Die zusammengeführten Statistiken sind unter https://data.syncthing.net zu finden.</string>
   <string name="yes">Ja</string>
@@ -36,6 +30,12 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="dialog_disable_battery_optimization_later">Später</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Nicht mehr zeigen.</string>
   <string name="dialog_disable_battery_optimization_turn_off">Für Syncthing abstellen.</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Dein Gerät unterstützt das deaktivieren der Batterielaufzeit Optimierung nicht</string>
+  <!--StateDialogActivity-->
+  <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">Ladevorgang…</string>
+  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+  <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Verzeichnisse</string>
   <!--Shown if no folders exist-->
@@ -138,6 +138,8 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
   <string name="web_gui_title">Weboberfläche</string>
+  <!--Text for WebGuiActivity loading view-->
+  <string name="web_gui_loading">Warte auf Weboberfläche</string>
   <!--SettingsFragment-->
   <string name="settings_title">Einstellungen</string>
   <string name="category_run_conditions">Laufkonditionen</string>
@@ -151,8 +153,8 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="always_run_in_background_enabled">Syncthing läuft immer im Hintergrund, entsprechend den untenstehenden Einstellungen.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing läuft nur wenn es explizit gestartet wird und kann über das Menü gestoppt werden. </string>
-  <string name="sync_only_charging">Sync nur mit Ladegerät</string>
-  <string name="sync_only_wifi">Sync nur im WLAN</string>
+  <string name="sync_only_charging">Nur beim Aufladen aktiv</string>
+  <string name="sync_only_wifi">Nur mit WLAN aktiv</string>
   <string name="sync_only_wifi_ssids">Nur in bestimmten WLAN Netzwerken</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
   <string name="respect_battery_saving_title">Android Energiesparmodus Einstellung berücksichtigen</string>
@@ -170,6 +172,8 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   </string-array>
   <string name="preference_language_title">Sprache</string>
   <string name="preference_language_summary">Anwendungssprache ändern</string>
+  <string name="start_into_web_gui_title">Beim Start direkt die Weboberfläche öffnen</string>
+  <string name="start_into_web_gui_summary">Beim Start der App die Weboberfläche anstelle des Hauptfensters öffnen</string>
   <string name="pref_language_default">Standardsprache</string>
   <string-array name="versioning_types">
     <item>Keine</item>
@@ -210,9 +214,11 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Import fehlgeschlagen, Dateien werden in %1$s erwartet</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">Fehlersuchoptionen</string>
+  <string name="sttrace_title">STTRACE Optionen</string>
+  <string name="environment_variables">Umgebungsvariablen</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Nur 0-9, a-z und \',\' sind erlaubt in STTRACE Optionen</string>
+  <string name="toast_invalid_environment_variables">Wert ist kein gültiger Umgebungsvariablen-String</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Datenbank zurücksetzen</string>
   <!--Syncthing was reset-->
@@ -254,8 +260,7 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="select_folder">Verzeichnis auswählen</string>
   <string name="create_folder_failed">Verzeichniserstellung fehlgeschlagen</string>
   <!--LogActivity-->
-  <!--Title of the "log" activity-->
-    <!--Title of the "log android" menu button-->
+  <!--Title of the "log android" menu button-->
   <string name="view_android_log">Zeige Android-Log</string>
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Zeige Syncthing-Log</string>
@@ -357,7 +362,9 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="maximum_age">Höchstalter</string>
   <string name="clean_out_after">Aufräumen nach</string>
   <string name="file_versioning">Dateiversionierung</string>
+  <string name="finish">Fertig</string>
   <string name="none">Keine</string>
+  <string name="versions_path">Versionspfad</string>
   <string name="command">Befehl</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Anzahl der alten Versionen, die von jeder Datei behalten werden sollen.</string>
@@ -370,8 +377,16 @@ Bitte melden Sie auftretende Probleme via Github.</string>
   <string name="external_versioning_description">Der erste Kommandozeilenparameter ist der Ordnerpfad und der zweite Parameter ist der relative Pfad innerhalb des Ordners</string>
   <string name="no_versioning_description">Dateiversionierungstyp auswählen um Dateiversionierung zu aktivieren.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Typ: Einfach</string>
+  <string name="type_trashcan">Typ: Papierkorb</string>
+  <string name="type_staggered">Typ: Gestaffelt</string>
+  <string name="type_external">Typ: Extern</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">Aufräumen nach: %1$s</string>
+  <string name="staggered_versioning_info">Maximales Alter: %1$d \nVersionspfad: %2$s</string>
   <string name="external_versioning_info">Befehl: %1$s</string>
+  <string name="simple_versioning_info">Behalte Versionen: %1$s</string>
   <string name="show_device_id">Zeige Geräte-ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Kein Zugriff auf die Geräte-ID möglich</string>
 </resources>
