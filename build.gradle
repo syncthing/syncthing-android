@@ -30,7 +30,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'org.mindrot:jbcrypt:0.4'
     compile 'com.google.guava:guava:20.0'
-    compile 'com.annimon:stream:1.1.8'
+    compile 'com.annimon:stream:1.1.9'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.google.dagger:dagger:2.11"
@@ -41,7 +41,7 @@ dependencies {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true
 
