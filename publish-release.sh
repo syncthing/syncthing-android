@@ -25,13 +25,12 @@ echo "
 Enter Changelog for $version
 -----------------------------
 "
-changelog_file="/tmp/changelog.tmp"
-touch
-${DEFAULT_EDITOR} $changelog_file
+changelog_file="build/changelog.tmp"
+touch ${changelog_file}
+nano ${changelog_file}
 
-changelog=`cat $changelog_file`
-rm $changelog_file
-echo $changelog > "src/main/play/en-GB/whatsnew"
+changelog=`cat ${changelog_file}`
+mv ${changelog_file} "src/main/play/en-GB/whatsnew"
 
 echo "
 
@@ -39,12 +38,12 @@ Push to Google Play
 -----------------------------
 "
 
-read -p "Enter signing password: " password
+read -s -p "Enter signing password: " password
 
 SIGNING_PASSWORD=$password ./gradlew assembleRelease
 
 # Upload apk and listing to Google Play
-./gradlew publishRelease
+SIGNING_PASSWORD=$password ./gradlew publishRelease
 
 echo "
 

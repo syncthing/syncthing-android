@@ -1,7 +1,8 @@
-- sort folders and devices (@nutomic)
-- change default compression to metadata only (@nutomic)
-- fixed chmod problem with syncthing binary (@zillode)
-- fixed dialog background on pre-Lollipop (@veniosg)
-- various design improvements (@veniosg)
-- imported translations
-- updated syncthing to v0.11.22
+- raise minimum Android version to ICS 4.0 (@nutomic)
+- fixed root related issues {@flipreverse)
+- lots of bug fixes, better working run conditions (@nutomic)
+- show button to open logs if Syncthing isn't loading (@nutomic)
+- added "edit ignores" button (@nutomic)
+- updated Syncthing to v0.14.39-rc.1
+- updated translations
+
