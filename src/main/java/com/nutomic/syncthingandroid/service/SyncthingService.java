@@ -425,6 +425,10 @@ public class SyncthingService extends Service implements
         return sp.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
     }
 
+    public State getCurrentState() {
+        return mCurrentState;
+    }
+
     /**
      * Exports the local config and keys to {@link Constants#EXPORT_PATH}.
      */

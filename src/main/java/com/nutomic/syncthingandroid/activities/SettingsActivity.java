@@ -59,6 +59,7 @@ public class SettingsActivity extends SyncthingActivity {
         private CheckBoxPreference mSyncOnlyWifi;
         private WifiSsidPreference mSyncOnlyOnSSIDs;
 
+        private Preference         mCategorySyncthingOptions;
         private EditTextPreference mDeviceName;
         private EditTextPreference mListenAddresses;
         private EditTextPreference mMaxRecvKbps;
@@ -70,6 +71,8 @@ public class SettingsActivity extends SyncthingActivity {
         private EditTextPreference mGlobalAnnounceServers;
         private EditTextPreference mAddress;
         private CheckBoxPreference mUrAccepted;
+
+        private Preference mCategoryBackup;
 
         private CheckBoxPreference mUseRoot;
 
@@ -134,6 +137,7 @@ public class SettingsActivity extends SyncthingActivity {
             mAddress                = (EditTextPreference) findPreference("address");
             mUrAccepted             = (CheckBoxPreference) findPreference("urAccepted");
 
+            mCategoryBackup         = findPreference("category_backup");
             Preference exportConfig = findPreference("export_config");
             Preference importConfig = findPreference("import_config");
 
@@ -152,8 +156,8 @@ public class SettingsActivity extends SyncthingActivity {
             mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
             setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
 
-            setPreferenceCategoryChangeListener(
-                    findPreference("category_syncthing_options"), this::onSyncthingPreferenceChange);
+            mCategorySyncthingOptions = findPreference("category_syncthing_options");
+            setPreferenceCategoryChangeListener(mCategorySyncthingOptions, this::onSyncthingPreferenceChange);
 
             exportConfig.setOnPreferenceClickListener(this);
             importConfig.setOnPreferenceClickListener(this);
@@ -163,9 +167,9 @@ public class SettingsActivity extends SyncthingActivity {
             stReset.setOnPreferenceClickListener(this);
 
             mUseRoot.setOnPreferenceClickListener(this);
-            useWakelock.setOnPreferenceChangeListener(this::onRequireRestart);
-            foregroundService.setOnPreferenceChangeListener(this::onRequireRestart);
-            useTor.setOnPreferenceChangeListener(this::onRequireRestart);
+            useWakelock.setOnPreferenceChangeListener((p, o) -> requireRestart());
+            foregroundService.setOnPreferenceChangeListener((p, o) -> requireRestart());
+            useTor.setOnPreferenceChangeListener((p, o) -> requireRestart());
 
             try {
                 appVersion.setSummary(getActivity().getPackageManager()
@@ -195,14 +199,11 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public void onApiChange(SyncthingService.State currentState) {
             boolean syncthingActive = currentState == SyncthingService.State.ACTIVE;
-            boolean enableAllPrefs = syncthingActive && mSyncthingService.getApi().isConfigLoaded();
-            PreferenceScreen ps = getPreferenceScreen();
-            for (int i = 0; i < ps.getPreferenceCount(); i++) {
-                Preference p = ps.getPreference(i);
-                p.setEnabled(enableAllPrefs || "category_run_conditions".equals(p.getKey()));
-            }
+            boolean isSyncthingRunning = syncthingActive && mSyncthingService.getApi().isConfigLoaded();
+            mCategorySyncthingOptions.setEnabled(isSyncthingRunning);
+            mCategoryBackup.setEnabled(isSyncthingRunning);
 
-            if (!enableAllPrefs)
+            if (!isSyncthingRunning)
                 return;
 
             mApi = mSyncthingService.getApi();
@@ -273,8 +274,11 @@ public class SettingsActivity extends SyncthingActivity {
             return true;
         }
 
-        public boolean onRequireRestart(Preference preference, Object o) {
-            mSyncthingService.getApi().showRestartDialog(getActivity());
+        public boolean requireRestart() {
+            if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
+                    mSyncthingService.getApi() != null) {
+                mSyncthingService.getApi().showRestartDialog(getActivity());
+            }
             return true;
         }
 
@@ -304,7 +308,7 @@ public class SettingsActivity extends SyncthingActivity {
                     break;
                 case KEY_STTRACE:
                     if (((String) o).matches("[0-9a-z, ]*"))
-                        mSyncthingService.getApi().showRestartDialog(getActivity());
+                        requireRestart();
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
                                 .show();
@@ -313,7 +317,7 @@ public class SettingsActivity extends SyncthingActivity {
                     break;
                 case "environment_variables":
                     if (((String) o).matches("^(\\w+=[\\w:/\\.]+)?( \\w+=[\\w:/\\.]+)*$")) {
-                        mSyncthingService.getApi().showRestartDialog(getActivity());
+                        requireRestart();
                     }
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_environment_variables, Toast.LENGTH_SHORT)
@@ -336,7 +340,7 @@ public class SettingsActivity extends SyncthingActivity {
                         new TestRootTask().execute();
                     } else {
                         new Thread(() -> Util.fixAppDataPermissions(getActivity())).start();
-                        mSyncthingService.getApi().showRestartDialog(getActivity());
+                        requireRestart();
                     }
                     return true;
                 case KEY_EXPORT_CONFIG:
@@ -402,7 +406,7 @@ public class SettingsActivity extends SyncthingActivity {
             @Override
             protected void onPostExecute(Boolean haveRoot) {
                 if (haveRoot) {
-                    mSyncthingService.getApi().showRestartDialog(getActivity());
+                    requireRestart();
                     mUseRoot.setChecked(true);
                 } else {
                     Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)

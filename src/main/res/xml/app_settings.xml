@@ -133,6 +133,7 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:key="category_backup"
         android:title="@string/category_backup">
 
         <Preference
