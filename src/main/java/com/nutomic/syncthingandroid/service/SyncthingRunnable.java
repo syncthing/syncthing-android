@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.text.TextUtils;
@@ -11,6 +10,7 @@ import android.util.Log;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 
 import java.io.BufferedReader;
@@ -69,7 +69,7 @@ public class SyncthingRunnable implements Runnable {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mSyncthingBinary = Constants.getSyncthingBinary(mContext);
-        mLogFile = new File(mContext.getExternalFilesDir(null), "syncthing.log");
+        mLogFile = Constants.getLogFile(mContext);
         mUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
             case generate:
@@ -141,10 +141,7 @@ public class SyncthingRunnable implements Runnable {
                     break;
                 default:
                     Log.w(TAG, "Syncthing has crashed (exit code " + ret + ")");
-                    // Show notification to inform user about crash.
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(mLogFile), "text/plain");
-                    mNotificationHandler.showCrashedNotification(intent);
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, false);
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);

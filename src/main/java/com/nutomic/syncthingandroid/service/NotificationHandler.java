@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
+import com.nutomic.syncthingandroid.activities.LogActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 
 import javax.inject.Inject;
@@ -92,10 +94,11 @@ public class NotificationHandler {
         mNotificationManager.cancel(ID_PERSISTENT);
     }
 
-    public void showCrashedNotification(Intent intent) {
-        if (mPreferences.getBoolean("notify_crashes", false)) {
+    public void showCrashedNotification(@StringRes int title, boolean force) {
+        if (force || mPreferences.getBoolean("notify_crashes", false)) {
+            Intent intent = new Intent(mContext, LogActivity.class);
             Notification n = new NotificationCompat.Builder(mContext)
-                    .setContentTitle(mContext.getString(R.string.notification_crash_title))
+                    .setContentTitle(mContext.getString(title))
                     .setContentText(mContext.getString(R.string.notification_crash_text))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))

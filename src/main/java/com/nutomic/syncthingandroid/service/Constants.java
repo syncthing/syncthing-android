@@ -66,4 +66,8 @@ public class Constants {
     static File getSyncthingBinary(Context context) {
         return new File(context.getApplicationInfo().nativeLibraryDir, "libsyncthing.so");
     }
+
+    static File getLogFile(Context context) {
+        return new File(context.getExternalFilesDir(null), "syncthing.log");
+    }
 }

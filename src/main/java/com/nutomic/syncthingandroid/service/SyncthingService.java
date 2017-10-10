@@ -220,8 +220,7 @@ public class SyncthingService extends Service implements
                 mConfig = new ConfigXml(SyncthingService.this);
                 mConfig.updateIfNeeded();
             } catch (ConfigXml.OpenConfigException e) {
-                Toast.makeText(SyncthingService.this, R.string.config_create_failed,
-                        Toast.LENGTH_LONG).show();
+                mNotificationHandler.showCrashedNotification(R.string.config_create_failed, true);
                 onApiChange(State.ERROR);
                 cancel(true);
             }
