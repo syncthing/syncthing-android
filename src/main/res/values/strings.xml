@@ -519,6 +519,8 @@ Please report any problems you encounter via Github.</string>
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>
 
+    <string name="syncthing_disabled">Syncthing is disabled</string>
+
     <string name="syncthing_active_foreground">Service is running with foreground priority.</string>
 
     <!-- Toast shown if folder observer fails to traverse a folder -->

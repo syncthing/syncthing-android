@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -45,7 +44,7 @@ public class NetworkReceiver extends BroadcastReceiver {
         lbm.sendBroadcast(intent);
 
         // Make sure service is running.
-        context.startService(new Intent(context, SyncthingService.class));
+        BootReceiver.startServiceCompat(context);
     }
 
 }

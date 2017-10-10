@@ -31,7 +31,7 @@ public class BatteryReceiver extends BroadcastReceiver {
         lbm.sendBroadcast(i);
 
         // Make sure service is running.
-        context.startService(new Intent(context, SyncthingService.class));
+        BootReceiver.startServiceCompat(context);
     }
 
     /**

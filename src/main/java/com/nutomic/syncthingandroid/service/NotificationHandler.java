@@ -40,20 +40,31 @@ public class NotificationHandler {
     public void updatePersistentNotification(SyncthingService service, SyncthingService.State currentState) {
         String type = mPreferences.getString(Constants.PREF_NOTIFICATION_TYPE, "low_priority");
         boolean foreground = mPreferences.getBoolean(Constants.PREF_FOREGROUND_SERVICE, false);
+
+        // Android 8 does not allow starting service from background unless it's a foreground
+        // service, so if "always run in background" is enabled, we have to use a foreground service.
+        // https://stackoverflow.com/a/44505719/1837158
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && SyncthingService.alwaysRunInBackground(mContext)) {
+            foreground = true;
+        }
+
+        // foreground priority requires any notification
+        // so this ensures that we either have a "default" or "low_priority" notification,
+        // but not "none".
         if ("none".equals(type) && foreground) {
-            // foreground priority requires any notification
-            // so this ensures that we either have a "default" or "low_priority" notification,
-            // but not "none".
             type = "low_priority";
         }
-        if ((currentState == SyncthingService.State.ACTIVE || currentState == SyncthingService.State.STARTING) &&
-                !type.equals("none")) {
+
+        boolean syncthingRunning = currentState == SyncthingService.State.ACTIVE ||
+                currentState == SyncthingService.State.STARTING;
+        if (foreground || (syncthingRunning && !type.equals("none"))) {
             // Launch FirstStartActivity instead of MainActivity so we can request permission if
             // necessary.
             PendingIntent pi = PendingIntent.getActivity(mContext, 0,
                     new Intent(mContext, FirstStartActivity.class), 0);
+            int title = syncthingRunning ? R.string.syncthing_active : R.string.syncthing_disabled;
             NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext)
-                    .setContentTitle(mContext.getString(R.string.syncthing_active))
+                    .setContentTitle(mContext.getString(title))
                     .setSmallIcon(R.drawable.ic_stat_notify)
                     .setOngoing(true)
                     .setContentIntent(pi);
@@ -74,6 +85,9 @@ public class NotificationHandler {
     }
 
     public void cancelPersistentNotification(SyncthingService service) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && SyncthingService.alwaysRunInBackground(mContext))
+            return;
+
         service.stopForeground(false);
         mNotificationManager.cancel(ID_PERSISTENT);
     }
