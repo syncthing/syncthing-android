@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         binding.directory.setText(folder.path);
         binding.openFolder.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(new File(folder.path)), "resource/folder");
+            Uri contentUri = FileProvider.getUriForFile(getContext(), "com.nutomic.syncthingandroid", new File(folder.path));
+            intent.setDataAndType(contentUri, "resource/folder");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                 getContext().startActivity(intent);
