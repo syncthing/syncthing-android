@@ -308,11 +308,11 @@
   <string name="exit">나가기</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing이 작동 중입니다</string>
+  <string name="syncthing_disabled">Syncthing이 비활성화되었습니다</string>
   <string name="syncthing_active_foreground">서비스가 포그라운드로  작동중입니다.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">폴더의 계층이 너무 깊습니다. 심볼릭 링크의 순환을 확인해주세요.</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Syncthing 설정을 작성하는데 실패하였습니다. 로그 내역을 확인해 주세요.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">카메라</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->

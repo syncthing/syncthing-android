@@ -284,6 +284,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="exit">Keluar</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing dinyalakan</string>
+  <string name="syncthing_disabled">Syncthing dimatikan</string>
   <string name="syncthing_active_foreground">Service dijalankan dengan prioritas foreground.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <!--Toast shown if syncthing failed to create a config-->

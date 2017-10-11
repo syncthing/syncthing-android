@@ -262,11 +262,11 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="exit">Ukončit</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing běží</string>
+  <string name="syncthing_disabled">Syncthing je vypnutý</string>
   <string name="syncthing_active_foreground">Služba běží na popředí.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Adresářová struktura je moc hluboká. Zkontrolujte zacyklené symlinky.</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Selhalo vytvoření konfigurace Syncthing. Zkontrolujte prosím logy.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->

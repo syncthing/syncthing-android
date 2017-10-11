@@ -288,11 +288,11 @@
   <string name="exit">Salir</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing se está ejecutando</string>
+  <string name="syncthing_disabled">Syncthing está deshabilitado</string>
   <string name="syncthing_active_foreground">El servicio se está ejecutando con prioridad de primer plano.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Árbol de directorios demasiado profundo. Comprueba enlaces simbólicos cíclicos</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Error al crear la configuración de Syncthing. Por favor, comprueba el registro.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Cámara</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->

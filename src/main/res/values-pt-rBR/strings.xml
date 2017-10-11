@@ -36,6 +36,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="api_loading">Carregando...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Gerando chaves de segurança. Isto pode levar alguns minutos.</string>
+  <string name="syncthing_loading_slow_message">O Syncthing está demorando muito para ser executado. Verifique os logs na busca por erros.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Shown if no folders exist-->
@@ -97,6 +98,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <string name="dialog_discard_changes">Descartar as alterações?</string>
+  <string name="ignore_patterns">Filtros</string>
+  <string name="create_ignore_file_error">Não foi possível criar o arquivo de filtros. Este diretório tem permissões de escrita?</string>
+  <string name="edit_ignore_file_error">Nenhum editor de texto foi encontrado</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -149,6 +153,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="always_run_in_background_enabled">O Syncthing sempre rodará em segundo plano de acordo com as preferências abaixo.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">O Syncthing sempre rodará quando iniciado manualmente e pode ser parado pelo botão de menu.</string>
+  <string name="sync_only_charging">Rodar somente durante a carga do aparelho</string>
+  <string name="sync_only_wifi">Rodar somente com o aparelho conectado ao Wi-Fi</string>
   <string name="sync_only_wifi_ssids">Limitar a certas redes WiFi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
   <string name="respect_battery_saving_title">Honrar a configuração de economia de bateria do Android</string>
@@ -166,6 +172,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   </string-array>
   <string name="preference_language_title">Idioma</string>
   <string name="preference_language_summary">Alterar o idioma do aplicativo</string>
+  <string name="start_into_web_gui_title">Iniciar diretamente na interface web</string>
+  <string name="start_into_web_gui_summary">Quando o app for iniciado, abrir a interface web em vez da tela principal</string>
   <string name="pref_language_default">Idioma padrão</string>
   <string-array name="versioning_types">
     <item>Nenhum</item>
@@ -206,6 +214,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">A importação falhou. Verifique se os arquivos estão em %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Opções do STTRACE</string>
   <string name="environment_variables">Variáveis de ambiente</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Somente os caracteres 0-9, a-z e vírgula são permitidos nas opções de STTRACE</string>
@@ -252,6 +261,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="select_folder">Selecionar pasta</string>
   <string name="create_folder_failed">Falha na criação da pasta</string>
   <!--LogActivity-->
+  <string name="syncthing_log_title">Logs do Syncthing</string>
+  <string name="android_log_title">Logs do Android</string>
   <!--Title of the "log android" menu button-->
   <string name="view_android_log">Exibir o log do Android</string>
   <!--Title of the "log Syncthing" menu button-->
@@ -301,11 +312,12 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="exit">Sair</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está rodando</string>
+  <string name="syncthing_disabled">O Syncthing está desabilitado</string>
   <string name="syncthing_active_foreground">Com prioridade de primeiro plano.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Árvore de diretórios profunda demais. Verifique links simbólicos cíclicos.</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Ocorreu um erro tentando configurar o Syncthing. Por favor, verifique os logs.</string>
+  <string name="config_create_failed">Erro na criação da configuração</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Câmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->

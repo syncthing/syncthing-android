@@ -30,11 +30,13 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Je apparaat biedt geen ondersteuning voor het uitschakelen van batterijoptimalisatie</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laden…</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Bezig met aanmaken van veilige sleutels. Dit kan enkele minuten duren.</string>
+  <string name="syncthing_loading_slow_message">Syncthing is al erg lang bezig met opstarten. Controleer de logs op mogelijke fouten.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->
@@ -100,6 +102,9 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
   <string name="dialog_discard_changes">Wijzigingen verwerpen?</string>
+  <string name="ignore_patterns">Patronen negeren</string>
+  <string name="create_ignore_file_error">Aanmaken van ignore-bestand mislukt. Is de map schrijfbaar?</string>
+  <string name="edit_ignore_file_error">Geen tekstverwerker gevonden</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Apparaat-ID</string>
@@ -152,6 +157,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="always_run_in_background_enabled">Syncthing draait altijd in de achtergrond, volgens de hieronder weergegeven voorkeuren.</string>
   <!--Preference summary in case it is disabled-->
   <string name="always_run_in_background_disabled">Syncthing draait enkel wanneer expliciet gestart, en kan gestopt worden door de menu-knop.</string>
+  <string name="sync_only_charging">Enkel uitvoeren tijdens opladen</string>
+  <string name="sync_only_wifi">Enkel uitvoeren via wifi</string>
   <string name="sync_only_wifi_ssids">Beperken tot bepaalde wifinetwerken</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
   <string name="respect_battery_saving_title">Eerbiedig de batterijbesparingsinstellingen van Android</string>
@@ -169,7 +176,16 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   </string-array>
   <string name="preference_language_title">Taal</string>
   <string name="preference_language_summary">Wijzig de taal van de app</string>
+  <string name="start_into_web_gui_title">Rechtstreeks opstarten in webinterface</string>
+  <string name="start_into_web_gui_summary">Open de webinterface in plaats van het hoofdvenster bij het opstarten van de app</string>
   <string name="pref_language_default">Standaardtaal</string>
+  <string-array name="versioning_types">
+    <item>Geen</item>
+    <item>Prullenbak</item>
+    <item>Eenvoudig</item>
+    <item>Gespreid</item>
+    <item>Extern</item>
+  </string-array>
   <string name="device_name">Apparaatnaam</string>
   <string name="listen_address">Luisteradressen voor synchronisatieprotocol</string>
   <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
@@ -202,8 +218,11 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Importeren van configuratie mislukt, zorg dat de bestanden zich in %1$s bevinden</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">STTRACE-opties</string>
+  <string name="environment_variables">Omgevingsvariabelen</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_sttrace" tools:ignore="TypographyDashes">Enkel 0-9, a-z en \',\' zijn toegestaan in STTRACE-opties</string>
+  <string name="toast_invalid_environment_variables">Waarde is geen geldige omgevingsvariabele</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="streset_title">Database opnieuw instellen</string>
   <!--Syncthing was reset-->
@@ -245,6 +264,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="select_folder">Map selecteren</string>
   <string name="create_folder_failed">Aanmaken van map mislukt</string>
   <!--LogActivity-->
+  <string name="syncthing_log_title">Syncthing-log</string>
+  <string name="android_log_title">Android-log</string>
   <!--Title of the "log android" menu button-->
   <string name="view_android_log">Bekijk Android-log</string>
   <!--Title of the "log Syncthing" menu button-->
@@ -294,11 +315,12 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="exit">Afsluiten</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
+  <string name="syncthing_disabled">Syncthing is uitgeschakeld</string>
   <string name="syncthing_active_foreground">Dienst wordt uitgevoerd met voorgrondprioriteit.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Mapstructuur te diep. Controleer op cyclische symlinks</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Aanmaken van een Syncthing-configuratie mislukt. Controleer de logs.</string>
+  <string name="config_create_failed">Aanmaken van configuratie mislukt</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Camera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -349,11 +371,28 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="file_versioning">Bestandsversies</string>
   <string name="finish">Voltooien</string>
   <string name="none">Geen</string>
+  <string name="versions_path">Versiepad</string>
   <string name="command">Opdracht</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">Het aantal verouderde versies dat bijgehouden moet worden, per bestand.</string>
+  <string name="simple_file_versioning_description">Bestanden worden met een tijdsstempel verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing.</string>
+  <string name="trashcan_versioning_description">Bestanden worden verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing.</string>
+  <string name="staggered_versioning_description">Bestanden worden met een tijdsstempel verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing. Deze versies worden verwijderd indien ze ouder zijn dan de maximumleeftijd, of indien ze het aantal bestanden toegestaan in een interval overschrijden.\n\nDe volgende intervallen worden gebruikt: het eerste uur wordt elke 30 seconden een versie bijgehouden, de eerste dag elk uur, de eerste 30 dagen elke dag, en tot de maximumleeftijd een versie elke week.</string>
+  <string name="maximum_age_description">Maximale duur waarvoor een versie bijgehouden dient te worden (in dagen, stel dit in op 0 om versies voorgoed bij te houden).</string>
+  <string name="versions_path_description">Pad waar versies moeten worden opgeslagen (laat dit leeg om de standaardmap \'.stversions\' in de gedeelde map te gebruiken).</string>
+  <string name="cleanout_after_description">Het aantal dagen dat bestanden in de prullenbak bijgehouden dienen te worden. Nul betekent voorgoed</string>
+  <string name="external_versioning_description">De eerste opdrachtregelparameter is het mappad, de tweede parameter het relatieve pad in de map.</string>
+  <string name="no_versioning_description">Kies een versiebeheertype om versiebeheer in te schakelen.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Type: eenvoudig</string>
+  <string name="type_trashcan">Type: prullenbak</string>
+  <string name="type_staggered">Type: gespreid</string>
+  <string name="type_external">Type: extern</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">Legen na: %1$s</string>
+  <string name="staggered_versioning_info">Maximumleeftijd: %1$d \nVersiepad: %2$s</string>
   <string name="external_versioning_info">Opdracht: %1$s</string>
+  <string name="simple_versioning_info">Versies behouden: %1$s</string>
   <string name="show_device_id">Apparaat-ID weergeven</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
   <string name="could_not_access_deviceid">Kon apparaat-ID niet lezen.</string>

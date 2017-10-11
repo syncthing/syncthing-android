@@ -260,11 +260,11 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="exit">Çık</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing çalışıyor</string>
+  <string name="syncthing_disabled">Syncthing devre dışı</string>
   <string name="syncthing_active_foreground">Hizmet ön plan önceliğiyle çalışıyor.</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">Dizin ağacı çok derin. Döngüsel simgesel bağlantıların varlığını araştır</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Syncthing yapılandırması başarısız oldu. Lütfen günlük kayıtlarını inceleyin.</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->

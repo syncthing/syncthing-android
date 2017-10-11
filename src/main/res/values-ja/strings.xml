@@ -36,6 +36,7 @@
   <string name="api_loading">ロード中…</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">セキュア鍵を生成しています。しばらくお待ちください。</string>
+  <string name="syncthing_loading_slow_message">Syncthingの起動に非常に時間がかかっています。ログにエラーが出力されていないか確認してください。</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">フォルダー</string>
   <!--Shown if no folders exist-->
@@ -262,6 +263,8 @@
   <string name="select_folder">フォルダーを選択</string>
   <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
   <!--LogActivity-->
+  <string name="syncthing_log_title">Syncthingログ</string>
+  <string name="android_log_title">Androidログ</string>
   <!--Title of the "log android" menu button-->
   <string name="view_android_log">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
@@ -308,11 +311,12 @@
   <string name="exit">終了</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
+  <string name="syncthing_disabled">Syncthing は無効になりました</string>
   <string name="syncthing_active_foreground">フォアグラウンドの優先度でサービスを実行中です</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
   <string name="toast_folder_observer_stack_overflow">ディレクトリーの階層が深すぎます。シンボリックリンクの循環を確認してください</string>
   <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Syncthing 設定の作成に失敗しました。ログを確認してください。</string>
+  <string name="config_create_failed">設定ファイルの作成に失敗しました</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">カメラ</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
