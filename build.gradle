@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
 
     }
     dependencies {
@@ -8,6 +11,7 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+        classpath "gradle.plugin.org.golang.mobile.bind2:gobindPlugin:0.2.5"
     }
 }
 
@@ -15,6 +19,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: "org.golang.mobile.bind2"
 
 repositories {
     jcenter()
@@ -106,4 +111,29 @@ task deleteUnsupportedPlayTranslations(type: Delete) {
     delete 'src/main/play/el-EL'
     delete 'src/main/play/nb'
     delete 'src/main/play/en/'
+}
+
+gobind {
+    // The Go package path; must be under one of the GOPATH elements or
+    // a relative to the current directory (e.g. ../../hello)
+    pkg = "github.com/syncthing/syncthing/cmd/syncthing"
+
+    // gobind doesn't seem to use `~/go/ if GOPATH is unset, so we have to check it explicitly.
+    // https://github.com/golang/go/issues/21658
+    GOPATH = System.getenv('GOPATH') ?: System.getenv('HOME') + "/go/"
+
+    // Optionally, set the absolute path to the gomobile binary.
+    // GOMOBILE = "/path/to/gomobile"
+
+    // Pass extra parameters to command line. Optional.
+    // GOMOBILEFLAGS="-javapkg my.java.package"
+
+    // Absolute path to the gobind binary. Optional.
+    // GOBIND="/path/to/gobind"
+
+    // gobind can
+    // GOBIND="/path/to/gobind"
+
+    // Optional list of architectures. Defaults to all supported architectures.
+    GOARCH="arm arm64 386"
 }
