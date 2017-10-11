@@ -202,6 +202,7 @@ public class SyncthingService extends Service implements
         }
         updateState();
         mPreferences.registerOnSharedPreferenceChangeListener(this);
+        mNotificationHandler.updatePersistentNotification(this, mCurrentState);
     }
 
     /**
@@ -211,7 +212,7 @@ public class SyncthingService extends Service implements
     private class StartupTask extends AsyncTask<Void, Void, Void> {
 
         public StartupTask() {
-            mCurrentState = State.STARTING;
+            onApiChange(State.STARTING);
         }
 
         @Override
