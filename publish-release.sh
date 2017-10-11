@@ -2,7 +2,7 @@
 
 set -e
 
-version=$(git describe --always)
+version=$(git describe --tags)
 regex='^[0-9]+\.[0-9]+\.[0-9]+$'
 if [[ ! ${version} =~ $regex ]]
 then
@@ -22,28 +22,16 @@ version=`git describe --tags --abbrev=0`
 
 echo "
 
-Enter Changelog for $version
------------------------------
-"
-changelog_file="build/changelog.tmp"
-touch ${changelog_file}
-nano ${changelog_file}
-
-changelog=`cat ${changelog_file}`
-mv ${changelog_file} "src/main/play/en-GB/whatsnew"
-
-echo "
-
 Push to Google Play
 -----------------------------
 "
 
 read -s -p "Enter signing password: " password
 
-SIGNING_PASSWORD=$password ./gradlew assembleRelease
+SIGNING_PASSWORD=${password} ./gradlew assembleRelease
 
 # Upload apk and listing to Google Play
-SIGNING_PASSWORD=$password ./gradlew publishRelease
+SIGNING_PASSWORD=${password} ./gradlew publishRelease
 
 echo "
 

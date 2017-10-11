@@ -95,7 +95,7 @@ task cleanNative(type: Delete) {
 play {
     jsonFile = file('keys.json')
     uploadImages = false
-    track = 'beta'
+    track = 'production'
 }
 
 /**

@@ -4,7 +4,7 @@ set -e
 
 NEW_VERSION_NAME=$1
 OLD_VERSION_NAME=$(grep "versionName" "build.gradle" | awk '{print $2}')
-if [[ -z $NEW_VERSION_NAME ]]
+if [[ -z ${NEW_VERSION_NAME} ]]
 then
     echo "New version name is empty. Please set a new version. Current version: $OLD_VERSION_NAME"
     exit
@@ -20,15 +20,15 @@ cd "ext/syncthing/src/github.com/syncthing/syncthing/"
 git fetch
 CURRENT_TAG=$(git describe)
 LATEST_TAG=$(git tag --sort=taggerdate | awk '!/rc/' | tail -1)
-if [ $CURRENT_TAG != $LATEST_TAG ]
+if [ ${CURRENT_TAG} != ${LATEST_TAG} ]
 then
-    git checkout -f $LATEST_TAG
-    cd $PROJECT_DIR
+    git checkout -f ${LATEST_TAG}
+    cd ${PROJECT_DIR}
     git add "ext/syncthing/src/github.com/syncthing/syncthing"
     git commit -m "Updated Syncthing to $LATEST_TAG"
     ./gradlew cleanNative buildNative
 fi
-cd $PROJECT_DIR
+cd ${PROJECT_DIR}
 
 
 echo "
@@ -51,10 +51,22 @@ fi
 
 echo "
 
-Running Tests
+Running Lint
 -----------------------------
 "
-./gradlew clean lint
+./gradlew clean lintVitalRelease
+
+echo "
+
+Enter Changelog for $NEW_VERSION_NAME
+-----------------------------
+"
+changelog_file="build/changelog.tmp"
+touch ${changelog_file}
+nano ${changelog_file}
+
+cat ${changelog_file}
+mv ${changelog_file} "src/main/play/en-GB/whatsnew"
 
 echo "
 
@@ -67,9 +79,9 @@ sed -i "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" build.gr
 
 OLD_VERSION_NAME=$(grep "versionName" "build.gradle" | awk '{print $2}')
 sed -i "s/$OLD_VERSION_NAME/\"$1\"/" build.gradle
-git add "build.gradle"
+git add "build.gradle" "src/main/play/en-GB/whatsnew"
 git commit -m "Bumped version to $NEW_VERSION_NAME"
-git tag $NEW_VERSION_NAME
+git tag ${NEW_VERSION_NAME}
 
 echo "
 Update ready.
