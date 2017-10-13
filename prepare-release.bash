@@ -16,7 +16,7 @@ Checking for Syncthing Update
 -----------------------------
 "
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "ext/syncthing/src/github.com/syncthing/syncthing/"
+cd "go/src/github.com/syncthing/syncthing/"
 git fetch
 CURRENT_TAG=$(git describe)
 LATEST_TAG=$(git tag --sort=taggerdate | awk '!/rc/' | tail -1)
@@ -24,7 +24,7 @@ if [ ${CURRENT_TAG} != ${LATEST_TAG} ]
 then
     git checkout -f ${LATEST_TAG}
     cd ${PROJECT_DIR}
-    git add "ext/syncthing/src/github.com/syncthing/syncthing"
+    git add "go/src/github.com/syncthing/syncthing/"
     git commit -m "Updated Syncthing to $LATEST_TAG"
     ./gradlew cleanNative buildNative
 fi

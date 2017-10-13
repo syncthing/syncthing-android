@@ -2,72 +2,63 @@
 
 set -e
 
-MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-JNIDIR="/src/main/jniLibs"
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TARGET_SDK=$(grep "targetSdkVersion" "${ROOT_DIR}/build.gradle" -m 1 | awk '{print $2}')
+# Use seperate build dir so standalone ndk isn't deleted by `gradle clean`
+BUILD_DIR="${ROOT_DIR}/gobuild"
+export GOPATH="${ROOT_DIR}/go/"
 
-case "$1" in
-    arm)
-        export CGO_ENABLED=0
-        export GOOS=linux
-        export GOARCH=arm
-        export GOARM=5
-        export TARGETDIR=$MYDIR$JNIDIR/armeabi
-        ;;
-    arm64)
-        export CGO_ENABLED=0
-        export GOOS=linux
-        export GOARCH=arm64
-        unset GOARM
-        export TARGETDIR=$MYDIR$JNIDIR/arm64-v8a
-        ;;
-    386)
-        export CGO_ENABLED=0
-        export GOOS=linux
-        export GOARCH=386
-        export GO386=387
-        export TARGETDIR=$MYDIR$JNIDIR/x86
-        ;;
-    *)
-        echo "Invalid architecture"
-        exit 1
-esac
-
-unset GOPATH #Set by build.go
-export GOROOT=${MYDIR}/ext/golang/dist/go-${GOOS}-${GOARCH}
-export PATH=${GOROOT}/bin:${PATH}
-
-case "$(uname)" in
-    *CYGWIN*)
-        export GOROOT=`cygpath -w $GOROOT`
-        ;;
-esac
-
-pushd ext/syncthing/src/github.com/syncthing/syncthing
-
-_GOOS=$GOOS
-unset GOOS
-_GOARCH=$GOARCH
-unset GOARCH
+cd "${ROOT_DIR}/go/src/github.com/syncthing/syncthing"
 
 # Make sure all tags are available for git describe
 # https://github.com/syncthing/syncthing-android/issues/872
 git fetch --tags
 
-go run build.go -goos=${_GOOS} -goarch=${_GOARCH} clean
-go run build.go -goos=${_GOOS} -goarch=${_GOARCH} -no-upgrade build
+for ANDROID_ARCH in arm x86 arm64; do
+    echo -e "Starting build for ${ANDROID_ARCH}\n"
+    case ${ANDROID_ARCH} in
+        arm)
+            GOARCH=arm
+            JNI_DIR="armeabi"
+            GCC="arm-linux-androideabi-gcc"
+            ;;
+        arm64)
+            GOARCH=arm64
+            JNI_DIR="arm64-v8a"
+            GCC="aarch64-linux-android-gcc"
+            ;;
+        x86)
+            GOARCH=386
+            JNI_DIR="x86"
+            GCC="i686-linux-android-gcc"
+            ;;
+        *)
+            echo "Invalid architecture"
+            exit 1
+    esac
 
-export GOOS=$_GOOS
-export GOARCH=$_GOARCH
+    # Build standalone NDK toolchain if it doesn't exist.
+    # https://developer.android.com/ndk/guides/standalone_toolchain.html
+    STANDALONE_NDK_DIR="${BUILD_DIR}/standalone-ndk/android-${TARGET_SDK}-${GOARCH}"
 
-mkdir -p ${TARGETDIR}
-mv syncthing ${TARGETDIR}/libsyncthing.so
-chmod 644 ${TARGETDIR}/libsyncthing.so
+    if [ ! -d "$STANDALONE_NDK_DIR" ]; then
+        echo -e "Building standalone NDK\n"
+        ${ANDROID_NDK_HOME}/build/tools/make-standalone-toolchain.sh \
+          --platform=android-${TARGET_SDK} --arch=${ANDROID_ARCH} \
+          --install-dir=${STANDALONE_NDK_DIR}
+    fi
 
-if [[ -e ./build.go ]]; then
-    git clean -f
-fi
+    echo -e "Building Syncthing\n"
+    CGO_ENABLED=1 CC="${STANDALONE_NDK_DIR}/bin/${GCC}" \
+      go run build.go -goos android -goarch ${GOARCH} -pkgdir "${BUILD_DIR}/go-packages" -no-upgrade build
 
-popd
+    # Copy compiled binary to jniLibs folder
+    TARGET_DIR="$ROOT_DIR/src/main/jniLibs/$JNI_DIR"
+    mkdir -p ${TARGET_DIR}
+    mv syncthing ${TARGET_DIR}/libsyncthing.so
 
-echo "Build Complete"
+    echo -e "Finished build for ${ANDROID_ARCH}\n"
 
+done
+
+echo -e "All builds finished"
