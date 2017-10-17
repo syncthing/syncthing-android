@@ -35,7 +35,7 @@ Use `./gradlew assembleDebug` in the project directory to compile the APK.
 
 To prepare a new release, execute `./prepare-release.bash`, and follow the instructions.
 
-To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git submodule in `ext/syncthing/src/github.com/syncthing/syncthing` may need to be updated.
+To check for updated gradle dependencies, run `gradle dependencyUpdates`. Additionally, the git submodule in `go/src/github.com/syncthing/syncthing/` may need to be updated.
 
 
 ### Building on Windows

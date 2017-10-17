@@ -83,13 +83,11 @@ android {
 
 task buildNative(type: Exec) {
     outputs.upToDateWhen { false }
-    executable = './make-all.bash'
+    executable = './make-syncthing.bash'
 }
 
 task cleanNative(type: Delete) {
     delete 'src/main/jniLibs/'
-    delete 'ext/syncthing/bin/'
-    delete 'ext/syncthing/pkg/'
 }
 
 play {
