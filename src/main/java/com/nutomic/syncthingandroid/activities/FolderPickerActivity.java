@@ -33,6 +33,7 @@ import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.Util;
 
 import org.w3c.dom.Text;
 
@@ -198,7 +199,7 @@ public class FolderPickerActivity extends SyncthingActivity
                 return true;
             case R.id.select:
                 Intent intent = new Intent()
-                        .putExtra(EXTRA_RESULT_DIRECTORY, mLocation.getAbsolutePath());
+                        .putExtra(EXTRA_RESULT_DIRECTORY, Util.formatPath(mLocation.getAbsolutePath()));
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 return true;
@@ -310,7 +311,7 @@ public class FolderPickerActivity extends SyncthingActivity
 
     /**
      * Goes up a directory, up to the list of roots if there are multiple roots.
-     *
+     * <p>
      * If we already are in the list of roots, or if we are directly in the only
      * root folder, we cancel.
      */

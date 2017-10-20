@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.activities;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +37,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Shares incoming files to syncthing folders.
- *
+ * <p>
  * {@link #getDisplayNameForUri} and {@link #getDisplayNameFromContentResolver} are taken from
  * ownCloud Android {@see https://github.com/owncloud/android/blob/79664304fdb762b2e04f1ac505f50d0923ddd212/src/com/owncloud/android/utils/UriUtils.java#L193}
  */
@@ -70,7 +67,7 @@ public class ShareActivity extends StateDialogActivity
         int folderIndex = 0;
         String savedFolderId = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, "");
-        for (Folder folder: folders) {
+        for (Folder folder : folders) {
             if (folder.id.equals(savedFolderId)) {
                 folderIndex = folders.indexOf(folder);
                 break;
@@ -106,14 +103,14 @@ public class ShareActivity extends StateDialogActivity
 
         registerOnServiceConnectedListener(this);
 
-        Button mShareButton = (Button) findViewById(R.id.share_button);
-        Button mCancelButton = (Button) findViewById(R.id.cancel_button);
-        Button browseButton = (Button) findViewById(R.id.browse_button);
-        EditText mShareName = (EditText) findViewById(R.id.name);
-        TextView mShareTitle = (TextView) findViewById(R.id.namesTitle);
+        Button mShareButton = findViewById(R.id.share_button);
+        Button mCancelButton = findViewById(R.id.cancel_button);
+        Button browseButton = findViewById(R.id.browse_button);
+        EditText mShareName = findViewById(R.id.name);
+        TextView mShareTitle = findViewById(R.id.namesTitle);
 
-        mSubDirectoryTextView = (TextView) findViewById(R.id.sub_directory_Textview);
-        mFoldersSpinner = (Spinner) findViewById(R.id.folders);
+        mSubDirectoryTextView = findViewById(R.id.sub_directory_Textview);
+        mFoldersSpinner = findViewById(R.id.folders);
 
         // TODO: add support for EXTRA_TEXT (notes, memos sharing)
         ArrayList<Uri> extrasToCopy = new ArrayList<>();
@@ -269,7 +266,7 @@ public class ShareActivity extends StateDialogActivity
 
         if (selectedFolder != null) {
             savedSubDirectory = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getString(PREF_FOLDER_SAVED_SUBDIRECTORY+selectedFolder.id, "");
+                    .getString(PREF_FOLDER_SAVED_SUBDIRECTORY + selectedFolder.id, "");
         }
 
         return savedSubDirectory;
@@ -329,10 +326,10 @@ public class ShareActivity extends StateDialogActivity
         protected void onPostExecute(Boolean isError) {
             Util.dismissDialogSafe(mProgress, ShareActivity.this);
             Toast.makeText(ShareActivity.this, mIgnored > 0 ?
-                    getResources().getQuantityString(R.plurals.copy_success_partially, mCopied,
-                            mCopied, mFolder.label, mIgnored) :
-                    getResources().getQuantityString(R.plurals.copy_success, mCopied, mCopied,
-                            mFolder.label),
+                            getResources().getQuantityString(R.plurals.copy_success_partially, mCopied,
+                                    mCopied, mFolder.label, mIgnored) :
+                            getResources().getQuantityString(R.plurals.copy_success, mCopied, mCopied,
+                                    mFolder.label),
                     Toast.LENGTH_LONG).show();
             if (isError) {
                 Toast.makeText(ShareActivity.this, getString(R.string.copy_exception),
@@ -358,23 +355,15 @@ public class ShareActivity extends StateDialogActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE && resultCode == RESULT_OK) {
             Folder selectedFolder = (Folder) mFoldersSpinner.getSelectedItem();
-            String folderDirectory = selectedFolder.path;
-            //The folder paths are not entirely consistent in terms of what character they end with,
-            //that is why a / is added if it is missing so it can be used to cut the corresponding part
-            //from the subDirectory string, so only the sub directory is displayed.
-            if (!folderDirectory.endsWith("/")) {
-                folderDirectory += "/";
-            }
-
-            String subDirectory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY) + "/";
+            String folderDirectory = Util.formatPath(selectedFolder.path);
+            String subDirectory = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             //Remove the parent directory from the string, so it is only the Sub directory that is displayed to the user.
-            subDirectory = (subDirectory).replace(folderDirectory.substring(0, folderDirectory.length()), "");
-
+            subDirectory = subDirectory.replace(folderDirectory, "");
             mSubDirectoryTextView.setText(subDirectory);
 
-           PreferenceManager.getDefaultSharedPreferences(this)
-                   .edit().putString(PREF_FOLDER_SAVED_SUBDIRECTORY+selectedFolder.id, subDirectory)
-                   .apply();
+            PreferenceManager.getDefaultSharedPreferences(this)
+                    .edit().putString(PREF_FOLDER_SAVED_SUBDIRECTORY + selectedFolder.id, subDirectory)
+                    .apply();
         }
     }
 }
