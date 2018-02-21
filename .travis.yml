@@ -10,8 +10,6 @@ android:
     - android-27
     - build-tools-27.0.2
     - platform-tools
-    - build-tools-27.0.2
-    - android-27
     - extra-android-m2repository
 
 # Install Android NDK (apparently there is no easier way to do this)
@@ -20,6 +18,7 @@ before_script:
   - curl -L https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip -O
   - unzip -q android-ndk-r15c-linux-x86_64.zip
   - export ANDROID_NDK_HOME=`pwd`/android-ndk-r15c
+  - yes | sudo sdkmanager --licenses
 
 # Install Golang
 before_install:
