@@ -23,6 +23,7 @@ before_script:
 
 # Install Golang
 before_install:
+  - yes | sdkmanager "platforms;android-27"
   - sudo add-apt-repository ppa:gophers/archive -y
   - sudo apt-get update -qq
   - sudo apt-get install golang-1.9-go -y
