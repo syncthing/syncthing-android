@@ -4,8 +4,8 @@ matrix:
       dist: trusty
       go:
         - "1.10.x"
-      before_install:
-        - touch Makefile
+      # Skip install step
+      install: true
       script:
         - ./syncthing/build-syncthing.bash
 
