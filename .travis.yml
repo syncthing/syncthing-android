@@ -5,7 +5,7 @@ matrix:
       go:
         - "1.10.x"
       script:
-        - unset GOPATH
+        - touch Makefile
         - ./syncthing/build-syncthing.bash
 
     - language: android
