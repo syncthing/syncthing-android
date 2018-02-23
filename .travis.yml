@@ -22,8 +22,7 @@ before_install:
   # Install Go using gimme tool
   - curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
   - chmod +x ~/bin/gimme
-  - gimme 1.10
-  - source ~/.gimme/envs/go1.10.env
+  - eval "$(gimme 1.10)"
   - which go
   # Hack to accept Android licenses
   - yes | sdkmanager "platforms;android-27"
