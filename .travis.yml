@@ -40,3 +40,6 @@ cache:
 script:
   - ./gradlew lint
   - ./gradlew buildNative assembleDebug
+
+after_failure:
+  - cat "/home/travis/build/syncthing/syncthing-android/syncthing/gobuild/standalone-ndk/android-14-arm/bin/../sysroot/usr/include/signal.h"
