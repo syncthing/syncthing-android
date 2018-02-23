@@ -4,8 +4,9 @@ matrix:
       dist: trusty
       go:
         - "1.10.x"
-      script:
+      before_install:
         - touch Makefile
+      script:
         - ./syncthing/build-syncthing.bash
 
     - language: android
