@@ -1,46 +1,45 @@
-sudo: required
-language: android
-jdk: oraclejdk8
-dist: trusty
+matrix:
+  include:
+    - language: go
+      dist: trusty
+      go:
+        - "1.10.x"
+      script:
+        - ./syncthing/build-syncthing.bash
 
-# Install Android SDK
-android:
-  components:
-    - tools
-    - platform-tools
-    - build-tools-27.0.2
-    - android-27
-    - extra-android-m2repository
+    - language: android
+      jdk: oraclejdk8
+      dist: trusty
 
-# Install Android NDK (apparently there is no easier way to do this)
-# https://github.com/travis-ci/travis-ci/issues/5395
-before_script:
-  - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-  - unzip -q android-ndk-r16b-linux-x86_64.zip
-  - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
+      # Install Android SDK
+      android:
+        components:
+          - tools
+          - platform-tools
+          - build-tools-27.0.2
+          - android-27
+          - extra-android-m2repository
 
-before_install:
-  # Install Golang
-  - go version
-  - which go
-  - sudo add-apt-repository ppa:gophers/archive -y
-  - sudo apt-get update -qq
-  - sudo apt-get install golang-1.9-go -y
-  - go version
-  - which go
-  # Hack to accept Android licenses
-  - yes | sdkmanager "platforms;android-27"
+      # Install Android NDK (apparently there is no easier way to do this)
+      # https://github.com/travis-ci/travis-ci/issues/5395
+      before_script:
+        - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
+        - unzip -q android-ndk-r16b-linux-x86_64.zip
+        - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
 
-# Cache gradle dependencies
-# https://docs.travis-ci.com/user/languages/android/#Caching
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+        # Hack to accept Android licenses
+      before_install:
+        - yes | sdkmanager "platforms;android-27"
 
-script:
-  - ./gradlew lint
-  - ./gradlew buildNative assembleDebug
+      # Cache gradle dependencies
+      # https://docs.travis-ci.com/user/languages/android/#Caching
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+
+      script:
+        - ./gradlew lint assembleDebug
