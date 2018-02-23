@@ -1,47 +1,42 @@
-matrix:
-  include:
-    - language: go
-      dist: trusty
-      go:
-        - "1.10.x"
-      # Skip install step
-      install: true
-      script:
-        - ./syncthing/build-syncthing.bash
+language: android
+jdk: oraclejdk8
+dist: trusty
 
-    - language: android
-      jdk: oraclejdk8
-      dist: trusty
+# Install Android SDK
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-27.0.2
+    - android-27
+    - extra-android-m2repository
 
-      # Install Android SDK
-      android:
-        components:
-          - tools
-          - platform-tools
-          - build-tools-27.0.2
-          - android-27
-          - extra-android-m2repository
+# Install Android NDK (apparently there is no easier way to do this)
+# https://github.com/travis-ci/travis-ci/issues/5395
+before_script:
+  - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
+  - unzip -q android-ndk-r16b-linux-x86_64.zip
+  - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
 
-      # Install Android NDK (apparently there is no easier way to do this)
-      # https://github.com/travis-ci/travis-ci/issues/5395
-      before_script:
-        - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-        - unzip -q android-ndk-r16b-linux-x86_64.zip
-        - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
+before_install:
+  # Install Go using gimme tool
+  - curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
+  - chmod +x ~/bin/gimme
+  - gimme 1.10
+  - source ~/.gimme/envs/go1.4.env
+  # Hack to accept Android licenses
+  - yes | sdkmanager "platforms;android-27"
 
-        # Hack to accept Android licenses
-      before_install:
-        - yes | sdkmanager "platforms;android-27"
+# Cache gradle dependencies
+# https://docs.travis-ci.com/user/languages/android/#Caching
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
-      # Cache gradle dependencies
-      # https://docs.travis-ci.com/user/languages/android/#Caching
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
-
-      script:
-        - ./gradlew lint assembleDebug
+script:
+  - ./gradlew lint
+  - ./gradlew buildNative assembleDebug
