@@ -21,9 +21,13 @@ before_script:
 
 before_install:
   # Install Golang
+  - go version
+  - which go
   - sudo add-apt-repository ppa:gophers/archive -y
   - sudo apt-get update -qq
   - sudo apt-get install golang-1.9-go -y
+  - go version
+  - which go
   # Hack to accept Android licenses
   - yes | sdkmanager "platforms;android-27"
 
@@ -38,6 +42,5 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - go version
   - ./gradlew lint
   - ./gradlew buildNative assembleDebug
