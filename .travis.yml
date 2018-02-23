@@ -1,3 +1,4 @@
+sudo: required
 language: android
 jdk: oraclejdk8
 dist: trusty
@@ -22,7 +23,7 @@ before_install:
   # Install Go using gimme tool
   - curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
   - chmod +x ~/bin/gimme
-  - eval "$(gimme 1.10)"
+  - eval "$(gimme 1.9)"
   - which go
   # Hack to accept Android licenses
   - yes | sdkmanager "platforms;android-27"
@@ -41,5 +42,3 @@ script:
   - ./gradlew lint
   - ./gradlew buildNative assembleDebug
 
-after_failure:
-  - cat "/home/travis/build/syncthing/syncthing-android/syncthing/gobuild/standalone-ndk/android-14-arm/bin/../sysroot/usr/include/signal.h"
