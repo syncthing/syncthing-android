@@ -15,7 +15,7 @@ android:
 # Install Android NDK (apparently there is no easier way to do this)
 # https://github.com/travis-ci/travis-ci/issues/5395
 before_script:
-  - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip
+  - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
   - unzip -q android-ndk-r16b-linux-x86_64.zip
   - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
 
