@@ -23,7 +23,8 @@ before_install:
   - curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
   - chmod +x ~/bin/gimme
   - gimme 1.10
-  - source ~/.gimme/envs/go1.4.env
+  - source ~/.gimme/envs/go1.10.env
+  - which go
   # Hack to accept Android licenses
   - yes | sdkmanager "platforms;android-27"
 
