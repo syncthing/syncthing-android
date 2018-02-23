@@ -19,11 +19,12 @@ before_script:
   - unzip -q android-ndk-r16b-linux-x86_64.zip
   - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
 
-# Install Golang
 before_install:
+  # Install Golang
   - sudo add-apt-repository ppa:gophers/archive -y
   - sudo apt-get update -qq
   - sudo apt-get install golang-1.9-go -y
+  # Hack to accept Android licenses
   - yes | sdkmanager "platforms;android-27"
 
 # Cache gradle dependencies
@@ -37,5 +38,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
+  - go version
   - ./gradlew lint
   - ./gradlew buildNative assembleDebug
