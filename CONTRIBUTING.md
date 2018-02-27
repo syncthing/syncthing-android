@@ -22,7 +22,7 @@ You can get logs in various ways:
 
  - Log window in the app: Settings -> Open Log -> Android Log
 
- - Install [adb](http://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/), 
+ - Install [adb](http://www.howtogeek.com/125769/how-to-install-and-use-abd-the-android-debug-bridge-utility/),
    and run `adb logcat`. To see only info about crashes, run `adb logcat -s *:E`.
 
  - Using one of the various "logcat apps" on Google Play and F-Droid
@@ -46,3 +46,7 @@ which are used by default in Android Studio.
 
 Unit tests are available, and can be executed from Android Studio, or from
 the terminal with `gradle connectedAndroidTest`.
+
+## Triage Issues [![Open Source Helpers](https://www.codetriage.com/syncthing/syncthing-android/badges/users.svg)](https://www.codetriage.com/syncthing/syncthing-android)
+
+In addition to contributing code, you can help to triage issues. This can include reproducing bug reports, or asking for vital information such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to syncthing-android on CodeTriage](https://www.codetriage.com/syncthing/syncthing-android).
