@@ -39,4 +39,3 @@ cd syncthing-android
 ./gradlew --no-daemon lint
 cd ..
 rm -rf syncthing-android
-

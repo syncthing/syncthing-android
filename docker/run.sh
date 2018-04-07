@@ -15,4 +15,3 @@ if [ ! -z "$BUILD_DIR" ] && [ -d "$BUILD_DIR" ]; then
 fi
 
 exec $@
-

@@ -20,7 +20,6 @@ if [ "${OSTYPE}" = "cygwin" ]; then
     GO_BUILD_DIR=`cygpath -w ${GO_BUILD_DIR}`
 fi
 
-
 cd "${MODULE_DIR}/src/github.com/syncthing/syncthing"
 
 # Make sure all tags are available for git describe
