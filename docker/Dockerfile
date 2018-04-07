@@ -2,7 +2,6 @@ FROM openjdk:8
 
 ENV GO_VERSION 1.9.5
 ENV ANDROID_SDK_VERSION 3859397
-ENV SYNCTHING_ANDROID_PREBUILT 1
 
 WORKDIR /opt
 
@@ -31,6 +30,9 @@ RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
 # Setup the NDK path
 ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk-bundle
+
+# Enable prebuild mode
+ENV SYNCTHING_ANDROID_PREBUILT 1
 
 # Run prebuild script (will prebuild stuff into the image if env var is set)
 ADD prebuild.sh /opt/prebuild.sh
