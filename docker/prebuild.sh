@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ -z "$SYNCTHING_ANDROID_PREBUILT" ] && echo "Prebuild disabled" && exit 0
+
 for ARCH in arm x86 arm64; do
   GOARCH=${ARCH}
   SDK=14
@@ -35,5 +37,6 @@ echo "Prepopulating gradle cache"
 git clone https://github.com/syncthing/syncthing-android
 cd syncthing-android
 ./gradlew --no-daemon tasks
+cd ..
 rm -rf syncthing-android
 

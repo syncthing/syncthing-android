@@ -59,7 +59,7 @@ for ANDROID_ARCH in arm x86 arm64; do
     else
       # The environment variable indicates the SDK and stdlib was prebuilt, set a custom paths.
       STANDALONE_NDK_DIR="${ANDROID_NDK_HOME}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
-      GO_BUILD_DIR=${GOROOT}
+      GO_BUILD_DIR=${GOROOT}/pkg
     fi
 
     if [ ! -d "$STANDALONE_NDK_DIR" ]; then
