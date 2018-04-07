@@ -12,12 +12,10 @@ PROJECT_DIR="${MODULE_DIR}/.."
 MIN_SDK=$(grep "minSdkVersion" "${PROJECT_DIR}/app/build.gradle" -m 1 | awk '{print $2}')
 # Use seperate build dir so standalone ndk isn't deleted by `gradle clean`
 BUILD_DIR="${MODULE_DIR}/gobuild"
-GO_BUILD_DIR="${BUILD_DIR}/go-packages"
 export GOPATH="${MODULE_DIR}/"
 
 if [ "${OSTYPE}" = "cygwin" ]; then
     export GOPATH=`cygpath -w ${GOPATH}`
-    GO_BUILD_DIR=`cygpath -w ${GO_BUILD_DIR}`
 fi
 
 
@@ -93,7 +91,7 @@ for ANDROID_ARCH in arm x86 arm64; do
 
     echo -e "Building Syncthing\n"
     CGO_ENABLED=1 CC="${STANDALONE_NDK_DIR}/bin/${GCC}" \
-      go run build.go -goos android -goarch ${GOARCH} -pkgdir "${GO_BUILD_DIR}" -no-upgrade build
+      go run build.go -goos android -goarch ${GOARCH} -no-upgrade build
 
     # Copy compiled binary to jniLibs folder
     TARGET_DIR="${PROJECT_DIR}/app/src/main/jniLibs/${JNI_DIR}"
