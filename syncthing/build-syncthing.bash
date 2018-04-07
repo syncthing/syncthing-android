@@ -56,10 +56,11 @@ for ANDROID_ARCH in arm x86 arm64; do
       # Build standalone NDK toolchain if it doesn't exist.
       # https://developer.android.com/ndk/guides/standalone_toolchain.html
       STANDALONE_NDK_DIR="${BUILD_DIR}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
+      PKG_ARGUMENT="-pkgdir ${GO_BUILD_DIR}"
     else
       # The environment variable indicates the SDK and stdlib was prebuilt, set a custom paths.
       STANDALONE_NDK_DIR="${ANDROID_NDK_HOME}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
-      GO_BUILD_DIR=${GOROOT}/pkg
+      PKG_ARGUMENT=""
     fi
 
     if [ ! -d "$STANDALONE_NDK_DIR" ]; then
@@ -94,7 +95,7 @@ for ANDROID_ARCH in arm x86 arm64; do
 
     echo -e "Building Syncthing\n"
     CGO_ENABLED=1 CC="${STANDALONE_NDK_DIR}/bin/${GCC}" \
-      go run build.go -goos android -goarch ${GOARCH} -pkgdir "${GO_BUILD_DIR}" -no-upgrade build
+      go run build.go -goos android -goarch ${GOARCH} $PKG_ARGUMENT -no-upgrade build
 
     # Copy compiled binary to jniLibs folder
     TARGET_DIR="${PROJECT_DIR}/app/src/main/jniLibs/${JNI_DIR}"
