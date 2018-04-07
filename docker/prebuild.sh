@@ -36,7 +36,7 @@ done
 echo "Prepopulating gradle cache"
 git clone https://github.com/syncthing/syncthing-android
 cd syncthing-android
-./gradlew --no-daemon tasks
+./gradlew --no-daemon lint
 cd ..
 rm -rf syncthing-android
 
