@@ -10,7 +10,7 @@ git submodule update
 
 if [ ! -z "$BUILD_DIR" ] && [ -d "$BUILD_DIR" ]; then
   echo "Mounting build directory"
-  ln -s $OUTPUT_DIR app/build
+  ln -s $BUILD_DIR app/build
 fi
 
 exec $@

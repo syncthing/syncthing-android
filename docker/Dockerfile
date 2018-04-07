@@ -29,10 +29,12 @@ RUN ${ANDROID_HOME}/tools/bin/sdkmanager tools platform-tools "build-tools;27.0.
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
 # Setup the NDK path
-ENV ANDROID_NDK_HOME=${ANDROID_HOME}/ndk-bundle
+ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk-bundle
 
 ADD prebuild.sh /opt/prebuild.sh
 RUN /opt/prebuild.sh
+
+ENV SYNCTHING_ANDROID_PREBUILT 1
 
 ADD run.sh
 ENTRYPOINT ["/opt/run.sh"]

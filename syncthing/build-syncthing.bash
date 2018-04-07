@@ -12,10 +12,12 @@ PROJECT_DIR="${MODULE_DIR}/.."
 MIN_SDK=$(grep "minSdkVersion" "${PROJECT_DIR}/app/build.gradle" -m 1 | awk '{print $2}')
 # Use seperate build dir so standalone ndk isn't deleted by `gradle clean`
 BUILD_DIR="${MODULE_DIR}/gobuild"
+GO_BUILD_DIR="${BUILD_DIR}/go-packages"
 export GOPATH="${MODULE_DIR}/"
 
 if [ "${OSTYPE}" = "cygwin" ]; then
     export GOPATH=`cygpath -w ${GOPATH}`
+    GO_BUILD_DIR=`cygpath -w ${GO_BUILD_DIR}`
 fi
 
 
@@ -50,13 +52,14 @@ for ANDROID_ARCH in arm x86 arm64; do
             exit 1
     esac
 
-    if [ -d "${ANDROID_NDK_HOME}/standalone-ndk/android-${MIN_SDK}-${GOARCH}" ]; then 
-      # Check if the NDK is prebuilt, inside the Docker image.
-      STANDALONE_NDK_DIR="${ANDROID_NDK_HOME}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
-    else
+    if [ -z "${SYNCTHING_ANDROID_PREBUILT}" ]; then
       # Build standalone NDK toolchain if it doesn't exist.
       # https://developer.android.com/ndk/guides/standalone_toolchain.html
       STANDALONE_NDK_DIR="${BUILD_DIR}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
+    else
+      # The environment variable indicates the SDK and stdlib was prebuilt, set a custom paths.
+      STANDALONE_NDK_DIR="${ANDROID_NDK_HOME}/standalone-ndk/android-${MIN_SDK}-${GOARCH}"
+      GO_BUILD_DIR=${GOROOT}
     fi
 
     if [ ! -d "$STANDALONE_NDK_DIR" ]; then
@@ -91,7 +94,7 @@ for ANDROID_ARCH in arm x86 arm64; do
 
     echo -e "Building Syncthing\n"
     CGO_ENABLED=1 CC="${STANDALONE_NDK_DIR}/bin/${GCC}" \
-      go run build.go -goos android -goarch ${GOARCH} -no-upgrade build
+      go run build.go -goos android -goarch ${GOARCH} -pkgdir "${GO_BUILD_DIR}" -no-upgrade build
 
     # Copy compiled binary to jniLibs folder
     TARGET_DIR="${PROJECT_DIR}/app/src/main/jniLibs/${JNI_DIR}"
