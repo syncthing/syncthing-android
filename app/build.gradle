@@ -55,7 +55,7 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release.storeFile ? signingConfigs.release : null
         }
         debug {
             debuggable true
