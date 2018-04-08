@@ -38,5 +38,4 @@ ENV SYNCTHING_ANDROID_PREBUILT 1
 ADD prebuild.sh /opt/prebuild.sh
 RUN /opt/prebuild.sh
 
-ADD run.sh /opt/run.sh
-ENTRYPOINT ["/opt/run.sh"]
+WORKDIR /mnt
