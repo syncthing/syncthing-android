@@ -205,6 +205,12 @@
             android:key="use_legacy_hashing"
             android:title="@string/use_legacy_hashing_title"
             android:summary="@string/use_legacy_hashing_summary" />
+            
+        <CheckBoxPreference
+            android:key="use_folder_observer"
+            android:title="@string/use_folder_observer_title"
+            android:summary="@string/use_folder_observer_summary"
+            android:defaultValue="true" />
 
     </PreferenceScreen>
 
