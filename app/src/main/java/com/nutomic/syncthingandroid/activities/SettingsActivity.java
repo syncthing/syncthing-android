@@ -186,9 +186,10 @@ public class SettingsActivity extends SyncthingActivity {
             Preference environmentVariables = findPreference("environment_variables");
             Preference stReset              = findPreference("streset");
 
-            mUseRoot                     = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
-            Preference useWakelock       = findPreference(Constants.PREF_USE_WAKE_LOCK);
-            Preference useTor            = findPreference("use_tor");
+            mUseRoot                        = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
+            Preference useWakelock          = findPreference(Constants.PREF_USE_WAKE_LOCK);
+            Preference useTor               = findPreference("use_tor");
+            Preference useFolderObserver    = findPreference(Constants.PREF_USE_FOLDER_OBSERVER);
 
             mSyncthingVersion       = findPreference("syncthing_version");
             Preference appVersion   = screen.findPreference("app_version");
@@ -209,6 +210,7 @@ public class SettingsActivity extends SyncthingActivity {
             mUseRoot.setOnPreferenceClickListener(this);
             useWakelock.setOnPreferenceChangeListener((p, o) -> requireRestart());
             useTor.setOnPreferenceChangeListener((p, o) -> requireRestart());
+            useFolderObserver.setOnPreferenceChangeListener((p, o) -> requireRestart());
 
             try {
                 appVersion.setSummary(getActivity().getPackageManager()

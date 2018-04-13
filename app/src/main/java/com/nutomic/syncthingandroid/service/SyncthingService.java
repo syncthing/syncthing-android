@@ -221,22 +221,32 @@ public class SyncthingService extends Service {
 
     private void onSyncthingStarted() {
         onApiChange(State.ACTIVE);
-        Handler handler = new Handler();
-        new Thread(() -> {
-            for (Folder r : mApi.getFolders()) {
-                try {
-                    mObservers.add(new FolderObserver(mApi, r, handler));
-                } catch (FolderObserver.FolderNotExistingException e) {
-                    Log.w(TAG, "Failed to add observer for folder", e);
-                } catch (StackOverflowError e) {
-                    Log.w(TAG, "Failed to add folder observer", e);
-                    Toast.makeText(SyncthingService.this,
-                            R.string.toast_folder_observer_stack_overflow,
-                            Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
-        }).start();
+        Log.i(TAG, "onSyncthingStarted(): State.ACTIVE reached.");
+        
+        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
+        if (prefUseFolderObserver) {
+          Log.i(TAG, "onSyncthingStarted(): Enumerating folders to create FolderObserver instances.");
+          
+          Handler handler = new Handler();
+          new Thread(() -> {
+              for (Folder r : mApi.getFolders()) {
+                  try {
+                      mObservers.add(new FolderObserver(mApi, r, handler));
+                  } catch (FolderObserver.FolderNotExistingException e) {
+                      Log.w(TAG, "Failed to add observer for folder", e);
+                  } catch (StackOverflowError e) {
+                      Log.w(TAG, "Failed to add folder observer", e);
+                      Toast.makeText(SyncthingService.this,
+                              R.string.toast_folder_observer_stack_overflow,
+                              Toast.LENGTH_LONG)
+                              .show();
+                  }
+              }
+          }).start();
+        } else {
+          /* FolderObserver is disabled by experimental preference */
+          Log.i(TAG, "onSyncthingStarted(): FolderObserver instances were disabled by experimental preference.");
+        }
     }
 
     @Override

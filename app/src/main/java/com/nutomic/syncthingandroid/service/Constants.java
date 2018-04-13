@@ -16,6 +16,7 @@ public class Constants {
     public static final String PREF_USE_ROOT                 = "use_root";
     public static final String PREF_NOTIFICATION_TYPE        = "notification_type";
     public static final String PREF_USE_WAKE_LOCK            = "wakelock_while_binary_running";
+    public static final String PREF_USE_FOLDER_OBSERVER      = "use_folder_observer";
 
     /**
      * On Android 8.1, ACCESS_COARSE_LOCATION is required to access WiFi SSID.

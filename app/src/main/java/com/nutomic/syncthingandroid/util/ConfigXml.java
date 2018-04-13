@@ -1,8 +1,10 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -23,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,6 +48,7 @@ public class ConfigXml {
     private static final String TAG = "ConfigXml";
 
     private final Context mContext;
+    @Inject SharedPreferences mPreferences;
 
     private final File mConfigFile;
 
@@ -110,9 +114,70 @@ public class ConfigXml {
      */
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
-        Log.i(TAG, "Checking for needed config updates");
         boolean changed = false;
+
+        /* Get preference - PREF_USE_FOLDER_OBSERVER */
+        boolean prefUseFolderObserver = false;
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
+
+        /* Read existing config version */
+        int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
+        Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
+
+        /* Get refs to important config objects */
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
+
+        /* Check if we have to do manual migration from version X to Y */
+        if ((iConfigVersion >= 27) &&
+            (iConfigVersion <= 28)) {
+          /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
+          Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
+
+          /* Enable fsWatcher for all folders */
+          for (int i = 0; i < folders.getLength(); i++) {
+            Element r = (Element) folders.item(i);
+
+            // Enable "fsWatcherEnabled" attribute.
+            if (!r.hasAttribute("fsWatcherEnabled") ||
+                    !Boolean.parseBoolean(r.getAttribute("fsWatcherEnabled"))) {
+              Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+              r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+              changed = true;
+            }
+          }
+
+          /**
+            * Set config version to 28 after manual config migration
+            * This prevents "unackedNotificationID" getting populated
+            * with the fsWatcher GUI notification.
+            */
+          iConfigVersion = 28;
+          mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+          Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
+        }
+
+        /**
+          * Force-disable fsWatcher for all folders if prefUseFolderObserver has been manually set
+          * in experimental options. This should give users the option to go back to the legacy
+          * implementation with FolderObserver watching for file changes instead of fsWatcher.
+          * Intended to be advised in the issue tracker if a user encounters a critical bug with
+          * the new fsWatcher. To be removed in a future release.
+        */
+        if (prefUseFolderObserver) {
+          Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
+          for (int i = 0; i < folders.getLength(); i++) {
+            Element r = (Element) folders.item(i);
+
+            // Disable "fsWatcherEnabled" attribute.
+            if (r.hasAttribute("fsWatcherEnabled")) {
+              r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
+              changed = true;
+            }
+          }
+        }
+
+        /* Section - folders */
         for (int i = 0; i < folders.getLength(); i++) {
             Element r = (Element) folders.item(i);
             // Set ignorePerms attribute.
@@ -128,6 +193,7 @@ public class ConfigXml {
             changed = setConfigElement(r, "hashers", "1") || changed;
         }
 
+        /* Section - GUI */
         // Enforce TLS.
         Element gui = getGuiElement();
         changed = setConfigElement(gui, "tls", "true") || changed;
@@ -156,15 +222,34 @@ public class ConfigXml {
             changed = true;
         }
 
+        /* Section - options */
         // Disable weak hash benchmark for faster startup.
         // https://github.com/syncthing/syncthing/issues/4348
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
         changed = setConfigElement(options, "weakHashSelectionMethod", "never") || changed;
 
+        /* Check if we have to dismiss any specific "unackedNotificationID" */
+        /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
+        if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
+          Log.i(TAG, "Remove option 'unackedNotificationID' to dismiss 'fsWatcherNotification'.");
+          // According to review, it is sufficient to remove all "unackedNotificationID" contents.
+          // changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
+          options.removeChild(options.getElementsByTagName("unackedNotificationID").item(0));
+          changed = true;
+        }
+
         if (changed) {
             saveChanges();
         }
+    }
+
+    private String getConfigElement(Element parent, String tagName) {
+        Node element = parent.getElementsByTagName(tagName).item(0);
+        if (element == null) {
+            return "";
+        }
+        return (String) element.getTextContent();
     }
 
     private boolean setConfigElement(Element parent, String tagName, String textContent) {
@@ -196,9 +281,19 @@ public class ConfigXml {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("device")) {
                 ((Element) node).setAttribute("name", Build.MODEL);
+                saveChanges();
+
+                /**
+                  * Only alter the first occurency of the device tag in assumption it is the device running this instance.
+                  * Reason: Sometimes encountered a bug when manually restored syncthing db+config with root explorer
+                  *         where app started and all devices got their name altered to the model name. Config was messed up then.
+                  *         This should work around the problem at least until a better fix will be implemented.
+                  * ToDo:   Implement a better fix by reading the device ID first, e.g. from REST API and only alter the correct
+                  *         node's device name attribute.
+                  */
+                break;
             }
         }
-        saveChanges();
     }
 
     /**
