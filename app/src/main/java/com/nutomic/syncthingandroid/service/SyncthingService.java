@@ -223,7 +223,7 @@ public class SyncthingService extends Service {
         onApiChange(State.ACTIVE);
         Log.i(TAG, "onSyncthingStarted(): State.ACTIVE reached.");
         
-        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, true);
+        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
         if (prefUseFolderObserver) {
           Log.i(TAG, "onSyncthingStarted(): Enumerating folders to create FolderObserver instances.");
           

@@ -210,7 +210,7 @@
             android:key="use_folder_observer"
             android:title="@string/use_folder_observer_title"
             android:summary="@string/use_folder_observer_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
     </PreferenceScreen>
 
