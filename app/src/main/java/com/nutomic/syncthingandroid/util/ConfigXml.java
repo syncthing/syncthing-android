@@ -176,7 +176,7 @@ public class ConfigXml {
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
           // According to review, it is sufficient to remove all "unackedNotificationID" contents.
           // changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
-          options.removeChild(options.getElementsByTagName("unackedNotificationID"));
+          options.removeChild(options.getElementsByTagName("unackedNotificationID").item(0));
           changed = true;
         }
 
