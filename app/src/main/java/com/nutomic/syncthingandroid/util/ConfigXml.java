@@ -122,7 +122,7 @@ public class ConfigXml {
                 r.setAttribute("ignorePerms", Boolean.toString(true));
                 changed = true;
             }
-            
+
             // Enable fsWatcherEnabled attribute.
             if (!r.hasAttribute("fsWatcherEnabled") ||
                     !Boolean.parseBoolean(r.getAttribute("fsWatcherEnabled"))) {
@@ -130,7 +130,7 @@ public class ConfigXml {
               r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
               changed = true;
             }
-            
+
             // Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
             // given folder.
             changed = setConfigElement(r, "hashers", "1") || changed;
@@ -170,7 +170,7 @@ public class ConfigXml {
         Element options = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("options").item(0);
         changed = setConfigElement(options, "weakHashSelectionMethod", "never") || changed;
-        
+
         /* Check if we have to dismiss any specific "unackedNotificationID" */
         /* Dismiss "fsWatcherNotification" */
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
@@ -182,12 +182,12 @@ public class ConfigXml {
         }
     }
 
-    private Element getConfigElement(Element parent, String tagName) {
+    private String getConfigElement(Element parent, String tagName) {
         Node element = parent.getElementsByTagName(tagName).item(0);
         if (element == null) {
-            return null;
+            return "";
         }
-        return element.getTextContent();
+        return (String) element.getTextContent();
     }
 
     private boolean setConfigElement(Element parent, String tagName, String textContent) {
@@ -220,13 +220,13 @@ public class ConfigXml {
             if (node.getNodeName().equals("device")) {
                 ((Element) node).setAttribute("name", Build.MODEL);
                 saveChanges();
-                
+
                 /**
                   * Only alter the first occurency of the device tag in assumption it is the device running this instance.
                   * Reason: Sometimes encountered a bug when manually restored syncthing db+config with root explorer
                   *         where app started and all devices got their name altered to the model name. Config was messed up then.
                   *         This should work around the problem at least until a better fix will be implemented.
-                  * ToDo:   Implement a better fix by reading the device ID first, e.g. from REST API and only alter the correct 
+                  * ToDo:   Implement a better fix by reading the device ID first, e.g. from REST API and only alter the correct
                   *         node's device name attribute.
                   */
                 break;
