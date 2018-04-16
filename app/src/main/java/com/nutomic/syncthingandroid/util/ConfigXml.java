@@ -172,10 +172,17 @@ public class ConfigXml {
         changed = setConfigElement(options, "weakHashSelectionMethod", "never") || changed;
 
         /* Check if we have to dismiss any specific "unackedNotificationID" */
-        /* Dismiss "fsWatcherNotification" */
+        /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
-          changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
+          // According to review, it is sufficient to remove all "unackedNotificationID" contents.
+          // changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
+          options.removeChild(options.getElementsByTagName("unackedNotificationID"));
+          changed = true;
         }
+
+
+
+
 
         if (changed) {
             saveChanges();
