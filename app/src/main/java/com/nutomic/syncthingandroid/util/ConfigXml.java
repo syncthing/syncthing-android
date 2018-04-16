@@ -180,10 +180,6 @@ public class ConfigXml {
           changed = true;
         }
 
-
-
-
-
         if (changed) {
             saveChanges();
         }
