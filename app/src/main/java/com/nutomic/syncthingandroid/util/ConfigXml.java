@@ -121,7 +121,7 @@ public class ConfigXml {
         if ((iConfigVersion >= 27) && 
             (iConfigVersion <= 28)) { 
           /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
-          Log.i(TAG, "Migrating config version 27 to 28 ...");
+          Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
           
           /* Enable fsWatcher for all folders */
           for (int i = 0; i < folders.getLength(); i++) {
@@ -141,8 +141,9 @@ public class ConfigXml {
             * This prevents "unackedNotificationID" getting populated 
             * with the fsWatcher GUI notification.
             */
-          mConfig.getDocumentElement().setAttribute("version", "28");
-          Log.i(TAG, "Config version 28 reached.");
+          iConfigVersion = 28;
+          mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+          Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
         }
         
         /* Section - folders */
