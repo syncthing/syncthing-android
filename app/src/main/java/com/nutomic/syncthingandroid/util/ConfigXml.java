@@ -111,7 +111,7 @@ public class ConfigXml {
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
         boolean changed = false;
-        int iConfigVersion = Integer.ParseInt(mConfig.getDocumentElement().getAttribute("version"));
+        int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
         Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
         
         /* Get refs to important config objects */
