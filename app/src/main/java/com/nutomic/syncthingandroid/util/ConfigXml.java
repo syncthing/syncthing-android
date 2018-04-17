@@ -110,9 +110,42 @@ public class ConfigXml {
      */
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
-        Log.i(TAG, "Checking for needed config updates");
         boolean changed = false;
+        int iConfigVersion = Integer.ParseInt(mConfig.getDocumentElement().getAttribute("version"));
+        Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
+        
+        /* Get refs to important config objects */
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
+        
+        /* Check if we have to do manual migration from version X to Y */
+        if ((iConfigVersion >= 27) && 
+            (iConfigVersion <= 28)) { 
+          /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
+          Log.i(TAG, "Migrating config version 27 to 28 ...");
+          
+          /* Enable fsWatcher for all folders */
+          for (int i = 0; i < folders.getLength(); i++) {
+            Element r = (Element) folders.item(i);
+            
+            // Enable "fsWatcherEnabled" attribute.
+            if (!r.hasAttribute("fsWatcherEnabled") ||
+                    !Boolean.parseBoolean(r.getAttribute("fsWatcherEnabled"))) {
+              Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+              r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+              changed = true;
+            }
+          }
+          
+          /**
+            * Set config version to 28 after manual config migration
+            * This prevents "unackedNotificationID" getting populated 
+            * with the fsWatcher GUI notification.
+            */
+          mConfig.getDocumentElement().setAttribute("version", "28");
+          Log.i(TAG, "Config version 28 reached.");
+        }
+        
+        /* Section - folders */
         for (int i = 0; i < folders.getLength(); i++) {
             Element r = (Element) folders.item(i);
             // Set ignorePerms attribute.
@@ -123,19 +156,12 @@ public class ConfigXml {
                 changed = true;
             }
 
-            // Enable fsWatcherEnabled attribute.
-            if (!r.hasAttribute("fsWatcherEnabled") ||
-                    !Boolean.parseBoolean(r.getAttribute("fsWatcherEnabled"))) {
-              Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
-              r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-              changed = true;
-            }
-
             // Set 'hashers' (see https://github.com/syncthing/syncthing-android/issues/384) on the
             // given folder.
             changed = setConfigElement(r, "hashers", "1") || changed;
         }
 
+        /* Section - GUI */
         // Enforce TLS.
         Element gui = getGuiElement();
         changed = setConfigElement(gui, "tls", "true") || changed;
