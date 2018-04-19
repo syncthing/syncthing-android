@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,6 +47,7 @@ public class ConfigXml {
     private static final String TAG = "ConfigXml";
 
     private final Context mContext;
+    @Inject SharedPreferences mPreferences;
 
     private final File mConfigFile;
 
@@ -111,6 +114,11 @@ public class ConfigXml {
     @SuppressWarnings("SdCardPath")
     public void updateIfNeeded() {
         boolean changed = false;
+        
+        /* Get preference - PREF_USE_FOLDER_OBSERVER */
+        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
+        
+        /* Read existing config version */
         int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
         Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
         
@@ -144,6 +152,26 @@ public class ConfigXml {
           iConfigVersion = 28;
           mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
           Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
+        }
+        
+        /**
+          * Force-disable fsWatcher for all folders if prefUseFolderObserver has been manually set
+          * in experimental options. This should give users the option to go back to the legacy
+          * implementation with FolderObserver watching for file changes instead of fsWatcher.
+          * Intended to be advised in the issue tracker if a user encounters a critical bug with
+          * the new fsWatcher. To be removed in a future release.
+        */
+        if (prefUseFolderObserver) {
+          Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
+          for (int i = 0; i < folders.getLength(); i++) {
+            Element r = (Element) folders.item(i);
+            
+            // Disable "fsWatcherEnabled" attribute.
+            if (!r.hasAttribute("fsWatcherEnabled")) {
+              r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
+              changed = true;
+            }
+          }
         }
         
         /* Section - folders */
