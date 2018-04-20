@@ -170,7 +170,7 @@ public class ConfigXml {
             Element r = (Element) folders.item(i);
 
             // Disable "fsWatcherEnabled" attribute.
-            if (!r.hasAttribute("fsWatcherEnabled")) {
+            if (r.hasAttribute("fsWatcherEnabled")) {
               r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
               changed = true;
             }
