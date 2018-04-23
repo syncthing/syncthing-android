@@ -129,8 +129,7 @@ public class ConfigXml {
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
 
         /* Check if we have to do manual migration from version X to Y */
-        if ((iConfigVersion >= 27) &&
-            (iConfigVersion <= 28)) {
+        if (iConfigVersion == 27)
           /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
           Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
 
