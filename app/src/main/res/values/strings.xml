@@ -348,7 +348,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_folder_observer_summary">Use wrapper\'s FolderObserver for realtime change detection. Syncthing core\'s fsWatcher will be disabled on all folders.</string>
 
-    <string name="restart_on_wakeup_title">Restart on wakeup</string>
+    <string name="restart_on_wakeup_title">Restart on Wakeup</string>
 
     <string name="restart_on_wakeup_summary">Restart syncthing core after a wakeup from standby has been detected and immediately rescan and reconnect devices.</string>
 

@@ -66,8 +66,27 @@ public class ConfigXml {
         readConfig();
 
         if (isFirstStart) {
-            changeLocalDeviceName();
-            changeDefaultFolder();
+            boolean changed = false;
+
+            /* Synthing devices */
+            changed = changeLocalDeviceName() || changed;
+
+            /* Syncthing folders */
+            changed = changeDefaultFolder() || changed;
+
+            /* Syncthing options */
+            /**
+              * Disable restartOnWakeup as advised by Nutomic, AudriusButkevicius
+              * see https://github.com/syncthing/syncthing-android/issues/368
+              */
+            Element options = (Element) mConfig.getDocumentElement()
+                    .getElementsByTagName("options").item(0);
+            changed = setConfigElement(options, "restartOnWakeup", "false") || changed;
+
+            // Save changes if we made any.
+            if (changed) {
+                saveChanges();
+            }
         }
     }
 
@@ -238,6 +257,7 @@ public class ConfigXml {
           changed = true;
         }
 
+        // Save changes if we made any.
         if (changed) {
             saveChanges();
         }
@@ -273,14 +293,16 @@ public class ConfigXml {
      *
      * We need to iterate through XML nodes manually, as mConfig.getDocumentElement() will also
      * return nested elements inside folder element.
+     *
+     * Returns if changes to the config have been made.
      */
-    private void changeLocalDeviceName() {
+    private boolean changeLocalDeviceName() {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("device")) {
+                Log.i(TAG, "changeLocalDeviceName: Current device name updated to build.MODEL.");
                 ((Element) node).setAttribute("name", Build.MODEL);
-                saveChanges();
 
                 /**
                   * Only alter the first occurency of the device tag in assumption it is the device running this instance.
@@ -290,15 +312,19 @@ public class ConfigXml {
                   * ToDo:   Implement a better fix by reading the device ID first, e.g. from REST API and only alter the correct
                   *         node's device name attribute.
                   */
-                break;
+                return true;
             }
         }
+
+        // No changes have been made.
+        return false;
     }
 
     /**
      * Change default folder id to camera and path to camera folder path.
+     * Returns if changes to the config have been made.
      */
-    private void changeDefaultFolder() {
+    private boolean changeDefaultFolder() {
         Element folder = (Element) mConfig.getDocumentElement()
                 .getElementsByTagName("folder").item(0);
         String model = Build.MODEL
@@ -310,7 +336,7 @@ public class ConfigXml {
         folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("type", "readonly");
-        saveChanges();
+        return true;
     }
 
     /**
