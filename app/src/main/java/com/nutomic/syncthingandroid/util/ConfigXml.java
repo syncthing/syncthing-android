@@ -76,12 +76,17 @@ public class ConfigXml {
 
             /* Syncthing options */
             /**
-              * Disable restartOnWakeup as advised by Nutomic, AudriusButkevicius
+              * As verifying the impact of disabling restartOnWakeup is not
+              * completed yet, we stick to what has been default in the past
+              * and keep this syncthing core feature enabled.
+              * After additional tests, we want to disable restartOnWakeup
+              * as advised by calmh, Nutomic, AudriusButkevicius to save battery.
               * see https://github.com/syncthing/syncthing-android/issues/368
+              * and https://forum.syncthing.net/t/question-about-restartonwakeup-setting/2222/11
               */
             Element options = (Element) mConfig.getDocumentElement()
                     .getElementsByTagName("options").item(0);
-            changed = setConfigElement(options, "restartOnWakeup", "false") || changed;
+            changed = setConfigElement(options, "restartOnWakeup", "true") || changed;
 
             // Save changes if we made any.
             if (changed) {
