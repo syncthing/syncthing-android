@@ -346,7 +346,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_folder_observer_title">Use FolderObserver</string>
 
-    <string name="use_folder_observer_summary">Use wrapper\'s FolderObserver for realtime change detection. Syncthing core's fsWatcher will be disabled on all folders.</string>
+    <string name="use_folder_observer_summary">Use wrapper\'s FolderObserver for realtime change detection. Syncthing core\'s fsWatcher will be disabled on all folders.</string>
 
     <!-- Dialog shown before config export -->
     <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
