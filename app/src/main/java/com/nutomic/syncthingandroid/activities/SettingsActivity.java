@@ -101,6 +101,7 @@ public class SettingsActivity extends SyncthingActivity {
         private CheckBoxPreference mRelaysEnabled;
         private EditTextPreference mGlobalAnnounceServers;
         private EditTextPreference mAddress;
+        private CheckBoxPreference mRestartOnWakeup;
         private CheckBoxPreference mUrAccepted;
 
         private Preference mCategoryBackup;
@@ -176,6 +177,7 @@ public class SettingsActivity extends SyncthingActivity {
             mRelaysEnabled          = (CheckBoxPreference) findPreference("relaysEnabled");
             mGlobalAnnounceServers  = (EditTextPreference) findPreference("globalAnnounceServers");
             mAddress                = (EditTextPreference) findPreference("address");
+            mRestartOnWakeup        = (CheckBoxPreference) findPreference("restartOnWakeup");
             mUrAccepted             = (CheckBoxPreference) findPreference("urAccepted");
 
             mCategoryBackup         = findPreference("category_backup");
@@ -263,6 +265,7 @@ public class SettingsActivity extends SyncthingActivity {
             mRelaysEnabled.setChecked(mOptions.relaysEnabled);
             mGlobalAnnounceServers.setText(joiner.join(mOptions.globalAnnounceServers));
             mAddress.setText(mGui.address);
+            mRestartOnWakeup.setChecked(mOptions.restartOnWakeup);
             mApi.getSystemInfo(systemInfo ->
                     mUrAccepted.setChecked(mOptions.isUsageReportingAccepted(systemInfo.urVersionMax)));
         }
@@ -305,6 +308,7 @@ public class SettingsActivity extends SyncthingActivity {
                     mOptions.globalAnnounceServers = Iterables.toArray(splitter.split((String) o), String.class);
                     break;
                 case "address":               mGui.address = (String) o;  break;
+                case "restartOnWakeup":       mOptions.restartOnWakeup = (boolean) o;              break;
                 case "urAccepted":
                     mApi.getSystemInfo(systemInfo -> {
                         mOptions.urAccepted = ((boolean) o)

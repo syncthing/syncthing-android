@@ -126,6 +126,12 @@
             android:inputType="textNoSuggestions" />
 
         <CheckBoxPreference
+            android:key="restartOnWakeup"
+            android:title="@string/restart_on_wakeup_title"
+            android:summary="@string/restart_on_wakeup_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
             android:key="urAccepted"
             android:title="@string/usage_reporting"
             android:persistent="false" />
@@ -205,7 +211,7 @@
             android:key="use_legacy_hashing"
             android:title="@string/use_legacy_hashing_title"
             android:summary="@string/use_legacy_hashing_summary" />
-            
+
         <CheckBoxPreference
             android:key="use_folder_observer"
             android:title="@string/use_folder_observer_title"

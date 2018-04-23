@@ -348,6 +348,10 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_folder_observer_summary">Use wrapper\'s FolderObserver for realtime change detection. Syncthing core\'s fsWatcher will be disabled on all folders.</string>
 
+    <string name="restart_on_wakeup_title">Restart on wakeup</string>
+
+    <string name="restart_on_wakeup_summary">Restart syncthing core after a wakeup from standby has been detected and immediately rescan and reconnect devices.</string>
+
     <!-- Dialog shown before config export -->
     <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
 
