@@ -246,7 +246,6 @@ public class ConfigXml {
                 // Enable "fsWatcherEnabled" attribute.
                 Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
                 r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-                changed = true;
             }
 
             /**
@@ -255,9 +254,11 @@ public class ConfigXml {
             * with the fsWatcher GUI notification.
             */
             iConfigVersion = 28;
-            mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
-            Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
+            changed = true;
         }
+
+        mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+        Log.i(TAG, "New config version is " + Integer.toString(iConfigVersion));
 
         return changed;
     }
@@ -292,8 +293,6 @@ public class ConfigXml {
      *
      * We need to iterate through XML nodes manually, as mConfig.getDocumentElement() will also
      * return nested elements inside folder element.
-     *
-     * Returns if changes to the config have been made.
      */
     private void changeLocalDeviceName() {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
