@@ -305,11 +305,7 @@ public class ConfigXml {
 
                 /**
                   * Only alter the first occurency of the device tag in assumption it is the device running this instance.
-                  * Reason: Sometimes encountered a bug when manually restored syncthing db+config with root explorer
-                  *         where app started and all devices got their name altered to the model name. Config was messed up then.
-                  *         This should work around the problem at least until a better fix will be implemented.
-                  * ToDo:   Implement a better fix by reading the device ID first, e.g. from REST API and only alter the correct
-                  *         node's device name attribute.
+                  * Fixes https://github.com/syncthing/syncthing-android/issues/1059
                   */
                 return true;
             }
