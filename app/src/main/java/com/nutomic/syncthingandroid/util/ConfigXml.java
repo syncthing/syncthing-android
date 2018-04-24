@@ -209,9 +209,16 @@ public class ConfigXml {
 
         /* Check if we have to dismiss any specific "unackedNotificationID" */
         /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
+        /* If "unackedNotificationID" would end up with an empty string or whitespace, remove the whole node */
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
             Log.i(TAG, "Remove 'fsWatcherNotification' from 'unackedNotificationID' node.");
-            changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
+            String unackedNotificationID = getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "");
+            if (TextUtils.isEmpty(unackedNotificationID.replaceAll("\\s+",""))) {
+                options.removeChild(options.getElementsByTagName("unackedNotificationID").item(0));
+            } else {
+                setConfigElement(options, "unackedNotificationID", unackedNotificationID);
+            }
+            changed = true;
         }
 
         // Save changes if we made any.
