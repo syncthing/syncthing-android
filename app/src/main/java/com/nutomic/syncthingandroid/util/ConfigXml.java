@@ -74,20 +74,6 @@ public class ConfigXml {
             /* Syncthing folders */
             changed = changeDefaultFolder() || changed;
 
-            /* Syncthing options */
-            /**
-              * As verifying the impact of disabling restartOnWakeup is not
-              * completed yet, we stick to what has been default in the past
-              * and keep this syncthing core feature enabled.
-              * After additional tests, we want to disable restartOnWakeup
-              * as advised by calmh, Nutomic, AudriusButkevicius to save battery.
-              * see https://github.com/syncthing/syncthing-android/issues/368
-              * and https://forum.syncthing.net/t/question-about-restartonwakeup-setting/2222/11
-              */
-            Element options = (Element) mConfig.getDocumentElement()
-                    .getElementsByTagName("options").item(0);
-            changed = setConfigElement(options, "restartOnWakeup", "true") || changed;
-
             // Save changes if we made any.
             if (changed) {
                 saveChanges();
@@ -141,9 +127,8 @@ public class ConfigXml {
         boolean changed = false;
 
         /* Get preference - PREF_USE_FOLDER_OBSERVER */
-        boolean prefUseFolderObserver = false;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
+        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
 
         /* Read existing config version */
         int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
@@ -162,12 +147,9 @@ public class ConfigXml {
             Element r = (Element) folders.item(i);
 
             // Enable "fsWatcherEnabled" attribute.
-            if (!r.hasAttribute("fsWatcherEnabled") ||
-                    !Boolean.parseBoolean(r.getAttribute("fsWatcherEnabled"))) {
-              Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
-              r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-              changed = true;
-            }
+            Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+            r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+            changed = true;
           }
 
           /**
@@ -255,11 +237,8 @@ public class ConfigXml {
         /* Check if we have to dismiss any specific "unackedNotificationID" */
         /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
-          Log.i(TAG, "Remove option 'unackedNotificationID' to dismiss 'fsWatcherNotification'.");
-          // According to review, it is sufficient to remove all "unackedNotificationID" contents.
-          // changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
-          options.removeChild(options.getElementsByTagName("unackedNotificationID").item(0));
-          changed = true;
+          Log.i(TAG, "Remove 'fsWatcherNotification' from 'unackedNotificationID' node.");
+          changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
         }
 
         // Save changes if we made any.

@@ -298,17 +298,33 @@ public class SettingsActivity extends SyncthingActivity {
                 case "listenAddresses":
                     mOptions.listenAddresses = Iterables.toArray(splitter.split((String) o), String.class);
                     break;
-                case "maxRecvKbps":           mOptions.maxRecvKbps = Integer.parseInt((String) o); break;
-                case "maxSendKbps":           mOptions.maxSendKbps = Integer.parseInt((String) o); break;
-                case "natEnabled":            mOptions.natEnabled = (boolean) o;                   break;
-                case "localAnnounceEnabled":  mOptions.localAnnounceEnabled = (boolean) o;         break;
-                case "globalAnnounceEnabled": mOptions.globalAnnounceEnabled = (boolean) o;        break;
-                case "relaysEnabled":         mOptions.relaysEnabled = (boolean) o;                break;
+                case "maxRecvKbps":
+                    mOptions.maxRecvKbps = Integer.parseInt((String) o);
+                    break;
+                case "maxSendKbps":
+                    mOptions.maxSendKbps = Integer.parseInt((String) o);
+                    break;
+                case "natEnabled":
+                    mOptions.natEnabled = (boolean) o;
+                    break;
+                case "localAnnounceEnabled":
+                    mOptions.localAnnounceEnabled = (boolean) o;
+                    break;
+                case "globalAnnounceEnabled":
+                    mOptions.globalAnnounceEnabled = (boolean) o;
+                    break;
+                case "relaysEnabled":
+                    mOptions.relaysEnabled = (boolean) o;
+                    break;
                 case "globalAnnounceServers":
                     mOptions.globalAnnounceServers = Iterables.toArray(splitter.split((String) o), String.class);
                     break;
-                case "address":               mGui.address = (String) o;  break;
-                case "restartOnWakeup":       mOptions.restartOnWakeup = (boolean) o;              break;
+                case "address":
+                    mGui.address = (String) o;
+                    break;
+                case "restartOnWakeup":
+                    mOptions.restartOnWakeup = (boolean) o;
+                    break;
                 case "urAccepted":
                     mApi.getSystemInfo(systemInfo -> {
                         mOptions.urAccepted = ((boolean) o)

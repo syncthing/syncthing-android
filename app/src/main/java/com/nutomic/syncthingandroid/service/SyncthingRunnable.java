@@ -71,9 +71,6 @@ public class SyncthingRunnable implements Runnable {
         mSyncthingBinary = Constants.getSyncthingBinary(mContext);
         mLogFile = Constants.getLogFile(mContext);
 
-        // Get preferences relevant for meaningful logs in bug reports.
-        Log.v(TAG, "SyncthingRunnable: syncthing-core option restartOnWakeup = " + Boolean.toString(mPreferences.getBoolean("restartOnWakeup", false)));
-
         // Get preferences relevant to starting syncthing core.
         mUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
