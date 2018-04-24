@@ -126,41 +126,11 @@ public class ConfigXml {
     public void updateIfNeeded() {
         boolean changed = false;
 
-        /* Get preference - PREF_USE_FOLDER_OBSERVER */
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
-
-        /* Read existing config version */
-        int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
-        Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
+        /* Perform one-time migration tasks on syncthing's config file when coming from an older config version. */
+        changed = migrateSyncthingOptions() || changed;
 
         /* Get refs to important config objects */
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
-
-        /* Check if we have to do manual migration from version X to Y */
-        if (iConfigVersion == 27) {
-            /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
-            Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
-
-            /* Enable fsWatcher for all folders */
-            for (int i = 0; i < folders.getLength(); i++) {
-                Element r = (Element) folders.item(i);
-
-                // Enable "fsWatcherEnabled" attribute.
-                Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
-                r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-                changed = true;
-            }
-
-            /**
-            * Set config version to 28 after manual config migration
-            * This prevents "unackedNotificationID" getting populated
-            * with the fsWatcher GUI notification.
-            */
-            iConfigVersion = 28;
-            mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
-            Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
-        }
 
         /**
           * Force-disable fsWatcher for all folders if prefUseFolderObserver has been manually set
@@ -169,6 +139,9 @@ public class ConfigXml {
           * Intended to be advised in the issue tracker if a user encounters a critical bug with
           * the new fsWatcher. To be removed in a future release.
         */
+        /* Get preference - PREF_USE_FOLDER_OBSERVER */
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
         if (prefUseFolderObserver) {
             Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
             for (int i = 0; i < folders.getLength(); i++) {
@@ -245,6 +218,48 @@ public class ConfigXml {
         if (changed) {
             saveChanges();
         }
+    }
+
+    /**
+     * Updates syncthing options to a version specific target setting in the config file.
+     *
+     * Used for one-time config migration from a lower syncthing version to the current version.
+     * Enables filesystem watcher.
+     */
+    private boolean migrateSyncthingOptions () {
+        boolean changed = false;
+
+        /* Read existing config version */
+        int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
+        Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
+
+        /* Check if we have to do manual migration from version X to Y */
+        if (iConfigVersion == 27) {
+            /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
+            Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
+
+            /* Enable fsWatcher for all folders */
+            NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
+            for (int i = 0; i < folders.getLength(); i++) {
+                Element r = (Element) folders.item(i);
+
+                // Enable "fsWatcherEnabled" attribute.
+                Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+                r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+                changed = true;
+            }
+
+            /**
+            * Set config version to 28 after manual config migration
+            * This prevents "unackedNotificationID" getting populated
+            * with the fsWatcher GUI notification.
+            */
+            iConfigVersion = 28;
+            mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+            Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
+        }
+
+        return changed;
     }
 
     private String getConfigElement(Element parent, String tagName) {
