@@ -69,7 +69,7 @@ public class ConfigXml {
             boolean changed = false;
 
             /* Synthing devices */
-            changed = changeLocalDeviceName() || changed;
+            changeLocalDeviceName();
 
             /* Syncthing folders */
             changed = changeDefaultFolder() || changed;
@@ -295,24 +295,15 @@ public class ConfigXml {
      *
      * Returns if changes to the config have been made.
      */
-    private boolean changeLocalDeviceName() {
+    private void changeLocalDeviceName() {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("device")) {
-                Log.i(TAG, "changeLocalDeviceName: Current device name updated to build.MODEL.");
                 ((Element) node).setAttribute("name", Build.MODEL);
-
-                /**
-                  * Only alter the first occurency of the device tag in assumption it is the device running this instance.
-                  * Fixes https://github.com/syncthing/syncthing-android/issues/1059
-                  */
-                return true;
             }
         }
-
-        // No changes have been made.
-        return false;
+        saveChanges();
     }
 
     /**
