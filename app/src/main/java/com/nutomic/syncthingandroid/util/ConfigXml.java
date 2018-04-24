@@ -139,27 +139,27 @@ public class ConfigXml {
 
         /* Check if we have to do manual migration from version X to Y */
         if (iConfigVersion == 27) {
-          /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
-          Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
+            /* fsWatcher transition - https://github.com/syncthing/syncthing/issues/4882 */
+            Log.i(TAG, "Migrating config version " + Integer.toString(iConfigVersion) + " to 28 ...");
 
-          /* Enable fsWatcher for all folders */
-          for (int i = 0; i < folders.getLength(); i++) {
-            Element r = (Element) folders.item(i);
+            /* Enable fsWatcher for all folders */
+            for (int i = 0; i < folders.getLength(); i++) {
+                Element r = (Element) folders.item(i);
 
-            // Enable "fsWatcherEnabled" attribute.
-            Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
-            r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-            changed = true;
-          }
+                // Enable "fsWatcherEnabled" attribute.
+                Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+                r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+                changed = true;
+            }
 
-          /**
+            /**
             * Set config version to 28 after manual config migration
             * This prevents "unackedNotificationID" getting populated
             * with the fsWatcher GUI notification.
             */
-          iConfigVersion = 28;
-          mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
-          Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
+            iConfigVersion = 28;
+            mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+            Log.i(TAG, "Config version " + Integer.toString(iConfigVersion) + " reached.");
         }
 
         /**
@@ -170,16 +170,16 @@ public class ConfigXml {
           * the new fsWatcher. To be removed in a future release.
         */
         if (prefUseFolderObserver) {
-          Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
-          for (int i = 0; i < folders.getLength(); i++) {
-            Element r = (Element) folders.item(i);
+            Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
+            for (int i = 0; i < folders.getLength(); i++) {
+                Element r = (Element) folders.item(i);
 
-            // Disable "fsWatcherEnabled" attribute.
-            if (r.hasAttribute("fsWatcherEnabled")) {
-              r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
-              changed = true;
+                // Disable "fsWatcherEnabled" attribute.
+                if (r.hasAttribute("fsWatcherEnabled")) {
+                    r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
+                    changed = true;
+                }
             }
-          }
         }
 
         /* Section - folders */
@@ -237,8 +237,8 @@ public class ConfigXml {
         /* Check if we have to dismiss any specific "unackedNotificationID" */
         /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
         if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
-          Log.i(TAG, "Remove 'fsWatcherNotification' from 'unackedNotificationID' node.");
-          changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
+            Log.i(TAG, "Remove 'fsWatcherNotification' from 'unackedNotificationID' node.");
+            changed = setConfigElement(options, "unackedNotificationID", getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "")) || changed;
         }
 
         // Save changes if we made any.
