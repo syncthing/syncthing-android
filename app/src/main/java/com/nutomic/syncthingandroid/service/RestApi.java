@@ -484,14 +484,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     /**
-     * Force a rescan of the given subdirectory in folder.
-     */
-    @Override
-    public void onFolderFileChange(String folderId, String relativePath) {
-        new PostScanRequest(mContext, mUrl, mApiKey, folderId, relativePath);
-    }
-
-    /**
      * Returns prettyfied usage report.
      */
     public void getUsageReport(final OnResultListener1<String> listener) {
