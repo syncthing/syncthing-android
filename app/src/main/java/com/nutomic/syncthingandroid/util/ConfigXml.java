@@ -184,18 +184,18 @@ public class ConfigXml {
                 .getElementsByTagName("options").item(0);
         changed = setConfigElement(options, "weakHashSelectionMethod", "never") || changed;
 
-        /* Check if we have to dismiss any specific "unackedNotificationID" */
         /* Dismiss "fsWatcherNotification" according to https://github.com/syncthing/syncthing-android/pull/1051 */
-        /* If "unackedNotificationID" would end up with an empty string or whitespace, remove the whole node */
-        if (getConfigElement(options, "unackedNotificationID").contains("fsWatcherNotification")) {
-            Log.i(TAG, "Remove 'fsWatcherNotification' from 'unackedNotificationID' node.");
-            String unackedNotificationID = getConfigElement(options, "unackedNotificationID").replace("fsWatcherNotification", "");
-            if (TextUtils.isEmpty(unackedNotificationID.replaceAll("\\s+",""))) {
-                options.removeChild(options.getElementsByTagName("unackedNotificationID").item(0));
-            } else {
-                setConfigElement(options, "unackedNotificationID", unackedNotificationID);
+        NodeList childNodes = options.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (node.getNodeName().equals("unackedNotificationID")) {
+                if (node.equals("fsWatcherNotification")) {
+                    Log.i(TAG, "Remove found unackedNotificationID 'fsWatcherNotification'.");
+                    options.removeChild(node);
+                    changed = true;
+                    break;
+                }
             }
-            changed = true;
         }
 
         // Save changes if we made any.
