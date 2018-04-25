@@ -328,6 +328,7 @@ public class ConfigXml {
         folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("type", "readonly");
+        folder.setAttribute("fsWatcherEnabled", "true");
         return true;
     }
 
