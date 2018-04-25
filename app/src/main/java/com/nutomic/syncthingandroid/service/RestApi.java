@@ -186,6 +186,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Sends current config to Syncthing.
      */
     private void sendConfig() {
+        Log.v(TAG, "sendConfig() called.");
         new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), null);
     }
 
@@ -213,6 +214,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public List<Folder> getFolders() {
+        Log.v(TAG, "getFolders() called.");
         List<Folder> folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
         Collections.sort(folders, FOLDERS_COMPARATOR);
         return folders;
@@ -224,11 +226,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public void editFolder(Folder newFolder) {
+        Log.v(TAG, "editFolder(" + newFolder.id + ")");
         removeFolderInternal(newFolder.id);
         addFolder(newFolder);
     }
 
     public void removeFolder(String id) {
+        Log.v(TAG, "removeFolder(" + id + ")");
         removeFolderInternal(id);
         sendConfig();
         // Remove saved data from share activity for this folder.
@@ -415,6 +419,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Returns status information about the folder with the given id.
      */
     public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
+        Log.v(TAG, "getModel(" + folderId + ")");
         new GetRequest(mContext, mUrl, GetRequest.URI_MODEL, mApiKey,
                     ImmutableMap.of("folder", folderId), result -> {
             Model m = new Gson().fromJson(result, Model.class);
