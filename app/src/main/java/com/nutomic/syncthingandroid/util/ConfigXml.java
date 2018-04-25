@@ -132,29 +132,6 @@ public class ConfigXml {
         /* Get refs to important config objects */
         NodeList folders = mConfig.getDocumentElement().getElementsByTagName("folder");
 
-        /**
-          * Force-disable fsWatcher for all folders if prefUseFolderObserver has been manually set
-          * in experimental options. This should give users the option to go back to the legacy
-          * implementation with FolderObserver watching for file changes instead of fsWatcher.
-          * Intended to be advised in the issue tracker if a user encounters a critical bug with
-          * the new fsWatcher. To be removed in a future release.
-        */
-        /* Get preference - PREF_USE_FOLDER_OBSERVER */
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        boolean prefUseFolderObserver = mPreferences.getBoolean(Constants.PREF_USE_FOLDER_OBSERVER, false);
-        if (prefUseFolderObserver) {
-            Log.i(TAG, "Disabling fsWatcher on all folders because experimental option to use FolderObserver was manually set.");
-            for (int i = 0; i < folders.getLength(); i++) {
-                Element r = (Element) folders.item(i);
-
-                // Disable "fsWatcherEnabled" attribute.
-                if (r.hasAttribute("fsWatcherEnabled")) {
-                    r.setAttribute("fsWatcherEnabled", Boolean.toString(false));
-                    changed = true;
-                }
-            }
-        }
-
         /* Section - folders */
         for (int i = 0; i < folders.getLength(); i++) {
             Element r = (Element) folders.item(i);

@@ -32,7 +32,6 @@ import com.nutomic.syncthingandroid.model.Model;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
-import com.nutomic.syncthingandroid.util.FolderObserver;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -49,8 +48,7 @@ import javax.inject.Inject;
 /**
  * Provides functions to interact with the syncthing REST API.
  */
-public class RestApi implements SyncthingService.OnWebGuiAvailableListener,
-        FolderObserver.OnFolderFileChangeListener {
+public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     private static final String TAG = "RestApi";
 
