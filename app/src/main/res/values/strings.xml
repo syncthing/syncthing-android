@@ -372,15 +372,31 @@ Please report any problems you encounter via Github.</string>
     <string name="toast_invalid_environment_variables">Value is not a valid environment variable string</string>
 
     <!-- Title for the preference to reset Syncthing indexes -->
-    <string name="streset_title">Reset Database</string>
+    <string name="stresetdatabase_title">Reset Database</string>
 
     <!-- Syncthing was reset -->
-    <string name="streset_question">This action should only be performed based on a recommendation from our support team.
-        \nAre you sure you want to clear Syncthing\'s index database?
+    <string name="stresetdatabase_question">This action should only be performed based on a recommendation from our support team.
+        \nAre you sure you want to clear Syncthing\'s database?
+    </string>
+
+    <!-- to be removed after merge into the master -->
+    <string name="streset_title">to be removed</string>
+    <string name="streset_question">to be removed</string>
+    <string name="streset_done">to be removed</string>
+
+    <!-- Syncthing was reset -->
+    <string name="stresetdatabase_done">Successfully reset Syncthing\'s database</string>
+
+    <!-- Title for the preference to reset Syncthing indexes -->
+    <string name="stresetdeltas_title">Reset Delta Indexes</string>
+
+    <!-- Syncthing was reset -->
+    <string name="stresetdeltas_question">This action should only be performed based on a recommendation from our support team.
+        \nAre you sure you want to clear Syncthing\'s delta indexes?
     </string>
 
     <!-- Syncthing was reset -->
-    <string name="streset_done">Successfully reset Syncthing\'s database</string>
+    <string name="stresetdeltas_done">Successfully reset Syncthing\'s delta indexes</string>
 
     <string name="category_about">About</string>
 

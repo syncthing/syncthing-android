@@ -174,8 +174,13 @@
             android:inputType="textNoSuggestions"/>
 
         <Preference
-            android:key="streset"
-            android:title="@string/streset_title"
+            android:key="stresetdatabase"
+            android:title="@string/stresetdatabase_title"
+            android:singleLine="true" />
+
+        <Preference
+            android:key="stresetdeltas"
+            android:title="@string/stresetdeltas_title"
             android:singleLine="true" />
 
     </PreferenceScreen>
