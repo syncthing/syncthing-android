@@ -45,13 +45,13 @@ public class SyncthingService extends Service {
     /**
      * Intent action to reset Syncthing's database.
      */
-    public static final String ACTION_RESETDATABASE =
+    public static final String ACTION_RESET_DATABASE =
             "com.nutomic.syncthingandroid.service.SyncthingService.RESETDATABASE";
 
     /**
      * Intent action to reset Syncthing's delta indexes.
      */
-    public static final String ACTION_RESETDELTAS =
+    public static final String ACTION_RESET_DELTAS =
             "com.nutomic.syncthingandroid.service.SyncthingService.RESETDELTAS";
 
     public static final String ACTION_REFRESH_NETWORK_INFO =
@@ -126,12 +126,12 @@ public class SyncthingService extends Service {
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             shutdown(State.INIT, () -> new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR));
-        } else if (ACTION_RESETDATABASE.equals(intent.getAction())) {
+        } else if (ACTION_RESET_DATABASE.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdatabase).run();
                 new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             });
-        } else if (ACTION_RESETDELTAS.equals(intent.getAction())) {
+        } else if (ACTION_RESET_DELTAS.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdeltas).run();
                 new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
