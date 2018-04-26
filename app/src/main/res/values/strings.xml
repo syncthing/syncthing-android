@@ -379,11 +379,6 @@ Please report any problems you encounter via Github.</string>
         \nAre you sure you want to clear Syncthing\'s database?
     </string>
 
-    <!-- to be removed after merge into the master -->
-    <string name="streset_title">to be removed</string>
-    <string name="streset_question">to be removed</string>
-    <string name="streset_done">to be removed</string>
-
     <!-- Syncthing was reset -->
     <string name="stresetdatabase_done">Successfully reset Syncthing\'s database</string>
 
