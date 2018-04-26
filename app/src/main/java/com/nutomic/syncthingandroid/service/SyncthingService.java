@@ -46,13 +46,13 @@ public class SyncthingService extends Service {
      * Intent action to reset Syncthing's database.
      */
     public static final String ACTION_RESET_DATABASE =
-            "com.nutomic.syncthingandroid.service.SyncthingService.RESETDATABASE";
+            "com.nutomic.syncthingandroid.service.SyncthingService.RESET_DATABASE";
 
     /**
      * Intent action to reset Syncthing's delta indexes.
      */
     public static final String ACTION_RESET_DELTAS =
-            "com.nutomic.syncthingandroid.service.SyncthingService.RESETDELTAS";
+            "com.nutomic.syncthingandroid.service.SyncthingService.RESET_DELTAS";
 
     public static final String ACTION_REFRESH_NETWORK_INFO =
             "com.nutomic.syncthingandroid.service.SyncthingService.REFRESH_NETWORK_INFO";

@@ -80,8 +80,8 @@ public class SettingsActivity extends SyncthingActivity {
         private static final String KEY_STTRACE = "sttrace";
         private static final String KEY_EXPORT_CONFIG = "export_config";
         private static final String KEY_IMPORT_CONFIG = "import_config";
-        private static final String KEY_ST_RESET_DATABASE = "streset_database";
-        private static final String KEY_ST_RESET_DELTAS = "streset_deltas";
+        private static final String KEY_ST_RESET_DATABASE = "st_reset_database";
+        private static final String KEY_ST_RESET_DELTAS = "st_reset_deltas";
 
         @Inject NotificationHandler mNotificationHandler;
         @Inject SharedPreferences mPreferences;
@@ -185,8 +185,8 @@ public class SettingsActivity extends SyncthingActivity {
 
             Preference stTrace              = findPreference("sttrace");
             Preference environmentVariables = findPreference("environment_variables");
-            Preference stResetDatabase      = findPreference("streset_database");
-            Preference stResetDeltas        = findPreference("streset_deltas");
+            Preference stResetDatabase      = findPreference("st_reset_database");
+            Preference stResetDeltas        = findPreference("st_reset_deltas");
 
             mUseRoot                     = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
             Preference useWakelock       = findPreference(Constants.PREF_USE_WAKE_LOCK);
@@ -427,11 +427,11 @@ public class SettingsActivity extends SyncthingActivity {
                             .setAction(SyncthingService.ACTION_RESET_DATABASE);
 
                     new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.streset_database_title)
-                            .setMessage(R.string.streset_database_question)
+                            .setTitle(R.string.st_reset_database_title)
+                            .setMessage(R.string.st_reset_database_question)
                             .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
                                 getActivity().startService(intent);
-                                Toast.makeText(getActivity(), R.string.streset_database_done, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), R.string.st_reset_database_done, Toast.LENGTH_LONG).show();
                             })
                             .setNegativeButton(android.R.string.no, (dialogInterface, i) -> {
                             })
@@ -442,11 +442,11 @@ public class SettingsActivity extends SyncthingActivity {
                             .setAction(SyncthingService.ACTION_RESET_DELTAS);
 
                     new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.streset_deltas_title)
-                            .setMessage(R.string.streset_deltas_question)
+                            .setTitle(R.string.st_reset_deltas_title)
+                            .setMessage(R.string.st_reset_deltas_question)
                             .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
                                 getActivity().startService(intent);
-                                Toast.makeText(getActivity(), R.string.streset_deltas_done, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), R.string.st_reset_deltas_done, Toast.LENGTH_LONG).show();
                             })
                             .setNegativeButton(android.R.string.no, (dialogInterface, i) -> {
                             })
