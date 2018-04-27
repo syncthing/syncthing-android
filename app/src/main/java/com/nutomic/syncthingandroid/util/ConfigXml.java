@@ -227,9 +227,10 @@ public class ConfigXml {
             for (int i = 0; i < folders.getLength(); i++) {
                 Element r = (Element) folders.item(i);
 
-                // Enable "fsWatcherEnabled" attribute.
-                Log.i(TAG, "Set 'fsWatcherEnabled' on folder " + r.getAttribute("id"));
+                // Enable "fsWatcherEnabled" attribute and set default delay.
+                Log.i(TAG, "Set 'fsWatcherEnabled', 'fsWatcherDelayS' on folder " + r.getAttribute("id"));
                 r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
+                r.setAttribute("fsWatcherDelayS"), Integer.toString(10));
             }
 
             /**
@@ -306,6 +307,7 @@ public class ConfigXml {
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("type", "readonly");
         folder.setAttribute("fsWatcherEnabled", "true");
+        folder.setAttribute("fsWatcherDelayS", "10");
         return true;
     }
 
