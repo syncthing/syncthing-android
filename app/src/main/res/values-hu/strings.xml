@@ -326,7 +326,7 @@ Biztosan törölni szeretnéd a Syncthing index adatbázisát?</string>
   <string name="syncthing_active">A Syncthing fut</string>
   <string name="syncthing_disabled">A Syncthing le van tiltva</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-    <!--Toast shown if syncthing failed to create a config-->
+  <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Nem sikerült létrehozni a konfigurációs fájlt</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>

@@ -315,7 +315,7 @@
   <string name="syncthing_active">Syncthing 正在运行</string>
   <string name="syncthing_disabled">Syncthing 已禁用</string>
   <!--Toast shown if folder observer fails to traverse a folder-->
-    <!--Toast shown if syncthing failed to create a config-->
+  <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">创建配置文件失败</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">摄像机</string>
