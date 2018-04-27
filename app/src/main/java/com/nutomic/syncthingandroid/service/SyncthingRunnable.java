@@ -57,8 +57,8 @@ public class SyncthingRunnable implements Runnable {
     public enum Command {
         generate,           // Generate keys, a config file and immediately exit.
         main,               // Run the main Syncthing application.
-        resetdatabase,     // Reset Syncthing's database
-        resetdeltas,       // Reset Syncthing's delta indexes
+        resetdatabase,      // Reset Syncthing's database
+        resetdeltas,        // Reset Syncthing's delta indexes
     }
 
     /**
