@@ -209,12 +209,12 @@ public class ConfigXml {
      *
      * Used for one-time config migration from a lower syncthing version to the current version.
      * Enables filesystem watcher.
+     * Returns if changes to the config have been made.
      */
     private boolean migrateSyncthingOptions () {
-        boolean changed = false;
-
         /* Read existing config version */
         int iConfigVersion = Integer.parseInt(mConfig.getDocumentElement().getAttribute("version"));
+        int iOldConfigVersion = iConfigVersion;
         Log.i(TAG, "Found existing config version " + Integer.toString(iConfigVersion));
 
         /* Check if we have to do manual migration from version X to Y */
@@ -229,8 +229,8 @@ public class ConfigXml {
 
                 // Enable "fsWatcherEnabled" attribute and set default delay.
                 Log.i(TAG, "Set 'fsWatcherEnabled', 'fsWatcherDelayS' on folder " + r.getAttribute("id"));
-                r.setAttribute("fsWatcherEnabled", Boolean.toString(true));
-                r.setAttribute("fsWatcherDelayS", Integer.toString(10));
+                r.setAttribute("fsWatcherEnabled", "true");
+                r.setAttribute("fsWatcherDelayS", "10");
             }
 
             /**
@@ -239,21 +239,15 @@ public class ConfigXml {
             * with the fsWatcher GUI notification.
             */
             iConfigVersion = 28;
-            changed = true;
         }
 
-        mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
-        Log.i(TAG, "New config version is " + Integer.toString(iConfigVersion));
-
-        return changed;
-    }
-
-    private String getConfigElement(Element parent, String tagName) {
-        Node element = parent.getElementsByTagName(tagName).item(0);
-        if (element == null) {
-            return "";
+        if (iConfigVersion != iOldConfigVersion) {
+            mConfig.getDocumentElement().setAttribute("version", Integer.toString(iConfigVersion));
+            Log.i(TAG, "New config version is " + Integer.toString(iConfigVersion));
+            return true;
+        } else {
+            return false;
         }
-        return (String) element.getTextContent();
     }
 
     private boolean setConfigElement(Element parent, String tagName, String textContent) {
