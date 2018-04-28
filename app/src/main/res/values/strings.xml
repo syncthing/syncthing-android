@@ -343,14 +343,14 @@ Please report any problems you encounter via Github.</string>
     <!-- Experimental options -->
     <string name="use_proxy">Connect through proxy</string>
     <string name="do_not_use_proxy">Do not connect through proxy</string>
-    
+
     <string name="keep_wakelock_while_binary_running">Keep the CPU awake while Syncthing is running</string>
 
     <string name="keep_wakelock_while_binary_running_summary">Use this setting if you experience unexpected disconnects while operating on battery. This will result in increased battery consumption.</string>
 
     <string name="use_tor_title">Use Tor</string>
 
-    <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot</string>
+    <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot. Disables proxy options.</string>
 
     <string name="socks_proxy_address_title">SOCKS-Proxy</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>

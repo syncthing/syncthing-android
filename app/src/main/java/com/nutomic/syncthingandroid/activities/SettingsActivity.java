@@ -110,6 +110,7 @@ public class SettingsActivity extends SyncthingActivity {
 
         /* Experimental options */
         private CheckBoxPreference mUseRoot;
+        private CheckBoxPreference mUseTor;
         private EditTextPreference mSocksProxyAddress;
         private EditTextPreference mHttpProxyAddress;
 
@@ -195,8 +196,8 @@ public class SettingsActivity extends SyncthingActivity {
             Preference stResetDeltas        = findPreference("st_reset_deltas");
 
             mUseRoot                        = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
-            Preference useWakelock          = findPreference(Constants.PREF_USE_WAKE_LOCK);
-            Preference useTor               = findPreference(Constants.PREF_USE_TOR);
+            Preference useWakelock          = (CheckBoxPreference) findPreference(Constants.PREF_USE_WAKE_LOCK);
+            mUseTor                         = (CheckBoxPreference) findPreference(Constants.PREF_USE_TOR);
             mSocksProxyAddress              = (EditTextPreference) findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS);
             mHttpProxyAddress               = (EditTextPreference) findPreference(Constants.PREF_HTTP_PROXY_ADDRESS);
 
@@ -220,8 +221,11 @@ public class SettingsActivity extends SyncthingActivity {
             /* Experimental options */
             mUseRoot.setOnPreferenceClickListener(this);
             useWakelock.setOnPreferenceChangeListener((p, o) -> requireRestart());
-            useTor.setOnPreferenceChangeListener((p, o) -> requireRestart());
+            mUseTor.setOnPreferenceChangeListener(this);
+
+            mSocksProxyAddress.setEnabled(!(Boolean) mUseTor.isChecked());
             mSocksProxyAddress.setOnPreferenceChangeListener(this);
+            mHttpProxyAddress.setEnabled(!(Boolean) mUseTor.isChecked());
             mHttpProxyAddress.setOnPreferenceChangeListener(this);
 
             /* Initialize summaries */
@@ -405,6 +409,11 @@ public class SettingsActivity extends SyncthingActivity {
                                 .show();
                         return false;
                     }
+                    break;
+                case Constants.PREF_USE_TOR:
+                    mSocksProxyAddress.setEnabled(!(Boolean) o);
+                    mHttpProxyAddress.setEnabled(!(Boolean) o);
+                    requireRestart();
                     break;
                 case Constants.PREF_SOCKS_PROXY_ADDRESS:
                     if (handleSocksProxyPreferenceChange(preference, o.toString().trim())) {
