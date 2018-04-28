@@ -352,7 +352,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot. Disables proxy options.</string>
 
-    <string name="socks_proxy_address_title">SOCKS-Proxy</string>
+    <string name="socks_proxy_address_title">SOCKS5 Proxy</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
 
     <!-- Toast after entering invalid socks proxy address -->
