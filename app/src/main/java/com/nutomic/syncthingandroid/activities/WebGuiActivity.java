@@ -70,8 +70,9 @@ public class WebGuiActivity extends StateDialogActivity
          public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
              if (errorCode == WebViewClient.ERROR_TIMEOUT) {
                 Log.w(TAG, "Timeout loading locally running web UI. Retrying ...");
-                setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
-                view.reload();
+                if (setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]")) {
+                    view.reload();
+                }
              }
              super.onReceivedError(view, errorCode, description, failingUrl);
          }
@@ -213,9 +214,9 @@ public class WebGuiActivity extends StateDialogActivity
 
         Properties properties = System.getProperties();
         properties.setProperty("http.proxyHost", host);
-        properties.setProperty("http.proxyPort", Integer.toString(port) + "");
+        properties.setProperty("http.proxyPort", Integer.toString(port));
         properties.setProperty("https.proxyHost", host);
-        properties.setProperty("https.proxyPort", Integer.toString(port) + "");
+        properties.setProperty("https.proxyPort", Integer.toString(port));
         properties.setProperty("http.nonProxyHosts", exclusionList);
         properties.setProperty("https.nonProxyHosts", exclusionList);
 
