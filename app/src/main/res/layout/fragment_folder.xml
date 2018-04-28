@@ -96,8 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_autorenew_black_24dp"
-                android:drawableStart="@drawable/ic_autorenew_black_24dp"
+                android:drawableLeft="@drawable/ic_folder_black_24dp"
+                android:drawableStart="@drawable/ic_folder_black_24dp"
                 android:text="@string/folder_pause_sync" />
 
             <LinearLayout
