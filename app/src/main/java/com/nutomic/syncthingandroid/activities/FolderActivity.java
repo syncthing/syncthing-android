@@ -115,7 +115,7 @@ public class FolderActivity extends SyncthingActivity
                     mFolder.fsWatcherEnabled = isChecked;
                     mFolderNeedsToUpdate = true;
                     break;
-                case R.id.folderPause:
+                case R.id.folderPauseSync:
                     mFolder.paused = isChecked;
                     mFolderNeedsToUpdate = true;
                     break;
@@ -146,7 +146,7 @@ public class FolderActivity extends SyncthingActivity
         mPathView = findViewById(R.id.directoryTextView);
         mFolderMasterView = findViewById(R.id.master);
         mFolderFileWatcher = findViewById(R.id.fileWatcher);
-        mFolderPaused = findViewById(R.id.folderPaused);
+        mFolderPaused = findViewById(R.id.folderPauseSync);
         mVersioningDescriptionView = findViewById(R.id.versioningDescription);
         mVersioningTypeView = findViewById(R.id.versioningType);
         mDevicesContainer = findViewById(R.id.devicesContainer);
