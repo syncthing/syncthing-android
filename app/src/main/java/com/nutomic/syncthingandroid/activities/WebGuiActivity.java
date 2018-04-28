@@ -255,7 +255,7 @@ public class WebGuiActivity extends StateDialogActivity
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.w(TAG, "setWebViewProxy exception", e);
         }
         return false;
     }
