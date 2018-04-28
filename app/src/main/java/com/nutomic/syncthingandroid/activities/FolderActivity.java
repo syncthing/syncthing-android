@@ -431,7 +431,15 @@ public class FolderActivity extends SyncthingActivity
                 ? getIntent().getStringExtra(EXTRA_FOLDER_ID)
                 : generateRandomFolderId();
         mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
-        mFolder.rescanIntervalS = 3600;
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M) {
+            // Scan every hour (in case real time change detection failed)
+            mFolder.rescanIntervalS = 3600;
+        }
+        else {
+            // FileObserver is broken on Marshmallow.
+            // https://github.com/syncthing/syncthing-android/issues/787
+            mFolder.rescanIntervalS = 300;
+        }
         mFolder.versioning = new Folder.Versioning();
     }
 
