@@ -320,7 +320,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mNameView.addTextChangedListener(mNameTextWatcher);
         mAddressesView.addTextChangedListener(mAddressesTextWatcher);
         mIntroducerView.setOnCheckedChangeListener(mIntroducerCheckedChangeListener);
-        mDevicePaused.setOnCheckedChangeListener(mIntroducerCheckedChangeListener);
+        mDevicePaused.setOnCheckedChangeListener(mDevicePausedCheckedChangeListener);
     }
 
     @Override
