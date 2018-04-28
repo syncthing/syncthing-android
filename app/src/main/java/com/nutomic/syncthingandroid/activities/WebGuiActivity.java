@@ -206,18 +206,18 @@ public class WebGuiActivity extends StateDialogActivity
      * Source: https://stackoverflow.com/a/26781539
      */
     public static boolean setWebViewProxy(Context appContext, String host, int port, String exclusionList) {
-        Properties properties = System.getProperties();
-        properties.setProperty("http.proxyHost", host);
-        properties.setProperty("http.proxyPort", port + "");
-        properties.setProperty("https.proxyHost", host);
-        properties.setProperty("https.proxyPort", port + "");
-        properties.setProperty("http.nonProxyHosts", exclusionList);
-        properties.setProperty("https.nonProxyHosts", exclusionList);
-
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             // Not supported on android version lower than KitKat.
             return false;
         }
+
+        Properties properties = System.getProperties();
+        properties.setProperty("http.proxyHost", host);
+        properties.setProperty("http.proxyPort", Integer.toString(port) + "");
+        properties.setProperty("https.proxyHost", host);
+        properties.setProperty("https.proxyPort", Integer.toString(port) + "");
+        properties.setProperty("http.nonProxyHosts", exclusionList);
+        properties.setProperty("https.nonProxyHosts", exclusionList);
 
         try {
             Class applictionCls = Class.forName("android.app.Application");
