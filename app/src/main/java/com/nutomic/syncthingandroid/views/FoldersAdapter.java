@@ -92,6 +92,9 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                     case "syncing":
                         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
                         break;
+                    case "":
+                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+                        break;
                     default:
                         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
                 }
@@ -118,17 +121,15 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
      */
     private static String getLocalizedState(Context c, String state, int percentage) {
         switch (state) {
-            case "idle":     return c.getString(R.string.state_idle);
-            case "scanning": return c.getString(R.string.state_scanning);
-            case "cleaning": return c.getString(R.string.state_cleaning);
-            case "syncing":  return c.getString(R.string.state_syncing, percentage);
-            case "error":    return c.getString(R.string.state_error);
-            case "unknown":  // Fallthrough
-            case "":         return c.getString(R.string.state_unknown);
+            case "idle":        return c.getString(R.string.state_idle);
+            case "scanning":    return c.getString(R.string.state_scanning);
+            case "cleaning":    return c.getString(R.string.state_cleaning);
+            case "syncing":     return c.getString(R.string.state_syncing, percentage);
+            case "error":       return c.getString(R.string.state_error);
+            case "unknown":     return c.getString(R.string.state_unknown);
+            case "":            return c.getString(R.string.state_paused);
         }
-        if (BuildConfig.DEBUG) {
-            throw new AssertionError("Unexpected folder state " + state);
-        }
+        Log.w(TAG, "Unexpected folder state " + state);
         return "";
     }
 

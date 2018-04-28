@@ -78,6 +78,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private SwitchCompat mIntroducerView;
 
+    private SwitchCompat mDevicePaused;
+
     private TextView mSyncthingVersionView;
 
     private View mCompressionContainer;
@@ -149,6 +151,17 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
     };
 
+    private final CompoundButton.OnCheckedChangeListener mDevicePausedCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (mDevice.paused != isChecked) {
+                mDeviceNeedsToUpdate = true;
+
+                mDevice.paused = isChecked;
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +180,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mCompressionContainer = findViewById(R.id.compressionContainer);
         mCompressionValueView = findViewById(R.id.compressionValue);
         mIntroducerView = findViewById(R.id.introducer);
+        mDevicePaused = findViewById(R.id.devicePauseSync);
         mSyncthingVersionView = findViewById(R.id.syncthingVersion);
 
         mQrButton.setOnClickListener(this);
@@ -299,12 +313,14 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mAddressesView.setText(displayableAddresses());
         mCompressionValueView.setText(Compression.fromValue(this, mDevice.compression).getTitle(this));
         mIntroducerView.setChecked(mDevice.introducer);
+        mDevicePaused.setChecked(mDevice.paused);
 
         // Keep state updated
         mIdView.addTextChangedListener(mIdTextWatcher);
         mNameView.addTextChangedListener(mNameTextWatcher);
         mAddressesView.addTextChangedListener(mAddressesTextWatcher);
         mIntroducerView.setOnCheckedChangeListener(mIntroducerCheckedChangeListener);
+        mDevicePaused.setOnCheckedChangeListener(mIntroducerCheckedChangeListener);
     }
 
     @Override
@@ -384,6 +400,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mDevice.addresses = DYNAMIC_ADDRESS;
         mDevice.compression = METADATA.getValue(this);
         mDevice.introducer = false;
+        mDevice.paused = false;
     }
 
     private void prepareEditMode() {
