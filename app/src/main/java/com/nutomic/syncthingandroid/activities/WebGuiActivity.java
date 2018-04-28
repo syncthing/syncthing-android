@@ -72,6 +72,7 @@ public class WebGuiActivity extends StateDialogActivity
                 Log.w(TAG, "Timeout loading locally running web UI. Retrying ...");
                 if (setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]")) {
                     view.reload();
+                    return;
                 }
              }
              super.onReceivedError(view, errorCode, description, failingUrl);
