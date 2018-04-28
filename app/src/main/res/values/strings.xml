@@ -100,6 +100,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Indicates that there is no connection to the device -->
     <string name="device_disconnected">Disconnected</string>
 
+    <!-- Indicates that the device is paused and does not sync -->
+    <string name="device_paused">Paused</string>
+
     <!-- Title for current download rate -->
     <string name="download_title">Download</string>
 

@@ -45,10 +45,11 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
+        Connections.Connection conn = mConnections.connections.get(deviceId);
         boolean haveInfo = mConnections != null && mConnections.connections.containsKey(deviceId) &&
-                mConnections.connections.get(deviceId).connected;
+                conn.connected;
         if (haveInfo) {
-            Connections.Connection conn = mConnections.connections.get(deviceId);
+
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
@@ -63,8 +64,13 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         else {
             download.setText(Util.readableTransferRate(getContext(), 0));
             upload.setText(Util.readableTransferRate(getContext(), 0));
-            status.setText(r.getString(R.string.device_disconnected));
-            status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+            if (conn.paused) {
+                status.setText(r.getString(R.string.device_paused));
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
+            } else {
+                status.setText(r.getString(R.string.device_disconnected));
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+            }
         }
 
         return convertView;
