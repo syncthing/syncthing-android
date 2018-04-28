@@ -431,6 +431,7 @@ public class FolderActivity extends SyncthingActivity
                 ? getIntent().getStringExtra(EXTRA_FOLDER_ID)
                 : generateRandomFolderId();
         mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
+        // Folder rescan interval defaults to 3600s as it is the default in syncthing.
         mFolder.rescanIntervalS = 3600;
         mFolder.versioning = new Folder.Versioning();
     }
