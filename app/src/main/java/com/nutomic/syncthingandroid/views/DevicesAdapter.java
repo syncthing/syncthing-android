@@ -45,32 +45,40 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
 
         name.setText(getItem(position).getDisplayName());
         Resources r = getContext().getResources();
-        Connections.Connection conn = mConnections.connections.get(deviceId);
-        boolean haveInfo = mConnections != null && mConnections.connections.containsKey(deviceId) &&
-                conn.connected;
-        if (haveInfo) {
 
-            if (conn.completion == 100) {
-                status.setText(r.getString(R.string.device_up_to_date));
-                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
+        Connections.Connection conn = null;
+        if (mConnections != null) {
+            if (mConnections.connections.containsKey(deviceId)) {
+                conn = mConnections.connections.get(deviceId);
             }
-            else {
-                status.setText(r.getString(R.string.device_syncing, conn.completion));
-                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
-            }
-            download.setText(Util.readableTransferRate(getContext(), conn.inBits));
-            upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
         }
-        else {
-            download.setText(Util.readableTransferRate(getContext(), 0));
-            upload.setText(Util.readableTransferRate(getContext(), 0));
+
+        if (conn != null)
+        {
+            download.setText(Util.readableTransferRate(getContext(), (conn.paused || !conn.connected) ? 0 : conn.inBits));
+            upload.setText(Util.readableTransferRate(getContext(), (conn.paused || !conn.connected) ? 0 : conn.outBits));
+
             if (conn.paused) {
                 status.setText(r.getString(R.string.device_paused));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
+            } else if (conn.connected) {
+                if (conn.completion == 100) {
+                    status.setText(r.getString(R.string.device_up_to_date));
+                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
+                }
+                else {
+                    status.setText(r.getString(R.string.device_syncing, conn.completion));
+                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
+                }
             } else {
                 status.setText(r.getString(R.string.device_disconnected));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
             }
+        } else {
+            download.setText(Util.readableTransferRate(getContext(), 0));
+            upload.setText(Util.readableTransferRate(getContext(), 0));
+            status.setText(r.getString(R.string.device_state_unknown));
+            status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
         }
 
         return convertView;

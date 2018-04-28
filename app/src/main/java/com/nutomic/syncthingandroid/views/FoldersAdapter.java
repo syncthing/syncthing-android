@@ -93,7 +93,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
                         break;
                     case "":
-                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+                        // paused
+                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
                         break;
                     default:
                         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));

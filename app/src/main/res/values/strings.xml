@@ -103,6 +103,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Indicates that the device is paused and does not sync -->
     <string name="device_paused">Paused</string>
 
+    !-- Indicates that the device connection is unknown -->
+    <string name="device_state_unknown">Unknown</string>
+
     <!-- Title for current download rate -->
     <string name="download_title">Download</string>
 
