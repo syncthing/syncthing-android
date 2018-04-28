@@ -147,6 +147,9 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_fileWatcher">Realtime Sync</string>
 
     <!-- Setting title -->
+    <string name="folder_paused">Pause Sync</string>
+
+    <!-- Setting title -->
     <string name="devices">Devices</string>
 
     <!-- Setting title -->
