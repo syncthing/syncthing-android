@@ -230,8 +230,8 @@ public class SettingsActivity extends SyncthingActivity {
 
             /* Initialize summaries */
             mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            handleSocksProxyPreferenceChange (screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
-            handleHttpProxyPreferenceChange (screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
+            handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
+            handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
 
             try {
                 appVersion.setSummary(getActivity().getPackageManager()
@@ -559,7 +559,7 @@ public class SettingsActivity extends SyncthingActivity {
             if (newValue.equals("")) {
                 preference.setSummary(getString(R.string.do_not_use_proxy) + " " + getString(R.string.generic_example) + ": " + getString(R.string.socks_proxy_address_example));
                 return true;
-            } else if (newValue.matches("^socks.://(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):(\\d{1,5})$")) {
+            } else if (newValue.matches("^socks5://(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}):(\\d{1,5})$")) {
                 preference.setSummary(getString(R.string.use_proxy) + " " + newValue);
                 return true;
             } else {
