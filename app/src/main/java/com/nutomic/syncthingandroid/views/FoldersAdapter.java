@@ -82,7 +82,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 binding.state.setText(getContext().getString(R.string.status_outofsync));
                 binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
             } else {
-                if (model.watchError.equals("folder is paused")) {
+                if (folder.paused) {
                     binding.state.setText(getContext().getString(R.string.state_paused));
                     binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
                 } else {
