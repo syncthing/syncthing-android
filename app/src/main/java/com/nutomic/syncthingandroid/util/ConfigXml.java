@@ -280,10 +280,10 @@ public class ConfigXml {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("device")) {
                 ((Element) node).setAttribute("name", Build.MODEL);
-                break;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
