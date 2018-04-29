@@ -18,6 +18,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="cont">Continue</string>
 
+    <!-- Generic texts used everywhere -->
+    <string name="generic_example">Example</string>
+
     <!-- MainActivity -->
 
 
@@ -79,6 +82,8 @@ Please report any problems you encounter via Github.</string>
         <item quantity="other">%1$d / %2$d Files</item>
     </plurals>
 
+    <string name="open_file_manager">Open file manager</string>
+
     <string name="toast_no_file_manager">No compatible file manager found</string>
 
     <!-- DevicesFragment -->
@@ -97,6 +102,12 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Indicates that there is no connection to the device -->
     <string name="device_disconnected">Disconnected</string>
+
+    <!-- Indicates that the device is paused and does not sync -->
+    <string name="device_paused">Paused</string>
+
+    !-- Indicates that the device connection is unknown -->
+    <string name="device_state_unknown">Unknown</string>
 
     <!-- Title for current download rate -->
     <string name="download_title">Download</string>
@@ -143,6 +154,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Setting title -->
     <string name="folder_fileWatcher">Realtime Sync</string>
+
+    <!-- Setting title -->
+    <string name="folder_pause">Pause Folder</string>
 
     <!-- Setting title -->
     <string name="devices">Devices</string>
@@ -206,6 +220,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Setting title -->
     <string name="introducer">Introducer</string>
+
+    <!-- Setting title -->
+    <string name="pause_device">Pause Device</string>
 
     <!-- ActionBar item -->
     <string name="delete_device">Delete Device</string>
@@ -335,21 +352,33 @@ Please report any problems you encounter via Github.</string>
 
     <string name="export_config">Export Configuration</string>
 
+    <!-- Experimental options -->
+    <string name="use_proxy">Connect through a proxy</string>
+    <string name="do_not_use_proxy">Do not connect through a proxy</string>
+
     <string name="keep_wakelock_while_binary_running">Keep the CPU awake while Syncthing is running</string>
 
     <string name="keep_wakelock_while_binary_running_summary">Use this setting if you experience unexpected disconnects while operating on battery. This will result in increased battery consumption.</string>
 
     <string name="use_tor_title">Use Tor</string>
 
-    <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot</string>
+    <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot. Disables proxy options.</string>
+
+    <string name="socks_proxy_address_title">SOCKS5 proxy</string>
+    <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
+
+    <!-- Toast after entering invalid socks proxy address -->
+    <string name="toast_invalid_socks_proxy_address">Input violates proxy syntax \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+
+    <string name="http_proxy_address_title">HTTP(S) proxy</string>
+    <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
+
+    <!-- Toast after entering invalid http proxy address -->
+    <string name="toast_invalid_http_proxy_address">Input violates proxy syntax \'http://[IP/HOSTNAME]:[PORT]\'</string>
 
     <string name="use_legacy_hashing_title">Use legacy hashing</string>
 
     <string name="use_legacy_hashing_summary">Force Syncthing to use legacy hashing package for compatibility purposes</string>
-
-    <string name="use_folder_observer_title">Use deprecated change detection</string>
-
-    <string name="use_folder_observer_summary">Default: Disabled. Use deprecated android implementation to detect filesystem changes instead of SyncThing\'s new built-in feature.</string>
 
     <string name="restart_on_wakeup_title">Restart on Wakeup</string>
 
@@ -603,10 +632,10 @@ Please report any problems you encounter via Github.</string>
     <!-- Possible folder states -->
     <string name="state_idle">Idle</string>
     <string name="state_scanning">Scanning</string>
-    <string name="state_cleaning">Cleaning</string>
     <string name="state_syncing">Syncing (%1$d%%)</string>
     <string name="state_error">Error</string>
     <string name="state_unknown">Unknown</string>
+    <string name="state_paused">Paused</string>
     <string name="status_outofsync">Out of Sync</string>
 
     <!-- Format string for folder size, eg "500 MiB / 1 GiB" -->
