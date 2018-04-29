@@ -92,6 +92,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                             binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
                             break;
                         case "scanning":
+                        case "cleaning":
                         case "syncing":
                             binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
                             break;
@@ -124,11 +125,14 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         switch (state) {
             case "idle":        return c.getString(R.string.state_idle);
             case "scanning":    return c.getString(R.string.state_scanning);
+            case "cleaning":    return c.getString(R.string.state_cleaning);
             case "syncing":     return c.getString(R.string.state_syncing, percentage);
             case "error":       return c.getString(R.string.state_error);
-            case "unknown":     return c.getString(R.string.state_unknown);
-            default:            return state;
+            case "unknown":     // Fallthrough
+            case "":            return c.getString(R.string.state_unknown);
         }
+        Log.w(TAG, "Unexpected folder state " + state);
+        return "";
     }
 
     /**
