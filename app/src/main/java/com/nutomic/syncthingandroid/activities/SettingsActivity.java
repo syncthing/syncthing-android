@@ -416,6 +416,8 @@ public class SettingsActivity extends SyncthingActivity {
                     requireRestart();
                     break;
                 case Constants.PREF_SOCKS_PROXY_ADDRESS:
+                    if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, "")))
+                        return false;
                     if (handleSocksProxyPreferenceChange(preference, o.toString().trim())) {
                         requireRestart();
                     } else {
@@ -423,6 +425,8 @@ public class SettingsActivity extends SyncthingActivity {
                     }
                     break;
                 case Constants.PREF_HTTP_PROXY_ADDRESS:
+                    if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, "")))
+                        return false;
                     if (handleHttpProxyPreferenceChange(preference, o.toString().trim())) {
                         requireRestart();
                     } else {
@@ -552,10 +556,10 @@ public class SettingsActivity extends SyncthingActivity {
 
         /**
          * Handles a new user input for the SOCKS proxy preference.
-         * Returns if the changed setting requires a reboot.
+         * Returns if the changed setting requires a restart.
          */
         private boolean handleSocksProxyPreferenceChange(Preference preference, String newValue) {
-            // Valid input is either a proxy adress or an empty field to disable the proxy.
+            // Valid input is either a proxy address or an empty field to disable the proxy.
             if (newValue.equals("")) {
                 preference.setSummary(getString(R.string.do_not_use_proxy) + " " + getString(R.string.generic_example) + ": " + getString(R.string.socks_proxy_address_example));
                 return true;
@@ -571,10 +575,10 @@ public class SettingsActivity extends SyncthingActivity {
 
         /**
          * Handles a new user input for the HTTP(S) proxy preference.
-         * Returns if the changed setting requires a reboot.
+         * Returns if the changed setting requires a restart.
          */
         private boolean handleHttpProxyPreferenceChange(Preference preference, String newValue) {
-            // Valid input is either a proxy adress or an empty field to disable the proxy.
+            // Valid input is either a proxy address or an empty field to disable the proxy.
             if (newValue.equals("")) {
                 preference.setSummary(getString(R.string.do_not_use_proxy) + " " + getString(R.string.generic_example) + ": " + getString(R.string.http_proxy_address_example));
                 return true;
