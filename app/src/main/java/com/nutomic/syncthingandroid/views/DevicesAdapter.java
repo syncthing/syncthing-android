@@ -73,8 +73,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
             if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
-            }
-            else {
+            } else {
                 status.setText(r.getString(R.string.device_syncing, conn.completion));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
             }
