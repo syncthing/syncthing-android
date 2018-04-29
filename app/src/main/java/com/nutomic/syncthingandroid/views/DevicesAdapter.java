@@ -81,7 +81,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
             return convertView;
         }
 
-        // conn.disconnected
+        // !conn.connected
         download.setText(Util.readableTransferRate(getContext(), 0));
         upload.setText(Util.readableTransferRate(getContext(), 0));
         status.setText(r.getString(R.string.device_disconnected));
