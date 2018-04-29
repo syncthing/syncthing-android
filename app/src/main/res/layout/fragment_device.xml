@@ -120,7 +120,7 @@
                 android:checked="false"
                 android:drawableLeft="@drawable/ic_settings_black_24dp"
                 android:drawableStart="@drawable/ic_settings_black_24dp"
-                android:text="@string/device_pause" />
+                android:text="@string/pause_device" />
 
             <TextView
                 android:id="@+id/currentAddress"
