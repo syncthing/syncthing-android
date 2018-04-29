@@ -68,10 +68,10 @@ public class ConfigXml {
         if (isFirstStart) {
             boolean changed = false;
 
-            /* Synthing devices */
-            changeLocalDeviceName();
+            /* Synthing defaul device anme */
+            changed = changeLocalDeviceName() || changed;
 
-            /* Syncthing folders */
+            /* Syncthing default folder name */
             changed = changeDefaultFolder() || changed;
 
             // Save changes if we made any.
@@ -272,8 +272,9 @@ public class ConfigXml {
      *
      * We need to iterate through XML nodes manually, as mConfig.getDocumentElement() will also
      * return nested elements inside folder element.
+     * Returns if changes to the config have been made.
      */
-    private void changeLocalDeviceName() {
+    private boolean changeLocalDeviceName() {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
@@ -282,7 +283,7 @@ public class ConfigXml {
                 break;
             }
         }
-        saveChanges();
+        return true;
     }
 
     /**
