@@ -559,10 +559,7 @@ public class SettingsActivity extends SyncthingActivity {
             if (newValue.equals("")) {
                 preference.setSummary(getString(R.string.do_not_use_proxy) + " " + getString(R.string.generic_example) + ": " + getString(R.string.socks_proxy_address_example));
                 return true;
-            } else if (newValue.matches("^socks5://" +
-                                        "(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|" +
-                                        "((([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])))" +
-                                        ":(\\d{1,5})$")) {
+            } else if (newValue.matches("^socks5://.*:\\d{1,5}$")) {
                 preference.setSummary(getString(R.string.use_proxy) + " " + newValue);
                 return true;
             } else {
@@ -581,10 +578,7 @@ public class SettingsActivity extends SyncthingActivity {
             if (newValue.equals("")) {
                 preference.setSummary(getString(R.string.do_not_use_proxy) + " " + getString(R.string.generic_example) + ": " + getString(R.string.http_proxy_address_example));
                 return true;
-            } else if (newValue.matches("^http://" +
-                                        "(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))|" +
-                                        "((([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])))" +
-                                        ":(\\d{1,5})$")) {
+            } else if (newValue.matches("^http://.*:\\d{1,5}$")) {
                 preference.setSummary(getString(R.string.use_proxy) + " " + newValue);
                 return true;
             } else {
