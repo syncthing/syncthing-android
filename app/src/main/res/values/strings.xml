@@ -153,7 +153,7 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_fileWatcher">Realtime Sync</string>
 
     <!-- Setting title -->
-    <string name="folder_pause_sync">Pause Sync</string>
+    <string name="folder_pause">Pause Folder</string>
 
     <!-- Setting title -->
     <string name="devices">Devices</string>
@@ -219,7 +219,7 @@ Please report any problems you encounter via Github.</string>
     <string name="introducer">Introducer</string>
 
     <!-- Setting title -->
-    <string name="device_pause_sync">Pause Sync</string>
+    <string name="device_pause">Pause Device</string>
 
     <!-- ActionBar item -->
     <string name="delete_device">Delete Device</string>

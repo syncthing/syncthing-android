@@ -112,7 +112,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(mDevice.deviceID)) {
                 mDeviceNeedsToUpdate = true;
-
                 mDevice.deviceID = s.toString();
             }
         }
@@ -123,7 +122,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(mDevice.name)) {
                 mDeviceNeedsToUpdate = true;
-
                 mDevice.name = s.toString();
             }
         }
@@ -134,30 +132,24 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         public void afterTextChanged(Editable s) {
             if (!s.toString().equals(displayableAddresses())) {
                 mDeviceNeedsToUpdate = true;
-
                 mDevice.addresses = persistableAddresses(s);
             }
         }
     };
 
-    private final CompoundButton.OnCheckedChangeListener mIntroducerCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener mCheckedListener =
+            new CompoundButton.OnCheckedChangeListener() {
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (mDevice.introducer != isChecked) {
-                mDeviceNeedsToUpdate = true;
-
-                mDevice.introducer = isChecked;
-            }
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener mDevicePausedCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (mDevice.paused != isChecked) {
-                mDeviceNeedsToUpdate = true;
-
-                mDevice.paused = isChecked;
+        public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+            switch (view.getId()) {
+                case R.id.introducer:
+                    mDevice.introducer = isChecked;
+                    mDeviceNeedsToUpdate = true;
+                    break;
+                case R.id.devicePause:
+                    mDevice.paused = isChecked;
+                    mDeviceNeedsToUpdate = true;
+                    break;
             }
         }
     };
@@ -180,7 +172,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mCompressionContainer = findViewById(R.id.compressionContainer);
         mCompressionValueView = findViewById(R.id.compressionValue);
         mIntroducerView = findViewById(R.id.introducer);
-        mDevicePaused = findViewById(R.id.devicePauseSync);
+        mDevicePaused = findViewById(R.id.devicePause);
         mSyncthingVersionView = findViewById(R.id.syncthingVersion);
 
         mQrButton.setOnClickListener(this);
@@ -307,6 +299,12 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private void updateViewsAndSetListeners() {
+        mIdView.removeTextChangedListener(mIdTextWatcher);
+        mNameView.removeTextChangedListener(mNameTextWatcher);
+        mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
+        mIntroducerView.setOnCheckedChangeListener(null);
+        mDevicePaused.setOnCheckedChangeListener(null);
+
         // Update views
         mIdView.setText(mDevice.deviceID);
         mNameView.setText(mDevice.name);
@@ -319,8 +317,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         mIdView.addTextChangedListener(mIdTextWatcher);
         mNameView.addTextChangedListener(mNameTextWatcher);
         mAddressesView.addTextChangedListener(mAddressesTextWatcher);
-        mIntroducerView.setOnCheckedChangeListener(mIntroducerCheckedChangeListener);
-        mDevicePaused.setOnCheckedChangeListener(mDevicePausedCheckedChangeListener);
+        mIntroducerView.setOnCheckedChangeListener(mCheckedListener);
+        mDevicePaused.setOnCheckedChangeListener(mCheckedListener);
     }
 
     @Override

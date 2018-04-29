@@ -91,14 +91,14 @@
                 android:text="@string/folder_fileWatcher" />
 
             <android.support.v7.widget.SwitchCompat
-                android:id="@+id/folderPauseSync"
+                android:id="@+id/folderPause"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:drawableLeft="@drawable/ic_folder_black_24dp"
                 android:drawableStart="@drawable/ic_folder_black_24dp"
-                android:text="@string/folder_pause_sync" />
+                android:text="@string/folder_pause" />
 
             <LinearLayout
                 android:id="@+id/versioningContainer"
