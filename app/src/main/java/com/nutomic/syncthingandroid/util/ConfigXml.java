@@ -273,6 +273,7 @@ public class ConfigXml {
      * We need to iterate through XML nodes manually, as mConfig.getDocumentElement() will also
      * return nested elements inside folder element.
      * Returns if changes to the config have been made.
+     * Issue reference - https://github.com/syncthing/syncthing-android/issues/1059
      */
     private boolean changeLocalDeviceName() {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
