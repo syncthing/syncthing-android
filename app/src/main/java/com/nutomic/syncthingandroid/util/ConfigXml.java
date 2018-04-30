@@ -59,12 +59,10 @@ public class ConfigXml {
 
     private Document mConfig;
 
-    boolean isFirstStart;
-
     public ConfigXml(Context context) throws OpenConfigException {
         mContext = context;
         mConfigFile = Constants.getConfigFile(mContext);
-        isFirstStart = !mConfigFile.exists();
+        boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
             new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
