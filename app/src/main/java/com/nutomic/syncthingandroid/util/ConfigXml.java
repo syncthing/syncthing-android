@@ -71,7 +71,14 @@ public class ConfigXml {
 
         if (isFirstStart) {
             boolean changed = false;
-            changed = changeLocalDeviceName(getLocalDeviceIDFromLog()) || changed;
+
+            Log.i(TAG, "Starting syncthing to retrieve local device id.");
+            String logOutput = new SyncthingRunnable(context, SyncthingRunnable.Command.deviceid).run(true);
+            String localDeviceID = logOutput.replace("\n", "");
+            // Verify local device ID is correctly formatted.
+            if (localDeviceID.matches("^([A-Z0-9]{7}-){7}[A-Z0-9]{7}$")) {
+                changed = changeLocalDeviceName(localDeviceID) || changed;
+            }
             changed = changeDefaultFolder() || changed;
 
             // Save changes if we made any.
@@ -79,40 +86,6 @@ public class ConfigXml {
                 saveChanges();
             }
         }
-    }
-
-    /**
-     * Queries logcat to obtain a log and extract the local device ID.
-     * Returns the local device ID.
-     */
-    private String getLocalDeviceIDFromLog() {
-        Process process = null;
-        try {
-            ProcessBuilder pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-v", "brief", "-s", "SyncthingNativeCode");
-            pb.redirectErrorStream(true);
-            process = pb.start();
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream(), "UTF-8"), 8192);
-            String localDeviceID;
-            String line;
-            Pattern p = Pattern.compile("^.*Device ID: (.*$)");
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.matches("^.*Device ID: .*$")) {
-                    Matcher m = p.matcher(line);
-                    if (m.find()) {
-                        return m.group(1);
-                    }
-                }
-            }
-            return "";
-        } catch (IOException e) {
-            Log.w(TAG, "Error reading SyncthingNativeCode log", e);
-        } finally {
-            if (process != null) {
-                process.destroy();
-            }
-        }
-        return "";
     }
 
     private void readConfig() {
@@ -349,15 +322,25 @@ public class ConfigXml {
             Log.w(TAG, "Failed to save updated config. Cannot change the owner of the config file.");
             return;
         }
+
+        Log.i(TAG, "Writing updated config file");
+        File mConfigTempFile = Constants.getConfigTempFile(mContext);
         try {
-            Log.i(TAG, "Writing updated config back to file");
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(mConfig);
-            StreamResult streamResult = new StreamResult(mConfigFile);
+            StreamResult streamResult = new StreamResult(mConfigTempFile);
             transformer.transform(domSource, streamResult);
         } catch (TransformerException e) {
-            Log.w(TAG, "Failed to save updated config", e);
+            Log.w(TAG, "Failed to save temporary config file", e);
+            return;
+        }
+        try {
+            // Delete outdated config file and put temporary config file instead.
+            mConfigFile.delete();
+            mConfigTempFile.renameTo(mConfigFile);
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to rename temporary config file to original file");
         }
     }
 }
