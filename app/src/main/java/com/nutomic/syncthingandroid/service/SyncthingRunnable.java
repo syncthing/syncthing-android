@@ -133,13 +133,13 @@ public class SyncthingRunnable implements Runnable {
             Thread lWarn = null;
             if (returnStdOut) {
                 try {
-                    InputStreamReader isr = new InputStreamReader(process.getInputStream(), Charsets.UTF_8);
-                    BufferedReader br = new BufferedReader(isr);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), Charsets.UTF_8));
                     String line;
                     while ((line = br.readLine()) != null) {
                         Log.println(Log.INFO, TAG_NATIVE, line);
                         capturedStdOut = capturedStdOut + line + "\n";
                     }
+                    br.close();
                 } catch (IOException e) {
                     Log.w(TAG, "Failed to read Syncthing's command line output", e);
                 }
@@ -346,6 +346,7 @@ public class SyncthingRunnable implements Runnable {
                         Files.append(line + "\n", mLogFile, Charsets.UTF_8);
                     }
                 }
+                br.close();
             } catch (IOException e) {
                 Log.w(TAG, "Failed to read Syncthing's command line output", e);
             }
