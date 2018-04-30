@@ -336,8 +336,6 @@ public class ConfigXml {
             return;
         }
         try {
-            // Delete outdated config file and put temporary config file instead.
-            mConfigFile.delete();
             mConfigTempFile.renameTo(mConfigFile);
         } catch (Exception e) {
             Log.w(TAG, "Failed to rename temporary config file to original file");
