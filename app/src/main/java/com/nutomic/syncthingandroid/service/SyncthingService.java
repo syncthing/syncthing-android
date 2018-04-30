@@ -19,16 +19,12 @@ import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -204,9 +200,6 @@ public class SyncthingService extends Service {
         protected Void doInBackground(Void... voids) {
             try {
                 mConfig = new ConfigXml(SyncthingService.this);
-                if (mConfig.getFirstStart()) {
-                    mConfig.changeLocalDeviceName(getLocalDeviceIDFromLog());
-                }
                 mConfig.updateIfNeeded();
             } catch (ConfigXml.OpenConfigException e) {
                 mNotificationHandler.showCrashedNotification(R.string.config_create_failed, true);
@@ -214,41 +207,6 @@ public class SyncthingService extends Service {
                 cancel(true);
             }
             return null;
-        }
-
-        /**
-         * Queries logcat to obtain a log.
-         *
-         * @param syncthingLog Filter on Syncthing's native messages.
-         */
-        private String getLocalDeviceIDFromLog() {
-            Process process = null;
-            try {
-                ProcessBuilder pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-v", "brief", "-s", "SyncthingNativeCode");
-                pb.redirectErrorStream(true);
-                process = pb.start();
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(process.getInputStream(), "UTF-8"), 8192);
-                String localDeviceID;
-                String line;
-                Pattern p = Pattern.compile("^.*Device ID: (.*$)");
-                while ((line = bufferedReader.readLine()) != null) {
-                    if (line.matches("^.*Device ID: .*$")) {
-                        Matcher m = p.matcher(line);
-                        if (m.find()) {
-                            return m.group(1);
-                        }
-                    }
-                }
-                return "";
-            } catch (IOException e) {
-                Log.w(TAG, "Error reading SyncthingNativeCode log", e);
-            } finally {
-                if (process != null) {
-                    process.destroy();
-                }
-            }
-            return "";
         }
 
         @Override

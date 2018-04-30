@@ -19,11 +19,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.IOException;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
@@ -69,8 +74,7 @@ public class ConfigXml {
 
         if (isFirstStart) {
             boolean changed = false;
-
-            /* Syncthing default folder name */
+            changed = changeLocalDeviceName(getLocalDeviceIDFromLog()) || changed;
             changed = changeDefaultFolder() || changed;
 
             // Save changes if we made any.
@@ -80,8 +84,39 @@ public class ConfigXml {
         }
     }
 
-    public boolean getFirstStart () {
-        return isFirstStart;
+    /**
+     * Queries logcat to obtain a log and extract the local device ID.
+     *
+     * @param syncthingLog Filter on Syncthing's native messages.
+     */
+    private String getLocalDeviceIDFromLog() {
+        Process process = null;
+        try {
+            ProcessBuilder pb = new ProcessBuilder("/system/bin/logcat", "-t", "300", "-v", "brief", "-s", "SyncthingNativeCode");
+            pb.redirectErrorStream(true);
+            process = pb.start();
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(process.getInputStream(), "UTF-8"), 8192);
+            String localDeviceID;
+            String line;
+            Pattern p = Pattern.compile("^.*Device ID: (.*$)");
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.matches("^.*Device ID: .*$")) {
+                    Matcher m = p.matcher(line);
+                    if (m.find()) {
+                        return m.group(1);
+                    }
+                }
+            }
+            return "";
+        } catch (IOException e) {
+            Log.w(TAG, "Error reading SyncthingNativeCode log", e);
+        } finally {
+            if (process != null) {
+                process.destroy();
+            }
+        }
+        return "";
     }
 
     private void readConfig() {
@@ -274,7 +309,7 @@ public class ConfigXml {
      * device corresponding to the local device ID.
      * Returns if changes to the config have been made.
      */
-    public void changeLocalDeviceName(String localDeviceID) {
+    public boolean changeLocalDeviceName(String localDeviceID) {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
@@ -282,10 +317,11 @@ public class ConfigXml {
                 if (((Element) node).getAttribute("id").equals(localDeviceID)) {
                     Log.i(TAG, "changeLocalDeviceName: Rename device ID " + localDeviceID + " to " + Build.MODEL);
                     ((Element) node).setAttribute("name", Build.MODEL);
-                    saveChanges();
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     /**
