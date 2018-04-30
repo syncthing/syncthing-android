@@ -353,7 +353,7 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Called to notifiy listeners of an API change.
+     * Called to notify listeners of an API change.
      *
      * Must only be called from SyncthingService or {@link RestApi} on the main thread.
      */
