@@ -54,22 +54,21 @@ public class ConfigXml {
 
     private Document mConfig;
 
+    boolean isFirstStart;
+
     public ConfigXml(Context context) throws OpenConfigException {
         mContext = context;
         mConfigFile = Constants.getConfigFile(mContext);
-        boolean isFirstStart = !mConfigFile.exists();
+        isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
-            generateKeysConfig(context);
+            new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
         }
 
         readConfig();
 
         if (isFirstStart) {
             boolean changed = false;
-
-            /* Synthing defaul device anme */
-            changed = changeLocalDeviceName() || changed;
 
             /* Syncthing default folder name */
             changed = changeDefaultFolder() || changed;
@@ -79,6 +78,10 @@ public class ConfigXml {
                 saveChanges();
             }
         }
+    }
+
+    public boolean getFirstStart () {
+        return isFirstStart;
     }
 
     private void readConfig() {
@@ -94,10 +97,6 @@ public class ConfigXml {
             throw new OpenConfigException();
         }
         Log.i(TAG, "Loaded Syncthing config file");
-    }
-
-    private void generateKeysConfig(Context context) {
-        new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
     }
 
     public URL getWebGuiUrl() {
@@ -271,20 +270,22 @@ public class ConfigXml {
      * Set model name as device name for Syncthing.
      *
      * We need to iterate through XML nodes manually, as mConfig.getDocumentElement() will also
-     * return nested elements inside folder element.
+     * return nested elements inside folder element. We have to check that we only rename the
+     * device corresponding to the local device ID.
      * Returns if changes to the config have been made.
-     * Issue reference - https://github.com/syncthing/syncthing-android/issues/1059
      */
-    private boolean changeLocalDeviceName() {
+    public void changeLocalDeviceName(String localDeviceID) {
         NodeList childNodes = mConfig.getDocumentElement().getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("device")) {
-                ((Element) node).setAttribute("name", Build.MODEL);
-                return true;
+                if (((Element) node).getAttribute("id").equals(localDeviceID)) {
+                    Log.i(TAG, "changeLocalDeviceName: Rename device ID " + localDeviceID + " to " + Build.MODEL);
+                    ((Element) node).setAttribute("name", Build.MODEL);
+                    saveChanges();
+                }
             }
         }
-        return false;
     }
 
     /**
