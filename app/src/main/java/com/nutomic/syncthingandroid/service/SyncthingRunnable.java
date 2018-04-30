@@ -132,16 +132,19 @@ public class SyncthingRunnable implements Runnable {
             Thread lInfo = null;
             Thread lWarn = null;
             if (returnStdOut) {
+                BufferedReader br = null;
                 try {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), Charsets.UTF_8));
+                    br = new BufferedReader(new InputStreamReader(process.getInputStream(), Charsets.UTF_8));
                     String line;
                     while ((line = br.readLine()) != null) {
                         Log.println(Log.INFO, TAG_NATIVE, line);
                         capturedStdOut = capturedStdOut + line + "\n";
                     }
-                    br.close();
                 } catch (IOException e) {
                     Log.w(TAG, "Failed to read Syncthing's command line output", e);
+                } finally {
+                    if (br != null)
+                        br.close();
                 }
             } else {
                 lInfo = log(process.getInputStream(), Log.INFO, true);
@@ -335,9 +338,9 @@ public class SyncthingRunnable implements Runnable {
      */
     private Thread log(final InputStream is, final int priority, final boolean saveLog) {
         Thread t = new Thread(() -> {
+            BufferedReader br = null;
             try {
-                InputStreamReader isr = new InputStreamReader(is, Charsets.UTF_8);
-                BufferedReader br = new BufferedReader(isr);
+                br = new BufferedReader(new InputStreamReader(is, Charsets.UTF_8));
                 String line;
                 while ((line = br.readLine()) != null) {
                     Log.println(priority, TAG_NATIVE, line);
@@ -346,9 +349,15 @@ public class SyncthingRunnable implements Runnable {
                         Files.append(line + "\n", mLogFile, Charsets.UTF_8);
                     }
                 }
-                br.close();
             } catch (IOException e) {
                 Log.w(TAG, "Failed to read Syncthing's command line output", e);
+            }
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    Log.w(TAG, "log: Failed to close bufferedReader", e);
+                }
             }
         });
         t.start();
