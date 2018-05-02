@@ -65,20 +65,6 @@ public class WebGuiActivity extends StateDialogActivity
     private final WebViewClient mWebViewClient = new WebViewClient() {
 
         /**
-         * Catch errors like the timeout on loading a web page.
-         */
-         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-             if (errorCode == WebViewClient.ERROR_TIMEOUT) {
-                Log.w(TAG, "Timeout loading locally running web UI. Retrying ...");
-                if (setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]")) {
-                    view.reload();
-                    return;
-                }
-             }
-             super.onReceivedError(view, errorCode, description, failingUrl);
-         }
-
-        /**
          * Catch (self-signed) SSL errors and test if they correspond to Syncthing's certificate.
          */
         @Override
@@ -150,8 +136,8 @@ public class WebGuiActivity extends StateDialogActivity
         loadCaCert();
 
         mWebView = findViewById(R.id.webview);
-        setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.setWebViewClient(mWebViewClient);
         mWebView.clearCache(true);
     }
@@ -165,6 +151,8 @@ public class WebGuiActivity extends StateDialogActivity
     @Override
     public void onWebGuiAvailable() {
         if (mWebView.getUrl() == null) {
+            mWebView.stopLoading();
+            setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
             mWebView.loadUrl(getService().getWebGuiUrl().toString());
         }
     }
