@@ -152,8 +152,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Setting title -->
     <string name="folder_master">Send Only</string>
 
-    <!-- Setting title -->
-    <string name="folder_fileWatcher">Realtime Sync</string>
+    <!-- Setting title and description -->
+    <string name="folder_fileWatcher">Watch for changes</string>
+    <string name="folder_fileWatcherDescription">If enabled, changes are detected much faster. Otherwise it takes up to an hour to detect a change. Thats because of the default rescan interval.</string>
 
     <!-- Setting title -->
     <string name="folder_pause">Pause Folder</string>

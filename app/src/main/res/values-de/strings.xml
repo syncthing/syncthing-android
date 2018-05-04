@@ -90,7 +90,7 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <!--Setting title-->
   <string name="folder_master">Nur senden</string>
   <!--Setting title-->
-  <string name="folder_fileWatcher">Echtzeit-Synchronisation</string>
+  <string name="folder_fileWatcher">Auf Änderungen achten</string>
   <!--Setting title-->
   <string name="folder_pause">Ordner pausieren</string>
   <!--Setting title-->
