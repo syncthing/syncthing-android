@@ -98,7 +98,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Stores the latest result of {@link #getModel} for each folder, for calculating device
      * percentage in {@link #getConnections}.
      */
-    private final HashMap<String, Model> mCachedModelInfo = new HashMap<>();
+    public HashMap<String, Model> mCachedModelInfo = new HashMap<>();
 
     @Inject NotificationHandler mNotificationHandler;
 
@@ -214,8 +214,12 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public List<Folder> getFolders() {
+        Log.v(TAG, "getFolders --- ");
         List<Folder> folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
         Collections.sort(folders, FOLDERS_COMPARATOR);
+        for (Folder r : folders) {
+            Log.v(TAG, "getFolders: " + r.id);
+        }
         return folders;
     }
 
@@ -385,7 +389,29 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     private int getDeviceCompletion(String deviceId) {
         int folderCount = 0;
-        float percentageSum = 0;
+        long percentageSum = 0;
+        // Log.v(TAG, "gdc:" + deviceId);
+
+        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
+            List<Folder> folders = getFolders();
+            for (Folder r : folders) {
+                if (r.getDevice(deviceId) != null) {
+                    // Log.v(TAG, "Looking up device ID for folder " + r.id + " ...");
+                    Device d = modelInfo.getValue().getDevice(deviceId);
+                    if (d != null) {
+                        Log.v(TAG, "gdc: " + r.id + " - c=" + d._completion + " - d=" + deviceId);
+                        folderCount++;
+                        percentageSum += d._completion;
+                    }
+                }
+            }
+        }
+
+        return (folderCount > 0)
+                ? Math.min(Math.round(percentageSum / folderCount), 100)
+                : -1;
+
+/**
         // Syncthing UI limits pending deletes to 95% completion of a device
         int maxPercentage = 100;
         for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
@@ -399,6 +425,9 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             if (isShared) {
                 long global = modelInfo.getValue().globalBytes;
                 long local = modelInfo.getValue().inSyncBytes;
+                //Log.v(TAG, "gdc: global " + global + " - local " + local);
+                //Log.v(TAG, "gdc: needFiles " + modelInfo.getValue().needFiles + " - needDeletes " +modelInfo.getValue().needDeletes);
+                //Log.v(TAG, "gdc: needDirectories " + modelInfo.getValue().needDirectories + " - needDeletes " +modelInfo.getValue().needDeletes);
                 if (modelInfo.getValue().needFiles == 0 && modelInfo.getValue().needDeletes > 0)
                     maxPercentage = 95;
                 percentageSum += (global != 0)
@@ -407,9 +436,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                 folderCount++;
             }
         }
+        Log.v(TAG, "return = " + Math.min(Math.round(percentageSum / folderCount), maxPercentage));
         return (folderCount != 0)
                 ? Math.min(Math.round(percentageSum / folderCount), maxPercentage)
                 : 100;
+        */
     }
 
     /**

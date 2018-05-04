@@ -20,9 +20,11 @@ import com.nutomic.syncthingandroid.activities.FolderActivity;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.Model;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -93,9 +95,12 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
      */
     @Override
     public void onEvent(Event event) {
+        String deviceId;
+        String folderId;
+
         switch (event.type) {
             case "DeviceRejected":
-                String deviceId = (String) event.data.get("device");
+                deviceId = (String) event.data.get("device");
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
 
                 Intent intent = new Intent(mContext, DeviceActivity.class)
@@ -111,9 +116,23 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
 
                 notify(title, pi);
                 break;
+            case "FolderCompletion":
+                deviceId = (String) event.data.get("device");
+                folderId = (String) event.data.get("folder");
+                int completion = ((Double) event.data.get("completion")).intValue();
+                Log.v (TAG, "deviceId - " + deviceId);
+                Log.v (TAG, "folderId - " + folderId);
+                for (Map.Entry<String, Model> modelInfo : mApi.mCachedModelInfo.entrySet()) {
+                    if (modelInfo.getValue().getDevice(deviceId) == null) {
+                        modelInfo.getValue().addDevice(deviceId);
+                    }
+                    modelInfo.getValue().getDevice(deviceId)._completion = completion;
+                    Log.v (TAG, "completion - " + completion);
+                }
+                break;
             case "FolderRejected":
                 deviceId = (String) event.data.get("device");
-                String folderId = (String) event.data.get("folder");
+                folderId = (String) event.data.get("folder");
                 String folderLabel = (String) event.data.get("folderLabel");
                 Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
 
@@ -164,6 +183,18 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             case "Ping":
                 // Ignored.
                 break;
+            case "Starting":
+            case "StateChanged":
+            case "StartupComplete":
+            case "DeviceConnected":
+            case "FolderSummary":
+            case "RemoteIndexUpdated":
+            case "LocalIndexUpdated":
+            case "ItemStarted":
+            case "FolderPaused":
+            case "ConfigSaved":
+            case "FolderScanProgress":
+            case "LoginAttempt":
             default:
                 Log.v(TAG, "Unhandled event " + event.type);
         }

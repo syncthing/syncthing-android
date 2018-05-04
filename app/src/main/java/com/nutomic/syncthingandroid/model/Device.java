@@ -13,6 +13,9 @@ public class Device {
     public boolean introducer;
     public boolean paused;
 
+    // Retrieved by the EventProcessor at runtime.
+    public Integer _completion;
+
     /**
      * Returns the device name, or the first characters of the ID if the name is empty.
      */
