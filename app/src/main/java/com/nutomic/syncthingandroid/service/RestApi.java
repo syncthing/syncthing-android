@@ -384,10 +384,53 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         });
     }
 
+
     /**
      * Calculates completion percentage for the given device using {@link #mCachedModelInfo}.
      */
     private int getDeviceCompletion(String deviceId) {
+        long total = 0, needed = 0, deletes = 0, items = 0;
+        int retPercentage = 0;
+        Log.v(TAG, "gdc:" + deviceId);
+
+        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
+            List<Folder> folders = getFolders();
+            for (Folder r : folders) {
+                if (r.getDevice(deviceId) != null) {
+                    Log.v(TAG, "Device has folder:" + r.id + "/" + r.label);
+                    total += modelInfo.getValue().globalBytes;
+                    needed += modelInfo.getValue().needBytes;
+                    items += modelInfo.getValue().needItems;
+                    deletes += modelInfo.getValue().needDeletes;
+                }
+            }
+        }
+
+        if (total == 0) {
+            // $scope.completion[device]._total = 100;
+            // $scope.completion[device]._needBytes = 0;
+            // $scope.completion[device]._needItems = 0;
+            retPercentage = 100;
+        } else {
+            // $scope.completion[device]._needBytes = needed
+            // $scope.completion[device]._needItems = items + deletes;
+            retPercentage = (int) Math.floor(100 * (1 - needed / total));
+        }
+
+        if (needed == 0 && deletes > 0) {
+            // We don't need any data, but we have deletes that we need
+            // to do. Drop down the completion percentage to indicate
+            // that we have stuff to do.
+            retPercentage = 95;
+        }
+        return retPercentage;
+    }
+
+
+    /**
+     * Calculates completion percentage for the given device using {@link #mCachedModelInfo}.
+     */
+    private int getDeviceCompletion2(String deviceId) {
         int folderCount = 0;
         long percentageSum = 0;
         // Log.v(TAG, "gdc:" + deviceId);

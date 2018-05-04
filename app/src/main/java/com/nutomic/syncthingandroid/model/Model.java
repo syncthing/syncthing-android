@@ -25,6 +25,7 @@ public class Model {
     public long needDeletes;
     public long needDirectories;
     public long needFiles;
+    public long needItems;
     public long needSymlinks;
     public long pullErrors;
     public long sequence;
