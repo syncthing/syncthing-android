@@ -154,7 +154,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Setting title and description -->
     <string name="folder_fileWatcher">Watch for changes</string>
-    <string name="folder_fileWatcherDescription">If enabled, changes are detected much faster. Otherwise it takes up to an hour to detect a change. Thats because of the default rescan interval.</string>
+    <string name="folder_fileWatcherDescription">Asks operating system to notify about changes to files. If disabled falls back to periodic hourly scans.</string>
 
     <!-- Setting title -->
     <string name="folder_pause">Pause Folder</string>
