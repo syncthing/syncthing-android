@@ -19,7 +19,7 @@ import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.ItemFolderListBinding;
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.util.Util;
 
@@ -36,7 +36,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
 
     private static final String TAG = "FoldersAdapter";
 
-    private final HashMap<String, Model> mModels = new HashMap<>();
+    private final HashMap<String, FolderStatus> mFolderStatuss = new HashMap<>();
 
     public FoldersAdapter(Context context) {
         super(context, 0);
@@ -50,7 +50,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 : DataBindingUtil.bind(convertView);
 
         Folder folder = getItem(position);
-        Model model = mModels.get(folder.id);
+        FolderStatus model = mFolderStatuss.get(folder.id);
         binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         binding.directory.setText(folder.path);
         binding.openFolder.setOnClickListener(v -> {
@@ -134,14 +134,14 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
     /**
      * Requests updated model info from the api for all visible items.
      */
-    public void updateModel(RestApi api) {
+    public void updateFolderStatus(RestApi api) {
         for (int i = 0; i < getCount(); i++) {
-            api.getModel(getItem(i).id, this::onReceiveModel);
+            api.getFolderStatus(getItem(i).id, this::onReceiveFolderStatus);
         }
     }
 
-    private void onReceiveModel(String folderId, Model model) {
-        mModels.put(folderId, model);
+    private void onReceiveFolderStatus(String folderId, FolderStatus model) {
+        mFolderStatuss.put(folderId, model);
         notifyDataSetChanged();
     }
 

@@ -28,7 +28,7 @@ import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
@@ -95,10 +95,10 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     private long mPreviousConnectionTime = 0;
 
     /**
-     * Stores the latest result of {@link #getModel} for each folder, for calculating device
+     * Stores the latest result of {@link #getFolderStatus} for each folder, for calculating device
      * percentage in {@link #getConnections}.
      */
-    public HashMap<String, Model> mCachedModelInfo = new HashMap<>();
+    public HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
 
     @Inject NotificationHandler mNotificationHandler;
 
@@ -386,14 +386,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 
     /**
-     * Calculates completion percentage for the given device using {@link #mCachedModelInfo}.
+     * Calculates completion percentage for the given device using {@link #mCachedFolderStatusInfo}.
      */
     private int getDeviceCompletion(String deviceId) {
         long total = 0, needed = 0, deletes = 0, items = 0;
         int retPercentage = 0;
         Log.v(TAG, "gdc:" + deviceId);
 
-        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
+        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
             List<Folder> folders = getFolders();
             for (Folder r : folders) {
                 if (r.getDevice(deviceId) != null) {
@@ -428,14 +428,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 
     /**
-     * Calculates completion percentage for the given device using {@link #mCachedModelInfo}.
+     * Calculates completion percentage for the given device using {@link #mCachedFolderStatusInfo}.
      */
     private int getDeviceCompletion2(String deviceId) {
         int folderCount = 0;
         long percentageSum = 0;
         // Log.v(TAG, "gdc:" + deviceId);
 
-        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
+        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
             List<Folder> folders = getFolders();
             for (Folder r : folders) {
                 if (r.getDevice(deviceId) != null) {
@@ -457,7 +457,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 /**
         // Syncthing UI limits pending deletes to 95% completion of a device
         int maxPercentage = 100;
-        for (Map.Entry<String, Model> modelInfo : mCachedModelInfo.entrySet()) {
+        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
             boolean isShared = false;
             for (Folder r : getFolders()) {
                 if (r.getDevice(deviceId) != null) {
@@ -489,11 +489,11 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Returns status information about the folder with the given id.
      */
-    public void getModel(final String folderId, final OnResultListener2<String, Model> listener) {
+    public void getFolderStatus(final String folderId, final OnResultListener2<String, FolderStatus> listener) {
         new GetRequest(mContext, mUrl, GetRequest.URI_MODEL, mApiKey,
                     ImmutableMap.of("folder", folderId), result -> {
-            Model m = new Gson().fromJson(result, Model.class);
-            mCachedModelInfo.put(folderId, m);
+            FolderStatus m = new Gson().fromJson(result, FolderStatus.class);
+            mCachedFolderStatusInfo.put(folderId, m);
             listener.onResult(folderId, m);
         });
     }

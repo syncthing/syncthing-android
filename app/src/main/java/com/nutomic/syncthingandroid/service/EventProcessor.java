@@ -20,7 +20,7 @@ import com.nutomic.syncthingandroid.activities.FolderActivity;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.model.Model;
+import com.nutomic.syncthingandroid.model.FolderStatus;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -122,11 +122,11 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 int completion = ((Double) event.data.get("completion")).intValue();
                 Log.v (TAG, "deviceId - " + deviceId);
                 Log.v (TAG, "folderId - " + folderId);
-                for (Map.Entry<String, Model> modelInfo : mApi.mCachedModelInfo.entrySet()) {
-                    if (modelInfo.getValue().getDevice(deviceId) == null) {
-                        modelInfo.getValue().addDevice(deviceId);
+                for (Map.Entry<String, FolderStatus> FolderStatusInfo : mApi.mCachedFolderStatusInfo.entrySet()) {
+                    if (FolderStatusInfo.getValue().getDevice(deviceId) == null) {
+                        FolderStatusInfo.getValue().addDevice(deviceId);
                     }
-                    modelInfo.getValue().getDevice(deviceId)._completion = completion;
+                    FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
                     Log.v (TAG, "completion - " + completion);
                 }
                 break;
