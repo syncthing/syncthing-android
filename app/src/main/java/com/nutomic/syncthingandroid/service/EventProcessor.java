@@ -94,6 +94,12 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
     @Override
     public void onEvent(Event event) {
         switch (event.type) {
+            case "ConfigSaved":
+                Log.d(TAG, "Restarting syncthing due to ConfigSaved event.");
+                Intent iSyncthingService = new Intent(mContext, SyncthingService.class)
+                        .setAction(SyncthingService.ACTION_RESTART);
+                mContext.startService(iSyncthingService);
+                break;
             case "DeviceRejected":
                 String deviceId = (String) event.data.get("device");
                 Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
