@@ -122,13 +122,13 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 int completion = ((Double) event.data.get("completion")).intValue();
                 Log.v (TAG, "deviceId - " + deviceId);
                 Log.v (TAG, "folderId - " + folderId);
-                for (Map.Entry<String, FolderStatus> FolderStatusInfo : mApi.mCachedFolderStatusInfo.entrySet()) {
+                /* for (Map.Entry<String, FolderStatus> FolderStatusInfo : mApi.mCachedFolderStatusInfo.entrySet()) {
                     if (FolderStatusInfo.getValue().getDevice(deviceId) == null) {
                         FolderStatusInfo.getValue().addDevice(deviceId);
                     }
-                    //FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
+                    FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
                     Log.v (TAG, "completion - " + completion);
-                }
+                } */
                 break;
             case "FolderRejected":
                 deviceId = (String) event.data.get("device");

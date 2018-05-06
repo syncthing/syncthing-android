@@ -98,7 +98,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Stores the latest result of {@link #getFolderStatus} for each folder, for calculating device
      * percentage in {@link #getConnections}.
      */
-    public HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
+    private HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
 
     @Inject NotificationHandler mNotificationHandler;
 
