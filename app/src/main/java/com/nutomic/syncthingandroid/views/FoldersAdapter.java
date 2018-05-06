@@ -36,7 +36,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
 
     private static final String TAG = "FoldersAdapter";
 
-    private final HashMap<String, FolderStatus> mFolderStatuss = new HashMap<>();
+    private final HashMap<String, FolderStatus> mFolderStatus = new HashMap<>();
 
     public FoldersAdapter(Context context) {
         super(context, 0);
@@ -50,7 +50,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 : DataBindingUtil.bind(convertView);
 
         Folder folder = getItem(position);
-        FolderStatus model = mFolderStatuss.get(folder.id);
+        FolderStatus model = mFolderStatus.get(folder.id);
         binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         binding.directory.setText(folder.path);
         binding.openFolder.setOnClickListener(v -> {
@@ -141,7 +141,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
     }
 
     private void onReceiveFolderStatus(String folderId, FolderStatus model) {
-        mFolderStatuss.put(folderId, model);
+        mFolderStatus.put(folderId, model);
         notifyDataSetChanged();
     }
 
