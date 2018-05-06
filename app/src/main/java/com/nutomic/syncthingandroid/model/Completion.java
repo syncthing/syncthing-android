@@ -14,9 +14,16 @@ public class Completion {
         new HashMap<String, HashMap<String, CompletionInfo>>();
 
     // Adds a device to the cache model if it does not exist.
-    private void addDevice(String deviceId){
+    private void addDevice(String deviceId) {
         if (!deviceFolderMap.containsKey(deviceId))
             deviceFolderMap.put(deviceId, new HashMap<String, CompletionInfo>());
+    }
+
+    // Removes a device from the cache model.
+    public void removeDevice(String deviceId) {
+        if (deviceFolderMap.containsKey(deviceId)) {
+            deviceFolderMap.remove(deviceId);
+        }
     }
 
     // Adds a folder to the cache model if it does not exist.
@@ -26,6 +33,16 @@ public class Completion {
 
         if (!deviceFolderMap.get(deviceId).containsKey(folderId))
             deviceFolderMap.get(deviceId).put(folderId, new CompletionInfo());
+    }
+
+    // Removes a folder from the cache model.
+    public void removeFolder(String folderId) {
+        for (String deviceId : deviceFolderMap.keySet()) {
+            if (deviceFolderMap.get(deviceId).containsKey(folderId)) {
+                deviceFolderMap.get(deviceId).remove(folderId);
+                break;
+            }
+        }
     }
 
     /**

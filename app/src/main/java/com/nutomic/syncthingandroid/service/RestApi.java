@@ -238,6 +238,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     public void removeFolder(String id) {
         removeFolderInternal(id);
         sendConfig();
+        mCompletion.removeFolder(id);
         // Remove saved data from share activity for this folder.
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .remove(ShareActivity.PREF_FOLDER_SAVED_SUBDIRECTORY+id)
@@ -297,6 +298,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     public void removeDevice(String deviceId) {
         removeDeviceInternal(deviceId);
         sendConfig();
+        removeDevice(deviceId);
     }
 
     private void removeDeviceInternal(String deviceId) {
