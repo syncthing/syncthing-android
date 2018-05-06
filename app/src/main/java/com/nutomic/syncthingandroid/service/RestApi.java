@@ -426,66 +426,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         return retPercentage;
     }
 
-
-    /**
-     * Calculates completion percentage for the given device using {@link #mCachedFolderStatusInfo}.
-     */
-    private int getDeviceCompletion2(String deviceId) {
-        int folderCount = 0;
-        long percentageSum = 0;
-        // Log.v(TAG, "gdc:" + deviceId);
-
-        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
-            List<Folder> folders = getFolders();
-            for (Folder r : folders) {
-                if (r.getDevice(deviceId) != null) {
-                    // Log.v(TAG, "Looking up device ID for folder " + r.id + " ...");
-                    Device d = modelInfo.getValue().getDevice(deviceId);
-                    if (d != null) {
-                        Log.v(TAG, "gdc: " + r.id + " - c=" + d._completion + " - d=" + deviceId);
-                        folderCount++;
-                        percentageSum += d._completion;
-                    }
-                }
-            }
-        }
-
-        return (folderCount > 0)
-                ? Math.min(Math.round(percentageSum / folderCount), 100)
-                : -1;
-
-/**
-        // Syncthing UI limits pending deletes to 95% completion of a device
-        int maxPercentage = 100;
-        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
-            boolean isShared = false;
-            for (Folder r : getFolders()) {
-                if (r.getDevice(deviceId) != null) {
-                    isShared = true;
-                    break;
-                }
-            }
-            if (isShared) {
-                long global = modelInfo.getValue().globalBytes;
-                long local = modelInfo.getValue().inSyncBytes;
-                //Log.v(TAG, "gdc: global " + global + " - local " + local);
-                //Log.v(TAG, "gdc: needFiles " + modelInfo.getValue().needFiles + " - needDeletes " +modelInfo.getValue().needDeletes);
-                //Log.v(TAG, "gdc: needDirectories " + modelInfo.getValue().needDirectories + " - needDeletes " +modelInfo.getValue().needDeletes);
-                if (modelInfo.getValue().needFiles == 0 && modelInfo.getValue().needDeletes > 0)
-                    maxPercentage = 95;
-                percentageSum += (global != 0)
-                        ? (local * 100f) / global
-                        : 100f;
-                folderCount++;
-            }
-        }
-        Log.v(TAG, "return = " + Math.min(Math.round(percentageSum / folderCount), maxPercentage));
-        return (folderCount != 0)
-                ? Math.min(Math.round(percentageSum / folderCount), maxPercentage)
-                : 100;
-        */
-    }
-
     /**
      * Returns status information about the folder with the given id.
      */
