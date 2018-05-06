@@ -376,7 +376,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             Connections connections = new Gson().fromJson(result, Connections.class);
             for (Map.Entry<String, Connections.Connection> e : connections.connections.entrySet()) {
                 e.getValue().completion = mCompletion.getDeviceCompletion(e.getKey());
-                // e.getValue().completion = getDeviceCompletion(e.getKey());
 
                 Connections.Connection prev =
                         (mPreviousConnections.isPresent() && mPreviousConnections.get().connections.containsKey(e.getKey()))
@@ -391,51 +390,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             listener.onResult(deepCopy(connections, Connections.class));
         });
     }
-
-
-    /**
-     * Calculates completion percentage for the given device using {@link #mCompletion}.
-     */
-     /*
-    private int getDeviceCompletion(String deviceId) {
-
-        int retPercentage = 0;
-        Log.v(TAG, "gdc: " + deviceId);
-
-        long total = 0, needed = 0, deletes = 0, items = 0;
-
-        for (Map.Entry<String, FolderStatus> FolderStatusInfo : mCachedFolderStatusInfo.entrySet()) {
-            List<Folder> folders = getFolders();
-            for (Folder r : folders) {
-                if (r.getDevice(deviceId) != null) {
-                    Log.v(TAG, "Device has folder:" + r.id + "/" + r.label + " / " + FolderStatusInfo.getValue().globalBytes + " / " +
-                                FolderStatusInfo.getValue().needBytes + " / " + FolderStatusInfo.getValue().needItems + "/" + FolderStatusInfo.getValue().needDeletes);
-                    total += FolderStatusInfo.getValue().globalBytes;
-                    needed += FolderStatusInfo.getValue().needBytes;
-                    items += FolderStatusInfo.getValue().needItems;
-                    deletes += FolderStatusInfo.getValue().needDeletes;
-                }
-            }
-        }
-
-        if (total == 0) {
-            // $scope.completion[device]._total = 100;
-            // $scope.completion[device]._needBytes = 0;
-            // $scope.completion[device]._needItems = 0;
-            retPercentage = 100;
-        } else {
-            // $scope.completion[device]._needBytes = needed
-            // $scope.completion[device]._needItems = items + deletes;
-            retPercentage = (int) Math.floor(100 * (1 - needed / total));
-        }
-
-        if (needed == 0 && deletes > 0) {
-            // We don't need any data, but we have deletes that we need
-            // to do. Drop down the completion percentage to indicate
-            // that we have stuff to do.
-            retPercentage = 95;
-        }
-    } */
 
     /**
      * Returns status information about the folder with the given id.
