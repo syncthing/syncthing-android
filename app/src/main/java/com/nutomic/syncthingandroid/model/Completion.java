@@ -13,20 +13,26 @@ public class Completion {
     HashMap<String, HashMap<String, CompletionInfo>> deviceFolderMap =
         new HashMap<String, HashMap<String, CompletionInfo>>();
 
-    // Adds a device to the cache model if it does not exist.
+    /**
+     * Adds a device to the cache model if it does not exist.
+     */
     private void addDevice(String deviceId) {
         if (!deviceFolderMap.containsKey(deviceId))
             deviceFolderMap.put(deviceId, new HashMap<String, CompletionInfo>());
     }
 
-    // Removes a device from the cache model.
+    /**
+     * Removes a device from the cache model.
+     */
     public void removeDevice(String deviceId) {
         if (deviceFolderMap.containsKey(deviceId)) {
             deviceFolderMap.remove(deviceId);
         }
     }
 
-    // Adds a folder to the cache model if it does not exist.
+    /**
+     * Adds a folder to the cache model if it does not exist.
+     */
     private void addFolder(String deviceId, String folderId) {
         if (!deviceFolderMap.containsKey(deviceId))
             addDevice(deviceId);
@@ -35,7 +41,9 @@ public class Completion {
             deviceFolderMap.get(deviceId).put(folderId, new CompletionInfo());
     }
 
-    // Removes a folder from the cache model.
+    /**
+     * Removes a folder from the cache model.
+     */
     public void removeFolder(String folderId) {
         for (String deviceId : deviceFolderMap.keySet()) {
             if (deviceFolderMap.get(deviceId).containsKey(folderId)) {
@@ -68,7 +76,9 @@ public class Completion {
         return (deviceFolderMap.get(deviceId)).get(folderId);
     }
 
-    // Set completionInfo within the completion[deviceId][folderId] model.
+    /**
+     * Set completionInfo within the completion[deviceId][folderId] model.
+     */
     public void setCompletionInfo(String deviceId, String folderId,
                                     CompletionInfo completionInfo) {
         addFolder(deviceId, folderId);
