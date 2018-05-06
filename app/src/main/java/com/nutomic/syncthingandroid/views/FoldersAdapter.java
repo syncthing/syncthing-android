@@ -50,7 +50,6 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 : DataBindingUtil.bind(convertView);
 
         Folder folder = getItem(position);
-        FolderStatus FolderStatusInfo = mFolderStatus.get(folder.id);
         binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         binding.directory.setText(folder.path);
         binding.openFolder.setOnClickListener(v -> {
@@ -73,48 +72,53 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             }
         });
 
-        if (FolderStatusInfo != null) {
-            int percentage = (FolderStatusInfo.globalBytes != 0)
-                    ? Math.round(100 * FolderStatusInfo.inSyncBytes / FolderStatusInfo.globalBytes)
-                    : 100;
-            long neededItems = FolderStatusInfo.needFiles + FolderStatusInfo.needDirectories + FolderStatusInfo.needSymlinks + FolderStatusInfo.needDeletes;
-            if (FolderStatusInfo.state.equals("idle") && neededItems > 0) {
-                binding.state.setText(getContext().getString(R.string.status_outofsync));
-                binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
-            } else {
-                if (folder.paused) {
-                    binding.state.setText(getContext().getString(R.string.state_paused));
-                    binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
-                } else {
-                    binding.state.setText(getLocalizedState(getContext(), FolderStatusInfo.state, percentage));
-                    switch(FolderStatusInfo.state) {
-                        case "idle":
-                            binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
-                            break;
-                        case "scanning":
-                        case "syncing":
-                            binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
-                            break;
-                        default:
-                            binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
-                    }
-                }
-            }
-            binding.items.setVisibility(VISIBLE);
-            binding.items.setText(getContext().getResources()
-                    .getQuantityString(R.plurals.files, (int) FolderStatusInfo.inSyncFiles, FolderStatusInfo.inSyncFiles, FolderStatusInfo.globalFiles));
-            binding.size.setVisibility(VISIBLE);
-            binding.size.setText(getContext().getString(R.string.folder_size_format,
-                    Util.readableFileSize(getContext(), FolderStatusInfo.inSyncBytes),
-                    Util.readableFileSize(getContext(), FolderStatusInfo.globalBytes)));
-            setTextOrHide(binding.invalid, FolderStatusInfo.invalid);
-        } else {
+        updateFolderStatusView(binding, folder);
+        return binding.getRoot();
+    }
+
+    private void updateFolderStatusView(ItemFolderListBinding binding, Folder folder) {
+        FolderStatus FolderStatusInfo = mFolderStatus.get(folder.id);
+        if (FolderStatusInfo == null) {
             binding.items.setVisibility(GONE);
             binding.size.setVisibility(GONE);
             setTextOrHide(binding.invalid, folder.invalid);
+            return;
         }
 
-        return binding.getRoot();
+        int percentage = (FolderStatusInfo.globalBytes != 0)
+                ? Math.round(100 * FolderStatusInfo.inSyncBytes / FolderStatusInfo.globalBytes)
+                : 100;
+        long neededItems = FolderStatusInfo.needFiles + FolderStatusInfo.needDirectories + FolderStatusInfo.needSymlinks + FolderStatusInfo.needDeletes;
+        if (FolderStatusInfo.state.equals("idle") && neededItems > 0) {
+            binding.state.setText(getContext().getString(R.string.status_outofsync));
+            binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+        } else {
+            if (folder.paused) {
+                binding.state.setText(getContext().getString(R.string.state_paused));
+                binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
+            } else {
+                binding.state.setText(getLocalizedState(getContext(), FolderStatusInfo.state, percentage));
+                switch(FolderStatusInfo.state) {
+                    case "idle":
+                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
+                        break;
+                    case "scanning":
+                    case "syncing":
+                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_blue));
+                        break;
+                    default:
+                        binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
+                }
+            }
+        }
+        binding.items.setVisibility(VISIBLE);
+        binding.items.setText(getContext().getResources()
+                .getQuantityString(R.plurals.files, (int) FolderStatusInfo.inSyncFiles, FolderStatusInfo.inSyncFiles, FolderStatusInfo.globalFiles));
+        binding.size.setVisibility(VISIBLE);
+        binding.size.setText(getContext().getString(R.string.folder_size_format,
+                Util.readableFileSize(getContext(), FolderStatusInfo.inSyncBytes),
+                Util.readableFileSize(getContext(), FolderStatusInfo.globalBytes)));
+        setTextOrHide(binding.invalid, FolderStatusInfo.invalid);
     }
 
     /**
