@@ -162,7 +162,7 @@ public class WebGuiActivity extends StateDialogActivity
         if (mWebView.canGoBack()) {
             mWebView.goBack();
         } else {
-            this.finish();
+            finish();
             super.onBackPressed();
         }
     }
