@@ -17,10 +17,10 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
 import com.nutomic.syncthingandroid.activities.FolderActivity;
+import com.nutomic.syncthingandroid.model.CompletionInfo;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
-import com.nutomic.syncthingandroid.model.FolderStatus;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -119,16 +119,9 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             case "FolderCompletion":
                 deviceId = (String) event.data.get("device");
                 folderId = (String) event.data.get("folder");
-                int completion = ((Double) event.data.get("completion")).intValue();
-                Log.v (TAG, "deviceId - " + deviceId);
-                Log.v (TAG, "folderId - " + folderId);
-                /* for (Map.Entry<String, FolderStatus> FolderStatusInfo : mApi.mCachedFolderStatusInfo.entrySet()) {
-                    if (FolderStatusInfo.getValue().getDevice(deviceId) == null) {
-                        FolderStatusInfo.getValue().addDevice(deviceId);
-                    }
-                    FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
-                    Log.v (TAG, "completion - " + completion);
-                } */
+                CompletionInfo completionInfo = new CompletionInfo();
+                completionInfo.completion = (Double) event.data.get("completion");
+                mApi.updateCompletionInfo(deviceId, folderId, completionInfo);
                 break;
             case "FolderRejected":
                 deviceId = (String) event.data.get("device");

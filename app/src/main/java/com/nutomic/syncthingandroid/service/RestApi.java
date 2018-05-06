@@ -24,6 +24,8 @@ import com.nutomic.syncthingandroid.http.GetRequest;
 import com.nutomic.syncthingandroid.http.PostConfigRequest;
 import com.nutomic.syncthingandroid.http.PostScanRequest;
 import com.nutomic.syncthingandroid.model.Config;
+import com.nutomic.syncthingandroid.model.Completion;
+import com.nutomic.syncthingandroid.model.CompletionInfo;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
@@ -95,10 +97,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     private long mPreviousConnectionTime = 0;
 
     /**
-     * Stores the latest result of {@link #getFolderStatus} for each folder, for calculating device
-     * percentage in {@link #getConnections}.
+     * Stores the latest result of {@link #getFolderStatus} for each folder
      */
     private HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
+
+    /**
+     * Stores the latest result of device and folder completion events, for calculating device
+     * percentage in {@link #getConnections}.
+     */
+    private Completion mCompletion = new Completion();
 
     @Inject NotificationHandler mNotificationHandler;
 
@@ -368,7 +375,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             mPreviousConnectionTime = now;
             Connections connections = new Gson().fromJson(result, Connections.class);
             for (Map.Entry<String, Connections.Connection> e : connections.connections.entrySet()) {
-                e.getValue().completion = getDeviceCompletion(e.getKey());
+                e.getValue().completion = mCompletion.getDeviceCompletion(e.getKey());
+                // e.getValue().completion = getDeviceCompletion(e.getKey());
 
                 Connections.Connection prev =
                         (mPreviousConnections.isPresent() && mPreviousConnections.get().connections.containsKey(e.getKey()))
@@ -386,18 +394,22 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 
     /**
-     * Calculates completion percentage for the given device using {@link #mCachedFolderStatusInfo}.
+     * Calculates completion percentage for the given device using {@link #mCompletion}.
      */
+     /*
     private int getDeviceCompletion(String deviceId) {
-        long total = 0, needed = 0, deletes = 0, items = 0;
+
         int retPercentage = 0;
-        Log.v(TAG, "gdc:" + deviceId);
+        Log.v(TAG, "gdc: " + deviceId);
+
+        long total = 0, needed = 0, deletes = 0, items = 0;
 
         for (Map.Entry<String, FolderStatus> FolderStatusInfo : mCachedFolderStatusInfo.entrySet()) {
             List<Folder> folders = getFolders();
             for (Folder r : folders) {
                 if (r.getDevice(deviceId) != null) {
-                    Log.v(TAG, "Device has folder:" + r.id + "/" + r.label);
+                    Log.v(TAG, "Device has folder:" + r.id + "/" + r.label + " / " + FolderStatusInfo.getValue().globalBytes + " / " +
+                                FolderStatusInfo.getValue().needBytes + " / " + FolderStatusInfo.getValue().needItems + "/" + FolderStatusInfo.getValue().needDeletes);
                     total += FolderStatusInfo.getValue().globalBytes;
                     needed += FolderStatusInfo.getValue().needBytes;
                     items += FolderStatusInfo.getValue().needItems;
@@ -423,8 +435,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             // that we have stuff to do.
             retPercentage = 95;
         }
-        return retPercentage;
-    }
+    } */
 
     /**
      * Returns status information about the folder with the given id.
@@ -496,6 +507,14 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             if (error != null)
                 errorListener.onResult(error.getAsString());
         });
+    }
+
+
+    /**
+     * Updates cached folder and device completion info.
+     */
+    public void updateCompletionInfo(String deviceId, String folderId, CompletionInfo completionInfo) {
+        mCompletion.setCompletionInfo(deviceId, folderId, completionInfo);
     }
 
     /**

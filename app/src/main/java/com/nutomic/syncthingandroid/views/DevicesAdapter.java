@@ -70,10 +70,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
         if (conn.connected) {
             download.setText(Util.readableTransferRate(getContext(), conn.inBits));
             upload.setText(Util.readableTransferRate(getContext(), conn.outBits));
-            if (conn.completion == -1) {
-                status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
-            }
-            else if (conn.completion == 100) {
+            if (conn.completion == 100) {
                 status.setText(r.getString(R.string.device_up_to_date));
                 status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
             } else {

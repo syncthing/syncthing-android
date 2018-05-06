@@ -1,11 +1,5 @@
 package com.nutomic.syncthingandroid.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 public class FolderStatus {
     public long globalBytes;
     public long globalDeleted;
@@ -33,34 +27,4 @@ public class FolderStatus {
     public String stateChanged;
     public long version;
     public String watchError;
-
-    /**
-     * Stores completion information for each associated device.
-     * Data is retrieved by the EventProcessor.
-     */
-    private List<Device> devices = new ArrayList<>();
-
-    public void addDevice(String deviceId) {
-        Device d = new Device();
-        d.deviceID = deviceId;
-        devices.add(d);
-    }
-
-    public Device getDevice(String deviceId) {
-        for (Device d : devices) {
-            if (d.deviceID.equals(deviceId)) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    public void removeDevice(String deviceId) {
-        for (Iterator<Device> it = devices.iterator(); it.hasNext();) {
-            String currentId = it.next().deviceID;
-            if (currentId.equals(deviceId)) {
-                it.remove();
-            }
-        }
-    }
 }
