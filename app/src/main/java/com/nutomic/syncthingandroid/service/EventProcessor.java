@@ -24,7 +24,6 @@ import com.nutomic.syncthingandroid.model.Folder;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-import java.util.Map;
 
 import javax.inject.Inject;
 
