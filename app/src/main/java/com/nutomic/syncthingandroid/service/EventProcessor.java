@@ -126,7 +126,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                     if (FolderStatusInfo.getValue().getDevice(deviceId) == null) {
                         FolderStatusInfo.getValue().addDevice(deviceId);
                     }
-                    FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
+                    //FolderStatusInfo.getValue().getDevice(deviceId)._completion = completion;
                     Log.v (TAG, "completion - " + completion);
                 }
                 break;

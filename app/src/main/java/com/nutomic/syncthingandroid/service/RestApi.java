@@ -393,15 +393,15 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         int retPercentage = 0;
         Log.v(TAG, "gdc:" + deviceId);
 
-        for (Map.Entry<String, FolderStatus> modelInfo : mCachedFolderStatusInfo.entrySet()) {
+        for (Map.Entry<String, FolderStatus> FolderStatusInfo : mCachedFolderStatusInfo.entrySet()) {
             List<Folder> folders = getFolders();
             for (Folder r : folders) {
                 if (r.getDevice(deviceId) != null) {
                     Log.v(TAG, "Device has folder:" + r.id + "/" + r.label);
-                    total += modelInfo.getValue().globalBytes;
-                    needed += modelInfo.getValue().needBytes;
-                    items += modelInfo.getValue().needItems;
-                    deletes += modelInfo.getValue().needDeletes;
+                    total += FolderStatusInfo.getValue().globalBytes;
+                    needed += FolderStatusInfo.getValue().needBytes;
+                    items += FolderStatusInfo.getValue().needItems;
+                    deletes += FolderStatusInfo.getValue().needDeletes;
                 }
             }
         }
@@ -430,7 +430,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      * Returns status information about the folder with the given id.
      */
     public void getFolderStatus(final String folderId, final OnResultListener2<String, FolderStatus> listener) {
-        new GetRequest(mContext, mUrl, GetRequest.URI_MODEL, mApiKey,
+        new GetRequest(mContext, mUrl, GetRequest.URI_STATUS, mApiKey,
                     ImmutableMap.of("folder", folderId), result -> {
             FolderStatus m = new Gson().fromJson(result, FolderStatus.class);
             mCachedFolderStatusInfo.put(folderId, m);
