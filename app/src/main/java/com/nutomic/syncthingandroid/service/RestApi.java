@@ -102,8 +102,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     private HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
 
     /**
-     * Stores the latest result of device and folder completion events, for calculating device
-     * percentage in {@link #getConnections}.
+     * Stores the latest result of device and folder completion events.
      */
     private Completion mCompletion = new Completion();
 
@@ -221,12 +220,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public List<Folder> getFolders() {
-        Log.v(TAG, "getFolders --- ");
         List<Folder> folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
         Collections.sort(folders, FOLDERS_COMPARATOR);
-        for (Folder r : folders) {
-            Log.v(TAG, "getFolders: " + r.id);
-        }
         return folders;
     }
 
@@ -465,7 +460,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
 
     /**
-     * Updates cached folder and device completion info.
+     * Updates cached folder and device completion info according to event data.
      */
     public void updateCompletionInfo(String deviceId, String folderId, CompletionInfo completionInfo) {
         mCompletion.setCompletionInfo(deviceId, folderId, completionInfo);
