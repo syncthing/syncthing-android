@@ -163,6 +163,7 @@ public class WebGuiActivity extends StateDialogActivity
             mWebView.goBack();
         } else {
             super.onBackPressed();
+            finish();
         }
     }
 
