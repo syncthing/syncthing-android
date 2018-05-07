@@ -142,16 +142,20 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             Log.i(TAG, "Syncthing version is " + mVersion);
             tryIsAvailable();
         });
+        reloadConfig();
+        getSystemInfo(info -> {
+            mLocalDeviceId = info.myID;
+            tryIsAvailable();
+        });
+    }
+
+    public void reloadConfig() {
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             Log.v(TAG, "onWebGuiAvailable: " + result);
             mConfig = new Gson().fromJson(result, Config.class);
             if (mConfig == null) {
                 throw new RuntimeException("config is null: " + result);
             }
-            tryIsAvailable();
-        });
-        getSystemInfo(info -> {
-            mLocalDeviceId = info.myID;
             tryIsAvailable();
         });
     }

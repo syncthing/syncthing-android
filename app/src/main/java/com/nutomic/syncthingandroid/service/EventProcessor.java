@@ -97,7 +97,7 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             case "ConfigSaved":
                 if (mApi != null) {
                     Log.v(TAG, "Forwarding ConfigSaved event to RestApi to get the updated config.");
-                    mApi.onWebGuiAvailable();
+                    mApi.reloadConfig();
                 }
                 break;
             case "DeviceRejected":
