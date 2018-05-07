@@ -163,13 +163,19 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public void reloadConfig() {
-        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
-            Log.v(TAG, "reloadConfig: " + result);
-            mConfig = new Gson().fromJson(result, Config.class);
-            if (mConfig == null) {
-                throw new RuntimeException("config is null: " + result);
-            }
-        });
+        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> onReloadConfigComplete(result));
+    }
+
+    private void onReloadConfigComplete(String result) {
+        Log.v(TAG, "onReloadConfigComplete: " + result);
+        mConfig = new Gson().fromJson(result, Config.class);
+        if (mConfig == null) {
+            throw new RuntimeException("config is null: " + result);
+        }
+
+        // Update cached device and folder information stored in the mCompletion model.
+        mCompletion.updateDevices(getDevices(true));
+        mCompletion.updateFolders(getFolders());
     }
 
     /**
@@ -247,8 +253,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     public void removeFolder(String id) {
         removeFolderInternal(id);
-        sendConfig();
         mCompletion.removeFolder(id);
+        sendConfig();
         // Remove saved data from share activity for this folder.
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .remove(ShareActivity.PREF_FOLDER_SAVED_SUBDIRECTORY+id)
@@ -307,8 +313,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     public void removeDevice(String deviceId) {
         removeDeviceInternal(deviceId);
+        mCompletion.removeDevice(deviceId);
         sendConfig();
-        removeDevice(deviceId);
     }
 
     private void removeDeviceInternal(String deviceId) {

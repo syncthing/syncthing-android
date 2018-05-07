@@ -1,6 +1,10 @@
 package com.nutomic.syncthingandroid.model;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class caches remote folder and device synchronization
@@ -10,6 +14,8 @@ import java.util.HashMap;
  */
 public class Completion {
 
+    private static final String TAG = "Completion";
+
     HashMap<String, HashMap<String, CompletionInfo>> deviceFolderMap =
         new HashMap<String, HashMap<String, CompletionInfo>>();
 
@@ -17,8 +23,9 @@ public class Completion {
      * Adds a device to the cache model if it does not exist.
      */
     private void addDevice(String deviceId) {
-        if (!deviceFolderMap.containsKey(deviceId))
+        if (!deviceFolderMap.containsKey(deviceId)) {
             deviceFolderMap.put(deviceId, new HashMap<String, CompletionInfo>());
+        }
     }
 
     /**
@@ -34,11 +41,13 @@ public class Completion {
      * Adds a folder to the cache model if it does not exist.
      */
     private void addFolder(String deviceId, String folderId) {
-        if (!deviceFolderMap.containsKey(deviceId))
+        if (!deviceFolderMap.containsKey(deviceId)) {
             addDevice(deviceId);
+        }
 
-        if (!deviceFolderMap.get(deviceId).containsKey(folderId))
+        if (!deviceFolderMap.get(deviceId).containsKey(folderId)) {
             deviceFolderMap.get(deviceId).put(folderId, new CompletionInfo());
+        }
     }
 
     /**
@@ -50,6 +59,56 @@ public class Completion {
                 deviceFolderMap.get(deviceId).remove(folderId);
                 break;
             }
+        }
+    }
+
+    /**
+     * Updates device information in the cache model.
+     */
+    public void updateDevices(List<Device> newDeviceSet) {
+        List<String> removedDevices = new ArrayList<>();;
+        Boolean deviceFound;
+        for (String deviceId : deviceFolderMap.keySet()) {
+            deviceFound = false;
+            for (Device device : newDeviceSet) {
+                if (device.deviceID.equals(deviceId)) {
+                    deviceFound = true;
+                    break;
+                }
+            }
+            if (!deviceFound) {
+                removedDevices.add(deviceId);
+            }
+        }
+        for (String deviceId : removedDevices) {
+            Log.v(TAG, "updateDevices: Remove device '" + deviceId + "' from cache model");
+            removeDevice(deviceId);
+        }
+    }
+
+    /**
+     * Updates folder information in the cache model.
+     */
+    public void updateFolders(List<Folder> newFolderSet) {
+        List<String> removedFolders = new ArrayList<>();;
+        Boolean folderFound;
+        for (String deviceId : deviceFolderMap.keySet()) {
+            for (String folderId : deviceFolderMap.get(deviceId).keySet()) {
+                folderFound = false;
+                for (Folder folder : newFolderSet) {
+                    if (folder.id.equals(folderId)) {
+                        folderFound = true;
+                        break;
+                    }
+                }
+                if (!folderFound) {
+                    removedFolders.add(folderId);
+                }
+            }
+        }
+        for (String folderId : removedFolders) {
+            Log.v(TAG, "updateFolders: Remove folder '" + folderId + "' from cache model");
+            removeFolder(folderId);
         }
     }
 
