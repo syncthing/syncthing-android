@@ -190,7 +190,6 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
             case "LocalIndexUpdated":
             case "ItemStarted":
             case "FolderPaused":
-            case "ConfigSaved":
             case "FolderScanProgress":
             case "LoginAttempt":
             default:
