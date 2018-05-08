@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class caches remote folder and device synchronization
@@ -23,9 +24,11 @@ public class Completion {
      * Removes a folder from the cache model.
      */
     private void removeFolder(String folderId) {
+        HashMap<String, CompletionInfo> folderMap;
         for (String deviceId : deviceFolderMap.keySet()) {
-            if (deviceFolderMap.get(deviceId).containsKey(folderId)) {
-                deviceFolderMap.get(deviceId).remove(folderId);
+            folderMap = deviceFolderMap.get(deviceId);
+            if (folderMap.containsKey(folderId)) {
+                folderMap.remove(folderId);
                 break;
             }
         }
@@ -36,6 +39,8 @@ public class Completion {
      * after a config update.
      */
     public void updateFromConfig(List<Device> newDevices, List<Folder> newFolders) {
+        HashMap<String, CompletionInfo> folderMap;
+
         // Handle devices that were removed from the config.
         List<String> removedDevices = new ArrayList<>();;
         Boolean deviceFound;
@@ -67,8 +72,8 @@ public class Completion {
         // Handle folders that were removed from the config.
         List<String> removedFolders = new ArrayList<>();;
         Boolean folderFound;
-        for (String deviceId : deviceFolderMap.keySet()) {
-            for (String folderId : deviceFolderMap.get(deviceId).keySet()) {
+        for (Map.Entry<String, HashMap<String, CompletionInfo>> device : deviceFolderMap.entrySet()) {
+            for (String folderId : device.getValue().keySet()) {
                 folderFound = false;
                 for (Folder folder : newFolders) {
                     if (folder.id.equals(folderId)) {
@@ -91,10 +96,11 @@ public class Completion {
             for (Device device : newDevices) {
                 if (folder.getDevice(device.deviceID) != null) {
                     // folder is shared with device.
-                    if (!deviceFolderMap.get(device.deviceID).containsKey(folder.id)) {
+                    folderMap = deviceFolderMap.get(device.deviceID);
+                    if (!folderMap.containsKey(folder.id)) {
                         Log.v(TAG, "updateFromConfig: Add folder '" + folder.id +
                                     "' shared with device '" + device.deviceID + "' to cache model.");
-                        deviceFolderMap.get(device.deviceID).put(folder.id, new CompletionInfo());
+                        folderMap.put(folder.id, new CompletionInfo());
                     }
                 }
             }
@@ -110,8 +116,8 @@ public class Completion {
         double sumCompletion = 0;
         HashMap<String, CompletionInfo> folderMap = deviceFolderMap.get(deviceId);
         if (folderMap != null) {
-            for (String folderId : folderMap.keySet()) {
-                sumCompletion += (deviceFolderMap.get(deviceId)).get(folderId).completion;
+            for (Map.Entry<String, CompletionInfo> folder : folderMap.entrySet()) {
+                sumCompletion += folder.getValue().completion;
                 folderCount++;
             }
         }
