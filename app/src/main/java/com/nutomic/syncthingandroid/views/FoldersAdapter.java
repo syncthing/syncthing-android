@@ -36,7 +36,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
 
     private static final String TAG = "FoldersAdapter";
 
-    private final HashMap<String, FolderStatus> mFolderStatus = new HashMap<>();
+    private final HashMap<String, FolderStatus> mLocalFolderStatuses = new HashMap<>();
 
     public FoldersAdapter(Context context) {
         super(context, 0);
@@ -77,19 +77,19 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
     }
 
     private void updateFolderStatusView(ItemFolderListBinding binding, Folder folder) {
-        FolderStatus FolderStatusInfo = mFolderStatus.get(folder.id);
-        if (FolderStatusInfo == null) {
+        FolderStatus folderStatus = mLocalFolderStatuses.get(folder.id);
+        if (folderStatus == null) {
             binding.items.setVisibility(GONE);
             binding.size.setVisibility(GONE);
             setTextOrHide(binding.invalid, folder.invalid);
             return;
         }
 
-        int percentage = (FolderStatusInfo.globalBytes != 0)
-                ? Math.round(100 * FolderStatusInfo.inSyncBytes / FolderStatusInfo.globalBytes)
+        int percentage = (folderStatus.globalBytes != 0)
+                ? Math.round(100 * folderStatus.inSyncBytes / folderStatus.globalBytes)
                 : 100;
-        long neededItems = FolderStatusInfo.needFiles + FolderStatusInfo.needDirectories + FolderStatusInfo.needSymlinks + FolderStatusInfo.needDeletes;
-        if (FolderStatusInfo.state.equals("idle") && neededItems > 0) {
+        long neededItems = folderStatus.needFiles + folderStatus.needDirectories + folderStatus.needSymlinks + folderStatus.needDeletes;
+        if (folderStatus.state.equals("idle") && neededItems > 0) {
             binding.state.setText(getContext().getString(R.string.status_outofsync));
             binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
         } else {
@@ -97,8 +97,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 binding.state.setText(getContext().getString(R.string.state_paused));
                 binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
             } else {
-                binding.state.setText(getLocalizedState(getContext(), FolderStatusInfo.state, percentage));
-                switch(FolderStatusInfo.state) {
+                binding.state.setText(getLocalizedState(getContext(), folderStatus.state, percentage));
+                switch(folderStatus.state) {
                     case "idle":
                         binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_green));
                         break;
@@ -113,12 +113,12 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         }
         binding.items.setVisibility(VISIBLE);
         binding.items.setText(getContext().getResources()
-                .getQuantityString(R.plurals.files, (int) FolderStatusInfo.inSyncFiles, FolderStatusInfo.inSyncFiles, FolderStatusInfo.globalFiles));
+                .getQuantityString(R.plurals.files, (int) folderStatus.inSyncFiles, folderStatus.inSyncFiles, folderStatus.globalFiles));
         binding.size.setVisibility(VISIBLE);
         binding.size.setText(getContext().getString(R.string.folder_size_format,
-                Util.readableFileSize(getContext(), FolderStatusInfo.inSyncBytes),
-                Util.readableFileSize(getContext(), FolderStatusInfo.globalBytes)));
-        setTextOrHide(binding.invalid, FolderStatusInfo.invalid);
+                Util.readableFileSize(getContext(), folderStatus.inSyncBytes),
+                Util.readableFileSize(getContext(), folderStatus.globalBytes)));
+        setTextOrHide(binding.invalid, folderStatus.invalid);
     }
 
     /**
@@ -144,8 +144,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         }
     }
 
-    private void onReceiveFolderStatus(String folderId, FolderStatus FolderStatusInfo) {
-        mFolderStatus.put(folderId, FolderStatusInfo);
+    private void onReceiveFolderStatus(String folderId, FolderStatus folderStatus) {
+        mLocalFolderStatuses.put(folderId, folderStatus);
         notifyDataSetChanged();
     }
 

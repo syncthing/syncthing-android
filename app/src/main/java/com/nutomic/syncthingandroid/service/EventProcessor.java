@@ -104,9 +104,11 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                     mApi.reloadConfig();
                 }
                 break;
+            case "DeviceConnected":
+                break;
             case "DeviceRejected":
                 deviceId = (String) event.data.get("device");
-                Log.d(TAG, "Unknwon device " + deviceId + " wants to connect");
+                Log.d(TAG, "Unknown device " + deviceId + " wants to connect");
 
                 Intent intent = new Intent(mContext, DeviceActivity.class)
                         .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
@@ -127,6 +129,8 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 CompletionInfo completionInfo = new CompletionInfo();
                 completionInfo.completion = (Double) event.data.get("completion");
                 mApi.updateCompletionInfo(deviceId, folderId, completionInfo);
+                break;
+            case "FolderPaused":
                 break;
             case "FolderRejected":
                 deviceId = (String) event.data.get("device");
@@ -156,6 +160,12 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
 
                 notify(title, pi);
                 break;
+            case "FolderScanProgress":
+                break;
+            case "FolderSummary":
+                Log.v(TAG, "Unhandled event " + event.type);
+                // ToDo
+                break;
             case "ItemFinished":
                 String folder = (String) event.data.get("folder");
                 String folderPath = null;
@@ -178,22 +188,29 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                             new String[]{updatedFile.getPath()});
                 }
                 break;
+            case "ItemStarted":
+                break;
+            case "LocalIndexUpdated":
+                // ToDo
+                Log.v(TAG, "Unhandled event " + event.type);
+                break;
+            case "LoginAttempt":
+                break;
             case "Ping":
                 // Ignored.
                 break;
-            case "Starting":
-            case "StateChanged":
-            case "StartupComplete":
-            case "DeviceConnected":
-            case "FolderSummary":
             case "RemoteIndexUpdated":
-            case "LocalIndexUpdated":
-            case "ItemStarted":
-            case "FolderPaused":
-            case "FolderScanProgress":
-            case "LoginAttempt":
-            default:
+                // ToDo
                 Log.v(TAG, "Unhandled event " + event.type);
+                break;
+            case "Starting":
+                break;
+            case "StartupComplete":
+                break;
+            case "StateChanged":
+                break;
+            default:
+                Log.v(TAG, "Unknown event " + event.type);
         }
     }
 

@@ -99,7 +99,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Stores the latest result of {@link #getFolderStatus} for each folder
      */
-    private HashMap<String, FolderStatus> mCachedFolderStatusInfo = new HashMap<>();
+    private HashMap<String, FolderStatus> mCachedFolderStatuses = new HashMap<>();
 
     /**
      * Stores the latest result of device and folder completion events.
@@ -163,7 +163,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public void reloadConfig() {
-        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> onReloadConfigComplete(result));
+        new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, this::onReloadConfigComplete);
     }
 
     private void onReloadConfigComplete(String result) {
@@ -253,7 +253,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     public void removeFolder(String id) {
         removeFolderInternal(id);
-        mCompletion.removeFolder(id);
+        // mCompletion will be updated after the ConfigSaved event.
         sendConfig();
         // Remove saved data from share activity for this folder.
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
@@ -313,7 +313,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
     public void removeDevice(String deviceId) {
         removeDeviceInternal(deviceId);
-        mCompletion.removeDevice(deviceId);
+        // mCompletion will be updated after the ConfigSaved event.
         sendConfig();
     }
 
@@ -411,7 +411,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         new GetRequest(mContext, mUrl, GetRequest.URI_STATUS, mApiKey,
                     ImmutableMap.of("folder", folderId), result -> {
             FolderStatus m = new Gson().fromJson(result, FolderStatus.class);
-            mCachedFolderStatusInfo.put(folderId, m);
+            mCachedFolderStatuses.put(folderId, m);
             listener.onResult(folderId, m);
         });
     }
