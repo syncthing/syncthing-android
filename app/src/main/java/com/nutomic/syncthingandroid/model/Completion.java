@@ -128,10 +128,18 @@ public class Completion {
         }
 
         // Handle folders that were added to the config.
-        /**
-         * ToDo - combine Folder and Device class models into a nested HashMap to represent the
-         * device-folder hierarchy that results from the config.
-        */
+        for (Folder folder : newFolderSet) {
+            for (Device device : newDeviceSet) {
+                if (folder.getDevice(device.deviceID) != null) {
+                    // folder is shared with device.
+                    if (!deviceFolderMap.get(device.deviceID).containsKey(folder.id)) {
+                        Log.v(TAG, "updateFromConfig: Add folder '" + folder.id +
+                                    "' shared with device '" + device.deviceID + "' to cache model.");
+                        deviceFolderMap.get(device.deviceID).put(folder.id, defaultFolder);
+                    }
+                }
+            }
+        }
     }
 
     /**
