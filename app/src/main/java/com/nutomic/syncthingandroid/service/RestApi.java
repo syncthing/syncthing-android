@@ -475,7 +475,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Updates cached folder and device completion info according to event data.
      */
-    public void updateCompletionInfo(String deviceId, String folderId, CompletionInfo completionInfo) {
+    public void setCompletionInfo(String deviceId, String folderId, CompletionInfo completionInfo) {
         mCompletion.setCompletionInfo(deviceId, folderId, completionInfo);
     }
 
