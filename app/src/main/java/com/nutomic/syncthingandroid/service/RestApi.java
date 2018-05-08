@@ -149,11 +149,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             tryIsAvailable();
         });
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
-            Log.v(TAG, "onWebGuiAvailable: " + result);
-            mConfig = new Gson().fromJson(result, Config.class);
-            if (mConfig == null) {
-                throw new RuntimeException("config is null: " + result);
-            }
+            onReloadConfigComplete(result);
             tryIsAvailable();
         });
         getSystemInfo(info -> {
@@ -174,8 +170,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         }
 
         // Update cached device and folder information stored in the mCompletion model.
-        mCompletion.updateDevices(getDevices(true));
-        mCompletion.updateFolders(getFolders());
+        mCompletion.updateFromConfig(getDevices(true), getFolders());
     }
 
     /**

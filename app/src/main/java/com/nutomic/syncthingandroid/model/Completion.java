@@ -27,20 +27,24 @@ public class Completion {
     /**
      * Adds a device to the cache model if it does not exist.
      */
+    /*
     private void addDevice(String deviceId) {
         if (!deviceFolderMap.containsKey(deviceId)) {
             deviceFolderMap.put(deviceId, defaultDevice);
         }
     }
+    */
 
     /**
      * Removes a device from the cache model.
      */
+    /*
     private void removeDevice(String deviceId) {
         if (deviceFolderMap.containsKey(deviceId)) {
             deviceFolderMap.remove(deviceId);
         }
     }
+    */
 
     /**
      * Adds a folder to the cache model if it does not exist.
@@ -69,9 +73,11 @@ public class Completion {
     }
 
     /**
-     * Updates device information in the cache model.
+     * Updates device and folder information in the cache model
+     * after a config update.
      */
-    public void updateDevices(List<Device> newDeviceSet) {
+    public void updateFromConfig(List<Device> newDeviceSet, List<Folder> newFolderSet) {
+        // Handle devices that were removed from the config.
         List<String> removedDevices = new ArrayList<>();;
         Boolean deviceFound;
         for (String deviceId : deviceFolderMap.keySet()) {
@@ -87,15 +93,19 @@ public class Completion {
             }
         }
         for (String deviceId : removedDevices) {
-            Log.v(TAG, "updateDevices: Remove device '" + deviceId + "' from cache model");
-            removeDevice(deviceId);
+            Log.v(TAG, "updateFromConfig: Remove device '" + deviceId + "' from cache model");
+            deviceFolderMap.remove(deviceId);
         }
-    }
 
-    /**
-     * Updates folder information in the cache model.
-     */
-    public void updateFolders(List<Folder> newFolderSet) {
+        // Handle devices that were added to the config.
+        for (Device device : newDeviceSet) {
+            if (!deviceFolderMap.containsKey(device.deviceID)) {
+                Log.v(TAG, "updateFromConfig: Add device '" + device.deviceID + "' to cache model");
+                deviceFolderMap.put(device.deviceID, defaultDevice);
+            }
+        }
+
+        // Handle folders that were removed from the config.
         List<String> removedFolders = new ArrayList<>();;
         Boolean folderFound;
         for (String deviceId : deviceFolderMap.keySet()) {
@@ -113,9 +123,15 @@ public class Completion {
             }
         }
         for (String folderId : removedFolders) {
-            Log.v(TAG, "updateFolders: Remove folder '" + folderId + "' from cache model");
+            Log.v(TAG, "updateFromConfig: Remove folder '" + folderId + "' from cache model");
             removeFolder(folderId);
         }
+
+        // Handle folders that were added to the config.
+        /**
+         * ToDo - combine Folder and Device class models into a nested HashMap to represent the
+         * device-folder hierarchy that results from the config.
+        */
     }
 
     /**
