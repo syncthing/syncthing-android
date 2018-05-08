@@ -2,8 +2,6 @@ package com.nutomic.syncthingandroid.model;
 
 import android.util.Log;
 
-import com.nutomic.syncthingandroid.util.DefaultHashMap;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +16,8 @@ public class Completion {
 
     private static final String TAG = "Completion";
 
-    DefaultHashMap<String, DefaultHashMap<String, CompletionInfo>> deviceFolderMap =
-        new DefaultHashMap<String, DefaultHashMap<String, CompletionInfo>>();
-
-    DefaultHashMap<String, CompletionInfo> defaultDevice = new DefaultHashMap<String, CompletionInfo>();
+    HashMap<String, HashMap<String, CompletionInfo>> deviceFolderMap =
+        new HashMap<String, HashMap<String, CompletionInfo>>();
 
     /**
      * Removes a folder from the cache model.
@@ -64,7 +60,7 @@ public class Completion {
         for (Device device : newDevices) {
             if (!deviceFolderMap.containsKey(device.deviceID)) {
                 Log.v(TAG, "updateFromConfig: Add device '" + device.deviceID + "' to cache model");
-                deviceFolderMap.put(device.deviceID, new DefaultHashMap<String, CompletionInfo>());
+                deviceFolderMap.put(device.deviceID, new HashMap<String, CompletionInfo>());
             }
         }
 
@@ -112,9 +108,12 @@ public class Completion {
     public int getDeviceCompletion(String deviceId) {
         int folderCount = 0;
         double sumCompletion = 0;
-        for (String folderId : deviceFolderMap.getOrDefault(deviceId, defaultDevice).keySet()) {
-            sumCompletion += (deviceFolderMap.get(deviceId)).get(folderId).completion;
-            folderCount++;
+        HashMap<String, CompletionInfo> folderMap = deviceFolderMap.get(deviceId);
+        if (folderMap != null) {
+            for (String folderId : folderMap.keySet()) {
+                sumCompletion += (deviceFolderMap.get(deviceId)).get(folderId).completion;
+                folderCount++;
+            }
         }
         if (folderCount == 0) {
             return 100;
@@ -130,7 +129,7 @@ public class Completion {
                                     CompletionInfo completionInfo) {
         // Add device parent node if it does not exist.
         if (!deviceFolderMap.containsKey(deviceId)) {
-            deviceFolderMap.put(deviceId, new DefaultHashMap<String, CompletionInfo>());
+            deviceFolderMap.put(deviceId, new HashMap<String, CompletionInfo>());
         }
         // Add folder or update existing folder entry.
         deviceFolderMap.get(deviceId).put(folderId, completionInfo);
