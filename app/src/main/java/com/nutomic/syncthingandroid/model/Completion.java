@@ -2,7 +2,7 @@ package com.nutomic.syncthingandroid.model;
 
 import android.util.Log;
 
-import com.nutomic.syncthingandroid.model.DefaultHashMap;
+import com.nutomic.syncthingandroid.util.DefaultHashMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
