@@ -92,8 +92,9 @@ public class SyncthingService extends Service {
     private RestApi mApi;
     private EventProcessor mEventProcessor;
     private DeviceStateHolder mDeviceStateHolder;
-    private SyncthingRunnable mSyncthingRunnable;
+    private SyncthingRunnable mSyncthingRunnablel
 
+    private final Handler mHandler;
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
@@ -180,7 +181,8 @@ public class SyncthingService extends Service {
         super.onCreate();
         PRNGFixes.apply();
         ((SyncthingApp) getApplication()).component().inject(this);
-
+        mHandler = new Handler();
+        
         mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::updateState);
         updateState();
         mNotificationHandler.updatePersistentNotification(this);
@@ -358,17 +360,19 @@ public class SyncthingService extends Service {
      * Must only be called from SyncthingService or {@link RestApi} on the main thread.
      */
     private void onApiChange(State newState) {
-        mCurrentState = newState;
-        mNotificationHandler.updatePersistentNotification(this);
-        for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
-             i.hasNext(); ) {
-            OnApiChangeListener listener = i.next();
-            if (listener != null) {
-                listener.onApiChange(mCurrentState);
-            } else {
-                i.remove();
+        mHandler.post(new Runnable {
+            mCurrentState = newState;
+            mNotificationHandler.updatePersistentNotification(this);
+            for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
+                 i.hasNext(); ) {
+                OnApiChangeListener listener = i.next();
+                if (listener != null) {
+                    listener.onApiChange(mCurrentState);
+                } else {
+                    i.remove();
+                }
             }
-        }
+        });
     }
 
     public URL getWebGuiUrl() {
