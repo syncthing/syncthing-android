@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.annimon.stream.Stream;
+import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
@@ -182,22 +183,24 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 // Ignored.
                 break;
             case "DeviceConnected":
+            case "DownloadProgress":
             case "FolderPaused":
             case "FolderScanProgress":
             case "FolderSummary":
-                // ToDo in a separate PR
-                // Call updateFolderStatus(RestApi api) to update the folder status UI
             case "ItemStarted":
             case "LocalIndexUpdated":
             case "LoginAttempt":
+            case "RemoteDownloadProgress":
             case "RemoteIndexUpdated":
             case "Starting":
             case "StartupComplete":
             case "StateChanged":
-                Log.v(TAG, "Unhandled event " + event.type);
+                if (BuildConfig.DEBUG) {
+                    Log.v(TAG, "Ignored event " + event.type + ", data " + event.data);
+                }
                 break;
             default:
-                Log.v(TAG, "Unknown event " + event.type);
+                Log.v(TAG, "Unhandled event " + event.type);
         }
     }
 
