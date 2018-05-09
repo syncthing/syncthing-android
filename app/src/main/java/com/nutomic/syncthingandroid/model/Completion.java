@@ -24,9 +24,7 @@ public class Completion {
      * Removes a folder from the cache model.
      */
     private void removeFolder(String folderId) {
-        HashMap<String, CompletionInfo> folderMap;
-        for (Map.Entry<String, HashMap<String, CompletionInfo>> device : deviceFolderMap.entrySet()) {
-            folderMap = device.getValue();
+        for (HashMap<String, CompletionInfo> folderMap : deviceFolderMap.values()) {
             if (folderMap.containsKey(folderId)) {
                 folderMap.remove(folderId);
                 break;
