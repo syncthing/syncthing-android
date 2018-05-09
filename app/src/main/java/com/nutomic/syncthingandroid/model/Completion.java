@@ -25,8 +25,8 @@ public class Completion {
      */
     private void removeFolder(String folderId) {
         HashMap<String, CompletionInfo> folderMap;
-        for (String deviceId : deviceFolderMap.keySet()) {
-            folderMap = deviceFolderMap.get(deviceId);
+        for (Map.Entry<String, HashMap<String, CompletionInfo>> device : deviceFolderMap.entrySet()) {
+            folderMap = device.getValue();
             if (folderMap.containsKey(folderId)) {
                 folderMap.remove(folderId);
                 break;
