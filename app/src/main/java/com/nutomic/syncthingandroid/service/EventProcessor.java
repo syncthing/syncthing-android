@@ -183,6 +183,8 @@ public class EventProcessor implements SyncthingService.OnWebGuiAvailableListene
                 // Ignored.
                 break;
             case "DeviceConnected":
+            case "DeviceDisconnected":
+            case "DeviceDiscovered":
             case "DownloadProgress":
             case "FolderPaused":
             case "FolderScanProgress":
