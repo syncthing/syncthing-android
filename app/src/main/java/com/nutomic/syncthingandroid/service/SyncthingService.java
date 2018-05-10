@@ -358,7 +358,7 @@ public class SyncthingService extends Service {
      * Called to notifiy listeners of an API change.
      */
     private void onApiChange(State newState) {
-        mHandler.post(new Runnable {
+        mHandler.post(() -> {
             mCurrentState = newState;
             mNotificationHandler.updatePersistentNotification(this);
             for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
