@@ -93,8 +93,8 @@ public class SyncthingService extends Service {
     private EventProcessor mEventProcessor;
     private DeviceStateHolder mDeviceStateHolder;
     private SyncthingRunnable mSyncthingRunnable;
+    private Handler mHandler;
 
-    private final Handler mHandler;
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
