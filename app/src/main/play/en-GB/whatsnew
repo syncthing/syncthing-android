@@ -1,2 +1,7 @@
-* Fix high CPU usage (for some devices this manifested as a crash)
-* Fix Wifi run condition on Android 8.1
+* Update syncthing to v0.14.47
+* Minimum Android version is now 4.1
+* Using syncthing's built-in file watcher
+* Pause buttons for folders and devices
+* Support more file managers
+
+Other fixes/features, check github.
