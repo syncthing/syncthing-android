@@ -322,7 +322,7 @@ public class SettingsActivity extends SyncthingActivity {
                     try {
                         maxRecvKbps = Integer.parseInt((String) o);
                     } catch (Exception e) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.invalid_integer_value, Integer.MIN_VALUE, Integer.MAX_VALUE), Toast.LENGTH_LONG)
+                        Toast.makeText(getActivity(), getResources().getString(R.string.invalid_integer_value, 0, Integer.MAX_VALUE), Toast.LENGTH_LONG)
                                 .show();
                         return false;
                     }
@@ -333,7 +333,7 @@ public class SettingsActivity extends SyncthingActivity {
                     try {
                         maxSendKbps = Integer.parseInt((String) o);
                     } catch (Exception e) {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.invalid_integer_value, Integer.MIN_VALUE, Integer.MAX_VALUE), Toast.LENGTH_LONG)
+                        Toast.makeText(getActivity(), getResources().getString(R.string.invalid_integer_value, 0, Integer.MAX_VALUE), Toast.LENGTH_LONG)
                                 .show();
                         return false;
                     }
