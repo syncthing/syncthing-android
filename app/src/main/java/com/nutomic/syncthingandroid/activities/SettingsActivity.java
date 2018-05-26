@@ -442,28 +442,15 @@ public class SettingsActivity extends SyncthingActivity implements BackButtonHan
 
         @Override
         public boolean onBackClick() {
-            /*
             if (mRequireRestart) {
                 if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
                         mSyncthingService.getApi() != null) {
-                    mSyncthingService.getApi().showRestartDialog(getActivity());
+                    mSyncthingService.getApi().restart();
                 }
             }
-            */
 
             // Do not intercept the onBackPressed() handling of the parent activity.
             return false;
-        }
-
-        @Override
-        public void onStop() {
-            if (mRequireRestart) {
-                if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
-                        mSyncthingService.getApi() != null) {
-                    mSyncthingService.getApi().showRestartDialog(getActivity());
-                }
-            }
-            super.onStop();
         }
 
         /**
