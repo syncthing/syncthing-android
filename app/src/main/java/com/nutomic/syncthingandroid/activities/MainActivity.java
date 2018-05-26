@@ -467,6 +467,7 @@ public class MainActivity extends StateDialogActivity
                     break;
             }
             getApi().editSettings(getApi().getGui(), options, this);
+            getApi().showRestartDialog(MainActivity.this);
         };
 
         getApi().getUsageReport(report -> {

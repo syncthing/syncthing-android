@@ -333,7 +333,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     public void editSettings(Config.Gui newGui, Options newOptions, Activity activity) {
         mConfig.gui = newGui;
         mConfig.options = newOptions;
-        showRestartDialog(activity);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,17 +33,60 @@ import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.BackButtonHandlerInterface;
+import com.nutomic.syncthingandroid.util.OnBackClickListener;
 import com.nutomic.syncthingandroid.util.Languages;
 import com.nutomic.syncthingandroid.util.Util;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
+import java.lang.ref.WeakReference;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
 import eu.chainfire.libsuperuser.Shell;
 
-public class SettingsActivity extends SyncthingActivity {
+public class SettingsActivity extends SyncthingActivity implements BackButtonHandlerInterface {
+    private ArrayList<WeakReference<OnBackClickListener>> backClickListenersList = new ArrayList<>();
+
+    @Override
+    public void addBackClickListener(OnBackClickListener onBackClickListener) {
+        backClickListenersList.add(new WeakReference<>(onBackClickListener));
+    }
+
+    @Override
+    public void removeBackClickListener(OnBackClickListener onBackClickListener) {
+        for (Iterator<WeakReference<OnBackClickListener>> iterator = backClickListenersList.iterator();
+                iterator.hasNext();) {
+            WeakReference<OnBackClickListener> weakRef = iterator.next();
+            if (weakRef.get() == onBackClickListener){
+                iterator.remove();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!fragmentsBackKeyIntercept()) {
+            super.onBackPressed();
+        }
+    }
+
+    private boolean fragmentsBackKeyIntercept() {
+        boolean isIntercept = false;
+        for (WeakReference<OnBackClickListener> weakRef : backClickListenersList) {
+            OnBackClickListener onBackClickListener = weakRef.get();
+            if (onBackClickListener != null) {
+                boolean isFragmIntercept = onBackClickListener.onBackClick();
+                if (!isIntercept) {
+                    isIntercept = isFragmIntercept;
+                }
+            }
+        }
+        return isIntercept;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +118,9 @@ public class SettingsActivity extends SyncthingActivity {
 
     public static class SettingsFragment extends PreferenceFragment
             implements SyncthingActivity.OnServiceConnectedListener,
-            SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener,
-            Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+            SyncthingService.OnApiChangeListener, OnBackClickListener,
+            Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
+            SharedPreferences.OnSharedPreferenceChangeListener {
 
         private static final String TAG = "SettingsFragment";
         private static final String KEY_STTRACE = "sttrace";
@@ -110,6 +155,7 @@ public class SettingsActivity extends SyncthingActivity {
 
         /* Experimental options */
         private CheckBoxPreference mUseRoot;
+        private CheckBoxPreference mUseWakelock;
         private CheckBoxPreference mUseTor;
         private EditTextPreference mSocksProxyAddress;
         private EditTextPreference mHttpProxyAddress;
@@ -121,6 +167,24 @@ public class SettingsActivity extends SyncthingActivity {
 
         private Options mOptions;
         private Config.Gui mGui;
+
+        private BackButtonHandlerInterface backButtonHandler;
+
+        private Boolean mRequireRestart = false;
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            backButtonHandler = (BackButtonHandlerInterface) activity;
+            backButtonHandler.addBackClickListener(this);
+        }
+
+        @Override
+        public void onDetach() {
+            super.onDetach();
+            backButtonHandler.removeBackClickListener(this);
+            backButtonHandler = null;
+        }
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -196,7 +260,7 @@ public class SettingsActivity extends SyncthingActivity {
             Preference stResetDeltas        = findPreference("st_reset_deltas");
 
             mUseRoot                        = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
-            Preference useWakelock          = (CheckBoxPreference) findPreference(Constants.PREF_USE_WAKE_LOCK);
+            mUseWakelock                    = (CheckBoxPreference) findPreference(Constants.PREF_USE_WAKE_LOCK);
             mUseTor                         = (CheckBoxPreference) findPreference(Constants.PREF_USE_TOR);
             mSocksProxyAddress              = (EditTextPreference) findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS);
             mHttpProxyAddress               = (EditTextPreference) findPreference(Constants.PREF_HTTP_PROXY_ADDRESS);
@@ -220,7 +284,7 @@ public class SettingsActivity extends SyncthingActivity {
 
             /* Experimental options */
             mUseRoot.setOnPreferenceClickListener(this);
-            useWakelock.setOnPreferenceChangeListener((p, o) -> requireRestart());
+            mUseWakelock.setOnPreferenceChangeListener(this);
             mUseTor.setOnPreferenceChangeListener(this);
 
             mSocksProxyAddress.setEnabled(!(Boolean) mUseTor.isChecked());
@@ -291,10 +355,11 @@ public class SettingsActivity extends SyncthingActivity {
 
         @Override
         public void onDestroy() {
-            super.onDestroy();
             mPreferences.unregisterOnSharedPreferenceChangeListener(this);
-            if (mSyncthingService != null)
+            if (mSyncthingService != null) {
                 mSyncthingService.unregisterOnApiChangeListener(this);
+            }
+            super.onDestroy();
         }
 
         private void setPreferenceCategoryChangeListener(
@@ -365,22 +430,27 @@ public class SettingsActivity extends SyncthingActivity {
                         mOptions.urAccepted = ((boolean) o)
                                 ? systemInfo.urVersionMax
                                 : Options.USAGE_REPORTING_DENIED;
-                        mApi.editSettings(mGui, mOptions, getActivity());
                     });
                     break;
                 default: throw new InvalidParameterException();
             }
 
             mApi.editSettings(mGui, mOptions, getActivity());
+            mRequireRestart = true;
             return true;
         }
 
-        public boolean requireRestart() {
-            if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
-                    mSyncthingService.getApi() != null) {
-                mSyncthingService.getApi().showRestartDialog(getActivity());
+        @Override
+        public boolean onBackClick() {
+            if (mRequireRestart) {
+                if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
+                        mSyncthingService.getApi() != null) {
+                    mSyncthingService.getApi().showRestartDialog(getActivity());
+                }
             }
-            return true;
+
+            // Do not intercept the onBackPressed() handling of the parent activity.
+            return false;
         }
 
         /**
@@ -409,16 +479,16 @@ public class SettingsActivity extends SyncthingActivity {
                     break;
                 case KEY_STTRACE:
                     if (((String) o).matches("[0-9a-z, ]*"))
-                        requireRestart();
+                        mRequireRestart = true;
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
                                 .show();
                         return false;
                     }
                     break;
-                case "environment_variables":
+                case Constants.PREF_ENVIRONMENT_VARIABLES:
                     if (((String) o).matches("^(\\w+=[\\w:/\\.]+)?( \\w+=[\\w:/\\.]+)*$")) {
-                        requireRestart();
+                        mRequireRestart = true;
                     }
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_environment_variables, Toast.LENGTH_SHORT)
@@ -426,16 +496,19 @@ public class SettingsActivity extends SyncthingActivity {
                         return false;
                     }
                     break;
+                case Constants.PREF_USE_WAKE_LOCK:
+                    mRequireRestart = true;
+                    break;
                 case Constants.PREF_USE_TOR:
                     mSocksProxyAddress.setEnabled(!(Boolean) o);
                     mHttpProxyAddress.setEnabled(!(Boolean) o);
-                    requireRestart();
+                    mRequireRestart = true;
                     break;
                 case Constants.PREF_SOCKS_PROXY_ADDRESS:
                     if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, "")))
                         return false;
                     if (handleSocksProxyPreferenceChange(preference, o.toString().trim())) {
-                        requireRestart();
+                        mRequireRestart = true;
                     } else {
                         return false;
                     }
@@ -444,7 +517,7 @@ public class SettingsActivity extends SyncthingActivity {
                     if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, "")))
                         return false;
                     if (handleHttpProxyPreferenceChange(preference, o.toString().trim())) {
-                        requireRestart();
+                        mRequireRestart = true;
                     } else {
                         return false;
                     }
@@ -465,7 +538,7 @@ public class SettingsActivity extends SyncthingActivity {
                         new TestRootTask().execute();
                     } else {
                         new Thread(() -> Util.fixAppDataPermissions(getActivity())).start();
-                        requireRestart();
+                        mRequireRestart = true;
                     }
                     return true;
                 case KEY_EXPORT_CONFIG:
@@ -561,7 +634,7 @@ public class SettingsActivity extends SyncthingActivity {
             @Override
             protected void onPostExecute(Boolean haveRoot) {
                 if (haveRoot) {
-                    requireRestart();
+                    mRequireRestart = true;
                     mUseRoot.setChecked(true);
                 } else {
                     Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
