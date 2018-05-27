@@ -41,7 +41,6 @@ public class RestartActivity extends SyncthingActivity {
      */
     private void createRestartNotification() {
         new NotificationHandler(getService()).showRestartNotification();
-        getApi().setRestartPostponed();
     }
 
 }
