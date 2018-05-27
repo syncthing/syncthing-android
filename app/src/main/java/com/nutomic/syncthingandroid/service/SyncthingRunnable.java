@@ -216,11 +216,10 @@ public class SyncthingRunnable implements Runnable {
      * containing the PIDs of found instances.
      */
     private List<String> getSyncthingPIDs() {
-        List<String> mLibSyncthingPID = new ArrayList<String>();
+        List<String> libSyncthingPID = new ArrayList<String>();
         Process ps = null;
         DataOutputStream psOut = null;
         BufferedReader br = null;
-        mLibSyncthingPID.clear();
         try {
             ps = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
             psOut = new DataOutputStream(ps.getOutputStream());
@@ -234,7 +233,7 @@ public class SyncthingRunnable implements Runnable {
                 if (line.contains(Constants.FILENAME_SYNCTHING_BINARY)) {
                     String syncthingPID = line.trim().split("\\s+")[1];
                     Log.v(TAG, "getSyncthingPIDs: Found process PID [" + syncthingPID + "]");
-                    mLibSyncthingPID.add(syncthingPID);
+                    libSyncthingPID.add(syncthingPID);
                 }
             }
         } catch (IOException | InterruptedException e) {
@@ -254,7 +253,7 @@ public class SyncthingRunnable implements Runnable {
                 ps.destroy();
             }
         }
-        return mLibSyncthingPID;
+        return libSyncthingPID;
     }
 
     /**
