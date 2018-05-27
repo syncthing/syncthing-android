@@ -52,7 +52,6 @@ public class SyncthingRunnable implements Runnable {
     private final Context mContext;
     private final File mSyncthingBinary;
     private String[] mCommand;
-    private List<String> mLibSyncthingPID = new ArrayList<String>();
     private final File mLogFile;
     @Inject SharedPreferences mPreferences;
     private final boolean mUseRoot;
@@ -213,9 +212,11 @@ public class SyncthingRunnable implements Runnable {
     }
 
     /**
-     * Look for running libsyncthing.so processes and store the PID of each instance.
+     * Look for running libsyncthing.so processes and return an array
+     * containing the PIDs of found instances.
      */
-    private void getSyncthingPIDs() {
+    private List<String> getSyncthingPIDs() {
+        List<String> mLibSyncthingPID = new ArrayList<String>();
         Process ps = null;
         DataOutputStream psOut = null;
         BufferedReader br = null;
@@ -253,6 +254,7 @@ public class SyncthingRunnable implements Runnable {
                 ps.destroy();
             }
         }
+        return mLibSyncthingPID;
     }
 
     /**
@@ -266,13 +268,13 @@ public class SyncthingRunnable implements Runnable {
                 int ret = 1;
                 try {
                     Thread.sleep(1000); // Wait a second before getting the pid
-                    getSyncthingPIDs();
-                    if (mLibSyncthingPID.isEmpty()) {
+                    List<String> libSyncthingPID = getSyncthingPIDs();
+                    if (libSyncthingPID.isEmpty()) {
                         Log.w(TAG, "niceSyncthing: Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
                     } else {
                         nice = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
                         niceOut = new DataOutputStream(nice.getOutputStream());
-                        for (String runningPID : mLibSyncthingPID) {
+                        for (String runningPID : libSyncthingPID) {
                             // Set best-effort, low priority using ionice.
                             niceOut.writeBytes("ionice " + runningPID + " be 7\n");
                         }
@@ -313,13 +315,13 @@ public class SyncthingRunnable implements Runnable {
     public void killSyncthing(OnSyncthingKilled onKilledListener) {
         new Thread(() -> {
             for (int i = 0; i < 2; i++) {
-                getSyncthingPIDs();
-                if (mLibSyncthingPID.isEmpty()) {
+                List<String> libSyncthingPID = getSyncthingPIDs();
+                if (libSyncthingPID.isEmpty()) {
                     Log.d(TAG, "killSyncthing: Found no more running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
                     break;
                 }
 
-                for (String runningPID : mLibSyncthingPID) {
+                for (String runningPID : libSyncthingPID) {
                     killProcessId(runningPID, i > 0);
                 }
             }
