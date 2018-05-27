@@ -205,6 +205,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
                     .setAction(SyncthingService.ACTION_RESTART);
             mContext.startService(intent);
         });
+        mOnConfigChangedListener.onConfigChanged();
     }
 
     public void shutdown() {
