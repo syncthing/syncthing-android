@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,60 +32,17 @@ import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
-import com.nutomic.syncthingandroid.util.BackButtonHandlerInterface;
-import com.nutomic.syncthingandroid.util.OnBackClickListener;
 import com.nutomic.syncthingandroid.util.Languages;
 import com.nutomic.syncthingandroid.util.Util;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
-import java.lang.ref.WeakReference;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.inject.Inject;
 
 import eu.chainfire.libsuperuser.Shell;
 
-public class SettingsActivity extends SyncthingActivity implements BackButtonHandlerInterface {
-    private ArrayList<WeakReference<OnBackClickListener>> backClickListenersList = new ArrayList<>();
-
-    @Override
-    public void addBackClickListener(OnBackClickListener onBackClickListener) {
-        backClickListenersList.add(new WeakReference<>(onBackClickListener));
-    }
-
-    @Override
-    public void removeBackClickListener(OnBackClickListener onBackClickListener) {
-        for (Iterator<WeakReference<OnBackClickListener>> iterator = backClickListenersList.iterator();
-                iterator.hasNext();) {
-            WeakReference<OnBackClickListener> weakRef = iterator.next();
-            if (weakRef.get() == onBackClickListener){
-                iterator.remove();
-            }
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!fragmentsBackKeyIntercept()) {
-            super.onBackPressed();
-        }
-    }
-
-    private boolean fragmentsBackKeyIntercept() {
-        boolean isIntercept = false;
-        for (WeakReference<OnBackClickListener> weakRef : backClickListenersList) {
-            OnBackClickListener onBackClickListener = weakRef.get();
-            if (onBackClickListener != null) {
-                boolean isFragmIntercept = onBackClickListener.onBackClick();
-                if (!isIntercept) {
-                    isIntercept = isFragmIntercept;
-                }
-            }
-        }
-        return isIntercept;
-    }
+public class SettingsActivity extends SyncthingActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +74,8 @@ public class SettingsActivity extends SyncthingActivity implements BackButtonHan
 
     public static class SettingsFragment extends PreferenceFragment
             implements SyncthingActivity.OnServiceConnectedListener,
-            SyncthingService.OnApiChangeListener, OnBackClickListener,
-            Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-            SharedPreferences.OnSharedPreferenceChangeListener {
+            SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener,
+            Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
         private static final String TAG = "SettingsFragment";
         private static final String KEY_STTRACE = "sttrace";
@@ -168,23 +123,7 @@ public class SettingsActivity extends SyncthingActivity implements BackButtonHan
         private Options mOptions;
         private Config.Gui mGui;
 
-        private BackButtonHandlerInterface backButtonHandler;
-
         private Boolean mRequireRestart = false;
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            backButtonHandler = (BackButtonHandlerInterface) activity;
-            backButtonHandler.addBackClickListener(this);
-        }
-
-        @Override
-        public void onDetach() {
-            super.onDetach();
-            backButtonHandler.removeBackClickListener(this);
-            backButtonHandler = null;
-        }
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -441,16 +380,15 @@ public class SettingsActivity extends SyncthingActivity implements BackButtonHan
         }
 
         @Override
-        public boolean onBackClick() {
+        public void onStop() {
             if (mRequireRestart) {
                 if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
                         mSyncthingService.getApi() != null) {
                     mSyncthingService.getApi().restart();
+                    mRequireRestart = false;
                 }
             }
-
-            // Do not intercept the onBackPressed() handling of the parent activity.
-            return false;
+            super.onStop();
         }
 
         /**
