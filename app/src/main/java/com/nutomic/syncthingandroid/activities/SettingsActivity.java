@@ -408,13 +408,7 @@ public class SettingsActivity extends SyncthingActivity {
                     mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
                     break;
                 case KEY_STTRACE:
-                    if (((String) o).matches("[0-9a-z, ]*"))
-                        requireRestart();
-                    else {
-                        Toast.makeText(getActivity(), R.string.toast_invalid_sttrace, Toast.LENGTH_SHORT)
-                                .show();
-                        return false;
-                    }
+                    requireRestart();
                     break;
                 case "environment_variables":
                     if (((String) o).matches("^(\\w+=[\\w:/\\.]+)?( \\w+=[\\w:/\\.]+)*$")) {
