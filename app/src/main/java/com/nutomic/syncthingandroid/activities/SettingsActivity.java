@@ -374,7 +374,7 @@ public class SettingsActivity extends SyncthingActivity {
                 default: throw new InvalidParameterException();
             }
 
-            mApi.editSettings(mGui, mOptions, getActivity());
+            mApi.editSettings(mGui, mOptions);
             mRequireRestart = true;
             return true;
         }

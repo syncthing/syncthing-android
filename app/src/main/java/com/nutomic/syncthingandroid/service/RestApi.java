@@ -319,7 +319,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         return deepCopy(mConfig.gui, Config.Gui.class);
     }
 
-    public void editSettings(Config.Gui newGui, Options newOptions, Activity activity) {
+    public void editSettings(Config.Gui newGui, Options newOptions) {
         mConfig.gui = newGui;
         mConfig.options = newOptions;
     }
