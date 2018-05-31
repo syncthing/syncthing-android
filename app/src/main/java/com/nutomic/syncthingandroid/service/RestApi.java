@@ -26,8 +26,6 @@ import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Completion;
 import com.nutomic.syncthingandroid.model.CompletionInfo;
 import com.nutomic.syncthingandroid.model.Connections;
-import com.nutomic.syncthingandroid.model.DebugFacilities;
-import com.nutomic.syncthingandroid.model.DebugFacility;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -35,15 +33,18 @@ import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.model.SystemInfo;
 import com.nutomic.syncthingandroid.model.SystemVersion;
+import com.nutomic.syncthingandroid.service.Constants;
 
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
@@ -184,27 +185,26 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         final String PREF_LAST_BINARY_VERSION = "lastBinaryVersion";
         if (!mVersion.equals(PreferenceManager.getDefaultSharedPreferences(mContext).getString(PREF_LAST_BINARY_VERSION, ""))) {
             // First binary launch or binary upgraded case.
-            Log.v(TAG, "Querying debug facilities supported by syncthing " + mVersion);
             new GetRequest(mContext, mUrl, GetRequest.URI_DEBUG, mApiKey, null, result -> {
-                Log.v(TAG, "updateDebugFacilitiesCache: testA" + result);
-                DebugFacilities debugFacilities = new Gson().fromJson(result, DebugFacilities.class);
+                try {
+                    Set<String> facilitiesToStore = new HashSet<String>();
+                    JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+                    JsonObject jsonFacilities = json.getAsJsonObject("facilities");
+                    for (String facilityName : jsonFacilities.keySet()) {
+                        facilitiesToStore.add(facilityName);
+                    }
+                    PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                        .putStringSet(Constants.PREF_STTRACE_AVAILABLE_OPTIONS, facilitiesToStore)
+                        .apply();
 
-                for (DebugFacility debugFacility : debugFacilities.facilities) {
-                    Log.v(TAG, "updateDebugFacilitiesCache: " + debugFacility.name);
+                    // Store current binary version so we will only store this information again
+                    // after a binary update.
+                    PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                        .putString(PREF_LAST_BINARY_VERSION, mVersion)
+                        .apply();
+                } catch (Exception e) {
+                    Log.w(TAG, "updateDebugFacilitiesCache: Failed to get debug facilities. result=" + result);
                 }
-
-                /*
-                JsonObject json = new JsonParser().parse(result).getAsJsonObject();
-                JsonElement jsonFacilities = json.get("facilities");
-                if (jsonFacilities == null) {
-                    Log.w(TAG, "updateDebugFacilitiesCache: Failed to get debug facilities, falling back to hardcoded list.");
-                    return;
-                }
-                for (String facilityName : jsonFacilities.keySet()) {
-                    Log.v(TAG, "updateDebugFacilitiesCache: " + facilityName);
-                }
-                */
-                // PreferenceManager.getDefaultSharedPreferences(mContext).putString(PREF_LAST_BINARY_VERSION, mVersion);
             });
         }
     }
