@@ -26,6 +26,8 @@ import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Completion;
 import com.nutomic.syncthingandroid.model.CompletionInfo;
 import com.nutomic.syncthingandroid.model.Connections;
+import com.nutomic.syncthingandroid.model.DebugFacilities;
+import com.nutomic.syncthingandroid.model.DebugFacility;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -145,6 +147,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             mVersion = json.get("version").getAsString();
             Log.i(TAG, "Syncthing version is " + mVersion);
             tryIsAvailable();
+            updateDebugFacilitiesCache();
         });
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             onReloadConfigComplete(result);
@@ -169,6 +172,41 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
 
         // Update cached device and folder information stored in the mCompletion model.
         mCompletion.updateFromConfig(getDevices(true), getFolders());
+    }
+
+    /**
+     * Queries debug facilities available from the currently running syncthing binary
+     * if the syncthing binary version changed. First launch of the binary is also
+     * considered as a version change.
+     * Precondition: {@link #mVersion} read from REST
+     */
+    private void updateDebugFacilitiesCache() {
+        final String PREF_LAST_BINARY_VERSION = "lastBinaryVersion";
+        if (!mVersion.equals(PreferenceManager.getDefaultSharedPreferences(mContext).getString(PREF_LAST_BINARY_VERSION, ""))) {
+            // First binary launch or binary upgraded case.
+            Log.v(TAG, "Querying debug facilities supported by syncthing " + mVersion);
+            new GetRequest(mContext, mUrl, GetRequest.URI_DEBUG, mApiKey, null, result -> {
+                Log.v(TAG, "updateDebugFacilitiesCache: testA" + result);
+                DebugFacilities debugFacilities = new Gson().fromJson(result, DebugFacilities.class);
+
+                for (DebugFacility debugFacility : debugFacilities.facilities) {
+                    Log.v(TAG, "updateDebugFacilitiesCache: " + debugFacility.name);
+                }
+
+                /*
+                JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+                JsonElement jsonFacilities = json.get("facilities");
+                if (jsonFacilities == null) {
+                    Log.w(TAG, "updateDebugFacilitiesCache: Failed to get debug facilities, falling back to hardcoded list.");
+                    return;
+                }
+                for (String facilityName : jsonFacilities.keySet()) {
+                    Log.v(TAG, "updateDebugFacilitiesCache: " + facilityName);
+                }
+                */
+                // PreferenceManager.getDefaultSharedPreferences(mContext).putString(PREF_LAST_BINARY_VERSION, mVersion);
+            });
+        }
     }
 
     /**
