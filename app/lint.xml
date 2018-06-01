@@ -2,7 +2,7 @@
 <lint>
     <!-- We don't care about incomplete translations. -->
     <issue id="MissingTranslation" severity="ignore" />
-	
+
 	<!-- Ignore "Value overridden by Gradle build script" for app
 	version (which is actually read from manifest by gradle). -->
 	<issue id="GradleOverrides" severity="ignore" />
@@ -53,7 +53,6 @@
 
     <!-- Ignore lint on ... not being replaced by the ellipsis character -->
     <issue id="TypographyEllipsis" severity="ignore" />
-
 	<!-- Don't fail lint on translation errors, they have to be resolve on transifex -->
 	<issue id="ImpliedQuantity" severity="warning">
         <ignore path="src/main/res/values-fr" />
@@ -64,7 +63,7 @@
     <!-- Having an expandable drawer for the menu will always cause overdrawing regions -->
     <issue id="Overdraw">
         <ignore path="src/main/res/layout/widget_toolbar.xml" />
-    </issue>    
+    </issue>
 
 	<issue id="OldTargetApi" severity="ignore" />
 </lint>
