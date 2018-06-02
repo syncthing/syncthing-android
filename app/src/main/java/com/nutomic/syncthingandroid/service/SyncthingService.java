@@ -157,7 +157,7 @@ public class SyncthingService extends Service {
             return START_NOT_STICKY;
         }
 
-        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::onUpdatedShouldRun);
+        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::onUpdatedShouldRunDecision);
         mNotificationHandler.updatePersistentNotification(this);
 
         if (intent == null)
@@ -176,7 +176,7 @@ public class SyncthingService extends Service {
                 new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
-            mDeviceStateHolder.refreshNetworkInfo();
+            mDeviceStateHolder.updateShouldRunDecision();
         }
         return START_STICKY;
     }
@@ -187,7 +187,7 @@ public class SyncthingService extends Service {
      * function is called to notify this class to run/terminate the syncthing binary.
      * {@link #onApiChange} is called while applying the decision change.
      */
-    private void onUpdatedShouldRun(boolean shouldRun) {
+    private void onUpdatedShouldRunDecision(boolean shouldRun) {
         if (shouldRun) {
             // Start syncthing.
             switch (mCurrentState) {
