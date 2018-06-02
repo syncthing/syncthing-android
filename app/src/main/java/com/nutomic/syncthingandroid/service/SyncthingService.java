@@ -139,7 +139,7 @@ public class SyncthingService extends Service {
         mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                                         PackageManager.PERMISSION_GRANTED);
     }
-        
+
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
      * {@link DeviceStateHolder#EXTRA_IS_ALLOWED_NETWORK_CONNECTION} or
@@ -181,7 +181,7 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Checks according preferences and charging/wifi state, whether syncthing should be enabled
+     * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
      * or not.
      *
      * Depending on the result, syncthing is started or stopped, and {@link #onApiChange} is
@@ -281,7 +281,7 @@ public class SyncthingService extends Service {
         }
 
         synchronized (mStateLock) {
-            if ((mCurrentState == State.INIT || mCurrentState == State.STARTING)) {
+            if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
                 Log.i(TAG, "Delay shutting down service until initialisation of Syncthing finished");
                 mStopScheduled = true;
             } else {
