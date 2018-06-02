@@ -175,7 +175,7 @@ public class NotificationHandler {
     public void showStoragePermissionRevokedNotification() {
         Intent intent = new Intent(mContext, FirstStartActivity.class);
         Notification n = getNotificationBuilder(mInfoChannel)
-                .setContentTitle(mContext.getString(R.string.syncthing_disabled))
+                .setContentTitle(mContext.getString(R.string.syncthing_terminated))
                 .setContentText(mContext.getString(R.string.toast_write_storage_permission_required))
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))

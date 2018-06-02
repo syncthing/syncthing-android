@@ -94,7 +94,7 @@ public class SyncthingService extends Service {
     private ConfigXml mConfig;
     private RestApi mApi;
     private EventProcessor mEventProcessor;
-    private DeviceStateHolder mDeviceStateHolder;
+    private @Nullable DeviceStateHolder mDeviceStateHolder = null;
     private SyncthingRunnable mSyncthingRunnable;
     private Handler mHandler;
 
@@ -117,11 +117,29 @@ public class SyncthingService extends Service {
     private boolean mStopScheduled = false;
 
     /**
-     * True if the user revoked the storage permission, in that case, refuse to start the
-     * syncthing binary.
+     * True if the user granted the storage permission.
      */
-    private boolean mStoragePermissionGranted = true;
+    private boolean mStoragePermissionGranted = false;
 
+    /**
+     * Starts the native binary.
+     */
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        PRNGFixes.apply();
+        ((SyncthingApp) getApplication()).component().inject(this);
+        mHandler = new Handler();
+
+        /**
+         * If runtime permissions are revoked, android kills and restarts the service.
+         * see issue: https://github.com/syncthing/syncthing-android/issues/871
+         * We need to recheck if we still have the storage permission.
+         */
+        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                                        PackageManager.PERMISSION_GRANTED);
+    }
+        
     /**
      * Handles intents, either {@link #ACTION_RESTART}, or intents having
      * {@link DeviceStateHolder#EXTRA_IS_ALLOWED_NETWORK_CONNECTION} or
@@ -129,13 +147,6 @@ public class SyncthingService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        /**
-         * If runtime permissions are revoked, android kills and restarts the service.
-         * see issue: https://github.com/syncthing/syncthing-android/issues/871
-         * We need to recheck if we still have the storage permission during {@link SyncthingService#updateState}
-         */
-        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                                        PackageManager.PERMISSION_GRANTED);
         if (!mStoragePermissionGranted) {
             Log.e(TAG, "User revoked storage permission. Stopping service.");
             if (mNotificationHandler != null) {
@@ -144,6 +155,9 @@ public class SyncthingService extends Service {
             stopSelf();
             return START_NOT_STICKY;
         }
+
+        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::updateState);
+        mNotificationHandler.updatePersistentNotification(this);
 
         if (intent == null)
             return START_STICKY;
@@ -167,18 +181,13 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
+     * Checks according preferences and charging/wifi state, whether syncthing should be enabled
      * or not.
      *
      * Depending on the result, syncthing is started or stopped, and {@link #onApiChange} is
      * called.
      */
     private void updateState() {
-        // Refuse to run syncthing binary if the storage permission is not granted.
-        if (!mStoragePermissionGranted) {
-            return;
-        }
-
         // Start syncthing.
         if (mDeviceStateHolder.shouldRun()) {
             if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
@@ -201,20 +210,6 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Stopping syncthing according to current state and preferences");
             shutdown(State.DISABLED, () -> {});
         }
-    }
-
-    /**
-     * Starts the native binary.
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        PRNGFixes.apply();
-        ((SyncthingApp) getApplication()).component().inject(this);
-        mHandler = new Handler();
-
-        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::updateState);
-        mNotificationHandler.updatePersistentNotification(this);
     }
 
     /**
@@ -278,18 +273,26 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onDestroy() {
+        // If the storage permission got revoked, we did not start the binary nor mDeviceStateHolder
+        // and are in State.INIT requiring an immediate shutdown of this service class.
+        if (!mStoragePermissionGranted) {
+            shutdown(State.DISABLED, () -> {});
+            return;
+        }
+
         synchronized (mStateLock) {
-            if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
+            if ((mCurrentState == State.INIT || mCurrentState == State.STARTING)) {
                 Log.i(TAG, "Delay shutting down service until initialisation of Syncthing finished");
                 mStopScheduled = true;
-
             } else {
                 Log.i(TAG, "Shutting down service immediately");
                 shutdown(State.DISABLED, () -> {});
             }
         }
 
-        mDeviceStateHolder.shutdown();
+        if (mDeviceStateHolder != null) {
+            mDeviceStateHolder.shutdown();
+        }
     }
 
     /**
@@ -307,7 +310,8 @@ public class SyncthingService extends Service {
         if (mApi != null)
             mApi.shutdown();
 
-        mNotificationHandler.cancelPersistentNotification(this);
+        if (mNotificationHandler != null)
+            mNotificationHandler.cancelPersistentNotification(this);
 
         if (mSyncthingRunnable != null) {
             mSyncthingRunnable.killSyncthing(onKilledListener);
