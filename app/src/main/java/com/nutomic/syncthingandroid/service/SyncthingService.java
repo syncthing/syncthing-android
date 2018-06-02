@@ -157,7 +157,7 @@ public class SyncthingService extends Service {
             return START_NOT_STICKY;
         }
 
-        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::updateState);
+        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::onUpdatedShouldRun);
         mNotificationHandler.updatePersistentNotification(this);
 
         if (intent == null)
@@ -183,28 +183,33 @@ public class SyncthingService extends Service {
 
     /**
      * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
-     * or not.
+     * or not. Called by {@link DeviceStateHolder}.
      *
      * Depending on the result, syncthing is started or stopped, and {@link #onApiChange} is
      * called.
      */
-    private void updateState() {
-        // Start syncthing.
-        if (mDeviceStateHolder.shouldRun()) {
-            if (mCurrentState == State.ACTIVE || mCurrentState == State.STARTING) {
-                mStopScheduled = false;
-                return;
+    private void onUpdatedShouldRun(boolean shouldRun) {
+        if (shouldRun) {
+            // Start syncthing.
+            switch (mCurrentState) {
+                case DISABLED:
+                case INIT:
+                    // HACK: Make sure there is no syncthing binary left running from an improper
+                    // shutdown (eg Play Store update).
+                    shutdown(State.INIT, () -> {
+                        Log.i(TAG, "Starting syncthing according to current state and preferences after State.INIT");
+                        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    });
+                    break;
+                case STARTING:
+                case ACTIVE:
+                    mStopScheduled = false;
+                    break;
+                default:
+                    break;
             }
-
-            // HACK: Make sure there is no syncthing binary left running from an improper
-            // shutdown (eg Play Store update).
-            shutdown(State.INIT, () -> {
-                Log.i(TAG, "Starting syncthing according to current state and preferences");
-                new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            });
-        }
-        // Stop syncthing.
-        else {
+        } else {
+            // Stop syncthing.
             if (mCurrentState == State.DISABLED)
                 return;
 
@@ -274,21 +279,21 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onDestroy() {
-        // If the storage permission got revoked, we did not start the binary nor mDeviceStateHolder
-        // and are in State.INIT requiring an immediate shutdown of this service class.
-        if (!mStoragePermissionGranted) {
-            shutdown(State.DISABLED, () -> {});
-            return;
-        }
-
-        synchronized (mStateLock) {
-            if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
-                Log.i(TAG, "Delay shutting down service until initialisation of Syncthing finished");
-                mStopScheduled = true;
-            } else {
-                Log.i(TAG, "Shutting down service immediately");
-                shutdown(State.DISABLED, () -> {});
+        if (mStoragePermissionGranted) {
+            synchronized (mStateLock) {
+                if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
+                    Log.i(TAG, "Delay shutting down synchting binary until initialisation finished");
+                    mStopScheduled = true;
+                } else {
+                    Log.i(TAG, "Shutting down syncthing binary immediately");
+                    shutdown(State.DISABLED, () -> {});
+                }
             }
+        } else {
+            // If the storage permission got revoked, we did not start the binary and
+            // are in State.INIT requiring an immediate shutdown of this service class.
+            Log.i(TAG, "Shutting down syncthing binary due to missing storage permission.");
+            shutdown(State.DISABLED, () -> {});
         }
 
         if (mDeviceStateHolder != null) {

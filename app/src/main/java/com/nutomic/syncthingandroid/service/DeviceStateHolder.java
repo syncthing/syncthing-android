@@ -65,7 +65,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public interface OnDeviceStateChangedListener {
-        void onDeviceStateChanged();
+        void onDeviceStateChanged(boolean shouldRun);
     }
 
     private final Context mContext;
@@ -83,7 +83,13 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     private boolean mIsCharging;
     private boolean mIsPowerSaving;
 
+    /**
+     * Stores the result of the last call to {@link shouldRun}.
+     */
+    private boolean lastDeterminedShouldRun = false;
+
     public DeviceStateHolder(Context context, OnDeviceStateChangedListener listener) {
+        Log.v(TAG, "New class instance");
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
@@ -94,6 +100,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void shutdown() {
+        Log.v(TAG, "shutdown() called");
         mBroadcastManager.unregisterReceiver(mReceiver);
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
 
@@ -166,9 +173,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             mIsPowerSaving = intent.getBooleanExtra(EXTRA_IS_POWER_SAVING, mIsPowerSaving);
             Log.i(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
                     ", charging: " + mIsCharging + ", power saving: " + mIsPowerSaving);
-
-            updateWifiSsid();
-            mListener.onDeviceStateChanged();
+            refreshNetworkInfo();
         }
     }
 
@@ -185,13 +190,20 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
 
     public void refreshNetworkInfo() {
         updateWifiSsid();
-        mListener.onDeviceStateChanged();
+
+        // Check if the current conditions changed the result of shouldRun()
+        // compared to the last determined result.
+        boolean newShouldRun = shouldRun();
+        if (newShouldRun != lastDeterminedShouldRun) {
+            mListener.onDeviceStateChanged(newShouldRun);
+            lastDeterminedShouldRun = newShouldRun;
+        }
     }
 
     /**
      * Determines if Syncthing should currently run.
      */
-    boolean shouldRun() {
+    private boolean shouldRun() {
         boolean prefRespectPowerSaving = mPreferences.getBoolean("respect_battery_saving", true);
         if (prefRespectPowerSaving && mIsPowerSaving)
             return false;
