@@ -136,7 +136,8 @@ public class SyncthingService extends Service {
          * see issue: https://github.com/syncthing/syncthing-android/issues/871
          * We need to recheck if we still have the storage permission.
          */
-        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this,
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
                                         PackageManager.PERMISSION_GRANTED);
     }
 
