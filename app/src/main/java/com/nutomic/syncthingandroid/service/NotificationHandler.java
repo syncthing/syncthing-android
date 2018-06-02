@@ -26,7 +26,7 @@ public class NotificationHandler {
     private static final int ID_RESTART = 2;
     private static final int ID_STOP_BACKGROUND_WARNING = 3;
     private static final int ID_CRASH = 9;
-    private static final int ID_MISSINGPERM = 10;
+    private static final int ID_MISSING_PERM = 10;
     private static final String CHANNEL_PERSISTENT = "01_syncthing_persistent";
     private static final String CHANNEL_INFO = "02_syncthing_notifications";
     private static final String CHANNEL_PERSISTENT_WAITING = "03_syncthing_persistent_waiting";
@@ -182,7 +182,7 @@ public class NotificationHandler {
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .build();
-        mNotificationManager.notify(ID_MISSINGPERM, n);
+        mNotificationManager.notify(ID_MISSING_PERM, n);
     }
 
     public void showRestartNotification() {
