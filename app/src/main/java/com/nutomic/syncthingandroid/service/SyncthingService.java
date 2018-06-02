@@ -182,11 +182,10 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Checks according to preferences and charging/wifi state, whether syncthing should be enabled
-     * or not. Called by {@link DeviceStateHolder}.
-     *
-     * Depending on the result, syncthing is started or stopped, and {@link #onApiChange} is
-     * called.
+     * After run conditions monitored by {@link DeviceStateHolder} changed and
+     * it had an influence on the decision to run/terminate syncthing, this
+     * function is called to notify this class to run/terminate the syncthing binary.
+     * {@link #onApiChange} is called while applying the decision change.
      */
     private void onUpdatedShouldRun(boolean shouldRun) {
         if (shouldRun) {
