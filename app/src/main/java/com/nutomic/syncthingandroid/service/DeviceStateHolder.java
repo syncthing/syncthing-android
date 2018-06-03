@@ -164,12 +164,12 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             try {
                 mContext.unregisterReceiver(receiver);
                 Log.v(TAG, "Unregistered receiver '" + receiverReadableName + "'");
-            } catch(IllegalArgumentException) {
-                // We have to catch the race condition a registration is still internally pending in android
+                receiver = null;
+            } catch(IllegalArgumentException e) {
+                // We have to catch the race condition a registration is still pending in android
                 // according to https://stackoverflow.com/a/3568906
                 Log.w(TAG, "unregisterReceiver threw IllegalArgumentException");
             }
-            receiver = null;
         }
     }
 
