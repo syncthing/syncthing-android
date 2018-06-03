@@ -278,13 +278,21 @@ public class SyncthingService extends Service {
         }
     }
 
+    /**
+     * Called when @link{pollWebGui} confirmed the REST API is available.
+     * We can assume mApi being available under normal conditions.
+     * UI stressing results in mApi getting null on simultaneous shutdown, so
+     * we check it for safety.
+     */
     private void onApiAvailable() {
         onApiChange(State.ACTIVE);
         Log.i(TAG, "onApiAvailable(): State.ACTIVE reached.");
-        if (mEventProcessor == null) {
-            mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+        if (mApi != null) {
+            if (mEventProcessor == null) {
+                mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+            }
+            mEventProcessor.start();
         }
-        mEventProcessor.start();
     }
 
     @Override
