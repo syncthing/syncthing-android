@@ -283,8 +283,8 @@ public class SyncthingService extends Service {
         Log.i(TAG, "onApiAvailable(): State.ACTIVE reached.");
         if (mEventProcessor == null) {
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
-            registerOnWebGuiAvailableListener(mEventProcessor);
         }
+        mEventProcessor.start();
     }
 
     @Override
@@ -338,7 +338,7 @@ public class SyncthingService extends Service {
         onApiChange(newState);
 
         if (mEventProcessor != null) {
-            mEventProcessor.shutdown();
+            mEventProcessor.stop();
             mEventProcessor = null;
         }
 
