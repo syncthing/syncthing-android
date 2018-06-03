@@ -337,11 +337,15 @@ public class SyncthingService extends Service {
         Log.i(TAG, "Shutting down background service");
         onApiChange(newState);
 
-        if (mEventProcessor != null)
+        if (mEventProcessor != null) {
             mEventProcessor.shutdown();
+            mEventProcessor = null;
+        }
 
-        if (mApi != null)
+        if (mApi != null) {
             mApi.shutdown();
+            mApi = null;
+        }
 
         if (mNotificationHandler != null)
             mNotificationHandler.cancelPersistentNotification(this);
