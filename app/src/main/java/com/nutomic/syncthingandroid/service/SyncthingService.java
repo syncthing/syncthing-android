@@ -260,12 +260,6 @@ public class SyncthingService extends Service {
      */
     private class StartupTask extends AsyncTask<Void, Void, Void> {
 
-        public StartupTask() {
-            synchronized (mStateLock) {
-                onApiChange(State.STARTING);
-            }
-        }
-
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -273,7 +267,9 @@ public class SyncthingService extends Service {
                 mConfig.updateIfNeeded();
             } catch (ConfigXml.OpenConfigException e) {
                 mNotificationHandler.showCrashedNotification(R.string.config_create_failed, true);
-                onApiChange(State.ERROR);
+                synchronized (mStateLock) {
+                    onApiChange(State.ERROR);
+                }
                 cancel(true);
             }
             return null;
@@ -287,9 +283,12 @@ public class SyncthingService extends Service {
                 registerOnWebGuiAvailableListener(mApi);
                 Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
             }
-            pollWebGui();
-            mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
-            new Thread(mSyncthingRunnable).start();
+            synchronized (mStateLock) {
+                onApiChange(State.STARTING);
+                pollWebGui();
+                mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
+                new Thread(mSyncthingRunnable).start();
+            }
         }
     }
 
@@ -300,7 +299,9 @@ public class SyncthingService extends Service {
      * we check it for safety.
      */
     private void onApiAvailable() {
-        onApiChange(State.ACTIVE);
+        synchronized (mStateLock) {
+            onApiChange(State.ACTIVE);
+        }
         if (mApi == null) {
             Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
             return;
@@ -442,7 +443,6 @@ public class SyncthingService extends Service {
                 }
             }
             Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-            onApiChange(State.STARTING);
             Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
             mOnWebGuiAvailableListeners.clear();
         });
