@@ -266,17 +266,12 @@ public class SyncthingService extends Service {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
-                    SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
-
-            mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
-
-            if (mApi != null)
+            if (mApi == null) {
+                mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
+                                    SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
                 registerOnWebGuiAvailableListener(mApi);
-            if (mEventProcessor != null)
-                registerOnWebGuiAvailableListener(mEventProcessor);
-            Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
-
+                Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
+            }
             pollWebGui();
             mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
             new Thread(mSyncthingRunnable).start();
@@ -286,6 +281,10 @@ public class SyncthingService extends Service {
     private void onApiAvailable() {
         onApiChange(State.ACTIVE);
         Log.i(TAG, "onApiAvailable(): State.ACTIVE reached.");
+        if (mEventProcessor == null) {
+            mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+            registerOnWebGuiAvailableListener(mEventProcessor);
+        }
     }
 
     @Override

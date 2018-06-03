@@ -124,11 +124,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     private final AtomicInteger mAvailableCount = new AtomicInteger(0);
 
-    /**
-     * Number of asynchronous calls performed in {@link #onWebGuiAvailable()}.
-     */
-    private static final int TOTAL_STARTUP_CALLS = 3;
-
     public interface OnApiAvailableListener {
         void onApiAvailable();
     }
@@ -142,7 +137,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
      */
     @Override
     public void onWebGuiAvailable() {
-        mAvailableCount.set(0);
         new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();
