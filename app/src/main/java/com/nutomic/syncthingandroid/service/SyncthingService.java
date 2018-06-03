@@ -101,7 +101,8 @@ public class SyncthingService extends Service {
     private @Nullable RestApi mApi = null;
     private @Nullable EventProcessor mEventProcessor = null;
     private @Nullable DeviceStateHolder mDeviceStateHolder = null;
-    private SyncthingRunnable mSyncthingRunnable;
+    private @Nullable SyncthingRunnable mSyncthingRunnable = null;
+    private Thread mSyncthingRunnableThread = null;
     private Handler mHandler;
 
     private final HashSet<OnApiChangeListener> mOnApiChangeListeners = new HashSet<>();
@@ -297,8 +298,12 @@ public class SyncthingService extends Service {
             }
 
             // Start the syncthing binary.
+            if (mSyncthingRunnable != null || mSyncthingRunnableThread != null) {
+                Log.e(TAG, "StartupTask/onPostExecute: Syncthing binary lifecycle violated");
+            }
             mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
-            new Thread(mSyncthingRunnable).start();
+            mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
+            mSyncthingRunnableThread.start();
 
             /**
              * Wait for the web-gui of the native syncthing binary to come online.
@@ -419,15 +424,25 @@ public class SyncthingService extends Service {
             mApi = null;
         }
 
-        if (mNotificationHandler != null)
+        if (mNotificationHandler != null) {
             mNotificationHandler.cancelPersistentNotification(this);
+        }
 
         if (mSyncthingRunnable != null) {
-            mSyncthingRunnable.killSyncthing(onKilledListener);
+            mSyncthingRunnable.killSyncthing();
+            if (mSyncthingRunnableThread != null) {
+                Log.v(TAG, "Waiting for mSyncthingRunnableThread to finish after killSyncthing ...");
+                try {
+                    mSyncthingRunnableThread.join();
+                } catch (InterruptedException e) {
+                    Log.w(TAG, "mSyncthingRunnableThread InterruptedException");
+                }
+                Log.v(TAG, "Finished mSyncthingRunnableThread.");
+                mSyncthingRunnableThread = null;
+            }
             mSyncthingRunnable = null;
-        } else {
-            onKilledListener.onKilled();
         }
+        onKilledListener.onKilled();
     }
 
     /**
