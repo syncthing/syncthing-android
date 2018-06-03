@@ -110,7 +110,6 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     public void shutdown() {
         Log.v(TAG, "Shutting down");
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
-        // unregisterChildReceivers();
         mReceiverManager.unregisterAllReceivers(mBroadcastManager);
         if (mDeviceStateChangedReceiver != null) {
             mBroadcastManager.unregisterReceiver(mDeviceStateChangedReceiver);
@@ -123,7 +122,6 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
                 Constants.PREF_SYNC_ONLY_WIFI, Constants.PREF_RESPECT_BATTERY_SAVING,
                 Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
         if (watched.contains(key)) {
-            // unregisterChildReceivers();
             mReceiverManager.unregisterAllReceivers(mBroadcastManager);
             registerChildReceivers();
         }
@@ -131,31 +129,27 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
 
     private void registerChildReceivers() {
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
-            Log.i(TAG, "Listening for network state changes");
+            Log.i(TAG, "Creating NetworkReceiver");
             NetworkReceiver.updateNetworkStatus(mContext);
             mNetworkReceiver = new NetworkReceiver();
-            // mContext.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
             ReceiverManager.registerReceiver(mBroadcastManager, mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
 
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false)) {
-            Log.i(TAG, "Listening to battery state changes");
+            Log.i(TAG, "Creating BatteryReceiver");
             BatteryReceiver.updateInitialChargingStatus(mContext);
             mBatteryReceiver = new BatteryReceiver();
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_POWER_CONNECTED);
             filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-            // mContext.registerReceiver(mBatteryReceiver, filter);
             ReceiverManager.registerReceiver(mBroadcastManager, mBatteryReceiver, filter);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                 mPreferences.getBoolean("respect_battery_saving", true)) {
-            Log.i(TAG, "Listening to power saving changes");
+            Log.i(TAG, "Creating PowerSaveModeChangedReceiver");
             PowerSaveModeChangedReceiver.updatePowerSavingState(mContext);
             mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
-            // mContext.registerReceiver(mPowerSaveModeChangedReceiver,
-            //         new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
             ReceiverManager.registerReceiver(mBroadcastManager, mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
