@@ -97,8 +97,9 @@ public class SyncthingService extends Service {
     private State mCurrentState = State.DISABLED;
 
     private ConfigXml mConfig;
-    private RestApi mApi;
-    private EventProcessor mEventProcessor;
+    private @Nullable PollWebGuiAvailableTask mPollWebGuiAvailableTask = null;
+    private @Nullable RestApi mApi = null;
+    private @Nullable EventProcessor mEventProcessor = null;
     private @Nullable DeviceStateHolder mDeviceStateHolder = null;
     private SyncthingRunnable mSyncthingRunnable;
     private Handler mHandler;
@@ -306,11 +307,17 @@ public class SyncthingService extends Service {
              * to stop the binary in the time while waiting for the GUI to become active. See the comment
              * for SyncthingService.onDestroy for details.
              */
-            new PollWebGuiAvailableTask(SyncthingService.this, getWebGuiUrl(), mConfig.getApiKey(), result -> {
-                Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-                Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
-                mOnWebGuiAvailableListeners.clear();
-            });
+            if (mPollWebGuiAvailableTask == null) {
+                mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
+                        SyncthingService.this,
+                        getWebGuiUrl(),
+                        mConfig.getApiKey(),
+                        result -> {
+                    Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+                    Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
+                    mOnWebGuiAvailableListeners.clear();
+                });
+            }
         }
     }
 
@@ -396,6 +403,11 @@ public class SyncthingService extends Service {
     private void shutdown(State newState, SyncthingRunnable.OnSyncthingKilled onKilledListener) {
         Log.i(TAG, "Shutting down background service");
         onApiChange(newState);
+
+        if (mPollWebGuiAvailableTask != null) {
+            mPollWebGuiAvailableTask.cancelRequestsAndCallback();
+            mPollWebGuiAvailableTask = null;
+        }
 
         if (mEventProcessor != null) {
             mEventProcessor.stop();
