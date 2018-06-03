@@ -130,11 +130,14 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     }
 
     private void registerChildReceivers() {
+        boolean incomingBroadcastEventsExpected = false;
+
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
             Log.i(TAG, "Creating NetworkReceiver");
             NetworkReceiver.updateNetworkStatus(mContext);
             mNetworkReceiver = new NetworkReceiver();
             ReceiverManager.registerReceiver(mContext, mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            incomingBroadcastEventsExpected = true;
         }
 
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false)) {
@@ -145,15 +148,23 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             filter.addAction(Intent.ACTION_POWER_CONNECTED);
             filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
             ReceiverManager.registerReceiver(mContext, mBatteryReceiver, filter);
+            incomingBroadcastEventsExpected = true;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                mPreferences.getBoolean("respect_battery_saving", true)) {
+                mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true)) {
             Log.i(TAG, "Creating PowerSaveModeChangedReceiver");
             PowerSaveModeChangedReceiver.updatePowerSavingState(mContext);
             mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
             ReceiverManager.registerReceiver(mContext, mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+            incomingBroadcastEventsExpected = true;
+        }
+
+        // If no broadcast messages can be received as we didn't register an emitter,
+        // force an initial decision to be made.
+        if (!incomingBroadcastEventsExpected) {
+            updateShouldRunDecision();
         }
     }
 
@@ -198,7 +209,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         Log.v(TAG, "State updated: IsAllowedConnectionType: " + mIsAllowedConnectionType +
                 ", IsCharging: " + mIsCharging + ", IsPowerSaving: " + mIsPowerSaving);
 
-        boolean prefRespectPowerSaving = mPreferences.getBoolean("respect_battery_saving", true);
+        boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         if (prefRespectPowerSaving && mIsPowerSaving)
             return false;
 
