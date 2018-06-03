@@ -262,8 +262,8 @@ public class SyncthingService extends Service {
         @Override
         protected void onPreExecute() {
             synchronized(mStateLock) {
-                if (mStateLock != State.INIT) {
-                    Log.e(TAG, "StartupTask: Wrong state detected " + mStateLock + ". Cancelling.");
+                if (mCurrentState != State.INIT) {
+                    Log.e(TAG, "StartupTask: Wrong state detected " + mCurrentState + ". Cancelling.");
                     cancel(true);
                     return;
                 }
