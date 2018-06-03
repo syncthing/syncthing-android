@@ -161,9 +161,15 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
 
     private void unregisterReceiverIfRegistered(BroadcastReceiver receiver, String receiverReadableName) {
         if (receiver != null) {
-            mContext.unregisterReceiver(receiver);
+            try {
+                mContext.unregisterReceiver(receiver);
+                Log.v(TAG, "Unregistered receiver '" + receiverReadableName + "'");
+            } catch(IllegalArgumentException) {
+                // We have to catch the race condition a registration is still internally pending in android
+                // according to https://stackoverflow.com/a/3568906
+                Log.w(TAG, "unregisterReceiver threw IllegalArgumentException");
+            }
             receiver = null;
-            Log.v(TAG, "Unregistered receiver '" + receiverReadableName + "'");
         }
     }
 
