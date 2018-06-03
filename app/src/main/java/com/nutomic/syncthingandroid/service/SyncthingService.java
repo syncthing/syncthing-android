@@ -286,13 +286,15 @@ public class SyncthingService extends Service {
      */
     private void onApiAvailable() {
         onApiChange(State.ACTIVE);
-        Log.i(TAG, "onApiAvailable(): State.ACTIVE reached.");
-        if (mApi != null) {
-            if (mEventProcessor == null) {
-                mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
-            }
-            mEventProcessor.start();
+        Log.i(TAG, "onApiAvailable: State.ACTIVE reached.");
+        if (mApi == null) {
+            Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
+            return;
         }
+        if (mEventProcessor == null) {
+            mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+        }
+        mEventProcessor.start();
     }
 
     @Override
