@@ -44,8 +44,6 @@ import eu.chainfire.libsuperuser.Shell;
 
 public class SettingsActivity extends SyncthingActivity {
 
-    private static final String TAG = "SettingsActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +59,6 @@ public class SettingsActivity extends SyncthingActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (Manifest.permission.ACCESS_COARSE_LOCATION.equals(permissions[i])) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Log.v(TAG, "onRequestPermissionsResult startService");
                         this.startService(new Intent(this, SyncthingService.class)
                                 .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
                     } else {

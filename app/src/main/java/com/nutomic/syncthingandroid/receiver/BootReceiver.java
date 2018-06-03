@@ -4,14 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import com.nutomic.syncthingandroid.service.DeviceStateHolder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
 public class BootReceiver extends BroadcastReceiver {
-
-    private static final String TAG = "BootReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -22,7 +19,6 @@ public class BootReceiver extends BroadcastReceiver {
         if (!DeviceStateHolder.alwaysRunInBackground(context))
             return;
 
-        Log.v(TAG, "onReceive startServiceCompat");
         startServiceCompat(context);
     }
 
