@@ -42,23 +42,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         mIsPaused = false;
         switch (mServiceState) {
             case DISABLED:
-                if (!this.isFinishing()) {
-                    // Show disabled dialog.
-                    mDisabledDialog = new AlertDialog.Builder(this)
-                            .setTitle(R.string.syncthing_disabled_title)
-                            .setMessage(R.string.syncthing_disabled_message)
-                            .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                                    (dialogInterface, i) -> {
-                                        finish();
-                                        startActivity(new Intent(this, SettingsActivity.class));
-                                    }
-                            )
-                            .setNegativeButton(R.string.exit,
-                                    (dialogInterface, i) -> ActivityCompat.finishAffinity(this)
-                            )
-                            .setCancelable(false)
-                            .show();
-                }
+                showDisabledDialog();
                 break;
             default:
                 break;
@@ -95,7 +79,34 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 dismissDisabledDialog();
                 dismissLoadingDialog();
                 break;
+            case DISABLED:
+                if (!mIsPaused) {
+                    showDisabledDialog();
+                }
+                break;
+            default:
+                break;
         }
+    }
+
+    private void showDisabledDialog() {
+        if (this.isFinishing() && (mDisabledDialog != null)) {
+            return;
+        }
+        mDisabledDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.syncthing_disabled_title)
+                .setMessage(R.string.syncthing_disabled_message)
+                .setPositiveButton(R.string.syncthing_disabled_change_settings,
+                        (dialogInterface, i) -> {
+                            finish();
+                            startActivity(new Intent(this, SettingsActivity.class));
+                        }
+                )
+                .setNegativeButton(R.string.exit,
+                        (dialogInterface, i) -> ActivityCompat.finishAffinity(this)
+                )
+                .setCancelable(false)
+                .show();
     }
 
     private void dismissDisabledDialog() {
