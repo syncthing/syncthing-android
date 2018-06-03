@@ -204,8 +204,7 @@ public class SyncthingService extends Service {
      */
     private void onUpdatedShouldRunDecision(boolean newShouldRunDecision) {
         if (newShouldRunDecision != mLastDeterminedShouldRun) {
-            Log.i(TAG, "onUpdatedShouldRunDecision: Got state change from " + mLastDeterminedShouldRun +
-                    " to " + newShouldRunDecision + " according to current state and preferences");
+            Log.i(TAG, "shouldRun decision changed to " + newShouldRunDecision + " according to configured run conditions.");
             mLastDeterminedShouldRun = newShouldRunDecision;
 
             // React to the shouldRun condition change.
