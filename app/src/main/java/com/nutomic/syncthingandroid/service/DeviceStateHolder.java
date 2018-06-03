@@ -171,7 +171,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
                     intent.getBooleanExtra(EXTRA_IS_ALLOWED_NETWORK_CONNECTION, mIsAllowedNetworkConnection);
             mIsCharging = intent.getBooleanExtra(EXTRA_IS_CHARGING, mIsCharging);
             mIsPowerSaving = intent.getBooleanExtra(EXTRA_IS_POWER_SAVING, mIsPowerSaving);
-            Log.v(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
+            Log.i(TAG, "State updated, allowed network connection: " + mIsAllowedNetworkConnection +
                     ", charging: " + mIsCharging + ", power saving: " + mIsPowerSaving);
             updateShouldRunDecision();
         }
@@ -193,7 +193,6 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         // compared to the last determined result.
         boolean newShouldRun = decideShouldRun();
         if (newShouldRun != lastDeterminedShouldRun) {
-            Log.i(TAG, "updateShouldRunDecision: Sending state change from " + lastDeterminedShouldRun + " to " + newShouldRun);
             mListener.onDeviceStateChanged(newShouldRun);
             lastDeterminedShouldRun = newShouldRun;
         }
