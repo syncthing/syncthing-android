@@ -213,20 +213,6 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     /**
-     * Increments mAvailableCount by one, and, if it reached TOTAL_STARTUP_CALLS,
-     * calls {@link SyncthingService#onApiChange}.
-     */
-    private void tryIsAvailable() {
-        int value = mAvailableCount.incrementAndGet();
-        if (BuildConfig.DEBUG && value > TOTAL_STARTUP_CALLS) {
-            throw new AssertionError("Too many startup calls");
-        }
-        if (value == TOTAL_STARTUP_CALLS) {
-
-        }
-    }
-
-    /**
      * Sends current config to Syncthing.
      * Will result in a "ConfigSaved" event.
      * EventProcessor will trigger this.reloadConfig().

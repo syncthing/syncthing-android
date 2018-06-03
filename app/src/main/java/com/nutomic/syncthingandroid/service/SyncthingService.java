@@ -263,7 +263,7 @@ public class SyncthingService extends Service {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected synchronized void onPostExecute(Void aVoid) {
             mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
                     SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
 
