@@ -254,6 +254,10 @@ public class MainActivity extends StateDialogActivity
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setOptimalDrawerWidth(findViewById(R.id.drawer));
 
+        // SyncthingService needs to be started from this activity as the user
+        // can directly launch this activity from the recent activity switcher.
+        startService(new Intent(this, SyncthingService.class));
+
         onNewIntent(getIntent());
     }
 

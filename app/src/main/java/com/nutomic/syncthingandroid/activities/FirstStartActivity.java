@@ -66,8 +66,6 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
             mPreferences.edit().putBoolean("first_start", false).apply();
         }
 
-        startService(new Intent(this, SyncthingService.class));
-
         // In case start_into_web_gui option is enabled, start both activities so that back
         // navigation works as expected.
         Intent mainIntent = new Intent(this, MainActivity.class);
