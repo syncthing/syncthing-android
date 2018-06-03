@@ -263,7 +263,7 @@ public class SyncthingService extends Service {
         protected void onPreExecute() {
             synchronized(mStateLock) {
                 if (mCurrentState != State.INIT) {
-                    Log.e(TAG, "StartupTask: Wrong state detected " + mCurrentState + ". Cancelling.");
+                    Log.e(TAG, "StartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
                     cancel(true);
                     return;
                 }
@@ -321,7 +321,15 @@ public class SyncthingService extends Service {
      * we check it for safety.
      */
     private void onApiAvailable() {
+        if (mApi == null) {
+            Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
+            return;
+        }
         synchronized (mStateLock) {
+            if (mCurrentState != State.STARTING) {
+                Log.e(TAG, "onApiAvailable: Wrong state " + mCurrentState + " detected. Cancelling callback.");
+                return;
+            }
             onApiChange(State.ACTIVE);
         }
 
@@ -335,10 +343,7 @@ public class SyncthingService extends Service {
             stopSelf();
             return;
         }
-        if (mApi == null) {
-            Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
-            return;
-        }
+
         if (mEventProcessor == null) {
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
         }
