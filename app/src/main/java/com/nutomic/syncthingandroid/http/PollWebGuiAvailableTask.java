@@ -55,13 +55,16 @@ public class PollWebGuiAvailableTask extends ApiRequest {
     }
 
     private void onError(VolleyError error) {
-        mHandler.postDelayed(this::performRequest, WEB_GUI_POLL_INTERVAL);
-
-        Throwable cause = error.getCause();
-        if (cause == null || cause.getClass().equals(ConnectException.class)) {
-            Log.v(TAG, "Polling web gui");
+        if (mListener != null) {
+            mHandler.postDelayed(this::performRequest, WEB_GUI_POLL_INTERVAL);
+            Throwable cause = error.getCause();
+            if (cause == null || cause.getClass().equals(ConnectException.class)) {
+                Log.v(TAG, "Polling web gui");
+            } else {
+                Log.w(TAG, "Unexpected error while polling web gui", error);
+            }
         } else {
-            Log.w(TAG, "Unexpected error while polling web gui", error);
+            Log.v(TAG, "Cancelled callback and outstanding requests");
         }
     }
 
