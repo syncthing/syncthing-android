@@ -111,6 +111,11 @@ public class SyncthingService extends Service {
     private final Object mStateLock = new Object();
 
     /**
+     * Stores the result of the last should run decision received by OnDeviceStateChangedListener.
+     */
+    private boolean mLastDeterminedShouldRun = false;
+
+    /**
      * True if a stop was requested while syncthing is starting, in that case, perform stop in
      * {@link #pollWebGui}.
      */
@@ -126,6 +131,7 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onCreate() {
+        Log.v(TAG, "onCreate");
         super.onCreate();
         PRNGFixes.apply();
         ((SyncthingApp) getApplication()).component().inject(this);
@@ -148,6 +154,7 @@ public class SyncthingService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.v(TAG, "onStartCommand");
         if (!mStoragePermissionGranted) {
             Log.e(TAG, "User revoked storage permission. Stopping service.");
             if (mNotificationHandler != null) {
@@ -157,7 +164,15 @@ public class SyncthingService extends Service {
             return START_NOT_STICKY;
         }
 
-        mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::onUpdatedShouldRunDecision);
+        if (mDeviceStateHolder == null) {
+            /**
+             * Instantiate the run condition monitor on first onStartCommand and
+             * enable callback on run condition change affecting the final decision to
+             * run/terminate syncthing. After initial run conditions are collected
+             * the first decision is sent to {@link onUpdatedShouldRunDecision}.
+             */
+            mDeviceStateHolder = new DeviceStateHolder(SyncthingService.this, this::onUpdatedShouldRunDecision);
+        }
         mNotificationHandler.updatePersistentNotification(this);
 
         if (intent == null)
@@ -187,33 +202,41 @@ public class SyncthingService extends Service {
      * function is called to notify this class to run/terminate the syncthing binary.
      * {@link #onApiChange} is called while applying the decision change.
      */
-    private void onUpdatedShouldRunDecision(boolean shouldRun) {
-        if (shouldRun) {
-            // Start syncthing.
-            switch (mCurrentState) {
-                case DISABLED:
-                case INIT:
-                    // HACK: Make sure there is no syncthing binary left running from an improper
-                    // shutdown (eg Play Store update).
-                    shutdown(State.INIT, () -> {
-                        Log.i(TAG, "Starting syncthing according to current state and preferences after State.INIT");
-                        new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                    });
-                    break;
-                case STARTING:
-                case ACTIVE:
-                    mStopScheduled = false;
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            // Stop syncthing.
-            if (mCurrentState == State.DISABLED)
-                return;
+    private void onUpdatedShouldRunDecision(boolean newShouldRunDecision) {
+        if (newShouldRunDecision != mLastDeterminedShouldRun) {
+            Log.i(TAG, "onUpdatedShouldRunDecision: Got state change from " + mLastDeterminedShouldRun +
+                    " to " + newShouldRunDecision + " according to current state and preferences");
+            mLastDeterminedShouldRun = newShouldRunDecision;
 
-            Log.i(TAG, "Stopping syncthing according to current state and preferences");
-            shutdown(State.DISABLED, () -> {});
+            // React to the shouldRun condition change.
+            if (newShouldRunDecision) {
+                // Start syncthing.
+                switch (mCurrentState) {
+                    case DISABLED:
+                    case INIT:
+                        // HACK: Make sure there is no syncthing binary left running from an improper
+                        // shutdown (eg Play Store update).
+                        shutdown(State.INIT, () -> {
+                            Log.v(TAG, "Starting syncthing");
+                            new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        });
+                        break;
+                    case STARTING:
+                    case ACTIVE:
+                        mStopScheduled = false;
+                        break;
+                    case ERROR:
+                    default:
+                        break;
+                }
+            } else {
+                // Stop syncthing.
+                if (mCurrentState == State.DISABLED) {
+                    return;
+                }
+                Log.v(TAG, "Stopping syncthing");
+                shutdown(State.DISABLED, () -> {});
+            }
         }
     }
 
@@ -278,6 +301,14 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onDestroy() {
+        Log.v(TAG, "onDestroy");
+        if (mDeviceStateHolder != null) {
+            /**
+             * Shut down the OnDeviceStateChangedListener so we won't get interrupted by run
+             * condition events that occur during shutdown.
+             */
+            mDeviceStateHolder.shutdown();
+        }
         if (mStoragePermissionGranted) {
             synchronized (mStateLock) {
                 if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
@@ -294,10 +325,7 @@ public class SyncthingService extends Service {
             Log.i(TAG, "Shutting down syncthing binary due to missing storage permission.");
             shutdown(State.DISABLED, () -> {});
         }
-
-        if (mDeviceStateHolder != null) {
-            mDeviceStateHolder.shutdown();
-        }
+        super.onDestroy();
     }
 
     /**

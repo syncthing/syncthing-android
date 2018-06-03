@@ -36,11 +36,11 @@ public class NetworkReceiver extends BroadcastReceiver {
         boolean isOffline = ni == null;
         boolean isWifi = ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI && ni.isConnected();
         boolean isNetworkMetered = (Build.VERSION.SDK_INT >= 16) ? cm.isActiveNetworkMetered() : false;
-        boolean isAllowedConnection =  isOffline || (isWifi && !isNetworkMetered);
+        boolean isAllowedConnectionType =  isOffline || (isWifi && !isNetworkMetered);
 
         LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
         Intent intent = new Intent(DeviceStateHolder.ACTION_DEVICE_STATE_CHANGED);
-        intent.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, isAllowedConnection);
+        intent.putExtra(DeviceStateHolder.EXTRA_IS_ALLOWED_NETWORK_CONNECTION, isAllowedConnectionType);
         lbm.sendBroadcast(intent);
     }
 
