@@ -98,7 +98,6 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 .setMessage(R.string.syncthing_disabled_message)
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
                         (dialogInterface, i) -> {
-                            finish();
                             startActivity(new Intent(this, SettingsActivity.class));
                         }
                 )

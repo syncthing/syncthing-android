@@ -122,10 +122,13 @@ public class NotificationHandler {
                     break;
             }
 
-            // Launch FirstStartActivity instead of MainActivity so we can request permission if
-            // necessary.
+            /**
+             * We no longer need to launch FirstStartActivity instead of MainActivity as
+             * {@link SyncthingService#onStartCommand} will check for denied permissions.
+             */
             PendingIntent pi = PendingIntent.getActivity(mContext, 0,
-                    new Intent(mContext, FirstStartActivity.class), 0);
+                    new Intent(mContext, MainActivity.class),
+                     PendingIntent.FLAG_ONE_SHOT);
 
             // Reason for two separate IDs: if one of the notification channels is hidden then
             // the startForeground() below won't update the notification but use the old one
