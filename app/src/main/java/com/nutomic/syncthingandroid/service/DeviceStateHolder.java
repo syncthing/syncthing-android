@@ -122,7 +122,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
 
     private void registerAllReceivers() {
         mDeviceStateChangedReceiver = new DeviceStateChangedReceiver();
-        mBroadcastManager.registerReceiver(mDeviceStateChangedReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
+        mContext.registerReceiver(mDeviceStateChangedReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
 
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
             Log.i(TAG, "Listening for network state changes");
