@@ -126,6 +126,7 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onCreate() {
+        Log.v(TAG, "onCreate");
         super.onCreate();
         PRNGFixes.apply();
         ((SyncthingApp) getApplication()).component().inject(this);
@@ -148,6 +149,7 @@ public class SyncthingService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.v(TAG, "onStartCommand");
         if (!mStoragePermissionGranted) {
             Log.e(TAG, "User revoked storage permission. Stopping service.");
             if (mNotificationHandler != null) {
@@ -224,11 +226,13 @@ public class SyncthingService extends Service {
     private class StartupTask extends AsyncTask<Void, Void, Void> {
 
         public StartupTask() {
+            Log.v(TAG, "StartupTask");
             onApiChange(State.STARTING);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
+            Log.v(TAG, "doInBackground");
             try {
                 mConfig = new ConfigXml(SyncthingService.this);
                 mConfig.updateIfNeeded();
@@ -278,6 +282,7 @@ public class SyncthingService extends Service {
      */
     @Override
     public void onDestroy() {
+        Log.v(TAG, "onDestroy");
         if (mStoragePermissionGranted) {
             synchronized (mStateLock) {
                 if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
@@ -298,6 +303,7 @@ public class SyncthingService extends Service {
         if (mDeviceStateHolder != null) {
             mDeviceStateHolder.shutdown();
         }
+        super.onDestroy();
     }
 
     /**

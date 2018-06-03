@@ -240,6 +240,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
         new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), result -> {
             Intent intent = new Intent(mContext, SyncthingService.class)
                     .setAction(SyncthingService.ACTION_RESTART);
+            Log.v(TAG, "restart startService");
             mContext.startService(intent);
         });
         mOnConfigChangedListener.onConfigChanged();
