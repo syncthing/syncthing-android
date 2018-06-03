@@ -245,7 +245,7 @@ public class SyncthingService extends Service {
      */
     private class StartupTask extends AsyncTask<Void, Void, Void> {
 
-        public StartupTask() {
+        public synchronized StartupTask() {
             onApiChange(State.STARTING);
         }
 
@@ -263,7 +263,7 @@ public class SyncthingService extends Service {
         }
 
         @Override
-        protected synchronized void onPostExecute(Void aVoid) {
+        protected void onPostExecute(Void aVoid) {
             mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
                     SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
 
