@@ -73,11 +73,13 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     private final LocalBroadcastManager mBroadcastManager;
     @Inject SharedPreferences mPreferences;
 
-    private ReceiverManager mReceiverManager;
     private @Nullable DeviceStateChangedReceiver mDeviceStateChangedReceiver = null;
-    private @Nullable NetworkReceiver mNetworkReceiver = null;
-    private @Nullable BatteryReceiver mBatteryReceiver = null;
-    private @Nullable PowerSaveModeChangedReceiver mPowerSaveModeChangedReceiver = null;
+    private ReceiverManager mReceiverManager;
+
+    // Those receivers are managed by {@link mReceiverManager}.
+    private NetworkReceiver mNetworkReceiver;
+    private BatteryReceiver mBatteryReceiver;
+    private PowerSaveModeChangedReceiver mPowerSaveModeChangedReceiver = null;
 
     private boolean mIsAllowedConnectionType;
     private String mWifiSsid;
