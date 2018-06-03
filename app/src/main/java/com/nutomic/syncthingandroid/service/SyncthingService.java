@@ -265,7 +265,7 @@ public class SyncthingService extends Service {
         @Override
         protected void onPostExecute(Void aVoid) {
             mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
-                    SyncthingService.this::onSyncthingStarted, () -> onApiChange(mCurrentState));
+                    SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
 
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
 
@@ -281,9 +281,9 @@ public class SyncthingService extends Service {
         }
     }
 
-    private void onSyncthingStarted() {
+    private void onApiAvailable() {
         onApiChange(State.ACTIVE);
-        Log.i(TAG, "onSyncthingStarted(): State.ACTIVE reached.");
+        Log.i(TAG, "onApiAvailable(): State.ACTIVE reached.");
     }
 
     @Override

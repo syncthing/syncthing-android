@@ -147,16 +147,19 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();
             Log.i(TAG, "Syncthing version is " + mVersion);
-            tryIsAvailable();
             updateDebugFacilitiesCache();
         });
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             onReloadConfigComplete(result);
-            tryIsAvailable();
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
-            tryIsAvailable();
+            /**
+             * Tell SyncthingService which put a listener that the REST API is available.
+             * This must not be done before as SettingsFragment expects "mLocalDeviceId" to
+             * be present in this class to get the local device object in @link{SettingsActivity#onApiChange}.
+             */
+            mOnApiAvailableListener.onApiAvailable();
         });
     }
 
@@ -219,7 +222,7 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
             throw new AssertionError("Too many startup calls");
         }
         if (value == TOTAL_STARTUP_CALLS) {
-            mOnApiAvailableListener.onApiAvailable();
+
         }
     }
 
@@ -311,7 +314,13 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     }
 
     public Device getLocalDevice() {
-        for (Device d : getDevices(true)) {
+        List<Device> devices = getDevices(true);
+        if (devices.isEmpty()) {
+            Log.e(TAG, "getLocalDevice: devices is empty");
+            throw new RuntimeException();
+        }
+        Log.v(TAG, "getLocalDevice: Looking for local device ID " + mLocalDeviceId);
+        for (Device d : devices) {
             if (d.deviceID.equals(mLocalDeviceId)) {
                 return deepCopy(d, Device.class);
             }
