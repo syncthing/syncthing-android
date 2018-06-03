@@ -96,17 +96,22 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         Log.v(TAG, "Created new instance");
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
-        mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
-
         mPreferences.registerOnSharedPreferenceChangeListener(this);
         mOnDeviceStateChangedListener = listener;
-        registerAllReceivers();
+
+        mDeviceStateChangedReceiver = new DeviceStateChangedReceiver();
+        mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+        mBroadcastManager.registerReceiver(mDeviceStateChangedReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
+        registerChildReceivers();
     }
 
     public void shutdown() {
         Log.v(TAG, "Shutting down");
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
-        unregisterAllReceivers();
+        unregisterChildReceivers();
+        if (mDeviceStateChangedReceiver != null) {
+            mBroadcastManager.unregisterReceiver(mDeviceStateChangedReceiver);
+        }
     }
 
     @Override
@@ -115,15 +120,12 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
                 Constants.PREF_SYNC_ONLY_WIFI, Constants.PREF_RESPECT_BATTERY_SAVING,
                 Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
         if (watched.contains(key)) {
-            unregisterAllReceivers();
-            registerAllReceivers();
+            unregisterChildReceivers();
+            registerChildReceivers();
         }
     }
 
-    private void registerAllReceivers() {
-        mDeviceStateChangedReceiver = new DeviceStateChangedReceiver();
-        mContext.registerReceiver(mDeviceStateChangedReceiver, new IntentFilter(ACTION_DEVICE_STATE_CHANGED));
-
+    private void registerChildReceivers() {
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
             Log.i(TAG, "Listening for network state changes");
             NetworkReceiver.updateNetworkStatus(mContext);
@@ -151,11 +153,10 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    private void unregisterAllReceivers() {
+    private void unregisterChildReceivers() {
         unregisterReceiverIfRegistered(mNetworkReceiver, "NetworkReceiver");
         unregisterReceiverIfRegistered(mBatteryReceiver, "BatteryReceiver");
         unregisterReceiverIfRegistered(mPowerSaveModeChangedReceiver, "PowerSaveModeChangedReceiver");
-        unregisterReceiverIfRegistered(mDeviceStateChangedReceiver, "DeviceStateChangedReceiver");
     }
 
     private void unregisterReceiverIfRegistered(BroadcastReceiver receiver, String receiverReadableName) {
