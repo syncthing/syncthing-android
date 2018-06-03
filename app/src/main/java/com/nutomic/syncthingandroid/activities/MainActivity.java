@@ -434,15 +434,19 @@ public class MainActivity extends StateDialogActivity
         return super.onKeyDown(keyCode, e);
     }
 
-    /**
-     * Close drawer on back button press.
-     */
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // Close drawer on back button press.
             closeDrawer();
-        else
-            super.onBackPressed();
+        } else {
+            /**
+             * Leave MainActivity in its state as the home button was pressed.
+             * This will avoid waiting for the loading spinner when getting back
+             * and give changes to do UI updates based on EventProcessor in the future.
+             */
+            moveTaskToBack(true);
+        }
     }
 
     /**
