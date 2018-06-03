@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -17,9 +16,9 @@ public class ReceiverManager {
 
     private static List<BroadcastReceiver> mReceivers = new ArrayList<BroadcastReceiver>();
 
-    public static void registerReceiver(LocalBroadcastManager localBroadcastManager, BroadcastReceiver receiver, IntentFilter intentFilter) {
+    public static void registerReceiver(Context context, BroadcastReceiver receiver, IntentFilter intentFilter) {
         mReceivers.add(receiver);
-        localBroadcastManager.registerReceiver(receiver, intentFilter);
+        context.registerReceiver(receiver, intentFilter);
         Log.v(TAG, "Registered receiver: " + receiver + " with filter: " + intentFilter);
     }
 
@@ -27,14 +26,14 @@ public class ReceiverManager {
         return mReceivers.contains(receiver);
     }
 
-    public static void unregisterReceiver(LocalBroadcastManager localBroadcastManager, BroadcastReceiver receiver) {
-        if (localBroadcastManager == null) {
-            Log.e(TAG, "unregisterReceiver: localBroadcastManager is null");
+    public static void unregisterReceiver(Context context, BroadcastReceiver receiver) {
+        if (context == null) {
+            Log.e(TAG, "unregisterReceiver: context is null");
             return;
         }
         if (isReceiverRegistered(receiver)) {
             try {
-                localBroadcastManager.unregisterReceiver(receiver);
+                context.unregisterReceiver(receiver);
                 Log.v(TAG, "Unregistered receiver: " + receiver);
             } catch(IllegalArgumentException e) {
                 // We have to catch the race condition a registration is still pending in android
@@ -45,9 +44,9 @@ public class ReceiverManager {
         }
     }
 
-    public static void unregisterAllReceivers(LocalBroadcastManager localBroadcastManager) {
-        if (localBroadcastManager == null) {
-            Log.e(TAG, "unregisterReceiver: localBroadcastManager is null");
+    public static void unregisterAllReceivers(Context context) {
+        if (context == null) {
+            Log.e(TAG, "unregisterReceiver: context is null");
             return;
         }
         Iterator<BroadcastReceiver> iter = mReceivers.iterator();
@@ -55,7 +54,7 @@ public class ReceiverManager {
             BroadcastReceiver receiver = iter.next();
             if (isReceiverRegistered(receiver)) {
                 try {
-                    localBroadcastManager.unregisterReceiver(receiver);
+                    context.unregisterReceiver(receiver);
                     Log.v(TAG, "Unregistered receiver: " + receiver);
                 } catch(IllegalArgumentException e) {
                     // We have to catch the race condition a registration is still pending in android
