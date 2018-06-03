@@ -121,10 +121,10 @@ public class SyncthingService extends Service {
     private boolean mLastDeterminedShouldRun = false;
 
     /**
-     * True if a stop was requested while syncthing is starting, in that case, perform stop in
-     * {@link #pollWebGui}.
+     * True if a service {@link onDestroy} was requested while syncthing is starting,
+     * in that case, perform stop in {@link onApiAvailable}.
      */
-    private boolean mStopScheduled = false;
+    private boolean mDestroyScheduled = false;
 
     /**
      * True if the user granted the storage permission.
@@ -237,9 +237,8 @@ public class SyncthingService extends Service {
                         break;
                     case STARTING:
                     case ACTIVE:
-                        mStopScheduled = false;
-                        break;
                     case ERROR:
+                        break;
                     default:
                         break;
                 }
@@ -259,6 +258,18 @@ public class SyncthingService extends Service {
      * version.
      */
     private class StartupTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            synchronized(mStateLock) {
+                if (mStateLock != State.INIT) {
+                    Log.e(TAG, "StartupTask: Wrong state detected " + mStateLock + ". Cancelling.");
+                    cancel(true);
+                    return;
+                }
+                onApiChange(State.STARTING);
+            }
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -283,17 +294,28 @@ public class SyncthingService extends Service {
                 registerOnWebGuiAvailableListener(mApi);
                 Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
             }
-            synchronized (mStateLock) {
-                onApiChange(State.STARTING);
-                pollWebGui();
-                mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
-                new Thread(mSyncthingRunnable).start();
-            }
+
+            // Start the syncthing binary.
+            mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
+            new Thread(mSyncthingRunnable).start();
+
+            /**
+             * Wait for the web-gui of the native syncthing binary to come online.
+             *
+             * In case the binary is to be stopped, also be aware that another thread could request
+             * to stop the binary in the time while waiting for the GUI to become active. See the comment
+             * for SyncthingService.onDestroy for details.
+             */
+            new PollWebGuiAvailableTask(SyncthingService.this, getWebGuiUrl(), mConfig.getApiKey(), result -> {
+                Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+                Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
+                mOnWebGuiAvailableListeners.clear();
+            });
         }
     }
 
     /**
-     * Called when {@link pollWebGui} confirmed the REST API is available.
+     * Called when {@link PollWebGuiAvailableTask} confirmed the REST API is available.
      * We can assume mApi being available under normal conditions.
      * UI stressing results in mApi getting null on simultaneous shutdown, so
      * we check it for safety.
@@ -301,6 +323,17 @@ public class SyncthingService extends Service {
     private void onApiAvailable() {
         synchronized (mStateLock) {
             onApiChange(State.ACTIVE);
+        }
+
+        /**
+         * If the service instance got an onDestroy() event while being in
+         * State.STARTING we'll trigger the service onDestroy() now. this
+         * allows the syncthing binary to get gracefully stopped.
+         */
+        if (mDestroyScheduled) {
+            mDestroyScheduled = false;
+            stopSelf();
+            return;
         }
         if (mApi == null) {
             Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
@@ -319,10 +352,7 @@ public class SyncthingService extends Service {
 
     /**
      * Stops the native binary.
-     *
-     * The native binary crashes if stopped before it is fully active. In that case signal the
-     * stop request to PollWebGuiAvailableTaskImpl that is active in that situation and terminate
-     * the service there.
+     * Shuts down DeviceStateHolder instance.
      */
     @Override
     public void onDestroy() {
@@ -336,9 +366,9 @@ public class SyncthingService extends Service {
         }
         if (mStoragePermissionGranted) {
             synchronized (mStateLock) {
-                if (mCurrentState == State.INIT || mCurrentState == State.STARTING) {
+                if (mCurrentState == State.STARTING) {
                     Log.i(TAG, "Delay shutting down synchting binary until initialisation finished");
-                    mStopScheduled = true;
+                    mDestroyScheduled = true;
                 } else {
                     Log.i(TAG, "Shutting down syncthing binary immediately");
                     shutdown(State.DISABLED, () -> {});
@@ -423,29 +453,6 @@ public class SyncthingService extends Service {
      */
     public void unregisterOnApiChangeListener(OnApiChangeListener listener) {
         mOnApiChangeListeners.remove(listener);
-    }
-
-    /**
-     * Wait for the web-gui of the native syncthing binary to come online.
-     *
-     * In case the binary is to be stopped, also be aware that another thread could request
-     * to stop the binary in the time while waiting for the GUI to become active. See the comment
-     * for SyncthingService.onDestroy for details.
-     */
-    private void pollWebGui() {
-        new PollWebGuiAvailableTask(this, getWebGuiUrl(), mConfig.getApiKey(), result -> {
-            synchronized (mStateLock) {
-                if (mStopScheduled) {
-                    shutdown(State.DISABLED, () -> {});
-                    mStopScheduled = false;
-                    stopSelf();
-                    return;
-                }
-            }
-            Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-            Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
-            mOnWebGuiAvailableListeners.clear();
-        });
     }
 
     /**
