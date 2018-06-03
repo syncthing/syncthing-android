@@ -459,9 +459,9 @@ public class SyncthingService extends Service {
      * Called to notifiy listeners of an API change.
      */
     private void onApiChange(State newState) {
-        Log.v(TAG, "onApiChange(" + newState + ") called.");
+        Log.v(TAG, "onApiChange: State change from " + mCurrentState + " to " + newState);
+        mCurrentState = newState;
         mHandler.post(() -> {
-            mCurrentState = newState;
             mNotificationHandler.updatePersistentNotification(this);
             for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
                  i.hasNext(); ) {
