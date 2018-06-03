@@ -140,6 +140,10 @@ public class WebGuiActivity extends StateDialogActivity
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.setWebViewClient(mWebViewClient);
         mWebView.clearCache(true);
+
+        // SyncthingService needs to be started from this activity as the user
+        // can directly launch this activity from the recent activity switcher.
+        startService(new Intent(this, SyncthingService.class));
     }
 
     @Override
