@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
-import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import javax.inject.Inject;
 
