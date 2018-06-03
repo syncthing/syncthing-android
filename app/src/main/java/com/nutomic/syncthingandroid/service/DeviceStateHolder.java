@@ -111,7 +111,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         Log.v(TAG, "Shutting down");
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
         // unregisterChildReceivers();
-        mReceiverManager.unregisterAllReceivers();
+        mReceiverManager.unregisterAllReceivers(mBroadcastManager);
         if (mDeviceStateChangedReceiver != null) {
             mBroadcastManager.unregisterReceiver(mDeviceStateChangedReceiver);
         }
@@ -124,20 +124,18 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
                 Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
         if (watched.contains(key)) {
             // unregisterChildReceivers();
-            mReceiverManager.unregisterAllReceivers();
+            mReceiverManager.unregisterAllReceivers(mBroadcastManager);
             registerChildReceivers();
         }
     }
 
     private void registerChildReceivers() {
-        mReceiverManager.init(mContext);
-
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
             Log.i(TAG, "Listening for network state changes");
             NetworkReceiver.updateNetworkStatus(mContext);
             mNetworkReceiver = new NetworkReceiver();
             // mContext.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-            ReceiverManager.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            ReceiverManager.registerReceiver(mBroadcastManager, mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
 
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false)) {
@@ -148,7 +146,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             filter.addAction(Intent.ACTION_POWER_CONNECTED);
             filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
             // mContext.registerReceiver(mBatteryReceiver, filter);
-            ReceiverManager.registerReceiver(mBatteryReceiver, filter);
+            ReceiverManager.registerReceiver(mBroadcastManager, mBatteryReceiver, filter);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
@@ -158,34 +156,10 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
             // mContext.registerReceiver(mPowerSaveModeChangedReceiver,
             //         new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
-            ReceiverManager.registerReceiver(mPowerSaveModeChangedReceiver,
+            ReceiverManager.registerReceiver(mBroadcastManager, mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
     }
-
-/*
-    private void unregisterChildReceivers() {
-        unregisterReceiverIfRegistered(mNetworkReceiver, "NetworkReceiver");
-        unregisterReceiverIfRegistered(mBatteryReceiver, "BatteryReceiver");
-        unregisterReceiverIfRegistered(mPowerSaveModeChangedReceiver, "PowerSaveModeChangedReceiver");
-    }
-*/
-
-/*
-    private void unregisterReceiverIfRegistered(BroadcastReceiver receiver, String receiverReadableName) {
-        if (receiver != null) {
-            try {
-                mContext.unregisterReceiver(receiver);
-                Log.v(TAG, "Unregistered receiver '" + receiverReadableName + "'");
-                receiver = null;
-            } catch(IllegalArgumentException e) {
-                // We have to catch the race condition a registration is still pending in android
-                // according to https://stackoverflow.com/a/3568906
-                Log.w(TAG, "unregisterReceiver(" + receiverReadableName + ") threw IllegalArgumentException");
-            }
-        }
-    }
-*/
 
     private class DeviceStateChangedReceiver extends BroadcastReceiver {
         @Override
