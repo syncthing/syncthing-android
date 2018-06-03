@@ -245,8 +245,10 @@ public class SyncthingService extends Service {
      */
     private class StartupTask extends AsyncTask<Void, Void, Void> {
 
-        public synchronized StartupTask() {
-            onApiChange(State.STARTING);
+        public StartupTask() {
+            synchronized (mStateLock) {
+                onApiChange(State.STARTING);
+            }
         }
 
         @Override
