@@ -20,6 +20,7 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.receiver.BatteryReceiver;
 import com.nutomic.syncthingandroid.receiver.NetworkReceiver;
 import com.nutomic.syncthingandroid.receiver.PowerSaveModeChangedReceiver;
+import com.nutomic.syncthingandroid.service.ReceiverManager;
 
 import java.util.HashSet;
 import java.util.List;
@@ -72,6 +73,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     private final LocalBroadcastManager mBroadcastManager;
     @Inject SharedPreferences mPreferences;
 
+    private ReceiverManager mReceiverManager;
     private @Nullable DeviceStateChangedReceiver mDeviceStateChangedReceiver = null;
     private @Nullable NetworkReceiver mNetworkReceiver = null;
     private @Nullable BatteryReceiver mBatteryReceiver = null;
@@ -108,7 +110,8 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     public void shutdown() {
         Log.v(TAG, "Shutting down");
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
-        unregisterChildReceivers();
+        // unregisterChildReceivers();
+        mReceiverManager.unregisterAllReceivers();
         if (mDeviceStateChangedReceiver != null) {
             mBroadcastManager.unregisterReceiver(mDeviceStateChangedReceiver);
         }
@@ -120,17 +123,21 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
                 Constants.PREF_SYNC_ONLY_WIFI, Constants.PREF_RESPECT_BATTERY_SAVING,
                 Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
         if (watched.contains(key)) {
-            unregisterChildReceivers();
+            // unregisterChildReceivers();
+            mReceiverManager.unregisterAllReceivers();
             registerChildReceivers();
         }
     }
 
     private void registerChildReceivers() {
+        mReceiverManager.init(mContext);
+
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false)) {
             Log.i(TAG, "Listening for network state changes");
             NetworkReceiver.updateNetworkStatus(mContext);
             mNetworkReceiver = new NetworkReceiver();
-            mContext.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            // mContext.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            ReceiverManager.registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
 
         if (mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false)) {
@@ -140,7 +147,8 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_POWER_CONNECTED);
             filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-            mContext.registerReceiver(mBatteryReceiver, filter);
+            // mContext.registerReceiver(mBatteryReceiver, filter);
+            ReceiverManager.registerReceiver(mBatteryReceiver, filter);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
@@ -148,17 +156,22 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             Log.i(TAG, "Listening to power saving changes");
             PowerSaveModeChangedReceiver.updatePowerSavingState(mContext);
             mPowerSaveModeChangedReceiver = new PowerSaveModeChangedReceiver();
-            mContext.registerReceiver(mPowerSaveModeChangedReceiver,
+            // mContext.registerReceiver(mPowerSaveModeChangedReceiver,
+            //         new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+            ReceiverManager.registerReceiver(mPowerSaveModeChangedReceiver,
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
     }
 
+/*
     private void unregisterChildReceivers() {
         unregisterReceiverIfRegistered(mNetworkReceiver, "NetworkReceiver");
         unregisterReceiverIfRegistered(mBatteryReceiver, "BatteryReceiver");
         unregisterReceiverIfRegistered(mPowerSaveModeChangedReceiver, "PowerSaveModeChangedReceiver");
     }
+*/
 
+/*
     private void unregisterReceiverIfRegistered(BroadcastReceiver receiver, String receiverReadableName) {
         if (receiver != null) {
             try {
@@ -172,6 +185,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             }
         }
     }
+*/
 
     private class DeviceStateChangedReceiver extends BroadcastReceiver {
         @Override
