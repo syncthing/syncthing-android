@@ -89,7 +89,12 @@ public class SyncthingService extends Service {
         ERROR,
     }
 
-    private State mCurrentState = State.INIT;
+    /**
+     * Initialize the service with State.DISABLED as {@link DeviceStateHolder} will
+     * send an update if we should run the binary after it got instantiated in
+     * {@link onStartCommand}.
+     */
+    private State mCurrentState = State.DISABLED;
 
     private ConfigXml mConfig;
     private RestApi mApi;
@@ -164,6 +169,16 @@ public class SyncthingService extends Service {
             return START_NOT_STICKY;
         }
 
+        /**
+         * Send current service state to listening endpoints.
+         * This is required that components know about the service State.DISABLED
+         * if DeviceStateHolder does not send a "shouldRun = true" callback
+         * to start the binary according to preferences shortly after its creation.
+         * See {@link mLastDeterminedShouldRun} defaulting to "false".
+         */
+        if (mCurrentState == State.DISABLED) {
+            onApiChange(mCurrentState);
+        }
         if (mDeviceStateHolder == null) {
             /**
              * Instantiate the run condition monitor on first onStartCommand and
@@ -279,14 +294,13 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Called when @link{pollWebGui} confirmed the REST API is available.
+     * Called when {@link pollWebGui} confirmed the REST API is available.
      * We can assume mApi being available under normal conditions.
      * UI stressing results in mApi getting null on simultaneous shutdown, so
      * we check it for safety.
      */
     private void onApiAvailable() {
         onApiChange(State.ACTIVE);
-        Log.i(TAG, "onApiAvailable: State.ACTIVE reached.");
         if (mApi == null) {
             Log.e(TAG, "onApiAvailable: Did we stop the binary during startup? mApi == null");
             return;
@@ -438,6 +452,7 @@ public class SyncthingService extends Service {
      * Called to notifiy listeners of an API change.
      */
     private void onApiChange(State newState) {
+        Log.v(TAG, "onApiChange(" + newState + ") called.");
         mHandler.post(() -> {
             mCurrentState = newState;
             mNotificationHandler.updatePersistentNotification(this);
