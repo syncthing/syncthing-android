@@ -168,7 +168,7 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
             } catch(IllegalArgumentException e) {
                 // We have to catch the race condition a registration is still pending in android
                 // according to https://stackoverflow.com/a/3568906
-                Log.w(TAG, "unregisterReceiver threw IllegalArgumentException");
+                Log.w(TAG, "unregisterReceiver(" + receiverReadableName + ") threw IllegalArgumentException");
             }
         }
     }
