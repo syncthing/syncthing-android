@@ -154,6 +154,10 @@ public class WebGuiActivity extends StateDialogActivity
 
     @Override
     public void onWebGuiAvailable() {
+        if (mWebView == null) {
+            Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
+            return;
+        }
         if (mWebView.getUrl() == null) {
             mWebView.stopLoading();
             setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
