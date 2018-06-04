@@ -252,13 +252,6 @@ public class SettingsActivity extends SyncthingActivity {
 
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
             mSyncthingService.registerOnApiChangeListener(this);
-            mSyncthingService.registerOnWebGuiAvailableListener(() -> {
-                mApi = mSyncthingService.getApi();
-                if (mApi != null && mApi.isConfigLoaded()) {
-                    mGui = mApi.getGui();
-                    mOptions = mApi.getOptions();
-                }
-            });
         }
 
         @Override

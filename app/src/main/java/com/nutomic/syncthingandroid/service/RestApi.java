@@ -52,7 +52,7 @@ import javax.inject.Inject;
 /**
  * Provides functions to interact with the syncthing REST API.
  */
-public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
+public class RestApi {
 
     private static final String TAG = "RestApi";
 
@@ -135,8 +135,8 @@ public class RestApi implements SyncthingService.OnWebGuiAvailableListener {
     /**
      * Gets local device ID, syncthing version and config, then calls all OnApiAvailableListeners.
      */
-    @Override
-    public void onWebGuiAvailable() {
+    public void readConfigFromRestApi() {
+        Log.v(TAG, "Reading Config from REST ...");
         new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();

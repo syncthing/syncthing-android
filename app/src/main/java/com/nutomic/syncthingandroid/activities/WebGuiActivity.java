@@ -47,7 +47,7 @@ import java.util.Properties;
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
 public class WebGuiActivity extends StateDialogActivity
-        implements SyncthingService.OnWebGuiAvailableListener {
+        implements SyncthingService.OnApiChangeListener {
 
     private static final String TAG = "WebGuiActivity";
 
@@ -146,12 +146,30 @@ public class WebGuiActivity extends StateDialogActivity
         startService(new Intent(this, SyncthingService.class));
     }
 
+/*
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
         getService().registerOnWebGuiAvailableListener(WebGuiActivity.this);
     }
+*/
 
+    @Override
+    public void onApiChange(SyncthingService.State State) {
+        if (State == State.ACTIVE) {
+            if (mWebView == null) {
+                Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
+                return;
+            }
+            if (mWebView.getUrl() == null) {
+                mWebView.stopLoading();
+                setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
+                mWebView.loadUrl(getService().getWebGuiUrl().toString());
+            }
+        }
+    }
+
+/*
     @Override
     public void onWebGuiAvailable() {
         if (mWebView == null) {
@@ -164,6 +182,7 @@ public class WebGuiActivity extends StateDialogActivity
             mWebView.loadUrl(getService().getWebGuiUrl().toString());
         }
     }
+*/
 
     @Override
     public void onBackPressed() {

@@ -59,16 +59,6 @@ public class SyncthingService extends Service {
     public static final String ACTION_REFRESH_NETWORK_INFO =
             "com.nutomic.syncthingandroid.service.SyncthingService.REFRESH_NETWORK_INFO";
 
-    /**
-     * Callback for when the Syncthing web interface becomes first available after service start.
-     */
-    public interface OnWebGuiAvailableListener {
-        void onWebGuiAvailable();
-    }
-
-    private final HashSet<OnWebGuiAvailableListener> mOnWebGuiAvailableListeners =
-            new HashSet<>();
-
     public interface OnApiChangeListener {
         void onApiChange(State currentState);
     }
@@ -295,7 +285,6 @@ public class SyncthingService extends Service {
             if (mApi == null) {
                 mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
                                     SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
-                registerOnWebGuiAvailableListener(mApi);
                 Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
             }
 
@@ -321,8 +310,9 @@ public class SyncthingService extends Service {
                         mConfig.getApiKey(),
                         result -> {
                     Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-                    Stream.of(mOnWebGuiAvailableListeners).forEach(OnWebGuiAvailableListener::onWebGuiAvailable);
-                    mOnWebGuiAvailableListeners.clear();
+                    if (mApi != null) {
+                        mApi.readConfigFromRestApi();
+                    }
                 });
             }
         }
@@ -447,20 +437,6 @@ public class SyncthingService extends Service {
             mSyncthingRunnable = null;
         }
         onKilledListener.onKilled();
-    }
-
-    /**
-     * Register a listener for the web gui becoming available..
-     *
-     * If the web gui is already available, listener will be called immediately.
-     * Listeners are unregistered automatically after being called.
-     */
-    public void registerOnWebGuiAvailableListener(OnWebGuiAvailableListener listener) {
-        if (mCurrentState == State.ACTIVE) {
-            listener.onWebGuiAvailable();
-        } else {
-            mOnWebGuiAvailableListeners.add(listener);
-        }
     }
 
     public @Nullable RestApi getApi() {
