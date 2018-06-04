@@ -163,10 +163,12 @@ public class RestApi {
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             onReloadConfigComplete(result);
             asyncQueryConfigComplete = true;
+            checkReadConfigFromRestApiCompleted();
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
             asyncQuerySystemInfoComplete = true;
+            checkReadConfigFromRestApiCompleted();
         });
     }
 
