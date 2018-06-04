@@ -136,11 +136,16 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
      * Invokes status callbacks.
      */
     private void updateGui() {
-        if (mActivity.getApi() == null || getActivity() == null || getActivity().isFinishing())
+        if (getActivity() == null || getActivity().isFinishing()) {
             return;
-        mActivity.getApi().getSystemInfo(this::onReceiveSystemInfo);
-        mActivity.getApi().getSystemVersion(this::onReceiveSystemVersion);
-        mActivity.getApi().getConnections(this::onReceiveConnections);
+        }
+
+        RestApi mApi = mActivity.getApi();
+        if (mApi != null) {
+            mApi.getSystemInfo(this::onReceiveSystemInfo);
+            mApi.getSystemVersion(this::onReceiveSystemVersion);
+            mApi.getConnections(this::onReceiveConnections);
+        }
     }
 
     /**

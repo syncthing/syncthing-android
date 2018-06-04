@@ -179,7 +179,9 @@ public class SyncthingService extends Service {
          * See {@link mLastDeterminedShouldRun} defaulting to "false".
          */
         if (mCurrentState == State.DISABLED) {
-            onApiChange(mCurrentState);
+            synchronized(mStateLock) {
+                onApiChange(mCurrentState);
+            }
         }
         if (mDeviceStateHolder == null) {
             /**
@@ -407,7 +409,9 @@ public class SyncthingService extends Service {
      */
     private void shutdown(State newState, SyncthingRunnable.OnSyncthingKilled onKilledListener) {
         Log.i(TAG, "Shutting down background service");
-        onApiChange(newState);
+        synchronized(mStateLock) {
+            onApiChange(newState);
+        }
 
         if (mPollWebGuiAvailableTask != null) {
             mPollWebGuiAvailableTask.cancelRequestsAndCallback();

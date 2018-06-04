@@ -246,32 +246,33 @@ public class SettingsActivity extends SyncthingActivity {
 
         @Override
         public void onServiceConnected() {
+            Log.v(TAG, "onServiceConnected");
             if (getActivity() == null)
                 return;
 
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
             mSyncthingService.registerOnApiChangeListener(this);
-            // Use callback to make sure getApi() doesn't return null.
             mSyncthingService.registerOnWebGuiAvailableListener(() -> {
-                if (mSyncthingService.getApi().isConfigLoaded()) {
-                    mGui = mSyncthingService.getApi().getGui();
-                    mOptions = mSyncthingService.getApi().getOptions();
+                mApi = mSyncthingService.getApi();
+                if (mApi != null && mApi.isConfigLoaded()) {
+                    mGui = mApi.getGui();
+                    mOptions = mApi.getOptions();
                 }
-
             });
         }
 
         @Override
         public void onApiChange(SyncthingService.State currentState) {
-            boolean syncthingActive = currentState == SyncthingService.State.ACTIVE;
-            boolean isSyncthingRunning = syncthingActive && mSyncthingService.getApi().isConfigLoaded();
+            mApi = mSyncthingService.getApi();
+            boolean isSyncthingRunning = (mApi != null) &&
+                        mApi.isConfigLoaded() &&
+                        (currentState == SyncthingService.State.ACTIVE);
             mCategorySyncthingOptions.setEnabled(isSyncthingRunning);
             mCategoryBackup.setEnabled(isSyncthingRunning);
 
             if (!isSyncthingRunning)
                 return;
 
-            mApi = mSyncthingService.getApi();
             mSyncthingVersion.setSummary(mApi.getVersion());
             mOptions = mApi.getOptions();
             mGui = mApi.getGui();
@@ -382,9 +383,9 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public void onStop() {
             if (mRequireRestart) {
-                if (mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED &&
-                        mSyncthingService.getApi() != null) {
-                    mSyncthingService.getApi().restart();
+                if (mApi != null &&
+                        mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED) {
+                    mApi.restart();
                     mRequireRestart = false;
                 }
             }
