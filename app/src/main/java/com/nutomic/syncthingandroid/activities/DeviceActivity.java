@@ -214,7 +214,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     public void onDestroy() {
         super.onDestroy();
         if (getService() != null) {
-            getService().unregisterOnApiChangeListener(this::onApiChange);
+            getService().unregisteronServiceStateChangeListener(this::onServiceStateChange);
         }
         mIdView.removeTextChangedListener(mIdTextWatcher);
         mNameView.removeTextChangedListener(mNameTextWatcher);
@@ -252,7 +252,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private void onServiceConnected() {
-        getService().registerOnApiChangeListener(this::onApiChange);
+        getService().registeronServiceStateChangeListener(this::onServiceStateChange);
     }
 
     /**
@@ -271,7 +271,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
     }
 
-    private void onApiChange(SyncthingService.State currentState) {
+    private void onServiceStateChange(SyncthingService.State currentState) {
         if (currentState != ACTIVE) {
             finish();
             return;

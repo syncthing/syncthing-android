@@ -59,8 +59,8 @@ public class SyncthingService extends Service {
     public static final String ACTION_REFRESH_NETWORK_INFO =
             "com.nutomic.syncthingandroid.service.SyncthingService.REFRESH_NETWORK_INFO";
 
-    public interface OnApiChangeListener {
-        void onApiChange(State currentState);
+    public interface onServiceStateChangeListener {
+        void onServiceStateChange(State currentState);
     }
 
     /**
@@ -95,7 +95,7 @@ public class SyncthingService extends Service {
     private Thread mSyncthingRunnableThread = null;
     private Handler mHandler;
 
-    private final HashSet<OnApiChangeListener> mOnApiChangeListeners = new HashSet<>();
+    private final HashSet<onServiceStateChangeListener> monServiceStateChangeListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
     @Inject NotificationHandler mNotificationHandler;
@@ -170,7 +170,7 @@ public class SyncthingService extends Service {
          */
         if (mCurrentState == State.DISABLED) {
             synchronized(mStateLock) {
-                onApiChange(mCurrentState);
+                onServiceStateChange(mCurrentState);
             }
         }
         if (mDeviceStateHolder == null) {
@@ -209,7 +209,7 @@ public class SyncthingService extends Service {
      * After run conditions monitored by {@link DeviceStateHolder} changed and
      * it had an influence on the decision to run/terminate syncthing, this
      * function is called to notify this class to run/terminate the syncthing binary.
-     * {@link #onApiChange} is called while applying the decision change.
+     * {@link #onServiceStateChange} is called while applying the decision change.
      */
     private void onUpdatedShouldRunDecision(boolean newShouldRunDecision) {
         if (newShouldRunDecision != mLastDeterminedShouldRun) {
@@ -261,7 +261,7 @@ public class SyncthingService extends Service {
                     cancel(true);
                     return;
                 }
-                onApiChange(State.STARTING);
+                onServiceStateChange(State.STARTING);
             }
         }
 
@@ -273,7 +273,7 @@ public class SyncthingService extends Service {
             } catch (ConfigXml.OpenConfigException e) {
                 mNotificationHandler.showCrashedNotification(R.string.config_create_failed, true);
                 synchronized (mStateLock) {
-                    onApiChange(State.ERROR);
+                    onServiceStateChange(State.ERROR);
                 }
                 cancel(true);
             }
@@ -284,7 +284,7 @@ public class SyncthingService extends Service {
         protected void onPostExecute(Void aVoid) {
             if (mApi == null) {
                 mApi = new RestApi(SyncthingService.this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
-                                    SyncthingService.this::onApiAvailable, () -> onApiChange(mCurrentState));
+                                    SyncthingService.this::onApiAvailable, () -> onServiceStateChange(mCurrentState));
                 Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
             }
 
@@ -334,7 +334,7 @@ public class SyncthingService extends Service {
                 Log.e(TAG, "onApiAvailable: Wrong state " + mCurrentState + " detected. Cancelling callback.");
                 return;
             }
-            onApiChange(State.ACTIVE);
+            onServiceStateChange(State.ACTIVE);
         }
 
         /**
@@ -400,7 +400,7 @@ public class SyncthingService extends Service {
     private void shutdown(State newState, SyncthingRunnable.OnSyncthingKilled onKilledListener) {
         Log.i(TAG, "Shutting down background service");
         synchronized(mStateLock) {
-            onApiChange(newState);
+            onServiceStateChange(newState);
         }
 
         if (mPollWebGuiAvailableTask != null) {
@@ -449,37 +449,37 @@ public class SyncthingService extends Service {
      * The listener is called immediately with the current state, and again whenever the state
      * changes. The call is always from the GUI thread.
      *
-     * @see #unregisterOnApiChangeListener
+     * @see #unregisteronServiceStateChangeListener
      */
-    public void registerOnApiChangeListener(OnApiChangeListener listener) {
+    public void registeronServiceStateChangeListener(onServiceStateChangeListener listener) {
         // Make sure we don't send an invalid state or syncthing might show a "disabled" message
         // when it's just starting up.
-        listener.onApiChange(mCurrentState);
-        mOnApiChangeListeners.add(listener);
+        listener.onServiceStateChange(mCurrentState);
+        monServiceStateChangeListeners.add(listener);
     }
 
     /**
      * Unregisters a previously registered listener.
      *
-     * @see #registerOnApiChangeListener
+     * @see #registeronServiceStateChangeListener
      */
-    public void unregisterOnApiChangeListener(OnApiChangeListener listener) {
-        mOnApiChangeListeners.remove(listener);
+    public void unregisteronServiceStateChangeListener(onServiceStateChangeListener listener) {
+        monServiceStateChangeListeners.remove(listener);
     }
 
     /**
      * Called to notifiy listeners of an API change.
      */
-    private void onApiChange(State newState) {
-        Log.v(TAG, "onApiChange: State change from " + mCurrentState + " to " + newState);
+    private void onServiceStateChange(State newState) {
+        Log.v(TAG, "onServiceStateChange: State change from " + mCurrentState + " to " + newState);
         mCurrentState = newState;
         mHandler.post(() -> {
             mNotificationHandler.updatePersistentNotification(this);
-            for (Iterator<OnApiChangeListener> i = mOnApiChangeListeners.iterator();
+            for (Iterator<onServiceStateChangeListener> i = monServiceStateChangeListeners.iterator();
                  i.hasNext(); ) {
-                OnApiChangeListener listener = i.next();
+                onServiceStateChangeListener listener = i.next();
                 if (listener != null) {
-                    listener.onApiChange(mCurrentState);
+                    listener.onServiceStateChange(mCurrentState);
                 } else {
                     i.remove();
                 }

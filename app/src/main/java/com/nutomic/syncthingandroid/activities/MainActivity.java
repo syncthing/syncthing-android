@@ -66,7 +66,7 @@ import static java.lang.Math.min;
  * {@link DrawerFragment} in the navigation drawer.
  */
 public class MainActivity extends StateDialogActivity
-        implements SyncthingService.OnApiChangeListener {
+        implements SyncthingService.onServiceStateChangeListener {
 
     private static final String TAG = "MainActivity";
     private static final String IS_SHOWING_RESTART_DIALOG = "RESTART_DIALOG_STATE";
@@ -102,7 +102,7 @@ public class MainActivity extends StateDialogActivity
      * Handles various dialogs based on current state.
      */
     @Override
-    public void onApiChange(SyncthingService.State currentState) {
+    public void onServiceStateChange(SyncthingService.State currentState) {
         switch (currentState) {
             case STARTING:
                 break;
@@ -276,18 +276,18 @@ public class MainActivity extends StateDialogActivity
     public void onDestroy() {
         super.onDestroy();
         if (getService() != null) {
-            getService().unregisterOnApiChangeListener(this);
-            getService().unregisterOnApiChangeListener(mFolderListFragment);
-            getService().unregisterOnApiChangeListener(mDeviceListFragment);
+            getService().unregisteronServiceStateChangeListener(this);
+            getService().unregisteronServiceStateChangeListener(mFolderListFragment);
+            getService().unregisteronServiceStateChangeListener(mDeviceListFragment);
         }
     }
 
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        getService().registerOnApiChangeListener(this);
-        getService().registerOnApiChangeListener(mFolderListFragment);
-        getService().registerOnApiChangeListener(mDeviceListFragment);
+        getService().registeronServiceStateChangeListener(this);
+        getService().registeronServiceStateChangeListener(mFolderListFragment);
+        getService().registeronServiceStateChangeListener(mDeviceListFragment);
     }
 
     /**

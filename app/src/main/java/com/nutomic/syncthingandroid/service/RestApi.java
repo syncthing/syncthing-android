@@ -151,7 +151,7 @@ public class RestApi {
             /**
              * Tell SyncthingService which put a listener that the REST API is available.
              * This must not be done before as SettingsFragment expects "mLocalDeviceId" to
-             * be present in this class to get the local device object in {@link SettingsActivity#onApiChange}.
+             * be present in this class to get the local device object in {@link SettingsActivity#onServiceStateChange}.
              */
             mOnApiAvailableListener.onApiAvailable();
         });

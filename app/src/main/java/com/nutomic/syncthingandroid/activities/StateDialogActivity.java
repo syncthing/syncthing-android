@@ -33,7 +33,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerOnServiceConnectedListener(() ->
-                getService().registerOnApiChangeListener(this::onApiChange));
+                getService().registeronServiceStateChangeListener(this::onServiceStateChange));
     }
 
     @Override
@@ -61,12 +61,12 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (getService() != null) {
-            getService().unregisterOnApiChangeListener(this::onApiChange);
+            getService().unregisteronServiceStateChangeListener(this::onServiceStateChange);
         }
         dismissDisabledDialog();
     }
 
-    private void onApiChange(SyncthingService.State currentState) {
+    private void onServiceStateChange(SyncthingService.State currentState) {
         mServiceState = currentState;
         switch (mServiceState) {
             case ERROR:

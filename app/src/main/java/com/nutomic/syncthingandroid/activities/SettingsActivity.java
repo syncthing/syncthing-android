@@ -74,7 +74,7 @@ public class SettingsActivity extends SyncthingActivity {
 
     public static class SettingsFragment extends PreferenceFragment
             implements SyncthingActivity.OnServiceConnectedListener,
-            SyncthingService.OnApiChangeListener, Preference.OnPreferenceChangeListener,
+            SyncthingService.onServiceStateChangeListener, Preference.OnPreferenceChangeListener,
             Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
         private static final String TAG = "SettingsFragment";
@@ -251,11 +251,11 @@ public class SettingsActivity extends SyncthingActivity {
                 return;
 
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-            mSyncthingService.registerOnApiChangeListener(this);
+            mSyncthingService.registeronServiceStateChangeListener(this);
         }
 
         @Override
-        public void onApiChange(SyncthingService.State currentState) {
+        public void onServiceStateChange(SyncthingService.State currentState) {
             mApi = mSyncthingService.getApi();
             boolean isSyncthingRunning = (mApi != null) &&
                         mApi.isConfigLoaded() &&
@@ -290,7 +290,7 @@ public class SettingsActivity extends SyncthingActivity {
         public void onDestroy() {
             mPreferences.unregisterOnSharedPreferenceChangeListener(this);
             if (mSyncthingService != null) {
-                mSyncthingService.unregisterOnApiChangeListener(this);
+                mSyncthingService.unregisteronServiceStateChangeListener(this);
             }
             super.onDestroy();
         }

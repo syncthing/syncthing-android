@@ -47,7 +47,7 @@ import java.util.Properties;
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
 public class WebGuiActivity extends StateDialogActivity
-        implements SyncthingService.OnApiChangeListener {
+        implements SyncthingService.onServiceStateChangeListener {
 
     private static final String TAG = "WebGuiActivity";
 
@@ -155,7 +155,7 @@ public class WebGuiActivity extends StateDialogActivity
 */
 
     @Override
-    public void onApiChange(SyncthingService.State State) {
+    public void onServiceStateChange(SyncthingService.State State) {
         if (State == State.ACTIVE) {
             if (mWebView == null) {
                 Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
