@@ -153,8 +153,9 @@ public class WebGuiActivity extends StateDialogActivity
     }
 
     @Override
-    public void onServiceStateChange(SyncthingService.State State) {
-        if (State == State.ACTIVE) {
+    public void onServiceStateChange(SyncthingService.State newState) {
+        Log.v(TAG, "onServiceStateChange(" + newState + ")");
+        if (newState == SyncthingService.State.ACTIVE) {
             if (mWebView == null) {
                 Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
                 return;
