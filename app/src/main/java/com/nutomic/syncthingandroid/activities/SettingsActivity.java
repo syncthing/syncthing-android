@@ -399,7 +399,7 @@ public class SettingsActivity extends SyncthingActivity {
                             : R.string.always_run_in_background_disabled);
                     mSyncOnlyCharging.setEnabled(value);
                     mSyncOnlyWifi.setEnabled(value);
-                    mSyncOnlyOnSSIDs.setEnabled(value);
+                    mSyncOnlyOnSSIDs.setEnabled(false);
                     // Uncheck items when disabled, so it is clear they have no effect.
                     if (!value) {
                         mSyncOnlyCharging.setChecked(false);
