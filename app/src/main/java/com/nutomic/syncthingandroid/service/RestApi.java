@@ -98,6 +98,18 @@ public class RestApi {
     private long mPreviousConnectionTime = 0;
 
     /**
+     * In the last-finishing {@link readConfigFromRestApi} callback, we have to call
+     * {@link SyncthingService#onApiAvailable} to indicate that the RestApi class is fully initialized.
+     * We do this to avoid getting stuck with our main thread due to synchronous REST queries.
+     * The correct indication of full initialisation is crucial to stability as other listeners of
+     * {@link SettingsActivity#onServiceStateChange} needs cached config and system information available.
+     * e.g. SettingsFragment need "mLocalDeviceId"
+     */
+    private Boolean asyncQueryConfigComplete = false;
+    private Boolean asyncQueryVersionComplete = false;
+    private Boolean asyncQuerySystemInfoComplete = false;
+
+    /**
      * Stores the latest result of {@link #getFolderStatus} for each folder
      */
     private HashMap<String, FolderStatus> mCachedFolderStatuses = new HashMap<>();
@@ -136,25 +148,33 @@ public class RestApi {
      * Gets local device ID, syncthing version and config, then calls all OnApiAvailableListeners.
      */
     public void readConfigFromRestApi() {
-        Log.v(TAG, "Reading Config from REST ...");
+        Log.v(TAG, "Reading config from REST ...");
+        asyncQueryVersionComplete = false;
+        asyncQueryConfigComplete = false;
+        asyncQuerySystemInfoComplete = false;
         new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();
             Log.i(TAG, "Syncthing version is " + mVersion);
             updateDebugFacilitiesCache();
+            asyncQueryVersionComplete = true;
+            checkReadConfigFromRestApiCompleted();
         });
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             onReloadConfigComplete(result);
+            asyncQueryConfigComplete = true;
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
-            /**
-             * Tell SyncthingService which put a listener that the REST API is available.
-             * This must not be done before as SettingsFragment expects "mLocalDeviceId" to
-             * be present in this class to get the local device object in {@link SettingsActivity#onServiceStateChange}.
-             */
-            mOnApiAvailableListener.onApiAvailable();
+            asyncQuerySystemInfoComplete = true;
         });
+    }
+
+    private void checkReadConfigFromRestApiCompleted() {
+        if (asyncQueryVersionComplete && asyncQueryConfigComplete && asyncQuerySystemInfoComplete) {
+            Log.v(TAG, "Reading config from REST completed.");
+            mOnApiAvailableListener.onApiAvailable();
+        }
     }
 
     public void reloadConfig() {
