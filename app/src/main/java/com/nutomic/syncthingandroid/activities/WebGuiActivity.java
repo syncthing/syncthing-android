@@ -149,7 +149,7 @@ public class WebGuiActivity extends StateDialogActivity
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        onServiceStateChange(getService().getCurrentState());
+        getService().registeronServiceStateChangeListener(this);
     }
 
     @Override
@@ -194,6 +194,10 @@ public class WebGuiActivity extends StateDialogActivity
 
     @Override
     protected void onDestroy() {
+        SyncthingService mSyncthingService = getService();
+        if (mSyncthingService != null) {
+            mSyncthingService.registeronServiceStateChangeListener(this);
+        }
         mWebView.destroy();
         mWebView = null;
         super.onDestroy();
