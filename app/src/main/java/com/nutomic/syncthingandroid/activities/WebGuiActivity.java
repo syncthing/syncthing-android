@@ -146,13 +146,11 @@ public class WebGuiActivity extends StateDialogActivity
         startService(new Intent(this, SyncthingService.class));
     }
 
-/*
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        getService().registerOnWebGuiAvailableListener(WebGuiActivity.this);
+        onServiceStateChange(getService().getCurrentState());
     }
-*/
 
     @Override
     public void onServiceStateChange(SyncthingService.State State) {
@@ -168,21 +166,6 @@ public class WebGuiActivity extends StateDialogActivity
             }
         }
     }
-
-/*
-    @Override
-    public void onWebGuiAvailable() {
-        if (mWebView == null) {
-            Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
-            return;
-        }
-        if (mWebView.getUrl() == null) {
-            mWebView.stopLoading();
-            setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
-            mWebView.loadUrl(getService().getWebGuiUrl().toString());
-        }
-    }
-*/
 
     @Override
     public void onBackPressed() {
