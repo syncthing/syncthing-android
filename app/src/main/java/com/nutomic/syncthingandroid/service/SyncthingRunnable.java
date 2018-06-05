@@ -157,8 +157,6 @@ public class SyncthingRunnable implements Runnable {
                 lWarn = log(process.getErrorStream(), Log.WARN, true);
             }
 
-            niceSyncthing();
-
             ret = process.waitFor();
             Log.i(TAG, "Syncthing exited with code " + ret);
             mSyncthing.set(null);
@@ -257,49 +255,6 @@ public class SyncthingRunnable implements Runnable {
             }
         }
         return syncthingPIDs;
-    }
-
-    /**
-     * Look for a running libsyncthing.so process and nice its IO.
-     */
-    private void niceSyncthing() {
-        Process nice = null;
-        DataOutputStream niceOut = null;
-        int ret = 1;
-        try {
-            List<String> syncthingPIDs = getSyncthingPIDs();
-            if (syncthingPIDs.isEmpty()) {
-                Log.w(TAG, "niceSyncthing: Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
-            } else {
-                nice = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
-                niceOut = new DataOutputStream(nice.getOutputStream());
-                for (String syncthingPID : syncthingPIDs) {
-                    // Set best-effort, low priority using ionice.
-                    niceOut.writeBytes("/system/bin/ionice " + syncthingPID + " be 7\n");
-                }
-                niceOut.writeBytes("exit\n");
-                log(nice.getErrorStream(), Log.WARN, false);
-                niceOut.flush();
-                ret = nice.waitFor();
-                Log.i(TAG_NICE, "ionice performed on " + Constants.FILENAME_SYNCTHING_BINARY);
-            }
-        } catch (IOException | InterruptedException e) {
-            Log.e(TAG_NICE, "Failed to execute ionice binary", e);
-        } finally {
-            try {
-                if (niceOut != null) {
-                    niceOut.close();
-                }
-            } catch (IOException e) {
-                Log.w(TAG_NICE, "Failed to close shell stream", e);
-            }
-            if (nice != null) {
-                nice.destroy();
-            }
-            if (ret != 0) {
-                Log.e(TAG_NICE, "Failed to set ionice " + Integer.toString(ret));
-            }
-        }
     }
 
     public interface OnSyncthingKilled {
