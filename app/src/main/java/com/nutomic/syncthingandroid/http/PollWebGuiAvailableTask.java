@@ -30,7 +30,7 @@ public class PollWebGuiAvailableTask extends ApiRequest {
     private OnSuccessListener mListener;
 
     /**
-     * Object that must be locked upon accessing mCurrentState
+     * Object that must be locked upon accessing mListener
      */
     private final Object mListenerLock = new Object();
 
