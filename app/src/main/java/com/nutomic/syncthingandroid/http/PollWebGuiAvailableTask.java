@@ -29,6 +29,11 @@ public class PollWebGuiAvailableTask extends ApiRequest {
 
     private OnSuccessListener mListener;
 
+    /**
+     * Object that must be locked upon accessing mCurrentState
+     */
+    private final Object mListenerLock = new Object();
+
     public PollWebGuiAvailableTask(Context context, URL url, String apiKey,
                                    OnSuccessListener listener) {
         super(context, url, "", apiKey);
@@ -38,7 +43,9 @@ public class PollWebGuiAvailableTask extends ApiRequest {
     }
 
     public void cancelRequestsAndCallback() {
-        mListener = null;
+        synchronized(mListenerLock) {
+            mListener = null;
+        }
     }
 
     private void performRequest() {
@@ -47,24 +54,29 @@ public class PollWebGuiAvailableTask extends ApiRequest {
     }
 
     private void onSuccess(String result) {
-        if (mListener != null) {
-            mListener.onSuccess(result);
-        } else {
-            Log.v(TAG, "Cancelled callback and outstanding requests");
+        synchronized(mListenerLock) {
+            if (mListener != null) {
+                mListener.onSuccess(result);
+            } else {
+                Log.v(TAG, "Cancelled callback and outstanding requests");
+            }
         }
     }
 
     private void onError(VolleyError error) {
-        if (mListener != null) {
-            mHandler.postDelayed(this::performRequest, WEB_GUI_POLL_INTERVAL);
-            Throwable cause = error.getCause();
-            if (cause == null || cause.getClass().equals(ConnectException.class)) {
-                Log.v(TAG, "Polling web gui");
-            } else {
-                Log.w(TAG, "Unexpected error while polling web gui", error);
+        synchronized(mListenerLock) {
+            if (mListener == null) {
+                Log.v(TAG, "Cancelled callback and outstanding requests");
+                return;
             }
+        }
+
+        mHandler.postDelayed(this::performRequest, WEB_GUI_POLL_INTERVAL);
+        Throwable cause = error.getCause();
+        if (cause == null || cause.getClass().equals(ConnectException.class)) {
+            Log.v(TAG, "Polling web gui");
         } else {
-            Log.v(TAG, "Cancelled callback and outstanding requests");
+            Log.w(TAG, "Unexpected error while polling web gui", error);
         }
     }
 
