@@ -74,7 +74,7 @@ public class SettingsActivity extends SyncthingActivity {
 
     public static class SettingsFragment extends PreferenceFragment
             implements SyncthingActivity.OnServiceConnectedListener,
-            SyncthingService.onServiceStateChangeListener, Preference.OnPreferenceChangeListener,
+            SyncthingService.OnServiceStateChangeListener, Preference.OnPreferenceChangeListener,
             Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
         private static final String TAG = "SettingsFragment";

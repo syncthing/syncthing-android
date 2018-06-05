@@ -44,7 +44,7 @@ import java.util.Iterator;
  * Activity that allows selecting a directory in the local file system.
  */
 public class FolderPickerActivity extends SyncthingActivity
-        implements AdapterView.OnItemClickListener, SyncthingService.onServiceStateChangeListener {
+        implements AdapterView.OnItemClickListener, SyncthingService.OnServiceStateChangeListener {
 
     private static final String EXTRA_INITIAL_DIRECTORY =
             "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";

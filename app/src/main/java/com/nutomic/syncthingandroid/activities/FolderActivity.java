@@ -51,7 +51,7 @@ import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE
  * Shows folder details and allows changing them.
  */
 public class FolderActivity extends SyncthingActivity
-        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.onServiceStateChangeListener {
+        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnServiceStateChangeListener {
 
     public static final String EXTRA_IS_CREATE =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";

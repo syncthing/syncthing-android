@@ -59,7 +59,7 @@ public class SyncthingService extends Service {
     public static final String ACTION_REFRESH_NETWORK_INFO =
             "com.nutomic.syncthingandroid.service.SyncthingService.REFRESH_NETWORK_INFO";
 
-    public interface onServiceStateChangeListener {
+    public interface OnServiceStateChangeListener {
         void onServiceStateChange(State currentState);
     }
 
@@ -98,7 +98,7 @@ public class SyncthingService extends Service {
     private Thread mSyncthingRunnableThread = null;
     private Handler mHandler;
 
-    private final HashSet<onServiceStateChangeListener> mOnServiceStateChangeListeners = new HashSet<>();
+    private final HashSet<OnServiceStateChangeListener> mOnServiceStateChangeListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
     @Inject NotificationHandler mNotificationHandler;
@@ -453,7 +453,7 @@ public class SyncthingService extends Service {
      *
      * @see #unregisterOnServiceStateChangeListener
      */
-    public void registerOnServiceStateChangeListener(onServiceStateChangeListener listener) {
+    public void registerOnServiceStateChangeListener(OnServiceStateChangeListener listener) {
         // Make sure we don't send an invalid state or syncthing might show a "disabled" message
         // when it's just starting up.
         listener.onServiceStateChange(mCurrentState);
@@ -465,7 +465,7 @@ public class SyncthingService extends Service {
      *
      * @see #registerOnServiceStateChangeListener
      */
-    public void unregisterOnServiceStateChangeListener(onServiceStateChangeListener listener) {
+    public void unregisterOnServiceStateChangeListener(OnServiceStateChangeListener listener) {
         mOnServiceStateChangeListeners.remove(listener);
     }
 
@@ -477,9 +477,9 @@ public class SyncthingService extends Service {
         mCurrentState = newState;
         mHandler.post(() -> {
             mNotificationHandler.updatePersistentNotification(this);
-            for (Iterator<onServiceStateChangeListener> i = mOnServiceStateChangeListeners.iterator();
+            for (Iterator<OnServiceStateChangeListener> i = mOnServiceStateChangeListeners.iterator();
                  i.hasNext(); ) {
-                onServiceStateChangeListener listener = i.next();
+                OnServiceStateChangeListener listener = i.next();
                 if (listener != null) {
                     listener.onServiceStateChange(mCurrentState);
                 } else {

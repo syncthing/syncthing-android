@@ -66,7 +66,7 @@ import static java.lang.Math.min;
  * {@link DrawerFragment} in the navigation drawer.
  */
 public class MainActivity extends StateDialogActivity
-        implements SyncthingService.onServiceStateChangeListener {
+        implements SyncthingService.OnServiceStateChangeListener {
 
     private static final String TAG = "MainActivity";
     private static final String IS_SHOWING_RESTART_DIALOG = "RESTART_DIALOG_STATE";
