@@ -327,7 +327,7 @@ public class RestApi {
     public Device getLocalDevice() {
         List<Device> devices = getDevices(true);
         if (devices.isEmpty()) {
-            Log.e(TAG, "getLocalDevice: devices is empty");
+            Log.e(TAG, "getLocalDevice: devices is empty. Execution stops here to prevent config corruption and data loss.");
             throw new RuntimeException();
         }
         Log.v(TAG, "getLocalDevice: Looking for local device ID " + mLocalDeviceId);
@@ -336,6 +336,7 @@ public class RestApi {
                 return deepCopy(d, Device.class);
             }
         }
+        Log.e(TAG, "getLocalDevice: Failed to find and get the local device. Execution stops here to prevent config corruption and data loss.");
         throw new RuntimeException();
     }
 
