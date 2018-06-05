@@ -69,8 +69,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     private void onServiceStateChange(SyncthingService.State currentState) {
         mServiceState = currentState;
         switch (mServiceState) {
-            case ERROR:
-            case INIT:
+            case INIT: // fallthrough
             case STARTING:
                 dismissDisabledDialog();
                 showLoadingDialog();
@@ -84,6 +83,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                     showDisabledDialog();
                 }
                 break;
+            case ERROR: // fallthrough
             default:
                 break;
         }
