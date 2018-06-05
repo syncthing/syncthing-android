@@ -196,7 +196,7 @@ public class WebGuiActivity extends StateDialogActivity
     protected void onDestroy() {
         SyncthingService mSyncthingService = getService();
         if (mSyncthingService != null) {
-            mSyncthingService.registerOnServiceStateChangeListener(this);
+            mSyncthingService.unregisterOnServiceStateChangeListener(this);
         }
         mWebView.destroy();
         mWebView = null;
