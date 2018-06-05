@@ -276,18 +276,18 @@ public class MainActivity extends StateDialogActivity
     public void onDestroy() {
         super.onDestroy();
         if (getService() != null) {
-            getService().unregisteronServiceStateChangeListener(this);
-            getService().unregisteronServiceStateChangeListener(mFolderListFragment);
-            getService().unregisteronServiceStateChangeListener(mDeviceListFragment);
+            getService().unregisterOnServiceStateChangeListener(this);
+            getService().unregisterOnServiceStateChangeListener(mFolderListFragment);
+            getService().unregisterOnServiceStateChangeListener(mDeviceListFragment);
         }
     }
 
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        getService().registeronServiceStateChangeListener(this);
-        getService().registeronServiceStateChangeListener(mFolderListFragment);
-        getService().registeronServiceStateChangeListener(mDeviceListFragment);
+        getService().registerOnServiceStateChangeListener(this);
+        getService().registerOnServiceStateChangeListener(mFolderListFragment);
+        getService().registerOnServiceStateChangeListener(mDeviceListFragment);
     }
 
     /**

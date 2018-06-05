@@ -156,13 +156,13 @@ public class FolderPickerActivity extends SyncthingActivity
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         super.onServiceConnected(componentName, iBinder);
-        getService().registeronServiceStateChangeListener(this);
+        getService().registerOnServiceStateChangeListener(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getService().unregisteronServiceStateChangeListener(this);
+        getService().unregisterOnServiceStateChangeListener(this);
     }
 
     @Override

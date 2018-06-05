@@ -85,7 +85,7 @@ public class ShareActivity extends StateDialogActivity
 
     @Override
     public void onServiceConnected() {
-        getService().registeronServiceStateChangeListener(this);
+        getService().registerOnServiceStateChangeListener(this);
     }
 
     @Override

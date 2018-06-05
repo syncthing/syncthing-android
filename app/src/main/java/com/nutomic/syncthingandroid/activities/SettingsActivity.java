@@ -251,7 +251,7 @@ public class SettingsActivity extends SyncthingActivity {
                 return;
 
             mSyncthingService = ((SyncthingActivity) getActivity()).getService();
-            mSyncthingService.registeronServiceStateChangeListener(this);
+            mSyncthingService.registerOnServiceStateChangeListener(this);
         }
 
         @Override
@@ -290,7 +290,7 @@ public class SettingsActivity extends SyncthingActivity {
         public void onDestroy() {
             mPreferences.unregisterOnSharedPreferenceChangeListener(this);
             if (mSyncthingService != null) {
-                mSyncthingService.unregisteronServiceStateChangeListener(this);
+                mSyncthingService.unregisterOnServiceStateChangeListener(this);
             }
             super.onDestroy();
         }

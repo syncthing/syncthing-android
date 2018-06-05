@@ -33,7 +33,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerOnServiceConnectedListener(() ->
-                getService().registeronServiceStateChangeListener(this::onServiceStateChange));
+                getService().registerOnServiceStateChangeListener(this::onServiceStateChange));
     }
 
     @Override
@@ -61,7 +61,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (getService() != null) {
-            getService().unregisteronServiceStateChangeListener(this::onServiceStateChange);
+            getService().unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         dismissDisabledDialog();
     }
