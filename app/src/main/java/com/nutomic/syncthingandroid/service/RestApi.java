@@ -137,11 +137,6 @@ public class RestApi {
         mOnConfigChangedListener = configListener;
     }
 
-    /**
-     * Number of previous calls to {@link #tryIsAvailable()}.
-     */
-    private final AtomicInteger mAvailableCount = new AtomicInteger(0);
-
     public interface OnApiAvailableListener {
         void onApiAvailable();
     }
