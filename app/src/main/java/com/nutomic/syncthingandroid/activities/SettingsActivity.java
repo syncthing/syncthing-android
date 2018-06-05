@@ -376,7 +376,7 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public void onStop() {
             if (mRequireRestart) {
-                if (mApi != null &&
+                if (mSyncthingService != null && mApi != null &&
                         mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED) {
                     mApi.restart();
                     mRequireRestart = false;
