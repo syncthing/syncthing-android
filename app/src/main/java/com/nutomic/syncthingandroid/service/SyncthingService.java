@@ -105,7 +105,7 @@ public class SyncthingService extends Service {
     @Inject SharedPreferences mPreferences;
 
     /**
-     * Object that must be locked upon when accessing mCurrentState
+     * Object that must be locked upon accessing mCurrentState
      */
     private final Object mStateLock = new Object();
 
