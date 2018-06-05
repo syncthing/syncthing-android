@@ -71,9 +71,12 @@ public class SyncthingService extends Service {
         INIT,
         /** Syncthing binary is starting. */
         STARTING,
-        /** Syncthing binary is running, API is available. */
+        /** Syncthing binary is running,
+         * Rest API is available,
+         * RestApi class read the config and is fully initialized.
+         */
         ACTIVE,
-        /** Syncthing is stopped according to user preferences. */
+        /** Syncthing binary is shutting down. */
         DISABLED,
         /** There is some problem that prevents Syncthing from running. */
         ERROR,
