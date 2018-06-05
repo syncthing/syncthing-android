@@ -38,11 +38,11 @@ public class NetworkReceiver extends BroadcastReceiver {
         NetworkInfo ni = cm.getActiveNetworkInfo();
         boolean isAllowedConnectionType = false;
         if (ni == null) {
-            Log.v(TAG, "Detected flight mode enabled.");
+            Log.v(TAG, "In flight mode");
             // We still allow opening MainActivity and WebGuiActivity for local administration.
             isAllowedConnectionType = true;
         } else {
-            Log.v(TAG, "Detected flight mode disabled.");
+            Log.v(TAG, "Not in flight mode");
             boolean isWifi = ni.getType() == ConnectivityManager.TYPE_WIFI && ni.isConnected();
             boolean isNetworkMetered = (Build.VERSION.SDK_INT >= 16) ? cm.isActiveNetworkMetered() : false;
             isAllowedConnectionType = isWifi && !isNetworkMetered;
