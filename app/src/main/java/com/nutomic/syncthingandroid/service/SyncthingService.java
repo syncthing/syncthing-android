@@ -105,8 +105,7 @@ public class SyncthingService extends Service {
     @Inject SharedPreferences mPreferences;
 
     /**
-     * Object that can be locked upon when accessing mCurrentState
-     * Currently used to male onDestroy() and PollWebGuiAvailableTaskImpl.onPostExcecute() tread-safe
+     * Object that must be locked upon when accessing mCurrentState
      */
     private final Object mStateLock = new Object();
 
