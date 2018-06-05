@@ -293,6 +293,7 @@ public class SyncthingService extends Service {
             // Start the syncthing binary.
             if (mSyncthingRunnable != null || mSyncthingRunnableThread != null) {
                 Log.e(TAG, "StartupTask/onPostExecute: Syncthing binary lifecycle violated");
+                return;
             }
             mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
             mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
