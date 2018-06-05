@@ -352,8 +352,8 @@ public class SyncthingService extends Service {
 
         if (mEventProcessor == null) {
             mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+            mEventProcessor.start();
         }
-        mEventProcessor.start();
     }
 
     @Override
