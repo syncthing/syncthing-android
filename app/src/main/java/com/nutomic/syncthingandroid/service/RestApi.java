@@ -110,6 +110,12 @@ public class RestApi {
     private Boolean asyncQuerySystemInfoComplete = false;
 
     /**
+     * Object that must be locked upon accessing the following variables:
+     * asyncQueryConfigComplete, asyncQueryVersionComplete, asyncQuerySystemInfoComplete
+     */
+    private final Object mAsyncQueryCompleteLock = new Object();
+
+    /**
      * Stores the latest result of {@link #getFolderStatus} for each folder
      */
     private HashMap<String, FolderStatus> mCachedFolderStatuses = new HashMap<>();
@@ -149,26 +155,34 @@ public class RestApi {
      */
     public void readConfigFromRestApi() {
         Log.v(TAG, "Reading config from REST ...");
-        asyncQueryVersionComplete = false;
-        asyncQueryConfigComplete = false;
-        asyncQuerySystemInfoComplete = false;
+        synchronized (mAsyncQueryCompleteLock) {
+            asyncQueryVersionComplete = false;
+            asyncQueryConfigComplete = false;
+            asyncQuerySystemInfoComplete = false;
+        }
         new GetRequest(mContext, mUrl, GetRequest.URI_VERSION, mApiKey, null, result -> {
             JsonObject json = new JsonParser().parse(result).getAsJsonObject();
             mVersion = json.get("version").getAsString();
             Log.i(TAG, "Syncthing version is " + mVersion);
             updateDebugFacilitiesCache();
-            asyncQueryVersionComplete = true;
-            checkReadConfigFromRestApiCompleted();
+            synchronized (mAsyncQueryCompleteLock) {
+                asyncQueryVersionComplete = true;
+                checkReadConfigFromRestApiCompleted();
+            }
         });
         new GetRequest(mContext, mUrl, GetRequest.URI_CONFIG, mApiKey, null, result -> {
             onReloadConfigComplete(result);
-            asyncQueryConfigComplete = true;
-            checkReadConfigFromRestApiCompleted();
+            synchronized (mAsyncQueryCompleteLock) {
+                asyncQueryConfigComplete = true;
+                checkReadConfigFromRestApiCompleted();
+            }
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
-            asyncQuerySystemInfoComplete = true;
-            checkReadConfigFromRestApiCompleted();
+            synchronized (mAsyncQueryCompleteLock) {
+                asyncQuerySystemInfoComplete = true;
+                checkReadConfigFromRestApiCompleted();
+            }
         });
     }
 
