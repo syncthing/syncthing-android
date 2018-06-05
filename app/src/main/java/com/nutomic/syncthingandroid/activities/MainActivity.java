@@ -275,10 +275,11 @@ public class MainActivity extends StateDialogActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (getService() != null) {
-            getService().unregisterOnServiceStateChangeListener(this);
-            getService().unregisterOnServiceStateChangeListener(mFolderListFragment);
-            getService().unregisterOnServiceStateChangeListener(mDeviceListFragment);
+        SyncthingService mSyncthingService = getService();
+        if (mSyncthingService != null) {
+            mSyncthingService.unregisterOnServiceStateChangeListener(this);
+            mSyncthingService.unregisterOnServiceStateChangeListener(mFolderListFragment);
+            mSyncthingService.unregisterOnServiceStateChangeListener(mDeviceListFragment);
         }
     }
 
