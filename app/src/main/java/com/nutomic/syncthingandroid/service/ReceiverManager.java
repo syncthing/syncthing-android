@@ -16,35 +16,17 @@ public class ReceiverManager {
 
     private static List<BroadcastReceiver> mReceivers = new ArrayList<BroadcastReceiver>();
 
-    public static void registerReceiver(Context context, BroadcastReceiver receiver, IntentFilter intentFilter) {
+    public static synchronized void registerReceiver(Context context, BroadcastReceiver receiver, IntentFilter intentFilter) {
         mReceivers.add(receiver);
         context.registerReceiver(receiver, intentFilter);
         Log.v(TAG, "Registered receiver: " + receiver + " with filter: " + intentFilter);
     }
 
-    public static boolean isReceiverRegistered(BroadcastReceiver receiver) {
+    public static synchronized boolean isReceiverRegistered(BroadcastReceiver receiver) {
         return mReceivers.contains(receiver);
     }
 
-    public static void unregisterReceiver(Context context, BroadcastReceiver receiver) {
-        if (context == null) {
-            Log.e(TAG, "unregisterReceiver: context is null");
-            return;
-        }
-        if (isReceiverRegistered(receiver)) {
-            try {
-                context.unregisterReceiver(receiver);
-                Log.v(TAG, "Unregistered receiver: " + receiver);
-            } catch(IllegalArgumentException e) {
-                // We have to catch the race condition a registration is still pending in android
-                // according to https://stackoverflow.com/a/3568906
-                Log.w(TAG, "unregisterReceiver(" + receiver + ") threw IllegalArgumentException");
-            }
-            mReceivers.remove(receiver);
-        }
-    }
-
-    public static void unregisterAllReceivers(Context context) {
+    public static synchronized void unregisterAllReceivers(Context context) {
         if (context == null) {
             Log.e(TAG, "unregisterReceiver: context is null");
             return;
