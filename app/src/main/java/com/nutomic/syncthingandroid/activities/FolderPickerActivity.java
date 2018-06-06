@@ -162,7 +162,10 @@ public class FolderPickerActivity extends SyncthingActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getService().unregisterOnServiceStateChangeListener(this);
+        SyncthingService syncthingService = getService();
+        if (syncthingService != null) {
+            syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
+        }
     }
 
     @Override
