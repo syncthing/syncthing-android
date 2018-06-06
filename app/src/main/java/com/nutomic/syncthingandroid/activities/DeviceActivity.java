@@ -213,8 +213,9 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (getService() != null) {
-            getService().unregisterOnServiceStateChangeListener(this::onServiceStateChange);
+        SyncthingService syncthingService = getService();
+        if (syncthingService != null) {
+            syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         mIdView.removeTextChangedListener(mIdTextWatcher);
         mNameView.removeTextChangedListener(mNameTextWatcher);

@@ -234,8 +234,9 @@ public class FolderActivity extends SyncthingActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (getService() != null) {
-            getService().unregisterOnServiceStateChangeListener(this);
+        SyncthingService syncthingService = getService();
+        if (syncthingService != null) {
+            syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         mLabelView.removeTextChangedListener(mTextWatcher);
         mIdView.removeTextChangedListener(mTextWatcher);
