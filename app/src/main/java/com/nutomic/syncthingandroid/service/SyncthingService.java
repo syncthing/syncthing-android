@@ -95,6 +95,7 @@ public class SyncthingService extends Service {
     private @Nullable EventProcessor mEventProcessor = null;
     private @Nullable DeviceStateHolder mDeviceStateHolder = null;
     private @Nullable SyncthingRunnable mSyncthingRunnable = null;
+    private StartupTask mStartupTask = null;
     private Thread mSyncthingRunnableThread = null;
     private Handler mHandler;
 
@@ -190,16 +191,16 @@ public class SyncthingService extends Service {
             return START_STICKY;
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            shutdown(State.INIT, () -> new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR));
+            shutdown(State.INIT, () -> LaunchStartupTask());
         } else if (ACTION_RESET_DATABASE.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdatabase).run();
-                new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                LaunchStartupTask();
             });
         } else if (ACTION_RESET_DELTAS.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdeltas).run();
-                new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                LaunchStartupTask();
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
             mDeviceStateHolder.updateShouldRunDecision();
@@ -227,8 +228,7 @@ public class SyncthingService extends Service {
                         // HACK: Make sure there is no syncthing binary left running from an improper
                         // shutdown (eg Play Store update).
                         shutdown(State.INIT, () -> {
-                            Log.v(TAG, "Starting syncthing");
-                            new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                            LaunchStartupTask();
                         });
                         break;
                     case STARTING:
@@ -250,13 +250,46 @@ public class SyncthingService extends Service {
     }
 
     /**
+     *
+     */
+    private void LaunchStartupTask () {
+        // ToDo - handle overlapping StartupTask still running case here ...
+        if (mStartupTask != null) {
+            Log.e(TAG, "LaunchStartupTask: StartupTask is still running. This needs to be investigated and properly handled.");
+            return;
+        }
+        mStartupTask = new StartupTask();
+        mStartupTask.setListener(new StartupTask.StartupTaskListener() {
+            @Override
+            public void onStartupTaskFinished() {
+                Log.v(TAG, "StartupTask finished");
+                mStartupTask = null;
+            }
+        });
+        mStartupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    /**
      * Sets up the initial configuration, and updates the config when coming from an old
      * version.
      */
     private class StartupTask extends AsyncTask<Void, Void, Void> {
+        /**
+         * Listener is used to notify the parent class when the AsyncTask finishes.
+         */
+        private StartupTaskListener listener;
+
+        public void setListener(StartupTaskListener listener) {
+            this.listener = listener;
+        }
+
+        public interface StartupTaskListener {
+            void onStartupTaskFinished();
+        }
 
         @Override
         protected void onPreExecute() {
+            Log.v(TAG, "Starting syncthing");
             synchronized(mStateLock) {
                 if (mCurrentState != State.INIT) {
                     Log.e(TAG, "StartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
@@ -293,31 +326,37 @@ public class SyncthingService extends Service {
             // Start the syncthing binary.
             if (mSyncthingRunnable != null || mSyncthingRunnableThread != null) {
                 Log.e(TAG, "StartupTask/onPostExecute: Syncthing binary lifecycle violated");
-                return;
-            }
-            mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
-            mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
-            mSyncthingRunnableThread.start();
+            } else {
+                mSyncthingRunnable = new SyncthingRunnable(SyncthingService.this, SyncthingRunnable.Command.main);
+                mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
+                mSyncthingRunnableThread.start();
 
-            /**
-             * Wait for the web-gui of the native syncthing binary to come online.
-             *
-             * In case the binary is to be stopped, also be aware that another thread could request
-             * to stop the binary in the time while waiting for the GUI to become active. See the comment
-             * for SyncthingService.onDestroy for details.
-             */
-            if (mPollWebGuiAvailableTask == null) {
-                mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
-                        SyncthingService.this,
-                        getWebGuiUrl(),
-                        mConfig.getApiKey(),
-                        result -> {
-                    Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-                    if (mApi != null) {
-                        mApi.readConfigFromRestApi();
-                    }
-                });
+                /**
+                 * Wait for the web-gui of the native syncthing binary to come online.
+                 *
+                 * In case the binary is to be stopped, also be aware that another thread could request
+                 * to stop the binary in the time while waiting for the GUI to become active. See the comment
+                 * for SyncthingService.onDestroy for details.
+                 */
+                if (mPollWebGuiAvailableTask == null) {
+                    mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
+                            SyncthingService.this,
+                            getWebGuiUrl(),
+                            mConfig.getApiKey(),
+                            result -> {
+                        Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+                        if (mApi != null) {
+                            mApi.readConfigFromRestApi();
+                        }
+                    });
+                }
             }
+
+            if (listener != null) {
+                listener.onStartupTaskFinished();
+                listener = null;
+            }
+            return;
         }
     }
 
@@ -534,7 +573,7 @@ public class SyncthingService extends Service {
             } catch (IOException e) {
                 Log.w(TAG, "Failed to import config", e);
             }
-            new StartupTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            LaunchStartupTask();
         });
         return true;
     }
