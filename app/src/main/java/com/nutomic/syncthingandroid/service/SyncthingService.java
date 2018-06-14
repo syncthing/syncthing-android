@@ -251,12 +251,21 @@ public class SyncthingService extends Service {
     }
 
     /**
-     *
+     * Prepares to launch the syncthing binary.
      */
     private void LaunchStartupTask () {
-        // ToDo - handle overlapping StartupTask still running case here ...
-        if (mStartupTask != null) {
-            Log.e(TAG, "LaunchStartupTask: StartupTask is still running. This needs to be investigated and properly handled.");
+        Log.v(TAG, "Starting syncthing");
+        synchronized(mStateLock) {
+            if (mCurrentState != State.INIT) {
+                Log.e(TAG, "StartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
+                return;
+            }
+            onServiceStateChange(State.STARTING);
+        }
+
+        // Safety check: Log warning if a previously launched startup task did not finish properly.
+        if (mStartupTask != null && (mStartupTask.getStatus() == AsyncTask.Status.RUNNING)) {
+            Log.w(TAG, "LaunchStartupTask: StartupTask is still running. Skipped starting it twice.");
             return;
         }
         mStartupTask = new StartupTask(this);
@@ -273,20 +282,6 @@ public class SyncthingService extends Service {
 
          StartupTask(SyncthingService context) {
              refSyncthingService = new WeakReference<>(context);
-         }
-
-         @Override
-         protected void onPreExecute() {
-             Log.v(TAG, "Starting syncthing");
-             SyncthingService syncthingService = refSyncthingService.get();
-             synchronized(syncthingService.mStateLock) {
-                 if (syncthingService.mCurrentState != State.INIT) {
-                     Log.e(TAG, "StartupTask: Wrong state " + syncthingService.mCurrentState + " detected. Cancelling.");
-                     cancel(true);
-                     return;
-                 }
-                 syncthingService.onServiceStateChange(State.STARTING);
-             }
          }
 
          @Override
@@ -309,51 +304,57 @@ public class SyncthingService extends Service {
          protected void onPostExecute(Void aVoid) {
              // Get a reference to the service if it is still there.
              SyncthingService syncthingService = refSyncthingService.get();
-             if (syncthingService == null) {
-                 return;
-             }
-
-             if (syncthingService.mApi == null) {
-                 syncthingService.mApi = new RestApi(syncthingService, syncthingService.mConfig.getWebGuiUrl(), syncthingService.mConfig.getApiKey(),
-                                     syncthingService::onApiAvailable, () -> syncthingService.onServiceStateChange(syncthingService.mCurrentState));
-                 Log.i(TAG, "Web GUI will be available at " + syncthingService.mConfig.getWebGuiUrl());
-             }
-
-             // Start the syncthing binary.
-             if (syncthingService.mSyncthingRunnable != null || syncthingService.mSyncthingRunnableThread != null) {
-                 Log.e(TAG, "StartupTask/onPostExecute: Syncthing binary lifecycle violated");
-             } else {
-                 syncthingService.mSyncthingRunnable = new SyncthingRunnable(syncthingService, SyncthingRunnable.Command.main);
-                 syncthingService.mSyncthingRunnableThread = new Thread(syncthingService.mSyncthingRunnable);
-                 syncthingService.mSyncthingRunnableThread.start();
-
-                 /**
-                  * Wait for the web-gui of the native syncthing binary to come online.
-                  *
-                  * In case the binary is to be stopped, also be aware that another thread could request
-                  * to stop the binary in the time while waiting for the GUI to become active. See the comment
-                  * for SyncthingService.onDestroy for details.
-                  */
-                 if (syncthingService.mPollWebGuiAvailableTask == null) {
-                     syncthingService.mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
-                             syncthingService,
-                             syncthingService.getWebGuiUrl(),
-                             syncthingService.mConfig.getApiKey(),
-                             result -> {
-                         Log.i(TAG, "Web GUI has come online at " + syncthingService.mConfig.getWebGuiUrl());
-                         if (syncthingService.mApi != null) {
-                             syncthingService.mApi.readConfigFromRestApi();
-                         }
-                     });
-                 }
+             if (syncthingService != null) {
+                 syncthingService.StartupTask_onPostExecute();
              }
              return;
          }
      }
 
+     /**
+      * Callback on {@link StartupTask#onPostExecute}.
+      */
+     private void StartupTask_onPostExecute() {
+         if (mApi == null) {
+             mApi = new RestApi(this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
+                                 this::onApiAvailable, () -> onServiceStateChange(mCurrentState));
+             Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
+         }
+
+         // Start the syncthing binary.
+         if (mSyncthingRunnable != null || mSyncthingRunnableThread != null) {
+             Log.e(TAG, "StartupTask_onPostExecute: Syncthing binary lifecycle violated");
+             return;
+         }
+         mSyncthingRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
+         mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
+         mSyncthingRunnableThread.start();
+
+         /**
+          * Wait for the web-gui of the native syncthing binary to come online.
+          *
+          * In case the binary is to be stopped, also be aware that another thread could request
+          * to stop the binary in the time while waiting for the GUI to become active. See the comment
+          * for {@link SyncthingService#onDestroy} for details.
+          */
+         if (mPollWebGuiAvailableTask == null) {
+             mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
+                     this,
+                     getWebGuiUrl(),
+                     mConfig.getApiKey(),
+                     result -> {
+                 Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+                 if (mApi != null) {
+                     mApi.readConfigFromRestApi();
+                 }
+             });
+         }
+         return;
+     }
+
     /**
-     * Called when {@link PollWebGuiAvailableTask} confirmed the REST API is available.
-     * We can assume mApi being available under normal conditions.
+     * Called when {@link RestApi#checkReadConfigFromRestApiCompleted} detects
+     * the RestApi class has been fully initialized.
      * UI stressing results in mApi getting null on simultaneous shutdown, so
      * we check it for safety.
      */
