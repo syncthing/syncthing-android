@@ -257,10 +257,9 @@ public class SyncthingService extends Service {
         Log.v(TAG, "Starting syncthing");
         synchronized(mStateLock) {
             if (mCurrentState != State.INIT) {
-                Log.e(TAG, "StartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
+                Log.e(TAG, "LaunchStartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
                 return;
             }
-            onServiceStateChange(State.STARTING);
         }
 
         // Safety check: Log warning if a previously launched startup task did not finish properly.
@@ -268,6 +267,7 @@ public class SyncthingService extends Service {
             Log.w(TAG, "LaunchStartupTask: StartupTask is still running. Skipped starting it twice.");
             return;
         }
+        onServiceStateChange(State.STARTING);
         mStartupTask = new StartupTask(this);
         mStartupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -287,6 +287,9 @@ public class SyncthingService extends Service {
          @Override
          protected Void doInBackground(Void... voids) {
              SyncthingService syncthingService = refSyncthingService.get();
+             if (syncthingService == null) {
+                 cancel(true);
+             }
              try {
                  syncthingService.mConfig = new ConfigXml(syncthingService);
                  syncthingService.mConfig.updateIfNeeded();
