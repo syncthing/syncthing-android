@@ -192,16 +192,16 @@ public class SyncthingService extends Service {
             return START_STICKY;
 
         if (ACTION_RESTART.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
-            shutdown(State.INIT, () -> LaunchStartupTask());
+            shutdown(State.INIT, () -> launchStartupTask());
         } else if (ACTION_RESET_DATABASE.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdatabase).run();
-                LaunchStartupTask();
+                launchStartupTask();
             });
         } else if (ACTION_RESET_DELTAS.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
                 new SyncthingRunnable(this, SyncthingRunnable.Command.resetdeltas).run();
-                LaunchStartupTask();
+                launchStartupTask();
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
             mDeviceStateHolder.updateShouldRunDecision();
@@ -229,7 +229,7 @@ public class SyncthingService extends Service {
                         // HACK: Make sure there is no syncthing binary left running from an improper
                         // shutdown (eg Play Store update).
                         shutdown(State.INIT, () -> {
-                            LaunchStartupTask();
+                            launchStartupTask();
                         });
                         break;
                     case STARTING:
@@ -253,18 +253,18 @@ public class SyncthingService extends Service {
     /**
      * Prepares to launch the syncthing binary.
      */
-    private void LaunchStartupTask () {
+    private void launchStartupTask () {
         Log.v(TAG, "Starting syncthing");
         synchronized(mStateLock) {
             if (mCurrentState != State.INIT) {
-                Log.e(TAG, "LaunchStartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
+                Log.e(TAG, "launchStartupTask: Wrong state " + mCurrentState + " detected. Cancelling.");
                 return;
             }
         }
 
         // Safety check: Log warning if a previously launched startup task did not finish properly.
         if (mStartupTask != null && (mStartupTask.getStatus() == AsyncTask.Status.RUNNING)) {
-            Log.w(TAG, "LaunchStartupTask: StartupTask is still running. Skipped starting it twice.");
+            Log.w(TAG, "launchStartupTask: StartupTask is still running. Skipped starting it twice.");
             return;
         }
         onServiceStateChange(State.STARTING);
@@ -308,7 +308,7 @@ public class SyncthingService extends Service {
              // Get a reference to the service if it is still there.
              SyncthingService syncthingService = refSyncthingService.get();
              if (syncthingService != null) {
-                 syncthingService.StartupTask_onPostExecute();
+                 syncthingService.onStartupTaskCompleteListener();
              }
              return;
          }
@@ -317,7 +317,7 @@ public class SyncthingService extends Service {
      /**
       * Callback on {@link StartupTask#onPostExecute}.
       */
-     private void StartupTask_onPostExecute() {
+     private void onStartupTaskCompleteListener() {
          if (mApi == null) {
              mApi = new RestApi(this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
                                  this::onApiAvailable, () -> onServiceStateChange(mCurrentState));
@@ -326,7 +326,7 @@ public class SyncthingService extends Service {
 
          // Start the syncthing binary.
          if (mSyncthingRunnable != null || mSyncthingRunnableThread != null) {
-             Log.e(TAG, "StartupTask_onPostExecute: Syncthing binary lifecycle violated");
+             Log.e(TAG, "onStartupTaskCompleteListener: Syncthing binary lifecycle violated");
              return;
          }
          mSyncthingRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
@@ -568,7 +568,7 @@ public class SyncthingService extends Service {
             } catch (IOException e) {
                 Log.w(TAG, "Failed to import config", e);
             }
-            LaunchStartupTask();
+            launchStartupTask();
         });
         return true;
     }
