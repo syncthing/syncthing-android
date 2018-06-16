@@ -85,7 +85,7 @@ public class FolderActivity extends SyncthingActivity
     private TextView mEditIgnores;
 
     private boolean mIsCreateMode;
-    private boolean mFolderNeedsToUpdate;
+    private boolean mFolderNeedsToUpdate = false;
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
@@ -403,7 +403,11 @@ public class FolderActivity extends SyncthingActivity
         return new AlertDialog.Builder(this)
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
-                    getApi().removeFolder(mFolder.id);
+                    RestApi restApi = getApi();
+                    if (restApi != null) {
+                        restApi.removeFolder(mFolder.id);
+                        mFolderNeedsToUpdate = false;
+                    }
                     finish();
                 })
                 .setNegativeButton(android.R.string.no, null)
