@@ -290,7 +290,7 @@ public class ShareActivity extends StateDialogActivity
         }
 
         protected void onPreExecute() {
-            // Get a reference to the service if it is still there.
+            // Get a reference to the activity if it is still there.
             ShareActivity shareActivity = refShareActivity.get();
             // shareActivity cannot be null before the task executes.
             mProgress = ProgressDialog.show(shareActivity, null,
