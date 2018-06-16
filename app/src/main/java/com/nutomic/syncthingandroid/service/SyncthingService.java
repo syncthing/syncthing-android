@@ -277,7 +277,6 @@ public class SyncthingService extends Service {
      * version.
      */
      private static class StartupTask extends AsyncTask<Void, Void, Void> {
-
          private WeakReference<SyncthingService> refSyncthingService;
 
          StartupTask(SyncthingService context) {
@@ -289,6 +288,7 @@ public class SyncthingService extends Service {
              SyncthingService syncthingService = refSyncthingService.get();
              if (syncthingService == null) {
                  cancel(true);
+                 return null;
              }
              try {
                  syncthingService.mConfig = new ConfigXml(syncthingService);
@@ -310,7 +310,6 @@ public class SyncthingService extends Service {
              if (syncthingService != null) {
                  syncthingService.onStartupTaskCompleteListener();
              }
-             return;
          }
      }
 
@@ -342,15 +341,13 @@ public class SyncthingService extends Service {
           */
          if (mPollWebGuiAvailableTask == null) {
              mPollWebGuiAvailableTask = new PollWebGuiAvailableTask(
-                     this,
-                     getWebGuiUrl(),
-                     mConfig.getApiKey(),
-                     result -> {
-                 Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
-                 if (mApi != null) {
-                     mApi.readConfigFromRestApi();
-                 }
-             });
+                this, getWebGuiUrl(), mConfig.getApiKey(), result -> {
+                    Log.i(TAG, "Web GUI has come online at " + mConfig.getWebGuiUrl());
+                    if (mApi != null) {
+                        mApi.readConfigFromRestApi();
+                    }
+                }
+             );
          }
          return;
      }
