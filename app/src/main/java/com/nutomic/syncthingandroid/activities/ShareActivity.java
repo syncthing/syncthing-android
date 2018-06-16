@@ -298,7 +298,7 @@ public class ShareActivity extends StateDialogActivity
         }
 
         protected Boolean doInBackground(Void... params) {
-            // Get a reference to the service if it is still there.
+            // Get a reference to the activity if it is still there.
             ShareActivity shareActivity = refShareActivity.get();
             if (shareActivity == null || shareActivity.isFinishing()) {
                 cancel(true);
@@ -338,10 +338,9 @@ public class ShareActivity extends StateDialogActivity
         }
 
         protected void onPostExecute(Boolean isError) {
-            // Get a reference to the service if it is still there.
+            // Get a reference to the activity if it is still there.
             ShareActivity shareActivity = refShareActivity.get();
             if (shareActivity == null || shareActivity.isFinishing()) {
-                cancel(true);
                 return;
             }
             Util.dismissDialogSafe(mProgress, shareActivity);
