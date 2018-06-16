@@ -407,8 +407,8 @@ public class FolderActivity extends SyncthingActivity
                     RestApi restApi = getApi();
                     if (restApi != null) {
                         restApi.removeFolder(mFolder.id);
-                        mFolderNeedsToUpdate = false;
                     }
+                    mFolderNeedsToUpdate = false;
                     finish();
                 })
                 .setNegativeButton(android.R.string.no, null)
