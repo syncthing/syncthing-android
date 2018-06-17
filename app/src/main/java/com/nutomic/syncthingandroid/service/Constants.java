@@ -28,11 +28,7 @@ public class Constants {
      * Available options cache for preference {@link app_settings#debug_facilities_enabled}
      * Read via REST API call in {@link RestApi#updateDebugFacilitiesCache} after first successful binary startup.
      */
-<<<<<<< HEAD
     public static final String PREF_DEBUG_FACILITIES_AVAILABLE  = "debug_facilities_available";
-=======
-    public static final String PREF_DEBUG_FACILITIES_AVAILABLE  = "sttrace_available_options";
->>>>>>> f2064ab3b1cc0efff5ff5c847c74ef8976de8a55
 
     /**
      * On Android 8.1, ACCESS_COARSE_LOCATION is required to access WiFi SSID.
