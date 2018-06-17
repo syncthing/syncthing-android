@@ -544,7 +544,12 @@ public class RestApi {
     }
 
     public Boolean isUsageReportingDecided() {
-        return getOptions().isUsageReportingDecided(mUrVersionMax);
+        Options options = getOptions();
+        if (options == null) {
+            Log.e(TAG, "isUsageReportingDecided called while options == null");
+            return true;
+        }
+        return options.isUsageReportingDecided(mUrVersionMax);
     }
 
     public void setUsageReporting(Boolean acceptUsageReporting) {
