@@ -503,9 +503,6 @@ public class MainActivity extends StateDialogActivity
             }
         };
 
-        if (restApi == null) {
-            return;
-        }
         restApi.getUsageReport(report -> {
             @SuppressLint("InflateParams")
             View v = LayoutInflater.from(MainActivity.this)
