@@ -206,10 +206,15 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
      */
 
     private void showQrCode() {
+        RestApi restApi = mActivity.getApi();
+        if (restApi == null) {
+            Toast.makeText(mActivity, R.string.syncthing_terminated, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String apiKey = restApi.getGui().apiKey;
+        String deviceId = restApi.getLocalDevice().deviceID;
+        URL url = restApi.getUrl();
         //The QRCode request takes one paramteer called "text", which is the text to be converted to a QRCode.
-        String apiKey = mActivity.getApi().getGui().apiKey;
-        String deviceId = mActivity.getApi().getLocalDevice().deviceID;
-        URL url = mActivity.getApi().getUrl();
         new ImageGetRequest(mActivity, url, ImageGetRequest.QR_CODE_GENERATOR, apiKey,
                 ImmutableMap.of("text", deviceId),qrCodeBitmap -> {
             mActivity.showQrCodeDialog(deviceId, qrCodeBitmap);
