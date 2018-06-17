@@ -36,6 +36,7 @@ import com.nutomic.syncthingandroid.util.Languages;
 import com.nutomic.syncthingandroid.util.Util;
 import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
+import java.lang.ref.WeakReference;
 import java.security.InvalidParameterException;
 
 import javax.inject.Inject;
@@ -78,7 +79,6 @@ public class SettingsActivity extends SyncthingActivity {
             Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
         private static final String TAG = "SettingsFragment";
-        private static final String KEY_STTRACE = "sttrace";
         private static final String KEY_EXPORT_CONFIG = "export_config";
         private static final String KEY_IMPORT_CONFIG = "import_config";
         private static final String KEY_ST_RESET_DATABASE = "st_reset_database";
@@ -193,10 +193,10 @@ public class SettingsActivity extends SyncthingActivity {
             Preference exportConfig = findPreference("export_config");
             Preference importConfig = findPreference("import_config");
 
-            Preference stTrace              = findPreference("sttrace");
-            Preference environmentVariables = findPreference("environment_variables");
-            Preference stResetDatabase      = findPreference("st_reset_database");
-            Preference stResetDeltas        = findPreference("st_reset_deltas");
+            Preference debugFacilitiesEnabled   = findPreference(Constants.PREF_DEBUG_FACILITIES_ENABLED);
+            Preference environmentVariables     = findPreference("environment_variables");
+            Preference stResetDatabase          = findPreference("st_reset_database");
+            Preference stResetDeltas            = findPreference("st_reset_deltas");
 
             mUseRoot                        = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
             mUseWakelock                    = (CheckBoxPreference) findPreference(Constants.PREF_USE_WAKE_LOCK);
@@ -216,7 +216,7 @@ public class SettingsActivity extends SyncthingActivity {
             exportConfig.setOnPreferenceClickListener(this);
             importConfig.setOnPreferenceClickListener(this);
 
-            stTrace.setOnPreferenceChangeListener(this);
+            debugFacilitiesEnabled.setOnPreferenceChangeListener(this);
             environmentVariables.setOnPreferenceChangeListener(this);
             stResetDatabase.setOnPreferenceClickListener(this);
             stResetDeltas.setOnPreferenceClickListener(this);
@@ -409,7 +409,7 @@ public class SettingsActivity extends SyncthingActivity {
                 case Constants.PREF_SYNC_ONLY_WIFI:
                     mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
                     break;
-                case KEY_STTRACE:
+                case Constants.PREF_DEBUG_FACILITIES_ENABLED:
                     mRequireRestart = true;
                     break;
                 case Constants.PREF_ENVIRONMENT_VARIABLES:
@@ -461,7 +461,7 @@ public class SettingsActivity extends SyncthingActivity {
                     if (mUseRoot.isChecked()) {
                         // Only check preference after root was granted.
                         mUseRoot.setChecked(false);
-                        new TestRootTask().execute();
+                        new TestRootTask(this).execute();
                     } else {
                         new Thread(() -> Util.fixAppDataPermissions(getActivity())).start();
                         mRequireRestart = true;
@@ -551,7 +551,13 @@ public class SettingsActivity extends SyncthingActivity {
         /**
          * Enables or disables {@link #mUseRoot} preference depending whether root is available.
          */
-        private class TestRootTask extends AsyncTask<Void, Void, Boolean> {
+        private static class TestRootTask extends AsyncTask<Void, Void, Boolean> {
+            private WeakReference<SettingsFragment> refSettingsFragment;
+
+            TestRootTask(SettingsFragment context) {
+                refSettingsFragment = new WeakReference<>(context);
+            }
+
             @Override
             protected Boolean doInBackground(Void... params) {
                 return Shell.SU.available();
@@ -559,11 +565,16 @@ public class SettingsActivity extends SyncthingActivity {
 
             @Override
             protected void onPostExecute(Boolean haveRoot) {
+                // Get a reference to the fragment if it is still there.
+                SettingsFragment settingsFragment = refSettingsFragment.get();
+                if (settingsFragment == null) {
+                    return;
+                }
                 if (haveRoot) {
-                    mRequireRestart = true;
-                    mUseRoot.setChecked(true);
+                    settingsFragment.mRequireRestart = true;
+                    settingsFragment.mUseRoot.setChecked(true);
                 } else {
-                    Toast.makeText(getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
+                    Toast.makeText(settingsFragment.getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
                             .show();
                 }
             }

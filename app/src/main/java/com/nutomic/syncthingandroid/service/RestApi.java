@@ -21,7 +21,6 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.ShareActivity;
 import com.nutomic.syncthingandroid.http.GetRequest;
 import com.nutomic.syncthingandroid.http.PostConfigRequest;
-import com.nutomic.syncthingandroid.http.PostScanRequest;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Completion;
 import com.nutomic.syncthingandroid.model.CompletionInfo;
@@ -222,7 +221,7 @@ public class RestApi {
                         facilitiesToStore.add(facilityName);
                     }
                     PreferenceManager.getDefaultSharedPreferences(mContext).edit()
-                        .putStringSet(Constants.PREF_STTRACE_AVAILABLE_OPTIONS, facilitiesToStore)
+                        .putStringSet(Constants.PREF_DEBUG_FACILITIES_AVAILABLE, facilitiesToStore)
                         .apply();
 
                     // Store current binary version so we will only store this information again
