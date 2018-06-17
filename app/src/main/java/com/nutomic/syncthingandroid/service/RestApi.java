@@ -83,12 +83,7 @@ public class RestApi {
 
     private String mVersion;
     private Config mConfig;
-
-    /**
-     * Results cached from systemInfo
-     */
     private String mLocalDeviceId;
-    private Integer mUrVersionMax;
 
     /**
      * Stores the result of the last successful request to {@link GetRequest#URI_CONNECTIONS},
@@ -178,7 +173,6 @@ public class RestApi {
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
-            mUrVersionMax = info.urVersionMax;
             synchronized (mAsyncQueryCompleteLock) {
                 asyncQuerySystemInfoComplete = true;
                 checkReadConfigFromRestApiCompleted();
@@ -542,6 +536,7 @@ public class RestApi {
     public URL getUrl() {
         return mUrl;
     }
+<<<<<<< HEAD
 
     public Boolean isUsageReportingDecided() {
         Options options = getOptions();
@@ -561,4 +556,6 @@ public class RestApi {
         options.urAccepted = acceptUsageReporting ? mUrVersionMax : Options.USAGE_REPORTING_DENIED;
         mConfig.options = options;
     }
+=======
+>>>>>>> parent of 89a0dac7... fix async restApi.getSystemInfo causing usage reporting
 }
