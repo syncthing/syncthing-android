@@ -479,10 +479,6 @@ public class MainActivity extends StateDialogActivity
      */
     private void showUsageReportingDialog(RestApi restApi) {
         final DialogInterface.OnClickListener listener = (dialog, which) -> {
-            if (restApi == null) {
-                Toast.makeText(MainActivity.this, R.string.syncthing_terminated, Toast.LENGTH_SHORT).show();
-                return;
-            }
             try {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
