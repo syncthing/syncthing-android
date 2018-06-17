@@ -206,17 +206,21 @@ public class WebGuiActivity extends StateDialogActivity
     }
 
     /**
-     * Reads the SyncthingService.HTTPS_CERT_FILE Ca Cert key  and loads it in memory
+     * Reads the SyncthingService.HTTPS_CERT_FILE Ca Cert key and loads it in memory
      */
     private void loadCaCert() {
         InputStream inStream = null;
+        File httpsCertFile = Constants.getHttpsCertFile(this);
+        if (!httpsCertFile.exists()) {
+            
+            return;
+        }
         try {
-            File httpsCertPath = Constants.getHttpsCertFile(this);
-            inStream = new FileInputStream(httpsCertPath);
+            inStream = new FileInputStream(httpsCertFile);
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             mCaCert = (X509Certificate)
                     cf.generateCertificate(inStream);
-        } catch (FileNotFoundException|CertificateException e) {
+        } catch (CertificateException e) {
             throw new IllegalArgumentException("Untrusted Certificate", e);
         } finally {
             try {
