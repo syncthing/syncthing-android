@@ -50,6 +50,7 @@ import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.model.Options;
+import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.Util;
@@ -112,12 +113,13 @@ public class MainActivity extends StateDialogActivity
                 showBatteryOptimizationDialogIfNecessary();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
-                getApi().getSystemInfo(systemInfo -> {
-                    if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
-                            !getApi().getOptions().isUsageReportingDecided(systemInfo.urVersionMax)) {
-                        showUsageReportingDialog();
-                    }
-                });
+
+                // Check if the usage reporting minimum delay passed by.
+                Boolean usageReportingDelayPassed = (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY);
+                RestApi restApi = getApi();
+                if (usageReportingDelayPassed && restApi != null && !restApi.isUsageReportingDecided()) {
+                    showUsageReportingDialog(restApi);
+                }
                 break;
             case ERROR:
                 finish();
@@ -475,7 +477,7 @@ public class MainActivity extends StateDialogActivity
     /**
      * Displays dialog asking user to accept/deny usage reporting.
      */
-    private void showUsageReportingDialog() {
+    private void showUsageReportingDialog(RestApi restApi) {
         final DialogInterface.OnClickListener listener = (dialog, which) -> {
 <<<<<<< HEAD
             if (restApi == null) {
@@ -500,31 +502,15 @@ public class MainActivity extends StateDialogActivity
             } catch (Exception e) {
                 Log.e(TAG, "showUsageReportingDialog:OnClickListener", e);
 =======
-            Options options = getApi().getOptions();
-            switch (which) {
-                case DialogInterface.BUTTON_POSITIVE:
-                    getApi().getSystemInfo(systemInfo -> {
-                        options.urAccepted = systemInfo.urVersionMax;
-                    });
-                    break;
-                case DialogInterface.BUTTON_NEGATIVE:
-                    options.urAccepted = Options.USAGE_REPORTING_DENIED;
-                    break;
-                case DialogInterface.BUTTON_NEUTRAL:
-                    Uri uri = Uri.parse("https://data.syncthing.net");
-                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    break;
->>>>>>> parent of 89a0dac7... fix async restApi.getSystemInfo causing usage reporting
+>>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
             }
-            getApi().editSettings(getApi().getGui(), options);
-            getApi().restart();
         };
 
 <<<<<<< HEAD
         restApi.getUsageReport(report -> {
 =======
-        getApi().getUsageReport(report -> {
->>>>>>> parent of 89a0dac7... fix async restApi.getSystemInfo causing usage reporting
+        restApi.getUsageReport(report -> {
+>>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
             @SuppressLint("InflateParams")
             View v = LayoutInflater.from(MainActivity.this)
                     .inflate(R.layout.dialog_usage_reporting, null);

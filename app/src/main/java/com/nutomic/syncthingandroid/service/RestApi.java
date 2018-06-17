@@ -83,7 +83,12 @@ public class RestApi {
 
     private String mVersion;
     private Config mConfig;
+
+    /**
+     * Results cached from systemInfo
+     */
     private String mLocalDeviceId;
+    private Integer mUrVersionMax;
 
     /**
      * Stores the result of the last successful request to {@link GetRequest#URI_CONNECTIONS},
@@ -173,6 +178,7 @@ public class RestApi {
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
+            mUrVersionMax = info.urVersionMax;
             synchronized (mAsyncQueryCompleteLock) {
                 asyncQuerySystemInfoComplete = true;
                 checkReadConfigFromRestApiCompleted();
@@ -557,5 +563,5 @@ public class RestApi {
         mConfig.options = options;
     }
 =======
->>>>>>> parent of 89a0dac7... fix async restApi.getSystemInfo causing usage reporting
+>>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
 }
