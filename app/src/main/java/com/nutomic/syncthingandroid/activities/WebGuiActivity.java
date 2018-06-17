@@ -19,6 +19,7 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.Constants;
@@ -212,7 +213,8 @@ public class WebGuiActivity extends StateDialogActivity
         InputStream inStream = null;
         File httpsCertFile = Constants.getHttpsCertFile(this);
         if (!httpsCertFile.exists()) {
-            
+            Toast.makeText(WebGuiActivity.this, R.string.config_file_missing, Toast.LENGTH_LONG).show();
+            finish();
             return;
         }
         try {
@@ -220,7 +222,7 @@ public class WebGuiActivity extends StateDialogActivity
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             mCaCert = (X509Certificate)
                     cf.generateCertificate(inStream);
-        } catch (CertificateException e) {
+        } catch (FileNotFoundException|CertificateException e) {
             throw new IllegalArgumentException("Untrusted Certificate", e);
         } finally {
             try {
