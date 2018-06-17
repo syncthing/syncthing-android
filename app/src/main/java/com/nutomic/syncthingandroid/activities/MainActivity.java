@@ -487,11 +487,11 @@ public class MainActivity extends StateDialogActivity
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         restApi.setUsageReporting(true);
-                        restApi.restart();
+                        restApi.saveConfigAndRestart();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
                         restApi.setUsageReporting(false);
-                        restApi.restart();
+                        restApi.saveConfigAndRestart();
                         break;
                     case DialogInterface.BUTTON_NEUTRAL:
                         Uri uri = Uri.parse("https://data.syncthing.net");
