@@ -388,7 +388,7 @@ public class SyncthingService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
+    public SyncthingServiceBinder onBind(Intent intent) {
         return mBinder;
     }
 
