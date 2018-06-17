@@ -349,7 +349,6 @@ public class SyncthingService extends Service {
                 }
              );
          }
-         return;
      }
 
     /**
