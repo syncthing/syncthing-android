@@ -50,7 +50,6 @@ import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.model.Options;
-import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.Util;
@@ -113,13 +112,12 @@ public class MainActivity extends StateDialogActivity
                 showBatteryOptimizationDialogIfNecessary();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 mDrawerFragment.requestGuiUpdate();
-
-                // Check if the usage reporting minimum delay passed by.
-                Boolean usageReportingDelayPassed = (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY);
-                RestApi restApi = getApi();
-                if (usageReportingDelayPassed && restApi != null && !restApi.isUsageReportingDecided()) {
-                    showUsageReportingDialog(restApi);
-                }
+                getApi().getSystemInfo(systemInfo -> {
+                    if (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY &&
+                            !getApi().getOptions().isUsageReportingDecided(systemInfo.urVersionMax)) {
+                        showUsageReportingDialog();
+                    }
+                });
                 break;
             case ERROR:
                 finish();
@@ -477,40 +475,28 @@ public class MainActivity extends StateDialogActivity
     /**
      * Displays dialog asking user to accept/deny usage reporting.
      */
-    private void showUsageReportingDialog(RestApi restApi) {
+    private void showUsageReportingDialog() {
         final DialogInterface.OnClickListener listener = (dialog, which) -> {
-<<<<<<< HEAD
-            if (restApi == null) {
-                Toast.makeText(MainActivity.this, R.string.syncthing_terminated, Toast.LENGTH_SHORT).show();
-                return;
+            Options options = getApi().getOptions();
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    getApi().getSystemInfo(systemInfo -> {
+                        options.urAccepted = systemInfo.urVersionMax;
+                    });
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    options.urAccepted = Options.USAGE_REPORTING_DENIED;
+                    break;
+                case DialogInterface.BUTTON_NEUTRAL:
+                    Uri uri = Uri.parse("https://data.syncthing.net");
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    break;
             }
-            try {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        restApi.setUsageReporting(true);
-                        restApi.saveConfigAndRestart();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        restApi.setUsageReporting(false);
-                        restApi.saveConfigAndRestart();
-                        break;
-                    case DialogInterface.BUTTON_NEUTRAL:
-                        Uri uri = Uri.parse("https://data.syncthing.net");
-                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                        break;
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "showUsageReportingDialog:OnClickListener", e);
-=======
->>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
-            }
+            getApi().editSettings(getApi().getGui(), options);
+            getApi().restart();
         };
 
-<<<<<<< HEAD
-        restApi.getUsageReport(report -> {
-=======
-        restApi.getUsageReport(report -> {
->>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
+        getApi().getUsageReport(report -> {
             @SuppressLint("InflateParams")
             View v = LayoutInflater.from(MainActivity.this)
                     .inflate(R.layout.dialog_usage_reporting, null);

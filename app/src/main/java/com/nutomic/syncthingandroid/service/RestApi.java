@@ -83,12 +83,7 @@ public class RestApi {
 
     private String mVersion;
     private Config mConfig;
-
-    /**
-     * Results cached from systemInfo
-     */
     private String mLocalDeviceId;
-    private Integer mUrVersionMax;
 
     /**
      * Stores the result of the last successful request to {@link GetRequest#URI_CONNECTIONS},
@@ -178,7 +173,6 @@ public class RestApi {
         });
         getSystemInfo(info -> {
             mLocalDeviceId = info.myID;
-            mUrVersionMax = info.urVersionMax;
             synchronized (mAsyncQueryCompleteLock) {
                 asyncQuerySystemInfoComplete = true;
                 checkReadConfigFromRestApiCompleted();
@@ -255,7 +249,7 @@ public class RestApi {
     /**
      * Sends current config and restarts Syncthing.
      */
-    public void saveConfigAndRestart() {
+    public void restart() {
         new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), result -> {
             Intent intent = new Intent(mContext, SyncthingService.class)
                     .setAction(SyncthingService.ACTION_RESTART);
@@ -542,26 +536,4 @@ public class RestApi {
     public URL getUrl() {
         return mUrl;
     }
-<<<<<<< HEAD
-
-    public Boolean isUsageReportingDecided() {
-        Options options = getOptions();
-        if (options == null) {
-            Log.e(TAG, "isUsageReportingDecided called while options == null");
-            return true;
-        }
-        return options.isUsageReportingDecided(mUrVersionMax);
-    }
-
-    public void setUsageReporting(Boolean acceptUsageReporting) {
-        Options options = getOptions();
-        if (options == null) {
-            Log.e(TAG, "setUsageReporting called while options == null");
-            return;
-        }
-        options.urAccepted = acceptUsageReporting ? mUrVersionMax : Options.USAGE_REPORTING_DENIED;
-        mConfig.options = options;
-    }
-=======
->>>>>>> 383b8db1ecb471c17978d91098d16627e236f66d
 }
