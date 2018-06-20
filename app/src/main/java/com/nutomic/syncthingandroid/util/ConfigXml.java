@@ -51,7 +51,7 @@ public class ConfigXml {
     }
 
     private static final String TAG = "ConfigXml";
-    private static final int DEVICE_ID_APPENDIX_LENGTH = 7;
+    private static final int FOLDER_ID_APPENDIX_LENGTH = 4;
 
     private final Context mContext;
     @Inject SharedPreferences mPreferences;
@@ -306,9 +306,9 @@ public class ConfigXml {
                 .replace(" ", "_")
                 .toLowerCase(Locale.US)
                 .replaceAll("[^a-z0-9_-]", "");
-        String deviceId = deviceModel + "_" + generateRandomString(DEVICE_ID_APPENDIX_LENGTH);
+        String defaultFolderId = deviceModel + "_" + generateRandomString(FOLDER_ID_APPENDIX_LENGTH);
         folder.setAttribute("label", mContext.getString(R.string.default_folder_label));
-        folder.setAttribute("id", mContext.getString(R.string.default_folder_id, deviceId));
+        folder.setAttribute("id", mContext.getString(R.string.default_folder_id, defaultFolderId));
         folder.setAttribute("path", Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath());
         folder.setAttribute("type", "readonly");
