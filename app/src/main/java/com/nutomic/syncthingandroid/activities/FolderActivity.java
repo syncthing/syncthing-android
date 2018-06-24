@@ -460,6 +460,12 @@ public class FolderActivity extends SyncthingActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
+            /**
+             * Normally, syncthing takes care of creating the ".stfolder" marker.
+             * This can fail on android if the syncthing binary only has readonly
+             * access on the path and the user tries to configure a sendonly folder.
+             * To fix this, we'll precreate the marker using java code.
+             */
             Uri treeUri = data.getData();
             DocumentFile pickedDir = DocumentFile.fromTreeUri(this, treeUri);
             Log.v(TAG, "uri " + treeUri.toString());
