@@ -51,6 +51,19 @@ import java.util.Locale;
 public class FileUtils {
     private FileUtils() {} //private constructor to enforce Singleton pattern
 
+    public static String getRealPathFromURI(Context context, Uri uri) {
+    		Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+    		if (cursor == null) {
+    			return uri.getPath();
+    		} else {
+    			cursor.moveToFirst();
+    			int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+    			String realPath = cursor.getString(index);
+    			cursor.close();
+    			return realPath;
+    		}
+    	}
+
     /** TAG for log messages. */
     static final String TAG = "FileUtils";
     private static final boolean DEBUG = false; // Set to true to enable logging
