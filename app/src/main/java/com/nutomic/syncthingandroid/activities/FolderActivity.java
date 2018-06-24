@@ -1,12 +1,11 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.UriPermission;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,7 +38,6 @@ import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Random;
 import java.util.Map;
@@ -139,6 +137,7 @@ public class FolderActivity extends SyncthingActivity
     };
 
     @Override
+    @SuppressLint("InlinedAPI")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_folder);
@@ -158,8 +157,16 @@ public class FolderActivity extends SyncthingActivity
         mDevicesContainer = findViewById(R.id.devicesContainer);
         mEditIgnores = findViewById(R.id.edit_ignores);
 
-        mPathView.setOnClickListener(view ->
-                startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null), FolderPickerActivity.DIRECTORY_REQUEST_CODE));
+        mPathView.setOnClickListener(view -> {
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE),
+                            CHOOSE_FOLDER_REQUEST);
+                    } else {
+                        startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
+                            FolderPickerActivity.DIRECTORY_REQUEST_CODE);
+                    }
+                }
+            );
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
         mEditIgnores.setOnClickListener(v -> editIgnores());
@@ -372,42 +379,6 @@ public class FolderActivity extends SyncthingActivity
         return true;
     }
 
-
-
-
-
-
-
-
-    @TargetApi(19)
-    protected DocumentFile getSaveDirNew(String uriString) {
-        DocumentFile saveDir = null;
-        boolean canWrite = isUriWritePermission(uriString);
-        if (canWrite) {
-            try {
-                saveDir = DocumentFile.fromTreeUri(FolderActivity.this, Uri.parse(uriString));
-            } catch (Exception e) {
-                saveDir = null;
-            }
-        }
-        return saveDir;
-    }
-
-    @TargetApi(19)
-    private boolean isUriWritePermission(String uriString) {
-        boolean canWrite = false;
-
-        List<UriPermission> perms = getContentResolver().getPersistedUriPermissions();
-        for (UriPermission p : perms) {
-            if (p.getUri().toString().equals(uriString) && p.isWritePermission()) {
-                Toast.makeText(this, "canWrite() can write URI::  " + p.getUri().toString(), Toast.LENGTH_LONG).show();
-                canWrite = true;
-                break;
-            }
-        }
-        return canWrite;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -422,9 +393,8 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
-
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                startActivityForResult(intent, CHOOSE_FOLDER_REQUEST);
+                getApi().createFolder(mFolder);
+                finish();
                 return true;
             case R.id.remove:
                 showDeleteDialog();
@@ -476,31 +446,12 @@ public class FolderActivity extends SyncthingActivity
                 Log.d(TAG, "Found file " + file.getName() + " with size " + file.length());
             }
 
-            // Create a new file and write into it
-            /*
-            DocumentFile newFile = pickedDir.createFile("text/plain", "My Novel");
-            try {
-                OutputStream out = getContentResolver().openOutputStream(newFile.getUri());
-                out.write("A long time ago...".getBytes());
-                out.close();
-            } catch (Exception e) {
-                Log.e(TAG, "onActivityResult", e);
-            }
-            */
+
             pickedDir.createDirectory(".stfolder");
-            pickedDir.createDirectory("stfolderA");
 
-            /**
-            DocumentFile newDirectory;
-            final int takeFlags = newDirectory.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            Uri treeUri = newDirectory.getData();
-            Log.v(TAG, "treeuri = " + treeUri.toString());
 
-            // Check for the freshest data.
-            getContentResolver().takePersistableUriPermission(treeUri, takeFlags);
-            */
-            getApi().createFolder(mFolder);
-            finish();
+
+
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
