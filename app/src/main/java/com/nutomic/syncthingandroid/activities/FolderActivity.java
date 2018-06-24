@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -37,7 +36,6 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.FileUtils;
-// import com.nutomic.syncthingandroid.util.DocumentsContract;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
 
@@ -81,7 +79,7 @@ public class FolderActivity extends SyncthingActivity
     private static final String IGNORE_FILE_NAME = ".stignore";
 
     private Folder mFolder;
-    // Contains SAF readwrite access URI on API level >= 19
+    // Contains SAF readwrite access URI on API level >= Build.VERSION_CODES.LOLLIPOP (21)
     private Uri mFolderUri = null;
 
     private EditText mLabelView;
@@ -165,7 +163,7 @@ public class FolderActivity extends SyncthingActivity
         mEditIgnores = findViewById(R.id.edit_ignores);
 
         mPathView.setOnClickListener(view -> {
-                    if (Build.VERSION.SDK_INT >= 19) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE),
                             CHOOSE_FOLDER_REQUEST);
                     } else {
@@ -400,7 +398,8 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
-                if (Build.VERSION.SDK_INT >= 19 && mFolderUri != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                    mFolderUri != null) {
                     /**
                      * Normally, syncthing takes care of creating the ".stfolder" marker.
                      * This fails on newer android versions if the syncthing binary only has
@@ -448,18 +447,14 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
-    @TargetApi(21)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
+            // This result case only occurs on API level >= Build.VERSION_CODES.LOLLIPOP (21)
             mFolderUri = data.getData();
             if (mFolderUri != null) {
                 // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                Uri docUri = DocumentsContract.buildDocumentUriUsingTree(mFolderUri,
-                    DocumentsContract.getTreeDocumentId(mFolderUri));
-                // mFolder.path = Util.formatPath(FileUtils.getRealPathFromURI(FolderActivity.this, docUri));
-                // mFolder.path = Util.formatPath(FileUtils.getPath(FolderActivity.this, docUri));
-                mFolder.path = Util.formatPath(FileUtils.getFullPathFromTreeUri(FolderActivity.this, docUri));
+                mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;
