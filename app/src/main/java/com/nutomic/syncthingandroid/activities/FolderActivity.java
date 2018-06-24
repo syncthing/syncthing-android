@@ -409,7 +409,6 @@ public class FolderActivity extends SyncthingActivity
                     if (dfFolder != null) {
                         Log.v(TAG, "Creating new directory " + mFolder.path + "/.stfolder");
                         dfFolder.createDirectory(".stfolder");
-                        dfFolder.createDirectory(".stfolderA");
                     }
                 }
                 getApi().createFolder(mFolder);
