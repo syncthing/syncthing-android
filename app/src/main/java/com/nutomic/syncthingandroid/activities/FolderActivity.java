@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -406,11 +405,11 @@ public class FolderActivity extends SyncthingActivity
                      * readonly access on the path and the user tries to configure a
                      * sendonly folder. To fix this, we'll precreate the marker using java code.
                      */
-                    DocumentFile dfFolderPath = DocumentFile.fromTreeUri(this, mFolderUri);
-                    if (dfFolderPath != null) {
+                    DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
+                    if (dfFolder != null) {
                         Log.v(TAG, "Creating new directory " + mFolder.path + "/.stfolder");
-                        dfFolderPath.createDirectory(".stfolder");
-                        dfFolderPath.createDirectory(".stfolderA");
+                        dfFolder.createDirectory(".stfolder");
+                        dfFolder.createDirectory(".stfolderA");
                     }
                 }
                 getApi().createFolder(mFolder);
@@ -452,14 +451,20 @@ public class FolderActivity extends SyncthingActivity
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
             // This result case only occurs on API level >= Build.VERSION_CODES.LOLLIPOP (21)
             mFolderUri = data.getData();
-            if (mFolderUri != null) {
-                // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
-                Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
-                mPathView.setText(mFolder.path);
-                mFolderNeedsToUpdate = true;
-                mEditIgnores.setEnabled(true);
+            if (mFolderUri == null) {
+                return;
             }
+            // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
+            mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
+            if (mFolder.path == null) {
+                Log.e(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Could not get absolute folder path.");
+                return;
+            }
+            mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
+            Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
+            mPathView.setText(mFolder.path);
+            mFolderNeedsToUpdate = true;
+            mEditIgnores.setEnabled(true);
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);

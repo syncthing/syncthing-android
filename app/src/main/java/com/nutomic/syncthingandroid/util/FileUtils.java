@@ -100,6 +100,7 @@ public class FileUtils {
             // not found.
             return null;
         } catch (Exception e) {
+            Log.w(TAG, "getVolumePath exception", e);
             return null;
         }
     }
@@ -121,5 +122,13 @@ public class FileUtils {
         final String[] split = docId.split(":");
         if ((split.length >= 2) && (split[1] != null)) return split[1];
         else return File.separator;
+    }
+
+    @Nullable
+    public static String cutTrailingSlash(final String path) {
+        if (path.endsWith("/")) {
+            return path.substring(0, path.length() - 1);
+        }
+        return path;
     }
 }
