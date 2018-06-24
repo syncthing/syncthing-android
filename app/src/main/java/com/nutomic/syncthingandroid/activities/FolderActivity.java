@@ -34,8 +34,9 @@ import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.FileUtils;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
-import com.nutomic.syncthingandroid.util.UriUtil;
+// import com.nutomic.syncthingandroid.util.UriUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
@@ -451,7 +452,7 @@ public class FolderActivity extends SyncthingActivity
             mFolderUri = data.getData();
             if (mFolderUri != null) {
                 // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                mFolder.path = Util.formatPath(UriUtil.getAbsolutePathFromUri2(FolderActivity.this, mFolderUri));
+                mFolder.path = Util.formatPath(FileUtils.getPath(FolderActivity.this, mFolderUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;

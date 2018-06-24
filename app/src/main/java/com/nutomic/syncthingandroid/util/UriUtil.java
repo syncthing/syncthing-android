@@ -22,24 +22,6 @@ import java.util.ArrayList;
 public class UriUtil {
     private static final String TAG = "UriUtil";
 
-    public static String getAbsolutePathFromUri2(final Context context, final Uri uri) {
-        final String id = DocumentsContract.getDocumentId(uri);
-        if (TextUtils.isEmpty(id)) {
-            return "";
-        }
-        if (id.startsWith("raw:")) {
-            return id.replaceFirst("raw:", "");
-        }
-        try {
-            final Uri contentUri = ContentUris.withAppendedId(
-                Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-            return getDataColumn(context, contentUri, null, null);
-        } catch (NumberFormatException e) {
-            Log.e(TAG, "getAbsolutePathFromUri2: Downloads provider returned unexpected uri " + uri.toString(), e);
-            return null;
-        }
-    }
-
     /**
      * Get a file path from a Uri. This will get the the path for Storage Access
      * Framework Documents, as well as the _data field for the MediaStore and
@@ -125,6 +107,10 @@ public class UriUtil {
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             // MediaStore (and general)
+            if (isGooglePhotosUri(uri)) {
+                // Return the remote address
+                return uri.getLastPathSegment();
+            }
             return getDataColumn(context, uri, null, null);
         } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             // File
@@ -184,5 +170,13 @@ public class UriUtil {
      */
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 }
