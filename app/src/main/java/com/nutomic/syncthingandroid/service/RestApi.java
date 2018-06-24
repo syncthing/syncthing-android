@@ -283,14 +283,31 @@ public class RestApi {
         return folders;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private static boolean fsCreateFolderUsingUri(String fullFolderPath, String treeUri, String uriFolder, Context context)
     {
         String[] folders = fullFolderPath.replaceFirst(uriFolder + "/", "").split("/");
-        DocumentFile Directory = DocumentFile.fromTreeUri(context, Uri.parse(treeUri));
+        DocumentFile directory = DocumentFile.fromTreeUri(context, Uri.parse(treeUri));
         for (int i = 0; i < folders.length - 1; i++) {
-            Directory = Directory.findFile(folders[i]);
+            directory = directory.findFile(folders[i]);
         }
-        Directory.createDirectory(folders[folders.length - 1]);
+        directory.createDirectory(folders[folders.length - 1]);
         return true;
     }
 
@@ -304,7 +321,7 @@ public class RestApi {
          * access on the path and the user tries to configure a sendonly folder.
          * To fix this, we'll precreate the marker using java code.
          */
-        fsCreateFolderUsingUri(folder.path, "", "", mContext);
+        // fsCreateFolderUsingUri(folder.path, "", "", mContext);
 
         // Add the new folder to the model.
         mConfig.folders.add(folder);

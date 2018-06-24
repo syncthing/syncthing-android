@@ -1,13 +1,16 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -36,6 +39,7 @@ import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Random;
 import java.util.Map;
@@ -69,6 +73,7 @@ public class FolderActivity extends SyncthingActivity
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
 
     private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
+    private static final int CHOOSE_FOLDER_REQUEST = 3459;
 
     private static final String IGNORE_FILE_NAME = ".stignore";
 
@@ -367,6 +372,42 @@ public class FolderActivity extends SyncthingActivity
         return true;
     }
 
+
+
+
+
+
+
+
+    @TargetApi(19)
+    protected DocumentFile getSaveDirNew(String uriString) {
+        DocumentFile saveDir = null;
+        boolean canWrite = isUriWritePermission(uriString);
+        if (canWrite) {
+            try {
+                saveDir = DocumentFile.fromTreeUri(FolderActivity.this, Uri.parse(uriString));
+            } catch (Exception e) {
+                saveDir = null;
+            }
+        }
+        return saveDir;
+    }
+
+    @TargetApi(19)
+    private boolean isUriWritePermission(String uriString) {
+        boolean canWrite = false;
+
+        List<UriPermission> perms = getContentResolver().getPersistedUriPermissions();
+        for (UriPermission p : perms) {
+            if (p.getUri().toString().equals(uriString) && p.isWritePermission()) {
+                Toast.makeText(this, "canWrite() can write URI::  " + p.getUri().toString(), Toast.LENGTH_LONG).show();
+                canWrite = true;
+                break;
+            }
+        }
+        return canWrite;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -381,8 +422,9 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
-                getApi().createFolder(mFolder);
-                finish();
+
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                startActivityForResult(intent, CHOOSE_FOLDER_REQUEST);
                 return true;
             case R.id.remove:
                 showDeleteDialog();
@@ -417,7 +459,43 @@ public class FolderActivity extends SyncthingActivity
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
+            Uri treeUri = data.getData();
+            DocumentFile pickedDir = DocumentFile.fromTreeUri(this, treeUri);
+            Log.v(TAG, "uri " + treeUri.toString());
+            Log.v(TAG, "uri pickedDir " + pickedDir.toString());
+
+            // List all existing files inside picked directory
+            for (DocumentFile file : pickedDir.listFiles()) {
+                Log.d(TAG, "Found file " + file.getName() + " with size " + file.length());
+            }
+
+            // Create a new file and write into it
+            /*
+            DocumentFile newFile = pickedDir.createFile("text/plain", "My Novel");
+            try {
+                OutputStream out = getContentResolver().openOutputStream(newFile.getUri());
+                out.write("A long time ago...".getBytes());
+                out.close();
+            } catch (Exception e) {
+                Log.e(TAG, "onActivityResult", e);
+            }
+            */
+            pickedDir.createDirectory(".stfolder");
+            pickedDir.createDirectory("stfolderA");
+
+            /**
+            DocumentFile newDirectory;
+            final int takeFlags = newDirectory.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            Uri treeUri = newDirectory.getData();
+            Log.v(TAG, "treeuri = " + treeUri.toString());
+
+            // Check for the freshest data.
+            getContentResolver().takePersistableUriPermission(treeUri, takeFlags);
+            */
+            getApi().createFolder(mFolder);
+            finish();
+        } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
             mFolderNeedsToUpdate = true;
