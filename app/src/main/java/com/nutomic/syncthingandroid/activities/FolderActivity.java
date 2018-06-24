@@ -1,14 +1,19 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -65,7 +70,7 @@ public class FolderActivity extends SyncthingActivity
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
-    private static final String TAG = "EditFolderFragment";
+    private static final String TAG = "FolderActivity";
 
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
@@ -443,20 +448,37 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
+    @TargetApi(19)
+    public static String getRealPathFromURI_API19(Context context, Uri uri){
+        String filePath = "";
+        String wholeID = DocumentsContract.getDocumentId(uri);
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+        String[] column = { MediaStore.Images.Media.DATA };
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            column, sel, new String[]{ id }, null);
+        int columnIndex = cursor.getColumnIndex(column[0]);
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
             mFolderUri = data.getData();
             if (mFolderUri != null) {
                 // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                File file = new File(mFolderUri.getPath());
-                final String[] split = file.getPath().split(":");
-                mFolder.path = split[1];
+                mFolder.path = Util.formatPath(getRealPathFromURI_API19(FolderActivity.this, mFolderUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;
                 mEditIgnores.setEnabled(true);
-            } 
+            }
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
