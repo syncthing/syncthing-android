@@ -27,7 +27,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
@@ -53,7 +55,7 @@ public class RealStoragePathLibrary {
 
 	public static final int 	MAX_INTERAL_COUNT = 3;
 
-	private static RealStoragePathLibrary mInstance;
+	private RealStoragePathLibrary mInstance;
 	private Context mContext = null;
 
 	private ArrayList<VolumeInfo> mFixedVolumeInfoArrayList = new ArrayList<VolumeInfo>();
@@ -281,6 +283,7 @@ public class RealStoragePathLibrary {
 		return APP_SPECIFIC_DIRECTORY_SDCARD;
 	}
 
+	@SuppressLint("ObsoleteSdkInt")
 	private void initialize() {
 		mFixedVolumeInfoArrayList.clear();
 		mRemovableVolumeInfoArrayList.clear();
@@ -399,7 +402,8 @@ public class RealStoragePathLibrary {
 //		if ((info != null) && (MountInfoManager.isMounted(mountPoint))) {
 		if (info != null) {
 			if (part.contentEquals("auto") == true) {
-				if (!label.toLowerCase().contains("usb") && !mountPoint.toLowerCase().contains("usb"))
+				Locale locale = Locale.getDefault();
+				if (!label.toLowerCase(locale).contains("usb") && !mountPoint.toLowerCase(locale).contains("usb"))
 					mRemovableVolumeInfoArrayList.add(info);
 			}
 			else {
@@ -490,6 +494,7 @@ public class RealStoragePathLibrary {
 
 	}
 
+	@SuppressLint("ObsoleteSdkInt")
 	private String getRealRemovableStoragePath() {
 
     	String path = null;

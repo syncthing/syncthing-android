@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -35,9 +37,9 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.FileUtils;
+// import com.nutomic.syncthingandroid.util.DocumentsContract;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
-import com.sandisk.realstoragepath.RealStoragePathLibrary;
 
 import java.io.File;
 import java.io.IOException;
@@ -446,13 +448,18 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
+    @TargetApi(21)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
             mFolderUri = data.getData();
             if (mFolderUri != null) {
                 // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                mFolder.path = Util.formatPath(FileUtils.getRealPathFromURI(FolderActivity.this, mFolderUri));
+                Uri docUri = DocumentsContract.buildDocumentUriUsingTree(mFolderUri,
+                    DocumentsContract.getTreeDocumentId(mFolderUri));
+                // mFolder.path = Util.formatPath(FileUtils.getRealPathFromURI(FolderActivity.this, docUri));
+                mFolder.path = Util.formatPath(FileUtils.getPath(FolderActivity.this, docUri));
+                // mFolder.path = Util.formatPath(FileUtils.getFullPathFromTreeUri(FolderActivity.this, docUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;

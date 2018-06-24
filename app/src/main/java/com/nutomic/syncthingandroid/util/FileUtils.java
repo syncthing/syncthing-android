@@ -17,6 +17,7 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -28,11 +29,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import com.nutomic.syncthingandroid.util.DocumentsContract;
+// import com.nutomic.syncthingandroid.util.DocumentsContract;
+
+import android.provider.DocumentsContract;
+import android.os.storage.StorageManager;
+import java.lang.reflect.Method;
+import java.lang.reflect.Array;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -51,18 +58,96 @@ import java.util.Locale;
 public class FileUtils {
     private FileUtils() {} //private constructor to enforce Singleton pattern
 
+    private static final String PRIMARY_VOLUME_NAME = "primary";
+
+    @Nullable
+    public static String getFullPathFromTreeUri(Context context, @Nullable final Uri treeUri) {
+        if (treeUri == null) return null;
+        String volumePath = getVolumePath(getVolumeIdFromTreeUri(treeUri), context);
+        if (volumePath == null) return File.separator;
+        if (volumePath.endsWith(File.separator))
+            volumePath = volumePath.substring(0, volumePath.length() - 1);
+
+        String documentPath = getDocumentPathFromTreeUri(treeUri);
+        if (documentPath.endsWith(File.separator))
+            documentPath = documentPath.substring(0, documentPath.length() - 1);
+
+        if (documentPath.length() > 0) {
+            if (documentPath.startsWith(File.separator))
+                return volumePath + documentPath;
+            else
+                return volumePath + File.separator + documentPath;
+        }
+        else return volumePath;
+    }
+
+
+    @SuppressLint("ObsoleteSdkInt")
+    private static String getVolumePath(final String volumeId, Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
+        try {
+            StorageManager mStorageManager =
+                    (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+            Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
+            Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
+            Method getUuid = storageVolumeClazz.getMethod("getUuid");
+            Method getPath = storageVolumeClazz.getMethod("getPath");
+            Method isPrimary = storageVolumeClazz.getMethod("isPrimary");
+            Object result = getVolumeList.invoke(mStorageManager);
+
+            final int length = Array.getLength(result);
+            for (int i = 0; i < length; i++) {
+                Object storageVolumeElement = Array.get(result, i);
+                String uuid = (String) getUuid.invoke(storageVolumeElement);
+                Boolean primary = (Boolean) isPrimary.invoke(storageVolumeElement);
+
+                // primary volume?
+                if (primary && PRIMARY_VOLUME_NAME.equals(volumeId))
+                    return (String) getPath.invoke(storageVolumeElement);
+
+                // other volumes?
+                if (uuid != null && uuid.equals(volumeId))
+                    return (String) getPath.invoke(storageVolumeElement);
+            }
+            // not found.
+            return null;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static String getVolumeIdFromTreeUri(final Uri treeUri) {
+        final String docId = DocumentsContract.getTreeDocumentId(treeUri);
+        final String[] split = docId.split(":");
+        if (split.length > 0) return split[0];
+        else return null;
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static String getDocumentPathFromTreeUri(final Uri treeUri) {
+        final String docId = DocumentsContract.getTreeDocumentId(treeUri);
+        final String[] split = docId.split(":");
+        if ((split.length >= 2) && (split[1] != null)) return split[1];
+        else return File.separator;
+    }
+
+    /*
+    // Does not work on external sdcards on Android 7.1.2
     public static String getRealPathFromURI(Context context, Uri uri) {
-    		Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-    		if (cursor == null) {
-    			return uri.getPath();
-    		} else {
-    			cursor.moveToFirst();
-    			int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-    			String realPath = cursor.getString(index);
-    			cursor.close();
-    			return realPath;
-    		}
-    	}
+		Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+		if (cursor == null) {
+			return uri.getPath();
+		} else {
+			cursor.moveToFirst();
+			int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+			String realPath = cursor.getString(index);
+			cursor.close();
+			return realPath;
+		}
+	}
+    */
 
     /** TAG for log messages. */
     static final String TAG = "FileUtils";
