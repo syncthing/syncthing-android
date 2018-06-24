@@ -458,8 +458,8 @@ public class FolderActivity extends SyncthingActivity
                 Uri docUri = DocumentsContract.buildDocumentUriUsingTree(mFolderUri,
                     DocumentsContract.getTreeDocumentId(mFolderUri));
                 // mFolder.path = Util.formatPath(FileUtils.getRealPathFromURI(FolderActivity.this, docUri));
-                mFolder.path = Util.formatPath(FileUtils.getPath(FolderActivity.this, docUri));
-                // mFolder.path = Util.formatPath(FileUtils.getFullPathFromTreeUri(FolderActivity.this, docUri));
+                // mFolder.path = Util.formatPath(FileUtils.getPath(FolderActivity.this, docUri));
+                mFolder.path = Util.formatPath(FileUtils.getFullPathFromTreeUri(FolderActivity.this, docUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;
