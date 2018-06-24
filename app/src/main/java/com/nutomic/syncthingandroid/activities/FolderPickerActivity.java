@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.Util;
@@ -102,7 +103,8 @@ public class FolderPickerActivity extends SyncthingActivity
             displayRoot();
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        Boolean mUseRoot = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !mUseRoot) {
             Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
                     .show();
         }
