@@ -3,7 +3,9 @@ package com.nutomic.syncthingandroid.service;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.provider.DocumentFile;
 import android.util.Log;
 
 import com.google.common.base.Objects;
@@ -281,14 +283,40 @@ public class RestApi {
         return folders;
     }
 
-    public void addFolder(Folder folder) {
+    private static boolean fsCreateFolderUsingUri(String fullFolderPath, String treeUri, String uriFolder, Context context)
+    {
+        String[] folders = fullFolderPath.replaceFirst(uriFolder + "/", "").split("/");
+        DocumentFile Directory = DocumentFile.fromTreeUri(context, Uri.parse(treeUri));
+        for (int i = 0; i < folders.length - 1; i++) {
+            Directory = Directory.findFile(folders[i]);
+        }
+        Directory.createDirectory(folders[folders.length - 1]);
+        return true;
+    }
+
+    /**
+     * This is only used for new folder creation, see {@link FolderActivity}.
+     */
+    public void createFolder(Folder folder) {
+        /**
+         * Normally, syncthing takes care of creating the ".stfolder" marker.
+         * This can fail on android if the syncthing binary only has readonly
+         * access on the path and the user tries to configure a sendonly folder.
+         * To fix this, we'll precreate the marker using java code.
+         */
+        fsCreateFolderUsingUri(folder.path, "", "", mContext);
+
+        // Add the new folder to the model.
         mConfig.folders.add(folder);
+
+        // Send model changes to syncthing, does not require a restart.
         sendConfig();
     }
 
-    public void editFolder(Folder newFolder) {
+    public void updateFolder(Folder newFolder) {
         removeFolderInternal(newFolder.id);
-        addFolder(newFolder);
+        mConfig.folders.add(newFolder);
+        sendConfig();
     }
 
     public void removeFolder(String id) {

@@ -381,7 +381,7 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
-                getApi().addFolder(mFolder);
+                getApi().createFolder(mFolder);
                 finish();
                 return true;
             case R.id.remove:
@@ -493,7 +493,7 @@ public class FolderActivity extends SyncthingActivity
              * RestApi is guaranteed not to be null as {@link onServiceStateChange}
              * immediately finishes this activity if SyncthingService shuts down.
              */
-            getApi().editFolder(mFolder);
+            getApi().updateFolder(mFolder);
         }
     }
 
