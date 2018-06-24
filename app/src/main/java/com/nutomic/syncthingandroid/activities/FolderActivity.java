@@ -76,6 +76,8 @@ public class FolderActivity extends SyncthingActivity
     private static final String IGNORE_FILE_NAME = ".stignore";
 
     private Folder mFolder;
+    // Contains SAF readwrite access URI on API level >= 19
+    private Uri mFolderUri = null;
 
     private EditText mLabelView;
     private EditText mIdView;
@@ -393,6 +395,20 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
+                if (Build.VERSION.SDK_INT >= 19 && mFolderUri != null) {
+                    /**
+                     * Normally, syncthing takes care of creating the ".stfolder" marker.
+                     * This fails on newer android versions if the syncthing binary only has
+                     * readonly access on the path and the user tries to configure a
+                     * sendonly folder. To fix this, we'll precreate the marker using java code.
+                     */
+                    DocumentFile dfFolderPath = DocumentFile.fromTreeUri(this, mFolderUri);
+                    if (dfFolderPath != null) {
+                        Log.v(TAG, "Creating new directory " + mFolder.path + "/.stfolder");
+                        dfFolderPath.createDirectory(".stfolder");
+                        dfFolderPath.createDirectory(".stfolderA");
+                    }
+                }
                 getApi().createFolder(mFolder);
                 finish();
                 return true;
@@ -430,28 +446,17 @@ public class FolderActivity extends SyncthingActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
-            /**
-             * Normally, syncthing takes care of creating the ".stfolder" marker.
-             * This can fail on android if the syncthing binary only has readonly
-             * access on the path and the user tries to configure a sendonly folder.
-             * To fix this, we'll precreate the marker using java code.
-             */
-            Uri treeUri = data.getData();
-            DocumentFile pickedDir = DocumentFile.fromTreeUri(this, treeUri);
-            Log.v(TAG, "uri " + treeUri.toString());
-            Log.v(TAG, "uri pickedDir " + pickedDir.toString());
-
-            // List all existing files inside picked directory
-            for (DocumentFile file : pickedDir.listFiles()) {
-                Log.d(TAG, "Found file " + file.getName() + " with size " + file.length());
-            }
-
-
-            pickedDir.createDirectory(".stfolder");
-
-
-
-
+            mFolderUri = data.getData();
+            if (mFolderUri != null) {
+                // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
+                File file = new File(mFolderUri.getPath());
+                final String[] split = file.getPath().split(":");
+                mFolder.path = split[1];
+                Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
+                mPathView.setText(mFolder.path);
+                mFolderNeedsToUpdate = true;
+                mEditIgnores.setEnabled(true);
+            } 
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
