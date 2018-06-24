@@ -489,6 +489,10 @@ public class FolderActivity extends SyncthingActivity
 
     private void updateFolder() {
         if (!mIsCreateMode) {
+            /**
+             * RestApi is guaranteed not to be null as {@link onServiceStateChange}
+             * immediately finishes this activity if SyncthingService shuts down.
+             */
             getApi().editFolder(mFolder);
         }
     }
