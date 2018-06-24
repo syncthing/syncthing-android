@@ -1,19 +1,15 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -39,6 +35,7 @@ import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
+import com.nutomic.syncthingandroid.util.UriUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
@@ -448,32 +445,13 @@ public class FolderActivity extends SyncthingActivity
                 .create();
     }
 
-    @TargetApi(19)
-    public static String getRealPathFromURI_API19(Context context, Uri uri){
-        String filePath = "";
-        String wholeID = DocumentsContract.getDocumentId(uri);
-        // Split at colon, use second item in the array
-        String id = wholeID.split(":")[1];
-        String[] column = { MediaStore.Images.Media.DATA };
-        // where id is equal to
-        String sel = MediaStore.Images.Media._ID + "=?";
-        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            column, sel, new String[]{ id }, null);
-        int columnIndex = cursor.getColumnIndex(column[0]);
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
-        }
-        cursor.close();
-        return filePath;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
             mFolderUri = data.getData();
             if (mFolderUri != null) {
                 // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-                mFolder.path = Util.formatPath(getRealPathFromURI_API19(FolderActivity.this, mFolderUri));
+                mFolder.path = Util.formatPath(UriUtil.getAbsolutePathFromUri2(FolderActivity.this, mFolderUri));
                 Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
                 mPathView.setText(mFolder.path);
                 mFolderNeedsToUpdate = true;
