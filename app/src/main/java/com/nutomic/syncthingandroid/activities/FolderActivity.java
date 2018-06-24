@@ -75,6 +75,7 @@ public class FolderActivity extends SyncthingActivity
     private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
     private static final int CHOOSE_FOLDER_REQUEST = 3459;
 
+    private static final String FOLDER_MARKER_NAME = ".stfolder";
     private static final String IGNORE_FILE_NAME = ".stignore";
 
     private Folder mFolder;
@@ -407,8 +408,8 @@ public class FolderActivity extends SyncthingActivity
                      */
                     DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
                     if (dfFolder != null) {
-                        Log.v(TAG, "Creating new directory " + mFolder.path + "/.stfolder");
-                        dfFolder.createDirectory(".stfolder");
+                        Log.v(TAG, "Creating new directory " + mFolder.path + "/" + FOLDER_MARKER_NAME);
+                        dfFolder.createDirectory(FOLDER_MARKER_NAME);
                     }
                 }
                 getApi().createFolder(mFolder);
