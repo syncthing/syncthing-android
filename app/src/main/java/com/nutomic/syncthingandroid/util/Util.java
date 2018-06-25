@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.service.Constants;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -120,6 +122,55 @@ public class Util {
             Log.w(TAG, "This should not happen", e);
         }
         return false;
+    }
+
+    /**
+     * Returns if the syncthing binary would be able to write a file into
+     * the given folder given the configured access level.
+     */
+    public static boolean nativeBinaryCanWriteToPath(Context context, String absoluteFolderPath) {
+        final String TAG_WRITETEST = TAG + "_CanWrite";
+        final String TOUCH_FILE_NAME = ".stwritetest";
+        Boolean useRoot = false;
+        Boolean prefUseRoot = PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(Constants.PREF_USE_ROOT, false);
+        if (prefUseRoot && Shell.SU.available()) {
+            useRoot = true;
+        }
+
+        String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
+        Process touchFileProc = null;
+        DataOutputStream touchFileOut = null;
+        int exitCode = 0;
+        try {
+            touchFileProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
+            touchFileOut = new DataOutputStream(touchFileProc.getOutputStream());
+            String dir = context.getFilesDir().getAbsolutePath();
+            String cmd = "echo \"\" > \"" + touchFile + "\"\n";
+            Log.d(TAG_WRITETEST, "Running: '" + cmd);
+            touchFileOut.writeBytes(cmd);
+            touchFileOut.flush();
+            touchFileOut.close();
+            exitCode = touchFileProc.waitFor();
+            Log.i(TAG_WRITETEST, "Test file write exit code " + exitCode + " for '" + touchFile + "'");
+            if (exitCode != 0) {
+                Log.e(TAG_WRITETEST, "Failed to write test file " + Integer.toString(exitCode));
+            }
+        } catch (IOException | InterruptedException e) {
+            Log.w(TAG, "Cannot write perm test file", e);
+        } finally {
+            try {
+                if (touchFileOut != null) {
+                    touchFileOut.close();
+                }
+            } catch (IOException e) {
+                Log.w(TAG_WRITETEST, "Failed to close shell stream", e);
+            }
+            if (touchFileProc != null) {
+                touchFileProc.destroy();
+            }
+        }
+        return (exitCode == 0);
     }
 
     /**

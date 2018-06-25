@@ -456,13 +456,38 @@ public class FolderActivity extends SyncthingActivity
             }
             // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
             mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
-            if (mFolder.path == null) {
+            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path)) {
+                // ToDo - Handle folder from "Documents" tab selection returning mFolder.path=''.
+                mFolder.path = "";
                 Log.e(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Could not get absolute folder path.");
                 return;
             }
             mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
             Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
             mPathView.setText(mFolder.path);
+
+            /**
+             * Check if the permissions we have on that folder is readonly or readwrite.
+             * Access level readonly: folder can only be configured "sendonly".
+             * Access level readwrite: folder can be configured "sendonly" or "sendreceive".
+             */
+            Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
+            if (canWrite) {
+                /**
+                 * Suggest "readwrite" folder because the user most probably intentionally
+                 * chose a special folder like
+                 * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
+                 * or enabled root mode thus having write access.
+                 */
+                mFolderMasterView.setChecked(false);
+                mFolderMasterView.setEnabled(true);
+            } else {
+                // Force "sendonly" folder.
+                mFolderMasterView.setChecked(true);
+                mFolderMasterView.setEnabled(false);
+            }
+
+            // Postpone sending the config changes using syncthing REST API.
             mFolderNeedsToUpdate = true;
             mEditIgnores.setEnabled(true);
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
