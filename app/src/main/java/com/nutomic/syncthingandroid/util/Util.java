@@ -138,23 +138,35 @@ public class Util {
             useRoot = true;
         }
 
+        // Assume an unsuccessful test if an error is caught.
+        int exitCode = 1;
         String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
         Process touchFileProc = null;
         DataOutputStream touchFileOut = null;
-        int exitCode = 0;
         try {
             touchFileProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
             touchFileOut = new DataOutputStream(touchFileProc.getOutputStream());
-            String dir = context.getFilesDir().getAbsolutePath();
             String cmd = "echo \"\" > \"" + touchFile + "\"\n";
             Log.d(TAG_WRITETEST, "Running: '" + cmd);
             touchFileOut.writeBytes(cmd);
             touchFileOut.flush();
             touchFileOut.close();
+            touchFileOut = null;
             exitCode = touchFileProc.waitFor();
-            Log.i(TAG_WRITETEST, "Test file write exit code " + exitCode + " for '" + touchFile + "'");
-            if (exitCode != 0) {
-                Log.e(TAG_WRITETEST, "Failed to write test file " + Integer.toString(exitCode));
+            if (exitCode == 0) {
+                Log.i(TAG_WRITETEST, "Successfully wrote test file '" + touchFile + "'");
+                // Remote the file.
+                touchFileProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
+                touchFileOut = new DataOutputStream(touchFileProc.getOutputStream());
+                cmd = "rm \"" + touchFile + "\"\n";
+                Log.d(TAG_WRITETEST, "Running: '" + cmd);
+                touchFileOut.writeBytes(cmd);
+                touchFileOut.flush();
+                touchFileOut.close();
+                touchFileOut = null;
+            } else {
+                // Permission error: exit code == 1
+                Log.e(TAG_WRITETEST, "Failed to write test file '" + touchFile + "' code " + Integer.toString(exitCode));
             }
         } catch (IOException | InterruptedException e) {
             Log.w(TAG, "Cannot write perm test file", e);
