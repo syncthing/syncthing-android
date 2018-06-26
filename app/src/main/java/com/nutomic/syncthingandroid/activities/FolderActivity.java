@@ -464,7 +464,7 @@ public class FolderActivity extends SyncthingActivity
              * Currently it is returning mFolder.path="/"
              */
             mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
-            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path) || (mFolder.path == "/")) {
+            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path) || (mFolder.path.equals("/"))) {
                 mFolder.path = "";
                 mFolderUri = null;
                 // Show message to the user suggesting to select a folder on internal or external storage.
