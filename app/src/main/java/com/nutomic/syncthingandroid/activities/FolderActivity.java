@@ -459,7 +459,7 @@ public class FolderActivity extends SyncthingActivity
             }
             // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
             mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
-            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path)) {
+            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path) || (mFolder.path == "/")) {
                 // ToDo - Handle folder from "Documents" tab selection returning mFolder.path=''.
                 mFolder.path = "";
                 mFolderUri = null;
