@@ -196,7 +196,6 @@ public class FolderActivity extends SyncthingActivity
             mIdView.setFocusable(false);
             mIdView.setEnabled(false);
             mPathView.setEnabled(false);
-            checkWriteAndUpdateUI();
         }
 
         if (savedInstanceState != null){
@@ -319,6 +318,7 @@ public class FolderActivity extends SyncthingActivity
                 finish();
                 return;
             }
+            checkWriteAndUpdateUI();
         }
         if (getIntent().hasExtra(EXTRA_DEVICE_ID)) {
             mFolder.addDevice(getIntent().getStringExtra(EXTRA_DEVICE_ID));
