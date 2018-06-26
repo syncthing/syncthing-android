@@ -458,12 +458,17 @@ public class FolderActivity extends SyncthingActivity
                 return;
             }
             // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
+            /**
+             * ToDo
+             * Handle mFolderUri returned by the "Documents" tab in {@link FileUtils#getAbsolutePathFromSAFUri}.
+             * Currently it is returning mFolder.path="/"
+             */
             mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
             if (mFolder.path == null || TextUtils.isEmpty(mFolder.path) || (mFolder.path == "/")) {
-                // ToDo - Handle folder from "Documents" tab selection returning mFolder.path=''.
                 mFolder.path = "";
                 mFolderUri = null;
-                Log.e(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Could not get absolute folder path.");
+                // Show message to the user suggesting to select a folder on internal or external storage.
+                Toast.makeText(this, R.string.toast_invalid_folder_selected, Toast.LENGTH_LONG).show();
                 return;
             }
             mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
