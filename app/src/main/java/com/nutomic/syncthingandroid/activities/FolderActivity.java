@@ -191,7 +191,12 @@ public class FolderActivity extends SyncthingActivity
             mEditIgnores.setEnabled(false);
         }
         else {
-            prepareEditMode();
+            // Prepare edit mode.
+            mIdView.clearFocus();
+            mIdView.setFocusable(false);
+            mIdView.setEnabled(false);
+            mPathView.setEnabled(false);
+            checkWriteAndUpdateUI();
         }
 
         if (savedInstanceState != null){
@@ -459,44 +464,52 @@ public class FolderActivity extends SyncthingActivity
             if (mFolder.path == null || TextUtils.isEmpty(mFolder.path)) {
                 // ToDo - Handle folder from "Documents" tab selection returning mFolder.path=''.
                 mFolder.path = "";
+                mFolderUri = null;
                 Log.e(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Could not get absolute folder path.");
                 return;
             }
             mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
             Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
             mPathView.setText(mFolder.path);
-
-            /**
-             * Check if the permissions we have on that folder is readonly or readwrite.
-             * Access level readonly: folder can only be configured "sendonly".
-             * Access level readwrite: folder can be configured "sendonly" or "sendreceive".
-             */
-            Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
-            if (canWrite) {
-                /**
-                 * Suggest "readwrite" folder because the user most probably intentionally
-                 * chose a special folder like
-                 * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
-                 * or enabled root mode thus having write access.
-                 */
-                mFolderMasterView.setChecked(false);
-                mFolderMasterView.setEnabled(true);
-            } else {
-                // Force "sendonly" folder.
-                mFolderMasterView.setChecked(true);
-                mFolderMasterView.setEnabled(false);
-            }
-
+            checkWriteAndUpdateUI();
             // Postpone sending the config changes using syncthing REST API.
             mFolderNeedsToUpdate = true;
-            mEditIgnores.setEnabled(true);
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
             mPathView.setText(mFolder.path);
+            checkWriteAndUpdateUI();
+            // Postpone sending the config changes using syncthing REST API.
             mFolderNeedsToUpdate = true;
-            mEditIgnores.setEnabled(true);
         } else if (resultCode == Activity.RESULT_OK && requestCode == FILE_VERSIONING_DIALOG_REQUEST) {
             updateVersioning(data.getExtras());
+        }
+    }
+
+    /**
+     * Prerequisite: mFolder.path must be non-empty
+     */
+    private void checkWriteAndUpdateUI() {
+        /**
+         * Check if the permissions we have on that folder is readonly or readwrite.
+         * Access level readonly: folder can only be configured "sendonly".
+         * Access level readwrite: folder can be configured "sendonly" or "sendreceive".
+         */
+        Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
+        if (canWrite) {
+            /**
+             * Suggest "readwrite" folder because the user most probably intentionally
+             * chose a special folder like
+             * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
+             * or enabled root mode thus having write access.
+             */
+            mFolderMasterView.setChecked(false);
+            mFolderMasterView.setEnabled(true);
+            mEditIgnores.setEnabled(true);
+        } else {
+            // Force "sendonly" folder.
+            mFolderMasterView.setChecked(true);
+            mFolderMasterView.setEnabled(false);
+            mEditIgnores.setEnabled(false);
         }
     }
 
@@ -528,13 +541,6 @@ public class FolderActivity extends SyncthingActivity
         mFolder.rescanIntervalS = 3600;
         mFolder.paused = false;
         mFolder.versioning = new Folder.Versioning();
-    }
-
-    private void prepareEditMode() {
-        mIdView.clearFocus();
-        mIdView.setFocusable(false);
-        mIdView.setEnabled(false);
-        mPathView.setEnabled(false);
     }
 
     private void addEmptyDeviceListView() {
