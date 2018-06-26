@@ -188,6 +188,12 @@ Please report any problems you encounter via Github.</string>
 
     <string name="dialog_discard_changes">Discard your changes?</string>
 
+    <!-- Summary shown if we only have readonly access to the folder path -->
+    <string name="folder_path_readonly">Your Android version only allows Syncthing to access this folder in readonly mode.</string>
+
+    <!-- Summary shown if we only have readwrite access to the folder path -->
+    <string name="folder_path_readwrite">Your Android version allows Syncthing to read from and write to this folder.</string>
+
     <string name="ignore_patterns">Ignore Patterns</string>
 
     <string name="create_ignore_file_error">Failed to create ignore file. Is the directory writable?</string>

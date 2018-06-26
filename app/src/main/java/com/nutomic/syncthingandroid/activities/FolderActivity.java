@@ -85,6 +85,7 @@ public class FolderActivity extends SyncthingActivity
     private EditText mLabelView;
     private EditText mIdView;
     private TextView mPathView;
+    private TextView mAccessExplanationView;
     private SwitchCompat mFolderMasterView;
     private SwitchCompat mFolderFileWatcher;
     private SwitchCompat mFolderPaused;
@@ -105,8 +106,8 @@ public class FolderActivity extends SyncthingActivity
         @Override
         public void afterTextChanged(Editable s) {
             mFolder.label        = mLabelView.getText().toString();
-            mFolder.id           = mIdView.getText().toString();
-            mFolder.path         = mPathView.getText().toString();
+            mFolder.id           = mIdView.getText().toString();;
+            // mPathView must not be handled here as it's handled by {@link onActivityResult}
             mFolderNeedsToUpdate = true;
         }
     };
@@ -154,6 +155,7 @@ public class FolderActivity extends SyncthingActivity
         mLabelView = findViewById(R.id.label);
         mIdView = findViewById(R.id.id);
         mPathView = findViewById(R.id.directoryTextView);
+        mAccessExplanationView = findViewById(R.id.accessExplanationView);
         mFolderMasterView = findViewById(R.id.master);
         mFolderFileWatcher = findViewById(R.id.fileWatcher);
         mFolderPaused = findViewById(R.id.folderPause);
@@ -262,7 +264,6 @@ public class FolderActivity extends SyncthingActivity
         }
         mLabelView.removeTextChangedListener(mTextWatcher);
         mIdView.removeTextChangedListener(mTextWatcher);
-        mPathView.removeTextChangedListener(mTextWatcher);
     }
 
     @Override
@@ -343,7 +344,6 @@ public class FolderActivity extends SyncthingActivity
     private void updateViewsAndSetListeners() {
         mLabelView.removeTextChangedListener(mTextWatcher);
         mIdView.removeTextChangedListener(mTextWatcher);
-        mPathView.removeTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(null);
         mFolderFileWatcher.setOnCheckedChangeListener(null);
         mFolderPaused.setOnCheckedChangeListener(null);
@@ -351,7 +351,6 @@ public class FolderActivity extends SyncthingActivity
         // Update views
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
-        mPathView.setText(mFolder.path);
         updateVersioningDescription();
         mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
         mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
@@ -370,7 +369,6 @@ public class FolderActivity extends SyncthingActivity
         // Keep state updated
         mLabelView.addTextChangedListener(mTextWatcher);
         mIdView.addTextChangedListener(mTextWatcher);
-        mPathView.addTextChangedListener(mTextWatcher);
         mFolderMasterView.setOnCheckedChangeListener(mCheckedListener);
         mFolderFileWatcher.setOnCheckedChangeListener(mCheckedListener);
         mFolderPaused.setOnCheckedChangeListener(mCheckedListener);
@@ -470,13 +468,11 @@ public class FolderActivity extends SyncthingActivity
             }
             mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
             Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
-            mPathView.setText(mFolder.path);
             checkWriteAndUpdateUI();
             // Postpone sending the config changes using syncthing REST API.
             mFolderNeedsToUpdate = true;
         } else if (resultCode == Activity.RESULT_OK && requestCode == FolderPickerActivity.DIRECTORY_REQUEST_CODE) {
             mFolder.path = data.getStringExtra(FolderPickerActivity.EXTRA_RESULT_DIRECTORY);
-            mPathView.setText(mFolder.path);
             checkWriteAndUpdateUI();
             // Postpone sending the config changes using syncthing REST API.
             mFolderNeedsToUpdate = true;
@@ -497,16 +493,20 @@ public class FolderActivity extends SyncthingActivity
         Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
         if (canWrite) {
             /**
-             * Suggest "readwrite" folder because the user most probably intentionally
-             * chose a special folder like
+             * Suggest "readwrite" folder because the user most probably
+             * intentionally chose a special folder like
              * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
              * or enabled root mode thus having write access.
              */
+            mPathView.setText(mFolder.path);
+            mAccessExplanationView.setText(R.string.folder_path_readwrite);
             mFolderMasterView.setChecked(false);
             mFolderMasterView.setEnabled(true);
             mEditIgnores.setEnabled(true);
         } else {
             // Force "sendonly" folder.
+            mPathView.setText(mFolder.path);
+            mAccessExplanationView.setText(R.string.folder_path_readonly);
             mFolderMasterView.setChecked(true);
             mFolderMasterView.setEnabled(false);
             mEditIgnores.setEnabled(false);
