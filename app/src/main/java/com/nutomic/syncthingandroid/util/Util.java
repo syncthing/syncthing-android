@@ -129,7 +129,6 @@ public class Util {
      * the given folder given the configured access level.
      */
     public static boolean nativeBinaryCanWriteToPath(Context context, String absoluteFolderPath) {
-        final String TAG_WRITETEST = TAG + "_CanWrite";
         final String TOUCH_FILE_NAME = ".stwritetest";
         Boolean useRoot = false;
         Boolean prefUseRoot = PreferenceManager.getDefaultSharedPreferences(context)
@@ -138,51 +137,66 @@ public class Util {
             useRoot = true;
         }
 
-        // Assume an unsuccessful test if an error is caught.
-        int exitCode = 1;
+        // Write permission test file.
         String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
-        Process touchFileProc = null;
-        DataOutputStream touchFileOut = null;
-        try {
-            touchFileProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
-            touchFileOut = new DataOutputStream(touchFileProc.getOutputStream());
-            String cmd = "echo \"\" > \"" + touchFile + "\"\n";
-            Log.d(TAG_WRITETEST, "Running: '" + cmd);
-            touchFileOut.writeBytes(cmd);
-            touchFileOut.flush();
-            touchFileOut.close();
-            touchFileOut = null;
-            exitCode = touchFileProc.waitFor();
-            if (exitCode == 0) {
-                Log.i(TAG_WRITETEST, "Successfully wrote test file '" + touchFile + "'");
-                // Remote the file.
-                touchFileProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
-                touchFileOut = new DataOutputStream(touchFileProc.getOutputStream());
-                cmd = "rm \"" + touchFile + "\"\n";
-                Log.d(TAG_WRITETEST, "Running: '" + cmd);
-                touchFileOut.writeBytes(cmd);
-                touchFileOut.flush();
-                touchFileOut.close();
-                touchFileOut = null;
-            } else {
-                // Permission error: exit code == 1
-                Log.e(TAG_WRITETEST, "Failed to write test file '" + touchFile + "' code " + Integer.toString(exitCode));
+        int exitCode = runShellCommand("echo \"\" > \"" + touchFile + "\"\n", useRoot);
+        if (exitCode != 0) {
+            String error;
+            switch (exitCode) {
+                case 1:
+                    error = "Permission denied";
+                    break;
+                default:
+                    error = "Shell execution failed";
             }
+            Log.i(TAG, "Failed to write test file '" + touchFile +
+                "', " + error);
+            return false;
+        }
+
+        // Detected we have write permission.
+        Log.i(TAG, "Successfully wrote test file '" + touchFile + "'");
+
+        // Remove test file.
+        if (runShellCommand("rm \"" + touchFile + "\"\n", useRoot) != 0) {
+            // This is very unlikely to happen, so we have less error handling.
+            Log.i(TAG, "Failed to remove test file");
+        }
+        return true;
+    }
+
+    /**
+     * Run command in a shell and return the exit code.
+     */
+    public static int runShellCommand(String cmd, Boolean useRoot) {
+        // Assume "failure" exit code if an error is caught.
+        int exitCode = 255;
+        Process shellProc = null;
+        DataOutputStream shellOut = null;
+        try {
+            shellProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
+            shellOut = new DataOutputStream(shellProc.getOutputStream());
+            Log.d(TAG, "runShellCommand: " + cmd);
+            shellOut.writeBytes(cmd);
+            shellOut.flush();
+            shellOut.close();
+            shellOut = null;
+            exitCode = shellProc.waitFor();
         } catch (IOException | InterruptedException e) {
-            Log.w(TAG, "Cannot write perm test file", e);
+            Log.w(TAG, "runShellCommand: Exception", e);
         } finally {
             try {
-                if (touchFileOut != null) {
-                    touchFileOut.close();
+                if (shellOut != null) {
+                    shellOut.close();
                 }
             } catch (IOException e) {
-                Log.w(TAG_WRITETEST, "Failed to close shell stream", e);
+                Log.w(TAG, "Failed to close shell stream", e);
             }
-            if (touchFileProc != null) {
-                touchFileProc.destroy();
+            if (shellProc != null) {
+                shellProc.destroy();
             }
         }
-        return (exitCode == 0);
+        return exitCode;
     }
 
     /**
