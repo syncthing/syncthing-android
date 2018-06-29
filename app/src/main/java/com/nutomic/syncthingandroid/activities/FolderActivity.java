@@ -411,7 +411,7 @@ public class FolderActivity extends SyncthingActivity
                      */
                     DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
                     if (dfFolder != null) {
-                        Log.v(TAG, "Creating new directory " + mFolder.path + "/" + FOLDER_MARKER_NAME);
+                        Log.v(TAG, "Creating new directory " + mFolder.path + File.separator + FOLDER_MARKER_NAME);
                         dfFolder.createDirectory(FOLDER_MARKER_NAME);
                     }
                 }
@@ -458,20 +458,17 @@ public class FolderActivity extends SyncthingActivity
                 return;
             }
             // Get the folder path unix style, e.g. "/storage/0000-0000/DCIM"
-            /**
-             * ToDo
-             * Handle mFolderUri returned by the "Documents" tab in {@link FileUtils#getAbsolutePathFromSAFUri}.
-             * Currently it is returning mFolder.path="/"
-             */
-            mFolder.path = Util.formatPath(FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri));
-            if (mFolder.path == null || TextUtils.isEmpty(mFolder.path) || (mFolder.path.equals("/"))) {
-                mFolder.path = "";
+            String targetPath = FileUtils.getAbsolutePathFromSAFUri(FolderActivity.this, mFolderUri);
+            if (targetPath != null) {
+                targetPath = Util.formatPath(targetPath);
+            }
+            if (targetPath == null || TextUtils.isEmpty(targetPath) || (targetPath.equals(File.separator))) {
                 mFolderUri = null;
                 // Show message to the user suggesting to select a folder on internal or external storage.
                 Toast.makeText(this, R.string.toast_invalid_folder_selected, Toast.LENGTH_LONG).show();
                 return;
             }
-            mFolder.path = FileUtils.cutTrailingSlash(mFolder.path);
+            mFolder.path = FileUtils.cutTrailingSlash(targetPath);
             Log.v(TAG, "onActivityResult/CHOOSE_FOLDER_REQUEST: Got directory path '" + mFolder.path + "'");
             checkWriteAndUpdateUI();
             // Postpone sending the config changes using syncthing REST API.

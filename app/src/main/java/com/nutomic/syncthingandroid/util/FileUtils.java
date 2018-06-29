@@ -3,7 +3,6 @@ package com.nutomic.syncthingandroid.util;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
-
 import android.net.Uri;
 import android.os.Build;
 import android.os.storage.StorageManager;
@@ -29,6 +28,7 @@ public class FileUtils {
     }
 
     private static final String PRIMARY_VOLUME_NAME = "primary";
+    private static final String HOME_VOLUME_NAME = "home";
 
     @Nullable
     @TargetApi(21)
@@ -40,11 +40,23 @@ public class FileUtils {
 
     @Nullable
     public static String getAbsolutePathFromTreeUri(Context context, @Nullable final Uri treeUri) {
-        if (!isCompatible || (treeUri == null)) {
-            Log.e(TAG, "getVolumePath called on unsupported API level");
+        if (!isCompatible) {
+            Log.e(TAG, "getAbsolutePathFromTreeUri: called on unsupported API level");
             return null;
         }
-        String volumePath = getVolumePath(getVolumeIdFromTreeUri(treeUri), context);
+        if (treeUri == null) {
+            Log.w(TAG, "getAbsolutePathFromTreeUri: called with treeUri == null");
+            return null;
+        }
+
+        // Determine volumeId, e.g. "home", "documents"
+        String volumeId = getVolumeIdFromTreeUri(treeUri);
+        if (volumeId == null) {
+            return null;
+        }
+
+        // Handle Uri referring to internal or external storage.
+        String volumePath = getVolumePath(volumeId, context);
         if (volumePath == null) {
             return File.separator;
         }
@@ -87,22 +99,19 @@ public class FileUtils {
                 Object storageVolumeElement = Array.get(result, i);
                 String uuid = (String) getUuid.invoke(storageVolumeElement);
                 Boolean primary = (Boolean) isPrimary.invoke(storageVolumeElement);
-
-                // primary volume?
-                if (primary && PRIMARY_VOLUME_NAME.equals(volumeId))
-                    return (String) getPath.invoke(storageVolumeElement);
-
-                // other volumes?
-                if (uuid != null && uuid.equals(volumeId)) {
+                Boolean isPrimaryVolume = (primary && PRIMARY_VOLUME_NAME.equals(volumeId));
+                Boolean isExternalVolume = ((uuid != null) && uuid.equals(volumeId));
+                Boolean isHomeVolume = (uuid == null && HOME_VOLUME_NAME.equals(volumeId));
+                if (isPrimaryVolume || isExternalVolume || isHomeVolume) {
+                    // Return path if the correct volume corresponding to volumeId was found.
                     return (String) getPath.invoke(storageVolumeElement);
                 }
+                Log.d(TAG, "Skipping volume, uuid = '" + uuid + "', volumeId = '" + volumeId + "'");
             }
-            // not found.
-            return null;
         } catch (Exception e) {
             Log.w(TAG, "getVolumePath exception", e);
-            return null;
         }
+        return null;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -126,7 +135,7 @@ public class FileUtils {
 
     @Nullable
     public static String cutTrailingSlash(final String path) {
-        if (path.endsWith("/")) {
+        if (path.endsWith(File.separator)) {
             return path.substring(0, path.length() - 1);
         }
         return path;
