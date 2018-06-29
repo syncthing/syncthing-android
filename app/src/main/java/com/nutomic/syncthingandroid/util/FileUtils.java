@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.provider.DocumentsContract;
 import android.support.annotation.Nullable;
@@ -29,7 +30,6 @@ public class FileUtils {
 
     private static final String PRIMARY_VOLUME_NAME = "primary";
     private static final String HOME_VOLUME_NAME = "home";
-    private static final String DOCUMENTS_FOLDER_NAME = "documents";
 
     @Nullable
     @TargetApi(21)
@@ -80,6 +80,7 @@ public class FileUtils {
     }
 
     @SuppressLint("ObsoleteSdkInt")
+    @TargetApi(21)
     private static String getVolumePath(final String volumeId, Context context) {
         if (!isCompatible) {
             Log.e(TAG, "getVolumePath called on unsupported API level");
@@ -107,7 +108,8 @@ public class FileUtils {
                     // Return path if the correct volume corresponding to volumeId was found.
                     return (String) getPath.invoke(storageVolumeElement);
                 } else if (isHomeVolume) {
-                    return (String) getPath.invoke(storageVolumeElement) + File.separator + DOCUMENTS_FOLDER_NAME;
+                    // Reading the environment var avoids hard coding the case of the "documents" folder.
+                    return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
                 }
                 Log.d(TAG, "Skipping volume, uuid = '" + uuid + "', volumeId = '" + volumeId + "'");
             }
