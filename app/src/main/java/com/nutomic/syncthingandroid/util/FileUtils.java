@@ -29,6 +29,7 @@ public class FileUtils {
 
     private static final String PRIMARY_VOLUME_NAME = "primary";
     private static final String HOME_VOLUME_NAME = "home";
+    private static final String DOCUMENTS_FOLDER_NAME = "documents";
 
     @Nullable
     @TargetApi(21)
@@ -102,9 +103,11 @@ public class FileUtils {
                 Boolean isPrimaryVolume = (primary && PRIMARY_VOLUME_NAME.equals(volumeId));
                 Boolean isExternalVolume = ((uuid != null) && uuid.equals(volumeId));
                 Boolean isHomeVolume = (uuid == null && HOME_VOLUME_NAME.equals(volumeId));
-                if (isPrimaryVolume || isExternalVolume || isHomeVolume) {
+                if (isPrimaryVolume || isExternalVolume) {
                     // Return path if the correct volume corresponding to volumeId was found.
                     return (String) getPath.invoke(storageVolumeElement);
+                } else if (isHomeVolume) {
+                    return (String) getPath.invoke(storageVolumeElement) + File.separator + DOCUMENTS_FOLDER_NAME;
                 }
                 Log.d(TAG, "Skipping volume, uuid = '" + uuid + "', volumeId = '" + volumeId + "'");
             }
