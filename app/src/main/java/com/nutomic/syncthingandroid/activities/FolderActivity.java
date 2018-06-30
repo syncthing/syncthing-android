@@ -224,14 +224,13 @@ public class FolderActivity extends SyncthingActivity
         ArrayList<File> externalFilesDir = new ArrayList<>();
         externalFilesDir.addAll(Arrays.asList(getExternalFilesDirs(null)));
         externalFilesDir.remove(getExternalFilesDir(null));
-        if (externalFilesDir.size() > 0) {
-            initialPath = externalFilesDir.get(0);
-            Log.d(TAG, "Using initial path '" + initialPath.getAbsolutePath() + "'");
-        }
 
         // Display storage access framework directory picker UI.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-        if (initialPath != null) {
+        if (externalFilesDir.size() > 0) {
+            initialPath = externalFilesDir.get(0);
+            Toast.makeText(this, getString(R.string.folder_hint_writeable_initial_folder, initialPath.getAbsolutePath()),
+                Toast.LENGTH_LONG).show();
             intent.putExtra("android.provider.extra.INITIAL_URI", Uri.fromFile(initialPath).toString());
         }
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
