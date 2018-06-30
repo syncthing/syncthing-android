@@ -38,6 +38,8 @@ import com.nutomic.syncthingandroid.util.FileUtils;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -143,7 +145,6 @@ public class FolderActivity extends SyncthingActivity
     };
 
     @Override
-    @SuppressLint("InlinedAPI")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_folder);
@@ -164,16 +165,7 @@ public class FolderActivity extends SyncthingActivity
         mDevicesContainer = findViewById(R.id.devicesContainer);
         mEditIgnores = findViewById(R.id.edit_ignores);
 
-        mPathView.setOnClickListener(view -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE),
-                            CHOOSE_FOLDER_REQUEST);
-                    } else {
-                        startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
-                            FolderPickerActivity.DIRECTORY_REQUEST_CODE);
-                    }
-                }
-            );
+        mPathView.setOnClickListener(view -> onPathViewClick());
 
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
         mEditIgnores.setOnClickListener(v -> editIgnores());
@@ -211,6 +203,40 @@ public class FolderActivity extends SyncthingActivity
                 showDeleteDialog();
             }
         }
+    }
+
+    /**
+     * Invoked after user clicked on the {@link mPathView} label.
+     */
+    @SuppressLint("InlinedAPI")
+    private void onPathViewClick() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
+                FolderPickerActivity.DIRECTORY_REQUEST_CODE);
+            return;
+        }
+
+        /**
+         * Determine the app's private data folder on external storage if present.
+         * e.g. "/storage/abcd-efgh/Android/com.nutomic.syncthinandroid/files"
+         */
+        File initialPath = null;
+        ArrayList<File> externalFilesDir = new ArrayList<>();
+        externalFilesDir.addAll(Arrays.asList(getExternalFilesDirs(null)));
+        externalFilesDir.remove(getExternalFilesDir(null));
+        if (externalFilesDir.size() > 0) {
+            initialPath = externalFilesDir.get(0);
+            Log.d(TAG, "Using initial path '" + initialPath.getAbsolutePath() + "'");
+        }
+
+        // Display storage access framework directory picker UI.
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        if (initialPath != null) {
+            intent.putExtra("android.provider.extra.INITIAL_URI", Uri.fromFile(initialPath));
+        }
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        intent.putExtra("android.content.extra.SHOW_ADVANCED", true);
+        startActivityForResult(intent, CHOOSE_FOLDER_REQUEST);
     }
 
     private void editIgnores() {
