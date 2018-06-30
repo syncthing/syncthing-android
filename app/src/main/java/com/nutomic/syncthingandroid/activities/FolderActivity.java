@@ -232,7 +232,7 @@ public class FolderActivity extends SyncthingActivity
         // Display storage access framework directory picker UI.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         if (initialPath != null) {
-            intent.putExtra("android.provider.extra.INITIAL_URI", Uri.fromFile(initialPath));
+            intent.putExtra("android.provider.extra.INITIAL_URI", Uri.fromFile(initialPath).toString());
         }
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
         intent.putExtra("android.content.extra.SHOW_ADVANCED", true);
