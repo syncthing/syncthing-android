@@ -14,6 +14,8 @@ import android.util.Log;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Utils for dealing with Storage Access Framework URIs.
@@ -22,6 +24,7 @@ public class FileUtils {
 
     private static final String TAG = "FileUtils";
 
+    // TargetApi(21)
     private static final Boolean isCompatible = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
 
     private FileUtils() {
@@ -115,6 +118,47 @@ public class FileUtils {
             }
         } catch (Exception e) {
             Log.w(TAG, "getVolumePath exception", e);
+        }
+        return null;
+    }
+
+    /**
+     * FileProvider does not support converting the absolute path from
+     * getExternalFilesDir() to a "content://" Uri. As "file://" Uri
+     * has been blocked since Android 7+, we need to build the Uri
+     * manually after discovering the first external storage.
+     * This is crucial to assist the user finding a writeable folder
+     * to use syncthing's two way sync feature.
+     */
+    @TargetApi(19)
+    public static android.net.Uri getExternalFilesDirUri(Context context) {
+        try {
+            /**
+             * Determine the app's private data folder on external storage if present.
+             * e.g. "/storage/abcd-efgh/Android/com.nutomic.syncthinandroid/files"
+             */
+            ArrayList<File> externalFilesDir = new ArrayList<>();
+            externalFilesDir.addAll(Arrays.asList(context.getExternalFilesDirs(null)));
+            externalFilesDir.remove(context.getExternalFilesDir(null));
+            if (externalFilesDir.size() == 0) {
+                Log.w(TAG, "Could not determine app's private files directory on external storage.");
+                return null;
+            }
+            String absPath = externalFilesDir.get(0).getAbsolutePath();
+            String[] segments = absPath.split("/");
+            if (segments.length < 2) {
+                Log.w(TAG, "Could not extract volumeId from app's private files path '" + absPath + "'");
+                return null;
+            }
+            // Extract the volumeId, e.g. "abcd-efgh"
+            String volumeId = segments[2];
+            // Build the content Uri for our private "files" folder.
+            return android.net.Uri.parse(
+                "content://com.android.externalstorage.documents/document/" +
+                volumeId + "%3AAndroid%2Fdata%2F" +
+                context.getPackageName() + "%2Ffiles");
+        } catch (Exception e) {
+            Log.w(TAG, "getExternalFilesDirUri exception", e);
         }
         return null;
     }

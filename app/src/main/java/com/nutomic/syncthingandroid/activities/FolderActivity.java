@@ -38,8 +38,6 @@ import com.nutomic.syncthingandroid.util.FileUtils;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -216,22 +214,13 @@ public class FolderActivity extends SyncthingActivity
             return;
         }
 
-        /**
-         * Determine the app's private data folder on external storage if present.
-         * e.g. "/storage/abcd-efgh/Android/com.nutomic.syncthinandroid/files"
-         */
-        File initialPath = null;
-        ArrayList<File> externalFilesDir = new ArrayList<>();
-        externalFilesDir.addAll(Arrays.asList(getExternalFilesDirs(null)));
-        externalFilesDir.remove(getExternalFilesDir(null));
+        // This has to be android.net.Uri as it implements a Parcelable.
+        android.net.Uri externalFilesDirUri = FileUtils.getExternalFilesDirUri(FolderActivity.this);
 
         // Display storage access framework directory picker UI.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-        if (externalFilesDir.size() > 0) {
-            initialPath = externalFilesDir.get(0);
-            Toast.makeText(this, getString(R.string.folder_hint_writeable_initial_folder, initialPath.getAbsolutePath()),
-                Toast.LENGTH_LONG).show();
-            intent.putExtra("android.provider.extra.INITIAL_URI", Uri.fromFile(initialPath).toString());
+        if (externalFilesDirUri != null) {
+            intent.putExtra("android.provider.extra.INITIAL_URI", externalFilesDirUri);
         }
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
         intent.putExtra("android.content.extra.SHOW_ADVANCED", true);

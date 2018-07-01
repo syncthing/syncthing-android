@@ -194,9 +194,6 @@ Please report any problems you encounter via Github.</string>
     <!-- Summary shown if we only have readwrite access to the folder path -->
     <string name="folder_path_readwrite">Your Android version grants Syncthing read and write access to the selected folder.</string>
 
-    <!-- Toast shown to give the user a hint where a writeable directory resides on external storage -->
-    <string name="folder_hint_writeable_initial_folder">Please note you have write access within the folder %1$s</string>
-
     <!-- Toast shown if the user selected an invalid location for a new syncthing folder -->
     <string name="toast_invalid_folder_selected">Sorry. The selected folder cannot be used. Please select a folder located on the internal or external storage.</string>
 
