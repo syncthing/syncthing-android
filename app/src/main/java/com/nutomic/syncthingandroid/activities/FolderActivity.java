@@ -477,7 +477,9 @@ public class FolderActivity extends SyncthingActivity
                 targetPath = Util.formatPath(targetPath);
             }
             if (targetPath == null || TextUtils.isEmpty(targetPath) || (targetPath.equals(File.separator))) {
+                mFolder.path = "";
                 mFolderUri = null;
+                checkWriteAndUpdateUI();
                 // Show message to the user suggesting to select a folder on internal or external storage.
                 Toast.makeText(this, R.string.toast_invalid_folder_selected, Toast.LENGTH_LONG).show();
                 return;
@@ -501,6 +503,11 @@ public class FolderActivity extends SyncthingActivity
      * Prerequisite: mFolder.path must be non-empty
      */
     private void checkWriteAndUpdateUI() {
+        mPathView.setText(mFolder.path);
+        if (TextUtils.isEmpty(mFolder.path)) {
+            return;
+        }
+
         /**
          * Check if the permissions we have on that folder is readonly or readwrite.
          * Access level readonly: folder can only be configured "sendonly".
@@ -514,14 +521,12 @@ public class FolderActivity extends SyncthingActivity
              * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
              * or enabled root mode thus having write access.
              */
-            mPathView.setText(mFolder.path);
             mAccessExplanationView.setText(R.string.folder_path_readwrite);
             mFolderMasterView.setChecked(false);
             mFolderMasterView.setEnabled(true);
             mEditIgnores.setEnabled(true);
         } else {
             // Force "sendonly" folder.
-            mPathView.setText(mFolder.path);
             mAccessExplanationView.setText(R.string.folder_path_readonly);
             mFolderMasterView.setChecked(true);
             mFolderMasterView.setEnabled(false);
