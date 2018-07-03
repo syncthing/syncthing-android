@@ -11,14 +11,25 @@
     <!-- Title for dialog displayed on first start -->
     <string name="welcome_title">Welcome to Syncthing for Android</string>
 
-    <!-- Text for dialog displayed on first start -->
+    <!-- Welcome wizard -->
+    <!-- to be cleaned out -->
+    <string name="title_activity_welcome"></string>
+
+    <string name="slide_1_title">Title 1</string>
     <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
 To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
 Please report any problems you encounter via Github.</string>
 
-    <string name="cont">Continue</string>
+    <string name="slide_2_title">Title 2</string>
+    <string name="slide_2_desc">Desc 2</string>
+
+    <string name="slide_3_title">Title 3</string>
+    <string name="slide_3_desc">Desc 3</string>
 
     <!-- Generic texts used everywhere -->
+    <string name="back">Back</string>
+    <string name="cont">Continue</string>
+    <string name="finish">Finish</string>
     <string name="generic_example">Example</string>
 
     <!-- MainActivity -->
@@ -650,7 +661,6 @@ Please report any problems you encounter via Github.</string>
     <string name="maximum_age">Maximum Age</string>
     <string name="clean_out_after">Clean out after</string>
     <string name="file_versioning">File Versioning</string>
-    <string name="finish">Finish</string>
     <string name="none"> None</string>
     <string name="versions_path">Versions Path</string>
     <string name="command">Command</string>
