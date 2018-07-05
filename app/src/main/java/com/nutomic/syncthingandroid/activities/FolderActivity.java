@@ -416,7 +416,8 @@ public class FolderActivity extends SyncthingActivity
                     return true;
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    mFolderUri != null) {
+                    mFolderUri != null &&
+                    mFolder.type.equals("readonly")) {
                     /**
                      * Normally, syncthing takes care of creating the ".stfolder" marker.
                      * This fails on newer android versions if the syncthing binary only has
