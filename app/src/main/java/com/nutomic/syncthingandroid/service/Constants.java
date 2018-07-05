@@ -33,8 +33,8 @@ public class Constants {
     /**
      * Available folder types.
      */
-    public static final String FOLDER_TYPE_SEND_ONLY            = "readonly";
-    public static final String FOLDER_TYPE_SEND_RECEIVE         = "readwrite";
+    public static final String FOLDER_TYPE_SEND_ONLY            = "sendonly";
+    public static final String FOLDER_TYPE_SEND_RECEIVE         = "sendreceive";
     // public static final String FOLDER_TYPE_RECEIVE_ONLY      = "receiveonly"
 
 
