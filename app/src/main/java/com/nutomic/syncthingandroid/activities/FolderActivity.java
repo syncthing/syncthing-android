@@ -118,7 +118,7 @@ public class FolderActivity extends SyncthingActivity
         public void onCheckedChanged(CompoundButton view, boolean isChecked) {
             switch (view.getId()) {
                 case R.id.master:
-                    mFolder.type = (isChecked) ? "readonly" : "readwrite";
+                    mFolder.type = (isChecked) ? Constants.FOLDER_TYPE_SEND_ONLY : Constants.FOLDER_TYPE_SEND_RECEIVE;
                     mFolderNeedsToUpdate = true;
                     break;
                 case R.id.fileWatcher:
@@ -366,7 +366,7 @@ public class FolderActivity extends SyncthingActivity
         mLabelView.setText(mFolder.label);
         mIdView.setText(mFolder.id);
         updateVersioningDescription();
-        mFolderMasterView.setChecked(Objects.equal(mFolder.type, "readonly"));
+        mFolderMasterView.setChecked(Objects.equal(mFolder.type, Constants.FOLDER_TYPE_SEND_ONLY));
         mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
         mFolderPaused.setChecked(mFolder.paused);
         List<Device> devicesList = getApi().getDevices(false);
@@ -417,7 +417,7 @@ public class FolderActivity extends SyncthingActivity
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                     mFolderUri != null &&
-                    mFolder.type.equals("readonly")) {
+                    mFolder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY)) {
                     /**
                      * Normally, syncthing takes care of creating the ".stfolder" marker.
                      * This fails on newer android versions if the syncthing binary only has
@@ -517,7 +517,7 @@ public class FolderActivity extends SyncthingActivity
         Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
         if (canWrite) {
             /**
-             * Suggest "readwrite" folder because the user most probably
+             * Suggest FOLDER_TYPE_SEND_RECEIVE folder because the user most probably
              * intentionally chose a special folder like
              * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
              * or enabled root mode thus having write access.
