@@ -178,7 +178,18 @@ public class NotificationHandler {
         }
     }
 
-    public void showEventNotification(String text, PendingIntent pi, int id) {
+    /**
+     * Used by {@link EventProcessor}
+     */
+    public void showEventNotification(String text, PendingIntent pi) {
+        /**
+         * Use a deterministic ID between 1000 and 2000 to avoid duplicate
+         * notifications. As we know the id for a specific notification text,
+         * we'll dismiss this notification as it may be outdated when this ID
+         * occurs again.
+         */
+        int notificationId = 1000 + text.hashCode() % 1000;
+        mNotificationManager.cancel(notificationId);
         Notification n = getNotificationBuilder(mInfoChannel)
                 .setContentTitle(mContext.getString(R.string.app_name))
                 .setContentText(text)
@@ -188,7 +199,7 @@ public class NotificationHandler {
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setAutoCancel(true)
                 .build();
-        mNotificationManager.notify(id, n);
+        mNotificationManager.notify(notificationId, n);
     }
 
     public void showStoragePermissionRevokedNotification() {

@@ -95,7 +95,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
     @Override
     public void onEvent(Event event) {
         String deviceId;
+        String deviceName;
         String folderId;
+        String title;
+        PendingIntent pi;
 
         switch (event.type) {
             case "ConfigSaved":
@@ -105,21 +108,19 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 }
                 break;
             case "DeviceRejected":
+                Log.d(TAG, "event data " + event);
                 deviceId = (String) event.data.get("device");
-                Log.d(TAG, "Unknown device " + deviceId + " wants to connect");
+                deviceName = (String) event.data.get("name");
+                Log.d(TAG, "Unknown device " + deviceName + "(" + deviceId + ") wants to connect");
 
                 Intent intent = new Intent(mContext, DeviceActivity.class)
                         .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
                         .putExtra(DeviceActivity.EXTRA_DEVICE_ID, deviceId);
-                // HACK: Use a random, deterministic ID to make multiple PendingIntents
-                //       distinguishable
+                // Use a deterministic ID to make multiple PendingIntents distinguishable.
                 int requestCode = deviceId.hashCode();
-                PendingIntent pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
-
-                String title = mContext.getString(R.string.device_rejected,
-                        deviceId.substring(0, 7));
-
-                notify(title, pi);
+                pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
+                title = mContext.getString(R.string.device_rejected, deviceName);
+                mNotificationHandler.showEventNotification(title, pi);
                 break;
             case "FolderCompletion":
                 deviceId = (String) event.data.get("device");
@@ -141,12 +142,11 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                         .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
                         .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
                         .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);
-                // HACK: Use a random, deterministic ID to make multiple PendingIntents
-                //       distinguishable
-                requestCode = (deviceId + folderId + folderLabel).hashCode();
+                // Use a deterministic ID to make multiple PendingIntents distinguishable.
+                requestCode = (deviceId + folderId).hashCode();
                 pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
 
-                String deviceName = null;
+                deviceName = null;
                 for (Device d : mApi.getDevices(false)) {
                     if (d.deviceID.equals(deviceId))
                         deviceName = d.getDisplayName();
@@ -154,7 +154,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 title = mContext.getString(R.string.folder_rejected, deviceName,
                         folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
 
-                notify(title, pi);
+                mNotificationHandler.showEventNotification(title, pi);
                 break;
             case "ItemFinished":
                 String folder = (String) event.data.get("folder");
@@ -240,12 +240,5 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
             mShutdown = true;
             mMainThreadHandler.removeCallbacks(this);
         }
-    }
-
-    private void notify(String text, PendingIntent pi) {
-        // HACK: Use a random, deterministic ID between 1000 and 2000 to avoid duplicate
-        //       notifications.
-        int notificationId = 1000 + text.hashCode() % 1000;
-        mNotificationHandler.showEventNotification(text, pi, notificationId);
     }
 }
