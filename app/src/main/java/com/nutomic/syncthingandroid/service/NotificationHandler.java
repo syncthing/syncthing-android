@@ -181,7 +181,7 @@ public class NotificationHandler {
     /**
      * Used by {@link EventProcessor}
      */
-    public void showEventNotification(String text,
+    public void showConsentNotification(String text,
                                         PendingIntent piAccept,
                                         PendingIntent piIgnore) {
         /**

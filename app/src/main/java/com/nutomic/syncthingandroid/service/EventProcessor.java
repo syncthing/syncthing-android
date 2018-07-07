@@ -232,7 +232,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
 
         // Show notification.
         String title = mContext.getString(R.string.device_rejected, deviceName);
-        mNotificationHandler.showEventNotification(title, piAccept, piIgnore);  // ToDo
+        mNotificationHandler.showConsentNotification(title, piAccept, piIgnore);  // ToDo
     }
 
     private void onFolderRejected(String deviceId, String folderId,
@@ -269,6 +269,6 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         }
         String title = mContext.getString(R.string.folder_rejected, deviceName,
                 folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
-        mNotificationHandler.showEventNotification(title, piAccept, piIgnore);
+        mNotificationHandler.showConsentNotification(title, piAccept, piIgnore);
     }
 }
