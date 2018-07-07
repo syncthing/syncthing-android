@@ -215,8 +215,13 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         }
         Log.d(TAG, "Unknown device " + deviceName + "(" + deviceId + ") wants to connect");
 
+        String title = mContext.getString(R.string.device_rejected,
+                deviceName.isEmpty() ? deviceId.substring(0, 7) : deviceName);
+        int notificationId = mNotificationHandler.getNotificationIdFromText(title);
+
         // Prepare "accept" action.
         Intent intentAccept = new Intent(mContext, DeviceActivity.class)
+                .putExtra(DeviceActivity.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
                 .putExtra(DeviceActivity.EXTRA_DEVICE_ID, deviceId)
                 .putExtra(DeviceActivity.EXTRA_DEVICE_NAME, deviceName);
@@ -226,13 +231,13 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
 
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
+                .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_DEVICE);
         PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
 
         // Show notification.
-        String title = mContext.getString(R.string.device_rejected, deviceName);
-        mNotificationHandler.showConsentNotification(title, piAccept, piIgnore);  // ToDo
+        mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);  // ToDo
     }
 
     private void onFolderRejected(String deviceId, String folderId,
@@ -243,10 +248,21 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         Log.d(TAG, "Device " + deviceId + " wants to share folder " +
             folderLabel + " (" + folderId + ")");
 
+        // Find the deviceName corresponding to the deviceId
+        String deviceName = null;
+        for (Device d : mApi.getDevices(false)) {
+            if (d.deviceID.equals(deviceId))
+                deviceName = d.getDisplayName();
+        }
+        String title = mContext.getString(R.string.folder_rejected, deviceName,
+                folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
+        int notificationId = mNotificationHandler.getNotificationIdFromText(title);
+
         // Prepare "accept" action.
         boolean isNewFolder = Stream.of(mApi.getFolders())
                 .noneMatch(f -> f.id.equals(folderId));
         Intent intentAccept = new Intent(mContext, FolderActivity.class)
+                .putExtra(FolderActivity.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(FolderActivity.EXTRA_IS_CREATE, isNewFolder)
                 .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
                 .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
@@ -257,18 +273,12 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
 
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
+                .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_FOLDER);
         PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
 
-        // Find the deviceName corresponding to the deviceId
-        String deviceName = null;
-        for (Device d : mApi.getDevices(false)) {
-            if (d.deviceID.equals(deviceId))
-                deviceName = d.getDisplayName();
-        }
-        String title = mContext.getString(R.string.folder_rejected, deviceName,
-                folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
-        mNotificationHandler.showConsentNotification(title, piAccept, piIgnore);
+        // Show notification.
+        mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);
     }
 }

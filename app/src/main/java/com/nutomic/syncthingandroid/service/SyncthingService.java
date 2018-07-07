@@ -72,6 +72,12 @@ public class SyncthingService extends Service {
             "com.nutomic.syncthingandroid.service.SyncthingService.IGNORE_FOLDER";
 
     /**
+     * Extra used together with ACTION_IGNORE_DEVICE, ACTION_IGNORE_FOLDER.
+     */
+    public static final String EXTRA_NOTIFICATION_ID =
+            "com.nutomic.syncthingandroid.service.EXTRA_NOTIFICATION_ID";
+
+    /**
      * Extra used together with ACTION_IGNORE_DEVICE
      */
     public static final String EXTRA_DEVICE_ID =
@@ -231,9 +237,11 @@ public class SyncthingService extends Service {
         } else if (ACTION_IGNORE_DEVICE.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             // mApi is not null due to State.ACTIVE
             mApi.ignoreDevice(intent.getStringExtra(EXTRA_DEVICE_ID));
+            mNotificationHandler.cancelConsentNotification(intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         } else if (ACTION_IGNORE_FOLDER.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             // mApi is not null due to State.ACTIVE
             mApi.ignoreFolder(intent.getStringExtra(EXTRA_FOLDER_ID));
+            mNotificationHandler.cancelConsentNotification(intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         }
         return START_STICKY;
     }

@@ -27,6 +27,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
@@ -35,6 +36,8 @@ import com.nutomic.syncthingandroid.util.Util;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static android.text.TextUtils.isEmpty;
 import static android.view.View.GONE;
@@ -48,6 +51,8 @@ import static com.nutomic.syncthingandroid.util.Compression.METADATA;
  */
 public class DeviceActivity extends SyncthingActivity implements View.OnClickListener {
 
+    public static final String EXTRA_NOTIFICATION_ID =
+            "com.nutomic.syncthingandroid.activities.DeviceActivity.NOTIFICATION_ID";
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.DEVICE_ID";
     public static final String EXTRA_DEVICE_NAME =
@@ -93,6 +98,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
     private Dialog mCompressionDialog;
+
+    @Inject NotificationHandler mNotificationHandler;
 
     private final DialogInterface.OnClickListener mCompressionEntrySelectedListener = new DialogInterface.OnClickListener() {
         @Override
@@ -160,6 +167,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_device);
+        mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         registerOnServiceConnectedListener(this::onServiceConnected);

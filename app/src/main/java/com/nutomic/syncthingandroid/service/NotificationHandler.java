@@ -179,18 +179,36 @@ public class NotificationHandler {
     }
 
     /**
+     * Calculate a deterministic ID between 1000 and 2000 to avoid duplicate
+     * notification ids for different device, folder consent popups triggered
+     * by {@link EventProcessor}.
+     */
+    public int getNotificationIdFromText(String text) {
+        return 1000 + text.hashCode() % 1000;
+    }
+
+    /**
+     * Closes a notification. Required after the user hit an action button.
+     */
+    public void cancelConsentNotification(int notificationId) {
+        if (notificationId == 0) {
+            return;
+        }
+        mNotificationManager.cancel(notificationId);
+    }
+
+    /**
      * Used by {@link EventProcessor}
      */
-    public void showConsentNotification(String text,
+    public void showConsentNotification(int notificationId,
+                                        String text,
                                         PendingIntent piAccept,
                                         PendingIntent piIgnore) {
         /**
-         * Use a deterministic ID between 1000 and 2000 to avoid duplicate
-         * notifications. As we know the id for a specific notification text,
-         * we'll dismiss this notification as it may be outdated when this ID
-         * occurs again.
+         * As we know the id for a specific notification text,
+         * we'll dismiss this notification as it may be outdated.
+         * This is also valid if the notification does not exist.
          */
-        int notificationId = 1000 + text.hashCode() % 1000;
         mNotificationManager.cancel(notificationId);
         Notification n = getNotificationBuilder(mInfoChannel)
                 .setContentTitle(mContext.getString(R.string.app_name))
