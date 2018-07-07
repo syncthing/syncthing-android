@@ -139,10 +139,6 @@ public class FolderActivity extends SyncthingActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_folder);
-        SyncthingService syncthingService = getService();
-        if (syncthingService != null) {
-            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
-        }
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
@@ -243,6 +239,7 @@ public class FolderActivity extends SyncthingActivity
         super.onDestroy();
         SyncthingService syncthingService = getService();
         if (syncthingService != null) {
+            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         mLabelView.removeTextChangedListener(mTextWatcher);
@@ -278,7 +275,10 @@ public class FolderActivity extends SyncthingActivity
      */
     @Override
     public void onServiceConnected() {
-        getService().registerOnServiceStateChangeListener(this);
+        Log.v(TAG, "onServiceConnected");
+        SyncthingService syncthingService = (SyncthingService) getService();
+        syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        syncthingService.registerOnServiceStateChangeListener(this);
     }
 
     @Override

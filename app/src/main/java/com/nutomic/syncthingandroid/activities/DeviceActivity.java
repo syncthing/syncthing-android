@@ -162,10 +162,6 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_device);
-        SyncthingService syncthingService = getService();
-        if (syncthingService != null) {
-            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
-        }
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         registerOnServiceConnectedListener(this::onServiceConnected);
@@ -223,6 +219,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         super.onDestroy();
         SyncthingService syncthingService = getService();
         if (syncthingService != null) {
+            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         mIdView.removeTextChangedListener(mIdTextWatcher);
@@ -261,7 +258,10 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private void onServiceConnected() {
-        getService().registerOnServiceStateChangeListener(this::onServiceStateChange);
+        Log.v(TAG, "onServiceConnected");
+        SyncthingService syncthingService = (SyncthingService) getService();
+        syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        syncthingService.registerOnServiceStateChangeListener(this::onServiceStateChange);
     }
 
     /**
