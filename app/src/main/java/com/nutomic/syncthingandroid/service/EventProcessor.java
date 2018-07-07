@@ -253,8 +253,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         // Find the deviceName corresponding to the deviceId
         String deviceName = null;
         for (Device d : mApi.getDevices(false)) {
-            if (d.deviceID.equals(deviceId))
+            if (d.deviceID.equals(deviceId)) {
                 deviceName = d.getDisplayName();
+                break;
+            }
         }
         String title = mContext.getString(R.string.folder_rejected, deviceName,
                 folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
