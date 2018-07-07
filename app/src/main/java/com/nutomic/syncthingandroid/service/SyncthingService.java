@@ -565,6 +565,10 @@ public class SyncthingService extends Service {
         return mCurrentState;
     }
 
+    public NotificationHandler getNotificationHandler() {
+        return mNotificationHandler;
+    }
+
     /**
      * Exports the local config and keys to {@link Constants#EXPORT_PATH}.
      */

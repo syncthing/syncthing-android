@@ -30,7 +30,6 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.RestApi;
-import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
@@ -41,8 +40,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
@@ -98,8 +95,6 @@ public class FolderActivity extends SyncthingActivity
 
     private Folder.Versioning mVersioning;
 
-    @Inject NotificationHandler mNotificationHandler;
-
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
@@ -144,7 +139,10 @@ public class FolderActivity extends SyncthingActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_folder);
-        mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        SyncthingService syncthingService = getService();
+        if (syncthingService != null) {
+            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        }
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);

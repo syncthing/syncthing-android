@@ -227,14 +227,16 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 .putExtra(DeviceActivity.EXTRA_DEVICE_NAME, deviceName);
         // Use a deterministic ID to make multiple PendingIntents distinguishable.
         int requestCode = deviceId.hashCode();
-        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode, intentAccept, 0);
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode,
+            intentAccept, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
                 .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_DEVICE);
-        PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
+        PendingIntent piIgnore = PendingIntent.getService(mContext, 0,
+            intentIgnore, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Show notification.
         mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);  // ToDo
@@ -269,14 +271,16 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);
         // Use a deterministic ID to make multiple PendingIntents distinguishable.
         int requestCode = (deviceId + folderId).hashCode();
-        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode, intentAccept, 0);
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode,
+            intentAccept, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
                 .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
                 .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_FOLDER);
-        PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
+        PendingIntent piIgnore = PendingIntent.getService(mContext, 0,
+            intentIgnore, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Show notification.
         mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);

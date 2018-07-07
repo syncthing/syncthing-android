@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 
 public class NotificationHandler {
 
+    private static final String TAG = "NotificationHandler";
     private static final int ID_PERSISTENT = 1;
     private static final int ID_PERSISTENT_WAITING = 4;
     private static final int ID_RESTART = 2;
@@ -194,6 +196,7 @@ public class NotificationHandler {
         if (notificationId == 0) {
             return;
         }
+        Log.v(TAG, "Cancelling notification with id " + notificationId);
         mNotificationManager.cancel(notificationId);
     }
 
