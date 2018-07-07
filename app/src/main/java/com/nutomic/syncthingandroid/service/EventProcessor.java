@@ -225,9 +225,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
                 .putExtra(DeviceActivity.EXTRA_DEVICE_ID, deviceId)
                 .putExtra(DeviceActivity.EXTRA_DEVICE_NAME, deviceName);
-        // Use a deterministic ID to make multiple PendingIntents distinguishable.
-        int requestCode = deviceId.hashCode();
-        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode,
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, notificationId,
             intentAccept, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Prepare "ignore" action.
@@ -271,9 +269,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
                 .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
                 .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);
-        // Use a deterministic ID to make multiple PendingIntents distinguishable.
-        int requestCode = (deviceId + folderId).hashCode();
-        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode,
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, notificationId,
             intentAccept, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Prepare "ignore" action.
