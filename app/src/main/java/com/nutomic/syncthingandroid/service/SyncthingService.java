@@ -75,19 +75,19 @@ public class SyncthingService extends Service {
      * Extra used together with ACTION_IGNORE_DEVICE, ACTION_IGNORE_FOLDER.
      */
     public static final String EXTRA_NOTIFICATION_ID =
-            "com.nutomic.syncthingandroid.service.EXTRA_NOTIFICATION_ID";
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_NOTIFICATION_ID";
 
     /**
      * Extra used together with ACTION_IGNORE_DEVICE
      */
     public static final String EXTRA_DEVICE_ID =
-            "com.nutomic.syncthingandroid.service.EXTRA_DEVICE_ID";
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_DEVICE_ID";
 
     /**
      * Extra used together with ACTION_IGNORE_FOLDER
      */
     public static final String EXTRA_FOLDER_ID =
-            "com.nutomic.syncthingandroid.service.EXTRA_FOLDER_ID";
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_FOLDER_ID";
 
     public interface OnServiceStateChangeListener {
         void onServiceStateChange(State currentState);
