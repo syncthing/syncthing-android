@@ -50,6 +50,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.DEVICE_ID";
+    public static final String EXTRA_DEVICE_NAME =
+            "com.nutomic.syncthingandroid.activities.DeviceActivity.DEVICE_NAME";
     public static final String EXTRA_IS_CREATE =
             "com.nutomic.syncthingandroid.activities.DeviceActivity.IS_CREATE";
 
@@ -394,7 +396,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private void initDevice() {
         mDevice = new Device();
-        mDevice.name = "";
+        mDevice.name = getIntent().getStringExtra(EXTRA_DEVICE_NAME);
         mDevice.deviceID = getIntent().getStringExtra(EXTRA_DEVICE_ID);
         mDevice.addresses = DYNAMIC_ADDRESS;
         mDevice.compression = METADATA.getValue(this);

@@ -94,12 +94,6 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
      */
     @Override
     public void onEvent(Event event) {
-        String deviceId;
-        String deviceName;
-        String folderId;
-        String title;
-        PendingIntent pi;
-
         switch (event.type) {
             case "ConfigSaved":
                 if (mApi != null) {
@@ -108,53 +102,26 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 }
                 break;
             case "DeviceRejected":
-                Log.d(TAG, "event data " + event);
-                deviceId = (String) event.data.get("device");
-                deviceName = (String) event.data.get("name");
-                Log.d(TAG, "Unknown device " + deviceName + "(" + deviceId + ") wants to connect");
-
-                Intent intent = new Intent(mContext, DeviceActivity.class)
-                        .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
-                        .putExtra(DeviceActivity.EXTRA_DEVICE_ID, deviceId);
-                // Use a deterministic ID to make multiple PendingIntents distinguishable.
-                int requestCode = deviceId.hashCode();
-                pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
-                title = mContext.getString(R.string.device_rejected, deviceName);
-                mNotificationHandler.showEventNotification(title, pi);
+                onDeviceRejected(
+                    (String) event.data.get("device"),          // deviceId
+                    (String) event.data.get("name")             // deviceName
+                );
                 break;
             case "FolderCompletion":
-                deviceId = (String) event.data.get("device");
-                folderId = (String) event.data.get("folder");
                 CompletionInfo completionInfo = new CompletionInfo();
                 completionInfo.completion = (Double) event.data.get("completion");
-                mApi.setCompletionInfo(deviceId, folderId, completionInfo);
+                mApi.setCompletionInfo(
+                    (String) event.data.get("device"),          // deviceId
+                    (String) event.data.get("folder"),          // folderId
+                    completionInfo
+                );
                 break;
             case "FolderRejected":
-                deviceId = (String) event.data.get("device");
-                folderId = (String) event.data.get("folder");
-                String folderLabel = (String) event.data.get("folderLabel");
-                Log.d(TAG, "Device " + deviceId + " wants to share folder " + folderId);
-
-                boolean isNewFolder = Stream.of(mApi.getFolders())
-                        .noneMatch(f -> f.id.equals(folderId));
-                intent = new Intent(mContext, FolderActivity.class)
-                        .putExtra(FolderActivity.EXTRA_IS_CREATE, isNewFolder)
-                        .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
-                        .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
-                        .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);
-                // Use a deterministic ID to make multiple PendingIntents distinguishable.
-                requestCode = (deviceId + folderId).hashCode();
-                pi = PendingIntent.getActivity(mContext, requestCode, intent, 0);
-
-                deviceName = null;
-                for (Device d : mApi.getDevices(false)) {
-                    if (d.deviceID.equals(deviceId))
-                        deviceName = d.getDisplayName();
-                }
-                title = mContext.getString(R.string.folder_rejected, deviceName,
-                        folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
-
-                mNotificationHandler.showEventNotification(title, pi);
+                onFolderRejected(
+                    (String) event.data.get("device"),          // deviceId
+                    (String) event.data.get("folder"),          // folderId
+                    (String) event.data.get("folderLabel")      // folderLabel
+                );
                 break;
             case "ItemFinished":
                 String folder = (String) event.data.get("folder");
@@ -240,5 +207,68 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
             mShutdown = true;
             mMainThreadHandler.removeCallbacks(this);
         }
+    }
+
+    private void onDeviceRejected(String deviceId, String deviceName) {
+        if (deviceId == null) {
+            return;
+        }
+        Log.d(TAG, "Unknown device " + deviceName + "(" + deviceId + ") wants to connect");
+
+        // Prepare "accept" action.
+        Intent intentAccept = new Intent(mContext, DeviceActivity.class)
+                .putExtra(DeviceActivity.EXTRA_IS_CREATE, true)
+                .putExtra(DeviceActivity.EXTRA_DEVICE_ID, deviceId)
+                .putExtra(DeviceActivity.EXTRA_DEVICE_NAME, deviceName);
+        // Use a deterministic ID to make multiple PendingIntents distinguishable.
+        int requestCode = deviceId.hashCode();
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode, intentAccept, 0);
+
+        // Prepare "ignore" action.
+        Intent intentIgnore = new Intent(mContext, SyncthingService.class)
+                .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId);
+        intentIgnore.setAction(SyncthingService.ACTION_IGNORE_DEVICE);
+        PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
+
+        // Show notification.
+        String title = mContext.getString(R.string.device_rejected, deviceName);
+        mNotificationHandler.showEventNotification(title, piAccept, piIgnore);  // ToDo
+    }
+
+    private void onFolderRejected(String deviceId, String folderId,
+                                    String folderLabel) {
+        if (deviceId == null || folderId == null) {
+            return;
+        }
+        Log.d(TAG, "Device " + deviceId + " wants to share folder " +
+            folderLabel + " (" + folderId + ")");
+
+        // Prepare "accept" action.
+        boolean isNewFolder = Stream.of(mApi.getFolders())
+                .noneMatch(f -> f.id.equals(folderId));
+        Intent intentAccept = new Intent(mContext, FolderActivity.class)
+                .putExtra(FolderActivity.EXTRA_IS_CREATE, isNewFolder)
+                .putExtra(FolderActivity.EXTRA_DEVICE_ID, deviceId)
+                .putExtra(FolderActivity.EXTRA_FOLDER_ID, folderId)
+                .putExtra(FolderActivity.EXTRA_FOLDER_LABEL, folderLabel);
+        // Use a deterministic ID to make multiple PendingIntents distinguishable.
+        int requestCode = (deviceId + folderId).hashCode();
+        PendingIntent piAccept = PendingIntent.getActivity(mContext, requestCode, intentAccept, 0);
+
+        // Prepare "ignore" action.
+        Intent intentIgnore = new Intent(mContext, SyncthingService.class)
+                .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId);
+        intentIgnore.setAction(SyncthingService.ACTION_IGNORE_FOLDER);
+        PendingIntent piIgnore = PendingIntent.getService(mContext, 0, intentIgnore, 0);
+
+        // Find the deviceName corresponding to the deviceId
+        String deviceName = null;
+        for (Device d : mApi.getDevices(false)) {
+            if (d.deviceID.equals(deviceId))
+                deviceName = d.getDisplayName();
+        }
+        String title = mContext.getString(R.string.folder_rejected, deviceName,
+                folderLabel.isEmpty() ? folderId : folderLabel + " (" + folderId + ")");
+        mNotificationHandler.showEventNotification(title, piAccept, piIgnore);
     }
 }

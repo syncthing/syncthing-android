@@ -181,7 +181,9 @@ public class NotificationHandler {
     /**
      * Used by {@link EventProcessor}
      */
-    public void showEventNotification(String text, PendingIntent pi) {
+    public void showEventNotification(String text,
+                                        PendingIntent piAccept,
+                                        PendingIntent piIgnore) {
         /**
          * Use a deterministic ID between 1000 and 2000 to avoid duplicate
          * notifications. As we know the id for a specific notification text,
@@ -195,7 +197,9 @@ public class NotificationHandler {
                 .setContentText(text)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(text))
-                .setContentIntent(pi)
+                .setContentIntent(piAccept)
+                .addAction(R.drawable.ic_stat_notify, "Accept", piAccept)
+                .addAction(R.drawable.ic_stat_notify, "Ignore", piIgnore)
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setAutoCancel(true)
                 .build();

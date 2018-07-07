@@ -59,6 +59,30 @@ public class SyncthingService extends Service {
     public static final String ACTION_REFRESH_NETWORK_INFO =
             "com.nutomic.syncthingandroid.service.SyncthingService.REFRESH_NETWORK_INFO";
 
+    /**
+     * Intent action to permanently ignore a device connection request.
+     */
+    public static final String ACTION_IGNORE_DEVICE =
+            "com.nutomic.syncthingandroid.service.SyncthingService.IGNORE_DEVICE";
+
+    /**
+     * Intent action to permanently ignore a folder share request.
+     */
+    public static final String ACTION_IGNORE_FOLDER =
+            "com.nutomic.syncthingandroid.service.SyncthingService.IGNORE_FOLDER";
+
+    /**
+     * Extra used together with ACTION_IGNORE_DEVICE
+     */
+    public static final String EXTRA_DEVICE_ID =
+            "com.nutomic.syncthingandroid.service.EXTRA_DEVICE_ID";
+
+    /**
+     * Extra used together with ACTION_IGNORE_FOLDER
+     */
+    public static final String EXTRA_FOLDER_ID =
+            "com.nutomic.syncthingandroid.service.EXTRA_FOLDER_ID";
+
     public interface OnServiceStateChangeListener {
         void onServiceStateChange(State currentState);
     }
@@ -204,6 +228,16 @@ public class SyncthingService extends Service {
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
             mDeviceStateHolder.updateShouldRunDecision();
+        } else if (ACTION_IGNORE_DEVICE.equals(intent.getAction())) {
+            Log.w(TAG, "test Heard ACTION_IGNORE_DEVICE");
+            if (mApi == null) {
+                Log.w(TAG, "test mRestApi == null");
+            }
+        } else if (ACTION_IGNORE_FOLDER.equals(intent.getAction())) {
+            Log.w(TAG, "test Heard ACTION_IGNORE_FOLDER");
+            if (mApi == null) {
+                Log.w(TAG, "test mRestApi == null");
+            }
         }
         return START_STICKY;
     }
