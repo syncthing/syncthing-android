@@ -198,8 +198,8 @@ public class NotificationHandler {
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(text))
                 .setContentIntent(piAccept)
-                .addAction(R.drawable.ic_stat_notify, "Accept", piAccept)
-                .addAction(R.drawable.ic_stat_notify, "Ignore", piIgnore)
+                .addAction(R.drawable.ic_stat_notify, mContext.getString(R.string.accept), piAccept)
+                .addAction(R.drawable.ic_stat_notify, mContext.getString(R.string.ignore), piIgnore)
                 .setSmallIcon(R.drawable.ic_stat_notify)
                 .setAutoCancel(true)
                 .build();

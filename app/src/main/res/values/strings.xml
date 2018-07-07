@@ -21,6 +21,10 @@ Please report any problems you encounter via Github.</string>
     <!-- Generic texts used everywhere -->
     <string name="generic_example">Example</string>
 
+    <string name="accept">Accept</string>
+
+    <string name="ignore">Ignore</string>
+
     <!-- MainActivity -->
 
 
