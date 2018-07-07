@@ -239,7 +239,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
             intentIgnore, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Show notification.
-        mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);  // ToDo
+        mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);
     }
 
     private void onFolderRejected(String deviceId, String folderId,
