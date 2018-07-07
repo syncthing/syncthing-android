@@ -228,16 +228,12 @@ public class SyncthingService extends Service {
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
             mDeviceStateHolder.updateShouldRunDecision();
-        } else if (ACTION_IGNORE_DEVICE.equals(intent.getAction())) {
-            Log.w(TAG, "test Heard ACTION_IGNORE_DEVICE");
-            if (mApi == null) {
-                Log.w(TAG, "test mRestApi == null");
-            }
-        } else if (ACTION_IGNORE_FOLDER.equals(intent.getAction())) {
-            Log.w(TAG, "test Heard ACTION_IGNORE_FOLDER");
-            if (mApi == null) {
-                Log.w(TAG, "test mRestApi == null");
-            }
+        } else if (ACTION_IGNORE_DEVICE.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
+            // mApi is not null due to State.ACTIVE
+            mApi.ignoreDevice(intent.getStringExtra(EXTRA_DEVICE_ID));
+        } else if (ACTION_IGNORE_FOLDER.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
+            // mApi is not null due to State.ACTIVE
+            mApi.ignoreFolder(intent.getStringExtra(EXTRA_FOLDER_ID));
         }
         return START_STICKY;
     }
