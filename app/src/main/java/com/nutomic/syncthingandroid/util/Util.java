@@ -114,7 +114,7 @@ public class Util {
         // Leaving them as they are, the Android service won't be able to access them.
         // At least for those files residing in an application's data folder.
         // Simply reverting the type to its default should do the trick.
-        cmd = "restorecon -R " + dir + "\n";
+        cmd += "restorecon -R " + dir + "\n";
         Log.d(TAG, "Running: '" + cmd);
         int exitCode = runShellCommand(cmd, true);
         if (exitCode == 0) {
