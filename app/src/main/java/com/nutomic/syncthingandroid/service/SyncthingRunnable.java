@@ -263,6 +263,11 @@ public class SyncthingRunnable implements Runnable {
      * Look for a running libsyncthing.so process and nice its IO.
      */
     private void niceSyncthing() {
+        if (!mUseRoot || !Shell.SU.available()) {
+            Log.i(TAG_NICE, "Root is not available. Cannot nice syncthing.");
+            return;
+        }
+
         List<String> syncthingPIDs = getSyncthingPIDs();
         if (syncthingPIDs.isEmpty()) {
             Log.w(TAG_NICE, "Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
@@ -272,7 +277,7 @@ public class SyncthingRunnable implements Runnable {
         // Ionice all running syncthing processes.
         for (String syncthingPID : syncthingPIDs) {
             // Set best-effort, low priority using ionice.
-            int exitCode = Util.runShellCommand("/system/bin/ionice " + syncthingPID + " be 7\n", mUseRoot);
+            int exitCode = Util.runShellCommand("/system/bin/ionice " + syncthingPID + " be 7\n", true);
             Log.i(TAG_NICE, "ionice returned " + Integer.toString(exitCode) +
                 " on " + Constants.FILENAME_SYNCTHING_BINARY);
         }

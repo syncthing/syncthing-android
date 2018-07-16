@@ -89,7 +89,7 @@ public class Util {
         // Ignore the 'use_root' preference, because we might want to fix ther permission
         // just after the root option has been disabled.
         if (!Shell.SU.available()) {
-            Log.e(TAG, "Root is not available. Cannot fix permssions.");
+            Log.e(TAG, "Root is not available. Cannot fix permissions.");
             return false;
         }
 
