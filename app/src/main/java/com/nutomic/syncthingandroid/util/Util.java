@@ -93,35 +93,37 @@ public class Util {
             return false;
         }
 
+        String packageName;
+        ApplicationInfo appInfo;
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
-            Log.d(TAG, "Uid of '" + context.getPackageName() + "' is " + appInfo.uid);
-            Process fixPerm = Runtime.getRuntime().exec("su");
-            DataOutputStream fixPermOut = new DataOutputStream(fixPerm.getOutputStream());
-            String dir = context.getFilesDir().getAbsolutePath();
-            String cmd = "chown -R " + appInfo.uid + ":" + appInfo.uid + " " + dir + "\n";
-            Log.d(TAG, "Running: '" + cmd);
-            fixPermOut.writeBytes(cmd);
-            // Running Syncthing as root might change a file's or directories type in terms of SELinux.
-            // Leaving them as they are, the Android service won't be able to access them.
-            // At least for those files residing in an application's data folder.
-            // Simply reverting the type to its default should do the trick.
-            cmd = "restorecon -R " + dir + "\n";
-            Log.d(TAG, "Running: '" + cmd);
-            fixPermOut.writeBytes(cmd);
-            fixPermOut.flush();
-            fixPermOut.close();
-            int ret = fixPerm.waitFor();
-            Log.i(TAG, "Changed the owner, the group and the SELinux context of '" + dir + "'. Result: " + ret);
-            return ret == 0;
-        } catch (IOException | InterruptedException e) {
-            Log.w(TAG, "Cannot chown data directory", e);
+            packageName = context.getPackageName();
+            appInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
+
         } catch (NameNotFoundException e) {
             // This should not happen!
             // One should always be able to retrieve the application info for its own package.
-            Log.w(TAG, "This should not happen", e);
+            Log.w(TAG, "Error getting current package name", e);
+            return false;
         }
-        return false;
+        Log.d(TAG, "Uid of '" + packageName + "' is " + appInfo.uid);
+
+        // Get private app's "files" dir residing in "/data/data/[packageName]".
+        String dir = context.getFilesDir().getAbsolutePath();
+        String cmd = "chown -R " + appInfo.uid + ":" + appInfo.uid + " " + dir + "; ";
+        // Running Syncthing as root might change a file's or directories type in terms of SELinux.
+        // Leaving them as they are, the Android service won't be able to access them.
+        // At least for those files residing in an application's data folder.
+        // Simply reverting the type to its default should do the trick.
+        cmd = "restorecon -R " + dir + "\n";
+        Log.d(TAG, "Running: '" + cmd);
+        int exitCode = runShellCommand(cmd, true);
+        if (exitCode == 0) {
+            Log.i(TAG, "Fixed app data permissions on '" + dir + "'.");
+        } else {
+            Log.w(TAG, "Failed to fix app data permissions on '" + dir + "'. Result: " +
+                Integer.toString(exitCode));
+        }
+        return (exitCode == 0);
     }
 
     /**
