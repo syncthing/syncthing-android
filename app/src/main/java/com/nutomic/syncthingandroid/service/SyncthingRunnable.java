@@ -240,7 +240,7 @@ public class SyncthingRunnable implements Runnable {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            Log.w(TAG, "Failed list Syncthing processes", e);
+            Log.w(TAG, "Failed to list Syncthing processes", e);
         } finally {
             try {
                 if (br != null) {
@@ -250,7 +250,7 @@ public class SyncthingRunnable implements Runnable {
                     psOut.close();
                 }
             } catch (IOException e) {
-                Log.w(TAG, "Failed close the psOut stream", e);
+                Log.w(TAG, "Failed to close psOut stream", e);
             }
             if (ps != null) {
                 ps.destroy();
@@ -270,7 +270,7 @@ public class SyncthingRunnable implements Runnable {
 
         List<String> syncthingPIDs = getSyncthingPIDs();
         if (syncthingPIDs.isEmpty()) {
-            Log.w(TAG_NICE, "Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
+            Log.i(TAG_NICE, "Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
             return;
         }
 
@@ -311,7 +311,7 @@ public class SyncthingRunnable implements Runnable {
                 if (exitCode == 0) {
                     Log.d(TAG, "Killed Syncthing process " + syncthingPID);
                 } else {
-                    Log.d(TAG, "Failed to kill Syncthing process " + syncthingPID +
+                    Log.w(TAG, "Failed to kill Syncthing process " + syncthingPID +
                         " exit code " + Integer.toString(exitCode));
                 }
             }
