@@ -32,6 +32,10 @@ Please report any problems you encounter via Github.</string>
     <string name="finish">Finish</string>
     <string name="generic_example">Example</string>
 
+    <string name="accept">Accept</string>
+
+    <string name="ignore">Ignore</string>
+
     <!-- MainActivity -->
 
 
@@ -57,9 +61,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="toast_write_storage_permission_required">Write storage permission is required for this app</string>
 
-    <string name="device_rejected">Device %1$s wants to connect</string>
+    <string name="device_rejected">Device \"%1$s\" wants to connect</string>
 
-    <string name="folder_rejected">Device %1$s wants to share folder %2$s</string>
+    <string name="folder_rejected">Device \"%1$s\" wants to share folder \"%2$s\"</string>
 
     <string name="dialog_disable_battery_optimization_title">Battery Optimization</string>
     <string name="dialog_disable_battery_optimization_message">Android may stop synchronization after some time. To prevent this, turn off battery optimization.\n\nSome devices have additional task-killing apps preinstalled. You should add Syncthing to their whitelist, as well.</string>
@@ -199,6 +203,15 @@ Please report any problems you encounter via Github.</string>
 
     <string name="dialog_discard_changes">Discard your changes?</string>
 
+    <!-- Summary shown if we only have readonly access to the folder path -->
+    <string name="folder_path_readonly">Your Android version only grants Syncthing readonly access to the selected folder.</string>
+
+    <!-- Summary shown if we only have readwrite access to the folder path -->
+    <string name="folder_path_readwrite">Your Android version grants Syncthing read and write access to the selected folder.</string>
+
+    <!-- Toast shown if the user selected an invalid location for a new syncthing folder -->
+    <string name="toast_invalid_folder_selected">Sorry. The selected folder cannot be used. Please select a folder located on the internal or external storage.</string>
+
     <string name="ignore_patterns">Ignore Patterns</string>
 
     <string name="create_ignore_file_error">Failed to create ignore file. Is the directory writable?</string>
@@ -331,6 +344,15 @@ Please report any problems you encounter via Github.</string>
     <string name="start_into_web_gui_summary">When starting the app, open web GUI instead of the main screen</string>
 
     <string name="pref_language_default">Default Language</string>
+
+    <string-array name="pull_order_types">
+        <item>Random</item>
+        <item>Alphabetic</item>
+        <item>Smallest First</item>
+        <item>Largest First</item>
+        <item>Oldest First</item>
+        <item>Newest First</item>
+    </string-array>
 
     <string-array name="versioning_types">
         <item>None</item>
@@ -656,6 +678,25 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_size_format">%1$s / %2$s</string>
 
     <string name="appconfig_receiver_background_enabled">Stopping Syncthing is not supported when running in background is enabled.</string>
+
+    <!-- Titles used in the pull order dialog and pull order button in the folder activity -->
+    <string name="pull_order">File Pull Order</string>
+
+    <!-- Displays the current pull order type in the Folder activity -->
+    <string name="pull_order_type_random">Random</string>
+    <string name="pull_order_type_alphabetic">Alphabetic</string>
+    <string name="pull_order_type_smallestFirst">Smallest First</string>
+    <string name="pull_order_type_largestFirst">Largest First</string>
+    <string name="pull_order_type_oldestFirst">Oldest First</string>
+    <string name="pull_order_type_newestFirst">Newest First</string>
+
+    <!-- Pull order dialog descriptions for pull order types -->
+    <string name="pull_order_type_random_description">Pull files in random order.</string>
+    <string name="pull_order_type_alphabetic_description">Pull files ordered by file name alphabetically.</string>
+    <string name="pull_order_type_smallestFirst_description">Pull files ordered by file size. Smallest first respectively.</string>
+    <string name="pull_order_type_largestFirst_description">Pull files ordered by file size. Largest first respectively.</string>
+    <string name="pull_order_type_oldestFirst_description">Pull files ordered by modification time. Oldest first respectively.</string>
+    <string name="pull_order_type_newestFirst_description">Pull files ordered by modification time. Newest first respectively.</string>
 
     <!-- Titles used in the file versioning dialog and file versioning button in the folder activity -->
     <string name="maximum_age">Maximum Age</string>

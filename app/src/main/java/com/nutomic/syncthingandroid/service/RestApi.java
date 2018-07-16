@@ -243,6 +243,32 @@ public class RestApi {
     }
 
     /**
+     * Permanently ignore a device when it tries to connect.
+     * Ignored devices will not trigger the "DeviceRejected" event
+     * in {@link EventProcessor#onEvent}.
+     */
+    public void ignoreDevice(String deviceId) {
+        if (!mConfig.ignoredDevices.contains(deviceId)) {
+            mConfig.ignoredDevices.add(deviceId);
+            sendConfig();
+            Log.d(TAG, "Ignored device [" + deviceId + "]");
+        }
+    }
+
+    /**
+     * Permanently ignore a folder share request.
+     * Ignored folders will not trigger the "FolderRejected" event
+     * in {@link EventProcessor#onEvent}.
+     */
+    public void ignoreFolder(String folderId) {
+        if (!mConfig.ignoredFolders.contains(folderId)) {
+            mConfig.ignoredFolders.add(folderId);
+            sendConfig();
+            Log.d(TAG, "Ignored folder [" + folderId + "]");
+        }
+    }
+
+    /**
      * Sends current config to Syncthing.
      * Will result in a "ConfigSaved" event.
      * EventProcessor will trigger this.reloadConfig().
@@ -281,14 +307,20 @@ public class RestApi {
         return folders;
     }
 
-    public void addFolder(Folder folder) {
+    /**
+     * This is only used for new folder creation, see {@link FolderActivity}.
+     */
+    public void createFolder(Folder folder) {
+        // Add the new folder to the model.
         mConfig.folders.add(folder);
+        // Send model changes to syncthing, does not require a restart.
         sendConfig();
     }
 
-    public void editFolder(Folder newFolder) {
+    public void updateFolder(Folder newFolder) {
         removeFolderInternal(newFolder.id);
-        addFolder(newFolder);
+        mConfig.folders.add(newFolder);
+        sendConfig();
     }
 
     public void removeFolder(String id) {
