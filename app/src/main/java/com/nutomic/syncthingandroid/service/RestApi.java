@@ -269,6 +269,17 @@ public class RestApi {
     }
 
     /**
+     * Override folder changes. This is the same as hitting
+     * the "override changes" button from the web UI.
+     */
+    public void overrideChanges(String folderId) {
+        Log.d(TAG, "overrideChanges '" + folderId + "'");
+        // ToDo
+
+        // new PostRequest();
+    }
+
+    /**
      * Sends current config to Syncthing.
      * Will result in a "ConfigSaved" event.
      * EventProcessor will trigger this.reloadConfig().
