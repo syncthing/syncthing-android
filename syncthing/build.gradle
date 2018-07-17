@@ -2,9 +2,7 @@ task buildNative(type: Exec) {
     inputs.dir("$projectDir/src/")
     outputs.dir("$projectDir/../app/src/main/jniLibs/")
     executable = 'python'
-    args = ['./build-syncthing.py']
-    // stderr is unbuffered, send everything there.
-    standardOutput = System.err
+    args = ['-u', './build-syncthing.py']
 }
 
 /**
