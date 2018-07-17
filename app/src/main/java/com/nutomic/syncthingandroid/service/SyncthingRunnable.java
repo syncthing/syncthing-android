@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -299,15 +300,15 @@ public class SyncthingRunnable implements Runnable {
             }
 
             int exitCode;
-            String shellCmd;
             for (String syncthingPID : syncthingPIDs) {
                 if (i > 0) {
                     // Force termination of the process by sending SIGKILL.
-                    shellCmd = "sleep 3; kill -SIGKILL " + syncthingPID + "\n";
+                    SystemClock.sleep(3000);
+                    exitCode = Util.runShellCommand("kill -SIGKILL " + syncthingPID + "\n", mUseRoot);
                 } else {
-                    shellCmd = "kill -SIGINT " + syncthingPID + "; sleep 1\n";
+                    exitCode = Util.runShellCommand("kill -SIGINT " + syncthingPID + "\n", mUseRoot);
+                    SystemClock.sleep(1000);
                 }
-                exitCode = Util.runShellCommand(shellCmd, mUseRoot);
                 if (exitCode == 0) {
                     Log.d(TAG, "Killed Syncthing process " + syncthingPID);
                 } else {

@@ -123,7 +123,7 @@ public class Util {
             Log.w(TAG, "Failed to fix app data permissions on '" + dir + "'. Result: " +
                 Integer.toString(exitCode));
         }
-        return (exitCode == 0);
+        return exitCode == 0;
     }
 
     /**
