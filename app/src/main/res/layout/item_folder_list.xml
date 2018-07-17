@@ -45,11 +45,26 @@
                 android:ellipsize="end"
                 android:textAppearance="?textAppearanceListItemSecondary" />
 
+            <Button
+                android:id="@+id/override"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/directory"
+                android:contentDescription="@string/override_changes"
+                android:paddingEnd="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingStart="20dp"
+                android:text="@string/override_changes"
+                android:drawableLeft="@android:drawable/ic_menu_upload"
+                android:drawableStart="@android:drawable/ic_menu_upload"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/items"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/directory"
+                android:layout_below="@id/override"
                 android:textAppearance="?textAppearanceListItemSecondary" />
 
             <TextView
@@ -68,30 +83,6 @@
                 android:textColor="@color/text_red" />
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/override_changes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/inner"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_toLeftOf="@+id/open_folder"
-            android:layout_toStartOf="@+id/open_folder"
-            android:contentDescription="@string/override_changes"
-            android:paddingBottom="5dp"
-            android:paddingEnd="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingStart="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/override_changes"
-            android:drawableLeft="@android:drawable/ic_menu_upload"
-            android:drawableStart="@android:drawable/ic_menu_upload"
-            android:textSize="12sp" />
 
         <ImageButton
             android:id="@+id/open_folder"

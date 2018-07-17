@@ -89,7 +89,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 : 100;
         long neededItems = folderStatus.needFiles + folderStatus.needDirectories + folderStatus.needSymlinks + folderStatus.needDeletes;
         boolean outOfSync = folderStatus.state.equals("idle") && neededItems > 0;
-        
+        binding.override.setVisibility(outOfSync ? VISIBLE : GONE);
         if (outOfSync) {
             binding.state.setText(getContext().getString(R.string.status_outofsync));
             binding.state.setTextColor(ContextCompat.getColor(getContext(), R.color.text_red));
