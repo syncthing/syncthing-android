@@ -20,6 +20,7 @@ import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.ShareActivity;
 import com.nutomic.syncthingandroid.http.GetRequest;
+import com.nutomic.syncthingandroid.http.PostRequest;
 import com.nutomic.syncthingandroid.http.PostConfigRequest;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Completion;
@@ -274,9 +275,8 @@ public class RestApi {
      */
     public void overrideChanges(String folderId) {
         Log.d(TAG, "overrideChanges '" + folderId + "'");
-        // ToDo
-
-        // new PostRequest();
+        new PostRequest(mContext, mUrl, PostRequest.URI_DB_OVERRIDE, mApiKey,
+            ImmutableMap.of("folder", folderId), null);
     }
 
     /**
