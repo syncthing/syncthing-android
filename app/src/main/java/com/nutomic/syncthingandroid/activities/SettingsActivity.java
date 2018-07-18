@@ -124,7 +124,7 @@ public class SettingsActivity extends SyncthingActivity {
         private Options mOptions;
         private Config.Gui mGui;
 
-        private Boolean mRequireRestart = false;
+        private Boolean mPendingConfig = false;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -372,17 +372,17 @@ public class SettingsActivity extends SyncthingActivity {
             }
 
             mApi.editSettings(mGui, mOptions);
-            mRequireRestart = true;
+            mPendingConfig = true;
             return true;
         }
 
         @Override
         public void onStop() {
-            if (mRequireRestart) {
+            if (mPendingConfig) {
                 if (mSyncthingService != null && mApi != null &&
                         mSyncthingService.getCurrentState() != SyncthingService.State.DISABLED) {
                     mApi.saveConfigAndRestart();
-                    mRequireRestart = false;
+                    mPendingConfig = false;
                 }
             }
             super.onStop();
@@ -413,11 +413,11 @@ public class SettingsActivity extends SyncthingActivity {
                     mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
                     break;
                 case Constants.PREF_DEBUG_FACILITIES_ENABLED:
-                    mRequireRestart = true;
+                    mPendingConfig = true;
                     break;
                 case Constants.PREF_ENVIRONMENT_VARIABLES:
                     if (((String) o).matches("^(\\w+=[\\w:/\\.]+)?( \\w+=[\\w:/\\.]+)*$")) {
-                        mRequireRestart = true;
+                        mPendingConfig = true;
                     }
                     else {
                         Toast.makeText(getActivity(), R.string.toast_invalid_environment_variables, Toast.LENGTH_SHORT)
@@ -426,18 +426,18 @@ public class SettingsActivity extends SyncthingActivity {
                     }
                     break;
                 case Constants.PREF_USE_WAKE_LOCK:
-                    mRequireRestart = true;
+                    mPendingConfig = true;
                     break;
                 case Constants.PREF_USE_TOR:
                     mSocksProxyAddress.setEnabled(!(Boolean) o);
                     mHttpProxyAddress.setEnabled(!(Boolean) o);
-                    mRequireRestart = true;
+                    mPendingConfig = true;
                     break;
                 case Constants.PREF_SOCKS_PROXY_ADDRESS:
                     if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, "")))
                         return false;
                     if (handleSocksProxyPreferenceChange(preference, o.toString().trim())) {
-                        mRequireRestart = true;
+                        mPendingConfig = true;
                     } else {
                         return false;
                     }
@@ -446,7 +446,7 @@ public class SettingsActivity extends SyncthingActivity {
                     if (o.toString().trim().equals(mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, "")))
                         return false;
                     if (handleHttpProxyPreferenceChange(preference, o.toString().trim())) {
-                        mRequireRestart = true;
+                        mPendingConfig = true;
                     } else {
                         return false;
                     }
@@ -467,7 +467,7 @@ public class SettingsActivity extends SyncthingActivity {
                         new TestRootTask(this).execute();
                     } else {
                         new Thread(() -> Util.fixAppDataPermissions(getActivity())).start();
-                        mRequireRestart = true;
+                        mPendingConfig = true;
                     }
                     return true;
                 case KEY_EXPORT_CONFIG:
@@ -512,7 +512,7 @@ public class SettingsActivity extends SyncthingActivity {
                                     return;
                                 }
                                 mApi.undoIgnoredDevicesAndFolders();
-                                mRequireRestart = true;
+                                mPendingConfig = true;
                                 Toast.makeText(getActivity(),
                                         getString(R.string.undo_ignored_devices_folders_done),
                                         Toast.LENGTH_SHORT).show();
@@ -593,7 +593,7 @@ public class SettingsActivity extends SyncthingActivity {
                     return;
                 }
                 if (haveRoot) {
-                    settingsFragment.mRequireRestart = true;
+                    settingsFragment.mPendingConfig = true;
                     settingsFragment.mUseRoot.setChecked(true);
                 } else {
                     Toast.makeText(settingsFragment.getActivity(), R.string.toast_root_denied, Toast.LENGTH_SHORT)
