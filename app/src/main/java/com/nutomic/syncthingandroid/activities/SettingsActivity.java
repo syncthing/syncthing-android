@@ -81,6 +81,7 @@ public class SettingsActivity extends SyncthingActivity {
         private static final String TAG = "SettingsFragment";
         private static final String KEY_EXPORT_CONFIG = "export_config";
         private static final String KEY_IMPORT_CONFIG = "import_config";
+        private static final String KEY_UNDO_IGNORED_DEVICES_FOLDERS = "undo_ignored_devices_folders";
         private static final String KEY_ST_RESET_DATABASE = "st_reset_database";
         private static final String KEY_ST_RESET_DELTAS = "st_reset_deltas";
 
@@ -193,10 +194,11 @@ public class SettingsActivity extends SyncthingActivity {
             Preference exportConfig = findPreference("export_config");
             Preference importConfig = findPreference("import_config");
 
-            Preference debugFacilitiesEnabled   = findPreference(Constants.PREF_DEBUG_FACILITIES_ENABLED);
-            Preference environmentVariables     = findPreference("environment_variables");
-            Preference stResetDatabase          = findPreference("st_reset_database");
-            Preference stResetDeltas            = findPreference("st_reset_deltas");
+            Preference undoIgnoredDevicesFolders    = findPreference(KEY_UNDO_IGNORED_DEVICES_FOLDERS);
+            Preference debugFacilitiesEnabled       = findPreference(Constants.PREF_DEBUG_FACILITIES_ENABLED);
+            Preference environmentVariables         = findPreference("environment_variables");
+            Preference stResetDatabase              = findPreference("st_reset_database");
+            Preference stResetDeltas                = findPreference("st_reset_deltas");
 
             mUseRoot                        = (CheckBoxPreference) findPreference(Constants.PREF_USE_ROOT);
             mUseWakelock                    = (CheckBoxPreference) findPreference(Constants.PREF_USE_WAKE_LOCK);
@@ -216,6 +218,7 @@ public class SettingsActivity extends SyncthingActivity {
             exportConfig.setOnPreferenceClickListener(this);
             importConfig.setOnPreferenceClickListener(this);
 
+            undoIgnoredDevicesFolders.setOnPreferenceClickListener(this);
             debugFacilitiesEnabled.setOnPreferenceChangeListener(this);
             environmentVariables.setOnPreferenceChangeListener(this);
             stResetDatabase.setOnPreferenceClickListener(this);
@@ -495,6 +498,25 @@ public class SettingsActivity extends SyncthingActivity {
                                                     Constants.EXPORT_PATH), Toast.LENGTH_LONG).show();
                                         }
                                     })
+                            .setNegativeButton(android.R.string.no, null)
+                            .show();
+                    return true;
+                case KEY_UNDO_IGNORED_DEVICES_FOLDERS:
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.undo_ignored_devices_folders_question)
+                            .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                                if (mApi == null) {
+                                    Toast.makeText(getActivity(),
+                                            getString(R.string.generic_error) + getString(R.string.syncthing_disabled_title),
+                                            Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                mApi.undoIgnoredDevicesAndFolders();
+                                mRequireRestart = true;
+                                Toast.makeText(getActivity(),
+                                        getString(R.string.undo_ignored_devices_folders_done),
+                                        Toast.LENGTH_SHORT).show();
+                            })
                             .setNegativeButton(android.R.string.no, null)
                             .show();
                     return true;
