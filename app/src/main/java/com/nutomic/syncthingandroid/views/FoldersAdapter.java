@@ -19,6 +19,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.ItemFolderListBinding;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.model.FolderStatus;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
@@ -90,6 +91,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         FolderStatus folderStatus = mLocalFolderStatuses.get(folder.id);
         if (folderStatus == null) {
             binding.items.setVisibility(GONE);
+            binding.override.setVisibility(GONE);
             binding.size.setVisibility(GONE);
             setTextOrHide(binding.invalid, folder.invalid);
             return;
@@ -100,7 +102,8 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 : 100;
         long neededItems = folderStatus.needFiles + folderStatus.needDirectories + folderStatus.needSymlinks + folderStatus.needDeletes;
         boolean outOfSync = folderStatus.state.equals("idle") && neededItems > 0;
-        binding.override.setVisibility(outOfSync ? VISIBLE : GONE);
+        boolean overrideButtonVisible = (folder.type == Constants.FOLDER_TYPE_SEND_ONLY) && outOfSync;
+        binding.override.setVisibility(overrideButtonVisible ? VISIBLE : GONE);
         if (outOfSync) {
             binding.state.setText(mContext.getString(R.string.status_outofsync));
             binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
