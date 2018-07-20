@@ -5,10 +5,11 @@
     android:background="@color/bg_screen1">
 
     <LinearLayout
+        android:background="@color/bg_screen1"
+        android:gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -16,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_title"
-            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="30sp"
@@ -24,12 +24,14 @@
 
         <ImageView
             android:layout_width="@dimen/img_width_height"
-            android:layout_height="@dimen/img_width_height" />
+            android:layout_height="@dimen/img_width_height"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_syncthing_logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/slide_1_title"
+            android:text="@string/introduction"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />

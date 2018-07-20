@@ -12,19 +12,19 @@
     <string name="welcome_title">Welcome to Syncthing for Android</string>
 
     <!-- Welcome wizard -->
-    <!-- to be cleaned out -->
-    <string name="title_activity_welcome"></string>
-
-    <string name="slide_1_title">Title 1</string>
+    <!-- Slide 1 -->
+    <string name="introduction">Introduction</string>
     <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
 To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
 Please report any problems you encounter via Github.</string>
 
-    <string name="slide_2_title">Title 2</string>
-    <string name="slide_2_desc">Desc 2</string>
+    <!-- Slide 2 -->
+    <string name="storage_permission_title">Storage permission</string>
+    <string name="storage_permission_desc">Syncthing requires the storage permission to do file synchronization. We ask you to grant the permission.</string>
 
-    <string name="slide_3_title">Title 3</string>
-    <string name="slide_3_desc">Desc 3</string>
+    <!-- Slide 3 -->
+    <string name="location_permission_title">Location permission</string>
+    <string name="location_permission_desc">Syncthing can be configured to run only on selected wifi networks. Due to android requirements, you need to grant the permission if you\'d like to use this feature. Otherwise, feel free to deny it.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
