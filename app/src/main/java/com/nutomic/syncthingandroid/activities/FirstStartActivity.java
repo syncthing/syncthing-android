@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,8 +40,8 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     private static String TAG = "FirstStartActivity";
     private static final int REQUEST_WRITE_STORAGE = 142;
 
-    private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
+    private ViewPager mViewPager;
+    private ViewPagerAdapter mViewPagerAdapter;
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
@@ -50,6 +53,7 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     /**
      * Handles activity behaviour depending on {@link #isFirstStart()} and {@link #haveStoragePermission()}.
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +71,19 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
 
         // Show first start welcome wizard UI.
         setContentView(R.layout.activity_first_start);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnBack = (Button) findViewById(R.id.btn_back);
         btnNext = (Button) findViewById(R.id.btn_next);
+
+        mViewPager.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Consume the event to prevent swiping through the slides.
+                v.performClick();
+                return true;
+            }
+        });
 
         // layouts of all welcome sliders
         // add few more layouts if you want
@@ -85,9 +98,9 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         // making notification bar transparent
         changeStatusBarColor();
 
-        myViewPagerAdapter = new MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+        mViewPagerAdapter = new ViewPagerAdapter();
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.addOnPageChangeListener(mViewPagerPageChangeListener);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +108,7 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
                 int current = getItem(-1);
                 if (current >= 0) {
                     // Move to previous slider.
-                    viewPager.setCurrentItem(current);
+                    mViewPager.setCurrentItem(current);
                     if (current == 0) {
                         btnBack.setVisibility(View.GONE);
                     }
@@ -126,11 +139,11 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     }
 
     private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
+        return mViewPager.getCurrentItem() + i;
     }
 
     //  viewpager change listener
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+    ViewPager.OnPageChangeListener mViewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
@@ -165,10 +178,10 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     /**
      * View pager adapter
      */
-    public class MyViewPagerAdapter extends PagerAdapter {
+    public class ViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 
-        public MyViewPagerAdapter() {
+        public ViewPagerAdapter() {
         }
 
         @Override
@@ -268,7 +281,7 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         int current = getItem(+1);
         if (current < layouts.length) {
             // Move to next slide
-            viewPager.setCurrentItem(current);
+            mViewPager.setCurrentItem(current);
             btnBack.setVisibility(View.VISIBLE);
         } else {
             startApp();
