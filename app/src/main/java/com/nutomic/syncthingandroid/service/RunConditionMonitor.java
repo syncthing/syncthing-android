@@ -227,48 +227,6 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         return powerManager.isPowerSaveMode();
     }
 
-    private boolean isFlightMode() {
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        return ni == null;
-    }
-
-    private boolean isMeteredNetworkConnection() {
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // In flight mode.
-            return false;
-        }
-        if (!ni.isConnected()) {
-            // No network connection.
-            return false;
-        }
-        return cm.isActiveNetworkMetered();
-    }
-
-    private boolean isMobileDataConnection() {
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // In flight mode.
-            return false;
-        }
-        if (!ni.isConnected()) {
-            // No network connection.
-            return false;
-        }
-        switch (ni.getType()) {
-            case ConnectivityManager.TYPE_BLUETOOTH:
-            case ConnectivityManager.TYPE_MOBILE:
-            case ConnectivityManager.TYPE_MOBILE_DUN:
-            case ConnectivityManager.TYPE_MOBILE_HIPRI:
-                return true;
-            default:
-                return false;
-        }
-    }
-
     private boolean isWifiOrEthernetConnection() {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
