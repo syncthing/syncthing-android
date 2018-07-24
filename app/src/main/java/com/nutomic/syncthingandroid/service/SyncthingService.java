@@ -184,9 +184,7 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Handles intents, either {@link #ACTION_RESTART}, or intents having
-     * {@link DeviceStateHolder#EXTRA_IS_ALLOWED_NETWORK_CONNECTION} or
-     * {@link DeviceStateHolder#EXTRA_IS_CHARGING} (which are handled by {@link DeviceStateHolder}.
+     * Handles intent actions, e.g. {@link #ACTION_RESTART}
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
