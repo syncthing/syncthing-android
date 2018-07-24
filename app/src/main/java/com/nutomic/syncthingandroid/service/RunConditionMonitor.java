@@ -34,12 +34,12 @@ import javax.inject.Inject;
  * This information is actively read on instance creation, and then updated from intents
  * that are passed with {@link #ACTION_DEVICE_STATE_CHANGED}.
  */
-public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class RunConditionMonitor implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private static final String TAG = "DeviceStateHolder";
+    private static final String TAG = "RunConditionMonitor";
 
-    public interface OnDeviceStateChangedListener {
-        void onDeviceStateChanged(boolean shouldRun);
+    public interface OnRunConditionChangedListener {
+        void onRunConditionChanged(boolean shouldRun);
     }
 
     private final Context mContext;
@@ -49,19 +49,19 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
     /**
      * Sending callback notifications through {@link OnDeviceStateChangedListener} is enabled if not null.
      */
-    private @Nullable OnDeviceStateChangedListener mOnDeviceStateChangedListener = null;
+    private @Nullable OnRunConditionChangedListener mOnRunConditionChangedListener = null;
 
     /**
      * Stores the result of the last call to {@link decideShouldRun}.
      */
     private boolean lastDeterminedShouldRun = false;
 
-    public DeviceStateHolder(Context context, OnDeviceStateChangedListener listener) {
+    public RunConditionMonitor(Context context, OnRunConditionChangedListener listener) {
         Log.v(TAG, "Created new instance");
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mPreferences.registerOnSharedPreferenceChangeListener(this);
-        mOnDeviceStateChangedListener = listener;
+        mOnRunConditionChangedListener = listener;
 
         /**
          * Register broadcast receivers.
@@ -137,8 +137,8 @@ public class DeviceStateHolder implements SharedPreferences.OnSharedPreferenceCh
         // compared to the last determined result.
         boolean newShouldRun = decideShouldRun();
         if (newShouldRun != lastDeterminedShouldRun) {
-            if (mOnDeviceStateChangedListener != null) {
-                mOnDeviceStateChangedListener.onDeviceStateChanged(newShouldRun);
+            if (mOnRunConditionChangedListener != null) {
+                mOnRunConditionChangedListener.onRunConditionChanged(newShouldRun);
             }
             lastDeterminedShouldRun = newShouldRun;
         }
