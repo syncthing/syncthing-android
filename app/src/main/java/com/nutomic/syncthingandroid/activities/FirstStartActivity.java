@@ -32,13 +32,16 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.service.Constants;
 
 import javax.inject.Inject;
 
-public class FirstStartActivity extends Activity implements Button.OnClickListener {
+public class FirstStartActivity extends Activity {
 
     private static String TAG = "FirstStartActivity";
+    private static final int REQUEST_COARSE_LOCATION = 141;
     private static final int REQUEST_WRITE_STORAGE = 142;
+    private static final int SLIDE_POS_LOCATION_PERMISSION = 1;
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -59,14 +62,20 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         super.onCreate(savedInstanceState);
         ((SyncthingApp) getApplication()).component().inject(this);
 
-        if (!isFirstStart() && false) {
+        /**
+         * Recheck storage permission. If it has been revoked after the user
+         * completed the welcome slides, displays the slides again.
+         */
+        if (!mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
+                haveStoragePermission()) {
             startApp();
             return;
         }
 
         // Make notification bar transparent (API level 21+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
         // Show first start welcome wizard UI.
@@ -85,17 +94,16 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
             }
         });
 
-        // layouts of all welcome sliders
-        // add few more layouts if you want
+        // Layouts of all welcome slides
         layouts = new int[]{
                 R.layout.activity_firststart_slide1,
                 R.layout.activity_firststart_slide2,
                 R.layout.activity_firststart_slide3};
 
-        // adding bottom dots
+        // Add bottom dots
         addBottomDots(0);
 
-        // making notification bar transparent
+        // Make notification bar transparent
         changeStatusBarColor();
 
         mViewPagerAdapter = new ViewPagerAdapter();
@@ -105,18 +113,52 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int current = getItem(-1);
-                if (current >= 0) {
-                    // Move to previous slider.
-                    mViewPager.setCurrentItem(current);
-                    if (current == 0) {
-                        btnBack.setVisibility(View.GONE);
-                    }
-                }
+                onBtnBackClick();
             }
         });
 
-        btnNext.setOnClickListener(this);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBtnNextClick();
+            }
+        });
+    }
+
+    public void onBtnBackClick() {
+        int current = getItem(-1);
+        if (current >= 0) {
+            // Move to previous slider.
+            mViewPager.setCurrentItem(current);
+            if (current == 0) {
+                btnBack.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    public void onBtnNextClick() {
+        // Check if we are allowed to advance to the next slide.
+        if (mViewPager.getCurrentItem() == SLIDE_POS_LOCATION_PERMISSION) {
+            // As the storage permission is a prerequisite to run syncthing, refuse to continue without it.
+            if (!haveStoragePermission()) {
+                Toast.makeText(this, R.string.toast_write_storage_permission_required,
+                        Toast.LENGTH_LONG).show();
+                this.finish();
+                return;
+            }
+        }
+
+        int current = getItem(+1);
+        if (current < layouts.length) {
+            // Move to next slide.
+            mViewPager.setCurrentItem(current);
+            btnBack.setVisibility(View.VISIBLE);
+        } else {
+            // Start the app after "btnNext" was hit on the last slide.
+            Log.v(TAG, "User completed first start UI.");
+            mPreferences.edit().putBoolean(Constants.PREF_FIRST_START, false).apply();
+            startApp();
+        }
     }
 
     private void addBottomDots(int currentPage) {
@@ -189,8 +231,30 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(layouts[position], container, false);
-            container.addView(view);
 
+            /* Slide: storage permission */
+            Button btnGrantStoragePerm = (Button) view.findViewById(R.id.btnGrantStoragePerm);
+            if (btnGrantStoragePerm != null) {
+                btnGrantStoragePerm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestStoragePermission();
+                    }
+                });
+            }
+
+            /* Slide: location permission */
+            Button btnGrantLocationPerm = (Button) view.findViewById(R.id.btnGrantLocationPerm);
+            if (btnGrantLocationPerm != null) {
+                btnGrantLocationPerm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestLocationPermission();
+                    }
+                });
+            }
+
+            container.addView(view);
             return view;
         }
 
@@ -212,55 +276,34 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private boolean isFirstStart() {
-        return mPreferences.getBoolean("first_start", true);
-    }
-
+    /**
+     * Preconditions:
+     * Storage permission has been granted.
+     */
     private void startApp() {
-        if (!haveStoragePermission()) {
-            requestStoragePermission();
-            /**
-             * startApp will be called in {@link #onRequestPermissionsResult()}
-             * after permission was granted.
-             */
-            return;
-        }
-
-        boolean isFirstStart = isFirstStart();
-        if (isFirstStart) {
-            Log.v(TAG, "User completed first start UI.");
-            mPreferences.edit().putBoolean("first_start", false).apply();
-        }
-
-        // In case start_into_web_gui option is enabled, start both activities so that back
-        // navigation works as expected.
+        Boolean doInitialKeyGeneration = !Constants.getConfigFile(this).exists();
         Intent mainIntent = new Intent(this, MainActivity.class);
-        mainIntent.putExtra(MainActivity.EXTRA_KEY_GENERATION_IN_PROGRESS, isFirstStart);
-        Intent webIntent = new Intent(this, WebGuiActivity.class);
-        if (mPreferences.getBoolean("start_into_web_gui", false)) {
-            startActivities(new Intent[] {mainIntent, webIntent});
+        mainIntent.putExtra(MainActivity.EXTRA_KEY_GENERATION_IN_PROGRESS, doInitialKeyGeneration);
+
+        /**
+         * In case start_into_web_gui option is enabled, start both activities
+         * so that back navigation works as expected.
+         */
+        if (mPreferences.getBoolean(Constants.PREF_START_INTO_WEB_GUI, false)) {
+            startActivities(new Intent[] {mainIntent, new Intent(this, WebGuiActivity.class)});
         } else {
             startActivity(mainIntent);
         }
         finish();
+    }
+
+    /**
+     * Permission check and request functions
+     */
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                REQUEST_COARSE_LOCATION);
     }
 
     private boolean haveStoragePermission() {
@@ -276,30 +319,25 @@ public class FirstStartActivity extends Activity implements Button.OnClickListen
     }
 
     @Override
-    public void onClick(View v) {
-        // Start the app when "next" was hit on the last slide
-        int current = getItem(+1);
-        if (current < layouts.length) {
-            // Move to next slide
-            mViewPager.setCurrentItem(current);
-            btnBack.setVisibility(View.VISIBLE);
-        } else {
-            startApp();
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
+            case REQUEST_COARSE_LOCATION:
+                if (grantResults.length == 0 ||
+                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "User denied ACCESS_COARSE_LOCATION permission.");
+                } else {
+                    Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "User granted ACCESS_COARSE_LOCATION permission.");
+                }
+                break;
             case REQUEST_WRITE_STORAGE:
                 if (grantResults.length == 0 ||
                         grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, R.string.toast_write_storage_permission_required,
-                            Toast.LENGTH_LONG).show();
-                    this.finish();
+                    Log.i(TAG, "User denied WRITE_EXTERNAL_STORAGE permission.");
                 } else {
-                    startApp();
+                    Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "User granted WRITE_EXTERNAL_STORAGE permission.");
                 }
                 break;
             default:

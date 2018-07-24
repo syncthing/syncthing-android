@@ -28,6 +28,21 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_location" />
 
+        <Button
+            android:id="@+id/btnGrantLocationPerm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingEnd="40dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingStart="40dp"
+            android:text="@string/grant_permission"
+            android:contentDescription="@string/grant_permission"
+            android:drawableLeft="@android:drawable/ic_menu_mylocation"
+            android:drawableStart="@android:drawable/ic_menu_mylocation"
+            android:textSize="12sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

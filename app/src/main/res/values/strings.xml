@@ -32,6 +32,8 @@ Please report any problems you encounter via Github.</string>
     <string name="finish">Finish</string>
     <string name="generic_example">Example</string>
     <string name="generic_error">Error</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="permission_granted">Permission granted</string>
 
     <string name="accept">Accept</string>
 
