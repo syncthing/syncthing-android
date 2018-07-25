@@ -38,6 +38,10 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
 
     private static final String TAG = "RunConditionMonitor";
 
+    private static final String POWER_SOURCE_AC_BATTERY = "ac_and_battery_power";
+    private static final String POWER_SOURCE_AC = "ac_power";
+    private static final String POWER_SOURCE_BATTERY = "battery_power";
+
     public interface OnRunConditionChangedListener {
         void onRunConditionChanged(boolean shouldRun);
     }
@@ -95,7 +99,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         List<String> watched = Lists.newArrayList(
-            Constants.PREF_SYNC_ONLY_CHARGING,
+            Constants.PREF_POWER_SOURCE,
             Constants.PREF_SYNC_ONLY_WIFI, Constants.PREF_RESPECT_BATTERY_SAVING,
             Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
         if (watched.contains(key)) {
@@ -152,7 +156,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefRunOnlyOnWifi= mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false);
-        boolean prefRunOnlyWhenCharging = mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_CHARGING, false);
+        String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
         Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
         boolean prefWifiWhitelistEnabled = !whitelistedWifiSsids.isEmpty();
 
@@ -173,10 +177,23 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
             return true;
         }
 
-        // Run only when charging.
-        if (prefRunOnlyWhenCharging && !isCharging()) {
-            Log.v(TAG, "decideShouldRun: prefRunOnlyWhenCharging && !isCharging");
-            return false;
+        // PREF_POWER_SOURCE
+        switch (prefPowerSource) {
+            case POWER_SOURCE_AC:
+                if (!isOnAcPower()) {
+                    Log.v(TAG, "decideShouldRun: POWER_SOURCE_AC && !isOnAcPower");
+                    return false;
+                }
+                break;
+            case POWER_SOURCE_BATTERY:
+                if (isOnAcPower()) {
+                    Log.v(TAG, "decideShouldRun: POWER_SOURCE_BATTERY && isOnAcPower");
+                    return false;
+                }
+                break;
+            case POWER_SOURCE_AC_BATTERY:
+            default:
+                break;
         }
 
         // Run only on wifi.
@@ -206,7 +223,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     /**
      * Functions for run condition information retrieval.
      */
-    private boolean isCharging() {
+    private boolean isOnAcPower() {
         Intent batteryIntent = mContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         return status == BatteryManager.BATTERY_STATUS_CHARGING ||

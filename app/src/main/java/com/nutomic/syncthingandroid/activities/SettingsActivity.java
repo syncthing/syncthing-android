@@ -89,7 +89,7 @@ public class SettingsActivity extends SyncthingActivity {
         @Inject SharedPreferences mPreferences;
 
         private CheckBoxPreference mAlwaysRunInBackground;
-        private CheckBoxPreference mSyncOnlyCharging;
+        private ListPreference     mPowerSource;
         private CheckBoxPreference mSyncOnlyWifi;
         private WifiSsidPreference mSyncOnlyOnSSIDs;
 
@@ -147,15 +147,13 @@ public class SettingsActivity extends SyncthingActivity {
             PreferenceScreen screen = getPreferenceScreen();
             mAlwaysRunInBackground =
                     (CheckBoxPreference) findPreference(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND);
-            mSyncOnlyCharging =
-                    (CheckBoxPreference) findPreference(Constants.PREF_SYNC_ONLY_CHARGING);
+            mPowerSource =
+                    (ListPreference) findPreference(Constants.PREF_POWER_SOURCE);
             mSyncOnlyWifi =
                     (CheckBoxPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI);
             mSyncOnlyOnSSIDs =
                     (WifiSsidPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
 
-            mSyncOnlyCharging.setEnabled(mAlwaysRunInBackground.isChecked());
-            mSyncOnlyWifi.setEnabled(mAlwaysRunInBackground.isChecked());
             mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
 
             ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
@@ -236,6 +234,7 @@ public class SettingsActivity extends SyncthingActivity {
 
             /* Initialize summaries */
             mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            screen.findPreference(Constants.PREF_POWER_SOURCE).setSummary(mPowerSource.getEntry());
             handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
             handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
 
@@ -395,22 +394,9 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
-                case Constants.PREF_ALWAYS_RUN_IN_BACKGROUND:
-                    boolean value = (Boolean) o;
-                    mAlwaysRunInBackground.setSummary((value)
-                            ? R.string.always_run_in_background_enabled
-                            : R.string.always_run_in_background_disabled);
-                    mSyncOnlyCharging.setEnabled(value);
-                    mSyncOnlyWifi.setEnabled(value);
-                    mSyncOnlyOnSSIDs.setEnabled(false);
-                    // Uncheck items when disabled, so it is clear they have no effect.
-                    if (!value) {
-                        mSyncOnlyCharging.setChecked(false);
-                        mSyncOnlyWifi.setChecked(false);
-                    }
-                    break;
-                case Constants.PREF_SYNC_ONLY_WIFI:
-                    mSyncOnlyOnSSIDs.setEnabled((Boolean) o);
+                case Constants.PREF_POWER_SOURCE:
+                    mPowerSource.setValue(o.toString());
+                    preference.setSummary(mPowerSource.getEntry());
                     break;
                 case Constants.PREF_DEBUG_FACILITIES_ENABLED:
                     mPendingConfig = true;

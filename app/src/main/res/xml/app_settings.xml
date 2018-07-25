@@ -5,15 +5,32 @@
         android:title="@string/category_run_conditions"
         android:key="category_run_conditions">
 
-        <CheckBoxPreference
-            android:key="always_run_in_background"
-            android:title="@string/always_run_in_background"
-            android:defaultValue="false" />
+        <Preference
+            android:key="static_service_settings"
+            android:persistent="false"
+            android:selectable="false"
+            android:title="@string/service_settings_title"
+            android:summary="@string/service_settings_summary"/>
 
         <CheckBoxPreference
-            android:key="sync_only_charging"
-            android:title="@string/sync_only_charging"
+            android:key="always_run_in_background"
+            android:title="@string/run_as_background_service"
             android:defaultValue="false" />
+
+        <Preference
+            android:key="static_run_conditions"
+            android:persistent="false"
+            android:selectable="false"
+            android:title="@string/run_conditions_title"
+            android:summary="@string/run_conditions_summary"/>
+
+        <ListPreference
+            android:key="power_source"
+            android:title="@string/power_source_title"
+            android:entryValues="@array/power_source_values"
+            android:entries="@array/power_source_entries"
+            android:summary="@null"
+            android:defaultValue="ac_and_battery_power" />
 
         <CheckBoxPreference
             android:key="sync_only_wifi"

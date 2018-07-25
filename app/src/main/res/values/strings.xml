@@ -285,15 +285,27 @@ Please report any problems you encounter via Github.</string>
     <string name="category_debug">Debug</string>
     <string name="category_experimental">Experimental</string>
 
-    <string name="always_run_in_background">Always run in background</string>
+    <!-- Preference screen - Run conditions -->
+    <string name="always_run_in_background">to_be_deleted</string>
+    <string name="always_run_in_background_enabled">to_be_deleted</string>
+    <string name="always_run_in_background_disabled">to_be_deleted</string>
+    <string name="sync_only_charging">to_be_deleted</string>
 
-    <!-- Preference summary in case it is enabled -->
-    <string name="always_run_in_background_enabled">Syncthing always runs in the background, according to preferences below.</string>
+    <string name="service_settings_title">Service setting</string>
+    <string name="service_settings_summary">Running Syncthing as a service adds a persistent notification to prevent it from being ended by android. Checking this option starts syncthing automatically when the phone boots.</string>
 
-    <!-- Preference summary in case it is disabled -->
-    <string name="always_run_in_background_disabled">Syncthing only runs when explicitly started, and can be stopped by menu button.</string>
+    <string name="run_as_background_service">Run as background service</string>
 
-    <string name="sync_only_charging">Run only when charging</string>
+    <string name="run_conditions_title">Run Conditions</string>
+    <string name="run_conditions_summary">Use the following options to decide when the syncthing UI and syncing will be available.</string>
+
+    <string name="power_source_title">Run when device powered by</string>
+
+    <string-array name="power_source_entries">
+        <item>AC and battery power</item>
+        <item>AC power</item>
+        <item>Battery power</item>
+    </string-array>
 
     <string name="sync_only_wifi">Run only on wifi</string>
 
