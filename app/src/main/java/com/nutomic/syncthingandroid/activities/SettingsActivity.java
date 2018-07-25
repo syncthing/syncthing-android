@@ -104,8 +104,8 @@ public class SettingsActivity extends SyncthingActivity {
         private CheckBoxPreference mRunOnMobileData;
         private CheckBoxPreference mRunOnWifi;
         private CheckBoxPreference mRunOnMeteredWifi;
-        private CheckBoxPreference mRunInFlightMode;
         private WifiSsidPreference mWifiSsidWhitelist;
+        private CheckBoxPreference mRunInFlightMode;
 
         private Preference         mCategorySyncthingOptions;
         private EditTextPreference mDeviceName;

@@ -50,6 +50,12 @@
             android:defaultValue="true" />
 
         <CheckBoxPreference
+            android:key="respect_master_sync"
+            android:title="@string/respect_master_sync_title"
+            android:summary="@string/respect_master_sync_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
             android:key="run_in_flight_mode"
             android:title="@string/run_in_flight_mode_title"
             android:summary="@string/run_in_flight_mode_summary"

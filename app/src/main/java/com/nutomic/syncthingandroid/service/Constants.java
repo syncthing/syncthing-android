@@ -10,14 +10,18 @@ public class Constants {
 
     public static final String FILENAME_SYNCTHING_BINARY        = "libsyncthing.so";
 
+    // Preferences - Run conditions
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND    = "always_run_in_background";
     public static final String PREF_RUN_ON_MOBILE_DATA          = "run_on_mobile_data";
     public static final String PREF_RUN_ON_WIFI                 = "run_on_wifi";
     public static final String PREF_RUN_ON_METERED_WIFI         = "run_on_metered_wifi";
     public static final String PREF_WIFI_SSID_WHITELIST         = "wifi_ssid_whitelist";
     public static final String PREF_POWER_SOURCE                = "power_source";
-    public static final String PREF_RUN_IN_FLIGHT_MODE          = "run_in_flight_mode";
     public static final String PREF_RESPECT_BATTERY_SAVING      = "respect_battery_saving";
+    public static final String PREF_RESPECT_MASTER_SYNC         = "respect_master_sync";
+    public static final String PREF_RUN_IN_FLIGHT_MODE          = "run_in_flight_mode";
+
+    // Preferences - Behaviour
     public static final String PREF_USE_ROOT                    = "use_root";
     public static final String PREF_NOTIFICATION_TYPE           = "notification_type";
     public static final String PREF_ENVIRONMENT_VARIABLES       = "environment_variables";

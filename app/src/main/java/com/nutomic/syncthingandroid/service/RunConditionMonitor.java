@@ -2,10 +2,12 @@ package com.nutomic.syncthingandroid.service;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.SyncStatusObserver;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -41,6 +43,13 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     private static final String POWER_SOURCE_AC_BATTERY = "ac_and_battery_power";
     private static final String POWER_SOURCE_AC = "ac_power";
     private static final String POWER_SOURCE_BATTERY = "battery_power";
+
+    private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
+        @Override
+        public void onStatusChanged(int i) {
+            updateShouldRunDecision();
+        }
+    };
 
     public interface OnRunConditionChangedListener {
         void onRunConditionChanged(boolean shouldRun);
@@ -86,6 +95,10 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
                     new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         }
 
+        // SyncStatusObserver to monitor android's "AutoSync" quick toggle.
+        ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS,
+                mSyncStatusObserver);
+
         // Initially determine if syncthing should run under current circumstances.
         updateShouldRunDecision();
     }
@@ -93,6 +106,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     public void shutdown() {
         Log.v(TAG, "Shutting down");
         mPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        ContentResolver.removeStatusChangeListener(mSyncStatusObserver);
         mReceiverManager.unregisterAllReceivers(mContext);
     }
 
@@ -105,7 +119,8 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
             Constants.PREF_WIFI_SSID_WHITELIST,
             Constants.PREF_POWER_SOURCE,
             Constants.PREF_RUN_IN_FLIGHT_MODE,
-            Constants.PREF_RESPECT_BATTERY_SAVING
+            Constants.PREF_RESPECT_BATTERY_SAVING,
+            Constants.PREF_RESPECT_MASTER_SYNC
         );
         if (watched.contains(key)) {
             // Force a re-evaluation of which run conditions apply according to the changed prefs.
@@ -166,6 +181,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         boolean prefRunInFlightMode = mPreferences.getBoolean(Constants.PREF_RUN_IN_FLIGHT_MODE, false);
         String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
+        boolean prefRespectMasterSync = mPreferences.getBoolean(Constants.PREF_RESPECT_MASTER_SYNC, false);
         boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
 
         // PREF_POWER_SOURCE
@@ -193,6 +209,12 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
                 Log.v(TAG, "decideShouldRun: prefRespectPowerSaving && isPowerSaving");
                 return false;
             }
+        }
+
+        // Android global AutoSync setting.
+        if (prefRespectMasterSync && !ContentResolver.getMasterSyncAutomatically()) {
+            Log.v(TAG, "decideShouldRun: prefRespectMasterSync && !getMasterSyncAutomatically");
+            return false;
         }
 
         // Run on mobile data.

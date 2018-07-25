@@ -327,6 +327,9 @@ Please report any problems you encounter via Github.</string>
     <string name="respect_battery_saving_title">Respect Android battery saving setting</string>
     <string name="respect_battery_saving_summary">Disable Syncthing if battery saving is active</string>
 
+    <string name="respect_master_sync_title">Respect Android \'Auto-sync data\' setting</string>
+    <string name="respect_master_sync_summary">Disable Syncthing when the quick settings tile \'Auto-sync data\' is toggled off.</string>
+
     <string name="run_in_flight_mode_title">Run when device is in flight mode</string>
     <string name="run_in_flight_mode_summary">Enable if your phone has problems detecting manually connected wifi during flight mode.</string>
 
