@@ -11,8 +11,11 @@ public class Constants {
     public static final String FILENAME_SYNCTHING_BINARY        = "libsyncthing.so";
 
     public static final String PREF_ALWAYS_RUN_IN_BACKGROUND    = "always_run_in_background";
-    public static final String PREF_SYNC_ONLY_WIFI              = "sync_only_wifi";
-    public static final String PREF_SYNC_ONLY_WIFI_SSIDS        = "sync_only_wifi_ssids_set";
+    public static final String PREF_RUN_ON_MOBILE_DATA          = "run_on_mobile_data";
+    public static final String PREF_RUN_ON_WIFI                 = "run_on_wifi";
+    // to_be_deleted public static final String PREF_SYNC_ONLY_WIFI              = "sync_only_wifi";
+    public static final String PREF_WIFI_SSID_WHITELIST         = "wifi_ssid_whitelist";
+    // to_be_deleted public static final String PREF_SYNC_ONLY_WIFI_SSIDS        = "sync_only_wifi_ssids_set";
     // to_be_deleted public static final String PREF_SYNC_ONLY_CHARGING          = "sync_only_charging";
     public static final String PREF_POWER_SOURCE                = "power_source";
     public static final String PREF_RESPECT_BATTERY_SAVING      = "respect_battery_saving";

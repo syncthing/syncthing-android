@@ -100,8 +100,10 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         List<String> watched = Lists.newArrayList(
             Constants.PREF_POWER_SOURCE,
-            Constants.PREF_SYNC_ONLY_WIFI, Constants.PREF_RESPECT_BATTERY_SAVING,
-            Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
+            Constants.PREF_RUN_ON_WIFI,
+            Constants.PREF_WIFI_SSID_WHITELIST,
+            Constants.PREF_RESPECT_BATTERY_SAVING
+        );
         if (watched.contains(key)) {
             // Force a re-evaluation of which run conditions apply according to the changed prefs.
             updateShouldRunDecision();
@@ -155,17 +157,11 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         // Get run conditions preferences.
         boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
-        boolean prefRunOnlyOnWifi= mPreferences.getBoolean(Constants.PREF_SYNC_ONLY_WIFI, false);
+        boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
+        boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
         String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
-        Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_SYNC_ONLY_WIFI_SSIDS, new HashSet<>());
+        Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>());
         boolean prefWifiWhitelistEnabled = !whitelistedWifiSsids.isEmpty();
-
-        // Power saving
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (prefRespectPowerSaving && isPowerSaving()) {
-                return false;
-            }
-        }
 
         // PREF_POWER_SOURCE
         switch (prefPowerSource) {
@@ -186,28 +182,37 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
                 break;
         }
 
-        // Run only on wifi.
-        if (prefRunOnlyOnWifi && !isWifiOrEthernetConnection()) {
-            // Not on wifi.
-            Log.v(TAG, "decideShouldRun: prefRunOnlyOnWifi && !isWifiOrEthernetConnection");
-            return false;
+        // Power saving
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (prefRespectPowerSaving && isPowerSaving()) {
+                Log.v(TAG, "decideShouldRun: prefRespectPowerSaving && isPowerSaving");
+                return false;
+            }
         }
 
-        // Run only on whitelisted wifi ssids.
-        if (prefRunOnlyOnWifi && prefWifiWhitelistEnabled) {
-            // Wifi connection detected. Wifi ssid whitelist enabled.
-            Log.v(TAG, "decideShouldRun: prefRunOnlyOnWifi && prefWifiWhitelistEnabled");
-            return isWifiConnectionWhitelisted(whitelistedWifiSsids);
+        // Run on mobile data or tethered connection that is marked as metered.
+        if (prefRunOnMobileData && (isMobileDataConnection() || isMeteredNetworkConnection())) {
+            Log.v(TAG, "decideShouldRun: prefRunOnMobileData && (isMobileDataConnection || isMeteredNetworkConnection");
+            return true;
+        }
+
+        // Run on wifi.
+        if (prefRunOnWifi && isWifiOrEthernetConnection()) {
+            if (!prefWifiWhitelistEnabled) {
+                Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && !prefWifiWhitelistEnabled");
+                return true;
+            }
+            if (isWifiConnectionWhitelisted(whitelistedWifiSsids)) {
+                Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefWifiWhitelistEnabled && isWifiConnectionWhitelisted");
+                return true;
+            }
         }
 
         /**
-         * Respect power saving, device is not in power-save mode.
-         * Always run in background is the only pref that is enabled.
-         * Run only when charging, charging.
-         * Run only on wifi, wifi connection detected, wifi ssid whitelist disabled.
+         * If none of the above run conditions matched, don't run.
          */
-        Log.v(TAG, "decideShouldRun: return true");
-        return true;
+        Log.v(TAG, "decideShouldRun: return false");
+        return false;
     }
 
     /**

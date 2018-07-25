@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ import com.nutomic.syncthingandroid.views.WifiSsidPreference;
 
 import java.lang.ref.WeakReference;
 import java.security.InvalidParameterException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -90,8 +93,9 @@ public class SettingsActivity extends SyncthingActivity {
 
         private CheckBoxPreference mAlwaysRunInBackground;
         private ListPreference     mPowerSource;
-        private CheckBoxPreference mSyncOnlyWifi;
-        private WifiSsidPreference mSyncOnlyOnSSIDs;
+        private CheckBoxPreference mRunOnMobileData;
+        private CheckBoxPreference mRunOnWifi;
+        private WifiSsidPreference mWifiSsidWhitelist;
 
         private Preference         mCategorySyncthingOptions;
         private EditTextPreference mDeviceName;
@@ -149,12 +153,12 @@ public class SettingsActivity extends SyncthingActivity {
                     (CheckBoxPreference) findPreference(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND);
             mPowerSource =
                     (ListPreference) findPreference(Constants.PREF_POWER_SOURCE);
-            mSyncOnlyWifi =
-                    (CheckBoxPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI);
-            mSyncOnlyOnSSIDs =
-                    (WifiSsidPreference) findPreference(Constants.PREF_SYNC_ONLY_WIFI_SSIDS);
-
-            mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+            mRunOnMobileData =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
+            mRunOnWifi =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
+            mWifiSsidWhitelist =
+                    (WifiSsidPreference) findPreference(Constants.PREF_WIFI_SSID_WHITELIST);
 
             ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
             PreferenceScreen categoryBehaviour = (PreferenceScreen) findPreference("category_behaviour");
@@ -207,7 +211,7 @@ public class SettingsActivity extends SyncthingActivity {
             mSyncthingVersion       = findPreference("syncthing_version");
             Preference appVersion   = screen.findPreference("app_version");
 
-            mSyncOnlyOnSSIDs.setEnabled(mSyncOnlyWifi.isChecked());
+            mWifiSsidWhitelist.setEnabled(mRunOnWifi.isChecked());
             setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
 
             mCategorySyncthingOptions = findPreference("category_syncthing_options");
@@ -235,6 +239,11 @@ public class SettingsActivity extends SyncthingActivity {
             /* Initialize summaries */
             mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             screen.findPreference(Constants.PREF_POWER_SOURCE).setSummary(mPowerSource.getEntry());
+            String wifiSsidSummary = TextUtils.join(", ", mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>()));
+            screen.findPreference(Constants.PREF_WIFI_SSID_WHITELIST).setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
+                getString(R.string.run_on_all_wifi_networks) :
+                getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+            );
             handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
             handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
 
@@ -397,6 +406,16 @@ public class SettingsActivity extends SyncthingActivity {
                 case Constants.PREF_POWER_SOURCE:
                     mPowerSource.setValue(o.toString());
                     preference.setSummary(mPowerSource.getEntry());
+                    break;
+                case Constants.PREF_RUN_ON_WIFI:
+                    mWifiSsidWhitelist.setEnabled((Boolean) o);
+                    break;
+                case Constants.PREF_WIFI_SSID_WHITELIST:
+                    String wifiSsidSummary = TextUtils.join(", ", (Set<String>) o);
+                    preference.setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
+                        getString(R.string.run_on_all_wifi_networks) :
+                        getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                    );
                     break;
                 case Constants.PREF_DEBUG_FACILITIES_ENABLED:
                     mPendingConfig = true;
