@@ -43,6 +43,12 @@
             android:summary="@string/respect_battery_saving_summary"
             android:defaultValue="true" />
 
+        <CheckBoxPreference
+            android:key="run_in_flight_mode"
+            android:title="@string/run_in_flight_mode_title"
+            android:summary="@string/run_in_flight_mode_summary"
+            android:defaultValue="false" />
+
         <Preference
             android:key="static_service_settings"
             android:persistent="false"

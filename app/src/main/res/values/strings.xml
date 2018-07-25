@@ -324,6 +324,9 @@ Please report any problems you encounter via Github.</string>
     <string name="respect_battery_saving_title">Respect Android battery saving setting</string>
     <string name="respect_battery_saving_summary">Disable Syncthing if battery saving is active</string>
 
+    <string name="run_in_flight_mode_title">Run when device is in flight mode</string>
+    <string name="run_in_flight_mode_summary">Enable if your phone has problems detecting manually connected wifi during flight mode.</string>
+
     <string name="service_settings_title">Service setting</string>
     <string name="service_settings_summary">Running Syncthing as a service adds a persistent notification to prevent it from being ended by android. Checking this option starts syncthing automatically when the phone boots.</string>
 

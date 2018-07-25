@@ -18,6 +18,7 @@ public class Constants {
     // to_be_deleted public static final String PREF_SYNC_ONLY_WIFI_SSIDS        = "sync_only_wifi_ssids_set";
     // to_be_deleted public static final String PREF_SYNC_ONLY_CHARGING          = "sync_only_charging";
     public static final String PREF_POWER_SOURCE                = "power_source";
+    public static final String PREF_RUN_IN_FLIGHT_MODE          = "run_in_flight_mode";
     public static final String PREF_RESPECT_BATTERY_SAVING      = "respect_battery_saving";
     public static final String PREF_USE_ROOT                    = "use_root";
     public static final String PREF_NOTIFICATION_TYPE           = "notification_type";

@@ -103,6 +103,7 @@ public class SettingsActivity extends SyncthingActivity {
         private ListPreference     mPowerSource;
         private CheckBoxPreference mRunOnMobileData;
         private CheckBoxPreference mRunOnWifi;
+        private CheckBoxPreference mRunInFlightMode;
         private WifiSsidPreference mWifiSsidWhitelist;
 
         private Preference         mCategorySyncthingOptions;
@@ -167,6 +168,8 @@ public class SettingsActivity extends SyncthingActivity {
                     (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
             mWifiSsidWhitelist =
                     (WifiSsidPreference) findPreference(Constants.PREF_WIFI_SSID_WHITELIST);
+            mRunInFlightMode =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_IN_FLIGHT_MODE);
 
             ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
             PreferenceScreen categoryBehaviour = (PreferenceScreen) findPreference("category_behaviour");

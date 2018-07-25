@@ -103,6 +103,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
             Constants.PREF_RUN_ON_WIFI,
             Constants.PREF_WIFI_SSID_WHITELIST,
             Constants.PREF_POWER_SOURCE,
+            Constants.PREF_RUN_IN_FLIGHT_MODE,
             Constants.PREF_RESPECT_BATTERY_SAVING
         );
         if (watched.contains(key)) {
@@ -156,13 +157,14 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
      */
     private boolean decideShouldRun() {
         // Get run conditions preferences.
-        boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
-        boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
         String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
         Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>());
         boolean prefWifiWhitelistEnabled = !whitelistedWifiSsids.isEmpty();
+        boolean prefRunInFlightMode = mPreferences.getBoolean(Constants.PREF_RUN_IN_FLIGHT_MODE, false);
+        boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
+        boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
 
         // PREF_POWER_SOURCE
         switch (prefPowerSource) {
@@ -207,6 +209,12 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
                 Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefWifiWhitelistEnabled && isWifiConnectionWhitelisted");
                 return true;
             }
+        }
+
+        // Run in flight mode.
+        if (prefRunInFlightMode && isFlightMode()) {
+            Log.v(TAG, "decideShouldRun: prefRunInFlightMode && isFlightMode");
+            return true;
         }
 
         /**
