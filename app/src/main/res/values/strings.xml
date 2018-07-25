@@ -294,7 +294,7 @@ Please report any problems you encounter via Github.</string>
     <string name="sync_only_wifi_ssids">to_be_deleted</string>
 
     <string name="run_conditions_title">Run Conditions</string>
-    <string name="run_conditions_summary">Use the following options to decide when the syncthing UI and syncing will be available.</string>
+    <string name="run_conditions_summary">Use the following options to decide when the syncthing UI will be available and synchronization takes place.</string>
 
     <string name="run_on_mobile_data_title">Run on mobile data</string>
     <string name="run_on_mobile_data_summary">Run when device is connected to the mobile data network. Attention: This can fastly consume your data plan if you sync a large amount of data.</string>
