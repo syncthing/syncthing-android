@@ -616,7 +616,7 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_disabled_title">Syncthing is disabled</string>
 
     <!-- Message of the "syncthing disabled" dialog -->
-    <string name="syncthing_disabled_message">Do you want to change your preferences?</string>
+    <string name="syncthing_disabled_message">Do you want to change the run conditions?</string>
 
     <!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>

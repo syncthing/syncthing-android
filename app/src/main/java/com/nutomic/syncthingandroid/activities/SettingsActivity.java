@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.google.common.base.Joiner;
@@ -48,11 +49,18 @@ import eu.chainfire.libsuperuser.Shell;
 
 public class SettingsActivity extends SyncthingActivity {
 
+    public static final String EXTRA_OPEN_SUB_PREF_SCREEN =
+            "com.nutomic.syncthingandroid.activities.SettingsActivity.OPEN_SUB_PREF_SCREEN";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SettingsFragment settingsFragment = new SettingsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_OPEN_SUB_PREF_SCREEN, getIntent().getStringExtra(EXTRA_OPEN_SUB_PREF_SCREEN));
+        settingsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new SettingsFragment())
+                .replace(android.R.id.content, settingsFragment)
                 .commit();
     }
 
@@ -252,6 +260,30 @@ public class SettingsActivity extends SyncthingActivity {
                         .getPackageInfo(getActivity().getPackageName(), 0).versionName);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.d(TAG, "Failed to get app version name");
+            }
+
+            openSubPrefScreen(screen);
+        }
+
+        private void openSubPrefScreen(PreferenceScreen prefScreen) {
+            Bundle bundle = getArguments();
+            if (bundle == null) {
+                return;
+            }
+            String openSubPrefScreen = bundle.getString(EXTRA_OPEN_SUB_PREF_SCREEN, "");
+            // Open sub preferences screen if EXTRA_OPEN_SUB_PREF_SCREEN was passed in bundle.
+            if (openSubPrefScreen != null && !TextUtils.isEmpty(openSubPrefScreen)) {
+                Log.v(TAG, "Transitioning to pref screen " + openSubPrefScreen);
+                PreferenceScreen categoryRunConditions = (PreferenceScreen) findPreference(openSubPrefScreen);
+                final ListAdapter listAdapter = prefScreen.getRootAdapter();
+                final int itemsCount = listAdapter.getCount();
+                for (int itemNumber = 0; itemNumber < itemsCount; ++itemNumber) {
+                    if (listAdapter.getItem(itemNumber).equals(categoryRunConditions)) {
+                        //simulates click on the sub-preference
+                        prefScreen.onItemClick(null, null, itemNumber, 0);
+                        break;
+                    }
+                }
             }
         }
 
