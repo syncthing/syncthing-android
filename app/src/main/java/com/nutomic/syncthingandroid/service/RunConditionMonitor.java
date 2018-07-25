@@ -99,9 +99,10 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         List<String> watched = Lists.newArrayList(
-            Constants.PREF_POWER_SOURCE,
+            Constants.PREF_RUN_ON_MOBILE_DATA,
             Constants.PREF_RUN_ON_WIFI,
             Constants.PREF_WIFI_SSID_WHITELIST,
+            Constants.PREF_POWER_SOURCE,
             Constants.PREF_RESPECT_BATTERY_SAVING
         );
         if (watched.contains(key)) {
