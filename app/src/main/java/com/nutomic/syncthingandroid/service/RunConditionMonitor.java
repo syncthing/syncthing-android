@@ -167,16 +167,6 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
             }
         }
 
-        // Always run in background
-        if (!prefAlwaysRunInBackground) {
-            /**
-             * User did not specify run conditions in the options.
-             * The app is displaying a foreground activity and syncthing should run.
-             */
-            Log.v(TAG, "decideShouldRun: !prefAlwaysRunInBackground");
-            return true;
-        }
-
         // PREF_POWER_SOURCE
         switch (prefPowerSource) {
             case POWER_SOURCE_AC:
