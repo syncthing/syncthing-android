@@ -103,6 +103,7 @@ public class SettingsActivity extends SyncthingActivity {
         private ListPreference     mPowerSource;
         private CheckBoxPreference mRunOnMobileData;
         private CheckBoxPreference mRunOnWifi;
+        private CheckBoxPreference mRunOnMeteredWifi;
         private CheckBoxPreference mRunInFlightMode;
         private WifiSsidPreference mWifiSsidWhitelist;
 
@@ -166,6 +167,8 @@ public class SettingsActivity extends SyncthingActivity {
                     (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
             mRunOnWifi =
                     (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
+            mRunOnMeteredWifi =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_METERED_WIFI);
             mWifiSsidWhitelist =
                     (WifiSsidPreference) findPreference(Constants.PREF_WIFI_SSID_WHITELIST);
             mRunInFlightMode =
@@ -222,6 +225,7 @@ public class SettingsActivity extends SyncthingActivity {
             mSyncthingVersion       = findPreference("syncthing_version");
             Preference appVersion   = screen.findPreference("app_version");
 
+            mRunOnMeteredWifi.setEnabled(mRunOnWifi.isChecked());
             mWifiSsidWhitelist.setEnabled(mRunOnWifi.isChecked());
             setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
 
@@ -443,6 +447,7 @@ public class SettingsActivity extends SyncthingActivity {
                     preference.setSummary(mPowerSource.getEntry());
                     break;
                 case Constants.PREF_RUN_ON_WIFI:
+                    mRunOnMeteredWifi.setEnabled((Boolean) o);
                     mWifiSsidWhitelist.setEnabled((Boolean) o);
                     break;
                 case Constants.PREF_WIFI_SSID_WHITELIST:

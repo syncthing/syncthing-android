@@ -297,10 +297,13 @@ Please report any problems you encounter via Github.</string>
     <string name="run_conditions_summary">Use the following options to decide when the syncthing UI and syncing will be available.</string>
 
     <string name="run_on_mobile_data_title">Run on mobile data</string>
-    <string name="run_on_mobile_data_summary">Run when device is connected to a mobile data or tethered network. Attention: This can fastly consume your data plan if you sync a large amount of data.</string>
+    <string name="run_on_mobile_data_summary">Run when device is connected to the mobile data network. Attention: This can fastly consume your data plan if you sync a large amount of data.</string>
 
     <string name="run_on_wifi_title">Run on wifi</string>
     <string name="run_on_wifi_summary">Run when device is connected to a wifi network.</string>
+
+    <string name="run_on_metered_wifi_title">Run on metered wifi</string>
+    <string name="run_on_metered_wifi_summary">Run when device is connected to a metered wifi network e.g. a hotspot or tethered network. Attention: This can fastly consume your data plan if you sync a large amount of data.</string>
 
     <string name="run_on_whitelisted_wifi_title">Run on specified wifi networks</string>
     <string name="run_on_whitelisted_wifi_networks">Run on selected wifi networks: %1$s</string>

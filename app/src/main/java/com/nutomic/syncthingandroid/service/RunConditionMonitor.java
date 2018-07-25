@@ -101,6 +101,7 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         List<String> watched = Lists.newArrayList(
             Constants.PREF_RUN_ON_MOBILE_DATA,
             Constants.PREF_RUN_ON_WIFI,
+            Constants.PREF_RUN_ON_METERED_WIFI,
             Constants.PREF_WIFI_SSID_WHITELIST,
             Constants.PREF_POWER_SOURCE,
             Constants.PREF_RUN_IN_FLIGHT_MODE,
@@ -159,10 +160,11 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
         // Get run conditions preferences.
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
-        String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
+        boolean prefRunOnMeteredWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_METERED_WIFI, false);
         Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>());
         boolean prefWifiWhitelistEnabled = !whitelistedWifiSsids.isEmpty();
         boolean prefRunInFlightMode = mPreferences.getBoolean(Constants.PREF_RUN_IN_FLIGHT_MODE, false);
+        String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
 
@@ -193,21 +195,26 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
             }
         }
 
-        // Run on mobile data or tethered connection that is marked as metered.
-        if (prefRunOnMobileData && (isMobileDataConnection() || isMeteredNetworkConnection())) {
-            Log.v(TAG, "decideShouldRun: prefRunOnMobileData && (isMobileDataConnection || isMeteredNetworkConnection");
+        // Run on mobile data.
+        if (prefRunOnMobileData && isMobileDataConnection()) {
+            Log.v(TAG, "decideShouldRun: prefRunOnMobileData && isMobileDataConnection");
             return true;
         }
 
         // Run on wifi.
         if (prefRunOnWifi && isWifiOrEthernetConnection()) {
-            if (!prefWifiWhitelistEnabled) {
-                Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && !prefWifiWhitelistEnabled");
-                return true;
-            }
-            if (isWifiConnectionWhitelisted(whitelistedWifiSsids)) {
-                Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefWifiWhitelistEnabled && isWifiConnectionWhitelisted");
-                return true;
+            if (prefRunOnMeteredWifi) {
+                // Check if we are on metered wifi and if wifi whitelist run condition is met.
+                if (isMeteredNetworkConnection() && wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
+                    Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefRunOnMeteredWifi && isMeteredNetworkConnection && wifiWhitelistConditionMet");
+                    return true;
+                }
+            } else {
+                // Check if we are on a non-metered wifi and if wifi whitelist run condition is met.
+                if (!isMeteredNetworkConnection() && wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
+                    Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && !prefRunOnMeteredWifi && !isMeteredNetworkConnection && wifiWhitelistConditionMet");
+                    return true;
+                }
             }
         }
 
@@ -221,6 +228,23 @@ public class RunConditionMonitor implements SharedPreferences.OnSharedPreference
          * If none of the above run conditions matched, don't run.
          */
         Log.v(TAG, "decideShouldRun: return false");
+        return false;
+    }
+
+    /**
+     * Return whether the wifi whitelist run condition is met.
+     * Precondition: An active wifi connection has been detected.
+     */
+    private boolean wifiWhitelistConditionMet(boolean prefWifiWhitelistEnabled,
+            Set<String> whitelistedWifiSsids) {
+        if (!prefWifiWhitelistEnabled) {
+            Log.v(TAG, "handleWifiWhitelist: !prefWifiWhitelistEnabled");
+            return true;
+        }
+        if (isWifiConnectionWhitelisted(whitelistedWifiSsids)) {
+            Log.v(TAG, "handleWifiWhitelist: isWifiConnectionWhitelisted");
+            return true;
+        }
         return false;
     }
 

@@ -24,6 +24,12 @@
             android:summary="@string/run_on_wifi_summary"
             android:defaultValue="true" />
 
+        <CheckBoxPreference
+            android:key="run_on_metered_wifi"
+            android:title="@string/run_on_metered_wifi_title"
+            android:summary="@string/run_on_metered_wifi_summary"
+            android:defaultValue="false" />
+
         <com.nutomic.syncthingandroid.views.WifiSsidPreference
             android:key="wifi_ssid_whitelist"
             android:title="@string/run_on_whitelisted_wifi_title"
