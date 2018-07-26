@@ -121,6 +121,11 @@ public class RestApi {
     private final Object mAsyncQueryCompleteLock = new Object();
 
     /**
+     * Object that must be locked upon accessing mConfig
+     */
+    private final Object mConfigLock = new Object();
+
+    /**
      * Stores the latest result of {@link #getFolderStatus} for each folder
      */
     private HashMap<String, FolderStatus> mCachedFolderStatuses = new HashMap<>();
@@ -199,7 +204,9 @@ public class RestApi {
     }
 
     private void onReloadConfigComplete(String result) {
-        mConfig = new Gson().fromJson(result, Config.class);
+        synchronized(mConfigLock) {
+            mConfig = new Gson().fromJson(result, Config.class);
+        }
         if (mConfig == null) {
             throw new RuntimeException("config is null: " + result);
         }
@@ -456,7 +463,11 @@ public class RestApi {
     }
 
     public boolean isConfigLoaded() {
-        return mConfig != null;
+        Boolean configLoaded;
+        synchronized(mConfigLock) {
+            configLoaded = mConfig != null;
+        }
+        return configLoaded;
     }
 
     /**
