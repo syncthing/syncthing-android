@@ -99,6 +99,7 @@ public class SettingsActivity extends SyncthingActivity {
         @Inject NotificationHandler mNotificationHandler;
         @Inject SharedPreferences mPreferences;
 
+        private Preference         mCategoryRunConditions;
         private CheckBoxPreference mAlwaysRunInBackground;
         private ListPreference     mPowerSource;
         private CheckBoxPreference mRunOnMobileData;
@@ -139,6 +140,12 @@ public class SettingsActivity extends SyncthingActivity {
         private Config.Gui mGui;
 
         private Boolean mPendingConfig = false;
+
+        /**
+         * Indicates if run conditions were changed and need to be
+         * re-evaluated when the user leaves the preferences screen.
+         */
+        private Boolean mPendingRunConditions = false;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -227,10 +234,11 @@ public class SettingsActivity extends SyncthingActivity {
 
             mRunOnMeteredWifi.setEnabled(mRunOnWifi.isChecked());
             mWifiSsidWhitelist.setEnabled(mRunOnWifi.isChecked());
-            setPreferenceCategoryChangeListener(findPreference("category_run_conditions"), this);
 
             mCategorySyncthingOptions = findPreference("category_syncthing_options");
             setPreferenceCategoryChangeListener(mCategorySyncthingOptions, this::onSyncthingPreferenceChange);
+            mCategoryRunConditions = findPreference("category_run_conditions");
+            setPreferenceCategoryChangeListener(mCategoryRunConditions, this::onRunConditionPreferenceChange);
 
             exportConfig.setOnPreferenceClickListener(this);
             importConfig.setOnPreferenceClickListener(this);
@@ -354,6 +362,28 @@ public class SettingsActivity extends SyncthingActivity {
             }
         }
 
+        public boolean onRunConditionPreferenceChange(Preference preference, Object o) {
+            switch (preference.getKey()) {
+                case Constants.PREF_POWER_SOURCE:
+                    mPowerSource.setValue(o.toString());
+                    preference.setSummary(mPowerSource.getEntry());
+                    break;
+                case Constants.PREF_RUN_ON_WIFI:
+                    mRunOnMeteredWifi.setEnabled((Boolean) o);
+                    mWifiSsidWhitelist.setEnabled((Boolean) o);
+                    break;
+                case Constants.PREF_WIFI_SSID_WHITELIST:
+                    String wifiSsidSummary = TextUtils.join(", ", (Set<String>) o);
+                    preference.setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
+                        getString(R.string.run_on_all_wifi_networks) :
+                        getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                    );
+                    break;
+            }
+            mPendingRunConditions = true;
+            return true;
+        }
+
         public boolean onSyncthingPreferenceChange(Preference preference, Object o) {
             Splitter splitter = Splitter.on(",").trimResults().omitEmptyStrings();
             switch (preference.getKey()) {
@@ -432,6 +462,11 @@ public class SettingsActivity extends SyncthingActivity {
                     mPendingConfig = false;
                 }
             }
+            if (mPendingRunConditions) {
+                if (mSyncthingService != null) {
+                    mSyncthingService.reEvaluateRunConditions();
+                }
+            }
             super.onStop();
         }
 
@@ -442,21 +477,6 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
-                case Constants.PREF_POWER_SOURCE:
-                    mPowerSource.setValue(o.toString());
-                    preference.setSummary(mPowerSource.getEntry());
-                    break;
-                case Constants.PREF_RUN_ON_WIFI:
-                    mRunOnMeteredWifi.setEnabled((Boolean) o);
-                    mWifiSsidWhitelist.setEnabled((Boolean) o);
-                    break;
-                case Constants.PREF_WIFI_SSID_WHITELIST:
-                    String wifiSsidSummary = TextUtils.join(", ", (Set<String>) o);
-                    preference.setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
-                        getString(R.string.run_on_all_wifi_networks) :
-                        getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
-                    );
-                    break;
                 case Constants.PREF_DEBUG_FACILITIES_ENABLED:
                     mPendingConfig = true;
                     break;
