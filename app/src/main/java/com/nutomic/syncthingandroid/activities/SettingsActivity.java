@@ -419,7 +419,7 @@ public class SettingsActivity extends SyncthingActivity {
             }
             if (mPendingRunConditions) {
                 if (mSyncthingService != null) {
-                    mSyncthingService.reEvaluateRunConditions();
+                    mSyncthingService.evaluateRunConditions();
                 }
             }
             super.onStop();
