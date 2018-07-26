@@ -43,9 +43,10 @@ public class RunConditionMonitor {
     private static final String POWER_SOURCE_AC = "ac_power";
     private static final String POWER_SOURCE_BATTERY = "battery_power";
 
+    private @Nullable Object mSyncStatusObserverHandle = null;
     private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
         @Override
-        public void onStatusChanged(int i) {
+        public void onStatusChanged(int which) {
             updateShouldRunDecision();
         }
     };
@@ -94,8 +95,8 @@ public class RunConditionMonitor {
         }
 
         // SyncStatusObserver to monitor android's "AutoSync" quick toggle.
-        ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS,
-                mSyncStatusObserver);
+        mSyncStatusObserverHandle = ContentResolver.addStatusChangeListener(
+                ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, mSyncStatusObserver);
 
         // Initially determine if syncthing should run under current circumstances.
         updateShouldRunDecision();
@@ -103,7 +104,10 @@ public class RunConditionMonitor {
 
     public void shutdown() {
         Log.v(TAG, "Shutting down");
-        ContentResolver.removeStatusChangeListener(mSyncStatusObserver);
+        if (mSyncStatusObserverHandle != null) {
+            ContentResolver.removeStatusChangeListener(mSyncStatusObserverHandle);
+            mSyncStatusObserverHandle = null;
+        }
         mReceiverManager.unregisterAllReceivers(mContext);
     }
 
