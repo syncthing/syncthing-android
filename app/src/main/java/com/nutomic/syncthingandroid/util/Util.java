@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.io.File;
 import java.text.DecimalFormat;
 
+import java.io.StringReader;
+import java.util.Properties;
+
 import eu.chainfire.libsuperuser.Shell;
 
 public class Util {
@@ -139,9 +142,19 @@ public class Util {
             useRoot = true;
         }
 
+        absoluteFolderPath = "/storage/emulated/0/Папка";
+
+        Properties p = new Properties();
+        try {
+            p.load(new StringReader("key="+absoluteFolderPath));
+        } catch(IOException e) {
+            Log.e(TAG, "Error", e);
+        }
+        absoluteFolderPath = p.getProperty("key");
+
         // Write permission test file.
         String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
-        int exitCode = runShellCommand("echo \"\" > \"" + touchFile + "\"\n", useRoot);
+        int exitCode = runShellCommand("mkdir -p \"" + absoluteFolderPath + "\"; echo \"\" > \"" + touchFile + "\"\n", useRoot);
         if (exitCode != 0) {
             String error;
             switch (exitCode) {
