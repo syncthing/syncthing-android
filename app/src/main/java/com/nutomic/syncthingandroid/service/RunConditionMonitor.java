@@ -60,7 +60,6 @@ public class RunConditionMonitor {
         Log.v(TAG, "Created new instance");
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
-        // ToDo mPreferences.registerOnSharedPreferenceChangeListener(this);
         mOnRunConditionChangedListener = listener;
 
         /**
@@ -88,18 +87,8 @@ public class RunConditionMonitor {
 
     public void shutdown() {
         Log.v(TAG, "Shutting down");
-        // ToDo mPreferences.unregisterOnSharedPreferenceChangeListener(this);
         mReceiverManager.unregisterAllReceivers(mContext);
     }
-
-/*
-// ToDo
-    @Override
-    public void onRunConditionPreferencesChanged() {
-        // Force a re-evaluation of which run conditions apply according to the changed prefs.
-        updateShouldRunDecision();
-    }
-*/
 
     private class BatteryReceiver extends BroadcastReceiver {
         @Override
