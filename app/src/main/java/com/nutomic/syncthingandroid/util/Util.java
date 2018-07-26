@@ -20,8 +20,7 @@ import java.io.IOException;
 import java.io.File;
 import java.text.DecimalFormat;
 
-import java.io.StringReader;
-import java.util.Properties;
+import java.io.UnsupportedEncodingException;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -142,19 +141,18 @@ public class Util {
             useRoot = true;
         }
 
+        // ToDo - For testing purposes only.
         absoluteFolderPath = "/storage/emulated/0/Папка";
-
-        Properties p = new Properties();
+        byte absoluteFolderPathBytes[] = absoluteFolderPath.getBytes();
         try {
-            p.load(new StringReader("key="+absoluteFolderPath));
-        } catch(IOException e) {
+            absoluteFolderPath = new String(absoluteFolderPathBytes, "Cp1251");
+        } catch(UnsupportedEncodingException e) {
             Log.e(TAG, "Error", e);
         }
-        absoluteFolderPath = p.getProperty("key");
 
         // Write permission test file.
         String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
-        int exitCode = runShellCommand("mkdir -p \"" + absoluteFolderPath + "\"; echo \"\" > \"" + touchFile + "\"\n", useRoot);
+        int exitCode = runShellCommand("rm -f \"" + absoluteFolderPath + "\"; echo \"\" > \"" + touchFile + "\"\n", useRoot);
         if (exitCode != 0) {
             String error;
             switch (exitCode) {
