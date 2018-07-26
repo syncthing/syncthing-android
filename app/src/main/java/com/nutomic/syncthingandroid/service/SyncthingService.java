@@ -523,7 +523,7 @@ public class SyncthingService extends Service {
      * Force re-evaluating run conditions immediately e.g. after
      * preferences were modified by {@link SettingsActivity}.
      */
-    public void reEvaluateRunConditions() {
+    public void evaluateRunConditions() {
         if (mRunConditionMonitor == null) {
             return;
         }
