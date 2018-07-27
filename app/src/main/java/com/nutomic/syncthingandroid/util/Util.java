@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.File;
 import java.text.DecimalFormat;
 
-import java.io.UnsupportedEncodingException;
-
 import eu.chainfire.libsuperuser.Shell;
 
 public class Util {
@@ -141,18 +139,18 @@ public class Util {
             useRoot = true;
         }
 
-        // ToDo - For testing purposes only.
         absoluteFolderPath = "/storage/emulated/0/Папка";
-        byte absoluteFolderPathBytes[] = absoluteFolderPath.getBytes();
-        try {
-            absoluteFolderPath = new String(absoluteFolderPathBytes, "Cp1251");
-        } catch(UnsupportedEncodingException e) {
-            Log.e(TAG, "Error", e);
+
+        // Check for cyrillic characters in the folder path.
+        if (absoluteFolderPath.matches(".*\\p{InCyrillic}.*")) {
+            Log.w(TAG, "nativeBinaryCanWriteToPath: Path '" + absoluteFolderPath +
+                "' contains cyrillic characters. As this is currently not handled, we'll return true without checking permissions.");
+            return true;
         }
 
         // Write permission test file.
         String touchFile = absoluteFolderPath + "/" + TOUCH_FILE_NAME;
-        int exitCode = runShellCommand("rm -f \"" + absoluteFolderPath + "\"; echo \"\" > \"" + touchFile + "\"\n", useRoot);
+        int exitCode = runShellCommand("echo \"\" > \"" + touchFile + "\"\n", useRoot);
         if (exitCode != 0) {
             String error;
             switch (exitCode) {
