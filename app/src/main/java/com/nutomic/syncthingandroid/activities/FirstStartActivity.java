@@ -45,11 +45,11 @@ public class FirstStartActivity extends Activity {
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
-    private LinearLayout dotsLayout;
-    private TextView[] dots;
-    private int[] layouts;
-    private Button btnBack;
-    private Button btnNext;
+    private LinearLayout mDotsLayout;
+    private TextView[] mDots;
+    private int[] mLayouts;
+    private Button mBackButton;
+    private Button mNextButton;
 
     @Inject SharedPreferences mPreferences;
 
@@ -81,9 +81,9 @@ public class FirstStartActivity extends Activity {
         // Show first start welcome wizard UI.
         setContentView(R.layout.activity_first_start);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnNext = (Button) findViewById(R.id.btn_next);
+        mDotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        mBackButton = (Button) findViewById(R.id.btn_back);
+        mNextButton = (Button) findViewById(R.id.btn_next);
 
         mViewPager.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -95,7 +95,7 @@ public class FirstStartActivity extends Activity {
         });
 
         // Layouts of all welcome slides
-        layouts = new int[]{
+        mLayouts = new int[]{
                 R.layout.activity_firststart_slide1,
                 R.layout.activity_firststart_slide2,
                 R.layout.activity_firststart_slide3};
@@ -110,14 +110,14 @@ public class FirstStartActivity extends Activity {
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.addOnPageChangeListener(mViewPagerPageChangeListener);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBtnBackClick();
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBtnNextClick();
@@ -131,7 +131,7 @@ public class FirstStartActivity extends Activity {
             // Move to previous slider.
             mViewPager.setCurrentItem(current);
             if (current == 0) {
-                btnBack.setVisibility(View.GONE);
+                mBackButton.setVisibility(View.GONE);
             }
         }
     }
@@ -149,12 +149,12 @@ public class FirstStartActivity extends Activity {
         }
 
         int current = getItem(+1);
-        if (current < layouts.length) {
+        if (current < mLayouts.length) {
             // Move to next slide.
             mViewPager.setCurrentItem(current);
-            btnBack.setVisibility(View.VISIBLE);
+            mBackButton.setVisibility(View.VISIBLE);
         } else {
-            // Start the app after "btnNext" was hit on the last slide.
+            // Start the app after "mNextButton" was hit on the last slide.
             Log.v(TAG, "User completed first start UI.");
             mPreferences.edit().putBoolean(Constants.PREF_FIRST_START, false).apply();
             startApp();
@@ -162,29 +162,29 @@ public class FirstStartActivity extends Activity {
     }
 
     private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
+        mDots = new TextView[mLayouts.length];
 
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(colorsInactive[currentPage]);
-            dotsLayout.addView(dots[i]);
+        mDotsLayout.removeAllViews();
+        for (int i = 0; i < mDots.length; i++) {
+            mDots[i] = new TextView(this);
+            mDots[i].setText(Html.fromHtml("&#8226;"));
+            mDots[i].setTextSize(35);
+            mDots[i].setTextColor(colorsInactive[currentPage]);
+            mDotsLayout.addView(mDots[i]);
         }
 
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
+        if (mDots.length > 0)
+            mDots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
     private int getItem(int i) {
         return mViewPager.getCurrentItem() + i;
     }
 
-    //  viewpager change listener
+    //  ViewPager change listener
     ViewPager.OnPageChangeListener mViewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -192,7 +192,7 @@ public class FirstStartActivity extends Activity {
             addBottomDots(position);
 
             // Change the next button text from next to finish on last slide.
-            btnNext.setText(getString((position == layouts.length - 1) ? R.string.finish : R.string.cont));
+            mNextButton.setText(getString((position == mLayouts.length - 1) ? R.string.finish : R.string.cont));
         }
 
         @Override
@@ -230,7 +230,7 @@ public class FirstStartActivity extends Activity {
         public Object instantiateItem(ViewGroup container, int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View view = layoutInflater.inflate(layouts[position], container, false);
+            View view = layoutInflater.inflate(mLayouts[position], container, false);
 
             /* Slide: storage permission */
             Button btnGrantStoragePerm = (Button) view.findViewById(R.id.btnGrantStoragePerm);
@@ -260,14 +260,13 @@ public class FirstStartActivity extends Activity {
 
         @Override
         public int getCount() {
-            return layouts.length;
+            return mLayouts.length;
         }
 
         @Override
         public boolean isViewFromObject(View view, Object obj) {
             return view == obj;
         }
-
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
