@@ -13,12 +13,6 @@
             android:summary="@string/run_conditions_summary"/>
 
         <CheckBoxPreference
-            android:key="run_on_mobile_data"
-            android:title="@string/run_on_mobile_data_title"
-            android:summary="@string/run_on_mobile_data_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
             android:key="run_on_wifi"
             android:title="@string/run_on_wifi_title"
             android:summary="@string/run_on_wifi_summary"
@@ -34,6 +28,12 @@
             android:key="wifi_ssid_whitelist"
             android:title="@string/run_on_whitelisted_wifi_title"
             android:summary="@null" />
+
+        <CheckBoxPreference
+            android:key="run_on_mobile_data"
+            android:title="@string/run_on_mobile_data_title"
+            android:summary="@string/run_on_mobile_data_summary"
+            android:defaultValue="false" />
 
         <ListPreference
             android:key="power_source"
