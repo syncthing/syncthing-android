@@ -139,8 +139,6 @@ public class Util {
             useRoot = true;
         }
 
-        absoluteFolderPath = "/storage/emulated/0/Папка";
-
         // Check for cyrillic characters in the folder path.
         if (absoluteFolderPath.matches(".*\\p{InCyrillic}.*")) {
             Log.w(TAG, "nativeBinaryCanWriteToPath: Path '" + absoluteFolderPath +
