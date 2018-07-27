@@ -18,7 +18,6 @@ import com.nutomic.syncthingandroid.service.Constants;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 
