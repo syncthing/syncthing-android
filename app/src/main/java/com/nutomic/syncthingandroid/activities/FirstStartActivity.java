@@ -143,7 +143,6 @@ public class FirstStartActivity extends Activity {
             if (!haveStoragePermission()) {
                 Toast.makeText(this, R.string.toast_write_storage_permission_required,
                         Toast.LENGTH_LONG).show();
-                this.finish();
                 return;
             }
         }
