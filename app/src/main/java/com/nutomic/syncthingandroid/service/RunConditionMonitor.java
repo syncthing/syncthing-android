@@ -209,9 +209,9 @@ public class RunConditionMonitor {
         // Run on wifi.
         if (prefRunOnWifi && isWifiOrEthernetConnection()) {
             if (prefRunOnMeteredWifi) {
-                // Check if we are on metered wifi and if wifi whitelist run condition is met.
-                if (isMeteredNetworkConnection() && wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
-                    Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefRunOnMeteredWifi && isMeteredNetworkConnection && wifiWhitelistConditionMet");
+                // We are on non-metered or metered wifi. Check if wifi whitelist run condition is met.
+                if (wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
+                    Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefRunOnMeteredWifi && wifiWhitelistConditionMet");
                     return true;
                 }
             } else {
