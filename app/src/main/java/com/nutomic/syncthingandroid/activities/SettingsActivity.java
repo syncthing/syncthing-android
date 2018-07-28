@@ -294,7 +294,7 @@ public class SettingsActivity extends SyncthingActivity {
                 final int itemsCount = listAdapter.getCount();
                 for (int itemNumber = 0; itemNumber < itemsCount; ++itemNumber) {
                     if (listAdapter.getItem(itemNumber).equals(categoryRunConditions)) {
-                        //simulates click on the sub-preference
+                        // Simulates click on the sub-preference
                         prefScreen.onItemClick(null, null, itemNumber, 0);
                         break;
                     }
