@@ -20,7 +20,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
+import android.view.View;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -275,6 +277,14 @@ public class SettingsActivity extends SyncthingActivity {
                         .getPackageInfo(getActivity().getPackageName(), 0).versionName);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.d(TAG, "Failed to get app version name");
+            }
+
+            // Remove dividers
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                // For SDK version 21 and below, the code has to be within on CreateView.
+                View rootView = getView();
+                ListView list = (ListView) rootView.findViewById(android.R.id.list);
+                list.setDivider(null);
             }
 
             openSubPrefScreen(screen);
