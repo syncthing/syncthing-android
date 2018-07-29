@@ -392,6 +392,7 @@ public class RestApi {
                 Folder f = it.next();
                 if (f.id.equals(id)) {
                     it.remove();
+                    break;
                 }
             }
         }
@@ -464,6 +465,7 @@ public class RestApi {
                 Device d = it.next();
                 if (d.deviceID.equals(deviceId)) {
                     it.remove();
+                    break;
                 }
             }
         }
