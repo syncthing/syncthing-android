@@ -204,10 +204,12 @@ public class RestApi {
     }
 
     private void onReloadConfigComplete(String result) {
+        Boolean configParseSuccess;
         synchronized(mConfigLock) {
             mConfig = new Gson().fromJson(result, Config.class);
+            configParseSuccess = mConfig != null;
         }
-        if (mConfig == null) {
+        if (!configParseSuccess) {
             throw new RuntimeException("config is null: " + result);
         }
         Log.v(TAG, "onReloadConfigComplete: Successfully parsed configuration.");
@@ -256,10 +258,12 @@ public class RestApi {
      * in {@link EventProcessor#onEvent}.
      */
     public void ignoreDevice(String deviceId) {
-        if (!mConfig.ignoredDevices.contains(deviceId)) {
-            mConfig.ignoredDevices.add(deviceId);
-            sendConfig();
-            Log.d(TAG, "Ignored device [" + deviceId + "]");
+        synchronized (mConfigLock) {
+            if (!mConfig.ignoredDevices.contains(deviceId)) {
+                mConfig.ignoredDevices.add(deviceId);
+                sendConfig();
+                Log.d(TAG, "Ignored device [" + deviceId + "]");
+            }
         }
     }
 
@@ -269,10 +273,12 @@ public class RestApi {
      * in {@link EventProcessor#onEvent}.
      */
     public void ignoreFolder(String folderId) {
-        if (!mConfig.ignoredFolders.contains(folderId)) {
-            mConfig.ignoredFolders.add(folderId);
-            sendConfig();
-            Log.d(TAG, "Ignored folder [" + folderId + "]");
+        synchronized (mConfigLock) {
+            if (!mConfig.ignoredFolders.contains(folderId)) {
+                mConfig.ignoredFolders.add(folderId);
+                sendConfig();
+                Log.d(TAG, "Ignored folder [" + folderId + "]");
+            }
         }
     }
 
@@ -281,8 +287,10 @@ public class RestApi {
      */
     public void undoIgnoredDevicesAndFolders() {
         Log.d(TAG, "Undo ignoring devices and folders ...");
-        mConfig.ignoredDevices.clear();
-        mConfig.ignoredFolders.clear();
+        synchronized (mConfigLock) {
+            mConfig.ignoredDevices.clear();
+            mConfig.ignoredFolders.clear();
+        }
     }
 
     /**
@@ -301,7 +309,11 @@ public class RestApi {
      * EventProcessor will trigger this.reloadConfig().
      */
     private void sendConfig() {
-        new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), null);
+        String jsonConfig;
+        synchronized (mConfigLock) {
+            jsonConfig = new Gson().toJson(mConfig);
+        }
+        new PostConfigRequest(mContext, mUrl, mApiKey, jsonConfig, null);
         mOnConfigChangedListener.onConfigChanged();
     }
 
@@ -309,7 +321,11 @@ public class RestApi {
      * Sends current config and restarts Syncthing.
      */
     public void saveConfigAndRestart() {
-        new PostConfigRequest(mContext, mUrl, mApiKey, new Gson().toJson(mConfig), result -> {
+        String jsonConfig;
+        synchronized (mConfigLock) {
+            jsonConfig = new Gson().toJson(mConfig);
+        }
+        new PostConfigRequest(mContext, mUrl, mApiKey, jsonConfig, result -> {
             Intent intent = new Intent(mContext, SyncthingService.class)
                     .setAction(SyncthingService.ACTION_RESTART);
             mContext.startService(intent);
@@ -329,7 +345,10 @@ public class RestApi {
     }
 
     public List<Folder> getFolders() {
-        List<Folder> folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
+        List<Folder> folders;
+        synchronized (mConfigLock) {
+            folders = deepCopy(mConfig.folders, new TypeToken<List<Folder>>(){}.getType());
+        }
         Collections.sort(folders, FOLDERS_COMPARATOR);
         return folders;
     }
@@ -338,34 +357,42 @@ public class RestApi {
      * This is only used for new folder creation, see {@link FolderActivity}.
      */
     public void createFolder(Folder folder) {
-        // Add the new folder to the model.
-        mConfig.folders.add(folder);
-        // Send model changes to syncthing, does not require a restart.
-        sendConfig();
+        synchronized (mConfigLock) {
+            // Add the new folder to the model.
+            mConfig.folders.add(folder);
+            // Send model changes to syncthing, does not require a restart.
+            sendConfig();
+        }
     }
 
     public void updateFolder(Folder newFolder) {
-        removeFolderInternal(newFolder.id);
-        mConfig.folders.add(newFolder);
-        sendConfig();
+        synchronized (mConfigLock) {
+            removeFolderInternal(newFolder.id);
+            mConfig.folders.add(newFolder);
+            sendConfig();
+        }
     }
 
     public void removeFolder(String id) {
-        removeFolderInternal(id);
-        // mCompletion will be updated after the ConfigSaved event.
-        sendConfig();
-        // Remove saved data from share activity for this folder.
+        synchronized (mConfigLock) {
+            removeFolderInternal(id);
+            // mCompletion will be updated after the ConfigSaved event.
+            sendConfig();
+            // Remove saved data from share activity for this folder.
+        }
         PreferenceManager.getDefaultSharedPreferences(mContext).edit()
                 .remove(ShareActivity.PREF_FOLDER_SAVED_SUBDIRECTORY+id)
                 .apply();
     }
 
     private void removeFolderInternal(String id) {
-        Iterator<Folder> it = mConfig.folders.iterator();
-        while (it.hasNext()) {
-            Folder f = it.next();
-            if (f.id.equals(id)) {
-                it.remove();
+        synchronized (mConfigLock) {
+            Iterator<Folder> it = mConfig.folders.iterator();
+            while (it.hasNext()) {
+                Folder f = it.next();
+                if (f.id.equals(id)) {
+                    it.remove();
+                }
             }
         }
     }
@@ -376,7 +403,10 @@ public class RestApi {
      * @param includeLocal True if the local device should be included in the result.
      */
     public List<Device> getDevices(boolean includeLocal) {
-        List<Device> devices = deepCopy(mConfig.devices, new TypeToken<List<Device>>(){}.getType());
+        List<Device> devices;
+        synchronized (mConfigLock) {
+            devices = deepCopy(mConfig.devices, new TypeToken<List<Device>>(){}.getType());
+        }
 
         Iterator<Device> it = devices.iterator();
         while (it.hasNext()) {
@@ -404,44 +434,58 @@ public class RestApi {
 
     public void addDevice(Device device, OnResultListener1<String> errorListener) {
         normalizeDeviceId(device.deviceID, normalizedId -> {
-            mConfig.devices.add(device);
-            sendConfig();
+            synchronized (mConfigLock) {
+                mConfig.devices.add(device);
+                sendConfig();
+            }
         }, errorListener);
     }
 
     public void editDevice(Device newDevice) {
-        removeDeviceInternal(newDevice.deviceID);
-        mConfig.devices.add(newDevice);
-        sendConfig();
+        synchronized (mConfigLock) {
+            removeDeviceInternal(newDevice.deviceID);
+            mConfig.devices.add(newDevice);
+            sendConfig();
+        }
     }
 
     public void removeDevice(String deviceId) {
-        removeDeviceInternal(deviceId);
-        // mCompletion will be updated after the ConfigSaved event.
-        sendConfig();
+        synchronized (mConfigLock) {
+            removeDeviceInternal(deviceId);
+            // mCompletion will be updated after the ConfigSaved event.
+            sendConfig();
+        }
     }
 
     private void removeDeviceInternal(String deviceId) {
-        Iterator<Device> it = mConfig.devices.iterator();
-        while (it.hasNext()) {
-            Device d = it.next();
-            if (d.deviceID.equals(deviceId)) {
-                it.remove();
+        synchronized (mConfigLock) {
+            Iterator<Device> it = mConfig.devices.iterator();
+            while (it.hasNext()) {
+                Device d = it.next();
+                if (d.deviceID.equals(deviceId)) {
+                    it.remove();
+                }
             }
         }
     }
 
     public Options getOptions() {
-        return deepCopy(mConfig.options, Options.class);
+        synchronized (mConfigLock) {
+            return deepCopy(mConfig.options, Options.class);
+        }
     }
 
     public Config.Gui getGui() {
-        return deepCopy(mConfig.gui, Config.Gui.class);
+        synchronized (mConfigLock) {
+            return deepCopy(mConfig.gui, Config.Gui.class);
+        }
     }
 
     public void editSettings(Config.Gui newGui, Options newOptions) {
-        mConfig.gui = newGui;
-        mConfig.options = newOptions;
+        synchronized (mConfigLock) {
+            mConfig.gui = newGui;
+            mConfig.options = newOptions;
+        }
     }
 
     /**
@@ -463,11 +507,9 @@ public class RestApi {
     }
 
     public boolean isConfigLoaded() {
-        Boolean configLoaded;
         synchronized(mConfigLock) {
-            configLoaded = mConfig != null;
+            return mConfig != null;
         }
-        return configLoaded;
     }
 
     /**
@@ -622,6 +664,8 @@ public class RestApi {
             return;
         }
         options.urAccepted = acceptUsageReporting ? mUrVersionMax : Options.USAGE_REPORTING_DENIED;
-        mConfig.options = options;
+        synchronized (mConfigLock) {
+            mConfig.options = options;
+        }
     }
 }
