@@ -19,12 +19,12 @@ To share data with other devices, you need to add their unique device IDs to the
 Please report any problems you encounter via Github.</string>
 
     <!-- Slide 2 -->
-    <string name="storage_permission_title">STORAGE PERMISSION</string>
+    <string name="storage_permission_title">Storage Permission</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
 
     <!-- Slide 3 -->
-    <string name="location_permission_title">LOCATION PERMISSION</string>
-    <string name="location_permission_desc">Syncthing can be configured to run on selected wifi networks. Sadly, Android requires applications to have location permissions to be able look up active WiFi network name, as you can sometimes infer users location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise you can skip this step.</string>
+    <string name="location_permission_title">Location Permission</string>
+    <string name="location_permission_desc">Syncthing can be configured to run on selected wifi networks. Android requires applications to have location permissions to be able look up active WiFi network name, as you can sometimes infer users location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise you can skip this step.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
