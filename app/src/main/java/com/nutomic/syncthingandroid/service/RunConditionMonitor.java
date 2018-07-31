@@ -165,7 +165,6 @@ public class RunConditionMonitor {
         String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_AC_BATTERY);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefRespectMasterSync = mPreferences.getBoolean(Constants.PREF_RESPECT_MASTER_SYNC, false);
-        boolean prefAlwaysRunInBackground = mPreferences.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
 
         // PREF_POWER_SOURCE
         switch (prefPowerSource) {
