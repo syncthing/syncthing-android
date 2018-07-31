@@ -286,13 +286,6 @@ Please report any problems you encounter via Github.</string>
     <string name="category_experimental">Experimental</string>
 
     <!-- Preference screen - Run conditions -->
-    <string name="always_run_in_background">to_be_deleted</string>
-    <string name="always_run_in_background_enabled">to_be_deleted</string>
-    <string name="always_run_in_background_disabled">to_be_deleted</string>
-    <string name="sync_only_charging">to_be_deleted</string>
-    <string name="sync_only_wifi">to_be_deleted</string>
-    <string name="sync_only_wifi_ssids">to_be_deleted</string>
-
     <string name="run_conditions_title">Run Conditions</string>
     <string name="run_conditions_summary">Use the following options to decide when Syncthing will run.</string>
 
