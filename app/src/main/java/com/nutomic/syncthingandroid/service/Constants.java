@@ -22,6 +22,8 @@ public class Constants {
     public static final String PREF_RUN_IN_FLIGHT_MODE          = "run_in_flight_mode";
 
     // Preferences - Behaviour
+    public static final String PREF_FIRST_START                 = "first_start";
+    public static final String PREF_START_INTO_WEB_GUI          = "start_into_web_gui";
     public static final String PREF_USE_ROOT                    = "use_root";
     public static final String PREF_NOTIFICATION_TYPE           = "notification_type";
     public static final String PREF_ENVIRONMENT_VARIABLES       = "environment_variables";
