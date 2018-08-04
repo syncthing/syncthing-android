@@ -135,6 +135,10 @@ Please report any problems you encounter via Github.</string>
     <!-- Title for current upload rate -->
     <string name="upload_title">Upload</string>
 
+    <!-- StatusFragment -->
+    <string name="status_fragment_title">Status</string>
+
+
     <!-- DrawerFragment -->
 
 

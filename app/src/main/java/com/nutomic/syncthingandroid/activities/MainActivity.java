@@ -49,6 +49,7 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
+import com.nutomic.syncthingandroid.fragments.StatusFragment;
 import com.nutomic.syncthingandroid.model.Options;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -94,6 +95,7 @@ public class MainActivity extends StateDialogActivity
 
     private FolderListFragment mFolderListFragment;
     private DeviceListFragment mDeviceListFragment;
+    private StatusFragment     mStatusFragment;
     private DrawerFragment     mDrawerFragment;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -187,6 +189,8 @@ public class MainActivity extends StateDialogActivity
                             return mFolderListFragment;
                         case 1:
                             return mDeviceListFragment;
+                        case 2:
+                            return mStatusFragment;
                         default:
                             return null;
                     }
@@ -194,7 +198,7 @@ public class MainActivity extends StateDialogActivity
 
                 @Override
                 public int getCount() {
-                    return 2;
+                    return 3;
                 }
 
                 @Override
@@ -204,6 +208,8 @@ public class MainActivity extends StateDialogActivity
                             return getResources().getString(R.string.folders_fragment_title);
                         case 1:
                             return getResources().getString(R.string.devices_fragment_title);
+                        case 2:
+                            return getResources().getString(R.string.status_fragment_title);
                         default:
                             return String.valueOf(position);
                     }
@@ -226,11 +232,14 @@ public class MainActivity extends StateDialogActivity
                     savedInstanceState, FolderListFragment.class.getName());
             mDeviceListFragment = (DeviceListFragment) fm.getFragment(
                     savedInstanceState, DeviceListFragment.class.getName());
+            mStatusFragment = (StatusFragment) fm.getFragment(
+                    savedInstanceState, StatusFragment.class.getName());
             mDrawerFragment = (DrawerFragment) fm.getFragment(
                     savedInstanceState, DrawerFragment.class.getName());
         } else {
             mFolderListFragment = new FolderListFragment();
             mDeviceListFragment = new DeviceListFragment();
+            mStatusFragment = new StatusFragment();
             mDrawerFragment = new DrawerFragment();
         }
 
@@ -287,6 +296,7 @@ public class MainActivity extends StateDialogActivity
             mSyncthingService.unregisterOnServiceStateChangeListener(this);
             mSyncthingService.unregisterOnServiceStateChangeListener(mFolderListFragment);
             mSyncthingService.unregisterOnServiceStateChangeListener(mDeviceListFragment);
+            mSyncthingService.unregisterOnServiceStateChangeListener(mStatusFragment);
         }
     }
 
@@ -298,6 +308,7 @@ public class MainActivity extends StateDialogActivity
         syncthingService.registerOnServiceStateChangeListener(this);
         syncthingService.registerOnServiceStateChangeListener(mFolderListFragment);
         syncthingService.registerOnServiceStateChangeListener(mDeviceListFragment);
+        syncthingService.registerOnServiceStateChangeListener(mStatusFragment);
     }
 
     /**
@@ -315,6 +326,7 @@ public class MainActivity extends StateDialogActivity
         };
         putFragment.accept(mFolderListFragment);
         putFragment.accept(mDeviceListFragment);
+        putFragment.accept(mStatusFragment);
         putFragment.accept(mDrawerFragment);
 
         outState.putInt("currentTab", mViewPager.getCurrentItem());
