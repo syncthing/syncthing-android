@@ -323,6 +323,7 @@ public class MainActivity extends StateDialogActivity
             mSyncthingService.unregisterOnServiceStateChangeListener(this);
             mSyncthingService.unregisterOnServiceStateChangeListener(mFolderListFragment);
             mSyncthingService.unregisterOnServiceStateChangeListener(mDeviceListFragment);
+            mSyncthingService.unregisterOnServiceStateChangeListener(mDrawerFragment);
             mSyncthingService.unregisterOnServiceStateChangeListener(mStatusFragment);
         }
     }
@@ -335,6 +336,7 @@ public class MainActivity extends StateDialogActivity
         syncthingService.registerOnServiceStateChangeListener(this);
         syncthingService.registerOnServiceStateChangeListener(mFolderListFragment);
         syncthingService.registerOnServiceStateChangeListener(mDeviceListFragment);
+        syncthingService.registerOnServiceStateChangeListener(mDrawerFragment);
         syncthingService.registerOnServiceStateChangeListener(mStatusFragment);
     }
 

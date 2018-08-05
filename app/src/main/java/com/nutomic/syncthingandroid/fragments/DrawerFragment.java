@@ -38,7 +38,10 @@ import java.util.TimerTask;
 /**
  * Displays information about the local device.
  */
-public class DrawerFragment extends Fragment implements View.OnClickListener {
+public class DrawerFragment extends Fragment implements SyncthingService.OnServiceStateChangeListener,
+        View.OnClickListener {
+
+    private SyncthingService.State mServiceState = SyncthingService.State.INIT;
 
     private static final String TAG = "DrawerFragment";
 
@@ -48,11 +51,22 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private TextView mUpload;
     private TextView mAnnounceServer;
     private TextView mVersion;
+
+    private TextView mDrawerActionShowQrCode;
+    private TextView mDrawerActionWebGui;
+    private TextView mDrawerActionRestart;
+    private TextView mDrawerActionSettings;
     private TextView mExitButton;
 
     private Timer mTimer;
 
     private MainActivity mActivity;
+
+    @Override
+    public void onServiceStateChange(SyncthingService.State currentState) {
+        mServiceState = currentState;
+        updateButtons();
+    }
 
     public void onDrawerOpened() {
         mTimer = new Timer();
@@ -68,7 +82,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        updateExitButtonVisibility();
+        updateButtons();
     }
 
     public void onDrawerClosed() {
@@ -94,30 +108,25 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mCpuUsage       = view.findViewById(R.id.cpu_usage);
-        mRamUsage       = view.findViewById(R.id.ram_usage);
-        mDownload       = view.findViewById(R.id.download);
-        mUpload         = view.findViewById(R.id.upload);
-        mAnnounceServer = view.findViewById(R.id.announce_server);
-        mVersion        = view.findViewById(R.id.version);
-        mExitButton     = view.findViewById(R.id.drawerActionExit);
+        mCpuUsage               = view.findViewById(R.id.cpu_usage);
+        mRamUsage               = view.findViewById(R.id.ram_usage);
+        mDownload               = view.findViewById(R.id.download);
+        mUpload                 = view.findViewById(R.id.upload);
+        mAnnounceServer         = view.findViewById(R.id.announce_server);
+        mVersion                = view.findViewById(R.id.version);
+        mDrawerActionShowQrCode = view.findViewById(R.id.drawerActionShowQrCode);
+        mDrawerActionWebGui     = view.findViewById(R.id.drawerActionWebGui);
+        mDrawerActionRestart    = view.findViewById(R.id.drawerActionRestart);
+        mDrawerActionSettings   = view.findViewById(R.id.drawerActionSettings);
+        mExitButton             = view.findViewById(R.id.drawerActionExit);
 
-        view.findViewById(R.id.drawerActionWebGui)
-                .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionRestart)
-                .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionSettings)
-                .setOnClickListener(this);
-        view.findViewById(R.id.drawerActionShowQrCode)
-                .setOnClickListener(this);
+        mDrawerActionShowQrCode.setOnClickListener(this);
+        mDrawerActionWebGui.setOnClickListener(this);
+        mDrawerActionRestart.setOnClickListener(this);
+        mDrawerActionSettings.setOnClickListener(this);
         mExitButton.setOnClickListener(this);
 
-        updateExitButtonVisibility();
-    }
-
-    private void updateExitButtonVisibility() {
-        boolean alwaysInBackground = alwaysRunInBackground();
-        mExitButton.setVisibility(alwaysInBackground ? View.GONE : View.VISIBLE);
+        updateButtons();
     }
 
     @Override
@@ -134,6 +143,27 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("active", mTimer != null);
+    }
+
+    /**
+     * Update action button availability.
+     */
+    private void updateButtons() {
+        Boolean synthingRunning = mServiceState == SyncthingService.State.ACTIVE;
+
+        // Show buttons if syncthing is running.
+        mCpuUsage.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mRamUsage.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mDownload.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mUpload.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mAnnounceServer.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mVersion.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mDrawerActionShowQrCode.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mDrawerActionWebGui.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+        mDrawerActionRestart.setVisibility(synthingRunning ? View.VISIBLE : View.GONE);
+
+        // Do not show the exit button if our app runs as a background service.
+        mExitButton.setVisibility(alwaysRunInBackground() ? View.GONE : View.VISIBLE);
     }
 
     /**
