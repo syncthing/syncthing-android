@@ -10,12 +10,14 @@ import android.view.MenuItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+
+import java.util.ArrayList;
 
 /**
  * Displays why syncthing is running or disabled.
@@ -48,11 +50,15 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
             return;
         }
 
+        ArrayList<String> statusItems = new ArrayList<String>();
+
         if (mServiceState == SyncthingService.State.ACTIVE) {
-            //setEmptyText("ToDo StatusFragment ACTIVE");
+            statusItems.add("ToDo StatusFragment ACTIVE");
         } else {
-            //setEmptyText("ToDo StatusFragment DISABLED");
+            statusItems.add("ToDo StatusFragment DISABLED");
         }
+
+        setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
     }
 
 }
