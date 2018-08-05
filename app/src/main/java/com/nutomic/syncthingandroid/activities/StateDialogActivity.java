@@ -42,7 +42,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         mIsPaused = false;
         switch (mServiceState) {
             case DISABLED:
-                showDisabledDialog();
+                // to-remove showDisabledDialog();
                 break;
             default:
                 break;
@@ -53,7 +53,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onPause() {
         super.onPause();
         mIsPaused = true;
-        dismissDisabledDialog();
+        // to-remove dismissDisabledDialog();
         dismissLoadingDialog();
     }
 
@@ -63,7 +63,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         if (getService() != null) {
             getService().unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
-        dismissDisabledDialog();
+        // to-remove dismissDisabledDialog();
     }
 
     private void onServiceStateChange(SyncthingService.State currentState) {
@@ -71,16 +71,16 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         switch (mServiceState) {
             case INIT: // fallthrough
             case STARTING:
-                dismissDisabledDialog();
+                // to-remove dismissDisabledDialog();
                 showLoadingDialog();
                 break;
             case ACTIVE:
-                dismissDisabledDialog();
+                // to-remove dismissDisabledDialog();
                 dismissLoadingDialog();
                 break;
             case DISABLED:
                 if (!mIsPaused) {
-                    showDisabledDialog();
+                    // to-remove showDisabledDialog();
                 }
                 break;
             case ERROR: // fallthrough
@@ -89,6 +89,8 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         }
     }
 
+    /**
+     * to-remove
     private void showDisabledDialog() {
         if (this.isFinishing() && (mDisabledDialog != null)) {
             return;
@@ -114,6 +116,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         Util.dismissDialogSafe(mDisabledDialog, this);
         mDisabledDialog = null;
     }
+    */
 
     /**
      * Shows the loading dialog with the correct text ("creating keys" or "loading").
