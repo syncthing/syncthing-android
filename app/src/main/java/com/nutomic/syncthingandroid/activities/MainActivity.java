@@ -24,7 +24,7 @@ import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -90,6 +90,7 @@ public class MainActivity extends StateDialogActivity
     private Dialog mRestartDialog;
 
     private boolean mBatteryOptimizationDialogDismissed;
+    private SyncthingService.State mSyncthingServiceState = SyncthingService.State.INIT;
 
     private ViewPager mViewPager;
 
@@ -107,6 +108,9 @@ public class MainActivity extends StateDialogActivity
      */
     @Override
     public void onServiceStateChange(SyncthingService.State currentState) {
+        mSyncthingServiceState = currentState;
+        updateViewPager();
+
         switch (currentState) {
             case STARTING:
                 break;
@@ -179,43 +183,6 @@ public class MainActivity extends StateDialogActivity
         return firstInstallTime;
     }
 
-    private final FragmentPagerAdapter mSectionsPagerAdapter =
-            new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-                @Override
-                public Fragment getItem(int position) {
-                    switch (position) {
-                        case 0:
-                            return mFolderListFragment;
-                        case 1:
-                            return mDeviceListFragment;
-                        case 2:
-                            return mStatusFragment;
-                        default:
-                            return null;
-                    }
-                }
-
-                @Override
-                public int getCount() {
-                    return 3;
-                }
-
-                @Override
-                public CharSequence getPageTitle(int position) {
-                    switch (position) {
-                        case 0:
-                            return getResources().getString(R.string.folders_fragment_title);
-                        case 1:
-                            return getResources().getString(R.string.devices_fragment_title);
-                        case 2:
-                            return getResources().getString(R.string.status_fragment_title);
-                        default:
-                            return String.valueOf(position);
-                    }
-                }
-            };
-
     /**
      * Initializes tab navigation.
      */
@@ -243,10 +210,7 @@ public class MainActivity extends StateDialogActivity
             mDrawerFragment = new DrawerFragment();
         }
 
-        mViewPager = findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        TabLayout tabLayout = findViewById(R.id.tabContainer);
-        tabLayout.setupWithViewPager(mViewPager);
+        updateViewPager();
         if (savedInstanceState != null) {
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
             if (savedInstanceState.getBoolean(IS_SHOWING_RESTART_DIALOG)){
@@ -269,6 +233,69 @@ public class MainActivity extends StateDialogActivity
         startService(new Intent(this, SyncthingService.class));
 
         onNewIntent(getIntent());
+    }
+
+    /**
+     * Updates the ViewPager to show tabs depending on the service state.
+     */
+    private void updateViewPager() {
+        FragmentStatePagerAdapter mSectionsPagerAdapter =
+                new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                if (mSyncthingServiceState == SyncthingService.State.ACTIVE) {
+                    switch (position) {
+                        case 0:
+                            return mFolderListFragment;
+                        case 1:
+                            return mDeviceListFragment;
+                        case 2:
+                            return mStatusFragment;
+                        default:
+                            return null;
+                    }
+                } else {
+                    switch (position) {
+                        case 0:
+                            return mStatusFragment;
+                        default:
+                            return null;
+                    }
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return mSyncthingServiceState == SyncthingService.State.ACTIVE ? 3 : 1;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                if (mSyncthingServiceState == SyncthingService.State.ACTIVE) {
+                    switch (position) {
+                        case 0:
+                            return getResources().getString(R.string.folders_fragment_title);
+                        case 1:
+                            return getResources().getString(R.string.devices_fragment_title);
+                        case 2:
+                            return getResources().getString(R.string.status_fragment_title);
+                        default:
+                            return String.valueOf(position);
+                    }
+                } else {
+                    switch (position) {
+                        case 0:
+                            return getResources().getString(R.string.status_fragment_title);
+                        default:
+                            return String.valueOf(position);
+                        }
+                }
+            }
+        };
+        mViewPager = findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        TabLayout tabLayout = findViewById(R.id.tabContainer);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
