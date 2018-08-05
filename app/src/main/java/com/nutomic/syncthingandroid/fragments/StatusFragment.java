@@ -58,7 +58,7 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
             statusItems.add("ToDo StatusFragment DISABLED");
         }
 
-        setListAdapter(new ArrayAdapter(getActivity(), R.layout.item_status_list, statusItems));
+        setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
     }
 
 }
