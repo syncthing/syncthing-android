@@ -25,6 +25,7 @@ import java.util.ArrayList;
  */
 public class StatusFragment extends ListFragment implements SyncthingService.OnServiceStateChangeListener {
 
+    private static final String TAG = "StatusFragment";
     private SyncthingService.State mServiceState = SyncthingService.State.INIT;
 
     @Override
@@ -63,19 +64,23 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
     }
 
     private void updateStatus() {
-        SyncthingActivity activity = (SyncthingActivity) getActivity();
-        if (activity == null || getView() == null || activity.isFinishing()) {
+        SyncthingActivity syncthingActivity = (SyncthingActivity) getActivity();
+        if (syncthingActivity == null || getView() == null || syncthingActivity.isFinishing()) {
+            return;
+        }
+        SyncthingService syncthingService = syncthingActivity.getService();
+        if (syncthingService == null) {
             return;
         }
 
+        // Get explanation why syncthing is running or not running from RunConditionMonitor.
+        String syncthingStateExplantion = getString(mServiceState == SyncthingService.State.ACTIVE ?
+            R.string.syncthing_active : R.string.syncthing_not_running);
+        syncthingStateExplantion += "\n" + syncthingService.getRunDecisionExplanation();
+
+        // Prepare status items for ArrayAdapter.
         ArrayList<String> statusItems = new ArrayList<String>();
-
-        if (mServiceState == SyncthingService.State.ACTIVE) {
-            statusItems.add("ToDo StatusFragment ACTIVE");
-        } else {
-            statusItems.add("ToDo StatusFragment DISABLED");
-        }
-
+        statusItems.add(syncthingStateExplantion.replace("\n", " "));
         setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
     }
 

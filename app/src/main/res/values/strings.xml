@@ -646,6 +646,9 @@ Please report any problems you encounter via Github.</string>
     <string name="reason_not_nonmetered_wifi">Syncthing is not running as you disallowed it to run on metered WiFi connections.</string>
     <string name="reason_on_flight_mode">Syncthing is running as you allowed it to run when flight mode is active.</string>
 
+    <!-- StatusFragment -->
+    <string name="syncthing_not_running">Syncthing is not running</string>
+
     <!-- SyncthingService -->
 
 
