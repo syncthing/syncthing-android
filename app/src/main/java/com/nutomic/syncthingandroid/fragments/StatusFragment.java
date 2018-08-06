@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -75,12 +76,13 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
 
         // Get explanation why syncthing is running or not running from RunConditionMonitor.
         String syncthingStateExplantion = getString(mServiceState == SyncthingService.State.ACTIVE ?
-            R.string.syncthing_active : R.string.syncthing_not_running);
-        syncthingStateExplantion += "\n" + syncthingService.getRunDecisionExplanation();
+            R.string.syncthing_running : R.string.syncthing_not_running);
+        syncthingStateExplantion += " " + getString(R.string.reason) + "\n";
+        syncthingStateExplantion += "- " + syncthingService.getRunDecisionExplanation().trim().replace("\n", "\n- ");
 
         // Prepare status items for ArrayAdapter.
         ArrayList<String> statusItems = new ArrayList<String>();
-        statusItems.add(syncthingStateExplantion.replace("\n", " "));
+        statusItems.add(syncthingStateExplantion);
         setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
     }
 

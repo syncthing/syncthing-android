@@ -34,6 +34,7 @@ Please report any problems you encounter via Github.</string>
     <string name="generic_error">Error</string>
     <string name="grant_permission">Grant permission</string>
     <string name="permission_granted">Permission granted</string>
+    <string name="reason">Reason:</string>
 
     <string name="accept">Accept</string>
 
@@ -137,7 +138,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- StatusFragment -->
     <string name="status_fragment_title">Status</string>
-
+    <string name="syncthing_running">Syncthing is running.</string>
+    <string name="syncthing_not_running">Syncthing is not running.</string>
 
     <!-- DrawerFragment -->
 
@@ -645,9 +647,6 @@ Please report any problems you encounter via Github.</string>
     <string name="reason_on_nonmetered_wifi">Syncthing is allowed to run on non-metered WiFi connections. The active WiFi connection is non-metered.</string>
     <string name="reason_not_nonmetered_wifi">Syncthing is not running as you disallowed it to run on metered WiFi connections.</string>
     <string name="reason_on_flight_mode">Syncthing is running as you allowed it to run when flight mode is active.</string>
-
-    <!-- StatusFragment -->
-    <string name="syncthing_not_running">Syncthing is not running</string>
 
     <!-- SyncthingService -->
 

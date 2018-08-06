@@ -164,7 +164,7 @@ public class RunConditionMonitor {
      */
     private boolean decideShouldRun() {
         Resources res = mContext.getResources();
-        String mRunDecisionExplanation = "";
+        mRunDecisionExplanation = "";
 
         // Get run conditions preferences.
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
