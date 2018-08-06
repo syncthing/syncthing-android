@@ -74,15 +74,35 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
             return;
         }
 
-        // Get explanation why syncthing is running or not running from RunConditionMonitor.
-        String syncthingStateExplantion = getString(mServiceState == SyncthingService.State.ACTIVE ?
-            R.string.syncthing_running : R.string.syncthing_not_running);
-        syncthingStateExplantion += " " + getString(R.string.reason) + "\n";
-        syncthingStateExplantion += "- " + syncthingService.getRunDecisionExplanation().trim().replace("\n", "\n- ");
-
-        // Prepare status items for ArrayAdapter.
+        // Add status line showing the syncthing service state.
         ArrayList<String> statusItems = new ArrayList<String>();
-        statusItems.add(syncthingStateExplantion);
+        switch (mServiceState) {
+            case INIT:
+            case STARTING:
+                statusItems.add(getString(R.string.syncthing_starting));
+                break;
+            case ACTIVE:
+                statusItems.add(getString(R.string.syncthing_running));
+                break;
+            case DISABLED:
+                statusItems.add(getString(R.string.syncthing_not_running));
+                break;
+            case ERROR:
+                statusItems.add(getString(R.string.syncthing_has_crashed));
+                break;
+        }
+
+        // Add explanation why syncthing is (not) running.
+        switch (mServiceState) {
+            case ACTIVE:
+            case DISABLED:
+                statusItems.add(getString(R.string.reason) + "\n" +
+                    "- " + syncthingService.getRunDecisionExplanation().trim().replace("\n", "\n- "));
+            default:
+                break;
+        }
+
+        // Put status items into ArrayAdapter and associate it with the ListView.
         setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
     }
 
