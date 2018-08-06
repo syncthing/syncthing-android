@@ -313,10 +313,6 @@
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Το Syncthing είναι απενεργοποιημένο</string>
-  <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Επιθυμείτε να αλλάξετε τις ρυθμίσεις σας;</string>
-  <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Αλλαγή ρυθμίσεως</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Έξοδος</string>
   <!--Title of the notification shown while syncthing is running and enabled-->

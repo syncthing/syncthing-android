@@ -655,13 +655,6 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_title">Syncthing is disabled</string>
-
-    <!-- Message of the "syncthing disabled" dialog -->
-    <string name="syncthing_disabled_message">Do you want to change the run conditions?</string>
-
-    <!-- Button text on the "syncthing disabled" dialog -->
-    <string name="syncthing_disabled_change_settings">Change Settings</string>
-
     <!-- Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true -->
     <string name="exit">Exit</string>
 
