@@ -40,20 +40,12 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     protected void onResume() {
         super.onResume();
         mIsPaused = false;
-        switch (mServiceState) {
-            case DISABLED:
-                // to-remove showDisabledDialog();
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mIsPaused = true;
-        // to-remove dismissDisabledDialog();
         dismissLoadingDialog();
     }
 
@@ -63,7 +55,6 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         if (getService() != null) {
             getService().unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
-        // to-remove dismissDisabledDialog();
     }
 
     private void onServiceStateChange(SyncthingService.State currentState) {
@@ -71,52 +62,17 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         switch (mServiceState) {
             case INIT: // fallthrough
             case STARTING:
-                // to-remove dismissDisabledDialog();
                 showLoadingDialog();
                 break;
             case ACTIVE:
-                // to-remove dismissDisabledDialog();
                 dismissLoadingDialog();
                 break;
-            case DISABLED:
-                if (!mIsPaused) {
-                    // to-remove showDisabledDialog();
-                }
-                break;
+            case DISABLED: // fallthrough
             case ERROR: // fallthrough
             default:
                 break;
         }
     }
-
-    /**
-     * to-remove
-    private void showDisabledDialog() {
-        if (this.isFinishing() && (mDisabledDialog != null)) {
-            return;
-        }
-        mDisabledDialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.syncthing_disabled_title)
-                .setMessage(R.string.syncthing_disabled_message)
-                .setPositiveButton(R.string.syncthing_disabled_change_settings,
-                        (dialogInterface, i) -> {
-                            Intent intent = new Intent(this, SettingsActivity.class);
-                            intent.putExtra(SettingsActivity.EXTRA_OPEN_SUB_PREF_SCREEN, "category_run_conditions");
-                            startActivity(intent);
-                        }
-                )
-                .setNegativeButton(R.string.exit,
-                        (dialogInterface, i) -> ActivityCompat.finishAffinity(this)
-                )
-                .setCancelable(false)
-                .show();
-    }
-
-    private void dismissDisabledDialog() {
-        Util.dismissDialogSafe(mDisabledDialog, this);
-        mDisabledDialog = null;
-    }
-    */
 
     /**
      * Shows the loading dialog with the correct text ("creating keys" or "loading").
