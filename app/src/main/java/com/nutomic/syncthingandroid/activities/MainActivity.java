@@ -118,7 +118,6 @@ public class MainActivity extends StateDialogActivity
                 getIntent().putExtra(this.EXTRA_KEY_GENERATION_IN_PROGRESS, false);
                 showBatteryOptimizationDialogIfNecessary();
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                mDrawerFragment.requestGuiUpdate();
 
                 // Check if the usage reporting minimum delay passed by.
                 Boolean usageReportingDelayPassed = (new Date().getTime() > getFirstStartTime() + USAGE_REPORTING_DIALOG_DELAY);
@@ -442,18 +441,6 @@ public class MainActivity extends StateDialogActivity
     private class Toggle extends ActionBarDrawerToggle {
         public Toggle(Activity activity, DrawerLayout drawerLayout) {
             super(activity, drawerLayout, R.string.app_name, R.string.app_name);
-        }
-
-        @Override
-        public void onDrawerOpened(View drawerView) {
-            super.onDrawerOpened(drawerView);
-            mDrawerFragment.onDrawerOpened();
-        }
-
-        @Override
-        public void onDrawerClosed(View view) {
-            super.onDrawerClosed(view);
-            mDrawerFragment.onDrawerClosed();
         }
 
         @Override

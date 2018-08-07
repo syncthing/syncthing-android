@@ -159,7 +159,7 @@ Please report any problems you encounter via Github.</string>
     <string name="ram_usage">RAM Usage</string>
 
     <!-- Title for announce server status -->
-    <string name="announce_server">Announce Server</string>
+    <string name="announce_server">Configured Announce Server</string>
 
     <string name="restart">Restart</string>
 
