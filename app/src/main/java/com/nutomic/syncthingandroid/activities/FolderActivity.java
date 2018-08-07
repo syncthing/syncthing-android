@@ -561,7 +561,6 @@ public class FolderActivity extends SyncthingActivity
         if (mCanWriteToPath) {
             mAccessExplanationView.setText(R.string.folder_path_readwrite);
             mFolderTypeView.setEnabled(true);
-            mFolderTypeDescriptionView.setEnabled(true);
             mEditIgnores.setEnabled(true);
             if (mIsCreateMode) {
                 /**
@@ -576,7 +575,6 @@ public class FolderActivity extends SyncthingActivity
             // Force "sendonly" folder.
             mAccessExplanationView.setText(R.string.folder_path_readonly);
             mFolderTypeView.setEnabled(false);
-            mFolderTypeDescriptionView.setEnabled(false);
             mEditIgnores.setEnabled(false);
             mFolder.type = Constants.FOLDER_TYPE_SEND_ONLY;
         }
