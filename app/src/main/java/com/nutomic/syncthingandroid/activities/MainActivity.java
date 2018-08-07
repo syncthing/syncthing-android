@@ -108,8 +108,10 @@ public class MainActivity extends StateDialogActivity
      */
     @Override
     public void onServiceStateChange(SyncthingService.State currentState) {
-        mSyncthingServiceState = currentState;
-        updateViewPager();
+        if (currentState != mSyncthingServiceState) {
+            mSyncthingServiceState = currentState;
+            updateViewPager();
+        }
 
         switch (currentState) {
             case STARTING:
