@@ -49,8 +49,10 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
     };
 
     private MainActivity mActivity;
+    private ArrayAdapter mAdapter;
     private SyncthingService.State mServiceState = SyncthingService.State.INIT;
     private final Handler mRestApiQueryHandler = new Handler();
+    private Boolean mLastVisibleToUser = false;
 
     /**
      * Object that must be locked upon accessing the status holders.
@@ -67,33 +69,30 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
     private String mAnnounceServer = "";
 
     @Override
-    public void onServiceStateChange(SyncthingService.State currentState) {
-        mServiceState = currentState;
-        switch (mServiceState) {
-            case ACTIVE:
-                mRestApiQueryHandler.postDelayed(mRestApiQueryRunnable, Constants.GUI_UPDATE_INTERVAL);
-                break;
-            default:
-                mRestApiQueryHandler.removeCallbacks(mRestApiQueryRunnable);
-                break;
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && !mLastVisibleToUser) {
+            // User switched to the current tab, start handler.
+            mRestApiQueryHandler.post(mRestApiQueryRunnable);
+
+        } else if (!isVisibleToUser && mLastVisibleToUser) {
+            // User switched away to another tab, stop handler.
+            mRestApiQueryHandler.removeCallbacks(mRestApiQueryRunnable);
         }
-        updateStatus();
+        mLastVisibleToUser = isVisibleToUser;
     }
 
     @Override
     public void onPause() {
-        Log.v(TAG, "onPause");
-        super.onPause();
         mRestApiQueryHandler.removeCallbacks(mRestApiQueryRunnable);
+        super.onPause();
     }
 
     @Override
-    public void onResume() {
-        Log.v(TAG, "onResume");
-        super.onResume();
-        if (mServiceState == SyncthingService.State.ACTIVE) {
-            mRestApiQueryHandler.postDelayed(mRestApiQueryRunnable, Constants.GUI_UPDATE_INTERVAL);
-        }
+    public void onServiceStateChange(SyncthingService.State currentState) {
+        mServiceState = currentState;
+        updateStatus();
     }
 
     @Override
@@ -103,15 +102,10 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
     }
 
     @Override
-    public void onDestroyView() {
-        Log.v(TAG, "onDestroyView");
-        mRestApiQueryHandler.removeCallbacks(mRestApiQueryRunnable);
-        super.onDestroyView();
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1);
+        setListAdapter(mAdapter);
         setHasOptionsMenu(true);
         updateStatus();
     }
@@ -197,15 +191,21 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
             }
         }
 
-        // Put status items into ArrayAdapter and associate it with the ListView.
-        setListAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, statusItems));
+        // Update list contents.
+        mAdapter.setNotifyOnChange(false);
+        mAdapter.clear();
+        mAdapter.addAll(statusItems);
+        mAdapter.notifyDataSetChanged();
     }
 
     /**
-     * Invokes status callbacks via syncthing's REST API.
+     * Invokes status callbacks via syncthing's REST API
+     * while the user is looking at the current tab.
      */
     private void onTimerEvent() {
-        Log.v(TAG, "onTimerEvent 1");
+        if (mServiceState != SyncthingService.State.ACTIVE) {
+            return;
+        }
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity == null) {
             return;
@@ -213,13 +213,11 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
         if (mainActivity.isFinishing()) {
             return;
         }
-        // ToDo if (!Tab-isVisibleToTheUser) { return }
-        Log.v(TAG, "onTimerEvent 2");
         RestApi restApi = mainActivity.getApi();
         if (restApi == null) {
             return;
         }
-        Log.v(TAG, "onTimerEvent 3");
+        Log.v(TAG, "Invoking REST status queries");
         restApi.getSystemInfo(this::onReceiveSystemInfo);
         restApi.getConnections(this::onReceiveConnections);
     }
