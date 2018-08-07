@@ -260,6 +260,11 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void showFolderTypeDialog() {
+        if (TextUtils.isEmpty(mFolder.path)) {
+            Toast.makeText(this, R.string.folder_path_required, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
         if (!mCanWriteToPath) {
             /**
              * Do not handle the click as the children in the folder type layout are disabled
