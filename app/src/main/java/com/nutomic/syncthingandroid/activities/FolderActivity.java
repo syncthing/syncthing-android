@@ -86,6 +86,8 @@ public class FolderActivity extends SyncthingActivity
     private Folder mFolder;
     // Contains SAF readwrite access URI on API level >= Build.VERSION_CODES.LOLLIPOP (21)
     private Uri mFolderUri = null;
+    // Indicates the result of the write test to mFolder.path on dialog init or after a path change.
+    Boolean mCanWriteToPath = false;
 
     private EditText mLabelView;
     private EditText mIdView;
@@ -258,6 +260,15 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void showFolderTypeDialog() {
+        if (!mCanWriteToPath) {
+            /**
+             * Do not handle the click as the children in the folder type layout are disabled
+             * and an explanation is already given on the UI why the only allowed folder type
+             * is "sendonly".
+            */
+            return;
+        }
+        // The user selected folder path is writeable, offer to choose from all available folder types.
         Intent intent = new Intent(this, FolderTypeDialogActivity.class);
         intent.putExtra(FolderTypeDialogActivity.EXTRA_FOLDER_TYPE, mFolder.type);
         startActivityForResult(intent, FOLDER_TYPE_DIALOG_REQUEST);
@@ -546,23 +557,28 @@ public class FolderActivity extends SyncthingActivity
          * Access level readonly: folder can only be configured "sendonly".
          * Access level readwrite: folder can be configured "sendonly" or "sendreceive".
          */
-        Boolean canWrite = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
-        if (canWrite) {
-            /**
-             * The user most probably intentionally chose a special folder like
-             * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
-             * or enabled root mode thus having write access.
-             */
+        mCanWriteToPath = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
+        if (mCanWriteToPath) {
             mAccessExplanationView.setText(R.string.folder_path_readwrite);
             mFolderTypeView.setEnabled(true);
             mFolderTypeDescriptionView.setEnabled(true);
             mEditIgnores.setEnabled(true);
+            if (mIsCreateMode) {
+                /**
+                 * Suggest folder type FOLDER_TYPE_SEND_RECEIVE for folders to be created
+                 * because the user most probably intentionally chose a special folder like
+                 * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
+                 * or enabled root mode thus having write access.
+                 */
+                mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;
+            }
         } else {
             // Force "sendonly" folder.
             mAccessExplanationView.setText(R.string.folder_path_readonly);
             mFolderTypeView.setEnabled(false);
             mFolderTypeDescriptionView.setEnabled(false);
             mEditIgnores.setEnabled(false);
+            mFolder.type = Constants.FOLDER_TYPE_SEND_ONLY;
         }
     }
 
