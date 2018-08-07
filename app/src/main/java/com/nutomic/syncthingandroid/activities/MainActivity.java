@@ -191,6 +191,7 @@ public class MainActivity extends StateDialogActivity
 
         setContentView(R.layout.activity_main);
         mDrawerLayout = findViewById(R.id.drawer_layout);
+        mViewPager = findViewById(R.id.pager);
 
         FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState != null) {
@@ -202,14 +203,20 @@ public class MainActivity extends StateDialogActivity
                     savedInstanceState, StatusFragment.class.getName());
             mDrawerFragment = (DrawerFragment) fm.getFragment(
                     savedInstanceState, DrawerFragment.class.getName());
-        } else {
+        }
+        if (mFolderListFragment == null) {
             mFolderListFragment = new FolderListFragment();
+        }
+        if (mDeviceListFragment == null) {
             mDeviceListFragment = new DeviceListFragment();
+        }
+        if (mStatusFragment == null) {
             mStatusFragment = new StatusFragment();
+        }
+        if (mDrawerFragment == null) {
             mDrawerFragment = new DrawerFragment();
         }
 
-        updateViewPager();
         if (savedInstanceState != null) {
             mViewPager.setCurrentItem(savedInstanceState.getInt("currentTab"));
             if (savedInstanceState.getBoolean(IS_SHOWING_RESTART_DIALOG)){
@@ -219,6 +226,8 @@ public class MainActivity extends StateDialogActivity
             if(savedInstanceState.getBoolean(IS_QRCODE_DIALOG_DISPLAYED)) {
                 showQrCodeDialog(savedInstanceState.getString(DEVICEID_KEY), savedInstanceState.getParcelable(QRCODE_BITMAP_KEY));
             }
+        } else {
+            updateViewPager();
         }
 
         fm.beginTransaction().replace(R.id.drawer, mDrawerFragment).commit();
@@ -240,6 +249,7 @@ public class MainActivity extends StateDialogActivity
     private void updateViewPager() {
         FragmentStatePagerAdapter mSectionsPagerAdapter =
                 new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+
             @Override
             public Fragment getItem(int position) {
                 if (mSyncthingServiceState == SyncthingService.State.ACTIVE) {
@@ -261,6 +271,11 @@ public class MainActivity extends StateDialogActivity
                             return null;
                     }
                 }
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return this.POSITION_NONE;
             }
 
             @Override
@@ -291,7 +306,6 @@ public class MainActivity extends StateDialogActivity
                 }
             }
         };
-        mViewPager = findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.tabContainer);
         tabLayout.setupWithViewPager(mViewPager);
