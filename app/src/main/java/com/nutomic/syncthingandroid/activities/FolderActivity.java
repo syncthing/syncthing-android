@@ -271,6 +271,8 @@ public class FolderActivity extends SyncthingActivity
              * and an explanation is already given on the UI why the only allowed folder type
              * is "sendonly".
             */
+            Toast.makeText(this, R.string.folder_path_readonly, Toast.LENGTH_LONG)
+                    .show();
             return;
         }
         // The user selected folder path is writeable, offer to choose from all available folder types.
