@@ -12,19 +12,22 @@
     <string name="welcome_title">Welcome to Syncthing for Android</string>
 
     <!-- Welcome wizard -->
-    <!-- Slide 1 -->
+    <!-- Slide "Introduction" -->
     <string name="introduction">Introduction</string>
     <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
 To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
 Please report any problems you encounter via Github.</string>
 
-    <!-- Slide 2 -->
+    <!-- Slide "Storage Permission" -->
     <string name="storage_permission_title">Storage Permission</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
 
-    <!-- Slide 3 -->
+    <!-- Slide "Location Permission"" -->
     <string name="location_permission_title">Location Permission</string>
     <string name="location_permission_desc">Syncthing can be configured to run on selected wifi networks. Android requires applications to have location permissions to be able look up active WiFi network name, as you can sometimes infer users location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise you can skip this step.</string>
+
+    <!-- Slide "Key Generation" -->
+    <string name="key_generation_title">Key Generation</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>

@@ -66,7 +66,8 @@ public class FirstStartActivity extends Activity {
          * Recheck storage permission. If it has been revoked after the user
          * completed the welcome slides, displays the slides again.
          */
-        if (!mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
+        // ToDo Remove "false && "
+        if (false && !mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
                 haveStoragePermission()) {
             startApp();
             return;
@@ -96,9 +97,11 @@ public class FirstStartActivity extends Activity {
 
         // Layouts of all welcome slides
         mLayouts = new int[]{
-                R.layout.activity_firststart_slide1,
-                R.layout.activity_firststart_slide2,
-                R.layout.activity_firststart_slide3};
+            R.layout.activity_firststart_slide1,
+            R.layout.activity_firststart_slide2,
+            R.layout.activity_firststart_slide3,
+            R.layout.activity_firststart_slide4
+        };
 
         // Add bottom dots
         addBottomDots(0);
