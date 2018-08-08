@@ -70,8 +70,7 @@ public class FirstStartActivity extends Activity {
          * Recheck storage permission. If it has been revoked after the user
          * completed the welcome slides, displays the slides again.
          */
-        // ToDo Remove "false && "
-        if (false && !mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
+        if (!mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
                 haveStoragePermission()) {
             startApp();
             return;
@@ -365,43 +364,43 @@ public class FirstStartActivity extends Activity {
     /**
      * Sets up the initial configuration and generates secure keys.
      */
-     private static class KeyGenerationTask extends AsyncTask<Void, Void, Void> {
-         private WeakReference<FirstStartActivity> refFirstStartActivity;
-         ConfigXml configXml;
+    private static class KeyGenerationTask extends AsyncTask<Void, Void, Void> {
+        private WeakReference<FirstStartActivity> refFirstStartActivity;
+        ConfigXml configXml;
 
-         KeyGenerationTask(FirstStartActivity context) {
-             refFirstStartActivity = new WeakReference<>(context);
-         }
+        KeyGenerationTask(FirstStartActivity context) {
+            refFirstStartActivity = new WeakReference<>(context);
+        }
 
-         @Override
-         protected Void doInBackground(Void... voids) {
-             FirstStartActivity firstStartActivity = refFirstStartActivity.get();
-             if (firstStartActivity == null) {
-                 cancel(true);
-                 return null;
-             }
-             try {
-                 configXml = new ConfigXml(firstStartActivity);
-             } catch (ConfigXml.OpenConfigException e) {
-                 TextView keygenStatus = firstStartActivity.findViewById(R.id.key_generation_status);
-                 keygenStatus.setText(firstStartActivity.getString(R.string.config_create_failed));
-                 cancel(true);
-             }
-             return null;
-         }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            FirstStartActivity firstStartActivity = refFirstStartActivity.get();
+            if (firstStartActivity == null) {
+                cancel(true);
+                return null;
+            }
+            try {
+                configXml = new ConfigXml(firstStartActivity);
+            } catch (ConfigXml.OpenConfigException e) {
+                TextView keygenStatus = firstStartActivity.findViewById(R.id.key_generation_status);
+                keygenStatus.setText(firstStartActivity.getString(R.string.config_create_failed));
+                cancel(true);
+            }
+            return null;
+        }
 
-         @Override
-         protected void onPostExecute(Void aVoid) {
-             // Get a reference to the activity if it is still there.
-             FirstStartActivity firstStartActivity = refFirstStartActivity.get();
-             if (firstStartActivity == null) {
-                 return;
-             }
-             TextView keygenStatus = (TextView) firstStartActivity.findViewById(R.id.key_generation_status);
-             keygenStatus.setText(firstStartActivity.getString(R.string.key_generation_success));
-             Button nextButton = (Button) firstStartActivity.findViewById(R.id.btn_next);
-             nextButton.setVisibility(View.VISIBLE);
-         }
-     }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            // Get a reference to the activity if it is still there.
+            FirstStartActivity firstStartActivity = refFirstStartActivity.get();
+            if (firstStartActivity == null) {
+                return;
+            }
+            TextView keygenStatus = (TextView) firstStartActivity.findViewById(R.id.key_generation_status);
+            keygenStatus.setText(firstStartActivity.getString(R.string.key_generation_success));
+            Button nextButton = (Button) firstStartActivity.findViewById(R.id.btn_next);
+            nextButton.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
