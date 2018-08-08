@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.Manifest;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,7 +34,9 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.util.ConfigXml;
 
+import java.lang.ref.WeakReference;
 import javax.inject.Inject;
 
 public class FirstStartActivity extends Activity {
@@ -42,6 +45,7 @@ public class FirstStartActivity extends Activity {
     private static final int REQUEST_COARSE_LOCATION = 141;
     private static final int REQUEST_WRITE_STORAGE = 142;
     private static final int SLIDE_POS_LOCATION_PERMISSION = 1;
+    private static final int SLIDE_POS_KEY_GENERATION = 3;
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -155,6 +159,9 @@ public class FirstStartActivity extends Activity {
             // Move to next slide.
             mViewPager.setCurrentItem(current);
             mBackButton.setVisibility(View.VISIBLE);
+            if (current == SLIDE_POS_KEY_GENERATION) {
+                onKeyGenerationSlideShown();
+            }
         } else {
             // Start the app after "mNextButton" was hit on the last slide.
             Log.v(TAG, "User completed first start UI.");
@@ -345,5 +352,56 @@ public class FirstStartActivity extends Activity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+    /**
+     * Perform secure key generation in an AsyncTask.
+     */
+    private void onKeyGenerationSlideShown() {
+        mNextButton.setVisibility(View.GONE);
+        KeyGenerationTask keyGenerationTask = new KeyGenerationTask(this);
+        keyGenerationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    /**
+     * Sets up the initial configuration and generates secure keys.
+     */
+     private static class KeyGenerationTask extends AsyncTask<Void, Void, Void> {
+         private WeakReference<FirstStartActivity> refFirstStartActivity;
+         ConfigXml configXml;
+
+         KeyGenerationTask(FirstStartActivity context) {
+             refFirstStartActivity = new WeakReference<>(context);
+         }
+
+         @Override
+         protected Void doInBackground(Void... voids) {
+             FirstStartActivity firstStartActivity = refFirstStartActivity.get();
+             if (firstStartActivity == null) {
+                 cancel(true);
+                 return null;
+             }
+             try {
+                 configXml = new ConfigXml(firstStartActivity);
+             } catch (ConfigXml.OpenConfigException e) {
+                 TextView keygenStatus = firstStartActivity.findViewById(R.id.key_generation_status);
+                 keygenStatus.setText(firstStartActivity.getString(R.string.config_create_failed));
+                 cancel(true);
+             }
+             return null;
+         }
+
+         @Override
+         protected void onPostExecute(Void aVoid) {
+             // Get a reference to the activity if it is still there.
+             FirstStartActivity firstStartActivity = refFirstStartActivity.get();
+             if (firstStartActivity == null) {
+                 return;
+             }
+             TextView keygenStatus = (TextView) firstStartActivity.findViewById(R.id.key_generation_status);
+             keygenStatus.setText(firstStartActivity.getString(R.string.key_generation_success));
+             Button nextButton = (Button) firstStartActivity.findViewById(R.id.btn_next);
+             nextButton.setVisibility(View.VISIBLE);
+         }
+     }
 
 }
