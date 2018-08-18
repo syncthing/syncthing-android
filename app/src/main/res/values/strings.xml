@@ -654,7 +654,7 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_terminated">Syncthing was terminated</string>
 
     <!-- Toast shown if syncthing failed to create a config -->
-    <string name="config_create_failed">Failed to create the config. Backup your sync data, then clear this app\'s data from Android settings.</string>
+    <string name="config_create_failed">Failed to create configuration. Consider backing up your sync data, then clear this app\'s data from Android settings.</string>
 
     <!-- Toast shown if a config file crucial to operation is missing -->
     <string name="config_file_missing">A config file crucial to operation is missing</string>
