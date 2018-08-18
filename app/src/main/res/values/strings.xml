@@ -28,7 +28,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Slide "Key Generation" -->
     <string name="key_generation_title">Key Generation</string>
-    <string name="key_generation_success">Secure keys for private data exchange have been successfully generated. Enjoy Syncthing.</string>
+    <string name="key_generation_success">Secure keys for private data exchange have been successfully generated.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
