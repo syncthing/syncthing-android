@@ -45,15 +45,15 @@ public class FirstStartActivity extends Activity {
     private static final int REQUEST_COARSE_LOCATION = 141;
     private static final int REQUEST_WRITE_STORAGE = 142;
 
-    private class Slide {
+    private static class Slide {
         public int layout;
         public int dotColorActive;
         public int dotColorInActive;
 
-        Slide (int iLayout, int iDotColorActive, int iDotColorInActive) {
-            layout = iLayout;
-            dotColorActive = iDotColorActive;
-            dotColorInActive = iDotColorInActive;
+        Slide (int layout, int dotColorActive, int dotColorInActive) {
+            this.layout = layout;
+            this.dotColorActive = dotColorActive;
+            this.dotColorInActive = dotColorInActive;
         }
     }
 
