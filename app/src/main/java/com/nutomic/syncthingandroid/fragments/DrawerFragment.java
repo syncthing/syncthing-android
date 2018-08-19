@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private Timer mTimer;
 
     private MainActivity mActivity;
+    private SharedPreferences sharedPreferences = null;
 
     public void onDrawerOpened() {
         mTimer = new Timer();
@@ -94,6 +96,8 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        
         mCpuUsage       = view.findViewById(R.id.cpu_usage);
         mRamUsage       = view.findViewById(R.id.ram_usage);
         mDownload       = view.findViewById(R.id.download);
@@ -273,6 +277,15 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private boolean alwaysRunInBackground() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        return sp.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
+        return sp.getBoolean(Constants.PREF_START_SERVICE_ON_BOOT, false);
+    }
+
+    private void doExit() {
+        if (mActivity == null || mActivity.isFinishing()) {
+            return;
+        }
+        Log.i(TAG, "Exiting app on user request");
+        mActivity.stopService(new Intent(mActivity, SyncthingService.class));
+        mActivity.finish();
     }
 }

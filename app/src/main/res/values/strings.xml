@@ -43,6 +43,10 @@ Please report any problems you encounter via Github.</string>
 
 
 
+    <!-- Title of the exit app when running as a service confirmation dialog -->
+    <string name="dialog_exit_while_running_as_service_title">Confirm to quit app</string>
+    <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device rebooted?</string>
+
     <!-- Title of the "add folder" menu action -->
     <string name="add_folder">Add Folder</string>
 
@@ -134,6 +138,13 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title for current upload rate -->
     <string name="upload_title">Upload</string>
+
+    <!-- StatusFragment -->
+    <string name="status_fragment_title">Status</string>
+    <string name="syncthing_starting">Syncthing is starting.</string>
+    <string name="syncthing_running">Syncthing is running.</string>
+    <string name="syncthing_not_running">Syncthing is not running.</string>
+    <string name="syncthing_has_crashed">Syncthing has crashed.</string>
 
     <!-- DrawerFragment -->
 
