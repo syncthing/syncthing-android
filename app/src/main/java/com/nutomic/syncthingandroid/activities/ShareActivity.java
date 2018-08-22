@@ -50,7 +50,7 @@ import java.util.Map;
  * ownCloud Android {@see https://github.com/owncloud/android/blob/79664304fdb762b2e04f1ac505f50d0923ddd212/src/com/owncloud/android/utils/UriUtils.java#L193}
  */
 public class ShareActivity extends SyncthingActivity
-        implements SyncthingService.OnServiceStateChangeListener {
+        implements SyncthingService.OnServiceStateChangeListener  {
 
     private static final String TAG = "ShareActivity";
     private static final String PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER = "previously_selected_syncthing_folder";
