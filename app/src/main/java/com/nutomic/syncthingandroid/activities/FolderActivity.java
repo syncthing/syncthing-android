@@ -577,6 +577,7 @@ public class FolderActivity extends SyncthingActivity
                  * or enabled root mode thus having write access.
                  */
                 mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;
+                updateFolderTypeDescription();
             }
         } else {
             // Force "sendonly" folder.
@@ -584,6 +585,7 @@ public class FolderActivity extends SyncthingActivity
             mFolderTypeView.setEnabled(false);
             mEditIgnores.setEnabled(false);
             mFolder.type = Constants.FOLDER_TYPE_SEND_ONLY;
+            updateFolderTypeDescription();
         }
     }
 
