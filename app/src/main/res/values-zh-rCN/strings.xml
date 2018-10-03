@@ -64,6 +64,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">连接断开</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">未知</string>
   <!--Title for current download rate-->
   <string name="download_title">下载速度</string>
@@ -166,7 +167,6 @@
   <string name="category_experimental">实验性</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">运行条件</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开无线网络连接并选择网络</string>
   <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>

@@ -76,6 +76,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="device_disconnected">Desconnectat</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">En pausa</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Desconegut</string>
   <!--Title for current download rate-->
   <string name="download_title">Descàrrega</string>
@@ -184,15 +185,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="run_conditions_title">Condicions d\'execució</string>
   <string name="run_conditions_summary">Utilitzeu les següents opcions per decidir quan s\'executarà el Syncthing.</string>
   <string name="run_on_mobile_data_title">Executa amb dades mòbils</string>
-  <string name="run_on_wifi_title">Executa amb wifi</string>
-  <string name="run_on_metered_wifi_title">Executa en wifi controlada</string>
-  <string name="run_on_whitelisted_wifi_title">Executa en xarxes wifi específiques</string>
-  <string name="run_on_whitelisted_wifi_networks">Executa només a les xarxes wifi seleccionades: %1$s</string>
-  <string name="run_on_all_wifi_networks">Executa en totes les xarxes wifi</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Enceneu el WiFi per seleccionar xarxes.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Heu de proporcionar el permís d\'UBICACIÓ per poder fer això.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Calen permisos</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir de l\'Android 8.1, cal tenir accés a la ubicació per poder llegir el nom de la WiFi. Només ho podreu fer si concediu aquest permís.</string>
   <string name="power_source_title">Executa quan el dispositiu estigui encès</string>
   <string name="respect_battery_saving_title">Respecta la configuració d\'estalvi de bateria de l\'Android</string>
   <string name="respect_battery_saving_summary">Desactiva el Syncthing durant el mode d\'estalvi de bateria.</string>

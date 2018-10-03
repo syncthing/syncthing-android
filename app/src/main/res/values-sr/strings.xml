@@ -23,6 +23,7 @@
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <!--Indicates that there is no connection to the device-->
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--DrawerFragment-->

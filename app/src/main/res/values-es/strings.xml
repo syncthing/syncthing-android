@@ -54,6 +54,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Desconectado</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Desconocido</string>
   <!--Title for current download rate-->
   <string name="download_title">Descarga</string>
@@ -153,7 +154,6 @@
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condiciones de ejecución</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor enciende el wifi para seleccionar redes.</string>
   <string name="respect_battery_saving_title">Respeta la configuración de ahorro de batería de Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar selección avanzada de carpeta</string>

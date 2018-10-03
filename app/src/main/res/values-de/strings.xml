@@ -16,7 +16,6 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <string name="storage_permission_desc">Syncthing muss auf den Speicher zugreifen können, um Dateien zu synchronisieren.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Standort-Berechtigung</string>
-  <string name="location_permission_desc">Syncthing kann eingestellt werden, nur in bestimmten WLAN-Netzwerken zu laufen. Android erfordert, dass Apps die Standortberechtigung haben müssen, um den Namen des gerade verbundenen WLAN-Netzwerks ermitteln zu können, da diese potentiell den Standort des Nutzers aus dem Namen des Netzwerks ableiten können. Wenn du diese Funktion nutzen möchtest, klicke die Schaltfläche, um Syncthing die dafür benötigte Berechtigung zu erteilen. Andernfalls kannst du diesen Schritt auslassen.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Zurück</string>
   <string name="cont">Weiter</string>
@@ -78,6 +77,7 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <string name="device_disconnected">Getrennt</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Pausiert</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Unbekannt</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
@@ -190,17 +190,8 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <string name="run_conditions_summary">Benutze die folgenden Optionen, um zu entscheiden, wann Syncthing läuft.</string>
   <string name="run_on_mobile_data_title">Starte bei mobiler Datenverbindung</string>
   <string name="run_on_mobile_data_summary">Starte, wenn das Gerät über das mobile Datennetzwerk verbunden ist. Warnung: Wenn Du große Datenmengen synchronisierst, kann dies einen hohen Verbrauch deines mobilen Datentarifs verursachen.</string>
-  <string name="run_on_wifi_title">Starte bei WLAN-Verbindung</string>
-  <string name="run_on_wifi_summary">Starte, wenn das Gerät mit einem WLAN-Netzwerk verbunden ist.</string>
-  <string name="run_on_metered_wifi_title">Starte bei getakteter WLAN-Verbindung</string>
-  <string name="run_on_metered_wifi_summary">Starte, wenn das Gerät mit einem getakteten WLAN-Netzwerk wie z. B. einem Hotspot- oder Tethering-Netzwerk verbunden ist. Achtung: Dies kann einen großen Anteil des mobilen Datenvolumens verbrauchen, wenn Du viele Dateien synchronisierst.</string>
-  <string name="run_on_whitelisted_wifi_title">Starte in festgelegten WLAN-Netzwerken</string>
-  <string name="run_on_whitelisted_wifi_networks">Starte nur in ausgewählten WLAN-Netzwerken: %1$s</string>
-  <string name="run_on_all_wifi_networks">Starte in allen WLAN-Netzwerken.</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um eines zu wählen.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bitte gewähre die Standort-Berechtigung, um diese Funktion nutzen zu können.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Berechtigung benötigt</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Mit Android 8.1 beginnend wird der Standortzugriff dazu benötigt, den WLAN-Namen zu ermitteln. Daher kann diese Funktion nur genutzt werden, wenn diese Berechtigung erteilt wird.</string>
   <string name="power_source_title">Starte, wenn Gerät betrieben per</string>
   <string-array name="power_source_entries">
     <item>Ladegerät und Batterie</item>
@@ -212,7 +203,6 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <string name="respect_master_sync_title">Berücksichtige \"Autom. Datensynchronisierung\"</string>
   <string name="respect_master_sync_summary">Stoppt Syncthing sobald die \"Automatische Datensynchronisierung\"  in Android ausgeschaltet wird.</string>
   <string name="run_in_flight_mode_title">Starte im Flugzeugmodus</string>
-  <string name="run_in_flight_mode_summary">Aktiviere dies, wenn dein Telefon Probleme beim Erkennen von manuell hergestellten WLAN-Verbindungen im Flugmodus hat.</string>
   <string name="service_settings_title">Diensteinstellung</string>
   <string name="service_settings_summary">Führt Syncthing als Dienst aus. Fügt eine permanente Benachrichtigung hinzu, um das Beenden des Diensts durch Android zu verhindern. Wenn Du diese Option aktivierst, wird Syncthing beim Hochfahren gestartet.</string>
   <string name="run_as_background_service">Starte den Dienst automatisch beim Hochfahren</string>

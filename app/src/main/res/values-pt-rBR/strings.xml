@@ -66,6 +66,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="device_disconnected">Desconectado</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Pausado</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Desconhecido</string>
   <!--Title for current download rate-->
   <string name="download_title">Recepção</string>
@@ -172,10 +173,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="category_experimental">Configurações experimentais</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condições de execução</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para selecionar as redes</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Você precisa dar permissão de localização para usar esse recurso.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permissão requerida</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Iniciando com o Android 8.1, acesso a localização é necessário para ler o nome do WIFI. Você pode usar esse recurso se conceder essa permissão.</string>
   <string name="respect_battery_saving_title">Honrar a configuração de economia de bateria do Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>

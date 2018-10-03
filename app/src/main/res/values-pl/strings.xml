@@ -65,6 +65,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Rozłączony</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Nieznany</string>
   <!--Title for current download rate-->
   <string name="download_title">Pobieranie</string>
@@ -167,7 +168,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="category_experimental">Eksperymentalne</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Warunki działania</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Proszę włącz WiFi dla wybranych sieci</string>
   <string name="respect_battery_saving_title">Respektuj ustawienia oszczędzania energii Androida</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Zaawansowane wybieranie katalogów</string>

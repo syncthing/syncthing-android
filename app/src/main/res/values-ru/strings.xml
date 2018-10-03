@@ -68,6 +68,7 @@
   <string name="device_disconnected">Отсоединено</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Остановлено</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Неизвестно</string>
   <!--Title for current download rate-->
   <string name="download_title">Скачивание</string>
@@ -174,10 +175,8 @@
   <string name="category_experimental">Экспериментальное</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Условия выполнения</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Включите WiFi, чтобы выбрать сети</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Вы должны разрешить позиционирование для использования данной функции</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Требуется разрешение</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Начиная с Android 8.1, для чтения имени сети WiFi требуется разрешение позиционирования. Вы можете пользоваться данной функцией только если разрешите позиционирование. </string>
   <string name="respect_battery_saving_title">Учитывать настройки энергосбережения Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Использовать продвинутый выбор папок</string>

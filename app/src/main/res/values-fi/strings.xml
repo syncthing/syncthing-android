@@ -65,6 +65,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="device_disconnected">Ei yhteyttä</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Tauolla</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Tuntematon</string>
   <!--Title for current download rate-->
   <string name="download_title">Lataus</string>
@@ -164,7 +165,6 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="category_experimental">Kokeellinen</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Käyntiehdot</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Laita Wifi päälle valitaksesi verkkoja.</string>
   <string name="respect_battery_saving_title">Noudata Androidin virransäästöasetusta</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Käytä edistynyttä Kansionvalitsinta</string>

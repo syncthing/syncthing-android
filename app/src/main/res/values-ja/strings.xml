@@ -62,6 +62,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">切断中</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">不明</string>
   <!--Title for current download rate-->
   <string name="download_title">ダウンロード</string>
@@ -164,7 +165,6 @@
   <string name="category_experimental">実験的</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">実行条件</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために Wi-Fi をオンにしてください。</string>
   <string name="respect_battery_saving_title">Android の節電設定に従う</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">高度なフォルダー選択を使用</string>

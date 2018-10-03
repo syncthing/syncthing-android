@@ -66,6 +66,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="device_disconnected">Niet verbonden</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Gepauzeerd</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Onbekend</string>
   <!--Title for current download rate-->
   <string name="download_title">Download</string>
@@ -172,10 +173,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="category_experimental">Experimenteel</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Uitvoervoorwaarden</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Geef de LOCATIE-toestemming om deze functie te gebruiken.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Toestemming vereist</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Vanaf Android 8.1 wordt toegang tot de locatie vereist om de naam van het wifinetwerk te kunnen lezen. Deze functie kan enkel gebruikt worden als je deze toestemming geeft.</string>
   <string name="respect_battery_saving_title">Eerbiedig de batterijbesparingsinstellingen van Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Gebruik geavanceerde mapkiezer</string>

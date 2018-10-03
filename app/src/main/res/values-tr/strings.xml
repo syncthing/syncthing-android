@@ -56,6 +56,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Bağlantı kesik</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Bilinmiyor</string>
   <!--Title for current download rate-->
   <string name="download_title">İndirme</string>
@@ -155,7 +156,6 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="category_experimental">Deneysel</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Çalışma Koşulları</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağ seçmek için lütfen kablosuz bağlantınızı açın.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Gelişmiş Klasör Seçici kullan</string>
   <string name="advanced_folder_picker_summary">Eşzamanlama yapmak için aygıttan herhangi bir klasör seçin</string>

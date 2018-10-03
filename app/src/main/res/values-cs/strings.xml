@@ -65,6 +65,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Odpojen</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Neznámý</string>
   <!--Title for current download rate-->
   <string name="download_title">Rychlost stahování</string>
@@ -167,7 +168,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="category_experimental">Experimentální</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Podmínky spuštění</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Pro výběr sítí prosím zapněte WiFi.</string>
   <string name="respect_battery_saving_title">Dodržovat nastavení úspory baterie z Androidu</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>

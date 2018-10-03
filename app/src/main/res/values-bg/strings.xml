@@ -63,6 +63,7 @@
   <string name="device_disconnected">Не е свързано</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">На пауза</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Неясно</string>
   <!--Title for current download rate-->
   <string name="download_title">Сваляне</string>
@@ -165,8 +166,6 @@
   <string name="category_experimental">Експериментални</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Условия на работа</string>
-  <string name="run_on_whitelisted_wifi_networks">Самo в избрани WiFi мрежи: %1$s</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа, моля включете WiFi</string>
   <string name="respect_battery_saving_title">Ползване на настройките за пестене на батеия от Android</string>
   <string name="respect_battery_saving_summary">Спира Syncthing когато режима за пестене на батерия е активен.</string>
   <!--Preferences - Behaviour-->

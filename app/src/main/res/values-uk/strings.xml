@@ -43,6 +43,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Від\'єднано</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Невідомо</string>
   <!--Title for current download rate-->
   <string name="download_title">Завантаження</string>
@@ -134,7 +135,6 @@
   <string name="category_experimental">Експериментальне</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Умови запуску</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Будь-ласка, увімкніть Wi-Fi, щоби вибрати мережі</string>
   <string name="respect_battery_saving_title">Відповідно до налаштувань енергозбереження пристрою в системі</string>
   <!--Preferences - Behaviour-->
   <string name="notification_type_title">Сповіщення</string>

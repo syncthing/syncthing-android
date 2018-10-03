@@ -82,6 +82,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="device_disconnected">Kapcsolat bontva</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Szünteteltetve</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Ismeretlen</string>
   <!--Title for current download rate-->
   <string name="download_title">Letöltés</string>
@@ -188,10 +189,8 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="category_experimental">Kísérleti</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Futás feltételei</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Hálózat választásához kapcsold be a WiFit.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">A funkció használatához engedélyezni kell a hozzáférést a földrajzi helyhez</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Hozzáférés szükséges</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Az Android 8.1-el kezdve helyzeti hozzáférés szükséges a WiFi hálózat nevének olvasásához. Ezt a funkciót csak akkor használhatod, ha megadod ezt a hozzáférést.</string>
   <string name="respect_battery_saving_title">Az Android akkumulátor-optimalizáció beállításainak tiszteletben tartása</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Advanced mappaválasztó használata</string>

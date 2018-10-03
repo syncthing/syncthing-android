@@ -57,6 +57,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="device_disconnected">Desconectado</string>
   <!--Indicates that the device is paused and does not sync-->
   <string name="device_paused">Pausado(a)</string>
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Desconhecido</string>
   <!--Title for current download rate-->
   <string name="download_title">Recepção</string>
@@ -156,7 +157,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condições de execução</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ligue o WiFi para seleccionar redes.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>

@@ -62,6 +62,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Αποσυνδεδεμένο</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Άγνωστο</string>
   <!--Title for current download rate-->
   <string name="download_title">Λήψη</string>
@@ -164,7 +165,6 @@
   <string name="category_experimental">Πειραματικά</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Συνθήκες εκτέλεσης</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Παρακαλώ ενεργοποιήστε το WiFi για να επιλέξετε δίκτυα.</string>
   <string name="respect_battery_saving_title">Υπακοή στη ρύθμιση εξοικονόμησης ενέργειας του Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Χρήση προχωρημένου επιλογέα φακέλων</string>

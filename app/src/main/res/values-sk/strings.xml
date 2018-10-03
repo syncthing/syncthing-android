@@ -46,6 +46,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Odpojené</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Neznámy</string>
   <!--Title for current download rate-->
   <string name="download_title">Sťahovanie</string>

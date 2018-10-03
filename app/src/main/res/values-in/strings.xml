@@ -59,6 +59,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Terputus</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <!--Title for current download rate-->
   <string name="download_title">Unduhan</string>
   <!--Title for current upload rate-->
@@ -160,7 +161,6 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="category_experimental">Ujicoba</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Syarat Operasi</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Mohon aktifkan WiFi untuk memilih jaringan.</string>
   <string name="respect_battery_saving_title">Ikuti pengaturan penghematan baterai Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Gunakan Pemilihan Folder tahap lanjut</string>

@@ -46,6 +46,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Fråkopla</string>
   <!--Indicates that the device is paused and does not sync-->
+  <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Ukjend</string>
   <!--Title for current download rate-->
   <string name="download_title">Nedlasting</string>
@@ -139,7 +140,6 @@
   <string name="category_syncthing_options">Syncthing-innstillingar</string>
   <string name="category_experimental">Eksperiment</string>
   <!--Preference screen - Run conditions-->
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Skru på WiFi for å velje nettverk.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Bruk avansert mappeveljar</string>
   <string name="advanced_folder_picker_summary">Vel kva mappe som helst for synkronisering</string>
