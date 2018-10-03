@@ -1,6 +1,6 @@
 * Add Welcome wizard
 * Improve run conditions and their UI
-* Update syncthing to v0.14.50-rc.1
+* Update syncthing to v0.14.50
 * Add support for receive only folder type
 * Increase max_user_watches kernel setting on startup on rooted devices
 * Fixed a race condition that could lead to crashes
