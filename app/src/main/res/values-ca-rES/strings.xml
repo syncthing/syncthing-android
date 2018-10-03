@@ -7,16 +7,24 @@
   <string name="welcome_title">Benvinguts al Syncthing per Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introducció</string>
   <string name="welcome_text">El Syncthing és una aplicació de sincronització de fitxers de codi obert.\n\
 Per compartir dades amb altres dispositius, cal que afegiu els seus identificadors únics a la llista de dispositius. Un cop fet això podreu triar quines carpetes voleu compartir i amb quins dispositius.\n\
 Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permís d\'emmagatzematge</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permís d\'ubicació</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Torna</string>
   <string name="cont">Continua</string>
   <string name="finish">Finalitza</string>
   <string name="generic_example">Exemple</string>
   <string name="generic_error">Error</string>
+  <string name="grant_permission">Concedeix el permís</string>
+  <string name="permission_granted">Permís concedit</string>
+  <string name="accept">Accepta</string>
+  <string name="ignore">Ignora</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Afegeix una carpeta</string>
@@ -30,6 +38,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="no">No</string>
   <string name="open_website">Obre la pàgina web</string>
   <string name="toast_write_storage_permission_required">Aquesta aplicació requereix el permís d\'escriptura a l\'emmagatzematge</string>
+  <string name="device_rejected">El dispositiu \"%1$s\" es vol connectar</string>
+  <string name="folder_rejected">El dispositiu \"%1$s\" vol compartir la carpeta \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Optimització de bateria</string>
   <string name="dialog_disable_battery_optimization_message">Passat algun temps, l\'Android podria aturar la sincronització. Per evitar-ho, apagueu l\'optimitzador de bateria.\n\nAlguns dispositius porten pre-instal·lades aplicacions que finalitzen les tasques automàticament, en aquest cas hauríeu d\'afegir el Syncthing a la seva llista d\'aplicacions autoritzades.</string>
   <string name="dialog_disable_battery_optimization_later">Més tard</string>
@@ -51,6 +61,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
     <item quantity="one">%1$d / %2$d Fitxer</item>
     <item quantity="other">%1$d / %2$d Fitxers</item>
   </plurals>
+  <string name="override_changes">Anul·lar els canvis</string>
   <string name="open_file_manager">Obre l\'administrador d\'arxius</string>
   <string name="toast_no_file_manager">No s\'ha trobat cap gestor de fitxers compatible</string>
   <!--DevicesFragment-->
@@ -171,11 +182,23 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condicions d\'execució</string>
+  <string name="run_conditions_summary">Utilitzeu les següents opcions per decidir quan s\'executarà el Syncthing.</string>
+  <string name="run_on_mobile_data_title">Executa amb dades mòbils</string>
+  <string name="run_on_wifi_title">Executa amb wifi</string>
+  <string name="run_on_metered_wifi_title">Executa en wifi controlada</string>
+  <string name="run_on_whitelisted_wifi_title">Executa en xarxes wifi específiques</string>
+  <string name="run_on_whitelisted_wifi_networks">Executa només a les xarxes wifi seleccionades: %1$s</string>
+  <string name="run_on_all_wifi_networks">Executa en totes les xarxes wifi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Enceneu el WiFi per seleccionar xarxes.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Heu de proporcionar el permís d\'UBICACIÓ per poder fer això.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Calen permisos</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir de l\'Android 8.1, cal tenir accés a la ubicació per poder llegir el nom de la WiFi. Només ho podreu fer si concediu aquest permís.</string>
+  <string name="power_source_title">Executa quan el dispositiu estigui encès</string>
   <string name="respect_battery_saving_title">Respecta la configuració d\'estalvi de bateria de l\'Android</string>
+  <string name="respect_battery_saving_summary">Desactiva el Syncthing durant el mode d\'estalvi de bateria.</string>
+  <string name="run_in_flight_mode_title">Executa quan el dispositiu es troba en mode avió</string>
+  <string name="service_settings_title">Configuració del servei</string>
+  <string name="run_as_background_service">Inicia el servei automàticament en arrencar</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Utilitza el selector de carpetes avançat</string>
   <string name="advanced_folder_picker_summary">Seleccioneu qualsevol carpeta del dispositiu per sincronitzar-la</string>
@@ -403,11 +426,20 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">No es permet aturar el Syncthing mentre s\'està executant en segon pla.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Tipus de carpeta</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">Envia i rep</string>
   <string name="folder_type_sendonly">Només envia</string>
+  <string name="folder_type_receiveonly">Només rep</string>
   <!--Folder type dialog descriptions for folder types-->
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Aleatori</string>
+  <string name="pull_order_type_alphabetic">Alfabètic</string>
+  <string name="pull_order_type_smallestFirst">Primer els més petits</string>
+  <string name="pull_order_type_largestFirst">Primer els més grans</string>
+  <string name="pull_order_type_oldestFirst">Primer els més antics</string>
+  <string name="pull_order_type_newestFirst">Primer els més nous</string>
   <!--Pull order dialog descriptions for pull order types-->
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Antiguitat Màxima</string>

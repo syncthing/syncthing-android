@@ -7,16 +7,24 @@
   <string name="welcome_title">Bine ați venit la Syncthing pentru Android!</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introducere</string>
   <string name="welcome_text">Syncthing este o aplicație, cu sursă deschisă, de sincronizare a fișierelor.\n\
 Pentru a partaja date cu alte dispozitive, trebuie să le adăugați ID-ul unic de dispozitiv la lista dumneavoastră de dispozitive. După aceea puteți selecta care directoare le veți partaja cu care dispozitive.\n\
 Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permisiune acces stocare</string>
+  <string name="storage_permission_desc">Syncthing are nevoie să acceseze stocarea pentru a face sincronizarea fișierelor.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permisiune locație</string>
+  <string name="location_permission_desc">Syncthing poate fi configurat pentru a rula pe anumite rețele Wi-Fi. Android solicită ca aplicațiile să aibă permisiuni de locație pentru a putea căuta numele rețelei Wi-Fi active, deoarece uneori se poate deduce locația utilizatorilor din numele rețelei la care sunt conectați. Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunea de locație necesară. Altfel puteți sări acest pas.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Înapoi</string>
   <string name="cont">Continuare</string>
   <string name="finish">Terminat</string>
   <string name="generic_example">Exemplu</string>
   <string name="generic_error">Eroare</string>
+  <string name="grant_permission">Acordă permisiunea</string>
+  <string name="permission_granted">Permisiune acordată</string>
   <string name="accept">Acceptă</string>
   <string name="ignore">Ignoră</string>
   <!--MainActivity-->
@@ -180,11 +188,35 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condiții de rulare</string>
+  <string name="run_conditions_summary">Folosiți următoarele setări pentru a decide când Syncthing va rula.</string>
+  <string name="run_on_mobile_data_title">Rulează prin date mobile</string>
+  <string name="run_on_mobile_data_summary">Rulează atunci când dispozitivul este conectat prin date mobile. Avertizare: Aceasta poate consuma mult din datele incluse în contract dacă doriți să sincronizați o cantitate mare de date.</string>
+  <string name="run_on_wifi_title">Rulează prin Wi-Fi</string>
+  <string name="run_on_wifi_summary">Rulează atunci când dispozitivul este conectat la o rețea Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Rulează prin Wi-Fi contorizat</string>
+  <string name="run_on_metered_wifi_summary">Rulează atunci când dispozitivul este conectat prin Wi-Fi contorizat ex. un hotspot sau o rețea pe fir. Avertizare: Aceasta poate consuma mult din datele incluse în contract dacă doriți să sincronizați o cantitate mare de date.</string>
+  <string name="run_on_whitelisted_wifi_title">Rulează prin anumite rețele Wi-Fi</string>
+  <string name="run_on_whitelisted_wifi_networks">Rulează numai prin anumite rețele Wi-Fi: %1$s</string>
+  <string name="run_on_all_wifi_networks">Rulează prin toate rețelele Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">VA rugăm să activați Wi-Fi pentru a selecta rețelele.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Trebuie să permiteți accesul la LOCAȚIE pentru a putea folosi această caracteristică.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Necesită permisiunea</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Începând cu Android 8.1, este necesar accesul la locație pentru a putea citii numele rețelei Wi-Fi. Această caracteristică poate fi folosită doar dacă acordați această permisiune.</string>
+  <string name="power_source_title">Rulează atunci când dispozitivul este alimentat la</string>
+  <string-array name="power_source_entries">
+    <item>Încărcător și baterie.</item>
+    <item>Încărcător.</item>
+    <item>Baterie.</item>
+  </string-array>
   <string name="respect_battery_saving_title">Se va respecta setarea de economisire a bateriei din Android</string>
+  <string name="respect_battery_saving_summary">Syncthing va fi dezactivat dacă economisirea bateriei este activată.</string>
+  <string name="respect_master_sync_title">Se va respecta setarea \'Sincronizare date\' din Android</string>
+  <string name="respect_master_sync_summary">Atunci când setarea \'Sincronizare date\' este oprită, Syncthing va fi dezactivat.</string>
+  <string name="run_in_flight_mode_title">Rulează atunci când dispozitivul este în modul avion</string>
+  <string name="run_in_flight_mode_summary">Activați în cazul în care dispozitivul are probleme în detectarea manuală a conexiunilor Wi-Fi în modul avion.</string>
+  <string name="service_settings_title">Setări serviciu</string>
+  <string name="service_settings_summary">Rulează Syncthing ca un serviciu. Se adaugă o notificare permanentă pentru a împiedica Android să închidă aplicația. Bifând această opțiune se va porni Syncthing odată cu dispozitivul.</string>
+  <string name="run_as_background_service">Pornește serviciul automat odată cu dispozitivul</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Folosește selectorul avansat de directoare</string>
   <string name="advanced_folder_picker_summary">Alegeți orice director de pe dispozitiv pentru sincronizare</string>
@@ -202,6 +234,11 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="start_into_web_gui_title">Pornire direct în interfața web</string>
   <string name="start_into_web_gui_summary">Când aplicația pornește se deschide direct interfața web în loc de ecranul principal</string>
   <string name="pref_language_default">Limba implicită</string>
+  <string-array name="folder_types">
+    <item>Trimitere &amp; Primire</item>
+    <item>Numai trimitere</item>
+    <item>Numai primire</item>
+  </string-array>
   <string-array name="pull_order_types">
     <item>Aleator</item>
     <item>Alfabetic</item>
@@ -369,6 +406,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing este dezactivat</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Doriți să schimbați condițiile de rulare?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Schimbă setări</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -427,9 +465,15 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Nu este posibilă oprirea Syncthing atunci când rularea în fundal este activată</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Tip de director</string>
   <!--Displays the current folder type in the folder activity-->
-  <string name="folder_type_sendonly">Doar trimitere</string>
+  <string name="folder_type_sendreceive">Trimite &amp; Primește</string>
+  <string name="folder_type_sendonly">Numai trimitere</string>
+  <string name="folder_type_receiveonly">Numai primire</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">Acest director va trimite către și va primi schimbările de la celelalte dispozitive.</string>
+  <string name="folder_type_sendonly_description">Fișierele sunt protejate la schimbările de pe celelalte dispozitive, dar orice schimbare locală va fi trimisă către ele.</string>
+  <string name="folder_type_receiveonly_description">Fișierele sunt sincronizate de la celelalte dispozitive, dar orice schimbare locală nu va fi trimisă către ele.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
   <string name="pull_order">Ordinea de preluare a fișierelor</string>
   <!--Displays the current pull order type in the Folder activity-->

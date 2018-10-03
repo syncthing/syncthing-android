@@ -7,16 +7,23 @@
   <string name="welcome_title">Bienvenue dans Syncthing pour Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introduction</string>
   <string name="welcome_text">Syncthing est une application de synchronisation de fichiers. Son code source est ouvert.\n\
 Pour partager des données avec d\'autres appareils, vous devez ajouter leur identifiant unique à la liste des appareils. Ensuite, vous pouvez sélectionner quels répertoires partager avec quels appareils..\n\
 S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permission de stockage</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permission de localisation</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Retour</string>
   <string name="cont">Continuer</string>
   <string name="finish">Terminé</string>
   <string name="generic_example">Exemple</string>
   <string name="generic_error">Erreur</string>
+  <string name="grant_permission">Donner la permission</string>
+  <string name="permission_granted">Permission accordée</string>
+  <string name="accept">Accepter</string>
   <string name="ignore">Ignorer</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
@@ -31,6 +38,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="no">Non</string>
   <string name="open_website">Ouvrir le site WEB</string>
   <string name="toast_write_storage_permission_required">La permission d\'écriture sur l\'espace de stockage est requise pour cette application.</string>
+  <string name="device_rejected">L\'appareil \"%1$s\" veut se connecter</string>
+  <string name="folder_rejected">L\'appareil \"%1$s\" veut partager le dossier \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Optimisation de la batterie</string>
   <string name="dialog_disable_battery_optimization_message">Android peut arrêter la synchronisation après un certain temps.  Pour éviter cela, désactivez l\'optimisation de la batterie.\n\nCertains appareils disposent d\'applications préinstallées pour tuer les tâches.  Vous devrez ajouter Syncthing à leur liste blanche.</string>
   <string name="dialog_disable_battery_optimization_later">Plus tard</string>
@@ -116,8 +125,11 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="folder_path_required">Le chemin du répertoire ne doit pas être vide</string>
   <string name="dialog_discard_changes">Annuler vos modifications ?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">Votre version Android accorde à Syncthing uniquement un accès en lecture seule au dossier sélectionné.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">Votre version Android accorde à Syncthing un accès en lecture et écriture au dossier sélectionné.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">Désolé. Le dossier sélectionné ne peut pas être utilisé. Veuillez sélectionner un dossier situé sur le stockage interne ou externe.</string>
   <string name="ignore_patterns">Ignorer les exclusions</string>
   <string name="create_ignore_file_error">Création de fichier échoué, fichier ignoré. Le répertoire est-il accessible en écriture ?</string>
   <string name="edit_ignore_file_error">Editeur de texte non trouvé</string>
@@ -172,11 +184,29 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="category_experimental">Expérimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Conditions d\'exécution</string>
+  <string name="run_conditions_summary">Utilisez les options suivantes pour décider du moment où la synchronisation sera exécutée.</string>
+  <string name="run_on_mobile_data_title">Exécuter en données mobiles (3G...)</string>
+  <string name="run_on_wifi_title">Exécuter en wifi</string>
+  <string name="run_on_wifi_summary">Exécuter lorsque l\'appareil est connecté à un réseau wifi.</string>
+  <string name="run_on_whitelisted_wifi_title">Exécuter sur des réseaux wifi spécifiés</string>
+  <string name="run_on_whitelisted_wifi_networks">Exécuter uniquement sur les réseaux wifi sélectionnés: %1$s</string>
+  <string name="run_on_all_wifi_networks">Exécuter sur tous les réseaux wifi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le WiFi pour sélectionner un réseau</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Vous devez accorder la permission LOCALISATION pour utiliser cette fonctionnalité.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permission requise</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">À partir d\'Android 8.1, l\'accès à la localisation est nécessaire pour pouvoir lire le nom du WiFi. Vous pouvez utiliser cette fonctionnalité uniquement si vous accordez cette autorisation.</string>
+  <string name="power_source_title">Exécuter lorsque le périphérique est alimenté par</string>
+  <string-array name="power_source_entries">
+    <item>Secteur et batterie.</item>
+    <item>Secteur.</item>
+    <item>Batterie.</item>
+  </string-array>
   <string name="respect_battery_saving_title">Sauvegarde batterie selon les réglages Android</string>
+  <string name="respect_battery_saving_summary">Désactiver Synthing si la sauvegarde batterie est active.</string>
+  <string name="run_in_flight_mode_title">Exécuter lorsque l\'appareil est en mode avion</string>
+  <string name="run_in_flight_mode_summary">Activer si votre téléphone a des problèmes pour détecter les connexions wifi manuelles en mode avion.</string>
+  <string name="service_settings_title">Réglage du service</string>
+  <string name="run_as_background_service">Lancer le service automatiquement au démarrage</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Choix étendu des répertoires</string>
   <string name="advanced_folder_picker_summary">Permettre la sélection de n\'importe quel répertoire de cet appareil pour créer les partages</string>
@@ -194,6 +224,19 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="start_into_web_gui_title">Démarrer directement dans l\'interface WEB</string>
   <string name="start_into_web_gui_summary">Au lancement de l\'application, ouvre l\'interface WEB au lieu de l\'écran d\'accueil.</string>
   <string name="pref_language_default">Langue par défaut</string>
+  <string-array name="folder_types">
+    <item>Envoyer &amp; Recevoir</item>
+    <item>Envoyer seulement</item>
+    <item>Recevoir seulement</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>Aléatoire</item>
+    <item>Alphabétique</item>
+    <item>Petits en premier</item>
+    <item>Grands en premier</item>
+    <item>Anciens en premier</item>
+    <item>Récents en premier</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>Aucun</item>
     <item>Corbeille</item>
@@ -213,6 +256,9 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="usage_reporting">Rapports anonymes d\'utilisation</string>
   <string name="gui_address">Adresse pour l\'interface WEB</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Annuler les appareils et partages ignorés</string>
+  <string name="undo_ignored_devices_folders_question">Cela annulera les décisions précédentes, appareils ignorés et partages ignorés. Continuer ?</string>
+  <string name="undo_ignored_devices_folders_done">Annulation des décisions réussie.</string>
   <string name="export_config">Exporter la configuration</string>
   <!--Toast after entering invalid integer value-->
   <string name="invalid_integer_value" tools:ignore="PluralsCandidate">La valeur entrée ne convient pas. SVP, entrez une valeur comprise entre %1$det %2$d.</string>
@@ -347,6 +393,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing est désactivé</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Voulez-vous changer les conditions de fonctionnement ?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Modification des paramètres</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -358,6 +405,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Echec de création du fichier de configuration</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Un fichier de configuration crucial pour l\'opération est manquant</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Caméra</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -404,12 +452,29 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">L\'arrêt de Syncthing n\'est pas supporté quand le fonctionnement en tâche de fond est activé.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Type de partage</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">Envoyer &amp; Recevoir</string>
   <string name="folder_type_sendonly">Envoyer uniquement</string>
+  <string name="folder_type_receiveonly">Recevoir uniquement</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">Le partage enverra et recevra les modifications des appareils distants.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Ordre de traitement des fichiers</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Aléatoire</string>
+  <string name="pull_order_type_alphabetic">Alphabétique</string>
+  <string name="pull_order_type_smallestFirst">Plus petits en premier</string>
+  <string name="pull_order_type_largestFirst">Plus grands en premier</string>
+  <string name="pull_order_type_oldestFirst">Plus anciens en premier</string>
+  <string name="pull_order_type_newestFirst">Plus récents en premier</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Traite les fichiers dans un ordre aléatoire</string>
+  <string name="pull_order_type_alphabetic_description">Traite les fichiers par nom alphabétique</string>
+  <string name="pull_order_type_smallestFirst_description">Traite les fichiers par taille. Les plus petits en premier.</string>
+  <string name="pull_order_type_largestFirst_description">Traite les fichiers par taille. Les plus grands en premier.</string>
+  <string name="pull_order_type_oldestFirst_description">Traite les fichiers par date de modification. Les plus anciens en premier.</string>
+  <string name="pull_order_type_newestFirst_description">Traite les fichiers par date de modification. Les plus récents en premier.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Age maximum</string>
   <string name="clean_out_after">Nettoyer après</string>

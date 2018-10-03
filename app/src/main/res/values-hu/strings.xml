@@ -7,18 +7,26 @@
   <string name="welcome_title">Üdvözöl az androidos Syncthing.</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Bevezetés</string>
   <string name="welcome_text">A Syncthing egy nyílt forráskódú fájlszinkronizáló alkalmazás.
 
 Az adatok más eszközökkel való megosztásához hozzá kell adnod egyedi eszközazonosítójukat az eszközlistához. Utána kiválaszthatod, hogy mely mappákat mely eszközökkel osztasz meg.
 
 Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Tárhely jogosultság</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Helyi jogosutság</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Vissza</string>
   <string name="cont">Folytatás</string>
   <string name="finish">Befejezés</string>
   <string name="generic_example">Példa</string>
   <string name="generic_error">Hiba</string>
+  <string name="grant_permission">Jogosultság megadás</string>
+  <string name="permission_granted">Jogosultság megadva</string>
+  <string name="accept">Elfogad</string>
+  <string name="ignore">Elvet</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Mappa hozzáadása</string>
@@ -34,6 +42,8 @@ Az összesített statisztika nyilvánosan elérhető a https://data.syncthing.ne
   <string name="no">Nem</string>
   <string name="open_website">Weblap megnyitása</string>
   <string name="toast_write_storage_permission_required">Az alkalmazás használatához háttértár-hozzáférési jogra van szükség</string>
+  <string name="device_rejected">\"%1$s\" eszköz szeretne csatlakozni</string>
+  <string name="folder_rejected">\"%1$s\" eszköz szeretné megosztani a mappát: \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Akkumulátor optimalizáció</string>
   <string name="dialog_disable_battery_optimization_message">Az Android idővel leállíthatja a szinkronizálást. Ennek megakadályozásához kapcsold ki az akkumulátor optimalizálást.
 
@@ -57,6 +67,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <item quantity="one">%1$d / %2$d fájl</item>
     <item quantity="other">%1$d / %2$d fájl</item>
   </plurals>
+  <string name="override_changes">Módosítások felülbírálása</string>
   <string name="open_file_manager">Fájlkezelő megnyitása</string>
   <string name="toast_no_file_manager">Nem található kompatibilis fájlkezelő</string>
   <!--DevicesFragment-->
