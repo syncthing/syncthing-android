@@ -179,8 +179,12 @@ public class SyncthingService extends Service {
          * We need to recheck if we still have the storage permission.
          */
         mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this,
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                                        PackageManager.PERMISSION_GRANTED);
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_GRANTED);
+
+        if (mNotificationHandler != null) {
+            mNotificationHandler.setAppShutdownInProgress(false);
+        }
     }
 
     /**
@@ -449,6 +453,9 @@ public class SyncthingService extends Service {
              */
             mRunConditionMonitor.shutdown();
         }
+        if (mNotificationHandler != null) {
+            mNotificationHandler.setAppShutdownInProgress(true);
+        }
         if (mStoragePermissionGranted) {
             synchronized (mStateLock) {
                 if (mCurrentState == State.STARTING) {
@@ -492,10 +499,6 @@ public class SyncthingService extends Service {
         if (mApi != null) {
             mApi.shutdown();
             mApi = null;
-        }
-
-        if (mNotificationHandler != null) {
-            mNotificationHandler.cancelPersistentNotification(this);
         }
 
         if (mSyncthingRunnable != null) {
@@ -556,7 +559,7 @@ public class SyncthingService extends Service {
     }
 
     /**
-     * Called to notifiy listeners of an API change.
+     * Called to notify listeners of an API change.
      */
     private void onServiceStateChange(State newState) {
         Log.v(TAG, "onServiceStateChange: from " + mCurrentState + " to " + newState);
