@@ -7,15 +7,26 @@
   <string name="welcome_title">Bem vindo(a) ao Syncthing para Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introdução</string>
   <string name="welcome_text">O Syncthing é uma aplicação de sincronização de ficheiros de código aberto.\n\
 Para partilhar dados com outros dispositivos, tem que adicionar o seu ID único de dispositivo à lista de dispositivos. Depois pode seleccionar quais as pastas a partilhar com os dispositivos.\n\
 Reporte, através do Github, quaisquer problemas que encontre, por favor.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permissão de armazenamento</string>
+  <string name="storage_permission_desc">O Syncthing precisa de aceder ao seu armazenamento para fazer a sincronização de ficheiros.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permissão de localização</string>
+  <string name="location_permission_desc">O Synctinhg pode ser configurado para correr sobre redes Wi-Fi seleccionadas. O Android precisa que as aplicações tenham permissão de localização para poder procurar o nome da rede Wi-Fi activa, uma vez que é possível inferir a localização dos utilizadores a partir do nome da rede à qual estão ligados. Se quiser usar esta funcionalidade, clique no botão acima para fornecer as permissões de localização necessárias ao Syncthing. Caso contrário pode saltar este passo.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Retornar</string>
   <string name="cont">Continuar</string>
+  <string name="finish">Terminar</string>
   <string name="generic_example">Exemplo</string>
   <string name="generic_error">Erro</string>
+  <string name="grant_permission">Condeder permissão</string>
+  <string name="permission_granted">Permissão concedida</string>
+  <string name="accept">Aceitar</string>
+  <string name="ignore">Ignorar</string>
   <!--MainActivity-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
@@ -29,21 +40,31 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="no">Não</string>
   <string name="open_website">Abrir Website</string>
   <string name="toast_write_storage_permission_required">Esta aplicação precisa de permissão de escrita no armazenamento</string>
+  <string name="device_rejected">O dispositivo \"%1$s\" quer conectar-se</string>
+  <string name="folder_rejected">O dispositivo \"%1$s\" quer partilhar a pasta \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Optimização da bateria</string>
   <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização passado algum tempo. Para prevenir isso, desligue a optimização da bateria.\n\nAlguns dispositivos têm aplicações adicionais pré-instaladas para matar tarefas. Deve adicionar o Syncthing à lista de excepções dessas aplicações.</string>
   <string name="dialog_disable_battery_optimization_later">Mais tarde</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Não apresentar novamente</string>
   <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">O seu dispositivo não suporta a desactivação de optimizações de bateria</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Carregando...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Gerando chaves seguras. Isto pode demorar uns minutos.</string>
+  <string name="syncthing_loading_slow_message">O Syncthing está a demorar muito tempo para carregar. Use os registos para verificar ocorrência de erros.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Pastas</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Não foram encontradas quaisquer pastas</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">Ficheiro %1$d / %2$d</item>
+    <item quantity="other">Ficheiros %1$d / %2$d</item>
+  </plurals>
+  <string name="override_changes">Sobrepor alterações</string>
+  <string name="open_file_manager">Abrir gestor de ficheiros</string>
   <string name="toast_no_file_manager">Não foi encontrado um gestor de ficheiros compatível</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Dispositivos</string>
@@ -84,7 +105,10 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">Monitorizar alterações</string>
+  <string name="folder_fileWatcherDescription">Pede ao sistema operativo para notificar quando ocorrem alterações a ficheiros. Se for desactivado, reverte para a verificação periódica a cada hora.</string>
   <!--Setting title-->
+  <string name="folder_pause">Pausar a pasta</string>
   <!--Setting title-->
   <string name="devices">Dispositivos</string>
   <!--Setting title-->
@@ -105,8 +129,14 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="folder_path_required">O caminho da pasta não pode estar vazio</string>
   <string name="dialog_discard_changes">Descarto as suas alterações?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">A sua versão de Android apenas concede ao Syncthing acesso exclusivamente de leitura à pasta seleccionada.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">A sua versão de Android concede ao Syncthing acesso de leitura e escrita à pasta seleccionada.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">Lamento, mas a pasta seleccionada não pode ser usada. Por favor escolha uma pasta localizada no armazenamento interno ou externo.</string>
+  <string name="ignore_patterns">Padrões de exclusão</string>
+  <string name="create_ignore_file_error">Falhou a criação do ficheiro de exclusões. A pasta permite escrita?</string>
+  <string name="edit_ignore_file_error">Não encontrado um editor de texto</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">ID do dispositivo</string>
@@ -127,6 +157,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Setting title-->
   <string name="introducer">Apresentador</string>
   <!--Setting title-->
+  <string name="pause_device">Pausar dispositivo</string>
   <!--ActionBar item-->
   <string name="delete_device">Eliminar dispositivo</string>
   <string name="add_device">Adicionar dispositivo</string>
@@ -157,6 +188,11 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Condições de execução</string>
+  <string name="run_conditions_summary">Use as opções seguintes para decidir quando o Syncthing vai ser executado.</string>
+  <string name="run_on_mobile_data_title">Usar os dados móveis</string>
+  <string name="run_on_mobile_data_summary">Correr quando o dispositivo estiver conectado através da rede de dados móveis. Aviso: Isso poderá consumir uma grande parte do plano de dados fornecido pelo seu operador se sincronizar grandes quantidades de dados.</string>
+  <string name="run_on_wifi_title">Usar o Wi-Fi</string>
+  <string name="run_on_wifi_summary">Correr quando o dispositivo estiver conectado através de uma rede Wi-Fi.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>
