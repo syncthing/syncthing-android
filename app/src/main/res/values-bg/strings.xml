@@ -7,12 +7,14 @@
   <string name="welcome_title">Добре дошли в Syncthing за Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Въведение</string>
   <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.\n\
 За да споделите информация с друго устройство е необходимо да добавите уникалния идентификатор, на даденото устройство, към списъка с устройства. След това можете да определите кои папки с кои устройства да бъдат споделени.\n\
 Ако срещнете проблем моля докладвайте в Github.</string>
   <!--Slide 2-->
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
+  <string name="back">Назад</string>
   <string name="cont">Напред</string>
   <string name="finish">Готово</string>
   <string name="generic_example">Пример</string>
@@ -166,8 +168,24 @@
   <string name="category_experimental">Експериментални</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Условия на работа</string>
+  <string name="run_conditions_summary">Определете, чрез следните опции, как да работи Syncthing.</string>
+  <string name="run_on_mobile_data_title">Синхронизиране в мобилни мрежи</string>
+  <string name="run_on_mobile_data_summary">Синхронизира когато устройството е свързано към мобилна мрежа. ВНИМАНИЕ: Възможно е бързо да достигнете лимита, на плана за мобилен Интернет, когато синхронизирате много файлове.</string>
+  <string name="run_on_wifi_title">Синхронизиране в Wi-Fi мрежи</string>
+  <string name="run_on_wifi_summary">Синхронизира, когато устройството е свързано към Wi-Fi мрежа.</string>
+  <string name="run_on_whitelisted_wifi_title">Синхронизиране от определени Wi-Fi мрежи</string>
+  <string name="run_on_whitelisted_wifi_networks">Синхронизира само от следните мрежи: %1$s</string>
+  <string name="run_on_all_wifi_networks">Синхронизира от всяка Wi-Fi мрежа.</string>
+  <string name="power_source_title">Синхронизиране при захранване от</string>
+  <string-array name="power_source_entries">
+    <item>Батерия или зарядно.</item>
+    <item>Зарядно.</item>
+    <item>Батерия.</item>
+  </string-array>
   <string name="respect_battery_saving_title">Ползване на настройките за пестене на батеия от Android</string>
   <string name="respect_battery_saving_summary">Спира Syncthing когато режима за пестене на батерия е активен.</string>
+  <string name="service_settings_title">Настройки на услугата</string>
+  <string name="service_settings_summary">Стартира Syncthing като услуга. Добавя постоянни известия за да се предотврати изключване от Android. Също така стартира Syncthing заедно с операционната система.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Избор на папка, за напреднали</string>
   <string name="advanced_folder_picker_summary">Изберете папка, от устройството, за синхронизиране</string>
@@ -216,7 +234,7 @@
   <string name="usage_reporting"> Анонимен доклад за ползване на програмата</string>
   <string name="gui_address">Адрес за свързване с потребителския интерфейс</string>
   <!--Titles for the preference to undo ignored devices and folders-->
-  <string name="undo_ignored_devices_folders_title">Прехване на игнорираните устройства и папки</string>
+  <string name="undo_ignored_devices_folders_title">Премахване на игнорираните устройства и папки</string>
   <string name="undo_ignored_devices_folders_question">Решенията за игнориране на устройства и папки ще бъдат отменени. Желаете ли да продължите?</string>
   <string name="undo_ignored_devices_folders_done">Игнориранията са успешно отменени.</string>
   <string name="export_config">Изнасяне на настройките</string>
@@ -328,6 +346,7 @@
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing не работи</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Наистина ли желаете да промените условията на работа?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Промяна на настройките</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -383,9 +402,14 @@
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <string name="folder_type">Вид папка</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">Изпращане и получаване</string>
   <string name="folder_type_sendonly">Само изпращане</string>
   <string name="folder_type_receiveonly">Само получаване</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">Папката ще изпраща локалните промени и ще получава промени от други устройства.</string>
+  <string name="folder_type_sendonly_description">Защитава файловете от промени направени на други устройства, но промените направени на това устройство ще бъдат синхронизирани с останалите устройства.</string>
+  <string name="folder_type_receiveonly_description">Промените направени на на други устройства ще бъдат прилагани локално, но локалните промени няма да бъдат синхронизирани с останалите устройства.
+</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
   <string name="pull_order">Ред на сваляне</string>
   <!--Displays the current pull order type in the Folder activity-->
@@ -396,6 +420,12 @@
   <string name="pull_order_type_oldestFirst">Първо най-старите</string>
   <string name="pull_order_type_newestFirst">Първо най-новите</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Файловете ще бъдат сваляни в произволен ред.</string>
+  <string name="pull_order_type_alphabetic_description">Файловете ще бъдат сваляни според името им в азбучен ред.</string>
+  <string name="pull_order_type_smallestFirst_description">Файловете ще бъдат сваляни според размера им. Първо най-малките.</string>
+  <string name="pull_order_type_largestFirst_description">Файловете ще бъдат сваляни според размера им. Първо най-големите.</string>
+  <string name="pull_order_type_oldestFirst_description">Файловете ще бъдат сваляни според датата на модифициране. Първо най-старите.</string>
+  <string name="pull_order_type_newestFirst_description">Файловете ще бъдат сваляни според датата на модифициране. Първо най-новите.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Максимална възраст</string>
   <string name="clean_out_after">Изчисти след</string>

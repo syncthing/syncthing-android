@@ -16,6 +16,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="storage_permission_desc">Syncthing doit accéder à votre stockage pour synchroniser des fichiers.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permission de localisation</string>
+  <string name="location_permission_desc">Syncthing peut être configuré pour fonctionner sur certains réseaux Wi-Fi. Android exige que les applications puissent lire la localisation pour rechercher le nom du réseau Wi-Fi actif, car on peut parfois déduire l\'emplacement des utilisateurs à partir du nom du réseau auquel ils sont connectés. Si vous souhaitez utiliser cette fonctionnalité, appuyez sur le bouton ci-dessus pour attribuer à Syncthing les autorisations de lecture de la localisation. Sinon, vous pouvez ignorer cette étape.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Retour</string>
   <string name="cont">Continuer</string>
@@ -189,8 +190,18 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="run_conditions_title">Conditions d\'exécution</string>
   <string name="run_conditions_summary">Utilisez les options suivantes pour décider du moment où la synchronisation sera exécutée.</string>
   <string name="run_on_mobile_data_title">Exécuter en données mobiles (3G...)</string>
+  <string name="run_on_mobile_data_summary">Exécuter lorsque l\'appareil est connecté via le réseau de données mobile. Attention cela peut consommer beaucoup de données de votre forfait mobile si vous synchronisez de grandes quantités de données.</string>
+  <string name="run_on_wifi_title">Exécuter en Wi-Fi</string>
+  <string name="run_on_wifi_summary">Exécuter lorsque l\'appareil est connecté à un réseau Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Exécuter sur une connexion Wi-Fi avec quota</string>
+  <string name="run_on_metered_wifi_summary">Exécuter lorsque le périphérique est connecté à un réseau Wi-Fi mesurant les volumes transmis, par ex. un point d\'accès ou un réseau public. Attention: cela peut consommer une grande partie de votre quota de données si vous synchronisez beaucoup de données.</string>
+  <string name="run_on_whitelisted_wifi_title">Exécuter sur des réseaux Wi-Fi spécifiés</string>
+  <string name="run_on_whitelisted_wifi_networks">Exécuter uniquement sur certains réseaux Wi-Fi: %1$s</string>
+  <string name="run_on_all_wifi_networks">Exécuter sur tous les réseaux Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le Wi-Fi pour sélectionner les réseaux.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Vous devez accorder la permission LOCALISATION pour utiliser cette fonctionnalité.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permission requise</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">À partir d\'Android 8.1, il est nécessaire d\'accéder à la localisation pour lire le nom du Wi-Fi. Vous pouvez utiliser cette fonction uniquement si vous accordez cette autorisation.</string>
   <string name="power_source_title">Exécuter lorsque le périphérique est alimenté par</string>
   <string-array name="power_source_entries">
     <item>Secteur et batterie.</item>
@@ -200,8 +211,11 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="respect_battery_saving_title">Sauvegarde batterie selon les réglages Android</string>
   <string name="respect_battery_saving_summary">Désactiver Synthing si la sauvegarde batterie est active.</string>
   <string name="respect_master_sync_title">Respecter les paramètres Android de \'synchronisation automatique des données\'</string>
+  <string name="respect_master_sync_summary">Désactiver Syncthing quand la touche rapide «Synchronisation automatique des données» est désactivée.</string>
   <string name="run_in_flight_mode_title">Exécuter lorsque l\'appareil est en mode avion</string>
+  <string name="run_in_flight_mode_summary">Activer si votre appareil a des problèmes pour détecter les connexions wifi manuelles en mode avion.</string>
   <string name="service_settings_title">Réglage du service</string>
+  <string name="service_settings_summary">Exécuter Syncthing en tant que service. Ajoute une notification persistante pour empêcher sa fermeture par Android. L\'activation de cette option lance la synchronisation au démarrage du système d\'exploitation.</string>
   <string name="run_as_background_service">Lancer le service automatiquement au démarrage</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Choix étendu des répertoires</string>
@@ -455,6 +469,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="folder_type_receiveonly">Recevoir uniquement</string>
   <!--Folder type dialog descriptions for folder types-->
   <string name="folder_type_sendreceive_description">Le partage enverra et recevra les modifications des appareils distants.</string>
+  <string name="folder_type_sendonly_description">Les fichiers sont protégés des changements depuis les autres appareils, mais les modifications apportées localement seront envoyées au reste du groupe.</string>
+  <string name="folder_type_receiveonly_description">Les fichiers sont synchronisés à partir du groupe d\'appareils, mais les modifications apportées localement ne leur seront pas envoyées.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
   <string name="pull_order">Ordre de traitement des fichiers</string>
   <!--Displays the current pull order type in the Folder activity-->

@@ -13,8 +13,10 @@ Per compartir dades amb altres dispositius, cal que afegiu els seus identificado
 Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Slide 2-->
   <string name="storage_permission_title">Permís d\'emmagatzematge</string>
+  <string name="storage_permission_desc">El Syncthing necessita accés a l\'emmagatzematge per poder sincronitzar els arxius</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permís d\'ubicació</string>
+  <string name="location_permission_desc">Podeu configurar el Syncthing perquè funcioni amb les xarxes Wi-Fi que seleccioneu. L\'Android requereix que les aplicacions tinguin permís d\'ubicació per poder cercar el nom de les xarxes Wi-Fi actives, ja que es podria deduir la localització de l\'usuari a partir del nom de la xarxa a la qual es troba connectat. Si voleu utilitzar aquesta característica, premeu el botó de la part superior per donar els permisos necessaris al Syncthing. Altrament podeu ometre aquest pas.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Torna</string>
   <string name="cont">Continua</string>
@@ -127,8 +129,11 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="folder_path_required">El camí de la carpeta no pot ser buit</string>
   <string name="dialog_discard_changes">Voleu descartar els canvis?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">La vostra versió d\'Android només permet accés de lectura al Syncthing per la carpeta seleccionada</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">La vostra versió d\'Android permet accés de lectura i escriptura al Syncthing per la carpeta seleccionada</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">Ho sentim. La capeta seleccionada no es pot utilitzar. Trieu una carpeta de l\'emmagatzematge intern o extern.</string>
   <string name="ignore_patterns">Patrons a ignorar</string>
   <string name="create_ignore_file_error">No s\'ha pogut crear el fitxer d\'ignorats. Es pot escriure al directori?</string>
   <string name="edit_ignore_file_error">No hi ha cap editor de text</string>
@@ -185,13 +190,32 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="run_conditions_title">Condicions d\'execució</string>
   <string name="run_conditions_summary">Utilitzeu les següents opcions per decidir quan s\'executarà el Syncthing.</string>
   <string name="run_on_mobile_data_title">Executa amb dades mòbils</string>
+  <string name="run_on_mobile_data_summary">Executa quan el dispositiu es connecti a través de la xarxa de dades mòbils. Advertència: Si sincronitzeu gran quantitat de dades podríeu consumir un volum important del pla de dades del vostre operador mòbil.</string>
+  <string name="run_on_wifi_title">Executa amb Wi-Fi</string>
+  <string name="run_on_wifi_summary">Executa quan el dispositiu estigui connectat a una xarxa Wi-Fi</string>
+  <string name="run_on_metered_wifi_title">Executa amb Wi-Fi mesurada</string>
+  <string name="run_on_metered_wifi_summary">Executa quan el dispositiu estigui connectat a una xarxa Wi-Fi mesurada, com ara una zona amb cobertura o un ancoratge. Advertència: Si sincronitzeu gran quantitat de dades podríeu consumir un volum important del pla de dades del vostre operador mòbil.</string>
+  <string name="run_on_whitelisted_wifi_title">Executa amb les xarxes Wi-Fi especificades</string>
+  <string name="run_on_whitelisted_wifi_networks">Executa només amb les xarxes Wi-Fi seleccionades: %1$s</string>
+  <string name="run_on_all_wifi_networks">Executa amb totes les xarxes Wi-Fi</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Enceneu el Wi-Fi per selecionar les xarxes.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Heu de proporcionar el permís d\'UBICACIÓ per poder fer això.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Calen permisos</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir d\'Android 8.1, es necessita el permís d\'ubicació per poder llegir el nom de les xarxes Wi-Fi. Només podreu fer-ho si doneu aquest permís.</string>
   <string name="power_source_title">Executa quan el dispositiu estigui encès</string>
+  <string-array name="power_source_entries">
+    <item>Connectat i amb bateria.</item>
+    <item>Connectat</item>
+    <item>Amb bateria</item>
+  </string-array>
   <string name="respect_battery_saving_title">Respecta la configuració d\'estalvi de bateria de l\'Android</string>
   <string name="respect_battery_saving_summary">Desactiva el Syncthing durant el mode d\'estalvi de bateria.</string>
+  <string name="respect_master_sync_title">Respecta l\'ajustament de l\'Android d\'\'Auto-sincronitzar dades\'</string>
+  <string name="respect_master_sync_summary">Desactiva el Syncthing quan l\'ajustament ràpid d\'\'Auto-sincronitzar dades\' estigui apagat.</string>
   <string name="run_in_flight_mode_title">Executa quan el dispositiu es troba en mode avió</string>
+  <string name="run_in_flight_mode_summary">Activeu-ho si el vostre dispositiu té problemes per detectar connexions WI-Fi quan es troba en el mode avió.</string>
   <string name="service_settings_title">Configuració del servei</string>
+  <string name="service_settings_summary">Executa el Syncthing com un servei. Això afegeix una notificació persistent per evitar que l\'Android el tanqui. Si activeu aquesta opció s\'iniciarà el Syncthing quan es posi en marxa el sistema operatiu.</string>
   <string name="run_as_background_service">Inicia el servei automàticament en arrencar</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Utilitza el selector de carpetes avançat</string>
@@ -210,6 +234,19 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="start_into_web_gui_title">Inicia amb la interfície web directament</string>
   <string name="start_into_web_gui_summary">Quan s\'inicia la aplicació, obre la interfície web enlloc de la pantalla principal</string>
   <string name="pref_language_default">Idioma per defecte</string>
+  <string-array name="folder_types">
+    <item>Envia i rep</item>
+    <item>Només envia</item>
+    <item>Només rep</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>Aleatori</item>
+    <item>Alfabètic</item>
+    <item>Primer el més petit</item>
+    <item>Primer el més gran</item>
+    <item>Primer el més antic</item>
+    <item>Primer el més nou</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>Cap</item>
     <item>Paperera</item>
@@ -229,6 +266,9 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="usage_reporting">Informes d\'ús anònims</string>
   <string name="gui_address">Adreça d\'escolta de la interfície gràfica</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Desfés ignorant els dispositius i carpetes</string>
+  <string name="undo_ignored_devices_folders_question">Això desfarà les decisions anteriors d\'ignorar els dispositius i carpetes. Voleu continuar?</string>
+  <string name="undo_ignored_devices_folders_done">S\'han desfet les decisions correctament</string>
   <string name="export_config">Exporta la configuració</string>
   <!--Toast after entering invalid integer value-->
   <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Valor no vàlid. Introduïu un valor entre %1$d i %2$d.</string>
@@ -363,6 +403,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">El Syncthing està desactivat</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Voleu canviar les condicions d\'execució?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Canvia la configuració</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -374,6 +415,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">No s\'ha pogut crear el fitxer de configuració</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Falta un fitxer de configuració que és crucial per al funcionament</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Càmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -426,7 +468,11 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="folder_type_sendonly">Només envia</string>
   <string name="folder_type_receiveonly">Només rep</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">Aquesta carpeta enviarà els canvis cap a i rebrà els canvis de dispositius remots.</string>
+  <string name="folder_type_sendonly_description">Els fitxers queden protegits dels canvis fets en altres dispositius, però els canvis fets en aquest dispositiu s\'enviaran a tota la resta.</string>
+  <string name="folder_type_receiveonly_description">Els fitxers es sincronitzen des dels altres dispositius, però els canvis fets localment no s\'envien cap a la resta.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Ordre d\'extracció dels fitxers</string>
   <!--Displays the current pull order type in the Folder activity-->
   <string name="pull_order_type_random">Aleatori</string>
   <string name="pull_order_type_alphabetic">Alfabètic</string>
@@ -435,6 +481,12 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="pull_order_type_oldestFirst">Primer els més antics</string>
   <string name="pull_order_type_newestFirst">Primer els més nous</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Extreu els fitxers en ordre aleatori.</string>
+  <string name="pull_order_type_alphabetic_description">Extreu els fitxers alfabèticament pel seu nom.</string>
+  <string name="pull_order_type_smallestFirst_description">Extreu els fitxers segons la seva mida. Els més petits primer respectivament.</string>
+  <string name="pull_order_type_largestFirst_description">Extreu els fitxers segons la seva mida. Els més grans primer respectivament.</string>
+  <string name="pull_order_type_oldestFirst_description">Extreu els fitxers segons el moment de modificació. Els més antics primer respectivament.</string>
+  <string name="pull_order_type_newestFirst_description">Extreu els fitxers segons el moment de modificació. Els més nous primer respectivament.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Antiguitat Màxima</string>
   <string name="clean_out_after">Neteja després de</string>

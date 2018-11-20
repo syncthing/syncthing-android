@@ -16,6 +16,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="storage_permission_desc">Syncthing deve accedere allo spazio di archiviazione per eseguire la sincronizzazione dei file.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permesso di localizzazione</string>
+  <string name="location_permission_desc">Syncthing può essere configurato per funzionare su reti Wi-Fi selezionate. Android richiede che le applicazioni dispongano di autorizzazioni di localizzazione per poter cercare il nome della rete Wi-Fi attiva, poiché a volte è possibile dedurre la posizione degli utenti dal nome della rete a cui sono connessi. Se si desidera utilizzare questa funzione, premere il pulsante sopra per fornire i permessi di posizione richiesti a Syncthing. Altrimenti puoi saltare questo passaggio.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Indietro</string>
   <string name="cont">Continua</string>
@@ -190,8 +191,17 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="run_conditions_summary">Utilizzare le seguenti opzioni per decidere quando verrà eseguito Syncthing.</string>
   <string name="run_on_mobile_data_title">Esegui su dati mobili</string>
   <string name="run_on_mobile_data_summary">Esegui quando il dispositivo è connesso tramite la rete dati mobile. Avviso: questo può consumare molti dati dal piano dati dell\'operatore mobile se si sincronizzano grandi quantità di dati.</string>
+  <string name="run_on_wifi_title">Esegui su Wi-Fi</string>
+  <string name="run_on_wifi_summary">Esegui quando il dispositivo è connesso a una rete Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Esegui su Wi-Fi a consumo</string>
+  <string name="run_on_metered_wifi_summary">Esegui quando il dispositivo è connesso a una rete Wi-Fi a consumo, ad es. un hotspot o connessioni mobili condivise. Attenzione: questo può consumare gran parte del piano dati se si sincronizzano molti dati.</string>
+  <string name="run_on_whitelisted_wifi_title">Esegui su reti Wi-Fi specificate</string>
+  <string name="run_on_whitelisted_wifi_networks">Esegui solo su reti Wi-Fi selezionate: %1$s</string>
+  <string name="run_on_all_wifi_networks">Esegui su tutte le reti Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Attiva il Wi-Fi per selezionare le reti.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">È necessario concedere l\'autorizzazione alla LOCALIZZAZIONE per utilizzare questa funzione.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Autorizzazione richiesta</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partire da Android 8.1, è necessario l\'accesso alla posizione per poter leggere il nome del Wi-Fi. È possibile utilizzare questa funzionalità solo se si concede questa autorizzazione.</string>
   <string name="power_source_title">Esegui quando il dispositivo è alimentato da</string>
   <string-array name="power_source_entries">
     <item>Rete elettrica e batteria.</item>
@@ -203,6 +213,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="respect_master_sync_title">Rispetta l\'impostazione \'Sincronizzazione automatica dati\' di Android</string>
   <string name="respect_master_sync_summary">Disabilita Syncthing quando \'Sincronizzazione automatica dati\' è disattivato nelle impostazioni rapide.</string>
   <string name="run_in_flight_mode_title">Esegui quando il dispositivo è in modalità aereo</string>
+  <string name="run_in_flight_mode_summary">Abilita se il tuo dispositivo ha problemi a rilevare le connessioni Wi-Fi manuali durante la modalità aereo.</string>
   <string name="service_settings_title">Impostazione del servizio</string>
   <string name="service_settings_summary">Esegui Syncthing come servizio. Aggiunge una notifica persistente per impedire che venga interrotta da Android. Selezionando questa opzione si avvia Syncthing all\'avvio del sistema operativo.</string>
   <string name="run_as_background_service">Avvia automaticamente il servizio all\'avvio</string>

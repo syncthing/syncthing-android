@@ -16,6 +16,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="storage_permission_desc">Syncthing are nevoie să acceseze stocarea pentru a face sincronizarea fișierelor.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permisiune locație</string>
+  <string name="location_permission_desc">Syncthing poate fi configurat pentru a rula pe anumite rețele Wi-Fi. Android solicită ca aplicațiile să aibă permisiuni de locație pentru a putea căuta numele rețelei Wi-Fi active, deoarece uneori se poate deduce locația utilizatorilor din numele rețelei la care sunt conectați. Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunea de locație necesară. Altfel puteți sări acest pas.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Înapoi</string>
   <string name="cont">Continuare</string>
@@ -191,8 +192,17 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="run_conditions_summary">Folosiți următoarele setări pentru a decide când Syncthing va rula.</string>
   <string name="run_on_mobile_data_title">Rulează prin date mobile</string>
   <string name="run_on_mobile_data_summary">Rulează atunci când dispozitivul este conectat prin date mobile. Avertizare: Aceasta poate consuma mult din datele incluse în contract dacă doriți să sincronizați o cantitate mare de date.</string>
+  <string name="run_on_wifi_title">Rulează prin Wi-Fi</string>
+  <string name="run_on_wifi_summary">Rulează atunci când dispozitivul este conectat la o rețea Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Rulează prin Wi-Fi contorizat</string>
+  <string name="run_on_metered_wifi_summary">Rulează atunci când dispozitivul este conectat prin Wi-Fi contorizat ex. un hotspot sau o rețea pe fir. Avertizare: Aceasta poate consuma mult din datele incluse în contract dacă doriți să sincronizați o cantitate mare de date.</string>
+  <string name="run_on_whitelisted_wifi_title">Rulează prin anumite rețele Wi-Fi</string>
+  <string name="run_on_whitelisted_wifi_networks">Rulează numai prin anumite rețele Wi-Fi: %1$s</string>
+  <string name="run_on_all_wifi_networks">Rulează prin toate rețelele Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vă rugăm să activați Wi-Fi pentru a selecta rețelele.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Trebuie să permiteți accesul la LOCAȚIE pentru a putea folosi această caracteristică.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Necesită permisiunea</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Începând cu Android 8.1, este necesar accesul la locație pentru a putea citii numele rețelei Wi-Fi. Această caracteristică poate fi folosită doar dacă acordați această permisiune.</string>
   <string name="power_source_title">Rulează atunci când dispozitivul este alimentat la</string>
   <string-array name="power_source_entries">
     <item>Încărcător și baterie.</item>
@@ -204,6 +214,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="respect_master_sync_title">Se va respecta setarea \'Sincronizare date\' din Android</string>
   <string name="respect_master_sync_summary">Atunci când setarea \'Sincronizare date\' este oprită, Syncthing va fi dezactivat.</string>
   <string name="run_in_flight_mode_title">Rulează atunci când dispozitivul este în modul avion</string>
+  <string name="run_in_flight_mode_summary">Activați în cazul în care dispozitivul are probleme în detectarea manuală a conexiunilor Wi-Fi în modul avion.</string>
   <string name="service_settings_title">Setări serviciu</string>
   <string name="service_settings_summary">Rulează Syncthing ca un serviciu. Se adaugă o notificare permanentă pentru a împiedica Android să închidă aplicația. Bifând această opțiune se va porni Syncthing odată cu dispozitivul.</string>
   <string name="run_as_background_service">Pornește serviciul automat odată cu dispozitivul</string>
