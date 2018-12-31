@@ -96,8 +96,9 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        mActivity = (MainActivity) getActivity();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
-        
+
         mCpuUsage       = view.findViewById(R.id.cpu_usage);
         mRamUsage       = view.findViewById(R.id.ram_usage);
         mDownload       = view.findViewById(R.id.download);
