@@ -21,6 +21,7 @@
   <string name="generic_error">Грешка</string>
   <string name="ignore">Игнориране</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добави папка</string>
   <!--Title of the "share device id" menu action-->
@@ -71,6 +72,7 @@
   <string name="download_title">Сваляне</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Качване</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Сваляне:\u0020</string>
@@ -252,12 +254,12 @@
   <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
   <string name="toast_invalid_http_proxy_address">Невалиден синтаксис за прокси \'http://[IP/HOSTNAME]:[PORT]\'</string>
-  <string name="restart_on_wakeup_title">Ресартиране при Събуждане</string>
+  <string name="restart_on_wakeup_title">Рестартиране при Събуждане</string>
   <string name="restart_on_wakeup_summary">Стандартно: Включено. Ако изключите опцията сканирането и свързването с устройства ще бъдат отложени, с цел запазване на батерията.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Програми могат да извлекат частния ви ключ от генерирания файл, а чрез него да свалят и синхронизират файлове.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Наистина ли желаете да внасете нови настройки? Съществуващите файлове ще бъдат презаписани.</string>
+  <string name="dialog_confirm_import">Наистина ли желаете да внесете нови настройки? Съществуващите файлове ще бъдат презаписани.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Настройките са изнесени в %1$s</string>
   <string name="import_config">Внасяне на настройки</string>

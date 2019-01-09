@@ -28,6 +28,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="accept">Acceptera</string>
   <string name="ignore">Ignorera</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lägg till mapp</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +85,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="download_title">Hämtar</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Skickar</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Hämtar:\u0020</string>
@@ -106,7 +108,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="directory">Katalog</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Håll utkik efter ändringar</string>
-  <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande skanningar varje timme.</string>
+  <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande genomsökningar varje timme.</string>
   <!--Setting title-->
   <string name="folder_pause">Pausa mapp</string>
   <!--Setting title-->
@@ -183,8 +185,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="category_run_conditions">Körvillkor</string>
   <string name="category_behaviour">Beteende</string>
   <string name="category_syncthing_options">Syncthing-inställningar</string>
-  <string name="category_backup">Säkerhetskopiera</string>
-  <string name="category_debug">Felsök</string>
+  <string name="category_backup">Säkerhetskopiering</string>
+  <string name="category_debug">Felsökning</string>
   <string name="category_experimental">Experimentellt</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Körvillkor</string>

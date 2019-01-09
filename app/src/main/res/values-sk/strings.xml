@@ -12,6 +12,7 @@
   <!--Generic texts used everywhere-->
   <string name="generic_error">Chyba</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Pridať Adresár</string>
   <!--Title of the "share device id" menu action-->
@@ -52,6 +53,7 @@
   <string name="download_title">Sťahovanie</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Odosielanie</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Sťahovanie:\u0020</string>

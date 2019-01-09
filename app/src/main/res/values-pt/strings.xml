@@ -28,6 +28,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="accept">Aceitar</string>
   <string name="ignore">Ignorar</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +85,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="download_title">Recepção</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>

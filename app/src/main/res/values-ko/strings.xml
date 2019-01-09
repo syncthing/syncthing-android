@@ -17,6 +17,7 @@
   <string name="finish">완료</string>
   <string name="generic_error">오류</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">폴더 추가</string>
   <!--Title of the "share device id" menu action-->
@@ -67,6 +68,7 @@
   <string name="download_title">다운로드</string>
   <!--Title for current upload rate-->
   <string name="upload_title">업로드</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">다운로드됨:\u0020</string>

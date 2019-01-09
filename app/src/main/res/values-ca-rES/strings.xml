@@ -28,6 +28,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="accept">Accepta</string>
   <string name="ignore">Ignora</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Afegeix una carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +85,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="download_title">Descàrrega</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Pujada</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Descàrrega:\u0020</string>

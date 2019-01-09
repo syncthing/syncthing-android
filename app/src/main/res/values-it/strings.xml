@@ -28,6 +28,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="accept">Accettare</string>
   <string name="ignore">Ignora</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Nuova Cartella</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +85,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>

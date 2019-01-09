@@ -18,6 +18,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="generic_error">Chyba</string>
   <string name="ignore">Ignorovat</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
@@ -71,6 +72,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="download_title">Rychlost stahování</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Rychlost odesílání</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Rychlost stahování:\u0020</string>

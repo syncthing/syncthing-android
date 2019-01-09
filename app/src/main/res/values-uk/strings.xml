@@ -12,6 +12,7 @@
   <string name="finish">Завершити</string>
   <string name="generic_error">Помилка</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Додати каталог</string>
   <!--Title of the "share device id" menu action-->
@@ -49,6 +50,7 @@
   <string name="download_title">Завантаження</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Відправка</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Завантаження:\u0020</string>

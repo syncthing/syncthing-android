@@ -7,17 +7,28 @@
   <string name="welcome_title">Syncthing for Android にようこそ</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">はじめに</string>
   <string name="welcome_text">Syncthing は、オープンソースのファイル同期アプリケーションです。\n\
 他のデバイスとデータを共有するには、デバイスリストにその一意のデバイス ID を追加する必要があります。その後で、そのデバイスと共有するフォルダーを選択することができます。\n\
 発生した問題は何でも Github で報告してください。</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">ストレージアクセス許可</string>
+  <string name="storage_permission_desc">Syncthing はファイル同期を行うためにストレージのアクセス許可が必要です。</string>
   <!--Slide 3-->
+  <string name="location_permission_title">位置情報アクセス許可</string>
+  <string name="location_permission_desc">Syncthing は、選択した Wi-Fi ネットワークで動作するように設定できます。  Android は、接続するネットワークの名前からユーザーの位置情報を推測することがあるため、アプリケーションが有効な Wi-Fi ネットワーク名を参照できるように、位置情報のアクセス許可が必要です。 この機能を使用する場合は、上のボタンを押して Syncthing に必要な位置情報のアクセス許可を付与してください。 それ以外の場合は、この手順をスキップできます。</string>
   <!--Generic texts used everywhere-->
+  <string name="back">戻る</string>
   <string name="cont">続行</string>
   <string name="finish">完了</string>
+  <string name="generic_example">例</string>
   <string name="generic_error">エラー</string>
+  <string name="grant_permission">アクセス許可を付与する</string>
+  <string name="permission_granted">アクセス許可を付与しました</string>
+  <string name="accept">許可</string>
   <string name="ignore">無視</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">フォルダーを追加</string>
   <!--Title of the "share device id" menu action-->
@@ -30,6 +41,8 @@
   <string name="no">いいえ</string>
   <string name="open_website">Web サイトを開く</string>
   <string name="toast_write_storage_permission_required">このアプリはストレージの書き込みアクセス許可が必要です</string>
+  <string name="device_rejected">デバイス \"%1$s\" が接続を求めています</string>
+  <string name="folder_rejected">デバイス \"%1$s\" がフォルダー \"%2$s\" の共有を求めています</string>
   <string name="dialog_disable_battery_optimization_title">バッテリー最適化</string>
   <string name="dialog_disable_battery_optimization_message">Android はしばらくすると同期を停止することがあります。 これを防ぐには、バッテリーの最適化をオフにしてください。\n\n一部のデバイスには、タスク終了アプリが別途プリインストールされています。 これらのホワイトリストにも Syncthing を追加する必要があります。</string>
   <string name="dialog_disable_battery_optimization_later">後で</string>
@@ -50,6 +63,8 @@
   <plurals name="files">
     <item quantity="other">%1$d / %2$d ファイル</item>
   </plurals>
+  <string name="override_changes">変更を上書き</string>
+  <string name="open_file_manager">ファイルマネージャーを開く</string>
   <string name="toast_no_file_manager">互換性のあるファイルマネージャーが見つかりません</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">デバイス</string>
@@ -62,12 +77,14 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">切断中</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">一時停止中</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">不明</string>
   <!--Title for current download rate-->
   <string name="download_title">ダウンロード</string>
   <!--Title for current upload rate-->
   <string name="upload_title">アップロード</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">ダウンロード:\u0020</string>
@@ -85,11 +102,14 @@
   <!--Setting title-->
   <string name="folder_id">フォルダー ID</string>
   <!--Setting title-->
-  <string name="folder_label">フォルダー ラベル</string>
+  <string name="folder_label">フォルダーラベル</string>
   <!--Setting title-->
   <string name="directory">ディレクトリー</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">変更を監視する</string>
+  <string name="folder_fileWatcherDescription">オペレーティングシステムにファイルの変更を通知するよう要求します。 無効にすると、定期的な1時間ごとのスキャンに戻ります。</string>
   <!--Setting title-->
+  <string name="folder_pause">フォルダーを一時停止</string>
   <!--Setting title-->
   <string name="devices">デバイス</string>
   <!--Setting title-->
@@ -110,8 +130,11 @@
   <string name="folder_path_required">フォルダーのパスは空にできません</string>
   <string name="dialog_discard_changes">変更を破棄しますか?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">お使いの Android のバージョンは、 Syncthing に選択されたフォルダーの読み取り専用アクセスのみを許可します。</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">お使いの Android のバージョンは、 Syncthing に選択されたフォルダーの読み書きアクセスを許可します。</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">申し訳ありません。 選択したフォルダーは使用できません。 内蔵または外部ストレージにあるフォルダーを選択してください。</string>
   <string name="ignore_patterns">無視するパターン</string>
   <string name="create_ignore_file_error">無視ファイルの作成に失敗しました。ディレクトリは書き込み可能ですか?</string>
   <string name="edit_ignore_file_error">テキストエディタが見つかりません</string>
@@ -135,6 +158,7 @@
   <!--Setting title-->
   <string name="introducer">紹介者デバイス</string>
   <!--Setting title-->
+  <string name="pause_device">デバイスを一時停止</string>
   <!--ActionBar item-->
   <string name="delete_device">デバイスを削除</string>
   <string name="add_device">デバイスを追加</string>
@@ -165,7 +189,35 @@
   <string name="category_experimental">実験的</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">実行条件</string>
+  <string name="run_conditions_summary">以下の設定で、Syncthing を実行するタイミングを指定できます。</string>
+  <string name="run_on_mobile_data_title">モバイルネットワーク接続時に実行</string>
+  <string name="run_on_mobile_data_summary">デバイスがモバイルデータネットワーク経由で接続されている場合に実行します。 警告：大量のデータを同期すると、モバイルデータプランから大量のデータを消費する可能性があります。</string>
+  <string name="run_on_wifi_title">Wi-Fi 接続時に実行</string>
+  <string name="run_on_wifi_summary">デバイスが Wi-Fi ネットワークに接続しているときに実行します。</string>
+  <string name="run_on_metered_wifi_title">従量制課金の Wi-Fi 接続時に実行</string>
+  <string name="run_on_metered_wifi_summary">デバイスが従量制のWi-Fiネットワークに接続されている場合に実行します。 例えば、ホットスポットやテザリングネットワーク。 重要: 大量のデータを同期すると、データプランを大量に消費する可能性があります。</string>
+  <string name="run_on_whitelisted_wifi_title">特定の Wi-Fi ネットワーク上で実行する</string>
+  <string name="run_on_whitelisted_wifi_networks">選択された Wi-Fi ネットワーク上でのみ実行する: %1$s</string>
+  <string name="run_on_all_wifi_networks">すべての Wi-Fi ネットワークで実行します。</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">ネットワークを選択するために Wi-Fi をオンにしてください。</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">この機能を使用するには位置情報のアクセス許可を付与する必要があります。</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">アクセス許可が必要です</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1 以降は、Wi-Fi 名を読み取るには位置情報のアクセスが必要です。 このアクセス許可を付与した場合にのみ、この機能を使用できます。</string>
+  <string name="power_source_title">デバイスが次の電源に接続されている時に実行する</string>
+  <string-array name="power_source_entries">
+    <item>AC とバッテリー電源。</item>
+    <item>AC 電源。</item>
+    <item>バッテリー電源。</item>
+  </string-array>
   <string name="respect_battery_saving_title">Android の節電設定に従う</string>
+  <string name="respect_battery_saving_summary">バッテリー節約が有効な場合は、Syncthing を無効にします。</string>
+  <string name="respect_master_sync_title">Android の \'データ自動同期\' 設定に従う</string>
+  <string name="respect_master_sync_summary">クイック設定のタイル \'データ自動同期\' がオフになっている場合は、同期を無効にします。</string>
+  <string name="run_in_flight_mode_title">デバイスが機内モードのときに実行する</string>
+  <string name="run_in_flight_mode_summary">機内モードで手動 Wi-Fi 接続の検出に問題がある場合に有効にします。</string>
+  <string name="service_settings_title">サービス設定</string>
+  <string name="service_settings_summary">Syncthing をサービスとして実行します。 Android による終了を防止するために永続通知を追加します。 このオプションをオンにすると、オペレーティングシステムの起動時に Syncthing が開始されます。</string>
+  <string name="run_as_background_service">起動時にサービスを自動的に開始する</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">高度なフォルダー選択を使用</string>
   <string name="advanced_folder_picker_summary">デバイス上の任意のフォルダーを選択できます</string>
@@ -183,6 +235,19 @@
   <string name="start_into_web_gui_title">Web GUI に直接起動する</string>
   <string name="start_into_web_gui_summary">アプリを起動するとき、メイン画面ではなく Web GUI を開きます</string>
   <string name="pref_language_default">デフォルトの言語</string>
+  <string-array name="folder_types">
+    <item>送信 &amp; 受信</item>
+    <item>送信のみ</item>
+    <item>受信のみ</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>ランダム</item>
+    <item>アルファベット順</item>
+    <item>小さい順</item>
+    <item>大きい順</item>
+    <item>古い順</item>
+    <item>新しい順</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>なし</item>
     <item>ゴミ箱</item>
@@ -202,16 +267,32 @@
   <string name="usage_reporting">匿名での使用状況レポート</string>
   <string name="gui_address">GUI 待ち受けアドレス</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">無視したデバイスとフォルダーを元に戻す</string>
+  <string name="undo_ignored_devices_folders_question">デバイスとフォルダーを無視するという以前の設定が元に戻されます。
+続行しますか?</string>
+  <string name="undo_ignored_devices_folders_done">設定を元に戻しました。</string>
   <string name="export_config">設定のエクスポート</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">入力値が正しくありません。 %1$d と %2$d の間で入力してください。</string>
   <!--Experimental options-->
+  <string name="use_proxy">プロキシ経由で接続する</string>
+  <string name="do_not_use_proxy">プロキシが設定されていません。</string>
   <string name="keep_wakelock_while_binary_running">実行中は CPU をオンのままにする</string>
   <string name="keep_wakelock_while_binary_running_summary">バッテリーでの動作中に予期しない切断が発生する場合オンにしてください。バッテリー消費量が増える場合があります。</string>
   <string name="use_tor_title">Tor を使用する</string>
+  <string name="use_tor_summary">プライバシー保護のためにすべてのトラフィックを強制的に Tor 経由にします。これには Orbot が必要です。プロキシ設定は無効化されます。</string>
+  <string name="socks_proxy_address_title">SOCKS5 プロキシ</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="toast_invalid_socks_proxy_address">入力されたプロキシ設定は間違っています \'socks5://[IPアドレス/ホスト名]:[ポート番号]\'</string>
+  <string name="http_proxy_address_title">HTTP(S) プロキシ</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
+  <string name="toast_invalid_http_proxy_address">入力されたプロキシ設定は間違っています \'http://[IPアドレス/ホスト名]:[ポート番号]\'</string>
   <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
   <string name="use_legacy_hashing_summary">互換性のため従来のハッシュパッケージの使用を強制</string>
+  <string name="restart_on_wakeup_title">ウェイクアップ時に再起動</string>
+  <string name="restart_on_wakeup_summary">デフォルト: 有効。 この機能を無効にすると、バッテリを節約するためにフォルダーのスキャンとデバイスの再接続が遅くなることがあります。</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
   <!--Dialog shown before config import-->
@@ -231,11 +312,18 @@
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">データベースをリセットする</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">この操作は、サポートチームが推奨する場合にのみ実行する必要があります。
+\nSyncthing のデータベースをクリアしてもよろしいですか?</string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">正常に Syncthing のデータベースをリセットしました</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">デルタインデックスをリセットする</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">この操作は、サポートチームに推奨された場合にのみ行ってください。
+\n本当に Syncthing のデルタインデックスをクリアしてもよろしいですか?
+</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">正常に Syncthing のデルタインデックスをリセットしました</string>
   <string name="category_about">アプリについて</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">ログを開く</string>
@@ -270,8 +358,8 @@
   <string name="select_folder">フォルダーを選択</string>
   <string name="create_folder_failed">フォルダーの作成に失敗しました</string>
   <!--LogActivity-->
-  <string name="syncthing_log_title">Syncthingログ</string>
-  <string name="android_log_title">Androidログ</string>
+  <string name="syncthing_log_title">Syncthing ログ</string>
+  <string name="android_log_title">Android ログ</string>
   <!--Title of the "log android" menu button-->
   <string name="view_android_log">Android ログを表示</string>
   <!--Title of the "log Syncthing" menu button-->
@@ -313,6 +401,7 @@
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing は無効になりました</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">実行条件を変更しますか?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">設定を変更</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -320,15 +409,19 @@
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
   <string name="syncthing_disabled">Syncthing は無効になりました</string>
+  <string name="syncthing_terminated">Syncthing が終了しました</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">設定ファイルの作成に失敗しました</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">操作に不可欠な設定ファイルがありません</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">カメラ</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-写真</string>
   <string name="notification_crash_title">Syncthing がクラッシュしました</string>
   <string name="notification_crash_text">クリックしてログを表示</string>
+  <string name="notifications_persistent_channel">Syncthing は有効です</string>
+  <string name="notification_persistent_waiting_channel">実行条件を監視しています</string>
   <string name="notifications_other_channel">他の通知</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -361,17 +454,37 @@
   <string name="state_syncing">同期中 (%1$d%%)</string>
   <string name="state_error">エラー</string>
   <string name="state_unknown">不明</string>
+  <string name="state_paused">一時停止中</string>
   <string name="status_outofsync">未同期</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">バックグラウンドでの実行が有効になっている場合、Syncthing の停止はサポートされていません。</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">フォルダータイプ</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">送信 &amp; 受信</string>
   <string name="folder_type_sendonly">送信のみ</string>
+  <string name="folder_type_receiveonly">受信のみ</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">このフォルダは、リモートデバイスに対する変更の送信と受信の両方を行います。</string>
+  <string name="folder_type_sendonly_description">ファイルは他のデバイスの変更から保護されていますが、このデバイスで加えられた変更は残りのクラスタに送信されます。</string>
+  <string name="folder_type_receiveonly_description">ファイルはクラスタから同期されますが、ローカルで行われた変更は他のデバイスに送信されません。</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">ファイル転送の順序</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">ランダム</string>
+  <string name="pull_order_type_alphabetic">アルファベット順</string>
+  <string name="pull_order_type_smallestFirst">小さい順</string>
+  <string name="pull_order_type_largestFirst">大きい順</string>
+  <string name="pull_order_type_oldestFirst">古い順</string>
+  <string name="pull_order_type_newestFirst">新しい順</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">ランダムな順序でファイルを転送します。</string>
+  <string name="pull_order_type_alphabetic_description">アルファベット順にファイルを転送します。</string>
+  <string name="pull_order_type_smallestFirst_description">ファイルサイズ順にファイルを転送します。小さいファイルから転送されます。</string>
+  <string name="pull_order_type_largestFirst_description">ファイルサイズ順にファイルを転送します。大きいファイルから転送されます。</string>
+  <string name="pull_order_type_oldestFirst_description">変更時刻順にファイルを転送します。古いファイルから転送されます。</string>
+  <string name="pull_order_type_newestFirst_description">変更時刻順にファイルを転送します。新しいファイルから転送されます。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最大保存日数</string>
   <string name="clean_out_after">以下の期間後に完全に削除</string>

@@ -11,6 +11,7 @@
   <string name="cont">استمرار</string>
   <string name="generic_error">خطأ</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">إضافة مجلد</string>
   <!--Title of the "share device id" menu action-->
@@ -39,6 +40,7 @@
   <string name="device_state_unknown">غير معروف</string>
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->

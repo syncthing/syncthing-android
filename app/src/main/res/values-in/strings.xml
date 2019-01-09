@@ -15,6 +15,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--Generic texts used everywhere-->
   <string name="cont">Lanjutkan</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tambah Folder</string>
   <!--Title of the "share device id" menu action-->
@@ -64,6 +65,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="download_title">Unduhan</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Unggah</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Unduhan:\u0020</string>

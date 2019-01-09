@@ -19,6 +19,7 @@
   <string name="generic_error">Ошибка</string>
   <string name="ignore">Игнорировать</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добавить папку</string>
   <!--Title of the "share device id" menu action-->
@@ -74,6 +75,7 @@
   <string name="download_title">Скачивание</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Отдача</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Скачивание:\u0020</string>

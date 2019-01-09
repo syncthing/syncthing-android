@@ -30,6 +30,7 @@ Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</stri
   <string name="accept">Elfogad</string>
   <string name="ignore">Elvet</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Mappa hozzáadása</string>
   <!--Title of the "share device id" menu action-->
@@ -90,6 +91,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="download_title">Letöltés</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Feltöltés</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Letöltve:\u0020</string>
