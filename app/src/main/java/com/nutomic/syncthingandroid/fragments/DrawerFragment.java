@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
     private Timer mTimer;
 
     private MainActivity mActivity;
+    private SharedPreferences sharedPreferences = null;
 
     public void onDrawerOpened() {
         mTimer = new Timer();
@@ -94,6 +96,9 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        mActivity = (MainActivity) getActivity();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
+
         mCpuUsage       = view.findViewById(R.id.cpu_usage);
         mRamUsage       = view.findViewById(R.id.ram_usage);
         mDownload       = view.findViewById(R.id.download);
@@ -246,8 +251,23 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionExit:
-                mActivity.stopService(new Intent(mActivity, SyncthingService.class));
-                mActivity.finish();
+                if (sharedPreferences != null && sharedPreferences.getBoolean(Constants.PREF_START_SERVICE_ON_BOOT, false)) {
+                    /**
+                     * App is running as a service. Show an explanation why exiting syncthing is an
+                     * extraordinary request, then ask the user to confirm.
+                     */
+                    AlertDialog mExitConfirmationDialog = new AlertDialog.Builder(mActivity)
+                            .setTitle(R.string.dialog_exit_while_running_as_service_title)
+                            .setMessage(R.string.dialog_exit_while_running_as_service_message)
+                            .setPositiveButton(R.string.yes, (d, i) -> {
+                                doExit();
+                            })
+                            .setNegativeButton(R.string.no, (d, i) -> {})
+                            .show();
+                } else {
+                    // App is not running as a service.
+                    doExit();
+                }
                 mActivity.closeDrawer();
                 break;
             case R.id.drawerActionShowQrCode:
@@ -258,6 +278,15 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private boolean alwaysRunInBackground() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        return sp.getBoolean(Constants.PREF_ALWAYS_RUN_IN_BACKGROUND, false);
+        return sp.getBoolean(Constants.PREF_START_SERVICE_ON_BOOT, false);
+    }
+
+    private void doExit() {
+        if (mActivity == null || mActivity.isFinishing()) {
+            return;
+        }
+        Log.i(TAG, "Exiting app on user request");
+        mActivity.stopService(new Intent(mActivity, SyncthingService.class));
+        mActivity.finish();
     }
 }
