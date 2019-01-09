@@ -653,6 +653,19 @@ Please report any problems you encounter via Github.</string>
     <!-- Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true -->
     <string name="exit">Exit</string>
 
+    <!-- Reasons for "syncthing disabled" dialog -->
+    <string name="syncthing_disabled_reason_heading">Reasons:</string>
+    <string name="syncthing_disabled_reason_on_battery">Device is running on battery</string>
+    <string name="syncthing_disabled_reason_on_charger">Device is running on charger</string>
+    <string name="syncthing_disabled_reason_powersaving">Device is in power-saving mode</string>
+    <string name="syncthing_disabled_reason_android_sync_disabled">Global Synchronization is disabled</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Current WiFi SSID is not whitelisted</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">Current WiFi is metered</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">No network connection or airplane mode enabled</string>
+    <string name="syncthing_disabled_reason_no_mobile_connection">Not connected to mobile data</string>
+    <string name="syncthing_disabled_reason_no_wifi_connection">Not connected to WiFi</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Not configured to sync on WiFi nor mobile data</string>
+
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>
 

@@ -16,18 +16,20 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.google.common.collect.Lists;
 import com.nutomic.syncthingandroid.SyncthingApp;
-import com.nutomic.syncthingandroid.service.ReceiverManager;
+import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+
+import static com.nutomic.syncthingandroid.model.RunConditionCheckResult.*;
+import static com.nutomic.syncthingandroid.model.RunConditionCheckResult.BlockerReason.*;
 
 /**
  * Holds information about the current wifi and charging state of the device.
@@ -52,7 +54,7 @@ public class RunConditionMonitor {
     };
 
     public interface OnRunConditionChangedListener {
-        void onRunConditionChanged(boolean shouldRun);
+        void onRunConditionChanged(RunConditionCheckResult result);
     }
 
     private final Context mContext;
@@ -60,14 +62,14 @@ public class RunConditionMonitor {
     private ReceiverManager mReceiverManager;
 
     /**
-     * Sending callback notifications through {@link OnDeviceStateChangedListener} is enabled if not null.
+     * Sending callback notifications through {@link OnRunConditionChangedListener} is enabled if not null.
      */
     private @Nullable OnRunConditionChangedListener mOnRunConditionChangedListener = null;
 
     /**
-     * Stores the result of the last call to {@link decideShouldRun}.
+     * Stores the result of the last call to {@link #decideShouldRun()}.
      */
-    private boolean lastDeterminedShouldRun = false;
+    private RunConditionCheckResult lastRunConditionCheckResult;
 
     public RunConditionMonitor(Context context, OnRunConditionChangedListener listener) {
         Log.v(TAG, "Created new instance");
@@ -140,21 +142,25 @@ public class RunConditionMonitor {
     }
 
     public void updateShouldRunDecision() {
-        // Check if the current conditions changed the result of decideShouldRun()
+        // Reason if the current conditions changed the result of decideShouldRun()
         // compared to the last determined result.
-        boolean newShouldRun = decideShouldRun();
-        if (newShouldRun != lastDeterminedShouldRun) {
+        RunConditionCheckResult result = decideShouldRun();
+        boolean change;
+        synchronized (this) {
+            change = lastRunConditionCheckResult == null || !lastRunConditionCheckResult.equals(result);
+            lastRunConditionCheckResult = result;
+        }
+        if (change) {
             if (mOnRunConditionChangedListener != null) {
-                mOnRunConditionChangedListener.onRunConditionChanged(newShouldRun);
+                mOnRunConditionChangedListener.onRunConditionChanged(result);
             }
-            lastDeterminedShouldRun = newShouldRun;
         }
     }
 
     /**
      * Determines if Syncthing should currently run.
      */
-    private boolean decideShouldRun() {
+    private RunConditionCheckResult decideShouldRun() {
         // Get run conditions preferences.
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
@@ -166,18 +172,20 @@ public class RunConditionMonitor {
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefRespectMasterSync = mPreferences.getBoolean(Constants.PREF_RESPECT_MASTER_SYNC, false);
 
+        List<BlockerReason> blockerReasons = new ArrayList<>();
+
         // PREF_POWER_SOURCE
         switch (prefPowerSource) {
             case POWER_SOURCE_CHARGER:
                 if (!isCharging()) {
                     Log.v(TAG, "decideShouldRun: POWER_SOURCE_AC && !isCharging");
-                    return false;
+                    blockerReasons.add(ON_BATTERY);
                 }
                 break;
             case POWER_SOURCE_BATTERY:
                 if (isCharging()) {
                     Log.v(TAG, "decideShouldRun: POWER_SOURCE_BATTERY && isCharging");
-                    return false;
+                    blockerReasons.add(ON_CHARGER);
                 }
                 break;
             case POWER_SOURCE_CHARGER_BATTERY:
@@ -189,35 +197,43 @@ public class RunConditionMonitor {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (prefRespectPowerSaving && isPowerSaving()) {
                 Log.v(TAG, "decideShouldRun: prefRespectPowerSaving && isPowerSaving");
-                return false;
+                blockerReasons.add(POWERSAVING_ENABLED);
             }
         }
 
         // Android global AutoSync setting.
         if (prefRespectMasterSync && !ContentResolver.getMasterSyncAutomatically()) {
             Log.v(TAG, "decideShouldRun: prefRespectMasterSync && !getMasterSyncAutomatically");
-            return false;
+            blockerReasons.add(GLOBAL_SYNC_DISABLED);
         }
 
         // Run on mobile data.
-        if (prefRunOnMobileData && isMobileDataConnection()) {
+        if (blockerReasons.isEmpty() && prefRunOnMobileData && isMobileDataConnection()) {
             Log.v(TAG, "decideShouldRun: prefRunOnMobileData && isMobileDataConnection");
-            return true;
+            return SHOULD_RUN;
         }
 
         // Run on wifi.
         if (prefRunOnWifi && isWifiOrEthernetConnection()) {
             if (prefRunOnMeteredWifi) {
-                // We are on non-metered or metered wifi. Check if wifi whitelist run condition is met.
+                // We are on non-metered or metered wifi. Reason if wifi whitelist run condition is met.
                 if (wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
                     Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && prefRunOnMeteredWifi && wifiWhitelistConditionMet");
-                    return true;
+                    if (blockerReasons.isEmpty()) return SHOULD_RUN;
+                } else {
+                    blockerReasons.add(WIFI_SSID_NOT_WHITELISTED);
                 }
             } else {
-                // Check if we are on a non-metered wifi and if wifi whitelist run condition is met.
-                if (!isMeteredNetworkConnection() && wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
-                    Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && !prefRunOnMeteredWifi && !isMeteredNetworkConnection && wifiWhitelistConditionMet");
-                    return true;
+                // Reason if we are on a non-metered wifi and if wifi whitelist run condition is met.
+                if (!isMeteredNetworkConnection()) {
+                    if (wifiWhitelistConditionMet(prefWifiWhitelistEnabled, whitelistedWifiSsids)) {
+                        Log.v(TAG, "decideShouldRun: prefRunOnWifi && isWifiOrEthernetConnection && !prefRunOnMeteredWifi && !isMeteredNetworkConnection && wifiWhitelistConditionMet");
+                        if (blockerReasons.isEmpty()) return SHOULD_RUN;
+                    } else {
+                        blockerReasons.add(WIFI_SSID_NOT_WHITELISTED);
+                    }
+                } else {
+                    blockerReasons.add(WIFI_WIFI_IS_METERED);
                 }
             }
         }
@@ -225,14 +241,27 @@ public class RunConditionMonitor {
         // Run in flight mode.
         if (prefRunInFlightMode && isFlightMode()) {
             Log.v(TAG, "decideShouldRun: prefRunInFlightMode && isFlightMode");
-            return true;
+            if (blockerReasons.isEmpty()) return SHOULD_RUN;
         }
 
         /**
          * If none of the above run conditions matched, don't run.
          */
         Log.v(TAG, "decideShouldRun: return false");
-        return false;
+        if (blockerReasons.isEmpty()) {
+            if (isFlightMode()) {
+                blockerReasons.add(NO_NETWORK_OR_FLIGHTMODE);
+            } else if (!prefRunOnWifi && !prefRunOnMobileData) {
+                blockerReasons.add(NO_ALLOWED_NETWORK);
+            } else if (prefRunOnMobileData) {
+                blockerReasons.add(NO_MOBILE_CONNECTION);
+            } else if (prefRunOnWifi) {
+                blockerReasons.add(NO_WIFI_CONNECTION);
+            } else {
+                blockerReasons.add(NO_NETWORK_OR_FLIGHTMODE);
+            }
+        }
+        return new RunConditionCheckResult(blockerReasons);
     }
 
     /**

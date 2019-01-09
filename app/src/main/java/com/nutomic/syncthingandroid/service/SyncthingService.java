@@ -1,33 +1,34 @@
 package com.nutomic.syncthingandroid.service;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
-import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.PRNGFixes;
-import com.annimon.stream.Stream;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
-import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 import com.nutomic.syncthingandroid.util.ConfigXml;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.inject.Inject;
 
@@ -99,6 +100,10 @@ public class SyncthingService extends Service {
         void onServiceStateChange(State currentState);
     }
 
+    public interface OnRunConditionCheckResultListener {
+        void onRunConditionCheckResultChanged(RunConditionCheckResult result);
+    }
+
     /**
      * Indicates the current state of SyncthingService and of Syncthing itself.
      */
@@ -124,6 +129,7 @@ public class SyncthingService extends Service {
      * {@link onStartCommand}.
      */
     private State mCurrentState = State.DISABLED;
+    private AtomicReference<RunConditionCheckResult> mCurrentCheckResult = new AtomicReference<>(RunConditionCheckResult.SHOULD_RUN);
 
     private ConfigXml mConfig;
     private @Nullable PollWebGuiAvailableTask mPollWebGuiAvailableTask = null;
@@ -136,6 +142,7 @@ public class SyncthingService extends Service {
     private Handler mHandler;
 
     private final HashSet<OnServiceStateChangeListener> mOnServiceStateChangeListeners = new HashSet<>();
+    private final HashSet<OnRunConditionCheckResultListener> mOnRunConditionCheckResultListeners = new HashSet<>();
     private final SyncthingServiceBinder mBinder = new SyncthingServiceBinder(this);
 
     @Inject NotificationHandler mNotificationHandler;
@@ -262,7 +269,13 @@ public class SyncthingService extends Service {
      * function is called to notify this class to run/terminate the syncthing binary.
      * {@link #onServiceStateChange} is called while applying the decision change.
      */
-    private void onUpdatedShouldRunDecision(boolean newShouldRunDecision) {
+    private void onUpdatedShouldRunDecision(RunConditionCheckResult result) {
+        boolean newShouldRunDecision = result.isShouldRun();
+        boolean reasonsChanged = !mCurrentCheckResult.getAndSet(result).equals(result);
+        if (reasonsChanged) {
+            onRunConditionCheckResultChange(result);
+        }
+
         if (newShouldRunDecision != mLastDeterminedShouldRun) {
             Log.i(TAG, "shouldRun decision changed to " + newShouldRunDecision + " according to configured run conditions.");
             mLastDeterminedShouldRun = newShouldRunDecision;
@@ -578,12 +591,40 @@ public class SyncthingService extends Service {
         });
     }
 
+    public void registerOnRunConditionCheckResultChange(OnRunConditionCheckResultListener listener) {
+        listener.onRunConditionCheckResultChanged(mCurrentCheckResult.get());
+        mOnRunConditionCheckResultListeners.add(listener);
+    }
+
+    public void unregisterOnRunConditionCheckResultChange(OnRunConditionCheckResultListener listener) {
+        mOnRunConditionCheckResultListeners.remove(listener);
+    }
+
+    private void onRunConditionCheckResultChange(RunConditionCheckResult result) {
+        mHandler.post(() -> {
+            for (Iterator<OnRunConditionCheckResultListener> i = mOnRunConditionCheckResultListeners.iterator();
+                 i.hasNext(); ) {
+                OnRunConditionCheckResultListener listener = i.next();
+                if (listener != null) {
+                    listener.onRunConditionCheckResultChanged(result);
+                } else {
+                    i.remove();
+                }
+            }
+        });
+    }
+
+
     public URL getWebGuiUrl() {
         return mConfig.getWebGuiUrl();
     }
 
     public State getCurrentState() {
         return mCurrentState;
+    }
+
+    public RunConditionCheckResult getCurrentRunConditionCheckResult() {
+        return mCurrentCheckResult.get();
     }
 
     public NotificationHandler getNotificationHandler() {
