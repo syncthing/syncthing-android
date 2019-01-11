@@ -111,12 +111,11 @@ for target in BUILD_TARGETS:
     environ.update({
         'GOPATH': module_dir,
         'CGO_ENABLED': '1',
-        'CC': os.path.join(standalone_ndk_dir, 'bin', target['cc'])
     })
 
     subprocess.check_call([
-                              'go', 'run', 'build.go', '-goos', 'android', '-goarch', target['goarch'],
-                          ] + pkg_argument + ['-no-upgrade', 'build'], env=environ, cwd=syncthing_dir)
+        'go', 'run', 'build.go', '-goos', 'android', '-goarch', target['goarch'], '-cc', os.path.join(standalone_ndk_dir, 'bin', target['cc'])
+    ] + pkg_argument + ['-no-upgrade', 'build'], env=environ, cwd=syncthing_dir)
 
     # Copy compiled binary to jniLibs folder
     target_dir = os.path.join(project_dir, 'app', 'src', 'main', 'jniLibs', target['jni_dir'])
