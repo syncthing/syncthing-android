@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.DialogLoadingBinding;
+import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingService.State;
 import com.nutomic.syncthingandroid.util.Util;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+
+import static com.nutomic.syncthingandroid.model.RunConditionCheckResult.*;
 
 /**
  * Handles loading/disabled dialogs.
@@ -32,8 +37,10 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerOnServiceConnectedListener(() ->
-                getService().registerOnServiceStateChangeListener(this::onServiceStateChange));
+        registerOnServiceConnectedListener(() -> {
+                getService().registerOnServiceStateChangeListener(this::onServiceStateChange);
+                getService().registerOnRunConditionCheckResultChange(this::onRunConditionCheckResultChange);
+        });
     }
 
     @Override
@@ -62,6 +69,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         super.onDestroy();
         if (getService() != null) {
             getService().unregisterOnServiceStateChangeListener(this::onServiceStateChange);
+            getService().unregisterOnRunConditionCheckResultChange(this::onRunConditionCheckResultChange);
         }
         dismissDisabledDialog();
     }
@@ -89,13 +97,20 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         }
     }
 
+    private void onRunConditionCheckResultChange(RunConditionCheckResult result) {
+        if (mDisabledDialog != null && mDisabledDialog.isShowing()) {
+            mDisabledDialog.setMessage(getDisabledDialogMessage());
+        }
+    }
+
     private void showDisabledDialog() {
         if (this.isFinishing() && (mDisabledDialog != null)) {
             return;
         }
+
         mDisabledDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.syncthing_disabled_title)
-                .setMessage(R.string.syncthing_disabled_message)
+                .setMessage(getDisabledDialogMessage())
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
                         (dialogInterface, i) -> {
                             Intent intent = new Intent(this, SettingsActivity.class);
@@ -108,6 +123,26 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 )
                 .setCancelable(false)
                 .show();
+    }
+
+    @NonNull
+    private StringBuilder getDisabledDialogMessage() {
+        StringBuilder message = new StringBuilder();
+        message.append(this.getResources().getString(R.string.syncthing_disabled_message));
+        Collection<BlockerReason> reasons = getService().getCurrentRunConditionCheckResult().getBlockReasons();
+        if (!reasons.isEmpty()) {
+            message.append("\n");
+            message.append("\n");
+            message.append(this.getResources().getString(R.string.syncthing_disabled_reason_heading));
+            int count = 0;
+            for (BlockerReason reason : reasons) {
+                count++;
+                message.append("\n");
+                if (reasons.size() > 1) message.append(count + ". ");
+                message.append(this.getString(reason.getResId()));
+            }
+        }
+        return message;
     }
 
     private void dismissDisabledDialog() {
