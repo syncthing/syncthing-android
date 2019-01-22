@@ -120,7 +120,17 @@ public class Constants {
      * fall back to an unencrypted HTTP connection to localhost. This applies
      * to syncthing core v0.14.53+.
      */
-    public static final Boolean osSupportsTLS12() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    public static Boolean osSupportsTLS12() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false;
+        }
+
+        if ("huawei".equalsIgnoreCase(Build.MANUFACTURER)) {
+            if (com.nutomic.syncthingandroid.util.Util.containsIgnoreCase(Build.MODEL, "CAN")) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
