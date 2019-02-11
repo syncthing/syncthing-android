@@ -35,8 +35,8 @@ android {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4151
-        versionName "0.10.17-beta1"
+        versionCode 4154
+        versionName "0.10.17-beta4"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         playAccountConfig = playAccountConfigs.defaultAccountConfig
@@ -81,8 +81,10 @@ play {
  * Some languages are not supported by Google Play, so we ignore them.
  */
 task deleteUnsupportedPlayTranslations(type: Delete) {
-    delete 'src/main/play/nn'
-    delete 'src/main/play/el-EL'
-    delete 'src/main/play/nb'
+    delete 'src/main/play/nn/'
+    delete 'src/main/play/el-EL/'
+    delete 'src/main/play/nb/'
     delete 'src/main/play/en/'
+    delete 'src/main/play/ta/'
+    delete 'src/main/play/eu/'
 }
