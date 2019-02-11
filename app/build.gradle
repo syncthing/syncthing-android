@@ -86,4 +86,5 @@ task deleteUnsupportedPlayTranslations(type: Delete) {
     delete 'src/main/play/nb/'
     delete 'src/main/play/en/'
     delete 'src/main/play/ta/'
+    delete 'src/main/play/eu/'
 }
