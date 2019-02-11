@@ -28,6 +28,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="accept">Acceptă</string>
   <string name="ignore">Ignoră</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirmare ieșire din aplicație</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adăugare director</string>
   <!--Title of the "share device id" menu action-->
@@ -85,6 +87,12 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="download_title">Descărcare </string>
   <!--Title for current upload rate-->
   <string name="upload_title">Încarcă</string>
+  <!--StatusFragment-->
+  <string name="status_fragment_title">Stare</string>
+  <string name="syncthing_starting">Syncthing pornește.</string>
+  <string name="syncthing_running">Syncthing rulează.</string>
+  <string name="syncthing_not_running">Syncthing nu rulează.</string>
+  <string name="syncthing_has_crashed">Syncthing s-a oprit neașteptat.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Descărcare:\u0020</string>
@@ -412,6 +420,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="syncthing_disabled_change_settings">Schimbă setări</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Ieșire</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing rulează</string>
   <string name="syncthing_disabled">Syncthing este dezactivat</string>

@@ -28,6 +28,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="accept">Acceptera</string>
   <string name="ignore">Ignorera</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Bekräfta att avsluta appen</string>
+  <string name="dialog_exit_while_running_as_service_message">För din övervägande: Du konfigurerade appen för att starta automatiskt vid uppstart. Därför övervakar den körförhållanden och synkroniseras när som helst i bakgrunden när förhållandena matchar. Du bör bara avsluta manuellt om du stöter på allvarliga problem. Annars, inaktivera \"Starta automatiskt vid start\" i inställningarna. Vill du avsluta nu tills enheten startas om?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lägg till mapp</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +87,12 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="download_title">Hämtar</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Skickar</string>
+  <!--StatusFragment-->
+  <string name="status_fragment_title">Status</string>
+  <string name="syncthing_starting">Syncthing startas.</string>
+  <string name="syncthing_running">Syncthing körs.</string>
+  <string name="syncthing_not_running">Syncthing körs inte.</string>
+  <string name="syncthing_has_crashed">Syncthing har kraschat.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Hämtar:\u0020</string>
@@ -106,7 +115,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="directory">Katalog</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Håll utkik efter ändringar</string>
-  <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande skanningar varje timme.</string>
+  <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande uppdateringar varje timme.</string>
   <!--Setting title-->
   <string name="folder_pause">Pausa mapp</string>
   <!--Setting title-->
@@ -183,8 +192,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="category_run_conditions">Körvillkor</string>
   <string name="category_behaviour">Beteende</string>
   <string name="category_syncthing_options">Syncthing-inställningar</string>
-  <string name="category_backup">Säkerhetskopiera</string>
-  <string name="category_debug">Felsök</string>
+  <string name="category_backup">Säkerhetskopiering</string>
+  <string name="category_debug">Felsökning</string>
   <string name="category_experimental">Experimentellt</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Körvillkor</string>
@@ -290,7 +299,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="use_legacy_hashing_title">Använd legacy hashing</string>
   <string name="use_legacy_hashing_summary">Tvinga Syncthing att använda legacy hashningspaket för kompatibilitetsändamål</string>
   <string name="restart_on_wakeup_title">Starta om på Vakna upp</string>
-  <string name="restart_on_wakeup_summary">Standard: Aktiverad. Om du inaktiverar den här funktionen kan det resultera i försenade mappsökningar och återkopplingar av enheter för att spara batteri.</string>
+  <string name="restart_on_wakeup_summary">Standard: Aktiverad. Om du inaktiverar den här funktionen kan det resultera i försenade mappuppdateringar och återkopplingar av enheter för att spara batteri.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att hämta/ändra synkroniserade filer.</string>
   <!--Dialog shown before config import-->
@@ -408,6 +417,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="syncthing_disabled_change_settings">Ändra inställningar</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Avsluta</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing körs</string>
   <string name="syncthing_disabled">Syncthing är inaktiverad</string>
@@ -452,7 +462,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inaktiv</string>
-  <string name="state_scanning">Skannar</string>
+  <string name="state_scanning">Uppdaterar</string>
   <string name="state_syncing">Synkroniserar (%1$d%%)</string>
   <string name="state_error">Fel</string>
   <string name="state_unknown">Okänd</string>

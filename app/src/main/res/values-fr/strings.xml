@@ -28,6 +28,9 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="accept">Accepter</string>
   <string name="ignore">Ignorer</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirmer pour quitter l\'application</string>
+  <string name="dialog_exit_while_running_as_service_message">Pour votre information: vous avez configuré l\'application pour qu\'elle démarre automatiquement au démarrage. Par conséquent, elle surveille les conditions d\'exécution et se synchronise à tout moment en arrière-plan lorsque les conditions sont réunies. Vous ne devez quitter manuellement que si vous rencontrez des problèmes graves. Sinon, désactivez \'Démarrer automatiquement au démarrage\' dans les paramètres. Souhaitez-vous quitter maintenant jusqu\'au redémarrage de l\'appareil ?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Ajouter un partage</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +87,12 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="download_title">Réception</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Emission</string>
+  <!--StatusFragment-->
+  <string name="status_fragment_title">Statut</string>
+  <string name="syncthing_starting">Syncthing  démarre.</string>
+  <string name="syncthing_running">Syncthing est en marche.</string>
+  <string name="syncthing_not_running">Syncthing est arrêté.</string>
+  <string name="syncthing_has_crashed">Syncthing s\'est planté.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Réception:\u0020</string>
@@ -408,6 +417,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="syncthing_disabled_change_settings">Modification des paramètres</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Quitter</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing fonctionne</string>
   <string name="syncthing_disabled">Syncthing est désactivé</string>

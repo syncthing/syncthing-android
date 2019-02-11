@@ -28,6 +28,9 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="accept">Aceitar</string>
   <string name="ignore">Ignorar</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirme para sair da aplicação</string>
+  <string name="dialog_exit_while_running_as_service_message">Para sua consideração: Configurou a aplicação para iniciar automaticamente no arranque. Portanto, monitoriza as condições de execução e sincroniza em qualquer altura em segundo plano quando reúne condições. Apenas deve sair manualmente se encontrar problemas sérios. Caso contrário, desactive \'Iniciar automaticamente durante o arranque\' nas configurações. Quer sair agora até que o dispositivo reinicie?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +87,12 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="download_title">Recepção</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
+  <!--StatusFragment-->
+  <string name="status_fragment_title">Estado</string>
+  <string name="syncthing_starting">O Syncthing está a iniciar.</string>
+  <string name="syncthing_running">O Syncthing está a correr.</string>
+  <string name="syncthing_not_running">O Syncthing não está a correr.</string>
+  <string name="syncthing_has_crashed">O Syncthing estoirou.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
@@ -193,6 +202,30 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="run_on_mobile_data_summary">Correr quando o dispositivo estiver conectado através da rede de dados móveis. Aviso: Isso poderá consumir uma grande parte do plano de dados fornecido pelo seu operador se sincronizar grandes quantidades de dados.</string>
   <string name="run_on_wifi_title">Usar o Wi-Fi</string>
   <string name="run_on_wifi_summary">Correr quando o dispositivo estiver conectado através de uma rede Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Correr sobre Wi-Fi racionado</string>
+  <string name="run_on_metered_wifi_summary">Correr quando o dispositivo estiver ligado a uma rede Wi-Fi racionada, por exemplo, um ponto de acesso ou uma rede restrita. Atenção: Isso poderá consumir grandes porções do seu plano de dados se sincronizar grandes quantidades de dados.</string>
+  <string name="run_on_whitelisted_wifi_title">Correr sobre redes Wi-Fi especificadas</string>
+  <string name="run_on_whitelisted_wifi_networks">Correr somente sobre redes Wi-Fi seleccionadas: %1$s</string>
+  <string name="run_on_all_wifi_networks">Correr sobre todas as redes Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor ligue o Wi-Fi para seleccionar redes.</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Tem que fornecer a permissão LOCALIZAÇÃO para usar esta funcionalidade.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">É necessário permissão</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir do Android 8.1, é necessário o acesso à localização para poder ler o nome do Wi-Fi. Apenas pode usar esta funcionalidade se fornecer essa permissão.</string>
+  <string name="power_source_title">Correr quando o dispositivo estiver a ser alimentado por</string>
+  <string-array name="power_source_entries">
+    <item>Carregador e bateria.</item>
+    <item>Carregador.</item>
+    <item>Bateria.</item>
+  </string-array>
+  <string name="respect_battery_saving_title">Respeitar a configuração do Android em relação à poupança da bateria</string>
+  <string name="respect_battery_saving_summary">Desactivar o Syncthing se a poupança de bateria estiver activa.</string>
+  <string name="respect_master_sync_title">Respeitar a configuração do Android \'Sincronizar dados automaticamente\'</string>
+  <string name="respect_master_sync_summary">Desactivar o Syncthing quando a configuração rápida do Android \'Sincronizar dados automaticamente\' estiver desligada.</string>
+  <string name="run_in_flight_mode_title">Correr quando o dispositivo estiver em modo de avião</string>
+  <string name="run_in_flight_mode_summary">Active se o seu dispositivo tiver problemas ao detectar ligações Wi-Fi manuais durante o modo de avião.</string>
+  <string name="service_settings_title">Configuração do serviço</string>
+  <string name="service_settings_summary">Correr o Syncthing como um serviço. Adiciona uma notificação persistente para prevenir que seja terminado pelo Android. Activar esta opção faz com que o Syncthing inicie durante o arranque do sistema operativo.</string>
+  <string name="run_as_background_service">Iniciar o serviço automaticamente durante o arranque</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar selector de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Seleccione qualquer pasta no dispositivo para sincronizar</string>
@@ -204,6 +237,31 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
     <item>Normal</item>
     <item>Baixa prioridade</item>
     <item>Nenhuma</item>
+  </string-array>
+  <string name="preference_language_title">Idioma</string>
+  <string name="preference_language_summary">Alterar o idioma da aplicação</string>
+  <string name="start_into_web_gui_title">Iniciar automaticamente na interface web.</string>
+  <string name="start_into_web_gui_summary">Ao iniciar a aplicação, abre a interface web ao invés do ecrã principal</string>
+  <string name="pref_language_default">Idioma predefinido</string>
+  <string-array name="folder_types">
+    <item>Enviar e receber</item>
+    <item>Enviar apenas</item>
+    <item>Receber apenas</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>Aleatória</item>
+    <item>Alfabética</item>
+    <item>Primeiro o mais pequeno</item>
+    <item>Primeiro o maior</item>
+    <item>Primeiro o mais velho</item>
+    <item>Primeiro o mais recente</item>
+  </string-array>
+  <string-array name="versioning_types">
+    <item>Nenhuma</item>
+    <item>Lixo</item>
+    <item>Simples</item>
+    <item>Escalonada</item>
+    <item>Externa</item>
   </string-array>
   <string name="device_name">Nome do dispositivo</string>
   <string name="listen_address">Endereços de escuta do protocolo de sincronização</string>
@@ -217,9 +275,15 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="usage_reporting">Enviar relatórios anónimos de utilização</string>
   <string name="gui_address">Endereço de escuta da interface gráfica</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Desfazer a acção de ignorar dispositivos e pastas</string>
+  <string name="undo_ignored_devices_folders_question">Isto irá desfazer as decisões prévias de ignorar dispositivos e pastas. Continuar?</string>
+  <string name="undo_ignored_devices_folders_done">As decisões foram desfeitas com sucesso.</string>
   <string name="export_config">Exportar configuração</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">O valor dado não é válido. Por favor escreva um valor entre %1$d e %2$d.</string>
   <!--Experimental options-->
+  <string name="use_proxy">Ligar através de um proxy</string>
+  <string name="do_not_use_proxy">Não há um proxy configurado.</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada enquanto o Syncthing está a correr</string>
   <string name="keep_wakelock_while_binary_running_summary">Use esta definição se experimentar desconectações inesperadas enquanto estiver a trabalhar com a bateria. Isto irá resultar num aumento do consumo da carga da bateria.</string>
   <string name="use_tor_title">Utilizar o Tor</string>
@@ -305,6 +369,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="syncthing_disabled_change_settings">Alterar configurações</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Sair</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está a correr</string>
   <string name="syncthing_disabled">O Syncthing está desactivado</string>

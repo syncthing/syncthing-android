@@ -18,6 +18,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="generic_example">Esimerkki</string>
   <string name="generic_error">Virhe</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Lisää kansio</string>
   <!--Title of the "share device id" menu action-->
@@ -71,6 +72,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="download_title">Lataus</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Lähetys</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Lataus:\u0020</string>
@@ -291,6 +293,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="syncthing_disabled_change_settings">Muuta asetuksia</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Poistu</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing on käynnissä</string>
   <string name="syncthing_disabled">Syncthing on poistettu käytöstä</string>

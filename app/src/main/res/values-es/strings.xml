@@ -15,6 +15,7 @@
   <string name="finish">Finalizar</string>
   <string name="generic_error">Error</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -60,6 +61,7 @@
   <string name="download_title">Descarga</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Subida</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Descarga:\u0020</string>
@@ -294,6 +296,7 @@
   <string name="syncthing_disabled_change_settings">Cambiar la configuración</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Salir</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing se está ejecutando</string>
   <string name="syncthing_disabled">Syncthing está deshabilitado</string>

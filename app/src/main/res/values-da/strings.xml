@@ -17,6 +17,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="finish">Færdiggør</string>
   <string name="generic_error">Fejl</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tilføj mappe</string>
   <!--Title of the "share device id" menu action-->
@@ -67,6 +68,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
@@ -316,6 +318,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="syncthing_disabled_change_settings">Ændre Indstillinger</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Afslut</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing kører</string>
   <string name="syncthing_disabled">Syncthing er slået fra</string>

@@ -28,6 +28,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="accept">Accepta</string>
   <string name="ignore">Ignora</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirmeu sortir de l\'aplicació</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Afegeix una carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -84,6 +86,12 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="download_title">Descàrrega</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Pujada</string>
+  <!--StatusFragment-->
+  <string name="status_fragment_title">Estat</string>
+  <string name="syncthing_starting">El Syncthing s\'està iniciant</string>
+  <string name="syncthing_running">El Syncthing s\'està executant</string>
+  <string name="syncthing_not_running">El Syncthing no s\'està executant</string>
+  <string name="syncthing_has_crashed">El Syncthing ha tingut un problema.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Descàrrega:\u0020</string>
@@ -408,6 +416,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="syncthing_disabled_change_settings">Canvia la configuració</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Surt</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">El Syncthing s\'està executant</string>
   <string name="syncthing_disabled">El Syncthing està desactivat</string>

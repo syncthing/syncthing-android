@@ -17,6 +17,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="cont">Devam et</string>
   <string name="generic_error">Hata</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Klasör Ekleme</string>
   <!--Title of the "share device id" menu action-->
@@ -62,6 +63,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="download_title">İndirme</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Yükleme</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">İndirme:\u0020</string>
@@ -267,6 +269,7 @@ Eğer herhangi bir sorunla karşılaşırsan Github aracılığıyla bildir.</st
   <string name="syncthing_disabled_change_settings">Ayarları Değiştir</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Çık</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing çalışıyor</string>
   <string name="syncthing_disabled">Syncthing devre dışı</string>

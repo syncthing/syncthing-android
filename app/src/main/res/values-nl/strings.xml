@@ -19,6 +19,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="generic_error">Fout</string>
   <string name="ignore">Negeren</string>
   <!--MainActivity-->
+  <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Map toevoegen</string>
   <!--Title of the "share device id" menu action-->
@@ -72,6 +73,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="download_title">Download</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
+  <!--StatusFragment-->
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Downloaden:\u0020</string>
@@ -350,6 +352,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="syncthing_disabled_change_settings">Instellingen wijzigen</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Afsluiten</string>
+  <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
   <string name="syncthing_disabled">Syncthing is uitgeschakeld</string>
