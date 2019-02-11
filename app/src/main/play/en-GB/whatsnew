@@ -1,2 +1,3 @@
-* Updated syncthing to 0.14.51
-* Cherry-picked fixes from Catfriend1 fork
+* Update syncthing to v1.0.1
+* Fix app getting killed by activity manager in Android 8+ (thanks Catfriend1 for backport)
+* Show reasons for disabled service in notification dialog (#1264)
