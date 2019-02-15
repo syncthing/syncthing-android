@@ -414,6 +414,17 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">終了</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">理由:</string>
+  <string name="syncthing_disabled_reason_on_battery">デバイスはバッテリーで実行しています</string>
+  <string name="syncthing_disabled_reason_on_charger">デバイスは充電して実行しています</string>
+  <string name="syncthing_disabled_reason_powersaving">デバイスは省電力モードです</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">グローバル同期は無効です</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">現在の WiFi SSID はホワイトリストにありません</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">現在の WiFi は従量制です</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">ネットワーク接続されていないか、機内モードが有効です</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">モバイルデータ通信に接続されていません</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">WiFi に接続されていません</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">WiFi やモバイル通信で同期するように設定されていません</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing は実行中です</string>
   <string name="syncthing_disabled">Syncthing は無効になりました</string>
