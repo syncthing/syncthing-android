@@ -103,6 +103,7 @@ public class FolderActivity extends SyncthingActivity
     private TextView mVersioningDescriptionView;
     private TextView mVersioningTypeView;
     private TextView mEditIgnores;
+    private SwitchCompat mVariableSizeBlocks;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate = false;
@@ -144,6 +145,10 @@ public class FolderActivity extends SyncthingActivity
                     }
                     mFolderNeedsToUpdate = true;
                     break;
+                case R.id.variableSizeBlocks:
+                    mFolder.useLargeBlocks = isChecked;
+                    mFolderNeedsToUpdate = true;
+                    break;
             }
         }
     };
@@ -169,6 +174,7 @@ public class FolderActivity extends SyncthingActivity
         mPullOrderDescriptionView = findViewById(R.id.pullOrderDescription);
         mVersioningDescriptionView = findViewById(R.id.versioningDescription);
         mVersioningTypeView = findViewById(R.id.versioningType);
+        mVariableSizeBlocks = findViewById(R.id.variableSizeBlocks);
         mDevicesContainer = findViewById(R.id.devicesContainer);
         mEditIgnores = findViewById(R.id.edit_ignores);
 
@@ -235,7 +241,13 @@ public class FolderActivity extends SyncthingActivity
         }
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
         intent.putExtra("android.content.extra.SHOW_ADVANCED", true);
-        startActivityForResult(intent, CHOOSE_FOLDER_REQUEST);
+        try {
+            startActivityForResult(intent, CHOOSE_FOLDER_REQUEST);
+        } catch (android.content.ActivityNotFoundException e) {
+            Log.e(TAG, "onPathViewClick exception, falling back to built-in FolderPickerActivity.", e);
+            startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
+                FolderPickerActivity.DIRECTORY_REQUEST_CODE);
+        }
     }
 
     private void editIgnores() {
@@ -403,6 +415,7 @@ public class FolderActivity extends SyncthingActivity
         mIdView.removeTextChangedListener(mTextWatcher);
         mFolderFileWatcher.setOnCheckedChangeListener(null);
         mFolderPaused.setOnCheckedChangeListener(null);
+        mVariableSizeBlocks.setOnCheckedChangeListener(null);
 
         // Update views
         mLabelView.setText(mFolder.label);
@@ -412,6 +425,7 @@ public class FolderActivity extends SyncthingActivity
         updateVersioningDescription();
         mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
         mFolderPaused.setChecked(mFolder.paused);
+        mVariableSizeBlocks.setChecked(mFolder.useLargeBlocks);
         List<Device> devicesList = getApi().getDevices(false);
 
         mDevicesContainer.removeAllViews();
@@ -428,6 +442,7 @@ public class FolderActivity extends SyncthingActivity
         mIdView.addTextChangedListener(mTextWatcher);
         mFolderFileWatcher.setOnCheckedChangeListener(mCheckedListener);
         mFolderPaused.setOnCheckedChangeListener(mCheckedListener);
+        mVariableSizeBlocks.setOnCheckedChangeListener(mCheckedListener);
     }
 
     @Override
