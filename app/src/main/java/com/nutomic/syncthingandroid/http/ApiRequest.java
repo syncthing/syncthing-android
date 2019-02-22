@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ImageView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -18,21 +17,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
-import com.nutomic.syncthingandroid.service.Constants;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
 
 public abstract class ApiRequest {
 
@@ -60,7 +47,7 @@ public abstract class ApiRequest {
     private RequestQueue getVolleyQueue() {
         if (sVolleyQueue == null) {
             Context context = mContext.getApplicationContext();
-            sVolleyQueue = Volley.newRequestQueue(context, new NetworkStack());
+            sVolleyQueue = Volley.newRequestQueue(context, new HurlStack());
         }
         return sVolleyQueue;
     }
@@ -144,35 +131,5 @@ public abstract class ApiRequest {
         };
 
         getVolleyQueue().add(imageRequest);
-    }
-
-    /**
-     * Extends {@link HurlStack}, uses {@link #getSslSocketFactory()} and disables hostname
-     * verification.
-     */
-    private class NetworkStack extends HurlStack {
-
-        public NetworkStack() {
-            super(null, getSslSocketFactory());
-        }
-        @Override
-        protected HttpURLConnection createConnection(URL url) throws IOException {
-            HttpsURLConnection connection = (HttpsURLConnection) super.createConnection(url);
-            connection.setHostnameVerifier((hostname, session) -> true);
-            return connection;
-        }
-    }
-
-    private SSLSocketFactory getSslSocketFactory() {
-        try {
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            File httpsCertPath = Constants.getHttpsCertFile(mContext);
-            sslContext.init(null, new TrustManager[]{new SyncthingTrustManager(httpsCertPath)},
-                    new SecureRandom());
-            return sslContext.getSocketFactory();
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            Log.w(TAG, e);
-            return null;
-        }
     }
 }
