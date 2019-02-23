@@ -107,7 +107,7 @@ public class ConfigXml {
 
     public URL getWebGuiUrl() {
         try {
-            return new URL("http://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent());
+            return new URL("https://" + getGuiElement().getElementsByTagName("address").item(0).getTextContent());
         } catch (MalformedURLException e) {
             throw new RuntimeException("Failed to parse web interface URL", e);
         }
@@ -154,9 +154,9 @@ public class ConfigXml {
         }
 
         /* Section - GUI */
-        // Disable TLS.
+        // Enforce TLS.
         Element gui = getGuiElement();
-        changed = setConfigElement(gui, "tls", "false") || changed;
+        changed = setConfigElement(gui, "tls", "true") || changed;
 
         // Set user to "syncthing"
         changed = setConfigElement(gui, "user", "syncthing") || changed;
