@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.service;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 
 import java.io.File;
@@ -111,5 +112,29 @@ public class Constants {
 
     static File getLogFile(Context context) {
         return new File(context.getExternalFilesDir(null), "syncthing.log");
+    }
+
+    /**
+     * Decide if we should enforce HTTPS when accessing the Web UI and REST API.
+     * Android 4.4 and earlier don't have support for TLS 1.2 requiring us to
+     * fall back to an unencrypted HTTP connection to localhost. This applies
+     * to syncthing core v0.14.53+.
+     */
+    public static Boolean osSupportsTLS12() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // Pre-Lollipop devices don't support TLS 1.2
+            return false;
+        }
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) {
+            /**
+             * SSLProtocolException: SSL handshake failed on Android N/7.0,
+             * missing support for elliptic curves.
+             * See https://issuetracker.google.com/issues/37122132
+             */
+            return false;
+        }
+
+        return true;
     }
 }
