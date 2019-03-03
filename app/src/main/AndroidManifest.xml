@@ -47,6 +47,24 @@
             android:launchMode="singleTask">
         </activity>
         <activity
+            android:name=".activities.RecentChangesActivity"
+            android:label="@string/recent_changes_title"
+            android:parentActivityName=".activities.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.TipsAndTricksActivity"
+            android:label="@string/tips_and_tricks_title"
+            android:parentActivityName=".activities.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.WebGuiActivity"
             android:label="@string/web_gui_title"
             android:parentActivityName=".activities.MainActivity"
@@ -54,6 +72,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.WebViewActivity"
+            android:label="@string/report_issue_title"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".activities.ShareActivity"
@@ -90,9 +113,13 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
-        <activity android:name=".activities.RestartActivity"
-            android:theme="@style/Theme.Syncthing.Translucent"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activities.SyncConditionsActivity"
+            android:label="@string/custom_sync_conditions_dialog">
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
+        </activity>
         <activity android:name=".activities.DeviceActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
@@ -100,12 +127,14 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity android:name=".activities.FolderActivity"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".activities.MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
         <activity android:name=".activities.SettingsActivity"
+            android:label="@string/settings_title"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -121,8 +150,8 @@
         <receiver android:name=".receiver.AppConfigReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="com.nutomic.syncthingandroid.action.START" />
-                <action android:name="com.nutomic.syncthingandroid.action.STOP" />
+                <action android:name="com.github.catfriend1.syncthingandroid.action.START" />
+                <action android:name="com.github.catfriend1.syncthingandroid.action.STOP" />
             </intent-filter>
         </receiver>
         <activity android:name=".activities.FolderTypeDialogActivity"
