@@ -13,33 +13,36 @@ import java.util.Map;
 
 public class Folder {
 
+    // Folder Configuration
     public String id;
-    public String label;
+    public String label = "";
     public String filesystemType = "basic";
     public String path;
     public String type = Constants.FOLDER_TYPE_SEND_RECEIVE;
     public boolean fsWatcherEnabled = true;
     public int fsWatcherDelayS = 10;
     private List<Device> devices = new ArrayList<>();
-    public int rescanIntervalS;
-    public final boolean ignorePerms = true;
+    public int rescanIntervalS = 3600;
+    public boolean ignorePerms = true;
     public boolean autoNormalize = true;
     public MinDiskFree minDiskFree;
     public Versioning versioning;
-    public int copiers;
+    public int copiers = 0;
     public int pullerMaxPendingKiB;
-    public int hashers;
-    public String order;
-    public boolean ignoreDelete;
-    public int scanProgressIntervalS;
-    public int pullerPauseS;
+    public int hashers = 0;
+    public String order = "random";
+    public boolean ignoreDelete = false;
+    public int scanProgressIntervalS = 0;
+    public int pullerPauseS = 0;
     public int maxConflicts = 10;
-    public boolean disableSparseFiles;
-    public boolean disableTempIndexes;
-    public boolean paused;
-    public boolean useLargeBlocks = true;
+    public boolean disableSparseFiles = false;
+    public boolean disableTempIndexes = false;
+    public boolean paused = false;
+    public boolean useLargeBlocks = false;
     public int weakHashThresholdPct = 25;
     public String markerName = ".stfolder";
+
+    // Folder Status
     public String invalid;
 
     public static class Versioning implements Serializable {
@@ -48,14 +51,19 @@ public class Folder {
     }
 
     public static class MinDiskFree {
-        public float value;
-        public String unit;
+        public float value = 1;
+        public String unit = "%";
     }
 
-    public void addDevice(String deviceId) {
+    public void addDevice(final Device device) {
         Device d = new Device();
-        d.deviceID = deviceId;
+        d.deviceID = device.deviceID;
+        d.introducedBy = device.introducedBy;
         devices.add(d);
+    }
+
+    public List<Device> getDevices() {
+        return devices;
     }
 
     public Device getDevice(String deviceId) {
@@ -78,6 +86,8 @@ public class Folder {
 
     @Override
     public String toString() {
-        return !TextUtils.isEmpty(label) ? label : id;
+        return (TextUtils.isEmpty(label))
+                ? (TextUtils.isEmpty(id) ? "" : id)
+                : label;
     }
 }

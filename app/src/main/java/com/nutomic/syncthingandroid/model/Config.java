@@ -10,15 +10,4 @@ public class Config {
     public Options options;
     public List<PendingDevice> pendingDevices;
     public List<RemoteIgnoredDevice> remoteIgnoredDevices;
-
-    public class Gui {
-        public boolean enabled;
-        public String address;
-        public String user;
-        public String password;
-        public boolean useTLS;
-        public String apiKey;
-        public boolean insecureAdminAccess;
-        public String theme;
-    }
 }
