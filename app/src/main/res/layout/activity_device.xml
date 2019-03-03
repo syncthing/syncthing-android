@@ -21,15 +21,16 @@
             android:paddingTop="8dp"
             android:showDividers="middle">
 
+            <!-- Option 1: Input or edit device ID -->
             <LinearLayout
-                android:id="@+id/idContainer"
+                android:id="@+id/editDeviceIdContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
                 android:orientation="horizontal">
 
                 <com.nutomic.syncthingandroid.views.EnhancedEditText
-                    android:id="@+id/id"
+                    android:id="@+id/editDeviceId"
                     style="@style/Widget.Syncthing.TextView.Label.Details.Field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -39,7 +40,8 @@
                     android:hint="@string/device_id"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions|textMultiLine"
-                    android:nextFocusForward="@+id/name" />
+                    android:focusable="true"
+                    android:nextFocusDown="@+id/name" />
 
                 <ImageView
                     android:id="@+id/qrButton"
@@ -51,8 +53,71 @@
                     android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
                     android:contentDescription="@string/scan_qr_code_description"
                     android:src="@drawable/ic_qrcode_black_24dp_active" />
+
             </LinearLayout>
 
+            <TextView
+                style="@style/Widget.Syncthing.TextView.Label.Details"
+                android:id="@+id/discoveredDevicesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_device_hub_black_24dp_active"
+                android:drawableStart="@drawable/ic_device_hub_black_24dp_active"
+                android:drawableEnd="@drawable/ic_refresh_black_24"
+                android:drawableRight="@drawable/ic_refresh_black_24"
+                android:focusable="true"
+                android:text="@string/discovered_devices_title"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/discoveredDevicesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:focusable="false"
+                android:visibility="gone">
+            </LinearLayout>
+
+            <!-- Option 2: Show or copy device ID -->
+            <LinearLayout
+                android:id="@+id/showDeviceIdContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:nextFocusDown="@+id/name" >
+
+                <com.nutomic.syncthingandroid.views.EnhancedEditText
+                    android:id="@+id/showDeviceId"
+                    style="@style/Widget.Syncthing.TextView.Label.Details.Field"
+                    android:enabled="false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_cellphone_black_24dp"
+                    android:drawableStart="@drawable/ic_cellphone_black_24dp"
+                    android:hint="@string/device_id"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions|textMultiLine" />
+
+                <ImageView
+                    android:id="@+id/copyDeviceIdIcon"
+                    style="?actionButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
+                    android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
+                    android:contentDescription="@string/scan_qr_code_description"
+                    android:src="@drawable/ic_content_copy_black_24dp" />
+
+            </LinearLayout>
+
+            <!-- Device Name -->
             <EditText
                 android:id="@+id/name"
                 style="@style/Widget.Syncthing.TextView.Label.Details.Field"
@@ -62,8 +127,10 @@
                 android:drawableStart="@drawable/ic_tag_text_outline_black_24dp_active"
                 android:hint="@string/name"
                 android:imeOptions="actionNext"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:importantForAutofill="no" />
 
+            <!-- Device Addresses-->
             <EditText
                 android:id="@+id/addresses"
                 style="@style/Widget.Syncthing.TextView.Label.Details.Field"
@@ -73,14 +140,16 @@
                 android:drawableStart="@drawable/ic_link_black_24dp_active"
                 android:hint="@string/addresses"
                 android:imeOptions="actionDone"
-                android:inputType="textNoSuggestions"/>
+                android:inputType="textNoSuggestions"
+                android:importantForAutofill="no" />
 
             <LinearLayout
                 android:id="@+id/compressionContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:focusable="true">
 
                 <TextView
                     style="@style/Widget.Syncthing.TextView.Label.Details"
@@ -118,9 +187,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_settings_black_24dp"
-                android:drawableStart="@drawable/ic_settings_black_24dp"
+                android:drawableLeft="@drawable/ic_pause_circle_outline_black_24dp"
+                android:drawableStart="@drawable/ic_pause_circle_outline_black_24dp"
                 android:text="@string/pause_device" />
+
+            <!-- Custom sync conditions -->
+            <LinearLayout
+                android:id="@+id/customSyncConditionsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/customSyncConditionsSwitch"
+                    style="@style/Widget.Syncthing.TextView.Label.Details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/ic_autorenew_black_24dp"
+                    android:drawableStart="@drawable/ic_autorenew_black_24dp"
+                    android:text="@string/custom_sync_conditions_title" />
+
+                <TextView
+                    android:id="@+id/customSyncConditionsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="-20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:text="@string/custom_sync_conditions_description"
+                    android:focusable="false"/>
+
+                <TextView
+                    android:id="@+id/customSyncConditionsDialog"
+                    style="@style/Widget.Syncthing.TextView.Label.Details"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/custom_sync_conditions_dialog"/>
+
+                <TextView
+                    android:id="@+id/customSyncConditionsCurrent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="-20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:text="@null"
+                    android:focusable="false"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/currentAddress"

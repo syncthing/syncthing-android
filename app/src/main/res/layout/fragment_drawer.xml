@@ -71,123 +71,6 @@
                 android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cpu_usage"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="?android:textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/cpu_usage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ram_usage"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="?android:textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/ram_usage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
-
-                <TextView
-                    android:id="@+id/download_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/download_title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="?android:textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/download"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
-
-                <TextView
-                    android:id="@+id/upload_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upload_title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="?android:textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/upload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/announce_server"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="?android:textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/announce_server"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
-
-                <TextView
                     android:id="@+id/syncthingVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -221,6 +104,17 @@
                 android:text="@string/show_device_id" />
 
             <TextView
+                android:id="@+id/drawerActionRecentChanges"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_history_black_24dp_active"
+                android:drawableStart="@drawable/ic_history_black_24dp_active"
+                android:text="@string/recent_changes_title"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
                 android:id="@+id/drawerActionWebGui"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
@@ -232,6 +126,17 @@
                 android:focusable="true" />
 
             <TextView
+                android:id="@+id/drawerActionImportExport"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_import_export_black_24dp"
+                android:drawableStart="@drawable/ic_import_export_black_24dp"
+                android:text="@string/category_backup"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
                 android:id="@+id/drawerActionRestart"
                 style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="match_parent"
@@ -239,6 +144,17 @@
                 android:drawableLeft="@drawable/ic_autorenew_black_24dp"
                 android:drawableStart="@drawable/ic_autorenew_black_24dp"
                 android:text="@string/restart"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/drawerActionTipsAndTricks"
+                style="@style/Widget.Syncthing.TextView.Label"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/ic_help_outline_black_24dp"
+                android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                android:text="@string/tips_and_tricks_title"
                 android:clickable="true"
                 android:focusable="true" />
         </LinearLayout>

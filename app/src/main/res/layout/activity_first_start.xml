@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.nutomic.syncthingandroid.activities.FirstStartActivity"
         tools:showIn="@layout/activity_first_start">
 
-        <android.support.v4.view.ViewPager
+        <com.nutomic.syncthingandroid.views.CustomViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:nextFocusLeft="@+id/btn_back"
+                android:nextFocusRight="@+id/btn_next" />
 
         <LinearLayout
                 android:id="@+id/layoutDots"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dots_height"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/dots_margin_bottom"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:importantForAccessibility="no"
+                android:descendantFocusability="blocksDescendants">
         </LinearLayout>
 
         <View
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:alpha=".5"
@@ -32,25 +37,26 @@
 
         <Button
                 android:id="@+id/btn_back"
+                android:focusable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@null"
                 android:text="@string/back"
-                android:textColor="@android:color/white"
-                android:visibility="gone" />
+                android:visibility="gone"
+                style="@style/Theme.Syncthing.GreyButton" />
 
         <Button
                 android:id="@+id/btn_next"
+                android:focusable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:background="@null"
                 android:text="@string/cont"
-                android:textColor="@android:color/white" />
+                style="@style/Theme.Syncthing.GreyButton" >
+        </Button>
 
 </RelativeLayout>

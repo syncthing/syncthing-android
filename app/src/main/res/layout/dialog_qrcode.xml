@@ -33,6 +33,7 @@
 
             <TextView
                 android:id="@+id/actionShareId"
+                style="@style/Widget.Syncthing.TextView.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -40,7 +41,8 @@
                 android:drawableRight="@drawable/ic_share_black_24dp"
                 android:drawableEnd="@drawable/ic_share_black_24dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/share_title" />
 
         </LinearLayout>
 
@@ -50,7 +52,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_launcher"/>
+            tools:src="@mipmap/ic_launcher"/>
 
     </LinearLayout>
 
