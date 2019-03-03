@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add_device"
-        android:icon="@drawable/btn_add_device"
-        android:title="@string/add_device"
-        app:showAsAction="always|withText" />
+        android:id="@+id/openBrowser"
+        android:icon="@drawable/ic_open_in_new_white_24"
+        android:title="@string/open_in_browser"
+        app:showAsAction="ifRoom" />
 
 </menu>

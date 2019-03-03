@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add_device"
-        android:icon="@drawable/btn_add_device"
-        android:title="@string/add_device"
+        android:id="@+id/open_preferences"
+        android:icon="@drawable/btn_settings"
+        android:title="@string/settings_title"
         app:showAsAction="always|withText" />
 
 </menu>
