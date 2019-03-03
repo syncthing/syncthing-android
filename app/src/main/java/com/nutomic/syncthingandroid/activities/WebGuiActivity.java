@@ -26,6 +26,7 @@ import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +35,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -48,7 +48,7 @@ import java.util.Properties;
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
-public class WebGuiActivity extends StateDialogActivity
+public class WebGuiActivity extends SyncthingActivity
         implements SyncthingService.OnServiceStateChangeListener {
 
     private static final String TAG = "WebGuiActivity";
@@ -83,7 +83,7 @@ public class WebGuiActivity extends StateDialogActivity
                 SslCertificate sslCert = error.getCertificate();
                 Field f = sslCert.getClass().getDeclaredField("mX509Certificate");
                 f.setAccessible(true);
-                X509Certificate cert = (X509Certificate)f.get(sslCert);
+                X509Certificate cert = (X509Certificate) f.get(sslCert);
                 if (cert == null) {
                     Log.w(TAG, "X509Certificate reference invalid");
                     handler.cancel();
@@ -91,8 +91,8 @@ public class WebGuiActivity extends StateDialogActivity
                 }
                 cert.verify(mCaCert.getPublicKey());
                 handler.proceed();
-            } catch (NoSuchFieldException|IllegalAccessException|CertificateException|
-                    NoSuchAlgorithmException|InvalidKeyException|NoSuchProviderException|
+            } catch (NoSuchFieldException | IllegalAccessException | CertificateException |
+                    NoSuchAlgorithmException | InvalidKeyException | NoSuchProviderException |
                     SignatureException e) {
                 Log.w(TAG, e);
                 handler.cancel();
@@ -106,10 +106,12 @@ public class WebGuiActivity extends StateDialogActivity
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Uri uri = Uri.parse(url);
-            if(uri.getHost().equals(getService().getWebGuiUrl().getHost())) {
+            if (uri.getHost().equals(getService().getWebGuiUrl().getHost())) {
                 return false;
             } else {
-                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                if (!Util.isRunningOnTV(WebGuiActivity.this)) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                }
                 return true;
             }
         }
@@ -123,7 +125,6 @@ public class WebGuiActivity extends StateDialogActivity
 
     /**
      * Initialize WebView.
-     *
      * Ignore lint javascript warning as js is loaded only from our known, local service.
      */
     @Override
@@ -135,6 +136,11 @@ public class WebGuiActivity extends StateDialogActivity
 
         mLoadingView = findViewById(R.id.loading);
         mConfig = new ConfigXml(this);
+        try {
+            mConfig.loadConfig();
+        } catch (ConfigXml.OpenConfigException e) {
+            throw new RuntimeException(e.getMessage());
+        }
         loadCaCert();
 
         mWebView = findViewById(R.id.webview);
@@ -227,7 +233,7 @@ public class WebGuiActivity extends StateDialogActivity
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
             mCaCert = (X509Certificate)
                     cf.generateCertificate(inStream);
-        } catch (FileNotFoundException|CertificateException e) {
+        } catch (FileNotFoundException | CertificateException e) {
             throw new IllegalArgumentException("Untrusted Certificate", e);
         } finally {
             try {
@@ -261,8 +267,8 @@ public class WebGuiActivity extends StateDialogActivity
         properties.setProperty("https.nonProxyHosts", exclusionList);
 
         try {
-            Class applictionCls = Class.forName("android.app.Application");
-            Field loadedApkField = applictionCls.getDeclaredField("mLoadedApk");
+            Class applicationCls = Class.forName("android.app.Application");
+            Field loadedApkField = applicationCls.getDeclaredField("mLoadedApk");
             loadedApkField.setAccessible(true);
             Object loadedApk = loadedApkField.get(appContext);
             Class loadedApkCls = Class.forName("android.app.LoadedApk");
