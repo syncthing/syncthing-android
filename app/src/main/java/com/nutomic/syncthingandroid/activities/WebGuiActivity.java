@@ -48,7 +48,7 @@ import java.util.Properties;
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
-public class WebGuiActivity extends SyncthingActivity
+public class WebGuiActivity extends StateDialogActivity
         implements SyncthingService.OnServiceStateChangeListener {
 
     private static final String TAG = "WebGuiActivity";

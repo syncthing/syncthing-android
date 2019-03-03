@@ -67,7 +67,7 @@ import static com.nutomic.syncthingandroid.service.Constants.PREF_BROADCAST_SERV
  * {@link DeviceListFragment} in different tabs, and
  * {@link DrawerFragment} in the navigation drawer.
  */
-public class MainActivity extends SyncthingActivity
+public class MainActivity extends StateDialogActivity
         implements SyncthingService.OnServiceStateChangeListener {
 
     private static final String TAG = "MainActivity";
