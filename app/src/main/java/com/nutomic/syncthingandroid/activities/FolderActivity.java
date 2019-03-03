@@ -1,15 +1,16 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -20,6 +21,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -27,48 +29,51 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.FolderIgnoreList;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.util.ConfigRouter;
 import com.nutomic.syncthingandroid.util.FileUtils;
+import com.nutomic.syncthingandroid.util.FileUtils.ExternalStorageDirType;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginEnd;
 import static android.support.v4.view.MarginLayoutParamsCompat.setMarginStart;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
 
 /**
  * Shows folder details and allows changing them.
  */
-public class FolderActivity extends SyncthingActivity
-        implements SyncthingActivity.OnServiceConnectedListener, SyncthingService.OnServiceStateChangeListener {
+public class FolderActivity extends SyncthingActivity {
 
     public static final String EXTRA_NOTIFICATION_ID =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.NOTIFICATION_ID";
+            "com.github.catfriend1.syncthingandroid.activities.FolderActivity.NOTIFICATION_ID";
     public static final String EXTRA_IS_CREATE =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.IS_CREATE";
+            "com.github.catfriend1.syncthingandroid.activities.FolderActivity.IS_CREATE";
     public static final String EXTRA_FOLDER_ID =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_ID";
+            "com.github.catfriend1.syncthingandroid.activities.FolderActivity.FOLDER_ID";
     public static final String EXTRA_FOLDER_LABEL =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_LABEL";
+            "com.github.catfriend1.syncthingandroid.activities.FolderActivity.FOLDER_LABEL";
     public static final String EXTRA_DEVICE_ID =
-            "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
+            "com.github.catfriend1.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
     private static final String TAG = "FolderActivity";
 
@@ -81,8 +86,9 @@ public class FolderActivity extends SyncthingActivity
     private static final int CHOOSE_FOLDER_REQUEST = 3459;
 
     private static final String FOLDER_MARKER_NAME = ".stfolder";
-    private static final String IGNORE_FILE_NAME = ".stignore";
+    // private static final String IGNORE_FILE_NAME = ".stignore";
 
+    private ConfigRouter mConfig;
     private Folder mFolder;
     // Contains SAF readwrite access URI on API level >= Build.VERSION_CODES.LOLLIPOP (21)
     private Uri mFolderUri = null;
@@ -95,30 +101,45 @@ public class FolderActivity extends SyncthingActivity
     private TextView mAccessExplanationView;
     private TextView mFolderTypeView;
     private TextView mFolderTypeDescriptionView;
+    private ViewGroup mDevicesContainer;
     private SwitchCompat mFolderFileWatcher;
     private SwitchCompat mFolderPaused;
-    private ViewGroup mDevicesContainer;
+    private SwitchCompat mCustomSyncConditionsSwitch;
+    private TextView mCustomSyncConditionsDescription;
+    private TextView mCustomSyncConditionsDialog;
     private TextView mPullOrderTypeView;
     private TextView mPullOrderDescriptionView;
     private TextView mVersioningDescriptionView;
     private TextView mVersioningTypeView;
-    private TextView mEditIgnores;
     private SwitchCompat mVariableSizeBlocks;
+    private TextView mEditIgnoreListTitle;
+    private EditText mEditIgnoreListContent;
+
+    @Inject
+    SharedPreferences mPreferences;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate = false;
+    private boolean mIgnoreListNeedsToUpdate = false;
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
-
-    private Folder.Versioning mVersioning;
 
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
             mFolder.label        = mLabelView.getText().toString();
-            mFolder.id           = mIdView.getText().toString();;
+            mFolder.id           = mIdView.getText().toString();
             // mPathView must not be handled here as it's handled by {@link onActivityResult}
+            // mEditIgnoreListContent must not be handled here as it's written back when the dialog ends.
+            mFolderNeedsToUpdate = true;
+        }
+    };
+
+    private final TextWatcher mIgnoreListContentTextWatcher = new TextWatcherAdapter() {
+        @Override
+        public void afterTextChanged(Editable s) {
+            mIgnoreListNeedsToUpdate = true;
             mFolderNeedsToUpdate = true;
         }
     };
@@ -136,10 +157,17 @@ public class FolderActivity extends SyncthingActivity
                     mFolder.paused = isChecked;
                     mFolderNeedsToUpdate = true;
                     break;
+                case R.id.customSyncConditionsSwitch:
+                    mCustomSyncConditionsDescription.setEnabled(isChecked);
+                    mCustomSyncConditionsDialog.setFocusable(isChecked);
+                    mCustomSyncConditionsDialog.setEnabled(isChecked);
+                    // This is needed to display the "discard changes dialog".
+                    mFolderNeedsToUpdate = true;
+                    break;
                 case R.id.device_toggle:
                     Device device = (Device) view.getTag();
                     if (isChecked) {
-                        mFolder.addDevice(device.deviceID);
+                        mFolder.addDevice(device);
                     } else {
                         mFolder.removeDevice(device.deviceID);
                     }
@@ -155,12 +183,14 @@ public class FolderActivity extends SyncthingActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        mConfig = new ConfigRouter(FolderActivity.this);
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_folder);
+        ((SyncthingApp) getApplication()).component().inject(this);
+        setContentView(R.layout.activity_folder);
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
-        registerOnServiceConnectedListener(this);
 
         mLabelView = findViewById(R.id.label);
         mIdView = findViewById(R.id.id);
@@ -170,69 +200,114 @@ public class FolderActivity extends SyncthingActivity
         mFolderTypeDescriptionView = findViewById(R.id.folderTypeDescription);
         mFolderFileWatcher = findViewById(R.id.fileWatcher);
         mFolderPaused = findViewById(R.id.folderPause);
+        mCustomSyncConditionsSwitch = findViewById(R.id.customSyncConditionsSwitch);
+        mCustomSyncConditionsDescription = findViewById(R.id.customSyncConditionsDescription);
+        mCustomSyncConditionsDialog = findViewById(R.id.customSyncConditionsDialog);
         mPullOrderTypeView = findViewById(R.id.pullOrderType);
         mPullOrderDescriptionView = findViewById(R.id.pullOrderDescription);
         mVersioningDescriptionView = findViewById(R.id.versioningDescription);
         mVersioningTypeView = findViewById(R.id.versioningType);
         mVariableSizeBlocks = findViewById(R.id.variableSizeBlocks);
         mDevicesContainer = findViewById(R.id.devicesContainer);
-        mEditIgnores = findViewById(R.id.edit_ignores);
+        mEditIgnoreListTitle = findViewById(R.id.edit_ignore_list_title);
+        mEditIgnoreListContent = findViewById(R.id.edit_ignore_list_content);
 
         mPathView.setOnClickListener(view -> onPathViewClick());
+        mCustomSyncConditionsDialog.setOnClickListener(view -> onCustomSyncConditionsDialogClick());
 
         findViewById(R.id.folderTypeContainer).setOnClickListener(v -> showFolderTypeDialog());
         findViewById(R.id.pullOrderContainer).setOnClickListener(v -> showPullOrderDialog());
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
-        mEditIgnores.setOnClickListener(v -> editIgnores());
+
+        if (savedInstanceState != null) {
+            Log.d(TAG, "Retrieving state from savedInstanceState ...");
+            mFolder = new Gson().fromJson(savedInstanceState.getString("mFolder"), Folder.class);
+            mFolderNeedsToUpdate = savedInstanceState.getBoolean("mFolderNeedsToUpdate");
+            mIgnoreListNeedsToUpdate = savedInstanceState.getBoolean("mIgnoreListNeedsToUpdate");
+            mFolderUri = savedInstanceState.getParcelable("mFolderUri");
+            restoreDialogStates(savedInstanceState);
+        } else {
+            // Fresh init of the edit or create mode.
+            if (mIsCreateMode) {
+                Log.d(TAG, "Initializing create mode ...");
+                initFolder();
+                mFolderNeedsToUpdate = true;
+            } else {
+                // Edit mode.
+                String passedId = getIntent().getStringExtra(EXTRA_FOLDER_ID);
+                Log.d(TAG, "Initializing edit mode: folder.id=" + passedId);
+                // getApi() is unavailable (onCreate > onPostCreate > onServiceConnected)
+                List<Folder> folders = mConfig.getFolders(null);
+                mFolder = null;
+                for (Folder currentFolder : folders) {
+                    if (currentFolder.id.equals(passedId)) {
+                        mFolder = currentFolder;
+                        break;
+                    }
+                }
+                if (mFolder == null) {
+                    Log.w(TAG, "Folder not found in API update, maybe it was deleted?");
+                    finish();
+                    return;
+                }
+                mConfig.getFolderIgnoreList(null, mFolder, this::onReceiveFolderIgnoreList);
+                mFolderNeedsToUpdate = false;
+            }
+
+            // If the extra is set, we should automatically share the current folder with the given device.
+            if (getIntent().hasExtra(EXTRA_DEVICE_ID)) {
+                Device device = new Device();
+                device.deviceID = getIntent().getStringExtra(EXTRA_DEVICE_ID);
+                mFolder.addDevice(device);
+                mFolderNeedsToUpdate = true;
+            }
+        }
 
         if (mIsCreateMode) {
-            if (savedInstanceState != null) {
-                mFolder = new Gson().fromJson(savedInstanceState.getString("folder"), Folder.class);
-                if (savedInstanceState.getBoolean(IS_SHOW_DISCARD_DIALOG)){
-                    showDiscardDialog();
-                }
-            }
-            if (mFolder == null) {
-                initFolder();
-            }
-            // Open keyboard on label view in edit mode.
-            mLabelView.requestFocus();
-            mEditIgnores.setEnabled(false);
-        }
-        else {
-            // Prepare edit mode.
-            mIdView.clearFocus();
+            mEditIgnoreListTitle.setEnabled(false);
+            mEditIgnoreListContent.setEnabled(false);
+        } else {
+            // Edit mode.
             mIdView.setFocusable(false);
             mIdView.setEnabled(false);
+            mPathView.setFocusable(false);
             mPathView.setEnabled(false);
         }
+        checkWriteAndUpdateUI();
+        updateViewsAndSetListeners();
 
-        if (savedInstanceState != null){
-            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
-                showDeleteDialog();
-            }
-        }
+        // Open keyboard on label view in edit mode.
+        mLabelView.requestFocus();
+    }
 
-        if (savedInstanceState != null){
-            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
-                showDeleteDialog();
-            }
+    private void restoreDialogStates(Bundle savedInstanceState) {
+        if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)) {
+            showDeleteDialog();
+        } else if (savedInstanceState.getBoolean(IS_SHOW_DISCARD_DIALOG)) {
+            showDiscardDialog();
         }
     }
 
     /**
-     * Invoked after user clicked on the {@link mPathView} label.
+     * Invoked after user clicked on the {@link #mPathView} label.
      */
     @SuppressLint("InlinedAPI")
     private void onPathViewClick() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // API < 21
             startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
                 FolderPickerActivity.DIRECTORY_REQUEST_CODE);
             return;
         }
+        String prefSuggestNewFolderRoot = mPreferences.getString(Constants.PREF_SUGGEST_NEW_FOLDER_ROOT, Constants.PREF_SUGGEST_NEW_FOLDER_ROOT_DATA);
 
         // This has to be android.net.Uri as it implements a Parcelable.
-        android.net.Uri externalFilesDirUri = FileUtils.getExternalFilesDirUri(FolderActivity.this);
+        android.net.Uri externalFilesDirUri = FileUtils.getExternalFilesDirUri(
+                FolderActivity.this,
+                prefSuggestNewFolderRoot.equals(Constants.PREF_SUGGEST_NEW_FOLDER_ROOT_DATA) ?
+                        ExternalStorageDirType.DATA :
+                        ExternalStorageDirType.MEDIA
+        );
 
         // Display storage access framework directory picker UI.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
@@ -250,25 +325,16 @@ public class FolderActivity extends SyncthingActivity
         }
     }
 
-    private void editIgnores() {
-        try {
-            File ignoreFile = new File(mFolder.path, IGNORE_FILE_NAME);
-            if (!ignoreFile.exists() && !ignoreFile.createNewFile()) {
-                Toast.makeText(this, R.string.create_ignore_file_error, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            Uri uri = Uri.fromFile(ignoreFile);
-            intent.setDataAndType(uri, "text/plain");
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-            startActivity(intent);
-        } catch (IOException e) {
-            Log.w(TAG, e);
-        } catch (ActivityNotFoundException e) {
-            Log.w(TAG, e);
-            Toast.makeText(this, R.string.edit_ignore_file_error, Toast.LENGTH_SHORT).show();
-        }
+    /**
+     * Invoked after user clicked on the {@link #mCustomSyncConditionsDialog} label.
+     */
+    private void onCustomSyncConditionsDialogClick() {
+        startActivityForResult(
+            SyncConditionsActivity.createIntent(
+                this, Constants.PREF_OBJECT_PREFIX_FOLDER + mFolder.id, mFolder.label
+            ),
+            0
+        );
     }
 
     private void showFolderTypeDialog() {
@@ -321,93 +387,61 @@ public class FolderActivity extends SyncthingActivity
     }
 
     @Override
+    public void onBackPressed() {
+        if (mFolderNeedsToUpdate) {
+            showDiscardDialog();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         SyncthingService syncthingService = getService();
         if (syncthingService != null) {
             syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
-            syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         mLabelView.removeTextChangedListener(mTextWatcher);
         mIdView.removeTextChangedListener(mTextWatcher);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        // We don't want to update every time a TextView's character changes,
-        // so we hold off until the view stops being visible to the user.
-        if (mFolderNeedsToUpdate) {
-            updateFolder();
-        }
+        mEditIgnoreListContent.removeTextChangedListener(mIgnoreListContentTextWatcher);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString("mFolder", new Gson().toJson(mFolder));
+        outState.putBoolean("mFolderNeedsToUpdate", mFolderNeedsToUpdate);
+        outState.putBoolean("mIgnoreListNeedsToUpdate", mIgnoreListNeedsToUpdate);
+        outState.putParcelable("mFolderUri", mFolderUri);
+
         outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
         Util.dismissDialogSafe(mDeleteDialog, this);
 
-        if (mIsCreateMode){
-            outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
-            Util.dismissDialogSafe(mDiscardDialog, this);
-        }
+        outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
+        Util.dismissDialogSafe(mDiscardDialog, this);
     }
 
     /**
-     * Save current settings in case we are in create mode and they aren't yet stored in the config.
+     * Register for service state change events.
      */
     @Override
-    public void onServiceConnected() {
-        Log.v(TAG, "onServiceConnected");
-        SyncthingService syncthingService = (SyncthingService) getService();
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        super.onServiceConnected(componentName, iBinder);
+        SyncthingServiceBinder syncthingServiceBinder = (SyncthingServiceBinder) iBinder;
+        SyncthingService syncthingService = (SyncthingService) syncthingServiceBinder.getService();
         syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
-        syncthingService.registerOnServiceStateChangeListener(this);
     }
 
-    @Override
-    public void onServiceStateChange(SyncthingService.State currentState) {
-        if (currentState != ACTIVE) {
-            finish();
-            return;
+    private void onReceiveFolderIgnoreList(FolderIgnoreList folderIgnoreList) {
+        mEditIgnoreListContent.setMaxLines(Integer.MAX_VALUE);
+        mEditIgnoreListContent.removeTextChangedListener(mIgnoreListContentTextWatcher);
+        if (folderIgnoreList.ignore != null) {
+            String ignoreList = TextUtils.join("\n", folderIgnoreList.ignore);
+            mEditIgnoreListContent.setText(ignoreList);
         }
-
-        if (!mIsCreateMode) {
-            List<Folder> folders = getApi().getFolders();
-            String passedId = getIntent().getStringExtra(EXTRA_FOLDER_ID);
-            mFolder = null;
-            for (Folder currentFolder : folders) {
-                if (currentFolder.id.equals(passedId)) {
-                    mFolder = currentFolder;
-                    break;
-                }
-            }
-            if (mFolder == null) {
-                Log.w(TAG, "Folder not found in API update, maybe it was deleted?");
-                finish();
-                return;
-            }
-            checkWriteAndUpdateUI();
-        }
-        if (getIntent().hasExtra(EXTRA_DEVICE_ID)) {
-            mFolder.addDevice(getIntent().getStringExtra(EXTRA_DEVICE_ID));
-            mFolderNeedsToUpdate = true;
-        }
-
-        attemptToApplyVersioningConfig();
-
-        updateViewsAndSetListeners();
-    }
-
-    // If the FolderActivity gets recreated after the VersioningDialogActivity is closed, then the result from the VersioningDialogActivity will be received before
-    // the mFolder variable has been recreated, so the versioning config will be stored in the mVersioning variable until the mFolder variable has been
-    // recreated in the onServiceStateChange(). This has been observed to happen after the screen orientation has changed while the VersioningDialogActivity was open.
-    private void attemptToApplyVersioningConfig() {
-        if (mFolder != null && mVersioning != null){
-            mFolder.versioning = mVersioning;
-            mVersioning = null;
-        }
+        mEditIgnoreListContent.addTextChangedListener(mIgnoreListContentTextWatcher);
     }
 
     private void updateViewsAndSetListeners() {
@@ -415,6 +449,7 @@ public class FolderActivity extends SyncthingActivity
         mIdView.removeTextChangedListener(mTextWatcher);
         mFolderFileWatcher.setOnCheckedChangeListener(null);
         mFolderPaused.setOnCheckedChangeListener(null);
+        mCustomSyncConditionsSwitch.setOnCheckedChangeListener(null);
         mVariableSizeBlocks.setOnCheckedChangeListener(null);
 
         // Update views
@@ -426,14 +461,31 @@ public class FolderActivity extends SyncthingActivity
         mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
         mFolderPaused.setChecked(mFolder.paused);
         mVariableSizeBlocks.setChecked(mFolder.useLargeBlocks);
-        List<Device> devicesList = getApi().getDevices(false);
+        findViewById(R.id.editIgnoresContainer).setVisibility(mIsCreateMode ? View.GONE : View.VISIBLE);
 
+        // Update views - custom sync conditions.
+        mCustomSyncConditionsSwitch.setChecked(false);
+        if (mIsCreateMode) {
+            findViewById(R.id.customSyncConditionsContainer).setVisibility(View.GONE);
+        } else {
+            mCustomSyncConditionsSwitch.setChecked(mPreferences.getBoolean(
+                Constants.DYN_PREF_OBJECT_CUSTOM_SYNC_CONDITIONS(Constants.PREF_OBJECT_PREFIX_FOLDER + mFolder.id), false
+            ));
+        }
+        mCustomSyncConditionsSwitch.setEnabled(!mIsCreateMode);
+        mCustomSyncConditionsDescription.setEnabled(mCustomSyncConditionsSwitch.isChecked());
+        mCustomSyncConditionsDialog.setFocusable(mCustomSyncConditionsSwitch.isChecked());
+        mCustomSyncConditionsDialog.setEnabled(mCustomSyncConditionsSwitch.isChecked());
+
+        // Populate devicesList.
+        RestApi restApi = getApi();
+        List<Device> devicesList = mConfig.getDevices(restApi, false);
         mDevicesContainer.removeAllViews();
         if (devicesList.isEmpty()) {
             addEmptyDeviceListView();
         } else {
-            for (Device n : devicesList) {
-                addDeviceViewAndSetListener(n, getLayoutInflater());
+            for (Device device : devicesList) {
+                addDeviceViewAndSetListener(device, getLayoutInflater());
             }
         }
 
@@ -442,6 +494,7 @@ public class FolderActivity extends SyncthingActivity
         mIdView.addTextChangedListener(mTextWatcher);
         mFolderFileWatcher.setOnCheckedChangeListener(mCheckedListener);
         mFolderPaused.setOnCheckedChangeListener(mCheckedListener);
+        mCustomSyncConditionsSwitch.setOnCheckedChangeListener(mCheckedListener);
         mVariableSizeBlocks.setOnCheckedChangeListener(mCheckedListener);
     }
 
@@ -453,7 +506,7 @@ public class FolderActivity extends SyncthingActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.create).setVisible(mIsCreateMode);
+        menu.findItem(R.id.save).setTitle(mIsCreateMode ? R.string.create : R.string.save_title);
         menu.findItem(R.id.remove).setVisible(!mIsCreateMode);
         return true;
     }
@@ -461,34 +514,8 @@ public class FolderActivity extends SyncthingActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.create:
-                if (TextUtils.isEmpty(mFolder.id)) {
-                    Toast.makeText(this, R.string.folder_id_required, Toast.LENGTH_LONG)
-                            .show();
-                    return true;
-                }
-                if (TextUtils.isEmpty(mFolder.path)) {
-                    Toast.makeText(this, R.string.folder_path_required, Toast.LENGTH_LONG)
-                            .show();
-                    return true;
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    mFolderUri != null &&
-                    mFolder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY)) {
-                    /**
-                     * Normally, syncthing takes care of creating the ".stfolder" marker.
-                     * This fails on newer android versions if the syncthing binary only has
-                     * readonly access on the path and the user tries to configure a
-                     * sendonly folder. To fix this, we'll precreate the marker using java code.
-                     */
-                    DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
-                    if (dfFolder != null) {
-                        Log.v(TAG, "Creating new directory " + mFolder.path + File.separator + FOLDER_MARKER_NAME);
-                        dfFolder.createDirectory(FOLDER_MARKER_NAME);
-                    }
-                }
-                getApi().createFolder(mFolder);
-                finish();
+            case R.id.save:
+                onSave();
                 return true;
             case R.id.remove:
                 showDeleteDialog();
@@ -502,23 +529,16 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void showDeleteDialog(){
-        mDeleteDialog = createDeleteDialog();
-        mDeleteDialog.show();
-    }
-
-    private Dialog createDeleteDialog(){
-        return new AlertDialog.Builder(this)
+        mDeleteDialog = new AlertDialog.Builder(this)
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
-                    RestApi restApi = getApi();
-                    if (restApi != null) {
-                        restApi.removeFolder(mFolder.id);
-                    }
+                    mConfig.removeFolder(getApi(), mFolder.id);
                     mFolderNeedsToUpdate = false;
                     finish();
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .create();
+        mDeleteDialog.show();
     }
 
     @Override
@@ -583,22 +603,29 @@ public class FolderActivity extends SyncthingActivity
         if (mCanWriteToPath) {
             mAccessExplanationView.setText(R.string.folder_path_readwrite);
             mFolderTypeView.setEnabled(true);
-            mEditIgnores.setEnabled(true);
             if (mIsCreateMode) {
                 /**
                  * Suggest folder type FOLDER_TYPE_SEND_RECEIVE for folders to be created
                  * because the user most probably intentionally chose a special folder like
                  * "[storage]/Android/data/com.nutomic.syncthingandroid/files"
                  * or enabled root mode thus having write access.
+                 * Default from {@link #initFolder} was already set in {@link #onCreate}.
+                 *      mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;
+                 * We won't set it again here as this would cause user selection to be reset on
+                 * screen rotation - as we don't know if we restored the activity or created
+                 * a fresh one.
                  */
-                mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;
                 updateFolderTypeDescription();
+            } else {
+                mEditIgnoreListTitle.setEnabled(true);
+                mEditIgnoreListContent.setEnabled(true);
             }
         } else {
             // Force "sendonly" folder.
             mAccessExplanationView.setText(R.string.folder_path_readonly);
             mFolderTypeView.setEnabled(false);
-            mEditIgnores.setEnabled(false);
+            mEditIgnoreListTitle.setEnabled(false);
+            mEditIgnoreListContent.setEnabled(false);
             mFolder.type = Constants.FOLDER_TYPE_SEND_ONLY;
             updateFolderTypeDescription();
         }
@@ -618,6 +645,9 @@ public class FolderActivity extends SyncthingActivity
         return sb.toString();
     }
 
+    /**
+     * Init a new folder in mIsCreateMode, used in {@link #onCreate}.
+     */
     private void initFolder() {
         mFolder = new Folder();
         mFolder.id = (getIntent().hasExtra(EXTRA_FOLDER_ID))
@@ -632,7 +662,8 @@ public class FolderActivity extends SyncthingActivity
          */
         mFolder.rescanIntervalS = 3600;
         mFolder.paused = false;
-        mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;
+        mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;      // Default for {@link #checkWriteAndUpdateUI}.
+        mFolder.minDiskFree = new Folder.MinDiskFree();
         mFolder.versioning = new Folder.Versioning();
     }
 
@@ -659,59 +690,110 @@ public class FolderActivity extends SyncthingActivity
         deviceView.setOnCheckedChangeListener(mCheckedListener);
     }
 
-    private void updateFolder() {
-        if (!mIsCreateMode) {
-            /**
-             * RestApi is guaranteed not to be null as {@link onServiceStateChange}
-             * immediately finishes this activity if SyncthingService shuts down.
-             */
-            getApi().updateFolder(mFolder);
+    private void onSave() {
+        if (mFolder == null) {
+            Log.e(TAG, "onSave: mFolder == null");
+            return;
         }
-    }
 
-    @Override
-    public void onBackPressed() {
+        // Validate fields.
+        if (TextUtils.isEmpty(mFolder.id)) {
+            Toast.makeText(this, R.string.folder_id_required, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        if (TextUtils.isEmpty(mFolder.label)) {
+            Toast.makeText(this, R.string.folder_label_required, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        if (TextUtils.isEmpty(mFolder.path)) {
+            Toast.makeText(this, R.string.folder_path_required, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+
         if (mIsCreateMode) {
-            showDiscardDialog();
+            Log.v(TAG, "onSave: Adding folder with ID = \'" + mFolder.id + "\'");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                mFolderUri != null &&
+                mFolder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY)) {
+                /**
+                 * Normally, syncthing takes care of creating the ".stfolder" marker.
+                 * This fails on newer android versions if the syncthing binary only has
+                 * readonly access on the path and the user tries to configure a
+                 * sendonly folder. To fix this, we'll precreate the marker using java code.
+                 */
+                DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
+                if (dfFolder != null) {
+                    Log.v(TAG, "onSave: Creating new directory " + mFolder.path + File.separator + FOLDER_MARKER_NAME);
+                    dfFolder.createDirectory(FOLDER_MARKER_NAME);
+                }
+            }
+            mConfig.addFolder(getApi(), mFolder);
+            finish();
+            return;
         }
-        else {
-            super.onBackPressed();
+
+        // Edit mode.
+        if (!mFolderNeedsToUpdate) {
+            // We've got nothing to save.
+            finish();
+            return;
         }
+
+        // Save folder specific preferences.
+        Log.v(TAG, "onSave: Updating folder with ID = \'" + mFolder.id + "\'");
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(
+            Constants.DYN_PREF_OBJECT_CUSTOM_SYNC_CONDITIONS(Constants.PREF_OBJECT_PREFIX_FOLDER + mFolder.id),
+            mCustomSyncConditionsSwitch.isChecked()
+        );
+        editor.apply();
+
+        // Update folder via restApi and send the config to REST endpoint.
+        RestApi restApi = getApi();
+        if (mIgnoreListNeedsToUpdate) {
+            // Update ignore list.
+            String[] ignore = mEditIgnoreListContent.getText().toString().split("\n");
+            mConfig.postFolderIgnoreList(restApi, mFolder, ignore);
+        }
+
+        // Update folder using RestApi or ConfigXml.
+        mConfig.updateFolder(restApi, mFolder);
+        finish();
+        return;
     }
 
     private void showDiscardDialog(){
-        mDiscardDialog = createDiscardDialog();
-        mDiscardDialog.show();
-    }
-
-    private Dialog createDiscardDialog() {
-        return new AlertDialog.Builder(this)
+        mDiscardDialog = new AlertDialog.Builder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
+        mDiscardDialog.show();
     }
 
     private void updateVersioning(Bundle arguments) {
-        if (mFolder != null){
-            mVersioning = mFolder.versioning;
-        } else {
-            mVersioning = new Folder.Versioning();
+        if (mFolder == null) {
+            Log.e(TAG, "updateVersioning: mFolder == null");
+            return;
+        }
+        if (mFolder.versioning == null) {
+            mFolder.versioning = new Folder.Versioning();
         }
 
         String type = arguments.getString("type");
         arguments.remove("type");
 
-        if (type.equals("none")){
-            mVersioning = new Folder.Versioning();
+        if (type.equals("none")) {
+            mFolder.versioning = new Folder.Versioning();
         } else {
             for (String key : arguments.keySet()) {
-                mVersioning.params.put(key, arguments.getString(key));
+                mFolder.versioning.params.put(key, arguments.getString(key));
             }
-            mVersioning.type = type;
+            mFolder.versioning.type = type;
         }
-
-        attemptToApplyVersioningConfig();
         updateVersioningDescription();
         mFolderNeedsToUpdate = true;
     }

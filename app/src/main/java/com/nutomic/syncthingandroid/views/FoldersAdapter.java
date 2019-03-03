@@ -3,17 +3,14 @@ package com.nutomic.syncthingandroid.views;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.ItemFolderListBinding;
@@ -22,9 +19,9 @@ import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.FileUtils;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.io.File;
 import java.util.HashMap;
 
 import static android.view.View.GONE;
@@ -63,25 +60,20 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             intent.setAction(SyncthingService.ACTION_OVERRIDE_CHANGES);
             mContext.startService(intent);
         });
-        binding.openFolder.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(new File(folder.path)), "resource/folder");
-            intent.putExtra("org.openintents.extra.ABSOLUTE_PATH", folder.path);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (intent.resolveActivity(mContext.getPackageManager()) != null) {
-                mContext.startActivity(intent);
-            } else {
-                // Try a second way to find a compatible file explorer app.
-                Log.v(TAG, "openFolder: Fallback to application chooser to open folder.");
-                intent.setDataAndType(Uri.parse(folder.path), "application/*");
-                Intent chooserIntent = Intent.createChooser(intent, mContext.getString(R.string.open_file_manager));
-                if (chooserIntent != null) {
-                    mContext.startActivity(chooserIntent);
-                } else {
-                    Toast.makeText(mContext, R.string.toast_no_file_manager, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        binding.openFolder.setOnClickListener(view -> { FileUtils.openFolder(mContext, folder.path); } );
+
+        // Update folder icon.
+        int drawableId = R.drawable.ic_folder_black_24dp_active;
+        switch (folder.type) {
+            case Constants.FOLDER_TYPE_RECEIVE_ONLY:
+                drawableId = R.drawable.ic_folder_receive_only;
+                break;
+            case Constants.FOLDER_TYPE_SEND_ONLY:
+                drawableId = R.drawable.ic_folder_send_only;
+                break;
+            default:
+        }
+        binding.openFolder.setImageResource(drawableId);
 
         updateFolderStatusView(binding, folder);
         return binding.getRoot();
@@ -93,6 +85,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             binding.items.setVisibility(GONE);
             binding.override.setVisibility(GONE);
             binding.size.setVisibility(GONE);
+            binding.state.setVisibility(GONE);
             setTextOrHide(binding.invalid, folder.invalid);
             return;
         }
@@ -101,6 +94,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         boolean outOfSync = folderStatus.state.equals("idle") && neededItems > 0;
         boolean overrideButtonVisible = folder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY) && outOfSync;
         binding.override.setVisibility(overrideButtonVisible ? VISIBLE : GONE);
+        binding.state.setVisibility(VISIBLE);
         if (outOfSync) {
             binding.state.setText(mContext.getString(R.string.status_outofsync));
             binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
@@ -163,14 +157,24 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
     /**
      * Requests updated folder status from the api for all visible items.
      */
-    public void updateFolderStatus(RestApi api) {
+    public void updateFolderStatus(RestApi restApi) {
+        if (restApi == null || !restApi.isConfigLoaded()) {
+            // Syncthing is not running. Clear last state.
+            mLocalFolderStatuses.clear();
+            return;
+        }
+
         for (int i = 0; i < getCount(); i++) {
-            api.getFolderStatus(getItem(i).id, this::onReceiveFolderStatus);
+            Folder folder = getItem(i);
+            if (folder != null) {
+                restApi.getFolderStatus(folder.id, this::onReceiveFolderStatus);
+            }
         }
     }
 
     private void onReceiveFolderStatus(String folderId, FolderStatus folderStatus) {
         mLocalFolderStatuses.put(folderId, folderStatus);
+        // This will invoke "getView" for all elements.
         notifyDataSetChanged();
     }
 
@@ -182,5 +186,6 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             view.setVisibility(VISIBLE);
         }
     }
+
 
 }

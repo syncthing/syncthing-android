@@ -1,10 +1,12 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +16,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.DialogLoadingBinding;
 import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.service.SyncthingService.State;
 import com.nutomic.syncthingandroid.util.Util;
 
@@ -25,7 +28,7 @@ import static com.nutomic.syncthingandroid.model.RunConditionCheckResult.*;
 /**
  * Handles loading/disabled dialogs.
  */
-public abstract class StateDialogActivity extends SyncthingActivity {
+public abstract class StateDialogActivity extends SyncthingActivity implements SyncthingService.OnServiceStateChangeListener {
 
     private static final long SLOW_LOADING_TIME = TimeUnit.SECONDS.toMillis(30);
 
@@ -37,10 +40,15 @@ public abstract class StateDialogActivity extends SyncthingActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerOnServiceConnectedListener(() -> {
-                getService().registerOnServiceStateChangeListener(this::onServiceStateChange);
-                getService().registerOnRunConditionCheckResultChange(this::onRunConditionCheckResultChange);
-        });
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        super.onServiceConnected(componentName, iBinder);
+        SyncthingServiceBinder syncthingServiceBinder = (SyncthingServiceBinder) iBinder;
+        SyncthingService syncthingService = syncthingServiceBinder.getService();
+        syncthingService.registerOnServiceStateChangeListener(this::onServiceStateChange);
+        syncthingService.registerOnRunConditionCheckResultChange(this::onRunConditionCheckResultChange);
     }
 
     @Override
@@ -74,7 +82,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
         dismissDisabledDialog();
     }
 
-    private void onServiceStateChange(SyncthingService.State currentState) {
+    public void onServiceStateChange(SyncthingService.State currentState) {
         mServiceState = currentState;
         switch (mServiceState) {
             case INIT: // fallthrough
@@ -159,7 +167,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
 
         DialogLoadingBinding binding = DataBindingUtil.inflate(
                 getLayoutInflater(), R.layout.dialog_loading, null, false);
-        boolean isGeneratingKeys = getIntent().getBooleanExtra(EXTRA_KEY_GENERATION_IN_PROGRESS, false);
+        boolean isGeneratingKeys = false;
         binding.loadingText.setText((isGeneratingKeys)
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);

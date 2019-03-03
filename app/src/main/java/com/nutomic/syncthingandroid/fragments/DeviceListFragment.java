@@ -1,8 +1,12 @@
 package com.nutomic.syncthingandroid.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,19 +15,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
+import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.AppPrefs;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
+import com.nutomic.syncthingandroid.util.ConfigXml;
 import com.nutomic.syncthingandroid.views.DevicesAdapter;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import javax.inject.Inject;
 
 /**
  * Displays a list of all existing devices.
@@ -31,36 +39,83 @@ import java.util.TimerTask;
 public class DeviceListFragment extends ListFragment implements SyncthingService.OnServiceStateChangeListener,
         ListView.OnItemClickListener {
 
-    private final static Comparator<Device> DEVICES_COMPARATOR = (lhs, rhs) -> lhs.name.compareTo(rhs.name);
+    private final static String TAG = "DeviceListFragment";
 
+    private Boolean ENABLE_VERBOSE_LOG = false;
+
+    @Inject SharedPreferences mPreferences;
+
+    /**
+     * Compares devices by name, uses the device ID as fallback if the name is empty
+     */
+    private final static Comparator<Device> DEVICES_COMPARATOR = (lhs, rhs) -> {
+        String lhsName = lhs.name != null && !lhs.name.isEmpty() ? lhs.name : lhs.deviceID;
+        String rhsName = rhs.name != null && !rhs.name.isEmpty() ? rhs.name : rhs.deviceID;
+        return lhsName.compareTo(rhsName);
+    };
+
+    private Runnable mUpdateListRunnable = new Runnable() {
+        @Override
+        public void run() {
+            onTimerEvent();
+            mUpdateListHandler.postDelayed(this, Constants.GUI_UPDATE_INTERVAL);
+        }
+    };
+
+    private final Handler mUpdateListHandler = new Handler();
+    private Boolean mLastVisibleToUser = false;
     private DevicesAdapter mAdapter;
+    private SyncthingService.State mServiceState = SyncthingService.State.INIT;
 
-    private Timer mTimer;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((SyncthingApp) getActivity().getApplication()).component().inject(this);
+        ENABLE_VERBOSE_LOG = AppPrefs.getPrefVerboseLog(mPreferences);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // User switched to the current tab, start handler.
+            startUpdateListHandler();
+        } else {
+            // User switched away to another tab, stop handler.
+            stopUpdateListHandler();
+        }
+        mLastVisibleToUser = isVisibleToUser;
+    }
 
     @Override
     public void onPause() {
+        stopUpdateListHandler();
         super.onPause();
-        if (mTimer != null) {
-            mTimer.cancel();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mLastVisibleToUser) {
+            startUpdateListHandler();
         }
+    }
+
+    private void startUpdateListHandler() {
+        LogV("startUpdateListHandler");
+        mUpdateListHandler.removeCallbacks(mUpdateListRunnable);
+        mUpdateListHandler.post(mUpdateListRunnable);
+    }
+
+    private void stopUpdateListHandler() {
+        LogV("stopUpdateListHandler");
+        mUpdateListHandler.removeCallbacks(mUpdateListRunnable);
     }
 
     @Override
     public void onServiceStateChange(SyncthingService.State currentState) {
-        if (currentState != SyncthingService.State.ACTIVE)
-            return;
-
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (getActivity() == null)
-                    return;
-
-                getActivity().runOnUiThread(DeviceListFragment.this::updateList);
-            }
-
-        }, 0, Constants.GUI_UPDATE_INTERVAL);
+        mServiceState = currentState;
     }
 
     @Override
@@ -73,6 +128,22 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
     }
 
     /**
+     * Invokes updateList which polls the REST API for device status updates
+     *  while the user is looking at the current tab.
+     */
+    private void onTimerEvent() {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity == null) {
+            return;
+        }
+        if (mainActivity.isFinishing()) {
+            return;
+        }
+        LogV("Invoking updateList on UI thread");
+        mainActivity.runOnUiThread(DeviceListFragment.this::updateList);
+    }
+
+    /**
      * Refreshes ListView by updating devices and info.
      *
      * Also creates adapter if it doesn't exist yet.
@@ -82,11 +153,19 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         if (activity == null || getView() == null || activity.isFinishing()) {
             return;
         }
+        List<Device> devices;
         RestApi restApi = activity.getApi();
-        if (restApi == null || !restApi.isConfigLoaded()) {
-            return;
+        if (restApi == null ||
+                !restApi.isConfigLoaded() ||
+                mServiceState != SyncthingService.State.ACTIVE) {
+            // Syncthing is not running or REST API is not available yet.
+            ConfigXml configXml = new ConfigXml(activity);
+            configXml.loadConfig();
+            devices = configXml.getDevices(false);
+        } else {
+            // Syncthing is running and REST API is available.
+            devices = restApi.getDevices(false);
         }
-        List<Device> devices = restApi.getDevices(false);
         if (devices == null) {
             return;
         }
@@ -100,7 +179,7 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         mAdapter.clear();
         Collections.sort(devices, DEVICES_COMPARATOR);
         mAdapter.addAll(devices);
-        mAdapter.updateConnections(restApi);
+        mAdapter.updateDeviceStatus(restApi);
         mAdapter.notifyDataSetChanged();
         setListShown(true);
     }
@@ -131,4 +210,9 @@ public class DeviceListFragment extends ListFragment implements SyncthingService
         }
     }
 
+    private void LogV(String logMessage) {
+        if (ENABLE_VERBOSE_LOG) {
+            Log.v(TAG, logMessage);
+        }
+    }
 }

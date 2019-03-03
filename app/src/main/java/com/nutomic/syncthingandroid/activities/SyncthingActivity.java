@@ -4,36 +4,27 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+// import android.util.Log;
 
-import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
-
-import java.util.LinkedList;
 
 /**
  * Connects to {@link SyncthingService} and provides access to it.
  */
 public abstract class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
 
-    public static final String EXTRA_KEY_GENERATION_IN_PROGRESS = "com.nutomic.syncthing-android.SyncthingActivity.KEY_GENERATION_IN_PROGRESS";
+    private static final String TAG = "SyncthingActivity";
 
     private SyncthingService mSyncthingService;
-
-    private final LinkedList<OnServiceConnectedListener> mServiceConnectedListeners = new LinkedList<>();
-
-    /**
-     * To be used for Fragments.
-     */
-    public interface OnServiceConnectedListener {
-        void onServiceConnected();
-    }
 
     /**
      * Look for a Toolbar in the layout and bind it as the activity's actionbar with reasonable
@@ -47,12 +38,20 @@ public abstract class SyncthingActivity extends AppCompatActivity implements Ser
         super.onPostCreate(savedInstanceState);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar == null)
+        if (toolbar == null) {
             return;
-
+        }
+        toolbar.setNavigationContentDescription(R.string.main_menu);
+        toolbar.setNavigationIcon(R.drawable.btn_arrow_back);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setTouchscreenBlocksFocus(false);
+        }
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.btn_arrow_back);
+        }
     }
 
     @Override
@@ -71,8 +70,6 @@ public abstract class SyncthingActivity extends AppCompatActivity implements Ser
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         SyncthingServiceBinder syncthingServiceBinder = (SyncthingServiceBinder) iBinder;
         mSyncthingService = syncthingServiceBinder.getService();
-        Stream.of(mServiceConnectedListeners).forEach(OnServiceConnectedListener::onServiceConnected);
-        mServiceConnectedListeners.clear();
     }
 
     @Override
@@ -81,20 +78,9 @@ public abstract class SyncthingActivity extends AppCompatActivity implements Ser
     }
 
     /**
-     * Used for Fragments to use the Activity's service connection.
-     */
-    void registerOnServiceConnectedListener(OnServiceConnectedListener listener) {
-        if (mSyncthingService != null) {
-            listener.onServiceConnected();
-        } else {
-            mServiceConnectedListeners.addLast(listener);
-        }
-    }
-
-    /**
      * Returns service object (or null if not bound).
      */
-    SyncthingService getService() {
+    public SyncthingService getService() {
         return mSyncthingService;
     }
 

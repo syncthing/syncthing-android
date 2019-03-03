@@ -3,15 +3,11 @@ package com.nutomic.syncthingandroid.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -31,9 +27,6 @@ import android.widget.Toast;
 import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
-import com.nutomic.syncthingandroid.service.Constants;
-import com.nutomic.syncthingandroid.service.SyncthingService;
-import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
@@ -46,16 +39,16 @@ import java.util.Iterator;
  * Activity that allows selecting a directory in the local file system.
  */
 public class FolderPickerActivity extends SyncthingActivity
-        implements AdapterView.OnItemClickListener, SyncthingService.OnServiceStateChangeListener {
+        implements AdapterView.OnItemClickListener {
 
     private static final String EXTRA_INITIAL_DIRECTORY =
-            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
+            "com.github.catfriend1.syncthingandroid.activities.FolderPickerActivity.INITIAL_DIRECTORY";
 
     private static final String EXTRA_ROOT_DIRECTORY =
-            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.ROOT_DIRECTORY";
+            "com.github.catfriend1.syncthingandroid.activities.FolderPickerActivity.ROOT_DIRECTORY";
 
     public static final String EXTRA_RESULT_DIRECTORY =
-            "com.nutomic.syncthingandroid.activities.FolderPickerActivity.RESULT_DIRECTORY";
+            "com.github.catfriend1.syncthingandroid.activities.FolderPickerActivity.RESULT_DIRECTORY";
 
     public static final int DIRECTORY_REQUEST_CODE = 234;
 
@@ -102,12 +95,6 @@ public class FolderPickerActivity extends SyncthingActivity
         } else {
             displayRoot();
         }
-
-        Boolean prefUseRoot = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !prefUseRoot) {
-            Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
-                    .show();
-        }
     }
 
     /**
@@ -121,6 +108,7 @@ public class FolderPickerActivity extends SyncthingActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
             roots.remove(getExternalFilesDir(null));
+            roots.remove(null);      // getExternalFilesDirs may return null for an ejected SDcard.
         }
 
         String rootDir = getIntent().getStringExtra(EXTRA_ROOT_DIRECTORY);
@@ -136,12 +124,9 @@ public class FolderPickerActivity extends SyncthingActivity
                 roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
             }
 
-            // Add paths that might not be accessible to Syncthing.
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            if (sp.getBoolean("advanced_folder_picker", false)) {
-                Collections.addAll(roots, new File("/storage/").listFiles());
-                roots.add(new File("/"));
-            }
+            // Add paths where we might have read-only access.
+            Collections.addAll(roots, new File("/storage/").listFiles());
+            roots.add(new File("/"));
         }
         // Remove any invalid directories.
         Iterator<File> it = roots.iterator();
@@ -153,22 +138,6 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         mRootsAdapter.addAll(Sets.newTreeSet(roots));
-    }
-
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        super.onServiceConnected(componentName, iBinder);
-        SyncthingServiceBinder syncthingServiceBinder = (SyncthingServiceBinder) iBinder;
-        syncthingServiceBinder.getService().registerOnServiceStateChangeListener(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SyncthingService syncthingService = getService();
-        if (syncthingService != null) {
-            syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
-        }
     }
 
     @Override
@@ -323,14 +292,6 @@ public class FolderPickerActivity extends SyncthingActivity
         } else if (mRootsAdapter.contains(mLocation) && mRootsAdapter.getCount() > 1) {
             displayRoot();
         } else {
-            setResult(Activity.RESULT_CANCELED);
-            finish();
-        }
-    }
-
-    @Override
-    public void onServiceStateChange(SyncthingService.State currentState) {
-        if (!isFinishing() && currentState != SyncthingService.State.ACTIVE) {
             setResult(Activity.RESULT_CANCELED);
             finish();
         }

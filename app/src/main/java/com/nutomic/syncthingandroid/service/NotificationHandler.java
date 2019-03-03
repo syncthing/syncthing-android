@@ -188,18 +188,16 @@ public class NotificationHandler {
         appShutdownInProgress = newValue;
     }
 
-    public void showCrashedNotification(@StringRes int title, boolean force) {
-        if (force || mPreferences.getBoolean("notify_crashes", false)) {
-            Intent intent = new Intent(mContext, LogActivity.class);
-            Notification n = getNotificationBuilder(mInfoChannel)
-                    .setContentTitle(mContext.getString(title))
-                    .setContentText(mContext.getString(R.string.notification_crash_text))
-                    .setSmallIcon(R.drawable.ic_stat_notify)
-                    .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
-                    .setAutoCancel(true)
-                    .build();
-            mNotificationManager.notify(ID_CRASH, n);
-        }
+    public void showCrashedNotification(@StringRes int title, String extraInfo) {
+        Intent intent = new Intent(mContext, LogActivity.class);
+        Notification n = getNotificationBuilder(mInfoChannel)
+                .setContentTitle(mContext.getString(title, extraInfo))
+                .setContentText(mContext.getString(R.string.notification_crash_text, extraInfo))
+                .setSmallIcon(R.drawable.ic_stat_notify)
+                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
+                .setAutoCancel(true)
+                .build();
+        mNotificationManager.notify(ID_CRASH, n);
     }
 
     /**

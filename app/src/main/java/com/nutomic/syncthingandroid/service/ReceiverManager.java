@@ -2,7 +2,6 @@ package com.nutomic.syncthingandroid.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
@@ -14,12 +13,14 @@ public class ReceiverManager {
 
     private static final String TAG = "ReceiverManager";
 
+    private static final Boolean ENABLE_VERBOSE_LOG = false;
+
     private static List<BroadcastReceiver> mReceivers = new ArrayList<BroadcastReceiver>();
 
     public static synchronized void registerReceiver(Context context, BroadcastReceiver receiver, IntentFilter intentFilter) {
         mReceivers.add(receiver);
         context.registerReceiver(receiver, intentFilter);
-        Log.v(TAG, "Registered receiver: " + receiver + " with filter: " + intentFilter);
+        LogV("Registered receiver: " + receiver + " with filter: " + intentFilter);
     }
 
     public static synchronized boolean isReceiverRegistered(BroadcastReceiver receiver) {
@@ -37,7 +38,7 @@ public class ReceiverManager {
             if (isReceiverRegistered(receiver)) {
                 try {
                     context.unregisterReceiver(receiver);
-                    Log.v(TAG, "Unregistered receiver: " + receiver);
+                    LogV("Unregistered receiver: " + receiver);
                 } catch(IllegalArgumentException e) {
                     // We have to catch the race condition a registration is still pending in android
                     // according to https://stackoverflow.com/a/3568906
@@ -45,6 +46,12 @@ public class ReceiverManager {
                 }
                 iter.remove();
             }
+        }
+    }
+
+    private static void LogV(String logMessage) {
+        if (ENABLE_VERBOSE_LOG) {
+            Log.v(TAG, logMessage);
         }
     }
 }

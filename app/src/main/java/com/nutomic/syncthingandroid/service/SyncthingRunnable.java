@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -39,6 +40,8 @@ import javax.inject.Inject;
 
 import eu.chainfire.libsuperuser.Shell;
 
+import static com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_STOP_AFTER_CRASHED_NATIVE;
+
 /**
  * Runs the syncthing binary from command line, and prints its output to logcat.
  *
@@ -49,6 +52,8 @@ public class SyncthingRunnable implements Runnable {
     private static final String TAG = "SyncthingRunnable";
     private static final String TAG_NATIVE = "SyncthingNativeCode";
     private static final String TAG_NICE = "SyncthingRunnableIoNice";
+
+    private Boolean ENABLE_VERBOSE_LOG = false;
     private static final int LOG_FILE_MAX_LINES = 10;
 
     private static final AtomicReference<Process> mSyncthing = new AtomicReference<>();
@@ -56,9 +61,13 @@ public class SyncthingRunnable implements Runnable {
     private final File mSyncthingBinary;
     private String[] mCommand;
     private final File mLogFile;
-    @Inject SharedPreferences mPreferences;
     private final boolean mUseRoot;
-    @Inject NotificationHandler mNotificationHandler;
+
+    @Inject
+    SharedPreferences mPreferences;
+
+    @Inject
+    NotificationHandler mNotificationHandler;
 
     public enum Command {
         deviceid,           // Output the device ID to the command line.
@@ -75,7 +84,9 @@ public class SyncthingRunnable implements Runnable {
      */
     public SyncthingRunnable(Context context, Command command) {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+        ENABLE_VERBOSE_LOG = AppPrefs.getPrefVerboseLog(mPreferences);
         mContext = context;
+        // Example: mSyncthingBinary="/data/app/com.github.catfriend1.syncthingandroid.debug-8HsN-IsVtZXc8GrE5-Hepw==/lib/x86/libsyncthing.so"
         mSyncthingBinary = Constants.getSyncthingBinary(mContext);
         mLogFile = Constants.getLogFile(mContext);
 
@@ -83,19 +94,19 @@ public class SyncthingRunnable implements Runnable {
         mUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false) && Shell.SU.available();
         switch (command) {
             case deviceid:
-                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "--device-id" };
+                mCommand = new String[]{mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "--device-id"};
                 break;
             case generate:
-                mCommand = new String[]{ mSyncthingBinary.getPath(), "-generate", mContext.getFilesDir().toString(), "-logflags=0" };
+                mCommand = new String[]{mSyncthingBinary.getPath(), "-generate", mContext.getFilesDir().toString(), "-logflags=0"};
                 break;
             case main:
-                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-no-browser", "-logflags=0" };
+                mCommand = new String[]{mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-no-browser", "-logflags=0"};
                 break;
             case resetdatabase:
-                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-reset-database", "-logflags=0" };
+                mCommand = new String[]{mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-reset-database", "-logflags=0"};
                 break;
             case resetdeltas:
-                mCommand = new String[]{ mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-reset-deltas", "-logflags=0" };
+                mCommand = new String[]{mSyncthingBinary.getPath(), "-home", mContext.getFilesDir().toString(), "-reset-deltas", "-logflags=0"};
                 break;
             default:
                 throw new InvalidParameterException("Unknown command option");
@@ -104,34 +115,59 @@ public class SyncthingRunnable implements Runnable {
 
     @Override
     public void run() {
-        run(false);
+        try {
+            run(false);
+        } catch (ExecutableNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @SuppressLint("WakelockTimeout")
-    public String run(boolean returnStdOut) {
-        trimLogFile();
-        int ret;
+    public String run(boolean returnStdOut) throws ExecutableNotFoundException {
+        Boolean sendStopToService = false;
+        Boolean restartSyncthingNative = false;
+        int exitCode;
         String capturedStdOut = "";
-        // Make sure Syncthing is executable
-        try {
-            ProcessBuilder pb = new ProcessBuilder("chmod", "500", mSyncthingBinary.getPath());
-            Process p = pb.start();
-            p.waitFor();
-        } catch (IOException|InterruptedException e) {
-            Log.w(TAG, "Failed to chmod Syncthing", e);
-        }
-        // Loop Syncthing
-        Process process = null;
-        // Potential fix for #498, keep the CPU running while native binary is running
-        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = useWakeLock()
-                ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG)
-                : null;
-        try {
-            if (wakeLock != null)
-                wakeLock.acquire();
-            increaseInotifyWatches();
 
+        // Trim Syncthing log.
+        trimLogFile();
+
+        // Make sure Syncthing is executable
+        exitCode = Util.runShellCommand("chmod 500 " + mSyncthingBinary.getPath(), false);
+        if (exitCode == 1) {
+            LogV("chmod SyncthingNative exited with code 1 [permission denied]. This is expected on Android 5+.");
+        } else if (exitCode > 1) {
+            Log.w(TAG, "chmod SyncthingNative failed with exit code " + Integer.toString(exitCode));
+        }
+
+        /**
+         * Potential fix for #498, keep the CPU running while native binary is running.
+         * Only valid on Android 5 or lower.
+         */
+        PowerManager pm;
+        PowerManager.WakeLock wakeLock = null;
+        Boolean useWakeLock = mPreferences.getBoolean(Constants.PREF_USE_WAKE_LOCK, false);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && useWakeLock) {
+            pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+            /**
+             * Since gradle 4.6, wakelock tags have to obey "app:component" naming convention.
+             */
+            wakeLock = pm.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK,
+                mContext.getString(R.string.app_name) + ":" + TAG
+            );
+        }
+
+        Process process = null;
+        try {
+            if (wakeLock != null) {
+                wakeLock.acquire();
+            }
+
+            /**
+             * Setup and run a new syncthing instance
+             */
+            increaseInotifyWatches();
             HashMap<String, String> targetEnv = buildEnvironment();
             process = setupAndLaunch(targetEnv);
 
@@ -145,7 +181,7 @@ public class SyncthingRunnable implements Runnable {
                     br = new BufferedReader(new InputStreamReader(process.getInputStream(), Charsets.UTF_8));
                     String line;
                     while ((line = br.readLine()) != null) {
-                        Log.println(Log.INFO, TAG_NATIVE, line);
+                        Log.i(TAG_NATIVE, line);
                         capturedStdOut = capturedStdOut + line + "\n";
                     }
                 } catch (IOException e) {
@@ -161,45 +197,84 @@ public class SyncthingRunnable implements Runnable {
 
             niceSyncthing();
 
-            ret = process.waitFor();
-            Log.i(TAG, "Syncthing exited with code " + ret);
+            exitCode = process.waitFor();
+            LogV("Syncthing exited with code " + exitCode);
             mSyncthing.set(null);
-            if (lInfo != null)
+            if (lInfo != null) {
                 lInfo.join();
-            if (lWarn != null)
+            }
+            if (lWarn != null) {
                 lWarn.join();
+            }
 
-            switch (ret) {
+            switch (exitCode) {
                 case 0:
                 case 137:
-                    // Syncthing was shut down (via API or SIGKILL), do nothing.
+                    Log.i(TAG, "Syncthing was shut down normally via API or SIGKILL. Exit code = " + exitCode);
                     break;
                 case 1:
-                    Log.w(TAG, "Another Syncthing instance is already running, requesting restart via SyncthingService intent");
-                    //fallthrough
+                    Log.w(TAG, "exit reason = exitError. Another Syncthing instance may be already running.");
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, Integer.toString(exitCode));
+                    sendStopToService = true;
+                    break;
+                case 2:
+                    // This should not happen as STNOUPGRADE is set.
+                    Log.w(TAG, "exit reason = exitNoUpgradeAvailable. Another Syncthing instance may be already running.");
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, Integer.toString(exitCode));
+                    sendStopToService = true;
+                    break;
                 case 3:
                     // Restart was requested via Rest API call.
-                    Log.i(TAG, "Restarting syncthing");
-                    mContext.startService(new Intent(mContext, SyncthingService.class)
-                            .setAction(SyncthingService.ACTION_RESTART));
+                    Log.i(TAG, "exit reason = exitRestarting. Restarting syncthing.");
+                    restartSyncthingNative = true;
+                    break;
+                case 9:
+                    // Native was force killed.
+                    Log.w(TAG, "exit reason = exitForceKill.");
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, Integer.toString(exitCode));
+                    sendStopToService = true;
+                    break;
+                case 64:
+                    Log.w(TAG, "exit reason = exitInvalidCommandLine.");
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, Integer.toString(exitCode));
+                    sendStopToService = true;
                     break;
                 default:
-                    Log.w(TAG, "Syncthing has crashed (exit code " + ret + ")");
-                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, false);
+                    Log.w(TAG, "Syncthing exited unexpectedly. Exit code = " + exitCode);
+                    mNotificationHandler.showCrashedNotification(R.string.notification_crash_title, Integer.toString(exitCode));
+                    sendStopToService = true;
             }
         } catch (IOException | InterruptedException e) {
             Log.e(TAG, "Failed to execute syncthing binary or read output", e);
         } finally {
-            if (wakeLock != null)
+            if (wakeLock != null) {
                 wakeLock.release();
-            if (process != null)
+            }
+            if (process != null) {
                 process.destroy();
+            }
         }
+
+        // Restart syncthing if it exited unexpectedly while running on a separate thread.
+        if (!returnStdOut && restartSyncthingNative) {
+            mContext.startService(new Intent(mContext, SyncthingService.class)
+                    .setAction(SyncthingService.ACTION_RESTART));
+        }
+
+        // Notify {@link SyncthingService} that service state State.ACTIVE is no longer valid.
+        if (!returnStdOut && sendStopToService) {
+            Intent intent = new Intent(mContext, SyncthingService.class);
+            intent.setAction(SyncthingService.ACTION_STOP);
+            intent.putExtra(EXTRA_STOP_AFTER_CRASHED_NATIVE, true);
+            mContext.startService(intent);
+        }
+
+        // Return captured command line output.
         return capturedStdOut;
     }
 
     private void putCustomEnvironmentVariables(Map<String, String> environment, SharedPreferences sp) {
-        String customEnvironment = sp.getString("environment_variables", null);
+        String customEnvironment = sp.getString(Constants.PREF_ENVIRONMENT_VARIABLES, null);
         if (TextUtils.isEmpty(customEnvironment))
             return;
 
@@ -210,52 +285,31 @@ public class SyncthingRunnable implements Runnable {
     }
 
     /**
-     * Returns true if the experimental setting for using wake locks has been enabled in settings.
-     */
-    private boolean useWakeLock() {
-        return mPreferences.getBoolean(Constants.PREF_USE_WAKE_LOCK, false);
-    }
-
-    /**
      * Look for running libsyncthing.so processes and return an array
      * containing the PIDs of found instances.
      */
-    private List<String> getSyncthingPIDs() {
+    private List<String> getSyncthingPIDs(Boolean enableLog) {
         List<String> syncthingPIDs = new ArrayList<String>();
-        Process ps = null;
-        DataOutputStream psOut = null;
-        BufferedReader br = null;
-        try {
-            ps = Runtime.getRuntime().exec((mUseRoot) ? "su" : "sh");
-            psOut = new DataOutputStream(ps.getOutputStream());
-            psOut.writeBytes("ps\n");
-            psOut.writeBytes("exit\n");
-            psOut.flush();
-            ps.waitFor();
-            br = new BufferedReader(new InputStreamReader(ps.getInputStream(), "UTF-8"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(Constants.FILENAME_SYNCTHING_BINARY)) {
-                    String syncthingPID = line.trim().split("\\s+")[1];
+        String output = Util.runShellCommandGetOutput("ps\n", mUseRoot);
+        if (TextUtils.isEmpty(output)) {
+            Log.w(TAG, "Failed to list SyncthingNative processes. ps command returned empty.");
+            return syncthingPIDs;
+        }
+
+        String lines[] = output.split("\n");
+        if (lines.length == 0) {
+            Log.w(TAG, "Failed to list SyncthingNative processes. ps command returned no rows.");
+            return syncthingPIDs;
+        }
+
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            if (line.contains(Constants.FILENAME_SYNCTHING_BINARY)) {
+                String syncthingPID = line.trim().split("\\s+")[1];
+                if (enableLog) {
                     Log.v(TAG, "getSyncthingPIDs: Found process PID [" + syncthingPID + "]");
-                    syncthingPIDs.add(syncthingPID);
                 }
-            }
-        } catch (IOException | InterruptedException e) {
-            Log.w(TAG, "Failed to list Syncthing processes", e);
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                if (psOut != null) {
-                    psOut.close();
-                }
-            } catch (IOException e) {
-                Log.w(TAG, "Failed to close psOut stream", e);
-            }
-            if (ps != null) {
-                ps.destroy();
+                syncthingPIDs.add(syncthingPID);
             }
         }
         return syncthingPIDs;
@@ -267,7 +321,11 @@ public class SyncthingRunnable implements Runnable {
      * Manually run "sysctl fs.inotify" in a root shell terminal to check current limit.
      */
     private void increaseInotifyWatches() {
-        if (!mUseRoot || !Shell.SU.available()) {
+        if (!mUseRoot) {
+            // Settings prohibit using root privileges. Cannot increase inotify limit.
+            return;
+        }
+        if (!Shell.SU.available()) {
             Log.i(TAG, "increaseInotifyWatches: Root is not available. Cannot increase inotify limit.");
             return;
         }
@@ -279,12 +337,16 @@ public class SyncthingRunnable implements Runnable {
      * Look for a running libsyncthing.so process and nice its IO.
      */
     private void niceSyncthing() {
-        if (!mUseRoot || !Shell.SU.available()) {
+        if (!mUseRoot) {
+            // Settings prohibit using root privileges. Cannot nice syncthing.
+            return;
+        }
+        if (!Shell.SU.available()) {
             Log.i(TAG_NICE, "Root is not available. Cannot nice syncthing.");
             return;
         }
 
-        List<String> syncthingPIDs = getSyncthingPIDs();
+        List<String> syncthingPIDs = getSyncthingPIDs(false);
         if (syncthingPIDs.isEmpty()) {
             Log.i(TAG_NICE, "Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
             return;
@@ -295,51 +357,46 @@ public class SyncthingRunnable implements Runnable {
             // Set best-effort, low priority using ionice.
             int exitCode = Util.runShellCommand("/system/bin/ionice " + syncthingPID + " be 7\n", true);
             Log.i(TAG_NICE, "ionice returned " + Integer.toString(exitCode) +
-                " on " + Constants.FILENAME_SYNCTHING_BINARY);
+                    " on " + Constants.FILENAME_SYNCTHING_BINARY);
         }
     }
 
-    public interface OnSyncthingKilled {
-        void onKilled();
-    }
     /**
-     * Look for running libsyncthing.so processes and kill them.
-     * Try a SIGINT first, then try again with SIGKILL.
+     * Look for running libsyncthing.so processes and end them gracefully.
      */
     public void killSyncthing() {
-        for (int i = 0; i < 2; i++) {
-            List<String> syncthingPIDs = getSyncthingPIDs();
-            if (syncthingPIDs.isEmpty()) {
-                Log.d(TAG, "killSyncthing: Found no more running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
-                break;
-            }
-
-            int exitCode;
-            for (String syncthingPID : syncthingPIDs) {
-                if (i > 0) {
-                    // Force termination of the process by sending SIGKILL.
-                    SystemClock.sleep(3000);
-                    exitCode = Util.runShellCommand("kill -SIGKILL " + syncthingPID + "\n", mUseRoot);
-                } else {
-                    exitCode = Util.runShellCommand("kill -SIGINT " + syncthingPID + "\n", mUseRoot);
-                    SystemClock.sleep(1000);
-                }
-                if (exitCode == 0) {
-                    Log.d(TAG, "Killed Syncthing process " + syncthingPID);
-                } else {
-                    Log.w(TAG, "Failed to kill Syncthing process " + syncthingPID +
+        int exitCode;
+        List<String> syncthingPIDs = getSyncthingPIDs(true);
+        if (syncthingPIDs.isEmpty()) {
+            LogV("killSyncthing: Found no running instances of " + Constants.FILENAME_SYNCTHING_BINARY);
+            return;
+        }
+        for (String syncthingPID : syncthingPIDs) {
+            exitCode = Util.runShellCommand("kill -SIGINT " + syncthingPID + "\n", mUseRoot);
+            if (exitCode == 0) {
+                LogV("Sent kill SIGINT to process " + syncthingPID);
+            } else {
+                Log.w(TAG, "Failed to send kill SIGINT to process " + syncthingPID +
                         " exit code " + Integer.toString(exitCode));
-                }
             }
         }
+
+        /**
+         * Wait for the syncthing instance to end.
+         */
+        LogV("Waiting for all syncthing instances to end ...");
+        while (!getSyncthingPIDs(false).isEmpty()) {
+            SystemClock.sleep(50);
+        }
+        Log.d(TAG, "killSyncthing: Complete.");
     }
 
     /**
      * Logs the outputs of a stream to logcat and mNativeLog.
      *
-     * @param is The stream to log.
+     * @param is       The stream to log.
      * @param priority The priority level.
-     * @param saveLog True if the log should be stored to {@link #mLogFile}.
+     * @param saveLog  True if the log should be stored to {@link #mLogFile}.
      */
     private Thread log(final InputStream is, final int priority, final boolean saveLog) {
         Thread t = new Thread(() -> {
@@ -373,8 +430,9 @@ public class SyncthingRunnable implements Runnable {
      * Only keep last {@link #LOG_FILE_MAX_LINES} lines in log file, to avoid bloat.
      */
     private void trimLogFile() {
-        if (!mLogFile.exists())
+        if (!mLogFile.exists()) {
             return;
+        }
 
         try {
             LineNumberReader lnr = new LineNumberReader(new FileReader(mLogFile));
@@ -408,7 +466,7 @@ public class SyncthingRunnable implements Runnable {
         // Set home directory to data folder for web GUI folder picker.
         targetEnv.put("HOME", Environment.getExternalStorageDirectory().getAbsolutePath());
         targetEnv.put("STTRACE", TextUtils.join(" ",
-                        mPreferences.getStringSet(Constants.PREF_DEBUG_FACILITIES_ENABLED, new HashSet<>())));
+                mPreferences.getStringSet(Constants.PREF_DEBUG_FACILITIES_ENABLED, new HashSet<>())));
         File externalFilesDir = mContext.getExternalFilesDir(null);
         if (externalFilesDir != null)
             targetEnv.put("STGUIASSETS", externalFilesDir.getAbsolutePath() + "/gui");
@@ -438,7 +496,16 @@ public class SyncthingRunnable implements Runnable {
         return targetEnv;
     }
 
-    private Process setupAndLaunch(HashMap<String, String> env) throws IOException {
+    private Process setupAndLaunch(HashMap<String, String> env) throws IOException, ExecutableNotFoundException {
+        // Check if "libSyncthing.so" exists.
+        if (mCommand.length > 0) {
+            File libSyncthing = new File(mCommand[0]);
+            if (!libSyncthing.exists()) {
+                Log.e(TAG, "CRITICAL - Syncthing core binary is missing in APK package location " + mCommand[0]);
+                throw new ExecutableNotFoundException(mCommand[0]);
+            }
+        }
+
         if (mUseRoot) {
             ProcessBuilder pb = new ProcessBuilder("su");
             Process process = pb.start();
@@ -462,6 +529,24 @@ public class SyncthingRunnable implements Runnable {
             ProcessBuilder pb = new ProcessBuilder(mCommand);
             pb.environment().putAll(env);
             return pb.start();
+        }
+    }
+
+    public class ExecutableNotFoundException extends Exception {
+
+        public ExecutableNotFoundException(String message) {
+            super(message);
+        }
+
+        public ExecutableNotFoundException(String message, Throwable throwable) {
+            super(message, throwable);
+        }
+
+    }
+
+    private void LogV(String logMessage) {
+        if (ENABLE_VERBOSE_LOG) {
+            Log.v(TAG, logMessage);
         }
     }
 }

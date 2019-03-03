@@ -2,22 +2,29 @@ package com.nutomic.syncthingandroid.util;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.UiModeManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.common.base.Charsets;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.Constants;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
@@ -26,7 +33,7 @@ import eu.chainfire.libsuperuser.Shell;
 
 public class Util {
 
-    private static final String TAG = "SyncthingUtil";
+    private static final String TAG = "Util";
 
     private Util() {
     }
@@ -78,7 +85,7 @@ public class Util {
      * Normally an application's data directory is only accessible by the corresponding application.
      * Therefore, every file and directory is owned by an application's user and group. When running Syncthing as root,
      * it writes to the application's data directory. This leaves files and directories behind which are owned by root having 0600.
-     * Moreover, those acitons performed as root changes a file's type in terms of SELinux.
+     * Moreover, those actions performed as root changes a file's type in terms of SELinux.
      * A subsequent start of Syncthing will fail due to insufficient permissions.
      * Hence, this method fixes the owner, group and the files' type of the data directory.
      *
@@ -88,7 +95,7 @@ public class Util {
         // We can safely assume that root magic is somehow available, because readConfig and saveChanges check for
         // read and write access before calling us.
         // Be paranoid :) and check if root is available.
-        // Ignore the 'use_root' preference, because we might want to fix ther permission
+        // Ignore the 'use_root' preference, because we might want to fix the permission
         // just after the root option has been disabled.
         if (!Shell.SU.available()) {
             Log.e(TAG, "Root is not available. Cannot fix permissions.");
@@ -174,6 +181,7 @@ public class Util {
      */
     public static int runShellCommand(String cmd, Boolean useRoot) {
         // Assume "failure" exit code if an error is caught.
+        // Note: redirectErrorStream(true); System.getProperty("line.separator");
         int exitCode = 255;
         Process shellProc = null;
         DataOutputStream shellOut = null;
@@ -186,6 +194,20 @@ public class Util {
             bufferedWriter.flush();
             shellOut.close();
             shellOut = null;
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new InputStreamReader(shellProc.getInputStream(), Charsets.UTF_8));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    Log.v(TAG, "runShellCommand: " + line);
+                }
+            } catch (IOException e) {
+                Log.w(TAG, "runShellCommand: Failed to read output", e);
+            } finally {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            }
             exitCode = shellProc.waitFor();
         } catch (IOException | InterruptedException e) {
             Log.w(TAG, "runShellCommand: Exception", e);
@@ -195,13 +217,96 @@ public class Util {
                     shellOut.close();
                 }
             } catch (IOException e) {
-                Log.w(TAG, "Failed to close shell stream", e);
+                Log.w(TAG, "runShellCommand: Failed to close stream", e);
             }
             if (shellProc != null) {
                 shellProc.destroy();
             }
         }
         return exitCode;
+    }
+
+    public static String runShellCommandGetOutput(String cmd, Boolean useRoot) {
+        // Note: redirectErrorStream(true); System.getProperty("line.separator");
+        int exitCode = 255;
+        String capturedStdOut = "";
+        Process shellProc = null;
+        DataOutputStream shellOut = null;
+        try {
+            shellProc = Runtime.getRuntime().exec((useRoot) ? "su" : "sh");
+            shellOut = new DataOutputStream(shellProc.getOutputStream());
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(shellOut));
+            Log.d(TAG, "runShellCommandGetOutput: " + cmd);
+            bufferedWriter.write(cmd);
+            bufferedWriter.flush();
+            shellOut.close();
+            shellOut = null;
+            BufferedReader bufferedReader = null;
+            try {
+                bufferedReader = new BufferedReader(new InputStreamReader(shellProc.getInputStream(), Charsets.UTF_8));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    // Log.i(TAG, "runShellCommandGetOutput: " + line);
+                    capturedStdOut = capturedStdOut + line + "\n";
+                }
+            } catch (IOException e) {
+                Log.w(TAG, "runShellCommandGetOutput: Failed to read output", e);
+            } finally {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            }
+            exitCode = shellProc.waitFor();
+            Log.i(TAG, "runShellCommandGetOutput: Exited with code " + exitCode);
+        } catch (IOException | InterruptedException e) {
+            Log.w(TAG, "runShellCommandGetOutput: Exception", e);
+        } finally {
+            try {
+                if (shellOut != null) {
+                    shellOut.close();
+                }
+            } catch (IOException e) {
+                Log.w(TAG, "runShellCommandGetOutput: Failed to close shell stream", e);
+            }
+            if (shellProc != null) {
+                shellProc.destroy();
+            }
+        }
+
+        // Return captured command line output.
+        return capturedStdOut;
+    }
+
+    /**
+     * Check if a TCP is listening on the local device on a specific port.
+     */
+    public static Boolean isTcpPortListening(Integer port) {
+        // t: tcp, l: listening, n: numeric
+        String output = runShellCommandGetOutput("netstat -t -l -n", false);
+        if (TextUtils.isEmpty(output)) {
+            Log.w(TAG, "isTcpPortListening: Failed to run netstat. Returning false.");
+            return false;
+        }
+        String[] results  = output.split("\n");
+        for (String line : results) {
+            if (TextUtils.isEmpty(output)) {
+                continue;
+            }
+            String[] words = line.split("\\s+");
+            if (words.length > 5) {
+                String protocol = words[0];
+                String localAddress = words[3];
+                String connState = words[5];
+                if (protocol.equals("tcp") || protocol.equals("tcp6")) {
+                    if (localAddress.endsWith(":" + Integer.toString(port)) &&
+                            connState.equalsIgnoreCase("LISTEN")) {
+                        // Port is listening.
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -229,5 +334,23 @@ public class Util {
      */
     public static String formatPath(String path) {
         return new File(path).toURI().normalize().getPath();
+    }
+
+    public static boolean containsIgnoreCase(String src, String what) {
+        final int length = what.length();
+        if (length == 0) {
+            return true;
+        }
+        for (int i = src.length() - length; i >= 0; i--) {
+            if (src.regionMatches(true, i, what, 0, length)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean isRunningOnTV(Context context) {
+        UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
+        return uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION;
     }
 }
