@@ -1,2 +1,2 @@
+* Update syncthing to v1.1.0
 * Fallback to http if https with TLS 1.2 is unavailable (#1255)
-
