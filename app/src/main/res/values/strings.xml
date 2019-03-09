@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY folder_ignore_delete_docs_url "https://docs.syncthing.net/advanced/folder-ignoredelete.html">
+]>
+
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">Syncthing-Fork</string>
@@ -109,7 +113,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="syncthing_loading_slow_message">Syncthing is taking very long to load. Use the logs to check for any errors.</string>
 
-    <!-- FoldersFragment -->
+    <!-- FolderListFragment -->
 
 
     <string name="folders_fragment_title">Folders</string>
@@ -133,13 +137,16 @@ Please report any problems you encounter via Github.</string>
     <string name="suggest_file_manager_app_dialog_title">No compatible file manager app found</string>
     <string name="suggest_file_manager_app_dialog_text">We recommend you to install the open-source file manager app \'Simple File Manager\' from F-Droid. Would you like to open its app store page?</string>
 
-    <!-- DevicesFragment -->
+    <!-- DeviceListFragment -->
 
-
+    <!-- Devices tab title -->
     <string name="devices_fragment_title">Devices</string>
 
-    <!-- Shown if no devices exist -->
-    <string name="devices_list_empty">No devices found</string>
+    <!-- Shown if no devices are configured in add folder dialog  -->
+    <string name="devices_list_empty">No devices configured. Tap to add a new device.</string>
+
+    <!-- Shown in ListView if no devices are configured -->
+    <string name="no_devices_configured">No devices configured.\nBegin by adding a device now.</string>
 
     <!-- Indicates that a folder is fully synced to the local device -->
     <string name="device_up_to_date">Up to Date</string>
@@ -213,6 +220,10 @@ Please report any problems you encounter via Github.</string>
     <!-- Setting title and description -->
     <string name="folder_variable_size_blocks_caption">Variable Size Blocks</string>
     <string name="folder_variable_size_blocks_description">Variable size blocks (also "large blocks") are more efficient for large files. If you enable this on one folder, you have to enable it for this folder on all devices.</string>
+
+    <!-- Setting title and description -->
+    <string name="folder_ignore_delete_caption">Ignore Delete</string>
+    <string name="folder_ignore_delete_description">Expert option that affects the handling of incoming index updates. When set, incoming updates with the delete flag set are ignored. See &folder_ignore_delete_docs_url;</string>
 
     <!-- Setting title -->
     <string name="folder_pause">Pause Folder</string>
@@ -461,6 +472,10 @@ Please report any problems you encounter via Github.</string>
         <item>[external_storage]/Android/media</item>
     </string-array>
 
+    <string name="expert_mode_title">Expert mode</string>
+
+    <string name="expert_mode_summary">Enabling this option will show advanced configuration options. You should have a look at the Syncthing Docs first to make sure you know how to use them correctly. Incorrect settings may cause battery drain, system resource exhaust or incomplete synchronization.</string>
+
     <string name="preference_language_title">Language</string>
 
     <string name="preference_language_summary">Change the app language</string>
@@ -673,6 +688,9 @@ Please report any problems you encounter via Github.</string>
     <!-- Title of the preference showing database size -->
     <string name="syncthing_database_size">Syncthing Database Size</string>
 
+    <!-- Title of the preference showing the OS open file limit -->
+    <string name="os_open_file_limit">Android Open File Limit</string>
+
     <!-- FolderPickerAcitivity -->
 
 
@@ -869,9 +887,11 @@ Please report any problems you encounter via Github.</string>
     <string name="state_syncing_general">Syncing</string>
     <string name="state_syncing">Syncing (%1$d%%)</string>
     <string name="state_error">Error</string>
+    <string name="state_error_message">Error (%1$s)</string>
     <string name="state_unknown">Unknown</string>
     <string name="state_paused">Paused</string>
     <string name="status_outofsync">Out of Sync</string>
+    <string name="state_unshared">Unshared</string>
 
     <!-- Format string for folder size, eg "500 MiB / 1 GiB" -->
     <string name="folder_size_format">%1$s / %2$s</string>
