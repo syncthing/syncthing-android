@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
@@ -32,11 +33,14 @@ import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.text.NumberFormat;
 
 import javax.inject.Inject;
+
+import static com.nutomic.syncthingandroid.model.RunConditionCheckResult.*;
 
 /**
  * Displays why syncthing is running or disabled.
@@ -199,8 +203,10 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
         switch (mServiceState) {
             case ACTIVE:
             case DISABLED:
-                statusItems.add(getString(R.string.reason) + "\n" +
-                    "- " + syncthingService.getRunDecisionExplanation().trim().replace("\n", "\n- "));
+            String explanation = getDisabledDialogMessage(syncthingService).toString();
+            if (!TextUtils.isEmpty(explanation)) {
+                statusItems.add(explanation);
+            }
             default:
                 break;
         }
@@ -315,6 +321,23 @@ public class StatusFragment extends ListFragment implements SyncthingService.OnS
             mUpload = (c.outBits / 8 < 1024) ? "" : Util.readableTransferRate(mActivity, c.outBits);
         }
         updateStatus();
+    }
+
+    @NonNull
+    private StringBuilder getDisabledDialogMessage(SyncthingService syncthingService) {
+        StringBuilder message = new StringBuilder();
+        Collection<BlockerReason> reasons = syncthingService.getCurrentRunConditionCheckResult().getBlockReasons();
+        if (!reasons.isEmpty()) {
+            message.append(getString(R.string.syncthing_disabled_reason_heading));
+            int count = 0;
+            for (BlockerReason reason : reasons) {
+                count++;
+                message.append("\n");
+                if (reasons.size() > 1) message.append(count + ". ");
+                message.append(this.getString(reason.getResId()));
+            }
+        }
+        return message;
     }
 
     private void LogV(String logMessage) {
