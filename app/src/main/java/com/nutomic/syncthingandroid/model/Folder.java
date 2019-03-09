@@ -11,6 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Sources:
+ * - https://github.com/syncthing/syncthing/tree/master/lib/config
+ * - https://github.com/syncthing/syncthing/blob/master/lib/config/folderconfiguration.go
+ */
 public class Folder {
 
     // Folder Configuration
@@ -22,6 +27,10 @@ public class Folder {
     public boolean fsWatcherEnabled = true;
     public int fsWatcherDelayS = 10;
     private List<Device> devices = new ArrayList<>();
+    /**
+     * Folder rescan interval defaults to 3600s as it is the default in
+     * syncthing when the file watcher is enabled and a new folder is created.
+     */
     public int rescanIntervalS = 3600;
     public boolean ignorePerms = true;
     public boolean autoNormalize = true;
@@ -38,9 +47,12 @@ public class Folder {
     public boolean disableSparseFiles = false;
     public boolean disableTempIndexes = false;
     public boolean paused = false;
-    public boolean useLargeBlocks = false;
+    public boolean useLargeBlocks = true;
     public int weakHashThresholdPct = 25;
     public String markerName = ".stfolder";
+
+    // Since v1.1.0, see Issue #5445, PR #5479
+    public Boolean copyOwnershipFromParent = false;
 
     // Folder Status
     public String invalid;
@@ -64,6 +76,19 @@ public class Folder {
 
     public List<Device> getDevices() {
         return devices;
+    }
+
+    /**
+     * Note: This is expected to return "1" if a folder is not shared with any
+     * other device. Syncthing's config will list ourself as the only device
+     * sub node which is associated with the folder. This will return >= 2
+     * if the folder is shared with other devices.
+     */
+    public int getDeviceCount() {
+        if (devices == null) {
+            return 1;
+        }
+        return devices.size();
     }
 
     public Device getDevice(String deviceId) {

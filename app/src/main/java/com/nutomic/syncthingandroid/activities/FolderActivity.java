@@ -107,11 +107,14 @@ public class FolderActivity extends SyncthingActivity {
     private SwitchCompat mCustomSyncConditionsSwitch;
     private TextView mCustomSyncConditionsDescription;
     private TextView mCustomSyncConditionsDialog;
+    private ViewGroup mPullOrderContainer;
     private TextView mPullOrderTypeView;
     private TextView mPullOrderDescriptionView;
     private TextView mVersioningDescriptionView;
     private TextView mVersioningTypeView;
     private SwitchCompat mVariableSizeBlocks;
+    private ViewGroup mIgnoreDeleteContainer;
+    private SwitchCompat mIgnoreDelete;
     private TextView mEditIgnoreListTitle;
     private EditText mEditIgnoreListContent;
 
@@ -177,6 +180,10 @@ public class FolderActivity extends SyncthingActivity {
                     mFolder.useLargeBlocks = isChecked;
                     mFolderNeedsToUpdate = true;
                     break;
+                case R.id.ignoreDelete:
+                    mFolder.ignoreDelete = isChecked;
+                    mFolderNeedsToUpdate = true;
+                    break;
             }
         }
     };
@@ -203,11 +210,14 @@ public class FolderActivity extends SyncthingActivity {
         mCustomSyncConditionsSwitch = findViewById(R.id.customSyncConditionsSwitch);
         mCustomSyncConditionsDescription = findViewById(R.id.customSyncConditionsDescription);
         mCustomSyncConditionsDialog = findViewById(R.id.customSyncConditionsDialog);
+        mPullOrderContainer = findViewById(R.id.pullOrderContainer);
         mPullOrderTypeView = findViewById(R.id.pullOrderType);
         mPullOrderDescriptionView = findViewById(R.id.pullOrderDescription);
         mVersioningDescriptionView = findViewById(R.id.versioningDescription);
         mVersioningTypeView = findViewById(R.id.versioningType);
         mVariableSizeBlocks = findViewById(R.id.variableSizeBlocks);
+        mIgnoreDeleteContainer = findViewById(R.id.ignoreDeleteContainer);
+        mIgnoreDelete = findViewById(R.id.ignoreDelete);
         mDevicesContainer = findViewById(R.id.devicesContainer);
         mEditIgnoreListTitle = findViewById(R.id.edit_ignore_list_title);
         mEditIgnoreListContent = findViewById(R.id.edit_ignore_list_content);
@@ -216,7 +226,7 @@ public class FolderActivity extends SyncthingActivity {
         mCustomSyncConditionsDialog.setOnClickListener(view -> onCustomSyncConditionsDialogClick());
 
         findViewById(R.id.folderTypeContainer).setOnClickListener(v -> showFolderTypeDialog());
-        findViewById(R.id.pullOrderContainer).setOnClickListener(v -> showPullOrderDialog());
+        mPullOrderContainer.setOnClickListener(v -> showPullOrderDialog());
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
 
         if (savedInstanceState != null) {
@@ -276,6 +286,11 @@ public class FolderActivity extends SyncthingActivity {
         checkWriteAndUpdateUI();
         updateViewsAndSetListeners();
 
+        // Show expert options conditionally.
+        Boolean prefExpertMode = mPreferences.getBoolean(Constants.PREF_EXPERT_MODE, false);
+        mPullOrderContainer.setVisibility(prefExpertMode ? View.VISIBLE : View.GONE);
+        mIgnoreDeleteContainer.setVisibility(prefExpertMode ? View.VISIBLE : View.GONE);
+
         // Open keyboard on label view in edit mode.
         mLabelView.requestFocus();
     }
@@ -323,6 +338,13 @@ public class FolderActivity extends SyncthingActivity {
             startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
                 FolderPickerActivity.DIRECTORY_REQUEST_CODE);
         }
+    }
+
+    /**
+     * Open dialog if the user clicked on empty device list view.
+     */
+    private void showAddDeviceDialog() {
+        startActivityForResult(DeviceActivity.createIntent(this), DeviceActivity.DEVICE_ADD_CODE);
     }
 
     /**
@@ -451,6 +473,7 @@ public class FolderActivity extends SyncthingActivity {
         mFolderPaused.setOnCheckedChangeListener(null);
         mCustomSyncConditionsSwitch.setOnCheckedChangeListener(null);
         mVariableSizeBlocks.setOnCheckedChangeListener(null);
+        mIgnoreDelete.setOnCheckedChangeListener(null);
 
         // Update views
         mLabelView.setText(mFolder.label);
@@ -461,6 +484,7 @@ public class FolderActivity extends SyncthingActivity {
         mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
         mFolderPaused.setChecked(mFolder.paused);
         mVariableSizeBlocks.setChecked(mFolder.useLargeBlocks);
+        mIgnoreDelete.setChecked(mFolder.ignoreDelete);
         findViewById(R.id.editIgnoresContainer).setVisibility(mIsCreateMode ? View.GONE : View.VISIBLE);
 
         // Update views - custom sync conditions.
@@ -496,6 +520,7 @@ public class FolderActivity extends SyncthingActivity {
         mFolderPaused.setOnCheckedChangeListener(mCheckedListener);
         mCustomSyncConditionsSwitch.setOnCheckedChangeListener(mCheckedListener);
         mVariableSizeBlocks.setOnCheckedChangeListener(mCheckedListener);
+        mIgnoreDelete.setOnCheckedChangeListener(mCheckedListener);
     }
 
     @Override
@@ -582,6 +607,8 @@ public class FolderActivity extends SyncthingActivity {
             mFolder.order = data.getStringExtra(PullOrderDialogActivity.EXTRA_RESULT_PULL_ORDER);
             updatePullOrderDescription();
             mFolderNeedsToUpdate = true;
+        } else if (resultCode == Activity.RESULT_OK && requestCode == DeviceActivity.DEVICE_ADD_CODE) {
+            updateViewsAndSetListeners();
         }
     }
 
@@ -654,13 +681,6 @@ public class FolderActivity extends SyncthingActivity {
                 ? getIntent().getStringExtra(EXTRA_FOLDER_ID)
                 : generateRandomFolderId();
         mFolder.label = getIntent().getStringExtra(EXTRA_FOLDER_LABEL);
-        mFolder.fsWatcherEnabled = true;
-        mFolder.fsWatcherDelayS = 10;
-        /**
-         * Folder rescan interval defaults to 3600s as it is the default in
-         * syncthing when the file watcher is enabled and a new folder is created.
-         */
-        mFolder.rescanIntervalS = 3600;
         mFolder.paused = false;
         mFolder.type = Constants.FOLDER_TYPE_SEND_RECEIVE;      // Default for {@link #checkWriteAndUpdateUI}.
         mFolder.minDiskFree = new Folder.MinDiskFree();
@@ -678,6 +698,7 @@ public class FolderActivity extends SyncthingActivity {
         emptyView.setGravity(CENTER_VERTICAL);
         emptyView.setText(R.string.devices_list_empty);
         mDevicesContainer.addView(emptyView, params);
+        mDevicesContainer.setOnClickListener(view -> showAddDeviceDialog());
     }
 
     private void addDeviceViewAndSetListener(Device device, LayoutInflater inflater) {

@@ -103,17 +103,46 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 binding.state.setText(mContext.getString(R.string.state_paused));
                 binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_black));
             } else {
-                binding.state.setText(getLocalizedState(mContext, folderStatus));
                 switch(folderStatus.state) {
                     case "idle":
-                        binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_green));
+                        if (folder.getDeviceCount() <= 1) {
+                            // Special case: The folder is IDLE and UNSHARED.
+                            binding.state.setText(mContext.getString(R.string.state_unshared));
+                            binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_orange));
+                        } else {
+                            binding.state.setText(mContext.getString(R.string.state_idle));
+                            binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_green));
+                        }
                         break;
                     case "scanning":
+                        binding.state.setText(mContext.getString(R.string.state_scanning));
+                        binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_blue));
+                        break;
                     case "syncing":
+                        binding.state.setText(
+                                mContext.getString(
+                                    R.string.state_syncing,
+                                        (folderStatus.globalBytes != 0)
+                                                ? Math.round(100 * folderStatus.inSyncBytes / folderStatus.globalBytes)
+                                                : 100
+                                )
+                        );
                         binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_blue));
                         break;
                     case "error":
+                        if (TextUtils.isEmpty(folderStatus.error)) {
+                            binding.state.setText(mContext.getString(R.string.state_error));
+                        } else {
+                            binding.state.setText(mContext.getString(R.string.state_error_message, folderStatus.error));
+                        }
+                        binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
+                        break;
+                    case "unknown":
+                        binding.state.setText(mContext.getString(R.string.state_unknown));
+                        binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
+                        break;
                     default:
+                        binding.state.setText(folderStatus.state);
                         binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
                 }
             }
@@ -126,32 +155,6 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
                 Util.readableFileSize(mContext, folderStatus.inSyncBytes),
                 Util.readableFileSize(mContext, folderStatus.globalBytes)));
         setTextOrHide(binding.invalid, folderStatus.invalid);
-    }
-
-    /**
-     * Returns the folder's state as a localized string.
-     */
-    private static String getLocalizedState(Context c, FolderStatus folderStatus) {
-        switch (folderStatus.state) {
-            case "idle":
-                return c.getString(R.string.state_idle);
-            case "scanning":
-                return c.getString(R.string.state_scanning);
-            case "syncing":
-                int percentage = (folderStatus.globalBytes != 0)
-                        ? Math.round(100 * folderStatus.inSyncBytes / folderStatus.globalBytes)
-                        : 100;
-                return c.getString(R.string.state_syncing, percentage);
-            case "error":
-                if (TextUtils.isEmpty(folderStatus.error)) {
-                    return c.getString(R.string.state_error);
-                }
-                return c.getString(R.string.state_error) + " (" + folderStatus.error + ")";
-            case "unknown":
-                return c.getString(R.string.state_unknown);
-            default:
-                return folderStatus.state;
-        }
     }
 
     /**
