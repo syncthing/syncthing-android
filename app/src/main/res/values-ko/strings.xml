@@ -330,7 +330,7 @@
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-사진</string>
   <string name="notification_crash_title">Syncthing이 충돌하였습니다.</string>
-  <string name="notification_crash_text">클릭해서 로그 보기</string>
+  <string name="notification_crash_text_tmp">클릭해서 로그 보기</string>
   <string name="notifications_other_channel">기타 알림</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->

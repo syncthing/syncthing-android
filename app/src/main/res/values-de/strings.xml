@@ -427,7 +427,7 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-Bilder</string>
   <string name="notification_crash_title">Syncthing ist abgestürzt</string>
-  <string name="notification_crash_text">Klicken um Logs anzuzeigen</string>
+  <string name="notification_crash_text_tmp">Klicken um Logs anzuzeigen</string>
   <string name="notifications_persistent_channel">Syncthing läuft</string>
   <string name="notification_persistent_waiting_channel">Laufkonditionen werden überwacht</string>
   <string name="notifications_other_channel">Andere Benachrichtigungen</string>
