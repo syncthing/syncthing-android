@@ -24,14 +24,14 @@ public class AppConfigReceiver extends BroadcastReceiver {
     /**
      * Start the Syncthing-Service
      */
-    private static final String ACTION_START = "com.github.catfriend1.syncthingandroid.action.START";
+    private static final String ACTION_START = "com.nutomic.syncthingandroid.action.START";
 
     /**
      * Stop the Syncthing-Service
      * If startServiceOnBoot is enabled the service must not be stopped. Instead a
      * notification is presented to the user.
      */
-    private static final String ACTION_STOP  = "com.github.catfriend1.syncthingandroid.action.STOP";
+    private static final String ACTION_STOP  = "com.nutomic.syncthingandroid.action.STOP";
 
     @Inject NotificationHandler mNotificationHandler;
 
