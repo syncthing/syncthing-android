@@ -29,24 +29,5 @@ project.properties
 gradle/wrapper/gradle/
 gradle/wrapper/gradlew*
 
-# Prebuilt-go
-syncthing/go
-syncthing/go.tgz
-syncthing/go.zip
-
-# Android NDK
-syncthing/android-ndk-r*
-syncthing/ndk.zip
-
-# Go modules
-syncthing/pkg/mod/
-
-# MinGit
-syncthing/mingit
-syncthing/mingit.zip
-
 # External build artifacts
 ext/
-
-# push-to-device after build marker file
-\#enable_push_to_device
