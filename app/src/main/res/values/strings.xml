@@ -5,7 +5,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name">Syncthing-Fork</string>
+    <string name="app_name">Syncthing</string>
 
     <string name="app_description">An open, trustworthy and decentralized file synchronization application.</string>
 
@@ -368,7 +368,7 @@ Please report any problems you encounter via Github.</string>
     <string name="tip_phone_ip_address_syntax">PHONE_IP_ADDRESS</string>
 
     <string name="tip_xiaomi_autostart_title">Xiaomi: app does not start on boot</string>
-    <string name="tip_xiaomi_autostart_text">Xiaomi MIUI disallows apps to start on their own by default. From home screen, go to \'Settings\' > \'Permissions\' > \'Autostart\' and enable the \'Syncthing-Fork\' slider.</string>
+    <string name="tip_xiaomi_autostart_text">Xiaomi MIUI disallows apps to start on their own by default. From home screen, go to \'Settings\' > \'Permissions\' > \'Autostart\' and enable the \'Syncthing\' slider.</string>
 
     <!-- RecentChangesActivity -->
     <string name="recent_changes_title">Recent changes</string>
@@ -660,7 +660,7 @@ Please report any problems you encounter via Github.</string>
     <string name="report_issue_title">Report Issue</string>
 
     <!-- Summary for the issue tracker settings item -->
-    <string name="open_issue_tracker_summary">Open the Syncthing-Fork issue tracker at %1$s</string>
+    <string name="open_issue_tracker_summary">Open the Syncthing issue tracker at %1$s</string>
 
     <!-- URL of the issue tracker -->
     <string name="issue_tracker_url" translatable="false">https://github.com/Catfriend1/syncthing-android/issues</string>
@@ -677,7 +677,7 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_version_title">Syncthing Version</string>
 
     <!-- Title of the preference showing this app's version name -->
-    <string name="app_version_title">Syncthing-Fork Wrapper Version</string>
+    <string name="app_version_title">Syncthing Wrapper Version</string>
 
     <!-- Title of the preference showing the REST API key -->
     <string name="syncthing_api_key">Syncthing API Key (click to copy)</string>

@@ -1013,10 +1013,9 @@ public class SyncthingService extends Service {
                 failSuccess = failSuccess && editor.commit();
             } else {
                 // File not found.
-                Log.w(TAG, "importConfig: SharedPreferences file missing. This is expected if you migrate from the official app to the forked app.");
+                Log.w(TAG, "importConfig: SharedPreferences file missing.");
                 /**
-                 * Don't fail as the file might be expectedly missing when users migrate
-                 * to the forked app.
+                 * Don't fail.
                  */
             }
         } catch (IOException | ClassNotFoundException e) {
