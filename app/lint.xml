@@ -62,4 +62,5 @@
         <ignore path="src/main/res/layout/widget_toolbar.xml" />
     </issue>
     <issue id="OldTargetApi" severity="ignore" />
+    <issue id="ExtraTranslation" severity="warning" />
 </lint>
