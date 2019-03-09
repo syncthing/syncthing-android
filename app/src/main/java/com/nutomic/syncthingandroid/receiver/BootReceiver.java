@@ -30,7 +30,7 @@ public class BootReceiver extends BroadcastReceiver {
             if (getPrefUseRoot(context) && Shell.SU.available()) {
                 /**
                  * In Root mode, there will be a SyncthingNative process left running after app update.
-                 * See https://github.com/Catfriend1/syncthing-android/issues/261
+                 * See https://github.com/syncthing/syncthing-android/issues/261
                  */
                 Log.d(TAG, "ACTION_MY_PACKAGE_REPLACED: Killing leftover SyncthingNative instance if present ...");
                 new SyncthingRunnable(context, SyncthingRunnable.Command.main).killSyncthing();

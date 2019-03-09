@@ -658,10 +658,10 @@ Please report any problems you encounter via Github.</string>
     <string name="open_issue_tracker_summary">Open the Syncthing issue tracker at %1$s</string>
 
     <!-- URL of the issue tracker -->
-    <string name="issue_tracker_url" translatable="false">https://github.com/Catfriend1/syncthing-android/issues</string>
+    <string name="issue_tracker_url" translatable="false">https://github.com/syncthing/syncthing-android/issues</string>
 
     <!-- URL of the GitHub wiki -->
-    <string name="wiki_url" translatable="false">https://github.com/Catfriend1/syncthing-android/wiki</string>
+    <string name="wiki_url" translatable="false">https://github.com/syncthing/syncthing-android/wiki</string>
 
     <!-- URL of the Syncthing project homepage -->
     <string name="url_syncthing_homepage" translatable="false">https://syncthing.net</string>

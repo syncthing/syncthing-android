@@ -55,7 +55,7 @@ public class RunConditionMonitor {
         @Override
         public void onStatusChanged(int which) {
             /**
-             * We need a Looper here, see issue https://github.com/Catfriend1/syncthing-android/issues/149
+             * We need a Looper here, see issue https://github.com/syncthing/syncthing-android/issues/149
              */
             Handler mainLooper = new Handler(Looper.getMainLooper());
             Runnable updateShouldRunDecisionRunnable = new Runnable() {
