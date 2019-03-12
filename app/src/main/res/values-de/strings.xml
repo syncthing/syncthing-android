@@ -116,6 +116,9 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Auf Änderungen achten</string>
   <string name="folder_fileWatcherDescription">Fordert das Betriebssystem auf, über Änderungen an Dateien zu informieren. Falls deaktiviert erfolgt stattdessen stündliches Scannen.</string>
+  <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">Blöcke mit variabler Größe</string>
+  <string name="folder_variable_size_blocks_description">Blöcke mit variabler Größe (auch \"große Blöcke\") sind effizienter für große Dateien. Wenn Sie diese für einen Ordner aktivieren, müssen Sie dies auch auf allen anderen Geräten tun.</string>
   <!--Setting title-->
   <string name="folder_pause">Ordner pausieren</string>
   <!--Setting title-->
@@ -414,6 +417,17 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Beenden</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Gründe:</string>
+  <string name="syncthing_disabled_reason_on_battery">Das Gerät läuft auf Akkubetrieb</string>
+  <string name="syncthing_disabled_reason_on_charger">Das Gerät wird geladen</string>
+  <string name="syncthing_disabled_reason_powersaving">Das Gerät ist im Energiesparmodus</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Globale Synchronisierung ist deaktiviert</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Die SSID des aktuellen WLANs ist nicht auf der Whitelist</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Die aktuelle WLAN-Verbindung ist getaktet</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Keine Netzwerkverbindung oder Flugmodus ist aktiviert</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Keine Verbindung zu mobilem Internet</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Mit keinem WLAN verbunden</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Die Konfiguration erlaubt Synchronisation weder über WLAN, noch über mobiles Internet</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing läuft</string>
   <string name="syncthing_disabled">Syncthing ist deaktiviert</string>

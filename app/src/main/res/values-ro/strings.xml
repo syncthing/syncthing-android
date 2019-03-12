@@ -116,6 +116,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Monitorizează schimbările</string>
   <string name="folder_fileWatcherDescription">Se cere sistemului să notifice despre schimbarea fișierelor. Dacă este dezactivat se folosește scanarea o dată pe oră.</string>
+  <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">Blocuri de mărime variabilă</string>
   <!--Setting title-->
   <string name="folder_pause">Întrerupe director</string>
   <!--Setting title-->
@@ -421,6 +423,17 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Ieșire</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Motive:</string>
+  <string name="syncthing_disabled_reason_on_battery">Dispozitivul este conectat la baterie</string>
+  <string name="syncthing_disabled_reason_on_charger">Dispozitivul este conectat la încărcător</string>
+  <string name="syncthing_disabled_reason_powersaving">Dispozitivul este în modul economizor baterie</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Sincronizarea globală este dezactivată</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Identificatorul SSID al rețelei Wi-Fi curentă nu este pe lista aprobată</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Rețeaua Wi-Fi curentă este contorizată</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Nu există conexiune la rețea sau modul avion este activat</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Nu este conectat la date mobile</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Nu este conectat la Wi-Fi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Nu este configurat să facă sincronizarea nici pe Wi-Fi, nici pe date mobile</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing rulează</string>
   <string name="syncthing_disabled">Syncthing este dezactivat</string>

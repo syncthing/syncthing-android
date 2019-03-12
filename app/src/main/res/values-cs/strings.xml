@@ -16,9 +16,13 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="cont">Pokračovat</string>
   <string name="finish">Dokončit</string>
   <string name="generic_error">Chyba</string>
+  <string name="grant_permission">Udělit oprávnění</string>
+  <string name="permission_granted">Oprávnění uděleno</string>
+  <string name="accept">Příjmout</string>
   <string name="ignore">Ignorovat</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Potvrďte pro ukončení aplikace</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
@@ -31,6 +35,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="no">Ne</string>
   <string name="open_website">Otevřít webovou stránku</string>
   <string name="toast_write_storage_permission_required">Tato aplikace vyžaduje oprávnění pro zápis do úložiště</string>
+  <string name="device_rejected">Zařízení \"%1$s\" se chce připojit</string>
+  <string name="folder_rejected">Zařízení \"%1$s\" chce sdílet adresář \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Optimalizace využití baterie</string>
   <string name="dialog_disable_battery_optimization_message">Po nějakém čase může Android zastavit synchronizaci. Aby se tak nestalo, vypněte optimalizaci využití baterie.\n\nNa některých zařízeních mohou být také předinstalovány aplikace ukončující úlohy. Měli byste přidat Syncthing do jejich výjimek.</string>
   <string name="dialog_disable_battery_optimization_later">Později</string>
@@ -54,6 +60,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <item quantity="many">%1$d / %2$d souborů</item>
     <item quantity="other">%1$d / %2$d souborů</item>
   </plurals>
+  <string name="override_changes">Vynutit změny</string>
+  <string name="open_file_manager">Otevřít správce souborů</string>
   <string name="toast_no_file_manager">Nenalezen žádný kompatibilní manažer souborů</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Přístroje</string>
@@ -66,6 +74,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Odpojen</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">Pozastaveno</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Neznámý</string>
   <!--Title for current download rate-->
@@ -73,6 +82,11 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Rychlost odesílání</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Stav</string>
+  <string name="syncthing_starting">Syncthing startuje.</string>
+  <string name="syncthing_running">Syncthing je spuštěn.</string>
+  <string name="syncthing_not_running">Syncthing není spuštěn.</string>
+  <string name="syncthing_has_crashed">Syncthing havaroval.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Rychlost stahování:\u0020</string>
@@ -94,6 +108,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Setting title-->
   <string name="directory">Adresář</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">Sledovat změny</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <!--Setting title-->
   <string name="devices">Přístroje</string>
@@ -113,9 +129,11 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
-  <string name="dialog_discard_changes">Zrušit změny?</string>
+  <string name="dialog_discard_changes">Zahodit změny?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">Vaše verze Androidu umožňuje aplikaci Syncthing pouze čtení vybrané složky.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">Vaše verze Androidu umožňuje aplikaci Syncthing čtení i zápis do vybrané složky.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
   <string name="ignore_patterns">Ignorované vzory</string>
   <string name="create_ignore_file_error">Vytvoření souboru s ignorovanými vzory selhalo. Umožňuje složka zápis?</string>
@@ -376,6 +394,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="state_syncing">Synchronizuje se (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámý</string>
+  <string name="state_paused">Pozastaveno</string>
   <string name="status_outofsync">Nesesynchronizováno</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>

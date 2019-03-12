@@ -7,13 +7,30 @@
   <string name="welcome_title">Bienvenido a Syncthing para Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introducción</string>
+  <string name="welcome_text">Syncthing es una aplicación de sincronización de archivos de código abierto.
+Para compartir datos con otros dispositivos, debe agregar sus ID de dispositivos únicos a la lista de dispositivos. Después, puede seleccionar qué carpetas compartir con qué dispositivos.
+Por favor, informe de cualquier problema que encuentre a través de Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permiso de almacenamiento</string>
+  <string name="storage_permission_desc">Syncthing necesita acceder a su almacenamiento para hacer la sincronización de archivos.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permiso de ubicación</string>
+  <string name="location_permission_desc">Syncthing puede configurarse para ejecutarse en redes Wi-Fi seleccionadas. Android requiere que las aplicaciones tengan permisos de ubicación para poder buscar el nombre de la red Wi-Fi activa, ya que a veces puede inferir la ubicación de los usuarios a partir del nombre de la red a la que están conectados. Si desea utilizar esta función, presione el botón de arriba para otorgar los permisos de ubicación requeridos a Syncthing. De lo contrario puede omitir este paso.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Retroceder</string>
+  <string name="cont">Continuar</string>
+  <string name="finish">Terminar</string>
+  <string name="generic_example">Ejemplo</string>
   <string name="generic_error">Error</string>
+  <string name="grant_permission">Conceder permiso</string>
+  <string name="permission_granted">Permiso concedido</string>
+  <string name="accept">Aceptar</string>
   <string name="ignore">Ignorar</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirmar para salir de la aplicación</string>
+  <string name="dialog_exit_while_running_as_service_message">Para su consideración: Usted configuró la aplicación para que se inicie automáticamente en el arranque. Por lo tanto, supervisa las condiciones de ejecución y se sincroniza en cualquier momento en segundo plano cuando las condiciones coinciden. Solo debe salir manualmente si tiene problemas graves. De lo contrario, deshabilite \"Iniciar automáticamente en el arranque\" en la configuración. ¿Quieres salir ahora hasta que el dispositivo se reinicie?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -26,6 +43,12 @@
   <string name="no">No</string>
   <string name="open_website">Abrir Sitio web</string>
   <string name="toast_write_storage_permission_required">Esta aplicación requiere permiso para escribir en el almacenamiento</string>
+  <string name="device_rejected">Dispositivo \"%1$s\" quiere conectarse</string>
+  <string name="folder_rejected">El dispositivo \"%1$s\" quiere compartir la carpeta \"%2$s\"</string>
+  <string name="dialog_disable_battery_optimization_title">Optimización de la batería</string>
+  <string name="dialog_disable_battery_optimization_message">Android puede detener la sincronización después de algún tiempo. Para evitar esto, apague la optimización de la batería.
+
+Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales preinstaladas. También debe agregar Syncthing a su lista blanca.</string>
   <string name="dialog_disable_battery_optimization_later">Después</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
@@ -73,6 +96,7 @@
   <!--Setting title-->
   <!--Setting title-->
   <string name="directory">Directorio</string>
+  <!--Setting title and description-->
   <!--Setting title and description-->
   <!--Setting title-->
   <!--Setting title-->
