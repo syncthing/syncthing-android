@@ -116,6 +116,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Håll utkik efter ändringar</string>
   <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande uppdateringar varje timme.</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Pausa mapp</string>
   <!--Setting title-->
@@ -191,7 +192,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="settings_title">Inställningar</string>
   <string name="category_run_conditions">Körvillkor</string>
   <string name="category_behaviour">Beteende</string>
-  <string name="category_syncthing_options">Syncthing-inställningar</string>
+  <string name="category_syncthing_options">Syncthing-alternativ</string>
   <string name="category_backup">Säkerhetskopiering</string>
   <string name="category_debug">Felsökning</string>
   <string name="category_experimental">Experimentellt</string>
@@ -312,7 +313,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">Konfigurations importering misslyckades, se till att filerna finns i %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">STTRACE-inställningar</string>
+  <string name="sttrace_title">STTRACE-alternativ</string>
   <string name="environment_variables">Miljövariabler</string>
   <!--Toast after entering invalid STTRACE params-->
   <string name="toast_invalid_environment_variables">Värdet är inte en giltig miljövariabel sträng</string>
@@ -424,6 +425,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="syncthing_disabled_reason_powersaving">Enheten är i energisparläge</string>
   <string name="syncthing_disabled_reason_android_sync_disabled">Global synkronisering är inaktiverad</string>
   <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Nuvarande WiFi SSID är inte vitlistad</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Nuvarande Wi-Fi är uppmätt</string>
   <string name="syncthing_disabled_reason_no_network_or_flightmode">Ingen nätverksanslutning eller flygplansläge aktiverat</string>
   <string name="syncthing_disabled_reason_no_mobile_connection">Inte ansluten till mobildata</string>
   <string name="syncthing_disabled_reason_no_wifi_connection">Inte ansluten till Wi-Fi</string>

@@ -7,6 +7,7 @@
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introductie</string>
   <string name="welcome_text">Syncthing is een open-bron-bestandssynchronisatietoepassing.\n\
 Om gegevens met andere apparaten te delen moet je hun unieke apparaats-ID toevoegen aan de lijst met apparaten. Nadien kan je kiezen welke mappen je met welke apparaten wil delen.\n\
 Als je problemen tegenkomt, meld ze dan via GitHub.</string>
@@ -97,6 +98,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Controleren op wijzigingen</string>
   <string name="folder_fileWatcherDescription">Vraagt het besturingssysteem om meldingen over gewijzigde bestanden. Indien uitgeschakeld wordt elk uur gescand.</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Map pauzeren</string>
   <!--Setting title-->

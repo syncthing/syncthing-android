@@ -97,6 +97,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Setting title and description-->
   <string name="folder_fileWatcher">observe as mudanças</string>
   <string name="folder_fileWatcherDescription">Pede ao sistema em operação para notificar sobre mudanças em arquivos. Se desabilitado cai para uma varredura periódica por hora.</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Repositório pausado</string>
   <!--Setting title-->

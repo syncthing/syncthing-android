@@ -7,18 +7,28 @@
   <string name="welcome_title">欢迎使用 Android 版 Syncthing</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">介绍</string>
   <string name="welcome_text">Syncthing 是一个开源的文件同步处理应用程序。
 若要与其他设备分享数据，你需要添加他们的唯一设备 ID 到设备列表。之后你就可以选择要分享哪些文件夹至该设备上。
 请通过 GitHub 报告任何你遇到的问题。</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">存储权限</string>
+  <string name="storage_permission_desc">Syncthing 需要获取读写存储设备权限以进行同步操作</string>
   <!--Slide 3-->
+  <string name="location_permission_title">定位权限</string>
   <!--Generic texts used everywhere-->
+  <string name="back">返回</string>
   <string name="cont">继续</string>
   <string name="finish">完成</string>
+  <string name="generic_example">例子</string>
   <string name="generic_error">错误</string>
+  <string name="grant_permission">获取权限</string>
+  <string name="permission_granted">权限已获取</string>
+  <string name="accept">同意</string>
   <string name="ignore">忽略</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">再按一次确认退出</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">添加文件夹</string>
   <!--Title of the "share device id" menu action-->
@@ -31,6 +41,8 @@
   <string name="no">否</string>
   <string name="open_website">打开主页</string>
   <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
+  <string name="device_rejected">设备“%1$s”想要连接</string>
+  <string name="folder_rejected">设备“%1$s”希望分享目录“%2$s”</string>
   <string name="dialog_disable_battery_optimization_title">电池优化</string>
   <string name="dialog_disable_battery_optimization_message">Android 可能会在一段时间后停止同步。为防这种情况，请关闭电池优化。
 
@@ -53,6 +65,8 @@
   <plurals name="files">
     <item quantity="other">%1$d / %2$d 个文件</item>
   </plurals>
+  <string name="override_changes">覆盖修改</string>
+  <string name="open_file_manager">打开文件管理器</string>
   <string name="toast_no_file_manager">未找到兼容的文件管理器</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">设备</string>
@@ -65,6 +79,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">连接断开</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">已暂停</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">未知</string>
   <!--Title for current download rate-->
@@ -72,6 +87,11 @@
   <!--Title for current upload rate-->
   <string name="upload_title">上传速度</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">状态</string>
+  <string name="syncthing_starting">正在启动 Syncthing</string>
+  <string name="syncthing_running">Syncthing 正在运行...</string>
+  <string name="syncthing_not_running">Syncthing 未运行...</string>
+  <string name="syncthing_has_crashed">Syncthing 已崩溃</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">下载：\u0020</string>
@@ -93,7 +113,10 @@
   <!--Setting title-->
   <string name="directory">目录</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">监视更改</string>
+  <!--Setting title and description-->
   <!--Setting title-->
+  <string name="folder_pause">暂停同步目录</string>
   <!--Setting title-->
   <string name="devices">设备</string>
   <!--Setting title-->
@@ -114,7 +137,9 @@
   <string name="folder_path_required">文件夹路径不得为空</string>
   <string name="dialog_discard_changes">放弃所做的更改？</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">您的系统版本只能给 Syncthing 提供到指定文件夹的只读访问</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">您的系统版本可以给 Syncthing 提供到指定文件夹的读写访问权限</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
   <string name="ignore_patterns">忽略列表</string>
   <string name="create_ignore_file_error">创建忽略文件失败。文件夹可写吗？</string>
@@ -139,6 +164,7 @@
   <!--Setting title-->
   <string name="introducer">介绍人</string>
   <!--Setting title-->
+  <string name="pause_device">暂停设备</string>
   <!--ActionBar item-->
   <string name="delete_device">删除设备</string>
   <string name="add_device">添加设备</string>
@@ -169,7 +195,16 @@
   <string name="category_experimental">实验性</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">运行条件</string>
+  <string name="run_on_all_wifi_networks">在所有 Wi-Fi 连接下运行</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开 Wi-Fi 来选择网络</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">你需要提供位置权限才能使用本功能</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要权限</string>
   <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
+  <string name="respect_battery_saving_summary">打开省电模式时禁用 Syncthing</string>
+  <string name="respect_master_sync_title">遵从安卓系统“自动同步数据”的设置</string>
+  <string name="run_in_flight_mode_title">在飞行模式下运行</string>
+  <string name="service_settings_title">服务设置</string>
+  <string name="run_as_background_service">开机自动启动服务</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
@@ -209,13 +244,23 @@
   <string name="export_config">导出设置</string>
   <!--Toast after entering invalid integer value-->
   <!--Experimental options-->
+  <string name="use_proxy">使用代理连接</string>
+  <string name="do_not_use_proxy">未设置代理</string>
   <string name="keep_wakelock_while_binary_running">当 Syncthing 正在运行时保持 CPU 唤醒</string>
   <string name="keep_wakelock_while_binary_running_summary">使用此设置如果您在电池上运行时遇到意外的断开连接。这将会导致电量消耗的增加。</string>
   <string name="use_tor_title">使用 Tor</string>
+  <string name="socks_proxy_address_title">SOCKS5 代理</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="toast_invalid_socks_proxy_address">请按照 “socks5://[IP/HOSTNAME]:[PORT]” 的格式输入代理地址</string>
+  <string name="http_proxy_address_title">HTTP(S) 代理</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
+  <string name="toast_invalid_http_proxy_address">请按照 “http://[IP/HOSTNAME]:[PORT]” 的格式输入代理地址</string>
   <string name="use_legacy_hashing_title">使用传统哈希</string>
   <string name="use_legacy_hashing_summary">强制 syncthing 使用传统哈希包出于兼容目的</string>
+  <string name="restart_on_wakeup_title">唤醒时重启</string>
+  <string name="restart_on_wakeup_summary">默认：启用。禁用该设置可推迟目录扫描和设备连接来节省电量。</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">您确定要导出您的配置？若您之前导出过配置，则文件会被当前导出的配置所覆盖。\n\n 警告！其他应用程序可以从您导出的配置文件中获取到您的密钥，并且可以通过它来下载或者修改您的同步文件。</string>
   <!--Dialog shown before config import-->
@@ -235,6 +280,7 @@
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">重置数据库</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">该操作仅应在服务人员的建议下执行。你确定要清空 Syncthing 的数据库吗？</string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">重置 Syncthing 数据库完成</string>
   <!--Title for the preference to reset Syncthing indexes-->
@@ -317,14 +363,24 @@
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已禁用</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">是否改变运行条件？</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">变更设置</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">退出</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">原因：</string>
+  <string name="syncthing_disabled_reason_on_battery">设备未在充电</string>
+  <string name="syncthing_disabled_reason_on_charger">设备正在充电</string>
+  <string name="syncthing_disabled_reason_powersaving">设备正在节电模式下运行</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">全局同步已禁用</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">当前 WiFi 会计费</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">没有网络连接或飞行模式已打开</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">未连接 WiFi</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在运行</string>
   <string name="syncthing_disabled">Syncthing 已禁用</string>
+  <string name="syncthing_terminated">Syncthing 被停止运行</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">创建配置文件失败</string>
   <!--Toast shown if a config file crucial to operation is missing-->
@@ -334,6 +390,7 @@
   <string name="default_folder_id">%1$s-照片</string>
   <string name="notification_crash_title">Syncthing 已崩溃</string>
   <string name="notification_crash_text_tmp">点击查看日志</string>
+  <string name="notifications_persistent_channel">Syncthing 已激活</string>
   <string name="notifications_other_channel">其他通知</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -366,16 +423,26 @@
   <string name="state_syncing">正在同步 (%1$d%%)</string>
   <string name="state_error">错误</string>
   <string name="state_unknown">未知</string>
+  <string name="state_paused">已暂停</string>
   <string name="status_outofsync">未同步</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">当启用后台运行时不支持停止 Syncthing。</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">目录种类</string>
   <!--Displays the current folder type in the folder activity-->
   <string name="folder_type_sendonly">仅发送</string>
+  <string name="folder_type_receiveonly">只接收</string>
   <!--Folder type dialog descriptions for folder types-->
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">文件下载顺序</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">随机</string>
+  <string name="pull_order_type_alphabetic">按名称</string>
+  <string name="pull_order_type_smallestFirst">先传小的</string>
+  <string name="pull_order_type_largestFirst">先传大的</string>
+  <string name="pull_order_type_oldestFirst">先传旧的</string>
+  <string name="pull_order_type_newestFirst">先传新的</string>
   <!--Pull order dialog descriptions for pull order types-->
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最长保留时间</string>
@@ -390,8 +457,8 @@
   <string name="trashcan_versioning_description">当文件被 Syncthing 替换或删除时，将被移动到 .stversions 目录。</string>
   <string name="staggered_versioning_description">当某个文件在其他设备被替换或删除时，本设备将在 .stversions 目录中保留该文件的备份，并在文件名中加入时间戳信息。超过最长保留时间，或者不满足下列条件的历史版本，将会被删除。
 
-保留的历史版本会遵循以下条件：最近一小时内的历史版本，更新间隔小于三十秒的仅保留一份。最近一天内的历史版本，更新间隔小于一小时的仅保留一份。最近一个月内的历史版本，更新间隔小于一天的仅保留一份。距离现在超过一个月且小于最长保留时间的，更新间隔小于一周的仅保留一份。</string>
-  <string name="maximum_age_description">历史版本保留的最长天数，0 为永久保存。</string>
+保留的历史版本会遵循以下条件：最近一小时内的历史版本，更新间隔小于30秒的仅保留一份。最近一天内的历史版本，更新间隔小于一小时的仅保留一份。最近30天内的历史版本，更新间隔小于一天的仅保留一份。距离现在超过30天且小于最长保留时间的，更新间隔小于一周的仅保留一份。</string>
+  <string name="maximum_age_description">历史版本保留的最长天数（0 为永久保存）。</string>
   <string name="versions_path_description">历史版本储存路径（留空则会默认存储在共享文件夹中的 .stversions 目录）。</string>
   <string name="cleanout_after_description">文件保存在回收站的天数。零表示永久。</string>
   <string name="external_versioning_description">命令行的第一个参数是文件夹的路径，第二个参数是文件夹内的相对路径。</string>

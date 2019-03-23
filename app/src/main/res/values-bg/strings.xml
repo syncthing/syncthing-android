@@ -95,6 +95,7 @@
   <string name="directory">Директория</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Следи за промени</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <!--Setting title-->
   <string name="devices">Устройства</string>
@@ -186,6 +187,7 @@
   </string-array>
   <string name="respect_battery_saving_title">Ползване на настройките за пестене на батеия от Android</string>
   <string name="respect_battery_saving_summary">Спира Syncthing когато режима за пестене на батерия е активен.</string>
+  <string name="run_in_flight_mode_title">Синхронизиране и в \"Самолетен режим\"</string>
   <string name="service_settings_title">Настройки на услугата</string>
   <string name="service_settings_summary">Стартира Syncthing като услуга. Добавя постоянни известия за да се предотврати изключване от Android. Също така стартира Syncthing заедно с операционната система.</string>
   <!--Preferences - Behaviour-->

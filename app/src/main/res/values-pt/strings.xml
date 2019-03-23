@@ -116,6 +116,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Monitorizar alterações</string>
   <string name="folder_fileWatcherDescription">Pede ao sistema operativo para notificar quando ocorrem alterações a ficheiros. Se for desactivado, reverte para a verificação periódica a cada hora.</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Pausar a pasta</string>
   <!--Setting title-->
@@ -287,10 +288,19 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada enquanto o Syncthing está a correr</string>
   <string name="keep_wakelock_while_binary_running_summary">Use esta definição se experimentar desconectações inesperadas enquanto estiver a trabalhar com a bateria. Isto irá resultar num aumento do consumo da carga da bateria.</string>
   <string name="use_tor_title">Utilizar o Tor</string>
+  <string name="use_tor_summary">Forçar todo o tráfego através do Tor para aumentar a privacidade. Requer Orbot. Desactiva opções proxy.</string>
+  <string name="socks_proxy_address_title">SOCKS5 proxy</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="toast_invalid_socks_proxy_address">O texto viola a sintaxe do proxy \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+  <string name="http_proxy_address_title">HTTP(S) proxy</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
+  <string name="toast_invalid_http_proxy_address">O texto viola a sintaxe do proxy \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Usar verificação antiga</string>
   <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar um pacote de verificação antiga por questões de compatabilidade</string>
+  <string name="restart_on_wakeup_title">Reiniciar com o sinal para acordar</string>
+  <string name="restart_on_wakeup_summary">Predefinido: Activo. Desactivar esta funcionalidade pode resultar em atrasos nas pesquisas de pastas e nas ligações aos dispositivos, para poupar bateria.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Tem a certeza de que quer exportar a sua configuração? Ficheiros existentes serão sobrescritos.\n\nAVISO! Outras aplicações poderão ler a chave privada da localização da cópia de segurança e utilizá-la para descarregar/modificar os ficheiros sincronizados.</string>
   <!--Dialog shown before config import-->
@@ -303,20 +313,34 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Toast shown after config was successfully imported-->
   <string name="config_import_failed">A importação da configuração falhou, assegure-se que os ficheiros estão em %1$s</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Opções STTRACE</string>
+  <string name="environment_variables">Variáveis de ambiente</string>
   <!--Toast after entering invalid STTRACE params-->
+  <string name="toast_invalid_environment_variables">O valor não é um texto válido para uma variável de ambiente</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">Reiniciar a base de dados</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">Esta acção só deve ser executada com base numa recomendação da nossa equipa de suporte.
+\nTem a certeza que quer eliminar a base de dados do Syncthing?
+</string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">Base de dados do Syncthing reiniciada com sucesso.</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">Reiniciar Índices Delta</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">Esta acção só deve ser executada com base numa recomendação da nossa equipa de suporte.
+\nTem a certeza que quer eliminar os índices delta do Syncthing?</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">Índices delta do Syncthing reiniciados com sucesso</string>
   <string name="category_about">Sobre</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Abrir registo</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Abrir a janela de registo do Syncthing e do Android</string>
+  <string name="notify_crashes_title">Notificar quando o Syncthing estoira</string>
+  <string name="notify_crashes_summary">Mostrar uma notificação sempre que é detectado um estoiro do Syncthing</string>
+  <string name="syncthing_forum_title">Fórum do Syncthing</string>
+  <string name="syncthing_forum_summary">Ir para o Fórum do Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Reportar incidente</string>
   <!--Summary for the issue tracker settings item-->
@@ -342,6 +366,8 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="select_folder">Seleccionar pasta</string>
   <string name="create_folder_failed">Falhou a criação da pasta</string>
   <!--LogActivity-->
+  <string name="syncthing_log_title">Registo do Syncthing</string>
+  <string name="android_log_title">Registo do Android</string>
   <!--Title of the "log android" menu button-->
   <string name="view_android_log">Ver registo do Android</string>
   <!--Title of the "log Syncthing" menu button-->
@@ -351,25 +377,54 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="share_title">Partilhar</string>
   <!--ShareActivity-->
   <!--Title of the "share" activity-->
+  <string name="share_activity_title">Guardar para o Syncthing</string>
   <!--Title of the "save" button-->
+  <string name="save_title">Guardar</string>
   <!--Title of the "cancel" button-->
+  <string name="cancel_title">Cancelar</string>
   <!--Title of the "save" button-->
+  <string name="folder_title">Pasta</string>
   <!--New file name template-->
+  <string name="file_name_template">Novo ficheiro %1$s</string>
   <!--Nothing to share toast-->
+  <string name="nothing_share">Nada a partilhar</string>
   <!--Copy success toast partially-->
+  <plurals name="copy_success_partially">
+    <item quantity="one">Ficheiro %1$d copiado para a pasta \"%2$s\", %3$d já existe</item>
+    <item quantity="other">%1$d ficheiros copiados para a pasta \"%2$s\", %3$d já existe</item>
+  </plurals>
   <!--Copy success toast-->
+  <plurals name="copy_success">
+    <item quantity="one">%1$d ficheiros copiados para a pasta \"%2$s\"</item>
+    <item quantity="other">%1$d ficheiros copiados para a pasta \"%2$s\"</item>
+  </plurals>
   <!--Copy exception toast-->
+  <string name="copy_exception">Ocorreu um erro durante a partilha, verifique os registo da aplicação</string>
   <!--Copy progress dialog text-->
+  <string name="copy_progress">Partilhando ficheiros...</string>
+  <plurals name="file_name_title">
+    <item quantity="one">Nome do ficheiro</item>
+    <item quantity="other">Lista de ficheiros</item>
+  </plurals>
   <!--Sub Folder title-->
+  <string name="sub_folder">Sub-pasta</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desactivado</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Quer alterar as condições de execução?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Alterar configurações</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Sair</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Razões:</string>
+  <string name="syncthing_disabled_reason_on_battery">O dispositivo está a ser alimentado pela bateria</string>
+  <string name="syncthing_disabled_reason_on_charger">O dispositivo está a ser alimentado pelo carregador</string>
+  <string name="syncthing_disabled_reason_powersaving">O dispositivo está no modo de poupança de energia</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">A sincronização global está desactivada</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID WiFi actual não está na lista autorizada</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">O WiFi actual é de consumo limitado</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está a correr</string>
   <string name="syncthing_disabled">O Syncthing está desactivado</string>

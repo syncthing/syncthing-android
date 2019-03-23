@@ -115,6 +115,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Vigila els canvis</string>
   <string name="folder_fileWatcherDescription">Demana al sistema que notifiqui dels canvis als fitxers. Si es desactiva es faran comprovacions cada hora.</string>
+  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Posa la carpeta en pausa</string>
   <!--Setting title-->
