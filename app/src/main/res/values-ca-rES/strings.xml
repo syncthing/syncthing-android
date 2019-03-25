@@ -116,6 +116,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="folder_fileWatcher">Vigila els canvis</string>
   <string name="folder_fileWatcherDescription">Demana al sistema que notifiqui dels canvis als fitxers. Si es desactiva es faran comprovacions cada hora.</string>
   <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">Blocs de Mida Variable</string>
   <!--Setting title-->
   <string name="folder_pause">Posa la carpeta en pausa</string>
   <!--Setting title-->
@@ -418,6 +419,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Surt</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Raons:</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">El Syncthing s\'està executant</string>
   <string name="syncthing_disabled">El Syncthing està desactivat</string>

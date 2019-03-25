@@ -117,6 +117,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="folder_fileWatcher">Surveiller les changements</string>
   <string name="folder_fileWatcherDescription">Demande au système d\'exploitation de signaler les modifications apportées aux fichiers. Si désactivé, revient aux analyses horaires périodiques.</string>
   <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">Taille de blocs variable</string>
+  <string name="folder_variable_size_blocks_description">Les blocs de taille variable (\"grands blocs\") sont plus efficaces pour les gros fichiers. Si vous l\'activez sur un partage, vous devrez l\'activer pour ce partage sur tous les périphériques.</string>
   <!--Setting title-->
   <string name="folder_pause">Mettre le partage en pause</string>
   <!--Setting title-->
@@ -419,6 +421,17 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Quitter</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Les raisons:</string>
+  <string name="syncthing_disabled_reason_on_battery">Le périphérique fonctionne sur batterie</string>
+  <string name="syncthing_disabled_reason_on_charger">Le périphérique fonctionne sur chargeur</string>
+  <string name="syncthing_disabled_reason_powersaving">Le périphérique est en mode sauvegarde batterie</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">La synchronisation globale est désactivée</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Le SSID WIFI courant n\'est pas sur liste blanche</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Le volume de données du WiFi courant est mesuré</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Pas de connexion réseau ou mode avion activé.</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Pas de connexion de données mobiles</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Pas de connexion WiFi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Non configuré pour la synchronisation en WiFi ou données mobiles</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing fonctionne</string>
   <string name="syncthing_disabled">Syncthing est désactivé</string>
