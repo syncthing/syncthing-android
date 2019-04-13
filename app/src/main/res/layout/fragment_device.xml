@@ -58,8 +58,8 @@
                 style="@style/Widget.Syncthing.TextView.Label.Details.Field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_tag_text_outline_black_24dp_active"
-                android:drawableStart="@drawable/ic_tag_text_outline_black_24dp_active"
+                android:drawableLeft="@drawable/ic_tag_text_outline_24dp"
+                android:drawableStart="@drawable/ic_tag_text_outline_24dp"
                 android:hint="@string/name"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords" />
