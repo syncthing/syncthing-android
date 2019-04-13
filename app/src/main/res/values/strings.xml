@@ -379,6 +379,8 @@ Please report any problems you encounter via Github.</string>
 
     <string name="start_into_web_gui_summary">When starting the app, open web GUI instead of the main screen</string>
 
+    <string name="preference_theme_title">Theme</string>
+
     <string name="pref_language_default">Default Language</string>
 
     <string-array name="folder_types">

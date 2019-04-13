@@ -1,7 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,6 +16,8 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -74,7 +75,7 @@ public class SettingsActivity extends SyncthingActivity {
                         this.startService(new Intent(this, SyncthingService.class)
                                 .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
                     } else {
-                        new AlertDialog.Builder(this)
+                        new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
                                 .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
                                 .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
                                 .setPositiveButton(android.R.string.ok, null).show();
@@ -259,11 +260,14 @@ public class SettingsActivity extends SyncthingActivity {
             screen.findPreference(Constants.PREF_POWER_SOURCE).setSummary(mPowerSource.getEntry());
             String wifiSsidSummary = TextUtils.join(", ", mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>()));
             screen.findPreference(Constants.PREF_WIFI_SSID_WHITELIST).setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
-                getString(R.string.run_on_all_wifi_networks) :
-                getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                    getString(R.string.run_on_all_wifi_networks) :
+                    getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
             );
             handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
             handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
+
+            ListPreference themePreference = (ListPreference) findPreference(Constants.PREF_THEME);
+            themePreference.setOnPreferenceChangeListener(this);
 
             try {
                 appVersion.setSummary(getActivity().getPackageManager()
@@ -311,8 +315,8 @@ public class SettingsActivity extends SyncthingActivity {
         public void onServiceStateChange(SyncthingService.State currentState) {
             mApi = mSyncthingService.getApi();
             boolean isSyncthingRunning = (mApi != null) &&
-                        mApi.isConfigLoaded() &&
-                        (currentState == SyncthingService.State.ACTIVE);
+                    mApi.isConfigLoaded() &&
+                    (currentState == SyncthingService.State.ACTIVE);
             mCategorySyncthingOptions.setEnabled(isSyncthingRunning);
             mCategoryBackup.setEnabled(isSyncthingRunning);
 
@@ -369,8 +373,8 @@ public class SettingsActivity extends SyncthingActivity {
                 case Constants.PREF_WIFI_SSID_WHITELIST:
                     String wifiSsidSummary = TextUtils.join(", ", (Set<String>) o);
                     preference.setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
-                        getString(R.string.run_on_all_wifi_networks) :
-                        getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                            getString(R.string.run_on_all_wifi_networks) :
+                            getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
                     );
                     break;
             }
@@ -511,6 +515,13 @@ public class SettingsActivity extends SyncthingActivity {
                         return false;
                     }
                     break;
+                case Constants.PREF_THEME:
+                    // Recreate activities with the correct colors
+                    TaskStackBuilder.create(getActivity())
+                            .addNextIntent(new Intent(getActivity(), MainActivity.class))
+                            .addNextIntent(getActivity().getIntent())
+                            .startActivities();
+                    break;
             }
 
             return true;
@@ -531,7 +542,7 @@ public class SettingsActivity extends SyncthingActivity {
                     }
                     return true;
                 case KEY_EXPORT_CONFIG:
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(getActivity(), R.style.Theme_Syncthing_Dialog)
                             .setMessage(R.string.dialog_confirm_export)
                             .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                                         mSyncthingService.exportConfig();
@@ -543,7 +554,7 @@ public class SettingsActivity extends SyncthingActivity {
                             .show();
                     return true;
                 case KEY_IMPORT_CONFIG:
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(getActivity(), R.style.Theme_Syncthing_Dialog)
                             .setMessage(R.string.dialog_confirm_import)
                             .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                                         if (mSyncthingService.importConfig()) {
@@ -562,7 +573,7 @@ public class SettingsActivity extends SyncthingActivity {
                             .show();
                     return true;
                 case KEY_UNDO_IGNORED_DEVICES_FOLDERS:
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(getActivity(), R.style.Theme_Syncthing_Dialog)
                             .setMessage(R.string.undo_ignored_devices_folders_question)
                             .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                                 if (mApi == null) {
@@ -584,7 +595,7 @@ public class SettingsActivity extends SyncthingActivity {
                     intent = new Intent(getActivity(), SyncthingService.class)
                             .setAction(SyncthingService.ACTION_RESET_DATABASE);
 
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(getActivity(), R.style.Theme_Syncthing_Dialog)
                             .setTitle(R.string.st_reset_database_title)
                             .setMessage(R.string.st_reset_database_question)
                             .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
@@ -599,7 +610,7 @@ public class SettingsActivity extends SyncthingActivity {
                     intent = new Intent(getActivity(), SyncthingService.class)
                             .setAction(SyncthingService.ACTION_RESET_DELTAS);
 
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(getActivity(), R.style.Theme_Syncthing_Dialog)
                             .setTitle(R.string.st_reset_deltas_title)
                             .setMessage(R.string.st_reset_deltas_question)
                             .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {

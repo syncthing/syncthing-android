@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <ListPreference
+        android:key="theme"
+        android:title="@string/preference_theme_title"
+        android:entries="@array/theme_names"
+        android:entryValues="@array/theme_values"/>
+
     <PreferenceScreen
         android:title="@string/category_run_conditions"
         android:key="category_run_conditions">

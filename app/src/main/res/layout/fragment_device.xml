@@ -34,8 +34,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_cellphone_black_24dp"
-                    android:drawableStart="@drawable/ic_cellphone_black_24dp"
+                    android:drawableLeft="@drawable/ic_smartphone_24dp"
+                    android:drawableStart="@drawable/ic_smartphone_24dp"
                     android:hint="@string/device_id"
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions|textMultiLine"
@@ -50,7 +50,7 @@
                     android:layout_marginEnd="@dimen/abc_action_bar_content_inset_material"
                     android:layout_marginRight="@dimen/abc_action_bar_content_inset_material"
                     android:contentDescription="@string/scan_qr_code_description"
-                    android:src="@drawable/ic_qrcode_black_24dp_active" />
+                    android:src="@drawable/ic_qrcode_24dp" />
             </LinearLayout>
 
             <EditText
@@ -69,8 +69,8 @@
                 style="@style/Widget.Syncthing.TextView.Label.Details.Field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_link_black_24dp_active"
-                android:drawableStart="@drawable/ic_link_black_24dp_active"
+                android:drawableLeft="@drawable/ic_link_24dp"
+                android:drawableStart="@drawable/ic_link_24dp"
                 android:hint="@string/addresses"
                 android:imeOptions="actionDone"
                 android:inputType="textNoSuggestions"/>
@@ -89,8 +89,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:checked="false"
-                    android:drawableLeft="@drawable/ic_zip_box_black_24dp_active"
-                    android:drawableStart="@drawable/ic_zip_box_black_24dp_active"
+                    android:drawableLeft="@drawable/ic_zipbox_24dp"
+                    android:drawableStart="@drawable/ic_zipbox_24dp"
                     android:text="@string/compression" />
 
                 <TextView
@@ -108,8 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_phonelink_black_24dp_active"
-                android:drawableStart="@drawable/ic_phonelink_black_24dp_active"
+                android:drawableLeft="@drawable/ic_phonelink_24dp"
+                android:drawableStart="@drawable/ic_phonelink_24dp"
                 android:text="@string/introducer" />
 
             <android.support.v7.widget.SwitchCompat
@@ -118,8 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:drawableLeft="@drawable/ic_settings_black_24dp"
-                android:drawableStart="@drawable/ic_settings_black_24dp"
+                android:drawableLeft="@drawable/ic_settings_24dp"
+                android:drawableStart="@drawable/ic_settings_24dp"
                 android:text="@string/pause_device" />
 
             <TextView
@@ -127,8 +127,8 @@
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_info_black_24dp_inactive"
-                android:drawableStart="@drawable/ic_info_black_24dp_inactive"
+                android:drawableLeft="@drawable/ic_info_24dp"
+                android:drawableStart="@drawable/ic_info_24dp"
                 android:enabled="false"
                 android:hint="@string/current_address"
                 android:visibility="gone"
