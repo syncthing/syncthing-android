@@ -3,7 +3,6 @@
     <color name="primary">#03A9F4</color>
     <color name="primary_dark">#0288D1</color>
     <color name="accent">#FFC107</color>
-    <color name="icon_light">#ccffffff</color>
     <color name="divider">#1F000000</color>
 
     <color name="text_black">#000000</color>
