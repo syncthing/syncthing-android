@@ -38,8 +38,22 @@
     <eat-comment/>
 
     <style name="Theme.Syncthing.Dialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="android:windowBackground">?attr/colorBackgroundFloating</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:windowBackground">?attr/colorBackgroundFloating</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Theme.Syncthing.NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Theme.Syncthing.PositiveButtonStyle</item>
+        <item name="colorAccent">@color/primary_dark</item>
+    </style>
+
+    <!-- Button themes -->
+    <eat-comment/>
+
+    <style name="Theme.Syncthing.NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary_dark</item>
+    </style>
+
+    <style name="Theme.Syncthing.PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary_dark</item>
     </style>
 
     <!-- Toolbar themes -->
