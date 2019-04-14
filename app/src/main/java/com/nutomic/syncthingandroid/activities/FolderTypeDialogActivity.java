@@ -2,11 +2,7 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,7 +13,7 @@ import com.nutomic.syncthingandroid.service.Constants;
 import java.util.Arrays;
 import java.util.List;
 
-public class FolderTypeDialogActivity extends AppCompatActivity {
+public class FolderTypeDialogActivity extends ThemedAppCompatActivity {
 
     public static final String EXTRA_FOLDER_TYPE = "com.nutomic.syncthinandroid.activities.FolderTypeDialogActivity.FOLDER_TYPE";
     public static final String EXTRA_RESULT_FOLDER_TYPE = "com.nutomic.syncthinandroid.activities.FolderTypeDialogActivity.EXTRA_RESULT_FOLDER_TYPE";
@@ -32,11 +28,6 @@ public class FolderTypeDialogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Load user theme
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String themeString = prefs.getString(Constants.PREF_THEME, "1");
-        AppCompatDelegate.setDefaultNightMode(Integer.parseInt(themeString));
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_foldertype_dialog);
         if (savedInstanceState == null) {

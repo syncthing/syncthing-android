@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Widget" />
+
     <style name="Widget.Syncthing" />
 
     <!-- Widget styles -->
@@ -64,4 +66,13 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
     </style>
+
+    <style name="Theme.Syncthing.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Syncthing.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Syncthing.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -17,7 +17,6 @@ import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -266,7 +265,7 @@ public class SettingsActivity extends SyncthingActivity {
             handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
             handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
 
-            ListPreference themePreference = (ListPreference) findPreference(Constants.PREF_THEME);
+            ListPreference themePreference = (ListPreference) findPreference(Constants.PREF_APP_THEME);
             themePreference.setOnPreferenceChangeListener(this);
 
             try {
@@ -515,7 +514,7 @@ public class SettingsActivity extends SyncthingActivity {
                         return false;
                     }
                     break;
-                case Constants.PREF_THEME:
+                case Constants.PREF_APP_THEME:
                     // Recreate activities with the correct colors
                     TaskStackBuilder.create(getActivity())
                             .addNextIntent(new Intent(getActivity(), MainActivity.class))

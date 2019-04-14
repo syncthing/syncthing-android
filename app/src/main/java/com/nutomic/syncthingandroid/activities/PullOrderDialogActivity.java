@@ -2,22 +2,17 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.service.Constants;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PullOrderDialogActivity extends AppCompatActivity {
+public class PullOrderDialogActivity extends ThemedAppCompatActivity {
 
     public static final String EXTRA_PULL_ORDER = "com.nutomic.syncthinandroid.activities.PullOrderDialogActivity.PULL_ORDER";
     public static final String EXTRA_RESULT_PULL_ORDER = "com.nutomic.syncthinandroid.activities.PullOrderDialogActivity.EXTRA_RESULT_PULL_ORDER";
@@ -35,11 +30,6 @@ public class PullOrderDialogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Load user theme
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String themeString = prefs.getString(Constants.PREF_THEME, "1");
-        AppCompatDelegate.setDefaultNightMode(Integer.parseInt(themeString));
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_pullorder_dialog);
         if (savedInstanceState == null) {

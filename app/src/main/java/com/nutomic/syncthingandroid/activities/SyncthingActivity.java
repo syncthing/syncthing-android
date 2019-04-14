@@ -4,17 +4,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 
 import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
@@ -24,7 +19,7 @@ import java.util.LinkedList;
 /**
  * Connects to {@link SyncthingService} and provides access to it.
  */
-public abstract class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
+public abstract class SyncthingActivity extends ThemedAppCompatActivity implements ServiceConnection {
 
     public static final String EXTRA_KEY_GENERATION_IN_PROGRESS = "com.nutomic.syncthing-android.SyncthingActivity.KEY_GENERATION_IN_PROGRESS";
 
@@ -37,18 +32,6 @@ public abstract class SyncthingActivity extends AppCompatActivity implements Ser
      */
     public interface OnServiceConnectedListener {
         void onServiceConnected();
-    }
-
-    /**
-     * Loads the selected user theme
-     */
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        // Load user theme
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String themeString = prefs.getString(Constants.PREF_THEME, "1");
-        AppCompatDelegate.setDefaultNightMode(Integer.parseInt(themeString));
-        super.onCreate(savedInstanceState);
     }
 
     /**

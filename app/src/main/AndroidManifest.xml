@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nutomic.syncthingandroid">
 
-    <uses-feature android:name="android.software.leanback" android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,62 +17,70 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-    <!-- ACCESS_COARSE_LOCATION is required to get WiFi's SSID on 8.1 -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" /> <!-- ACCESS_COARSE_LOCATION is required to get WiFi's SSID on 8.1 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".SyncthingApp"
         android:allowBackup="false"
+        android:banner="@drawable/banner"
+        android:description="@string/app_description"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
-        android:banner="@drawable/banner"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Syncthing"
-        android:description="@string/app_description"
-        android:supportsRtl="true"
         android:installLocation="internalOnly"
-        android:name=".SyncthingApp">
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Syncthing">
         <activity
-                android:name=".activities.FirstStartActivity"
-                android:label="@string/app_name"
-                android:launchMode="singleInstance">
+            android:name=".activities.ThemedAppCompatActivity"
+            android:label="@string/title_activity_themed_app_compat"
+            android:theme="@style/Theme.Syncthing.NoActionBar"></activity>
+        <activity
+            android:name=".activities.FirstStartActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name=".activities.WebGuiActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/web_gui_title"
-            android:parentActivityName=".activities.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
             android:name=".activities.ShareActivity"
-            android:label="@string/share_activity_title"
             android:excludeFromRecents="true"
+            android:label="@string/share_activity_title"
             android:taskAffinity=""
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="*/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
@@ -77,8 +89,10 @@
             android:parentActivityName=".activities.SettingsActivity">
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.SettingsActivity" />
@@ -90,61 +104,72 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
-        <activity android:name=".activities.RestartActivity"
-            android:theme="@style/Theme.Syncthing.Translucent"
-            android:launchMode="singleTop"/>
-        <activity android:name=".activities.DeviceActivity"
+        <activity
+            android:name=".activities.RestartActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Syncthing.Translucent" />
+        <activity
+            android:name=".activities.DeviceActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.FolderActivity"
+        <activity
+            android:name=".activities.FolderActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SettingsActivity"
+        <activity
+            android:name=".activities.SettingsActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <service android:name=".service.SyncthingService" />
+
         <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.AppConfigReceiver"
+        <receiver
+            android:name=".receiver.AppConfigReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.nutomic.syncthingandroid.action.START" />
                 <action android:name="com.nutomic.syncthingandroid.action.STOP" />
             </intent-filter>
         </receiver>
-        <activity android:name=".activities.FolderTypeDialogActivity"
+
+        <activity
+            android:name=".activities.FolderTypeDialogActivity"
             android:label="@string/folder_type"
-            android:theme="@style/Theme.Syncthing.Dialog"
-            android:parentActivityName=".activities.FolderActivity">
+            android:parentActivityName=".activities.FolderActivity"
+            android:theme="@style/Theme.Syncthing.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
         </activity>
-        <activity android:name=".activities.PullOrderDialogActivity"
+        <activity
+            android:name=".activities.PullOrderDialogActivity"
             android:label="@string/pull_order"
-            android:theme="@style/Theme.Syncthing.Dialog"
-            android:parentActivityName=".activities.FolderActivity">
+            android:parentActivityName=".activities.FolderActivity"
+            android:theme="@style/Theme.Syncthing.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
         </activity>
-        <activity android:name=".activities.VersioningDialogActivity"
+        <activity
+            android:name=".activities.VersioningDialogActivity"
             android:label="@string/file_versioning"
-            android:theme="@style/Theme.Syncthing.Dialog"
-            android:parentActivityName=".activities.FolderActivity">
+            android:parentActivityName=".activities.FolderActivity"
+            android:theme="@style/Theme.Syncthing.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
