@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -51,6 +52,7 @@ import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.util.ConfigRouter;
 import com.nutomic.syncthingandroid.util.FileUtils;
 import com.nutomic.syncthingandroid.util.Languages;
 import com.nutomic.syncthingandroid.util.Util;
@@ -161,7 +163,7 @@ public class SettingsActivity extends SyncthingActivity {
         private Dialog             mCurrentPrefScreenDialog = null;
 
         /* Run conditions */
-        private Preference         mCategoryRunConditions;
+        private PreferenceScreen   mCategoryRunConditions;
         private ListPreference     mPowerSource;
         private CheckBoxPreference mRunOnMobileData;
         private CheckBoxPreference mRunOnWifi;
@@ -170,14 +172,16 @@ public class SettingsActivity extends SyncthingActivity {
         private WifiSsidPreference mWifiSsidWhitelist;
         private CheckBoxPreference mRunInFlightMode;
 
+        /* User Interface */
+        private Languages          mLanguages;
+
         /* Behaviour */
         private CheckBoxPreference mStartServiceOnBoot;
         private CheckBoxPreference mUseRoot;
         private ListPreference     mSuggestNewFolderRoot;
-        private Languages          mLanguages;
 
         /* Syncthing Options */
-        private Preference         mCategorySyncthingOptions;
+        private PreferenceScreen   mCategorySyncthingOptions;
         private EditTextPreference mDeviceName;
         private EditTextPreference mListenAddresses;
         private EditTextPreference mMaxRecvKbps;
@@ -259,9 +263,9 @@ public class SettingsActivity extends SyncthingActivity {
             mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
             ListPreference languagePref = (ListPreference) findPreference(Languages.PREFERENCE_LANGUAGE);
-            PreferenceScreen categoryBehaviour = (PreferenceScreen) findPreference("category_behaviour");
+            PreferenceScreen categoryUserInterface = (PreferenceScreen) findPreference("category_user_interface");
             if (Build.VERSION.SDK_INT >= 24) {
-                categoryBehaviour.removePreference(languagePref);
+                categoryUserInterface.removePreference(languagePref);
             } else {
                 mLanguages = new Languages(getActivity());
                 languagePref.setDefaultValue(mLanguages.USE_SYSTEM_DEFAULT);
@@ -297,10 +301,19 @@ public class SettingsActivity extends SyncthingActivity {
                 getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
             );
 
-            mCategoryRunConditions = findPreference("category_run_conditions");
+            mCategoryRunConditions = (PreferenceScreen) findPreference("category_run_conditions");
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                // Remove pref as we use JobScheduler implementation which is not available on API < 21.
+                CheckBoxPreference prefRunOnTimeSchedule = (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_TIME_SCHEDULE);
+                mCategoryRunConditions.removePreference(prefRunOnTimeSchedule);
+            }
             setPreferenceCategoryChangeListener(mCategoryRunConditions, this::onRunConditionPreferenceChange);
 
+            /* User Interface */
+            setPreferenceCategoryChangeListener(categoryUserInterface, this::onUserInterfacePreferenceChange);
+
             /* Behaviour */
+            PreferenceScreen categoryBehaviour = (PreferenceScreen) findPreference("category_behaviour");
             mStartServiceOnBoot =
                     (CheckBoxPreference) findPreference(Constants.PREF_START_SERVICE_ON_BOOT);
             mUseRoot =
@@ -333,7 +346,7 @@ public class SettingsActivity extends SyncthingActivity {
             mDownloadSupportBundle  = findPreference(KEY_DOWNLOAD_SUPPORT_BUNDLE);
             Preference undoIgnoredDevicesFolders = findPreference(KEY_UNDO_IGNORED_DEVICES_FOLDERS);
 
-            mCategorySyncthingOptions = findPreference("category_syncthing_options");
+            mCategorySyncthingOptions = (PreferenceScreen) findPreference("category_syncthing_options");
             setPreferenceCategoryChangeListener(mCategorySyncthingOptions, this::onSyncthingPreferenceChange);
             mSyncthingApiKey.setOnPreferenceClickListener(this);
             mDownloadSupportBundle.setOnPreferenceClickListener(this);
@@ -549,10 +562,9 @@ public class SettingsActivity extends SyncthingActivity {
         }
 
         private void setPreferenceCategoryChangeListener(
-                Preference category, Preference.OnPreferenceChangeListener listener) {
-            PreferenceScreen ps = (PreferenceScreen) category;
-            for (int i = 0; i < ps.getPreferenceCount(); i++) {
-                Preference p = ps.getPreference(i);
+                PreferenceScreen category, Preference.OnPreferenceChangeListener listener) {
+            for (int i = 0; i < category.getPreferenceCount(); i++) {
+                Preference p = category.getPreference(i);
                 p.setOnPreferenceChangeListener(listener);
             }
         }
@@ -583,6 +595,27 @@ public class SettingsActivity extends SyncthingActivity {
             return true;
         }
 
+        public boolean onUserInterfacePreferenceChange(Preference preference, Object o) {
+            switch (preference.getKey()) {
+                case Constants.PREF_APP_THEME:
+                    String newTheme = (String) o;
+                    String prevTheme = mPreferences.getString(Constants.PREF_APP_THEME, Constants.APP_THEME_LIGHT);
+                    if (!newTheme.equals(prevTheme)) {
+                        ConfigRouter config = new ConfigRouter(getActivity());
+                        Gui gui = config.getGui(mRestApi);
+                        gui.theme = newTheme.equals(Constants.APP_THEME_LIGHT) ? "default" : "dark";
+                        config.updateGui(mRestApi, gui);
+                        getAppRestartConfirmationDialog(getActivity())
+                                .show();
+                    }
+                    break;
+                case Languages.PREFERENCE_LANGUAGE:
+                    mLanguages.forceChangeLanguage(getActivity(), (String) o);
+                    return false;
+            }
+            return true;
+        }
+
         public boolean onBehaviourPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
                 case Constants.PREF_USE_ROOT:
@@ -597,9 +630,6 @@ public class SettingsActivity extends SyncthingActivity {
                     mSuggestNewFolderRoot.setValue(o.toString());
                     preference.setSummary(mSuggestNewFolderRoot.getEntry());
                     break;
-                case Languages.PREFERENCE_LANGUAGE:
-                    mLanguages.forceChangeLanguage(getActivity(), (String) o);
-                    return false;
             }
             return true;
         }
@@ -769,13 +799,7 @@ public class SettingsActivity extends SyncthingActivity {
             final Intent intent;
             switch (preference.getKey()) {
                 case Constants.PREF_VERBOSE_LOG:
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.dialog_settings_restart_app_title)
-                            .setMessage(R.string.dialog_settings_restart_app_question)
-                            .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-                                getActivity().setResult(RESULT_RESTART_APP);
-                                getActivity().finish();
-                            })
+                    getAppRestartConfirmationDialog(getActivity())
                             .setNegativeButton(android.R.string.no, (dialogInterface, i) -> {
                                 // Revert.
                                 ((CheckBoxPreference) preference).setChecked(!((CheckBoxPreference) preference).isChecked());
@@ -894,6 +918,22 @@ public class SettingsActivity extends SyncthingActivity {
                 }
                 mDownloadSupportBundle.setSummary(getString(R.string.download_support_bundle_succeeded, targetFileFullFN));
             });
+        }
+
+        /**
+         * Provides a template for an AlertDialog which quits and restarts the
+         * whole app including all of its activities and services.
+         * Use rarely as it's annoying for a user having to restart the whole app.
+         */
+        private static AlertDialog.Builder getAppRestartConfirmationDialog(Activity activity) {
+            return new AlertDialog.Builder(activity)
+                    .setTitle(R.string.dialog_settings_restart_app_title)
+                    .setMessage(R.string.dialog_settings_restart_app_question)
+                    .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                        activity.setResult(RESULT_RESTART_APP);
+                        activity.finish();
+                    })
+                    .setNegativeButton(android.R.string.no, (dialogInterface, i) -> {});
         }
 
         /**
