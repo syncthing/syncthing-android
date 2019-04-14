@@ -7,17 +7,25 @@
   <string name="welcome_title">Velkommen til Syncthing til Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introduktion</string>
   <string name="welcome_text">Syncthing er en open-source fil-synkroniserings applikation.\n\
 For at dele data med andre enheder, skal du tilføje deres enheds unikke ID til enhedslisten. Efter dette kan du vælge hvilke mapper der skal deles med hvilke enheder.\n\
 Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Slide 2-->
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
+  <string name="back">Tilbage</string>
   <string name="cont">Fortsæt</string>
   <string name="finish">Færdiggør</string>
+  <string name="generic_example">Eksempel</string>
   <string name="generic_error">Fejl</string>
+  <string name="grant_permission">Giv tilladelse</string>
+  <string name="permission_granted">Tilladelse blev givet</string>
+  <string name="accept">Acceptér</string>
+  <string name="ignore">Ignorér</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Bekræft lukning af appen</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Tilføj mappe</string>
   <!--Title of the "share device id" menu action-->
@@ -62,6 +70,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Forbindelse afbrudt</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">I pause</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Ukendt</string>
   <!--Title for current download rate-->
@@ -69,6 +78,10 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Status</string>
+  <string name="syncthing_starting">Syncthing starter.</string>
+  <string name="syncthing_running">Syncthing kører.</string>
+  <string name="syncthing_not_running">Syncthing kører ikke.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Download:\u0020</string>
@@ -167,7 +180,15 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="category_experimental">Eksperimentalt</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Kør betingelser</string>
+  <string name="run_on_wifi_title">Kør på trådløse netværk</string>
+  <string name="run_on_wifi_summary">Kør når enheden er forbundet til et trådløst netværk.</string>
+  <string name="run_on_whitelisted_wifi_title">Kør på angivne trådløse netværk</string>
+  <string name="run_on_whitelisted_wifi_networks">Kør kun på valgte trådløse netværk: %1$s</string>
+  <string name="run_on_all_wifi_networks">Kør på alle trådløse netværk.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Tilladelse påkrævet</string>
   <string name="respect_battery_saving_title">Respekter Android battery saving indstillinger</string>
+  <string name="respect_master_sync_title">Respekter Androids \'Automatisk datasynkronisation\' indstilling.</string>
+  <string name="run_in_flight_mode_title">Kør, mens enheden er i flytilstand.</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Brug avanceret Mappe Vælger</string>
   <string name="advanced_folder_picker_summary">Vælg en valgfri mappe på enheden for synkronisering</string>
@@ -207,6 +228,8 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="export_config">Eksporter Konfigurering</string>
   <!--Toast after entering invalid integer value-->
   <!--Experimental options-->
+  <string name="use_proxy">Forbind gennem en proxy</string>
+  <string name="do_not_use_proxy">Ingen proxy er konfigureret.</string>
   <string name="keep_wakelock_while_binary_running">Lad CPU\'en køre imens Syncthing kører</string>
   <string name="keep_wakelock_while_binary_running_summary">Brug denne indstilling hvis du oplever uventede forbindelsesbrud imens batteriet bruges. Dette vil resultere i forøget batteriforbrug.</string>
   <string name="use_tor_title">Brug Tor</string>
@@ -320,6 +343,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Afslut</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Grunde:</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing kører</string>
   <string name="syncthing_disabled">Syncthing er slået fra</string>
@@ -331,6 +355,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="default_folder_id">%1$s-fotos</string>
   <string name="notification_crash_title">Syncthing crashede</string>
   <string name="notification_crash_text_tmp">Klik for at se logs</string>
+  <string name="notification_crash_text">Klik for at se logs</string>
+  <string name="notifications_persistent_channel">Syncthing er aktiv</string>
+  <string name="notifications_other_channel">Andre notifikationer</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Genstart nødvendig</string>
@@ -362,17 +389,33 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="state_syncing">Synkroniserer (%1$d%%)</string>
   <string name="state_error">Fejl</string>
   <string name="state_unknown">Ukendt</string>
+  <string name="state_paused">I pause</string>
   <string name="status_outofsync">Usynkroniseret</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">At stoppe Syncthing er ikke understøttet når kørsel i baggrunden er aktiveret.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Mappetype</string>
   <!--Displays the current folder type in the folder activity-->
   <string name="folder_type_sendonly">Send kun</string>
+  <string name="folder_type_receiveonly">Modtag kun.</string>
   <!--Folder type dialog descriptions for folder types-->
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Hentningsrækkefølge for filer</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Tilfældig</string>
+  <string name="pull_order_type_alphabetic">Alfabetisk</string>
+  <string name="pull_order_type_smallestFirst">Mindste først</string>
+  <string name="pull_order_type_largestFirst">Største først</string>
+  <string name="pull_order_type_oldestFirst">Ældste først</string>
+  <string name="pull_order_type_newestFirst">Nyeste først</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Hent filer i en tilfældig rækkefølge.</string>
+  <string name="pull_order_type_alphabetic_description">Hent filer i alfabetisk rækkefølge.</string>
+  <string name="pull_order_type_smallestFirst_description">Hent filer sorteret efter størrelse. Mindste først.</string>
+  <string name="pull_order_type_largestFirst_description">Hent filer sorteret efter størrelse. Største først. </string>
+  <string name="pull_order_type_oldestFirst_description">Hent filer sorteret efter ændringstidspunkt. Ældste først.</string>
+  <string name="pull_order_type_newestFirst_description">Hent filer sorteret efter ændringstidspunkt. Nyeste først.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Maksimal Alder</string>
   <string name="clean_out_after">Gør rent efter</string>
@@ -403,4 +446,5 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="show_device_id">Vis endheds-ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
   <string name="could_not_access_deviceid">Kunne ikke tilgå enheds-ID.</string>
+  <string name="browse">Gennemse</string>
 </resources>
