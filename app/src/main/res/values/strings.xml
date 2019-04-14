@@ -830,6 +830,7 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Not connected to mobile data</string>
     <string name="syncthing_disabled_reason_no_wifi_connection">Not connected to WiFi</string>
     <string name="syncthing_disabled_reason_no_allowed_method">Not configured to sync on WiFi nor mobile data</string>
+    <string name="syncthing_disabled_reason_not_within_timeframe">You enabled \'Run according to time schedule\' and the last sync was no more than an hour ago.</string>
 
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>

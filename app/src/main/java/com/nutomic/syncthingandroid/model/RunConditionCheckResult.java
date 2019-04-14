@@ -17,7 +17,8 @@ public class RunConditionCheckResult {
         NO_NETWORK_OR_FLIGHTMODE(R.string.syncthing_disabled_reason_no_network_or_flightmode),
         NO_MOBILE_CONNECTION(R.string.syncthing_disabled_reason_no_mobile_connection),
         NO_WIFI_CONNECTION(R.string.syncthing_disabled_reason_no_wifi_connection),
-        NO_ALLOWED_NETWORK(R.string.syncthing_disabled_reason_no_allowed_method);
+        NO_ALLOWED_NETWORK(R.string.syncthing_disabled_reason_no_allowed_method),
+        NOT_WITHIN_TIMEFRAME(R.string.syncthing_disabled_reason_not_within_timeframe);
 
         private final int resId;
 
