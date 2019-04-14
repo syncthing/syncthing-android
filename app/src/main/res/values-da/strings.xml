@@ -355,7 +355,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="default_folder_id">%1$s-fotos</string>
   <string name="notification_crash_title">Syncthing crashede</string>
   <string name="notification_crash_text_tmp">Klik for at se logs</string>
-  <string name="notification_crash_text">Klik for at se logs</string>
+  <string name="notification_crash_text">Klik for at se logs (%1$s)</string>
   <string name="notifications_persistent_channel">Syncthing er aktiv</string>
   <string name="notifications_other_channel">Andre notifikationer</string>
   <!--RestApi-->
