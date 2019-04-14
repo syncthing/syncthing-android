@@ -260,8 +260,8 @@ public class SettingsActivity extends SyncthingActivity {
             screen.findPreference(Constants.PREF_POWER_SOURCE).setSummary(mPowerSource.getEntry());
             String wifiSsidSummary = TextUtils.join(", ", mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>()));
             screen.findPreference(Constants.PREF_WIFI_SSID_WHITELIST).setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
-                    getString(R.string.run_on_all_wifi_networks) :
-                    getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                getString(R.string.run_on_all_wifi_networks) :
+                getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
             );
             handleSocksProxyPreferenceChange(screen.findPreference(Constants.PREF_SOCKS_PROXY_ADDRESS),  mPreferences.getString(Constants.PREF_SOCKS_PROXY_ADDRESS, ""));
             handleHttpProxyPreferenceChange(screen.findPreference(Constants.PREF_HTTP_PROXY_ADDRESS), mPreferences.getString(Constants.PREF_HTTP_PROXY_ADDRESS, ""));
@@ -315,8 +315,8 @@ public class SettingsActivity extends SyncthingActivity {
         public void onServiceStateChange(SyncthingService.State currentState) {
             mApi = mSyncthingService.getApi();
             boolean isSyncthingRunning = (mApi != null) &&
-                    mApi.isConfigLoaded() &&
-                    (currentState == SyncthingService.State.ACTIVE);
+                mApi.isConfigLoaded() &&
+                (currentState == SyncthingService.State.ACTIVE);
             mCategorySyncthingOptions.setEnabled(isSyncthingRunning);
             mCategoryBackup.setEnabled(isSyncthingRunning);
 
@@ -373,8 +373,8 @@ public class SettingsActivity extends SyncthingActivity {
                 case Constants.PREF_WIFI_SSID_WHITELIST:
                     String wifiSsidSummary = TextUtils.join(", ", (Set<String>) o);
                     preference.setSummary(TextUtils.isEmpty(wifiSsidSummary) ?
-                            getString(R.string.run_on_all_wifi_networks) :
-                            getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
+                        getString(R.string.run_on_all_wifi_networks) :
+                        getString(R.string.run_on_whitelisted_wifi_networks, wifiSsidSummary)
                     );
                     break;
             }
