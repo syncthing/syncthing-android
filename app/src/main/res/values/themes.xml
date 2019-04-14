@@ -38,7 +38,8 @@
     <eat-comment/>
 
     <style name="Theme.Syncthing.Dialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="colorAccent">@color/primary_dark</item>
+        <item name="android:windowBackground">?attr/colorBackgroundFloating</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
     </style>
 
     <!-- Toolbar themes -->
