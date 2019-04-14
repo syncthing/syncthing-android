@@ -186,7 +186,7 @@ public class FolderPickerActivity extends SyncthingActivity
         switch (item.getItemId()) {
             case R.id.create_folder:
                 final EditText et = new EditText(this);
-                AlertDialog dialog = new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
+                AlertDialog dialog = Util.getAlertDialogBuilder(this)
                         .setTitle(R.string.create_folder)
                         .setView(et)
                         .setPositiveButton(android.R.string.ok,

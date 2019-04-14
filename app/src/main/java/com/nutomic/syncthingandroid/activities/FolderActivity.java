@@ -496,7 +496,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private Dialog createDeleteDialog(){
-        return new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
                     RestApi restApi = getApi();
@@ -674,7 +674,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private Dialog createDiscardDialog() {
-        return new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)

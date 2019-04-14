@@ -108,7 +108,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
             return;
         }
 
-        mDisabledDialog = new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
+        mDisabledDialog = Util.getAlertDialogBuilder(this)
                 .setTitle(R.string.syncthing_disabled_title)
                 .setMessage(getDisabledDialogMessage())
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
@@ -164,7 +164,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);
 
-        mLoadingDialog = new AlertDialog.Builder(this, R.style.Theme_Syncthing_Dialog)
+        mLoadingDialog = Util.getAlertDialogBuilder(this)
                 .setCancelable(false)
                 .setView(binding.getRoot())
                 .show();
