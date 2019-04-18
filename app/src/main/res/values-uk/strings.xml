@@ -1,104 +1,159 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Syncthing</string>
+  <string name="app_description">Додаток для вікритої, надійної та децентралізованої синхронізації файлів.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Вітаємо в Syncthing для Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Вступ</string>
+  <string name="welcome_text">Syncthing - це додаток з відкритим джерельним кодом для синхронізації файлів.\n\
+Щоб поділитися інформацією з іншими пристроями, потрібно додати їх унікальні ідентифікатори (ID) до списку пристроїв. Після цього ви можете обрати, якими теками поділитися з іншими пристроями.\n\
+Будь ласка, повідомляйте про будь-які проблеми, які ви виявите, через Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Дозвіл на доступ до сховища</string>
+  <string name="storage_permission_desc">Syncthing потребує доступу до сховища, щоб виконувати синхронізацію файлів.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Дозвіл на доступ до місцезнаходження</string>
+  <string name="location_permission_desc">Syncthing може бути налаштований запускатися при обраних мережах Wi-Fi. Android вимагає, щоб додатки мали дозволи на визначення місцезнаходження, щоб мати змогу шукати назву активної мережі Wi-Fi, оскільки іноді можна визначити місцезнаходження користувачів по імені мережі, до якої вони під\'єднані. Якщо ви хочете користуватися цією функцією, натисніть кнопку вгорі, щоб надати Syncthing потрібні дозволи на доступ до місцезнаходження. В іншому випадку ви можете пропустити цей крок.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Назад</string>
   <string name="cont">Продовжити</string>
   <string name="finish">Завершити</string>
+  <string name="generic_example">Зразок</string>
   <string name="generic_error">Помилка</string>
+  <string name="grant_permission">Надати дозвіл</string>
+  <string name="permission_granted">Дозвіл надано</string>
+  <string name="accept">Прийняти</string>
+  <string name="ignore">Відхилити</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Підтвердити вихід з додатку</string>
+  <string name="dialog_exit_while_running_as_service_message">До вашої уваги: ви увімкнули автозапуск додатку при увімкненні пристрою. Тому він відслідковує умови синхронізації та синхронізує файли в фоні в будь-який час, коли умови співпадають. Вам слід закривати додаток вручну лише при виникненні серйозних проблем. В іншому випадку вимкніть \"Автозапуск при ввімкненні\" в налаштуваннях. Ви дійсно хочете закрити додаток до наступного перезавантаження пристрою?</string>
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Додати каталог</string>
+  <string name="add_folder">Додати теку</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">Поділитися ідентифікатором пристрою</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">Надіслати ідентифікатор пристрою на</string>
   <string name="usage_reporting_dialog_title">Дозволити відправку анонімної статистики використання?</string>
+  <string name="usage_reporting_dialog_description">Зашифрований звіт про використання додатку надсилається щодня. Він використовується для відстеження платформ, розмірів тек та версій додатку. При зміні набору інформації, що надсилається, цей діалог з\'явиться знову.\n\nОб\'єднана статистика загальнодоступна на https://data.syncthing.net.</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
-  <string name="open_website">Відкрити сайт</string>
-  <string name="toast_write_storage_permission_required">Додаток потребує прав на запис на носій(картку)</string>
+  <string name="open_website">Відкрити веб-сайт</string>
+  <string name="toast_write_storage_permission_required">Додаток потребує дозволу на запис у сховище</string>
+  <string name="device_rejected">Пристрій \"%1$s\" хоче приєднатися</string>
+  <string name="folder_rejected">Пристрій \"%1$s\" хоче поділитися текою \"%2$s\"</string>
+  <string name="dialog_disable_battery_optimization_title">Енергозбереження</string>
+  <string name="dialog_disable_battery_optimization_message">Android може зупинити синхронізацію через деякий час. Щоб цьому запобігти, вимкніть енергозбереження.\n\nДеякі пристрої постачаються з додатками, які припиняють інші процеси. Вам також варто додати Syncthing до їхнього білого списку.</string>
   <string name="dialog_disable_battery_optimization_later">Пізніше</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Більше не відображати</string>
   <string name="dialog_disable_battery_optimization_turn_off">Вимкнути для Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Ваш пристрій не дозволяє вимкнути енергозбереження</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Завантажується...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Генеруються ключі безпеки. Процедура може зайняти декілька хвилин.</string>
+  <string name="syncthing_loading_slow_message">Syncthing завантажується занадто довго. Перегляньте журнали на предмет виявлення помилок.</string>
   <!--FoldersFragment-->
-  <string name="folders_fragment_title">Каталоги</string>
+  <string name="folders_fragment_title">Теки</string>
   <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Жодного каталогу не знайдено</string>
+  <string name="folder_list_empty">Жодної теки не знайдено</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d / %2$d файлу</item>
+    <item quantity="few">%1$d / %2$d файлів</item>
+    <item quantity="many">%1$d / %2$d файлів</item>
+    <item quantity="other">%1$d / %2$d файлів</item>
+  </plurals>
+  <string name="override_changes">Перезаписати зміни</string>
+  <string name="open_file_manager">Відкрити файловий менеджер</string>
+  <string name="toast_no_file_manager">Не знайдено сумісного файлового менеджера</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Пристрої</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">Пристрої не знайдено</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">Актуально</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Синхронізуються (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Від\'єднано</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">Призупинено</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Невідомо</string>
   <!--Title for current download rate-->
   <string name="download_title">Завантаження</string>
   <!--Title for current upload rate-->
-  <string name="upload_title">Відправка</string>
+  <string name="upload_title">Вивантаження</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Статус</string>
+  <string name="syncthing_starting">Syncthing запускається.</string>
+  <string name="syncthing_running">Syncthing працює.</string>
+  <string name="syncthing_not_running">Syncthing не працює.</string>
+  <string name="syncthing_has_crashed">Syncthing впав.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Завантаження:\u0020</string>
   <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Відправка:\u0020</string>
+  <string name="upload_title_colon">Вивантаження:\u0020</string>
   <!--Title for current CPU usage-->
   <string name="cpu_usage">Використання ЦП</string>
   <!--Title for current RAM usage-->
-  <string name="ram_usage">Використання RAM</string>
+  <string name="ram_usage">Використання ОЗП</string>
   <!--Title for announce server status-->
+  <string name="announce_server">Сервер-оповіщувач</string>
   <string name="restart">Перезапуск</string>
   <string name="dialog_confirm_restart">Бажаєте перезапустити Syncthing?</string>
   <!--FolderActivity-->
   <!--Setting title-->
-  <string name="folder_id">ID каталогу</string>
+  <string name="folder_id">Ідентифікатор теки</string>
   <!--Setting title-->
-  <string name="folder_label">Мітка каталогу</string>
+  <string name="folder_label">Мітка теки</string>
   <!--Setting title-->
   <string name="directory">Каталог</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">Відстеження змін</string>
+  <string name="folder_fileWatcherDescription">Просить операційну систему повідомляти про зміни у файлах. Якщо вимкнено, повертається до періодичного погодинного сканування.</string>
   <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">Блоки змінного розміру</string>
+  <string name="folder_variable_size_blocks_description">Блоки змінного розміру (також \"великі блоки\") більш ефективні для великих файлів. Якщо ви увімкнете це для певної теки на одному пристрої, ви маєте увімкнути і на всіх інших пристроях.</string>
   <!--Setting title-->
+  <string name="folder_pause">Призупинити теку</string>
   <!--Setting title-->
   <string name="devices">Пристрої</string>
   <!--Setting title-->
+  <string name="keep_versions">Зберігати версії</string>
   <!--Setting title-->
-  <string name="delete_folder">Видалити каталог</string>
+  <string name="delete_folder">Видалити теку</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Створити каталог</string>
+  <string name="create_folder">Створити теку</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Редагувати каталог</string>
+  <string name="edit_folder">Редагувати теку</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Створити</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Ви дійсно бажаєте видалити цей каталог з Syncthing?</string>
+  <string name="remove_folder_confirm">Ви дійсно бажаєте видалити цю теку з Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">ID каталогу не може бути пустим</string>
+  <string name="folder_id_required">Ідентифікатор теки не може бути порожнім</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Шлях до каталогу не може бути пустим</string>
+  <string name="folder_path_required">Шлях до теки не може бути порожнім</string>
   <string name="dialog_discard_changes">Скасувати зміни?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">Ваша версія Android надає Syncthing доступ тільки на читання до обраної теки.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">Ваша версія Android надає Syncthing доступ на читання і запис до обраної теки.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
-  <string name="ignore_patterns">Ігнорувати паттерни</string>
+  <string name="toast_invalid_folder_selected">Вибачте, обрану теку не можна використати. Оберіть теку із внутрішнього або зовнішнього сховища.</string>
+  <string name="ignore_patterns">Шаблони ігнорування</string>
+  <string name="create_ignore_file_error">Не вдалося створити файл ігнорування. Чи доступна тека на запис?</string>
   <string name="edit_ignore_file_error">Текстові редактори не знайдено</string>
   <!--DeviceActivity-->
   <!--Setting title-->
-  <string name="device_id">ID пристрою</string>
+  <string name="device_id">Ідентифікатор пристрою</string>
   <!--Setting title-->
   <string name="name">Ім\'я</string>
   <!--Setting title-->
@@ -108,8 +163,15 @@
   <!--Setting title-->
   <string name="compression">Стиснення</string>
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>Ніколи</item>
+    <item>Метадані</item>
+    <item>Завжди</item>
+  </string-array>
   <!--Setting title-->
+  <string name="introducer">Представник</string>
   <!--Setting title-->
+  <string name="pause_device">Призупинити пристрій</string>
   <!--ActionBar item-->
   <string name="delete_device">Видалити пристрій</string>
   <string name="add_device">Додати пристрій</string>
@@ -120,9 +182,9 @@
   <!--Dialog shown when attempting to remove a device-->
   <string name="remove_device_confirm">Дійсно бажаєте видалити цей пристрій?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">ID пристрою не може бути пустим</string>
+  <string name="device_id_required">Ідентифікатор пристрою не може бути порожнім</string>
   <!--Content description for device ID qr code icon-->
-  <string name="scan_qr_code_description">Сканувати QR код</string>
+  <string name="scan_qr_code_description">Сканувати QR-код</string>
   <!--Toast show if we could not get root permissions-->
   <string name="toast_root_denied">Права root не отримано</string>
   <!--WebGuiActivity-->
@@ -132,87 +194,182 @@
   <string name="web_gui_loading">Очікую на веб-інтерфейс</string>
   <!--SettingsFragment-->
   <string name="settings_title">Налаштування</string>
-  <string name="category_run_conditions">Умови запуску</string>
+  <string name="category_run_conditions">Умови синхронізації</string>
+  <string name="category_behaviour">Поведінка</string>
   <string name="category_syncthing_options">Опції Syncthing</string>
-  <string name="category_debug">Відладка</string>
+  <string name="category_backup">Резервне копіювання</string>
+  <string name="category_debug">Налагодження</string>
   <string name="category_experimental">Експериментальне</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Умови запуску</string>
-  <string name="respect_battery_saving_title">Відповідно до налаштувань енергозбереження пристрою в системі</string>
+  <string name="run_conditions_title">Умови синхронізації</string>
+  <string name="run_conditions_summary">Використовувати наступні параметри для визначення, коли Syncthing працюватиме.</string>
+  <string name="run_on_mobile_data_title">Синхронізувати через мобільну мережу</string>
+  <string name="run_on_mobile_data_summary">Синхронізувати, коли пристрій підключено до мобільної мережі. Увага: синхронізація великих обсягів інформації може використати значну частину трафіку з вашого мобільного тарифного плану.</string>
+  <string name="run_on_wifi_title">Синхронізувати через Wi-Fi</string>
+  <string name="run_on_wifi_summary">Синхронізувати, коли пристрій підключено до мережі Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Синхронізувати через тарифікований Wi-Fi</string>
+  <string name="run_on_metered_wifi_summary">Синхронізувати, коли пристрій підключений до тарифікованої мережі Wi-Fi, такої як гаряча точка (hotspot) або мережа іншого пристрою (tethering). Увага: синхронізація великих обсягів інформації може використати значну частину трафіку з вашого мобільного тарифного плану.</string>
+  <string name="run_on_whitelisted_wifi_title">Синхронізувати через вказані мережі Wi-Fi</string>
+  <string name="run_on_whitelisted_wifi_networks">Синхронізувати лише при підключенні до обраних мереж Wi-Fi: %1$s</string>
+  <string name="run_on_all_wifi_networks">Синхронізувати через всі мережі Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Увімкніть Wi-Fi, щоб обрати мережі.</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Ви маєте надати дозвіл на доступ до місцезнаходження, щоб використовувати цю функцію.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Потрібен дозвіл</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Починаючи з Android 8.1, доступ до місцерозташування необхідний для визначення імені мережі Wi-Fi. Ви можете використовувати цю функцію лише після надання такого дозволу.</string>
+  <string name="power_source_title">Синхронізувати, коли пристрій живиться від</string>
+  <string-array name="power_source_entries">
+    <item>зарядного пристрою і батареї</item>
+    <item>зарядного пристрою</item>
+    <item>батареї</item>
+  </string-array>
+  <string name="respect_battery_saving_title">Відповідно до системних налаштувань енергозбереження</string>
+  <string name="respect_battery_saving_summary">Вимкнути Syncthing, якщо увімкнено енергозбереження.</string>
+  <string name="respect_master_sync_title">Відповідно до системних налаштувань автоматичної синхронізації</string>
+  <string name="respect_master_sync_summary">Вимкнути Syncthing, коли системна автоматична синхронізація вимкнена.</string>
+  <string name="run_in_flight_mode_title">Синхронізувати, коли пристрій у режимі польоту</string>
+  <string name="run_in_flight_mode_summary">Увімкніть, якщо ваш пристрій має проблеми з виявленням мереж Wi-Fi у режимі польоту.</string>
+  <string name="service_settings_title">Налаштування сервісу</string>
+  <string name="service_settings_summary">Запустити Syncthing як сервіс. Додає постійне сповіщення, щоб запобігти закриттю сервісу системою. Увімкнення цієї функції запускатиме Syncthing при запуску операційної системи.</string>
+  <string name="run_as_background_service">Автозапуск сервісу при запуску системи</string>
   <!--Preferences - Behaviour-->
+  <string name="advanced_folder_picker">Використовувати розширений діалог вибору теки</string>
+  <string name="advanced_folder_picker_summary">Оберіть будь-яку теку на пристрої для синхронізації</string>
+  <string name="use_root_title">Запустити Syncthing від імені Superuser</string>
+  <string name="use_root_summary">Це нестабільна функція, яка може призвести до проблем з Syncthing та вашим пристроєм. Якщо ви виявите проблеми, може знадобитися повторне встановлення Syncthing.</string>
   <string name="notification_type_title">Сповіщення</string>
-  <string name="notification_type_summary">Вибрати тип сповіщення</string>
+  <string name="notification_type_summary">Виберіть тип сповіщення</string>
   <string-array name="notification_type_entries">
     <item>Нормальне</item>
     <item>Низький пріоритет</item>
     <item>Немає</item>
   </string-array>
-  <string name="preference_language_title">Мова</string>
-  <string name="preference_language_summary">Змінити мову пристрою</string>
-  <string name="start_into_web_gui_title">Перехід одразу до веб-інтерфейсу</string>
+  <string name="preference_language_title">Мова (Language)</string>
+  <string name="preference_language_summary">Змінити мову додатку</string>
+  <string name="start_into_web_gui_title">Запуск веб-інтерфейсу при вході в додаток</string>
   <string name="start_into_web_gui_summary">При запуску додатка, відкривати веб-інтерфейс замість головного меню</string>
-  <string name="pref_language_default">Мова по замовчанню</string>
+  <string name="pref_language_default">Мова за-замовчуванням</string>
+  <string-array name="folder_types">
+    <item>Надсилати і отримувати</item>
+    <item>Тільки надсилати</item>
+    <item>Тільки отримувати</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>У довільному порядку</item>
+    <item>В алфавітному порядку</item>
+    <item>Спочатку найменші</item>
+    <item>Спочатку найбільші</item>
+    <item>Спочатку найстаріші</item>
+    <item>Спочатку найновіші</item>
+  </string-array>
+  <string-array name="versioning_types">
+    <item>Немає</item>
+    <item>Кошик</item>
+    <item>Звичайне</item>
+    <item>Ступінчасте</item>
+    <item>Зовнішнє</item>
+  </string-array>
   <string name="device_name">Назва пристрою</string>
-  <string name="max_recv_kbps">Обмеження вхідної смуги пропускання (KiB/s)</string>
-  <string name="max_send_kbps">Обмеження вихідної смуги пропускання (KiB/s)</string>
-  <string name="global_announce_enabled">Взаємний пошук через публічні сервери</string>
-  <string name="local_announce_enabled">Взаємний пошук в локальній мережі</string>
-  <string name="enable_nat_traversal">Дозволити NAT Traversal</string>
-  <string name="global_announce_server">Публічні сервери координації NAT</string>
+  <string name="listen_address">Адреси прослуховування протоколу синхронізації</string>
+  <string name="max_recv_kbps">Обмеження пропускної здатності при завантаженні (кіБ/с)</string>
+  <string name="max_send_kbps">Обмеження пропускної здатності при вивантаженні (кіБ/с)</string>
+  <string name="global_announce_enabled">Глобальне взаємне виявлення</string>
+  <string name="local_announce_enabled">Локальне взаємне виявлення</string>
+  <string name="enable_nat_traversal">Увімкнути обхід NAT</string>
+  <string name="global_announce_server">Сервери глобального взаємного виявлення</string>
   <string name="enable_relaying">Дозволити ретрансляцію (Relaying)</string>
-  <string name="usage_reporting">Статистика анонімного використання</string>
+  <string name="usage_reporting">Анонімне звітування про використання</string>
+  <string name="gui_address">Адреси прослуховування веб-інтерфейсу</string>
   <!--Titles for the preference to undo ignored devices and folders-->
-  <string name="export_config">Експорт налаштувань</string>
+  <string name="undo_ignored_devices_folders_title">Скасувати ігнорування пристроїв і тек</string>
+  <string name="undo_ignored_devices_folders_question">Це скасує раніше ігноровані пристрої і теки. Продовжити?</string>
+  <string name="undo_ignored_devices_folders_done">Ігнорування скасовано.</string>
+  <string name="export_config">Експортувати налаштування</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Введене значення недійсне. Введіть значення між %1$d і %2$d.</string>
   <!--Experimental options-->
-  <string name="keep_wakelock_while_binary_running">Перешкоджати режиму сну під час роботи Syncthing </string>
+  <string name="use_proxy">З\'єднуватися через проксі</string>
+  <string name="do_not_use_proxy">Жодний проксі не налаштований.</string>
+  <string name="keep_wakelock_while_binary_running">Перешкоджати засинанню процесору під час роботи Syncthing</string>
+  <string name="keep_wakelock_while_binary_running_summary">Використовуйте це налаштування, якщо під час роботи від батареї виникають несподівані відключення. Це призведе до збільшення витрати заряду.</string>
   <string name="use_tor_title">Використовувати Tor</string>
+  <string name="use_tor_summary">Примусово направити весь трафік через Tor для більшої приватності. Потребує встановленого Orbot. Вимикає налаштування проксі.</string>
+  <string name="socks_proxy_address_title">SOCKS5-проксі</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="toast_invalid_socks_proxy_address">Введені дані не відповідають синтаксису проксі \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+  <string name="http_proxy_address_title">HTTP(S)-проксі</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
-  <string name="use_legacy_hashing_title">Старий спосіб хешування</string>
+  <string name="toast_invalid_http_proxy_address">Введені дані не відповідають синтаксису проксі \'http://[IP/HOSTNAME]:[PORT]\'</string>
+  <string name="use_legacy_hashing_title">Використовувати застарілий спосіб хешування</string>
+  <string name="use_legacy_hashing_summary">Змусити Syncthing використовувати застарілий спосіб хешування з метою забезпечення сумісності</string>
+  <string name="restart_on_wakeup_title">Перезапустити при пробудженні</string>
+  <string name="restart_on_wakeup_summary">За-замовчуванням: Увімкнено. Вимкнення цієї функції може призвести до відкладення сканувань тек і перепідключень пристрою з метою збереження заряду батареї.</string>
   <!--Dialog shown before config export-->
+  <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування? Існуючі файли будуть перезаписані.\n\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Дійсно бажаєте імпортувати нову конфігурацію? Існуючі файли будуть перезаписані</string>
+  <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування? Існуючі файли будуть перезаписані.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Налаштування експортовано в %1$s</string>
   <string name="import_config">Імпортувати налаштування</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Налаштування імпортовано</string>
   <!--Toast shown after config was successfully imported-->
+  <string name="config_import_failed">Не вдалося імпортувати налаштування. Переконайтеся, що файли лежать у %1$s.</string>
   <!--Title for the preference to set STTRACE parameters-->
+  <string name="sttrace_title">Налаштування STTRACE</string>
   <string name="environment_variables">Змінні оточення</string>
   <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_environment_variables">Значення не відповідає формату рядка змінних оточення</string>
+  <string name="toast_invalid_environment_variables">Значення не відповідає формату змінної оточення</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">Очистити базу даних</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
+        \nВи впевнені, що хочете очистити базу даних Syncthing?
+    </string>
   <!--Syncthing was reset-->
-  <string name="st_reset_database_done">База даних  Syncthing успішно очищена</string>
+  <string name="st_reset_database_done">База даних Syncthing успішно очищена</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">Очистити дельта-індекси</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
+        \nВи впевнені, що хочете очистити дельта-індекси Syncthing?
+    </string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">Дельта-індекси Syncthing успішно очищені</string>
   <string name="category_about">Про додаток</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Відкрити журнал</string>
   <!--Summary for the log activity-->
-  <string name="notify_crashes_title">Повідомляти про аварійні завершення роботи Syncthing </string>
+  <string name="open_log_summary">Відкрити вікно журналу Syncthing і Android</string>
+  <string name="notify_crashes_title">Повідомляти про аварійне завершення роботи Syncthing</string>
+  <string name="notify_crashes_summary">Показувати сповіщення при виявленні падіння Syncthing</string>
+  <string name="syncthing_forum_title">Форум Syncthing</string>
+  <string name="syncthing_forum_summary">Перейти на форум Syncthing</string>
   <!--Settings item that opens issue tracker-->
   <string name="report_issue_title">Повідомити про проблему</string>
   <!--Summary for the issue tracker settings item-->
+  <string name="report_issue_summary">Відкрити баг-трекер Syncthing для Android</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
-  <string name="donate_title">Пожертвувати</string>
+  <string name="donate_title">Внести пожертву</string>
+  <string name="donate_summary">Допоможіть нам оплатити домени та хостинг</string>
   <!--Title of the preference showing upstream version name-->
+  <string name="syncthing_version_title">Версія Syncthing</string>
   <!--Title of the preference showing this app's version name-->
+  <string name="app_version_title">Версія Syncthing для Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
+  <string name="folder_picker_title">Вибір теки</string>
   <!--Toast shown on devices with kitkat or higher-->
+  <string name="kitkat_external_storage_warning">Увага! Ваша версія Android не дозволяє синхронізацію файлів у зовнішнє сховище</string>
   <!--ListView empty text-->
+  <string name="directory_empty">Каталог порожній</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Створити новий каталог</string>
+  <string name="create_fs_folder">Створити нову теку</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Вибрати каталог</string>
-  <string name="create_folder_failed">Не вдалося створити каталог</string>
+  <string name="select_folder">Вибрати теку</string>
+  <string name="create_folder_failed">Не вдалося створити теку</string>
   <!--LogActivity-->
   <string name="syncthing_log_title">Журнал Syncthing</string>
   <string name="android_log_title">Журнал Android</string>
@@ -229,74 +386,170 @@
   <!--Title of the "save" button-->
   <string name="save_title">Зберегти</string>
   <!--Title of the "cancel" button-->
+  <string name="cancel_title">Скасувати</string>
   <!--Title of the "save" button-->
-  <string name="folder_title">Каталог</string>
+  <string name="folder_title">Тека</string>
   <!--New file name template-->
+  <string name="file_name_template">Новий файл %1$s</string>
   <!--Nothing to share toast-->
+  <string name="nothing_share">Нічим ділитися</string>
   <!--Copy success toast partially-->
+  <plurals name="copy_success_partially">
+    <item quantity="one">%1$d файл скопійовано в теку \"%2$s\", %3$d вже існують</item>
+    <item quantity="few">%1$d файлів скопійовано в теку \"%2$s\", %3$d вже існують</item>
+    <item quantity="many">%1$d файлів скопійовано в теку \"%2$s\", %3$d вже існують</item>
+    <item quantity="other">%1$d файлів скопійовано в теку \"%2$s\", %3$d вже існують</item>
+  </plurals>
   <!--Copy success toast-->
+  <plurals name="copy_success">
+    <item quantity="one">%1$d файл скопійовано в теку \"%2$s\"</item>
+    <item quantity="few">%1$d файлів скопійовано в теку \"%2$s\"</item>
+    <item quantity="many">%1$d файлів скопійовано в теку \"%2$s\"</item>
+    <item quantity="other">%1$d файлів скопійовано в теку \"%2$s\"</item>
+  </plurals>
   <!--Copy exception toast-->
+  <string name="copy_exception">Під час надання доступу сталася помилка. За інформацією зверніться до журналів додатку.</string>
   <!--Copy progress dialog text-->
+  <string name="copy_progress">Спільний доступ до файлів...</string>
+  <plurals name="file_name_title">
+    <item quantity="one">Ім\'я файлу</item>
+    <item quantity="few">Список файлів</item>
+    <item quantity="many">Список файлів</item>
+    <item quantity="other">Список файлів</item>
+  </plurals>
   <!--Sub Folder title-->
-  <string name="sub_folder">Підпапка</string>
+  <string name="sub_folder">Підтека</string>
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing заборонено</string>
+  <string name="syncthing_disabled_title">Syncthing вимкнено</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Бажаєте змінити умови синхронізації?</string>
   <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Змінити Налаштування</string>
+  <string name="syncthing_disabled_change_settings">Змінити налаштування</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Вихід</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Причини:</string>
+  <string name="syncthing_disabled_reason_on_battery">Пристрій працює від батареї</string>
+  <string name="syncthing_disabled_reason_on_charger">Пристрій працює від зарядного пристрою</string>
+  <string name="syncthing_disabled_reason_powersaving">Пристрій у режимі енергозбереження</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Глобальна синхронізація вимкнена</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Поточна назва (SSID) мережі WiFi не у білому списку</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Поточна мережа WiFi є тарифікованою</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Відсутня мережа або увімкнений режим польоту</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Не підключено до мобільної мережі</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Не підключено до WiFi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Не налаштовано виконувати синхронізацію через WiFi або мобільну мережу</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing працює</string>
-  <string name="syncthing_disabled">Syncthing заборонено</string>
+  <string name="syncthing_disabled">Syncthing не працює</string>
+  <string name="syncthing_terminated">Syncthing було зупинено</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Не вдалося створити файл з налаштуваннями</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Відсутній файл налаштувань, необхідний для роботи</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Камера</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
-  <string name="notification_crash_title">Роботу Syncthing аварійно завершено </string>
+  <string name="default_folder_id">%1$s-photos</string>
+  <string name="notification_crash_title">Роботу Syncthing аварійно завершено</string>
+  <string name="notification_crash_text">Натисніть для перегляду журналів</string>
+  <string name="notifications_persistent_channel">Syncthing активний</string>
+  <string name="notification_persistent_waiting_channel">Відслідковування умов синхронізації</string>
+  <string name="notifications_other_channel">Інші сповіщення</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">Необхідний перезапуск</string>
   <!--Text for positive button in restart dialog-->
   <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Тисни сюди для негайного перезапуску syncthing </string>
+  <string name="restart_notification_text">Натисніть тут для негайного перезапуску syncthing</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">ID пристрою скопійовано в буфер обміну</string>
+  <string name="device_id_copied_to_clipboard">Ідентифікатор пристрою скопійовано в буфер обміну</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
+  <string-array name="file_size_units">
+    <item>Б</item>
+    <item>кіБ</item>
+    <item>МіБ</item>
+    <item>ГіБ</item>
+    <item>ТіБ</item>
+  </string-array>
   <!--Strings representing units for transfer rates, from smallest to largest-->
+  <string-array name="transfer_rate_units">
+    <item>Б/с</item>
+    <item>кіБ/с</item>
+    <item>МіБ/с</item>
+    <item>ГіБ/с</item>
+    <item>ТіБ/с</item>
+  </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Очікування</string>
   <string name="state_scanning">Сканування</string>
-  <string name="state_syncing">Синхронізуються (%1$d%%)</string>
+  <string name="state_syncing">Синхронізація (%1$d%%)</string>
   <string name="state_error">Помилка</string>
   <string name="state_unknown">Невідомо</string>
+  <string name="state_paused">Призупинено</string>
   <string name="status_outofsync">Не синхронізовано</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+  <string name="folder_size_format">%1$s / %2$s</string>
+  <string name="appconfig_receiver_background_enabled">Зупинка Syncthing не підтримується, коли увімкнено роботу в фоні.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Тип теки</string>
   <!--Displays the current folder type in the folder activity-->
-  <string name="folder_type_sendonly">Лише відправка</string>
+  <string name="folder_type_sendreceive">Надсилання і отримання</string>
+  <string name="folder_type_sendonly">Лише надсилання</string>
+  <string name="folder_type_receiveonly">Лише отримання</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">Тека буде надсилати зміни на інші пристрої та отримувати зміни  від інших пристроїв.</string>
+  <string name="folder_type_sendonly_description">Файли захищені від змін, зроблених на інших пристроях. Зміни, зроблені на цьому пристрої, надсилатимуться іншим пристроям групи.</string>
+  <string name="folder_type_receiveonly_description">Файли синхронізуються з пристроями групи. Зміни, зроблені на цьому пристрої, не надсилатимуться іншим пристроям групи.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Порядок отримання файлів</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Довільний порядок</string>
+  <string name="pull_order_type_alphabetic">Алфавітний порядок</string>
+  <string name="pull_order_type_smallestFirst">Спочатку найменші</string>
+  <string name="pull_order_type_largestFirst">Спочатку найбільші</string>
+  <string name="pull_order_type_oldestFirst">Спочатку найстаріші</string>
+  <string name="pull_order_type_newestFirst">Спочатку найновіші</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Отримувати файли у довільному порядку.</string>
+  <string name="pull_order_type_alphabetic_description">Отримувати файли, впорядковані за назвою, в алфавітному порядку.</string>
+  <string name="pull_order_type_smallestFirst_description">Отримувати файли, впорядковані за розміром, починаючи з найменших.</string>
+  <string name="pull_order_type_largestFirst_description">Отримувати файли, впорядковані за розміром, починаючи з найбільших.</string>
+  <string name="pull_order_type_oldestFirst_description">Отримувати файли, впорядковані за часом останньої зміни, починаючи з найстаріших.</string>
+  <string name="pull_order_type_newestFirst_description">Отримувати файли, впорядковані за часом останньої зміни, починаючи з найновіших.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Максимальний вік</string>
-  <string name="clean_out_after">Очистити пізніше</string>
+  <string name="clean_out_after">Прибрати після завершення</string>
   <string name="file_versioning">Версіонування файлів</string>
   <string name="none">Немає</string>
   <string name="versions_path">Шлях до версій</string>
   <string name="command">Команда</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Кількість попередніх версій до збереження, на кожен файл</string>
+  <string name="simple_file_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка.</string>
+  <string name="trashcan_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions.</string>
+  <string name="staggered_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка. Версії автоматично видаляються, якщо їх вік перевищує максимальний встановлений або якщо їх кількість перевищує максимально дозволену на певному інтервалі часу.\n\nВикористовуються такі часові інтервали: у першу годину нова версія зберігається кожні 30 секунд, у перший день нова версія зберігається щогодини, у перші 30 днів нова версія зберігається щодня, до максимального часу зберігання нова версія зберігається щотижня.</string>
+  <string name="maximum_age_description">Максимальний час зберігання версії, дні (встановіть на 0, щоб зберігати версії завжди).</string>
+  <string name="versions_path_description">Шлях до теки, де зберігатимуться версії (залиште порожнім, щоб використовувати теку за-замовчуванням .stversions у загальнодоступній теці).</string>
+  <string name="cleanout_after_description">Кількість днів, протягом яких видалені файли залишатимуться у Кошику. Нуль означає завжди.</string>
+  <string name="external_versioning_description">Перший параметр командної строки - це шлях до теки, другий параметр - відносний шлях у теці.</string>
+  <string name="no_versioning_description">Оберіть тип версіонування, щоб його увімкнути.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Тип: Звичайний</string>
+  <string name="type_trashcan">Тип: Кошик</string>
+  <string name="type_staggered">Тип: Ступеневий</string>
+  <string name="type_external">Тип: Зовнішній</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
-  <string name="show_device_id">Показати ID пристрою</string>
+  <string name="trashcan_versioning_info">Очистка після: %1$s</string>
+  <string name="staggered_versioning_info">Максимальний вік: %1$d \nМісце зберігання версій: %2$s</string>
+  <string name="external_versioning_info">Команда: %1$s</string>
+  <string name="simple_versioning_info">Зберігати версій: %1$s</string>
+  <string name="show_device_id">Показати ідентифікатор пристрою</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
-  <string name="could_not_access_deviceid">Немає доступу до ID пристрою</string>
+  <string name="could_not_access_deviceid">Немає доступу до ідентифікатору пристрою.</string>
   <string name="browse">Огляд</string>
-  <string name="no_sub_folder_is_selected">Підкаталог не вибрано</string>
+  <string name="no_sub_folder_is_selected">Підтеку не вибрано</string>
+  <string name="share_device_id_chooser">Поділитися ідентифікатором пристрою з</string>
 </resources>
