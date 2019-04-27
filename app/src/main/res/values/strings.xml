@@ -15,8 +15,8 @@
     <!-- Slide 1 -->
     <string name="introduction">Introduction</string>
     <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
-To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
-Please report any problems you encounter via Github.</string>
+To share data with other devices, you need to add their unique device IDs to the device list. Afterwards, you can select which folders to share with which devices.\n\
+Please report any problems you encounter via GitHub.</string>
 
     <!-- Slide 2 -->
     <string name="storage_permission_title">Storage Permission</string>
@@ -24,7 +24,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Slide 3 -->
     <string name="location_permission_title">Location Permission</string>
-    <string name="location_permission_desc">Syncthing can be configured to run on selected Wi-Fi networks. Android requires applications to have location permissions to be able look up active Wi-Fi network name, as you can sometimes infer users location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise you can skip this step.</string>
+    <string name="location_permission_desc">Syncthing can be configured to run on selected Wi-Fi networks. Android requires applications to have location permissions to be able look up active Wi-Fi network name, as you can sometimes infer the user's location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise, you can skip this step.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
@@ -45,7 +45,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the exit app when running as a service confirmation dialog -->
     <string name="dialog_exit_while_running_as_service_title">Confirm to quit app</string>
-    <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device rebooted?</string>
+    <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore, it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device reboots?</string>
 
     <!-- Title of the "add folder" menu action -->
     <string name="add_folder">Add Folder</string>
@@ -58,7 +58,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting?</string>
 
-    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed, you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
 
     <string name="yes">Yes</string>
 
@@ -73,7 +73,7 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_rejected">Device \"%1$s\" wants to share folder \"%2$s\"</string>
 
     <string name="dialog_disable_battery_optimization_title">Battery Optimization</string>
-    <string name="dialog_disable_battery_optimization_message">Android may stop synchronization after some time. To prevent this, turn off battery optimization.\n\nSome devices have additional task-killing apps preinstalled. You should add Syncthing to their whitelist, as well.</string>
+    <string name="dialog_disable_battery_optimization_message">Android may stop synchronization after some time. To prevent this, turn off battery optimization.\n\nSome devices have additional task-killing apps preinstalled. You should add Syncthing to their whitelist as well.</string>
     <string name="dialog_disable_battery_optimization_later">Later</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Don\'t show again</string>
     <string name="dialog_disable_battery_optimization_turn_off">Turn off for Syncthing</string>
@@ -221,7 +221,7 @@ Please report any problems you encounter via Github.</string>
     <string name="dialog_discard_changes">Discard your changes?</string>
 
     <!-- Summary shown if we only have readonly access to the folder path -->
-    <string name="folder_path_readonly">Your Android version only grants Syncthing readonly access to the selected folder.</string>
+    <string name="folder_path_readonly">Your Android version only grants Syncthing read-only access to the selected folder.</string>
 
     <!-- Summary shown if we only have readwrite access to the folder path -->
     <string name="folder_path_readwrite">Your Android version grants Syncthing read and write access to the selected folder.</string>
@@ -315,13 +315,13 @@ Please report any problems you encounter via Github.</string>
     <string name="run_conditions_summary">Use the following options to decide when Syncthing will run.</string>
 
     <string name="run_on_mobile_data_title">Run on mobile data</string>
-    <string name="run_on_mobile_data_summary">Run when device is connected via the mobile data network. Warning: This can consume a lot of data from your mobile operator data plan if you sync large amounts of data.</string>
+    <string name="run_on_mobile_data_summary">Run when device is connected to a mobile data network. Warning: This can consume a lot of data from your mobile operator data plan if you sync large amounts of data.</string>
 
     <string name="run_on_wifi_title">Run on Wi-Fi</string>
     <string name="run_on_wifi_summary">Run when device is connected to a Wi-Fi network.</string>
 
     <string name="run_on_metered_wifi_title">Run on metered Wi-Fi</string>
-    <string name="run_on_metered_wifi_summary">Run when device is connected to a metered Wi-Fi network e.g. a hotspot or tethered network. Attention: This can consume large portion of your data plan if you sync a lot of data.</string>
+    <string name="run_on_metered_wifi_summary">Run when device is connected to a metered Wi-Fi network e.g. a hotspot or tethered network. Warning: This can consume large portion of your data plan if you sync a lot of data.</string>
 
     <string name="run_on_whitelisted_wifi_title">Run on specified Wi-Fi networks</string>
     <string name="run_on_whitelisted_wifi_networks">Run only on selected Wi-Fi networks: %1$s</string>
@@ -663,12 +663,12 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_disabled_reason_on_charger">Device is running on charger</string>
     <string name="syncthing_disabled_reason_powersaving">Device is in power-saving mode</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Global Synchronization is disabled</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Current WiFi SSID is not whitelisted</string>
-    <string name="syncthing_disabled_reason_wifi_is_metered">Current WiFi is metered</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Current Wi-Fi SSID is not whitelisted</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">Current Wi-Fi is metered</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">No network connection or airplane mode enabled</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Not connected to mobile data</string>
-    <string name="syncthing_disabled_reason_no_wifi_connection">Not connected to WiFi</string>
-    <string name="syncthing_disabled_reason_no_allowed_method">Not configured to sync on WiFi nor mobile data</string>
+    <string name="syncthing_disabled_reason_no_wifi_connection">Not connected to Wi-Fi</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Not configured to sync on Wi-Fi nor mobile data</string>
 
     <!-- Title of the notification shown while syncthing is running and enabled -->
     <string name="syncthing_active">Syncthing is running</string>
@@ -706,7 +706,7 @@ Please report any problems you encounter via Github.</string>
     <!-- Text for positive button in restart dialog -->
     <!-- Text for the dismiss button of the restart Activity -->
     <!-- Text of the notification shown when a restart is needed -->
-    <string name="restart_notification_text">Click here to restart syncthing now</string>
+    <string name="restart_notification_text">Click here to restart Syncthing now</string>
 
     <!-- Shown when a device ID is copied to the clipboard -->
     <string name="device_id_copied_to_clipboard">Device ID copied to clipboard</string>
@@ -785,9 +785,9 @@ Please report any problems you encounter via Github.</string>
 
     <!-- File versioning dialog descriptions for file versioning types and file versioning configuration options. -->
     <string name="keep_versions_description">The number of old versions to keep, per file.</string>
-    <string name="simple_file_versioning_description">Files are moved to date stamped versions in a .stversions directory when replaced or deleted by Syncthing.</string>
+    <string name="simple_file_versioning_description">Files are moved to time-stamped versions in a .stversions directory when replaced or deleted by Syncthing.</string>
     <string name="trashcan_versioning_description">Files are moved to .stversions directory when replaced or deleted by Syncthing.</string>
-    <string name="staggered_versioning_description">Files are moved to date stamped versions in a .stversions directory when replaced or deleted by Syncthing. Versions are automatically deleted if they are older than the maximum age or exceed the number of files allowed in an interval.\n\nThe following intervals are used: for the first hour a version is kept every 30 seconds, for the first day a version is kept every hour, for the first 30 days a version is kept every day, until the maximum age a version is kept every week.</string>
+    <string name="staggered_versioning_description">Files are moved to time-stamped versions in a .stversions directory when replaced or deleted by Syncthing. Versions are automatically deleted if they are older than the maximum age or exceed the number of files allowed in an interval.\n\nThe following intervals are used: for the first hour, a version is kept every 30 seconds; for the first day, a version is kept every hour; for the first, 30 days a version is kept every day; until the maximum age, a version is kept every week.</string>
     <string name="maximum_age_description">The maximum time to keep a version (in days, set to 0 to keep versions forever).</string>
     <string name="versions_path_description">Path where versions should be stored (leave empty for the default .stversions directory in the shared folder).</string>
     <string name="cleanout_after_description">The number of days to keep files in the trash can. Zero means forever</string>
