@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
     <!-- ACCESS_COARSE_LOCATION is required to get WiFi's SSID on 8.1 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -97,7 +97,7 @@
         </activity>
         <activity android:name=".activities.RestartActivity"
             android:theme="@style/Theme.Syncthing.Translucent"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"/>
         <activity android:name=".activities.DeviceActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
@@ -130,7 +130,6 @@
                 <action android:name="com.nutomic.syncthingandroid.action.STOP" />
             </intent-filter>
         </receiver>
-
         <activity android:name=".activities.FolderTypeDialogActivity"
             android:label="@string/folder_type"
             android:theme="@style/Theme.Syncthing.Dialog"
@@ -139,11 +138,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
         </activity>
-        <activity
-            android:name=".activities.PullOrderDialogActivity"
+        <activity android:name=".activities.PullOrderDialogActivity"
             android:label="@string/pull_order"
-            android:parentActivityName=".activities.FolderActivity"
-            android:theme="@style/Theme.Syncthing.Dialog">
+            android:theme="@style/Theme.Syncthing.Dialog"
+            android:parentActivityName=".activities.FolderActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
