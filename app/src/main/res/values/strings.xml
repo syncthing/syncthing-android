@@ -24,7 +24,7 @@ Please report any problems you encounter via GitHub.</string>
 
     <!-- Slide 3 -->
     <string name="location_permission_title">Location Permission</string>
-    <string name="location_permission_desc">Syncthing can be configured to run on selected Wi-Fi networks. Android requires applications to have location permissions to be able look up active Wi-Fi network name, as you can sometimes infer the user's location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise, you can skip this step.</string>
+    <string name="location_permission_desc">Syncthing can be configured to run on selected Wi-Fi networks. Android requires applications to have location permissions to be able look up active Wi-Fi network name, as you can sometimes infer the user\'s location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise, you can skip this step.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
