@@ -34,9 +34,9 @@
             android:theme="@style/Theme.Syncthing.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.FirstStartActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance">
+                android:name=".activities.FirstStartActivity"
+                android:label="@string/app_name"
+                android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
