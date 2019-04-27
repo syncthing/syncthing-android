@@ -220,8 +220,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <string name="respect_battery_saving_title">Respektera Android-batterisparinställning</string>
   <string name="respect_battery_saving_summary">Inaktivera Syncthing om batterisparläge är aktivt.</string>
-  <string name="respect_master_sync_title">Respektera \"Automatisk synkronisering av data\"-inställning för Android</string>
-  <string name="respect_master_sync_summary">Inaktivera Syncthing när snabbinställning \"Automatisk synkronisering av data\" är avstängd.</string>
+  <string name="respect_master_sync_title">Respektera inställning \"Automatisk datasynkronisering\" för Android</string>
+  <string name="respect_master_sync_summary">Inaktivera Syncthing när snabbinställning \"Automatisk datasynkronisering\" är avstängd.</string>
   <string name="run_in_flight_mode_title">Kör när enheten är i flygläge</string>
   <string name="run_in_flight_mode_summary">Aktivera om din enhet har problem med att upptäcka manuella Wi-Fi-anslutningar under flygläge.</string>
   <string name="service_settings_title">Tjänstinställning</string>

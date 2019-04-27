@@ -16,6 +16,7 @@
   <string name="storage_permission_desc">Syncthing 需要获取读写存储设备权限以进行同步操作</string>
   <!--Slide 3-->
   <string name="location_permission_title">定位权限</string>
+  <string name="location_permission_desc">Syncthing 可以配置运行在所选的 Wi-Fi 网络上。Android 要求应用程序拥有位置权限才能查找活动的 Wi-Fi 网络名，因为有时你可以通过他们连接的网络名称推断出用户的位置。如果你想要使用此功能，点击上面的按钮为 Syncthing 提供所需的位置权限。否则你可以跳过此步骤。</string>
   <!--Generic texts used everywhere-->
   <string name="back">返回</string>
   <string name="cont">继续</string>
@@ -29,6 +30,7 @@
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">再按一次确认退出</string>
+  <string name="dialog_exit_while_running_as_service_message">供你参考：配置应用在开机时启动。这样它可以监视运行状况并在条件满足时在后台随时同步。如果遇到严重问题，你只可以手动退出。否则，在设置里禁用“开机自动启动”。你想现在退出，直到设备重启再启动吗？</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">添加文件夹</string>
   <!--Title of the "share device id" menu action-->
@@ -114,7 +116,10 @@
   <string name="directory">目录</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">监视更改</string>
+  <string name="folder_fileWatcherDescription">要求操作系统通知文件的更改。如果禁用，回落为定期按时扫描。</string>
   <!--Setting title and description-->
+  <string name="folder_variable_size_blocks_caption">可变大小块</string>
+  <string name="folder_variable_size_blocks_description">可变大小块（既“较大块”）对于大文件更有效率。如果你在一个文件夹上启用此特性，你必须在所有设备上同文件夹都启用。</string>
   <!--Setting title-->
   <string name="folder_pause">暂停同步目录</string>
   <!--Setting title-->
@@ -141,6 +146,7 @@
   <!--Summary shown if we only have readwrite access to the folder path-->
   <string name="folder_path_readwrite">您的系统版本可以给 Syncthing 提供到指定文件夹的读写访问权限</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">抱歉。所选文件夹无法使用。请选择一个位于内部或外部存储的文件夹。</string>
   <string name="ignore_patterns">忽略列表</string>
   <string name="create_ignore_file_error">创建忽略文件失败。文件夹可写吗？</string>
   <string name="edit_ignore_file_error">未找到文本编辑器</string>
@@ -187,7 +193,7 @@
   <string name="web_gui_loading">正在等待管理页面</string>
   <!--SettingsFragment-->
   <string name="settings_title">设置</string>
-  <string name="category_run_conditions">运行条件</string>
+  <string name="category_run_conditions">运行状况</string>
   <string name="category_behaviour">行为</string>
   <string name="category_syncthing_options">同步设置</string>
   <string name="category_backup">备份</string>
@@ -195,15 +201,34 @@
   <string name="category_experimental">实验性</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">运行条件</string>
+  <string name="run_conditions_summary">使用下列选项以决定 Syncthing 将在何时运行。</string>
+  <string name="run_on_mobile_data_title">在移动数据下运行</string>
+  <string name="run_on_mobile_data_summary">当设备通过移动数据网络连接时运行。警告：如果你要同步大量数据，此选项会消耗掉你移动运营商数据套餐里的很多流量。</string>
+  <string name="run_on_wifi_title">在 Wi-Fi 下运行</string>
+  <string name="run_on_wifi_summary">当设备连接到 Wi-Fi 网络时运行。</string>
+  <string name="run_on_metered_wifi_title">在计量 Wi-Fi 下运行</string>
+  <string name="run_on_metered_wifi_summary">当设备连接到计量 Wi-Fi 网络时运行，如热点或网络共享（Tethering）。注意：如果你要同步大量数据，此选项会消耗你数据套餐里很多流量。</string>
+  <string name="run_on_whitelisted_wifi_title">在指定 Wi-Fi 网络下运行</string>
+  <string name="run_on_whitelisted_wifi_networks">只在指定的 Wi-Fi 网络下运行：%1$s</string>
   <string name="run_on_all_wifi_networks">在所有 Wi-Fi 连接下运行</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开 Wi-Fi 来选择网络</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">你需要提供位置权限才能使用本功能</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要权限</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">从 Android 8.1 开始，需要位置访问权限才能读取 Wi-Fi 的名称。只有你获取了此权限时才能使用此功能。</string>
+  <string name="power_source_title">处于该设备供电方式时运行</string>
+  <string-array name="power_source_entries">
+    <item>交流电源或电池电量。</item>
+    <item>交流电源。</item>
+    <item>电池电量。</item>
+  </string-array>
   <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
   <string name="respect_battery_saving_summary">打开省电模式时禁用 Syncthing</string>
   <string name="respect_master_sync_title">遵从安卓系统“自动同步数据”的设置</string>
+  <string name="respect_master_sync_summary">当快速设置图块“自动同步数据”切换为关闭时禁用 Syncthing。</string>
   <string name="run_in_flight_mode_title">在飞行模式下运行</string>
+  <string name="run_in_flight_mode_summary">如果您的设备在飞行模式下检测手动 Wi-Fi 连接时出现问题，请启用。</string>
   <string name="service_settings_title">服务设置</string>
+  <string name="service_settings_summary">将 Syncthing 作为服务运行。添加持久的通知以防止 Android 终止它。勾选此选项将在操作系统启动时启动 Syncthing。</string>
   <string name="run_as_background_service">开机自动启动服务</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
@@ -222,6 +247,19 @@
   <string name="start_into_web_gui_title">启动直接进入 Web GUI</string>
   <string name="start_into_web_gui_summary">启动应用时，打开网页图形用户界面而不是打开主屏幕</string>
   <string name="pref_language_default">默认语言</string>
+  <string-array name="folder_types">
+    <item>发送和接收</item>
+    <item>仅发送</item>
+    <item>仅接收</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>随机</item>
+    <item>字母</item>
+    <item>最小优先</item>
+    <item>最大优先</item>
+    <item>最旧优先</item>
+    <item>最新优先</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>无</item>
     <item>垃圾桶</item>
@@ -241,22 +279,27 @@
   <string name="usage_reporting">匿名使用报告</string>
   <string name="gui_address">管理页监听地址</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">撤消忽略的设备和文件夹</string>
+  <string name="undo_ignored_devices_folders_question">此操作将撤消之前已忽略设备和文件夹的决策。继续进行？</string>
+  <string name="undo_ignored_devices_folders_done">成功撤消决策。</string>
   <string name="export_config">导出设置</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">输入值无效。请输入介于 %1$d 和 %2$d 之间的值。</string>
   <!--Experimental options-->
   <string name="use_proxy">使用代理连接</string>
   <string name="do_not_use_proxy">未设置代理</string>
   <string name="keep_wakelock_while_binary_running">当 Syncthing 正在运行时保持 CPU 唤醒</string>
   <string name="keep_wakelock_while_binary_running_summary">使用此设置如果您在电池上运行时遇到意外的断开连接。这将会导致电量消耗的增加。</string>
   <string name="use_tor_title">使用 Tor</string>
+  <string name="use_tor_summary">强制所有流量通过 TOR 以增强保密性。需要 Orbot。禁用代理选项。</string>
   <string name="socks_proxy_address_title">SOCKS5 代理</string>
   <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
-  <string name="toast_invalid_socks_proxy_address">请按照 “socks5://[IP/HOSTNAME]:[PORT]” 的格式输入代理地址</string>
+  <string name="toast_invalid_socks_proxy_address">请按照 “socks5://[IP/主机名]:[端口]” 的格式输入代理地址</string>
   <string name="http_proxy_address_title">HTTP(S) 代理</string>
   <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
-  <string name="toast_invalid_http_proxy_address">请按照 “http://[IP/HOSTNAME]:[PORT]” 的格式输入代理地址</string>
+  <string name="toast_invalid_http_proxy_address">请按照 “http://[IP/主机名]:[端口]” 的格式输入代理地址</string>
   <string name="use_legacy_hashing_title">使用传统哈希</string>
   <string name="use_legacy_hashing_summary">强制 syncthing 使用传统哈希包出于兼容目的</string>
   <string name="restart_on_wakeup_title">唤醒时重启</string>
@@ -284,8 +327,11 @@
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">重置 Syncthing 数据库完成</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">重置增量索引</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">该操作仅应在服务人员的建议下执行。你确定要清空 Syncthing 的增量索引吗？</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">重置 Syncthing 的增量索引成功</string>
   <string name="category_about">关于</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">打开日志</string>
@@ -353,7 +399,7 @@
   <!--Copy exception toast-->
   <string name="copy_exception">共享出现错误，检查应用程序日志</string>
   <!--Copy progress dialog text-->
-  <string name="copy_progress">共享文件中…</string>
+  <string name="copy_progress">正在共享文件……</string>
   <plurals name="file_name_title">
     <item quantity="other">文件列表</item>
   </plurals>
@@ -374,9 +420,12 @@
   <string name="syncthing_disabled_reason_on_charger">设备正在充电</string>
   <string name="syncthing_disabled_reason_powersaving">设备正在节电模式下运行</string>
   <string name="syncthing_disabled_reason_android_sync_disabled">全局同步已禁用</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">当前 WiFi SSID 未在白名单内</string>
   <string name="syncthing_disabled_reason_wifi_is_metered">当前 WiFi 会计费</string>
   <string name="syncthing_disabled_reason_no_network_or_flightmode">没有网络连接或飞行模式已打开</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">未连接移动数据</string>
   <string name="syncthing_disabled_reason_no_wifi_connection">未连接 WiFi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">未配置在 WiFi 或移动数据下同步</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在运行</string>
   <string name="syncthing_disabled">Syncthing 已禁用</string>
@@ -384,6 +433,7 @@
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">创建配置文件失败</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">缺少对操作至关重要的配置文件</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">摄像机</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -391,6 +441,7 @@
   <string name="notification_crash_title">Syncthing 已崩溃</string>
   <string name="notification_crash_text_tmp">点击查看日志</string>
   <string name="notifications_persistent_channel">Syncthing 已激活</string>
+  <string name="notification_persistent_waiting_channel">监视运行状况</string>
   <string name="notifications_other_channel">其他通知</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -431,19 +482,29 @@
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <string name="folder_type">目录种类</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">发送和接收</string>
   <string name="folder_type_sendonly">仅发送</string>
-  <string name="folder_type_receiveonly">只接收</string>
+  <string name="folder_type_receiveonly">仅接收</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">文件夹将同时发送更改到远程设备上并接收其更改。</string>
+  <string name="folder_type_sendonly_description">文件受保护不会接受其他设备的更改，但此设备上的更改将发送到群集的其他设备上。</string>
+  <string name="folder_type_receiveonly_description">文件已跟群集同步，但本地做的任何更改将不会发送到其他设备。</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
   <string name="pull_order">文件下载顺序</string>
   <!--Displays the current pull order type in the Folder activity-->
   <string name="pull_order_type_random">随机</string>
-  <string name="pull_order_type_alphabetic">按名称</string>
-  <string name="pull_order_type_smallestFirst">先传小的</string>
-  <string name="pull_order_type_largestFirst">先传大的</string>
-  <string name="pull_order_type_oldestFirst">先传旧的</string>
-  <string name="pull_order_type_newestFirst">先传新的</string>
+  <string name="pull_order_type_alphabetic">字母</string>
+  <string name="pull_order_type_smallestFirst">最小优先</string>
+  <string name="pull_order_type_largestFirst">最大优先</string>
+  <string name="pull_order_type_oldestFirst">最旧优先</string>
+  <string name="pull_order_type_newestFirst">最新优先</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">按随机顺序拉取文件。</string>
+  <string name="pull_order_type_alphabetic_description">按文件名称字母顺序拉取文件。</string>
+  <string name="pull_order_type_smallestFirst_description">按文件大小拉取文件。从最小文件开始。</string>
+  <string name="pull_order_type_largestFirst_description">按文件大小拉取文件。从最大文件开始。</string>
+  <string name="pull_order_type_oldestFirst_description">按修改时间拉取文件。从最旧文件开始。</string>
+  <string name="pull_order_type_newestFirst_description">按修改时间拉取文件。从最新文件开始。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最长保留时间</string>
   <string name="clean_out_after">在该时间后清除</string>

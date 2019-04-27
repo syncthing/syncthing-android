@@ -57,6 +57,7 @@ public class NotificationHandler {
             mPersistentChannel.enableLights(false);
             mPersistentChannel.enableVibration(false);
             mPersistentChannel.setSound(null, null);
+            mPersistentChannel.setShowBadge(false); // Disables the dot next to the app icon
             mNotificationManager.createNotificationChannel(mPersistentChannel);
 
             mPersistentChannelWaiting = new NotificationChannel(

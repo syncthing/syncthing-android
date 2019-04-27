@@ -30,6 +30,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Confirmeu sortir de l\'aplicació</string>
+  <string name="dialog_exit_while_running_as_service_message">Tingueu en compte: Heu configurat l\'aplicació per posar-se en marxa automàticament a l\'inici. Degut a això, constantment es comproven les condicions d\'execució i es sincronitza en qualsevol moment en que es compleixin. Només hauríeu d\'aturar-la manualment si teniu problemes greus. Altrament, desactiveu \"Posa en marxa automàticament a l\'inici\" a la configuració. Voleu tancar-la ara fins al proper reinici del dispositiu?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Afegeix una carpeta</string>
   <!--Title of the "share device id" menu action-->
@@ -117,6 +118,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="folder_fileWatcherDescription">Demana al sistema que notifiqui dels canvis als fitxers. Si es desactiva es faran comprovacions cada hora.</string>
   <!--Setting title and description-->
   <string name="folder_variable_size_blocks_caption">Blocs de Mida Variable</string>
+  <string name="folder_variable_size_blocks_description">El blocs de mida variable (o \"blocs grans\") són més eficients pels fitxers grans. Si ho activeu per una carpeta, ho heu d\'activar per aquella carpeta en tots els dispositius.</string>
   <!--Setting title-->
   <string name="folder_pause">Posa la carpeta en pausa</string>
   <!--Setting title-->
@@ -212,11 +214,11 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Heu de proporcionar el permís d\'UBICACIÓ per poder fer això.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Calen permisos</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir d\'Android 8.1, es necessita el permís d\'ubicació per poder llegir el nom de les xarxes Wi-Fi. Només podreu fer-ho si doneu aquest permís.</string>
-  <string name="power_source_title">Executa quan el dispositiu estigui encès</string>
+  <string name="power_source_title">Activa quan el dispositiu estigui funcionant</string>
   <string-array name="power_source_entries">
-    <item>Connectat i amb bateria.</item>
-    <item>Connectat</item>
-    <item>Amb bateria</item>
+    <item>Endollat i amb bateria.</item>
+    <item>Endollat.</item>
+    <item>Amb bateria.</item>
   </string-array>
   <string name="respect_battery_saving_title">Respecta la configuració d\'estalvi de bateria de l\'Android</string>
   <string name="respect_battery_saving_summary">Desactiva el Syncthing durant el mode d\'estalvi de bateria.</string>
@@ -420,6 +422,16 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="exit">Surt</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <string name="syncthing_disabled_reason_heading">Raons:</string>
+  <string name="syncthing_disabled_reason_on_battery">El dispositiu està funcionant amb bateria</string>
+  <string name="syncthing_disabled_reason_on_charger">El dispositiu està funcionant connectat al carregador</string>
+  <string name="syncthing_disabled_reason_powersaving">El dispositiu està en mode d\'estalvi de bateria</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">La Sincronització Global està desactivada</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">La xarxa WiFi actual no és a la llista de xarxes permeses</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">La xarxa WiFi actual està mesurada</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">No hi ha connexió de xarxa o bé el mode avió està activat</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">No hi ha connexió de dades mòbils</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">No hi ha connexió WiFi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">La configuració no permet sincronitzar ni amb WiFi ni amb dades mòbils</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">El Syncthing s\'està executant</string>
   <string name="syncthing_disabled">El Syncthing està desactivat</string>
