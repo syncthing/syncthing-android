@@ -453,7 +453,7 @@
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <string name="notification_crash_title">Роботу Syncthing аварійно завершено</string>
-  <string name="notification_crash_text">Натисніть для перегляду журналів</string>
+  <string name="notification_crash_text">Натисніть для перегляду журналів (%1$s)</string>
   <string name="notifications_persistent_channel">Syncthing активний</string>
   <string name="notification_persistent_waiting_channel">Відслідковування умов синхронізації</string>
   <string name="notifications_other_channel">Інші сповіщення</string>
