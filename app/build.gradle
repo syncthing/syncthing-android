@@ -10,11 +10,11 @@ dependencies {
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'com.google.guava:guava:23.6-android'
     implementation 'com.annimon:stream:1.1.9'
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.dagger:dagger:2.14.1'
     annotationProcessor "com.google.dagger:dagger-compiler:2.14.1"
-    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support:support-annotations:27.0.2'
 }
 
@@ -35,8 +35,8 @@ android {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4169
-        versionName "1.1.4-rc.2"
+        versionCode 4170
+        versionName "1.1.4"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         playAccountConfig = playAccountConfigs.defaultAccountConfig
