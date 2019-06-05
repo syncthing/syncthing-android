@@ -6,7 +6,7 @@ dependencies {
     implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.google.zxing:android-integration:3.3.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'com.google.guava:guava:23.6-android'
     implementation 'com.annimon:stream:1.1.9'
