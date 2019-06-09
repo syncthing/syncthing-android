@@ -116,9 +116,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Monitorare i cambiamenti</string>
   <string name="folder_fileWatcherDescription">Chiede al sistema operativo di notificare le modifiche ai file. Se disabilitato, ritorna a scansioni orarie periodiche.</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption"> Blocchi di dimensioni variabile</string>
-  <string name="folder_variable_size_blocks_description"> I blocchi di dimensioni variabile (anche \"blocchi di grandi dimensioni\") sono più efficienti per file di grandi dimensioni. Se lo abiliti su una cartella, devi abilitarlo per questa cartella su tutti i dispositivi.</string>
   <!--Setting title-->
   <string name="folder_pause">Metti in pausa la cartella</string>
   <!--Setting title-->

@@ -116,9 +116,6 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Surveiller les changements</string>
   <string name="folder_fileWatcherDescription">Demande au système d\'exploitation de signaler les modifications apportées aux fichiers. Si désactivé, revient aux analyses horaires périodiques.</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption">Taille de blocs variable</string>
-  <string name="folder_variable_size_blocks_description">Les blocs de taille variable (\"grands blocs\") sont plus efficaces pour les gros fichiers. Si vous l\'activez sur un partage, vous devrez l\'activer pour ce partage sur tous les périphériques.</string>
   <!--Setting title-->
   <string name="folder_pause">Mettre le partage en pause</string>
   <!--Setting title-->

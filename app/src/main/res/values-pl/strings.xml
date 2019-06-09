@@ -111,7 +111,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Obserwuj zmiany</string>
   <string name="folder_fileWatcherDescription">Poproś system operacyjny o powiadomienia o zmienionych plikach. Kiedy opcja jest wyłączona, zmiany skanowane są co godzinę</string>
-  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Zatrzymaj folder</string>
   <!--Setting title-->

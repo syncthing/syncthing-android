@@ -116,7 +116,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Monitorizar alterações</string>
   <string name="folder_fileWatcherDescription">Pede ao sistema operativo para notificar quando ocorrem alterações a ficheiros. Se for desactivado, reverte para a verificação periódica a cada hora.</string>
-  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Pausar a pasta</string>
   <!--Setting title-->

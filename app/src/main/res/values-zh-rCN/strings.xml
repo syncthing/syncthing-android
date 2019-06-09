@@ -117,9 +117,6 @@
   <!--Setting title and description-->
   <string name="folder_fileWatcher">监视更改</string>
   <string name="folder_fileWatcherDescription">要求操作系统通知文件的更改。如果禁用，回落为定期按时扫描。</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption">可变大小块</string>
-  <string name="folder_variable_size_blocks_description">可变大小块（既“较大块”）对于大文件更有效率。如果你在一个文件夹上启用此特性，你必须在所有设备上同文件夹都启用。</string>
   <!--Setting title-->
   <string name="folder_pause">暂停同步目录</string>
   <!--Setting title-->

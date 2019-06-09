@@ -116,7 +116,6 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Håll utkik efter ändringar</string>
   <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande uppdateringar varje timme.</string>
-  <!--Setting title and description-->
   <!--Setting title-->
   <string name="folder_pause">Pausa mapp</string>
   <!--Setting title-->

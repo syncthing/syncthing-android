@@ -115,9 +115,6 @@
   <!--Setting title and description-->
   <string name="folder_fileWatcher">変更を監視する</string>
   <string name="folder_fileWatcherDescription">オペレーティングシステムにファイルの変更を通知するよう要求します。 無効にすると、定期的な1時間ごとのスキャンに戻ります。</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption">可変サイズブロック</string>
-  <string name="folder_variable_size_blocks_description">可変サイズブロック（「ラージブロック」）は、大きなファイルにとって効率的です。 1つのフォルダでこれを有効にする場合、すべてのデバイスでこのフォルダに対して有効にする必要があります。</string>
   <!--Setting title-->
   <string name="folder_pause">フォルダーを一時停止</string>
   <!--Setting title-->

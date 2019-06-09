@@ -116,8 +116,6 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Monitorizează schimbările</string>
   <string name="folder_fileWatcherDescription">Se cere sistemului să notifice despre schimbarea fișierelor. Dacă este dezactivat se folosește scanarea o dată pe oră.</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption">Blocuri de mărime variabilă</string>
   <!--Setting title-->
   <string name="folder_pause">Întrerupe director</string>
   <!--Setting title-->
