@@ -3,7 +3,7 @@ apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.triplet.play'
 
 dependencies {
-    implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
+    implementation 'eu.chainfire:libsuperuser:1.1.0.201903290044'
     implementation 'com.android.support:design:27.0.2'
     implementation 'com.google.zxing:android-integration:3.3.0'
     implementation 'com.google.code.gson:gson:2.8.5'
