@@ -1,3 +1,3 @@
-* Disable badge for persistent notification (fixes #1305)
-* Show notification badge if user interaction is required (#1310)
-* Update syncthing to v1.1.4
+* Don't open keyboard on save to Syncthing
+* Updated Go and many dependencies
+* Update syncthing to v1.2.0-rc.1
