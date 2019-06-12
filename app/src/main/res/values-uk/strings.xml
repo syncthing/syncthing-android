@@ -118,9 +118,6 @@
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Відстеження змін</string>
   <string name="folder_fileWatcherDescription">Просить операційну систему повідомляти про зміни у файлах. Якщо вимкнено, повертається до періодичного погодинного сканування.</string>
-  <!--Setting title and description-->
-  <string name="folder_variable_size_blocks_caption">Блоки змінного розміру</string>
-  <string name="folder_variable_size_blocks_description">Блоки змінного розміру (також \"великі блоки\") більш ефективні для великих файлів. Якщо ви увімкнете це для певної теки на одному пристрої, ви маєте увімкнути і на всіх інших пристроях.</string>
   <!--Setting title-->
   <string name="folder_pause">Призупинити теку</string>
   <!--Setting title-->
