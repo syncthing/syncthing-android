@@ -14,6 +14,8 @@ build/
 gen/
 obj/
 .gradle/
+syncthing/gobuild
+syncthing/pkg
 
 # Local configuration file (sdk path, etc)
 local.properties
