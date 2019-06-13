@@ -29,11 +29,6 @@
         android:installLocation="internalOnly"
         android:name=".SyncthingApp">
         <activity
-            android:name=".activities.ThemedAppCompatActivity"
-            android:label="@string/title_activity_themed_app_compat"
-            android:theme="@style/Theme.Syncthing.NoActionBar">
-        </activity>
-        <activity
                 android:name=".activities.FirstStartActivity"
                 android:label="@string/app_name"
                 android:launchMode="singleInstance">
