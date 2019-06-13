@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.annimon.stream.Stream;
@@ -20,7 +19,7 @@ import java.util.LinkedList;
 /**
  * Connects to {@link SyncthingService} and provides access to it.
  */
-public abstract class SyncthingActivity extends AppCompatActivity implements ServiceConnection {
+public abstract class SyncthingActivity extends ThemedAppCompatActivity implements ServiceConnection {
 
     public static final String EXTRA_KEY_GENERATION_IN_PROGRESS = "com.nutomic.syncthing-android.SyncthingActivity.KEY_GENERATION_IN_PROGRESS";
 

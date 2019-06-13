@@ -378,7 +378,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private Dialog createDeleteDialog(){
-        return new android.app.AlertDialog.Builder(this)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.remove_device_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
                     getApi().removeDevice(mDevice.deviceID);
@@ -413,7 +413,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private void prepareEditMode() {
         getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        Drawable dr = ContextCompat.getDrawable(this, R.drawable.ic_content_copy_black_24dp);
+        Drawable dr = ContextCompat.getDrawable(this, R.drawable.ic_content_copy_24dp);
         mIdView.setCompoundDrawablesWithIntrinsicBounds(null, null, dr, null);
         mIdView.setEnabled(false);
         mQrButton.setVisibility(GONE);
@@ -461,7 +461,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private Dialog createCompressionDialog(){
-        return new AlertDialog.Builder(this)
+        return Util.getAlertDialogBuilder(this)
                 .setTitle(R.string.compression)
                 .setSingleChoiceItems(R.array.compress_entries,
                         Compression.fromValue(this, mDevice.compression).getIndex(),
@@ -497,7 +497,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private Dialog createDiscardDialog() {
-        return new android.app.AlertDialog.Builder(this)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)

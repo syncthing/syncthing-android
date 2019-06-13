@@ -2,7 +2,7 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -140,7 +140,7 @@ public class MainActivity extends StateDialogActivity
             return;
         }
 
-        mBatteryOptimizationsDialog = new AlertDialog.Builder(this)
+        mBatteryOptimizationsDialog = Util.getAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_disable_battery_optimization_title)
                 .setMessage(R.string.dialog_disable_battery_optimization_message)
                 .setPositiveButton(R.string.dialog_disable_battery_optimization_turn_off, (d, i) -> {
@@ -359,7 +359,7 @@ public class MainActivity extends StateDialogActivity
     }
 
     private Dialog createRestartDialog(){
-        return  new AlertDialog.Builder(this)
+        return  Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.dialog_confirm_restart)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i1) -> this.startService(new Intent(this, SyncthingService.class)
                         .setAction(SyncthingService.ACTION_RESTART)))
@@ -379,7 +379,7 @@ public class MainActivity extends StateDialogActivity
         shareDeviceIdTextView.setOnClickListener(v -> shareDeviceId(deviceId));
         qrCodeImageView.setImageBitmap(qrCode);
 
-        mQrCodeDialog = new AlertDialog.Builder(this)
+        mQrCodeDialog = Util.getAlertDialogBuilder(this)
                 .setTitle(R.string.device_id)
                 .setView(qrCodeDialogView)
                 .setPositiveButton(R.string.finish, null)
@@ -514,7 +514,7 @@ public class MainActivity extends StateDialogActivity
                     .inflate(R.layout.dialog_usage_reporting, null);
             TextView tv = v.findViewById(R.id.example);
             tv.setText(report);
-            new AlertDialog.Builder(MainActivity.this)
+            Util.getAlertDialogBuilder(MainActivity.this)
                     .setTitle(R.string.usage_reporting_dialog_title)
                     .setView(v)
                     .setPositiveButton(R.string.yes, listener)
