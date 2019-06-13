@@ -9,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -229,5 +230,13 @@ public class Util {
      */
     public static String formatPath(String path) {
         return new File(path).toURI().normalize().getPath();
+    }
+
+    /**
+     * @return a themed AlertDialog builder.
+     */
+    public static AlertDialog.Builder getAlertDialogBuilder(Context context)
+    {
+        return new AlertDialog.Builder(context, R.style.Theme_Syncthing_Dialog);
     }
 }

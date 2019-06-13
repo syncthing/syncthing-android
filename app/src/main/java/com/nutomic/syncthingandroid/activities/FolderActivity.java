@@ -1,9 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -12,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.provider.DocumentFile;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -27,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Device;
@@ -116,7 +114,7 @@ public class FolderActivity extends SyncthingActivity
         @Override
         public void afterTextChanged(Editable s) {
             mFolder.label        = mLabelView.getText().toString();
-            mFolder.id           = mIdView.getText().toString();;
+            mFolder.id           = mIdView.getText().toString();
             // mPathView must not be handled here as it's handled by {@link onActivityResult}
             mFolderNeedsToUpdate = true;
         }
@@ -498,7 +496,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private Dialog createDeleteDialog(){
-        return new AlertDialog.Builder(this)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.remove_folder_confirm)
                 .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
                     RestApi restApi = getApi();
@@ -676,7 +674,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private Dialog createDiscardDialog() {
-        return new AlertDialog.Builder(this)
+        return Util.getAlertDialogBuilder(this)
                 .setMessage(R.string.dialog_discard_changes)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)

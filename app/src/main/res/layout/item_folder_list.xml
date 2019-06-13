@@ -100,7 +100,7 @@
             android:paddingRight="20dp"
             android:paddingStart="30dp"
             android:paddingTop="5dp"
-            android:src="@drawable/ic_folder_black_24dp" />
+            android:src="@drawable/ic_folder_24dp" />
 
     </RelativeLayout>
 

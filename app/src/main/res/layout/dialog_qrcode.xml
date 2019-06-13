@@ -24,8 +24,8 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:clickable="true"
-                android:drawableEnd="@drawable/ic_content_copy_black_24dp"
-                android:drawableRight="@drawable/ic_content_copy_black_24dp"
+                android:drawableEnd="@drawable/ic_content_copy_24dp"
+                android:drawableRight="@drawable/ic_content_copy_24dp"
                 android:focusable="true"
                 android:fontFamily="monospace"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -37,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
-                android:drawableRight="@drawable/ic_share_black_24dp"
-                android:drawableEnd="@drawable/ic_share_black_24dp"
+                android:drawableRight="@drawable/ic_share_24dp"
+                android:drawableEnd="@drawable/ic_share_24dp"
                 android:clickable="true"
                 android:focusable="true" />
 

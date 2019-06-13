@@ -1,12 +1,12 @@
 package com.nutomic.syncthingandroid.fragments;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -256,7 +256,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                      * App is running as a service. Show an explanation why exiting syncthing is an
                      * extraordinary request, then ask the user to confirm.
                      */
-                    AlertDialog mExitConfirmationDialog = new AlertDialog.Builder(mActivity)
+                    AlertDialog mExitConfirmationDialog = Util.getAlertDialogBuilder(mActivity)
                             .setTitle(R.string.dialog_exit_while_running_as_service_title)
                             .setMessage(R.string.dialog_exit_while_running_as_service_message)
                             .setPositiveButton(R.string.yes, (d, i) -> {

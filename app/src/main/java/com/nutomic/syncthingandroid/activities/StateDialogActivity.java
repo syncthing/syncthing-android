@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
@@ -108,7 +108,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
             return;
         }
 
-        mDisabledDialog = new AlertDialog.Builder(this)
+        mDisabledDialog = Util.getAlertDialogBuilder(this)
                 .setTitle(R.string.syncthing_disabled_title)
                 .setMessage(getDisabledDialogMessage())
                 .setPositiveButton(R.string.syncthing_disabled_change_settings,
@@ -164,7 +164,7 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                 ? R.string.web_gui_creating_key
                 : R.string.api_loading);
 
-        mLoadingDialog = new AlertDialog.Builder(this)
+        mLoadingDialog = Util.getAlertDialogBuilder(this)
                 .setCancelable(false)
                 .setView(binding.getRoot())
                 .show();
