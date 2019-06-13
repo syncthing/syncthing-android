@@ -26,9 +26,9 @@ android {
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true
 
-    playAccountConfigs {
+    playConfigs {
         defaultAccountConfig {
-            jsonFile = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
+            serviceAccountCredentials = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
         }
     }
     defaultConfig {
@@ -39,7 +39,6 @@ android {
         versionName "1.2.0-rc.1"
         testApplicationId 'com.nutomic.syncthingandroid.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     signingConfigs {
@@ -72,8 +71,7 @@ android {
 }
 
 play {
-    jsonFile = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
-    uploadImages = false
+    serviceAccountCredentials = file(System.getenv("SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE") ?: 'keys.json')
     track = 'beta'
 }
 
