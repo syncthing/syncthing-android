@@ -15,7 +15,6 @@ then
     exit 1
 fi
 
-PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 cd "syncthing/src/github.com/syncthing/syncthing/"
 CURRENT_TAG=$(git describe)
 if [ "v${NEW_VERSION_NAME#$CURRENT_TAG}" = "v${NEW_VERSION_NAME}" ]; then
@@ -23,4 +22,3 @@ if [ "v${NEW_VERSION_NAME#$CURRENT_TAG}" = "v${NEW_VERSION_NAME}" ]; then
            "$NEW_VERSION_NAME" "$CURRENT_TAG"
     exit 1
 fi
-cd ${PROJECT_DIR}
