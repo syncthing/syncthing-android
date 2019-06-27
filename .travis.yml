@@ -39,3 +39,6 @@ cache:
 script:
   - ./gradlew lint
   - ./gradlew buildNative assembleDebug
+
+notifications:
+  email: false

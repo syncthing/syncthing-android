@@ -17,7 +17,7 @@ fi
 
 cd "syncthing/src/github.com/syncthing/syncthing/"
 CURRENT_TAG=$(git describe)
-if [ "v${NEW_VERSION_NAME#$CURRENT_TAG}" = "v${NEW_VERSION_NAME}" ]; then
+if [ "${NEW_VERSION_NAME#${CURRENT_TAG#v}}" = "${NEW_VERSION_NAME}" ]; then
     printf "New version name %s is not compatible with Syncthing version %s\n" \
            "$NEW_VERSION_NAME" "$CURRENT_TAG"
     exit 1
