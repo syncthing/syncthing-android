@@ -1,4 +1,1 @@
-* Added dark theme
-* Don't open keyboard on save to Syncthing
-* Updated Go and many dependencies
-* Update syncthing to v1.2.0 (https://github.com/syncthing/syncthing/releases/tag/v1.2.0)
+* Update syncthing to v1.2.1-rc.1 (https://github.com/syncthing/syncthing/releases/tag/v1.2.1-rc.1 )
