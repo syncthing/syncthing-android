@@ -242,6 +242,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="preference_language_summary">Ändra appens språk</string>
   <string name="start_into_web_gui_title">Starta direkt i webbgränssnittet</string>
   <string name="start_into_web_gui_summary">När du startar appen öppnar du webbgränssnittet istället för huvudskärmen</string>
+  <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_option_light">Ljust</string>
+  <string name="preference_theme_option_dark">Mörkt</string>
   <string name="pref_language_default">Standardspråk</string>
   <string-array name="folder_types">
     <item>Skicka &amp; ta emot</item>
