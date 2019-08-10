@@ -37,7 +37,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="dialog_disable_battery_optimization_message">Android kan je synchronisatie na een tijdje stoppen. Om dit te voorkomen kan je batterijoptimalisatie uitschakelen\n\nOp sommige apparaten staan extra apps voor beëindigen van taken, voeg Syncthing ook aan hun witte lijsten toe.</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
-  <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Zet uit voor Syncthing</string>
   <string name="dialog_disable_battery_optimizations_not_supported">Je apparaat biedt geen ondersteuning voor het uitschakelen van batterijoptimalisatie</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
@@ -75,6 +75,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--StatusFragment-->
+  <string name="syncthing_starting">Syncthing start op.</string>
+  <string name="syncthing_running">Syncthing loopt.</string>
+  <string name="syncthing_not_running">Syncthing loopt niet.</string>
+  <string name="syncthing_has_crashed">Syncthing is gecrasht.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Downloaden:\u0020</string>
@@ -113,7 +117,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Weet je zeker dat je deze map van Syncthing wil verwijderen?</string>
+  <string name="remove_folder_confirm">Weet je zeker dat je deze map van Syncthing wilt ontdoen?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">De map-ID mag niet leeg zijn</string>
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -356,7 +360,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
-  <string name="syncthing_disabled">Syncthing is uitgeschakeld</string>
+  <string name="syncthing_disabled">Syncthing is niet aan</string>
   <string name="syncthing_terminated">Syncthing is beëindigd</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Aanmaken van configuratiebestand mislukt</string>

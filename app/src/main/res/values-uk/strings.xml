@@ -244,6 +244,9 @@
   <string name="preference_language_summary">Змінити мову додатку</string>
   <string name="start_into_web_gui_title">Запуск веб-інтерфейсу при вході в додаток</string>
   <string name="start_into_web_gui_summary">При запуску додатка, відкривати веб-інтерфейс замість головного меню</string>
+  <string name="preference_theme_title">Тема</string>
+  <string name="preference_theme_option_light">Світла</string>
+  <string name="preference_theme_option_dark">Темна</string>
   <string name="pref_language_default">Мова за-замовчуванням</string>
   <string-array name="folder_types">
     <item>Надсилати і отримувати</item>
