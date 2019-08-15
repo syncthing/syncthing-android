@@ -125,7 +125,7 @@ public class SyncthingRunnable implements Runnable {
         // Potential fix for #498, keep the CPU running while native binary is running
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = useWakeLock()
-                ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG)
+                ? pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,  mContext.getString(R.string.app_name) + ":" + TAG)
                 : null;
         try {
             if (wakeLock != null)
