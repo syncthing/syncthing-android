@@ -1,1 +1,1 @@
-* Update Syncthing to v1.2.2 (https://github.com/syncthing/syncthing/releases/tag/v1.2.2)
+* Build Syncthing with go1.13 (fixes #1291)
