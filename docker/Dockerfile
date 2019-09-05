@@ -34,6 +34,9 @@ ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk-bundle
 # Enable prebuild mode
 ENV SYNCTHING_ANDROID_PREBUILT 1
 
+# Set location of go cache
+ENV GOCACHE /opt/gocache
+
 # Run prebuild script (will prebuild stuff into the image if env var is set)
 ADD prebuild.sh /opt/prebuild.sh
 RUN /opt/prebuild.sh
