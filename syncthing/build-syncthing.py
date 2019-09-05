@@ -113,7 +113,6 @@ for target in BUILD_TARGETS:
         'CGO_ENABLED': '1',
     })
 
-    subprocess.check_call(['go', 'mod', 'download'], cwd=syncthing_dir)
     subprocess.check_call([
         'go', 'run', 'build.go', '-goos', 'android', '-goarch', target['goarch'], '-cc', os.path.join(standalone_ndk_dir, 'bin', target['cc'])
     ] + pkg_argument + ['-no-upgrade', 'build'], env=environ, cwd=syncthing_dir)
