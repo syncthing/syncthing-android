@@ -33,7 +33,7 @@ for ARCH in arm x86 arm64; do
       GOOS=android GOARCH=$GOARCH go install -v std
 done
 
-echo "Prepopulating gradle cache"
+echo "Prepopulating gradle and go build/pkg cache"
 git clone https://github.com/syncthing/syncthing-android
 cd syncthing-android
 ./gradlew --no-daemon lint

@@ -109,7 +109,6 @@ for target in BUILD_TARGETS:
 
     environ = os.environ.copy()
     environ.update({
-        'GOPATH': module_dir,
         'GO111MODULE': 'on',
         'CGO_ENABLED': '1',
     })
