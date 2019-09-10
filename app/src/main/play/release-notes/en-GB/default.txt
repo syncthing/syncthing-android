@@ -1,1 +1,1 @@
-* Build Syncthing with go1.13 (fixes #1291)
+* Update Syncthing to v1.3.0-rc.1 (https://github.com/syncthing/syncthing/releases/tag/v1.3.0-rc.1)
