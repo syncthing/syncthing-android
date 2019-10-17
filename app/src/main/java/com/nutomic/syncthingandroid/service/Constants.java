@@ -138,4 +138,17 @@ public class Constants {
 
         return true;
     }
+
+    /**
+     * Detect kernels with a bug causing kernel oops when
+     * Syncthing v1.3.0+ attempts to enable the NAT feature.
+     * See: https://github.com/syncthing/syncthing-android/issues/1425
+     */
+    public static Boolean osHasKernel34() {
+        String kernelVersion = java.lang.System.getProperty("os.version");
+        if (kernelVersion == null) {
+            return false;
+        }
+        return kernelVersion.startsWith("3.4.");
+    }
 }

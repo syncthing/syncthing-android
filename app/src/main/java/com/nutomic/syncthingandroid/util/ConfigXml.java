@@ -210,6 +210,14 @@ public class ConfigXml {
             }
         }
 
+        /**
+         * Disable Syncthing's NAT feature because it causes kernel oops on some buggy kernels.
+         */
+        if (Constants.osHasKernel34()) {
+            Log.v(TAG, "Disabling NAT option because a buggy kernel was detected. See https://github.com/syncthing/syncthing-android/issues/1425 .");
+            changed = setConfigElement(options, "natEnabled", Boolean.toString(false)) || changed;
+        }
+
         // Save changes if we made any.
         if (changed) {
             saveChanges();
