@@ -32,6 +32,7 @@ BUILD_TARGETS = [
         'goarch': 'amd64',
         'jni_dir': 'x86_64',
         'clang': 'x86_64-linux-android21-clang',
+        'min_sdk': 21,
     }
 ]
 
