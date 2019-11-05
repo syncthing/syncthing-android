@@ -5,6 +5,7 @@
 for ARCH in arm x86 arm64 x86_64; do
   GOARCH=${ARCH}
   SDK=16
+  # The values here must correspond with those in ../syncthing/build-syncthing.py
   case ${ARCH} in
       arm)
         GCC="arm-linux-androideabi-clang"
@@ -19,6 +20,7 @@ for ARCH in arm x86 arm64 x86_64; do
         ;;
       x86_64)
         SDK=21
+        GOARCH=amd64
         GCC="x86_64-linux-android21-clang"
         ;;
       *)
