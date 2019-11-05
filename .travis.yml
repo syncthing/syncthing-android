@@ -14,9 +14,10 @@ android:
 # Install Android NDK (apparently there is no easier way to do this)
 # https://github.com/travis-ci/travis-ci/issues/5395
 before_script:
-  - curl -L https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip -O
-  - unzip -q android-ndk-r15c-linux-x86_64.zip
-  - export ANDROID_NDK_HOME=`pwd`/android-ndk-r15c
+  - export NDK_VERSION=r20
+  - curl -L https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux-x86_64.zip -O
+  - unzip -q android-ndk-${NDK_VERSION}-linux-x86_64.zip
+  - export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}
 
 before_install:
   # Install Go using gimme tool

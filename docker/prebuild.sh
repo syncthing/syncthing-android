@@ -2,7 +2,7 @@
 
 [ -z "$SYNCTHING_ANDROID_PREBUILT" ] && echo "Prebuild disabled" && exit 0
 
-for ARCH in arm x86 arm64; do
+for ARCH in arm x86 arm64 x86_64; do
   GOARCH=${ARCH}
   SDK=16
   case ${ARCH} in
@@ -16,6 +16,10 @@ for ARCH in arm x86 arm64; do
       x86)
         GOARCH=386
         GCC="i686-linux-android-clang"
+        ;;
+      x86_64)
+        SDK=21
+        GCC="x86_64-linux-android21-clang"
         ;;
       *)
         echo "Invalid architecture"
