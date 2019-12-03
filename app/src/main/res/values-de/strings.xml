@@ -179,7 +179,7 @@ Bitte melden Sie auftretende Probleme via GitHub.</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">Die Geräte-ID darf nicht leer sein</string>
   <!--Content description for device ID qr code icon-->
-  <string name="scan_qr_code_description">QR Code scannen</string>
+  <string name="scan_qr_code_description">QR-Code scannen</string>
   <!--Toast show if we could not get root permissions-->
   <string name="toast_root_denied">Konnte keine Root-Rechte erhalten.</string>
   <!--WebGuiActivity-->

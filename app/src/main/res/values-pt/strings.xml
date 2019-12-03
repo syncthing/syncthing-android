@@ -242,6 +242,9 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="preference_language_summary">Alterar o idioma da aplicação</string>
   <string name="start_into_web_gui_title">Iniciar automaticamente na interface web.</string>
   <string name="start_into_web_gui_summary">Ao iniciar a aplicação, abre a interface web ao invés do ecrã principal</string>
+  <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_option_light">Claro</string>
+  <string name="preference_theme_option_dark">Escuro</string>
   <string name="pref_language_default">Idioma predefinido</string>
   <string-array name="folder_types">
     <item>Enviar e receber</item>
@@ -424,15 +427,27 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="syncthing_disabled_reason_android_sync_disabled">A sincronização global está desactivada</string>
   <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID WiFi actual não está na lista autorizada</string>
   <string name="syncthing_disabled_reason_wifi_is_metered">O WiFi actual é de consumo limitado</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Não está activa uma ligação à rede ou modo de avião</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Não está ligado a dados móveis</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Não está ligado a Wi-Fi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Não está configurado para sincronizar por Wi-Fi nem por dados móveis</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está a correr</string>
   <string name="syncthing_disabled">O Syncthing está desactivado</string>
+  <string name="syncthing_terminated">O Syncthing foi terminado</string>
   <!--Toast shown if syncthing failed to create a config-->
+  <string name="config_create_failed">Falhou a criação do ficheiro de configuração</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Falta um ficheiro de configuração crucial para a operação</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Câmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">fotos-de-%1$s</string>
+  <string name="notification_crash_title">O Syncthing estoirou</string>
+  <string name="notification_crash_text">Clique para ver os relatórios</string>
+  <string name="notifications_persistent_channel">O Syncthing está activo</string>
+  <string name="notification_persistent_waiting_channel">Monitorizando condições de execução</string>
+  <string name="notifications_other_channel">Outras notificações</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
   <string name="restart_title">É necessário reiniciar</string>
@@ -470,15 +485,62 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Parar o Syncthing não é suportado quando está activada a opção para correr em segundo plano.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Tipo de Pasta</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">Enviar e Receber</string>
+  <string name="folder_type_sendonly">Enviar Apenas</string>
+  <string name="folder_type_receiveonly">Receber Apenas</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">A pasta vai simultaneamente enviar e receber alterações de dispositivos remotos.</string>
+  <string name="folder_type_sendonly_description">Os ficheiros estão protegidos contra alterações feitas noutros dispositivos, mas alterações feitas neste dispositivo serão enviadas para o resto do agrupamento.</string>
+  <string name="folder_type_receiveonly_description">Os ficheiros são sincronizados a partir do agrupamento, mas quaisquer alterações feitas localmente não serão enviadas para os outros dispositivos.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Ordem de descarga dos ficheiros</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Aleatória</string>
+  <string name="pull_order_type_alphabetic">Alfabética</string>
+  <string name="pull_order_type_smallestFirst">Menor primeiro</string>
+  <string name="pull_order_type_largestFirst">Maior primeiro</string>
+  <string name="pull_order_type_oldestFirst">Mais antigo primeiro</string>
+  <string name="pull_order_type_newestFirst">Mais novo primeiro</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Descarregar ficheiros aleatoriamente.</string>
+  <string name="pull_order_type_alphabetic_description">Descarregar ficheiros por ordem alfabética.</string>
+  <string name="pull_order_type_smallestFirst_description">Descarregar ficheiros por ordem de tamanho. Primeiro descarrega os menores.</string>
+  <string name="pull_order_type_largestFirst_description">Descarregar ficheiros por ordem de tamanho. Primeiro descarrega os maiores.</string>
+  <string name="pull_order_type_oldestFirst_description">Descarregar ficheiros por ordem da data de modificação. Primeiro descarrega os mais antigos.</string>
+  <string name="pull_order_type_newestFirst_description">Descarregar ficheiros por ordem da data de modificação. Primeiro descarrega os mais novos.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+  <string name="maximum_age">Idade Máxima</string>
+  <string name="clean_out_after">Limpar após</string>
   <string name="file_versioning">Gestão de versões</string>
+  <string name="none">Nenhum</string>
+  <string name="versions_path">Caminho das versões</string>
+  <string name="command">Comando</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+  <string name="keep_versions_description">Quantidade de versões antigas a manter, por ficheiro.</string>
+  <string name="simple_file_versioning_description">Os ficheiros são movidos para versões marcadas com a data e hora numa pasta .stversions ao serem substituídos ou eliminados pelo Syncthing.</string>
+  <string name="trashcan_versioning_description">Os ficheiros são movidos para a pasta .stversion ao serem substituídos ou eliminados pelo Syncthing.</string>
+  <string name="staggered_versioning_description">Os ficheiros são movidos para versões marcadas com data e hora numa pasta .stversions ao serem substituídos ou eliminados pelo Syncthing. As versões são eliminadas automaticamente se forem mais antigas do que a idade máxima ou excederem o número de ficheiros permitido num intervalo.\n\nSão usados os seguintes intervalos: na primeira hora é guardada uma versão a cada 30 segundos, no primeiro dia é guardada uma versão a cada hora, nos primeiros 30 dias é guardada uma versão a cada dia, até atingir a idade máxima é guardada uma versão a cada semana.</string>
+  <string name="maximum_age_description">O tempo máximo para guardar uma versão (em dias; escreva 0 para guardar versões para sempre).</string>
+  <string name="versions_path_description">Caminho onde as versões deverão ser guardadas (deixe vazio para usar a pasta predefinida .stversions dentro da pasta partilhada).</string>
+  <string name="cleanout_after_description">O número de dias para guardar os ficheiros na reciclagem. Zero significa para sempre.</string>
+  <string name="external_versioning_description">O primeiro parâmetro na linha de comandos é o caminho para a pasta e o segundo parâmetro é o caminho relativo dentro da pasta.</string>
+  <string name="no_versioning_description">Seleccione um tipo de gestão de versões para a activar.</string>
   <!--Displays the current file versioning type in the Folder activity-->
+  <string name="type_simple">Tipo: Simples</string>
+  <string name="type_trashcan">Tipo: Reciclagem</string>
+  <string name="type_staggered">Tipo: Escalonado</string>
+  <string name="type_external">Tipo: Externo</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
+  <string name="trashcan_versioning_info">Limpeza após: %1$s</string>
+  <string name="staggered_versioning_info">Idade máxima: %1$d\nCaminho das versões: %2$s</string>
+  <string name="external_versioning_info">Comando: %1$s</string>
+  <string name="simple_versioning_info">Manter versões: %1$s</string>
+  <string name="show_device_id">Mostrar ID do dispositivo</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+  <string name="could_not_access_deviceid">Não foi possível aceder ao ID do dispositivo.</string>
+  <string name="browse">Procurar</string>
+  <string name="no_sub_folder_is_selected">Não foi seleccionada uma sub-pasta</string>
+  <string name="share_device_id_chooser">Partilhar ID do dispositivo com</string>
 </resources>
