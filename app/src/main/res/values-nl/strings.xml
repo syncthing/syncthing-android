@@ -291,7 +291,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="donate_title">Doneren</string>
   <string name="donate_summary">Help ons betalen voor domeinen en hostingkosten</string>
   <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Synthing-versie</string>
+  <string name="syncthing_version_title">Syncthing-versie</string>
   <!--Title of the preference showing this app's version name-->
   <string name="app_version_title">Syncthing-Android-versie</string>
   <!--FolderPickerAcitivity-->
