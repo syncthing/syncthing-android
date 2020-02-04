@@ -230,7 +230,7 @@
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用高级文件夹选择器</string>
   <string name="advanced_folder_picker_summary">可以选择设备上任何文件夹</string>
-  <string name="use_root_title">Syncthing 运行于超级用户</string>
+  <string name="use_root_title">使用超级用户运行 Syncthing</string>
   <string name="use_root_summary">该项功能不稳定，可能导致您的设备和 Syncthing 出问题。如果遇到了问题，您可能要重新安装 Syncthing。</string>
   <string name="notification_type_title">通知</string>
   <string name="notification_type_summary">选择通知类型</string>
