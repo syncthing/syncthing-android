@@ -89,7 +89,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="upload_title">Upload</string>
   <!--StatusFragment-->
   <string name="status_fragment_title">Status</string>
-  <string name="syncthing_starting">Synthing startet</string>
+  <string name="syncthing_starting">Syncthing startet</string>
   <string name="syncthing_running">Syncthing arbeitet</string>
   <string name="syncthing_not_running">Syncthing läuft gerade nicht</string>
   <string name="syncthing_has_crashed">Syncthing ist abgestürzt</string>
