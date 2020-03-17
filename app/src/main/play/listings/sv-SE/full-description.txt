@@ -6,4 +6,4 @@ Källkod: https://github.com/syncthing/syncthing-android
 
 Forum: https://forum.syncthing.net/
 
-Frågor: https://github.com/syncthing/syncthing-android/issues
+Problem: https://github.com/syncthing/syncthing-android/issues

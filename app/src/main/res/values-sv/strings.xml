@@ -219,7 +219,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <string name="respect_battery_saving_title">Respektera Android-batterisparinställning</string>
   <string name="respect_battery_saving_summary">Inaktivera Syncthing om batterisparläge är aktivt.</string>
-  <string name="respect_master_sync_title">Respektera inställning \"Automatisk datasynkronisering\" för Android</string>
+  <string name="respect_master_sync_title">Respektera Androids \"Automatisk datasynkronisering\"-inställning</string>
   <string name="respect_master_sync_summary">Inaktivera Syncthing när snabbinställning \"Automatisk datasynkronisering\" är avstängd.</string>
   <string name="run_in_flight_mode_title">Kör när enheten är i flygläge</string>
   <string name="run_in_flight_mode_summary">Aktivera om din enhet har problem med att upptäcka manuella Wi-Fi-anslutningar under flygläge.</string>
@@ -339,7 +339,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Öppna logg</string>
   <!--Summary for the log activity-->
-  <string name="open_log_summary">Öppna loggfönstret för Syncthing och Android</string>
+  <string name="open_log_summary">Öppna loggfönstret för Syncthing Android</string>
   <string name="notify_crashes_title">Meddela om Syncthing kraschar</string>
   <string name="notify_crashes_summary">Visa en avisering när en Syncthing krasch detekteras</string>
   <string name="syncthing_forum_title">Syncthing-forum</string>
