@@ -462,19 +462,20 @@ public class FolderActivity extends SyncthingActivity
                     return true;
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    mFolderUri != null &&
-                    mFolder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY)) {
+                    mFolderUri != null) {
                     /**
                      * Normally, syncthing takes care of creating the ".stfolder" marker.
                      * This fails on newer android versions if the syncthing binary only has
                      * readonly access on the path and the user tries to configure a
                      * sendonly folder. To fix this, we'll precreate the marker using java code.
+                     * We also create an empty file in the marker directory, to hopefully keep
+                     * it alive in the face of overzealous disk cleaner apps.
                      */
                     DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
                     if (dfFolder != null) {
                         Log.v(TAG, "Creating new directory " + mFolder.path + File.separator + FOLDER_MARKER_NAME);
-                        DocumentFile mFolder = dfFolder.createDirectory(FOLDER_MARKER_NAME);
-                        mFolder.createFile("text/plain", "empty");
+                        DocumentFile marker = dfFolder.createDirectory(FOLDER_MARKER_NAME);
+                        marker.createFile("text/plain", "empty");
                     }
                 }
                 getApi().createFolder(mFolder);
