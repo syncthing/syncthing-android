@@ -473,7 +473,8 @@ public class FolderActivity extends SyncthingActivity
                     DocumentFile dfFolder = DocumentFile.fromTreeUri(this, mFolderUri);
                     if (dfFolder != null) {
                         Log.v(TAG, "Creating new directory " + mFolder.path + File.separator + FOLDER_MARKER_NAME);
-                        dfFolder.createDirectory(FOLDER_MARKER_NAME);
+                        DocumentFile mFolder = dfFolder.createDirectory(FOLDER_MARKER_NAME);
+                        mFolder.createFile("text/plain", "empty");
                     }
                 }
                 getApi().createFolder(mFolder);
