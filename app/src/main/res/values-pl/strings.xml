@@ -29,6 +29,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="ignore">Ignoru</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Potwierdź wyjście z aplikacji</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Dodaj katalog</string>
   <!--Title of the "share device id" menu action-->
@@ -88,6 +89,7 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <!--Title for current upload rate-->
   <string name="upload_title">Wysyłanie</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Status</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Pobieranie:\u0020</string>
@@ -229,6 +231,9 @@ UWAGA: może to skutkować znacznym zużyciem transferu</string>
   <string name="preference_language_summary">Zmień język aplikacji</string>
   <string name="start_into_web_gui_title">Startuj bezpośrednio do trybu web GUI</string>
   <string name="start_into_web_gui_summary">Uruchamiając aplikację, otwórz web GUI zamiast głównego ekranu</string>
+  <string name="preference_theme_title">Motyw</string>
+  <string name="preference_theme_option_light">Jasny</string>
+  <string name="preference_theme_option_dark">Ciemny</string>
   <string name="pref_language_default">Domyślny język</string>
   <string-array name="versioning_types">
     <item>Żaden</item>

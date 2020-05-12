@@ -13,10 +13,10 @@ För att dela data med andra enheter måste du lägga till deras unika enhets-ID
 Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Slide 2-->
   <string name="storage_permission_title">Lagringsbehörighet</string>
-  <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att göra filsynkronisering.</string>
+  <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att utföra filsynkronisering.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Platsbehörighet</string>
-  <string name="location_permission_desc">Syncthing kan konfigureras att köras på valda Wi-Fi-nätverk. Android kräver att program har platsbehörigheter för att kunna slå upp aktivt Wi-Fi-nätverksnamn, eftersom det ibland går att antyda användarnas plats från namnet på det nätverk de är anslutna till. Om du vill använda den här funktionen trycker du på knappen ovan för att ge Syncthing de nödvändiga platsbehörigheterna. Annars kan du hoppa över det här steget.</string>
+  <string name="location_permission_desc">Syncthing kan konfigureras att köras på utvalda Wi-Fi-nätverk. Android kräver att applikationer har platsbehörigheter för att kunna slå upp aktivt Wi-Fi-nätverksnamn, eftersom det ibland går att antyda användarnas plats från namnet på det nätverk de är anslutna till. Om du vill använda den här funktionen trycker du på knappen ovan för att ge Syncthing de nödvändiga platsbehörigheterna. Annars kan du hoppa över det här steget.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Bakåt</string>
   <string name="cont">Fortsätt</string>
@@ -46,7 +46,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="device_rejected">Enhet \"%1$s\" vill ansluta</string>
   <string name="folder_rejected">Enhet \"%1$s\" vill dela mapp \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Batterioptimering</string>
-  <string name="dialog_disable_battery_optimization_message">Android kan stoppa synkronisering efter en viss tid. För att förhindra detta, stäng av batterioptimering.\n\nNågra enheter har ytterligare uppgiftsdödande appar förinstallerade. Ni bör lägga till Syncthing till deras vitlista, också.</string>
+  <string name="dialog_disable_battery_optimization_message">Android kan stoppa synkroniseringen efter en viss tid. För att förhindra detta, stäng av batterioptimering.\n\nNågra enheter har ytterligare uppgiftsdödande appar förinstallerade. Ni bör också lägga till Syncthing till deras vitlista.</string>
   <string name="dialog_disable_battery_optimization_later">Senare</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Visa inte igen</string>
   <string name="dialog_disable_battery_optimization_turn_off">Stäng av för Syncthing</string>
@@ -114,8 +114,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Setting title-->
   <string name="directory">Katalog</string>
   <!--Setting title and description-->
-  <string name="folder_fileWatcher">Håll utkik efter ändringar</string>
-  <string name="folder_fileWatcherDescription">Frågar operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på återkommande uppdateringar varje timme.</string>
+  <string name="folder_fileWatcher">Bevaka ändringar</string>
+  <string name="folder_fileWatcherDescription">Ber operativsystemet att meddela om ändringar i filer. Om inaktiverad faller tillbaka på periodiska skanningar varje timme.</string>
   <!--Setting title-->
   <string name="folder_pause">Pausa mapp</string>
   <!--Setting title-->
@@ -136,7 +136,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="folder_id_required">Mapp-ID får inte vara tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mapp-sökvägen får inte vara tom</string>
-  <string name="dialog_discard_changes">Kassera dina ändringar?</string>
+  <string name="dialog_discard_changes">Kasta dina ändringar?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
   <string name="folder_path_readonly">Din Android-version ger Syncthing endast skrivskyddad åtkomst till den valda mappen.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
@@ -217,9 +217,9 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
     <item>Växelström.</item>
     <item>Batteri.</item>
   </string-array>
-  <string name="respect_battery_saving_title">Respektera Android-batterisparinställning</string>
+  <string name="respect_battery_saving_title">Respektera batterisparinställning för Android</string>
   <string name="respect_battery_saving_summary">Inaktivera Syncthing om batterisparläge är aktivt.</string>
-  <string name="respect_master_sync_title">Respektera Androids \"Automatisk datasynkronisering\"-inställning</string>
+  <string name="respect_master_sync_title">Respektera \"Automatisk datasynkronisering\"-inställning för Android</string>
   <string name="respect_master_sync_summary">Inaktivera Syncthing när snabbinställning \"Automatisk datasynkronisering\" är avstängd.</string>
   <string name="run_in_flight_mode_title">Kör när enheten är i flygläge</string>
   <string name="run_in_flight_mode_summary">Aktivera om din enhet har problem med att upptäcka manuella Wi-Fi-anslutningar under flygläge.</string>
@@ -476,7 +476,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <!--Possible folder states-->
   <string name="state_idle">Inaktiv</string>
-  <string name="state_scanning">Uppdaterar</string>
+  <string name="state_scanning">Skannar</string>
   <string name="state_syncing">Synkroniserar (%1$d%%)</string>
   <string name="state_error">Fel</string>
   <string name="state_unknown">Okänd</string>
@@ -527,11 +527,11 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="versions_path_description">Sökväg där versioner ska lagras (lämna tom för standard .stversions-katalogen i den delade mappen).</string>
   <string name="cleanout_after_description">Antalet dagar att behålla filer i papperskorgen. Noll betyder för evigt</string>
   <string name="external_versioning_description">Den första kommandoradsparametern är mappsökvägen och den andra parametern är den relativa sökvägen i mappen.</string>
-  <string name="no_versioning_description">Välj en versioner-typ för att aktivera versionshantering.</string>
+  <string name="no_versioning_description">Välj en versionstyp för att aktivera versionshantering.</string>
   <!--Displays the current file versioning type in the Folder activity-->
   <string name="type_simple">Typ: Enkel</string>
   <string name="type_trashcan">Typ: Papperskorg</string>
-  <string name="type_staggered">Typ: Förskjutna</string>
+  <string name="type_staggered">Typ: Spridda</string>
   <string name="type_external">Typ: Extern</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="trashcan_versioning_info">Rensa upp efter: %1$s</string>
