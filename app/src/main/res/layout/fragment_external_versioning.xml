@@ -9,6 +9,7 @@
         android:layout_margin="10dp"
         android:text="@string/command"
         android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
