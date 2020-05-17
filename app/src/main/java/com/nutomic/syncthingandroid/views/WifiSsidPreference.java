@@ -9,8 +9,8 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
@@ -132,7 +132,12 @@ public class WifiSsidPreference extends MultiSelectListPreference {
         WifiManager wifiManager = (WifiManager)
                 getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null) {
-            List<WifiConfiguration> configuredNetworks = wifiManager.getConfiguredNetworks();
+            List<WifiConfiguration> configuredNetworks = null;
+            try {
+                configuredNetworks = wifiManager.getConfiguredNetworks();
+            } catch (SecurityException e) {
+                // See changes in Android Q, https://developer.android.com/reference/android/net/wifi/WifiManager.html#getConfiguredNetworks()
+            }
             // if WiFi is turned off, getConfiguredNetworks returns null on many devices
             if (configuredNetworks != null) {
                 WifiConfiguration[] result = configuredNetworks.toArray(new WifiConfiguration[configuredNetworks.size()]);

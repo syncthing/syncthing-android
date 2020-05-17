@@ -102,7 +102,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
             </LinearLayout>
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/introducer"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
@@ -112,7 +112,7 @@
                 android:drawableStart="@drawable/ic_phonelink_24dp"
                 android:text="@string/introducer" />
 
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/devicePause"
                 style="@style/Widget.Syncthing.TextView.Label.Details"
                 android:layout_width="match_parent"
