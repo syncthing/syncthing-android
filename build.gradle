@@ -14,10 +14,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.github.triplet.play' version '2.7.5'
-}
-
 allprojects {
     repositories {
         google()
