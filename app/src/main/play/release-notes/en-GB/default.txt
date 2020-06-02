@@ -1,1 +1,2 @@
-* Update Syncthing to v1.6.0-rc.4 ( https://github.com/syncthing/syncthing/releases/tag/v1.6.0-rc.4 )
+* Fix startup problem when running as root ( https://github.com/syncthing/syncthing-android/issues/1504 )
+* Update Syncthing to v1.6.0 ( https://github.com/syncthing/syncthing/releases/tag/v1.6.0 )
