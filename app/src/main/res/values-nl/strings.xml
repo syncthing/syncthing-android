@@ -1,50 +1,62 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Een open, betrouwbare en gedecentraliseerde applicatie voor bestandssynchronisatie.</string>
+  <string name="app_description">Een open, betrouwbare en gedecentraliseerde toepassing voor bestandssynchronisatie.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Welkom bij Syncthing voor Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
   <string name="introduction">Introductie</string>
-  <string name="welcome_text">Syncthing is een open-bron-bestandssynchronisatietoepassing.\n\
-Om gegevens met andere apparaten te delen moet je hun unieke apparaats-ID toevoegen aan de lijst met apparaten. Nadien kan je kiezen welke mappen je met welke apparaten wil delen.\n\
-Als je problemen tegenkomt, meld ze dan via GitHub.</string>
+  <string name="welcome_text">Syncthing is een open-source-bestandssynchronisatietoepassing.\n\
+Om gegevens met andere apparaten te delen, moet u hun unieke apparaat-ID\'s aan de apparatenlijst toevoegen. Daarna kunt u selecteren welke mappen u met welke apparaten wilt delen.\n\
+Meld eventuele problemen die u tegenkomt via Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Machtiging voor opslag</string>
+  <string name="storage_permission_desc">Syncthing moet toegang hebben tot uw opslag om bestandssynchronisatie uit te voeren.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Machtiging voor locatie</string>
+  <string name="location_permission_desc">Synchronisatie kan worden geconfigureerd om op geselecteerde Wi-Fi-netwerken te draaien. Voor Android moeten applicaties locatiebevoegdheden hebben om actieve Wi-Fi-netwerknamen te kunnen opzoeken, omdat de locatie van gebruikers soms kan worden afgeleid uit de naam van het netwerk waarmee ze verbonden zijn. Als u deze functie wilt gebruiken, drukt u op de knop hierboven om de gewenste locatiemachtigingen aan Syncthing te geven. Anders kunt u deze stap overslaan.</string>
   <!--Generic texts used everywhere-->
-  <string name="cont">Verder</string>
+  <string name="back">Terug</string>
+  <string name="cont">Doorgaan</string>
   <string name="finish">Voltooien</string>
   <string name="generic_example">Voorbeeld</string>
   <string name="generic_error">Fout</string>
+  <string name="grant_permission">Toestemming verlenen</string>
+  <string name="permission_granted">Toestemming verleend</string>
+  <string name="accept">Accepteren</string>
   <string name="ignore">Negeren</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Bevestigen om app af te slutien</string>
+  <string name="dialog_exit_while_running_as_service_message">Ter overweging: u heeft de app zo geconfigureerd dat deze automatisch start bij het opstarten. Daarom bewaakt hij op elk moment op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij wanneer de voorwaarden overeenkomen. U moet alleen handmatig stoppen als u ernstige problemen ondervindt. Anders schakelt u \'automatisch starten bij het opstarten\' uit in de instellingen. Wilt u nu stoppen totdat het apparaat opnieuw wordt opgestart?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Map toevoegen</string>
   <!--Title of the "share device id" menu action-->
   <string name="share_device_id">Apparaat-ID delen</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">Apparaat-ID versturen naar</string>
-  <string name="usage_reporting_dialog_title">Anoniem gebruiksrapportage toestaan?</string>
-  <string name="usage_reporting_dialog_description">Het versleuteld gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en applicatieversies te volgen. Indien de gerapporteerde gegevensset wordt veranderd zal je deze dialoog opnieuw te zien krijgen.\n\nDe geaggregeerde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_title">Anonieme gebruiksrapportage toestaan?</string>
+  <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden. Het wordt gebruikt om veelgebruikte platformen, mapgroottes en app-versies te volgen. Als de gerapporteerde dataset gewijzigd wordt, zal dit dialoogvenster opnieuw weergegeven worden.\n\nDe verzamelde statistieken zijn publiek beschikbaar op https://data.syncthing.net.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="open_website">Website openen</string>
-  <string name="toast_write_storage_permission_required">Schrijftoegang is vereist voor deze applicatie</string>
+  <string name="toast_write_storage_permission_required">Voor deze app is toestemming voor schrijven naar opslag nodig</string>
+  <string name="device_rejected">Apparaat \"%1$s\" wil verbinden</string>
+  <string name="folder_rejected">Apparaat \"%1$s\" wil de map \"%2$s\" delen</string>
   <string name="dialog_disable_battery_optimization_title">Batterijoptimalisatie</string>
-  <string name="dialog_disable_battery_optimization_message">Android kan je synchronisatie na een tijdje stoppen. Om dit te voorkomen kan je batterijoptimalisatie uitschakelen\n\nOp sommige apparaten staan extra apps voor beëindigen van taken, voeg Syncthing ook aan hun witte lijsten toe.</string>
+  <string name="dialog_disable_battery_optimization_message">Android kan de synchronisatie na enige tijd stoppen. Om dit te voorkomen, schakelt u de batterijoptimalisatie uit.\n\nOp sommige apparaten zijn er extra apps voor het beëindigen van taken voorgeïnstalleerd. U moet Syncthing ook toevoegen aan hun whitelist.</string>
   <string name="dialog_disable_battery_optimization_later">Later</string>
-  <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
-  <string name="dialog_disable_battery_optimization_turn_off">Zet uit voor Syncthing</string>
-  <string name="dialog_disable_battery_optimizations_not_supported">Je apparaat biedt geen ondersteuning voor het uitschakelen van batterijoptimalisatie</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer weergeven</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Uw apparaat biedt geen ondersteuning voor het uitschakelen van batterijoptimalisatie</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Laden…</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Bezig met aanmaken van veilige sleutels. Dit kan enkele minuten duren.</string>
-  <string name="syncthing_loading_slow_message">Syncthing is al erg lang bezig met opstarten. Controleer de logs op mogelijke fouten.</string>
+  <string name="web_gui_creating_key">Veilige sleutels genereren. Dit kan enkele minuten duren.</string>
+  <string name="syncthing_loading_slow_message">Het laden van Syncthing duurt erg lang. Gebruik de logboeken om te controleren op eventuele fouten.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Mappen</string>
   <!--Shown if no folders exist-->
@@ -54,6 +66,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
     <item quantity="one">%1$d / %2$d bestand</item>
     <item quantity="other">%1$d / %2$d bestanden</item>
   </plurals>
+  <string name="override_changes">Wijzigingen opheffen</string>
   <string name="open_file_manager">Bestandsbeheerder openen</string>
   <string name="toast_no_file_manager">Geen compatibele bestandsbeheerder gevonden</string>
   <!--DevicesFragment-->
@@ -63,7 +76,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Indicates that a folder is fully synced to the local device-->
   <string name="device_up_to_date">Bijgewerkt</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Bezig met synchroniseren (%1$d%%)</string>
+  <string name="device_syncing">Synchroniseren (%1$d %%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Niet verbonden</string>
   <!--Indicates that the device is paused and does not sync-->
@@ -75,9 +88,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Title for current upload rate-->
   <string name="upload_title">Upload</string>
   <!--StatusFragment-->
-  <string name="syncthing_starting">Syncthing start op.</string>
-  <string name="syncthing_running">Syncthing loopt.</string>
-  <string name="syncthing_not_running">Syncthing loopt niet.</string>
+  <string name="status_fragment_title">Status</string>
+  <string name="syncthing_starting">Syncthing wordt gestart.</string>
+  <string name="syncthing_running">Syncthing wordt uitgevoerd.</string>
+  <string name="syncthing_not_running">Syncthing wordt niet uitgevoerd.</string>
   <string name="syncthing_has_crashed">Syncthing is gecrasht.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
@@ -90,8 +104,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="ram_usage">RAM-gebrui</string>
   <!--Title for announce server status-->
   <string name="announce_server">Mededelingsserver</string>
-  <string name="restart">Herstarten</string>
-  <string name="dialog_confirm_restart">Wil je Syncthing herstarten?</string>
+  <string name="restart">Opnieuw starten</string>
+  <string name="dialog_confirm_restart">Wilt u Syncthing opnieuw starten?</string>
   <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">Map-ID</string>
@@ -100,8 +114,8 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Setting title-->
   <string name="directory">Map</string>
   <!--Setting title and description-->
-  <string name="folder_fileWatcher">Controleren op wijzigingen</string>
-  <string name="folder_fileWatcherDescription">Vraagt het besturingssysteem om meldingen over gewijzigde bestanden. Indien uitgeschakeld wordt elk uur gescand.</string>
+  <string name="folder_fileWatcher">Wijzigingen opvolgen</string>
+  <string name="folder_fileWatcherDescription">Vraagt het besturingssysteem om wijzigingen aan bestanden te melden. Indien uitgeschakeld wordt elk uur gescand.</string>
   <!--Setting title-->
   <string name="folder_pause">Map pauzeren</string>
   <!--Setting title-->
@@ -117,17 +131,17 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Creëren</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Weet je zeker dat je deze map van Syncthing wilt ontdoen?</string>
+  <string name="remove_folder_confirm">Wilt u deze map echt uit Syncthing verwijderen?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">De map-ID mag niet leeg zijn</string>
   <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Het mappad mag niet leeg zijn</string>
-  <string name="dialog_discard_changes">Wijzigingen verwerpen?</string>
+  <string name="folder_path_required">Het map-pad mag niet leeg zijn</string>
+  <string name="dialog_discard_changes">Uw wijzigingen verwerpen?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
   <!--Summary shown if we only have readwrite access to the folder path-->
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
-  <string name="ignore_patterns">Patronen negeren</string>
-  <string name="create_ignore_file_error">Aanmaken van ignore-bestand mislukt. Is de map schrijfbaar?</string>
+  <string name="ignore_patterns">Negeerpatronen</string>
+  <string name="create_ignore_file_error">Aanmaken van negeer-bestand mislukt. Kan naar de map geschreven worden?</string>
   <string name="edit_ignore_file_error">Geen tekstverwerker gevonden</string>
   <!--DeviceActivity-->
   <!--Setting title-->
@@ -143,11 +157,11 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Strings representing compression options-->
   <string-array name="compress_entries">
     <item>Nooit</item>
-    <item>Alleen metadata</item>
+    <item>Metadata</item>
     <item>Altijd</item>
   </string-array>
   <!--Setting title-->
-  <string name="introducer">Introduceerder</string>
+  <string name="introducer">Introductie-apparaat</string>
   <!--Setting title-->
   <string name="pause_device">Apparaat pauzeren</string>
   <!--ActionBar item-->
@@ -158,9 +172,9 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Apparaat bewerken</string>
   <!--Dialog shown when attempting to remove a device-->
-  <string name="remove_device_confirm">Weet je zeker dat je dit apparaat wil verwijderen?</string>
+  <string name="remove_device_confirm">Weet u zeker dat u dit apparaat wilt verwijderen?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">De apparaat-ID kan niet leeg zijn</string>
+  <string name="device_id_required">De apparaat-ID mag niet leeg zijn</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">QR-code scannen</string>
   <!--Toast show if we could not get root permissions-->
@@ -180,6 +194,9 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="category_experimental">Experimenteel</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Uitvoervoorwaarden</string>
+  <string name="run_conditions_summary">Gebruik de volgende opties om te bepalen wanneer Syncthing zal uitgevoerd worden.</string>
+  <string name="run_on_mobile_data_title">Uitvoeren via mobiele data</string>
+  <string name="run_on_wifi_title">Uitvoeren via wifi</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Geef de LOCATIE-toestemming om deze functie te gebruiken.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Toestemming vereist</string>
   <string name="respect_battery_saving_title">Eerbiedig de batterijbesparingsinstellingen van Android</string>
@@ -211,10 +228,10 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <string name="listen_address">Luisteradressen voor synchronisatieprotocol</string>
   <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
   <string name="max_send_kbps">Uitgaande snelheidslimiet (KiB/s)</string>
-  <string name="global_announce_enabled">Globale ontdekking</string>
-  <string name="local_announce_enabled">Lokale ontdekking</string>
+  <string name="global_announce_enabled">Globale detectie</string>
+  <string name="local_announce_enabled">Lokale detectie</string>
   <string name="enable_nat_traversal">NAT-traversal inschakelen</string>
-  <string name="global_announce_server">Globale ontdekkingsservers</string>
+  <string name="global_announce_server">Globale detectieservers</string>
   <string name="enable_relaying">Relayen inschakelen</string>
   <string name="usage_reporting">Anoniem gebruiksrapportage</string>
   <string name="gui_address">GUI-luisteradressen</string>
@@ -360,7 +377,7 @@ Als je problemen tegenkomt, meld ze dan via GitHub.</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing draait</string>
-  <string name="syncthing_disabled">Syncthing is niet aan</string>
+  <string name="syncthing_disabled">Syncthing is uitgeschakeld</string>
   <string name="syncthing_terminated">Syncthing is beëindigd</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Aanmaken van configuratiebestand mislukt</string>
