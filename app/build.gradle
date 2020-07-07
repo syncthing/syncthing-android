@@ -25,12 +25,12 @@ dependencies {
 
 android {
     // Changes to these values need to be reflected in `../docker/Dockerfile`
-    compileSdkVersion 29
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.0'
     ndkVersion = "${ndkVersionShared}"
 
     buildTypes.debug.applicationIdSuffix ".debug"
-    dataBinding.enabled = true
+    buildFeatures.dataBinding = true
 
     playConfigs {
         defaultAccountConfig {
@@ -40,7 +40,7 @@ android {
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 4290
         versionName "1.18.4-rc.2"
         testApplicationId 'com.nutomic.syncthingandroid.test'

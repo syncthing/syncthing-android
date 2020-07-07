@@ -21,6 +21,7 @@ Please report any problems you encounter via Github.</string>
     <!-- Slide 2 -->
     <string name="storage_permission_title">Storage Permission</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
+    <string name="dialog_all_files_access_not_supported">Your device does not support all files access</string>
 
     <!-- Slide 3 -->
     <string name="location_permission_title">Location Permission (background)</string>
