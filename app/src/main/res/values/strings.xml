@@ -550,7 +550,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="donate_summary">Help us pay for domains and hosting fees</string>
 
-    <string name="donate_url" translatable="false">https://syncthing.net/#donate</string>
+    <string name="donate_url" translatable="false">https://syncthing.net/donations/</string>
 
     <!-- Title of the preference showing upstream version name -->
     <string name="syncthing_version_title">Syncthing Version</string>
