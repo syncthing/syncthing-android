@@ -1,4 +1,4 @@
-Syncthing vervangt niet-vrije diensten door iets open, betrouwbaar en gedecentraliseerd. Uw gegevens behoren enkel u toe en u bepaalt waar ze worden opgeslagen, of ze gedeeld worden met een derde partij en hoe ze over het internet verzonden worden.
+Syncthing vervangt niet-vrije diensten door een open, betrouwbaar en gedecentraliseerd systeem. Uw gegevens behoren enkel u toe en u bepaalt waar ze worden opgeslagen, of ze gedeeld worden met een externe partij en hoe ze over het internet worden verstuurd.
 
 Website: https://syncthing.net/
 

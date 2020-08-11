@@ -7,17 +7,29 @@
   <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">소개</string>
   <string name="welcome_text">Syncthing은 오픈소스 파일 동기화 어플리케이션입니다.\n\
 다른 장치들과 데이터를 공유하기 위해서는 기기 목록에 고유 기기 ID를 추가해야 합니다. 그 후에 기기와 공유하는 폴더를 선택할 수 있습니다.\n\
 발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">저장소 권한</string>
+  <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">위치 권한</string>
+  <string name="location_permission_desc">Syncthing은 선택한 Wi-Fi 네트워크에서 실행되도록 동기화를 구성 할 수 있습니다. Android에서는 어플리케이션이 연결된 Wi-Fi 네트워크 이름을 조회 할 수 있도록 하려면 위치 권한이 필요합니다. 때로는 연결된 네트워크 이름에서 사용자 위치를 유추 할 수도 있습니다. 이 기능을 사용하려면 위의 버튼을 눌러 동기화에 필요한 위치 권한을 부여하십시오. 그렇지 않으면 이 단계를 건너 뛸 수 있습니다.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">뒤로</string>
   <string name="cont">계속</string>
   <string name="finish">완료</string>
+  <string name="generic_example">예제</string>
   <string name="generic_error">오류</string>
+  <string name="grant_permission">권한 부여</string>
+  <string name="permission_granted">권한 부여됨</string>
+  <string name="accept">승인</string>
+  <string name="ignore">거부</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">앱 종료 확인</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">폴더 추가</string>
   <!--Title of the "share device id" menu action-->
@@ -30,6 +42,8 @@
   <string name="no">아니오</string>
   <string name="open_website">웹사이트 열기</string>
   <string name="toast_write_storage_permission_required">스토리지 쓰기 권한이 필요합니다</string>
+  <string name="device_rejected">\"%1$s\" 장치가 연결을 원하고 있습니다</string>
+  <string name="folder_rejected">\"%1$s\" 장치가 \"%2$s\" 폴더를 공유하길 원하고 있습니다</string>
   <string name="dialog_disable_battery_optimization_title">배터리 최적화</string>
   <string name="dialog_disable_battery_optimization_message">안드로이드 운영체제는 시간이 지나면 동기화를 정지시킬 수도 있습니다. 이를 막기 위해 배터리 최적화 기능을 꺼주시기 바랍니다.\n\n몇몇 기기들은 추가적인 태스크 관리 앱이 선탑재되어 있습니다. 태스크 관리 앱의 신뢰목록에 등록함으로써 역시 문제를 해결하실 수 있습니다.</string>
   <string name="dialog_disable_battery_optimization_later">나중에</string>
@@ -50,6 +64,7 @@
   <plurals name="files">
     <item quantity="other">%1$d / %2$d 파일</item>
   </plurals>
+  <string name="open_file_manager">파일 매니저 열기</string>
   <string name="toast_no_file_manager">호환되는 파일 매니저를 찾을 수 없습니다</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">기기</string>
@@ -62,6 +77,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">연결 끊김</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">일시중지</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">알 수 없음</string>
   <!--Title for current download rate-->
@@ -69,6 +85,11 @@
   <!--Title for current upload rate-->
   <string name="upload_title">업로드</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">상태</string>
+  <string name="syncthing_starting">Syncthing 시작중.</string>
+  <string name="syncthing_running">Syncthing 작동중.</string>
+  <string name="syncthing_not_running">Syncthing 정지중.</string>
+  <string name="syncthing_has_crashed">Syncthing이 충돌함.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">다운로드됨:\u0020</string>
@@ -90,6 +111,7 @@
   <!--Setting title-->
   <string name="directory">디렉토리</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">변경 사항 감시</string>
   <!--Setting title-->
   <!--Setting title-->
   <string name="devices">기기</string>
@@ -363,6 +385,7 @@
   <string name="state_syncing">동기화 중 (%1$d%%)</string>
   <string name="state_error">오류</string>
   <string name="state_unknown">알 수 없음</string>
+  <string name="state_paused">일시중지</string>
   <string name="status_outofsync">동기화 오류</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
