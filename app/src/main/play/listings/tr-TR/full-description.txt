@@ -1,4 +1,4 @@
-Syncthing, açık, güvenilir ve merkezi olmayan yapısıyla özel mülkiyete tescil edilmiş eşzamanlama ve bulut servislerinin yerine geçebilecek bir seçenektir. Sizin veriniz yalnızca size ait olup; verinizi nerede saklayacağınız, üçüncü taraflarla paylaşıp paylaşmayacağınız, internet üzerinde ne şekilde aktaracağınız seçiminize bırakılmıştır.
+Syncthing, tescilli eşitleme ve bulut hizmetlerini açık, güvenilir ve merkezi olmayan bir şeyle değiştirir. Verileriniz yalnızca sizin verilerinizdir ve üçüncü bir tarafla paylaşılıp paylaşılmayacağını ve İnternet üzerinden nasıl iletileceğini, nerede saklanacağını seçme hakkına sahip olursunuz.
 
 Web sitesi: https://syncthing.net/
 
