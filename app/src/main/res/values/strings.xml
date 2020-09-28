@@ -380,6 +380,7 @@ Please report any problems you encounter via Github.</string>
     <string name="start_into_web_gui_summary">When starting the app, open web GUI instead of the main screen</string>
 
     <string name="preference_theme_title">Theme</string>
+    <string name="preference_theme_follow_system">Follow system</string>
     <string name="preference_theme_option_light">Light</string>
     <string name="preference_theme_option_dark">Dark</string>
 
