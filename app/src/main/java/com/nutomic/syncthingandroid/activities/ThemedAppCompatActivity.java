@@ -13,13 +13,14 @@ import com.nutomic.syncthingandroid.service.Constants;
  */
 public class ThemedAppCompatActivity extends AppCompatActivity {
 
-    private static final String LIGHT_THEME = "1";
+    private static final String FOLLOW_SYSTEM = "-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Load theme.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Integer prefAppTheme = Integer.parseInt(prefs.getString(Constants.PREF_APP_THEME, LIGHT_THEME));
+        //For api level below 28, Follow system fall backs to light mode
+        Integer prefAppTheme = Integer.parseInt(prefs.getString(Constants.PREF_APP_THEME, FOLLOW_SYSTEM));
         AppCompatDelegate.setDefaultNightMode(prefAppTheme);
         super.onCreate(savedInstanceState);
     }

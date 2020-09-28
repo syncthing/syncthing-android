@@ -6,7 +6,7 @@
         android:title="@string/preference_theme_title"
         android:entries="@array/theme_names"
         android:entryValues="@array/theme_values"
-        android:defaultValue="1"/> <!-- 1 is Light Theme -->
+        android:defaultValue="-1"/> <!-- -1 is Follow System -->
 
     <PreferenceScreen
         android:title="@string/category_run_conditions"
