@@ -154,6 +154,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
         </activity>
+        <activity android:name=".activities.QRScannerActivity"
+            android:label="QR Code Scanner"
+            android:parentActivityName=".activities.DeviceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nutomic.syncthingandroid.activities.DeviceActivity" />
+        </activity>
     </application>
 
 </manifest>
