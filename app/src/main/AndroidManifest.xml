@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <!-- ACCESS_FINE_LOCATION is required to get WiFi's SSID on 10 "Q" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- CAMERA is required for the QR Code Scanner -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="false"
