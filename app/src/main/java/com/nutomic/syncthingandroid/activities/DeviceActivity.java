@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -61,6 +62,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private static final String IS_SHOWING_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
     private static final String IS_SHOWING_COMPRESSION_DIALOG = "COMPRESSION_FOLDER_DIALOG_STATE";
     private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
+    private static final int QR_SCAN_REQUEST_CODE = 777;
 
     private static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
 
@@ -393,10 +395,14 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null) {
-            mDevice.deviceID = scanResult.getContents();
-            mIdView.setText(mDevice.deviceID);
+        if (requestCode == QR_SCAN_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String scanResult = intent.getStringExtra(QRScannerActivity.QR_RESULT_ARG);
+                if (scanResult != null) {
+                    mDevice.deviceID = scanResult;
+                    mIdView.setText(mDevice.deviceID);
+                }
+            }
         }
     }
 
@@ -448,8 +454,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         if (v.equals(mCompressionContainer)) {
             showCompressionDialog();
         } else if (v.equals(mQrButton)){
-            IntentIntegrator integrator = new IntentIntegrator(DeviceActivity.this);
-            integrator.initiateScan();
+            Intent qrIntent = QRScannerActivity.intent(this);
+            startActivityForResult(qrIntent, QR_SCAN_REQUEST_CODE);
         } else if (v.equals(mIdContainer)) {
             Util.copyDeviceId(this, mDevice.deviceID);
         }

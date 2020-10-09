@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <!-- ACCESS_FINE_LOCATION is required to get WiFi's SSID on 10 "Q" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- CAMERA is required for the QR Code Scanner -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="false"
@@ -95,9 +97,6 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
-        <activity android:name=".activities.RestartActivity"
-            android:theme="@style/Theme.Syncthing.Translucent"
-            android:launchMode="singleTop"/>
         <activity android:name=".activities.DeviceActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
@@ -153,6 +152,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nutomic.syncthingandroid.activities.FolderActivity" />
+        </activity>
+        <activity android:name=".activities.QRScannerActivity"
+            android:label="QR Code Scanner"
+            android:parentActivityName=".activities.DeviceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nutomic.syncthingandroid.activities.DeviceActivity" />
         </activity>
     </application>
 
