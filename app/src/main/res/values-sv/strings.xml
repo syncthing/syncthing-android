@@ -224,7 +224,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="run_in_flight_mode_title">Kör när enheten är i flygläge</string>
   <string name="run_in_flight_mode_summary">Aktivera om din enhet har problem med att upptäcka manuella Wi-Fi-anslutningar under flygläge.</string>
   <string name="service_settings_title">Tjänstinställning</string>
-  <string name="service_settings_summary">Kör Syncthing som en tjänst. Lägger till ett ihållande meddelande för att förhindra att den avslutas av Android. Om du kryssar i det här alternativet startas Syncthing på operativsystemets uppstart.</string>
+  <string name="service_settings_summary">Kör Syncthing som en tjänst. Lägger till ett ihållande meddelande för att förhindra att den avslutas av Android. Om du kryssar i det här alternativet startas Syncthing vid uppstart av operativsystemet.</string>
   <string name="run_as_background_service">Starta tjänsten automatiskt vid uppstart</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Använd avancerad mappväljare</string>
@@ -243,6 +243,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="start_into_web_gui_title">Starta direkt i webbgränssnittet</string>
   <string name="start_into_web_gui_summary">När du startar appen öppnar du webbgränssnittet istället för huvudskärmen</string>
   <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Följ systemet</string>
   <string name="preference_theme_option_light">Ljust</string>
   <string name="preference_theme_option_dark">Mörkt</string>
   <string name="pref_language_default">Standardspråk</string>
@@ -267,7 +268,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
     <item>Extern</item>
   </string-array>
   <string name="device_name">Enhetens namn</string>
-  <string name="listen_address">Synkroniseringsprotokollets lyssnaradresser</string>
+  <string name="listen_address">Lyssnaradresser för synkroniseringsprotokollet</string>
   <string name="max_recv_kbps">Inkommande hastighetsgräns (KiB/s)</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
   <string name="global_announce_enabled">Global annonsering</string>
@@ -276,7 +277,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="global_announce_server">Globala annonseringsservrar</string>
   <string name="enable_relaying">Aktivera reläa</string>
   <string name="usage_reporting">Anonym användningsrapportering</string>
-  <string name="gui_address">Gränssnittets lyssnaradresser</string>
+  <string name="gui_address">Lyssnaradresser för gränssnittet</string>
   <!--Titles for the preference to undo ignored devices and folders-->
   <string name="undo_ignored_devices_folders_title">Ångra ignorerande enheter och mappar</string>
   <string name="undo_ignored_devices_folders_question">Detta kommer att ångra tidigare beslut att ignorera enheter och mappar. Fortsätta?</string>
@@ -301,7 +302,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="toast_invalid_http_proxy_address">Inmatning bryter mot proxysyntaxen \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Använd legacy hashing</string>
   <string name="use_legacy_hashing_summary">Tvinga Syncthing att använda legacy hashningspaket för kompatibilitetsändamål</string>
-  <string name="restart_on_wakeup_title">Starta om på Vakna upp</string>
+  <string name="restart_on_wakeup_title">Starta om vid Vakna upp</string>
   <string name="restart_on_wakeup_summary">Standard: Aktiverad. Om du inaktiverar den här funktionen kan det resultera i försenade mappuppdateringar och återkopplingar av enheter för att spara batteri.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att hämta/ändra synkroniserade filer.</string>

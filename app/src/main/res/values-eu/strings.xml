@@ -241,6 +241,7 @@
   <string name="start_into_web_gui_title">Hasi zuzenean GUI webean</string>
   <string name="start_into_web_gui_summary">Aplikazioa hastean, ireki GUI weba pantaila nagusiaren ordez</string>
   <string name="preference_theme_title">Gaia</string>
+  <string name="preference_theme_follow_system">Jarraitu sistema</string>
   <string name="preference_theme_option_light">Argia</string>
   <string name="preference_theme_option_dark">Iluna</string>
   <string name="pref_language_default">Hizkuntza lehenetsia</string>

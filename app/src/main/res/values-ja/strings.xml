@@ -242,6 +242,7 @@
   <string name="start_into_web_gui_title">Web GUI に直接起動する</string>
   <string name="start_into_web_gui_summary">アプリを起動するとき、メイン画面ではなく Web GUI を開きます</string>
   <string name="preference_theme_title">テーマ</string>
+  <string name="preference_theme_follow_system">システムに従う</string>
   <string name="preference_theme_option_light">ライト</string>
   <string name="preference_theme_option_dark">ダーク</string>
   <string name="pref_language_default">デフォルトの言語</string>

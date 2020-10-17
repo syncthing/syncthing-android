@@ -30,6 +30,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Confirmare ieșire din aplicație</string>
+  <string name="dialog_exit_while_running_as_service_message">Tineți cont: ați configurat aplicația să pornească automat la pornire. Prin urmare, monitorizează condițiile de executare și sincronizează în orice moment în fundal atunci când condițiile se potrivesc. Ar trebui să închideți manual numai dacă aveți probleme grave. Altfel dezactivați \'Start automat la pornire\' în setări. Închideți acum până când dispozitivul se repornește?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adăugare director</string>
   <!--Title of the "share device id" menu action-->
@@ -243,6 +244,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="start_into_web_gui_title">Pornire direct în interfața web</string>
   <string name="start_into_web_gui_summary">Când aplicația pornește se deschide direct interfața web în loc de ecranul principal</string>
   <string name="preference_theme_title">Temă</string>
+  <string name="preference_theme_follow_system">Setarea sistemului</string>
   <string name="preference_theme_option_light">Luminoasă</string>
   <string name="preference_theme_option_dark">Întunecată</string>
   <string name="pref_language_default">Limba implicită</string>

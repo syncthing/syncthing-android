@@ -46,7 +46,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="device_rejected">\"%1$s\" cihazı bağlanmak istiyor</string>
   <string name="folder_rejected">\"%1$s\" cihazı \"%2$s\" klasörünü paylaşmak istiyor</string>
   <string name="dialog_disable_battery_optimization_title">Pil İyileştirme</string>
-  <string name="dialog_disable_battery_optimization_message">Android bir süre sonra eşitlemeyi durdurabilir. Bunu önlemek için pil iyileştirmesini kapatın.\n\nBazı cihazlarda önceden yüklenmiş ek görev sonlandırma uygulamaları vardır. Beyaz listelerine de Syncthing eklemelisiniz.</string>
+  <string name="dialog_disable_battery_optimization_message">Android bir süre sonra eşitlemeyi durdurabilir. Bunu önlemek için pil iyileştirmesini kapatın.\n\nBazı cihazlarda önceden yüklenmiş ek görev sonlandırma uygulamaları vardır. Beyaz listelerine de Syncthing\'i eklemelisiniz.</string>
   <string name="dialog_disable_battery_optimization_later">Daha sonra sor</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Bir daha gösterme</string>
   <string name="dialog_disable_battery_optimization_turn_off">Syncthing için kapat</string>
@@ -243,6 +243,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="start_into_web_gui_title">Doğrudan web GKA içinde başlat</string>
   <string name="start_into_web_gui_summary">Uygulamayı başlatırken, ana ekran yerine web Grafiksel Kullanıcı Arayüzü\'nü açar</string>
   <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Sistemi takip et</string>
   <string name="preference_theme_option_light">Açık</string>
   <string name="preference_theme_option_dark">Koyu</string>
   <string name="pref_language_default">Varsayılan Dil</string>
@@ -304,7 +305,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="restart_on_wakeup_title">Uyanmada yeniden başlat</string>
   <string name="restart_on_wakeup_summary">Varsayılan: Etkinleştirildi. Bu özelliğin etkisizleştirilmesi, klasör taramalarına ve cihazın pilden tasarruf etmek için yeniden bağlanmasının gecikmesine neden olabilir.</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musun? Var olan dosyaların üzerine yazılacak.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme yapılan yerden okuyabilir ve eşzamanlaması yapılan dosyaları indirmek/değiştirmek için kullanabilir.</string>
+  <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz? Varolan dosyaların üzerine yazılacaktır.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Yeni bir yapılandırmayı gerçekten içe aktarmak istiyor musunuz? Varolan dosyaların üzerine yazılacaktır.</string>
   <!--Toast shown after config was successfully exported-->
