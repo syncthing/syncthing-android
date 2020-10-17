@@ -1,2 +1,2 @@
-*  Add Internal Activity for QR Code Scanner ( https://github.com/syncthing/syncthing-android/pull/1556 )
+* Add Internal Activity for QR Code Scanner ( https://github.com/syncthing/syncthing-android/pull/1556 )
 * Update Syncthing to v1.11.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.11.0-rc.1 )
