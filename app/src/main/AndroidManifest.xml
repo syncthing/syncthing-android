@@ -34,6 +34,7 @@
         android:description="@string/app_description"
         android:supportsRtl="true"
         android:installLocation="internalOnly"
+        android:requestLegacyExternalStorage="true"
         android:name=".SyncthingApp">
         <activity
                 android:name=".activities.FirstStartActivity"
