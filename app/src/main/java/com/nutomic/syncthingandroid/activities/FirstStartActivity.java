@@ -39,8 +39,7 @@ import javax.inject.Inject;
 public class FirstStartActivity extends Activity {
 
     private static String TAG = "FirstStartActivity";
-    private static final int REQUEST_COARSE_LOCATION = 141;
-    private static final int REQUEST_WRITE_STORAGE = 142;
+
     private static final int SLIDE_POS_LOCATION_PERMISSION = 1;
 
     private ViewPager mViewPager;
@@ -300,8 +299,8 @@ public class FirstStartActivity extends Activity {
      */
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                REQUEST_COARSE_LOCATION);
+                Constants.getLocationPermissions(),
+                Constants.PermissionRequestType.LOCATION.ordinal());
     }
 
     private boolean haveStoragePermission() {
@@ -313,23 +312,32 @@ public class FirstStartActivity extends Activity {
     private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                REQUEST_WRITE_STORAGE);
+                Constants.PermissionRequestType.STORAGE.ordinal());
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_COARSE_LOCATION:
-                if (grantResults.length == 0 ||
-                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.i(TAG, "User denied ACCESS_COARSE_LOCATION permission.");
-                } else {
+        switch (Constants.PermissionRequestType.values()[requestCode]) {
+            case LOCATION:
+                boolean granted = grantResults.length != 0;
+                if (!granted) {
+                    Log.i(TAG, "No location permission in request-result");
+                    break;
+                }
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        Log.i(TAG, "User granted permission: " + permissions[i]);
+                    } else {
+                        granted = false;
+                        Log.i(TAG, "User denied permission: " + permissions[i]);
+                    }
+                }
+                if (granted) {
                     Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "User granted ACCESS_COARSE_LOCATION permission.");
                 }
                 break;
-            case REQUEST_WRITE_STORAGE:
+            case STORAGE:
                 if (grantResults.length == 0 ||
                         grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Log.i(TAG, "User denied WRITE_EXTERNAL_STORAGE permission.");

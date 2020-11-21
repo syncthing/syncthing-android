@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.service;
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
@@ -48,10 +49,29 @@ public class Constants {
     public static final String FOLDER_TYPE_RECEIVE_ONLY         = "receiveonly";
 
     /**
-     * On Android 8.1, ACCESS_COARSE_LOCATION is required to access WiFi SSID.
-     * This is the request code used when requesting the permission.
+     * These are the request codes used when requesting the permissions.
      */
-    public static final int PERM_REQ_ACCESS_COARSE_LOCATION = 999; // for issue #999
+    public enum PermissionRequestType {
+        LOCATION, STORAGE
+    }
+
+    public static String[] getLocationPermissions() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) { // before android 9
+            return new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            };
+        }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) { // android 9
+            return new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            };
+        }
+        return new String[]{  // after android 9
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+        };
+    }
+
 
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).
