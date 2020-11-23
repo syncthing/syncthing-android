@@ -55,6 +55,10 @@ public class Constants {
         LOCATION, STORAGE
     }
 
+    /**
+     * Returns the location permissions required to access wifi SSIDs depending
+     * on the respective Android version.
+     */
     public static String[] getLocationPermissions() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) { // before android 9
             return new String[]{
