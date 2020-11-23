@@ -324,6 +324,7 @@ Please report any problems you encounter via Github.</string>
     <string name="run_on_all_wifi_networks">Run on all Wi-Fi networks.</string>
 
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Please turn on Wi-Fi to select networks.</string>
+    <string name="sync_only_wifi_ssids_connect_to_wifi">Please connect to a Wi-Fi to add it to the list.</string>
 
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">You need to grant LOCATION permission to use this feature.</string>
 

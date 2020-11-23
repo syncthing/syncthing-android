@@ -69,21 +69,30 @@ public class WifiSsidPreference extends MultiSelectListPreference {
         selected = new HashSet<>(selected);
         List<String> all = new ArrayList<>(selected);
 
+        boolean connected = false;
         WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null) {
             WifiInfo info = wifiManager.getConnectionInfo();
             if (info != null) {
                 String ssid = info.getSSID();
-                if (ssid != "" && !selected.contains(ssid)) {
+                // api lvl 30 will have WifiManager.UNKNOWN_SSID
+                if (ssid != "" && !ssid.contains("unknown ssid") && !selected.contains(ssid)) {
                     all.add(ssid);
+                    connected = true;
                 }
             }
         }
-                
-        setEntries(stripQuotes(all)); // display without surrounding quotes
-        setEntryValues(all.toArray(new CharSequence[all.size()])); // the value of the entry is the SSID "as is"
-        setValues(selected); // the currently selected values (without meanwhile deleted networks)
-        super.showDialog(state);
+
+        if (!connected) {
+            Toast.makeText(context, R.string.sync_only_wifi_ssids_connect_to_wifi, Toast.LENGTH_LONG).show();
+        }
+
+        if (all.size() > 0 ) {
+            setEntries(stripQuotes(all)); // display without surrounding quotes
+            setEntryValues(all.toArray(new CharSequence[all.size()])); // the value of the entry is the SSID "as is"
+            setValues(selected); // the currently selected values (without meanwhile deleted networks)
+            super.showDialog(state);
+        }
 
         String[] perms = Constants.getLocationPermissions();
         boolean granted = true;
