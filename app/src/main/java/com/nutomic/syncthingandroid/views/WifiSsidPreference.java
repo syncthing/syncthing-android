@@ -76,15 +76,22 @@ public class WifiSsidPreference extends MultiSelectListPreference {
             if (info != null) {
                 String ssid = info.getSSID();
                 // api lvl 30 will have WifiManager.UNKNOWN_SSID
-                if (ssid != "" && !ssid.contains("unknown ssid") && !selected.contains(ssid)) {
-                    all.add(ssid);
+                if (ssid != null && ssid != "" && !ssid.contains("unknown ssid")) {
+                    if (!selected.contains(ssid)) {
+                        all.add(ssid);
+                    }
                     connected = true;
                 }
             }
         }
 
+        boolean hasPerms = hasLocationPermissions();
         if (!connected) {
-            Toast.makeText(context, R.string.sync_only_wifi_ssids_connect_to_wifi, Toast.LENGTH_LONG).show();
+            if (!hasPerms) {
+                Toast.makeText(context, R.string.sync_only_wifi_ssids_need_to_grant_location_permission, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, R.string.sync_only_wifi_ssids_connect_to_wifi, Toast.LENGTH_LONG).show();
+            }
         }
 
         if (all.size() > 0 ) {
@@ -94,23 +101,23 @@ public class WifiSsidPreference extends MultiSelectListPreference {
             super.showDialog(state);
         }
 
+        if (!hasPerms && context instanceof Activity) {
+            Activity activity = (Activity) context;
+            ActivityCompat.requestPermissions(activity, Constants.getLocationPermissions(), Constants.PermissionRequestType.LOCATION.ordinal());
+        }
+    }
+
+    /**
+     * Checks if the required location permissions to obtain WiFi SSID are granted.
+     */
+    private boolean hasLocationPermissions() {
         String[] perms = Constants.getLocationPermissions();
-        boolean granted = true;
         for (int i = 0; i < perms.length; i++) {
-            if (ContextCompat.checkSelfPermission(context, perms[i]) != PackageManager.PERMISSION_GRANTED) {
-                granted = false;
-                break;
+            if (ContextCompat.checkSelfPermission(getContext(), perms[i]) != PackageManager.PERMISSION_GRANTED) {
+                return false;
             }
         }
-        if (!granted) {
-            if (context instanceof Activity) {
-                Activity activity = (Activity) context;
-                ActivityCompat.requestPermissions(activity, perms, Constants.PermissionRequestType.LOCATION.ordinal());
-                this.getDialog().dismiss(); // wait for result
-            } else {
-                Toast.makeText(context, R.string.sync_only_wifi_ssids_need_to_grant_location_permission, Toast.LENGTH_LONG).show();
-            }
-        }
+        return true;
     }
 
     /**
