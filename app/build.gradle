@@ -25,8 +25,8 @@ dependencies {
 
 android {
     // Changes to these values need to be reflected in `.travis.yml`
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
 
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true
@@ -39,7 +39,7 @@ android {
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 4253
         versionName "1.11.1"
         testApplicationId 'com.nutomic.syncthingandroid.test'

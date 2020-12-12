@@ -66,20 +66,22 @@ public class SettingsActivity extends SyncthingActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        // On Android 8.1, ACCESS_COARSE_LOCATION is required, see issue #999
-        if (requestCode == Constants.PERM_REQ_ACCESS_COARSE_LOCATION) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (Manifest.permission.ACCESS_COARSE_LOCATION.equals(permissions[i])) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        this.startService(new Intent(this, SyncthingService.class)
-                                .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
-                    } else {
-                        Util.getAlertDialogBuilder(this)
-                                .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
-                                .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
-                                .setPositiveButton(android.R.string.ok, null).show();
-                    }
+        if (requestCode == Constants.PermissionRequestType.LOCATION.ordinal()) {
+            boolean granted = grantResults.length > 0;
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    granted = false;
+                    break;
                 }
+            }
+            if (granted) {
+                this.startService(new Intent(this, SyncthingService.class)
+                        .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
+            } else {
+                Util.getAlertDialogBuilder(this)
+                    .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
+                    .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
+                    .setPositiveButton(android.R.string.ok, null).show();
             }
         }
     }

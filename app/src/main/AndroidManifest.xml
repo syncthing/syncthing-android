@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <!-- ACCESS_FINE_LOCATION is required to get WiFi's SSID on 10 "Q" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- ACCESS_BACKGROUND_LOCATION is required to get WiFi's SSID on 10 "Q" -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <!-- CAMERA is required for the QR Code Scanner -->
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -34,6 +36,7 @@
         android:description="@string/app_description"
         android:supportsRtl="true"
         android:installLocation="internalOnly"
+        android:requestLegacyExternalStorage="true"
         android:name=".SyncthingApp">
         <activity
                 android:name=".activities.FirstStartActivity"
