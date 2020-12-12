@@ -208,6 +208,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="run_on_whitelisted_wifi_networks">Yalnızca seçilen kablosuz (Wi-Fi) ağlarda çalışır: %1$s</string>
   <string name="run_on_all_wifi_networks">Tüm kablosuz (Wi-Fi) ağlarda çalışır.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağları seçmek için lütfen kablosuzu (Wi-Fi) açın.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Listeye eklemek için lütfen bir kablosuza (Wi-Fi) bağlanın.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bu özelliği kullanmak için KONUM izni vermeniz gerekiyor.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">İzin gerekli</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1\'den başlayarak, kablosuz (Wi-Fi) adını okuyabilmek için konum erişimi gereklidir. Bu özelliği yalnızca bu izni verirseniz kullanabilirsiniz.</string>

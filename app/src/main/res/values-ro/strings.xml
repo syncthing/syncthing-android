@@ -209,6 +209,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="run_on_whitelisted_wifi_networks">Rulează numai prin anumite rețele Wi-Fi: %1$s</string>
   <string name="run_on_all_wifi_networks">Rulează prin toate rețelele Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Vă rugăm să activați Wi-Fi pentru a selecta rețelele.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Vă rugăm să vă conectați la o rețea Wi-Fi pentru a o putea adăuga la listă.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Trebuie să permiteți accesul la LOCAȚIE pentru a putea folosi această caracteristică.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Necesită permisiunea</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Începând cu Android 8.1, este necesar accesul la locație pentru a putea citii numele rețelei Wi-Fi. Această caracteristică poate fi folosită doar dacă acordați această permisiune.</string>

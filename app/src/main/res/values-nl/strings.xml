@@ -208,6 +208,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="run_on_whitelisted_wifi_networks">Synchroniseer alleen via bepaalde Wi-Fi-netwerken: %1$s</string>
   <string name="run_on_all_wifi_networks">Synchroniseer via alle Wi-Fi-netwerken.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel Wi-Fi in om netwerken te selecteren.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Verbind met een wifi-netwerk om het aan de lijst toe te voegen.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Verleen de LOCATIE-machtiging om deze functie te gebruiken.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Machtiging benodigd</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Sinds Android 8.1 is de locatiemachtiging benodigd om de naam van het Wi-Fi-netwerk uit te lezen. U kunt deze functie alleen gebruiken als u deze machtiging verleent.</string>

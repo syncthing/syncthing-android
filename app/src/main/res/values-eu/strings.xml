@@ -206,6 +206,7 @@
   <string name="run_on_whitelisted_wifi_networks">Exekutatu bakarrik aukeratutako WI-FI sareetan: %1$s</string>
   <string name="run_on_all_wifi_networks">Exekutatu Wi-Fi sare guztietan.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Aktibatu Wi-Fia sareak hautatzeko.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Konektatu Wi-Fi batera zerrendan gehitzeko.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Kokapenari baimena eman behar diozu funtzio hori erabiltzeko.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Baimena beharrezkoa da</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1etik aurrera, Wi-Fi konexioaren izena irakurri ahal izateko kokalekurako sarbidea behar da. Bakarrik baimen hori ematen baduzu  erabil dezakezu funtzio hori.</string>
