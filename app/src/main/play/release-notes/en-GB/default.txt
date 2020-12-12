@@ -1,2 +1,3 @@
-* Add Internal Activity for QR Code Scanner ( https://github.com/syncthing/syncthing-android/pull/1556 )
-* Update Syncthing to v1.11.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.11.1 )
+* Target android 10 / sdk 29
+Nothing changes regarding storage access (still using legacy storage, not scoped). Newly imposed limitations on accessing configured wifi SSIDs means you cannot choose from those anymore, but can only add the one you are currently connected to. For details see https://github.com/syncthing/syncthing-android/pull/1575
+* Update Syncthing to v1.12.1-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.12.1-rc.1 )
