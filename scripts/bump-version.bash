@@ -40,4 +40,8 @@ OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle" | awk '{print $2}')
 sed -i "s/$OLD_VERSION_NAME/\"$1\"/" "app/build.gradle"
 git add "app/build.gradle" $CHANGELOG
 git commit -m "Bumped version to $NEW_VERSION_NAME"
-git tag -a ${NEW_VERSION_NAME}
+git tag -a ${NEW_VERSION_NAME} -m "
+$NEW_VERSION_NAME
+
+$(cat $CHANGELOG)
+"
