@@ -20,16 +20,19 @@ RUN mkdir -p /opt/android-sdk && cd /opt/android-sdk && \
 ENV ANDROID_HOME /opt/android-sdk
 
 # Accept the SDK license, as we can't install packages otherwise
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses > /dev/null
+
+# NDK version (r22 fails to build)
+ENV NDK_VERSION 21.4.7075529
 
 # Install other android packages, including NDK
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" ndk-bundle
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" "ndk;${NDK_VERSION}"
 
 # Accept licenses of newly installed packages
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
 # Setup the NDK path
-ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk-bundle
+ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk/${NDK_VERSION}
 
 # Enable prebuild mode
 ENV SYNCTHING_ANDROID_PREBUILT 1
