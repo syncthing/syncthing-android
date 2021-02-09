@@ -208,6 +208,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="run_on_whitelisted_wifi_networks">Esegui solo su reti Wi-Fi selezionate: %1$s</string>
   <string name="run_on_all_wifi_networks">Esegui su tutte le reti Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Attiva il Wi-Fi per selezionare le reti.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Connettiti ad una Wi-Fi per aggiungerla all\'elenco.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">È necessario concedere l\'autorizzazione alla LOCALIZZAZIONE per utilizzare questa funzione.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Autorizzazione richiesta</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partire da Android 8.1, è necessario l\'accesso alla posizione per poter leggere il nome del Wi-Fi. È possibile utilizzare questa funzionalità solo se si concede questa autorizzazione.</string>
@@ -243,6 +244,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="start_into_web_gui_title">Avvia direttamente nell\'Interfaccia Web</string>
   <string name="start_into_web_gui_summary">Quando si avvia l\'applicazione, apre l\'Interfaccia Web invece che la schermata principale</string>
   <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Predefinito di sistema</string>
   <string name="preference_theme_option_light">Chiaro</string>
   <string name="preference_theme_option_dark">Scuro</string>
   <string name="pref_language_default">Lingua di default</string>

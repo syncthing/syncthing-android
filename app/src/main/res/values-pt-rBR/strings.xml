@@ -95,8 +95,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Setting title-->
   <string name="directory">Pasta</string>
   <!--Setting title and description-->
-  <string name="folder_fileWatcher">observe as mudanças</string>
-  <string name="folder_fileWatcherDescription">Pede ao sistema em operação para notificar sobre mudanças em arquivos. Se desabilitado cai para uma varredura periódica por hora.</string>
+  <string name="folder_fileWatcher">Observar alterações</string>
+  <string name="folder_fileWatcherDescription">Pede ao sistema operacional para notificar sobre mudanças em arquivos. Se desativado, a verificação periódica volta a ser feita de hora em hora.</string>
   <!--Setting title-->
   <string name="folder_pause">Repositório pausado</string>
   <!--Setting title-->
