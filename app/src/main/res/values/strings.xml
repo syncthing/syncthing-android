@@ -23,8 +23,8 @@ Please report any problems you encounter via Github.</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
 
     <!-- Slide 3 -->
-    <string name="location_permission_title">Location Permission</string>
-    <string name="location_permission_desc">Syncthing can be configured to run on selected Wi-Fi networks. Android requires applications to have location permissions to be able look up active Wi-Fi network name, as you can sometimes infer users location from the name of the network they are connected to. If you want to use this feature, press the button above to give the required location permissions to Syncthing. Otherwise you can skip this step.</string>
+    <string name="location_permission_title">Location Permission (background)</string>
+    <string name="location_permission_desc">Syncthing can be configured to synchronize on selected Wi-Fi networks only. To do that it needs to look up the SSID of the currently connected Wi-Fi, also when the app is closed. Therefore it requires permission to access the location in the background. This information is not used to look up your location. And the only stored information is the Wi-Fi you manually choose to add to the list - no other user data is stored.\n\n If you want to use this feature, press the button above to grant the required permissions to Syncthing. Otherwise you can skip this step.</string>
 
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
@@ -553,6 +553,10 @@ Please report any problems you encounter via Github.</string>
     <string name="donate_summary">Help us pay for domains and hosting fees</string>
 
     <string name="donate_url" translatable="false">https://syncthing.net/donations/</string>
+
+    <!-- Menu item linking privacy policy -->
+    <string name="privacy_title">Privacy Policy</string>
+    <string name="privacy_summary">Open the Syncthing-Android privacy policy</string>
 
     <!-- Title of the preference showing upstream version name -->
     <string name="syncthing_version_title">Syncthing Version</string>

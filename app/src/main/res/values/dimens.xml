@@ -10,5 +10,7 @@
     <dimen name="slide_title">30sp</dimen>
     <dimen name="slide_desc">16sp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+    <dimen name="desc_marginTop">20dp</dimen>
+    <dimen name="desc_paddingBottom">80dp</dimen>
     <dimen name="button_height">44dp</dimen>
 </resources>
