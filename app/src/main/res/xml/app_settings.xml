@@ -304,6 +304,14 @@
         </Preference>
 
         <Preference
+            android:title="@string/privacy_title"
+            android:summary="@string/privacy_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md" />
+        </Preference>
+
+        <Preference
             android:key="syncthing_version"
             android:title="@string/syncthing_version_title" />
 
