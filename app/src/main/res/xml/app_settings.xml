@@ -308,7 +308,7 @@
             android:summary="@string/privacy_summary">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md" />
+                android:data="@string/privacy_policy_url" />
         </Preference>
 
         <Preference
