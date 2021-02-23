@@ -352,6 +352,7 @@
   <string name="donate_summary">Lagundu web zerbitzari eta domeinuen gastuak ordaintzen</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">Pribatutasun politika</string>
+  <string name="privacy_summary">Androidearen pribatutasun-politika irekia, datu pertsonalen erabilera (edozein izanda ere) estaltzen duena, adibidez, kokapena.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing bertsioa</string>
   <!--Title of the preference showing this app's version name-->

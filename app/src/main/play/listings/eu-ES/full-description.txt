@@ -8,4 +8,4 @@ Foroa: https://forum.syncthing.net/
 
 Arazoak: https://github.com/syncthing/syncthing-android/issues
 
-Pribatutasun politika: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md
+Pribatutasun-politika: https://syncthing.net/android-privacy-policy

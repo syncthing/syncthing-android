@@ -8,4 +8,4 @@ Syncthing е заместник на комерсиални услуги за с
 
 Проблеми: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md
+Privacy-policy: https://syncthing.net/android-privacy-policy

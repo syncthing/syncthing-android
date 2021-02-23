@@ -8,4 +8,4 @@ Fórum: https://forum.syncthing.net/
 
 Hlášení chyb: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md
+Privacy-policy: https://syncthing.net/android-privacy-policy
