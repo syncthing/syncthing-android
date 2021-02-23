@@ -7,3 +7,5 @@ Syncthing 用開放、可靠及去中心化的服務，來取代專有的同步�
 論壇：https://forum.syncthing.net/
 
 問題回報：https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md

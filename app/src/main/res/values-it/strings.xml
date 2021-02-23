@@ -15,8 +15,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="storage_permission_title">Autorizzazione di archiviazione</string>
   <string name="storage_permission_desc">Syncthing deve accedere allo spazio di archiviazione per eseguire la sincronizzazione dei file.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Permesso di localizzazione</string>
-  <string name="location_permission_desc">Syncthing può essere configurato per funzionare su reti Wi-Fi selezionate. Android richiede che le applicazioni dispongano di autorizzazioni di localizzazione per poter cercare il nome della rete Wi-Fi attiva, poiché a volte è possibile dedurre la posizione degli utenti dal nome della rete a cui sono connessi. Se si desidera utilizzare questa funzione, premere il pulsante sopra per fornire i permessi di posizione richiesti a Syncthing. Altrimenti puoi saltare questo passaggio.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Indietro</string>
   <string name="cont">Continua</string>
@@ -354,6 +352,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Donazione</string>
   <string name="donate_summary">Aiutaci a pagare i costi di domini ed hosting</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versione Syncthing</string>
   <!--Title of the preference showing this app's version name-->

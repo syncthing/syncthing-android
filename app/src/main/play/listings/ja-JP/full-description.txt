@@ -7,3 +7,5 @@ Webサイト: https://syncthing.net/
 フォーラム: https://forum.syncthing.net/
 
 問題: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md

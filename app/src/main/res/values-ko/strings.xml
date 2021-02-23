@@ -15,8 +15,6 @@
   <string name="storage_permission_title">저장소 권한</string>
   <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">위치 권한</string>
-  <string name="location_permission_desc">Syncthing은 선택한 Wi-Fi 네트워크에서 실행되도록 동기화를 구성 할 수 있습니다. Android에서는 어플리케이션이 연결된 Wi-Fi 네트워크 이름을 조회 할 수 있도록 하려면 위치 권한이 필요합니다. 때로는 연결된 네트워크 이름에서 사용자 위치를 유추 할 수도 있습니다. 이 기능을 사용하려면 위의 버튼을 눌러 동기화에 필요한 위치 권한을 부여하십시오. 그렇지 않으면 이 단계를 건너 뛸 수 있습니다.</string>
   <!--Generic texts used everywhere-->
   <string name="back">뒤로</string>
   <string name="cont">계속</string>
@@ -276,6 +274,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">기부하기</string>
   <string name="donate_summary">도메인과 호스팅 요금을 위해 저희를 도와주세요</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 버전</string>
   <!--Title of the preference showing this app's version name-->

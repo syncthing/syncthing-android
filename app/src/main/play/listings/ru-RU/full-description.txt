@@ -7,3 +7,5 @@ Syncthing заменяет закрытые частные сервисы и о�
 Форум: https://forum.syncthing.net/
 
 Замечания: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

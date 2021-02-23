@@ -202,6 +202,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">Quyên góp</string>
   <string name="donate_summary">Xin hỗ trợ chúng tôi phí tên miền và dịch vụ</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Phiên bản Syncthing</string>
   <!--Title of the preference showing this app's version name-->

@@ -17,8 +17,6 @@ Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</stri
   <string name="storage_permission_title">Tárhely jogosultság</string>
   <string name="storage_permission_desc">A szinkronizáláshoz a Syncthingnek hozzáférésre van szüksége a tárhelyhez.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Helyi jogosutság</string>
-  <string name="location_permission_desc">A Syncthing beállítható úgy, a kiválasztott Wi-Fi hálózatokon fusson. Az Android az aktív Wi-Fi hálózat nevének lekéréshez megköveteli az alkalmazásoktól, hogy rendelkezzen helyhez való hozzáféréssel, ahogy néha következtetni felhasználók helyét a hálózat nevét, amelyhez csatlakoztatva vannak, mivel néha el lehet végezni a felhasználók helyének meghatározását a hálózat nevéből, amelyhez kapcsolódnak. Ha használni szeretnéd ezt a funkciót, nyomd meg a fenti gombot, hogy megadhasd a szükséges helymeghatározási jogosultságokat. Ellenkező esetben kihagyhatod ezt a lépést.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Vissza</string>
   <string name="cont">Folytatás</string>
@@ -348,6 +346,7 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <!--Menu item to donate-->
   <string name="donate_title">Támogatás</string>
   <string name="donate_summary">Segíts a domain és hosting költségek fedezésében</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing verzió</string>
   <!--Title of the preference showing this app's version name-->

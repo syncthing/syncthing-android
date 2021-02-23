@@ -7,3 +7,5 @@ Syncthing은 기존의 사유(私有) 동기화 / 클라우드를 대체하는 �
 포럼: https://forum.syncthing.net/
 
 문제 제기: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

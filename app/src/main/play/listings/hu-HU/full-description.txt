@@ -7,3 +7,5 @@ Forráskód: https://github.com/syncthing/syncthing-android
 Fórum: https://forum.syncthing.net/
 
 Hibajelentés: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md

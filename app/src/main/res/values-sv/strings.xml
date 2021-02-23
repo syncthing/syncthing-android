@@ -15,8 +15,6 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="storage_permission_title">Lagringsbehörighet</string>
   <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att utföra filsynkronisering.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Platsbehörighet</string>
-  <string name="location_permission_desc">Syncthing kan konfigureras att köras på utvalda Wi-Fi-nätverk. Android kräver att applikationer har platsbehörigheter för att kunna slå upp aktivt Wi-Fi-nätverksnamn, eftersom det ibland går att antyda användarnas plats från namnet på det nätverk de är anslutna till. Om du vill använda den här funktionen trycker du på knappen ovan för att ge Syncthing de nödvändiga platsbehörigheterna. Annars kan du hoppa över det här steget.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Bakåt</string>
   <string name="cont">Fortsätt</string>
@@ -354,6 +352,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Donera</string>
   <string name="donate_summary">Hjälp oss att betala för domäner och värdsavgifter</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing version</string>
   <!--Title of the preference showing this app's version name-->

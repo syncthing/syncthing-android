@@ -255,6 +255,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">Κάνετε δωρεά</string>
   <string name="donate_summary">Βοηθήστε μας να πληρώσουμε τα έξοδα των domain και της φιλοξενίας ιστοσελίδας</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Έκδοση Syncthing</string>
   <!--Title of the preference showing this app's version name-->

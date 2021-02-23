@@ -15,8 +15,6 @@ Proszę zgłaszać napotkane błędy programu za pośrednictwem serwisu Github.<
   <string name="storage_permission_title">Dostęp do plików</string>
   <string name="storage_permission_desc">Syncthing potrzebuje dostępu do magazynu by synchronizować pliki</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Dostęp do lokalizacji</string>
-  <string name="location_permission_desc">Syncthing może być skonfigurowany by działać jedynie na wybranych sieciach Wi-Fi. Android wymaga by aplikacje miały dostęp do lokalizacji by widzieć nazwy sieci. Jeśli chcesz używać tej funkcji, dotknij przycisk wyżej by udzielić dostępu do lokalizacji Syncthing. W przeciwnym razie możesz pominąć ten krok.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Wstecz</string>
   <string name="cont">Kontynuuj</string>
@@ -333,6 +331,7 @@ UWAGA: może to skutkować znacznym zużyciem transferu</string>
   <!--Menu item to donate-->
   <string name="donate_title">Wspomóż</string>
   <string name="donate_summary">Pomaga nam opłacić domeny i hosting</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Wersja Syncthing</string>
   <!--Title of the preference showing this app's version name-->

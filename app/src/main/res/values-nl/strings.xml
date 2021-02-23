@@ -15,8 +15,8 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="storage_permission_title">Opslagmachtiging</string>
   <string name="storage_permission_desc">Syncthing heeft toegang nodig tot uw opslag om bestandssynchronisatie uit te voeren.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Locatiemachtiging</string>
-  <string name="location_permission_desc">Synchronisatie kan worden ingesteld om op geselecteerde Wi-Fi-netwerken te draaien. Op Android hebben apps locatiebevoegdheden nodig om actieve Wi-Fi-netwerknamen te kunnen opzoeken, omdat de locatie van gebruikers soms kan worden afgeleid uit de naam van het netwerk waarmee ze verbonden zijn. Als u deze functie wilt gebruiken, drukt u op de knop hierboven om de gewenste locatiemachtigingen aan Syncthing te geven. Anders kunt u deze stap overslaan.</string>
+  <string name="location_permission_title">Locatierecht (achtergrond)</string>
+  <string name="location_permission_desc">Syncthing kan worden ingesteld om alleen via geselecteerde wifi-netwerken te synchroniseren. Om dat te doen, moet het de ssid van het momenteel verbonden wifi-netwerk opzoeken, ook als de app is afgesloten. Syncthing heeft toestemming nodig om op de achtergrond de locatie op te zoeken. Deze informatie wordt niet gebruikt om úw locatie op te zoeken. De enige opgeslagen informatie is het door u gekozen wifi-netwerk om aan de lijst toe te voegen - er worden geen andere gebruikersgegevens opgeslagen.\n\nAls u deze functie wilt gebruiken, drukt u op de knop hierboven om Syncthing de vereiste rechten te verlenen. Anders kunt u deze stap overslaan.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Terug</string>
   <string name="cont">Doorgaan</string>
@@ -30,7 +30,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Bevestigen om app af te sluiten</string>
-  <string name="dialog_exit_while_running_as_service_message">Ter overweging: u heeft de app zo ingesteld dat deze automatisch opstart. Hierdoor bewaakt hij op elk moment op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij zodra de voorwaarden overeenkomen. U dient alleen handmatig te stoppen als u ernstige problemen ondervindt. U kunt automatisch opstarten uitschakelen in de instellingen. Wilt u stoppen totdat het apparaat opnieuw wordt opgestart?</string>
+  <string name="dialog_exit_while_running_as_service_message">Ter overweging: u heeft de app zó ingesteld dat deze automatisch opstart. Hierdoor bewaakt hij op elk moment op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij zodra de voorwaarden overeenkomen. U dient alleen handmatig te stoppen als u ernstige problemen ondervindt. U kunt automatisch opstarten uitschakelen in de instellingen. Wilt u stoppen totdat het apparaat opnieuw wordt opgestart?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Map toevoegen</string>
   <!--Title of the "share device id" menu action-->
@@ -199,26 +199,26 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="run_conditions_title">Uitvoervoorwaarden</string>
   <string name="run_conditions_summary">Gebruik de volgende opties om te bepalen wanneer Syncthing synchroniseert.</string>
   <string name="run_on_mobile_data_title">Synchroniseren via mobiel internet</string>
-  <string name="run_on_mobile_data_summary">Synchroniseer als het apparaat verbonden is met een mobiele internetverbinding. Waarschuwing: dit kan leiden tot een hoog verbruik. Mogelijk brengt uw provider hiervoor kosten in rekening.</string>
-  <string name="run_on_wifi_title">Synchroniseren via Wi-Fi</string>
-  <string name="run_on_wifi_summary">Synchroniseer als het apparaat verbonden is met een Wi-Fi-netwerk.</string>
-  <string name="run_on_metered_wifi_title">Synchroniseren via beperkt Wi-Fi-netwerk</string>
-  <string name="run_on_metered_wifi_summary">Synchroniseer als het apparaat verbonden is met een beperkt Wi-Fi-netwerk, zoals een hotspot of tethering. Let op: dit kan leiden ton een hoog verbruik. Mogelijk brengt uw provider hiervoor kosten in rekening.</string>
-  <string name="run_on_whitelisted_wifi_title">Synchroniseren via bepaalde Wi-Fi-netwerken</string>
-  <string name="run_on_whitelisted_wifi_networks">Synchroniseer alleen via bepaalde Wi-Fi-netwerken: %1$s</string>
-  <string name="run_on_all_wifi_networks">Synchroniseer via alle Wi-Fi-netwerken.</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel Wi-Fi in om netwerken te selecteren.</string>
+  <string name="run_on_mobile_data_summary">Synchroniseren als het apparaat verbonden is met een mobiele internetverbinding. Waarschuwing: dit kan leiden tot een hoog verbruik - mogelijk brengt uw provider hiervoor kosten in rekening.</string>
+  <string name="run_on_wifi_title">Synchroniseren via wifi</string>
+  <string name="run_on_wifi_summary">Synchroniseren als het apparaat verbonden is met een wifi-netwerk.</string>
+  <string name="run_on_metered_wifi_title">Synchroniseren via beperkt wifi-netwerk</string>
+  <string name="run_on_metered_wifi_summary">Synchroniseren als het apparaat verbonden is met een beperkt wifi-netwerk, zoals een hotspot of tethering. Let op: dit kan leiden tot een hoog verbruik - mogelijk brengt uw provider hiervoor kosten in rekening.</string>
+  <string name="run_on_whitelisted_wifi_title">Synchroniseren via bepaalde wifi-netwerken</string>
+  <string name="run_on_whitelisted_wifi_networks">Alleen synchroniseren via bepaalde wifi-netwerken: %1$s</string>
+  <string name="run_on_all_wifi_networks">Synchroniseren via alle wifi-netwerken.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
   <string name="sync_only_wifi_ssids_connect_to_wifi">Verbind met een wifi-netwerk om het aan de lijst toe te voegen.</string>
-  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Verleen de LOCATIE-machtiging om deze functie te gebruiken.</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Machtiging benodigd</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Sinds Android 8.1 is de locatiemachtiging benodigd om de naam van het Wi-Fi-netwerk uit te lezen. U kunt deze functie alleen gebruiken als u deze machtiging verleent.</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Verleen het LOCATIE-recht om deze functie te gebruiken.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Rechten vereist</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Sinds Android 8.1 is het locatierecht benodigd om de naam van het wifi-netwerk uit te lezen. U kunt deze functie alleen gebruiken als u dit recht verleent.</string>
   <string name="power_source_title">Synchroniseren als apparaat draait op</string>
   <string name="respect_battery_saving_title">Systeeminstellingen gebruiken</string>
   <string name="respect_battery_saving_summary">Schakel Syncthing uit als accubesparing is ingeschakeld.</string>
   <string name="respect_master_sync_title">Systeeminstellingen gebruiken</string>
   <string name="respect_master_sync_summary">Schakel Syncthing uit als de snelle-instellingentegel \'Gegevenssynchronisatie\' is uitgeschakeld.</string>
   <string name="run_in_flight_mode_title">Synchroniseren tijdens vliegtuigmodus</string>
-  <string name="run_in_flight_mode_summary">Schakel dit in als uw apparaat problemen ondervindt bij het handmatig opvragen van Wi-Fi-verbindingen tijdens de vliegtuigmodus.</string>
+  <string name="run_in_flight_mode_summary">Schakel dit in als uw apparaat problemen ondervindt bij het handmatig opvragen van wifi-verbindingen tijdens de vliegtuigmodus.</string>
   <string name="service_settings_title">Dienstinstelling</string>
   <string name="service_settings_summary">Voer Syncthing uit als een dienst. Hierdoor wordt een permanente melding toegevoegd zodat Android de dienst niet beëindigt en wordt Syncthing automatisch opgestart.</string>
   <string name="run_as_background_service">Automatisch opstarten</string>
@@ -296,7 +296,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="restart_on_wakeup_title">Herstarten bij ontwaken</string>
   <string name="restart_on_wakeup_summary">Dit is standaard ingeschakeld. Als u deze functie uitschakelt, kan dat ertoe leiden dat het scannen van mappen en verbinden met apparaten uitgesteld wordt om accu te besparen.</string>
   <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren? Bestaande bestanden worden overschreven.\n\nWAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
+  <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren? Bestaande bestanden worden overschreven.\n\WAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
   <!--Dialog shown before config import-->
   <string name="dialog_confirm_import">Weet u zeker dat u de nieuwe instellingen wilt importeren? Bestaande bestanden worden overschreven.</string>
   <!--Toast shown after config was successfully exported-->
@@ -344,6 +344,8 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Doneren</string>
   <string name="donate_summary">Help ons de domein- en hostingkosten te betalen</string>
+  <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Privacybeleid</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-versie</string>
   <!--Title of the preference showing this app's version name-->
@@ -418,12 +420,12 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="syncthing_disabled_reason_on_charger">He apparaat draait op netstroom</string>
   <string name="syncthing_disabled_reason_powersaving">Het apparaat is in accubeparingsmodus</string>
   <string name="syncthing_disabled_reason_android_sync_disabled">Globale synchronisatie is uitgeschakeld</string>
-  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">De huidige Wi-Fi-ssid staat niet op de witte lijst</string>
-  <string name="syncthing_disabled_reason_wifi_is_metered">Het huidige Wi-Fi-netwerk is beperkt</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">De huidige wifi-ssid staat niet op de witte lijst</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Het huidige wifi-netwerk is beperkt</string>
   <string name="syncthing_disabled_reason_no_network_or_flightmode">Geen internetverbinding, of vliegtuigmodus is ingeschakeld</string>
   <string name="syncthing_disabled_reason_no_mobile_connection">Niet verbonden met mobiel internet</string>
-  <string name="syncthing_disabled_reason_no_wifi_connection">Niet verbonden met Wi-Fi</string>
-  <string name="syncthing_disabled_reason_no_allowed_method">Niet ingesteld om te synchroniseren via Wi-Fi of mobiel internet</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Niet verbonden met wifi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Niet ingesteld om te synchroniseren via wifi of mobiel internet</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing wordt uitgevoerd</string>
   <string name="syncthing_disabled">Syncthing is uitgeschakeld</string>
@@ -473,7 +475,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="state_error">Fout</string>
   <string name="state_unknown">Onbekend</string>
   <string name="state_paused">Onderbroken</string>
-  <string name="status_outofsync">Niet gesynchroniseerd</string>
+  <string name="status_outofsync">Niet-gesynchroniseerd</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">U kunt Syncthing niet stoppen terwijl de app wordt uitgevoerd op de achtergrond.</string>

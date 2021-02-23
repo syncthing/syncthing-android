@@ -15,8 +15,6 @@
   <string name="storage_permission_title">Дозвіл на доступ до сховища</string>
   <string name="storage_permission_desc">Syncthing потребує доступу до сховища, щоб виконувати синхронізацію файлів.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Дозвіл на доступ до місцезнаходження</string>
-  <string name="location_permission_desc">Syncthing може бути налаштований запускатися при обраних мережах Wi-Fi. Android вимагає, щоб додатки мали дозволи на визначення місцезнаходження, щоб мати змогу шукати назву активної мережі Wi-Fi, оскільки іноді можна визначити місцезнаходження користувачів по імені мережі, до якої вони під\'єднані. Якщо ви хочете користуватися цією функцією, натисніть кнопку вгорі, щоб надати Syncthing потрібні дозволи на доступ до місцезнаходження. В іншому випадку ви можете пропустити цей крок.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Продовжити</string>
@@ -354,6 +352,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">Внести пожертву</string>
   <string name="donate_summary">Допоможіть нам оплатити домени та хостинг</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версія Syncthing</string>
   <!--Title of the preference showing this app's version name-->

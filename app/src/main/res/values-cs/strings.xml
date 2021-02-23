@@ -310,6 +310,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Přispět</string>
   <string name="donate_summary">Pomozte nám platit za domény a hostingové poplatky</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Verze Syncthing</string>
   <!--Title of the preference showing this app's version name-->

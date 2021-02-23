@@ -7,3 +7,5 @@ Syncthing 是开源、分布式且值得信赖的同步服务。它为取代专�
 论坛：https://forum.syncthing.net/
 
 问题回报：https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

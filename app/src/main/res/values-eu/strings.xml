@@ -13,8 +13,8 @@
   <string name="storage_permission_title">Biltegiratzeko baimena</string>
   <string name="storage_permission_desc">Syncthing-ek zure biltegira sartu behar du fitxategiak sinkronizatzeko.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Kokapen baimena</string>
-  <string name="location_permission_desc">Androidek eskatzen du aplikazioek kokapen-baimenak izatea Wi-Fi sarearen izen aktiboa bilatu ahal izateko; izan ere, batzuetan erabiltzaileen kokapena deduzitu daiteke konektatuta dauden sarearen izenetik abiatuta. Funtzio hori erabili nahi baduzu, sakatu goiko botoia sinkronizatzeko behar diren kokapen-baimenak emateko. Bestela, urrats hori alde batera utz dezakezu.</string>
+  <string name="location_permission_title">Kokapen baimena (atzeko planoa)</string>
+  <string name="location_permission_desc">Sintetizazioa hautatutako Wi-Fi sareetan soilik sinkronizatzeko konfigura daiteke. Horretarako, unean konektatutako Wi-Fi SSIDa bilatu behar du, aplikazioa itxita dagoenean ere. Hori dela eta, atzealdeko kokapenera sartzeko baimena behar da. Informazio hau ez da zure kokapena bilatzeko erabiltzen. Biltegiratutako informazio bakarra zerrendan eskuz gehitzea aukeratu duzun Wi-Fi da. Ez da beste erabiltzaile daturik gordetzen. \ N \ n Funtzio hau erabili nahi baduzu, sakatu goiko botoia Syncthing-i beharrezko baimenak emateko. Bestela, urrats hau salta dezakezu.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Atzera</string>
   <string name="cont">Jarraitu</string>
@@ -350,6 +350,8 @@
   <!--Menu item to donate-->
   <string name="donate_title">Lagundu</string>
   <string name="donate_summary">Lagundu web zerbitzari eta domeinuen gastuak ordaintzen</string>
+  <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Pribatutasun politika</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing bertsioa</string>
   <!--Title of the preference showing this app's version name-->

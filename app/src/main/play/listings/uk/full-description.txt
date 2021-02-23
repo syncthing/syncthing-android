@@ -7,3 +7,5 @@ Syncthing замінює пропрієтарні сервіси синхрон�
 Форум: https://forum.syncthing.net/
 
 Питання / проблеми: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

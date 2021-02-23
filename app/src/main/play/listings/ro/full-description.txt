@@ -7,3 +7,5 @@ Cod sursă: https://github.com/syncthing/syncthing-android
 Forum: https://forum.syncthing.net/
 
 Raportare probleme: https://github.com/syncthing/syncthing-android/issues
+
+Termeni de confidențialitate: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md

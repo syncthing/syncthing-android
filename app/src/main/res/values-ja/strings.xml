@@ -15,8 +15,6 @@
   <string name="storage_permission_title">ストレージアクセス許可</string>
   <string name="storage_permission_desc">Syncthing はファイル同期を行うためにストレージのアクセス許可が必要です。</string>
   <!--Slide 3-->
-  <string name="location_permission_title">位置情報アクセス許可</string>
-  <string name="location_permission_desc">Syncthing は、選択した Wi-Fi ネットワークで動作するように設定できます。  Android は、接続するネットワークの名前からユーザーの位置情報を推測することがあるため、アプリケーションが有効な Wi-Fi ネットワーク名を参照できるように、位置情報のアクセス許可が必要です。 この機能を使用する場合は、上のボタンを押して Syncthing に必要な位置情報のアクセス許可を付与してください。 それ以外の場合は、この手順をスキップできます。</string>
   <!--Generic texts used everywhere-->
   <string name="back">戻る</string>
   <string name="cont">続行</string>
@@ -352,6 +350,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">寄付</string>
   <string name="donate_summary">ドメインとホスティング手数料の支払いをご支援ください</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing バージョン</string>
   <!--Title of the preference showing this app's version name-->

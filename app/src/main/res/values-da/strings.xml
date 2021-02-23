@@ -277,6 +277,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Menu item to donate-->
   <string name="donate_title">Doner</string>
   <string name="donate_summary">Hjælp os med at betale for domæner og hosting udgifter</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Version</string>
   <!--Title of the preference showing this app's version name-->

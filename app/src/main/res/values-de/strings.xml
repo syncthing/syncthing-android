@@ -15,8 +15,6 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="storage_permission_title">Speicher-Berechtigung</string>
   <string name="storage_permission_desc">Syncthing muss auf den Speicher zugreifen können, um Dateien zu synchronisieren.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Standort-Berechtigung</string>
-  <string name="location_permission_desc">Syncthing kann so eingestellt werden, dass es nur in ausgesuchten WLAN-Netzwerken läuft. Android verlangt von Apps, dass sie die Standortberechtigung besitzen, damit sie den Namen des gerade verbundenen WLAN-Netzwerks ermitteln können, da man mitunter aus dem Standort des Nutzers auf den Namen der Netzwerkverbindung schließen kann. Wenn du diese Funktion nutzen möchtest, klicke die Schaltfläche, um Syncthing die dafür benötigte Berechtigung zu erteilen. Andernfalls kannst du diesen Schritt auslassen.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Zurück</string>
   <string name="cont">Weiter</string>
@@ -348,6 +346,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Spenden</string>
   <string name="donate_summary">Hilf uns die Domain- und Hostinggebühren zu zahlen</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-Version</string>
   <!--Title of the preference showing this app's version name-->

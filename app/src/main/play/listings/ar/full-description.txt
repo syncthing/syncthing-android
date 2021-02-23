@@ -7,3 +7,5 @@ Syncthing replaces proprietary sync and cloud services with something open, trus
 المنتديات : https://forum.syncthing.net/
 
 Issues: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

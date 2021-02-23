@@ -285,6 +285,7 @@
   <!--Menu item to donate-->
   <string name="donate_title">Пожертвовать</string>
   <string name="donate_summary">Внесите вклад в поддержку хостинга проекта</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версия ядра</string>
   <!--Title of the preference showing this app's version name-->

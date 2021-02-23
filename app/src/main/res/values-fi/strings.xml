@@ -238,6 +238,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <!--Menu item to donate-->
   <string name="donate_title">Lahjoita</string>
   <string name="donate_summary">Auta meitä kustantamaan verkkotunnus- ja webhotellimaksut</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthingin versio</string>
   <!--Title of the preference showing this app's version name-->

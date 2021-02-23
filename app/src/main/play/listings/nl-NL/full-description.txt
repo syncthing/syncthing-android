@@ -7,3 +7,5 @@ Broncode: https://github.com/syncthing/syncthing-android
 Forum: https://forum.syncthing.net/
 
 Problemen: https://github.com/syncthing/syncthing-android/issues
+
+Privacybeleid: https://github.com/syncthing/syncthing-android/blob/main/privacy-policy.md

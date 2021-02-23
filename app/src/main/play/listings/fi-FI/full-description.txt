@@ -7,3 +7,5 @@ Lähdekoodi: https://github.com/syncthing/syncthing-android
 Foorumi: https://forum.syncthing.net/
 
 Ongelmat: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

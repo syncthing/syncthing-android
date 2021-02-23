@@ -7,3 +7,5 @@ Kod źródłowy: https://github.com/syncthing/syncthing-android
 Forum: https://forum.syncthing.net/
 
 Problemy: https://github.com/syncthing/syncthing-android/issues
+
+Privacy-policy: https://syncthing.net/android-privacy-policy

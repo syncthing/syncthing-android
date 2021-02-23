@@ -15,8 +15,8 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="storage_permission_title">Depolama İzni</string>
   <string name="storage_permission_desc">Dosya eşitlemesi yapmak için Syncthing\'in depolama alanınıza erişmesi gerekiyor.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Konum İzni</string>
-  <string name="location_permission_desc">Syncthing, seçilen kablosuz (Wi-Fi) ağlarda çalışacak şekilde yapılandırılabilir. Bazen kullanıcıların konumunu bağlı oldukları ağın adından çıkarabildiğinizden Android, uygulamaların etkin kablosuz (Wi-Fi) ağ adını arayabilmeleri için konum izinlerine sahip olmalarını gerektirir. Eğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli konum izinlerini vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
+  <string name="location_permission_title">Konum İzni (arka plan)</string>
+  <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarında eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.\n\n Eğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli izinleri vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Geri</string>
   <string name="cont">Devam</string>
@@ -354,6 +354,8 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <!--Menu item to donate-->
   <string name="donate_title">Bağış</string>
   <string name="donate_summary">Etki alanlarını ve barındırma ücretlerini ödememize yardımcı olun</string>
+  <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Gizlilik İlkesi</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Sürümü</string>
   <!--Title of the preference showing this app's version name-->

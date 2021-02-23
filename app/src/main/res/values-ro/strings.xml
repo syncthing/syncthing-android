@@ -15,8 +15,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="storage_permission_title">Permisiune acces stocare</string>
   <string name="storage_permission_desc">Syncthing are nevoie să acceseze stocarea pentru a face sincronizarea fișierelor.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Permisiune locație</string>
-  <string name="location_permission_desc">Syncthing poate fi configurat pentru a rula pe anumite rețele Wi-Fi. Android solicită ca aplicațiile să aibă permisiuni de locație pentru a putea căuta numele rețelei Wi-Fi active, deoarece uneori se poate deduce locația utilizatorilor din numele rețelei la care sunt conectați. Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunea de locație necesară. Altfel puteți sări acest pas.</string>
+  <string name="location_permission_title">Permisiune locație (fundal)</string>
+  <string name="location_permission_desc">Syncthing poate fi configurat pentru a sincroniza numai pe rețelele Wi-Fi selectate. Pentru a face acest lucru, trebuie să caute SSID-ul Wi-Fi-ului conectat în prezent, chiar și atunci când aplicația este închisă. Prin urmare, necesită permisiunea de a accesa locația din fundal. Aceste informații nu sunt utilizate pentru a vă căuta locația. Și singurele informații stocate sunt Wi-Fi-ul pe care îl alegeți manual să îl adăugați la listă - nu sunt stocate alte date de utilizator.\n\n Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunile necesare pentru Syncthing. În caz contrar, puteți sări peste acest pas.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Înapoi</string>
   <string name="cont">Continuare</string>
@@ -355,6 +355,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Menu item to donate-->
   <string name="donate_title">Donează</string>
   <string name="donate_summary">Ajutați-ne să plătim costurile pentru domenii și găzduirea siteurilor</string>
+  <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Termeni de confidențialitate</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versiune Syncthing</string>
   <!--Title of the preference showing this app's version name-->

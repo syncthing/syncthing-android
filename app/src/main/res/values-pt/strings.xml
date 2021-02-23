@@ -15,8 +15,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="storage_permission_title">Permissão de armazenamento</string>
   <string name="storage_permission_desc">O Syncthing precisa de aceder ao seu armazenamento para fazer a sincronização de ficheiros.</string>
   <!--Slide 3-->
-  <string name="location_permission_title">Permissão de localização</string>
-  <string name="location_permission_desc">O Synctinhg pode ser configurado para correr sobre redes Wi-Fi seleccionadas. O Android precisa que as aplicações tenham permissão de localização para poder procurar o nome da rede Wi-Fi activa, uma vez que é possível inferir a localização dos utilizadores a partir do nome da rede à qual estão ligados. Se quiser usar esta funcionalidade, clique no botão acima para fornecer as permissões de localização necessárias ao Syncthing. Caso contrário pode saltar este passo.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Retornar</string>
   <string name="cont">Continuar</string>
@@ -351,6 +349,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Menu item to donate-->
   <string name="donate_title">Doar</string>
   <string name="donate_summary">Ajude-nos a pagar as despesas com domínios e alojamento</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versão do </string>
   <!--Title of the preference showing this app's version name-->

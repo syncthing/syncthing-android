@@ -242,6 +242,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--Menu item to donate-->
   <string name="donate_title">Donasi</string>
   <string name="donate_summary">Bantu kami dalam pembiayaan domain dan hosting</string>
+  <!--Menu item linking privacy policy-->
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versi Syncthing</string>
   <!--Title of the preference showing this app's version name-->
