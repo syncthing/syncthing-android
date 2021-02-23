@@ -556,7 +556,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Menu item linking privacy policy -->
     <string name="privacy_title">Privacy Policy</string>
-    <string name="privacy_summary">Open the Syncthing-Android privacy policy</string>
+    <string name="privacy_summary">Open syncthing-android\'s privacy policy, which covers usage (if any) of personal data, e.g. location.</string>
+    <string name="privacy_policy_url" translatable="false">https://syncthing.net/android-privacy-policy</string>
 
     <!-- Title of the preference showing upstream version name -->
     <string name="syncthing_version_title">Syncthing Version</string>
