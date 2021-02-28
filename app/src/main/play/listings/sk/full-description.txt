@@ -1,11 +1,11 @@
-Syncthing nahrádza proprietárne synchronizačné a cloudové služby niečím otvoreným, dôveryhodným a decentralizovaným. Vaše dáta sú len Vaše a Vy máte nárok rozhodnúť sa, kde budú uložené, s kým budú zdielané a ako budú prenášané Internetom.
+Syncthing nahrádza proprietárne synchronizačné a cloudové služby niečím otvoreným, dôveryhodným a decentralizovaným. Vaše dáta sú len Vaše a Vy máte nárok rozhodnúť sa, kde budú uložené, s kým budú zdieľané a ako budú prenášané Internetom.
 
 Webová stránka: https://syncthing.net/
 
 Zdrojový kód: https://github.com/syncthing/syncthing-android
 
-Forum: https://forum.syncthing.net/
+Fórum: https://forum.syncthing.net/
 
-Chybový tracker: https://github.com/syncthing/syncthing-android/issues
+Hlásenie a sledovanie chýb: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Zásady ochrany osobných údajov: https://syncthing.net/android-privacy-policy

@@ -14,23 +14,23 @@
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Pridať Adresár</string>
+  <string name="add_folder">Pridať adresár</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Zdielať ID Zariadenia</string>
+  <string name="share_device_id">Zdieľať ID zariadenia</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Zdielať ID Zariadenia s použitím</string>
+  <string name="send_device_id_to">Zdieľať ID zariadenia s použitím</string>
   <string name="usage_reporting_dialog_title">Povoliť anonymné hlásenia o používaní?</string>
-  <string name="usage_reporting_dialog_description">Šifrované dáta o používaní sú zasielané denne. Sú používané na získavanie štatistík o platformách, veľkostiach zdielaných adresárov a verziách aplikácie. Ak sa rozsah zbieraných údajov v budúcnosti zmení, budete na zmenu upozornený opätovným zobrazením tohoto dialógu.\n\nSúhrn získaných štatistýk je verejne dostupný na https://data.syncthing.net.</string>
+  <string name="usage_reporting_dialog_description">Šifrované dáta o používaní sú zasielané denne. Sú používané na získavanie štatistík o platformách, veľkostiach zdieľaných adresárov a verziách aplikácie. Ak sa rozsah zbieraných údajov v budúcnosti zmení, budete na zmenu upozornený opätovným zobrazením tohto dialógového okna.\n\nSúhrn získaných štatistýk je verejne dostupný na https://data.syncthing.net.</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
-  <string name="open_website">Otvoriť Webovú Stránku</string>
+  <string name="open_website">Otvoriť webovú stránku</string>
   <string name="toast_write_storage_permission_required">Táto aplikácia potrebuje práva pre zápis na úložisko</string>
   <string name="dialog_disable_battery_optimization_later">Neskôr</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Načítavam...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Syncthing generuje RSA klúč a certifikát. Táto operácia môže chvíľu trvať.</string>
+  <string name="web_gui_creating_key">Syncthing generuje RSA kľúč a certifikát. Táto operácia môže chvíľu trvať.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáre</string>
   <!--Shown if no folders exist-->
@@ -41,7 +41,7 @@
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">Žiadne zariadenia</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Syncrhronizované</string>
+  <string name="device_up_to_date">Synchronizované</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronizuje sa (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
@@ -70,19 +70,19 @@
   <string name="folder_id">ID adresára</string>
   <!--Setting title-->
   <!--Setting title-->
-  <string name="directory">Adersár</string>
+  <string name="directory">Adresár</string>
   <!--Setting title and description-->
   <!--Setting title-->
   <!--Setting title-->
   <string name="devices">Zariadenia</string>
   <!--Setting title-->
-  <string name="keep_versions">Zachovať Verzie</string>
+  <string name="keep_versions">Zachovať verzie</string>
   <!--Setting title-->
-  <string name="delete_folder">Odstrániť Adresár</string>
+  <string name="delete_folder">Odstrániť adresár</string>
   <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Pridať Adresár</string>
+  <string name="create_folder">Pridať adresár</string>
   <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Upraviť Adresár</string>
+  <string name="edit_folder">Upraviť adresár</string>
   <!--Menu item to confirm folder creation-->
   <string name="create">Vytvoriť</string>
   <!--Dialog shown when attempting to remove a folder-->
@@ -100,7 +100,7 @@
   <!--Setting title-->
   <string name="addresses">Adresy</string>
   <!--Setting title-->
-  <string name="current_address">Aktuálna Adresa</string>
+  <string name="current_address">Aktuálna adresa</string>
   <!--Setting title-->
   <string name="compression">Kompresia</string>
   <!--Strings representing compression options-->
@@ -110,15 +110,15 @@
     <item>Všetko</item>
   </string-array>
   <!--Setting title-->
-  <string name="introducer">Introducer</string>
+  <string name="introducer">Uvádzač</string>
   <!--Setting title-->
   <!--ActionBar item-->
-  <string name="delete_device">Odstrániť Zariadenie</string>
-  <string name="add_device">Pridať Zariadenie</string>
+  <string name="delete_device">Odstrániť zariadenie</string>
+  <string name="add_device">Pridať zariadenie</string>
   <!--Menu item to confirm adding a device-->
   <string name="add">Pridať</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Upraviť Zariadenie</string>
+  <string name="edit_device">Upraviť zariadenie</string>
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">ID zariadenia nemôže byť prázdne</string>
@@ -136,36 +136,36 @@
   <string name="category_syncthing_options">Nastavenia Syncthing</string>
   <!--Preference screen - Run conditions-->
   <!--Preferences - Behaviour-->
-  <string name="advanced_folder_picker">Použiť rozšírený dialóg pre volbu adresára</string>
-  <string name="advanced_folder_picker_summary">Vyberte ľubovolný adresár pre synchronizáciu</string>
+  <string name="advanced_folder_picker">Použiť rozšírený dialóg pre voľbu adresára</string>
+  <string name="advanced_folder_picker_summary">Vyberte ľubovoľný adresár pre synchronizáciu</string>
   <string name="use_root_title">Spúšťať Syncthing s root oprávneniami</string>
   <string name="notification_type_title">Notifikácie</string>
-  <string name="notification_type_summary">Zvolte si druh notifikácií</string>
+  <string name="notification_type_summary">Zvoľte si druh notifikácií</string>
   <string-array name="notification_type_entries">
     <item>Normálne</item>
     <item>S nízkou prioritou</item>
     <item>Žiadne</item>
   </string-array>
-  <string name="device_name">Názov Zariadenia</string>
-  <string name="listen_address">Adresa pre Sync Protokol</string>
-  <string name="max_recv_kbps">Limit Rýchlosti Sťahovania (KiB/s)</string>
-  <string name="max_send_kbps">Limit Rýchlosti Odosielania (KiB/s)</string>
-  <string name="global_announce_enabled">Globálne Vyhľadávanie</string>
-  <string name="local_announce_enabled">Lokálne Vyhľadávanie</string>
-  <string name="usage_reporting">Povoliť Anonymné Hlásenia o Používaní</string>
+  <string name="device_name">Názov zariadenia</string>
+  <string name="listen_address">Adresa pre Sync protokol</string>
+  <string name="max_recv_kbps">Limit rýchlosti sťahovania (KiB/s)</string>
+  <string name="max_send_kbps">Limit rýchlosti odosielania (KiB/s)</string>
+  <string name="global_announce_enabled">Globálne vyhľadávanie</string>
+  <string name="local_announce_enabled">Lokálne vyhľadávanie</string>
+  <string name="usage_reporting">Povoliť anonymné hlásenia o používaní</string>
   <string name="gui_address">Adresa pre GUI</string>
   <!--Titles for the preference to undo ignored devices and folders-->
-  <string name="export_config">Exportovať Konfiguráciu</string>
+  <string name="export_config">Exportovať konfiguráciu</string>
   <!--Toast after entering invalid integer value-->
   <!--Experimental options-->
   <!--Toast after entering invalid socks proxy address-->
   <!--Toast after entering invalid http proxy address-->
   <!--Dialog shown before config export-->
   <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>
+  <string name="dialog_confirm_import">Naozaj si želáte importovať konfiguráciu? Existujúce súbory budú prepísané.</string>
   <!--Toast shown after config was successfully exported-->
   <string name="config_export_successful">Konfigurácia bola exportovaná do %1$s</string>
-  <string name="import_config">Importovať Konfiguráciu</string>
+  <string name="import_config">Importovať konfiguráciu</string>
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">Konfigurácia bola importovaná</string>
   <!--Toast shown after config was successfully imported-->
@@ -173,7 +173,7 @@
   <!--Title for the preference to set STTRACE parameters-->
   <!--Toast after entering invalid STTRACE params-->
   <!--Title for the preference to reset Syncthing indexes-->
-  <string name="st_reset_database_title">Resetovať Databázu</string>
+  <string name="st_reset_database_title">Resetovať databázu</string>
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">Reset databázy bol úspešný</string>
@@ -182,7 +182,7 @@
   <!--Syncthing was reset-->
   <string name="category_about">O programe</string>
   <!--Settings item that opens the log activity-->
-  <string name="open_log">Zobraziť Záznam</string>
+  <string name="open_log">Zobraziť záznam</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Zobrazí okno so záznamom Syncthing a Androidu</string>
   <!--Settings item that opens issue tracker-->
@@ -199,15 +199,15 @@
   <string name="app_version_title">Verzia Syncthing-Android</string>
   <!--FolderPickerAcitivity-->
   <!--Activity title-->
-  <string name="folder_picker_title">Výver Adresára</string>
+  <string name="folder_picker_title">Výber Adresára</string>
   <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Varovanie: Verzia Androidu na Vašom zariadení nedovoľuje synchronizáciu externého úložiska</string>
+  <string name="kitkat_external_storage_warning">Varovanie: Verzia Androidu na Vašom zariadení nepovoľuje synchronizáciu externého úložiska</string>
   <!--ListView empty text-->
-  <string name="directory_empty">Adresár je Prázdny</string>
+  <string name="directory_empty">Adresár je prázdny</string>
   <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Vytvoriť nový Adresár</string>
+  <string name="create_fs_folder">Vytvoriť nový adresár</string>
   <!--Menu item to select the current folder-->
-  <string name="select_folder">Vybrať Adresár</string>
+  <string name="select_folder">Vybrať adresár</string>
   <string name="create_folder_failed">Nepodarilo sa vytvoriť adresár</string>
   <!--LogActivity-->
   <!--Title of the "log android" menu button-->
@@ -215,7 +215,7 @@
   <!--Title of the "log Syncthing" menu button-->
   <string name="view_syncthing_log">Zobraziť záznam Syncthing</string>
   <!--Title of the "share log" menu button-->
-  <string name="share_title">Zdielať</string>
+  <string name="share_title">Zdieľať</string>
   <!--ShareActivity-->
   <!--Title of the "share" activity-->
   <!--Title of the "save" button-->
@@ -230,16 +230,16 @@
   <!--Sub Folder title-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing je zakázaný</string>
+  <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
   <!--Message of the "syncthing disabled" dialog-->
   <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Zmeniť Nastavenia</string>
+  <string name="syncthing_disabled_change_settings">Zmeniť nastavenia</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Koniec</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing beží</string>
-  <string name="syncthing_disabled">Syncthing je zakázaný</string>
+  <string name="syncthing_disabled">Syncthing je vypnutý</string>
   <!--Toast shown if syncthing failed to create a config-->
   <!--Toast shown if a config file crucial to operation is missing-->
   <!--Label of the default folder created of first start (camera folder).-->
@@ -247,7 +247,7 @@
   <string name="default_folder_id">%1$s-fotografie</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Je nutný reštart</string>
+  <string name="restart_title">Je potrebný reštart</string>
   <!--Text for positive button in restart dialog-->
   <!--Text for the dismiss button of the restart Activity-->
   <!--Text of the notification shown when a restart is needed-->
