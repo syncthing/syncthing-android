@@ -353,6 +353,7 @@
   <string name="donate_summary">帮助我们支付域名和托管费用</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">隐私政策</string>
+  <string name="privacy_summary">打开 syncthing-android 的隐私政策，其中包括个人资料的使用(如有的话)，例如位置。</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 版本</string>
   <!--Title of the preference showing this app's version name-->

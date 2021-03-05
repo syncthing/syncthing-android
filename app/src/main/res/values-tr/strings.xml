@@ -356,6 +356,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="donate_summary">Etki alanlarını ve barındırma ücretlerini ödememize yardımcı olun</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">Gizlilik İlkesi</string>
+  <string name="privacy_summary">Kişisel verilerin (varsa) kullanımını kapsayan syncthing-android\'in gizlilik ilkesini açın, örn. konum.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing Sürümü</string>
   <!--Title of the preference showing this app's version name-->

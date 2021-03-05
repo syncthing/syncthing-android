@@ -5,8 +5,12 @@
   <!--Welcome wizard-->
   <!--Slide 1-->
   <!--Slide 2-->
+  <string name="storage_permission_title">ගබඩා අවසරය</string>
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
+  <string name="back">ආපසු</string>
+  <string name="generic_example">උදාහරණය</string>
+  <string name="generic_error">දෝෂය</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
@@ -143,6 +147,7 @@
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <string name="state_error">දෝෂය</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <!--Displays the current folder type in the folder activity-->

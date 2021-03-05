@@ -356,7 +356,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="donate_title">Donează</string>
   <string name="donate_summary">Ajutați-ne să plătim costurile pentru domenii și găzduirea siteurilor</string>
   <!--Menu item linking privacy policy-->
-  <string name="privacy_title">Termeni de confidențialitate</string>
+  <string name="privacy_title">Politica de confidențialitate</string>
+  <string name="privacy_summary">Deschideți politica de confidențialitate a Syncthing-Android, care acoperă utilizarea (dacă există) a datelor personale, de ex. Locație.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versiune Syncthing</string>
   <!--Title of the preference showing this app's version name-->

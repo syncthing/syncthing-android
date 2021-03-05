@@ -346,6 +346,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="donate_summary">Help ons de domein- en hostingkosten te betalen</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">Privacybeleid</string>
+  <string name="privacy_summary">Het privacybeleid van Syncthing-Android openen, dat betrekking heeft op het gebruik van persoonlijke gegevens (indien van toepassing), bijvoorbeeld locatie.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing-versie</string>
   <!--Title of the preference showing this app's version name-->

@@ -13,6 +13,8 @@
   <string name="storage_permission_title">Permisos de Almacenamiento</string>
   <string name="storage_permission_desc">Syncthing necesita acceso a tu almacenamiento para realizar la sincronización.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permiso de ubicación (segundo plano)</string>
+  <string name="location_permission_desc">Syncthing puede configurarse para sincronizar sólo en las redes Wi-Fi seleccionadas. Para ello necesita buscar el SSID de la red Wi-Fi actualmente conectada, también cuando la aplicación está cerrada. Por lo tanto, requiere permiso para acceder a la ubicación en segundo plano. Esta información no se utiliza para buscar su ubicación. Y la única información almacenada es el Wi-Fi que usted elige manualmente para añadir a la lista - no se almacena ningún otro dato del usuario.\n\n Si desea utilizar esta función, pulse el botón de arriba para conceder los permisos necesarios a Syncthing. De lo contrario, puede omitir este paso.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Atrás</string>
   <string name="cont">Continuar</string>
@@ -204,6 +206,7 @@
   <string name="run_on_whitelisted_wifi_networks">Ejecutar sólo en las redes Wi-Fi seleccionadas: %1$s</string>
   <string name="run_on_all_wifi_networks">Ejecutar en todas las redes Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor, activa el Wi-Fi para seleccionar las redes.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Por favor, conéctese a una Wi-Fi para añadirla a la lista.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Necesitas conceder permiso para acceder a la ubicación para usar esta característica.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permiso requerido</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Comenzando con Android 8.1, el acceso a la ubicación es necesario para leer el nombre de la red Wi-Fi. Sólo puedes usar esta característica si das permiso.</string>
@@ -239,6 +242,7 @@
   <string name="start_into_web_gui_title">Iniciar directamente en la interfaz web</string>
   <string name="start_into_web_gui_summary">Cuando se inicia la apliación, cargar la interfaz web en lugar de la pantalla principal</string>
   <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Seguir al sistema</string>
   <string name="preference_theme_option_light">Claro</string>
   <string name="preference_theme_option_dark">Oscuro</string>
   <string name="pref_language_default">Idioma predeterminado</string>
@@ -348,6 +352,8 @@
   <string name="donate_title">Donar</string>
   <string name="donate_summary">Ayúdanos a pagar los costes de dominios y servidores web</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Política de privacidad</string>
+  <string name="privacy_summary">Abra la política de privacidad de syncthing-android, que cubre el uso (si lo hay) de los datos personales, por ejemplo, la ubicación.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versión de Syncthing</string>
   <!--Title of the preference showing this app's version name-->
