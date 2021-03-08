@@ -8,4 +8,4 @@ Forum: https://forum.syncthing.net/
 
 Sorunlar için: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Gizlilik ilkesi: https://syncthing.net/android-privacy-policy

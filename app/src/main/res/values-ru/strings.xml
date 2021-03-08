@@ -7,11 +7,15 @@
   <string name="welcome_title">Добро пожаловать в Syncthing для Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Введение</string>
   <string name="welcome_text">Syncthing - это приложение с открытым исходным кодом для синхронизации файлов.\n
 Для того чтобы синхронизировать данные с другими устройствами, вам необходимо добавить их уникальные идентификаторы в список устройств. Затем вы сможете выбрать, какие папки с какими устройствами синхронизировать.\n
 Пожалуйста, сообщайте о возникших проблемах через Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Разрешение хранилища</string>
+  <string name="storage_permission_desc">Syncthing необходим доступ к вашему хранилищу для синхронизации файлов.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Разрешение местоположения (фон)</string>
   <!--Generic texts used everywhere-->
   <string name="cont">Продолжить</string>
   <string name="finish">Принять</string>
