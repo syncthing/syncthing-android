@@ -11,7 +11,7 @@ dependencies {
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'com.google.guava:guava:30.0-android'
     implementation 'com.annimon:stream:1.2.1'
-    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.android.volley:volley:1.2.0'
 
     implementation ('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
