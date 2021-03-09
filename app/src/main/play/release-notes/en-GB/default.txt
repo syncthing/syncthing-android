@@ -1,1 +1,1 @@
-* Update Syncthing to v1.14.0 ( https://github.com/syncthing/syncthing/releases/tag/v1.14.0 )
+* Update Syncthing to v1.15.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.15.0-rc.1 )
