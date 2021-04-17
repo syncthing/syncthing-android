@@ -395,6 +395,8 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
         if (requestCode == QR_SCAN_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String scanResult = intent.getStringExtra(QRScannerActivity.QR_RESULT_ARG);

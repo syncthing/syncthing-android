@@ -26,6 +26,8 @@
     <!-- CAMERA is required for the QR Code Scanner -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <application
         android:allowBackup="false"
         android:fullBackupContent="false"

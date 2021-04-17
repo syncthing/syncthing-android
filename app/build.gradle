@@ -13,7 +13,7 @@ dependencies {
     implementation 'com.annimon:stream:1.2.2'
     implementation 'com.android.volley:volley:1.2.0'
 
-    implementation ('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+    implementation ('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
