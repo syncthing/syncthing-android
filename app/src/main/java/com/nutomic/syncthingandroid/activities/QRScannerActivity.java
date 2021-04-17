@@ -45,11 +45,16 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
         this.barcodeView = findViewById(R.id.bar_code_scanner_view);
 
         findViewById(R.id.cancel_button).setOnClickListener(view -> {
-            pauseScanner();
-            finish();
+            finishScanning();
         });
 
         checkPermissionAndStartScanner();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finishScanning();
     }
     // endregion
 
@@ -73,7 +78,7 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
         Intent intent = new Intent();
         intent.putExtra(QR_RESULT_ARG, code);
         setResult(Activity.RESULT_OK, intent);
-        finish();
+        finishScanning();
     }
 
     @Override
@@ -97,8 +102,9 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
         this.barcodeView.decodeSingle(this);
     }
 
-    private void pauseScanner() {
+    private void finishScanning() {
         this.barcodeView.pause();
+        finish();
     }
     // endregion
 }
