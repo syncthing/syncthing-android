@@ -34,7 +34,6 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
     private final int RC_HANDLE_CAMERA_PERM = 888;
 
     private DecoratedBarcodeView barcodeView;
-    private TextView cancleButton;
 
     // region === Activity Lifecycle ===
     @Override
