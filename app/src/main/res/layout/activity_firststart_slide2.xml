@@ -63,7 +63,6 @@
                 android:paddingRight="@dimen/desc_padding"
                 android:paddingBottom="@dimen/desc_paddingBottom"
                 android:text="@string/storage_permission_desc"
-                android:textAlignment="center"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_desc" />
