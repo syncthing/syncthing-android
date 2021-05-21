@@ -60,7 +60,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/desc_marginTop"
                 android:paddingLeft="@dimen/desc_padding"
