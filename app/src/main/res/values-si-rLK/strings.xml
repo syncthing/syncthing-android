@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">සයින්තින්</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <!--Welcome wizard-->
@@ -14,8 +15,11 @@
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
+  <string name="add_folder">බහාලුමක් එකතු කරන්න</string>
   <!--Title of the "share device id" menu action-->
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="no">නැහැ</string>
+  <string name="open_website">වියමන අඩවිය විවෘත කරන්න</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->

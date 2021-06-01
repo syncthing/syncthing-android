@@ -15,6 +15,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="storage_permission_title">Permission de stockage</string>
   <string name="storage_permission_desc">Syncthing doit accéder à votre stockage pour synchroniser des fichiers.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Autorisation de géolocalisation (tâche de fond) </string>
+  <string name="location_permission_desc">Syncthing peut être configuré pour se synchroniser uniquement sur les réseaux Wi-Fi sélectionnés. Pour ce faire, il doit rechercher le SSID du Wi-Fi actuellement connecté, également lorsque l\'application est fermée. Par conséquent, il faut une autorisation pour accéder à la position en arrière-plan. Ces informations ne sont pas utilisées pour rechercher votre position. Et les seules informations stockées sont le Wi-Fi que vous choisissez manuellement d\'ajouter à la liste - aucune autre donnée utilisateur n\'est stockée.\n\n Si vous souhaitez utiliser cette fonctionnalité, appuyez sur le bouton ci-dessus pour accorder les autorisations requises à Syncthing. Sinon, vous pouvez sauter cette étape. </string>
   <!--Generic texts used everywhere-->
   <string name="back">Retour</string>
   <string name="cont">Continuer</string>
@@ -206,6 +208,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="run_on_whitelisted_wifi_networks">Exécuter uniquement sur certains réseaux Wi-Fi: %1$s</string>
   <string name="run_on_all_wifi_networks">Exécuter sur tous les réseaux Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le Wi-Fi pour sélectionner les réseaux.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Veuillez vous connecter à un réseau Wi-Fi pour l\'ajouter à la liste. </string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Vous devez accorder la permission LOCALISATION pour utiliser cette fonctionnalité.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permission requise</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">À partir d\'Android 8.1, il est nécessaire d\'accéder à la localisation pour lire le nom du Wi-Fi. Vous pouvez utiliser cette fonction uniquement si vous accordez cette autorisation.</string>
@@ -241,6 +244,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="start_into_web_gui_title">Démarrer directement dans l\'interface WEB</string>
   <string name="start_into_web_gui_summary">Au lancement de l\'application, ouvre l\'interface WEB au lieu de l\'écran d\'accueil.</string>
   <string name="preference_theme_title">Thème</string>
+  <string name="preference_theme_follow_system">Follow system</string>
   <string name="preference_theme_option_light">Clair</string>
   <string name="preference_theme_option_dark">Sombre</string>
   <string name="pref_language_default">Langue par défaut</string>
@@ -351,6 +355,8 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="donate_title">Faire un don</string>
   <string name="donate_summary">Aidez-nous à payer les domaines et les frais d\'hébergement</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Politique de confidentialité</string>
+  <string name="privacy_summary">Ouvrez la politique de confidentialité de syncthing-android, qui couvre l\'utilisation (le cas échéant) des données personnelles, par exemple la géolocalisation. </string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Version de Syncthing</string>
   <!--Title of the preference showing this app's version name-->
