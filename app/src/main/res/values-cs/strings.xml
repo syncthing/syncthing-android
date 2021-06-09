@@ -16,6 +16,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="storage_permission_desc">Aby mohlo synchronizovat soubory, Syncthing potřebuje přístup na úložiště.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Oprávnění polohy (v pozadí)</string>
+  <string name="location_permission_desc">Syncthing lze nastavit, aby docházelo k synchronizaci pouze na zvolených Wi-Fi sítích. K tomu potřebuje přístup k informacím o aktuálně připojené Wi-Fi, i pokud je aplikace vypnutá. Je tedy nutné udělit oprávnění. Informace nebudeme používat ke zjišťování Vaší polohy, navíc ukládáme pouze Vámi zadané Wi-Fi.\n\n Pokud si přejete tuto funkci zapnout, udělte oprávnění tlačítkem výše. Jinak je možné tento krok přeskočit.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Zpět</string>
   <string name="cont">Pokračovat</string>
@@ -29,6 +30,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Potvrďte pro ukončení aplikace</string>
+  <string name="dialog_exit_while_running_as_service_message">Ke zvážení: Nastavili jste aplikaci, aby se spouštěla automaticky po zapnutí zařízení. K synchronizaci tedy docházi i v pozadí při správných příležitostech. Manuálně byste měli aplikaci vypnout pouze v případě, že narazíte na problémy. Jinak můžete v nastavení zakázat možnost \'Spouštět službu automaticky při startu systému\'. Přejete si nyní aplikaci vypnout až do restartu zařízení?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Přidat adresář</string>
   <!--Title of the "share device id" menu action-->
@@ -115,6 +117,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="directory">Adresář</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Sledovat změny</string>
+  <string name="folder_fileWatcherDescription">Dotáže se operačního systému, aby docházelo k notifikacím o změnách souborů. Jinak budou změny registrovány periodickým skenováním.</string>
   <!--Setting title-->
   <string name="folder_pause">Pozastavit složku</string>
   <!--Setting title-->
@@ -196,6 +199,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="category_experimental">Experimentální</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Podmínky spuštění</string>
+  <string name="run_conditions_summary">Zvolte možnosti, kdy bude Syncthing spuštěn.</string>
   <string name="run_on_mobile_data_title">Spustit na mobilních datech</string>
   <string name="run_on_mobile_data_summary">Spouštět když je zařízení připojené prostřednictvím mobilní datové sítě. Varování: toto může spotřebovat mnoho dat z vašeho tarifu, pokud synchronizujete velká množství dat.</string>
   <string name="run_on_wifi_title">Spustit na Wi-Fi</string>
