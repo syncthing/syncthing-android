@@ -1,7 +1,9 @@
 FROM openjdk:11
 
 ENV GO_VERSION 1.16.5
-ENV ANDROID_SDK_VERSION 3859397
+
+ARG ANDROID_SDK_VERSION=7302050
+ARG ANDROID_SDK_FILENAME=commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip
 
 WORKDIR /opt
 
@@ -14,22 +16,24 @@ ENV PATH /opt/go/bin:${PATH}
 
 # Install Android SDK manager
 RUN mkdir -p /opt/android-sdk && cd /opt/android-sdk && \
-    wget -q https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip && \
-    unzip -q sdk-tools-linux-${ANDROID_SDK_VERSION}.zip && \
-    rm sdk-tools-linux-${ANDROID_SDK_VERSION}.zip
+    wget -q https://dl.google.com/android/repository/${ANDROID_SDK_FILENAME} && \
+    unzip -q ${ANDROID_SDK_FILENAME} && \
+    rm ${ANDROID_SDK_FILENAME}
 ENV ANDROID_HOME /opt/android-sdk
 
+ARG SDKMANAGER="${ANDROID_HOME}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROID_HOME}"
+
 # Accept the SDK license, as we can't install packages otherwise
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses > /dev/null
+RUN yes | $SDKMANAGER --licenses > /dev/null
 
 # NDK version (r22 fails to build)
 ENV NDK_VERSION 21.4.7075529
 
 # Install other android packages, including NDK
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" "ndk;${NDK_VERSION}"
+RUN $SDKMANAGER tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" "ndk;${NDK_VERSION}"
 
 # Accept licenses of newly installed packages
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+RUN yes | $SDKMANAGER --licenses
 
 # Setup the NDK path
 ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk/${NDK_VERSION}
