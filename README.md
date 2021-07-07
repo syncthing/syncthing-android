@@ -20,7 +20,7 @@ The project is translated on [Transifex](https://www.transifex.com/projects/p/sy
 - Android SDK (you can skip this if you are using Android Studio)
 - Android NDK (`$ANDROID_NDK_HOME` should point at the root directory of your NDK)
 - Go (see [here](https://docs.syncthing.net/dev/building.html#prerequisites) for the required version)
-- Java Version 8 (you might need to set `$JAVA_HOME` accordingly)
+- Java Version 11 (you scan skip this if you are using Android Studio, otherwise you might need to set `$JAVA_HOME` accordingly)
 
 ### Build instructions
 
