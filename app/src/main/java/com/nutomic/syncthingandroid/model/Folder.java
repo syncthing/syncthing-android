@@ -20,7 +20,7 @@ public class Folder {
     public String type = Constants.FOLDER_TYPE_SEND_RECEIVE;
     public boolean fsWatcherEnabled = true;
     public int fsWatcherDelayS = 10;
-    private List<Device> devices = new ArrayList<>();
+    private List<Folder.Device> devices = new ArrayList<>();
     public int rescanIntervalS;
     public final boolean ignorePerms = true;
     public boolean autoNormalize = true;
@@ -79,5 +79,11 @@ public class Folder {
     @Override
     public String toString() {
         return !TextUtils.isEmpty(label) ? label : id;
+    }
+
+    public class Device {
+        public String deviceID;
+        public String introducedBy;
+        public String encryptionPassword;
     }
 }
