@@ -8,4 +8,4 @@ Forum: https://forum.syncthing.net/
 
 Vorgänge: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Datenschutzrichtlinie (englisch): https://syncthing.net/android-privacy-policy

@@ -8,4 +8,4 @@ Diễn đàn: https://forum.syncthing.net/
 
 Các vấn đề: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Chính sách riêng tư: https://syncthing.net/android-privacy-policy
