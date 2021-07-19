@@ -1,1 +1,2 @@
-* Update Syncthing to v1.18.0 ( https://github.com/syncthing/syncthing/releases/tag/v1.18.0 )
+* Update Syncthing to v1.18.1-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.18.1-rc.1 )
+* #1673: Encryption password is overwritten for any change to any folder using the Android UI
