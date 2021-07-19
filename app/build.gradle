@@ -85,8 +85,10 @@ play {
  * Some languages are not supported by Google Play, so we ignore them.
  */
 task deleteUnsupportedPlayTranslations(type: Delete) {
+    delete 'src/main/play/listings/de_DE/'
     delete 'src/main/play/listings/el-EL/'
     delete 'src/main/play/listings/en/'
+    delete 'src/main/play/listings/eo/'
     delete 'src/main/play/listings/eu/'
     delete 'src/main/play/listings/nb/'
     delete 'src/main/play/listings/nl_BE/'
