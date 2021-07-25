@@ -12,7 +12,6 @@ public class Device {
     public String certName;
     public boolean introducer;
     public boolean paused;
-    public List<PendingFolder> pendingFolders;
     public List<IgnoredFolder> ignoredFolders;
 
     /**

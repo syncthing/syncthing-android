@@ -91,10 +91,28 @@ public class SyncthingService extends Service {
             "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_DEVICE_ID";
 
     /**
+     * Extra used together with ACTION_IGNORE_DEVICE
+     */
+    public static final String EXTRA_DEVICE_NAME =
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_DEVICE_NAME";
+
+    /**
+     * Extra used together with ACTION_IGNORE_DEVICE
+     */
+    public static final String EXTRA_DEVICE_ADDRESS =
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_DEVICE_ADDRESS";
+
+    /**
      * Extra used together with ACTION_IGNORE_FOLDER
      */
     public static final String EXTRA_FOLDER_ID =
             "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_FOLDER_ID";
+
+    /**
+     * Extra used together with ACTION_IGNORE_FOLDER
+     */
+    public static final String EXTRA_FOLDER_LABEL =
+            "com.nutomic.syncthingandroid.service.SyncthingService.EXTRA_FOLDER_LABEL";
 
     public interface OnServiceStateChangeListener {
         void onServiceStateChange(State currentState);
@@ -251,11 +269,11 @@ public class SyncthingService extends Service {
             mRunConditionMonitor.updateShouldRunDecision();
         } else if (ACTION_IGNORE_DEVICE.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             // mApi is not null due to State.ACTIVE
-            mApi.ignoreDevice(intent.getStringExtra(EXTRA_DEVICE_ID));
+            mApi.ignoreDevice(intent.getStringExtra(EXTRA_DEVICE_ID), intent.getStringExtra(EXTRA_DEVICE_NAME), intent.getStringExtra(EXTRA_DEVICE_ADDRESS));
             mNotificationHandler.cancelConsentNotification(intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         } else if (ACTION_IGNORE_FOLDER.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             // mApi is not null due to State.ACTIVE
-            mApi.ignoreFolder(intent.getStringExtra(EXTRA_DEVICE_ID), intent.getStringExtra(EXTRA_FOLDER_ID));
+            mApi.ignoreFolder(intent.getStringExtra(EXTRA_DEVICE_ID), intent.getStringExtra(EXTRA_FOLDER_ID), intent.getStringExtra(EXTRA_FOLDER_LABEL));
             mNotificationHandler.cancelConsentNotification(intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         } else if (ACTION_OVERRIDE_CHANGES.equals(intent.getAction()) && mCurrentState == State.ACTIVE) {
             mApi.overrideChanges(intent.getStringExtra(EXTRA_FOLDER_ID));

@@ -24,6 +24,8 @@ import com.nutomic.syncthingandroid.model.Event;
 import com.nutomic.syncthingandroid.model.Folder;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -101,11 +103,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                     mApi.reloadConfig();
                 }
                 break;
-            case "DeviceRejected":
-                onDeviceRejected(
-                    (String) event.data.get("device"),          // deviceId
-                    (String) event.data.get("name")             // deviceName
-                );
+            case "PendingDevicesChanged":
+                for (Map<String,String> m : (List<Map<String,String>>) event.data.get("added")) {
+                    onPendingDevicesChanged(m);
+                }
                 break;
             case "FolderCompletion":
                 CompletionInfo completionInfo = new CompletionInfo();
@@ -117,11 +118,9 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 );
                 break;
             case "FolderRejected":
-                onFolderRejected(
-                    (String) event.data.get("device"),          // deviceId
-                    (String) event.data.get("folder"),          // folderId
-                    (String) event.data.get("folderLabel")      // folderLabel
-                );
+                for (Map<String,String> m : (List<Map<String,String>>) event.data.get("added")) {
+                    onPendingFoldersChanged(m);
+                }
                 break;
             case "ItemFinished":
                 String folder = (String) event.data.get("folder");
@@ -209,7 +208,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         }
     }
 
-    private void onDeviceRejected(String deviceId, String deviceName) {
+    private void onPendingDevicesChanged(Map<String, String> added) {
+        String deviceId = added.get("deviceID");
+        String deviceName = added.get("name");
+        String deviceAddress = added.get("address");
         if (deviceId == null) {
             return;
         }
@@ -231,7 +233,9 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
                 .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
-                .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId);
+                .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId)
+                .putExtra(SyncthingService.EXTRA_DEVICE_NAME, deviceName)
+                .putExtra(SyncthingService.EXTRA_DEVICE_ADDRESS, deviceAddress);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_DEVICE);
         PendingIntent piIgnore = PendingIntent.getService(mContext, 0,
             intentIgnore, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -240,8 +244,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);
     }
 
-    private void onFolderRejected(String deviceId, String folderId,
-                                    String folderLabel) {
+    private void onPendingFoldersChanged(Map<String, String> added) {
+        String deviceId = added.get("deviceID");
+        String folderId = added.get("folderID");
+        String folderLabel = added.get("folderLabel");
         if (deviceId == null || folderId == null) {
             return;
         }
@@ -275,8 +281,8 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
                 .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
-                .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId)
-                .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId);
+                .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId)
+                .putExtra(SyncthingService.EXTRA_FOLDER_LABEL, folderLabel);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_FOLDER);
         PendingIntent piIgnore = PendingIntent.getService(mContext, 0,
             intentIgnore, PendingIntent.FLAG_UPDATE_CURRENT);
