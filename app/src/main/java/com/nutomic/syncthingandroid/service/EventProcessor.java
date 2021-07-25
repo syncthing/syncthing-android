@@ -12,6 +12,8 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.core.util.Consumer;
+
 import com.annimon.stream.Stream;
 import com.nutomic.syncthingandroid.BuildConfig;
 import com.nutomic.syncthingandroid.R;
@@ -104,9 +106,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 }
                 break;
             case "PendingDevicesChanged":
-                for (Map<String,String> m : (List<Map<String,String>>) event.data.get("added")) {
-                    onPendingDevicesChanged(m);
-                }
+                mapNullable((List<Map<String,String>>) event.data.get("added"), this::onPendingDevicesChanged);
                 break;
             case "FolderCompletion":
                 CompletionInfo completionInfo = new CompletionInfo();
@@ -117,10 +117,8 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                     completionInfo
                 );
                 break;
-            case "FolderRejected":
-                for (Map<String,String> m : (List<Map<String,String>>) event.data.get("added")) {
-                    onPendingFoldersChanged(m);
-                }
+            case "PendingFoldersChanged":
+                mapNullable((List<Map<String,String>>) event.data.get("added"), this::onPendingFoldersChanged);
                 break;
             case "ItemFinished":
                 String folder = (String) event.data.get("folder");
@@ -281,6 +279,7 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         // Prepare "ignore" action.
         Intent intentIgnore = new Intent(mContext, SyncthingService.class)
                 .putExtra(SyncthingService.EXTRA_NOTIFICATION_ID, notificationId)
+                .putExtra(SyncthingService.EXTRA_DEVICE_ID, deviceId)
                 .putExtra(SyncthingService.EXTRA_FOLDER_ID, folderId)
                 .putExtra(SyncthingService.EXTRA_FOLDER_LABEL, folderLabel);
         intentIgnore.setAction(SyncthingService.ACTION_IGNORE_FOLDER);
@@ -290,4 +289,13 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
         // Show notification.
         mNotificationHandler.showConsentNotification(notificationId, title, piAccept, piIgnore);
     }
+
+    private <T> void mapNullable(List<T> l, Consumer<T> c) {
+        if (l != null) {
+            for (T m : l) {
+                c.accept(m);
+            }
+        }
+    }
+
 }
