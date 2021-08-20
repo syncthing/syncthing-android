@@ -16,6 +16,7 @@ obj/
 .gradle/
 syncthing/gobuild
 syncthing/pkg
+__pycache__
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -26,6 +27,12 @@ project.properties
 *.ipr
 *.iws
 .idea/
+
+# Misc IDE stuff
+eclipse-java-style.xml
+.classpath
+.project
+.settings
 
 # Gradle wrapper
 gradle/wrapper/gradle/
