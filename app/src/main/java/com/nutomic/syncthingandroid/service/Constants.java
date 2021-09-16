@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid.service;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
@@ -143,4 +144,6 @@ public class Constants {
 
         return true;
     }
+
+    public static int FLAG_IMMUTABLE = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : 0;
 }
