@@ -1,8 +1,8 @@
 FROM openjdk:11
 
-ENV GO_VERSION 1.17
+ENV GO_VERSION 1.17.1
 
-ARG ANDROID_SDK_VERSION=7302050
+ARG ANDROID_SDK_VERSION=7583922
 ARG ANDROID_SDK_FILENAME=commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip
 
 WORKDIR /opt
@@ -27,7 +27,7 @@ ARG SDKMANAGER="${ANDROID_HOME}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROI
 RUN yes | $SDKMANAGER --licenses > /dev/null
 
 # NDK version (r22 fails to build)
-ENV NDK_VERSION 21.4.7075529
+ENV NDK_VERSION 23.0.7599858
 
 # Install other android packages, including NDK
 RUN $SDKMANAGER tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" "ndk;${NDK_VERSION}"
