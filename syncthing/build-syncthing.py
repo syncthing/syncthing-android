@@ -1,11 +1,16 @@
 from __future__ import print_function
+
 import os
 import os.path
-import sys
-import subprocess
 import platform
+import subprocess
+import sys
 
-SUPPORTED_PYTHON_PLATFORMS = ['Windows', 'Linux', 'Darwin']
+PLATFORM_DIRS = {
+    'Windows': 'windows-x86_64',
+    'Linux': 'linux-x86_64',
+    'Darwin': 'darwin-x86-64',
+}
 
 # The values here must correspond with those in ../docker/prebuild.sh
 BUILD_TARGETS = [
@@ -37,6 +42,7 @@ BUILD_TARGETS = [
     }
 ]
 
+
 def fail(message, *args, **kwargs):
     print((message % args).format(**kwargs))
     sys.exit(1)
@@ -58,13 +64,13 @@ def get_ndk_home():
     return os.environ['ANDROID_NDK_HOME']
 
 
-if platform.system() not in SUPPORTED_PYTHON_PLATFORMS:
+if platform.system() not in PLATFORM_DIRS:
     fail('Unsupported python platform %s. Supported platforms: %s', platform.system(),
-         ', '.join(SUPPORTED_PYTHON_PLATFORMS))
+         ', '.join(PLATFORM_DIRS.keys()))
 
 module_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.realpath(os.path.join(module_dir, '..'))
-# Use seperate build dir so standalone ndk isn't deleted by `gradle clean`
+# Use separate build dir so standalone ndk isn't deleted by `gradle clean`
 build_dir = os.path.join(module_dir, 'gobuild')
 go_build_dir = os.path.join(build_dir, 'go-packages')
 syncthing_dir = os.path.join(module_dir, 'src', 'github.com', 'syncthing', 'syncthing')
@@ -92,7 +98,7 @@ for target in BUILD_TARGETS:
     })
 
     cc = '/'.join([
-        get_ndk_home(), "toolchains/llvm/prebuilt/linux-x86_64", "bin",
+        get_ndk_home(), "toolchains/llvm/prebuilt/", PLATFORM_DIRS[platform.system()], "bin",
         target['cc']])
     subprocess.check_call(
         ['go', 'run', 'build.go', '-goos', 'android',
