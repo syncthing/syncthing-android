@@ -46,7 +46,7 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
   <string name="device_rejected">Il dispositivo \"%1$s\" vuole connettersi</string>
   <string name="folder_rejected">Il dispositivo \"%1$s\" vuole condividere la cartella \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Ottimizzazione della batteria</string>
-  <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria.\n\nAlcuni dispositivi hanno ulteriori applicazioni preinstallate di inturruzione dei processi. Si dovrebbe aggiungere Syncthing alla loro whitelist.</string>
+  <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria.\n\nAlcuni dispositivi hanno ulteriori applicazioni preinstallate di interruzione dei processi. Si dovrebbe aggiungere Syncthing alla loro whitelist.</string>
   <string name="dialog_disable_battery_optimization_later">Più tardi</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Non mostrare più</string>
   <string name="dialog_disable_battery_optimization_turn_off">Spegnere per Syncthing</string>

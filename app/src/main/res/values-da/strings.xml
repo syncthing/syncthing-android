@@ -13,6 +13,7 @@ For at dele data med andre enheder, skal du tilføje deres enheds unikke ID til 
 Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Slide 2-->
   <!--Slide 3-->
+  <string name="location_permission_title">Tilladelse til baggrundslokalisering</string>
   <!--Generic texts used everywhere-->
   <string name="back">Tilbage</string>
   <string name="cont">Fortsæt</string>
@@ -38,6 +39,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="no">Nej</string>
   <string name="open_website">Åben Hjemmeside</string>
   <string name="toast_write_storage_permission_required">Write storage rettigheder er nødvendige for denne app.</string>
+  <string name="device_rejected">Enheden \"%1$s\" ønsker at forbinde</string>
   <string name="dialog_disable_battery_optimization_title">Batterioptimering</string>
   <string name="dialog_disable_battery_optimization_message">Android stopper måske synkroniseringen efter noget tid. For at undgå dette, vælg batterioptimering fra.\n\nNogle enheder har ekstra job-afsluttende apps installeret. Du burde også tilføje Syncthing til deres whitelist. </string>
   <string name="dialog_disable_battery_optimization_later">Senere</string>
@@ -46,7 +48,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="dialog_disable_battery_optimizations_not_supported">Din enhed understøtter ikke at slå batterioptimeringer fra.</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Loader...</string>
+  <string name="api_loading">Indlæser...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Genererer sikre nøgler. Dette kan tage et par minutter.</string>
   <!--FoldersFragment-->
@@ -70,7 +72,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Forbindelse afbrudt</string>
   <!--Indicates that the device is paused and does not sync-->
-  <string name="device_paused">I pause</string>
+  <string name="device_paused">Midlertidigt afbrudt</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Ukendt</string>
   <!--Title for current download rate-->
@@ -201,10 +203,10 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <item>Ingen</item>
   </string-array>
   <string name="preference_language_title">Sprog</string>
-  <string name="preference_language_summary">Ændr app sproget</string>
+  <string name="preference_language_summary">Skift sprog</string>
   <string name="start_into_web_gui_title">Start direkte i webinterfacet</string>
   <string name="start_into_web_gui_summary">Når app\'en starter, åben webinterfacet i stedet for hovedskærmen</string>
-  <string name="pref_language_default">Default Sprog</string>
+  <string name="pref_language_default">Standard sprog</string>
   <string-array name="versioning_types">
     <item>Ingen</item>
     <item>Skraldespand</item>
@@ -260,9 +262,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Title for the preference to reset Syncthing indexes-->
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->
-  <string name="category_about">Omkring</string>
+  <string name="category_about">Om</string>
   <!--Settings item that opens the log activity-->
-  <string name="open_log">Åben Log</string>
+  <string name="open_log">Åbn Log</string>
   <!--Summary for the log activity-->
   <string name="open_log_summary">Åben Syncthing\'s og Android\'s log vindue</string>
   <string name="notify_crashes_title">Underret om Syncthing crashes</string>
@@ -442,7 +444,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="staggered_versioning_info">Maksimal Alder: %1$d \nVersionerings Sti: %2$s</string>
   <string name="external_versioning_info">Kommando: %1$s</string>
   <string name="simple_versioning_info">Behold versioner: %1$s</string>
-  <string name="show_device_id">Vis endheds-ID</string>
+  <string name="show_device_id">Vis enheds-ID</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
   <string name="could_not_access_deviceid">Kunne ikke tilgå enheds-ID.</string>
   <string name="browse">Gennemse</string>

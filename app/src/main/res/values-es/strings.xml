@@ -138,7 +138,7 @@
   <!--Summary shown if we only have readonly access to the folder path-->
   <string name="folder_path_readonly">Para la carpeta seleccionada, en tu versión de Android Syncthing sólo tiene permiso de lectura.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
-  <string name="folder_path_readwrite">Para la carpeta seleccioanada, en tu versión de Android Syncthing tiene permiso de lectura y de escritura.</string>
+  <string name="folder_path_readwrite">Tu versión de Android otorga a Syncthing permiso de lectura y escritura para la carpeta seleccionada.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
   <string name="toast_invalid_folder_selected">Lo sentimos. La carpeta seleccionada no se puede usar. Por favor, selecciona una carpeta que esté en el almacenamiento interno o externo.</string>
   <string name="ignore_patterns">Ignorar los Patrones</string>

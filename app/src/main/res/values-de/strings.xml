@@ -15,6 +15,8 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="storage_permission_title">Speicher-Berechtigung</string>
   <string name="storage_permission_desc">Syncthing muss auf den Speicher zugreifen können, um Dateien zu synchronisieren.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Standortberechtigung (Hintergrund)</string>
+  <string name="location_permission_desc">Syncthing kann so konfiguriert werden, dass es sich nur in bestimmten WLAN-Netzen synchronisiert. Um dies tun zu können, muss es die SSID des momentan verbundenen WLAN herausfinden, auch wenn die App geschlossen ist. Dazu benötigt es die Berechtigung zur Abfrage des Standorts im Hintergrund. Diese Informationen werden nicht dazu genutzt nach deinem Standort zu sehen. Und die einzige gespeicherte Information ist das WLAN, dass du ausgewählt hast, um es auf die Liste zu setzen - darüberhinausgehende Benutzerdaten werden nicht gespeichert.\n\n Wenn du diese Funktion nutzen willst, drücke den Knopf oben, um Syncthing die erforderlichen Berechtigungen zu erteilen. Anderenfalls kannst du diesen Schritt überspringen.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Zurück</string>
   <string name="cont">Weiter</string>
@@ -242,6 +244,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="start_into_web_gui_title">Direkt die Weboberfläche öffnen</string>
   <string name="start_into_web_gui_summary">Beim Start der App die Weboberfläche anstelle des Hauptfensters öffnen</string>
   <string name="preference_theme_title">Design</string>
+  <string name="preference_theme_follow_system">System folgen</string>
   <string name="preference_theme_option_light">Hell</string>
   <string name="preference_theme_option_dark">Dunkel</string>
   <string name="pref_language_default">Standardsprache</string>

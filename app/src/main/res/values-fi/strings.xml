@@ -13,6 +13,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <!--Slide 2-->
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
+  <string name="back">Takaisin</string>
   <string name="cont">Jatka</string>
   <string name="finish">Valmis</string>
   <string name="generic_example">Esimerkki</string>
@@ -177,6 +178,10 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="notification_type_summary">Valitse ilmoituksen tyyppi</string>
   <string name="preference_language_title">Kieli</string>
   <string name="preference_language_summary">Muuta sovelluksen kieli</string>
+  <string name="preference_theme_title">Teema</string>
+  <string name="preference_theme_follow_system">Seuraa järjestelmän asetusta</string>
+  <string name="preference_theme_option_light">Vaalea</string>
+  <string name="preference_theme_option_dark">Tumma</string>
   <string name="pref_language_default">Oletuskieli</string>
   <string name="device_name">Laitteen nimi</string>
   <string name="listen_address"> Synkronointiprotokollan kuunteluosoite</string>

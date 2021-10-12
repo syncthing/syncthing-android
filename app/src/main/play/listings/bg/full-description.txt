@@ -1,11 +1,11 @@
-Syncthing е заместник на комерсиални услуги за синхронизиране и облачни услуги, но за разлика от тях е децентрализирано решение с отворен код. Вашите данни остават под ваш контрол, вие решавате къде да се съхраняват, с кой да бъдат споделени и как да се предават през Интернет.
+Syncthing е заместник на комерсиални услуги за синхронизиране и облачни услуги, но за разлика от тях е децентрализирано решение с отворен код. Вашите данни остават под ваш контрол, вие решавате къде да бъдат съхранявани, с кой да бъдат споделяни и как да бъдат пренасяни през интернет.
 
-Уеб сайт: https://syncthing.net/
+Страница: https://syncthing.net/
 
-Сорс код: https://github.com/syncthing/syncthing-android
+Изходен код: https://github.com/syncthing/syncthing-android
 
 Форум: https://forum.syncthing.net/
 
 Проблеми: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Политика за поверителност: https://syncthing.net/android-privacy-policy
