@@ -55,27 +55,6 @@ public class Constants {
         LOCATION, LOCATION_BACKGROUND, STORAGE
     }
 
-    /**
-     * Returns the location permissions required to access wifi SSIDs depending
-     * on the respective Android version.
-     */
-    public static String[] getLocationPermissions() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) { // before android 9
-            return new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            };
-        }
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) { // android 9
-            return new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-            };
-        }
-        return new String[]{  // after android 9
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-        };
-    }
-
 
     /**
      * Interval in ms at which the GUI is updated (eg {@link com.nutomic.syncthingandroid.fragments.DrawerFragment}).

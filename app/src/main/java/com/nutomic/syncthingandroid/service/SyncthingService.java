@@ -18,6 +18,7 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.PermissionUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -203,9 +204,7 @@ public class SyncthingService extends Service {
          * see issue: https://github.com/syncthing/syncthing-android/issues/871
          * We need to recheck if we still have the storage permission.
          */
-        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                PackageManager.PERMISSION_GRANTED);
+        mStoragePermissionGranted = PermissionUtil.haveStoragePermission(this);
 
         if (mNotificationHandler != null) {
             mNotificationHandler.setAppShutdownInProgress(false);

@@ -75,7 +75,6 @@ public class Util {
     }
 
     /**
-     * <<<<<<< HEAD
      * Normally an application's data directory is only accessible by the corresponding application.
      * Therefore, every file and directory is owned by an application's user and group. When running Syncthing as root,
      * it writes to the application's data directory. This leaves files and directories behind which are owned by root having 0600.
