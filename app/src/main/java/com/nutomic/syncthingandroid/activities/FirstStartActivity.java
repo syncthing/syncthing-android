@@ -1,13 +1,17 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.Manifest;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -353,41 +359,38 @@ public class FirstStartActivity extends Activity {
     /**
      * Permission check and request functions
      */
-<<<<<<< HEAD
     private void requestLocationPermission() {
-=======
-    @TargetApi(30)
-    private boolean haveAllFilesAccessPermission() {
-        return Environment.isExternalStorageManager();
+        ActivityCompat.requestPermissions(this,
+                PermissionUtil.getLocationPermissions(),
+                Constants.PermissionRequestType.LOCATION.ordinal());
+    }
+
+    private void requestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requestAllFilesAccessPermission();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    Constants.PermissionRequestType.STORAGE.ordinal());
+        }
     }
 
     @TargetApi(30)
     private void requestAllFilesAccessPermission() {
-        Boolean intentFailed = false;
         Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
         intent.setData(Uri.parse("package:" + getPackageName()));
         try {
             ComponentName componentName = intent.resolveActivity(getPackageManager());
             if (componentName != null) {
-                String className = componentName.getClassName();
-                if (className != null) {
-                    // Launch "Allow all files access?" dialog.
-                    startActivity(intent);
-                    return;
-                }
-                intentFailed = true;
-            } else {
-                Log.w(TAG, "Request all files access not supported");
-                intentFailed = true;
+                // Launch "Allow all files access?" dialog.
+                startActivity(intent);
+                return;
             }
+            Log.w(TAG, "Request all files access not supported");
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "Request all files access not supported", e);
-            intentFailed = true;
         }
-        if (intentFailed) {
-            // Some devices don't support this request.
-            Toast.makeText(this, R.string.dialog_all_files_access_not_supported, Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(this, R.string.dialog_all_files_access_not_supported, Toast.LENGTH_LONG).show();
     }
 
     private boolean haveIgnoreDozePermission() {
