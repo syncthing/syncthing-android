@@ -52,7 +52,7 @@ public class Constants {
      * These are the request codes used when requesting the permissions.
      */
     public enum PermissionRequestType {
-        LOCATION, STORAGE
+        LOCATION, LOCATION_BACKGROUND, STORAGE
     }
 
     /**

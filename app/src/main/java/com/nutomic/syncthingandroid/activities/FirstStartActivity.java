@@ -487,60 +487,33 @@ public class FirstStartActivity extends Activity {
                                            @NonNull int[] grantResults) {
         switch (Constants.PermissionRequestType.values()[requestCode]) {
             case LOCATION:
-                boolean granted = grantResults.length != 0;
-                if (!granted) {
-                    Log.i(TAG, "No location permission in request-result");
+                boolean granted =
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "User denied foreground location permission");
                     break;
                 }
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Log.i(TAG, "User granted permission: " + permissions[i]);
-                    } else {
-                        granted = false;
-                        Log.i(TAG, "User denied permission: " + permissions[i]);
-                    }
-                }
-                if (granted) {
-                    Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "User granted foreground location permission");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ActivityCompat.requestPermissions(this,
+                            PermissionUtil.getLocationPermissions(),
+                            Constants.PermissionRequestType.LOCATION_BACKGROUND.ordinal());
                 }
                 break;
-<<<<<<< HEAD
-            case STORAGE:
-=======
-            case REQUEST_FINE_LOCATION:
-                if (grantResults.length == 0 ||
-                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.i(TAG, "User denied ACCESS_FINE_LOCATION permission.");
-                    return;
+            case LOCATION_BACKGROUND:
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "User denied background location permission");
+                    break;
                 }
+                Log.i(TAG, "User granted background location permission");
                 Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
-                Log.i(TAG, "User granted ACCESS_FINE_LOCATION permission.");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    ActivityCompat.requestPermissions(
-                            this,
-                            new String[]{
-                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                            },
-                            REQUEST_BACKGROUND_LOCATION
-                    );
-                    return;
-                }
                 break;
-            case REQUEST_WRITE_STORAGE:
->>>>>>> 545a9ffb (Support SDcard read/write using all files access on Android 11+ (fixes #568) (#618))
+            case STORAGE:
                 if (grantResults.length == 0 ||
                         grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Log.i(TAG, "User denied WRITE_EXTERNAL_STORAGE permission.");
                 } else {
                     Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "User granted WRITE_EXTERNAL_STORAGE permission.");
-<<<<<<< HEAD
-=======
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        requestAllFilesAccessPermission();
-                    }
-                    mNextButton.requestFocus();
->>>>>>> 545a9ffb (Support SDcard read/write using all files access on Android 11+ (fixes #568) (#618))
                 }
                 break;
             default:
