@@ -357,7 +357,6 @@ public class FirstStartActivity extends Activity {
                                            @NonNull int[] grantResults) {
         switch (Constants.PermissionRequestType.values()[requestCode]) {
             case LOCATION:
-                boolean granted =
                 if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Log.i(TAG, "User denied foreground location permission");
                     break;
