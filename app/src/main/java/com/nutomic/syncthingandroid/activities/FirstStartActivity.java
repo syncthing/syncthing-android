@@ -77,20 +77,6 @@ public class FirstStartActivity extends Activity {
             return;
         }
 
-        // Log what's missing and preventing us from directly starting into MainActivity.
-        if (showSlideStoragePermission) {
-            Log.d(TAG, "We (no longer?) have storage permission and will politely ask for it.");
-        }
-        if (showSlideIgnoreDozePermission) {
-            Log.d(TAG, "We (no longer?) have ignore doze permission and will politely ask for it on phones.");
-        }
-        if (showSlideLocationPermission) {
-            Log.d(TAG, "We (no longer?) have location permission and will politely ask for it.");
-        }
-        if (showSlideKeyGeneration) {
-            Log.d(TAG, "We (no longer?) have a valid Syncthing config and will attempt to generate a fresh config.");
-        }
-
         // Make notification bar transparent (API level 21+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
