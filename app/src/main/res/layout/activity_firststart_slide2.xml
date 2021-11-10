@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen2">
+    android:background="@color/bg_screen2"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:background="@color/bg_screen2"
-        android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_title"
+            android:layout_margin="30dp"
             android:gravity="center"
+            android:text="@string/welcome_title"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:layout_margin="30dp" />
+            android:textSize="30sp" />
 
         <ImageView
             android:layout_width="@dimen/img_width_height"
@@ -33,14 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:paddingEnd="40dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:paddingStart="40dp"
-            android:text="@string/grant_permission"
             android:contentDescription="@string/grant_permission"
-            android:drawableLeft="@android:drawable/ic_menu_save"
             android:drawableStart="@android:drawable/ic_menu_save"
+            android:drawableLeft="@android:drawable/ic_menu_save"
+            android:paddingStart="40dp"
+            android:paddingLeft="40dp"
+            android:paddingEnd="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/grant_permission"
             android:textSize="12sp" />
 
         <TextView
@@ -51,26 +50,19 @@
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/desc_marginTop"
-                android:paddingLeft="@dimen/desc_padding"
-                android:paddingRight="@dimen/desc_padding"
-                android:paddingBottom="@dimen/desc_paddingBottom"
-                android:text="@string/storage_permission_desc"
-                android:textAlignment="center"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/slide_desc" />
-
-        </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/desc_marginTop"
+            android:paddingLeft="@dimen/desc_padding"
+            android:paddingRight="@dimen/desc_padding"
+            android:paddingBottom="@dimen/desc_paddingBottom"
+            android:text="@string/storage_permission_desc"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>
 
-
-</RelativeLayout>
+</ScrollView>
