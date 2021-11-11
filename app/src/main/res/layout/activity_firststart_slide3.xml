@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_screen3"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:paddingBottom="@dimen/dots_full_height">
 
     <LinearLayout
         android:layout_width="match_parent"
