@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/dots_full_height"
     android:background="@color/bg_screen1"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:paddingBottom="@dimen/dots_full_height">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center"
         android:orientation="vertical">
 
