@@ -24,10 +24,10 @@ dependencies {
 }
 
 android {
-    // Changes to these values need to be reflected in `.travis.yml`
+    // Changes to these values need to be reflected in `../docker/Dockerfile`
     compileSdkVersion 29
     buildToolsVersion '29.0.3'
-    ndkVersion = '23.0.7599858'
+    ndkVersion = "${ndkVersionShared}"
 
     buildTypes.debug.applicationIdSuffix ".debug"
     dataBinding.enabled = true

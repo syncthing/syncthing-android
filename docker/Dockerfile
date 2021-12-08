@@ -35,9 +35,6 @@ RUN $SDKMANAGER tools platform-tools "build-tools;29.0.3" "platforms;android-29"
 # Accept licenses of newly installed packages
 RUN yes | $SDKMANAGER --licenses
 
-# Setup the NDK path
-ENV ANDROID_NDK_HOME ${ANDROID_HOME}/ndk/${NDK_VERSION}
-
 # Enable prebuild mode
 ENV SYNCTHING_ANDROID_PREBUILT 1
 

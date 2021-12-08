@@ -21,8 +21,8 @@ Language mappings are defined in `.tx/config`, with the second code being the on
 # Building
 
 ### Dependencies
-- Android SDK (you can skip this if you are using Android Studio)
-- Android NDK (`$ANDROID_NDK_HOME` should point at the root directory of your NDK)
+- Android SDK, with `$ANDROID_HOME` pointing to it (you can skip this if you are using Android Studio)
+- Android NDK (you should install the required version (`ext.ndkVersionShared` in `./build.gradle`) with the usual tools, such that it's located within `$ANDROID_HOME/ndk/`).
 - Go (see [here](https://docs.syncthing.net/dev/building.html#prerequisites) for the required version)
 - Java Version 11 (you scan skip this if you are using Android Studio, otherwise you might need to set `$JAVA_HOME` accordingly)
 

@@ -1,6 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        // Cannot be called "ndkVersion" as that leads to naming collision
+        // Changes to this value must be reflected in `./docker/Dockerfile`
+        ndkVersionShared = '23.0.7599858'
+    }
     repositories {
         google()
         jcenter()
