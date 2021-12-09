@@ -22,6 +22,7 @@ import java.util.LinkedList;
 public abstract class SyncthingActivity extends ThemedAppCompatActivity implements ServiceConnection {
 
     public static final String EXTRA_KEY_GENERATION_IN_PROGRESS = "com.nutomic.syncthing-android.SyncthingActivity.KEY_GENERATION_IN_PROGRESS";
+    public static final String EXTRA_RESET_DATABASE = "com.nutomic.syncthing-android.SyncthingActivity.RESET_DATABASE";
 
     private SyncthingService mSyncthingService;
 

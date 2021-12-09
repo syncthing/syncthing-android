@@ -27,6 +27,12 @@ Please report any problems you encounter via Github.</string>
     <string name="location_permission_title">Location Permission (background)</string>
     <string name="location_permission_desc">Syncthing can be configured to synchronize on selected Wi-Fi networks only. To do that it needs to look up the SSID of the currently connected Wi-Fi, also when the app is closed. Therefore it requires permission to access the location in the background. This information is not used to look up your location. And the only stored information is the Wi-Fi you manually choose to add to the list - no other user data is stored.\n\n If you want to use this feature, press the button above to grant the required permissions to Syncthing. Otherwise you can skip this step.</string>
 
+    <!-- Slide 4 -->
+    <string name="api_level_30_title">Upgrade Information</string>
+    <string name="api_level_30_desc">With the latest update syncthing-android is targeting api level 30, which changes the behaviour of android\'s filesystem. To prevent data loss, the database needs to be reset. This will cause all your data to be hashed again, but it doesn\'t need to be transferred from remote devices again. Depending on how much data you have, this can take quite a long time.\n\n Please press the button below to reset the database and start Syncthing.</string>
+    <string name="api_level_30_button">Reset database</string>
+    <string name="toast_api_level_30_must_reset">You can only continue by clicking the button to reset the database.</string>
+
     <!-- Generic texts used everywhere -->
     <string name="back">Back</string>
     <string name="cont">Continue</string>

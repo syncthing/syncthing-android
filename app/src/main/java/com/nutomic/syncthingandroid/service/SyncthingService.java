@@ -340,13 +340,17 @@ public class SyncthingService extends Service {
         }
 
         // Safety check: Log warning if a previously launched startup task did not finish properly.
-        if (mStartupTask != null && (mStartupTask.getStatus() == AsyncTask.Status.RUNNING)) {
+        if (startupTaskIsRunning()) {
             Log.w(TAG, "launchStartupTask: StartupTask is still running. Skipped starting it twice.");
             return;
         }
         onServiceStateChange(State.STARTING);
         mStartupTask = new StartupTask(this);
         mStartupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private boolean startupTaskIsRunning() {
+        return mStartupTask != null && mStartupTask.getStatus() == AsyncTask.Status.RUNNING;
     }
 
     /**
@@ -544,6 +548,14 @@ public class SyncthingService extends Service {
                 mSyncthingRunnableThread = null;
             }
             mSyncthingRunnable = null;
+        }
+        if (startupTaskIsRunning()) {
+            mStartupTask.cancel(true);
+            Log.v(TAG, "Waiting for mStartupTask to finish after cancelling ...");
+            try {
+                mStartupTask.get();
+            } catch (Exception e) { }
+            mStartupTask = null;
         }
         onKilledListener.onKilled();
     }

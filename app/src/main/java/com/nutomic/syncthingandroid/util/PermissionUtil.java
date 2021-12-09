@@ -10,8 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 public class PermissionUtil {
-    private PermissionUtil() {
-    }
+    private PermissionUtil() {}
 
     /**
      * Returns the location permissions required to access wifi SSIDs depending

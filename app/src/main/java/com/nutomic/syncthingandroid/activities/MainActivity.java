@@ -50,9 +50,11 @@ import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
 import com.nutomic.syncthingandroid.model.Options;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
+import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.util.Date;
@@ -258,10 +260,18 @@ public class MainActivity extends StateDialogActivity
         // SyncthingService needs to be started from this activity as the user
         // can directly launch this activity from the recent activity switcher.
         Intent serviceIntent = new Intent(this, SyncthingService.class);
+        if (getIntent().getBooleanExtra(MainActivity.EXTRA_RESET_DATABASE, false)) {
+            serviceIntent.setAction(SyncthingService.ACTION_RESET_DATABASE);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(serviceIntent);
         } else {
             startService(serviceIntent);
+        }
+
+        // In case start_into_web_gui option is enabled, immediately open that.
+        if (mPreferences.getBoolean(Constants.PREF_START_INTO_WEB_GUI, false)) {
+            startActivity(new Intent(this, WebGuiActivity.class));
         }
 
         onNewIntent(getIntent());
@@ -270,8 +280,7 @@ public class MainActivity extends StateDialogActivity
     @Override
     public void onResume() {
         // Check if storage permission has been revoked at runtime.
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-            PackageManager.PERMISSION_GRANTED)) {
+        if (!PermissionUtil.haveStoragePermission(this)) {
             startActivity(new Intent(this, FirstStartActivity.class));
             this.finish();
         }
