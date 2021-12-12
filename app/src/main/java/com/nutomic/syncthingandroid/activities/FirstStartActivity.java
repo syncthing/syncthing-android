@@ -39,7 +39,6 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
-import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
 
 import javax.inject.Inject;
@@ -98,7 +97,7 @@ public class FirstStartActivity extends Activity {
         // Make notification bar transparent (API level 21+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
         // Show first start welcome wizard UI.
@@ -203,7 +202,15 @@ public class FirstStartActivity extends Activity {
     }
 
     private boolean upgradedToApiLevel30() {
-        return mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30,false);
+        boolean upgraded = mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30,false);
+        if (upgraded) {
+            return true;
+        }
+        if (isFirstStart()) {
+            mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
+            return true;
+        }
+        return false;
     }
 
     private Slide currentSlide() {

@@ -29,7 +29,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Slide 4 -->
     <string name="api_level_30_title">Upgrade Information</string>
-    <string name="api_level_30_desc">With the latest update syncthing-android is targeting api level 30, which changes the behaviour of android\'s filesystem. To prevent data loss, the database needs to be reset. This will cause all your data to be hashed again, but it doesn\'t need to be transferred from remote devices again. Depending on how much data you have, this can take quite a long time.\n\n Please press the button below to reset the database and start Syncthing.</string>
+    <string name="api_level_30_desc">With the latest update syncthing-android is targeting api level 30, which changes the behaviour of android\'s filesystem. Good news: On android 11 and newer it is now able to write to an external SD card. Bad news: It may be slower and some paths will be hidden. Due to these hidden paths, the database needs to be reset to prevent data loss. This will cause all your data to be hashed again, but it doesn\'t need to be transferred from remote devices. Depending on how much data you have, this can take quite a long time.\n\n Please press the button below to reset the database and start Syncthing.</string>
+
     <string name="api_level_30_button">Reset database</string>
     <string name="toast_api_level_30_must_reset">You can only continue by clicking the button to reset the database.</string>
 

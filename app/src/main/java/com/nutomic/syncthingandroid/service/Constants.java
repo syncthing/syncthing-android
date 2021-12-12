@@ -34,7 +34,7 @@ public class Constants {
     public static final String PREF_USE_TOR                     = "use_tor";
     public static final String PREF_SOCKS_PROXY_ADDRESS         = "socks_proxy_address";
     public static final String PREF_HTTP_PROXY_ADDRESS          = "http_proxy_address";
-    public static final String PREF_UPGRADED_TO_API_LEVEL_30 = "upgraded_to_api_level_30";
+    public static final String PREF_UPGRADED_TO_API_LEVEL_30    = "upgraded_to_api_level_30";
 
     /**
      * Available options cache for preference {@link app_settings#debug_facilities_enabled}
