@@ -140,10 +140,12 @@ public class FileUtils {
     @TargetApi(21)
     private static String volumeToPath(Object storageVolumeElement, Class<?> storageVolumeClazz) throws Exception {
         try {
+            // >= API level 30
             Method getDir = storageVolumeClazz.getMethod("getDirectory");
             File file = (File) getDir.invoke(storageVolumeElement);
             return file.getPath();
         } catch (NoSuchMethodException e) {
+            // Not present in API level 30, available at some earlier point.
             Method getPath = storageVolumeClazz.getMethod("getPath");
             return (String) getPath.invoke(storageVolumeElement);
         }

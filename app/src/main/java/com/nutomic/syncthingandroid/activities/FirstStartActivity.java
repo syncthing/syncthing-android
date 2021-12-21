@@ -41,30 +41,29 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
 import javax.inject.Inject;
 
 public class FirstStartActivity extends Activity {
 
     private enum Slide {
-        INTRO,
-        STORAGE,
-        LOCATION,
-        API_LEVEL_30,
+        INTRO(R.layout.activity_firststart_slide_intro),
+        STORAGE(R.layout.activity_firststart_slide_storage),
+        LOCATION(R.layout.activity_firststart_slide_location),
+        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
+
+        public final int layout;
+
+        Slide(int layout) {
+            this.layout = layout;
+        }
     };
 
-    private static final Slide[] slideOrder = {
-            Slide.INTRO,
-            Slide.STORAGE,
-            Slide.LOCATION,
-            Slide.API_LEVEL_30,
-    };
-    private static int[] mLayouts = new int[]{
-            R.layout.activity_firststart_slide_intro,
-            R.layout.activity_firststart_slide_storage,
-            R.layout.activity_firststart_slide_location,
-            R.layout.activity_firststart_slide_api_level_30,
-    };
-
+    private static Slide[] slides = Slide.values();
     private static String TAG = "FirstStartActivity";
 
     private ViewPager mViewPager;
@@ -73,8 +72,6 @@ public class FirstStartActivity extends Activity {
     private TextView[] mDots;
     private Button mBackButton;
     private Button mNextButton;
-
-    private boolean mResetDatabase = false;
 
     @Inject
     SharedPreferences mPreferences;
@@ -181,15 +178,15 @@ public class FirstStartActivity extends Activity {
         }
 
         int next = mViewPager.getCurrentItem() + 1;
-        while (next < slideOrder.length) {
-            if (!shouldSkipSlide(slideOrder[next])) {
+        while (next < slides.length) {
+            if (!shouldSkipSlide(slides[next])) {
                 mViewPager.setCurrentItem(next);
                 mBackButton.setVisibility(View.VISIBLE);
                 break;
             }
             next++;
         }
-        if (next == mLayouts.length) {
+        if (next == slides.length) {
             // Start the app after "mNextButton" was hit on the last slide.
             Log.v(TAG, "User completed first start UI.");
             mPreferences.edit().putBoolean(Constants.PREF_FIRST_START, false).apply();
@@ -202,8 +199,7 @@ public class FirstStartActivity extends Activity {
     }
 
     private boolean upgradedToApiLevel30() {
-        boolean upgraded = mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30,false);
-        if (upgraded) {
+        if (mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, false)) {
             return true;
         }
         if (isFirstStart()) {
@@ -213,8 +209,13 @@ public class FirstStartActivity extends Activity {
         return false;
     }
 
+    private void upgradeToApiLevel30() {
+        FileUtils.deleteQuietly(new File(this.getFilesDir(), "index-v0.14.0.db"));
+        mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
+    }
+
     private Slide currentSlide() {
-        return slideOrder[mViewPager.getCurrentItem()];
+        return slides[mViewPager.getCurrentItem()];
     }
 
     private boolean shouldSkipSlide(Slide slide) {
@@ -234,7 +235,7 @@ public class FirstStartActivity extends Activity {
     }
 
     private void addBottomDots() {
-        mDots = new TextView[mLayouts.length];
+        mDots = new TextView[slides.length];
         for (int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
@@ -260,7 +261,7 @@ public class FirstStartActivity extends Activity {
             setActiveBottomDot(position);
 
             // Change the next button text from next to finish on last slide.
-            mNextButton.setText(getString((position == mLayouts.length - 1) ? R.string.finish : R.string.cont));
+            mNextButton.setText(getString((position == slides.length - 1) ? R.string.finish : R.string.cont));
         }
 
         @Override
@@ -298,9 +299,9 @@ public class FirstStartActivity extends Activity {
         public Object instantiateItem(ViewGroup container, int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View view = layoutInflater.inflate(mLayouts[position], container, false);
+            View view = layoutInflater.inflate(slides[position].layout, container, false);
 
-            switch (slideOrder[position]) {
+            switch (slides[position]) {
                 case INTRO:
                     break;
 
@@ -329,9 +330,7 @@ public class FirstStartActivity extends Activity {
                     btnResetDatabase.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // The main-activity will actually do the db reset.
-                            mResetDatabase = true;
-                            mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
+                            upgradeToApiLevel30();
                             onBtnNextClick();
                         }
                     });
@@ -344,7 +343,7 @@ public class FirstStartActivity extends Activity {
 
         @Override
         public int getCount() {
-            return mLayouts.length;
+            return slides.length;
         }
 
         @Override
@@ -367,7 +366,6 @@ public class FirstStartActivity extends Activity {
         Boolean doInitialKeyGeneration = !Constants.getConfigFile(this).exists();
         Intent mainIntent = new Intent(this, MainActivity.class);
         mainIntent.putExtra(MainActivity.EXTRA_KEY_GENERATION_IN_PROGRESS, doInitialKeyGeneration);
-        mainIntent.putExtra(MainActivity.EXTRA_RESET_DATABASE, mResetDatabase);
         startActivity(mainIntent);
         finish();
     }
