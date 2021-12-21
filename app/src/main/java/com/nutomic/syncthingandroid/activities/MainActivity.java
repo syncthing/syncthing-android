@@ -263,11 +263,6 @@ public class MainActivity extends StateDialogActivity
             startService(serviceIntent);
         }
 
-        // In case start_into_web_gui option is enabled, immediately open that.
-        if (mPreferences.getBoolean(Constants.PREF_START_INTO_WEB_GUI, false)) {
-            startActivity(new Intent(this, WebGuiActivity.class));
-        }
-
         onNewIntent(getIntent());
     }
 
