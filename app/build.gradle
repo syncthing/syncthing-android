@@ -14,7 +14,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'commons-io:commons-io:2.11.0'
 
-    implementation ('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
+    implementation ('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
     implementation 'com.google.zxing:core:3.4.1'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
