@@ -18,6 +18,7 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.http.PollWebGuiAvailableTask;
 import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 import com.nutomic.syncthingandroid.util.ConfigXml;
+import com.nutomic.syncthingandroid.util.PermissionUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -203,9 +204,7 @@ public class SyncthingService extends Service {
          * see issue: https://github.com/syncthing/syncthing-android/issues/871
          * We need to recheck if we still have the storage permission.
          */
-        mStoragePermissionGranted = (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                PackageManager.PERMISSION_GRANTED);
+        mStoragePermissionGranted = PermissionUtil.haveStoragePermission(this);
 
         if (mNotificationHandler != null) {
             mNotificationHandler.setAppShutdownInProgress(false);
@@ -341,13 +340,17 @@ public class SyncthingService extends Service {
         }
 
         // Safety check: Log warning if a previously launched startup task did not finish properly.
-        if (mStartupTask != null && (mStartupTask.getStatus() == AsyncTask.Status.RUNNING)) {
+        if (startupTaskIsRunning()) {
             Log.w(TAG, "launchStartupTask: StartupTask is still running. Skipped starting it twice.");
             return;
         }
         onServiceStateChange(State.STARTING);
         mStartupTask = new StartupTask(this);
         mStartupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private boolean startupTaskIsRunning() {
+        return mStartupTask != null && mStartupTask.getStatus() == AsyncTask.Status.RUNNING;
     }
 
     /**
@@ -545,6 +548,14 @@ public class SyncthingService extends Service {
                 mSyncthingRunnableThread = null;
             }
             mSyncthingRunnable = null;
+        }
+        if (startupTaskIsRunning()) {
+            mStartupTask.cancel(true);
+            Log.v(TAG, "Waiting for mStartupTask to finish after cancelling ...");
+            try {
+                mStartupTask.get();
+            } catch (Exception e) { }
+            mStartupTask = null;
         }
         onKilledListener.onKilled();
     }

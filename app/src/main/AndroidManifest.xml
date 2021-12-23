@@ -25,6 +25,8 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <!-- CAMERA is required for the QR Code Scanner -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- MANAGE_EXTERNAL_STORAGE is required on Android 11 "R" -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
@@ -43,7 +45,7 @@
         <activity
                 android:name=".activities.FirstStartActivity"
                 android:label="@string/app_name"
-                android:launchMode="singleInstance">
+                android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

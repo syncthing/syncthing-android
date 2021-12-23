@@ -1,13 +1,17 @@
 package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.Manifest;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -15,7 +19,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
+
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,28 +39,43 @@ import android.widget.Toast;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.util.PermissionUtil;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 import javax.inject.Inject;
 
 public class FirstStartActivity extends Activity {
 
-    private static String TAG = "FirstStartActivity";
+    private enum Slide {
+        INTRO(R.layout.activity_firststart_slide_intro),
+        STORAGE(R.layout.activity_firststart_slide_storage),
+        LOCATION(R.layout.activity_firststart_slide_location),
+        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
 
-    private static final int SLIDE_POS_LOCATION_PERMISSION = 1;
+        public final int layout;
+
+        Slide(int layout) {
+            this.layout = layout;
+        }
+    };
+
+    private static Slide[] slides = Slide.values();
+    private static String TAG = "FirstStartActivity";
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private LinearLayout mDotsLayout;
     private TextView[] mDots;
-    private int[] mLayouts;
     private Button mBackButton;
     private Button mNextButton;
 
-    @Inject SharedPreferences mPreferences;
+    @Inject
+    SharedPreferences mPreferences;
 
-    /**
-     * Handles activity behaviour depending on {@link #isFirstStart()} and {@link #haveStoragePermission()}.
-     */
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +86,7 @@ public class FirstStartActivity extends Activity {
          * Recheck storage permission. If it has been revoked after the user
          * completed the welcome slides, displays the slides again.
          */
-        if (!mPreferences.getBoolean(Constants.PREF_FIRST_START, true) &&
-                haveStoragePermission()) {
+        if (!isFirstStart() && PermissionUtil.haveStoragePermission(this) && upgradedToApiLevel30()) {
             startApp();
             return;
         }
@@ -93,14 +113,9 @@ public class FirstStartActivity extends Activity {
             }
         });
 
-        // Layouts of all welcome slides
-        mLayouts = new int[]{
-                R.layout.activity_firststart_slide1,
-                R.layout.activity_firststart_slide2,
-                R.layout.activity_firststart_slide3};
-
         // Add bottom dots
-        addBottomDots(0);
+        addBottomDots();
+        setActiveBottomDot(0);
 
         // Make notification bar transparent
         changeStatusBarColor();
@@ -122,10 +137,15 @@ public class FirstStartActivity extends Activity {
                 onBtnNextClick();
             }
         });
+
+        if (!isFirstStart()) {
+            // Skip intro slide
+            onBtnNextClick();
+        }
     }
 
     public void onBtnBackClick() {
-        int current = getItem(-1);
+        int current = mViewPager.getCurrentItem() - 1;
         if (current >= 0) {
             // Move to previous slider.
             mViewPager.setCurrentItem(current);
@@ -136,22 +156,37 @@ public class FirstStartActivity extends Activity {
     }
 
     public void onBtnNextClick() {
+        Slide slide = currentSlide();
         // Check if we are allowed to advance to the next slide.
-        if (mViewPager.getCurrentItem() == SLIDE_POS_LOCATION_PERMISSION) {
-            // As the storage permission is a prerequisite to run syncthing, refuse to continue without it.
-            if (!haveStoragePermission()) {
-                Toast.makeText(this, R.string.toast_write_storage_permission_required,
-                        Toast.LENGTH_LONG).show();
-                return;
-            }
+        switch (slide) {
+            case STORAGE:
+                // As the storage permission is a prerequisite to run syncthing, refuse to continue without it.
+                Boolean storagePermissionsGranted = PermissionUtil.haveStoragePermission(this);
+                if (!storagePermissionsGranted) {
+                    Toast.makeText(this, R.string.toast_write_storage_permission_required,
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                break;
+            case API_LEVEL_30:
+                if (!upgradedToApiLevel30()) {
+                    Toast.makeText(this, R.string.toast_api_level_30_must_reset,
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                break;
         }
 
-        int current = getItem(+1);
-        if (current < mLayouts.length) {
-            // Move to next slide.
-            mViewPager.setCurrentItem(current);
-            mBackButton.setVisibility(View.VISIBLE);
-        } else {
+        int next = mViewPager.getCurrentItem() + 1;
+        while (next < slides.length) {
+            if (!shouldSkipSlide(slides[next])) {
+                mViewPager.setCurrentItem(next);
+                mBackButton.setVisibility(View.VISIBLE);
+                break;
+            }
+            next++;
+        }
+        if (next == slides.length) {
             // Start the app after "mNextButton" was hit on the last slide.
             Log.v(TAG, "User completed first start UI.");
             mPreferences.edit().putBoolean(Constants.PREF_FIRST_START, false).apply();
@@ -159,27 +194,63 @@ public class FirstStartActivity extends Activity {
         }
     }
 
-    private void addBottomDots(int currentPage) {
-        mDots = new TextView[mLayouts.length];
+    private boolean isFirstStart() {
+        return mPreferences.getBoolean(Constants.PREF_FIRST_START, true);
+    }
 
-        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+    private boolean upgradedToApiLevel30() {
+        if (mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, false)) {
+            return true;
+        }
+        if (isFirstStart()) {
+            mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
+            return true;
+        }
+        return false;
+    }
 
-        mDotsLayout.removeAllViews();
+    private void upgradeToApiLevel30() {
+        FileUtils.deleteQuietly(new File(this.getFilesDir(), "index-v0.14.0.db"));
+        mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
+    }
+
+    private Slide currentSlide() {
+        return slides[mViewPager.getCurrentItem()];
+    }
+
+    private boolean shouldSkipSlide(Slide slide) {
+        switch (slide) {
+            case INTRO:
+                return !isFirstStart();
+            case STORAGE:
+                return PermissionUtil.haveStoragePermission(this);
+            case LOCATION:
+                return hasLocationPermission();
+            case API_LEVEL_30:
+                // Skip if running as root, as that circumvents any Android FS restrictions.
+                return upgradedToApiLevel30()
+                        || PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+        }
+        return false;
+    }
+
+    private void addBottomDots() {
+        mDots = new TextView[slides.length];
         for (int i = 0; i < mDots.length; i++) {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(colorsInactive[currentPage]);
             mDotsLayout.addView(mDots[i]);
         }
-
-        if (mDots.length > 0)
-            mDots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
-    private int getItem(int i) {
-        return mViewPager.getCurrentItem() + i;
+    private void setActiveBottomDot(int currentPage) {
+        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+        for (int i = 0; i < mDots.length; i++) {
+            mDots[i].setTextColor(colorsInactive[currentPage]);
+        }
+        mDots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
     //  ViewPager change listener
@@ -187,10 +258,10 @@ public class FirstStartActivity extends Activity {
 
         @Override
         public void onPageSelected(int position) {
-            addBottomDots(position);
+            setActiveBottomDot(position);
 
             // Change the next button text from next to finish on last slide.
-            mNextButton.setText(getString((position == mLayouts.length - 1) ? R.string.finish : R.string.cont));
+            mNextButton.setText(getString((position == slides.length - 1) ? R.string.finish : R.string.cont));
         }
 
         @Override
@@ -228,28 +299,42 @@ public class FirstStartActivity extends Activity {
         public Object instantiateItem(ViewGroup container, int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View view = layoutInflater.inflate(mLayouts[position], container, false);
+            View view = layoutInflater.inflate(slides[position].layout, container, false);
 
-            /* Slide: storage permission */
-            Button btnGrantStoragePerm = (Button) view.findViewById(R.id.btnGrantStoragePerm);
-            if (btnGrantStoragePerm != null) {
-                btnGrantStoragePerm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        requestStoragePermission();
-                    }
-                });
-            }
+            switch (slides[position]) {
+                case INTRO:
+                    break;
 
-            /* Slide: location permission */
-            Button btnGrantLocationPerm = (Button) view.findViewById(R.id.btnGrantLocationPerm);
-            if (btnGrantLocationPerm != null) {
-                btnGrantLocationPerm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        requestLocationPermission();
-                    }
-                });
+                case STORAGE:
+                    Button btnGrantStoragePerm = (Button) view.findViewById(R.id.btnGrantStoragePerm);
+                    btnGrantStoragePerm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestStoragePermission();
+                        }
+                    });
+                    break;
+
+                case LOCATION:
+                    Button btnGrantLocationPerm = (Button) view.findViewById(R.id.btnGrantLocationPerm);
+                    btnGrantLocationPerm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestLocationPermission();
+                        }
+                    });
+                    break;
+
+                case API_LEVEL_30:
+                    Button btnResetDatabase = (Button) view.findViewById(R.id.btnResetDatabase);
+                    btnResetDatabase.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            upgradeToApiLevel30();
+                            onBtnNextClick();
+                        }
+                    });
+                    break;
             }
 
             container.addView(view);
@@ -258,7 +343,7 @@ public class FirstStartActivity extends Activity {
 
         @Override
         public int getCount() {
-            return mLayouts.length;
+            return slides.length;
         }
 
         @Override
@@ -281,7 +366,6 @@ public class FirstStartActivity extends Activity {
         Boolean doInitialKeyGeneration = !Constants.getConfigFile(this).exists();
         Intent mainIntent = new Intent(this, MainActivity.class);
         mainIntent.putExtra(MainActivity.EXTRA_KEY_GENERATION_IN_PROGRESS, doInitialKeyGeneration);
-
         /**
          * In case start_into_web_gui option is enabled, start both activities
          * so that back navigation works as expected.
@@ -294,25 +378,50 @@ public class FirstStartActivity extends Activity {
         finish();
     }
 
+    private boolean hasLocationPermission() {
+        for (String perm : PermissionUtil.getLocationPermissions()) {
+            if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Permission check and request functions
      */
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(this,
-                Constants.getLocationPermissions(),
+                PermissionUtil.getLocationPermissions(),
                 Constants.PermissionRequestType.LOCATION.ordinal());
     }
 
-    private boolean haveStoragePermission() {
-        int permissionState = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return permissionState == PackageManager.PERMISSION_GRANTED;
+    private void requestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requestAllFilesAccessPermission();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    Constants.PermissionRequestType.STORAGE.ordinal());
+        }
     }
 
-    private void requestStoragePermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                Constants.PermissionRequestType.STORAGE.ordinal());
+    @TargetApi(30)
+    private void requestAllFilesAccessPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        try {
+            ComponentName componentName = intent.resolveActivity(getPackageManager());
+            if (componentName != null) {
+                // Launch "Allow all files access?" dialog.
+                startActivity(intent);
+                return;
+            }
+            Log.w(TAG, "Request all files access not supported");
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "Request all files access not supported", e);
+        }
+        Toast.makeText(this, R.string.dialog_all_files_access_not_supported, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -320,22 +429,24 @@ public class FirstStartActivity extends Activity {
                                            @NonNull int[] grantResults) {
         switch (Constants.PermissionRequestType.values()[requestCode]) {
             case LOCATION:
-                boolean granted = grantResults.length != 0;
-                if (!granted) {
-                    Log.i(TAG, "No location permission in request-result");
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "User denied foreground location permission");
                     break;
                 }
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Log.i(TAG, "User granted permission: " + permissions[i]);
-                    } else {
-                        granted = false;
-                        Log.i(TAG, "User denied permission: " + permissions[i]);
-                    }
+                Log.i(TAG, "User granted foreground location permission");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ActivityCompat.requestPermissions(this,
+                            PermissionUtil.getLocationPermissions(),
+                            Constants.PermissionRequestType.LOCATION_BACKGROUND.ordinal());
                 }
-                if (granted) {
-                    Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                break;
+            case LOCATION_BACKGROUND:
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "User denied background location permission");
+                    break;
                 }
+                Log.i(TAG, "User granted background location permission");
+                Toast.makeText(this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
                 break;
             case STORAGE:
                 if (grantResults.length == 0 ||
@@ -350,5 +461,4 @@ public class FirstStartActivity extends Activity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
 }

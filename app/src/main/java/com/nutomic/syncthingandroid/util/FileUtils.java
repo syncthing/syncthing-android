@@ -107,7 +107,6 @@ public class FileUtils {
             Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
             Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
             Method getUuid = storageVolumeClazz.getMethod("getUuid");
-            Method getPath = storageVolumeClazz.getMethod("getPath");
             Method isPrimary = storageVolumeClazz.getMethod("isPrimary");
             Object result = getVolumeList.invoke(mStorageManager);
 
@@ -127,7 +126,7 @@ public class FileUtils {
                 if (isPrimaryVolume || isExternalVolume) {
                     Log.v(TAG, "getVolumePath: isPrimaryVolume || isExternalVolume");
                     // Return path if the correct volume corresponding to volumeId was found.
-                    return (String) getPath.invoke(storageVolumeElement);
+                    return volumeToPath(storageVolumeElement, storageVolumeClazz);
                 }
             }
         } catch (Exception e) {
@@ -135,6 +134,21 @@ public class FileUtils {
         }
         Log.e(TAG, "getVolumePath failed for volumeId='" + volumeId + "'");
         return null;
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    @TargetApi(21)
+    private static String volumeToPath(Object storageVolumeElement, Class<?> storageVolumeClazz) throws Exception {
+        try {
+            // >= API level 30
+            Method getDir = storageVolumeClazz.getMethod("getDirectory");
+            File file = (File) getDir.invoke(storageVolumeElement);
+            return file.getPath();
+        } catch (NoSuchMethodException e) {
+            // Not present in API level 30, available at some earlier point.
+            Method getPath = storageVolumeClazz.getMethod("getPath");
+            return (String) getPath.invoke(storageVolumeElement);
+        }
     }
 
     /**

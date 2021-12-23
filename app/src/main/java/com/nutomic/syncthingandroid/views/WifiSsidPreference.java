@@ -1,13 +1,10 @@
 package com.nutomic.syncthingandroid.views;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
 import androidx.core.app.ActivityCompat;
@@ -17,8 +14,8 @@ import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.util.PermissionUtil;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -103,7 +100,7 @@ public class WifiSsidPreference extends MultiSelectListPreference {
 
         if (!hasPerms && context instanceof Activity) {
             Activity activity = (Activity) context;
-            ActivityCompat.requestPermissions(activity, Constants.getLocationPermissions(), Constants.PermissionRequestType.LOCATION.ordinal());
+            ActivityCompat.requestPermissions(activity, PermissionUtil.getLocationPermissions(), Constants.PermissionRequestType.LOCATION.ordinal());
         }
     }
 
@@ -111,7 +108,7 @@ public class WifiSsidPreference extends MultiSelectListPreference {
      * Checks if the required location permissions to obtain WiFi SSID are granted.
      */
     private boolean hasLocationPermissions() {
-        String[] perms = Constants.getLocationPermissions();
+        String[] perms = PermissionUtil.getLocationPermissions();
         for (int i = 0; i < perms.length; i++) {
             if (ContextCompat.checkSelfPermission(getContext(), perms[i]) != PackageManager.PERMISSION_GRANTED) {
                 return false;
