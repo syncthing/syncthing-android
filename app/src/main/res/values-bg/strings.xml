@@ -171,7 +171,7 @@
   <string name="category_behaviour">Поведение</string>
   <string name="category_syncthing_options">Настройки на Syncthing</string>
   <string name="category_backup">Резервно копие</string>
-  <string name="category_debug">Дебъг</string>
+  <string name="category_debug">Отстраняване на дефекти</string>
   <string name="category_experimental">Експериментални</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Условия на работа</string>
@@ -302,9 +302,9 @@
   <string name="syncthing_forum_title">Форум на Syncthing</string>
   <string name="syncthing_forum_summary">Посетете форума на Syncthing</string>
   <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Съобщете за проблем</string>
+  <string name="report_issue_title">Докладване на дефект</string>
   <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Отваря страницата за проблеми на Syncthing-Android</string>
+  <string name="report_issue_summary">Отваря страницата за дефекти на Syncthing-Android</string>
   <!--URL of the issue tracker-->
   <!--Menu item to donate-->
   <string name="donate_title">Дарете</string>

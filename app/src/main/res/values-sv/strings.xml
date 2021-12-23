@@ -15,10 +15,12 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="storage_permission_title">Lagringsbehörighet</string>
   <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att utföra filsynkronisering.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Platsbehörighet (bakgrund)</string>
+  <string name="location_permission_desc">Syncthing kan konfigureras för att synkronisera endast på utvalda Wi-Fi-nätverk. För att göra det måste den söka upp SSID för det för närvarande anslutna Wi-Fi-nätverket, även när appen är stängd. Därför krävs behörighet för att komma åt platsen i bakgrunden. Denna information används inte för att söka upp din plats. Och den enda lagrade informationen är det Wi-Fi-nätverk du manuellt väljer att lägga till i listan - ingen annan användardata lagras.\n\n Om du vill använda denna funktion, tryck på knappen ovan för att ge de nödvändiga behörigheterna till Syncthing. Annars kan du hoppa över detta steg.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Bakåt</string>
   <string name="cont">Fortsätt</string>
-  <string name="finish">Färdig</string>
+  <string name="finish">Klar</string>
   <string name="generic_example">Exempel</string>
   <string name="generic_error">Fel</string>
   <string name="grant_permission">Bevilja behörighet</string>
@@ -134,7 +136,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="folder_id_required">Mapp-ID får inte vara tom</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Mapp-sökvägen får inte vara tom</string>
-  <string name="dialog_discard_changes">Kasta dina ändringar?</string>
+  <string name="dialog_discard_changes">Kassera dina ändringar?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
   <string name="folder_path_readonly">Din Android-version ger Syncthing endast skrivskyddad åtkomst till den valda mappen.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
@@ -268,7 +270,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   </string-array>
   <string name="device_name">Enhetens namn</string>
   <string name="listen_address">Lyssnaradresser för synkroniseringsprotokollet</string>
-  <string name="max_recv_kbps">Inkommande hastighetsgräns (KiB/s)</string>
+  <string name="max_recv_kbps">Ingående hastighetsgräns (KiB/s)</string>
   <string name="max_send_kbps">Utgående hastighetsgräns (KiB/s)</string>
   <string name="global_announce_enabled">Global annonsering</string>
   <string name="local_announce_enabled">Lokal annonsering</string>
@@ -353,6 +355,8 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="donate_title">Donera</string>
   <string name="donate_summary">Hjälp oss att betala för domäner och värdsavgifter</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Integritetspolicy</string>
+  <string name="privacy_summary">Öppna syncthing-androids integritetspolicy, som täcker användning (om någon) av personuppgifter, t.ex. plats.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing version</string>
   <!--Title of the preference showing this app's version name-->
