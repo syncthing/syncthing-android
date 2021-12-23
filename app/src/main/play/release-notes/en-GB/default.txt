@@ -1,6 +1,6 @@
 Warning!  
 This release targets API level 30, which changes how Android lets Syncthing interact with the filesystem. As always please make sure you have a good backup of your data, and do look out for problems testing for betas, and any reports to https://forum.syncthing.net are much appreciated (also positive ones :) ).  
-The main beneficial change is, that SD card access is possible on Android >= 11. At the same time folders within `Android/` in internal storage (except for Syncthing's own directory) are not accessible anymore, and overall filesystem operations may be slower.
+For more details, check out the issue linked below.
 
 * Target API level 30 / Android 11 ( https://github.com/syncthing/syncthing-android/issues/1721 )
 * Update Syncthing to v1.18.6-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.18.6-rc.1 )
