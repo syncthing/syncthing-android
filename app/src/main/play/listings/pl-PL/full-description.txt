@@ -1,4 +1,4 @@
-Syncthing zastępuje własnościowe usługi synchronizacyjne i chmury rozwiązaniem otwartym, godnym zaufania i zdecentralizowanym. Twoje dane są tylko i wyłącznie Twoimi i zasługujesz, aby wybrać, gdzie są magazynowane oraz jak są udostępniane osobom trzecim i przesyłane przez Internet.
+Syncthing zastępuje własnościowe usługi synchronizacyjne i chmury rozwiązaniem otwartym, godnym zaufania i zdecentralizowanym. Twoje dane należą wyłącznie do Ciebie i zasługujesz na wybór, gdzie je przechowywać, czy udostępniać je osobom trzecim oraz w jaki sposób przesyłać je przez Internet.
 
 Strona internetowa: https://syncthing.net/
 
@@ -8,4 +8,4 @@ Forum: https://forum.syncthing.net/
 
 Problemy: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Polityka prywatności: https://syncthing.net/android-privacy-policy

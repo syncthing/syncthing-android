@@ -7,12 +7,30 @@
   <string name="welcome_title">Víta Vás Syncthing pre Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Úvod</string>
+  <string name="welcome_text">Syncthing je open-source aplikácia na synchronizáciu súborov.\n
+Na zdieľanie súborov medzi zariadeniami, pridajte si ich ID do zoznamu. Potom si vyberiete, ktoré priečinky chcete synchronizovať.\n
+Prípadné problémy nahláste cez GitHub.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Povolenie prístupu k úložisku</string>
+  <string name="storage_permission_desc">Syncthing potrebuje prístup k úložisku súborov aby mohol súbory synchronizovať.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Prístup k polohe zariadenia (na pozadí)</string>
+  <string name="location_permission_desc">Syncthing sa dá nastaviť tak, aby bežal iba na zvolených WiFi sieťach. Rozpoznávanie dostupných WiFi sietí sa považuje za určovanie polohy. V tejto aplikácii sa však informácie o WiFi na určovanie polohy nepoužívajú. Jediný účel prečítania dostupných WiFi sietí je zobrazenie v zozname na výber sietí.\n\n Ak chcete povolenie synchronizácie vymedziť podľa WiFi, povoľte aplikácii Syncthing prístup k polohe zariadenia aj keď je aplikácia neaktívna. Inak môžete tento krok preskočiť.</string>
   <!--Generic texts used everywhere-->
+  <string name="back">Späť</string>
+  <string name="cont">Pokračovať</string>
+  <string name="finish">Dokončiť</string>
+  <string name="generic_example">Príklad</string>
   <string name="generic_error">Chyba</string>
+  <string name="grant_permission">Udeliť prístup</string>
+  <string name="permission_granted">Prístup udelený</string>
+  <string name="accept">Prijať</string>
+  <string name="ignore">Ignorovať</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Potvrďte ukončenie aplikácie</string>
+  <string name="dialog_exit_while_running_as_service_message">Na zváženie: Aplikáciu ste nastavili tak, aby sa spúšťala pri zapnutí zariadenia. Aplikácia bude preto sledovať podmienky a keď sú splnené, synchronizuje súbory. Aplikáciu by ste mali vypínať iba ak s vyskytnú problémy. Inak si radšej vypnite funkciu \"Zapnúť aplikáciu pri štarte zariadenia\" v nastaveniach. Chcete aplikáciu teraz vypnúť aby sa potom zapla pri ďalšom štarte?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Pridať Adresár</string>
   <!--Title of the "share device id" menu action-->
@@ -25,28 +43,46 @@
   <string name="no">Nie</string>
   <string name="open_website">Otvoriť Webovú Stránku</string>
   <string name="toast_write_storage_permission_required">Táto aplikácia potrebuje práva pre zápis na úložisko</string>
+  <string name="device_rejected">Zariadenie \"%1$s\" chce s týmto zariadením synchronizovať súbory</string>
+  <string name="folder_rejected">Zariadenie \"%1$s\" chce synchronizovať priečinok \"%2$s\"</string>
+  <string name="dialog_disable_battery_optimization_title">Optimalizácia batérie</string>
+  <string name="dialog_disable_battery_optimization_message">Android môže synchronizáciu po nejakom čase prerušiť. Ak tomu chcete zabrániť, vypnite optimalizáciu baterky.\n\nNiektoré zariadenia majú nainštalované dodatočné procesy, ktoré ukončujú aplikácie. Aj v týchto aplikáciách by ste mali Syncthing zaradiť na zoznam výnimiek.</string>
   <string name="dialog_disable_battery_optimization_later">Neskôr</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">Už nezobrazovať</string>
+  <string name="dialog_disable_battery_optimization_turn_off">Vypnúť pre Syncthing</string>
+  <string name="dialog_disable_battery_optimizations_not_supported">Vaše zariadenie nepodporuje vypnutie optimalizácie baterky</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
   <string name="api_loading">Načítavam...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">Syncthing generuje RSA klúč a certifikát. Táto operácia môže chvíľu trvať.</string>
+  <string name="syncthing_loading_slow_message">Syncthing sa štartuje podozrivo dlho. Skontrolujte logy.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">Adresáre</string>
   <!--Shown if no folders exist-->
   <string name="folder_list_empty">Žiadne adresáre</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">%1$d/ %2$d Súboru</item>
+    <item quantity="few">%1$d / %2$dSúborov</item>
+    <item quantity="many">%1$d / %2$d Súborov</item>
+    <item quantity="other">%1$d / %2$d Súborov</item>
+  </plurals>
+  <string name="override_changes">Prepísať zmeny</string>
+  <string name="open_file_manager">Otvoriť v správcovi súborov</string>
+  <string name="toast_no_file_manager">Nenašli sme žiadneho kompatibilného správcu súborov</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Zariadenia</string>
   <!--Shown if no devices exist-->
   <string name="devices_list_empty">Žiadne zariadenia</string>
   <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Syncrhronizované</string>
+  <string name="device_up_to_date">Synchronizované</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
   <string name="device_syncing">Synchronizuje sa (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">Odpojené</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">Pozastavené</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">Neznámy</string>
   <!--Title for current download rate-->
@@ -54,6 +90,11 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Odosielanie</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Stav</string>
+  <string name="syncthing_starting">Syncthing sa spúšťa.</string>
+  <string name="syncthing_running">Syncthing beží (synchronizácia aktívna).</string>
+  <string name="syncthing_not_running">Syncthing nebeží</string>
+  <string name="syncthing_has_crashed">Syncthing padol.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Sťahovanie:\u0020</string>
@@ -65,14 +106,20 @@
   <string name="ram_usage">Využitie RAM</string>
   <!--Title for announce server status-->
   <string name="announce_server">Ohlasovací server</string>
+  <string name="restart">Reštartovať</string>
+  <string name="dialog_confirm_restart">Chcete reštartovať Syncthing?</string>
   <!--FolderActivity-->
   <!--Setting title-->
   <string name="folder_id">ID adresára</string>
   <!--Setting title-->
+  <string name="folder_label">Označenie priečinka</string>
   <!--Setting title-->
   <string name="directory">Adersár</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">Sledovať zmeny</string>
+  <string name="folder_fileWatcherDescription">Operačný systém bude aplikáciu upozorňovať na zmeny v súboroch. Ak túto voľbu vypnete použije sa opakované skenovanie priečinka.</string>
   <!--Setting title-->
+  <string name="folder_pause">Pozastaviť priečinok</string>
   <!--Setting title-->
   <string name="devices">Zariadenia</string>
   <!--Setting title-->
@@ -86,9 +133,12 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">Vytvoriť</string>
   <!--Dialog shown when attempting to remove a folder-->
+  <string name="remove_folder_confirm">Chcete tento priečinok skutočne odstrániť zo synchronizácie?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
+  <string name="folder_id_required">ID pričinka nesmie byť prázdne</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">Cesta k adresáru nemôže byť prázdna</string>
+  <string name="dialog_discard_changes">Zahodiť zmeny</string>
   <!--Summary shown if we only have readonly access to the folder path-->
   <!--Summary shown if we only have readwrite access to the folder path-->
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
@@ -112,6 +162,7 @@
   <!--Setting title-->
   <string name="introducer">Introducer</string>
   <!--Setting title-->
+  <string name="pause_device">Pozastaviť zariadenie</string>
   <!--ActionBar item-->
   <string name="delete_device">Odstrániť Zariadenie</string>
   <string name="add_device">Pridať Zariadenie</string>
@@ -120,6 +171,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">Upraviť Zariadenie</string>
   <!--Dialog shown when attempting to remove a device-->
+  <string name="remove_device_confirm">Skutočne chcete odstrániť zariadenie?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">ID zariadenia nemôže byť prázdne</string>
   <!--Content description for device ID qr code icon-->
@@ -133,8 +185,36 @@
   <string name="web_gui_loading">Čakám na GUI</string>
   <!--SettingsFragment-->
   <string name="settings_title">Nastavenia</string>
+  <string name="category_run_conditions">Podmienky synchronizácie</string>
+  <string name="category_behaviour">Správanie</string>
   <string name="category_syncthing_options">Nastavenia Syncthing</string>
+  <string name="category_backup">Zálohy</string>
+  <string name="category_debug">Debug</string>
+  <string name="category_experimental">Experiment</string>
   <!--Preference screen - Run conditions-->
+  <string name="run_conditions_title">Podmienky synchronizácie</string>
+  <string name="run_conditions_summary">Tieto podmienky sa použijú pri určovaní, či má Syncthing synchronizovať súbory.</string>
+  <string name="run_on_mobile_data_title">Synchronizovať na mobilných dátach</string>
+  <string name="run_on_wifi_title">Synchronizovať na WiFi</string>
+  <string name="run_on_wifi_summary">Synchronizovať keď je zariadenie pripojené na WiFi</string>
+  <string name="run_on_metered_wifi_title">Synchronizovať na meranej WiFi sieti</string>
+  <string name="run_on_whitelisted_wifi_title">Synchronizovať len na vybraných WiFi sieťach</string>
+  <string name="run_on_whitelisted_wifi_networks">Synchronizovať iba na týchto WiFi sieťach: %1$s</string>
+  <string name="run_on_all_wifi_networks">Synchronizovať na všetkých WiFi sieťach</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Zapnite WiFi aby sa zobrazili dostupné siete.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Pripojte sa na WiFi aby sa zobrazila v zozname.</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Na to, aby ste mohli použiť tieto nastavenia musíte povoliť prístup k POLOHE zariadenia.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Aplikácia potrebuje povolenie.</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Od verzie Android 8.1 je pre čítanie názvov WiFi potrebné povolenie pristupovať k polohe. Jedine po udelení tohto povolenia môžete používať túto funkciu.</string>
+  <string name="power_source_title">Synchronizovať keď zariadenie beží na</string>
+  <string-array name="power_source_entries">
+    <item>Nabíjačka a Baterka</item>
+    <item>Nabíjačka</item>
+    <item>Baterka</item>
+  </string-array>
+  <string name="respect_battery_saving_title">Rešpektovať systémové nastavenia úspory batérie</string>
+  <string name="respect_battery_saving_summary">Deaktivovať Syncthing keď je aktívne šetrenie baterky.</string>
+  <string name="run_as_background_service">Zapnúť aplikáciu pri štarte zariadenia</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Použiť rozšírený dialóg pre volbu adresára</string>
   <string name="advanced_folder_picker_summary">Vyberte ľubovolný adresár pre synchronizáciu</string>
@@ -146,6 +226,15 @@
     <item>S nízkou prioritou</item>
     <item>Žiadne</item>
   </string-array>
+  <string name="preference_language_title">Jazyk</string>
+  <string name="preference_language_summary">Zmeniť jazyk aplikácie</string>
+  <string name="start_into_web_gui_title">Spustiť rovno webové rozhranie</string>
+  <string name="start_into_web_gui_summary">Pri spustení aplikácie sa spustí webové rozhranie namiesto hlavnej obrazovky aplikácie</string>
+  <string name="preference_theme_title">Téma</string>
+  <string name="preference_theme_follow_system">Systémová téma</string>
+  <string name="preference_theme_option_light">Svetlá</string>
+  <string name="preference_theme_option_dark">Tmavá</string>
+  <string name="pref_language_default">Predvolený jazyk</string>
   <string name="device_name">Názov Zariadenia</string>
   <string name="listen_address">Adresa pre Sync Protokol</string>
   <string name="max_recv_kbps">Limit Rýchlosti Sťahovania (KiB/s)</string>
@@ -219,9 +308,13 @@
   <!--ShareActivity-->
   <!--Title of the "share" activity-->
   <!--Title of the "save" button-->
+  <string name="save_title">Uložiť</string>
   <!--Title of the "cancel" button-->
+  <string name="cancel_title">Zrušiť</string>
   <!--Title of the "save" button-->
+  <string name="folder_title">Adresár</string>
   <!--New file name template-->
+  <string name="file_name_template">Nový súbor %1$s</string>
   <!--Nothing to share toast-->
   <!--Copy success toast partially-->
   <!--Copy success toast-->
@@ -237,6 +330,14 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Koniec</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_on_battery">Zariadenie beží na baterku</string>
+  <string name="syncthing_disabled_reason_on_charger">Zariadenie sa nabíja</string>
+  <string name="syncthing_disabled_reason_powersaving">Zariadenie je v úspornom režime</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Systémová synchronizácia je vypnutá</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Práve používaná WiFi nie je medzi zvolenými sieťami</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Práve používaná WiFi je meraná sieť</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Nemáte prístup k sieti. Možno je zapnutý letecký režim</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Nemáte pripojené mobilné dáta</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing beží</string>
   <string name="syncthing_disabled">Syncthing je zakázaný</string>
@@ -276,6 +377,7 @@
   <string name="state_syncing">Synchronizuje sa (%1$d%%)</string>
   <string name="state_error">Chyba</string>
   <string name="state_unknown">Neznámy</string>
+  <string name="state_paused">Pozastavené</string>
   <string name="status_outofsync">Nesynchronizované</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
