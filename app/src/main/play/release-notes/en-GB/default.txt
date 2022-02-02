@@ -1,6 +1,5 @@
-Warning!  
-This release targets API level 30, which changes how Android lets Syncthing interact with the filesystem. As always please make sure you have a good backup of your data. Please report your expierences with the beta on https://forum.syncthing.net.  
+This release targets API level 30, which changes how Android lets Syncthing interact with the filesystem. As a consequence the db is reset, meaning everything gets scanned again which takes some time and battery power.
 
 * Target API level 30 / Android 11 ( https://github.com/syncthing/syncthing-android/issues/1721 )
-* Update Syncthing to v1.19.0-rc.2 ( https://github.com/syncthing/syncthing/releases/tag/v1.19.0-rc.2 )
+* Update Syncthing to v1.19.0 ( https://github.com/syncthing/syncthing/releases/tag/v1.19.0 )
 
