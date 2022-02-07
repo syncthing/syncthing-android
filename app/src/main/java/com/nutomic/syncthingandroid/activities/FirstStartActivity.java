@@ -215,7 +215,7 @@ public class FirstStartActivity extends Activity {
         if (dbDir.exists()) {
             try {
                 FileUtils.deleteQuietly(dbDir);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 Log.w(TAG, "Deleting database with FileUtils failed", e);
                 Util.runShellCommand("rm -r" + dbDir.getAbsolutePath(), false);
                 if (dbDir.exists()) {
