@@ -40,6 +40,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
+import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -210,7 +211,18 @@ public class FirstStartActivity extends Activity {
     }
 
     private void upgradeToApiLevel30() {
-        FileUtils.deleteQuietly(new File(this.getFilesDir(), "index-v0.14.0.db"));
+        File dbDir = new File(this.getFilesDir(), "index-v0.14.0.db");
+        if (dbDir.exists()) {
+            try {
+                FileUtils.deleteQuietly(dbDir);
+            } catch (Exception e) {
+                Log.w(TAG, "Deleting database with FileUtils failed", e);
+                Util.runShellCommand("rm -r" + dbDir.getAbsolutePath(), false);
+                if (dbDir.exists()) {
+                    throw new RuntimeException("Failed to delete existing database");
+                }
+            }
+        }
         mPreferences.edit().putBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, true).apply();
     }
 
