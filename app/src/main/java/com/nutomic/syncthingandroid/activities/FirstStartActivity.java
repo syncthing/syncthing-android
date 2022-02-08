@@ -218,7 +218,7 @@ public class FirstStartActivity extends Activity {
             } catch (Throwable e) {
                 Log.w(TAG, "Deleting database with FileUtils failed", e);
                 Util.runShellCommand("rm -r " + dbDir.getAbsolutePath(), false);
-                if (new File(this.getFilesDir(), "index-v0.14.0.db").exists()) {
+                if (dbDir.exists()) {
                     throw new RuntimeException("Failed to delete existing database");
                 }
             }
