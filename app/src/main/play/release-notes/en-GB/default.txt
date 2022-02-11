@@ -1,5 +1,2 @@
-Hotfix release to fix a crash after upgrading to 1.19.0 on old android versions.
+* Update Syncthing to v1.19.1-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.19.1-rc.1 )
 
-See release notes for 1.19.0 for relevant changes since previous versions:  https://github.com/syncthing/syncthing-android/releases/tag/1.19.0
-
-* Crash on upgrade to v1.19.0 on old androids due to recursive deletion utility ( https://github.com/syncthing/syncthing-android/issues/1753 )
