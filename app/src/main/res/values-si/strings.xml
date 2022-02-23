@@ -3,57 +3,93 @@
   <string name="app_name">සයින්තින්</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">ඇන්ඩ්‍රොයිඩ් සඳහා සයින්තින් වෙත සාදරයෙන් පිළිගනිමු</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
   <!--Slide 2-->
-  <string name="storage_permission_title">ගබඩා අවසරය</string>
+  <string name="storage_permission_title">ආචයන අවසරය</string>
   <!--Slide 3-->
+  <string name="location_permission_title">ස්ථානය අවසරය (පසුබිම)</string>
   <!--Generic texts used everywhere-->
   <string name="back">ආපසු</string>
+  <string name="cont">ඉදිරියට</string>
+  <string name="finish">නිමයි</string>
   <string name="generic_example">උදාහරණය</string>
   <string name="generic_error">දෝෂය</string>
+  <string name="accept">පිළිගන්න</string>
+  <string name="ignore">නොසලකන්න</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">බහාලුමක් එකතු කරන්න</string>
   <!--Title of the "share device id" menu action-->
+  <string name="share_device_id">උපාංගයේ හැඳු. බෙදාගන්න</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
+  <string name="send_device_id_to">වෙත උපාංගයේ හැඳු. යවන්න</string>
+  <string name="usage_reporting_dialog_title">භාවිතය නිර්නාමික වාර්තා කිරීමට ඉඩ දෙනවාද?</string>
+  <string name="yes">ඔව්</string>
   <string name="no">නැහැ</string>
   <string name="open_website">වියමන අඩවිය විවෘත කරන්න</string>
+  <string name="toast_write_storage_permission_required">මෙම යෙදුමට ආචයනයට ලිවීමේ අවසරය ඇවැසිය</string>
+  <string name="dialog_disable_battery_optimization_later">පසුව</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">නැවත පෙන්වන්න එපා</string>
   <!--StateDialogActivity-->
   <!--Text for FoldersFragment and DevicesFragment loading view-->
+  <string name="api_loading">පූරණය වෙමින්…</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <!--FoldersFragment-->
+  <string name="folders_fragment_title">බහාලුම්</string>
   <!--Shown if no folders exist-->
+  <string name="folder_list_empty">බහාලුම් හමු නොවිණි</string>
   <!--Format string for folder file count-->
+  <plurals name="files">
+    <item quantity="one">ගොනු %1$d / %2$d</item>
+    <item quantity="other">ගොනු %1$d / %2$d</item>
+  </plurals>
   <!--DevicesFragment-->
+  <string name="devices_fragment_title">උපාංග</string>
   <!--Shown if no devices exist-->
+  <string name="devices_list_empty">උපාංග හමු නොවිණි</string>
   <!--Indicates that a folder is fully synced to the local device-->
+  <string name="device_up_to_date">යාවත්කාලීනයි</string>
   <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+  <string name="device_syncing">සමමුහූර්ත වෙමින් (%1$d%%)</string>
   <!--Indicates that there is no connection to the device-->
+  <string name="device_disconnected">විසන්ධියි</string>
   <!--Indicates that the device is paused and does not sync-->
   <!--Indicates that the device connection is unknown-->
+  <string name="device_state_unknown">නොදනී</string>
   <!--Title for current download rate-->
   <!--Title for current upload rate-->
   <!--StatusFragment-->
+  <string name="status_fragment_title">තත්‍වය</string>
+  <string name="syncthing_starting">සයින්තින් ඇරඹෙමින්.</string>
+  <string name="syncthing_running">සයින්තින් ධාවනය වෙමින්.</string>
+  <string name="syncthing_not_running">සයින්තින් ධාවනය නොවේ.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <!--Same as upload_title with a colon and space appended-->
   <!--Title for current CPU usage-->
   <!--Title for current RAM usage-->
   <!--Title for announce server status-->
+  <string name="restart">යළි අරඹන්න</string>
   <!--FolderActivity-->
   <!--Setting title-->
+  <string name="folder_id">බහාලුමේ හැඳු.</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Setting title and description-->
   <!--Setting title-->
   <!--Setting title-->
+  <string name="devices">උපාංග</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Title for FolderSettingsFragment in create mode-->
+  <string name="create_folder">බහාලුම සාදන්න</string>
   <!--Title for FolderSettingsFragment in edit mode-->
+  <string name="edit_folder">බහාලුම සංස්කරණය</string>
   <!--Menu item to confirm folder creation-->
+  <string name="create">සාදන්න</string>
   <!--Dialog shown when attempting to remove a folder-->
   <!--Toast shown when trying to create a folder with an empty ID-->
   <!--Toast shown when trying to create a folder with an empty path-->
@@ -62,16 +98,26 @@
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
   <!--DeviceActivity-->
   <!--Setting title-->
+  <string name="device_id">උපාංගයේ හැඳු.</string>
   <!--Setting title-->
+  <string name="name">නම</string>
   <!--Setting title-->
+  <string name="addresses">ලිපින</string>
   <!--Setting title-->
   <!--Setting title-->
   <!--Strings representing compression options-->
+  <string-array name="compress_entries">
+    <item>කවදාවත්</item>
+    <item>පාරදත්ත</item>
+    <item>සැමවිටම</item>
+  </string-array>
   <!--Setting title-->
   <!--Setting title-->
   <!--ActionBar item-->
   <!--Menu item to confirm adding a device-->
+  <string name="add">එකතු</string>
   <!--Title for DeviceSettingsFragment in edit mode-->
+  <string name="edit_device">උපාංගය සංස්කරණය</string>
   <!--Dialog shown when attempting to remove a device-->
   <!--Toast shown when trying to create a device with an empty ID-->
   <!--Content description for device ID qr code icon-->
@@ -151,7 +197,9 @@
   <!--Strings representing units for file sizes, from smallest to largest-->
   <!--Strings representing units for transfer rates, from smallest to largest-->
   <!--Possible folder states-->
+  <string name="state_syncing">සමමුහූර්ත වෙමින් (%1$d%%)</string>
   <string name="state_error">දෝෂය</string>
+  <string name="state_unknown">නොදනී</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <!--Displays the current folder type in the folder activity-->
