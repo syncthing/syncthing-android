@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Syncthing</string>
-  <string name="app_description">Отворено и заслужаващо доверие приложение за децентрализирано синхронизиране на файлове.</string>
+  <string name="app_description">Отворено и заслужаващо доверие приложение за нецентрализирано синхронизиране на файлове.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
   <string name="welcome_title">Добре дошли в Syncthing за Android</string>
@@ -9,8 +9,8 @@
   <!--Slide 1-->
   <string name="introduction">Въведение</string>
   <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.\n\
-За да споделите информация с друго устройство е необходимо да добавите уникалния идентификатор, на даденото устройство, към списъка с устройства. След това можете да определите кои папки с кои устройства да бъдат споделени.\n\
-Ако срещнете проблем моля докладвайте в Github.</string>
+За да споделите информация с друго устройство е необходимо да добавите уникалния идентификатор, на даденото устройство, към списъка с устройства. След това можете да изберете кои папки с кои устройства да бъдат споделени.\n\
+Ако срещнете проблем докладвайте в Github.</string>
   <!--Slide 2-->
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
@@ -76,6 +76,7 @@
   <!--Title for current upload rate-->
   <string name="upload_title">Качване</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Състояние</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Изтегляне:\u0020</string>
@@ -175,22 +176,26 @@
   <string name="category_experimental">Експериментални</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">Условия на работа</string>
-  <string name="run_conditions_summary">Определете, чрез следните опции, как да работи Syncthing.</string>
-  <string name="run_on_mobile_data_title">Синхронизиране в мобилни мрежи</string>
-  <string name="run_on_mobile_data_summary">Синхронизира когато устройството е свързано към мобилна мрежа. ВНИМАНИЕ: Възможно е бързо да достигнете лимита, на плана за мобилен Интернет, когато синхронизирате много файлове.</string>
-  <string name="run_on_wifi_title">Синхронизиране в Wi-Fi мрежи</string>
+  <string name="run_conditions_summary">Тези настройки определят как да работи Syncthing.</string>
+  <string name="run_on_mobile_data_title">Работи на мобилни данни</string>
+  <string name="run_on_mobile_data_summary">Синхронизира, когато устройството е свързано към мобилни данни. Внимание: Ако синхронизирате голямо количество данни е възможно изразходването на много от предоставения трафик.</string>
+  <string name="run_on_wifi_title">Работи на Wi-Fi</string>
   <string name="run_on_wifi_summary">Синхронизира, когато устройството е свързано към Wi-Fi мрежа.</string>
-  <string name="run_on_whitelisted_wifi_title">Синхронизиране от определени Wi-Fi мрежи</string>
+  <string name="run_on_metered_wifi_title">Работи на мрежи с таксуване на трафика</string>
+  <string name="run_on_metered_wifi_summary">Синхронизира, когато устройството е свързано към мрежи с таксуване на трафика. Внимание: Ако синхронизирате голямо количество данни е възможно изразходването на много от предоставения трафик.</string>
+  <string name="run_on_whitelisted_wifi_title">Работи на избрани Wi-Fi мрежи</string>
   <string name="run_on_whitelisted_wifi_networks">Синхронизира само от следните мрежи: %1$s</string>
   <string name="run_on_all_wifi_networks">Синхронизира от всяка Wi-Fi мрежа.</string>
-  <string name="power_source_title">Синхронизиране при захранване от</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">За да изберете мрежа включете Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">За да добавите безжична мрежа се свържете към нея.</string>
+  <string name="power_source_title">Работи при захранване от</string>
   <string-array name="power_source_entries">
     <item>Батерия или зарядно.</item>
     <item>Зарядно.</item>
     <item>Батерия.</item>
   </string-array>
   <string name="respect_battery_saving_title">Ползване на настройките за пестене на батеия от Android</string>
-  <string name="respect_battery_saving_summary">Спира Syncthing когато режима за пестене на батерия е активен.</string>
+  <string name="respect_battery_saving_summary">Спира Syncthing при включен режим за пестене на батерия.</string>
   <string name="run_in_flight_mode_title">Синхронизиране и в \"Самолетен режим\"</string>
   <string name="service_settings_title">Настройки на услугата</string>
   <string name="service_settings_summary">Стартира Syncthing като услуга. Добавя постоянни известия за да се предотврати изключване от Android. Също така стартира Syncthing заедно с операционната система.</string>
@@ -210,7 +215,7 @@
   <string name="start_into_web_gui_title">Стартиране на уеб интерфейса</string>
   <string name="start_into_web_gui_summary">При стартиране на приложението ще се отваря уеб интерфейса</string>
   <string name="preference_theme_title">Тема</string>
-  <string name="preference_theme_follow_system">Следва системната</string>
+  <string name="preference_theme_follow_system">Според системата</string>
   <string name="preference_theme_option_light">Светла</string>
   <string name="preference_theme_option_dark">Тъмна</string>
   <string name="pref_language_default">Стандартен език</string>
