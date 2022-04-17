@@ -10,7 +10,7 @@
   <string name="introduction">Introduktion</string>
   <string name="welcome_text">Syncthing är en filsynkroniseringsapplikation med öppen källkod.\n\
 För att dela data med andra enheter måste du lägga till deras unika enhets-ID i enhetslistan. Efteråt kan du välja vilka mappar som ska delas med vilka enheter.\n\
-Vänligen rapportera eventuella problem du stöter på via Github.</string>
+Rapportera eventuella problem du stöter på via Github.</string>
   <!--Slide 2-->
   <string name="storage_permission_title">Lagringsbehörighet</string>
   <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att utföra filsynkronisering.</string>
@@ -208,7 +208,7 @@ Vänligen rapportera eventuella problem du stöter på via Github.</string>
   <string name="run_on_whitelisted_wifi_networks">Kör endast på valda Wi-Fi-nätverk: %1$s</string>
   <string name="run_on_all_wifi_networks">Kör på alla Wi-Fi-nätverk</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Slå på Wi-Fi för att välja nätverk.</string>
-  <string name="sync_only_wifi_ssids_connect_to_wifi">Vänligen anslut till ett Wi-Fi för att lägga till det i listan.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Anslut till ett Wi-Fi för att lägga till det i listan.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Du måste ge tillstånd för PLATS för att använda den här funktionen.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Behörighet krävs</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Från och med Android 8.1 krävs platsåtkomst för att kunna läsa Wi-Fi-namn. Du kan bara använda den här funktionen om du beviljar detta tillstånd.</string>

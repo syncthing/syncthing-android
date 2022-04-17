@@ -4,15 +4,18 @@
   <string name="app_description">Отворено и заслужаващо доверие приложение за нецентрализирано синхронизиране на файлове.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Добре дошли в Syncthing за Android</string>
+  <string name="welcome_title">Добре дошли от Syncthing за Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
   <string name="introduction">Въведение</string>
   <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.\n\
-За да споделите информация с друго устройство е необходимо да добавите уникалния идентификатор, на даденото устройство, към списъка с устройства. След това можете да изберете кои папки с кои устройства да бъдат споделени.\n\
+За да споделите информация с друго устройство е необходимо да добавите уникалния му идентификатор към списъка с устройствата. След това ще можете да изберете кои папки с кои устройства да споделите.\n\
 Ако срещнете проблем докладвайте в Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Разрешение за хранилище</string>
+  <string name="storage_permission_desc">За да извършва синхронизация Syngthing има нужда от достъп до хранилището.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Достъп до местоположението (във фонов режим)</string>
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Напред</string>
@@ -25,6 +28,7 @@
   <string name="ignore">Пренебрегване</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Потвърдете за изход от приложението</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добавяне на папка</string>
   <!--Title of the "share device id" menu action-->
@@ -57,6 +61,7 @@
     <item quantity="one">%1$d / %2$d файл</item>
     <item quantity="other">%1$d / %2$d файла</item>
   </plurals>
+  <string name="override_changes">Налагане на местни промени</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">Устройства</string>
   <!--Shown if no devices exist-->
@@ -77,6 +82,10 @@
   <string name="upload_title">Качване</string>
   <!--StatusFragment-->
   <string name="status_fragment_title">Състояние</string>
+  <string name="syncthing_starting">Syncthing is стартира.</string>
+  <string name="syncthing_running">Syncthing работи.</string>
+  <string name="syncthing_not_running">Syncthing не работи.</string>
+  <string name="syncthing_has_crashed">Syncthing се срина.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Изтегляне:\u0020</string>
@@ -99,6 +108,7 @@
   <string name="directory">Папка</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Наблюдаване за промени</string>
+  <string name="folder_fileWatcherDescription">Операционната система известява при промяна на файловете. Ако е изключено използва ежечасно обхождане.</string>
   <!--Setting title-->
   <string name="folder_pause">Пауза на папката</string>
   <!--Setting title-->
@@ -124,7 +134,8 @@
   <!--Summary shown if we only have readwrite access to the folder path-->
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
   <string name="ignore_patterns">Модели за игнориране</string>
-  <string name="create_ignore_file_error">Създаването на файла се провали. Може ли да се пише в папката?</string>
+  <string name="create_ignore_file_error">Файлът с шаблони за пренебрегване не е създаден. Имате ли права за писане в папката?</string>
+  <string name="edit_ignore_file_error">Не е намерен текстов редактор</string>
   <!--DeviceActivity-->
   <!--Setting title-->
   <string name="device_id">Идентификатор на устройството</string>
@@ -168,14 +179,14 @@
   <string name="web_gui_loading">Изчакване на потребителския интерфейс</string>
   <!--SettingsFragment-->
   <string name="settings_title">Настройки</string>
-  <string name="category_run_conditions">Условия на работа</string>
+  <string name="category_run_conditions">Условия за работа</string>
   <string name="category_behaviour">Поведение</string>
   <string name="category_syncthing_options">Настройки на Syncthing</string>
   <string name="category_backup">Резервно копие</string>
   <string name="category_debug">Отстраняване на дефекти</string>
   <string name="category_experimental">Експериментални</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Условия на работа</string>
+  <string name="run_conditions_title">Условия за работа</string>
   <string name="run_conditions_summary">Тези настройки определят как да работи Syncthing.</string>
   <string name="run_on_mobile_data_title">Работи на мобилни данни</string>
   <string name="run_on_mobile_data_summary">Синхронизира, когато устройството е свързано към мобилни данни. Внимание: Ако синхронизирате голямо количество данни е възможно изразходването на много от предоставения трафик.</string>
@@ -366,11 +377,11 @@
   <!--Sub Folder title-->
   <!--SyncthingService-->
   <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing не работи</string>
+  <string name="syncthing_disabled_title">Syncthing е изключен</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Наистина ли желаете да промените условията на работа?</string>
+  <string name="syncthing_disabled_message">Наистина ли желаете да промените условията за включване?</string>
   <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Промяна на настройките</string>
+  <string name="syncthing_disabled_change_settings">Промяна на настройки</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Изход</string>
   <!--Reasons for "syncthing disabled" dialog-->
@@ -378,16 +389,16 @@
   <string name="syncthing_disabled_reason_on_battery">Устройството е на батерия</string>
   <string name="syncthing_disabled_reason_on_charger">Устройството е на зарядно</string>
   <string name="syncthing_disabled_reason_powersaving">Устройството е в режим на пестене на енергия</string>
-  <string name="syncthing_disabled_reason_android_sync_disabled">Глобалното синхронизиране е изключено</string>
-  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Идентификаторът на текущата безжична мрежа не е разрешен</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Синхронизирането на устройството е изключено</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Името на текущата безжична мрежа не е разрешен</string>
   <string name="syncthing_disabled_reason_wifi_is_metered">Трафикът на текущата безжична мрежа се измерва</string>
-  <string name="syncthing_disabled_reason_no_network_or_flightmode">Няма мрежова връзка или е включен самолетен режим</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Няма връзка или е включен самолетен режим</string>
   <string name="syncthing_disabled_reason_no_mobile_connection">Устройството не е свързано чрез мобилни данни</string>
   <string name="syncthing_disabled_reason_no_wifi_connection">Устройството не е свързано чрез безжична мрежа</string>
   <string name="syncthing_disabled_reason_no_allowed_method">Липсват настройки за синхронизиране по безжична мрежа или мобилни данни</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing работи</string>
-  <string name="syncthing_disabled">Syncthing не работи</string>
+  <string name="syncthing_disabled">Syncthing е изключен</string>
   <string name="syncthing_terminated">Syncthing е насилствено спрян</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Грешка при създаване на файла с настройки</string>
