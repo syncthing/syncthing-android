@@ -1,6 +1,6 @@
-Syncthing zastępuje własnościowe usługi synchronizacyjne i chmury rozwiązaniem otwartym, godnym zaufania i zdecentralizowanym. Twoje dane należą wyłącznie do Ciebie i zasługujesz na wybór, gdzie je przechowywać, czy udostępniać je osobom trzecim oraz w jaki sposób przesyłać je przez Internet.
+Syncthing zastępuje własnościowe usługi synchronizacyjne i chmury rozwiązaniem otwartym, godnym zaufania i zdecentralizowanym. Twoje dane należą wyłącznie do Ciebie i zasługujesz na wybór, gdzie są one przechowywane, czy są udostępniane osobom trzecim oraz w jaki sposób przesyłane są przez Internet.
 
-Strona internetowa: https://syncthing.net/
+Strona: https://syncthing.net/
 
 Kod źródłowy: https://github.com/syncthing/syncthing-android
 
