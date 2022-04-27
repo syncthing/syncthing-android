@@ -1,2 +1,2 @@
 * Bugfix in Syncthing: Prevent file being deleted on Android when doing a case-only rename on a remote device ( https://github.com/syncthing/syncthing/issues/7974 )
-* Update Syncthing to v1.20.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.20.0-rc.1 )
+* Update Syncthing to v1.20.0-rc.3 ( https://github.com/syncthing/syncthing/releases/tag/v1.20.0-rc.3 )
