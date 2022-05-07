@@ -2,7 +2,7 @@ task buildNative(type: Exec) {
     environment "NDK_VERSION", "$ndkVersionShared"
     inputs.dir("$projectDir/src/")
     outputs.dir("$projectDir/../app/src/main/jniLibs/")
-    executable = 'python3'
+    executable = 'python'
     args = ['-u', './build-syncthing.py']
 }
 
