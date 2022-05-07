@@ -7,6 +7,9 @@ ARG ANDROID_SDK_FILENAME=commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zi
 
 WORKDIR /opt
 
+# Ensure python
+RUN type python >/dev/null 2>&1 || ln -s $(which python3) /usr/bin/python
+
 # Install Go
 RUN wget -q https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
     tar -zxf go${GO_VERSION}.linux-amd64.tar.gz && \
