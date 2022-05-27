@@ -15,6 +15,7 @@
   <string name="storage_permission_title">저장소 권한</string>
   <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">위치 권한(배경)</string>
   <!--Generic texts used everywhere-->
   <string name="back">뒤로</string>
   <string name="cont">계속</string>
@@ -24,7 +25,7 @@
   <string name="grant_permission">권한 부여</string>
   <string name="permission_granted">권한 부여됨</string>
   <string name="accept">승인</string>
-  <string name="ignore">거부</string>
+  <string name="ignore">무시</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">앱 종료 확인</string>
@@ -35,7 +36,7 @@
   <!--Shown in the chooser dialog when sharing a Device ID-->
   <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
   <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까?</string>
-  <string name="usage_reporting_dialog_description">암호화된 사용 리포트를 매일 보냅니다. 이것은 일반적 플랫폼, 폴더 크기, 앱의 버전을 추적하는데 사용됩니다. 보고된 데이터 설정이 변경된 경우 이 대화 상자가 다시 표시됩니다.\n\n수집된 통계는 https://data.syncthing.net에서 공개되고 있습니다.</string>
+  <string name="usage_reporting_dialog_description">암호화된 사용 보고서는 매일 전송됩니다. 사용 중인 운영체제, 폴더 크기와 응용 프로그램의 버전을 추적하기 위해서입니다. 만일 보고되는 정보가 변경되면 이 알림창이 다시 표시될 예정입니다.\n\n수집된 통계는 https://data.syncthing.net 주소에서 공람할 수 있습니다.</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
   <string name="open_website">웹사이트 열기</string>
@@ -53,7 +54,7 @@
   <string name="api_loading">로드 중...</string>
   <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
   <string name="web_gui_creating_key">보안 키 생성 중. 몇 분 정도 소요될 수 있습니다.</string>
-  <string name="syncthing_loading_slow_message">Syncthing를 로드하는데 너무 오랜 시간이 걸리고 있습니다. 로그를 사용하여 오류가 있는지 확인하십시오.</string>
+  <string name="syncthing_loading_slow_message">Syncthing을 실행하는 데 너무 오래 걸립니다. 기록을 사용하여 오류가 발생하지 않았는지 확인하십시오.</string>
   <!--FoldersFragment-->
   <string name="folders_fragment_title">폴더</string>
   <!--Shown if no folders exist-->
@@ -62,6 +63,7 @@
   <plurals name="files">
     <item quantity="other">%1$d / %2$d 파일</item>
   </plurals>
+  <string name="override_changes">변경 항목 덮어쓰기</string>
   <string name="open_file_manager">파일 매니저 열기</string>
   <string name="toast_no_file_manager">호환되는 파일 매니저를 찾을 수 없습니다</string>
   <!--DevicesFragment-->
@@ -111,10 +113,11 @@
   <!--Setting title and description-->
   <string name="folder_fileWatcher">변경 사항 감시</string>
   <!--Setting title-->
+  <string name="folder_pause">폴더 일시 중지</string>
   <!--Setting title-->
   <string name="devices">기기</string>
   <!--Setting title-->
-  <string name="keep_versions">버전 보호</string>
+  <string name="keep_versions">버전 수</string>
   <!--Setting title-->
   <string name="delete_folder">폴더 삭제</string>
   <!--Title for FolderSettingsFragment in create mode-->
@@ -124,17 +127,19 @@
   <!--Menu item to confirm folder creation-->
   <string name="create">생성</string>
   <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">정말로 이 폴더를 삭제하시겠습니까?</string>
+  <string name="remove_folder_confirm">이 폴더를 정말로 Syncthing에서 제거하시겠습니까?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
   <string name="folder_id_required">폴더 ID는 공백으로 둘 수 없습니다.</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
   <string name="dialog_discard_changes">설정 변경을 취소합니까?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 쓰기 전용 권한만을 Syncthing에 부여해 줍니다.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 읽기 및 쓰기 권한을 Syncthing에 부여 해줍니다.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
-  <string name="ignore_patterns">패턴 무시하기</string>
-  <string name="create_ignore_file_error">무시 파일을 만들지 못했습니다. 디렉토리가 쓰기 가능합니까?</string>
+  <string name="ignore_patterns">무시 양식</string>
+  <string name="create_ignore_file_error">무시 파일을 생성하지 못했습니다. 해당 디렉터리에 쓰기 권한이 있습니까?</string>
   <string name="edit_ignore_file_error">텍스트 편집기를 찾을 수 없습니다</string>
   <!--DeviceActivity-->
   <!--Setting title-->
@@ -156,6 +161,7 @@
   <!--Setting title-->
   <string name="introducer">Introducer</string>
   <!--Setting title-->
+  <string name="pause_device">기기 일시 중지</string>
   <!--ActionBar item-->
   <string name="delete_device">기기 삭제</string>
   <string name="add_device">기기 추가</string>
@@ -164,7 +170,7 @@
   <!--Title for DeviceSettingsFragment in edit mode-->
   <string name="edit_device">기기 수정</string>
   <!--Dialog shown when attempting to remove a device-->
-  <string name="remove_device_confirm">정말로 이 기기를 삭제하시겠습니까?</string>
+  <string name="remove_device_confirm">이 기기를 정말로 제거하시겠습니까?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
   <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
   <!--Content description for device ID qr code icon-->
@@ -186,14 +192,20 @@
   <string name="category_experimental">실험적인 기능</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">작동 상태</string>
+  <string name="run_on_mobile_data_title">데이터 사용 시 작동</string>
+  <string name="run_on_wifi_title">Wi-Fi 사용 시 작동</string>
+  <string name="run_on_wifi_summary">기기가 무선 망에 연결되어 있을 때 작동합니다.</string>
+  <string name="run_on_whitelisted_wifi_title">특정한 Wi-Fi 사용 시 작동</string>
+  <string name="run_on_all_wifi_networks">모든 Wi-Fi 사용 시 작동</string>
   <string name="respect_battery_saving_title">안드로이드 배터리 절약 설정 우선</string>
+  <string name="service_settings_title">서비스 설정</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">고급 폴더 선택기 사용</string>
   <string name="advanced_folder_picker_summary">기기에서 동기화에 사용할 폴더를 골라 주세요</string>
   <string name="use_root_title">Syncthing을 Superuser로 실행</string>
   <string name="use_root_summary">이 기능은 불안정하며 Syncthing과 기기에 문제를 일으킬 수 있습니다. 문제가 발생한 경우 Syncthing을 재설치 해야 할 수도 있습니다.</string>
   <string name="notification_type_title">알림</string>
-  <string name="notification_type_summary">알림 종류를 선택하세요</string>
+  <string name="notification_type_summary">알림 유형을 선택하십시오</string>
   <string-array name="notification_type_entries">
     <item>일반</item>
     <item>우선 순위 낮음</item>
@@ -203,7 +215,24 @@
   <string name="preference_language_summary">언어 변경하기</string>
   <string name="start_into_web_gui_title">웹 GUI로 바로 시작하기</string>
   <string name="start_into_web_gui_summary">앱을 시작할 때 기본 화면 대신 웹 GUI로 엽니다.</string>
+  <string name="preference_theme_title">테마</string>
+  <string name="preference_theme_follow_system">운영 체제에 따름</string>
+  <string name="preference_theme_option_light">밝은 색</string>
+  <string name="preference_theme_option_dark">어두운 색</string>
   <string name="pref_language_default">기본 언어</string>
+  <string-array name="folder_types">
+    <item>송수신</item>
+    <item>송신 전용</item>
+    <item>수신 전용</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>무작위</item>
+    <item>가나다순</item>
+    <item>작은 파일 순</item>
+    <item>큰 파일 순</item>
+    <item>오랜 파일 순</item>
+    <item>최신 파일 순</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>없음</item>
     <item>휴지통</item>
@@ -212,24 +241,31 @@
     <item>외부</item>
   </string-array>
   <string name="device_name">기기명</string>
-  <string name="listen_address">동기화 프로토콜 수신 주소</string>
+  <string name="listen_address">동기화 규약 대기 주소</string>
   <string name="max_recv_kbps">다운로드 속도 제한 (KiB/s)</string>
   <string name="max_send_kbps">업로드 속도 제한 (KiB/s)</string>
-  <string name="global_announce_enabled">글로벌 탐색</string>
-  <string name="local_announce_enabled">로컬 탐색</string>
+  <string name="global_announce_enabled">외부 탐지</string>
+  <string name="local_announce_enabled">내부 탐지</string>
   <string name="enable_nat_traversal">NAT Traversal 활성화</string>
-  <string name="global_announce_server">글로벌 탐색 서버</string>
+  <string name="global_announce_server">외부 탐지 서버</string>
   <string name="enable_relaying">Relaying 활성화</string>
   <string name="usage_reporting">익명 사용 기록 </string>
-  <string name="gui_address">접속 대기 주소</string>
+  <string name="gui_address">GUI 대기 주소</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">기기 및 폴더의 무시가 취소되었습니다.</string>
   <string name="export_config">설정 내보내기</string>
   <!--Toast after entering invalid integer value-->
   <!--Experimental options-->
+  <string name="use_proxy">프록시를 통해 연결하기</string>
+  <string name="do_not_use_proxy">프록시가 설정되어 있지 않습니다.</string>
   <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
   <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
   <string name="use_tor_title">Tor 사용</string>
+  <string name="socks_proxy_address_title">SOCKS5 프록시</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="http_proxy_address_title">HTTP(S) 프록시</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
   <string name="use_legacy_hashing_title">레가시 해싱 쓰기</string>
   <string name="use_legacy_hashing_summary">호환성의 목적을 위하여 Syncthing이 Legacy Hashing 패키지를 쓰도록 강제합니다</string>
@@ -243,7 +279,7 @@
   <!--Toast shown after config was successfully imported-->
   <string name="config_imported_successful">설정을 불러왔습니다</string>
   <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">설정을 불러오지 못했습니다, 파일이 %1$s에 있는지 확인해 주세요</string>
+  <string name="config_import_failed">설정을 불러오지 못했습니다. 파일들이 %1$s에 있는지 확인해 주십시오</string>
   <!--Title for the preference to set STTRACE parameters-->
   <string name="sttrace_title">STTRACE 옵션</string>
   <string name="environment_variables">환경 변수</string>
@@ -255,8 +291,10 @@
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">Syncthing의 데이터베이스가 성공적으로 리셋되었습니다</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">델타 인덱스 초기화</string>
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">Syncthing의 델타 인덱스 초기화에 성공했습니다.</string>
   <string name="category_about">정보</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">로그 열기</string>
@@ -323,9 +361,9 @@
     <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사 되었습니다</item>
   </plurals>
   <!--Copy exception toast-->
-  <string name="copy_exception">공유 중 오류가 발생했습니다, 어플리케이션 로그를 확인해 주세요</string>
+  <string name="copy_exception">공유 중 오류가 발생했습니다. 어플리케이션 기록을 확인하십시오</string>
   <!--Copy progress dialog text-->
-  <string name="copy_progress">공유 파일...</string>
+  <string name="copy_progress">파일 공유 중…</string>
   <plurals name="file_name_title">
     <item quantity="other">파일 목록</item>
   </plurals>
@@ -340,18 +378,24 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">나가기</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">이유:</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">데이터에 연결되어 있지 않음</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Wi-Fi에 연결되어 있지 않음</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing이 작동 중입니다</string>
   <string name="syncthing_disabled">Syncthing이 비활성화되었습니다</string>
+  <string name="syncthing_terminated">Syncthing이 종료되었습니다</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">구성 파일을 만드는데 실패 했습니다.</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">작동에 필수적인 설정 파일이 존재하지 않습니다</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">카메라</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-사진</string>
   <string name="notification_crash_title">Syncthing이 충돌하였습니다.</string>
   <string name="notification_crash_text">클릭해서 로그 보기</string>
+  <string name="notifications_persistent_channel">Syncthing 작동 중</string>
   <string name="notifications_other_channel">기타 알림</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -390,39 +434,58 @@
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">백그라운드에서 실행이 활성화되어 있을 때는 Syncthing 중단은 지원되지 않습니다.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">폴더 유형</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">송수신</string>
   <string name="folder_type_sendonly">송신 전용</string>
+  <string name="folder_type_receiveonly">수신 전용</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">폴더는 변경 항목을 송신하는 것과 함께 다른 기기로부터 변경 항목을 수신합니다.</string>
+  <string name="folder_type_sendonly_description">다른 기기에서 변경된 내용으로부터 파일이 보호되어 있지만 현재 기기에서 변경된 항목은 다른 기기로 송신됩니다.</string>
+  <string name="folder_type_receiveonly_description">다른 기기로부터 파일이 동기화되지만 현재 기기에서 변경된 항목은 다른 기기로 송신되지 않습니다.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">파일 수신 순서</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">무작위</string>
+  <string name="pull_order_type_alphabetic">가나다순</string>
+  <string name="pull_order_type_smallestFirst">작은 파일 순</string>
+  <string name="pull_order_type_largestFirst">큰 파일 순</string>
+  <string name="pull_order_type_oldestFirst">오랜 파일 순</string>
+  <string name="pull_order_type_newestFirst">최신 파일 순</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">파일을 무작위 순서로 수신합니다.</string>
+  <string name="pull_order_type_alphabetic_description">파일을 이름에 따른 가나다 순서로 수신합니다.</string>
+  <string name="pull_order_type_smallestFirst_description">파일을 크기에 따른 순서로 수신합니다. 가장 작은 파일이 먼저입니다.</string>
+  <string name="pull_order_type_largestFirst_description">파일을 크기에 따른 순서로 수신합니다. 가장 큰 파일이 먼저입니다.</string>
+  <string name="pull_order_type_oldestFirst_description">파일을 수정 시간에 따른 순서로 수신합니다. 가장 오랜 파일이 먼저입니다.</string>
+  <string name="pull_order_type_newestFirst_description">파일을 수정 시간에 따른 순서로 수신합니다. 가장 최신 파일이 먼저입니다.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">최대 저장 기간</string>
   <string name="clean_out_after">다음 기간 후 제거</string>
-  <string name="file_versioning">파일 버전</string>
+  <string name="file_versioning">파일 버전 관리</string>
   <string name="none">없음</string>
-  <string name="versions_path">버전을 저장할 경로</string>
+  <string name="versions_path">보관 경로</string>
   <string name="command">명령</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
-  <string name="keep_versions_description">파일 당 보존 할 이전 버전 수.</string>
-  <string name="simple_file_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리의 날짜 스탬프 버전으로 이동됩니다.</string>
-  <string name="trashcan_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리로 이동됩니다.</string>
-  <string name="staggered_versioning_description">파일은 Syncthing에 의해 대체되거나 삭제 될 때 .stversions 디렉토리의 날짜 스탬프 버전으로 이동 됩니다. 버전이 최대 사용 기간보다 오래되었거나 해당 기간에 허용 된 파일 수를 초과하면 버전이 자동으로 삭제됩니다. \n\n다음 간격이 사용됩니다. 처음 1 시간 동안 버전이 매 30 초마다 유지됩니다. 버전은 매 시간 유지됩니다. 처음 30 일 동안은 버전이 매일 보관되고 최대 버전은 버전으로 유지됩니다. 매주 마다 보관됩니다.</string>
-  <string name="maximum_age_description">버전을 보관할 수 있는 최대 시간 (일 단위로 영원히 버전을 유지하려면 0으로 설정).</string>
-  <string name="versions_path_description">버전을 저장해야하는 경로 (공유 폴더의 기본 .stversions 디렉토리는 비워 두십시오).</string>
-  <string name="cleanout_after_description">휴지통에 보관할 일 수. 제로는 무한을 의미합니다.</string>
+  <string name="keep_versions_description">파일별로 유지할 이전 버전의 개수입니다.</string>
+  <string name="simple_file_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 날짜가 찍힌 채 .stversions 폴더로 이동됩니다.</string>
+  <string name="trashcan_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 .stversions 폴더로 이동됩니다.</string>
+  <string name="staggered_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 .stversions 폴더로 이동됩니다. 최대 보관 기간보다 오래되었거나 간격 내에서 허용되는 파일 개수를 넘긴 버전은 자동으로 삭제됩니다.\n\n다음과 같은 간격이 사용됩니다: 첫 한 시간 동안은 30초마다, 첫 하루 동안은 1시간마다, 첫 30일 동안은 1일마다, 그리고 최대 보관 기간까지는 1주일마다 버전이 보관됩니다.</string>
+  <string name="maximum_age_description">버전을 보관할 최대 시간입니다(일 단위이며 버전을 영구 보관하려면 0을 입력하십시오).</string>
+  <string name="versions_path_description">버전을 보관할 경로입니다(공유 폴더 안의 기본값 .stversions 폴더를 사용하려면 비워 두십시오).</string>
+  <string name="cleanout_after_description">휴지통에서 파일을 보관할 일수입니다. 0은 무제한을 의미합니다.</string>
   <string name="external_versioning_description">첫 번째 명령 줄 매개 변수는 폴더 경로이고 두 번째 매개 변수는 폴더의 상대 경로입니다.</string>
   <string name="no_versioning_description">버전 관리를 사용하려면 버전 유형을 선택하십시오.</string>
   <!--Displays the current file versioning type in the Folder activity-->
-  <string name="type_simple">유형: 단순</string>
+  <string name="type_simple">유형: 간단</string>
   <string name="type_trashcan">유형: 휴지통</string>
-  <string name="type_staggered">유형: 교차</string>
+  <string name="type_staggered">유형: 시차제</string>
   <string name="type_external">유형 : 외부</string>
   <!--Information displayed about the current file versioning configuration in the folder activity-->
   <string name="trashcan_versioning_info">다음 기간 후 제거: %1$s</string>
-  <string name="staggered_versioning_info">최대 저장 기간: %1$d \n버전을 저장할 경로: %2$s</string>
+  <string name="staggered_versioning_info">최대 보관 기간: %1$d \n보관 경로: %2$s</string>
   <string name="external_versioning_info">명령: %1$s</string>
-  <string name="simple_versioning_info">버전 보호: %1$s</string>
+  <string name="simple_versioning_info">버전 수: %1$s</string>
   <string name="show_device_id">기기 ID 보기</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
   <string name="could_not_access_deviceid">기기 ID에 접근 할 수 없습니다.</string>

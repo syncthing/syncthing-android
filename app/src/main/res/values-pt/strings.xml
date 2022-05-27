@@ -64,6 +64,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Format string for folder file count-->
   <plurals name="files">
     <item quantity="one">Ficheiro %1$d / %2$d</item>
+    <item quantity="many">Ficheiros %1$d / %2$d</item>
     <item quantity="other">Ficheiros %1$d / %2$d</item>
   </plurals>
   <string name="override_changes">Sobrepor alterações</string>
@@ -398,11 +399,13 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Copy success toast partially-->
   <plurals name="copy_success_partially">
     <item quantity="one">Ficheiro %1$d copiado para a pasta \"%2$s\", %3$d já existe</item>
+    <item quantity="many">%1$d ficheiros copiados para a pasta \"%2$s\", %3$d já existe</item>
     <item quantity="other">%1$d ficheiros copiados para a pasta \"%2$s\", %3$d já existe</item>
   </plurals>
   <!--Copy success toast-->
   <plurals name="copy_success">
     <item quantity="one">%1$d ficheiros copiados para a pasta \"%2$s\"</item>
+    <item quantity="many">%1$d ficheiros copiados para a pasta \"%2$s\"</item>
     <item quantity="other">%1$d ficheiros copiados para a pasta \"%2$s\"</item>
   </plurals>
   <!--Copy exception toast-->
@@ -411,6 +414,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="copy_progress">Partilhando ficheiros...</string>
   <plurals name="file_name_title">
     <item quantity="one">Nome do ficheiro</item>
+    <item quantity="many">Lista de ficheiros</item>
     <item quantity="other">Lista de ficheiros</item>
   </plurals>
   <!--Sub Folder title-->

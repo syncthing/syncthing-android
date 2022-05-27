@@ -122,7 +122,7 @@
   <!--Title for FolderSettingsFragment in edit mode-->
   <string name="edit_folder">Редактиране на папка</string>
   <!--Menu item to confirm folder creation-->
-  <string name="create">Създай</string>
+  <string name="create">Създаване</string>
   <!--Dialog shown when attempting to remove a folder-->
   <string name="remove_folder_confirm">Наистина ли желаете папката да бъде изтрита?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
@@ -306,8 +306,12 @@
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">Банката от данни на Syncthing е нулирана успешно</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">Нулиране на показалеца за различия</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">Това действие трябва да бъде изпълнявано само след препоръка от нашия екип по поддръжка.
+\nСигурни ли сте, че желаете показалеца за различия на Syncthing да бъде нулиран?</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">Показалецът за различия на Syncthing е нулиран</string>
   <string name="category_about">За приложението</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Отваряне на дневници</string>

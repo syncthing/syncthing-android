@@ -51,6 +51,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Format string for folder file count-->
   <plurals name="files">
     <item quantity="one">%1$d/%2$dArquivo</item>
+    <item quantity="many">%1$d/%2$dArquivos</item>
     <item quantity="other">%1$d/%2$dArquivos</item>
   </plurals>
   <string name="open_file_manager">Abrir gerenciador de arquivos</string>
@@ -319,11 +320,13 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Copy success toast partially-->
   <plurals name="copy_success_partially">
     <item quantity="one">%1$d arquivo copiado para a pasta \"%2$s\", %3$d já existem</item>
+    <item quantity="many">%1$d arquivos copiados para a pasta \"%2$s\", %3$d já existem</item>
     <item quantity="other">%1$d arquivos copiados para a pasta \"%2$s\", %3$d já existem</item>
   </plurals>
   <!--Copy success toast-->
   <plurals name="copy_success">
     <item quantity="one">%1$d arquivo copiado para a pasta \"%2$s\"</item>
+    <item quantity="many">%1$d arquivos copiados para a pasta \"%2$s\"</item>
     <item quantity="other">%1$d arquivos copiados para a pasta \"%2$s\"</item>
   </plurals>
   <!--Copy exception toast-->
@@ -332,6 +335,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="copy_progress">Compartilhando arquivos...</string>
   <plurals name="file_name_title">
     <item quantity="one">Nome do Arquivo</item>
+    <item quantity="many">Lista de Arquivos</item>
     <item quantity="other">Lista de Arquivos</item>
   </plurals>
   <!--Sub Folder title-->

@@ -62,6 +62,7 @@
   <!--Format string for folder file count-->
   <plurals name="files">
     <item quantity="one">%1$d / %2$d Archivo</item>
+    <item quantity="many">%1$d / %2$d Archivos</item>
     <item quantity="other">%1$d / %2$d Archivos</item>
   </plurals>
   <string name="override_changes">Pasar por alto los cambios</string>
@@ -396,11 +397,13 @@
   <!--Copy success toast partially-->
   <plurals name="copy_success_partially">
     <item quantity="one">%1$d archivo copiado en la carpeta \"%2$s\", %3$d ya existe</item>
+    <item quantity="many">%1$d archivos copiados en la carpeta \"%2$s\", %3$d ya existe</item>
     <item quantity="other">%1$d archivos copiados en la carpeta \"%2$s\", %3$d ya existe</item>
   </plurals>
   <!--Copy success toast-->
   <plurals name="copy_success">
     <item quantity="one">%1$d archivo copiado en la carpeta \"%2$s\"</item>
+    <item quantity="many">%1$d archivos copiados en la carpeta \"%2$s\"</item>
     <item quantity="other">%1$d archivos copiados en la carpeta \"%2$s\"</item>
   </plurals>
   <!--Copy exception toast-->
@@ -409,6 +412,7 @@
   <string name="copy_progress">Compartir archivos...</string>
   <plurals name="file_name_title">
     <item quantity="one">Nombre del archivo</item>
+    <item quantity="many">Lista de Archivos</item>
     <item quantity="other">Lista de Archivos</item>
   </plurals>
   <!--Sub Folder title-->
