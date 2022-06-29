@@ -8,9 +8,11 @@
   <!--Welcome wizard-->
   <!--Slide 1-->
   <string name="introduction">Introducción</string>
-  <string name="welcome_text">Syncthing es una aplicación para sincronización de ficheros de fuentes abiertas.\nPara compartir datos con otros dispisitivos, necesitas añadir sus identificadores únicos de dispositivo a la lista de dispositivos. Después, puedes seleccionar qué carpetas vas a compartir con qué dispositivos.\nPor favor, informa de cualquier problema que te encuentres vía Github.</string>
+  <string name="welcome_text">Syncthing es una aplicación de código abierto para sincronizar ficheros.\n\
+Para compartir datos con otros dispositivos, debes añadir los identificadores únicos de esos dispositivos a la lista de dispositivos. Tras hacer esto, podrás  indicar qué carpetas deseas compartir con qué dispositivos.\n\
+Si encuentras un problema, te pedimos que des aviso a través de GitHub.</string>
   <!--Slide 2-->
-  <string name="storage_permission_title">Permisos de Almacenamiento</string>
+  <string name="storage_permission_title">Permiso de almacenamiento</string>
   <string name="storage_permission_desc">Syncthing necesita acceso a tu almacenamiento para realizar la sincronización.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permiso de ubicación (segundo plano)</string>
@@ -32,9 +34,9 @@
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Añadir carpeta</string>
   <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Compartir el ID del dispositivo</string>
+  <string name="share_device_id">Compartir el id. del dispositivo</string>
   <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Enviar el ID del dispositivo a</string>
+  <string name="send_device_id_to">Enviar el id. del dispositivo a</string>
   <string name="usage_reporting_dialog_title">¿Permitir informes anónimos de uso?</string>
   <string name="usage_reporting_dialog_description">El informe cifrado de uso se manda a diario. Se utiliza para monitorizar las plataformas más comunes, el tamaño de las carpetas y las versiones de la aplicación. Si se modifica el conjunto de datos del informe se te presentará de nuevo este mensaje.\n\nLas estadísticas globales están disponibles públicamente en https://data.syncthing.net.</string>
   <string name="yes">Sí</string>
@@ -46,7 +48,7 @@
   <string name="dialog_disable_battery_optimization_title">Optimización de batería</string>
   <string name="dialog_disable_battery_optimization_message">Andoid puede detener la sincronización pasado un tiempo. Para evitarlo, deshabilita la optimización de batería.\n\nAlgunos dispositivos tienen instaladas aplicaciones adicionales para terminar tareas. Igualmente, deberías añadir Syncthing a su lista blanca.</string>
   <string name="dialog_disable_battery_optimization_later">Después</string>
-  <string name="dialog_disable_battery_optimization_dont_show_again">No volver a mostrar.</string>
+  <string name="dialog_disable_battery_optimization_dont_show_again">No volver a mostrar</string>
   <string name="dialog_disable_battery_optimization_turn_off">Deshabilitar para Syncthing</string>
   <string name="dialog_disable_battery_optimizations_not_supported">Tu dispositivo no permite desactivar las optimizaciones de batería</string>
   <!--StateDialogActivity-->
@@ -107,7 +109,7 @@
   <string name="dialog_confirm_restart">¿Quieres reiniciar Syncthing?</string>
   <!--FolderActivity-->
   <!--Setting title-->
-  <string name="folder_id">ID de carpeta</string>
+  <string name="folder_id">Id. de carpeta</string>
   <!--Setting title-->
   <string name="folder_label">Etiqueta de carpeta</string>
   <!--Setting title-->
@@ -132,7 +134,7 @@
   <!--Dialog shown when attempting to remove a folder-->
   <string name="remove_folder_confirm">¿Realmente quieres excluir esta carpeta de Syncthing?</string>
   <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">El ID de carpeta no debe estar vacío</string>
+  <string name="folder_id_required">El id. de carpeta no debe estar vacío</string>
   <!--Toast shown when trying to create a folder with an empty path-->
   <string name="folder_path_required">La ruta a la carpeta no debe estar vacía</string>
   <string name="dialog_discard_changes">¿Descartar tus cambios?</string>
@@ -147,7 +149,7 @@
   <string name="edit_ignore_file_error">No se ha encontrado un editor de texto</string>
   <!--DeviceActivity-->
   <!--Setting title-->
-  <string name="device_id">ID del dispositivo</string>
+  <string name="device_id">Id. del dispositivo</string>
   <!--Setting title-->
   <string name="name">Nombre</string>
   <!--Setting title-->
@@ -176,7 +178,7 @@
   <!--Dialog shown when attempting to remove a device-->
   <string name="remove_device_confirm">¿Realmente quieres excluir este dispositivo?</string>
   <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">El ID de dispositivo no debe estar vacío</string>
+  <string name="device_id_required">El id. de dispositivo no debe estar vacío</string>
   <!--Content description for device ID qr code icon-->
   <string name="scan_qr_code_description">Escanear código QR</string>
   <!--Toast show if we could not get root permissions-->
@@ -199,7 +201,7 @@
   <string name="run_conditions_summary">Usa las siguientes opciones para decidir cuando se va a ejecutar Syncthing.</string>
   <string name="run_on_mobile_data_title">Ejecutar con datos móviles</string>
   <string name="run_on_mobile_data_summary">Ejecutar cuando el dispositivo está conectado mediante una red móvil. Advertencia: esto puede gastar un montón de datos en el plan de tu operador si sincronizas cantidades ingentes de datos.</string>
-  <string name="run_on_wifi_title">Ejectuar con Wi-Fi</string>
+  <string name="run_on_wifi_title">Ejecutar con Wi-Fi</string>
   <string name="run_on_wifi_summary">Ejecutar cuando el dispositivo está conectado con una red Wi-Fi.</string>
   <string name="run_on_metered_wifi_title">Ejectuar en una Wi-Fi con tarifa limitada</string>
   <string name="run_on_metered_wifi_summary">Ejecutar cuando el dispositivo está conectado con una red Wi-Fi con tarifa limitada. Atención: esto puede consumir una gran cantidad de tu plan de datos si sincronizas cantidades ingentes de datos.</string>
@@ -217,10 +219,10 @@
     <item>CA por cable. </item>
     <item>Batería.</item>
   </string-array>
-  <string name="respect_battery_saving_title">Respeta la configuración de ahorro de batería de Android</string>
-  <string name="respect_battery_saving_summary">Desactivar Syncthing si el modo de ahorro de batería está activado.</string>
+  <string name="respect_battery_saving_title">Respetar la configuración de ahorro de batería</string>
+  <string name="respect_battery_saving_summary">Desactivar Syncthing si se activa el ahorro de batería de Android.</string>
   <string name="respect_master_sync_title">Respetar el ajuste \'Auto-sincronizar datos\' de Android</string>
-  <string name="respect_master_sync_summary">Desactivar Syncthin cuando el ajuste rápido \"Auto-sincronizar datos\" está desactivado.</string>
+  <string name="respect_master_sync_summary">Desactivar Syncthing cuando se desactive el ajuste rápido \"Auto-sincronizar datos\".</string>
   <string name="run_in_flight_mode_title">Ejecutar cuando el dispositivo está en modo vuelo</string>
   <string name="run_in_flight_mode_summary">Actívalo si tu dispositivo tiene problemas para detectar las conexiones Wi-Fi  manuales durante el modo vuelo.</string>
   <string name="service_settings_title">Ajustes del servicio</string>
@@ -248,9 +250,9 @@
   <string name="preference_theme_option_dark">Oscuro</string>
   <string name="pref_language_default">Idioma predeterminado</string>
   <string-array name="folder_types">
-    <item>Enviar &amp; Recibir</item>
-    <item>Sólo Enviar</item>
-    <item>Sólo Recibir</item>
+    <item>Enviar y recibir</item>
+    <item>Solo enviar</item>
+    <item>Solo recibir</item>
   </string-array>
   <string-array name="pull_order_types">
     <item>Aleatorio</item>
@@ -463,7 +465,7 @@
   <!--Text of the notification shown when a restart is needed-->
   <string name="restart_notification_text">Haga clic aquí para reiniciar Syncthing ahora</string>
   <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">ID de dispositivo copiado al portapapeles</string>
+  <string name="device_id_copied_to_clipboard">Id. del dispositivo copiado al portapapeles</string>
   <!--Strings representing units for file sizes, from smallest to largest-->
   <string-array name="file_size_units">
     <item>B</item>
@@ -494,9 +496,9 @@
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <string name="folder_type">Tipo de carpeta</string>
   <!--Displays the current folder type in the folder activity-->
-  <string name="folder_type_sendreceive">Enviar &amp; Recibir</string>
-  <string name="folder_type_sendonly">Solamente enviar</string>
-  <string name="folder_type_receiveonly">Sólo Recibir</string>
+  <string name="folder_type_sendreceive">Enviar y recibir</string>
+  <string name="folder_type_sendonly">Solo enviar</string>
+  <string name="folder_type_receiveonly">Solo recibir</string>
   <!--Folder type dialog descriptions for folder types-->
   <string name="folder_type_sendreceive_description">La carpeta mandará cambios y también recibirá cambios hechos en dispositivos remotos.</string>
   <string name="folder_type_sendonly_description">Los archivos están protegidos de cambios hechos en otros dispositivos, pero los cambios hechos en este dispositivo se mandarán al resto del cluster.</string>
@@ -544,10 +546,10 @@
   <string name="staggered_versioning_info">Antigüedad Máxima: %1$d \nRuta de Versiones: %2$s</string>
   <string name="external_versioning_info">Comando: %1$s</string>
   <string name="simple_versioning_info">Conservar versiones: %1$s</string>
-  <string name="show_device_id">Mostrar ID del dispositivo</string>
+  <string name="show_device_id">Mostrar id. del dispositivo</string>
   <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
-  <string name="could_not_access_deviceid">Mostrar ID del dispositivo</string>
+  <string name="could_not_access_deviceid">No se pudo acceder al id. del dispositivo.</string>
   <string name="browse">Navegar</string>
   <string name="no_sub_folder_is_selected">No se ha seleccionado una subcarpeta</string>
-  <string name="share_device_id_chooser">Compartir la ID del dispositivo con</string>
+  <string name="share_device_id_chooser">Compartir el id. del dispositivo con</string>
 </resources>

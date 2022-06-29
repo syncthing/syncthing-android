@@ -6,6 +6,6 @@ Syncthing е заместник на комерсиални услуги за с
 
 Форум: https://forum.syncthing.net/
 
-Проблеми: https://github.com/syncthing/syncthing-android/issues
+Дефекти: https://github.com/syncthing/syncthing-android/issues
 
 Политика за поверителност: https://syncthing.net/android-privacy-policy
