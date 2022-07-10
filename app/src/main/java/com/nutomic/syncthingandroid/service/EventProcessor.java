@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
@@ -134,11 +135,23 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                     MediaScannerConnection.scanFile(mContext, new String[]{updatedFile.getPath()},
                             null, null);
                 } else {
+                    // Starting with Android 10/Q and targeting API level 29/removing legacy storage flag,
+                    // reports of files being spuriously deleted came up.
+                    // Best guess is that Syncthing directly interacted with the filesystem before,
+                    // and there's a virtualisation layer there now. Also there's reports this API
+                    // changed behaviour with scoped storage. In any case it now does not only
+                    // update the media db, but actually delete the file on disk. Which is bad,
+                    // as it can race with the creation of the same file and thus delete it. See:
+                    // https://github.com/syncthing/syncthing-android/issues/1801
+                    // https://github.com/syncthing/syncthing/issues/7974
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        break;
+                    }
                     // https://stackoverflow.com/a/29881556/1837158
                     Log.i(TAG, "Deleted file from MediaStore: " + updatedFile.toString());
                     Uri contentUri = MediaStore.Files.getContentUri("external");
                     ContentResolver resolver = mContext.getContentResolver();
-                    resolver.delete(contentUri, MediaStore.Images.ImageColumns.DATA + " LIKE ?",
+                    resolver.delete(contentUri, MediaStore.Images.ImageColumns.DATA + " = ?",
                             new String[]{updatedFile.getPath()});
                 }
                 break;
