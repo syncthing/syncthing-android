@@ -1,1 +1,2 @@
-* Update Syncthing to v1.20.3 ( https://github.com/syncthing/syncthing/releases/tag/v1.20.3 )
+* Update Syncthing to v1.20.4-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.20.4-rc.1 )
+* #1801: Spurious file deletion due to MediaStore/ContentResolver delete race
