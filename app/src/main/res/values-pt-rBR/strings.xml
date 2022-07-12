@@ -52,8 +52,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <plurals name="files">
     <item quantity="one">%1$d/%2$dArquivo</item>
     <item quantity="many">%1$d/%2$dArquivos</item>
-    <item quantity="other">%1$d/%2$dArquivos</item>
+    <item quantity="other">%1$d/%2$d Arquivos</item>
   </plurals>
+  <string name="override_changes">Sobrepor alterações</string>
   <string name="open_file_manager">Abrir gerenciador de arquivos</string>
   <string name="toast_no_file_manager">Nenhum gerenciador de arquivos compatível foi encontrado</string>
   <!--DevicesFragment-->

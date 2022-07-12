@@ -1,12 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">सिंकथिंग</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
+  <string name="welcome_title">एंड्रॉयड के लिए सिंकथिंग में आपका स्वागत है</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">परिचय</string>
+  <string name="welcome_text">सिंकथिंग एक ओपन-सोर्स फ़ाइल सिंक्रोनाइज़ेशन एप्लिकेशन है।\n\
+अन्य उपकरणों के साथ डेटा साझा करने के लिए, आपको डिवाइस सूची में उनकी अद्वितीय डिवाइस आईडी जोड़ने की आवश्यकता है। बाद में आप चुन सकते हैं कि कौन से फोल्डर को किन उपकरणों के साथ साझा करना है।\n\
+कृपया गिटहब के माध्यम से आपके सामने आने वाली किसी भी समस्या की रिपोर्ट करें।</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">भंडारण की अनुमति</string>
+  <string name="storage_permission_desc">फ़ाइल सिंक्रनाइज़ेशन करने के लिए सिंकथिंग को आपके संग्रहण तक पहुंचने की आवश्यकता है।</string>
   <!--Slide 3-->
   <!--Generic texts used everywhere-->
+  <string name="back">वापस</string>
+  <string name="cont">जारी</string>
+  <string name="finish">अन्त</string>
+  <string name="generic_example">उदाहरण</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <!--Title of the "add folder" menu action-->

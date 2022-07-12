@@ -6,6 +6,6 @@ Syncthing replaces proprietary sync and cloud services with something open, trus
 
 සංසදය: https://forum.syncthing.net/
 
-Issues: https://github.com/syncthing/syncthing-android/issues
+ගැටළු: https://github.com/syncthing/syncthing-android/issues
 
 රහස්‍යතා ප්‍රතිපත්තිය: https://syncthing.net/android-privacy-policy
