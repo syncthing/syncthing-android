@@ -14,6 +14,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.os.Handler;
 import android.os.PowerManager;
 import androidx.annotation.Nullable;
 import android.util.Log;
@@ -118,8 +119,13 @@ public class RunConditionMonitor {
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_POWER_CONNECTED.equals(intent.getAction())
                     || Intent.ACTION_POWER_DISCONNECTED.equals(intent.getAction())) {
-                SystemClock.sleep(5000);
-                updateShouldRunDecision();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateShouldRunDecision();
+                    }
+                }, 5000);
             }
         }
     }
