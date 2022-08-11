@@ -1,2 +1,2 @@
-* Update Syncthing to v1.20.4 ( https://github.com/syncthing/syncthing/releases/tag/v1.20.4 )
-* #1801: Spurious file deletion due to MediaStore/ContentResolver delete race
+* Update Syncthing to v1.21.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.21.0-rc.1 )
+* Unreliable charging detection ( #1595 )
