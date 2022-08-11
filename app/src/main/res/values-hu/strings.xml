@@ -12,11 +12,13 @@
 
 Az adatok más eszközökkel való megosztásához hozzá kell adnod egyedi eszközazonosítójukat az eszközlistához. Utána kiválaszthatod, hogy mely mappákat mely eszközökkel osztasz meg.
 
-Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</string>
+Kérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
   <!--Slide 2-->
   <string name="storage_permission_title">Tárhely jogosultság</string>
   <string name="storage_permission_desc">A szinkronizáláshoz a Syncthingnek hozzáférésre van szüksége a tárhelyhez.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Földrajzi hely engedély (háttérben)</string>
+  <string name="location_permission_desc">A Syncthing beállítható úgy, hogy csak a kiválasztott Wi-Fi hálózatokon szinkronizáljon. Ehhez az alkalmazás bezárásakor is meg kell keresnie az éppen csatlakoztatott Wi-Fi SSID-jét. Ezért engedélyt igényel a helymeghatározáshoz való hozzáféréshez a háttérben. Ezt az információt nem használja fel az Ön tartózkodási helyének megkeresésére. Az egyetlen tárolt információ az a Wi-Fi, amelyet manuálisan választott a listához - más felhasználói adat nem kerül tárolásra.\n\n Ha használni szeretné ezt a funkciót, nyomja meg a fenti gombot a szükséges engedélyek megadásához a Syncthing számára. Ellenkező esetben kihagyhatja ezt a lépést.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Vissza</string>
   <string name="cont">Folytatás</string>
@@ -29,6 +31,8 @@ Kérlek, hogy az esetlegesen felmerülő hibákat jelentsd be a GitHub-on.</stri
   <string name="ignore">Elvet</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Alkalmazás bezárása</string>
+  <string name="dialog_exit_while_running_as_service_message">Az alkalmazást úgy állította be, hogy automatikusan elinduljon a rendszerindításkor. Ezért figyeli a futtatási feltételeket, és bármikor szinkronizál a háttérben, ha a feltételek megfelelnek. Csak akkor kell manuálisan kilépnie, ha súlyos problémákba ütközik. Ellenkező esetben tiltsa le az \"Automatikus indítás indításkor\" opciót a beállításokban. Szeretne most kilépni?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Mappa hozzáadása</string>
   <!--Title of the "share device id" menu action-->
@@ -105,7 +109,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <!--Title for current RAM usage-->
   <string name="ram_usage">Memória használat</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Announce kiszolgáló</string>
+  <string name="announce_server">Kiszolgáló bejelentés</string>
   <string name="restart">Újraindítás</string>
   <string name="dialog_confirm_restart">Biztosan újraindítod a Syncthinget?</string>
   <!--FolderActivity-->
@@ -117,7 +121,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="directory">Mappa</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Figyeli a változásokat</string>
-  <string name="folder_fileWatcherDescription">Megkéri az operációs rendszert, hogy értesítsen a fájlok módosításairól. Kikapcsolt állapotban, visszatér az időszakos óránkénti ellenőrzésekhez.</string>
+  <string name="folder_fileWatcherDescription">Megkéri az operációs rendszert, hogy értesítést küldjön, ha a fájlok módosulnak. Kikapcsolt állapotban a ciklikus óránkénti ellenőrzés lép érvénybe.</string>
   <!--Setting title-->
   <string name="folder_pause">Mappa szüneteltetés</string>
   <!--Setting title-->
@@ -210,6 +214,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="run_on_whitelisted_wifi_networks">Csak a kijelölt Wi-Fi hálózatokon fut: %1$s</string>
   <string name="run_on_all_wifi_networks">Futtatás minden W-Fi hálózaton.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">A hálózatok kiválasztásához kapcsold be a Wi-Fi-t.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Kapcsolódjon egy Wifi hálózathoz, hogy hozzá lehessen adni a listához.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">A funkció használatához engedélyezni kell a hozzáférést a földrajzi helyhez</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Hozzáférés szükséges</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Az Android 8.1-el kezdve helyzeti hozzáférés szükséges a Wi-Fi hálózat nevének olvasásához. Ezt a funkciót csak akkor használhatod, ha megadod ezt a hozzáférést.</string>
@@ -222,11 +227,14 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="respect_battery_saving_title">Az Android akkumulátor-optimalizáció beállításainak tiszteletben tartása</string>
   <string name="respect_battery_saving_summary">Syncthing tiltása, ha az akkumulátor-optimalizáció aktív</string>
   <string name="respect_master_sync_title">Az Android \'Automatikus adat szinkronizálás\' beállítás tiszteletben tartása</string>
+  <string name="respect_master_sync_summary">A szinkronizálás tiltása, ha a gyorsbeállításokban az \'Automatikus adatszinkronizálás\' ki van kapcsolva.</string>
   <string name="run_in_flight_mode_title">Futtatás amikor az eszköz repülési üzemmódban van</string>
+  <string name="run_in_flight_mode_summary">Engedélyezze, ha a készüléknek problémái vannak a kézi Wi-Fi-kapcsolatok felismerésével repülési üzemmódban.</string>
   <string name="service_settings_title">Szolgáltatás beállítások</string>
+  <string name="service_settings_summary">Futtassa a Syncthinget szolgáltatásként. Hozzáad egy állandó értesítést, amivel megakadályozza az Android általi leállítást. Ha bejelöljük ezt az opciót, a Syncthing az operációs rendszer indításakor elindul.</string>
   <string name="run_as_background_service">Szolgáltatás automatikus indítása bekapcsoláskor</string>
   <!--Preferences - Behaviour-->
-  <string name="advanced_folder_picker">Advanced mappaválasztó használata</string>
+  <string name="advanced_folder_picker">Fejlett mappaválasztó használata</string>
   <string name="advanced_folder_picker_summary">Bármely mappa kiválasztható szinkronizáláshoz</string>
   <string name="use_root_title">Syncthing futtatása Superuser-ként</string>
   <string name="use_root_summary">Ez egy kísérleti funkció, amely problémákat okozhat mind a Syncthing, mind az eszközöd számára. Ha ilyenbe ütközöl, előfordulhat, hogy újra kell telepítened az alkalmazást.</string>
@@ -242,6 +250,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="start_into_web_gui_title">A webes felület legyen a kezdőképernyő</string>
   <string name="start_into_web_gui_summary">Az app indításakor a főképernyő helyett a webes felület jelenjen meg</string>
   <string name="preference_theme_title">Téma</string>
+  <string name="preference_theme_follow_system">Rendszerbeállítás szerint</string>
   <string name="preference_theme_option_light">Világos</string>
   <string name="preference_theme_option_dark">Sötét</string>
   <string name="pref_language_default">Alapértelmezett nyelv</string>
@@ -254,7 +263,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <item>Véletlen</item>
     <item>Betűrendben</item>
     <item>Kisebb előbb</item>
-    <item>Nagyobb előb</item>
+    <item>Nagyobb előbb</item>
     <item>Régebbi előbb</item>
     <item>Újabb előbb</item>
   </string-array>
@@ -274,13 +283,18 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="enable_nat_traversal">NAT bejárás engedélyezése</string>
   <string name="global_announce_server">Globális felfedező kiszolgálók</string>
   <string name="enable_relaying">Relaying engedélyezése</string>
-  <string name="usage_reporting">Anonim használati statisztikák küldése</string>
+  <string name="usage_reporting">Használati statisztikák névtelen küldése</string>
   <string name="gui_address">Webes felület IP címe</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Eszközök és mappák figyelmen kívül hagyása</string>
+  <string name="undo_ignored_devices_folders_question">Elveted az eszközök és mappák figyelmen kívül hagyását?</string>
+  <string name="undo_ignored_devices_folders_done">Sikeresen visszavont döntések.</string>
   <string name="export_config">Beállítások mentése</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">A megadott érték érvénytelen. Érvényes érték %1$d és %2$d között lehet.</string>
   <!--Experimental options-->
   <string name="use_proxy">Kapcsolódás porxyn keresztül</string>
+  <string name="do_not_use_proxy">Nincs beállítva proxy.</string>
   <string name="keep_wakelock_while_binary_running">CPU ébren tartása a Syncthing futása során</string>
   <string name="keep_wakelock_while_binary_running_summary">Ezt a beállítást akkor használd, ha váratlan szakadásokat tapasztalsz akkumulátoros üzemben. Ennek hatására megnő az alkalmazás energiafelhasználása.</string>
   <string name="use_tor_title">Tor használata</string>
@@ -347,6 +361,8 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <string name="donate_title">Támogatás</string>
   <string name="donate_summary">Segíts a domain és hosting költségek fedezésében</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Személyiségi jogok</string>
+  <string name="privacy_summary">Nyissa meg a syncthing-android adatvédelmi szabályzatát, amely kiterjed a személyes adatok (esetleges) felhasználására, pl. a helymeghatározásra.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing verzió</string>
   <!--Title of the preference showing this app's version name-->
@@ -410,18 +426,31 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">A Syncthing le van tiltva</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Meg akarja változtatni a futási feltételeket?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Beállítások megváltoztatása</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Kilépés</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <string name="syncthing_disabled_reason_heading">Okok:</string>
+  <string name="syncthing_disabled_reason_on_battery">Az eszköz akkuról megy</string>
+  <string name="syncthing_disabled_reason_on_charger">Az eszköz töltőre van dugva</string>
+  <string name="syncthing_disabled_reason_powersaving">Az eszköz energiatakarékos üzemmódban van</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">A globális szinkronizálás ki van kapcsolva</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">A jelenlegi Wifi SSID nincs a fehér listán</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">A jelenlegi Wifi adatforgalom forgalmi díjas</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Nincs hálózati kapcsolat vagy repülőgépes üzemmód engedélyezve</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Nincs mobil adatkapcsolat</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Nincs wifi kapcsolat</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Nincs beállítva szinkronizálás sem Wifin, sem mobil adatkapcsolaton keresztül</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">A Syncthing fut</string>
   <string name="syncthing_disabled">A Syncthing le van tiltva</string>
+  <string name="syncthing_terminated">A Syncthing leállt</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Nem sikerült létrehozni a konfigurációs fájlt</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Hiányzik egy konfigurációs fájl, ami a működéshez elengedhetetlen</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Kamera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -474,8 +503,11 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <string name="folder_type_sendonly">Csak küldés</string>
   <string name="folder_type_receiveonly">Csak fogadás</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">A mappa küld és fogad módosításokat távoli eszközökkel.</string>
+  <string name="folder_type_sendonly_description">A helyi módosítások átkerülnek más eszközökre, de azokról ide nem.</string>
+  <string name="folder_type_receiveonly_description">A fájlok átkerülnek ide, de a helyi módosítások nem kerülnek át más eszközökre.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
-  <string name="pull_order">Fájl feltöltési sorrend</string>
+  <string name="pull_order">Fájl lehívási sorrend</string>
   <!--Displays the current pull order type in the Folder activity-->
   <string name="pull_order_type_random">Véletlen</string>
   <string name="pull_order_type_alphabetic">Betűrendben</string>
@@ -485,6 +517,11 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <string name="pull_order_type_newestFirst">Újabb először</string>
   <!--Pull order dialog descriptions for pull order types-->
   <string name="pull_order_type_random_description">Fájlok feltöltése véletlenszerű sorrendben.</string>
+  <string name="pull_order_type_alphabetic_description">Fájlok lehívása ábécésorrendben</string>
+  <string name="pull_order_type_smallestFirst_description">Hívja le a fájlokat fájlméret szerint rendezve. Mindig a legkisebbet.</string>
+  <string name="pull_order_type_largestFirst_description">Hívja le a fájlokat fájlméret szerint rendezve. Mindig a legnagyobbat.</string>
+  <string name="pull_order_type_oldestFirst_description">Hívja le a fájlokat módosítás szerint rendezve. Először a régebbit.</string>
+  <string name="pull_order_type_newestFirst_description">Hívja le a fájlokat módosítás szerint rendezve. Először az újabbat.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Maximális kor</string>
   <string name="clean_out_after">Takarítás ennyi idő után</string>
@@ -494,9 +531,9 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <string name="command">Parancs</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Fájlonként megtartandó korábbi verziók száma</string>
-  <string name="simple_file_versioning_description">Fájlok cseréje vagy törlése esetén az időpecséttel ellátott változatok a .stversions könyvtárba kerülnek.</string>
+  <string name="simple_file_versioning_description">Fájlok cseréje vagy törlése esetén az időbélyeggel ellátott változatok a .stversions könyvtárba kerülnek.</string>
   <string name="trashcan_versioning_description">Fájlok cseréje vagy törlése esetén a fájlok az .stversions könyvtárba kerülnek.</string>
-  <string name="staggered_versioning_description">Fájlok cseréje vagy törlése esetén az időpecséttel ellátott változatok az .stversions könyvtárba kerülnek. A verziók automatikusan törlődnek, amikor koruk eléri a megadott értéket, vagy a verziók száma meghaladja az intervallumon belül meghatározott maximális darabszámot.\n\nA következő intervallumok használatosak: az első órában 30 másodpercenként készül új verzió, az első nap óránként egy, az első 30 napban pedig napi egy verzió lesz megtartva. A maximális kort elérő fájlok hetente tárolódnak.</string>
+  <string name="staggered_versioning_description">Fájlok cseréje vagy törlése esetén az időbélyeggel ellátott változatok az .stversions könyvtárba kerülnek. A verziók automatikusan törlődnek, amikor koruk eléri a megadott értéket, vagy a verziók száma meghaladja az intervallumon belül meghatározott maximális darabszámot.\n\nA következő intervallumok használatosak: az első órában 30 másodpercenként készül új verzió, az első nap óránként egy, az első 30 napban pedig napi egy verzió lesz megtartva. A maximális kort elérő fájlok hetente tárolódnak.</string>
   <string name="maximum_age_description">Egy verzió megtartásának maximális ideje (napokban, 0 esetén a verziók korlátlan ideig megmaradnak)</string>
   <string name="versions_path_description">Régebbi verziók tárolásának útvonala (üresen hagyott érték esetén a megosztott mappán belüli alapértelmezett .stversions lesz felhasználva)</string>
   <string name="cleanout_after_description">Fájlok megőrzésének ideje a lomtárban. Nulla esetén nincs törlés.</string>

@@ -15,6 +15,8 @@
   <string name="storage_permission_title">Дозвіл на доступ до сховища</string>
   <string name="storage_permission_desc">Syncthing потребує доступу до сховища, щоб виконувати синхронізацію файлів.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Дозвіл розташування (фоново)</string>
+  <string name="location_permission_desc">Syncthing можна налаштувати синхронізувати лише у вибраних мережах Wi-Fi. Для цього потрібно взнати SSID поточного зʼєднання Wi-Fi, навіть при закритій програмі. Тому потрібен фоновий доступ до розташування. Ця інформація не використовується, щоб дізнатися Ваше місцерозташування. Єдина інформація, яка зберігається це Wi-Fi, яку Ви додаєте вручну до списку — інша користувацька інформація не зберігається.\n\n Якщо Ви хочете використовувати цю можливість, натисніть кнопку вище, щоб надати потрібні дозволи для Syncthing. В іншому випадку Ви можете пропустити цей крок.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Продовжити</string>
@@ -208,6 +210,7 @@
   <string name="run_on_whitelisted_wifi_networks">Синхронізувати лише при підключенні до обраних мереж Wi-Fi: %1$s</string>
   <string name="run_on_all_wifi_networks">Синхронізувати через всі мережі Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Увімкніть Wi-Fi, щоб обрати мережі.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Підʼєднайтеся до Wi-Fi, щоб додати його до списку.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Ви маєте надати дозвіл на доступ до місцезнаходження, щоб використовувати цю функцію.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Потрібен дозвіл</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Починаючи з Android 8.1, доступ до місцерозташування необхідний для визначення імені мережі Wi-Fi. Ви можете використовувати цю функцію лише після надання такого дозволу.</string>
@@ -243,6 +246,7 @@
   <string name="start_into_web_gui_title">Запуск веб-інтерфейсу при вході в додаток</string>
   <string name="start_into_web_gui_summary">При запуску додатка, відкривати веб-інтерфейс замість головного меню</string>
   <string name="preference_theme_title">Тема</string>
+  <string name="preference_theme_follow_system">Наслідувати системну</string>
   <string name="preference_theme_option_light">Світла</string>
   <string name="preference_theme_option_dark">Темна</string>
   <string name="pref_language_default">Мова за-замовчуванням</string>
@@ -353,6 +357,8 @@
   <string name="donate_title">Внести пожертву</string>
   <string name="donate_summary">Допоможіть нам оплатити домени та хостинг</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Політика приватності</string>
+  <string name="privacy_summary">Відкрити політику приватності syncthing-android, яка охоплює використання (будь-яких) особистих даних, як-от місцерозташування.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Версія Syncthing</string>
   <!--Title of the preference showing this app's version name-->

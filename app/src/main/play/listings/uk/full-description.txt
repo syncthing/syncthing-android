@@ -1,11 +1,11 @@
-Syncthing замінює пропрієтарні сервіси синхронізації та зберігання у хмарі чимось відкритим, надійним і децентралізованим. Ваша інформація належить лише вам і ви заслуговуєте право обиратимісце її зберігання, доступність її третім особам та спосіб її передачі через Інтернет.
+Syncthing замінює власницькі сервіси синхронізації та зберігання в хмарі чимось відкритим, надійним і децентралізованим. Ваші дані належить лише Вам і Ви заслуговуєте на право обирати місце їхнього зберігання, доступність їх третім особам та спосіб їх передавання через Інтернет.
 
-Веб-сайт: https://syncthing.net/
+Вебсайт: https://syncthing.net/
 
-Джерельний код: https://github.com/syncthing/syncthing-android
+Вихідний код: https://github.com/syncthing/syncthing-android
 
 Форум: https://forum.syncthing.net/
 
-Питання / проблеми: https://github.com/syncthing/syncthing-android/issues
+Проблеми: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+Політика приватності: https://syncthing.net/android-privacy-policy
