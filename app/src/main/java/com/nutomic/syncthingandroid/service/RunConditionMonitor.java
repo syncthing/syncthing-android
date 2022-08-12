@@ -170,6 +170,7 @@ public class RunConditionMonitor {
     private RunConditionCheckResult decideShouldRun() {
         // Get run conditions preferences.
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
+        boolean prefRunOnNoNetwork= mPreferences.getBoolean(Constants.PREF_RUN_ON_NO_NETWORK, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
         boolean prefRunOnMeteredWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_METERED_WIFI, false);
         Set<String> whitelistedWifiSsids = mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>());
@@ -212,6 +213,10 @@ public class RunConditionMonitor {
         if (prefRespectMasterSync && !ContentResolver.getMasterSyncAutomatically()) {
             Log.v(TAG, "decideShouldRun: prefRespectMasterSync && !getMasterSyncAutomatically");
             blockerReasons.add(GLOBAL_SYNC_DISABLED);
+        }
+
+        if (blockerReasons.isEmpty() && prefRunOnNoNetwork) {
+            return SHOULD_RUN;
         }
 
         // Run on mobile data.
