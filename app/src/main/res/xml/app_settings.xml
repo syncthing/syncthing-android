@@ -20,6 +20,12 @@
             android:summary="@string/run_conditions_summary"/>
 
         <CheckBoxPreference
+            android:key="run_on_no_network"
+            android:title="@string/run_on_no_network_title"
+            android:summary="@string/run_on_no_network_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
             android:key="run_on_wifi"
             android:title="@string/run_on_wifi_title"
             android:summary="@string/run_on_wifi_summary"

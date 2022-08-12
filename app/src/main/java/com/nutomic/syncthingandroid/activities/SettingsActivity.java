@@ -104,6 +104,7 @@ public class SettingsActivity extends SyncthingActivity {
         private Preference         mCategoryRunConditions;
         private CheckBoxPreference mStartServiceOnBoot;
         private ListPreference     mPowerSource;
+        private CheckBoxPreference mRunOnNoNetwork;
         private CheckBoxPreference mRunOnMobileData;
         private CheckBoxPreference mRunOnWifi;
         private CheckBoxPreference mRunOnMeteredWifi;
@@ -171,6 +172,8 @@ public class SettingsActivity extends SyncthingActivity {
                     (CheckBoxPreference) findPreference(Constants.PREF_START_SERVICE_ON_BOOT);
             mPowerSource =
                     (ListPreference) findPreference(Constants.PREF_POWER_SOURCE);
+            mRunOnNoNetwork =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_NO_NETWORK);
             mRunOnMobileData =
                     (CheckBoxPreference) findPreference(Constants.PREF_RUN_ON_WIFI);
             mRunOnWifi =
