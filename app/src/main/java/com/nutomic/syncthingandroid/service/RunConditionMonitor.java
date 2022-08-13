@@ -169,6 +169,7 @@ public class RunConditionMonitor {
      */
     private RunConditionCheckResult decideShouldRun() {
         // Get run conditions preferences.
+        boolean prefRunConditions= mPreferences.getBoolean(Constants.PREF_RUN_CONDITIONS, false);
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
         boolean prefRunOnMeteredWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_METERED_WIFI, false);
@@ -178,6 +179,11 @@ public class RunConditionMonitor {
         String prefPowerSource = mPreferences.getString(Constants.PREF_POWER_SOURCE, POWER_SOURCE_CHARGER_BATTERY);
         boolean prefRespectPowerSaving = mPreferences.getBoolean(Constants.PREF_RESPECT_BATTERY_SAVING, true);
         boolean prefRespectMasterSync = mPreferences.getBoolean(Constants.PREF_RESPECT_MASTER_SYNC, false);
+
+        if (!prefRunConditions) {
+            Log.v(TAG, "decideShouldRun: !runConditions");
+            return SHOULD_RUN;
+        }
 
         List<BlockerReason> blockerReasons = new ArrayList<>();
 
