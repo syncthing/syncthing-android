@@ -287,6 +287,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         }
         Log.i(TAG, "Exiting app on user request");
         mActivity.stopService(new Intent(mActivity, SyncthingService.class));
-        mActivity.finish();
+        mActivity.finishAndRemoveTask();
     }
 }
