@@ -315,7 +315,7 @@ Please report any problems you encounter via Github.</string>
     <string name="category_experimental">Experimental</string>
 
     <!-- Preference screen - Run conditions -->
-    <string name="run_conditions_title">Run Conditions</string>
+    <string name="run_conditions_title">Enable run conditions</string>
     <string name="run_conditions_summary">Use the following options to decide when Syncthing will run.</string>
 
     <string name="run_on_mobile_data_title">Run on mobile data</string>

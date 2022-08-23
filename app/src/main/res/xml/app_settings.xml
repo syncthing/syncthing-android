@@ -12,12 +12,11 @@
         android:title="@string/category_run_conditions"
         android:key="category_run_conditions">
 
-        <Preference
+        <CheckBoxPreference
             android:key="static_run_conditions"
-            android:persistent="false"
-            android:selectable="false"
             android:title="@string/run_conditions_title"
-            android:summary="@string/run_conditions_summary"/>
+            android:summary="@string/run_conditions_summary"
+            android:defaultValue="true" />
 
         <CheckBoxPreference
             android:key="run_on_wifi"

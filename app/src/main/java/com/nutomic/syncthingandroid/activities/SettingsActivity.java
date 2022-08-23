@@ -11,6 +11,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -101,7 +102,8 @@ public class SettingsActivity extends SyncthingActivity {
         @Inject NotificationHandler mNotificationHandler;
         @Inject SharedPreferences mPreferences;
 
-        private Preference         mCategoryRunConditions;
+        private PreferenceGroup    mCategoryRunConditions;
+        private CheckBoxPreference mRunConditions;
         private CheckBoxPreference mStartServiceOnBoot;
         private ListPreference     mPowerSource;
         private CheckBoxPreference mRunOnMobileData;
@@ -167,6 +169,8 @@ public class SettingsActivity extends SyncthingActivity {
 
             addPreferencesFromResource(R.xml.app_settings);
             PreferenceScreen screen = getPreferenceScreen();
+            mRunConditions =
+                    (CheckBoxPreference) findPreference(Constants.PREF_RUN_CONDITIONS);
             mStartServiceOnBoot =
                     (CheckBoxPreference) findPreference(Constants.PREF_START_SERVICE_ON_BOOT);
             mPowerSource =
@@ -234,8 +238,14 @@ public class SettingsActivity extends SyncthingActivity {
 
             mCategorySyncthingOptions = findPreference("category_syncthing_options");
             setPreferenceCategoryChangeListener(mCategorySyncthingOptions, this::onSyncthingPreferenceChange);
-            mCategoryRunConditions = findPreference("category_run_conditions");
+            mCategoryRunConditions = (PreferenceGroup) findPreference("category_run_conditions");
             setPreferenceCategoryChangeListener(mCategoryRunConditions, this::onRunConditionPreferenceChange);
+
+            if (!mRunConditions.isChecked()) {
+                for (int index = 1; index < mCategoryRunConditions.getPreferenceCount(); ++index) {
+                    mCategoryRunConditions.getPreference(index).setEnabled(false);
+                }
+            }
 
             exportConfig.setOnPreferenceClickListener(this);
             importConfig.setOnPreferenceClickListener(this);
@@ -363,6 +373,16 @@ public class SettingsActivity extends SyncthingActivity {
 
         public boolean onRunConditionPreferenceChange(Preference preference, Object o) {
             switch (preference.getKey()) {
+                case Constants.PREF_RUN_CONDITIONS:
+                    boolean enabled = (Boolean) o;
+                    for (int index = 1; index < mCategoryRunConditions.getPreferenceCount(); ++index) {
+                        mCategoryRunConditions.getPreference(index).setEnabled(enabled);
+                    }
+                    if (enabled) {
+                        mRunOnMeteredWifi.setEnabled(mRunOnWifi.isChecked());
+                        mWifiSsidWhitelist.setEnabled(mRunOnWifi.isChecked());
+                    }
+                    break;
                 case Constants.PREF_POWER_SOURCE:
                     mPowerSource.setValue(o.toString());
                     preference.setSummary(mPowerSource.getEntry());

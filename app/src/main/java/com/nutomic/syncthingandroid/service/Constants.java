@@ -14,6 +14,7 @@ public class Constants {
 
     // Preferences - Run conditions
     public static final String PREF_START_SERVICE_ON_BOOT       = "always_run_in_background";
+    public static final String PREF_RUN_CONDITIONS              = "static_run_conditions";
     public static final String PREF_RUN_ON_MOBILE_DATA          = "run_on_mobile_data";
     public static final String PREF_RUN_ON_WIFI                 = "run_on_wifi";
     public static final String PREF_RUN_ON_METERED_WIFI         = "run_on_metered_wifi";
