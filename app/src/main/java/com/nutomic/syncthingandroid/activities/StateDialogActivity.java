@@ -2,17 +2,22 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.DialogLoadingBinding;
 import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
+import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingService.State;
 import com.nutomic.syncthingandroid.util.Util;
@@ -119,7 +124,17 @@ public abstract class StateDialogActivity extends SyncthingActivity {
                         }
                 )
                 .setNegativeButton(R.string.exit,
-                        (dialogInterface, i) -> ActivityCompat.finishAffinity(this)
+                        (dialogInterface, i) -> {
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+                            if (sharedPreferences != null && !sharedPreferences.getBoolean(Constants.PREF_START_SERVICE_ON_BOOT, false)) {
+                                stopService(new Intent(this, SyncthingService.class));
+                            }
+                            if(android.os.Build.VERSION.SDK_INT >= 21) {
+                                finishAndRemoveTask();
+                            } else {
+                                finish();
+                            }
+                        }
                 )
                 .setCancelable(false)
                 .show();
