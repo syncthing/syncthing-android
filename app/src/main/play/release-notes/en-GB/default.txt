@@ -1,2 +1,2 @@
-* Update Syncthing to v1.21.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.21.0-rc.1 )
+* Update Syncthing to v1.21.0-rc.2 ( https://github.com/syncthing/syncthing/releases/tag/v1.21.0-rc.2 )
 * Unreliable charging detection ( #1595 )
