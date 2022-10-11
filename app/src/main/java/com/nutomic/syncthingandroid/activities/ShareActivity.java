@@ -119,11 +119,11 @@ public class ShareActivity extends StateDialogActivity
 
         // TODO: add support for EXTRA_TEXT (notes, memos sharing)
         ArrayList<Uri> extrasToCopy = new ArrayList<>();
-        if (getIntent().getAction().equals(Intent.ACTION_SEND)) {
+        if (Intent.ACTION_SEND.equals(getIntent().getAction())) {
             Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
             if (uri != null)
                 extrasToCopy.add(uri);
-        } else if (getIntent().getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(getIntent().getAction())) {
             ArrayList<Uri> extras = getIntent().getParcelableArrayListExtra(Intent.EXTRA_STREAM);
             if (extras != null)
                 extrasToCopy = extras;
