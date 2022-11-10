@@ -1,4 +1,1 @@
-* Update Syncthing to v1.22.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.22.1 )
-* Don't create spurious conflicts (cherry-picked on top of syncthing v1.22.1)
-* add preference to run always (ignore run conditions) #1823
-* Remove Syncthing from Recents after pressing Exit #1805
+* Update Syncthing to v1.22.2-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.22.2-rc.1 )
