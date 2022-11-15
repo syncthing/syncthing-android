@@ -44,7 +44,7 @@ public class Util {
         clipboard.setPrimaryClip(clip);
         if (android.os.Build.VERSION.SDK_INT < 33) {
             Toast.makeText(context, R.string.device_id_copied_to_clipboard, Toast.LENGTH_SHORT)
-                .show();
+                    .show();
         }
     }
 
