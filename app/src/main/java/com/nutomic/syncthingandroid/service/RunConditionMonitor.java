@@ -169,7 +169,7 @@ public class RunConditionMonitor {
      */
     private RunConditionCheckResult decideShouldRun() {
         // Get run conditions preferences.
-        boolean prefRunConditions= mPreferences.getBoolean(Constants.PREF_RUN_CONDITIONS, false);
+        boolean prefRunConditions= mPreferences.getBoolean(Constants.PREF_RUN_CONDITIONS, true);
         boolean prefRunOnMobileData= mPreferences.getBoolean(Constants.PREF_RUN_ON_MOBILE_DATA, false);
         boolean prefRunOnWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_WIFI, true);
         boolean prefRunOnMeteredWifi= mPreferences.getBoolean(Constants.PREF_RUN_ON_METERED_WIFI, false);
