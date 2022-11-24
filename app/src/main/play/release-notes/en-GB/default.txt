@@ -1,1 +1,2 @@
-* Update Syncthing to v1.22.2-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.22.2-rc.1 )
+* Update Syncthing to v1.22.2-rc.3 ( https://github.com/syncthing/syncthing/releases/tag/v1.22.2-rc.3 )
+* Mobile data usage while run on mobile data is disabled ( https://github.com/syncthing/syncthing-android/issues/1852 )
