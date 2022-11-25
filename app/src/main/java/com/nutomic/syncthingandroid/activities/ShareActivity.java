@@ -254,7 +254,7 @@ public class ShareActivity extends StateDialogActivity
             );
             if (cursor != null) {
                 cursor.moveToFirst();
-                displayName = cursor.getString(cursor.getColumnIndex(displayNameColumn));
+                displayName = cursor.getString(cursor.getColumnIndexOrThrow(displayNameColumn));
             }
             if (cursor != null) {
                 cursor.close();
