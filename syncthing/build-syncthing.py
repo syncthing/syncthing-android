@@ -18,25 +18,25 @@ BUILD_TARGETS = [
         'arch': 'arm',
         'goarch': 'arm',
         'jni_dir': 'armeabi',
-        'cc': 'armv7a-linux-androideabi16-clang',
+        'cc': 'armv7a-linux-androideabi{}-clang',
     },
     {
         'arch': 'arm64',
         'goarch': 'arm64',
         'jni_dir': 'arm64-v8a',
-        'cc': 'aarch64-linux-android21-clang',
+        'cc': 'aarch64-linux-android{}-clang',
     },
     {
         'arch': 'x86',
         'goarch': '386',
         'jni_dir': 'x86',
-        'cc': 'i686-linux-android16-clang',
+        'cc': 'i686-linux-android{}-clang',
     },
     {
         'arch': 'x86_64',
         'goarch': 'amd64',
         'jni_dir': 'x86_64',
-        'cc': 'x86_64-linux-android21-clang',
+        'cc': 'x86_64-linux-android{}-clang',
     }
 ]
 
@@ -97,7 +97,7 @@ for target in BUILD_TARGETS:
 
     cc = '/'.join([
         get_ndk_home(), "toolchains/llvm/prebuilt/", PLATFORM_DIRS[platform.system()], "bin",
-        target['cc']])
+        target['cc'].format(min_sdk)])
     subprocess.check_call(
         ['go', 'run', 'build.go', '-goos', 'android',
          '-goarch', target['goarch'], '-cc', cc,
