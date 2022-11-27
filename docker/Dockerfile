@@ -44,8 +44,9 @@ ENV GOCACHE /opt/gocache
 # Set location of GOPATH to persist packages for module builds in GOPATH/pkg/mod
 ENV GOPATH /opt/gopath
 
+ADD . /opt/syncthing-android
+
 # Run prebuild script (will prebuild stuff into the image if env var is set)
-ADD prebuild.sh /opt/prebuild.sh
-RUN /opt/prebuild.sh
+RUN /opt/syncthing-android/docker/prebuild.sh
 
 WORKDIR /mnt

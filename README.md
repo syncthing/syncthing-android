@@ -20,13 +20,18 @@ Language mappings are defined in `.tx/config`, with the second code being the on
 
 # Building
 
-### Dependencies
+## Dependencies
+
+If you build using docker (see below) you don't need to setup these.
+
 - Android SDK, with `$ANDROID_HOME` pointing to it (you can skip this if you are using Android Studio)
 - Android NDK (you should install the required version (`ext.ndkVersionShared` in `./build.gradle`) with the usual tools, such that it's located within `$ANDROID_HOME/ndk/`).
 - Go (see [here](https://docs.syncthing.net/dev/building.html#prerequisites) for the required version)
 - Java Version 11 (you scan skip this if you are using Android Studio, otherwise you might need to set `$JAVA_HOME` accordingly)
 
-### Build instructions
+## Build instructions
+
+### Command line
 
 Make sure you clone the project with
 `git clone https://github.com/syncthing/syncthing-android.git --recursive`. Alternatively, run
@@ -34,6 +39,22 @@ Make sure you clone the project with
 
 Build Syncthing using `./gradlew buildNative`. Then use `./gradlew assembleDebug` or
 Android Studio to build the apk.
+
+### Docker
+
+The release and CI builds happen in docker. You can run the same build with the following command:
+
+``` sh
+docker run  -v .:/mnt ghcr.io/syncthing/syncthing-android-builder:latest ./gradlew lint buildNative assembleDebug
+```
+
+If you do any changes to the build setup (e.g. SDK, Go, Java versions) or if you otherwise want to build the docker image locally, execute:
+
+``` sh
+docker build -t syncthing-android-builder -f ./docker/Dockerfile .
+```
+
+You can then just use `syncthing-android-builder` in the first command instead of the `ghcr.io/...` one to use the locally built image.
 
 # License
 
