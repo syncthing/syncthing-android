@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.service;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -165,7 +166,7 @@ public class NotificationHandler {
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, Constants.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT));
         if (!appShutdownInProgress) {
             if (startForegroundService) {
                 Log.v(TAG, "Starting foreground service or updating notification");
@@ -198,7 +199,7 @@ public class NotificationHandler {
                     .setContentTitle(mContext.getString(title))
                     .setContentText(mContext.getString(R.string.notification_crash_text))
                     .setSmallIcon(R.drawable.ic_stat_notify)
-                    .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
+                    .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, Constants.FLAG_IMMUTABLE))
                     .setAutoCancel(true)
                     .build();
             mNotificationManager.notify(ID_CRASH, n);
@@ -258,7 +259,7 @@ public class NotificationHandler {
                 .setContentTitle(mContext.getString(R.string.syncthing_terminated))
                 .setContentText(mContext.getString(R.string.toast_write_storage_permission_required))
                 .setSmallIcon(R.drawable.ic_stat_notify)
-                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
+                .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, Constants.FLAG_IMMUTABLE))
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .build();
@@ -268,7 +269,7 @@ public class NotificationHandler {
     public void showRestartNotification() {
         Intent intent = new Intent(mContext, SyncthingService.class)
                 .setAction(SyncthingService.ACTION_RESTART);
-        PendingIntent pi = PendingIntent.getService(mContext, 0, intent, 0);
+        PendingIntent pi = PendingIntent.getService(mContext, 0, intent, Constants.FLAG_IMMUTABLE);
 
         Notification n = getNotificationBuilder(mInfoChannel)
                 .setContentTitle(mContext.getString(R.string.restart_title))
@@ -295,7 +296,7 @@ public class NotificationHandler {
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(mContext, 0,
                         new Intent(mContext, MainActivity.class),
-                        PendingIntent.FLAG_UPDATE_CURRENT));
+                        Constants.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT));
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
