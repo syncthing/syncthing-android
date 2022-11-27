@@ -96,7 +96,8 @@ for target in BUILD_TARGETS:
     })
 
     cc = os.path.join(
-        get_ndk_home(), "toolchains/llvm/prebuilt/", PLATFORM_DIRS[platform.system()], "bin",
+        get_ndk_home(), "toolchains", "llvm", "prebuilt",
+        PLATFORM_DIRS[platform.system()], "bin",
         target['cc'].format(min_sdk))
     subprocess.check_call(
         ['go', 'run', 'build.go', '-goos', 'android',
