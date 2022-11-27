@@ -25,7 +25,6 @@ BUILD_TARGETS = [
         'goarch': 'arm64',
         'jni_dir': 'arm64-v8a',
         'cc': 'aarch64-linux-android21-clang',
-        'min_sdk': 21,
     },
     {
         'arch': 'x86',
@@ -38,7 +37,6 @@ BUILD_TARGETS = [
         'goarch': 'amd64',
         'jni_dir': 'x86_64',
         'cc': 'x86_64-linux-android21-clang',
-        'min_sdk': 21,
     }
 ]
 
@@ -88,7 +86,6 @@ subprocess.check_call([
 ])
 
 for target in BUILD_TARGETS:
-    target_min_sdk = str(target.get('min_sdk', min_sdk))
 
     print('Building syncthing for', target['arch'])
 

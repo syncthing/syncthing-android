@@ -2,9 +2,9 @@ FROM openjdk:11
 
 ENV GO_VERSION 1.19.3
 
-ARG ANDROID_SDK_VERSION=7583922
-ARG ANDROID_SDK_FILENAME=commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip
-
+# Can be found scrolling down on this page:
+# https://developer.android.com/studio/index.html#command-tools
+ARG ANDROID_SDK_FILENAME=commandlinetools-linux-9123335_latest.zip
 WORKDIR /opt
 
 # Install Go
@@ -26,11 +26,11 @@ ARG SDKMANAGER="${ANDROID_HOME}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROI
 # Accept the SDK license, as we can't install packages otherwise
 RUN yes | $SDKMANAGER --licenses > /dev/null
 
-# NDK version (r22 fails to build)
-ENV NDK_VERSION 23.0.7599858
+# NDK version
+ENV NDK_VERSION 23.2.8568313
 
 # Install other android packages, including NDK
-RUN $SDKMANAGER tools platform-tools "build-tools;29.0.3" "platforms;android-29" "extras;android;m2repository" "ndk;${NDK_VERSION}"
+RUN $SDKMANAGER tools platform-tools "build-tools;31.0.0" "platforms;android-31" "extras;android;m2repository" "ndk;${NDK_VERSION}"
 
 # Accept licenses of newly installed packages
 RUN yes | $SDKMANAGER --licenses
