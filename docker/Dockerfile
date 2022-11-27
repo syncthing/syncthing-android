@@ -27,7 +27,7 @@ ARG SDKMANAGER="${ANDROID_HOME}/cmdline-tools/bin/sdkmanager --sdk_root=${ANDROI
 RUN yes | $SDKMANAGER --licenses > /dev/null
 
 # NDK version
-ENV NDK_VERSION 23.2.8568313
+ENV NDK_VERSION 25.1.8937393
 
 # Install other android packages, including NDK
 RUN $SDKMANAGER tools platform-tools "build-tools;31.0.0" "platforms;android-31" "extras;android;m2repository" "ndk;${NDK_VERSION}"
