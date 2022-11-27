@@ -1,2 +1,5 @@
+This version drops support for Android <5.0 (API level <21)
+
 * Update Syncthing to v1.22.2-rc.3 ( https://github.com/syncthing/syncthing/releases/tag/v1.22.2-rc.3 )
 * Mobile data usage while run on mobile data is disabled ( https://github.com/syncthing/syncthing-android/issues/1852 )
+* Target API level 31
