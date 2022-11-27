@@ -57,6 +57,15 @@ public class RestApi {
 
     private static final String TAG = "RestApi";
 
+    private static final SimpleDateFormat dateFormat;
+    static {
+        if (android.os.Build.VERSION.SDK_INT < 24) {
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        } else {
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+        }
+    }
+
     /**
      * Compares folders by labels, uses the folder ID as fallback if the label is empty
      */
@@ -276,7 +285,7 @@ public class RestApi {
             remoteIgnoredDevice.deviceID = deviceId;
             remoteIgnoredDevice.address = deviceAddress;
             remoteIgnoredDevice.name = deviceName;
-            remoteIgnoredDevice.time = dateString(new Date());
+            remoteIgnoredDevice.time = dateFormat.format(new Date());
             mConfig.remoteIgnoredDevices.add(remoteIgnoredDevice);
             sendConfig();
             Log.d(TAG, "Ignored device [" + deviceId + "]");
@@ -310,7 +319,7 @@ public class RestApi {
                     IgnoredFolder ignoredFolder = new IgnoredFolder();
                     ignoredFolder.id = folderId;
                     ignoredFolder.label = folderLabel;
-                    ignoredFolder.time = dateString(new Date());
+                    ignoredFolder.time = dateFormat.format(new Date());
                     device.ignoredFolders.add(ignoredFolder);
                     if (BuildConfig.DEBUG) {
                         Log.v(TAG, "device.ignoredFolders = " + new Gson().toJson(device.ignoredFolders));
@@ -716,10 +725,6 @@ public class RestApi {
         synchronized (mConfigLock) {
             mConfig.options = options;
         }
-    }
-
-    private String dateString(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").format(date);
     }
 
 }
