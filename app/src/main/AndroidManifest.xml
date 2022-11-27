@@ -45,7 +45,8 @@
         <activity
                 android:name=".activities.FirstStartActivity"
                 android:label="@string/app_name"
-                android:launchMode="singleTask">
+                android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -74,7 +75,8 @@
             android:label="@string/share_activity_title"
             android:excludeFromRecents="true"
             android:taskAffinity=""
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -88,7 +90,8 @@
         </activity>
         <activity
             android:name=".activities.LogActivity"
-            android:parentActivityName=".activities.SettingsActivity">
+            android:parentActivityName=".activities.SettingsActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name=".activities.LogActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -123,14 +126,16 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <service android:name=".service.SyncthingService" />
-        <receiver android:name=".receiver.BootReceiver">
+        <receiver android:name=".receiver.BootReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receiver.AppConfigReceiver"
-            tools:ignore="ExportedReceiver">
+            tools:ignore="ExportedReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.nutomic.syncthingandroid.action.START" />
                 <action android:name="com.nutomic.syncthingandroid.action.STOP" />
