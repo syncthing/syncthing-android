@@ -29,7 +29,7 @@ Docker, you don't need to set them up separately.
     1. Download SDK command line tools from https://developer.android.com/studio#command-line-tools-only.
     2. Unpack the downloaded archive to an empty folder. This path is going
        to become your `ANDROID_HOME` folder.
-    3. Inside the unpacked `cmdline-tools`folder, create yet another folder
+    3. Inside the unpacked `cmdline-tools` folder, create yet another folder
        called `latest`, then move everything else inside it, so that the final
        folder hierarchy looks as follows.
        ```
