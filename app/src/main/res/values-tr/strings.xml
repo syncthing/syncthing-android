@@ -276,7 +276,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="local_announce_enabled">Yerel Keşif</string>
   <string name="enable_nat_traversal">NAT Geçişini etkinleştir</string>
   <string name="global_announce_server">Genel Keşif Sunucuları</string>
-  <string name="enable_relaying">Aktarmayı etkinleştir</string>
+  <string name="enable_relaying">Geçişi etkinleştir</string>
   <string name="usage_reporting">İsimsiz Kullanım Bildirme</string>
   <string name="gui_address">GKA Dinleme Adresleri</string>
   <!--Titles for the preference to undo ignored devices and folders-->

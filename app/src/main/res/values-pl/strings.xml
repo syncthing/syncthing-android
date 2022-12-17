@@ -7,7 +7,7 @@
   <string name="welcome_title">Witamy w aplikacji Syncthing dla systemu Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
-  <string name="introduction">Wstęp</string>
+  <string name="introduction">Wprowadzenie</string>
   <string name="welcome_text">Syncthing to otwartoźródłowa aplikacja do synchronizacji plików.\n\
 Aby udostępnić dane innym urządzeniom musisz dodać ich niepowtarzalne numery ID do listy urządzeń. Następnie możesz wybrać, które foldery z którymi urządzeniami współdzielić.\n\
 Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.</string>

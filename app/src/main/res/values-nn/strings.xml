@@ -4,7 +4,7 @@
   <string name="app_description">Ein open, påliteleg og desentralisert app for filsynkronisering.</string>
   <!--FirstStartActivity-->
   <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Velkommen til Synchting for Android</string>
+  <string name="welcome_title">Velkomen til Synchting for Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
   <string name="introduction">Innleiing</string>

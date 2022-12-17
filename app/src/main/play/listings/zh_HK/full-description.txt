@@ -1,11 +1,11 @@
-Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.
+Syncthing 用開放、可信和去中心化的東西取代了專有的同步和雲服務。您的數據只是您的數據，您應該選擇存儲位置、是否與第三方共享以及如何通過 Internet 傳輸。
 
-Website: https://syncthing.net/
+網站：https://syncthing.net/
 
-Source code: https://github.com/syncthing/syncthing-android
+源代碼：https://github.com/syncthing/syncthing-android
 
-Forum: https://forum.syncthing.net/
+論壇：https://forum.syncthing.net/
 
-Issues: https://github.com/syncthing/syncthing-android/issues
+問題：https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+隱私政策：https://syncthing.net/android-privacy-policy

@@ -525,7 +525,7 @@
 
 保留的历史版本会遵循以下条件：最近一小时内的历史版本，更新间隔小于30秒的仅保留一份。最近一天内的历史版本，更新间隔小于一小时的仅保留一份。最近30天内的历史版本，更新间隔小于一天的仅保留一份。距离现在超过30天且小于最长保留时间的，更新间隔小于一周的仅保留一份。</string>
   <string name="maximum_age_description">历史版本保留的最长天数（0 为永久保存）。</string>
-  <string name="versions_path_description">历史版本储存路径（留空则会默认存储在共享文件夹中的 .stversions 目录）。</string>
+  <string name="versions_path_description">历史版本储存路径(留空则会默认存储在共享文件夹中的 .stversions 目录)。</string>
   <string name="cleanout_after_description">文件保存在回收站的天数。零表示永久。</string>
   <string name="external_versioning_description">命令行的第一个参数是文件夹的路径，第二个参数是文件夹内的相对路径。</string>
   <string name="no_versioning_description">选择要启用的版本控制类型。</string>

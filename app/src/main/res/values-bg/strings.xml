@@ -16,6 +16,7 @@
   <string name="storage_permission_desc">За да извършва синхронизация Syngthing има нужда от достъп до хранилището.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Достъп до местоположението (във фонов режим)</string>
+  <string name="location_permission_desc">Syncthing може да бъде настроен да работи само в избрани безжични мрежи. За целта е необходимо да бъде проверен идентификатора на свързаната безжична мрежа, включително и докато приложението не работи. Затова е необходимо разрешение за достъп до местоположението във фонов режим. Тази информация не се използва за намиране на местоположението ви. Единствената съхранявана информация е идентификатора на безжичната мрежа, която ръчно сте избрали да добавите в списъка - не се съхраняват други потребителски данни.\n\n Ако искате да използвате тази функция и за да предоставите необходимите разрешения на Syncthing натиснете бутона по-горе. В противен случай можете да пропуснете тази стъпка.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Напред</string>
@@ -29,6 +30,7 @@
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Потвърдете за изход от приложението</string>
+  <string name="dialog_exit_while_running_as_service_message">Имайте предвид: Настроили сте приложението да се изпълнява автоматично при зареждане. Следователно то следи условията на работа и синхронизира по всяко време във фонов режим, когато условията позволяват. Ако се сблъскате със сериозни проблеми приложението може да бъде спряно само ръчно. В противен случай изключете „Услугата стартира при включване на устройството“ в настройките. Искате ли да спрете приложението сега, докато устройството се рестартира?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Добавяне на папка</string>
   <!--Title of the "share device id" menu action-->
@@ -44,6 +46,7 @@
   <string name="device_rejected">Устройството \"%1$s\" желае да се свърже</string>
   <string name="folder_rejected">Устройството \"%1$s\" желае да сподели папка \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Пестене на батерия</string>
+  <string name="dialog_disable_battery_optimization_message">Android може да спре приложението след определено време. За да предотвратите това, изключете оптимизацията на батерията.\n\nНякои устройства имат допълнителни приложения за спиране на задачи. Трябва да добавите Syncthing и в техния разрешителен списък.</string>
   <string name="dialog_disable_battery_optimization_later">По-късно</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Без повторно запитване</string>
   <string name="dialog_disable_battery_optimization_turn_off">Изключване за синхронизирането</string>
@@ -208,6 +211,7 @@
   <string name="sync_only_wifi_ssids_connect_to_wifi">За да добавите безжична мрежа се свържете към нея.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">За да използвате тази възможност, трябва да разрешите достъп до МЕСТОПОЛОЖЕНИЕТО.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Необходимо е резрешение</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">От Android 8.1 нататък се изисква достъп до местоположението, за да бъде прочетен идентификатора на безжичната мрежа. Можете да използвате тази възможност само ако сте предоставили това разрешение.</string>
   <string name="power_source_title">Работи при захранване от</string>
   <string-array name="power_source_entries">
     <item>Батерия или зарядно.</item>
@@ -351,6 +355,7 @@
   <string name="donate_summary">Помогнете с разходите за домейн и хостинг</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">Политика за поверителност</string>
+  <string name="privacy_summary">Отворете политиката за поверителност на syncthing-android, която обхваща използването (ако има такова) на лични данни, например местоположение.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Издание на Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -474,7 +479,7 @@
     <item>TiB/s</item>
   </string-array>
   <!--Possible folder states-->
-  <string name="state_idle">Бездействие</string>
+  <string name="state_idle">В готовност</string>
   <string name="state_scanning">Сканиране</string>
   <string name="state_syncing">Синхронизиране (%1$d%%)</string>
   <string name="state_error">Грешка</string>
@@ -519,6 +524,9 @@
   <string name="command">Команда</string>
   <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
   <string name="keep_versions_description">Броят стари версии, които да бъдат пазени за всеки файл.</string>
+  <string name="simple_file_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени, с добавяне на времеви отпечатък, в папка .stversions.</string>
+  <string name="trashcan_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени в папка .stversions.</string>
+  <string name="staggered_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени, с добавяне на времеви отпечатък, в папка .stversions. Версиите се изтриват автоматично, ако са по-стари от максималната възраст или надвишават броя на файловете, разрешени в даден времеви интервал.\n\nИзползват се следните интервали: през първия час се пази версия на всеки 30 секунди, през първия ден се пази версия на всеки час, през първите 30 дни се пази версия на всеки ден, а до достигане на максималната възраст се пази версия на всяка седмица.</string>
   <string name="maximum_age_description">Максималното време за пазене на версии (в дни, задайте 0 за да пазите всяка версия завинаги).</string>
   <string name="versions_path_description">Пътят, където версиите да бъдат складирани (оставете празно за папката .stversions).</string>
   <string name="cleanout_after_description">Броят дни за запазване на файловете в кошчето. Нула значи завинаги.</string>

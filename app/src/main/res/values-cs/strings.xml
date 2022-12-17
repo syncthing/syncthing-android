@@ -205,6 +205,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="run_on_wifi_title">Spustit na Wi-Fi</string>
   <string name="run_on_wifi_summary">Spustit když je zařízení připojené k Wi-Fi síti.</string>
   <string name="run_on_metered_wifi_title">Spouštět na Wi-Fi s účtovanými daty</string>
+  <string name="run_on_metered_wifi_summary">Spouštět když je zařízení připojeno k placené Wi-Fi sítí jako např. hotspotu nebo tethered síti. Pozor, může spotřebovat velkou část Vašich tarifních dat, pokud synchronizujete hodně dat.</string>
   <string name="run_on_whitelisted_wifi_title">Spouštět na zadaných Wi-Fi sítích</string>
   <string name="run_on_whitelisted_wifi_networks">Spustit pouze na vybraných Wi-Fi sítích: %1$s</string>
   <string name="run_on_all_wifi_networks">Spouštět na všech Wi-Fi sítích.</string>
@@ -212,13 +213,21 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="sync_only_wifi_ssids_connect_to_wifi">Pro přidání do seznamu se prosím nejdříve připojte k Wi-Fi.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Pro použité této funkcej je nutné udělit oprávnění k poloze.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Je vyžadováno oprávnění</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Počínaje Androidem 8.1 je jméno Wi-Fi přístupné jen s oprávněním k přístupu k poloze. Tuto funkci lze použít jen pokud oprávnění povolíte.</string>
   <string name="power_source_title">Spouštět když je zařízení napájeno z</string>
+  <string-array name="power_source_entries">
+    <item>Napájení ze sítě a baterie.</item>
+    <item>Napájení ze sítě.</item>
+    <item>Napájení z baterie.</item>
+  </string-array>
   <string name="respect_battery_saving_title">Dodržovat nastavení úspory baterie z Androidu</string>
   <string name="respect_battery_saving_summary">Vypnout Syncthing pokud je aktivní šetření energie.</string>
   <string name="respect_master_sync_title">Dodržovat nastavení automatické synchronizace dat z Androidu</string>
+  <string name="respect_master_sync_summary">Zakázat Syncthing, pokud je vypnutá dlaždice rychlého nastavení  \'Automaticky synchronizovat data.\'</string>
   <string name="run_in_flight_mode_title">Spouštět když je zařízení v režimu Letadlo</string>
   <string name="run_in_flight_mode_summary">Zapněte pokud vaše zařízení má problémy se zjišťováním ručně provedených Wi-Fi připojení v režimu Letadlo.</string>
   <string name="service_settings_title">Nastavení služby</string>
+  <string name="service_settings_summary">Spouštět Synchthing jako službu. Přidá trvalou notifikaci, kvůli které služba poběží bez přerušení. S touto možností bude Synching automaticky spuštěn při startu systému.</string>
   <string name="run_as_background_service">Spouštět službu automaticky při startu systému</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Použít rozšířený výběr adresáře</string>
@@ -241,6 +250,19 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="preference_theme_option_light">Světlý</string>
   <string name="preference_theme_option_dark">Tmavý</string>
   <string name="pref_language_default">Výchozí jazyk</string>
+  <string-array name="folder_types">
+    <item>Odesílat a přijímat</item>
+    <item>Pouze odesílat</item>
+    <item>Pouze přijímat</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>Náhodně</item>
+    <item>Abecedně</item>
+    <item>Od nejmenšího</item>
+    <item>Od největšího</item>
+    <item>Od nejstaršího</item>
+    <item>Od nejnovějšího</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>Žádné</item>
     <item>Odpadkový koš</item>
@@ -260,9 +282,12 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="usage_reporting">Anonymní hlášení o používání</string>
   <string name="gui_address">Adresy naslouchání GUI</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Vrátit zpět ignorovaná zařízení a složky</string>
+  <string name="undo_ignored_devices_folders_question">Tímto budou předchozí rozhodnutí o ignorování zařízení a složek vrácena zpět. Pokračovat?</string>
   <string name="undo_ignored_devices_folders_done">Rozhodnutí úspěšně vzata zpět.</string>
   <string name="export_config">Zálohovat nastavení</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Neplatná vstupní hodnota. Prosím zadejte hodnotu mezi %1$d a %2$d.</string>
   <!--Experimental options-->
   <string name="use_proxy">Připojit prostřednictvím proxy</string>
   <string name="do_not_use_proxy">Není nastavená žádná proxy.</string>
@@ -281,6 +306,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
   <string name="use_legacy_hashing_summary">Vynutit použití původního hashovacího algoritmu pro lepší kompatibilitu</string>
   <string name="restart_on_wakeup_title">Restartovat při probuzení</string>
+  <string name="restart_on_wakeup_summary">Výchozí stav: povoleno. Pokud je tato funkce zakázána, může být skenování zařízení a složek opožděno kvůli výdrži baterie.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
   <!--Dialog shown before config import-->
@@ -300,11 +326,15 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">Resetovat databázi</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
+       \nSkutečně chcete vymazat databázi Syncthing?</string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">Databáze aplikace Syncthing úspěšně resetována</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_deltas_title">Resetovat rejstříky přírůstků</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
+       \nSkutečně chcete vymazat delta indexy Syncthing?</string>
   <!--Syncthing was reset-->
   <string name="st_reset_deltas_done">Delta indexy aplikace Syncthing úspěšně resetovány</string>
   <string name="category_about">O aplikaci</string>
@@ -326,6 +356,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="donate_summary">Pomozte nám platit za domény a hostingové poplatky</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">Zásady ochrany osobních údajů </string>
+  <string name="privacy_summary">Otevřít politiku soukromí syncthing-android, která zahrnuje užití případných osobních údajů (např. polohy.)</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Verze Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -411,6 +442,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="syncthing_disabled_reason_no_network_or_flightmode">Žádné připojení nebo je zapnutý režim letadlo</string>
   <string name="syncthing_disabled_reason_no_mobile_connection">Nepřipojeno k mobilním datům</string>
   <string name="syncthing_disabled_reason_no_wifi_connection">Nepřipojeno k Wi-Fi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Není nastavena synchronizace na Wi-Fi ani mobilních datech</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing běží</string>
   <string name="syncthing_disabled">Syncthing je vypnutý</string>

@@ -64,6 +64,7 @@
     <item quantity="other">%1$d / %2$d 檔案</item>
   </plurals>
   <string name="override_changes">覆寫變更</string>
+  <string name="open_file_manager">打開文件管理器</string>
   <string name="toast_no_file_manager">沒有找到相容的檔案管理員。</string>
   <!--DevicesFragment-->
   <string name="devices_fragment_title">裝置</string>
@@ -76,6 +77,7 @@
   <!--Indicates that there is no connection to the device-->
   <string name="device_disconnected">斷線</string>
   <!--Indicates that the device is paused and does not sync-->
+  <string name="device_paused">暫停</string>
   <!--Indicates that the device connection is unknown-->
   <string name="device_state_unknown">未知</string>
   <!--Title for current download rate-->
@@ -83,6 +85,11 @@
   <!--Title for current upload rate-->
   <string name="upload_title">上載</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">狀態</string>
+  <string name="syncthing_starting">Syncthing 正在啟動…</string>
+  <string name="syncthing_running">Syncthing 執行中…</string>
+  <string name="syncthing_not_running">Syncthing 未執行。</string>
+  <string name="syncthing_has_crashed">Syncthing 已經當機</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">下載:\u0020</string>
@@ -180,7 +187,16 @@
   <string name="category_experimental">實驗性</string>
   <!--Preference screen - Run conditions-->
   <string name="run_conditions_title">執行條件</string>
+  <string name="run_on_mobile_data_title">使用行動網路時執行</string>
+  <string name="run_on_wifi_title">使用 WiFi 時執行</string>
+  <string name="run_on_all_wifi_networks">所有 WiFi 連線都執行</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要授權</string>
   <string name="respect_battery_saving_title">遵守 Android 節省電池設定</string>
+  <string name="respect_battery_saving_summary">使用省電模式時停用 Syncthing</string>
+  <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。&lt;br&gt;&lt;br data-mce-bogus="1"&gt;</string>
+  <string name="run_in_flight_mode_title">飛航模式時執行</string>
+  <string name="service_settings_title">服務設定</string>
+  <string name="run_as_background_service">開機時自動執行服務</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
   <string name="advanced_folder_picker_summary">選擇在裝置上的同步資料夾</string>
@@ -197,6 +213,8 @@
   <string name="preference_language_summary">選擇應用程式語言</string>
   <string name="start_into_web_gui_title">直接開啟網頁介面</string>
   <string name="start_into_web_gui_summary">當開啟應用程式時，打開網頁介面，而不是主螢幕</string>
+  <string name="preference_theme_title">主題</string>
+  <string name="preference_theme_follow_system">使用系統主題</string>
   <string name="pref_language_default">預設語言</string>
   <string-array name="versioning_types">
     <item>無</item>
@@ -227,6 +245,7 @@
   <!--Toast after entering invalid http proxy address-->
   <string name="use_legacy_hashing_title">使用過時的雜湊</string>
   <string name="use_legacy_hashing_summary">為了相容性，強制 Syncthing 使用過時的雜湊套</string>
+  <string name="restart_on_wakeup_title">喚醒時重新啟動</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">你確認要匯出你的設定？已存在的檔案將會被覆蓋。\n\n警告！其他的應用程式也許能從備份位置讀取私鑰，並且利用它來下載、修改同步的檔案。</string>
   <!--Dialog shown before config import-->
@@ -249,6 +268,7 @@
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">成功重設 Syncthing 資料庫</string>
   <!--Title for the preference to reset Syncthing indexes-->
+  <string name="st_reset_deltas_title">重置差異索引</string>
   <!--Syncthing was reset-->
   <!--Syncthing was reset-->
   <string name="category_about">關於</string>
@@ -269,6 +289,7 @@
   <string name="donate_title">捐獻</string>
   <string name="donate_summary">協助我們支付域名及主機費用</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">隱私政策</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 版本</string>
   <!--Title of the preference showing this app's version name-->
@@ -334,6 +355,13 @@
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">離開</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">原因：</string>
+  <string name="syncthing_disabled_reason_powersaving">設備在省電模式下</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">全域同步已停用</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">目前的 WiFi SSID 不在允許清單中</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">沒有網路連線，或是飛航模式已啟用。</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">沒有行動網路連線</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">沒有 WiFi 連線</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在執行</string>
   <string name="syncthing_disabled">Syncthing 已經停用</string>
@@ -378,11 +406,13 @@
   <string name="state_syncing">正在同步 (%1$d%%)</string>
   <string name="state_error">錯誤</string>
   <string name="state_unknown">未知</string>
+  <string name="state_paused">暫停</string>
   <string name="status_outofsync">不同步</string>
   <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">當開啟在背景執行時，不支援正在停止 Syncthing</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">資料夾類型</string>
   <!--Displays the current folder type in the folder activity-->
   <string name="folder_type_sendonly">僅傳送</string>
   <!--Folder type dialog descriptions for folder types-->

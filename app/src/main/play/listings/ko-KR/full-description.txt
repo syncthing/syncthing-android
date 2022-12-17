@@ -1,11 +1,11 @@
-Syncthing은 기존의 사유(私有) 동기화 / 클라우드를 대체하는 개방적이고, 믿을 수 있고, 분산화된 서비스입니다. 사용자의 데이터가 독립적으로 유지될 뿐만 아니라, 사용자가 직접 데이터가 저장될 장소를 지정하고, 공유할 제3자나, 인터넷상에서 전송되는 방법을 선택할 수 있습니다.
+Syncthing은 기존의 폐쇄적인 동기화 및 클라우드를 대체할 수 있는 개방적이고, 믿을 수 있고, 분산된 서비스입니다. 귀하의 데이터는 귀하만의 소유이며 이를 어디에 보관할지, 제삼자와 공유할지, 그리고 인터넷으로 어떻게 전송할지를 결정할 권리가 귀하에게만 있습니다.
 
-웹사이트: https://syncthing.net/
+홈페이지: https://syncthing.net/
 
 소스 코드: https://github.com/syncthing/syncthing-android
 
-포럼: https://forum.syncthing.net/
+게시판: https://forum.syncthing.net/
 
 문제 제기: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+개인정보처리방침: https://syncthing.net/android-privacy-policy
