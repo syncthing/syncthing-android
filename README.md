@@ -20,10 +20,10 @@ Language mappings are defined in `.tx/config`, with the second code being the on
 
 # Building
 
-## Dependencies
-
 These are necessary for building from the command line. If you build using
-Docker, you don't need to set them up separately.
+Docker or Android Studio, you don't need to set them up separately.
+
+## Dependencies
 
 1. Android SDK and NDK
     1. Download SDK command line tools from https://developer.android.com/studio#command-line-tools-only.
@@ -53,8 +53,6 @@ Docker, you don't need to set them up separately.
 4. Python version 3
 
 ## Build instructions
-
-### Command line
 
 1. Clone the project with
    ```
