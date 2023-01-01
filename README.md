@@ -40,12 +40,12 @@ Docker, you don't need to set them up separately.
        ```
     4. Navigate inside `cmdline-tools/latest/bin`, then execute
        ```
-       ./sdkmanager "platform-tools" "build-tools;31.0.0" "platforms;android-31" "extras;android;m2repository" "ndk;25.1.8937393"
+       ./sdkmanager "platform-tools" "build-tools;<version>" "platforms;android-<version>" "extras;android;m2repository" "ndk;<version>"
        ```
        The required tools and NDK will be downloaded automatically.
 
-        **NOTE:** You can double-check [Dockerfile](docker/Dockerfile) to make
-        sure that the version numbers are up-to-date.
+        **NOTE:** You should check [Dockerfile](docker/Dockerfile) for the
+        specific version numbers to insert in the command above.
 2. Go (see https://docs.syncthing.net/dev/building#prerequisites for the
    required version)
 3. Java version 11 (if not present in ``$PATH``, you might need to set
