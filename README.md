@@ -20,8 +20,9 @@ Language mappings are defined in `.tx/config`, with the second code being the on
 
 # Building
 
-These are necessary for building from the command line. If you build using
-Docker or Android Studio, you don't need to set them up separately.
+These dependencies and instructions are necessary for building from the command
+line. If you build using Docker or Android Studio, you don't need to set up and
+follow them separately.
 
 ## Dependencies
 
