@@ -48,7 +48,8 @@ Docker, you don't need to set them up separately.
         sure that the version numbers are up-to-date.
 2. Go (see https://docs.syncthing.net/dev/building#prerequisites for the
    required version)
-3. Java version 11
+3. Java version 11 (if not present in ``$PATH``, you might need to set
+   ``$JAVA_HOME`` accordingly)
 4. Python version 3
 
 ## Build instructions
