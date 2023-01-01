@@ -30,7 +30,8 @@ if command -v edit >/dev/null; then
 elif [ -n "$EDITOR" ]; then
     editor="$EDITOR"
 else
-    echo "No editor found - need either `edit` binary or $EDITOR env var set"
+    echo "No editor found - need either 'edit' binary or EDITOR env var set"
+    exit 1
 fi
 $editor $CHANGELOG
 
