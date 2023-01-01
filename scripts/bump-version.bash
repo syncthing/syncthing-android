@@ -29,8 +29,8 @@ if command -v edit >/dev/null; then
     editor=edit
 elif [ -n "$EDITOR" ]; then
     editor="$EDITOR"
-elif command -v open >/dev/null; then
-    editor=open
+else
+    echo "No editor found - need either `edit` binary or $EDITOR env var set"
 fi
 $editor $CHANGELOG
 
