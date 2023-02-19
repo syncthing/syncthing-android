@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-ENV GO_VERSION 1.19.5
+ENV GO_VERSION 1.20.1
 
 # Can be found scrolling down on this page:
 # https://developer.android.com/studio/index.html#command-tools
