@@ -49,8 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_log"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:textColor="@color/accent"/>
+                style="@style/Widget.AppCompat.Button.Borderless.Colored" />
 
         </LinearLayout>
 

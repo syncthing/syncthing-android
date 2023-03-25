@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     implementation 'eu.chainfire:libsuperuser:1.1.0.202004101746'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'com.google.guava:guava:31.1-android'
@@ -26,7 +26,7 @@ dependencies {
 
 android {
     // Changes to these values need to be reflected in `../docker/Dockerfile`
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion '31.0.0'
     ndkVersion = "${ndkVersionShared}"
 
@@ -36,7 +36,7 @@ android {
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 4337
         versionName "1.23.3-rc.1"
         testApplicationId 'com.nutomic.syncthingandroid.test'

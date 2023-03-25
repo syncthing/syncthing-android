@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -22,9 +20,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
@@ -82,9 +79,9 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private TextView mCompressionValueView;
 
-    private SwitchCompat mIntroducerView;
+    private MaterialSwitch mIntroducerView;
 
-    private SwitchCompat mDevicePaused;
+    private MaterialSwitch mDevicePaused;
 
     private TextView mSyncthingVersionView;
 
