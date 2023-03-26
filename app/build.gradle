@@ -26,7 +26,7 @@ dependencies {
 
 android {
     // Changes to these values need to be reflected in `../docker/Dockerfile`
-    compileSdkVersion 33
+    compileSdkVersion 32
     buildToolsVersion '31.0.0'
     ndkVersion = "${ndkVersionShared}"
 
@@ -36,7 +36,7 @@ android {
     defaultConfig {
         applicationId "com.nutomic.syncthingandroid"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 32
         versionCode 4337
         versionName "1.23.3-rc.1"
         testApplicationId 'com.nutomic.syncthingandroid.test'

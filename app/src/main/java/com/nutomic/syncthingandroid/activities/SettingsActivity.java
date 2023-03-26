@@ -67,6 +67,7 @@ public class SettingsActivity extends SyncthingActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.PermissionRequestType.LOCATION.ordinal()) {
             boolean granted = grantResults.length > 0;
             for (int i = 0; i < grantResults.length; i++) {
@@ -80,9 +81,9 @@ public class SettingsActivity extends SyncthingActivity {
                         .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
             } else {
                 Util.getAlertDialogBuilder(this)
-                    .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
-                    .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
-                    .setPositiveButton(android.R.string.ok, null).show();
+                        .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
+                        .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
+                        .setPositiveButton(android.R.string.ok, null).show();
             }
         }
     }
