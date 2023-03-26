@@ -30,7 +30,7 @@ RUN yes | $SDKMANAGER --licenses > /dev/null
 ENV NDK_VERSION 25.1.8937393
 
 # Install other android packages, including NDK
-RUN $SDKMANAGER tools platform-tools "build-tools;31.0.0" "platforms;android-31" "extras;android;m2repository" "ndk;${NDK_VERSION}"
+RUN $SDKMANAGER tools platform-tools "build-tools;32.0.0" "platforms;android-32" "extras;android;m2repository" "ndk;${NDK_VERSION}"
 
 # Accept licenses of newly installed packages
 RUN yes | $SDKMANAGER --licenses
