@@ -27,7 +27,7 @@ dependencies {
 android {
     // Changes to these values need to be reflected in `../docker/Dockerfile`
     compileSdkVersion 32
-    buildToolsVersion '31.0.0'
+    buildToolsVersion '32.0.0'
     ndkVersion = "${ndkVersionShared}"
 
     buildTypes.debug.applicationIdSuffix ".debug"
