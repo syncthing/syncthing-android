@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
@@ -63,7 +66,7 @@ public class DevicesAdapter extends ArrayAdapter<Device> {
             download.setText(Util.readableTransferRate(getContext(), 0));
             upload.setText(Util.readableTransferRate(getContext(), 0));
             status.setText(r.getString(R.string.device_paused));
-            status.setTextColor(ContextCompat.getColor(getContext(), R.color.text_black));
+            status.setTextColor(MaterialColors.getColor(getContext(), android.R.attr.textColorPrimary, Color.BLACK));
             return convertView;
         }
 
