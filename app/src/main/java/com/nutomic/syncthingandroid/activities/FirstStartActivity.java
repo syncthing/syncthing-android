@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
@@ -257,12 +258,12 @@ public class FirstStartActivity extends Activity {
     }
 
     private void setActiveBottomDot(int currentPage) {
-        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
-        for (int i = 0; i < mDots.length; i++) {
-            mDots[i].setTextColor(colorsInactive[currentPage]);
+        int colorInactive = MaterialColors.getColor(this, R.attr.colorPrimary, Color.BLUE);
+        int colorActive = MaterialColors.getColor(this, R.attr.colorAccent, Color.BLUE);
+        for (TextView mDot : mDots) {
+            mDot.setTextColor(colorInactive);
         }
-        mDots[currentPage].setTextColor(colorsActive[currentPage]);
+        mDots[currentPage].setTextColor(colorActive);
     }
 
     //  ViewPager change listener

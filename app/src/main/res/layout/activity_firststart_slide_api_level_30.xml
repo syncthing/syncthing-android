@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen4"
     android:fillViewport="true"
     android:paddingBottom="@dimen/dots_full_height">
 
@@ -19,7 +18,6 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="@string/api_level_30_title"
-            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
         <TextView
@@ -32,10 +30,10 @@
             android:paddingBottom="@dimen/desc_padding"
             android:text="@string/api_level_30_desc"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnResetDatabase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
