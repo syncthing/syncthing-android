@@ -27,12 +27,12 @@
         <item name="android:dialogCornerRadius" tools:targetApi="p">28dp</item>
         <item name="dialogCornerRadius">28dp</item>
 
-        <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="m">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Syncthing" parent="Theme.Syncthing.Base" >
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    <style name="Theme.Syncthing" parent="Theme.Syncthing.Base">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 

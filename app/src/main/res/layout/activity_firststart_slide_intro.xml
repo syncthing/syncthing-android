@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -24,7 +25,9 @@
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
             android:contentDescription="@null"
-            android:src="@drawable/ic_monochrome" />
+            android:src="@drawable/ic_monochrome"
+            android:tint="?attr/colorPrimary"
+            tools:ignore="UseAppTint" />
 
         <TextView
             android:layout_width="wrap_content"

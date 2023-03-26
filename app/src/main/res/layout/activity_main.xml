@@ -19,9 +19,9 @@
             android:background="?colorPrimary"
             android:elevation="@dimen/toolbar_elevation"
             android:theme="@style/ThemeOverlay.Syncthing.Toolbar"
-            app:tabIndicatorColor="?attr/colorOnSurface"
-            app:tabSelectedTextColor="?attr/colorOnSurface"
-            app:tabTextColor="?attr/colorOnPrimaryContainer" />
+            app:tabIndicatorColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
