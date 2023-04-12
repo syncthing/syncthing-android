@@ -10,7 +10,9 @@ If your issue is a bug report, replace this boilerplate with a description of th
 
 Also fill out the version information below and add log output or screenshots as appropriate.
 
-If your issue is a feature request, simply replace this template text in its entirety.
+Do not file a feature request unless you want to implement it yourself. This is
+due to the maintenance status of this project, see [the readme for
+context](./README.md#status-maintenance-mode---co-maintainers-welcome).
 
 ### Version Information
 
