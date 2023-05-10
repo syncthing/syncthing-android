@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen3"
     android:fillViewport="true"
     android:paddingBottom="@dimen/dots_full_height">
 
@@ -19,7 +18,6 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="@string/welcome_title"
-            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
         <ImageView
@@ -28,14 +26,14 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_location" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnGrantLocationPerm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/grant_permission"
             android:drawableStart="@android:drawable/ic_menu_mylocation"
-            android:drawableLeft="@android:drawable/ic_menu_mylocation"
             android:paddingStart="40dp"
             android:paddingLeft="40dp"
             android:paddingEnd="40dp"
@@ -49,7 +47,6 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/location_permission_title"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 
@@ -63,7 +60,6 @@
             android:paddingBottom="@dimen/desc_paddingBottom"
             android:text="@string/location_permission_desc"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>

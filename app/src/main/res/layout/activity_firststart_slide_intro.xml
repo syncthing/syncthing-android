@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen1"
     android:fillViewport="true"
     android:paddingBottom="@dimen/dots_full_height">
 
@@ -19,20 +19,20 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="@string/welcome_title"
-            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
             android:contentDescription="@null"
-            android:src="@drawable/ic_syncthing_logo" />
+            android:src="@drawable/ic_monochrome"
+            android:tint="?attr/colorPrimary"
+            tools:ignore="UseAppTint" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/introduction"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 
@@ -46,7 +46,6 @@
             android:paddingBottom="@dimen/desc_paddingBottom"
             android:text="@string/welcome_text"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>

@@ -70,7 +70,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Syncthing.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Syncthing.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
 
-    <style name="Theme.Syncthing.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Syncthing.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 </resources>

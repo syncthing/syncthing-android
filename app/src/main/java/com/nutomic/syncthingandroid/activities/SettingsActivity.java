@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -56,17 +55,21 @@ public class SettingsActivity extends SyncthingActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preferences);
+        setTitle(R.string.settings_title);
+
         SettingsFragment settingsFragment = new SettingsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_OPEN_SUB_PREF_SCREEN, getIntent().getStringExtra(EXTRA_OPEN_SUB_PREF_SCREEN));
         settingsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, settingsFragment)
+                .replace(R.id.settings_container, settingsFragment)
                 .commit();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == Constants.PermissionRequestType.LOCATION.ordinal()) {
             boolean granted = grantResults.length > 0;
             for (int i = 0; i < grantResults.length; i++) {
@@ -80,9 +83,9 @@ public class SettingsActivity extends SyncthingActivity {
                         .setAction(SyncthingService.ACTION_REFRESH_NETWORK_INFO));
             } else {
                 Util.getAlertDialogBuilder(this)
-                    .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
-                    .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
-                    .setPositiveButton(android.R.string.ok, null).show();
+                        .setTitle(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_title)
+                        .setMessage(R.string.sync_only_wifi_ssids_location_permission_rejected_dialog_content)
+                        .setPositiveButton(android.R.string.ok, null).show();
             }
         }
     }

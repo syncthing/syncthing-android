@@ -2,6 +2,8 @@ package com.nutomic.syncthingandroid.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -18,8 +20,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.provider.Settings;
+
+import com.google.android.material.color.DynamicColors;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

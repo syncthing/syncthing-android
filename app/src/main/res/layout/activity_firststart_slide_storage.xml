@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen2"
     android:fillViewport="true"
     android:paddingBottom="@dimen/dots_full_height">
 
@@ -19,23 +19,24 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="@string/welcome_title"
-            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
             android:contentDescription="@null"
-            android:src="@drawable/ic_storage" />
+            android:src="@drawable/ic_storage"
+            android:tint="?attr/colorSecondary"
+            tools:ignore="UseAppTint" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGrantStoragePerm"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/grant_permission"
             android:drawableStart="@android:drawable/ic_menu_save"
-            android:drawableLeft="@android:drawable/ic_menu_save"
             android:paddingStart="40dp"
             android:paddingLeft="40dp"
             android:paddingEnd="40dp"
@@ -47,7 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/storage_permission_title"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
 
@@ -61,7 +61,6 @@
             android:paddingBottom="@dimen/desc_paddingBottom"
             android:text="@string/storage_permission_desc"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>

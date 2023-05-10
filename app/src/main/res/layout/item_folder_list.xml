@@ -78,8 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/size"
-                android:textAppearance="?textAppearanceListItemSecondary"
-                android:textColor="@color/text_red" />
+                android:textAppearance="?textAppearanceListItemSecondary" />
 
         </RelativeLayout>
 

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.Constants;
 
@@ -238,6 +239,6 @@ public class Util {
      */
     public static AlertDialog.Builder getAlertDialogBuilder(Context context)
     {
-        return new AlertDialog.Builder(context, R.style.Theme_Syncthing_Dialog);
+        return new MaterialAlertDialogBuilder(context);
     }
 }

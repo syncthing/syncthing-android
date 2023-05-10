@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.documentfile.provider.DocumentFile;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.model.Device;
@@ -93,8 +92,8 @@ public class FolderActivity extends SyncthingActivity
     private TextView mAccessExplanationView;
     private TextView mFolderTypeView;
     private TextView mFolderTypeDescriptionView;
-    private SwitchCompat mFolderFileWatcher;
-    private SwitchCompat mFolderPaused;
+    private MaterialSwitch mFolderFileWatcher;
+    private MaterialSwitch mFolderPaused;
     private ViewGroup mDevicesContainer;
     private TextView mPullOrderTypeView;
     private TextView mPullOrderDescriptionView;
@@ -644,7 +643,7 @@ public class FolderActivity extends SyncthingActivity
 
     private void addDeviceViewAndSetListener(Device device, LayoutInflater inflater) {
         inflater.inflate(R.layout.item_device_form, mDevicesContainer);
-        SwitchCompat deviceView = (SwitchCompat) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
+        MaterialSwitch deviceView = (MaterialSwitch) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
         deviceView.setOnCheckedChangeListener(null);
         deviceView.setChecked(mFolder.getDevice(device.deviceID) != null);
         deviceView.setText(device.getDisplayName());

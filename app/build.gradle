@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     implementation 'eu.chainfire:libsuperuser:1.1.0.202004101746'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'org.mindrot:jbcrypt:0.4'
     implementation 'com.google.guava:guava:31.1-android'

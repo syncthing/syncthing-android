@@ -3,6 +3,8 @@ package com.nutomic.syncthingandroid.views;
 import android.content.Context;
 import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
+
+import android.graphics.Color;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -15,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.ItemFolderListBinding;
 import com.nutomic.syncthingandroid.model.Folder;
@@ -107,7 +110,7 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         } else {
             if (folder.paused) {
                 binding.state.setText(mContext.getString(R.string.state_paused));
-                binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_black));
+                binding.state.setTextColor(MaterialColors.getColor(mContext, android.R.attr.textColorPrimary, Color.BLACK));
             } else {
                 binding.state.setText(getLocalizedState(mContext, folderStatus));
                 switch(folderStatus.state) {

@@ -60,8 +60,9 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
     // region === Permissions Callback ===
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == RC_HANDLE_CAMERA_PERM) {
-            if (grantResults.length !=0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startScanner();
             } else {
                 finish();
