@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.activities;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -56,12 +55,15 @@ public class SettingsActivity extends SyncthingActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preferences);
+        setTitle(R.string.settings_title);
+
         SettingsFragment settingsFragment = new SettingsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_OPEN_SUB_PREF_SCREEN, getIntent().getStringExtra(EXTRA_OPEN_SUB_PREF_SCREEN));
         settingsFragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, settingsFragment)
+                .replace(R.id.settings_container, settingsFragment)
                 .commit();
     }
 

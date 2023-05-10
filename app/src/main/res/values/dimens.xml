@@ -14,4 +14,5 @@
     <dimen name="desc_marginTop">20dp</dimen>
     <dimen name="desc_paddingBottom">80dp</dimen>
     <dimen name="button_height">44dp</dimen>
+    <dimen name="dialog_corner_radius">28dp</dimen>
 </resources>

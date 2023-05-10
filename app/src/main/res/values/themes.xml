@@ -24,8 +24,8 @@
 
         <item name="android:alertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog.Monet</item>
         <item name="alertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog.Monet</item>
-        <item name="android:dialogCornerRadius" tools:targetApi="p">28dp</item>
-        <item name="dialogCornerRadius">28dp</item>
+        <item name="android:dialogCornerRadius" tools:targetApi="p">@dimen/dialog_corner_radius</item>
+        <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
 
         <item name="android:statusBarColor" tools:targetApi="m">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -64,9 +64,11 @@
     </style>
 
     <!-- Preference dialog theme -->
+    <eat-comment/>
+
     <style name="ThemeOverlay.App.MaterialAlertDialog.Monet" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
-        <item name="dialogCornerRadius">28dp</item>
+        <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
         <item name="android:background">@drawable/dialog_bg_monet</item>
     </style>
 
@@ -77,6 +79,6 @@
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">28dp</item>
+        <item name="cornerSize">@dimen/dialog_corner_radius</item>
     </style>
 </resources>

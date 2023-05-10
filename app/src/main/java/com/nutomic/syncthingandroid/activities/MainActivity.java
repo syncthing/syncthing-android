@@ -104,12 +104,6 @@ public class MainActivity extends StateDialogActivity
     private DrawerLayout          mDrawerLayout;
     @Inject SharedPreferences mPreferences;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        DynamicColors.applyToActivityIfAvailable(this);
-        super.onCreate(savedInstanceState, persistentState);
-    }
-
     /**
      * Handles various dialogs based on current state.
      */
