@@ -1,2 +1,2 @@
 * Migration to Material Design 3 (fixes #1833, fixes #1418) #1895
-* Update Syncthing to v1.23.5-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.5-rc.1 )
+* Update Syncthing to v1.23.5 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.5 )
