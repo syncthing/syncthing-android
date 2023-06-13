@@ -15,7 +15,6 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:listViewStyle">@style/Widget.Syncthing.ListView</item>
         <item name="android:listDivider">@drawable/list_divider_inset</item>
-        <item name="drawerArrowStyle">@style/Widget.Syncthing.DrawerArrowToggle</item>
 
         <item name="android:actionBarSize">@dimen/abc_action_bar_default_height_material</item>
 
@@ -27,7 +26,7 @@
         <item name="android:dialogCornerRadius" tools:targetApi="p">@dimen/dialog_corner_radius</item>
         <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
 
-        <item name="android:statusBarColor" tools:targetApi="m">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
@@ -55,13 +54,6 @@
     <eat-comment/>
 
     <style name="Theme.Syncthing.ButtonStyle" parent="Widget.Material3.Button.TextButton.Dialog" />
-
-    <!-- Toolbar themes -->
-    <eat-comment/>
-
-    <style name="ThemeOverlay.Syncthing.Toolbar" parent="ThemeOverlay.Material3.Dark.ActionBar">
-        <item name="android:windowBackground">@null</item>
-    </style>
 
     <!-- Preference dialog theme -->
     <eat-comment/>

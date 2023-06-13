@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="material_divider_inset">72dp</dimen>
-    <dimen name="toolbar_elevation">4dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="dots_height">30dp</dimen>
