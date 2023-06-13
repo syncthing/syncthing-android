@@ -8,6 +8,6 @@ public class Event {
     public int globalID;
     public String type;
     public String time;
-    public Map<String, Object> data;
+    public Object data;
 
 }
