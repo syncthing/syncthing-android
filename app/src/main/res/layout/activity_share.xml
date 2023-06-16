@@ -80,6 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/folder_title" />
 
             <Button
+                style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/share_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,8 +88,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="-8dp"
                 android:layout_marginTop="8dp"
-                android:background="?android:selectableItemBackground"
-                android:minWidth="60dip"
                 android:text="@string/save_title"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +96,7 @@
                 app:layout_constraintVertical_bias="0.965" />
 
             <Button
+                style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,8 +106,6 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="?android:selectableItemBackground"
-                android:minWidth="50dip"
                 android:text="@string/cancel_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.951"
@@ -135,6 +133,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginRight="8dp"
                 android:drawableLeft="@drawable/ic_folder_24dp"
                 android:drawableStart="@drawable/ic_folder_24dp"
                 android:focusable="true"
@@ -146,8 +145,8 @@
 
             <Button
                 android:id="@+id/browse_button"
-                android:layout_width="88dp"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
