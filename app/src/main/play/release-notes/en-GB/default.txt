@@ -1,2 +1,3 @@
-* Migration to Material Design 3 (fixes #1833, fixes #1418) #1895
-* Update Syncthing to v1.23.5 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.5 )
+* Fix some UI issues after the migration to Material Design 3 (#1915, #1918)
+* Fix crashes due to syncthing event parsing failure (#1884)
+* Update Syncthing to v1.23.6-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.6-rc.1 )
