@@ -99,6 +99,10 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
      */
     @Override
     public void onEvent(Event event) {
+        Map<String,Object> mapData = null;
+        try {
+            mapData = (Map<String,Object>) event.data;
+        } catch (ClassCastException e) { }
         switch (event.type) {
             case "ConfigSaved":
                 if (mApi != null) {
@@ -107,30 +111,30 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
                 }
                 break;
             case "PendingDevicesChanged":
-                mapNullable((List<Map<String,String>>) event.data.get("added"), this::onPendingDevicesChanged);
+                mapNullable((List<Map<String,String>>) mapData.get("added"), this::onPendingDevicesChanged);
                 break;
             case "FolderCompletion":
                 CompletionInfo completionInfo = new CompletionInfo();
-                completionInfo.completion = (Double) event.data.get("completion");
+                completionInfo.completion = (Double) mapData.get("completion");
                 mApi.setCompletionInfo(
-                    (String) event.data.get("device"),          // deviceId
-                    (String) event.data.get("folder"),          // folderId
+                    (String) mapData.get("device"),          // deviceId
+                    (String) mapData.get("folder"),          // folderId
                     completionInfo
                 );
                 break;
             case "PendingFoldersChanged":
-                mapNullable((List<Map<String,String>>) event.data.get("added"), this::onPendingFoldersChanged);
+                mapNullable((List<Map<String,String>>) mapData.get("added"), this::onPendingFoldersChanged);
                 break;
             case "ItemFinished":
-                String folder = (String) event.data.get("folder");
+                String folder = (String) mapData.get("folder");
                 String folderPath = null;
                 for (Folder f : mApi.getFolders()) {
                     if (f.id.equals(folder)) {
                         folderPath = f.path;
                     }
                 }
-                File updatedFile = new File(folderPath, (String) event.data.get("item"));
-                if (!"delete".equals(event.data.get("action"))) {
+                File updatedFile = new File(folderPath, (String) mapData.get("item"));
+                if (!"delete".equals(mapData.get("action"))) {
                     Log.i(TAG, "Rescanned file via MediaScanner: " + updatedFile.toString());
                     MediaScannerConnection.scanFile(mContext, new String[]{updatedFile.getPath()},
                             null, null);
