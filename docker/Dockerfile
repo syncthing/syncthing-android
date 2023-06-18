@@ -47,7 +47,7 @@ ENV GOCACHE /opt/gocache
 ENV GOPATH /opt/gopath
 
 # Run prebuild script (will prebuild stuff into the image if env var is set)
-ADD prebuild.sh /opt/prebuild.sh
-RUN /opt/prebuild.sh
+ADD . /opt/syncthing-android
+RUN /opt/syncthing-android/docker/prebuild.sh
 
 WORKDIR /mnt

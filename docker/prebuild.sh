@@ -1,9 +1,12 @@
 #!/bin/bash -e
 
-[ -z "$SYNCTHING_ANDROID_PREBUILT" ] && echo "Prebuild disabled" && exit 0
+if [ -z "$SYNCTHING_ANDROID_PREBUILT" ]; then
+    echo "Prebuild disabled"
+    rm -rf syncthing-android
+    exit 0
+fi
 
 echo "Prepopulating gradle and go build/pkg cache"
-git clone --recurse-submodules https://github.com/syncthing/syncthing-android
 cd syncthing-android
 ./gradlew --no-daemon lint buildNative
 cd ..
