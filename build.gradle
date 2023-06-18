@@ -4,7 +4,7 @@ buildscript {
     ext {
         // Cannot be called "ndkVersion" as that leads to naming collision
         // Changes to this value must be reflected in `./docker/Dockerfile`
-        ndkVersionShared = '25.1.8937393'
+        ndkVersionShared = '25.2.9519653'
     }
     repositories {
         google()
