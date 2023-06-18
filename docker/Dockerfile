@@ -1,13 +1,16 @@
 FROM eclipse-temurin:11-jdk-jammy
 
-ENV GO_VERSION 1.19.10
+ENV GO_VERSION 1.20.6
 
 # Can be found scrolling down on this page:
 # https://developer.android.com/studio/index.html#command-tools
 ARG ANDROID_SDK_FILENAME=commandlinetools-linux-9123335_latest.zip
 WORKDIR /opt
 
-RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip git gnupg python3
+# The '--reinstall' combined with 'build-essentials' is necessary for cgo
+# compilation of go std libs to work. A terrible, arcane hack to solve arkane
+# cgo issues - almost fitting.
+RUN apt-get update && apt-get install --reinstall --no-install-recommends -y build-essential gcc unzip git gnupg python3
 
 # Install Go
 RUN wget -nv https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
