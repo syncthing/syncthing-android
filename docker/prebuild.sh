@@ -5,6 +5,6 @@
 echo "Prepopulating gradle and go build/pkg cache"
 git clone --recurse-submodules https://github.com/syncthing/syncthing-android
 cd syncthing-android
-./gradlew --no-daemon lint build
+./gradlew --no-daemon lint buildNative
 cd ..
 rm -rf syncthing-android
