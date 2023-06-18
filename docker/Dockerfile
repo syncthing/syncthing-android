@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM eclipse-temurin:11-jdk-jammy
 
 ENV GO_VERSION 1.19.10
 
@@ -7,8 +7,10 @@ ENV GO_VERSION 1.19.10
 ARG ANDROID_SDK_FILENAME=commandlinetools-linux-9123335_latest.zip
 WORKDIR /opt
 
+RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip git python3
+
 # Install Go
-RUN wget -q https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
+RUN wget -nv https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
     tar -zxf go${GO_VERSION}.linux-amd64.tar.gz && \
     rm go${GO_VERSION}.linux-amd64.tar.gz
 ENV GOROOT /opt/go
