@@ -3,8 +3,12 @@ updates:
 - package-ecosystem: gradle
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
+  groups:
+    dagger:
+      pattern:
+        - "com.google.dagger:dagger*"
   ignore:
   - dependency-name: androidx.annotation:annotation
     versions:
