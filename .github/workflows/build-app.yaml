@@ -1,0 +1,37 @@
+name: App
+
+on:
+  pull_request:
+
+env:
+  # Our build metadata
+  BUILD_USER: builder
+  BUILD_HOST: github.syncthing.net
+
+jobs:
+  build:
+    name: Build
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container: ghcr.io/syncthing/syncthing-android-builder
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: build
+        run: |
+          java -version
+          ./gradlew --no-daemon buildNative lint assembleDebug
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: syncthing-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: reports-and-libs
+          path: |
+            app/build/reports/**
+            app/src/main/jniLibs/**

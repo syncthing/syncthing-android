@@ -1,7 +1,9 @@
-name: Build/Release
+name: Builder Image
 
 on:
   pull_request:
+    paths:
+      - 'docker/**'
   workflow_dispatch:
 
 jobs:
