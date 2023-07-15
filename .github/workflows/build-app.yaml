@@ -2,6 +2,12 @@ name: App
 
 on:
   pull_request:
+  push:
+    branches:
+      - release
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-rc\.[0-9]+(\.[0-9]+)?'
 
 env:
   # Our build metadata
@@ -35,3 +41,40 @@ jobs:
           path: |
             app/build/reports/**
             app/src/main/jniLibs/**
+
+  release:
+    name: Release Build and Publish
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    container: ghcr.io/syncthing/syncthing-android-builder
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: build_release
+        env:
+          SYNCTHING_RELEASE_KEY_ALIAS: android
+          SIGNING_PASSWORD: '${{ secrets.SIGNING_PASSWORD }}'
+          SYNCTHING_RELEASE_STORE_FILE: '${{ runner.temp }}/signing-keystore.jks'
+          SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE: '${{ runner.temp }}/google-play-secrets.json'
+        shell: bash
+        run: |
+          set -eu -o pipefail
+          echo '${{ secrets.SIGNING_KEYSTORE_JKS_BASE64 }}' | base64 -d > "$SYNCTHING_RELEASE_STORE_FILE"
+          echo '${{ secrets.GOOGLE_PLAY_SECRETS_BASE64 }}' | base64 -d > "$SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE"
+          java -version
+          ./gradlew --no-daemon buildNative lint assembleRelease publishReleaseApps
+          rm "$SYNCTHING_RELEASE_STORE_FILE" "$SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE"
+
+          echo '${{ secrets.GNUPG_SIGNING_KEY_BASE64 }}' | base64 -d | gpg --import
+          cd app/build/outputs/apk/release
+          sha256sum app-release.apk | gpg --clearsign > sha256sum.txt.asc
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "app/build/outputs/apk/release/*.apk,app/build/outputs/apk/release/*.asc"
+          artifactErrorsFailBuild: true
+          bodyFile: "app/src/main/play/release-notes/en-GB/default.txt"
+          prerelease: ${{ contains('-rc.', github.ref_name) }}
+          draft: true
