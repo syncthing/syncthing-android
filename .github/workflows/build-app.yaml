@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    name: Build
+    name: Debug Build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     container: ghcr.io/syncthing/syncthing-android-builder
@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: syncthing-debug.apk
+          name: syncthing-android-debug.apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
       - uses: actions/upload-artifact@v3
