@@ -14,11 +14,11 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <!-- ACCESS_COARSE_LOCATION is required to get WiFi's SSID on 8.1 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- FOREGROUND_SERVICE is required to create a foreground service on 9 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!-- ACCESS_FINE_LOCATION is required to get WiFi's SSID on 10 "Q" -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- ACCESS_BACKGROUND_LOCATION is required to get WiFi's SSID on 10 "Q" -->
@@ -43,13 +43,14 @@
         android:requestLegacyExternalStorage="true"
         android:name=".SyncthingApp">
         <activity
-                android:name=".activities.FirstStartActivity"
-                android:label="@string/app_name"
-                android:launchMode="singleTask"
+            android:name=".activities.FirstStartActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data android:scheme="syncthing" android:host="open" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
