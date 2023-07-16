@@ -7,7 +7,7 @@ ENV GO_VERSION 1.19.10
 ARG ANDROID_SDK_FILENAME=commandlinetools-linux-9123335_latest.zip
 WORKDIR /opt
 
-RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip git python3
+RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip git gpg python3
 
 # Install Go
 RUN wget -nv https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz && \
