@@ -2,4 +2,4 @@
 * Fix crashes due to syncthing event parsing failure (#1884)
 * Use GHA instead of TeamCity as CI
 * Switch to publishing to goolge play with bundles
-* Update Syncthing to v1.23.6-rc.2 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.6-rc.2 )
+* Update Syncthing to v1.23.6 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.6 )
