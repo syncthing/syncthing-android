@@ -70,6 +70,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
+    // Otherwise libsyncthing.so doesn't appear where it should in installs
+    // based on app bundles, and thus nothing works.
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 play {
