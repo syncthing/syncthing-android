@@ -1,5 +1,3 @@
-* Fix some UI issues after the migration to Material Design 3 (#1915, #1918)
-* Fix crashes due to syncthing event parsing failure (#1884)
-* Use GHA instead of TeamCity as CI
-* Switch to publishing to goolge play with bundles
-* Update Syncthing to v1.23.6 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.6 )
+* Fix issue with google play bundle release/packaging ( #1943 )
+
+No other changes compared to 1.23.6
