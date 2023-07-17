@@ -25,6 +25,7 @@ jobs:
 
       - name: build
         run: |
+          git config --system --add safe.directory '*'
           java -version
           ./gradlew --no-daemon buildNative lint assembleDebug
 
