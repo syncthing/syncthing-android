@@ -1,3 +1,1 @@
-* Fix issue with google play bundle release/packaging ( #1943 )
-
-No other changes compared to 1.23.6
+* Update Syncthing to v1.23.7-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.7-rc.1 )
