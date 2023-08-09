@@ -1,2 +1,2 @@
-* Update Syncthing to v1.23.7-rc.2 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.7-rc.2 )
+* Update Syncthing to v1.23.7 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.7 )
 * Android will not add device (invisible buttons) ( https://github.com/syncthing/syncthing-android/issues/1947 )
