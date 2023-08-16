@@ -303,8 +303,6 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="toast_invalid_http_proxy_address">Die Eingabe entspricht nicht der Form \'http://[IP/HOSTNAME]:[PORT]\'.</string>
   <string name="use_legacy_hashing_title">Veraltetes Hashing verwenden</string>
   <string name="use_legacy_hashing_summary">Aus Gründen der Abwärtskompatibilität soll Syncthing die alten Hashfunktionen verwenden</string>
-  <string name="restart_on_wakeup_title">Neustart nach Aufwachen</string>
-  <string name="restart_on_wakeup_summary">Standard: Aktiviert. Das Deaktivieren dieser Funktion kann verzögertes Ordner-Scannen und Wiederverbinden von Geräten zur Folge haben. Dafür spart es Akku.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, synchronisierte Dateien herunterzuladen und zu verändern.</string>
   <!--Dialog shown before config import-->

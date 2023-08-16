@@ -305,8 +305,6 @@
   <string name="toast_invalid_http_proxy_address">Введені дані не відповідають синтаксису проксі \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Використовувати застарілий спосіб хешування</string>
   <string name="use_legacy_hashing_summary">Змусити Syncthing використовувати застарілий спосіб хешування з метою забезпечення сумісності</string>
-  <string name="restart_on_wakeup_title">Перезапустити при пробудженні</string>
-  <string name="restart_on_wakeup_summary">За-замовчуванням: Увімкнено. Вимкнення цієї функції може призвести до відкладення сканувань тек і перепідключень пристрою з метою збереження заряду батареї.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування? Існуючі файли будуть перезаписані.\n\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
   <!--Dialog shown before config import-->

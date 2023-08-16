@@ -296,8 +296,6 @@ UWAGA: może to spowodować znaczne zużycie transferu danych</string>
   <string name="toast_invalid_http_proxy_address">Podana wartość nie zgadza się ze składnią: \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Użyj starszego mechanizmu haszowania</string>
   <string name="use_legacy_hashing_summary">Wymuś użycie przedawnionego hashowania paczki dla zachowania kompatybilności</string>
-  <string name="restart_on_wakeup_title">Uruchom ponownie przy wybudzeniu</string>
-  <string name="restart_on_wakeup_summary">Domyślnie włączone. Wyłączenie tej funkcji może skutkować w opóźnieniu skanowaniu zmian i łączenia z urządzeniami celem oszczędzania baterii</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
   <!--Dialog shown before config import-->

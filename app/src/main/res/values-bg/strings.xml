@@ -303,8 +303,6 @@
   <string name="toast_invalid_http_proxy_address">Невалиден синтаксис за прокси \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Стари отпечатъци</string>
   <string name="use_legacy_hashing_summary">Принуждава Syncthing да използва по-стария пакет за отпечатъци с цел съвместимост</string>
-  <string name="restart_on_wakeup_title">Рестартиране при Събуждане</string>
-  <string name="restart_on_wakeup_summary">Стандартно: Включено. Ако изключите опцията сканирането и свързването с устройства ще бъдат отложени, с цел запазване на батерията.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Други приложения могат да извлекат частния ключ от изнесения файл, а чрез него да изтеглят и синхронизират файлове.</string>
   <!--Dialog shown before config import-->

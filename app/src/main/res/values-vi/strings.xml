@@ -302,8 +302,6 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
   <string name="toast_invalid_http_proxy_address">Đầu vào vi phạm cú pháp proxy \'http://[IP/TÊN MIỀN]:[CỔNG]\'</string>
   <string name="use_legacy_hashing_title">Sử dụng hash cũ</string>
   <string name="use_legacy_hashing_summary">Buộc Syncthing sử dụng gói hash cũ vì mục đích tương thích</string>
-  <string name="restart_on_wakeup_title">Khởi động lại khi thức dậy</string>
-  <string name="restart_on_wakeup_summary">Mặc định: Bật. Việc tắt tính năng này có thể dẫn đến việc quét thư mục và kết nối lại thiết bị bị trì hoãn để tiết kiệm pin.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Có chắc là bạn muốn xuất cấu hình? Các tập tin hiện thời sẽ bị ghi đè.\n\nCẢNH BÁO! Các ứng dụng khác có thể đọc được khoá riêng tư từ vị trí sao lưu và dùng nó để tải về/chỉnh sửa các tập tin đã đồng bộ.</string>
   <!--Dialog shown before config import-->

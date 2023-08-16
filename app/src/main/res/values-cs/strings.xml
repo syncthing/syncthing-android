@@ -305,8 +305,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="toast_invalid_http_proxy_address">Vstup neodpovídá syntaxi proxy „http://[IP/HOSTNAME]:[PORT]“</string>
   <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
   <string name="use_legacy_hashing_summary">Vynutit použití původního hashovacího algoritmu pro lepší kompatibilitu</string>
-  <string name="restart_on_wakeup_title">Restartovat při probuzení</string>
-  <string name="restart_on_wakeup_summary">Výchozí stav: povoleno. Pokud je tato funkce zakázána, může být skenování zařízení a složek opožděno kvůli výdrži baterie.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
   <!--Dialog shown before config import-->
