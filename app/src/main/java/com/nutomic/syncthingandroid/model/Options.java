@@ -22,7 +22,6 @@ public class Options {
     public String urURL;
     public boolean urPostInsecurely;
     public int urInitialDelayS;
-    public boolean restartOnWakeup;
     public int autoUpgradeIntervalH;
     public int keepTemporariesH;
     public boolean cacheIgnoredFiles;
