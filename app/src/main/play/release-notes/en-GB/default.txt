@@ -1,2 +1,4 @@
-* Update Syncthing to v1.23.7 ( https://github.com/syncthing/syncthing/releases/tag/v1.23.7 )
-* Android will not add device (invisible buttons) ( https://github.com/syncthing/syncthing-android/issues/1947 )
+* Update Syncthing to v1.24.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.24.0-rc.1 )
+* Fix status bar text and icons color in light mode ( fixes https://github.com/syncthing/syncthing-android/issues/1963 )
+* Remove non-functional restartOnWakeup from app settings ( fixes https://github.com/syncthing/syncthing-android/issues/1961 )
+
