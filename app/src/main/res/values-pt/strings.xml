@@ -304,8 +304,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="toast_invalid_http_proxy_address">O texto viola a sintaxe do proxy \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Usar verificação antiga</string>
   <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar um pacote de verificação antiga por questões de compatabilidade</string>
-  <string name="restart_on_wakeup_title">Reiniciar com o sinal para acordar</string>
-  <string name="restart_on_wakeup_summary">Predefinido: Activo. Desactivar esta funcionalidade pode resultar em atrasos nas pesquisas de pastas e nas ligações aos dispositivos, para poupar bateria.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Tem a certeza de que quer exportar a sua configuração? Ficheiros existentes serão sobrescritos.\n\nAVISO! Outras aplicações poderão ler a chave privada da localização da cópia de segurança e utilizá-la para descarregar/modificar os ficheiros sincronizados.</string>
   <!--Dialog shown before config import-->

@@ -305,8 +305,6 @@
   <string name="toast_invalid_http_proxy_address">Проверьте синтаксис: \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Использовать старый метод хеширования</string>
   <string name="use_legacy_hashing_summary">Принудительно использовать старый метод в целях совместимости</string>
-  <string name="restart_on_wakeup_title">Перезапуск при пробуждении</string>
-  <string name="restart_on_wakeup_summary">По умолчанию включено. Выключение этой функции может вызвать задержки при сканировании папок и переподключениях устройства для экономии заряда батареи.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию? Существующие файлы будут перезаписаны.\n\nВНИМАНИЕ! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы скачать или изменить синхронизируемые файлы.</string>
   <!--Dialog shown before config import-->

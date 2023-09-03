@@ -300,8 +300,6 @@
   <string name="toast_invalid_http_proxy_address">入力されたプロキシ設定は間違っています \'http://[IPアドレス/ホスト名]:[ポート番号]\'</string>
   <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
   <string name="use_legacy_hashing_summary">互換性のため従来のハッシュパッケージの使用を強制</string>
-  <string name="restart_on_wakeup_title">ウェイクアップ時に再起動</string>
-  <string name="restart_on_wakeup_summary">デフォルト: 有効。 この機能を無効にすると、バッテリを節約するためにフォルダーのスキャンとデバイスの再接続が遅くなることがあります。</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
   <!--Dialog shown before config import-->

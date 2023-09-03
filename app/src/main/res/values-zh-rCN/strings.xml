@@ -304,8 +304,6 @@
   <string name="toast_invalid_http_proxy_address">请按照 “http://[IP/主机名]:[端口]” 的格式输入代理地址</string>
   <string name="use_legacy_hashing_title">使用传统哈希</string>
   <string name="use_legacy_hashing_summary">强制 syncthing 使用传统哈希包出于兼容目的</string>
-  <string name="restart_on_wakeup_title">唤醒时重启</string>
-  <string name="restart_on_wakeup_summary">默认：启用。禁用该设置可推迟目录扫描和设备连接来节省电量。</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">您确定要导出您的配置？若您之前导出过配置，则文件会被当前导出的配置所覆盖。\n\n 警告！其他应用程序可以从您导出的配置文件中获取到您的密钥，并且可以通过它来下载或者修改您的同步文件。</string>
   <!--Dialog shown before config import-->

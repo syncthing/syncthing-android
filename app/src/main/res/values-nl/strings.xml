@@ -293,8 +293,6 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="toast_invalid_http_proxy_address">U heeft een onjuiste proxysyntax opgegeven \'http://[IP/HOSTNAAM]:[POORT]\'</string>
   <string name="use_legacy_hashing_title">Verouderde hashing gebruiken</string>
   <string name="use_legacy_hashing_summary">Dwing Syncthing om het verouderd hashingpakket te gebruiken om compatibiliteitsredenen</string>
-  <string name="restart_on_wakeup_title">Herstarten bij ontwaken</string>
-  <string name="restart_on_wakeup_summary">Dit is standaard ingeschakeld. Als u deze functie uitschakelt, kan dat ertoe leiden dat het scannen van mappen en verbinden met apparaten uitgesteld wordt om accu te besparen.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren? Bestaande bestanden worden overschreven.\n\WAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
   <!--Dialog shown before config import-->

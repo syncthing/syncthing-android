@@ -304,8 +304,6 @@ Si encuentras un problema, te pedimos que des aviso a través de GitHub.</string
   <string name="toast_invalid_http_proxy_address">Lo introducido infringe la sintaxis de proxy \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Utilizar método antiguo para generar los hash</string>
   <string name="use_legacy_hashing_summary">Forzar el uso de un paquete de hashing antiguo por compatibilidad</string>
-  <string name="restart_on_wakeup_title">Reiniciar al Despertar</string>
-  <string name="restart_on_wakeup_summary">Por defecto: Activado. Desactivar esta característica puede provocar que los escaneos de las carpetas y las conexiones de los dispositivos se retrasen para ahorrar batería.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">¿Realmente quieres exportar tu configuración? Se sobreescribirán los ficheros existentes.\n\n¡ADVERTENCIA! Otras aplicaciones podrían leer la clave privada localizada en la ubicación de la copia y usarla para descargar/modificar ficheros sincronizados.</string>
   <!--Dialog shown before config import-->

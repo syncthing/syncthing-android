@@ -301,8 +301,6 @@
   <string name="toast_invalid_http_proxy_address">Sarrerak proxyaren sintaxia urratzen du \'http://[IP/HOSTNAME]:[PORT]\'</string>
   <string name="use_legacy_hashing_title">Erabili era zaharra hashak sortzeko</string>
   <string name="use_legacy_hashing_summary">Behartu antzinako hashing pakete baten erabilera, bateragarritasunagatik</string>
-  <string name="restart_on_wakeup_title">Esnatzean berrabiarazi</string>
-  <string name="restart_on_wakeup_summary">Balio lehenetsia: gaitua. Funtzio honen desaktibazioa eskaneatze bidez lor daiteke, eta gailuaren birkonexioak atzeratu egiten dira bateria aurrezteko.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Ziur konfigurazioa esportatu nahi duzula? Dauden fitxategiak gainidatziko dira. Beste aplikazio batzuek kopiaren kokapenean dagoen gako pribatua irakur dezakete eta fitxategi sinkronizatuak deskargatzeko/aldatzeko erabili.</string>
   <!--Dialog shown before config import-->

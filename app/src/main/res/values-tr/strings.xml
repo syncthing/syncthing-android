@@ -303,8 +303,6 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="toast_invalid_http_proxy_address">Girdi, \'http://[IP/ANAMAKİNEADI]:[B.NOKTASI]\' proksi sözdizimini ihlal ediyor</string>
   <string name="use_legacy_hashing_title">Eski adresleme kullan</string>
   <string name="use_legacy_hashing_summary">Uyumluluk amacıyla eski adresleme paketini kullanmak için Syncthing\'i zorlayın</string>
-  <string name="restart_on_wakeup_title">Uyanmada yeniden başlat</string>
-  <string name="restart_on_wakeup_summary">Varsayılan: Etkinleştirildi. Bu özelliğin etkisizleştirilmesi, klasör taramalarına ve cihazın pilden tasarruf etmek için yeniden bağlanmasının gecikmesine neden olabilir.</string>
   <!--Dialog shown before config export-->
   <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz? Varolan dosyaların üzerine yazılacaktır.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
   <!--Dialog shown before config import-->
