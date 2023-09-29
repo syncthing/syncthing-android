@@ -9,7 +9,7 @@ on:
 
 env:
   # Our build metadata
-  BUILD_USER: builder
+  BUILD_USER: android-builder
   BUILD_HOST: github.syncthing.net
   # template var
   image: ghcr.io/syncthing/syncthing-android-builder
