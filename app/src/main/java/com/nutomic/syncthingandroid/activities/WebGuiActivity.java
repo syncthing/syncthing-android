@@ -104,10 +104,6 @@ public class WebGuiActivity extends StateDialogActivity
             }
         }
 
-        public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
-            handler.proceed(mConfig.getUserName(), mConfig.getApiKey());
-        }
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Uri uri = Uri.parse(url);
