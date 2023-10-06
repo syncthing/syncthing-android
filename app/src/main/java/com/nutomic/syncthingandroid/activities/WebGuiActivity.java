@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
@@ -43,6 +45,9 @@ import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -171,7 +176,11 @@ public class WebGuiActivity extends StateDialogActivity
             if (mWebView.getUrl() == null) {
                 mWebView.stopLoading();
                 setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
-                mWebView.loadUrl(getService().getWebGuiUrl().toString());
+                String credentials = mConfig.getUserName() + ":" + mConfig.getApiKey();
+                String b64Credentials = Base64.getEncoder().encodeToString(credentials.getBytes(UTF_8));
+                Map<String,String> headers = new HashMap<>();
+                headers.put("Authorization", "Basic " + b64Credentials);
+                mWebView.loadUrl(getService().getWebGuiUrl().toString(), headers);
             }
         }
     }
