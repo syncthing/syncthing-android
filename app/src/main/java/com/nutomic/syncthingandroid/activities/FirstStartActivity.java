@@ -194,6 +194,14 @@ public class FirstStartActivity extends Activity {
         return mPreferences.getBoolean(Constants.PREF_FIRST_START, true);
     }
 
+    private boolean isNotificationPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+        }
+        else return true;
+    }
+
+
     private boolean upgradedToApiLevel30() {
         if (mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, false)) {
             return true;
@@ -229,6 +237,9 @@ public class FirstStartActivity extends Activity {
         switch (slide) {
             case INTRO:
                 return !isFirstStart();
+            case NOTIFICATION:
+                return isNotificationPermissionGranted();
+
             case STORAGE:
                 return PermissionUtil.haveStoragePermission(this);
             case LOCATION:
@@ -299,7 +310,7 @@ public class FirstStartActivity extends Activity {
 
             switch (slides[position]) {
                 case NOTIFICATION:
-                    Button notificationBtn = (Button) view.findViewById(R.id.notification_btn);
+                    Button notificationBtn = (Button) view.findViewById(R.id.btn_notification);
                     notificationBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -402,6 +413,7 @@ public class FirstStartActivity extends Activity {
                 Constants.PermissionRequestType.LOCATION.ordinal());
     }
 
+    @TargetApi(33)
     private void requestNotificationPermission() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -409,8 +421,6 @@ public class FirstStartActivity extends Activity {
 
                 requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
 
-            } else {
-                // repeat the permission or open app details
             }
         }
 
