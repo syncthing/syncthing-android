@@ -14,6 +14,7 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,8 +30,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
@@ -53,7 +51,10 @@ import javax.inject.Inject;
 public class FirstStartActivity extends Activity {
 
     private enum Slide {
+
         INTRO(R.layout.activity_firststart_slide_intro),
+
+        NOTIFICATION(R.layout.actiivty_notification),
         STORAGE(R.layout.activity_firststart_slide_storage),
         LOCATION(R.layout.activity_firststart_slide_location),
         API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
@@ -63,7 +64,9 @@ public class FirstStartActivity extends Activity {
         Slide(int layout) {
             this.layout = layout;
         }
-    };
+    }
+
+    ;
 
     private static Slide[] slides = Slide.values();
     private static String TAG = "FirstStartActivity";
@@ -295,6 +298,16 @@ public class FirstStartActivity extends Activity {
             View view = layoutInflater.inflate(slides[position].layout, container, false);
 
             switch (slides[position]) {
+                case NOTIFICATION:
+                    Button notificationBtn = (Button) view.findViewById(R.id.notification_btn);
+                    notificationBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestNotificationPermission();
+                        }
+                    });
+                    break;
+
                 case INTRO:
                     break;
 
@@ -364,7 +377,7 @@ public class FirstStartActivity extends Activity {
          * so that back navigation works as expected.
          */
         if (mPreferences.getBoolean(Constants.PREF_START_INTO_WEB_GUI, false)) {
-            startActivities(new Intent[] {mainIntent, new Intent(this, WebGuiActivity.class)});
+            startActivities(new Intent[]{mainIntent, new Intent(this, WebGuiActivity.class)});
         } else {
             startActivity(mainIntent);
         }
@@ -387,6 +400,20 @@ public class FirstStartActivity extends Activity {
         ActivityCompat.requestPermissions(this,
                 PermissionUtil.getLocationPermissions(),
                 Constants.PermissionRequestType.LOCATION.ordinal());
+    }
+
+    private void requestNotificationPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+
+            } else {
+                // repeat the permission or open app details
+            }
+        }
+
     }
 
     private void requestStoragePermission() {
