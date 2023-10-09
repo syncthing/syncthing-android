@@ -194,11 +194,13 @@ public class FirstStartActivity extends Activity {
         return mPreferences.getBoolean(Constants.PREF_FIRST_START, true);
     }
 
+    @TargetApi(33)
     private boolean isNotificationPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return true;
+        } else {
             return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
         }
-        else return true;
     }
 
 
