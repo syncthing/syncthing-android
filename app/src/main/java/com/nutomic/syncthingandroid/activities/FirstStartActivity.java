@@ -54,10 +54,10 @@ public class FirstStartActivity extends Activity {
 
         INTRO(R.layout.activity_firststart_slide_intro),
 
-        NOTIFICATION(R.layout.activity_firststart_slide_notification),
         STORAGE(R.layout.activity_firststart_slide_storage),
         LOCATION(R.layout.activity_firststart_slide_location),
-        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
+        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30),
+        NOTIFICATION(R.layout.activity_firststart_slide_notification);
 
         public final int layout;
 
