@@ -54,7 +54,7 @@ public class FirstStartActivity extends Activity {
 
         INTRO(R.layout.activity_firststart_slide_intro),
 
-        NOTIFICATION(R.layout.actiivty_notification),
+        NOTIFICATION(R.layout.activity_firststart_slide_notification),
         STORAGE(R.layout.activity_firststart_slide_storage),
         LOCATION(R.layout.activity_firststart_slide_location),
         API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
@@ -198,9 +198,10 @@ public class FirstStartActivity extends Activity {
     private boolean isNotificationPermissionGranted() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             return true;
-        } else {
-            return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
         }
+
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+
     }
 
 
@@ -417,15 +418,9 @@ public class FirstStartActivity extends Activity {
 
     @TargetApi(33)
     private void requestNotificationPermission() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
-
-            }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
-
     }
 
     private void requestStoragePermission() {
