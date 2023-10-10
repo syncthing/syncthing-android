@@ -64,9 +64,7 @@ public class FirstStartActivity extends Activity {
         Slide(int layout) {
             this.layout = layout;
         }
-    }
-
-    ;
+    };
 
     private static Slide[] slides = Slide.values();
     private static String TAG = "FirstStartActivity";
@@ -240,9 +238,6 @@ public class FirstStartActivity extends Activity {
         switch (slide) {
             case INTRO:
                 return !isFirstStart();
-            case NOTIFICATION:
-                return isNotificationPermissionGranted();
-
             case STORAGE:
                 return PermissionUtil.haveStoragePermission(this);
             case LOCATION:
@@ -251,6 +246,9 @@ public class FirstStartActivity extends Activity {
                 // Skip if running as root, as that circumvents any Android FS restrictions.
                 return upgradedToApiLevel30()
                         || PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+            case NOTIFICATION:
+                return isNotificationPermissionGranted();
+
         }
         return false;
     }
@@ -312,16 +310,6 @@ public class FirstStartActivity extends Activity {
             View view = layoutInflater.inflate(slides[position].layout, container, false);
 
             switch (slides[position]) {
-                case NOTIFICATION:
-                    Button notificationBtn = (Button) view.findViewById(R.id.btn_notification);
-                    notificationBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            requestNotificationPermission();
-                        }
-                    });
-                    break;
-
                 case INTRO:
                     break;
 
@@ -352,6 +340,15 @@ public class FirstStartActivity extends Activity {
                         public void onClick(View v) {
                             upgradeToApiLevel30();
                             onBtnNextClick();
+                        }
+                    });
+                    break;
+                case NOTIFICATION:
+                    Button notificationBtn = (Button) view.findViewById(R.id.btn_notification);
+                    notificationBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestNotificationPermission();
                         }
                     });
                     break;
