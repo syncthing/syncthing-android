@@ -1,7 +1,5 @@
 package com.nutomic.syncthingandroid.activities;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,7 +13,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.util.ArrayMap;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
@@ -172,10 +169,8 @@ public class WebGuiActivity extends StateDialogActivity
             if (mWebView.getUrl() == null) {
                 mWebView.stopLoading();
                 setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
-                String credentials = mConfig.getUserName() + ":" + mConfig.getApiKey();
-                String b64Credentials = Base64.encodeToString(credentials.getBytes(UTF_8), Base64.NO_WRAP);
                 Map<String,String> headers = new HashMap<>();
-                headers.put("Authorization", "Basic " + b64Credentials);
+                headers.put("Authorization", "Bearer " + mConfig.getApiKey());
                 mWebView.loadUrl(getService().getWebGuiUrl().toString(), headers);
             }
         }
