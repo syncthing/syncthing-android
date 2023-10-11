@@ -14,6 +14,7 @@ import android.Manifest;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,8 +30,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +43,6 @@ import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
@@ -53,10 +51,13 @@ import javax.inject.Inject;
 public class FirstStartActivity extends Activity {
 
     private enum Slide {
+
         INTRO(R.layout.activity_firststart_slide_intro),
+
         STORAGE(R.layout.activity_firststart_slide_storage),
         LOCATION(R.layout.activity_firststart_slide_location),
-        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30);
+        API_LEVEL_30(R.layout.activity_firststart_slide_api_level_30),
+        NOTIFICATION(R.layout.activity_firststart_slide_notification);
 
         public final int layout;
 
@@ -191,6 +192,17 @@ public class FirstStartActivity extends Activity {
         return mPreferences.getBoolean(Constants.PREF_FIRST_START, true);
     }
 
+    @TargetApi(33)
+    private boolean isNotificationPermissionGranted() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return true;
+        }
+
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+
+    }
+
+
     private boolean upgradedToApiLevel30() {
         if (mPreferences.getBoolean(Constants.PREF_UPGRADED_TO_API_LEVEL_30, false)) {
             return true;
@@ -234,6 +246,9 @@ public class FirstStartActivity extends Activity {
                 // Skip if running as root, as that circumvents any Android FS restrictions.
                 return upgradedToApiLevel30()
                         || PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+            case NOTIFICATION:
+                return isNotificationPermissionGranted();
+
         }
         return false;
     }
@@ -328,6 +343,15 @@ public class FirstStartActivity extends Activity {
                         }
                     });
                     break;
+                case NOTIFICATION:
+                    Button notificationBtn = (Button) view.findViewById(R.id.btn_notification);
+                    notificationBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestNotificationPermission();
+                        }
+                    });
+                    break;
             }
 
             container.addView(view);
@@ -364,7 +388,7 @@ public class FirstStartActivity extends Activity {
          * so that back navigation works as expected.
          */
         if (mPreferences.getBoolean(Constants.PREF_START_INTO_WEB_GUI, false)) {
-            startActivities(new Intent[] {mainIntent, new Intent(this, WebGuiActivity.class)});
+            startActivities(new Intent[]{mainIntent, new Intent(this, WebGuiActivity.class)});
         } else {
             startActivity(mainIntent);
         }
@@ -387,6 +411,13 @@ public class FirstStartActivity extends Activity {
         ActivityCompat.requestPermissions(this,
                 PermissionUtil.getLocationPermissions(),
                 Constants.PermissionRequestType.LOCATION.ordinal());
+    }
+
+    @TargetApi(33)
+    private void requestNotificationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
     }
 
     private void requestStoragePermission() {
