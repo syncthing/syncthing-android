@@ -1,6 +1,2 @@
-* Update Syncthing to v1.25.0-rc.1 ( https://github.com/syncthing/syncthing/releases/tag/v1.25.0-rc.1 )
-* Fix local discovery ( #1628 )
-* Fix status bar text and icons color in light mode ( fixes #1963 )
-* Remove non-functional restartOnWakeup from app settings ( fixes #1961 )
-* Target Android SKD level 30 (Android 13 - Google play requirement)
-
+* Update Syncthing to v1.26.0-rc.1: https://github.com/syncthing/syncthing/releases/tag/v1.26.0-rc.1
+* App changelog: https://github.com/syncthing/syncthing-android/releases/tag/1.26.0-rc.1
