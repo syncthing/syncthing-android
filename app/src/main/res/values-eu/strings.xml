@@ -1,546 +1,546 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <string name="app_name">Syncthing</string>
-  <string name="app_description">Sinkronizazio aplikazio irekia, konfiantzazkoa eta zentralizatu gabea.</string>
-  <!--FirstStartActivity-->
-  <!--Title for dialog displayed on first start-->
-  <string name="welcome_title">Ongi etorri Androidentzako Syncthingera</string>
-  <!--Welcome wizard-->
-  <!--Slide 1-->
-  <string name="introduction">Sarrera</string>
-  <string name="welcome_text">Syncthing iturri irekiko fitxategiak sinkronizatzeko aplikazio bat da.\NDatuak beste dispositibo batzuekin partekatzeko, gailuen zerrendari gailuen identifikatzaile bakarrak gehitu behar dizkiozu. Ondoren, aukeratu zer karpeta partekatuko dituzun zein gailurekin.\nMesedez, adierazi Github bidez aurkitzen duzun edozein arazoren berri.</string>
-  <!--Slide 2-->
-  <string name="storage_permission_title">Biltegiratzeko baimena</string>
-  <string name="storage_permission_desc">Syncthing-ek zure biltegira sartu behar du fitxategiak sinkronizatzeko.</string>
-  <!--Slide 3-->
-  <string name="location_permission_title">Kokapen baimena (atzeko planoa)</string>
-  <string name="location_permission_desc">Sintetizazioa hautatutako Wi-Fi sareetan soilik sinkronizatzeko konfigura daiteke. Horretarako, unean konektatutako Wi-Fi SSIDa bilatu behar du, aplikazioa itxita dagoenean ere. Hori dela eta, atzealdeko kokapenera sartzeko baimena behar da. Informazio hau ez da zure kokapena bilatzeko erabiltzen. Biltegiratutako informazio bakarra zerrendan eskuz gehitzea aukeratu duzun Wi-Fi da. Ez da beste erabiltzaile daturik gordetzen. \ N \ n Funtzio hau erabili nahi baduzu, sakatu goiko botoia Syncthing-i beharrezko baimenak emateko. Bestela, urrats hau salta dezakezu.</string>
-  <!--Slide 4-->
-  <!--Generic texts used everywhere-->
-  <string name="back">Atzera</string>
-  <string name="cont">Jarraitu</string>
-  <string name="finish">Bukatu</string>
-  <string name="generic_example">Adibidea</string>
-  <string name="generic_error">Errorea</string>
-  <string name="grant_permission">Baimena ematea</string>
-  <string name="permission_granted">Baimena emanda</string>
-  <string name="accept">Onartu</string>
-  <string name="ignore">Ez ikusi egin</string>
-  <!--MainActivity-->
-  <!--Title of the exit app when running as a service confirmation dialog-->
-  <string name="dialog_exit_while_running_as_service_title">Baieztatu aplikazioa uzteko</string>
-  <string name="dialog_exit_while_running_as_service_message">Kontuan hartzeko: abiaraztean automatikoki hasteko konfiguratu duzu aplikazioa. Beraz, exekuzio baldintzak gainbegiratzen ditu eta edozein momentutan sinkronizatzen da bigarren mailan, baldintzak bat datozenean. Arazo larriak izanez gero bakarrik atera behar duzu eskuz. Bestela, \'Automatikoki hasi\' desgaitu konfigurazioan. Gailua berrabiarazi arte irten nahi duzu orain?</string>
-  <!--Title of the "add folder" menu action-->
-  <string name="add_folder">Karpeta gehitu</string>
-  <!--Title of the "share device id" menu action-->
-  <string name="share_device_id">Partekatu gailuaren IDa</string>
-  <!--Shown in the chooser dialog when sharing a Device ID-->
-  <string name="send_device_id_to">Bidali honi gailuaren IDa</string>
-  <string name="usage_reporting_dialog_title">Erabilera txosten anonimoak baimendu?</string>
-  <string name="usage_reporting_dialog_description">Erabilera-txosten zifratua egunero bidaltzen da. Plataforma ohikoenak, karpeten tamaina eta aplikazioaren bertsioak monitorizatzeko erabiltzen da. Txostenaren datu guztiak aldatzen badira, mezu hau agertuko zaizu berriro.\n\nEstatistika globalak jendaurrean eskuragarri daude https://data.syncthing.net gunean.</string>
-  <string name="yes">Bai</string>
-  <string name="no">Ez</string>
-  <string name="open_website">Web gune irekia</string>
-  <string name="toast_write_storage_permission_required">Aplikazio honek biltegiratze  sistema idazteko baimena behar du</string>
-  <string name="device_rejected"> \"%1$s\" gailuak konektatu nahi du</string>
-  <string name="folder_rejected">\"%1$s\" Gailuak \"%2$s\" karpeta partekatu nahi du</string>
-  <string name="dialog_disable_battery_optimization_title">Bateria optimizatzea</string>
-  <string name="dialog_disable_battery_optimization_message">Androidek sinkronizazioa eten dezake denbora bat igarota. Hori saihesteko, bateriaren optimizazioa desgaitu ezazu.\n\ngailu batzuek aplikazio gehigarriak dituzte instalatuta zereginak amaitzeko. Era berean, Syncthing gehitu beharko zenioke zure zerrenda zuriari.</string>
-  <string name="dialog_disable_battery_optimization_later">Geroago</string>
-  <string name="dialog_disable_battery_optimization_dont_show_again">Ez erakutsi berriro</string>
-  <string name="dialog_disable_battery_optimization_turn_off">Desgaitu Syncthing-entzat</string>
-  <string name="dialog_disable_battery_optimizations_not_supported">Zure gailuak ez du onartzen bateria-optimizazioak desaktibatzea</string>
-  <!--StateDialogActivity-->
-  <!--Text for FoldersFragment and DevicesFragment loading view-->
-  <string name="api_loading">Kargatzen ...</string>
-  <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-  <string name="web_gui_creating_key">Gako seguruak sortzen. Horrek denbora pixka bat eraman dezake.</string>
-  <string name="syncthing_loading_slow_message">Sinkronizazioak denbora asko behar du kargatzeko. Erabili erregistroak edozein errore egiaztatzeko.</string>
-  <!--FoldersFragment-->
-  <string name="folders_fragment_title">Karpetak</string>
-  <!--Shown if no folders exist-->
-  <string name="folder_list_empty">Ez da karpetarik aurkitu</string>
-  <!--Format string for folder file count-->
-  <plurals name="files">
-    <item quantity="one">%1$d / %2$d Fitxategia</item>
-    <item quantity="other">%1$d / %2$d Fitxategiak</item>
-  </plurals>
-  <string name="override_changes">Ezeztatu aldaketak</string>
-  <string name="open_file_manager">Fitxategi-administratzaile irekia</string>
-  <string name="toast_no_file_manager">Ez da fitxategien kudeatzaile bateragarririk aurkitu</string>
-  <!--DevicesFragment-->
-  <string name="devices_fragment_title">Gailuak</string>
-  <!--Shown if no devices exist-->
-  <string name="devices_list_empty">Ez da gailurik aurkitu</string>
-  <!--Indicates that a folder is fully synced to the local device-->
-  <string name="device_up_to_date">Eguneratua</string>
-  <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
-  <string name="device_syncing">Sinkronizatzen (%1$d%%)</string>
-  <!--Indicates that there is no connection to the device-->
-  <string name="device_disconnected">Deskonektatuta</string>
-  <!--Indicates that the device is paused and does not sync-->
-  <string name="device_paused">Geldituta</string>
-  <!--Indicates that the device connection is unknown-->
-  <string name="device_state_unknown">Ezezaguna</string>
-  <!--Title for current download rate-->
-  <string name="download_title">Deskarga</string>
-  <!--Title for current upload rate-->
-  <string name="upload_title">Igo</string>
-  <!--StatusFragment-->
-  <string name="status_fragment_title">Egoera</string>
-  <string name="syncthing_starting">Syncthing hasita dago.</string>
-  <string name="syncthing_running">Syncthing martxan dago.</string>
-  <string name="syncthing_not_running">Syncthing ez dago martxan.</string>
-  <string name="syncthing_has_crashed">Syncthing-ek huts egin du.</string>
-  <!--DrawerFragment-->
-  <!--Same as download_title with a colon and space appended-->
-  <string name="download_title_colon">Deskarga:\u0020</string>
-  <!--Same as upload_title with a colon and space appended-->
-  <string name="upload_title_colon">Igo:\u0020</string>
-  <!--Title for current CPU usage-->
-  <string name="cpu_usage">CPU Erabilera</string>
-  <!--Title for current RAM usage-->
-  <string name="ram_usage">RAM erabilera</string>
-  <!--Title for announce server status-->
-  <string name="announce_server">Bilaketa globaleko zerbitzaria</string>
-  <string name="restart">Hasi berriro</string>
-  <string name="dialog_confirm_restart">Syncthing berriro hastea nahi duzu?</string>
-  <!--FolderActivity-->
-  <!--Setting title-->
-  <string name="folder_id">Karpetaren ID</string>
-  <!--Setting title-->
-  <string name="folder_label">Karpetaren etiketa</string>
-  <!--Setting title-->
-  <string name="directory">Direktorioa</string>
-  <!--Setting title and description-->
-  <string name="folder_fileWatcher">Adi aldaketei</string>
-  <string name="folder_fileWatcherDescription">Artxiboetako aldaketak jakinarazteko eskatzen dio sistema eragileari. Ezgaituta badago, eskaneatu egiten da berriz, orduka.</string>
-  <!--Setting title-->
-  <string name="folder_pause">Gelditu karpeta</string>
-  <!--Setting title-->
-  <string name="devices">Gailuak</string>
-  <!--Setting title-->
-  <string name="keep_versions">Gorde bertsioak</string>
-  <!--Setting title-->
-  <string name="delete_folder">Ezabatu karpeta</string>
-  <!--Title for FolderSettingsFragment in create mode-->
-  <string name="create_folder">Sortu karpeta</string>
-  <!--Title for FolderSettingsFragment in edit mode-->
-  <string name="edit_folder">Editatu karpeta</string>
-  <!--Menu item to confirm folder creation-->
-  <string name="create">Sortu</string>
-  <!--Dialog shown when attempting to remove a folder-->
-  <string name="remove_folder_confirm">Benetan baztertu nahi duzu karpeta hau Syncthing-etik?</string>
-  <!--Toast shown when trying to create a folder with an empty ID-->
-  <string name="folder_id_required">Karpeta ID-a ez du hutsik egon behar</string>
-  <!--Toast shown when trying to create a folder with an empty path-->
-  <string name="folder_path_required">Karpetarako bideak ez du hutsik egon behar</string>
-  <string name="dialog_discard_changes">Baztertu zure aldaketak?</string>
-  <!--Summary shown if we only have readonly access to the folder path-->
-  <string name="folder_path_readonly">Zure Android bertsioak bakarrik ematen dio Syncthingi aukeratutako karpeta irakurtzeko aukera.</string>
-  <!--Summary shown if we only have readwrite access to the folder path-->
-  <string name="folder_path_readwrite">Zure Android bertsioak, Syncthingi, aukeratutako karpeta irakurtzeko eta idazteko sarbidea ematen dio.</string>
-  <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
-  <string name="toast_invalid_folder_selected">Sentitzen dut. Aukeratutako karpeta ezin da erabili. Aukeratu barneko edo kanpoko biltegiratzean kokatutako karpeta bat.</string>
-  <string name="ignore_patterns">Ezikusi ereduak</string>
-  <string name="create_ignore_file_error">Ezin izan da ezikusi fitxategia sortu. Direktorioa idatzi daiteke?</string>
-  <string name="edit_ignore_file_error">Ez da testu editorerik aurkitu</string>
-  <!--DeviceActivity-->
-  <!--Setting title-->
-  <string name="device_id">Gailuaren IDa</string>
-  <!--Setting title-->
-  <string name="name">Izena</string>
-  <!--Setting title-->
-  <string name="addresses">Helbideak</string>
-  <!--Setting title-->
-  <string name="current_address">Oraingo helbidea</string>
-  <!--Setting title-->
-  <string name="compression">Konpresioa</string>
-  <!--Strings representing compression options-->
-  <string-array name="compress_entries">
-    <item>Inoiz ez</item>
-    <item>Metadatuak</item>
-    <item>Beti</item>
-  </string-array>
-  <!--Setting title-->
-  <string name="introducer">Sartzailea</string>
-  <!--Setting title-->
-  <string name="pause_device">Gelditu gailua</string>
-  <!--ActionBar item-->
-  <string name="delete_device">Ezabatu gailua</string>
-  <string name="add_device">Gehitu gailua</string>
-  <!--Menu item to confirm adding a device-->
-  <string name="add">Gehitu</string>
-  <!--Title for DeviceSettingsFragment in edit mode-->
-  <string name="edit_device">Editatu gailua</string>
-  <!--Dialog shown when attempting to remove a device-->
-  <string name="remove_device_confirm">Benetan baztertu nahi duzu gailu hau?</string>
-  <!--Toast shown when trying to create a device with an empty ID-->
-  <string name="device_id_required">Gailuaren ID-a ez du hutsik egon behar</string>
-  <!--Content description for device ID qr code icon-->
-  <string name="scan_qr_code_description">Eskaneatu QR kodea</string>
-  <!--Toast show if we could not get root permissions-->
-  <string name="toast_root_denied">Ez dira root baimenak lortu</string>
-  <!--WebGuiActivity-->
-  <!--Title of the web gui activity-->
-  <string name="web_gui_title">Web interfaze grafikoa</string>
-  <!--Text for WebGuiActivity loading view-->
-  <string name="web_gui_loading">Interfaze grafikoaren zain</string>
-  <!--SettingsFragment-->
-  <string name="settings_title">Ezarpenak</string>
-  <string name="category_run_conditions">Gauzatzeko baldintzak</string>
-  <string name="category_behaviour">Portaera</string>
-  <string name="category_syncthing_options">Syncthing aukerak</string>
-  <string name="category_backup">Segurtasun kopia</string>
-  <string name="category_debug">Arazketa</string>
-  <string name="category_experimental">Esperimentala</string>
-  <!--Preference screen - Run conditions-->
-  <string name="run_conditions_summary">Erabili aukera hauek Syncthing noiz exekutatuko den erabakitzeko.</string>
-  <string name="run_on_mobile_data_title">Exekutatu datu mugikorrak erabiliz</string>
-  <string name="run_on_mobile_data_summary">Gailua datu mugikorren sarearen bidez konektatuta dagoenean exekutatu. Oharra: horrek operadore mugikorraren datu-planeko datu asko kontsumi ditzake datu-kopuru handiak sinkronizatzen baditu.</string>
-  <string name="run_on_wifi_title">Exekutatu Wi-Fi bidez</string>
-  <string name="run_on_wifi_summary">Exekutatu gailua Wi-Fi sare batera konektatuta dagoenean.</string>
-  <string name="run_on_metered_wifi_title">Exekutatu Wi-Fi neurtuaren bidez</string>
-  <string name="run_on_metered_wifi_summary">Exekutatu gailua Wi-Fi sare neurtu batera konektatuta dagoenean, adibidez, hotspot bat edo sare lotu bat. Adi: horrek bere datu planaren zati handi bat kontsumi dezake, datu asko sinkronizatzen baditu.</string>
-  <string name="run_on_whitelisted_wifi_title">Exekutatu zehaztutako Wi-Fi sareetan</string>
-  <string name="run_on_whitelisted_wifi_networks">Exekutatu bakarrik aukeratutako WI-FI sareetan: %1$s</string>
-  <string name="run_on_all_wifi_networks">Exekutatu Wi-Fi sare guztietan.</string>
-  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Aktibatu Wi-Fia sareak hautatzeko.</string>
-  <string name="sync_only_wifi_ssids_connect_to_wifi">Konektatu Wi-Fi batera zerrendan gehitzeko.</string>
-  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Kokapenari baimena eman behar diozu funtzio hori erabiltzeko.</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Baimena beharrezkoa da</string>
-  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1etik aurrera, Wi-Fi konexioaren izena irakurri ahal izateko kokalekurako sarbidea behar da. Bakarrik baimen hori ematen baduzu  erabil dezakezu funtzio hori.</string>
-  <string name="power_source_title">Exekutatu gailua honek elikatuta dagoenean</string>
-  <string-array name="power_source_entries">
-    <item>AC eta bateria.</item>
-    <item>AC indarra.</item>
-    <item>Bateria indarra.</item>
-  </string-array>
-  <string name="respect_battery_saving_title">Errespetatu Androiden bateria aurrezteko konfigurazioa</string>
-  <string name="respect_battery_saving_summary">Desgaitu Syncthing  bateria aurreztea aktibo badago.</string>
-  <string name="respect_master_sync_title">Errespetatu \"sinkronizazio automatikoko datuak\" Androiden konfigurazioa</string>
-  <string name="respect_master_sync_summary">Desaktibatu sinkronizazioa  \"sinkronizazio automatikoko datuak\" konfigurazio azkarreko mosaikoa desaktibatuta dagoenean.</string>
-  <string name="run_in_flight_mode_title">Exekutatu gailua hegaldi moduan dagoenean</string>
-  <string name="run_in_flight_mode_summary">Gaitu zure gailuak hegaldi moduan eskuzko Wi-Fi  konexioak detektatzeko arazoak baditu.</string>
-  <string name="service_settings_title">Zerbitzuaren ezarpenak</string>
-  <string name="service_settings_summary">Syncthing zerbitzu gisa exekutatu. Gehitu jakinarazpen iraunkor bat Androidek bertan behera utz ez dezan. Aukera hori markatzean, sinkronizazioa hasten da sistema eragilea abiaraztean.</string>
-  <string name="run_as_background_service">Hasi zerbitzua automatikoki abiaraztean</string>
-  <!--Preferences - Behaviour-->
-  <string name="advanced_folder_picker">Erabili karpetaren hautaketa aurreratua</string>
-  <string name="advanced_folder_picker_summary">Aukeratu gailuaren karpetaren bat sinkronizatzeko</string>
-  <string name="use_root_title">ExekutatuSyncthing supererabiltzaile gisa</string>
-  <string name="use_root_summary">Syncthingekin eta zure gailuarekin arazoak sor ditzakeen ezaugarri ezegonkor bat da hau. Arazorik balego, Syncthing berrinstalatu beharko zenuke.</string>
-  <string name="notification_type_title">Jakinarazpena</string>
-  <string name="notification_type_summary">Aukeratu jakinarazpen mota</string>
-  <string-array name="notification_type_entries">
-    <item>Arrunta</item>
-    <item>Lehentasun txikia</item>
-    <item>Bat ere ez</item>
-  </string-array>
-  <string name="preference_language_title">Hizkuntza</string>
-  <string name="preference_language_summary">Aldatu aplikazioaren hizkuntza</string>
-  <string name="start_into_web_gui_title">Hasi zuzenean GUI webean</string>
-  <string name="start_into_web_gui_summary">Aplikazioa hastean, ireki GUI weba pantaila nagusiaren ordez</string>
-  <string name="preference_theme_title">Gaia</string>
-  <string name="preference_theme_follow_system">Jarraitu sistema</string>
-  <string name="preference_theme_option_light">Argia</string>
-  <string name="preference_theme_option_dark">Iluna</string>
-  <string name="pref_language_default">Hizkuntza lehenetsia</string>
-  <string-array name="folder_types">
-    <item>Bidali &amp; jaso</item>
-    <item>Bidali bakarrik</item>
-    <item>Jaso bakarrik</item>
-  </string-array>
-  <string-array name="pull_order_types">
-    <item>Ausaz</item>
-    <item>Alfabetikoki</item>
-    <item>Lehenengo txikiena</item>
-    <item>Lehenengo handiena</item>
-    <item>Lehenengo zaharrena</item>
-    <item>Lehenengo berriena</item>
-  </string-array>
-  <string-array name="versioning_types">
-    <item>Bat ere ez</item>
-    <item>Zakarrontzia</item>
-    <item>Sinplea</item>
-    <item>Mailakatua</item>
-    <item>Kanpokoa</item>
-  </string-array>
-  <string name="device_name">Gailuaren izena</string>
-  <string name="listen_address">Sinkronizazio-protokoloa entzuteko helbideak</string>
-  <string name="max_recv_kbps">Sarrera trafikoaren muga (KiB/s)</string>
-  <string name="max_send_kbps"> Irteera trafikoaren muga (KiB/s)</string>
-  <string name="global_announce_enabled">Aurkikuntza globala</string>
-  <string name="local_announce_enabled">Aurkikuntza lokala</string>
-  <string name="enable_nat_traversal">Gaitu NAT Traversal</string>
-  <string name="global_announce_server">Aurkikuntza zerbitzari globalak</string>
-  <string name="enable_relaying">Gaitu transmisioa</string>
-  <string name="usage_reporting">Erabilera txosten anonimoa</string>
-  <string name="gui_address">Interfazearen entzuteko helbideak </string>
-  <!--Titles for the preference to undo ignored devices and folders-->
-  <string name="undo_ignored_devices_folders_title">Desegin gailuak eta karpetak alde batera utzita</string>
-  <string name="undo_ignored_devices_folders_question">Honek gailuei eta karpetei jaramonik ez egiteko aurreko erabakiak desegingo ditu. Aurrera?</string>
-  <string name="undo_ignored_devices_folders_done">Erabaki deseginak, arrakastaz.</string>
-  <string name="export_config">Esportatu konfigurazioa</string>
-  <!--Toast after entering invalid integer value-->
-  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Sarrera-balioa ez da baliozkoa. Mesedez, sartu %1$d eta %2$d arteko balioa.</string>
-  <!--Experimental options-->
-  <string name="use_proxy">Konektatu proxy bidez</string>
-  <string name="do_not_use_proxy">Ez dago konfiguratutako proxyrik</string>
-  <string name="keep_wakelock_while_binary_running">Eduki CPUa ekinean Syncthing lanean den bitartean</string>
-  <string name="keep_wakelock_while_binary_running_summary">Erabili doikuntza hau bat-bateko deskonexioak badituzu bateriarekin funtzionatzen duzun bitartean. Horrek bateriaren kontsumoa handitzea ekarriko du.</string>
-  <string name="use_tor_title">Erabili Tor</string>
-  <string name="use_tor_summary">Bultzatu trafiko guztia Tor bidez pribatutasun handiagoa izateko. Orbot behar du. Proxy aukerak desaktibatzen ditu.</string>
-  <string name="socks_proxy_address_title">SOCKS5 proxy</string>
-  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
-  <!--Toast after entering invalid socks proxy address-->
-  <string name="toast_invalid_socks_proxy_address">Sarrerak proxyaren sintaxia urratzen du \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
-  <string name="http_proxy_address_title">HTTP(S) proxy</string>
-  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
-  <!--Toast after entering invalid http proxy address-->
-  <string name="toast_invalid_http_proxy_address">Sarrerak proxyaren sintaxia urratzen du \'http://[IP/HOSTNAME]:[PORT]\'</string>
-  <string name="use_legacy_hashing_title">Erabili era zaharra hashak sortzeko</string>
-  <string name="use_legacy_hashing_summary">Behartu antzinako hashing pakete baten erabilera, bateragarritasunagatik</string>
-  <!--Dialog shown before config export-->
-  <string name="dialog_confirm_export">Ziur konfigurazioa esportatu nahi duzula? Dauden fitxategiak gainidatziko dira. Beste aplikazio batzuek kopiaren kokapenean dagoen gako pribatua irakur dezakete eta fitxategi sinkronizatuak deskargatzeko/aldatzeko erabili.</string>
-  <!--Dialog shown before config import-->
-  <string name="dialog_confirm_import">Ziur konfigurazio berri bat inportatu nahi duzula? Dauden artxiboak gainidatziko dira.</string>
-  <!--Toast shown after config was successfully exported-->
-  <string name="config_export_successful">Konfigurazioa hona bidali da %1$s</string>
-  <string name="import_config">Inportatu konfigurazioa</string>
-  <!--Toast shown after config was successfully imported-->
-  <string name="config_imported_successful">Konfigurazioa inportatu da</string>
-  <!--Toast shown after config was successfully imported-->
-  <string name="config_import_failed">Konfigurazioaren inportazioak huts egin du, ziurtatu fitxategiak hor daudela %1$s</string>
-  <!--Title for the preference to set STTRACE parameters-->
-  <string name="sttrace_title">STTRACE aukerak</string>
-  <string name="environment_variables">Ingurunearen aldagaiak</string>
-  <!--Toast after entering invalid STTRACE params-->
-  <string name="toast_invalid_environment_variables">Inguruneko aldagaien kate-balioa ez da baliozkoa</string>
-  <!--Title for the preference to reset Syncthing indexes-->
-  <string name="st_reset_database_title">Datu basea berrezarri</string>
-  <!--Syncthing was reset-->
-  <string name="st_reset_database_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
+    <string name="app_name">Syncthing</string>
+    <string name="app_description">Sinkronizazio aplikazio irekia, konfiantzazkoa eta zentralizatu gabea.</string>
+    <!--FirstStartActivity-->
+    <!--Title for dialog displayed on first start-->
+    <string name="welcome_title">Ongi etorri Androidentzako Syncthingera</string>
+    <!--Welcome wizard-->
+    <!--Slide 1-->
+    <string name="introduction">Sarrera</string>
+    <string name="welcome_text">Syncthing iturri irekiko fitxategiak sinkronizatzeko aplikazio bat da.\NDatuak beste dispositibo batzuekin partekatzeko, gailuen zerrendari gailuen identifikatzaile bakarrak gehitu behar dizkiozu. Ondoren, aukeratu zer karpeta partekatuko dituzun zein gailurekin.\nMesedez, adierazi Github bidez aurkitzen duzun edozein arazoren berri.</string>
+    <!--Slide 2-->
+    <string name="storage_permission_title">Biltegiratzeko baimena</string>
+    <string name="storage_permission_desc">Syncthing-ek zure biltegira sartu behar du fitxategiak sinkronizatzeko.</string>
+    <!--Slide 3-->
+    <string name="location_permission_title">Kokapen baimena (atzeko planoa)</string>
+    <string name="location_permission_desc">Sintetizazioa hautatutako Wi-Fi sareetan soilik sinkronizatzeko konfigura daiteke. Horretarako, unean konektatutako Wi-Fi SSIDa bilatu behar du, aplikazioa itxita dagoenean ere. Hori dela eta, atzealdeko kokapenera sartzeko baimena behar da. Informazio hau ez da zure kokapena bilatzeko erabiltzen. Biltegiratutako informazio bakarra zerrendan eskuz gehitzea aukeratu duzun Wi-Fi da. Ez da beste erabiltzaile daturik gordetzen. \ N \ n Funtzio hau erabili nahi baduzu, sakatu goiko botoia Syncthing-i beharrezko baimenak emateko. Bestela, urrats hau salta dezakezu.</string>
+    <!--Slide 4-->
+    <!--Generic texts used everywhere-->
+    <string name="back">Atzera</string>
+    <string name="cont">Jarraitu</string>
+    <string name="finish">Bukatu</string>
+    <string name="generic_example">Adibidea</string>
+    <string name="generic_error">Errorea</string>
+    <string name="grant_permission">Baimena ematea</string>
+    <string name="permission_granted">Baimena emanda</string>
+    <string name="accept">Onartu</string>
+    <string name="ignore">Ez ikusi egin</string>
+    <!--MainActivity-->
+    <!--Title of the exit app when running as a service confirmation dialog-->
+    <string name="dialog_exit_while_running_as_service_title">Baieztatu aplikazioa uzteko</string>
+    <string name="dialog_exit_while_running_as_service_message">Kontuan hartzeko: abiaraztean automatikoki hasteko konfiguratu duzu aplikazioa. Beraz, exekuzio baldintzak gainbegiratzen ditu eta edozein momentutan sinkronizatzen da bigarren mailan, baldintzak bat datozenean. Arazo larriak izanez gero bakarrik atera behar duzu eskuz. Bestela, \'Automatikoki hasi\' desgaitu konfigurazioan. Gailua berrabiarazi arte irten nahi duzu orain?</string>
+    <!--Title of the "add folder" menu action-->
+    <string name="add_folder">Karpeta gehitu</string>
+    <!--Title of the "share device id" menu action-->
+    <string name="share_device_id">Partekatu gailuaren IDa</string>
+    <!--Shown in the chooser dialog when sharing a Device ID-->
+    <string name="send_device_id_to">Bidali honi gailuaren IDa</string>
+    <string name="usage_reporting_dialog_title">Erabilera txosten anonimoak baimendu?</string>
+    <string name="usage_reporting_dialog_description">Erabilera-txosten zifratua egunero bidaltzen da. Plataforma ohikoenak, karpeten tamaina eta aplikazioaren bertsioak monitorizatzeko erabiltzen da. Txostenaren datu guztiak aldatzen badira, mezu hau agertuko zaizu berriro.\n\nEstatistika globalak jendaurrean eskuragarri daude https://data.syncthing.net gunean.</string>
+    <string name="yes">Bai</string>
+    <string name="no">Ez</string>
+    <string name="open_website">Web gune irekia</string>
+    <string name="toast_write_storage_permission_required">Aplikazio honek biltegiratze  sistema idazteko baimena behar du</string>
+    <string name="device_rejected"> \"%1$s\" gailuak konektatu nahi du</string>
+    <string name="folder_rejected">\"%1$s\" Gailuak \"%2$s\" karpeta partekatu nahi du</string>
+    <string name="dialog_disable_battery_optimization_title">Bateria optimizatzea</string>
+    <string name="dialog_disable_battery_optimization_message">Androidek sinkronizazioa eten dezake denbora bat igarota. Hori saihesteko, bateriaren optimizazioa desgaitu ezazu.\n\ngailu batzuek aplikazio gehigarriak dituzte instalatuta zereginak amaitzeko. Era berean, Syncthing gehitu beharko zenioke zure zerrenda zuriari.</string>
+    <string name="dialog_disable_battery_optimization_later">Geroago</string>
+    <string name="dialog_disable_battery_optimization_dont_show_again">Ez erakutsi berriro</string>
+    <string name="dialog_disable_battery_optimization_turn_off">Desgaitu Syncthing-entzat</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">Zure gailuak ez du onartzen bateria-optimizazioak desaktibatzea</string>
+    <!--StateDialogActivity-->
+    <!--Text for FoldersFragment and DevicesFragment loading view-->
+    <string name="api_loading">Kargatzen ...</string>
+    <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
+    <string name="web_gui_creating_key">Gako seguruak sortzen. Horrek denbora pixka bat eraman dezake.</string>
+    <string name="syncthing_loading_slow_message">Sinkronizazioak denbora asko behar du kargatzeko. Erabili erregistroak edozein errore egiaztatzeko.</string>
+    <!--FoldersFragment-->
+    <string name="folders_fragment_title">Karpetak</string>
+    <!--Shown if no folders exist-->
+    <string name="folder_list_empty">Ez da karpetarik aurkitu</string>
+    <!--Format string for folder file count-->
+    <plurals name="files">
+        <item quantity="one">%1$d / %2$d Fitxategia</item>
+        <item quantity="other">%1$d / %2$d Fitxategiak</item>
+    </plurals>
+    <string name="override_changes">Ezeztatu aldaketak</string>
+    <string name="open_file_manager">Fitxategi-administratzaile irekia</string>
+    <string name="toast_no_file_manager">Ez da fitxategien kudeatzaile bateragarririk aurkitu</string>
+    <!--DevicesFragment-->
+    <string name="devices_fragment_title">Gailuak</string>
+    <!--Shown if no devices exist-->
+    <string name="devices_list_empty">Ez da gailurik aurkitu</string>
+    <!--Indicates that a folder is fully synced to the local device-->
+    <string name="device_up_to_date">Eguneratua</string>
+    <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
+    <string name="device_syncing">Sinkronizatzen (%1$d%%)</string>
+    <!--Indicates that there is no connection to the device-->
+    <string name="device_disconnected">Deskonektatuta</string>
+    <!--Indicates that the device is paused and does not sync-->
+    <string name="device_paused">Geldituta</string>
+    <!--Indicates that the device connection is unknown-->
+    <string name="device_state_unknown">Ezezaguna</string>
+    <!--Title for current download rate-->
+    <string name="download_title">Deskarga</string>
+    <!--Title for current upload rate-->
+    <string name="upload_title">Igo</string>
+    <!--StatusFragment-->
+    <string name="status_fragment_title">Egoera</string>
+    <string name="syncthing_starting">Syncthing hasita dago.</string>
+    <string name="syncthing_running">Syncthing martxan dago.</string>
+    <string name="syncthing_not_running">Syncthing ez dago martxan.</string>
+    <string name="syncthing_has_crashed">Syncthing-ek huts egin du.</string>
+    <!--DrawerFragment-->
+    <!--Same as download_title with a colon and space appended-->
+    <string name="download_title_colon">Deskarga:\u0020</string>
+    <!--Same as upload_title with a colon and space appended-->
+    <string name="upload_title_colon">Igo:\u0020</string>
+    <!--Title for current CPU usage-->
+    <string name="cpu_usage">CPU Erabilera</string>
+    <!--Title for current RAM usage-->
+    <string name="ram_usage">RAM erabilera</string>
+    <!--Title for announce server status-->
+    <string name="announce_server">Bilaketa globaleko zerbitzaria</string>
+    <string name="restart">Hasi berriro</string>
+    <string name="dialog_confirm_restart">Syncthing berriro hastea nahi duzu?</string>
+    <!--FolderActivity-->
+    <!--Setting title-->
+    <string name="folder_id">Karpetaren ID</string>
+    <!--Setting title-->
+    <string name="folder_label">Karpetaren etiketa</string>
+    <!--Setting title-->
+    <string name="directory">Direktorioa</string>
+    <!--Setting title and description-->
+    <string name="folder_fileWatcher">Adi aldaketei</string>
+    <string name="folder_fileWatcherDescription">Artxiboetako aldaketak jakinarazteko eskatzen dio sistema eragileari. Ezgaituta badago, eskaneatu egiten da berriz, orduka.</string>
+    <!--Setting title-->
+    <string name="folder_pause">Gelditu karpeta</string>
+    <!--Setting title-->
+    <string name="devices">Gailuak</string>
+    <!--Setting title-->
+    <string name="keep_versions">Gorde bertsioak</string>
+    <!--Setting title-->
+    <string name="delete_folder">Ezabatu karpeta</string>
+    <!--Title for FolderSettingsFragment in create mode-->
+    <string name="create_folder">Sortu karpeta</string>
+    <!--Title for FolderSettingsFragment in edit mode-->
+    <string name="edit_folder">Editatu karpeta</string>
+    <!--Menu item to confirm folder creation-->
+    <string name="create">Sortu</string>
+    <!--Dialog shown when attempting to remove a folder-->
+    <string name="remove_folder_confirm">Benetan baztertu nahi duzu karpeta hau Syncthing-etik?</string>
+    <!--Toast shown when trying to create a folder with an empty ID-->
+    <string name="folder_id_required">Karpeta ID-a ez du hutsik egon behar</string>
+    <!--Toast shown when trying to create a folder with an empty path-->
+    <string name="folder_path_required">Karpetarako bideak ez du hutsik egon behar</string>
+    <string name="dialog_discard_changes">Baztertu zure aldaketak?</string>
+    <!--Summary shown if we only have readonly access to the folder path-->
+    <string name="folder_path_readonly">Zure Android bertsioak bakarrik ematen dio Syncthingi aukeratutako karpeta irakurtzeko aukera.</string>
+    <!--Summary shown if we only have readwrite access to the folder path-->
+    <string name="folder_path_readwrite">Zure Android bertsioak, Syncthingi, aukeratutako karpeta irakurtzeko eta idazteko sarbidea ematen dio.</string>
+    <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+    <string name="toast_invalid_folder_selected">Sentitzen dut. Aukeratutako karpeta ezin da erabili. Aukeratu barneko edo kanpoko biltegiratzean kokatutako karpeta bat.</string>
+    <string name="ignore_patterns">Ezikusi ereduak</string>
+    <string name="create_ignore_file_error">Ezin izan da ezikusi fitxategia sortu. Direktorioa idatzi daiteke?</string>
+    <string name="edit_ignore_file_error">Ez da testu editorerik aurkitu</string>
+    <!--DeviceActivity-->
+    <!--Setting title-->
+    <string name="device_id">Gailuaren IDa</string>
+    <!--Setting title-->
+    <string name="name">Izena</string>
+    <!--Setting title-->
+    <string name="addresses">Helbideak</string>
+    <!--Setting title-->
+    <string name="current_address">Oraingo helbidea</string>
+    <!--Setting title-->
+    <string name="compression">Konpresioa</string>
+    <!--Strings representing compression options-->
+    <string-array name="compress_entries">
+        <item>Inoiz ez</item>
+        <item>Metadatuak</item>
+        <item>Beti</item>
+    </string-array>
+    <!--Setting title-->
+    <string name="introducer">Sartzailea</string>
+    <!--Setting title-->
+    <string name="pause_device">Gelditu gailua</string>
+    <!--ActionBar item-->
+    <string name="delete_device">Ezabatu gailua</string>
+    <string name="add_device">Gehitu gailua</string>
+    <!--Menu item to confirm adding a device-->
+    <string name="add">Gehitu</string>
+    <!--Title for DeviceSettingsFragment in edit mode-->
+    <string name="edit_device">Editatu gailua</string>
+    <!--Dialog shown when attempting to remove a device-->
+    <string name="remove_device_confirm">Benetan baztertu nahi duzu gailu hau?</string>
+    <!--Toast shown when trying to create a device with an empty ID-->
+    <string name="device_id_required">Gailuaren ID-a ez du hutsik egon behar</string>
+    <!--Content description for device ID qr code icon-->
+    <string name="scan_qr_code_description">Eskaneatu QR kodea</string>
+    <!--Toast show if we could not get root permissions-->
+    <string name="toast_root_denied">Ez dira root baimenak lortu</string>
+    <!--WebGuiActivity-->
+    <!--Title of the web gui activity-->
+    <string name="web_gui_title">Web interfaze grafikoa</string>
+    <!--Text for WebGuiActivity loading view-->
+    <string name="web_gui_loading">Interfaze grafikoaren zain</string>
+    <!--SettingsFragment-->
+    <string name="settings_title">Ezarpenak</string>
+    <string name="category_run_conditions">Gauzatzeko baldintzak</string>
+    <string name="category_behaviour">Portaera</string>
+    <string name="category_syncthing_options">Syncthing aukerak</string>
+    <string name="category_backup">Segurtasun kopia</string>
+    <string name="category_debug">Arazketa</string>
+    <string name="category_experimental">Esperimentala</string>
+    <!--Preference screen - Run conditions-->
+    <string name="run_conditions_summary">Erabili aukera hauek Syncthing noiz exekutatuko den erabakitzeko.</string>
+    <string name="run_on_mobile_data_title">Exekutatu datu mugikorrak erabiliz</string>
+    <string name="run_on_mobile_data_summary">Gailua datu mugikorren sarearen bidez konektatuta dagoenean exekutatu. Oharra: horrek operadore mugikorraren datu-planeko datu asko kontsumi ditzake datu-kopuru handiak sinkronizatzen baditu.</string>
+    <string name="run_on_wifi_title">Exekutatu Wi-Fi bidez</string>
+    <string name="run_on_wifi_summary">Exekutatu gailua Wi-Fi sare batera konektatuta dagoenean.</string>
+    <string name="run_on_metered_wifi_title">Exekutatu Wi-Fi neurtuaren bidez</string>
+    <string name="run_on_metered_wifi_summary">Exekutatu gailua Wi-Fi sare neurtu batera konektatuta dagoenean, adibidez, hotspot bat edo sare lotu bat. Adi: horrek bere datu planaren zati handi bat kontsumi dezake, datu asko sinkronizatzen baditu.</string>
+    <string name="run_on_whitelisted_wifi_title">Exekutatu zehaztutako Wi-Fi sareetan</string>
+    <string name="run_on_whitelisted_wifi_networks">Exekutatu bakarrik aukeratutako WI-FI sareetan: %1$s</string>
+    <string name="run_on_all_wifi_networks">Exekutatu Wi-Fi sare guztietan.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Aktibatu Wi-Fia sareak hautatzeko.</string>
+    <string name="sync_only_wifi_ssids_connect_to_wifi">Konektatu Wi-Fi batera zerrendan gehitzeko.</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Kokapenari baimena eman behar diozu funtzio hori erabiltzeko.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Baimena beharrezkoa da</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1etik aurrera, Wi-Fi konexioaren izena irakurri ahal izateko kokalekurako sarbidea behar da. Bakarrik baimen hori ematen baduzu  erabil dezakezu funtzio hori.</string>
+    <string name="power_source_title">Exekutatu gailua honek elikatuta dagoenean</string>
+    <string-array name="power_source_entries">
+        <item>AC eta bateria.</item>
+        <item>AC indarra.</item>
+        <item>Bateria indarra.</item>
+    </string-array>
+    <string name="respect_battery_saving_title">Errespetatu Androiden bateria aurrezteko konfigurazioa</string>
+    <string name="respect_battery_saving_summary">Desgaitu Syncthing  bateria aurreztea aktibo badago.</string>
+    <string name="respect_master_sync_title">Errespetatu \"sinkronizazio automatikoko datuak\" Androiden konfigurazioa</string>
+    <string name="respect_master_sync_summary">Desaktibatu sinkronizazioa  \"sinkronizazio automatikoko datuak\" konfigurazio azkarreko mosaikoa desaktibatuta dagoenean.</string>
+    <string name="run_in_flight_mode_title">Exekutatu gailua hegaldi moduan dagoenean</string>
+    <string name="run_in_flight_mode_summary">Gaitu zure gailuak hegaldi moduan eskuzko Wi-Fi  konexioak detektatzeko arazoak baditu.</string>
+    <string name="service_settings_title">Zerbitzuaren ezarpenak</string>
+    <string name="service_settings_summary">Syncthing zerbitzu gisa exekutatu. Gehitu jakinarazpen iraunkor bat Androidek bertan behera utz ez dezan. Aukera hori markatzean, sinkronizazioa hasten da sistema eragilea abiaraztean.</string>
+    <string name="run_as_background_service">Hasi zerbitzua automatikoki abiaraztean</string>
+    <!--Preferences - Behaviour-->
+    <string name="advanced_folder_picker">Erabili karpetaren hautaketa aurreratua</string>
+    <string name="advanced_folder_picker_summary">Aukeratu gailuaren karpetaren bat sinkronizatzeko</string>
+    <string name="use_root_title">ExekutatuSyncthing supererabiltzaile gisa</string>
+    <string name="use_root_summary">Syncthingekin eta zure gailuarekin arazoak sor ditzakeen ezaugarri ezegonkor bat da hau. Arazorik balego, Syncthing berrinstalatu beharko zenuke.</string>
+    <string name="notification_type_title">Jakinarazpena</string>
+    <string name="notification_type_summary">Aukeratu jakinarazpen mota</string>
+    <string-array name="notification_type_entries">
+        <item>Arrunta</item>
+        <item>Lehentasun txikia</item>
+        <item>Bat ere ez</item>
+    </string-array>
+    <string name="preference_language_title">Hizkuntza</string>
+    <string name="preference_language_summary">Aldatu aplikazioaren hizkuntza</string>
+    <string name="start_into_web_gui_title">Hasi zuzenean GUI webean</string>
+    <string name="start_into_web_gui_summary">Aplikazioa hastean, ireki GUI weba pantaila nagusiaren ordez</string>
+    <string name="preference_theme_title">Gaia</string>
+    <string name="preference_theme_follow_system">Jarraitu sistema</string>
+    <string name="preference_theme_option_light">Argia</string>
+    <string name="preference_theme_option_dark">Iluna</string>
+    <string name="pref_language_default">Hizkuntza lehenetsia</string>
+    <string-array name="folder_types">
+        <item>Bidali &amp; jaso</item>
+        <item>Bidali bakarrik</item>
+        <item>Jaso bakarrik</item>
+    </string-array>
+    <string-array name="pull_order_types">
+        <item>Ausaz</item>
+        <item>Alfabetikoki</item>
+        <item>Lehenengo txikiena</item>
+        <item>Lehenengo handiena</item>
+        <item>Lehenengo zaharrena</item>
+        <item>Lehenengo berriena</item>
+    </string-array>
+    <string-array name="versioning_types">
+        <item>Bat ere ez</item>
+        <item>Zakarrontzia</item>
+        <item>Sinplea</item>
+        <item>Mailakatua</item>
+        <item>Kanpokoa</item>
+    </string-array>
+    <string name="device_name">Gailuaren izena</string>
+    <string name="listen_address">Sinkronizazio-protokoloa entzuteko helbideak</string>
+    <string name="max_recv_kbps">Sarrera trafikoaren muga (KiB/s)</string>
+    <string name="max_send_kbps"> Irteera trafikoaren muga (KiB/s)</string>
+    <string name="global_announce_enabled">Aurkikuntza globala</string>
+    <string name="local_announce_enabled">Aurkikuntza lokala</string>
+    <string name="enable_nat_traversal">Gaitu NAT Traversal</string>
+    <string name="global_announce_server">Aurkikuntza zerbitzari globalak</string>
+    <string name="enable_relaying">Gaitu transmisioa</string>
+    <string name="usage_reporting">Erabilera txosten anonimoa</string>
+    <string name="gui_address">Interfazearen entzuteko helbideak </string>
+    <!--Titles for the preference to undo ignored devices and folders-->
+    <string name="undo_ignored_devices_folders_title">Desegin gailuak eta karpetak alde batera utzita</string>
+    <string name="undo_ignored_devices_folders_question">Honek gailuei eta karpetei jaramonik ez egiteko aurreko erabakiak desegingo ditu. Aurrera?</string>
+    <string name="undo_ignored_devices_folders_done">Erabaki deseginak, arrakastaz.</string>
+    <string name="export_config">Esportatu konfigurazioa</string>
+    <!--Toast after entering invalid integer value-->
+    <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Sarrera-balioa ez da baliozkoa. Mesedez, sartu %1$d eta %2$d arteko balioa.</string>
+    <!--Experimental options-->
+    <string name="use_proxy">Konektatu proxy bidez</string>
+    <string name="do_not_use_proxy">Ez dago konfiguratutako proxyrik</string>
+    <string name="keep_wakelock_while_binary_running">Eduki CPUa ekinean Syncthing lanean den bitartean</string>
+    <string name="keep_wakelock_while_binary_running_summary">Erabili doikuntza hau bat-bateko deskonexioak badituzu bateriarekin funtzionatzen duzun bitartean. Horrek bateriaren kontsumoa handitzea ekarriko du.</string>
+    <string name="use_tor_title">Erabili Tor</string>
+    <string name="use_tor_summary">Bultzatu trafiko guztia Tor bidez pribatutasun handiagoa izateko. Orbot behar du. Proxy aukerak desaktibatzen ditu.</string>
+    <string name="socks_proxy_address_title">SOCKS5 proxy</string>
+    <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
+    <!--Toast after entering invalid socks proxy address-->
+    <string name="toast_invalid_socks_proxy_address">Sarrerak proxyaren sintaxia urratzen du \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+    <string name="http_proxy_address_title">HTTP(S) proxy</string>
+    <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
+    <!--Toast after entering invalid http proxy address-->
+    <string name="toast_invalid_http_proxy_address">Sarrerak proxyaren sintaxia urratzen du \'http://[IP/HOSTNAME]:[PORT]\'</string>
+    <string name="use_legacy_hashing_title">Erabili era zaharra hashak sortzeko</string>
+    <string name="use_legacy_hashing_summary">Behartu antzinako hashing pakete baten erabilera, bateragarritasunagatik</string>
+    <!--Dialog shown before config export-->
+    <string name="dialog_confirm_export">Ziur konfigurazioa esportatu nahi duzula? Dauden fitxategiak gainidatziko dira. Beste aplikazio batzuek kopiaren kokapenean dagoen gako pribatua irakur dezakete eta fitxategi sinkronizatuak deskargatzeko/aldatzeko erabili.</string>
+    <!--Dialog shown before config import-->
+    <string name="dialog_confirm_import">Ziur konfigurazio berri bat inportatu nahi duzula? Dauden artxiboak gainidatziko dira.</string>
+    <!--Toast shown after config was successfully exported-->
+    <string name="config_export_successful">Konfigurazioa hona bidali da %1$s</string>
+    <string name="import_config">Inportatu konfigurazioa</string>
+    <!--Toast shown after config was successfully imported-->
+    <string name="config_imported_successful">Konfigurazioa inportatu da</string>
+    <!--Toast shown after config was successfully imported-->
+    <string name="config_import_failed">Konfigurazioaren inportazioak huts egin du, ziurtatu fitxategiak hor daudela %1$s</string>
+    <!--Title for the preference to set STTRACE parameters-->
+    <string name="sttrace_title">STTRACE aukerak</string>
+    <string name="environment_variables">Ingurunearen aldagaiak</string>
+    <!--Toast after entering invalid STTRACE params-->
+    <string name="toast_invalid_environment_variables">Inguruneko aldagaien kate-balioa ez da baliozkoa</string>
+    <!--Title for the preference to reset Syncthing indexes-->
+    <string name="st_reset_database_title">Datu basea berrezarri</string>
+    <!--Syncthing was reset-->
+    <string name="st_reset_database_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
           \n Ziur al zaude Syncthing-eko datu-basea ezabatu nahi duzula?</string>
-  <!--Syncthing was reset-->
-  <string name="st_reset_database_done">Syncthing-en datu-basea arrakastaz berrezarria</string>
-  <!--Title for the preference to reset Syncthing indexes-->
-  <string name="st_reset_deltas_title">Berrezarri Delta indizeak</string>
-  <!--Syncthing was reset-->
-  <string name="st_reset_deltas_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
+    <!--Syncthing was reset-->
+    <string name="st_reset_database_done">Syncthing-en datu-basea arrakastaz berrezarria</string>
+    <!--Title for the preference to reset Syncthing indexes-->
+    <string name="st_reset_deltas_title">Berrezarri Delta indizeak</string>
+    <!--Syncthing was reset-->
+    <string name="st_reset_deltas_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
           \n Ziur al zaude Syncthing-eko delta indizea ezabatu nahi duzula?</string>
-  <!--Syncthing was reset-->
-  <string name="st_reset_deltas_done">Syncthing-en delta indizea arrakastaz berrezarria</string>
-  <string name="category_about">Honi buruz</string>
-  <!--Settings item that opens the log activity-->
-  <string name="open_log">Ireki erregistroa</string>
-  <!--Summary for the log activity-->
-  <string name="open_log_summary">Syncthing eta Androiden izena emateko leihoa ireki</string>
-  <string name="notify_crashes_title">Syncthing-en huts egiten berri eman.</string>
-  <string name="notify_crashes_summary">Erakutsi jakinarazpena Syncthing blokeatzen dela antzematean</string>
-  <string name="syncthing_forum_title">Syncthing-en foroa</string>
-  <string name="syncthing_forum_summary">Syncthing-en forora joan</string>
-  <!--Settings item that opens issue tracker-->
-  <string name="report_issue_title">Arazo baten berri eman</string>
-  <!--Summary for the issue tracker settings item-->
-  <string name="report_issue_summary">Syncthing eta Androiden gertaeren jarraipena ireki</string>
-  <!--URL of the issue tracker-->
-  <!--Menu item to donate-->
-  <string name="donate_title">Lagundu</string>
-  <string name="donate_summary">Lagundu web zerbitzari eta domeinuen gastuak ordaintzen</string>
-  <!--Menu item linking privacy policy-->
-  <string name="privacy_title">Pribatutasun politika</string>
-  <string name="privacy_summary">Androidearen pribatutasun-politika irekia, datu pertsonalen erabilera (edozein izanda ere) estaltzen duena, adibidez, kokapena.</string>
-  <!--Title of the preference showing upstream version name-->
-  <string name="syncthing_version_title">Syncthing bertsioa</string>
-  <!--Title of the preference showing this app's version name-->
-  <string name="app_version_title">Syncthing-Android bertsioa</string>
-  <!--FolderPickerAcitivity-->
-  <!--Activity title-->
-  <string name="folder_picker_title">Karpeta aukeratzailea</string>
-  <!--Toast shown on devices with kitkat or higher-->
-  <string name="kitkat_external_storage_warning">Oharra: Androiden zure bertsioak ez du kanpoko biltegiratze-gailuekin sinkronizatzeko aukerarik ematen</string>
-  <!--ListView empty text-->
-  <string name="directory_empty">Direktorioa hutsik dago</string>
-  <!--Menu item to create folder on the file system-->
-  <string name="create_fs_folder">Sortu karpeta berria</string>
-  <!--Menu item to select the current folder-->
-  <string name="select_folder">Hautatu karpeta</string>
-  <string name="create_folder_failed">Errorea karpeta sortzean</string>
-  <!--LogActivity-->
-  <string name="syncthing_log_title">Syncthingen izena eman</string>
-  <string name="android_log_title">Androiden izena eman</string>
-  <!--Title of the "log android" menu button-->
-  <string name="view_android_log">Androiden erregistroa erakutsi</string>
-  <!--Title of the "log Syncthing" menu button-->
-  <string name="view_syncthing_log">Syncthingen erregistroa erakutsi</string>
-  <string name="retrieving_logs">Erregistroak berreskuratzen</string>
-  <!--Title of the "share log" menu button-->
-  <string name="share_title">Partekatu</string>
-  <!--ShareActivity-->
-  <!--Title of the "share" activity-->
-  <string name="share_activity_title">Syncthingen gorde</string>
-  <!--Title of the "save" button-->
-  <string name="save_title">Gorde</string>
-  <!--Title of the "cancel" button-->
-  <string name="cancel_title">Bertan behera utzi</string>
-  <!--Title of the "save" button-->
-  <string name="folder_title">Karpeta</string>
-  <!--New file name template-->
-  <string name="file_name_template">Fitxategi beria %1$s</string>
-  <!--Nothing to share toast-->
-  <string name="nothing_share">Ezer ez partekatzeko</string>
-  <!--Copy success toast partially-->
-  <plurals name="copy_success_partially">
-    <item quantity="one">%1$dfitxategi kopiatuta \"%2$s\"karpetan, %3$d badago lehendik</item>
-    <item quantity="other">%1$d fitxategi kopiatu dira \"%2$s\"karpetan, %3$d badago lehendik</item>
-  </plurals>
-  <!--Copy success toast-->
-  <plurals name="copy_success">
-    <item quantity="one">%1$d fitxategi kopiatuta \"%2$s\"karpetan</item>
-    <item quantity="other">%1$d fitxategi kopiatuta \"%2$s\"karpetan</item>
-  </plurals>
-  <!--Copy exception toast-->
-  <string name="copy_exception">Errorea gertatu da partekatutako erabileran</string>
-  <!--Copy progress dialog text-->
-  <string name="copy_progress">Fitxategiak partekatu...</string>
-  <plurals name="file_name_title">
-    <item quantity="one">Fitxategi izena</item>
-    <item quantity="other">Fitxategi zerrenda</item>
-  </plurals>
-  <!--Sub Folder title-->
-  <string name="sub_folder">Azpikarpeta</string>
-  <!--SyncthingService-->
-  <!--Title of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_title">Syncthing desgaituta dago</string>
-  <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Abiatzeko baldintzak aldatu nahi dituzu?</string>
-  <!--Button text on the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_change_settings">Aldatu ezarpenak</string>
-  <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
-  <string name="exit">Irten</string>
-  <!--Reasons for "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_reason_heading">Arrazoiak:</string>
-  <string name="syncthing_disabled_reason_on_battery">Gailuak bateriarekin funtzionatzen du</string>
-  <string name="syncthing_disabled_reason_on_charger">Gailuak kargagailuarekin funtzionatzen du</string>
-  <string name="syncthing_disabled_reason_powersaving">Gailua energia aurrezteko moduan dago.</string>
-  <string name="syncthing_disabled_reason_android_sync_disabled">Sinkronizazio globala desgaituta dago</string>
-  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Egungo SSID WiFi ez dago zerrenda zurian</string>
-  <string name="syncthing_disabled_reason_wifi_is_metered">Egungo WIFI-a neurtua da</string>
-  <string name="syncthing_disabled_reason_no_network_or_flightmode">Ez dago sare-konexiorik edo hegazkin-modurik gaituta</string>
-  <string name="syncthing_disabled_reason_no_mobile_connection">Ez dago datu mugikorretara konektatuta</string>
-  <string name="syncthing_disabled_reason_no_wifi_connection">Ez dago WiFi-ra konektatuta</string>
-  <string name="syncthing_disabled_reason_no_allowed_method">Ez dago konfiguratuta WiFi-n sinkronizatzeko, ezta datu mugikorretara ere</string>
-  <!--Title of the notification shown while syncthing is running and enabled-->
-  <string name="syncthing_active">Syncthing martxan dago</string>
-  <string name="syncthing_disabled">Syncthing desgaituta dago</string>
-  <string name="syncthing_terminated">Syncthing-ek bukatu du</string>
-  <!--Toast shown if syncthing failed to create a config-->
-  <string name="config_create_failed">Errorea konfigurazio-fitxategia sortzean</string>
-  <!--Toast shown if a config file crucial to operation is missing-->
-  <string name="config_file_missing">Eragiketarako konfigurazio-artxibo erabakigarria falta da</string>
-  <!--Label of the default folder created of first start (camera folder).-->
-  <string name="default_folder_label">Kamera</string>
-  <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
-  <string name="default_folder_id">%1$s-argazkiak</string>
-  <string name="notification_crash_title">Syncthing-ek huts egin du</string>
-  <string name="notification_crash_text">Klikatu erregistroak ikusteko</string>
-  <string name="notifications_persistent_channel">Syncthing martxan dago</string>
-  <string name="notification_persistent_waiting_channel">Gauzatze-baldintzak monitorizatzea</string>
-  <string name="notifications_other_channel">Beste jakinarazpenak</string>
-  <!--RestApi-->
-  <!--Title of the notification shown when a restart is needed-->
-  <string name="restart_title">Beharrezkoa da berrabiaraztea</string>
-  <!--Text for positive button in restart dialog-->
-  <!--Text for the dismiss button of the restart Activity-->
-  <!--Text of the notification shown when a restart is needed-->
-  <string name="restart_notification_text">Klikatu hemen syncthing orain berrabiarazteko</string>
-  <!--Shown when a device ID is copied to the clipboard-->
-  <string name="device_id_copied_to_clipboard">Gailuaren ID-a paperontzian kopiatu da</string>
-  <!--Strings representing units for file sizes, from smallest to largest-->
-  <string-array name="file_size_units">
-    <item>B</item>
-    <item>KiB</item>
-    <item>MiB</item>
-    <item>GiB</item>
-    <item>TiB</item>
-  </string-array>
-  <!--Strings representing units for transfer rates, from smallest to largest-->
-  <string-array name="transfer_rate_units">
-    <item>B/s</item>
-    <item>KiB/s</item>
-    <item>MiB/s</item>
-    <item>GiB/s</item>
-    <item>TiB/s</item>
-  </string-array>
-  <!--Possible folder states-->
-  <string name="state_idle">Ez aktiboa</string>
-  <string name="state_scanning">Eskaneatzen</string>
-  <string name="state_syncing">Sinkronizatzen (%1$d%%)</string>
-  <string name="state_error">Errorea</string>
-  <string name="state_unknown">Ezezaguna</string>
-  <string name="state_paused">Geldituta</string>
-  <string name="status_outofsync">Sinkronizatu gabe</string>
-  <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
-  <string name="folder_size_format">%1$s / %2$s</string>
-  <string name="appconfig_receiver_background_enabled">Ezin da Syncthing geldiarazi exekuzioa bigarren mailan aktibatuta dagoen bitartean.</string>
-  <!--Titles used in the folder type dialog and folder type button in the folder activity-->
-  <string name="folder_type">Karpeta mota</string>
-  <!--Displays the current folder type in the folder activity-->
-  <string name="folder_type_sendreceive">Bidali &amp; Jaso</string>
-  <string name="folder_type_sendonly">Bidali bakarrik</string>
-  <string name="folder_type_receiveonly">Jaso bakarrik</string>
-  <!--Folder type dialog descriptions for folder types-->
-  <string name="folder_type_sendreceive_description">Karpetak aldaketak bidaliko ditu eta aldaketak jasoko ditu urruneko gailuetatik.</string>
-  <string name="folder_type_sendonly_description">Fitxategiak beste gailu batzuetan egindako aldaketetatik babestuta daude, baina gailu honetan egindako aldaketak gainerako klusterrera bidaliko dira.</string>
-  <string name="folder_type_receiveonly_description">Fitxategiak klusterretik sinkronizatzen dira, baina lokalki egindako aldaketak ez dira beste gailuetara bidaliko.</string>
-  <!--Titles used in the pull order dialog and pull order button in the folder activity-->
-  <string name="pull_order">Artxiboak erauzteko agindua</string>
-  <!--Displays the current pull order type in the Folder activity-->
-  <string name="pull_order_type_random">Ausaz</string>
-  <string name="pull_order_type_alphabetic">Alfabetikoki</string>
-  <string name="pull_order_type_smallestFirst">Txikiena lehenengo</string>
-  <string name="pull_order_type_largestFirst">Handiena lehenengo</string>
-  <string name="pull_order_type_oldestFirst">Zaharrena lehenengo</string>
-  <string name="pull_order_type_newestFirst">Berriena lehenengo</string>
-  <!--Pull order dialog descriptions for pull order types-->
-  <string name="pull_order_type_random_description">Atera fitxategiak ausaz</string>
-  <string name="pull_order_type_alphabetic_description">Atera fitxategiak alfabetikoki bere izenez.</string>
-  <string name="pull_order_type_smallestFirst_description">Atera fitxategiak duten tamainagatik. Lehenbizi txikiena hurrenez hurren.</string>
-  <string name="pull_order_type_largestFirst_description">Atera fitxategiak duten tamainagatik. Lehenbizi handiena hurrenez hurren.</string>
-  <string name="pull_order_type_oldestFirst_description">Atera fitxategiak aldatze data erabiliz. Lehenbizi zaharrena hurrenez hurren.</string>
-  <string name="pull_order_type_newestFirst_description">Atera fitxategiak aldatze data erabiliz. Lehenbizi berriena hurrenez hurren.</string>
-  <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
-  <string name="maximum_age">Gehienezko antzinatasuna</string>
-  <string name="clean_out_after">Garbitu ondoren</string>
-  <string name="file_versioning">Fitxategien bertsioak</string>
-  <string name="none">Bat ere ez</string>
-  <string name="versions_path">Bertsioen ibilbidea</string>
-  <string name="command">Komandoa</string>
-  <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
-  <string name="keep_versions_description">Mantentzeko bertsio zaharren kopurua, fitxategiaz.</string>
-  <string name="simple_file_versioning_description">Fitxategiak data estanpatua duten bertsioetara mugitzen dira .stversions direktorio batean Syncthingek ordezten edo ezabatzen dituenean.</string>
-  <string name="trashcan_versioning_description">Fitxategiak .stversions direktoriora mugitzen dira Syncthingek ordezkatu edo ezabatzen dituenean.</string>
-  <string name="staggered_versioning_description">Fitxategiak data estanpatua duten bertsioetara mugitzen dira .stversions direktorio batean Syncthingek ordezten edo ezabatzen dituenean. Bertsioak automatikoki ezabatzen dira gehienezko adina baino zaharragoak badira edo tarte batean baimendutako fitxategi-kopurua gainditzen badute.\n\n. Hurrengo tarteetan 30 segundotik behin bertsio bat mantentzen da, lehen egunean bertsio bat ordu bakoitzean mantentzen da, lehen 30 egunetan egunero bertsio bat mantentzen da, astero bertsio bat mantentzen den gehieneko adinera arte.</string>
-  <string name="maximum_age_description">Bertsio bat mantentzeko gehienezko denbora (egunetan, 0an ezarrita, betiko bertsioak mantentzeko).</string>
-  <string name="versions_path_description">Bertsioak gordetzeko ibilbidea (utzi hutsik partekatutako karpetan lehenetsitako .stversions direktoriorako).</string>
-  <string name="cleanout_after_description">Zakarrontzian artxiboak mantentzeko egun kopurua. Zero esan nahi du betirako</string>
-  <string name="external_versioning_description">Komandoen linearen lehen parametroa karpetaren ibilbidea da, eta bigarren parametroa karpetaren ibilbide erlatiboa da.</string>
-  <string name="no_versioning_description">Hautatu bertsio mota bat bertsionak gaitzeko.</string>
-  <!--Displays the current file versioning type in the Folder activity-->
-  <string name="type_simple">Modua: Arrunta</string>
-  <string name="type_trashcan">Modua: zakarrontzia</string>
-  <string name="type_staggered">Modua: Mailakatua</string>
-  <string name="type_external">Modua: Kanpokoa</string>
-  <!--Information displayed about the current file versioning configuration in the folder activity-->
-  <string name="trashcan_versioning_info">Garbitu honen ondoren: %1$s</string>
-  <string name="staggered_versioning_info">Gehienezko antzinatasuna: %1$d \nBertsioen ibilbidea: %2$s</string>
-  <string name="external_versioning_info">Komandoa: %1$s</string>
-  <string name="simple_versioning_info">Bertsioak gorde: %1$s</string>
-  <string name="show_device_id">Erakutsi gailuaren IDa</string>
-  <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
-  <string name="could_not_access_deviceid">Ezin izan da gailuaren ID-a atzitu</string>
-  <string name="browse">Arakatu</string>
-  <string name="no_sub_folder_is_selected">Ez da azpikarpetarik aukeratu</string>
-  <string name="share_device_id_chooser">Partekatu gailuaren IDa honekin</string>
+    <!--Syncthing was reset-->
+    <string name="st_reset_deltas_done">Syncthing-en delta indizea arrakastaz berrezarria</string>
+    <string name="category_about">Honi buruz</string>
+    <!--Settings item that opens the log activity-->
+    <string name="open_log">Ireki erregistroa</string>
+    <!--Summary for the log activity-->
+    <string name="open_log_summary">Syncthing eta Androiden izena emateko leihoa ireki</string>
+    <string name="notify_crashes_title">Syncthing-en huts egiten berri eman.</string>
+    <string name="notify_crashes_summary">Erakutsi jakinarazpena Syncthing blokeatzen dela antzematean</string>
+    <string name="syncthing_forum_title">Syncthing-en foroa</string>
+    <string name="syncthing_forum_summary">Syncthing-en forora joan</string>
+    <!--Settings item that opens issue tracker-->
+    <string name="report_issue_title">Arazo baten berri eman</string>
+    <!--Summary for the issue tracker settings item-->
+    <string name="report_issue_summary">Syncthing eta Androiden gertaeren jarraipena ireki</string>
+    <!--URL of the issue tracker-->
+    <!--Menu item to donate-->
+    <string name="donate_title">Lagundu</string>
+    <string name="donate_summary">Lagundu web zerbitzari eta domeinuen gastuak ordaintzen</string>
+    <!--Menu item linking privacy policy-->
+    <string name="privacy_title">Pribatutasun politika</string>
+    <string name="privacy_summary">Androidearen pribatutasun-politika irekia, datu pertsonalen erabilera (edozein izanda ere) estaltzen duena, adibidez, kokapena.</string>
+    <!--Title of the preference showing upstream version name-->
+    <string name="syncthing_version_title">Syncthing bertsioa</string>
+    <!--Title of the preference showing this app's version name-->
+    <string name="app_version_title">Syncthing-Android bertsioa</string>
+    <!--FolderPickerAcitivity-->
+    <!--Activity title-->
+    <string name="folder_picker_title">Karpeta aukeratzailea</string>
+    <!--Toast shown on devices with kitkat or higher-->
+    <string name="kitkat_external_storage_warning">Oharra: Androiden zure bertsioak ez du kanpoko biltegiratze-gailuekin sinkronizatzeko aukerarik ematen</string>
+    <!--ListView empty text-->
+    <string name="directory_empty">Direktorioa hutsik dago</string>
+    <!--Menu item to create folder on the file system-->
+    <string name="create_fs_folder">Sortu karpeta berria</string>
+    <!--Menu item to select the current folder-->
+    <string name="select_folder">Hautatu karpeta</string>
+    <string name="create_folder_failed">Errorea karpeta sortzean</string>
+    <!--LogActivity-->
+    <string name="syncthing_log_title">Syncthingen izena eman</string>
+    <string name="android_log_title">Androiden izena eman</string>
+    <!--Title of the "log android" menu button-->
+    <string name="view_android_log">Androiden erregistroa erakutsi</string>
+    <!--Title of the "log Syncthing" menu button-->
+    <string name="view_syncthing_log">Syncthingen erregistroa erakutsi</string>
+    <string name="retrieving_logs">Erregistroak berreskuratzen</string>
+    <!--Title of the "share log" menu button-->
+    <string name="share_title">Partekatu</string>
+    <!--ShareActivity-->
+    <!--Title of the "share" activity-->
+    <string name="share_activity_title">Syncthingen gorde</string>
+    <!--Title of the "save" button-->
+    <string name="save_title">Gorde</string>
+    <!--Title of the "cancel" button-->
+    <string name="cancel_title">Bertan behera utzi</string>
+    <!--Title of the "save" button-->
+    <string name="folder_title">Karpeta</string>
+    <!--New file name template-->
+    <string name="file_name_template">Fitxategi beria %1$s</string>
+    <!--Nothing to share toast-->
+    <string name="nothing_share">Ezer ez partekatzeko</string>
+    <!--Copy success toast partially-->
+    <plurals name="copy_success_partially">
+        <item quantity="one">%1$dfitxategi kopiatuta \"%2$s\"karpetan, %3$d badago lehendik</item>
+        <item quantity="other">%1$d fitxategi kopiatu dira \"%2$s\"karpetan, %3$d badago lehendik</item>
+    </plurals>
+    <!--Copy success toast-->
+    <plurals name="copy_success">
+        <item quantity="one">%1$d fitxategi kopiatuta \"%2$s\"karpetan</item>
+        <item quantity="other">%1$d fitxategi kopiatuta \"%2$s\"karpetan</item>
+    </plurals>
+    <!--Copy exception toast-->
+    <string name="copy_exception">Errorea gertatu da partekatutako erabileran</string>
+    <!--Copy progress dialog text-->
+    <string name="copy_progress">Fitxategiak partekatu...</string>
+    <plurals name="file_name_title">
+        <item quantity="one">Fitxategi izena</item>
+        <item quantity="other">Fitxategi zerrenda</item>
+    </plurals>
+    <!--Sub Folder title-->
+    <string name="sub_folder">Azpikarpeta</string>
+    <!--SyncthingService-->
+    <!--Title of the "syncthing disabled" dialog-->
+    <string name="syncthing_disabled_title">Syncthing desgaituta dago</string>
+    <!--Message of the "syncthing disabled" dialog-->
+    <string name="syncthing_disabled_message">Abiatzeko baldintzak aldatu nahi dituzu?</string>
+    <!--Button text on the "syncthing disabled" dialog-->
+    <string name="syncthing_disabled_change_settings">Aldatu ezarpenak</string>
+    <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
+    <string name="exit">Irten</string>
+    <!--Reasons for "syncthing disabled" dialog-->
+    <string name="syncthing_disabled_reason_heading">Arrazoiak:</string>
+    <string name="syncthing_disabled_reason_on_battery">Gailuak bateriarekin funtzionatzen du</string>
+    <string name="syncthing_disabled_reason_on_charger">Gailuak kargagailuarekin funtzionatzen du</string>
+    <string name="syncthing_disabled_reason_powersaving">Gailua energia aurrezteko moduan dago.</string>
+    <string name="syncthing_disabled_reason_android_sync_disabled">Sinkronizazio globala desgaituta dago</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Egungo SSID WiFi ez dago zerrenda zurian</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">Egungo WIFI-a neurtua da</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">Ez dago sare-konexiorik edo hegazkin-modurik gaituta</string>
+    <string name="syncthing_disabled_reason_no_mobile_connection">Ez dago datu mugikorretara konektatuta</string>
+    <string name="syncthing_disabled_reason_no_wifi_connection">Ez dago WiFi-ra konektatuta</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Ez dago konfiguratuta WiFi-n sinkronizatzeko, ezta datu mugikorretara ere</string>
+    <!--Title of the notification shown while syncthing is running and enabled-->
+    <string name="syncthing_active">Syncthing martxan dago</string>
+    <string name="syncthing_disabled">Syncthing desgaituta dago</string>
+    <string name="syncthing_terminated">Syncthing-ek bukatu du</string>
+    <!--Toast shown if syncthing failed to create a config-->
+    <string name="config_create_failed">Errorea konfigurazio-fitxategia sortzean</string>
+    <!--Toast shown if a config file crucial to operation is missing-->
+    <string name="config_file_missing">Eragiketarako konfigurazio-artxibo erabakigarria falta da</string>
+    <!--Label of the default folder created of first start (camera folder).-->
+    <string name="default_folder_label">Kamera</string>
+    <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
+    <string name="default_folder_id">%1$s-argazkiak</string>
+    <string name="notification_crash_title">Syncthing-ek huts egin du</string>
+    <string name="notification_crash_text">Klikatu erregistroak ikusteko</string>
+    <string name="notifications_persistent_channel">Syncthing martxan dago</string>
+    <string name="notification_persistent_waiting_channel">Gauzatze-baldintzak monitorizatzea</string>
+    <string name="notifications_other_channel">Beste jakinarazpenak</string>
+    <!--RestApi-->
+    <!--Title of the notification shown when a restart is needed-->
+    <string name="restart_title">Beharrezkoa da berrabiaraztea</string>
+    <!--Text for positive button in restart dialog-->
+    <!--Text for the dismiss button of the restart Activity-->
+    <!--Text of the notification shown when a restart is needed-->
+    <string name="restart_notification_text">Klikatu hemen syncthing orain berrabiarazteko</string>
+    <!--Shown when a device ID is copied to the clipboard-->
+    <string name="device_id_copied_to_clipboard">Gailuaren ID-a paperontzian kopiatu da</string>
+    <!--Strings representing units for file sizes, from smallest to largest-->
+    <string-array name="file_size_units">
+        <item>B</item>
+        <item>KiB</item>
+        <item>MiB</item>
+        <item>GiB</item>
+        <item>TiB</item>
+    </string-array>
+    <!--Strings representing units for transfer rates, from smallest to largest-->
+    <string-array name="transfer_rate_units">
+        <item>B/s</item>
+        <item>KiB/s</item>
+        <item>MiB/s</item>
+        <item>GiB/s</item>
+        <item>TiB/s</item>
+    </string-array>
+    <!--Possible folder states-->
+    <string name="state_idle">Ez aktiboa</string>
+    <string name="state_scanning">Eskaneatzen</string>
+    <string name="state_syncing">Sinkronizatzen (%1$d%%)</string>
+    <string name="state_error">Errorea</string>
+    <string name="state_unknown">Ezezaguna</string>
+    <string name="state_paused">Geldituta</string>
+    <string name="status_outofsync">Sinkronizatu gabe</string>
+    <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
+    <string name="folder_size_format">%1$s / %2$s</string>
+    <string name="appconfig_receiver_background_enabled">Ezin da Syncthing geldiarazi exekuzioa bigarren mailan aktibatuta dagoen bitartean.</string>
+    <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+    <string name="folder_type">Karpeta mota</string>
+    <!--Displays the current folder type in the folder activity-->
+    <string name="folder_type_sendreceive">Bidali &amp; Jaso</string>
+    <string name="folder_type_sendonly">Bidali bakarrik</string>
+    <string name="folder_type_receiveonly">Jaso bakarrik</string>
+    <!--Folder type dialog descriptions for folder types-->
+    <string name="folder_type_sendreceive_description">Karpetak aldaketak bidaliko ditu eta aldaketak jasoko ditu urruneko gailuetatik.</string>
+    <string name="folder_type_sendonly_description">Fitxategiak beste gailu batzuetan egindako aldaketetatik babestuta daude, baina gailu honetan egindako aldaketak gainerako klusterrera bidaliko dira.</string>
+    <string name="folder_type_receiveonly_description">Fitxategiak klusterretik sinkronizatzen dira, baina lokalki egindako aldaketak ez dira beste gailuetara bidaliko.</string>
+    <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+    <string name="pull_order">Artxiboak erauzteko agindua</string>
+    <!--Displays the current pull order type in the Folder activity-->
+    <string name="pull_order_type_random">Ausaz</string>
+    <string name="pull_order_type_alphabetic">Alfabetikoki</string>
+    <string name="pull_order_type_smallestFirst">Txikiena lehenengo</string>
+    <string name="pull_order_type_largestFirst">Handiena lehenengo</string>
+    <string name="pull_order_type_oldestFirst">Zaharrena lehenengo</string>
+    <string name="pull_order_type_newestFirst">Berriena lehenengo</string>
+    <!--Pull order dialog descriptions for pull order types-->
+    <string name="pull_order_type_random_description">Atera fitxategiak ausaz</string>
+    <string name="pull_order_type_alphabetic_description">Atera fitxategiak alfabetikoki bere izenez.</string>
+    <string name="pull_order_type_smallestFirst_description">Atera fitxategiak duten tamainagatik. Lehenbizi txikiena hurrenez hurren.</string>
+    <string name="pull_order_type_largestFirst_description">Atera fitxategiak duten tamainagatik. Lehenbizi handiena hurrenez hurren.</string>
+    <string name="pull_order_type_oldestFirst_description">Atera fitxategiak aldatze data erabiliz. Lehenbizi zaharrena hurrenez hurren.</string>
+    <string name="pull_order_type_newestFirst_description">Atera fitxategiak aldatze data erabiliz. Lehenbizi berriena hurrenez hurren.</string>
+    <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
+    <string name="maximum_age">Gehienezko antzinatasuna</string>
+    <string name="clean_out_after">Garbitu ondoren</string>
+    <string name="file_versioning">Fitxategien bertsioak</string>
+    <string name="none">Bat ere ez</string>
+    <string name="versions_path">Bertsioen ibilbidea</string>
+    <string name="command">Komandoa</string>
+    <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
+    <string name="keep_versions_description">Mantentzeko bertsio zaharren kopurua, fitxategiaz.</string>
+    <string name="simple_file_versioning_description">Fitxategiak data estanpatua duten bertsioetara mugitzen dira .stversions direktorio batean Syncthingek ordezten edo ezabatzen dituenean.</string>
+    <string name="trashcan_versioning_description">Fitxategiak .stversions direktoriora mugitzen dira Syncthingek ordezkatu edo ezabatzen dituenean.</string>
+    <string name="staggered_versioning_description">Fitxategiak data estanpatua duten bertsioetara mugitzen dira .stversions direktorio batean Syncthingek ordezten edo ezabatzen dituenean. Bertsioak automatikoki ezabatzen dira gehienezko adina baino zaharragoak badira edo tarte batean baimendutako fitxategi-kopurua gainditzen badute.\n\n. Hurrengo tarteetan 30 segundotik behin bertsio bat mantentzen da, lehen egunean bertsio bat ordu bakoitzean mantentzen da, lehen 30 egunetan egunero bertsio bat mantentzen da, astero bertsio bat mantentzen den gehieneko adinera arte.</string>
+    <string name="maximum_age_description">Bertsio bat mantentzeko gehienezko denbora (egunetan, 0an ezarrita, betiko bertsioak mantentzeko).</string>
+    <string name="versions_path_description">Bertsioak gordetzeko ibilbidea (utzi hutsik partekatutako karpetan lehenetsitako .stversions direktoriorako).</string>
+    <string name="cleanout_after_description">Zakarrontzian artxiboak mantentzeko egun kopurua. Zero esan nahi du betirako</string>
+    <string name="external_versioning_description">Komandoen linearen lehen parametroa karpetaren ibilbidea da, eta bigarren parametroa karpetaren ibilbide erlatiboa da.</string>
+    <string name="no_versioning_description">Hautatu bertsio mota bat bertsionak gaitzeko.</string>
+    <!--Displays the current file versioning type in the Folder activity-->
+    <string name="type_simple">Modua: Arrunta</string>
+    <string name="type_trashcan">Modua: zakarrontzia</string>
+    <string name="type_staggered">Modua: Mailakatua</string>
+    <string name="type_external">Modua: Kanpokoa</string>
+    <!--Information displayed about the current file versioning configuration in the folder activity-->
+    <string name="trashcan_versioning_info">Garbitu honen ondoren: %1$s</string>
+    <string name="staggered_versioning_info">Gehienezko antzinatasuna: %1$d \nBertsioen ibilbidea: %2$s</string>
+    <string name="external_versioning_info">Komandoa: %1$s</string>
+    <string name="simple_versioning_info">Bertsioak gorde: %1$s</string>
+    <string name="show_device_id">Erakutsi gailuaren IDa</string>
+    <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+    <string name="could_not_access_deviceid">Ezin izan da gailuaren ID-a atzitu</string>
+    <string name="browse">Arakatu</string>
+    <string name="no_sub_folder_is_selected">Ez da azpikarpetarik aukeratu</string>
+    <string name="share_device_id_chooser">Partekatu gailuaren IDa honekin</string>
 </resources>
