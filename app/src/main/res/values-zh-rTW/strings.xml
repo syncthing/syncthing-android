@@ -224,7 +224,7 @@
     <string name="run_in_flight_mode_title">飛航模式時執行</string>
     <string name="run_in_flight_mode_summary">如果您的設備在飛行模式下無法檢測到手動 Wi-Fi 連接，請啟用。</string>
     <string name="service_settings_title">服務設定</string>
-    <string name="service_settings_summary">將 Syncthing 做為後台服務。增加持續通知防止 Android 終止程序。勾選此選項將會在開機時自動啟動 Syncthing 。</string>
+    <string name="service_settings_summary">將 Syncthing 做為後台服務。增加持續通知防止 Android 終止程序。勾選此選項將會在開機時自動啟動 Syncthing。</string>
     <string name="run_as_background_service">開機時自動執行服務</string>
     <!--Preferences - Behaviour-->
     <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>

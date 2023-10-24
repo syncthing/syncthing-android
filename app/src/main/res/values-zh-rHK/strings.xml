@@ -224,8 +224,7 @@
     <string name="run_in_flight_mode_title">飛航模式時執行</string>
     <string name="run_in_flight_mode_summary">如果您的設備在飛行模式下無法檢測到手動 Wi-Fi 連接，請啟用。</string>
     <string name="service_settings_title">服務設定</string>
-    <string name="service_settings_summary">將 Syncthing 作為服務運行。添加持久通知以防止其被 Android 終止。選中此選項會在操作系統啟動時啟動 Syncthing。
- </string>
+    <string name="service_settings_summary">將 Syncthing 作為服務運行。添加持久通知以防止其被 Android 終止。選中此選項會在操作系統啟動時啟動 Syncthing。</string>
     <string name="run_as_background_service">開機時自動執行服務</string>
     <!--Preferences - Behaviour-->
     <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
@@ -300,8 +299,7 @@
     <string name="http_proxy_address_title">HTTP(S) 代理伺服器</string>
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
-    <string name="toast_invalid_http_proxy_address">請點擊“http://[IP/主機名]:[端口]”的格式輸入代理地址
- </string>
+    <string name="toast_invalid_http_proxy_address">請點擊“http://[IP/主機名]:[端口]”的格式輸入代理地址</string>
     <string name="use_legacy_hashing_title">使用過時的雜湊</string>
     <string name="use_legacy_hashing_summary">為了相容性，強制 Syncthing 使用過時的雜湊套</string>
     <!--Dialog shown before config export-->

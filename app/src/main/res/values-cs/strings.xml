@@ -353,7 +353,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="donate_title">Přispět</string>
     <string name="donate_summary">Pomozte nám platit za domény a hostingové poplatky</string>
     <!--Menu item linking privacy policy-->
-    <string name="privacy_title">Zásady ochrany osobních údajů </string>
+    <string name="privacy_title">Zásady ochrany osobních údajů</string>
     <string name="privacy_summary">Otevřít politiku soukromí syncthing-android, která zahrnuje užití případných osobních údajů (např. polohy.)</string>
     <!--Title of the preference showing upstream version name-->
     <string name="syncthing_version_title">Verze Syncthing</string>

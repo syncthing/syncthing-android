@@ -240,7 +240,7 @@ UWAGA: może to spowodować znaczne zużycie transferu danych.</string>
     <string name="advanced_folder_picker">Używaj zaawansowanego wybierania folderów</string>
     <string name="advanced_folder_picker_summary">Wybierz dowolny folder na urządzeniu do synchronizacji</string>
     <string name="use_root_title">Uruchamiaj Syncthing jako superuser</string>
-    <string name="use_root_summary">To jest niestabilna funkcja, która może sprawiać problemy z Syncthing i urządzeniami. W przypadku napotkania błędów możliwe, że niezbędne będzie przeinstalowanie programu. </string>
+    <string name="use_root_summary">To jest niestabilna funkcja, która może sprawiać problemy z Syncthing i urządzeniami. W przypadku napotkania błędów możliwe, że niezbędne będzie przeinstalowanie programu.</string>
     <string name="notification_type_title">Powiadomienie</string>
     <string name="notification_type_summary">Wybierz rodzaj powiadomienia</string>
     <string name="preference_language_title">Język</string>
