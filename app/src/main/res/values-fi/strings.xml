@@ -77,9 +77,9 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <!--StatusFragment-->
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Lataus:\u0020</string>
+    <string name="download_title_colon">"Lataus: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Lähetys:\u0020</string>
+    <string name="upload_title_colon">"Lähetys: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Suorittimen käyttö</string>
     <!--Title for current RAM usage-->

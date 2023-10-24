@@ -103,9 +103,9 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <string name="syncthing_has_crashed">Syncthing uległ awarii.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Pobieranie:\u0020</string>
+    <string name="download_title_colon">"Pobieranie: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Wysyłanie:\u0020</string>
+    <string name="upload_title_colon">"Wysyłanie: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Użycie procesora</string>
     <!--Title for current RAM usage-->

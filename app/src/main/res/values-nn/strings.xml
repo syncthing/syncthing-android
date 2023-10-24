@@ -74,9 +74,9 @@ Ver venleg å rapporter problem som måtte oppstå via Github.</string>
     <!--StatusFragment-->
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Nedlasting:\u0020</string>
+    <string name="download_title_colon">"Nedlasting: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Opplasting:\u0020</string>
+    <string name="upload_title_colon">"Opplasting: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Prosessorbruk</string>
     <!--Title for current RAM usage-->

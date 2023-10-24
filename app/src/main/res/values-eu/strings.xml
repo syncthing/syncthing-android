@@ -94,9 +94,9 @@
     <string name="syncthing_has_crashed">Syncthing-ek huts egin du.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Deskarga:\u0020</string>
+    <string name="download_title_colon">"Deskarga: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Igo:\u0020</string>
+    <string name="upload_title_colon">"Igo: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">CPU Erabilera</string>
     <!--Title for current RAM usage-->

@@ -93,9 +93,9 @@
     <string name="syncthing_has_crashed">Syncthing がクラッシュしました。</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">ダウンロード:\u0020</string>
+    <string name="download_title_colon">"ダウンロード: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">アップロード:\u0020</string>
+    <string name="upload_title_colon">"アップロード: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">CPU 使用率</string>
     <!--Title for current RAM usage-->

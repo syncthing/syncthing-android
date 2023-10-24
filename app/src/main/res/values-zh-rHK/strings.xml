@@ -95,9 +95,9 @@
     <string name="syncthing_has_crashed">Syncthing 已經當機</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">下載:\u0020</string>
+    <string name="download_title_colon">"下載: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">上載:\u0020</string>
+    <string name="upload_title_colon">"上載: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">CPU 使用率</string>
     <!--Title for current RAM usage-->
