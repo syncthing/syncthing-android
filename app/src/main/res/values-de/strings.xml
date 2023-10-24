@@ -221,7 +221,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="respect_battery_saving_title">Android-Energiesparmodus berücksichtigen</string>
     <string name="respect_battery_saving_summary">Syncthing bei aktivem Energiesparmodus anhalten.</string>
     <string name="respect_master_sync_title"> \"Autom. Datensynchronisierung\" berücksichtigen</string>
-    <string name="respect_master_sync_summary">Syncthing anhalten, sobald die \"Automatische Datensynchronisierung\"  in Android ausgeschaltet wird.</string>
+    <string name="respect_master_sync_summary">Syncthing anhalten, sobald die \"Automatische Datensynchronisierung\" in Android ausgeschaltet wird.</string>
     <string name="run_in_flight_mode_title">Im Flugmodus ausführen</string>
     <string name="run_in_flight_mode_summary">Durch Aktivieren der Option wird Syncthing auch dann laufen, wenn du offline bist. Aktiviere dies, wenn dein Telefon Probleme beim Erkennen von manuell hergestellten WLAN-Verbindungen im Flugmodus hat.</string>
     <string name="service_settings_title">Diensteinstellung</string>

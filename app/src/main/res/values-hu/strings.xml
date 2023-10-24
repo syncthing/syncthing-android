@@ -209,7 +209,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <string name="run_on_wifi_title">Futtatás Wi-Fi kapcsolaton</string>
     <string name="run_on_wifi_summary">Futtatás amikor az eszköz Wi-Fi hálózathoz csatlakozik.</string>
     <string name="run_on_metered_wifi_title">Futtatás mért Wi-Fi kapcsolaton</string>
-    <string name="run_on_metered_wifi_summary">Futtatás mikor az eszköz mért Wi-Fi a hálózathoz csatlakozik, pl: hotspot vagy megosztott hálózat . Figyelem: Ez nagy mennyiségű adat szinkronizálásakor sok adatot használ fel  az adat keretből.</string>
+    <string name="run_on_metered_wifi_summary">Futtatás mikor az eszköz mért Wi-Fi a hálózathoz csatlakozik, pl: hotspot vagy megosztott hálózat . Figyelem: Ez nagy mennyiségű adat szinkronizálásakor sok adatot használ fel az adat keretből.</string>
     <string name="run_on_whitelisted_wifi_title">Futtatás megadott Wi-Fi hálózatokon</string>
     <string name="run_on_whitelisted_wifi_networks">Csak a kijelölt Wi-Fi hálózatokon fut: %1$s</string>
     <string name="run_on_all_wifi_networks">Futtatás minden W-Fi hálózaton.</string>
@@ -312,7 +312,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">Biztosan exportálni szeretnéd a konfigurációt\? A már létező fájlok felül lesznek írva.
 
-VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és ennek használatával letölthetik és módosíthatják  szinkronizált fájljaidat.</string>
+VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és ennek használatával letölthetik és módosíthatják szinkronizált fájljaidat.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Biztosan importálod a konfigurációt\? A meglévő fájlok felül lesznek írva.</string>
     <!--Toast shown after config was successfully exported-->

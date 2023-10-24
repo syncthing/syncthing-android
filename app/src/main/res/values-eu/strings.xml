@@ -40,7 +40,7 @@
     <string name="yes">Bai</string>
     <string name="no">Ez</string>
     <string name="open_website">Web gune irekia</string>
-    <string name="toast_write_storage_permission_required">Aplikazio honek biltegiratze  sistema idazteko baimena behar du</string>
+    <string name="toast_write_storage_permission_required">Aplikazio honek biltegiratze sistema idazteko baimena behar du</string>
     <string name="device_rejected"> \"%1$s\" gailuak konektatu nahi du</string>
     <string name="folder_rejected">\"%1$s\" Gailuak \"%2$s\" karpeta partekatu nahi du</string>
     <string name="dialog_disable_battery_optimization_title">Bateria optimizatzea</string>
@@ -209,7 +209,7 @@
     <string name="sync_only_wifi_ssids_connect_to_wifi">Konektatu Wi-Fi batera zerrendan gehitzeko.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Kokapenari baimena eman behar diozu funtzio hori erabiltzeko.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Baimena beharrezkoa da</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1etik aurrera, Wi-Fi konexioaren izena irakurri ahal izateko kokalekurako sarbidea behar da. Bakarrik baimen hori ematen baduzu  erabil dezakezu funtzio hori.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1etik aurrera, Wi-Fi konexioaren izena irakurri ahal izateko kokalekurako sarbidea behar da. Bakarrik baimen hori ematen baduzu erabil dezakezu funtzio hori.</string>
     <string name="power_source_title">Exekutatu gailua honek elikatuta dagoenean</string>
     <string-array name="power_source_entries">
         <item>AC eta bateria.</item>
@@ -217,11 +217,11 @@
         <item>Bateria indarra.</item>
     </string-array>
     <string name="respect_battery_saving_title">Errespetatu Androiden bateria aurrezteko konfigurazioa</string>
-    <string name="respect_battery_saving_summary">Desgaitu Syncthing  bateria aurreztea aktibo badago.</string>
+    <string name="respect_battery_saving_summary">Desgaitu Syncthing bateria aurreztea aktibo badago.</string>
     <string name="respect_master_sync_title">Errespetatu \"sinkronizazio automatikoko datuak\" Androiden konfigurazioa</string>
-    <string name="respect_master_sync_summary">Desaktibatu sinkronizazioa  \"sinkronizazio automatikoko datuak\" konfigurazio azkarreko mosaikoa desaktibatuta dagoenean.</string>
+    <string name="respect_master_sync_summary">Desaktibatu sinkronizazioa \"sinkronizazio automatikoko datuak\" konfigurazio azkarreko mosaikoa desaktibatuta dagoenean.</string>
     <string name="run_in_flight_mode_title">Exekutatu gailua hegaldi moduan dagoenean</string>
-    <string name="run_in_flight_mode_summary">Gaitu zure gailuak hegaldi moduan eskuzko Wi-Fi  konexioak detektatzeko arazoak baditu.</string>
+    <string name="run_in_flight_mode_summary">Gaitu zure gailuak hegaldi moduan eskuzko Wi-Fi konexioak detektatzeko arazoak baditu.</string>
     <string name="service_settings_title">Zerbitzuaren ezarpenak</string>
     <string name="service_settings_summary">Syncthing zerbitzu gisa exekutatu. Gehitu jakinarazpen iraunkor bat Androidek bertan behera utz ez dezan. Aukera hori markatzean, sinkronizazioa hasten da sistema eragilea abiaraztean.</string>
     <string name="run_as_background_service">Hasi zerbitzua automatikoki abiaraztean</string>

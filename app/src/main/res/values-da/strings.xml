@@ -38,7 +38,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Send enheds-ID til</string>
     <string name="usage_reporting_dialog_title">Tillad anonym forbrugsrapportering\?</string>
-    <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.\n\nDe aggregerede statistikker er offentligt tilgængelige her  https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.\n\nDe aggregerede statistikker er offentligt tilgængelige her https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="open_website">Åbn hjemmeside</string>

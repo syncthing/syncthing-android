@@ -306,7 +306,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
     <!--Toast shown after config was successfully imported-->
     <string name="config_imported_successful">S\'ha importat la configuració</string>
     <!--Toast shown after config was successfully imported-->
-    <string name="config_import_failed">Ha fallat la importació de la configuració, verifiqueu que els fitxers siguin a  %1$s</string>
+    <string name="config_import_failed">Ha fallat la importació de la configuració, verifiqueu que els fitxers siguin a %1$s</string>
     <!--Title for the preference to set STTRACE parameters-->
     <string name="sttrace_title">Opcions de STTRACE</string>
     <string name="environment_variables">Variables d\'entorn</string>
