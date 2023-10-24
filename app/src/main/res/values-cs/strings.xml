@@ -223,7 +223,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="respect_battery_saving_title">Dodržovat nastavení úspory baterie z Androidu</string>
     <string name="respect_battery_saving_summary">Vypnout Syncthing pokud je aktivní šetření energie.</string>
     <string name="respect_master_sync_title">Dodržovat nastavení automatické synchronizace dat z Androidu</string>
-    <string name="respect_master_sync_summary">Zakázat Syncthing, pokud je vypnutá dlaždice rychlého nastavení  \'Automaticky synchronizovat data.\'</string>
+    <string name="respect_master_sync_summary">Zakázat Syncthing, pokud je vypnutá dlaždice rychlého nastavení \'Automaticky synchronizovat data.\'</string>
     <string name="run_in_flight_mode_title">Spouštět když je zařízení v režimu Letadlo</string>
     <string name="run_in_flight_mode_summary">Zapněte pokud vaše zařízení má problémy se zjišťováním ručně provedených Wi-Fi připojení v režimu Letadlo.</string>
     <string name="service_settings_title">Nastavení služby</string>

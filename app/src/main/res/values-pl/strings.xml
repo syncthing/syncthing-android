@@ -300,7 +300,7 @@ UWAGA: może to spowodować znaczne zużycie transferu danych.</string>
     <string name="socks_proxy_address_title">Proxy SOCKS5</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
     <!--Toast after entering invalid socks proxy address-->
-    <string name="toast_invalid_socks_proxy_address">Podana wartość nie zgadza się ze składnią:  \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+    <string name="toast_invalid_socks_proxy_address">Podana wartość nie zgadza się ze składnią: \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="http_proxy_address_title">Proxy HTTP(S)</string>
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
