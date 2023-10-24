@@ -31,14 +31,14 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Підтвердити вихід з додатку</string>
-    <string name="dialog_exit_while_running_as_service_message">До вашої уваги: ви увімкнули автозапуск додатку при увімкненні пристрою. Тому він відслідковує умови синхронізації та синхронізує файли в фоні в будь-який час, коли умови співпадають. Вам слід закривати додаток вручну лише при виникненні серйозних проблем. В іншому випадку вимкніть \"Автозапуск при ввімкненні\" в налаштуваннях. Ви дійсно хочете закрити додаток до наступного перезавантаження пристрою?</string>
+    <string name="dialog_exit_while_running_as_service_message">До вашої уваги: ви увімкнули автозапуск додатку при увімкненні пристрою. Тому він відслідковує умови синхронізації та синхронізує файли в фоні в будь-який час, коли умови співпадають. Вам слід закривати додаток вручну лише при виникненні серйозних проблем. В іншому випадку вимкніть \"Автозапуск при ввімкненні\" в налаштуваннях. Ви дійсно хочете закрити додаток до наступного перезавантаження пристрою\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Додати теку</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Поділитися ідентифікатором пристрою</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Надіслати ідентифікатор пристрою на</string>
-    <string name="usage_reporting_dialog_title">Дозволити відправку анонімної статистики використання?</string>
+    <string name="usage_reporting_dialog_title">Дозволити відправку анонімної статистики використання\?</string>
     <string name="usage_reporting_dialog_description">Зашифрований звіт про використання додатку надсилається щодня. Він використовується для відстеження платформ, розмірів тек та версій додатку. При зміні набору інформації, що надсилається, цей діалог з\'явиться знову.\n\nОб\'єднана статистика загальнодоступна на https://data.syncthing.net.</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
@@ -108,7 +108,7 @@
     <!--Title for announce server status-->
     <string name="announce_server">Сервер-оповіщувач</string>
     <string name="restart">Перезапуск</string>
-    <string name="dialog_confirm_restart">Бажаєте перезапустити Syncthing?</string>
+    <string name="dialog_confirm_restart">Бажаєте перезапустити Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Ідентифікатор теки</string>
@@ -134,12 +134,12 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">Створити</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Ви дійсно бажаєте видалити цю теку з Syncthing?</string>
+    <string name="remove_folder_confirm">Ви дійсно бажаєте видалити цю теку з Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Ідентифікатор теки не може бути порожнім</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Шлях до теки не може бути порожнім</string>
-    <string name="dialog_discard_changes">Скасувати зміни?</string>
+    <string name="dialog_discard_changes">Скасувати зміни\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Ваша версія Android надає Syncthing доступ тільки на читання до обраної теки.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -147,7 +147,7 @@
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Вибачте, обрану теку не можна використати. Оберіть теку із внутрішнього або зовнішнього сховища.</string>
     <string name="ignore_patterns">Шаблони ігнорування</string>
-    <string name="create_ignore_file_error">Не вдалося створити файл ігнорування. Чи доступна тека на запис?</string>
+    <string name="create_ignore_file_error">Не вдалося створити файл ігнорування. Чи доступна тека на запис\?</string>
     <string name="edit_ignore_file_error">Текстові редактори не знайдено</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -178,7 +178,7 @@
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Редагувати пристрій</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Дійсно бажаєте видалити цей пристрій?</string>
+    <string name="remove_device_confirm">Дійсно бажаєте видалити цей пристрій\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Ідентифікатор пристрою не може бути порожнім</string>
     <!--Content description for device ID qr code icon-->
@@ -283,7 +283,7 @@
     <string name="gui_address">Адреси прослуховування веб-інтерфейсу</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Скасувати ігнорування пристроїв і тек</string>
-    <string name="undo_ignored_devices_folders_question">Це скасує раніше ігноровані пристрої і теки. Продовжити?</string>
+    <string name="undo_ignored_devices_folders_question">Це скасує раніше ігноровані пристрої і теки. Продовжити\?</string>
     <string name="undo_ignored_devices_folders_done">Ігнорування скасовано.</string>
     <string name="export_config">Експортувати налаштування</string>
     <!--Toast after entering invalid integer value-->
@@ -306,9 +306,9 @@
     <string name="use_legacy_hashing_title">Використовувати застарілий спосіб хешування</string>
     <string name="use_legacy_hashing_summary">Змусити Syncthing використовувати застарілий спосіб хешування з метою забезпечення сумісності</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування? Існуючі файли будуть перезаписані.\n\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
+    <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування\? Існуючі файли будуть перезаписані.\n\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування? Існуючі файли будуть перезаписані.</string>
+    <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування\? Існуючі файли будуть перезаписані.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Налаштування експортовано в %1$s</string>
     <string name="import_config">Імпортувати налаштування</string>
@@ -325,7 +325,7 @@
     <string name="st_reset_database_title">Очистити базу даних</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
-        \nВи впевнені, що хочете очистити базу даних Syncthing?
+        \nВи впевнені, що хочете очистити базу даних Syncthing\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">База даних Syncthing успішно очищена</string>
@@ -333,7 +333,7 @@
     <string name="st_reset_deltas_title">Очистити дельта-індекси</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
-        \nВи впевнені, що хочете очистити дельта-індекси Syncthing?
+        \nВи впевнені, що хочете очистити дельта-індекси Syncthing\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Дельта-індекси Syncthing успішно очищені</string>
@@ -426,7 +426,7 @@
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing вимкнено</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Бажаєте змінити умови синхронізації?</string>
+    <string name="syncthing_disabled_message">Бажаєте змінити умови синхронізації\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Змінити налаштування</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

@@ -27,7 +27,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <string name="share_device_id">Jaa laitetunnus</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Jaa laitetunnus</string>
-    <string name="usage_reporting_dialog_title">Salli anonyymi käytön seuranta?</string>
+    <string name="usage_reporting_dialog_title">Salli anonyymi käytön seuranta\?</string>
     <string name="usage_reporting_dialog_description">Salatut käyttötiedot lähetetään päivittäin. Niitä käytetään seuraamaan yleisiä alustoja, kansioiden kokoja ja sovellusten versioita. Jos ilmoitettu tietosisältö muuttuu, sinulta kysytään lupa uudelleen.\n\nKoostetut tilastot ovat julkisesti saatavilla osoitteessa https://data.syncthing.net.</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
@@ -87,7 +87,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <!--Title for announce server status-->
     <string name="announce_server">Etsintäpalvelin</string>
     <string name="restart">Käynnistä uudelleen</string>
-    <string name="dialog_confirm_restart">Haluatko käynnistää Syncthingin uudelleen?</string>
+    <string name="dialog_confirm_restart">Haluatko käynnistää Syncthingin uudelleen\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Kansion tunnus</string>
@@ -110,12 +110,12 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <!--Menu item to confirm folder creation-->
     <string name="create">Luo</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Haluatko varmasti poistaa tämän kansion Synthingistä?</string>
+    <string name="remove_folder_confirm">Haluatko varmasti poistaa tämän kansion Synthingistä\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Kansion tunnus ei voi olla tyhjä</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Kansion polku ei voi olla tyhjä</string>
-    <string name="dialog_discard_changes">Hylkää muutokset?</string>
+    <string name="dialog_discard_changes">Hylkää muutokset\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <!--Summary shown if we only have readwrite access to the folder path-->
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
@@ -147,7 +147,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Muokkaa laitetta</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Haluatko varmasti poistaa tämän laitteen?</string>
+    <string name="remove_device_confirm">Haluatko varmasti poistaa tämän laitteen\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Laitetunnus ei voi olla tyhjä</string>
     <!--Content description for device ID qr code icon-->
@@ -206,9 +206,9 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <string name="use_legacy_hashing_title">Käytä vanhaa tarkistussumman laskentaa</string>
     <string name="use_legacy_hashing_summary">Pakota Syncthing käyttämään vanhaa tarkistussumman laskentapakettia yhteensopivuuden parantamiseksi</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Haluatko varmasti viedä asetuksesi? Vanhat tiedostot ylikirjoitetaan.\n\nVAROITUS! Muut sovellukset saattavat voida lukea yksityisen avaimen varmuuskopiosta ja käyttää sitä synkronoitujan tiedostojen lataamiseen tai muokkaamiseen.</string>
+    <string name="dialog_confirm_export">Haluatko varmasti viedä asetuksesi\? Vanhat tiedostot ylikirjoitetaan.\n\nVAROITUS! Muut sovellukset saattavat voida lukea yksityisen avaimen varmuuskopiosta ja käyttää sitä synkronoitujan tiedostojen lataamiseen tai muokkaamiseen.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Haluatko varmasti tuoda uudet asetukset? Vanhat tiedostot ylikirjoitetaan.</string>
+    <string name="dialog_confirm_import">Haluatko varmasti tuoda uudet asetukset\? Vanhat tiedostot ylikirjoitetaan.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Asetukset vietiin kansioon %1$s</string>
     <string name="import_config">Tuo asetukset</string>

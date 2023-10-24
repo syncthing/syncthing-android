@@ -29,14 +29,14 @@ Por favor, informe de cualquier problema que encuentre a través de Github.</str
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Confirmar para salir de la aplicación</string>
-    <string name="dialog_exit_while_running_as_service_message">Para su consideración: Usted configuró la aplicación para que se inicie automáticamente en el arranque. Por lo tanto, supervisa las condiciones de ejecución y se sincroniza en cualquier momento en segundo plano cuando las condiciones coinciden. Solo debe salir manualmente si tiene problemas graves. De lo contrario, deshabilite \"Iniciar automáticamente en el arranque\" en la configuración. ¿Quieres salir ahora hasta que el dispositivo se reinicie?</string>
+    <string name="dialog_exit_while_running_as_service_message">Para su consideración: Usted configuró la aplicación para que se inicie automáticamente en el arranque. Por lo tanto, supervisa las condiciones de ejecución y se sincroniza en cualquier momento en segundo plano cuando las condiciones coinciden. Solo debe salir manualmente si tiene problemas graves. De lo contrario, deshabilite \"Iniciar automáticamente en el arranque\" en la configuración. ¿Quieres salir ahora hasta que el dispositivo se reinicie\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Añadir carpeta</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Compartir ID del dispositivo</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID del dispositivo</string>
-    <string name="usage_reporting_dialog_title">¿Permitir reportes de uso anónimos?</string>
+    <string name="usage_reporting_dialog_title">¿Permitir reportes de uso anónimos\?</string>
     <string name="usage_reporting_dialog_description">El reporte de uso encriptado es enviado diariamente. Es usado para rastrear plataformas comunes, tamaño de carpetas y versiones de la aplicación. Si se cambia el conjunto de datos reportados, se le presentará este diálogo de nuevo.\n\nLas estadísticas agregadas se encuentran disponibles públicamente en https://data.syncthing.net.</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
@@ -110,7 +110,7 @@ Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales p
     <!--Menu item to confirm folder creation-->
     <string name="create">Crear</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">¿Realmente quiere borrar esta carpeta de Syncthing?</string>
+    <string name="remove_folder_confirm">¿Realmente quiere borrar esta carpeta de Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">El ID de la carpeta no debe estar vacío</string>
     <!--Toast shown when trying to create a folder with an empty path-->
@@ -146,7 +146,7 @@ Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales p
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Editar dispositivo</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">¿Realmente quiere eliminar este dispositivo?</string>
+    <string name="remove_device_confirm">¿Realmente quiere eliminar este dispositivo\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">El ID del dispositivo no debe estar vacío</string>
     <!--Content description for device ID qr code icon-->
@@ -191,9 +191,9 @@ Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales p
     <!--Toast after entering invalid socks proxy address-->
     <!--Toast after entering invalid http proxy address-->
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">¿Realmente quiere exportar su configuración? Los archivos existentes se sobreescribirán.\n\n¡ADVERTENCIA! Otras aplicaciones pudieran leer la llave privada desde la ubicación del respaldo y usarla para descargar/modificar los archivos sincronizados.</string>
+    <string name="dialog_confirm_export">¿Realmente quiere exportar su configuración\? Los archivos existentes se sobreescribirán.\n\n¡ADVERTENCIA! Otras aplicaciones pudieran leer la llave privada desde la ubicación del respaldo y usarla para descargar/modificar los archivos sincronizados.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">¿Realmente quiere importar una nueva configuración? Los archivos existentes se sobreescribirán.</string>
+    <string name="dialog_confirm_import">¿Realmente quiere importar una nueva configuración\? Los archivos existentes se sobreescribirán.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Configuración exportada a %1$s</string>
     <string name="import_config">Importar Configuración</string>

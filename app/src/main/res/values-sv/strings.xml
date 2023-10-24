@@ -31,14 +31,14 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Bekräfta att avsluta appen</string>
-    <string name="dialog_exit_while_running_as_service_message">För din övervägande: Du konfigurerade appen för att starta automatiskt vid uppstart. Därför övervakar den körförhållanden och synkroniseras när som helst i bakgrunden när förhållandena matchar. Du bör bara avsluta manuellt om du stöter på allvarliga problem. Annars, inaktivera \"Starta automatiskt vid start\" i inställningarna. Vill du avsluta nu tills enheten startas om?</string>
+    <string name="dialog_exit_while_running_as_service_message">För din övervägande: Du konfigurerade appen för att starta automatiskt vid uppstart. Därför övervakar den körförhållanden och synkroniseras när som helst i bakgrunden när förhållandena matchar. Du bör bara avsluta manuellt om du stöter på allvarliga problem. Annars, inaktivera \"Starta automatiskt vid start\" i inställningarna. Vill du avsluta nu tills enheten startas om\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Lägg till mapp</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Dela enhets-ID</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Skicka enhets-ID till</string>
-    <string name="usage_reporting_dialog_title">Tillåt anonym användningsrapportering?</string>
+    <string name="usage_reporting_dialog_title">Tillåt anonym användningsrapportering\?</string>
     <string name="usage_reporting_dialog_description">Den krypterade användningsrapporten skickas dagligen. Den används för att spåra vanliga plattformar, mappstorlekar och appversioner. Om uppsättningen av de rapporterade uppgifterna ändras kommer du att bli tillfrågad med den här dialogrutan igen.\n\nDen aggregerade statistiken är offentligt tillgänglig på https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
@@ -106,7 +106,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--Title for announce server status-->
     <string name="announce_server">Annonseringsserver</string>
     <string name="restart">Starta om</string>
-    <string name="dialog_confirm_restart">Vill du starta om Syncthing?</string>
+    <string name="dialog_confirm_restart">Vill du starta om Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Mapp-ID</string>
@@ -132,12 +132,12 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Skapa</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Vill du verkligen ta bort denna mapp från Syncthing?</string>
+    <string name="remove_folder_confirm">Vill du verkligen ta bort denna mapp från Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Mapp-ID får inte vara tom</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Mapp-sökvägen får inte vara tom</string>
-    <string name="dialog_discard_changes">Kassera dina ändringar?</string>
+    <string name="dialog_discard_changes">Kassera dina ändringar\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Din Android-version ger Syncthing endast skrivskyddad åtkomst till den valda mappen.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -145,7 +145,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Tyvärr. Den valda mappen kan inte användas. Välj en mapp som finns på intern eller extern lagring.</string>
     <string name="ignore_patterns">Ignoreringsmönster</string>
-    <string name="create_ignore_file_error">Misslyckades med att skapa ignorera-fil. Är mappen skrivbar?</string>
+    <string name="create_ignore_file_error">Misslyckades med att skapa ignorera-fil. Är mappen skrivbar\?</string>
     <string name="edit_ignore_file_error">Ingen textredigerare hittades</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -176,7 +176,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Redigera enhet</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Vill du verkligen ta bort den här enheten?</string>
+    <string name="remove_device_confirm">Vill du verkligen ta bort den här enheten\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Enhets-ID får inte vara tom</string>
     <!--Content description for device ID qr code icon-->
@@ -281,7 +281,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <string name="gui_address">Lyssnaradresser för gränssnittet</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Ångra ignorerande enheter och mappar</string>
-    <string name="undo_ignored_devices_folders_question">Detta kommer att ångra tidigare beslut att ignorera enheter och mappar. Fortsätta?</string>
+    <string name="undo_ignored_devices_folders_question">Detta kommer att ångra tidigare beslut att ignorera enheter och mappar. Fortsätta\?</string>
     <string name="undo_ignored_devices_folders_done">Ogjort beslut.</string>
     <string name="export_config">Exportera konfiguration</string>
     <!--Toast after entering invalid integer value-->
@@ -304,9 +304,9 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <string name="use_legacy_hashing_title">Använd legacy hashing</string>
     <string name="use_legacy_hashing_summary">Tvinga Syncthing att använda legacy hashningspaket för kompatibilitetsändamål</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att hämta/ändra synkroniserade filer.</string>
+    <string name="dialog_confirm_export">Vill du verkligen exportera din konfiguration\? Befintliga filer kommer att skrivas över.\n\nVARNING! Andra appar kan få möjlighet att läsa den privata nyckeln från säkerhetskopian och använda den för att hämta/ändra synkroniserade filer.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration? Befintliga filer kommer att skrivas över.</string>
+    <string name="dialog_confirm_import">Vill du verkligen importera en ny konfiguration\? Befintliga filer kommer att skrivas över.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Konfiguration exporterades till %1$s</string>
     <string name="import_config">Importera konfiguration</string>
@@ -323,7 +323,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <string name="st_reset_database_title">Återställ databas</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Denna åtgärd bör endast utföras baserat på en rekommendation från vårt supportteam.
-        \nÄr du säker på att du vill rensa Syncthings databas?
+        \nÄr du säker på att du vill rensa Syncthings databas\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthings databas återställdes</string>
@@ -331,7 +331,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <string name="st_reset_deltas_title">Återställ deltaindex</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Denna åtgärd bör endast utföras baserat på en rekommendation från vårt supportteam.
-        \nÄr du säker på att du vill rensa Syncthings deltaindex?
+        \nÄr du säker på att du vill rensa Syncthings deltaindex\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthings deltaindex återställdes</string>
@@ -418,7 +418,7 @@ Rapportera eventuella problem du stöter på via Github.</string>
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing är inaktiverad</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Vill du ändra körförhållandena?</string>
+    <string name="syncthing_disabled_message">Vill du ändra körförhållandena\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Ändra inställningar</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

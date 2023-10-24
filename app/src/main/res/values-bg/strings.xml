@@ -31,14 +31,14 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Потвърдете за изход от приложението</string>
-    <string name="dialog_exit_while_running_as_service_message">Имайте предвид: Настроили сте приложението да се изпълнява автоматично при зареждане. Следователно то следи условията на работа и синхронизира по всяко време във фонов режим, когато условията позволяват. Ако се сблъскате със сериозни проблеми приложението може да бъде спряно само ръчно. В противен случай изключете „Услугата стартира при включване на устройството“ в настройките. Искате ли да спрете приложението сега, докато устройството се рестартира?</string>
+    <string name="dialog_exit_while_running_as_service_message">Имайте предвид: Настроили сте приложението да се изпълнява автоматично при зареждане. Следователно то следи условията на работа и синхронизира по всяко време във фонов режим, когато условията позволяват. Ако се сблъскате със сериозни проблеми приложението може да бъде спряно само ръчно. В противен случай изключете „Услугата стартира при включване на устройството“ в настройките. Искате ли да спрете приложението сега, докато устройството се рестартира\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Добавяне на папка</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Споделяне на идентификатор</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Изпращане на идентификатора чрез</string>
-    <string name="usage_reporting_dialog_title">Разреши анонимно докладване за употребата на програмата?</string>
+    <string name="usage_reporting_dialog_title">Разреши анонимно докладване за употребата на програмата\?</string>
     <string name="usage_reporting_dialog_description">Криптираният доклад се изпраща ежедневно. Използва се, за отичане на ползваните платформи, размер на папки и версии на приложението. Ако събираните данни се променят, ще бъдете информиран с подобен на този диалог.\n\nОбобщената статистика ще намерите на https://data.syncthing.net.</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
@@ -106,7 +106,7 @@
     <!--Title for announce server status-->
     <string name="announce_server">Сървър за откриване на устройства</string>
     <string name="restart">Рестартиране</string>
-    <string name="dialog_confirm_restart">Желаете ли Syncthing да бъде рестартиран?</string>
+    <string name="dialog_confirm_restart">Желаете ли Syncthing да бъде рестартиран\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Идентификатор на папката</string>
@@ -132,12 +132,12 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">Създаване</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Наистина ли желаете папката да бъде изтрита?</string>
+    <string name="remove_folder_confirm">Наистина ли желаете папката да бъде изтрита\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Наложително е да въведете идентификатор на папката</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Наложително е да въведете път до папката</string>
-    <string name="dialog_discard_changes">Отказвате ли се от направените промени?</string>
+    <string name="dialog_discard_changes">Отказвате ли се от направените промени\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Syncthing получава от Андроид права само за четене на избраната папка.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -145,7 +145,7 @@
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Избраната папка не може да бъде използвана. Изберете папка, разположена във вътрешното или външното хранилище.</string>
     <string name="ignore_patterns">Модели за игнориране</string>
-    <string name="create_ignore_file_error">Файлът с шаблони за пренебрегване не е създаден. Имате ли права за писане в папката?</string>
+    <string name="create_ignore_file_error">Файлът с шаблони за пренебрегване не е създаден. Имате ли права за писане в папката\?</string>
     <string name="edit_ignore_file_error">Не е намерен текстов редактор</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -176,7 +176,7 @@
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Редактиране на устройство</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Наистина ли желаете устройството да бъде изтрито?</string>
+    <string name="remove_device_confirm">Наистина ли желаете устройството да бъде изтрито\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Наложително е да въведете идентификатор на устройството</string>
     <!--Content description for device ID qr code icon-->
@@ -281,7 +281,7 @@
     <string name="gui_address">Адрес за свързване с потребителския интерфейс</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Премахване на пренебрегнати устройства и папки</string>
-    <string name="undo_ignored_devices_folders_question">Решенията за пренебрегване на устройства и папки ще бъдат отменени. Желаете ли да продължите?</string>
+    <string name="undo_ignored_devices_folders_question">Решенията за пренебрегване на устройства и папки ще бъдат отменени. Желаете ли да продължите\?</string>
     <string name="undo_ignored_devices_folders_done">Решенията са успешно отменени.</string>
     <string name="export_config">Изнасяне на настройки</string>
     <!--Toast after entering invalid integer value-->
@@ -304,9 +304,9 @@
     <string name="use_legacy_hashing_title">Стари отпечатъци</string>
     <string name="use_legacy_hashing_summary">Принуждава Syncthing да използва по-стария пакет за отпечатъци с цел съвместимост</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Други приложения могат да извлекат частния ключ от изнесения файл, а чрез него да изтеглят и синхронизират файлове.</string>
+    <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени\? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Други приложения могат да извлекат частния ключ от изнесения файл, а чрез него да изтеглят и синхронизират файлове.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Наистина ли желаете да внесете нови настройки? Съществуващите файлове ще бъдат презаписани.</string>
+    <string name="dialog_confirm_import">Наистина ли желаете да внесете нови настройки\? Съществуващите файлове ще бъдат презаписани.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Настройките са изнесени в %1$s</string>
     <string name="import_config">Внасяне на настройки</string>
@@ -323,7 +323,7 @@
     <string name="st_reset_database_title">Нулиране на банка от данни</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Нулирането трябва да се прилага само след препоръка от нашия екип.
-        \nНаистина ли желаете да нулирате банката от данни на Syncthing?
+        \nНаистина ли желаете да нулирате банката от данни на Syncthing\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Банката от данни на Syncthing е нулирана успешно</string>
@@ -331,7 +331,7 @@
     <string name="st_reset_deltas_title">Нулиране на показалеца за различия</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Това действие трябва да бъде изпълнявано само след препоръка от нашия екип по поддръжка.
-\nСигурни ли сте, че желаете показалеца за различия на Syncthing да бъде нулиран?</string>
+\nСигурни ли сте, че желаете показалеца за различия на Syncthing да бъде нулиран\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Показалецът за различия на Syncthing е нулиран</string>
     <string name="category_about">За приложението</string>
@@ -417,7 +417,7 @@
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing е изключен</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Наистина ли желаете да промените условията за включване?</string>
+    <string name="syncthing_disabled_message">Наистина ли желаете да промените условията за включване\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Промяна на настройки</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

@@ -32,7 +32,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <string name="share_device_id">Bagikan ID Perangkat</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Kirim ID Perangkat ke</string>
-    <string name="usage_reporting_dialog_title">Perbolehkan Pelaporan Penggunaan Anonim?</string>
+    <string name="usage_reporting_dialog_title">Perbolehkan Pelaporan Penggunaan Anonim\?</string>
     <string name="usage_reporting_dialog_description">Laporan penggunaan terenkripsi dikirim harian. Digunakan untuk melihat jenis platform, ukuran folder dan versi aplikasi. Jika data yang terkirim berubah maka akan muncul dialog ini kembali.\n\nAgregat statistik dipublikasikan di https://data.syncthing.net</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
@@ -88,7 +88,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--Title for announce server status-->
     <string name="announce_server">Server Penyiaran</string>
     <string name="restart">Restart</string>
-    <string name="dialog_confirm_restart">Anda ingin menjalankan ulang Syncthing?</string>
+    <string name="dialog_confirm_restart">Anda ingin menjalankan ulang Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">ID Folder</string>
@@ -111,17 +111,17 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Buat</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Anda yakin ingin menghapus folder ini dari Syncthing?</string>
+    <string name="remove_folder_confirm">Anda yakin ingin menghapus folder ini dari Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">ID folder tidak boleh kosong</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Path/lokasi folder tidak boleh kosong</string>
-    <string name="dialog_discard_changes">Abaikan perubahan anda?</string>
+    <string name="dialog_discard_changes">Abaikan perubahan anda\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <!--Summary shown if we only have readwrite access to the folder path-->
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="ignore_patterns">Pola pengabaian</string>
-    <string name="create_ignore_file_error">Gagal membuat berkas ignore. Apakah direktori bisa ditulisi?</string>
+    <string name="create_ignore_file_error">Gagal membuat berkas ignore. Apakah direktori bisa ditulisi\?</string>
     <string name="edit_ignore_file_error">Tidak ada editor teks yang ditemukan</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -151,7 +151,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Edit Perangkat</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Anda yakin ingin menghapus perangkat ini?</string>
+    <string name="remove_device_confirm">Anda yakin ingin menghapus perangkat ini\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">ID perangkat tidak boleh kosong</string>
     <!--Content description for device ID qr code icon-->
@@ -213,9 +213,9 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <string name="use_legacy_hashing_title">Gunakan hashing lawas</string>
     <string name="use_legacy_hashing_summary">Paksa Syncthing menggunakan paket hashing lawas untuk kompatibilitas</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Anda yakin ingin mengekspor konfigurasi? Berkas yang ada akan ditimpa.\n\nPERINGATAN| Aplikasi lain mungkin bisa membaca kunci privat dari lokasi backup dan menggunakannya untuk mengunduh/mengubah berkas terselaraskan.</string>
+    <string name="dialog_confirm_export">Anda yakin ingin mengekspor konfigurasi\? Berkas yang ada akan ditimpa.\n\nPERINGATAN| Aplikasi lain mungkin bisa membaca kunci privat dari lokasi backup dan menggunakannya untuk mengunduh/mengubah berkas terselaraskan.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Anda yakin ingin mengimpor konfigurasi baru? Berkas yang ada akan ditimpa.</string>
+    <string name="dialog_confirm_import">Anda yakin ingin mengimpor konfigurasi baru\? Berkas yang ada akan ditimpa.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Konfig sudah diekspor ke %1$s</string>
     <string name="import_config">Impor Konfigurasi</string>

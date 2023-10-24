@@ -53,7 +53,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Title of the exit app when running as a service confirmation dialog -->
     <string name="dialog_exit_while_running_as_service_title">Confirm to quit app</string>
-    <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device rebooted?</string>
+    <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device rebooted\?</string>
 
     <!-- Title of the "add folder" menu action -->
     <string name="add_folder">Add Folder</string>
@@ -64,7 +64,7 @@ Please report any problems you encounter via Github.</string>
     <!-- Shown in the chooser dialog when sharing a Device ID -->
     <string name="send_device_id_to">Send Device ID to</string>
 
-    <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting?</string>
+    <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting\?</string>
 
     <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
 
@@ -174,7 +174,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="restart">Restart</string>
 
-    <string name="dialog_confirm_restart">Do you want to restart Syncthing?</string>
+    <string name="dialog_confirm_restart">Do you want to restart Syncthing\?</string>
 
     <!-- FolderActivity -->
 
@@ -214,7 +214,7 @@ Please report any problems you encounter via Github.</string>
     <string name="create">Create</string>
 
     <!-- Dialog shown when attempting to remove a folder -->
-    <string name="remove_folder_confirm">Do you really want to remove this folder from Syncthing?</string>
+    <string name="remove_folder_confirm">Do you really want to remove this folder from Syncthing\?</string>
 
     <!-- Toast shown when trying to create a folder with an empty ID -->
     <string name="folder_id_required">The folder ID must not be empty</string>
@@ -222,7 +222,7 @@ Please report any problems you encounter via Github.</string>
     <!-- Toast shown when trying to create a folder with an empty path -->
     <string name="folder_path_required">The folder path must not be empty</string>
 
-    <string name="dialog_discard_changes">Discard your changes?</string>
+    <string name="dialog_discard_changes">Discard your changes\?</string>
 
     <!-- Summary shown if we only have readonly access to the folder path -->
     <string name="folder_path_readonly">Your Android version only grants Syncthing readonly access to the selected folder.</string>
@@ -235,7 +235,7 @@ Please report any problems you encounter via Github.</string>
 
     <string name="ignore_patterns">Ignore Patterns</string>
 
-    <string name="create_ignore_file_error">Failed to create ignore file. Is the directory writable?</string>
+    <string name="create_ignore_file_error">Failed to create ignore file. Is the directory writable\?</string>
 
     <string name="edit_ignore_file_error">No text editor found</string>
 
@@ -282,7 +282,7 @@ Please report any problems you encounter via Github.</string>
     <string name="edit_device">Edit Device</string>
 
     <!-- Dialog shown when attempting to remove a device -->
-    <string name="remove_device_confirm">Do you really want to remove this device?</string>
+    <string name="remove_device_confirm">Do you really want to remove this device\?</string>
 
     <!-- Toast shown when trying to create a device with an empty ID -->
     <string name="device_id_required">The device ID must not be empty</string>
@@ -442,7 +442,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Titles for the preference to undo ignored devices and folders -->
     <string name="undo_ignored_devices_folders_title">Undo ignoring devices and folders</string>
-    <string name="undo_ignored_devices_folders_question">This will undo previous decisions to ignore devices and folders. Continue?</string>
+    <string name="undo_ignored_devices_folders_question">This will undo previous decisions to ignore devices and folders. Continue\?</string>
     <string name="undo_ignored_devices_folders_done">Successfully undone decisions.</string>
 
     <string name="export_config">Export Configuration</string>
@@ -660,7 +660,7 @@ Please report any problems you encounter via Github.</string>
     <string name="syncthing_disabled_title">Syncthing is disabled</string>
 
     <!-- Message of the "syncthing disabled" dialog -->
-    <string name="syncthing_disabled_message">Do you want to change the run conditions?</string>
+    <string name="syncthing_disabled_message">Do you want to change the run conditions\?</string>
 
     <!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>

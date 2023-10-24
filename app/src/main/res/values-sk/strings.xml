@@ -31,14 +31,14 @@ Prípadné problémy nahláste cez GitHub.</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Potvrďte ukončenie aplikácie</string>
-    <string name="dialog_exit_while_running_as_service_message">Na zváženie: Aplikáciu ste nastavili tak, aby sa spúšťala pri zapnutí zariadenia. Aplikácia bude preto sledovať podmienky a keď sú splnené, synchronizuje súbory. Aplikáciu by ste mali vypínať iba ak s vyskytnú problémy. Inak si radšej vypnite funkciu \"Zapnúť aplikáciu pri štarte zariadenia\" v nastaveniach. Chcete aplikáciu teraz vypnúť aby sa potom zapla pri ďalšom štarte?</string>
+    <string name="dialog_exit_while_running_as_service_message">Na zváženie: Aplikáciu ste nastavili tak, aby sa spúšťala pri zapnutí zariadenia. Aplikácia bude preto sledovať podmienky a keď sú splnené, synchronizuje súbory. Aplikáciu by ste mali vypínať iba ak s vyskytnú problémy. Inak si radšej vypnite funkciu \"Zapnúť aplikáciu pri štarte zariadenia\" v nastaveniach. Chcete aplikáciu teraz vypnúť aby sa potom zapla pri ďalšom štarte\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Pridať Adresár</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Zdielať ID Zariadenia</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Zdielať ID Zariadenia s použitím</string>
-    <string name="usage_reporting_dialog_title">Povoliť anonymné hlásenia o používaní?</string>
+    <string name="usage_reporting_dialog_title">Povoliť anonymné hlásenia o používaní\?</string>
     <string name="usage_reporting_dialog_description">Šifrované dáta o používaní sú zasielané denne. Sú používané na získavanie štatistík o platformách, veľkostiach zdielaných adresárov a verziách aplikácie. Ak sa rozsah zbieraných údajov v budúcnosti zmení, budete na zmenu upozornený opätovným zobrazením tohoto dialógu.\n\nSúhrn získaných štatistýk je verejne dostupný na https://data.syncthing.net.</string>
     <string name="yes">Áno</string>
     <string name="no">Nie</string>
@@ -108,7 +108,7 @@ Prípadné problémy nahláste cez GitHub.</string>
     <!--Title for announce server status-->
     <string name="announce_server">Ohlasovací server</string>
     <string name="restart">Reštartovať</string>
-    <string name="dialog_confirm_restart">Chcete reštartovať Syncthing?</string>
+    <string name="dialog_confirm_restart">Chcete reštartovať Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">ID adresára</string>
@@ -134,7 +134,7 @@ Prípadné problémy nahláste cez GitHub.</string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Vytvoriť</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Chcete tento priečinok skutočne odstrániť zo synchronizácie?</string>
+    <string name="remove_folder_confirm">Chcete tento priečinok skutočne odstrániť zo synchronizácie\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">ID pričinka nesmie byť prázdne</string>
     <!--Toast shown when trying to create a folder with an empty path-->
@@ -172,7 +172,7 @@ Prípadné problémy nahláste cez GitHub.</string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Upraviť Zariadenie</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Skutočne chcete odstrániť zariadenie?</string>
+    <string name="remove_device_confirm">Skutočne chcete odstrániť zariadenie\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">ID zariadenia nemôže byť prázdne</string>
     <!--Content description for device ID qr code icon-->
@@ -251,7 +251,7 @@ Prípadné problémy nahláste cez GitHub.</string>
     <!--Toast after entering invalid http proxy address-->
     <!--Dialog shown before config export-->
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu? Existujúce súbory budú prepísané.</string>
+    <string name="dialog_confirm_import">Naozaj chcete importova konfiguráciu\? Existujúce súbory budú prepísané.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Konfigurácia bola exportovaná do %1$s</string>
     <string name="import_config">Importovať Konfiguráciu</string>

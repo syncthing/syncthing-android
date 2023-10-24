@@ -27,7 +27,7 @@
     <string name="share_device_id">උපාංගයේ හැඳු. බෙදාගන්න</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">මෙයට උපාංගයේ හැඳු. යවන්න</string>
-    <string name="usage_reporting_dialog_title">භාවිතය නිර්නාමිකව වාර්තා කිරීමට ඉඩ දෙනවාද?</string>
+    <string name="usage_reporting_dialog_title">භාවිතය නිර්නාමිකව වාර්තා කිරීමට ඉඩ දෙනවාද\?</string>
     <string name="yes">ඔව්</string>
     <string name="no">නැහැ</string>
     <string name="open_website">අඩවිය අරින්න</string>

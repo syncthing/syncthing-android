@@ -29,14 +29,14 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Baieztatu aplikazioa uzteko</string>
-    <string name="dialog_exit_while_running_as_service_message">Kontuan hartzeko: abiaraztean automatikoki hasteko konfiguratu duzu aplikazioa. Beraz, exekuzio baldintzak gainbegiratzen ditu eta edozein momentutan sinkronizatzen da bigarren mailan, baldintzak bat datozenean. Arazo larriak izanez gero bakarrik atera behar duzu eskuz. Bestela, \'Automatikoki hasi\' desgaitu konfigurazioan. Gailua berrabiarazi arte irten nahi duzu orain?</string>
+    <string name="dialog_exit_while_running_as_service_message">Kontuan hartzeko: abiaraztean automatikoki hasteko konfiguratu duzu aplikazioa. Beraz, exekuzio baldintzak gainbegiratzen ditu eta edozein momentutan sinkronizatzen da bigarren mailan, baldintzak bat datozenean. Arazo larriak izanez gero bakarrik atera behar duzu eskuz. Bestela, \'Automatikoki hasi\' desgaitu konfigurazioan. Gailua berrabiarazi arte irten nahi duzu orain\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Karpeta gehitu</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Partekatu gailuaren IDa</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Bidali honi gailuaren IDa</string>
-    <string name="usage_reporting_dialog_title">Erabilera txosten anonimoak baimendu?</string>
+    <string name="usage_reporting_dialog_title">Erabilera txosten anonimoak baimendu\?</string>
     <string name="usage_reporting_dialog_description">Erabilera-txosten zifratua egunero bidaltzen da. Plataforma ohikoenak, karpeten tamaina eta aplikazioaren bertsioak monitorizatzeko erabiltzen da. Txostenaren datu guztiak aldatzen badira, mezu hau agertuko zaizu berriro.\n\nEstatistika globalak jendaurrean eskuragarri daude https://data.syncthing.net gunean.</string>
     <string name="yes">Bai</string>
     <string name="no">Ez</string>
@@ -104,7 +104,7 @@
     <!--Title for announce server status-->
     <string name="announce_server">Bilaketa globaleko zerbitzaria</string>
     <string name="restart">Hasi berriro</string>
-    <string name="dialog_confirm_restart">Syncthing berriro hastea nahi duzu?</string>
+    <string name="dialog_confirm_restart">Syncthing berriro hastea nahi duzu\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Karpetaren ID</string>
@@ -130,12 +130,12 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">Sortu</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Benetan baztertu nahi duzu karpeta hau Syncthing-etik?</string>
+    <string name="remove_folder_confirm">Benetan baztertu nahi duzu karpeta hau Syncthing-etik\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Karpeta ID-a ez du hutsik egon behar</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Karpetarako bideak ez du hutsik egon behar</string>
-    <string name="dialog_discard_changes">Baztertu zure aldaketak?</string>
+    <string name="dialog_discard_changes">Baztertu zure aldaketak\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Zure Android bertsioak bakarrik ematen dio Syncthingi aukeratutako karpeta irakurtzeko aukera.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -143,7 +143,7 @@
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Sentitzen dut. Aukeratutako karpeta ezin da erabili. Aukeratu barneko edo kanpoko biltegiratzean kokatutako karpeta bat.</string>
     <string name="ignore_patterns">Ezikusi ereduak</string>
-    <string name="create_ignore_file_error">Ezin izan da ezikusi fitxategia sortu. Direktorioa idatzi daiteke?</string>
+    <string name="create_ignore_file_error">Ezin izan da ezikusi fitxategia sortu. Direktorioa idatzi daiteke\?</string>
     <string name="edit_ignore_file_error">Ez da testu editorerik aurkitu</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -174,7 +174,7 @@
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Editatu gailua</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Benetan baztertu nahi duzu gailu hau?</string>
+    <string name="remove_device_confirm">Benetan baztertu nahi duzu gailu hau\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Gailuaren ID-a ez du hutsik egon behar</string>
     <!--Content description for device ID qr code icon-->
@@ -279,7 +279,7 @@
     <string name="gui_address">Interfazearen entzuteko helbideak </string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Desegin gailuak eta karpetak alde batera utzita</string>
-    <string name="undo_ignored_devices_folders_question">Honek gailuei eta karpetei jaramonik ez egiteko aurreko erabakiak desegingo ditu. Aurrera?</string>
+    <string name="undo_ignored_devices_folders_question">Honek gailuei eta karpetei jaramonik ez egiteko aurreko erabakiak desegingo ditu. Aurrera\?</string>
     <string name="undo_ignored_devices_folders_done">Erabaki deseginak, arrakastaz.</string>
     <string name="export_config">Esportatu konfigurazioa</string>
     <!--Toast after entering invalid integer value-->
@@ -302,9 +302,9 @@
     <string name="use_legacy_hashing_title">Erabili era zaharra hashak sortzeko</string>
     <string name="use_legacy_hashing_summary">Behartu antzinako hashing pakete baten erabilera, bateragarritasunagatik</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Ziur konfigurazioa esportatu nahi duzula? Dauden fitxategiak gainidatziko dira. Beste aplikazio batzuek kopiaren kokapenean dagoen gako pribatua irakur dezakete eta fitxategi sinkronizatuak deskargatzeko/aldatzeko erabili.</string>
+    <string name="dialog_confirm_export">Ziur konfigurazioa esportatu nahi duzula\? Dauden fitxategiak gainidatziko dira. Beste aplikazio batzuek kopiaren kokapenean dagoen gako pribatua irakur dezakete eta fitxategi sinkronizatuak deskargatzeko/aldatzeko erabili.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Ziur konfigurazio berri bat inportatu nahi duzula? Dauden artxiboak gainidatziko dira.</string>
+    <string name="dialog_confirm_import">Ziur konfigurazio berri bat inportatu nahi duzula\? Dauden artxiboak gainidatziko dira.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Konfigurazioa hona bidali da %1$s</string>
     <string name="import_config">Inportatu konfigurazioa</string>
@@ -321,14 +321,14 @@
     <string name="st_reset_database_title">Datu basea berrezarri</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
-          \n Ziur al zaude Syncthing-eko datu-basea ezabatu nahi duzula?</string>
+          \n Ziur al zaude Syncthing-eko datu-basea ezabatu nahi duzula\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing-en datu-basea arrakastaz berrezarria</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Berrezarri Delta indizeak</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Ekintza hori gure euskarri-taldearen gomendio batean oinarritu behar da.
-          \n Ziur al zaude Syncthing-eko delta indizea ezabatu nahi duzula?</string>
+          \n Ziur al zaude Syncthing-eko delta indizea ezabatu nahi duzula\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing-en delta indizea arrakastaz berrezarria</string>
     <string name="category_about">Honi buruz</string>
@@ -414,7 +414,7 @@
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing desgaituta dago</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Abiatzeko baldintzak aldatu nahi dituzu?</string>
+    <string name="syncthing_disabled_message">Abiatzeko baldintzak aldatu nahi dituzu\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Aldatu ezarpenak</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
