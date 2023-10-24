@@ -28,14 +28,14 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">アプリ終了の確認</string>
-    <string name="dialog_exit_while_running_as_service_message">考慮事項: 起動時にアプリを自動的に開始するように設定しました。 したがって、実行条件を監視して、条件が一致するとバックグラウンドでいつでも同期します。 深刻な問題が発生した場合は、手動で終了してください。 それ以外の場合は、設定で「起動時に自動的に起動する」を無効にします。 デバイスが再起動するまでの間、今すぐ終了しますか?</string>
+    <string name="dialog_exit_while_running_as_service_message">考慮事項: 起動時にアプリを自動的に開始するように設定しました。 したがって、実行条件を監視して、条件が一致するとバックグラウンドでいつでも同期します。 深刻な問題が発生した場合は、手動で終了してください。 それ以外の場合は、設定で「起動時に自動的に起動する」を無効にします。 デバイスが再起動するまでの間、今すぐ終了しますか\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">フォルダーを追加</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">デバイス ID を共有</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">デバイス ID を送信…</string>
-    <string name="usage_reporting_dialog_title">匿名での使用状況レポートを許可しますか?</string>
+    <string name="usage_reporting_dialog_title">匿名での使用状況レポートを許可しますか\?</string>
     <string name="usage_reporting_dialog_description">使用状況レポートは暗号化されて毎日送信されます。この情報はプラットフォーム、フォルダーのサイズ、アプリケーションのバージョンを調査するために使われます。送信するデータセットが変更された場合、このダイアログで再度確認が求められます。\n\n集計結果は https://data.syncthing.net で公開されています。</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
@@ -102,7 +102,7 @@
     <!--Title for announce server status-->
     <string name="announce_server">アナウンスサーバー</string>
     <string name="restart">再起動</string>
-    <string name="dialog_confirm_restart">Syncthing を再起動しますか?</string>
+    <string name="dialog_confirm_restart">Syncthing を再起動しますか\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">フォルダー ID</string>
@@ -128,12 +128,12 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">作成</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Syncthing からフォルダーを削除してもよろしいですか?</string>
+    <string name="remove_folder_confirm">Syncthing からフォルダーを削除してもよろしいですか\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">フォルダー ID は空にできません</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">フォルダーのパスは空にできません</string>
-    <string name="dialog_discard_changes">変更を破棄しますか?</string>
+    <string name="dialog_discard_changes">変更を破棄しますか\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">お使いの Android のバージョンは、 Syncthing に選択されたフォルダーの読み取り専用アクセスのみを許可します。</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -141,7 +141,7 @@
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">申し訳ありません。 選択したフォルダーは使用できません。 内蔵または外部ストレージにあるフォルダーを選択してください。</string>
     <string name="ignore_patterns">無視するパターン</string>
-    <string name="create_ignore_file_error">無視ファイルの作成に失敗しました。ディレクトリは書き込み可能ですか?</string>
+    <string name="create_ignore_file_error">無視ファイルの作成に失敗しました。ディレクトリは書き込み可能ですか\?</string>
     <string name="edit_ignore_file_error">テキストエディタが見つかりません</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -172,7 +172,7 @@
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">デバイスを編集</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">このデバイスを削除してもよろしいですか?</string>
+    <string name="remove_device_confirm">このデバイスを削除してもよろしいですか\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">デバイス ID は空にできません</string>
     <!--Content description for device ID qr code icon-->
@@ -278,7 +278,7 @@
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">無視したデバイスとフォルダーを元に戻す</string>
     <string name="undo_ignored_devices_folders_question">デバイスとフォルダーを無視するという以前の設定が元に戻されます。
-続行しますか?</string>
+続行しますか\?</string>
     <string name="undo_ignored_devices_folders_done">設定を元に戻しました。</string>
     <string name="export_config">設定のエクスポート</string>
     <!--Toast after entering invalid integer value-->
@@ -301,9 +301,9 @@
     <string name="use_legacy_hashing_title">レガシーハッシュを使用する</string>
     <string name="use_legacy_hashing_summary">互換性のため従来のハッシュパッケージの使用を強制</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
+    <string name="dialog_confirm_export">設定をエクスポートしてもよろしいですか\? 既存のファイルは上書きされます。\n\n警告! 他のアプリケーションが、バックアップ先の秘密鍵を読み取り、同期したファイルをダウンロード/変更するために使用することができるかもしれません。</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか? 既存のファイルは上書きされます。</string>
+    <string name="dialog_confirm_import">新しい設定をインポートしてもよろしいですか\? 既存のファイルは上書きされます。</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">設定を %1$s にエクスポートしました</string>
     <string name="import_config">設定のインポート</string>
@@ -320,14 +320,14 @@
     <string name="st_reset_database_title">データベースをリセットする</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">この操作は、サポートチームが推奨する場合にのみ実行する必要があります。
-\nSyncthing のデータベースをクリアしてもよろしいですか?</string>
+\nSyncthing のデータベースをクリアしてもよろしいですか\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">正常に Syncthing のデータベースをリセットしました</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">デルタインデックスをリセットする</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">この操作は、サポートチームに推奨された場合にのみ行ってください。
-\n本当に Syncthing のデルタインデックスをクリアしてもよろしいですか?
+\n本当に Syncthing のデルタインデックスをクリアしてもよろしいですか\?
 </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">正常に Syncthing のデルタインデックスをリセットしました</string>
@@ -409,7 +409,7 @@
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing は無効になりました</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">実行条件を変更しますか?</string>
+    <string name="syncthing_disabled_message">実行条件を変更しますか\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">設定を変更</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

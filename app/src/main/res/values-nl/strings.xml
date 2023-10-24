@@ -30,14 +30,14 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Bevestigen om app af te sluiten</string>
-    <string name="dialog_exit_while_running_as_service_message">Ter overweging: u heeft de app zó ingesteld dat deze automatisch opstart. Hierdoor bewaakt hij op elk moment op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij zodra de voorwaarden overeenkomen. U dient alleen handmatig te stoppen als u ernstige problemen ondervindt. U kunt automatisch opstarten uitschakelen in de instellingen. Wilt u stoppen totdat het apparaat opnieuw wordt opgestart?</string>
+    <string name="dialog_exit_while_running_as_service_message">Ter overweging: u heeft de app zó ingesteld dat deze automatisch opstart. Hierdoor bewaakt hij op elk moment op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij zodra de voorwaarden overeenkomen. U dient alleen handmatig te stoppen als u ernstige problemen ondervindt. U kunt automatisch opstarten uitschakelen in de instellingen. Wilt u stoppen totdat het apparaat opnieuw wordt opgestart\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Map toevoegen</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Apparaat-id delen</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Apparaat-id versturen naar</string>
-    <string name="usage_reporting_dialog_title">Anonieme gebruiksrapportage toestaan?</string>
+    <string name="usage_reporting_dialog_title">Anonieme gebruiksrapportage toestaan\?</string>
     <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden en gebruikt om veelgebruikte platformen, mapgroottes en appversies bij te houden. Als de gerapporteerde dataset gewijzigd wordt, wordt dit venster opnieuw getoond.\n\nDe verzamelde statistieken zijn openbaar in te zien op https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
@@ -105,7 +105,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Title for announce server status-->
     <string name="announce_server">Mededelingsserver</string>
     <string name="restart">Opnieuw starten</string>
-    <string name="dialog_confirm_restart">Wilt u Syncthing opnieuw starten?</string>
+    <string name="dialog_confirm_restart">Wilt u Syncthing opnieuw starten\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Map-id</string>
@@ -131,12 +131,12 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Maken</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Weet u zeker dat u deze map wilt verwijderen uit Syncthing?</string>
+    <string name="remove_folder_confirm">Weet u zeker dat u deze map wilt verwijderen uit Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Voer een map-id in</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Geef het pad naar een map op</string>
-    <string name="dialog_discard_changes">Wilt u uw wijzigingen verwerpen?</string>
+    <string name="dialog_discard_changes">Wilt u uw wijzigingen verwerpen\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Uw Android-versie geeft Syncthing alleen de mogelijkheid om de geselecteerde map uit te lezen.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -144,7 +144,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">De geselecteerde map kan niet worden gebruikt. Selecteer een map op de interne of externe opslag.</string>
     <string name="ignore_patterns">Negeerpatronen</string>
-    <string name="create_ignore_file_error">Het negeerbestand kan niet worden aangemaakt. Is de map beschrijfbaar?</string>
+    <string name="create_ignore_file_error">Het negeerbestand kan niet worden aangemaakt. Is de map beschrijfbaar\?</string>
     <string name="edit_ignore_file_error">Geen tekstverwerker aangetroffen</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -175,7 +175,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Apparaat bewerken</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Weet u zeker dat u dit apparaat wilt verwijderen?</string>
+    <string name="remove_device_confirm">Weet u zeker dat u dit apparaat wilt verwijderen\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Voer een apparaat-id in</string>
     <!--Content description for device ID qr code icon-->
@@ -271,7 +271,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="gui_address">GUI-luisteradressen</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Genegeerde apparaten en mappen herstellen</string>
-    <string name="undo_ignored_devices_folders_question">Hierdoor worden alle genegeerde apparaten en mappen niet meer genegeerd. Wilt u doorgaan?</string>
+    <string name="undo_ignored_devices_folders_question">Hierdoor worden alle genegeerde apparaten en mappen niet meer genegeerd. Wilt u doorgaan\?</string>
     <string name="undo_ignored_devices_folders_done">Herstellen voltooid.</string>
     <string name="export_config">Instellingen exporteren</string>
     <!--Toast after entering invalid integer value-->
@@ -294,9 +294,9 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="use_legacy_hashing_title">Verouderde hashing gebruiken</string>
     <string name="use_legacy_hashing_summary">Dwing Syncthing om het verouderd hashingpakket te gebruiken om compatibiliteitsredenen</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren? Bestaande bestanden worden overschreven.\n\WAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
+    <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren\? Bestaande bestanden worden overschreven.\n\WAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Weet u zeker dat u de nieuwe instellingen wilt importeren? Bestaande bestanden worden overschreven.</string>
+    <string name="dialog_confirm_import">Weet u zeker dat u de nieuwe instellingen wilt importeren\? Bestaande bestanden worden overschreven.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">De instellingen zijn geëxporteerd naar %1$s</string>
     <string name="import_config">Instellingen importeren</string>
@@ -313,7 +313,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="st_reset_database_title">Databank opnieuw instellen</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Voer deze actie alléén uit als ons ondersteuningsteam dit aanraadt.
-        \nWeet u zeker dat u de databank van Syncthing wilt wissen?
+        \nWeet u zeker dat u de databank van Syncthing wilt wissen\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">De databank is opnieuw ingesteld</string>
@@ -321,7 +321,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="st_reset_deltas_title">Delta-indexen opnieuw instellen</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Voer deze actie alléén uit als ons ondersteuningsteam dit aanraadt.
-        \nWeet u zeker dat u de delta-indexen van Syncthing wilt wissen?
+        \nWeet u zeker dat u de delta-indexen van Syncthing wilt wissen\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">De delta-indexen zijn opnieuw ingesteld</string>
@@ -408,7 +408,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing is uitgeschakeld</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Weet u zeker dat u de uitvoervoorwaarden wilt aanpassen?</string>
+    <string name="syncthing_disabled_message">Weet u zeker dat u de uitvoervoorwaarden wilt aanpassen\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Instellingen aanpassen</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

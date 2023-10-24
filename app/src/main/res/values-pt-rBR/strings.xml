@@ -26,7 +26,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="share_device_id">Compartilhar ID</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID do dispositivo para</string>
-    <string name="usage_reporting_dialog_title">Permitir relatório anônimo de uso?</string>
+    <string name="usage_reporting_dialog_title">Permitir relatório anônimo de uso\?</string>
     <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -88,7 +88,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <!--Title for announce server status-->
     <string name="announce_server">Servidor de busca global</string>
     <string name="restart">Reiniciar</string>
-    <string name="dialog_confirm_restart">Quer mesmo reiniciar o Syncthing?</string>
+    <string name="dialog_confirm_restart">Quer mesmo reiniciar o Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">ID da pasta</string>
@@ -114,17 +114,17 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <!--Menu item to confirm folder creation-->
     <string name="create">Criar</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Quer mesmo remover esta pasta do Syncthing?</string>
+    <string name="remove_folder_confirm">Quer mesmo remover esta pasta do Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">O ID da pasta não pode ficar vazio</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
-    <string name="dialog_discard_changes">Descartar as alterações?</string>
+    <string name="dialog_discard_changes">Descartar as alterações\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <!--Summary shown if we only have readwrite access to the folder path-->
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="ignore_patterns">Filtros</string>
-    <string name="create_ignore_file_error">Não foi possível criar o arquivo de filtros. Este diretório tem permissões de escrita?</string>
+    <string name="create_ignore_file_error">Não foi possível criar o arquivo de filtros. Este diretório tem permissões de escrita\?</string>
     <string name="edit_ignore_file_error">Nenhum editor de texto foi encontrado</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -155,7 +155,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Editar dispositivo</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Quer mesmo remover este dispositivo?</string>
+    <string name="remove_device_confirm">Quer mesmo remover este dispositivo\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">O ID de dispositivo não pode ficar vazio</string>
     <!--Content description for device ID qr code icon-->
@@ -235,9 +235,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="use_legacy_hashing_title">Usar hashing legado</string>
     <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar hashing legado para fins de compatibilidade</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Quer mesmo exportar a configuração? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
+    <string name="dialog_confirm_export">Quer mesmo exportar a configuração\? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Quer mesmo importar uma nova configuração? Arquivos existentes serão sobrescritos.</string>
+    <string name="dialog_confirm_import">Quer mesmo importar uma nova configuração\? Arquivos existentes serão sobrescritos.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">A configuração foi salva em %1$s</string>
     <string name="import_config">Importar configuração</string>

@@ -32,14 +32,14 @@ Kérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Alkalmazás bezárása</string>
-    <string name="dialog_exit_while_running_as_service_message">Az alkalmazást úgy állította be, hogy automatikusan elinduljon a rendszerindításkor. Ezért figyeli a futtatási feltételeket, és bármikor szinkronizál a háttérben, ha a feltételek megfelelnek. Csak akkor kell manuálisan kilépnie, ha súlyos problémákba ütközik. Ellenkező esetben tiltsa le az \"Automatikus indítás indításkor\" opciót a beállításokban. Szeretne most kilépni?</string>
+    <string name="dialog_exit_while_running_as_service_message">Az alkalmazást úgy állította be, hogy automatikusan elinduljon a rendszerindításkor. Ezért figyeli a futtatási feltételeket, és bármikor szinkronizál a háttérben, ha a feltételek megfelelnek. Csak akkor kell manuálisan kilépnie, ha súlyos problémákba ütközik. Ellenkező esetben tiltsa le az \"Automatikus indítás indításkor\" opciót a beállításokban. Szeretne most kilépni\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Mappa hozzáadása</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Eszközazonosító megosztása</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Eszközazonosító megosztása</string>
-    <string name="usage_reporting_dialog_title">Engedélyezed a névtelen használati statisztikák küldését?</string>
+    <string name="usage_reporting_dialog_title">Engedélyezed a névtelen használati statisztikák küldését\?</string>
     <string name="usage_reporting_dialog_description">A titkosított használati statisztikákat naponta küldjük el. Ennek segítségével követjük a platformokat, mappaméreteket és az alkalmazás verzióját. Ha a megosztott adat tartalma megváltozik, újra engedélyt fogunk kérni a megosztás előtt.
 
 Az összesített statisztika nyilvánosan elérhető a https://data.syncthing.net linken.</string>
@@ -111,7 +111,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Title for announce server status-->
     <string name="announce_server">Kiszolgáló bejelentés</string>
     <string name="restart">Újraindítás</string>
-    <string name="dialog_confirm_restart">Biztosan újraindítod a Syncthinget?</string>
+    <string name="dialog_confirm_restart">Biztosan újraindítod a Syncthinget\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Mappa azonosító</string>
@@ -137,12 +137,12 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Menu item to confirm folder creation-->
     <string name="create">Létrehozás</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Biztosan el szeretnéd távolítani ezt a mappát a Syncthingből?</string>
+    <string name="remove_folder_confirm">Biztosan el szeretnéd távolítani ezt a mappát a Syncthingből\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">A mappaazonosító nem lehet üres</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">A mappaútvonal nem lehet üres</string>
-    <string name="dialog_discard_changes">Elveted a módosításaidat?</string>
+    <string name="dialog_discard_changes">Elveted a módosításaidat\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Az Android verziód csak olvasható hozzáférést ad a Syncthing számára a kiválasztott mappához.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -150,7 +150,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Sajnálom. A kiválasztott mappa nem használható. Kérlek válassz egy mappát a belső vagy a külső tárolóból.</string>
     <string name="ignore_patterns">Kihagyási minták</string>
-    <string name="create_ignore_file_error">Nem sikerült létrehozni a kihagyási fájlt. Írható a könyvtár?</string>
+    <string name="create_ignore_file_error">Nem sikerült létrehozni a kihagyási fájlt. Írható a könyvtár\?</string>
     <string name="edit_ignore_file_error">Nem található szövegszerkesztő</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -181,7 +181,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Eszköz szerkesztése</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Biztosan eltávolítod ezt az eszközt?</string>
+    <string name="remove_device_confirm">Biztosan eltávolítod ezt az eszközt\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Az eszközazonosító nem lehet üres</string>
     <!--Content description for device ID qr code icon-->
@@ -287,7 +287,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <string name="gui_address">Webes felület IP címe</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Eszközök és mappák figyelmen kívül hagyása</string>
-    <string name="undo_ignored_devices_folders_question">Elveted az eszközök és mappák figyelmen kívül hagyását?</string>
+    <string name="undo_ignored_devices_folders_question">Elveted az eszközök és mappák figyelmen kívül hagyását\?</string>
     <string name="undo_ignored_devices_folders_done">Sikeresen visszavont döntések.</string>
     <string name="export_config">Beállítások mentése</string>
     <!--Toast after entering invalid integer value-->
@@ -310,11 +310,11 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <string name="use_legacy_hashing_title">Régi típusú hashing használata</string>
     <string name="use_legacy_hashing_summary">Régi típusú hashing használatának kényszerítése kompatibilitási okokból </string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Biztosan exportálni szeretnéd a konfigurációt? A már létező fájlok felül lesznek írva.
+    <string name="dialog_confirm_export">Biztosan exportálni szeretnéd a konfigurációt\? A már létező fájlok felül lesznek írva.
 
 VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és ennek használatával letölthetik és módosíthatják  szinkronizált fájljaidat.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Biztosan importálod a konfigurációt? A meglévő fájlok felül lesznek írva.</string>
+    <string name="dialog_confirm_import">Biztosan importálod a konfigurációt\? A meglévő fájlok felül lesznek írva.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">A konfiguráció exportálása megtörtént: %1$s</string>
     <string name="import_config">Konfiguráció importálása</string>
@@ -331,14 +331,14 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
     <string name="st_reset_database_title">Adatbázis törlése</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Ezt a műveletet csak a support csapat ajánlása esetén szabad végrehajtani
- \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing adatbázisát?</string>
+ \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing adatbázisát\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">A Syncthing adatbázisának törlése megtörtént</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Különbségi indexek visszaállítása</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Ezt a műveletet csak a support csapat ajánlása esetén szabad végrehajtani
- \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing különbségi indexeit?</string>
+ \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing különbségi indexeit\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">A Syncthing különbségi indexei sikeresen visszaállítva</string>
     <string name="category_about">Névjegy</string>
@@ -424,7 +424,7 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">A Syncthing le van tiltva</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Meg akarja változtatni a futási feltételeket?</string>
+    <string name="syncthing_disabled_message">Meg akarja változtatni a futási feltételeket\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Beállítások megváltoztatása</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

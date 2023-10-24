@@ -30,14 +30,14 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Uygulamadan çıkmayı onaylayın</string>
-    <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalışma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Sadece ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz?</string>
+    <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalışma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Sadece ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Klasör Ekle</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Cihaz Kimliğini Paylaş</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Cihaz kimliğini şuna gönder</string>
-    <string name="usage_reporting_dialog_title">İsimsiz Kullanım Raporlamaya İzin Verilsin Mi?</string>
+    <string name="usage_reporting_dialog_title">İsimsiz Kullanım Raporlamaya İzin Verilsin Mi\?</string>
     <string name="usage_reporting_dialog_description">Şifreli kullanım raporu günlük olarak yollanır. Yaygın platformları, klasör boyutlarını ve uygulama sürümlerini izlemek için kullanılır. Eğer bildirilen veri kümesi değişirse, bu ileti öğesi aracılığıyla tekrar sorulacaktır.\n\nToplanan istatistikler https://data.syncthing.net adresinde herkese açıktır.</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
@@ -105,7 +105,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Title for announce server status-->
     <string name="announce_server">Duyuru Sunucusu</string>
     <string name="restart">Yeniden başlat</string>
-    <string name="dialog_confirm_restart">Syncthing\'i yeniden başlatmak istiyor musunuz?</string>
+    <string name="dialog_confirm_restart">Syncthing\'i yeniden başlatmak istiyor musunuz\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Klasör Kimliği</string>
@@ -131,12 +131,12 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Menu item to confirm folder creation-->
     <string name="create">Oluştur</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Bu klasörü Syncthing\'den gerçekten silmek istiyor musunuz?</string>
+    <string name="remove_folder_confirm">Bu klasörü Syncthing\'den gerçekten silmek istiyor musunuz\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Klasör kimliği boş olmamak zorundadır</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Klasör yolu boş olmamak zorundadır</string>
-    <string name="dialog_discard_changes">Değişiklikler yoksayılsın mı?</string>
+    <string name="dialog_discard_changes">Değişiklikler yoksayılsın mı\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Android sürümünüz, Syncthing\'e seçilen klasöre yalnızca salt okunur erişimi verir.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -144,7 +144,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Üzgünüz. Seçilen klasör kullanılamaz. Lütfen dahili veya harici depolamada bulunan bir klasör seçin.</string>
     <string name="ignore_patterns">Yoksayma Şekilleri</string>
-    <string name="create_ignore_file_error">Yoksayma dosyası oluşturma başarısız oldu. Dizin yazılabilir mi?</string>
+    <string name="create_ignore_file_error">Yoksayma dosyası oluşturma başarısız oldu. Dizin yazılabilir mi\?</string>
     <string name="edit_ignore_file_error">Bulunan metin düzenleyici yok</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -175,7 +175,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Cihazı Düzenle</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Bu cihazı gerçekten silmek istiyor musunuz?</string>
+    <string name="remove_device_confirm">Bu cihazı gerçekten silmek istiyor musunuz\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Cihaz kimliği boş olmamak zorundadır</string>
     <!--Content description for device ID qr code icon-->
@@ -281,7 +281,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="gui_address">GKA Dinleme Adresleri</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Yoksayılan cihazları ve klasörleri geri al</string>
-    <string name="undo_ignored_devices_folders_question">Bu, cihazları ve klasörleri yoksayan önceki kararları geri alacak. Devam edilsin mi?</string>
+    <string name="undo_ignored_devices_folders_question">Bu, cihazları ve klasörleri yoksayan önceki kararları geri alacak. Devam edilsin mi\?</string>
     <string name="undo_ignored_devices_folders_done">Kararlar başarılı olarak geri alındı.</string>
     <string name="export_config">Yapılandırmayı Dışa Aktar</string>
     <!--Toast after entering invalid integer value-->
@@ -304,9 +304,9 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="use_legacy_hashing_title">Eski adresleme kullan</string>
     <string name="use_legacy_hashing_summary">Uyumluluk amacıyla eski adresleme paketini kullanmak için Syncthing\'i zorlayın</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz? Varolan dosyaların üzerine yazılacaktır.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
+    <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz\? Varolan dosyaların üzerine yazılacaktır.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Yeni bir yapılandırmayı gerçekten içe aktarmak istiyor musunuz? Varolan dosyaların üzerine yazılacaktır.</string>
+    <string name="dialog_confirm_import">Yeni bir yapılandırmayı gerçekten içe aktarmak istiyor musunuz\? Varolan dosyaların üzerine yazılacaktır.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Yapılandırma %1$s konumuna aktarıldı</string>
     <string name="import_config">Yapılandırmayı İçe Aktar</string>
@@ -323,7 +323,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="st_reset_database_title">Veritabanını Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-        \nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz?
+        \nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing\'in veritabanı başarılı olarak sıfırlandı.</string>
@@ -331,7 +331,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="st_reset_deltas_title">Delta İndekslerini Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-        \nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz?
+        \nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing\'in delta indeksleri başarılı olarak sıfırlandı.</string>
@@ -418,7 +418,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing etkisizleştirildi</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Çalışma koşullarını değiştirmek istiyor musunuz?</string>
+    <string name="syncthing_disabled_message">Çalışma koşullarını değiştirmek istiyor musunuz\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Ayarları Değiştir</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

@@ -30,14 +30,14 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Bekræft lukning af appen</string>
-    <string name="dialog_exit_while_running_as_service_message">Til din overvejelse: Du har konfigureret appen til at starte automatisk ved opstart. Derfor overvåger den kørselsbetingelser og synkroniserer når som helst i baggrunden, når betingelserne passer. Du bør kun afslutte manuelt, hvis du løber ind i alvorlige problemer. Ellers skal du deaktivere \'Start automatisk ved opstart \' i indstillingerne. Vil du gerne afslutte nu, indtil enheden genstartes?</string>
+    <string name="dialog_exit_while_running_as_service_message">Til din overvejelse: Du har konfigureret appen til at starte automatisk ved opstart. Derfor overvåger den kørselsbetingelser og synkroniserer når som helst i baggrunden, når betingelserne passer. Du bør kun afslutte manuelt, hvis du løber ind i alvorlige problemer. Ellers skal du deaktivere \'Start automatisk ved opstart \' i indstillingerne. Vil du gerne afslutte nu, indtil enheden genstartes\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Tilføj mappe</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Del enheds-ID</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Send enheds-ID til</string>
-    <string name="usage_reporting_dialog_title">Tillad anonym forbrugsrapportering?</string>
+    <string name="usage_reporting_dialog_title">Tillad anonym forbrugsrapportering\?</string>
     <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.\n\nDe aggregerede statistikker er offentligt tilgængelige her  https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
@@ -105,7 +105,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Title for announce server status-->
     <string name="announce_server">Announce Server</string>
     <string name="restart">Genstart</string>
-    <string name="dialog_confirm_restart">Ønsker du at genstarte Syncthing?</string>
+    <string name="dialog_confirm_restart">Ønsker du at genstarte Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Mappe-ID</string>
@@ -131,12 +131,12 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Opret</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Er du sikker på du vil fjerne denne mappe fra Syncthing?</string>
+    <string name="remove_folder_confirm">Er du sikker på du vil fjerne denne mappe fra Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Mappe-ID må ikke være tomt</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Mappestien må ikke være tom</string>
-    <string name="dialog_discard_changes">Slet dine ændringer?</string>
+    <string name="dialog_discard_changes">Slet dine ændringer\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Din Android-version giver kun Syncthing skrivebeskyttet adgang til den valgte mappe.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -144,7 +144,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Beklager. Den valgte mappe kan ikke bruges. Vælg venligst en mappe på det interne eller eksterne lager.</string>
     <string name="ignore_patterns">Ignorer-mønstre</string>
-    <string name="create_ignore_file_error">Kunne ikke danne ignorer-filen. Er mappen skrivebeskyttet?</string>
+    <string name="create_ignore_file_error">Kunne ikke danne ignorer-filen. Er mappen skrivebeskyttet\?</string>
     <string name="edit_ignore_file_error">Intet tekstbehandlingsprogram blev fundet</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -175,7 +175,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Rediger enhed</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Er du sikker på at du vil fjerne denne enhed?</string>
+    <string name="remove_device_confirm">Er du sikker på at du vil fjerne denne enhed\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Enheds-ID må ikke være tomt</string>
     <!--Content description for device ID qr code icon-->
@@ -281,7 +281,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="gui_address">GUI Listen Addresser</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Fortryd ignorering af enheder og mapper</string>
-    <string name="undo_ignored_devices_folders_question">Dette ophæver tidligere beslutninger om at ignorere enheder og mapper. Fortsæt?</string>
+    <string name="undo_ignored_devices_folders_question">Dette ophæver tidligere beslutninger om at ignorere enheder og mapper. Fortsæt\?</string>
     <string name="undo_ignored_devices_folders_done">Beslutninger, der er blevet annulleret med succes.</string>
     <string name="export_config">Eksporter konfiguration</string>
     <!--Toast after entering invalid integer value-->
@@ -304,9 +304,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="use_legacy_hashing_title">Brug legacy hashing</string>
     <string name="use_legacy_hashing_summary">Tving Syncthing til at bruge legacy hashing pakken af kompatibilitetsgrunde </string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Ønsker du virkelig at eksportere dine konfigurationer? Eksisterende filer vil gå tabt.\n\nADVARSEL! Andre applikationer kan måske læse den private nøgle fra backup lokationen og bruge denne til at downloade/modificere synkroniserede filer.</string>
+    <string name="dialog_confirm_export">Ønsker du virkelig at eksportere dine konfigurationer\? Eksisterende filer vil gå tabt.\n\nADVARSEL! Andre applikationer kan måske læse den private nøgle fra backup lokationen og bruge denne til at downloade/modificere synkroniserede filer.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Er du sikker på du vil importere en ny konfiguration? Eksisterende filer vil blive overskrevet.</string>
+    <string name="dialog_confirm_import">Er du sikker på du vil importere en ny konfiguration\? Eksisterende filer vil blive overskrevet.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Konfigurationen blev eksporteret til %1$s</string>
     <string name="import_config">Importer konfiguration</string>
@@ -323,7 +323,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="st_reset_database_title">Nulstil database</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Denne handling bør kun udføres på baggrund af en anbefaling fra vores supportteam.
-        \nEr du sikker på, at du vil rydde Syncthing\'s database?
+        \nEr du sikker på, at du vil rydde Syncthing\'s database\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing\'s database nulstillet</string>
@@ -331,7 +331,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="st_reset_deltas_title">Nulstilling af Delta-indekser</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Denne handling bør kun udføres på baggrund af en anbefaling fra vores supportteam.
-        \nEr du sikker på, at du vil slette Syncthing\'s delta-indekser?
+        \nEr du sikker på, at du vil slette Syncthing\'s delta-indekser\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing\'s delta-indekser blev nulstillet</string>
@@ -418,7 +418,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing er slået fra</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Ønsker du at ændre betingelserne for kørsel?</string>
+    <string name="syncthing_disabled_message">Ønsker du at ændre betingelserne for kørsel\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Ændre Indstillinger</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

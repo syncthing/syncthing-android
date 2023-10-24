@@ -30,14 +30,14 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Confirmare ieșire din aplicație</string>
-    <string name="dialog_exit_while_running_as_service_message">Tineți cont: ați configurat aplicația să pornească automat la pornire. Prin urmare, monitorizează condițiile de executare și sincronizează în orice moment în fundal atunci când condițiile se potrivesc. Ar trebui să închideți manual numai dacă aveți probleme grave. Altfel dezactivați \'Start automat la pornire\' în setări. Închideți acum până când dispozitivul se repornește?</string>
+    <string name="dialog_exit_while_running_as_service_message">Tineți cont: ați configurat aplicația să pornească automat la pornire. Prin urmare, monitorizează condițiile de executare și sincronizează în orice moment în fundal atunci când condițiile se potrivesc. Ar trebui să închideți manual numai dacă aveți probleme grave. Altfel dezactivați \'Start automat la pornire\' în setări. Închideți acum până când dispozitivul se repornește\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Adăugare director</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Partajare ID dispozitiv</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Trimite ID-ul dispozitivul prin</string>
-    <string name="usage_reporting_dialog_title">Permite trimiterea unui raport de utilizare anonim?</string>
+    <string name="usage_reporting_dialog_title">Permite trimiterea unui raport de utilizare anonim\?</string>
     <string name="usage_reporting_dialog_description">Raportul de utilizare este trimis zilnic în mod criptat. Este folosit pentru a urmării platformele comune, mărimile de directoare și versiunile aplicației. Dacă datele raportate se schimbă veți fi întrebat din nou.\n\nStatisticile cumulate sunt disponibile public la https://data.syncthing.net</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
@@ -106,7 +106,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Title for announce server status-->
     <string name="announce_server">Server anunțuri</string>
     <string name="restart">Repornire </string>
-    <string name="dialog_confirm_restart">Doriți să reporniți Syncthing?</string>
+    <string name="dialog_confirm_restart">Doriți să reporniți Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">ID director</string>
@@ -132,12 +132,12 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Menu item to confirm folder creation-->
     <string name="create">Creeare</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Chiar doriți să ștergeți acest director din Syncthing?</string>
+    <string name="remove_folder_confirm">Chiar doriți să ștergeți acest director din Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">ID-ul directorului nu poate fi gol</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Calea directorului nu poate fi goală</string>
-    <string name="dialog_discard_changes">Eliminăm schimbările dumneavoastră?</string>
+    <string name="dialog_discard_changes">Eliminăm schimbările dumneavoastră\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Versiunea dumneavoastră de Android a permis Synthing numai acces citire pentru directorul selectat.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -145,7 +145,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Ne pare rău. Directorul selectat nu poate fi folosit. Vă rugăm să alegeți un director localizat pe stocarea internă sau externă.</string>
     <string name="ignore_patterns">Ignoră șabloane</string>
-    <string name="create_ignore_file_error">Nu s-a putut crea fișierul de ignorare. Se poate scrie în director?</string>
+    <string name="create_ignore_file_error">Nu s-a putut crea fișierul de ignorare. Se poate scrie în director\?</string>
     <string name="edit_ignore_file_error">Nu s-a găsit nici un editor de text</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -176,7 +176,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Editare dispozitiv</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Sigur doriți să eliminați acest dispozitiv?</string>
+    <string name="remove_device_confirm">Sigur doriți să eliminați acest dispozitiv\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">ID-ul dispozitivului nu poate fi gol</string>
     <!--Content description for device ID qr code icon-->
@@ -282,7 +282,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="gui_address">Adresa de ascultare a interfeței</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Reface setarea de ignorare de dispozitive și directoare</string>
-    <string name="undo_ignored_devices_folders_question">Această acțiune va reface decizia precedentă de ignorare a dispozitivelor și directoarelor. Continuați?</string>
+    <string name="undo_ignored_devices_folders_question">Această acțiune va reface decizia precedentă de ignorare a dispozitivelor și directoarelor. Continuați\?</string>
     <string name="undo_ignored_devices_folders_done">Acțiune refăcută cu succes.</string>
     <string name="export_config">Exportă configurația</string>
     <!--Toast after entering invalid integer value-->
@@ -305,9 +305,9 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="use_legacy_hashing_title">Folosește modul vechi de hashing</string>
     <string name="use_legacy_hashing_summary">Forțează utilizarea pachetului de hashing vechi din motive de compatibilitate</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Chiar doriți să exportați configurația? Fișierele existente vor fi suprascrise.\n\nATENȚIE! Alte aplicații vor putea să citească cheia privată din locația copiei de rezervă și să o folosească pentru a descărca/modifica fișierele sincronizate.</string>
+    <string name="dialog_confirm_export">Chiar doriți să exportați configurația\? Fișierele existente vor fi suprascrise.\n\nATENȚIE! Alte aplicații vor putea să citească cheia privată din locația copiei de rezervă și să o folosească pentru a descărca/modifica fișierele sincronizate.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Chiar doriți să importați o configurație nouă? Fișierele existente vor fi suprascrise.</string>
+    <string name="dialog_confirm_import">Chiar doriți să importați o configurație nouă\? Fișierele existente vor fi suprascrise.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Configurația a fost exportată în %1$s</string>
     <string name="import_config">Importă configurația</string>
@@ -324,7 +324,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="st_reset_database_title">Resetează baza de date</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Acestă acțiune trebuie realizată numai în baza unei recomandări din partea echipei noastre de asistență.
-        \nSigur doriți să curățați baza de date Syncthing?
+        \nSigur doriți să curățați baza de date Syncthing\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Baza de date Syncthing a fost resetată cu succes</string>
@@ -332,7 +332,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="st_reset_deltas_title">Resetare index diferențe</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Acestă acțiune trebuie realizată numai în baza unei recomandări din partea echipei noastre de asistență.
-        \nSigur doriți să curățați indexul diferențelor Syncthing?
+        \nSigur doriți să curățați indexul diferențelor Syncthing\?
     </string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Indexul cu diferențe Syncthing a fost resetat cu succes</string>
@@ -422,7 +422,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing este dezactivat</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Doriți să schimbați condițiile de rulare?</string>
+    <string name="syncthing_disabled_message">Doriți să schimbați condițiile de rulare\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Schimbă setări</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

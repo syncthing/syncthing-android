@@ -30,14 +30,14 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Potwierdź wyjście z aplikacji</string>
-    <string name="dialog_exit_while_running_as_service_message">Dla rozważenia: Aplikacja została skonfigurowana, aby uruchamiać się razem z urządzeniem. Dlatego ciągle monitoruje warunki uruchomienia i synchronizuje w tle, gdy warunki są spełnione. Powinieneś wyjść ręcznie, tylko, jeśli powstaną poważne problemy. W przeciwnym wypadku wyłącz \"Uruchom razem z urządzeniem\" w opcjach. Czy chcesz wyjść teraz, dopóki nie zrestartujesz urządzenia?</string>
+    <string name="dialog_exit_while_running_as_service_message">Dla rozważenia: Aplikacja została skonfigurowana, aby uruchamiać się razem z urządzeniem. Dlatego ciągle monitoruje warunki uruchomienia i synchronizuje w tle, gdy warunki są spełnione. Powinieneś wyjść ręcznie, tylko, jeśli powstaną poważne problemy. W przeciwnym wypadku wyłącz \"Uruchom razem z urządzeniem\" w opcjach. Czy chcesz wyjść teraz, dopóki nie zrestartujesz urządzenia\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Dodaj folder</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Udostępnij numer ID urządzenia</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Wyślij numer ID urządzenia do</string>
-    <string name="usage_reporting_dialog_title">Czy chcesz zezwolić na anonimowe statystyki użycia?</string>
+    <string name="usage_reporting_dialog_title">Czy chcesz zezwolić na anonimowe statystyki użycia\?</string>
     <string name="usage_reporting_dialog_description">Codziennie wysyłany jest zaszyfrowany raport statystyk użycia. Zawarte w nim są informacje o platformie użytkownika, rozmiarach folderów i wersji aplikacji. Jeśli zestaw pobieranych danych zmieni się to okno zostanie ponownie wyświetlone .\n\nZebrane statystyki są dostępne dla każdego na https://data.syncthing.net.</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
@@ -107,7 +107,7 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <!--Title for announce server status-->
     <string name="announce_server">Serwer ogłoszeniowy</string>
     <string name="restart">Uruchom ponownie</string>
-    <string name="dialog_confirm_restart">Czy chcesz uruchomić Syncthing ponownie?</string>
+    <string name="dialog_confirm_restart">Czy chcesz uruchomić Syncthing ponownie\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">Numer ID folderu</string>
@@ -133,12 +133,12 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <!--Menu item to confirm folder creation-->
     <string name="create">Utwórz</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Czy na pewno chcesz usunąć ten folder z aplikacji Syncthing?</string>
+    <string name="remove_folder_confirm">Czy na pewno chcesz usunąć ten folder z aplikacji Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Numer ID folderu nie może być pusty</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Ścieżka folderu nie może być pusta</string>
-    <string name="dialog_discard_changes">Czy chcesz odrzucić wprowadzone zmiany?</string>
+    <string name="dialog_discard_changes">Czy chcesz odrzucić wprowadzone zmiany\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Twoja wersja systemu Android pozwala Syncthing jedynie na dostęp tylko do odczytu do wskazanego folderu</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -146,7 +146,7 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Przepraszamy, wybrany folder nie może zostać użyty. Proszę wybrać folder znajdujący się na wewnętrznym, lub zewnętrznym magazynie pamieci</string>
     <string name="ignore_patterns">Wzorce ignorowania</string>
-    <string name="create_ignore_file_error">Nie powiodło się tworzenie pliku ze wzorcami ignorowania. Czy do folderu można zapisywać?</string>
+    <string name="create_ignore_file_error">Nie powiodło się tworzenie pliku ze wzorcami ignorowania. Czy do folderu można zapisywać\?</string>
     <string name="edit_ignore_file_error">Nie znaleziono edytora tekstu</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -177,7 +177,7 @@ Prosimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.<
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Edytuj urządzenie</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Czy na pewno chcesz usunąć to urządzenie?</string>
+    <string name="remove_device_confirm">Czy na pewno chcesz usunąć to urządzenie\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">Numer ID urządzenia nie może być pusty</string>
     <!--Content description for device ID qr code icon-->
@@ -274,7 +274,7 @@ UWAGA: może to spowodować znaczne zużycie transferu danych</string>
     <string name="gui_address">Adres nasłuchu GUI</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Cofnij ignorowanie urządzeń i folderów</string>
-    <string name="undo_ignored_devices_folders_question">To cofnie wcześniejsze decyzje o ignorowaniu urządzeń i folderów. Kontynuować?</string>
+    <string name="undo_ignored_devices_folders_question">To cofnie wcześniejsze decyzje o ignorowaniu urządzeń i folderów. Kontynuować\?</string>
     <string name="undo_ignored_devices_folders_done">Pomyślnie cofnięto decyzje</string>
     <string name="export_config">Eksportuj ustawienia</string>
     <!--Toast after entering invalid integer value-->
@@ -297,9 +297,9 @@ UWAGA: może to spowodować znaczne zużycie transferu danych</string>
     <string name="use_legacy_hashing_title">Użyj starszego mechanizmu haszowania</string>
     <string name="use_legacy_hashing_summary">Wymuś użycie przedawnionego hashowania paczki dla zachowania kompatybilności</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Wyeksportować ustawienia? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
+    <string name="dialog_confirm_export">Wyeksportować ustawienia\? Istniejące pliki zostaną zastąpione.\n\nUWAGA! Inne programy mogą odczytać klucz prywatny z lokalizacji kopii zapasowej i użyć go by pobrać bądź zmodyfikować synchronizowane pliki.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Zaimportować nowe ustawienia? Istniejące pliki zostaną zastąpione.</string>
+    <string name="dialog_confirm_import">Zaimportować nowe ustawienia\? Istniejące pliki zostaną zastąpione.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Wyeksportowano ustawienia do %1$s</string>
     <string name="import_config">Importuj ustawienia</string>
@@ -316,14 +316,14 @@ UWAGA: może to spowodować znaczne zużycie transferu danych</string>
     <string name="st_reset_database_title">Resetuj bazę danych</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Ta akcja powinna być przeprowadzana tylko po zaleceniu przez zespół wsparcia.
-\nCzy jesteś pewien że chcesz wyczyścić bazę Syncthing?</string>
+\nCzy jesteś pewien że chcesz wyczyścić bazę Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Przywrócono stan początkowy bazy danych</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Resetuj indeksy różnicowe</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Ta akcja powinna być przeprowadzana tylko w wyniku zalecenia zespołu wsparcia.
-\n Czy jesteś pewien, ze chcesz wyczyścić indeksy różnicowe Syncthing?</string>
+\n Czy jesteś pewien, ze chcesz wyczyścić indeksy różnicowe Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Pomyślnie zresetowano indeksy różnicowe Syncthing</string>
     <string name="category_about">Informacje</string>
@@ -415,7 +415,7 @@ UWAGA: może to spowodować znaczne zużycie transferu danych</string>
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing jest wyłączony</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Czy chcesz zmienić warunki działania?</string>
+    <string name="syncthing_disabled_message">Czy chcesz zmienić warunki działania\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Zmień ustawienia</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

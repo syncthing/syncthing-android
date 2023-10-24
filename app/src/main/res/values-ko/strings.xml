@@ -35,7 +35,7 @@
     <string name="share_device_id">기기 ID 공유</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
-    <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까?</string>
+    <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까\?</string>
     <string name="usage_reporting_dialog_description">암호화된 사용 보고서는 매일 전송됩니다. 사용 중인 운영체제, 폴더 크기와 응용 프로그램의 버전을 추적하기 위해서입니다. 만일 보고되는 정보가 변경되면 이 알림창이 다시 표시될 예정입니다.\n\n수집된 통계는 https://data.syncthing.net 주소에서 공람할 수 있습니다.</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
@@ -102,7 +102,7 @@
     <!--Title for announce server status-->
     <string name="announce_server">익명 서버</string>
     <string name="restart">재시작</string>
-    <string name="dialog_confirm_restart">Syncthing을 재시작하시겠습니까?</string>
+    <string name="dialog_confirm_restart">Syncthing을 재시작하시겠습니까\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">폴더 ID</string>
@@ -127,19 +127,19 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">생성</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">이 폴더를 정말로 Syncthing에서 제거하시겠습니까?</string>
+    <string name="remove_folder_confirm">이 폴더를 정말로 Syncthing에서 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">폴더 ID는 공백으로 둘 수 없습니다.</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
-    <string name="dialog_discard_changes">설정 변경을 취소합니까?</string>
+    <string name="dialog_discard_changes">설정 변경을 취소합니까\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 쓰기 전용 권한만을 Syncthing에 부여해 줍니다.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
     <string name="folder_path_readwrite">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 읽기 및 쓰기 권한을 Syncthing에 부여 해줍니다.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="ignore_patterns">무시 양식</string>
-    <string name="create_ignore_file_error">무시 파일을 생성하지 못했습니다. 해당 디렉터리에 쓰기 권한이 있습니까?</string>
+    <string name="create_ignore_file_error">무시 파일을 생성하지 못했습니다. 해당 디렉터리에 쓰기 권한이 있습니까\?</string>
     <string name="edit_ignore_file_error">텍스트 편집기를 찾을 수 없습니다</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -170,7 +170,7 @@
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">기기 편집</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">이 기기를 정말로 제거하시겠습니까?</string>
+    <string name="remove_device_confirm">이 기기를 정말로 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
     <!--Content description for device ID qr code icon-->
@@ -270,9 +270,9 @@
     <string name="use_legacy_hashing_title">예전 해시 방식 사용</string>
     <string name="use_legacy_hashing_summary">호환성을 위해 Syncthing이 예전 해시 방식을 사용하도록 합니다.</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
+    <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
+    <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
     <string name="import_config">설정 불러오기</string>

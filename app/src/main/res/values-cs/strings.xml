@@ -30,14 +30,14 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Potvrďte pro ukončení aplikace</string>
-    <string name="dialog_exit_while_running_as_service_message">Ke zvážení: Nastavili jste aplikaci, aby se spouštěla automaticky po zapnutí zařízení. K synchronizaci tedy docházi i v pozadí při správných příležitostech. Manuálně byste měli aplikaci vypnout pouze v případě, že narazíte na problémy. Jinak můžete v nastavení zakázat možnost \'Spouštět službu automaticky při startu systému\'. Přejete si nyní aplikaci vypnout až do restartu zařízení?</string>
+    <string name="dialog_exit_while_running_as_service_message">Ke zvážení: Nastavili jste aplikaci, aby se spouštěla automaticky po zapnutí zařízení. K synchronizaci tedy docházi i v pozadí při správných příležitostech. Manuálně byste měli aplikaci vypnout pouze v případě, že narazíte na problémy. Jinak můžete v nastavení zakázat možnost \'Spouštět službu automaticky při startu systému\'. Přejete si nyní aplikaci vypnout až do restartu zařízení\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Přidat adresář</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Sdílet ID přístroje</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Poslat ID přístroje přes</string>
-    <string name="usage_reporting_dialog_title">Povolit anonymní hlášení o používání?</string>
+    <string name="usage_reporting_dialog_title">Povolit anonymní hlášení o používání\?</string>
     <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
@@ -107,7 +107,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Title for announce server status-->
     <string name="announce_server">Globální oznamování</string>
     <string name="restart">Restart</string>
-    <string name="dialog_confirm_restart">Opravdu chcete restartovat Syncthing?</string>
+    <string name="dialog_confirm_restart">Opravdu chcete restartovat Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->
     <string name="folder_id">ID adresáře</string>
@@ -133,12 +133,12 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Menu item to confirm folder creation-->
     <string name="create">Přidat</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Opravdu chcete odebrat tento adresář ze Syncthing?</string>
+    <string name="remove_folder_confirm">Opravdu chcete odebrat tento adresář ze Syncthing\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">ID adresáře nesmí být prázdné</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Cesta k adresáři nesmí být prázdná</string>
-    <string name="dialog_discard_changes">Zahodit změny?</string>
+    <string name="dialog_discard_changes">Zahodit změny\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Vaše verze Androidu umožňuje aplikaci Syncthing pouze čtení vybrané složky.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -146,7 +146,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">Je nám líto, ale zvolenou složku není možné použít. Vyberte složku, která se nachází na vestavěném nebo externím úložišti.</string>
     <string name="ignore_patterns">Ignorované vzory</string>
-    <string name="create_ignore_file_error">Vytvoření souboru s ignorovanými vzory selhalo. Umožňuje složka zápis?</string>
+    <string name="create_ignore_file_error">Vytvoření souboru s ignorovanými vzory selhalo. Umožňuje složka zápis\?</string>
     <string name="edit_ignore_file_error">Nenalezen žádný textový editor</string>
     <!--DeviceActivity-->
     <!--Setting title-->
@@ -177,7 +177,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Title for DeviceSettingsFragment in edit mode-->
     <string name="edit_device">Upravit přístroj</string>
     <!--Dialog shown when attempting to remove a device-->
-    <string name="remove_device_confirm">Opravdu chcete odebrat tento přístroj?</string>
+    <string name="remove_device_confirm">Opravdu chcete odebrat tento přístroj\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
     <string name="device_id_required">ID přístroje nesmí být prázdné</string>
     <!--Content description for device ID qr code icon-->
@@ -283,7 +283,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="gui_address">Adresy naslouchání GUI</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Vrátit zpět ignorovaná zařízení a složky</string>
-    <string name="undo_ignored_devices_folders_question">Tímto budou předchozí rozhodnutí o ignorování zařízení a složek vrácena zpět. Pokračovat?</string>
+    <string name="undo_ignored_devices_folders_question">Tímto budou předchozí rozhodnutí o ignorování zařízení a složek vrácena zpět. Pokračovat\?</string>
     <string name="undo_ignored_devices_folders_done">Rozhodnutí úspěšně vzata zpět.</string>
     <string name="export_config">Zálohovat nastavení</string>
     <!--Toast after entering invalid integer value-->
@@ -306,9 +306,9 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
     <string name="use_legacy_hashing_summary">Vynutit použití původního hashovacího algoritmu pro lepší kompatibilitu</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
+    <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci\? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci? Existující soubory budou přepsány.</string>
+    <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci\? Existující soubory budou přepsány.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Nastavení bylo zálohováno do %1$s</string>
     <string name="import_config">Nahrát nastavení</string>
@@ -325,14 +325,14 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="st_reset_database_title">Resetovat databázi</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
-       \nSkutečně chcete vymazat databázi Syncthing?</string>
+       \nSkutečně chcete vymazat databázi Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Databáze aplikace Syncthing úspěšně resetována</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Resetovat rejstříky přírůstků</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
-       \nSkutečně chcete vymazat delta indexy Syncthing?</string>
+       \nSkutečně chcete vymazat delta indexy Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Delta indexy aplikace Syncthing úspěšně resetovány</string>
     <string name="category_about">O aplikaci</string>
@@ -424,7 +424,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Title of the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_title">Syncthing je vypnutý</string>
     <!--Message of the "syncthing disabled" dialog-->
-    <string name="syncthing_disabled_message">Chcete změnit podmínky běhu?</string>
+    <string name="syncthing_disabled_message">Chcete změnit podmínky běhu\?</string>
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Změnit nastavení</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
