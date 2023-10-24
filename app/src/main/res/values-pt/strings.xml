@@ -39,7 +39,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID do dispositivo para</string>
     <string name="usage_reporting_dialog_title">Permitir relatórios anónimos de utilização\?</string>
-    <string name="usage_reporting_dialog_description">O relatório de utilização cifrado é enviado diariamente. É usado para rastrear plataformas comuns, tamanhos de pastas e versões da aplicação. Se o conjunto de dados do relatório for alterado, este diálogo será apresentado novamente.\n\nAs estatísticas agregadas estão disponíveis publicamente em </string>
+    <string name="usage_reporting_dialog_description">O relatório de utilização cifrado é enviado diariamente. É usado para rastrear plataformas comuns, tamanhos de pastas e versões da aplicação. Se o conjunto de dados do relatório for alterado, este diálogo será apresentado novamente.\n\nAs estatísticas agregadas estão disponíveis publicamente em</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="open_website">Abrir Website</string>
@@ -356,7 +356,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
     <string name="privacy_title">Política de privacidade</string>
     <string name="privacy_summary">Abrir a política de privacidade do syncthing-android que cobre a utilização (se existir) de dados pessoais, tais como a localização.</string>
     <!--Title of the preference showing upstream version name-->
-    <string name="syncthing_version_title">Versão do </string>
+    <string name="syncthing_version_title">Versão do</string>
     <!--Title of the preference showing this app's version name-->
     <string name="app_version_title">Versão do Syncthing-Android</string>
     <!--FolderPickerAcitivity-->

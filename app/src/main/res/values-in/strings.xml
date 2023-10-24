@@ -23,7 +23,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <string name="cont">Lanjutkan</string>
     <string name="finish">Selesai</string>
     <string name="generic_example">Contoh</string>
-    <string name="generic_error">Kesalahan </string>
+    <string name="generic_error">Kesalahan</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <!--Title of the "add folder" menu action-->
@@ -331,7 +331,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
     <!--Possible folder states-->
     <string name="state_syncing">Sinkronisasi (%1$d%%)</string>
-    <string name="state_error">Kesalahan </string>
+    <string name="state_error">Kesalahan</string>
     <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
     <!--Titles used in the folder type dialog and folder type button in the folder activity-->
     <!--Displays the current folder type in the folder activity-->

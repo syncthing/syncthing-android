@@ -10,7 +10,7 @@
     <string name="introduction">Introduktion</string>
     <string name="welcome_text">Syncthing er en open-source fil-synkroniserings applikation.\n\
 For at dele data med andre enheder, skal du tilføje deres enheds unikke ID til enhedslisten. Efter dette kan du vælge hvilke mapper der skal deles med hvilke enheder.\n\
-Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
+Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Lagertilladelse</string>
     <string name="storage_permission_desc">Syncthing skal have adgang til dit lager for at udføre filsynkronisering.</string>
@@ -47,7 +47,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="device_rejected">Enheden \"%1$s\" ønsker at oprette forbindelse</string>
     <string name="folder_rejected">Enheden \"%1$s\" ønsker at dele mappen \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Batterioptimering</string>
-    <string name="dialog_disable_battery_optimization_message">Android stopper måske synkroniseringen efter et stykke tid. Du kan forhindre dette ved at slå batterioptimering fra.\n\nNogle enheder har ekstra job-afsluttende apps installeret. Du burde også tilføje Syncthing til deres whitelist. </string>
+    <string name="dialog_disable_battery_optimization_message">Android stopper måske synkroniseringen efter et stykke tid. Du kan forhindre dette ved at slå batterioptimering fra.\n\nNogle enheder har ekstra job-afsluttende apps installeret. Du burde også tilføje Syncthing til deres whitelist.</string>
     <string name="dialog_disable_battery_optimization_later">Senere</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Vis ikke igen</string>
     <string name="dialog_disable_battery_optimization_turn_off">Sluk for Syncthing</string>
@@ -270,7 +270,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     </string-array>
     <string name="device_name">Enhedens navn</string>
     <string name="listen_address">Sync Protocol Listen-adresser</string>
-    <string name="max_recv_kbps">Indgående hastighedsgrænse (KiB/s) </string>
+    <string name="max_recv_kbps">Indgående hastighedsgrænse (KiB/s)</string>
     <string name="max_send_kbps">Udgående hastighedsgrænse (KiB/s)</string>
     <string name="global_announce_enabled">Global opdagelse</string>
     <string name="local_announce_enabled">Lokal opdagelse</string>
@@ -302,7 +302,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <!--Toast after entering invalid http proxy address-->
     <string name="toast_invalid_http_proxy_address">Input er i strid med proxy syntax \'http://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="use_legacy_hashing_title">Brug legacy hashing</string>
-    <string name="use_legacy_hashing_summary">Tving Syncthing til at bruge legacy hashing pakken af kompatibilitetsgrunde </string>
+    <string name="use_legacy_hashing_summary">Tving Syncthing til at bruge legacy hashing pakken af kompatibilitetsgrunde</string>
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">Ønsker du virkelig at eksportere dine konfigurationer\? Eksisterende filer vil gå tabt.\n\nADVARSEL! Andre applikationer kan måske læse den private nøgle fra backup lokationen og bruge denne til at downloade/modificere synkroniserede filer.</string>
     <!--Dialog shown before config import-->
@@ -511,7 +511,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="pull_order_type_random_description">Hent filer i en tilfældig rækkefølge.</string>
     <string name="pull_order_type_alphabetic_description">Hent filer i alfabetisk rækkefølge.</string>
     <string name="pull_order_type_smallestFirst_description">Hent filer sorteret efter størrelse. Mindste først.</string>
-    <string name="pull_order_type_largestFirst_description">Hent filer sorteret efter størrelse. Største først. </string>
+    <string name="pull_order_type_largestFirst_description">Hent filer sorteret efter størrelse. Største først.</string>
     <string name="pull_order_type_oldestFirst_description">Hent filer sorteret efter ændringstidspunkt. Ældste først.</string>
     <string name="pull_order_type_newestFirst_description">Hent filer sorteret efter ændringstidspunkt. Nyeste først.</string>
     <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
@@ -529,7 +529,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <string name="maximum_age_description">Den maksimale tid at beholde en version (i dage, sæt til 0 for at beholde for altid).</string>
     <string name="versions_path_description">Sti, hvor versioner skal gemmes (lad være tomt for at bruge den normale .stversions-mappe i den delte mappe).</string>
     <string name="cleanout_after_description">Antallet af dage til at beholde filer i skraldespanden. Nul betyder for altid.</string>
-    <string name="external_versioning_description">Det første kommandolinjeparameter er mappe-stien og det andet parameter er den relative sti i mappen. </string>
+    <string name="external_versioning_description">Det første kommandolinjeparameter er mappe-stien og det andet parameter er den relative sti i mappen.</string>
     <string name="no_versioning_description">Vælg en versioneringstype for at aktivere versionering.</string>
     <!--Displays the current file versioning type in the Folder activity-->
     <string name="type_simple">Type: Simpel</string>

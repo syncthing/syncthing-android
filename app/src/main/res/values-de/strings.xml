@@ -220,7 +220,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     </string-array>
     <string name="respect_battery_saving_title">Android-Energiesparmodus berücksichtigen</string>
     <string name="respect_battery_saving_summary">Syncthing bei aktivem Energiesparmodus anhalten.</string>
-    <string name="respect_master_sync_title"> \"Autom. Datensynchronisierung\" berücksichtigen</string>
+    <string name="respect_master_sync_title">\"Autom. Datensynchronisierung\" berücksichtigen</string>
     <string name="respect_master_sync_summary">Syncthing anhalten, sobald die \"Automatische Datensynchronisierung\" in Android ausgeschaltet wird.</string>
     <string name="run_in_flight_mode_title">Im Flugmodus ausführen</string>
     <string name="run_in_flight_mode_summary">Durch Aktivieren der Option wird Syncthing auch dann laufen, wenn du offline bist. Aktiviere dies, wenn dein Telefon Probleme beim Erkennen von manuell hergestellten WLAN-Verbindungen im Flugmodus hat.</string>
@@ -350,7 +350,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="donate_summary">Hilf uns die Domain- und Hostinggebühren zu zahlen</string>
     <!--Menu item linking privacy policy-->
     <string name="privacy_title">Datenschutzrichtlinie</string>
-    <string name="privacy_summary">Öffne die Datenschuzrichtlinie für syncthing-android, in der die Nutzung personenbezogener Daten erklärt werden, sofern diese gesammelt werden (z.B. Standort). </string>
+    <string name="privacy_summary">Öffne die Datenschuzrichtlinie für syncthing-android, in der die Nutzung personenbezogener Daten erklärt werden, sofern diese gesammelt werden (z.B. Standort).</string>
     <!--Title of the preference showing upstream version name-->
     <string name="syncthing_version_title">Syncthing-Version</string>
     <!--Title of the preference showing this app's version name-->
