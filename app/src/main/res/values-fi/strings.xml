@@ -184,7 +184,7 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
     <string name="preference_theme_option_dark">Tumma</string>
     <string name="pref_language_default">Oletuskieli</string>
     <string name="device_name">Laitteen nimi</string>
-    <string name="listen_address"> Synkronointiprotokollan kuunteluosoite</string>
+    <string name="listen_address">Synkronointiprotokollan kuunteluosoite</string>
     <string name="max_recv_kbps">Sisääntulevan liikenteen rajoitus (KiB/s)</string>
     <string name="max_send_kbps">Uloslähtevän liikenteen rajoitus (KiB/s)</string>
     <string name="global_announce_enabled">Globaali etsintä</string>

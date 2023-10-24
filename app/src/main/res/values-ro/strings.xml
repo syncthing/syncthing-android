@@ -47,8 +47,8 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="folder_rejected">Dispozitivul \"%1$s\" dorește să partajeze directorul \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Optimizare baterie</string>
     <string name="dialog_disable_battery_optimization_message">Android poate oprii sincronizarea după un timp. Pentru a prevenii asta, opriți optimizarea bateriei.\n\nUnele dispozitive au aplicații adiționale preinstalate care pot oprii aplicațiile. Ar trebui să adăugați Syncthing și în listele lor de excepții.</string>
-    <string name="dialog_disable_battery_optimization_later">Mai târziu </string>
-    <string name="dialog_disable_battery_optimization_dont_show_again">Nu mai afișa </string>
+    <string name="dialog_disable_battery_optimization_later">Mai târziu</string>
+    <string name="dialog_disable_battery_optimization_dont_show_again">Nu mai afișa</string>
     <string name="dialog_disable_battery_optimization_turn_off">Închide Syncthing</string>
     <string name="dialog_disable_battery_optimizations_not_supported">Dispozitivul dumneavoastră nu suportă dezactivarea optimizărilor de baterie</string>
     <!--StateDialogActivity-->
@@ -75,7 +75,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Shown if no devices exist-->
     <string name="devices_list_empty">Nu s-a găsit nici un dispozitiv</string>
     <!--Indicates that a folder is fully synced to the local device-->
-    <string name="device_up_to_date">Actualizat </string>
+    <string name="device_up_to_date">Actualizat</string>
     <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
     <string name="device_syncing">Se sincronizează(%1$d%%)</string>
     <!--Indicates that there is no connection to the device-->
@@ -85,7 +85,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Indicates that the device connection is unknown-->
     <string name="device_state_unknown">Necunoscut</string>
     <!--Title for current download rate-->
-    <string name="download_title">Descărcare </string>
+    <string name="download_title">Descărcare</string>
     <!--Title for current upload rate-->
     <string name="upload_title">Încarcă</string>
     <!--StatusFragment-->
@@ -105,7 +105,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="ram_usage">Utilizare RAM</string>
     <!--Title for announce server status-->
     <string name="announce_server">Server anunțuri</string>
-    <string name="restart">Repornire </string>
+    <string name="restart">Repornire</string>
     <string name="dialog_confirm_restart">Doriți să reporniți Syncthing\?</string>
     <!--FolderActivity-->
     <!--Setting title-->

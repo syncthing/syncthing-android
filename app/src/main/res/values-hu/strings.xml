@@ -308,7 +308,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <!--Toast after entering invalid http proxy address-->
     <string name="toast_invalid_http_proxy_address">A bemenet sérti a proxy szintaxist \'http://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="use_legacy_hashing_title">Régi típusú hashing használata</string>
-    <string name="use_legacy_hashing_summary">Régi típusú hashing használatának kényszerítése kompatibilitási okokból </string>
+    <string name="use_legacy_hashing_summary">Régi típusú hashing használatának kényszerítése kompatibilitási okokból</string>
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">Biztosan exportálni szeretnéd a konfigurációt\? A már létező fájlok felül lesznek írva.
 

@@ -518,7 +518,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="maximum_age">En Fazla Yaş</string>
     <string name="clean_out_after">Şundan sonra temizle</string>
     <string name="file_versioning">Dosya Sürümlendirme</string>
-    <string name="none"> Yok</string>
+    <string name="none">Yok</string>
     <string name="versions_path">Sürümlerin Yolu</string>
     <string name="command">Komut</string>
     <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->

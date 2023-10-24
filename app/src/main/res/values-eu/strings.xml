@@ -41,7 +41,7 @@
     <string name="no">Ez</string>
     <string name="open_website">Web gune irekia</string>
     <string name="toast_write_storage_permission_required">Aplikazio honek biltegiratze sistema idazteko baimena behar du</string>
-    <string name="device_rejected"> \"%1$s\" gailuak konektatu nahi du</string>
+    <string name="device_rejected">\"%1$s\" gailuak konektatu nahi du</string>
     <string name="folder_rejected">\"%1$s\" Gailuak \"%2$s\" karpeta partekatu nahi du</string>
     <string name="dialog_disable_battery_optimization_title">Bateria optimizatzea</string>
     <string name="dialog_disable_battery_optimization_message">Androidek sinkronizazioa eten dezake denbora bat igarota. Hori saihesteko, bateriaren optimizazioa desgaitu ezazu.\n\ngailu batzuek aplikazio gehigarriak dituzte instalatuta zereginak amaitzeko. Era berean, Syncthing gehitu beharko zenioke zure zerrenda zuriari.</string>
@@ -269,14 +269,14 @@
     <string name="device_name">Gailuaren izena</string>
     <string name="listen_address">Sinkronizazio-protokoloa entzuteko helbideak</string>
     <string name="max_recv_kbps">Sarrera trafikoaren muga (KiB/s)</string>
-    <string name="max_send_kbps"> Irteera trafikoaren muga (KiB/s)</string>
+    <string name="max_send_kbps">Irteera trafikoaren muga (KiB/s)</string>
     <string name="global_announce_enabled">Aurkikuntza globala</string>
     <string name="local_announce_enabled">Aurkikuntza lokala</string>
     <string name="enable_nat_traversal">Gaitu NAT Traversal</string>
     <string name="global_announce_server">Aurkikuntza zerbitzari globalak</string>
     <string name="enable_relaying">Gaitu transmisioa</string>
     <string name="usage_reporting">Erabilera txosten anonimoa</string>
-    <string name="gui_address">Interfazearen entzuteko helbideak </string>
+    <string name="gui_address">Interfazearen entzuteko helbideak</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Desegin gailuak eta karpetak alde batera utzita</string>
     <string name="undo_ignored_devices_folders_question">Honek gailuei eta karpetei jaramonik ez egiteko aurreko erabakiak desegingo ditu. Aurrera\?</string>

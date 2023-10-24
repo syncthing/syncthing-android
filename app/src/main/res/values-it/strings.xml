@@ -549,6 +549,6 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
     <string name="could_not_access_deviceid">Impossibile accedere all\'ID dispositivo.</string>
     <string name="browse">Sfoglia</string>
-    <string name="no_sub_folder_is_selected">Nessuna sottocartella selezionata </string>
+    <string name="no_sub_folder_is_selected">Nessuna sottocartella selezionata</string>
     <string name="share_device_id_chooser">Condividi ID dispositivo con</string>
 </resources>

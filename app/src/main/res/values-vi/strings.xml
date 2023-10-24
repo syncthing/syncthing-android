@@ -395,7 +395,7 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="nothing_share">Không có gì để chia sẻ</string>
     <!--Copy success toast partially-->
     <plurals name="copy_success_partially">
-        <item quantity="other">Đã sao chép %1$d tệp vào thư mục \"%2$s\", %3$d đã tồn tại </item>
+        <item quantity="other">Đã sao chép %1$d tệp vào thư mục \"%2$s\", %3$d đã tồn tại</item>
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
