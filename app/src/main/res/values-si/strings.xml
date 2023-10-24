@@ -45,7 +45,7 @@
     <!--Format string for folder file count-->
     <plurals name="files">
         <item quantity="one">ගොනු %2$d / %1$d</item>
-        <item quantity="other">ගොනු %2$d /  %1$d</item>
+        <item quantity="other">ගොනු %2$d / %1$d</item>
     </plurals>
     <!--DevicesFragment-->
     <string name="devices_fragment_title">උපාංග</string>
