@@ -101,9 +101,9 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <string name="syncthing_has_crashed">A Syncthing összeomlott.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Letöltve:\u0020</string>
+    <string name="download_title_colon">"Letöltve: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Feltöltve:\u0020</string>
+    <string name="upload_title_colon">"Feltöltve: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">CPU használat</string>
     <!--Title for current RAM usage-->

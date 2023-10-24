@@ -77,9 +77,9 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--StatusFragment-->
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Unduhan:\u0020</string>
+    <string name="download_title_colon">"Unduhan: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Unggah:\u0020</string>
+    <string name="upload_title_colon">"Unggah: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Penggunaan CPU</string>
     <!--Title for current RAM usage-->

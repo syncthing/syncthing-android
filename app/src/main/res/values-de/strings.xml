@@ -95,9 +95,9 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="syncthing_has_crashed">Syncthing ist abgestürzt</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Herunterladen:\u0020</string>
+    <string name="download_title_colon">"Herunterladen: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Hochladen:\u0020</string>
+    <string name="upload_title_colon">"Hochladen: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Prozessorauslastung</string>
     <!--Title for current RAM usage-->

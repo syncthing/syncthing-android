@@ -95,9 +95,9 @@
     <string name="syncthing_has_crashed">Syncthing се срина.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">Изтегляне:\u0020</string>
+    <string name="download_title_colon">"Изтегляне: "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">Качване:\u0020</string>
+    <string name="upload_title_colon">"Качване: "</string>
     <!--Title for current CPU usage-->
     <string name="cpu_usage">Използване на CPU</string>
     <!--Title for current RAM usage-->
