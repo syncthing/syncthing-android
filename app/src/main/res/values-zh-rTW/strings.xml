@@ -511,4 +511,40 @@
     <string name="browse">瀏覽</string>
     <string name="no_sub_folder_is_selected">無子資料夾被選擇</string>
     <string name="share_device_id_chooser">分享裝置識別代碼</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content"></string>
+    <string name="api_level_30_desc"></string>
+    <string name="undo_ignored_devices_folders_question"></string>
+    <string name="folder_fileWatcherDescription"></string>
+    <string name="toast_invalid_socks_proxy_address"></string>
+    <string name="folder_path_readonly"></string>
+    <string name="invalid_integer_value" tools:ignore="PluralsCandidate"></string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="privacy_summary"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
+    <string name="toast_invalid_http_proxy_address"></string>
+    <string name="respect_battery_saving_summary"></string>
+    <string name="dialog_all_files_access_not_supported"></string>
+    <string name="run_in_flight_mode_summary"></string>
+    <string name="dialog_exit_while_running_as_service_message"></string>
+    <string name="enable_notification_permission"></string>
+    <string name="api_level_30_title"></string>
+    <string name="run_on_mobile_data_summary"></string>
+    <string name="use_tor_summary"></string>
+    <string name="service_settings_summary"></string>
+    <string name="toast_api_level_30_must_reset"></string>
+    <string name="api_level_30_button"></string>
+    <string name="run_on_metered_wifi_summary"></string>
+    <string name="location_permission_desc"></string>
+    <string name="toast_invalid_folder_selected"></string>
+    <string name="st_reset_deltas_done"></string>
+    <string name="notification_permission_title"></string>
+    <string name="run_on_wifi_summary"></string>
+    <string name="respect_master_sync_summary"></string>
+    <string name="st_reset_database_question"></string>
+    <string name="socks_proxy_address_example"></string>
+    <string name="folder_path_readwrite"></string>
+    <string name="require_notification_permission_desc"></string>
+    <string name="st_reset_deltas_question"></string>
 </resources>
