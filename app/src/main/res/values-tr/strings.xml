@@ -8,20 +8,23 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Giriş</string>
-    <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır.\n\
-Diğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.\n\
-Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
+    <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır.
+\nDiğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.
+\nLütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Depolama İzni</string>
     <string name="storage_permission_desc">Dosya eşitlemesi yapmak için Syncthing\'in depolama alanınıza erişmesi gerekiyor.</string>
     <string name="dialog_all_files_access_not_supported">Cihazınız tüm dosyalara erişimi desteklemiyor</string>
     <!--Slide 3-->
     <string name="location_permission_title">Konum İzni (arka plan)</string>
-    <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarında eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.\n\n Eğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli izinleri vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
+    <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarında eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.
+\n
+\nEğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli izinleri vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
     <!--Slide 4-->
     <string name="api_level_30_title">Yükseltme Bilgileri</string>
-    <string name="api_level_30_desc">En son güncellemeyle syncthing-android, Android\'in dosya sisteminin davranışını değiştiren API seviyesi 30\'u hedefliyor. İyi haber: Android 11 ve daha yeni sürümlerde artık harici bir SD karta yazabiliyor. Kötü haber: Daha yavaş olabilir ve bazı yollar gizlenecektir. Bu gizli yollardan dolayı veri kaybını önlemek için veritabanının sıfırlanması gerekir. Bu, tüm verilerinizin tekrar adreslenmesine neden olacak, ancak bunların uzak cihazlardan aktarılmasına gerek yoktur. Ayrıca, şu anda tam olarak eşitlenmiş değilseniz çakışmalara neden olabilir ve yakın zamanda silinen dosyaları yeniden oluşturabilir. Ne kadar veriye sahip olduğunuza bağlı olarak, bu işlem çok kaynak yoğunluğunda olabilir, yani biraz zaman alabilir ve çok fazla pil gücü kullanabilir.\n\n Veritabanını sıfırlamak ve Syncthing\'i başlatmak için lütfen aşağıdaki düğmeye basın.
-</string>
+    <string name="api_level_30_desc">En son güncellemeyle syncthing-android, Android\'in dosya sisteminin davranışını değiştiren API seviyesi 30\'u hedefliyor. İyi haber: Android 11 ve daha yeni sürümlerde artık harici bir SD karta yazabiliyor. Kötü haber: Daha yavaş olabilir ve bazı yollar gizlenecektir. Bu gizli yollardan dolayı veri kaybını önlemek için veritabanının sıfırlanması gerekir. Bu, tüm verilerinizin tekrar adreslenmesine neden olacak, ancak bunların uzak cihazlardan aktarılmasına gerek yoktur. Ayrıca, şu anda tam olarak eşitlenmiş değilseniz çakışmalara neden olabilir ve yakın zamanda silinen dosyaları yeniden oluşturabilir. Ne kadar veriye sahip olduğunuza bağlı olarak, bu işlem çok kaynak yoğunluğunda olabilir, yani biraz zaman alabilir ve çok fazla pil gücü kullanabilir.
+\n
+\nVeritabanını sıfırlamak ve Syncthing\'i başlatmak için lütfen aşağıdaki düğmeye basın.</string>
     <string name="api_level_30_button">Veritabanını sıfırla</string>
     <string name="toast_api_level_30_must_reset">Veritabanını sıfırlamak için yalnızca düğmeye tıklayarak devam edebilirsiniz.</string>
     <!--Generic texts used everywhere-->
@@ -45,7 +48,9 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Cihaz kimliğini şuna gönder</string>
     <string name="usage_reporting_dialog_title">İsimsiz Kullanım Raporlamaya İzin Verilsin Mi\?</string>
-    <string name="usage_reporting_dialog_description">Şifreli kullanım raporu günlük olarak yollanır. Yaygın platformları, klasör boyutlarını ve uygulama sürümlerini izlemek için kullanılır. Eğer bildirilen veri kümesi değişirse, bu ileti öğesi aracılığıyla tekrar sorulacaktır.\n\nToplanan istatistikler https://data.syncthing.net adresinde herkese açıktır.</string>
+    <string name="usage_reporting_dialog_description">Şifreli kullanım raporu günlük olarak yollanır. Yaygın platformları, klasör boyutlarını ve uygulama sürümlerini izlemek için kullanılır. Eğer bildirilen veri kümesi değişirse, bu ileti öğesi aracılığıyla tekrar sorulacaktır.
+\n
+\nToplanan istatistikler https://data.syncthing.net adresinde herkese açıktır.</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="open_website">Web sitesini aç</string>
@@ -53,7 +58,9 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="device_rejected">\"%1$s\" cihazı bağlanmak istiyor</string>
     <string name="folder_rejected">\"%1$s\" cihazı \"%2$s\" klasörünü paylaşmak istiyor</string>
     <string name="dialog_disable_battery_optimization_title">Pil İyileştirme</string>
-    <string name="dialog_disable_battery_optimization_message">Android bir süre sonra eşitlemeyi durdurabilir. Bunu önlemek için pil iyileştirmesini kapatın.\n\nBazı cihazlarda önceden yüklenmiş ek görev sonlandırma uygulamaları vardır. Beyaz listelerine de Syncthing\'i eklemelisiniz.</string>
+    <string name="dialog_disable_battery_optimization_message">Android bir süre sonra eşitlemeyi durdurabilir. Bunu önlemek için pil iyileştirmesini kapatın.
+\n
+\nBazı cihazlarda önceden yüklenmiş ek görev sonlandırma uygulamaları vardır. Beyaz listelerine de Syncthing\'i eklemelisiniz.</string>
     <string name="dialog_disable_battery_optimization_later">Daha sonra sor</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Bir daha gösterme</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing için kapat</string>
@@ -311,7 +318,9 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="use_legacy_hashing_title">Eski adresleme kullan</string>
     <string name="use_legacy_hashing_summary">Uyumluluk amacıyla eski adresleme paketini kullanmak için Syncthing\'i zorlayın</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz\? Varolan dosyaların üzerine yazılacaktır.\n\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
+    <string name="dialog_confirm_export">Yeni yapılandırmayı gerçekten dışa aktarmak istiyor musunuz\? Varolan dosyaların üzerine yazılacaktır.
+\n
+\nDİKKAT! Diğer uygulamalar gizli anahtarı yedekleme konumundan okuyabilir ve eşzamanlanan dosyaları indirmek/değiştirmek için kullanabilir.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Yeni bir yapılandırmayı gerçekten içe aktarmak istiyor musunuz\? Varolan dosyaların üzerine yazılacaktır.</string>
     <!--Toast shown after config was successfully exported-->
@@ -330,16 +339,14 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="st_reset_database_title">Veritabanını Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-        \nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz\?
-    </string>
+\nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing\'in veritabanı başarılı olarak sıfırlandı.</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Delta İndekslerini Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-        \nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz\?
-    </string>
+\nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing\'in delta indeksleri başarılı olarak sıfırlandı.</string>
     <string name="category_about">Hakkında</string>
@@ -532,7 +539,9 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="keep_versions_description">Dosya başına tutulacak eski sürüm sayısı.</string>
     <string name="simple_file_versioning_description">Dosyalar, Syncthing tarafından değiştirildiğinde veya silindiğinde, .stversions dizini içindeki tarih damgalı sürümlere taşınır.</string>
     <string name="trashcan_versioning_description">Dosyalar, Syncthing tarafından silindiğinde veya değiştirildiğinde .stversions dizinine taşınır.</string>
-    <string name="staggered_versioning_description">Dosyalar, Syncthing tarafından değiştirildiğinde veya silindiğinde, .stversions dizini içindeki tarih damgalı sürümlere taşınır. Sürümler, en fazla yaştan daha büyüklerse veya belirli bir aralıkta izin verilen dosya sayısını aşarlarsa, otomatik olarak silinir.\n\nŞu aralıklar kullanılır: ilk saat için her 30 saniyede bir sürüm tutulur, ilk gün için her saat bir sürüm tutulur, ilk 30 gün için her gün bir sürüm tutulur, en fazla yaşa kadar her hafta bir sürüm tutulur.</string>
+    <string name="staggered_versioning_description">Dosyalar, Syncthing tarafından değiştirildiğinde veya silindiğinde, .stversions dizini içindeki tarih damgalı sürümlere taşınır. Sürümler, en fazla yaştan daha büyüklerse veya belirli bir aralıkta izin verilen dosya sayısını aşarlarsa, otomatik olarak silinir.
+\n
+\nŞu aralıklar kullanılır: ilk saat için her 30 saniyede bir sürüm tutulur, ilk gün için her saat bir sürüm tutulur, ilk 30 gün için her gün bir sürüm tutulur, en fazla yaşa kadar her hafta bir sürüm tutulur.</string>
     <string name="maximum_age_description">Bir sürümü tutmak için en fazla süre (gün olarak, sürümleri süresiz tutmak için 0\'a ayarlayın)</string>
     <string name="versions_path_description">Sürümlerin depolanması gereken yol (paylaşılan klasördeki varsayılan .stversions dizini için boş bırakın).</string>
     <string name="cleanout_after_description">Dosyaları çöp kutusunda tutmak için gün sayısı. Sıfır süresiz demektir.</string>
@@ -545,7 +554,8 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
     <string name="type_external">Tür: Harici</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Şundan sonra temizle: %1$s</string>
-    <string name="staggered_versioning_info">En Fazla Yaş: %1$d \nSürümlerin Yolu: %2$s</string>
+    <string name="staggered_versioning_info">En Fazla Yaş: %1$d
+\nSürümlerin Yolu: %2$s</string>
     <string name="external_versioning_info">Komut: %1$s</string>
     <string name="simple_versioning_info">Şu sürümleri tut: %1$s</string>
     <string name="show_device_id">Cihaz kimliğini göster</string>

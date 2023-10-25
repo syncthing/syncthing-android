@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Introductie</string>
-    <string name="welcome_text">Syncthing is een opensource-bestandssynchronisatie-app.\n\
-Om gegevens met andere apparaten te delen, dient u hun unieke apparaat-id\'s aan de apparatenlijst toe te voegen. Daarna kunt u selecteren welke mappen u met welke apparaten wilt delen.\n\
-Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
+    <string name="welcome_text">Syncthing is een opensource-bestandssynchronisatie-app.
+\nOm gegevens met andere apparaten te delen, dient u hun unieke apparaat-id\'s aan de apparatenlijst toe te voegen. Daarna kunt u selecteren welke mappen u met welke apparaten wilt delen.
+\nMeld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Opslagmachtiging</string>
     <string name="storage_permission_desc">Syncthing heeft toegang nodig tot uw opslag om bestandssynchronisatie uit te voeren.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Locatierecht (achtergrond)</string>
-    <string name="location_permission_desc">Syncthing kan worden ingesteld om alleen via geselecteerde wifi-netwerken te synchroniseren. Om dat te doen, moet het de ssid van het momenteel verbonden wifi-netwerk opzoeken, ook als de app is afgesloten. Syncthing heeft toestemming nodig om op de achtergrond de locatie op te zoeken. Deze informatie wordt niet gebruikt om úw locatie op te zoeken. De enige opgeslagen informatie is het door u gekozen wifi-netwerk om aan de lijst toe te voegen - er worden geen andere gebruikersgegevens opgeslagen.\n\nAls u deze functie wilt gebruiken, drukt u op de knop hierboven om Syncthing de vereiste rechten te verlenen. Anders kunt u deze stap overslaan.</string>
+    <string name="location_permission_desc">Syncthing kan worden ingesteld om alleen via geselecteerde wifi-netwerken te synchroniseren. Om dat te doen, moet het de ssid van het momenteel verbonden wifi-netwerk opzoeken, ook als de app is afgesloten. Syncthing heeft toestemming nodig om op de achtergrond de locatie op te zoeken. Deze informatie wordt niet gebruikt om úw locatie op te zoeken. De enige opgeslagen informatie is het door u gekozen wifi-netwerk om aan de lijst toe te voegen - er worden geen andere gebruikersgegevens opgeslagen.
+\n
+\nAls u deze functie wilt gebruiken, drukt u op de knop hierboven om Syncthing de vereiste rechten te verlenen. Anders kunt u deze stap overslaan.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Terug</string>
@@ -39,7 +41,9 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Apparaat-id versturen naar</string>
     <string name="usage_reporting_dialog_title">Anonieme gebruiksrapportage toestaan\?</string>
-    <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden en gebruikt om veelgebruikte platformen, mapgroottes en appversies bij te houden. Als de gerapporteerde dataset gewijzigd wordt, wordt dit venster opnieuw getoond.\n\nDe verzamelde statistieken zijn openbaar in te zien op https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden en gebruikt om veelgebruikte platformen, mapgroottes en appversies bij te houden. Als de gerapporteerde dataset gewijzigd wordt, wordt dit venster opnieuw getoond.
+\n
+\nDe verzamelde statistieken zijn openbaar in te zien op https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="open_website">Website openen</string>
@@ -47,7 +51,9 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="device_rejected">Het apparaat, \"%1$s\", wil verbinden</string>
     <string name="folder_rejected">Het apparaat, \"%1$s\", wil de map \"%2$s\" delen</string>
     <string name="dialog_disable_battery_optimization_title">Accu-optimalisatie</string>
-    <string name="dialog_disable_battery_optimization_message">Android kan de synchronisatie na enige tijd stoppen. Schakelt accu-optimalisatie uit om dit te voorkomen.\n\nOp sommige apparaten zijn aanvullende apps voor het beëindigen van taken voorgeïnstalleerd - voeg Syncthing ook toe aan hun witte lijst.</string>
+    <string name="dialog_disable_battery_optimization_message">Android kan de synchronisatie na enige tijd stoppen. Schakelt accu-optimalisatie uit om dit te voorkomen.
+\n
+\nOp sommige apparaten zijn aanvullende apps voor het beëindigen van taken voorgeïnstalleerd - voeg Syncthing ook toe aan hun witte lijst.</string>
     <string name="dialog_disable_battery_optimization_later">Later</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
     <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
@@ -294,7 +300,8 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="use_legacy_hashing_title">Verouderde hashing gebruiken</string>
     <string name="use_legacy_hashing_summary">Dwing Syncthing om het verouderd hashingpakket te gebruiken om compatibiliteitsredenen</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren\? Bestaande bestanden worden overschreven.\n\WAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
+    <string name="dialog_confirm_export">Weet u zeker dat u de instellingen wilt exporteren\? Bestaande bestanden worden overschreven.
+\nWAARSCHUWING: andere apps kunnen mogelijkerwijs bij de geheime sleutel van de back-up en gesynchroniseerde bestanden downloaden/aanpassen.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Weet u zeker dat u de nieuwe instellingen wilt importeren\? Bestaande bestanden worden overschreven.</string>
     <!--Toast shown after config was successfully exported-->
@@ -313,16 +320,14 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="st_reset_database_title">Databank opnieuw instellen</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Voer deze actie alléén uit als ons ondersteuningsteam dit aanraadt.
-        \nWeet u zeker dat u de databank van Syncthing wilt wissen\?
-    </string>
+\nWeet u zeker dat u de databank van Syncthing wilt wissen\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">De databank is opnieuw ingesteld</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Delta-indexen opnieuw instellen</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Voer deze actie alléén uit als ons ondersteuningsteam dit aanraadt.
-        \nWeet u zeker dat u de delta-indexen van Syncthing wilt wissen\?
-    </string>
+\nWeet u zeker dat u de delta-indexen van Syncthing wilt wissen\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">De delta-indexen zijn opnieuw ingesteld</string>
     <string name="category_about">Over</string>
@@ -515,7 +520,9 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="keep_versions_description">Het aantal verouderde versies dat per bestand moet worden bewaard.</string>
     <string name="simple_file_versioning_description">Bestanden worden met een tijdsstempel verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing.</string>
     <string name="trashcan_versioning_description">Bestanden worden verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing.</string>
-    <string name="staggered_versioning_description">Bestanden worden met een tijdsstempel verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing. Deze versies worden verwijderd indien ze ouder zijn dan de maximale ouderdom, of indien ze het aantal bestanden toegestaan in een tussenpoos overschrijden.\n\nDe volgende tussenpozen worden gebruikt: het eerste uur wordt elke 30 seconden een versie bewaard, de eerste dag elk uur, de eerste 30 dagen elke dag, en tot de maximale ouderdom één versie per week.</string>
+    <string name="staggered_versioning_description">Bestanden worden met een tijdsstempel verplaatst naar de map .stversions indien vervangen of verwijderd door Syncthing. Deze versies worden verwijderd indien ze ouder zijn dan de maximale ouderdom, of indien ze het aantal bestanden toegestaan in een tussenpoos overschrijden.
+\n
+\nDe volgende tussenpozen worden gebruikt: het eerste uur wordt elke 30 seconden een versie bewaard, de eerste dag elk uur, de eerste 30 dagen elke dag, en tot de maximale ouderdom één versie per week.</string>
     <string name="maximum_age_description">Maximale duur om een versie te bewaren (in dagen - stel in op 0 om versies voorgoed te bewaren).</string>
     <string name="versions_path_description">Pad waar versies moeten worden opgeslagen (laat leeg om de standaardmap \'.stversions\' in de gedeelde map te gebruiken).</string>
     <string name="cleanout_after_description">Het aantal dagen dat bestanden in de prullenbak moeten worden bewaard (nul = voorgoed)</string>
@@ -528,7 +535,8 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
     <string name="type_external">Soort: extern</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Legen na: %1$s</string>
-    <string name="staggered_versioning_info">Maximale ouderdom: %1$d \nVersiepad: %2$s</string>
+    <string name="staggered_versioning_info">Maximale ouderdom: %1$d
+\nVersiepad: %2$s</string>
     <string name="external_versioning_info">Opdracht: %1$s</string>
     <string name="simple_versioning_info">Versies bewaren: %1$s</string>
     <string name="show_device_id">Apparaat-id tonen</string>

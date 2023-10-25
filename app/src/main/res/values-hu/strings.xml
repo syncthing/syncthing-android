@@ -9,16 +9,16 @@
     <!--Slide 1-->
     <string name="introduction">Bevezetés</string>
     <string name="welcome_text">A Syncthing egy nyílt forráskódú fájlszinkronizáló alkalmazás.
-
-Az adatok más eszközökkel való megosztásához hozzá kell adnod egyedi eszközazonosítójukat az eszközlistához. Utána kiválaszthatod, hogy mely mappákat mely eszközökkel osztasz meg.
-
-Kérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
+\nAz adatok más eszközökkel való megosztásához hozzá kell adnod egyedi eszközazonosítójukat az eszközlistához. Utána kiválaszthatod, hogy mely mappákat mely eszközökkel osztasz meg.
+\nKérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Tárhely jogosultság</string>
     <string name="storage_permission_desc">A szinkronizáláshoz a Syncthingnek hozzáférésre van szüksége a tárhelyhez.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Földrajzi hely engedély (háttérben)</string>
-    <string name="location_permission_desc">A Syncthing beállítható úgy, hogy csak a kiválasztott Wi-Fi hálózatokon szinkronizáljon. Ehhez az alkalmazás bezárásakor is meg kell keresnie az éppen csatlakoztatott Wi-Fi SSID-jét. Ezért engedélyt igényel a helymeghatározáshoz való hozzáféréshez a háttérben. Ezt az információt nem használja fel az Ön tartózkodási helyének megkeresésére. Az egyetlen tárolt információ az a Wi-Fi, amelyet manuálisan választott a listához - más felhasználói adat nem kerül tárolásra.\n\n Ha használni szeretné ezt a funkciót, nyomja meg a fenti gombot a szükséges engedélyek megadásához a Syncthing számára. Ellenkező esetben kihagyhatja ezt a lépést.</string>
+    <string name="location_permission_desc">A Syncthing beállítható úgy, hogy csak a kiválasztott Wi-Fi hálózatokon szinkronizáljon. Ehhez az alkalmazás bezárásakor is meg kell keresnie az éppen csatlakoztatott Wi-Fi SSID-jét. Ezért engedélyt igényel a helymeghatározáshoz való hozzáféréshez a háttérben. Ezt az információt nem használja fel az Ön tartózkodási helyének megkeresésére. Az egyetlen tárolt információ az a Wi-Fi, amelyet manuálisan választott a listához - más felhasználói adat nem kerül tárolásra.
+\n
+\nHa használni szeretné ezt a funkciót, nyomja meg a fenti gombot a szükséges engedélyek megadásához a Syncthing számára. Ellenkező esetben kihagyhatja ezt a lépést.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Vissza</string>
@@ -42,8 +42,8 @@ Kérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
     <string name="send_device_id_to">Eszközazonosító megosztása</string>
     <string name="usage_reporting_dialog_title">Engedélyezed a névtelen használati statisztikák küldését\?</string>
     <string name="usage_reporting_dialog_description">A titkosított használati statisztikákat naponta küldjük el. Ennek segítségével követjük a platformokat, mappaméreteket és az alkalmazás verzióját. Ha a megosztott adat tartalma megváltozik, újra engedélyt fogunk kérni a megosztás előtt.
-
-Az összesített statisztika nyilvánosan elérhető a https://data.syncthing.net linken.</string>
+\n
+\nAz összesített statisztika nyilvánosan elérhető a https://data.syncthing.net linken.</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
     <string name="open_website">Weblap megnyitása</string>
@@ -52,8 +52,8 @@ Az összesített statisztika nyilvánosan elérhető a https://data.syncthing.ne
     <string name="folder_rejected">\"%1$s\" eszköz szeretné megosztani a mappát: \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Akkumulátor optimalizáció</string>
     <string name="dialog_disable_battery_optimization_message">Az Android idővel leállíthatja a szinkronizálást. Ennek megakadályozásához kapcsold ki az akkumulátor optimalizálást.
-
-Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a gyártó. Ezekben szintén érdemes a Syncthinget fehérlistára tenni.</string>
+\n
+\nNéhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a gyártó. Ezekben szintén érdemes a Syncthinget fehérlistára tenni.</string>
     <string name="dialog_disable_battery_optimization_later">Később</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Ne jelenjen meg újra</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing kivételezése</string>
@@ -311,8 +311,8 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
     <string name="use_legacy_hashing_summary">Régi típusú hashing használatának kényszerítése kompatibilitási okokból</string>
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">Biztosan exportálni szeretnéd a konfigurációt\? A már létező fájlok felül lesznek írva.
-
-VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és ennek használatával letölthetik és módosíthatják szinkronizált fájljaidat.</string>
+\n
+\nVIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és ennek használatával letölthetik és módosíthatják szinkronizált fájljaidat.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Biztosan importálod a konfigurációt\? A meglévő fájlok felül lesznek írva.</string>
     <!--Toast shown after config was successfully exported-->
@@ -331,14 +331,14 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
     <string name="st_reset_database_title">Adatbázis törlése</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Ezt a műveletet csak a support csapat ajánlása esetén szabad végrehajtani
- \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing adatbázisát\?</string>
+\nBiztos vagy benne, hogy törölni szeretnéd a Syncthing adatbázisát\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">A Syncthing adatbázisának törlése megtörtént</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Különbségi indexek visszaállítása</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Ezt a műveletet csak a support csapat ajánlása esetén szabad végrehajtani
- \nBiztos vagy benne, hogy törölni szeretnéd a Syncthing különbségi indexeit\?</string>
+\nBiztos vagy benne, hogy törölni szeretnéd a Syncthing különbségi indexeit\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">A Syncthing különbségi indexei sikeresen visszaállítva</string>
     <string name="category_about">Névjegy</string>
@@ -531,7 +531,9 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
     <string name="keep_versions_description">Fájlonként megtartandó korábbi verziók száma</string>
     <string name="simple_file_versioning_description">Fájlok cseréje vagy törlése esetén az időbélyeggel ellátott változatok a .stversions könyvtárba kerülnek.</string>
     <string name="trashcan_versioning_description">Fájlok cseréje vagy törlése esetén a fájlok az .stversions könyvtárba kerülnek.</string>
-    <string name="staggered_versioning_description">Fájlok cseréje vagy törlése esetén az időbélyeggel ellátott változatok az .stversions könyvtárba kerülnek. A verziók automatikusan törlődnek, amikor koruk eléri a megadott értéket, vagy a verziók száma meghaladja az intervallumon belül meghatározott maximális darabszámot.\n\nA következő intervallumok használatosak: az első órában 30 másodpercenként készül új verzió, az első nap óránként egy, az első 30 napban pedig napi egy verzió lesz megtartva. A maximális kort elérő fájlok hetente tárolódnak.</string>
+    <string name="staggered_versioning_description">Fájlok cseréje vagy törlése esetén az időbélyeggel ellátott változatok az .stversions könyvtárba kerülnek. A verziók automatikusan törlődnek, amikor koruk eléri a megadott értéket, vagy a verziók száma meghaladja az intervallumon belül meghatározott maximális darabszámot.
+\n
+\nA következő intervallumok használatosak: az első órában 30 másodpercenként készül új verzió, az első nap óránként egy, az első 30 napban pedig napi egy verzió lesz megtartva. A maximális kort elérő fájlok hetente tárolódnak.</string>
     <string name="maximum_age_description">Egy verzió megtartásának maximális ideje (napokban, 0 esetén a verziók korlátlan ideig megmaradnak)</string>
     <string name="versions_path_description">Régebbi verziók tárolásának útvonala (üresen hagyott érték esetén a megosztott mappán belüli alapértelmezett .stversions lesz felhasználva)</string>
     <string name="cleanout_after_description">Fájlok megőrzésének ideje a lomtárban. Nulla esetén nincs törlés.</string>
@@ -544,7 +546,8 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
     <string name="type_external">Típus: Külső</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Takarítás ennyi idő után: %1$s</string>
-    <string name="staggered_versioning_info">Maximális kor: %1$d\nVerziók útvonala: %2$s</string>
+    <string name="staggered_versioning_info">Maximális kor: %1$d
+\nVerziók útvonala: %2$s</string>
     <string name="external_versioning_info">Parancs: %1$s</string>
     <string name="simple_versioning_info">Verziók megtartása: %1$s</string>
     <string name="show_device_id">Eszközazonosító megjelenítése</string>

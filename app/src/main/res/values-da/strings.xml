@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Introduktion</string>
-    <string name="welcome_text">Syncthing er en open-source fil-synkroniserings applikation.\n\
-For at dele data med andre enheder, skal du tilføje deres enheds unikke ID til enhedslisten. Efter dette kan du vælge hvilke mapper der skal deles med hvilke enheder.\n\
-Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
+    <string name="welcome_text">Syncthing er en open-source fil-synkroniserings applikation.
+\nFor at dele data med andre enheder, skal du tilføje deres enheds unikke ID til enhedslisten. Efter dette kan du vælge hvilke mapper der skal deles med hvilke enheder.
+\nVær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Lagertilladelse</string>
     <string name="storage_permission_desc">Syncthing skal have adgang til dit lager for at udføre filsynkronisering.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Tilladelse til lokalisering (baggrund)</string>
-    <string name="location_permission_desc">Syncthing kan konfigureres til kun at synkronisere på udvalgte Wi-Fi-netværk. For at gøre det skal den slå SSID\'et for det aktuelt tilsluttede Wi-Fi op, også når appen er lukket. Derfor kræver den tilladelse til at få adgang til placeringen i baggrunden. Disse oplysninger bruges ikke til at slå din placering op. Og de eneste lagrede oplysninger er det Wi-Fi, du manuelt vælger at tilføje til listen - ingen andre brugerdata gemmes. \n\n Hvis du vil bruge denne funktion, skal du trykke på knappen ovenfor for at give Syncthing de nødvendige tilladelser. Ellers kan du springe dette trin over.</string>
+    <string name="location_permission_desc">Syncthing kan konfigureres til kun at synkronisere på udvalgte Wi-Fi-netværk. For at gøre det skal den slå SSID\'et for det aktuelt tilsluttede Wi-Fi op, også når appen er lukket. Derfor kræver den tilladelse til at få adgang til placeringen i baggrunden. Disse oplysninger bruges ikke til at slå din placering op. Og de eneste lagrede oplysninger er det Wi-Fi, du manuelt vælger at tilføje til listen - ingen andre brugerdata gemmes.
+\n
+\nHvis du vil bruge denne funktion, skal du trykke på knappen ovenfor for at give Syncthing de nødvendige tilladelser. Ellers kan du springe dette trin over.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Tilbage</string>
@@ -39,7 +41,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Send enheds-ID til</string>
     <string name="usage_reporting_dialog_title">Tillad anonym forbrugsrapportering\?</string>
-    <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.\n\nDe aggregerede statistikker er offentligt tilgængelige her https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Den krypterede forbrugsrapport bliver send dagligt. Det bliver brugt til at undersøge mest burgte platforme, mappestørrelser og app versioner. Hvis det rapporterede dataset bliver ændret, vil du blive informeret med denne dialog igen.
+\n
+\nDe aggregerede statistikker er offentligt tilgængelige her https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="open_website">Åbn hjemmeside</string>
@@ -47,7 +51,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <string name="device_rejected">Enheden \"%1$s\" ønsker at oprette forbindelse</string>
     <string name="folder_rejected">Enheden \"%1$s\" ønsker at dele mappen \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Batterioptimering</string>
-    <string name="dialog_disable_battery_optimization_message">Android stopper måske synkroniseringen efter et stykke tid. Du kan forhindre dette ved at slå batterioptimering fra.\n\nNogle enheder har ekstra job-afsluttende apps installeret. Du burde også tilføje Syncthing til deres whitelist.</string>
+    <string name="dialog_disable_battery_optimization_message">Android stopper måske synkroniseringen efter et stykke tid. Du kan forhindre dette ved at slå batterioptimering fra.
+\n
+\nNogle enheder har ekstra job-afsluttende apps installeret. Du burde også tilføje Syncthing til deres whitelist.</string>
     <string name="dialog_disable_battery_optimization_later">Senere</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Vis ikke igen</string>
     <string name="dialog_disable_battery_optimization_turn_off">Sluk for Syncthing</string>
@@ -304,7 +310,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <string name="use_legacy_hashing_title">Brug legacy hashing</string>
     <string name="use_legacy_hashing_summary">Tving Syncthing til at bruge legacy hashing pakken af kompatibilitetsgrunde</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Ønsker du virkelig at eksportere dine konfigurationer\? Eksisterende filer vil gå tabt.\n\nADVARSEL! Andre applikationer kan måske læse den private nøgle fra backup lokationen og bruge denne til at downloade/modificere synkroniserede filer.</string>
+    <string name="dialog_confirm_export">Ønsker du virkelig at eksportere dine konfigurationer\? Eksisterende filer vil gå tabt.
+\n
+\nADVARSEL! Andre applikationer kan måske læse den private nøgle fra backup lokationen og bruge denne til at downloade/modificere synkroniserede filer.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Er du sikker på du vil importere en ny konfiguration\? Eksisterende filer vil blive overskrevet.</string>
     <!--Toast shown after config was successfully exported-->
@@ -323,16 +331,14 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <string name="st_reset_database_title">Nulstil database</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Denne handling bør kun udføres på baggrund af en anbefaling fra vores supportteam.
-        \nEr du sikker på, at du vil rydde Syncthing\'s database\?
-    </string>
+\nEr du sikker på, at du vil rydde Syncthing\'s database\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing\'s database nulstillet</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Nulstilling af Delta-indekser</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Denne handling bør kun udføres på baggrund af en anbefaling fra vores supportteam.
-        \nEr du sikker på, at du vil slette Syncthing\'s delta-indekser\?
-    </string>
+\nEr du sikker på, at du vil slette Syncthing\'s delta-indekser\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing\'s delta-indekser blev nulstillet</string>
     <string name="category_about">Om</string>
@@ -525,7 +531,9 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <string name="keep_versions_description">Antal af gamle versioner at beholde, pr fil.</string>
     <string name="simple_file_versioning_description">Filer flyttes til datostemplede versioner i en .stversions-mappe, når de erstattes eller slettes af Syncthing.</string>
     <string name="trashcan_versioning_description">Filer flyttes til mappen .stversions, når de erstattes eller slettes af Syncthing.</string>
-    <string name="staggered_versioning_description">Filer flyttes til datostemplede versioner i en .stversions-mappe, når de erstattes eller slettes af Syncthing. Versioner slettes automatisk, hvis de er ældre end den maksimale alder eller overstiger det antal filer, der er tilladt i et interval.\n\nDe følgende intervaller anvendes: I den første time opbevares en version hvert 30. sekund, den første dag opbevares en version hver time, de første 30 dage opbevares en version hver dag, indtil den maksimale alder opbevares en version hver uge.</string>
+    <string name="staggered_versioning_description">Filer flyttes til datostemplede versioner i en .stversions-mappe, når de erstattes eller slettes af Syncthing. Versioner slettes automatisk, hvis de er ældre end den maksimale alder eller overstiger det antal filer, der er tilladt i et interval.
+\n
+\nDe følgende intervaller anvendes: I den første time opbevares en version hvert 30. sekund, den første dag opbevares en version hver time, de første 30 dage opbevares en version hver dag, indtil den maksimale alder opbevares en version hver uge.</string>
     <string name="maximum_age_description">Den maksimale tid at beholde en version (i dage, sæt til 0 for at beholde for altid).</string>
     <string name="versions_path_description">Sti, hvor versioner skal gemmes (lad være tomt for at bruge den normale .stversions-mappe i den delte mappe).</string>
     <string name="cleanout_after_description">Antallet af dage til at beholde filer i skraldespanden. Nul betyder for altid.</string>
@@ -538,7 +546,8 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github.</string>
     <string name="type_external">Type: Ekstern</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Rens ud efter: %1$s</string>
-    <string name="staggered_versioning_info">Maksimal alder: %1$d \nVersioneringssti: %2$s</string>
+    <string name="staggered_versioning_info">Maksimal alder: %1$d
+\nVersioneringssti: %2$s</string>
     <string name="external_versioning_info">Kommando: %1$s</string>
     <string name="simple_versioning_info">Behold versioner: %1$s</string>
     <string name="show_device_id">Vis enheds-ID</string>
