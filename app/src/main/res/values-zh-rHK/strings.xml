@@ -226,7 +226,7 @@
     <string name="respect_battery_saving_title">遵守 Android 節省電池設定</string>
     <string name="respect_battery_saving_summary">使用省電模式時停用 Syncthing</string>
     <string name="respect_master_sync_title">使用 Android 的「自動同步」設定</string>
-    <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。&lt;br&gt;&lt;br data-mce-bogus="1"&gt;</string>
+    <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。</string>
     <string name="run_in_flight_mode_title">飛航模式時執行</string>
     <string name="run_in_flight_mode_summary">如果您的設備在飛行模式下無法檢測到手動 Wi-Fi 連接，請啟用。</string>
     <string name="service_settings_title">服務設定</string>
