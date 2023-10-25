@@ -197,7 +197,7 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要授權</string>
     <string name="respect_battery_saving_title">遵守 Android 節省電池設定</string>
     <string name="respect_battery_saving_summary">使用省電模式時停用 Syncthing</string>
-    <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。&lt;br&gt;&lt;br data-mce-bogus="1"&gt;</string>
+    <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。</string>
     <string name="run_in_flight_mode_title">飛航模式時執行</string>
     <string name="service_settings_title">服務設定</string>
     <string name="run_as_background_service">開機時自動執行服務</string>
