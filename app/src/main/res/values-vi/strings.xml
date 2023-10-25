@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Giới thiệu</string>
-    <string name="welcome_text">Syncthing là một ứng dụng đồng bộ hoá tệp mã nguồn mở.\n\
-Để chia sẻ dữ liệu với các thiết bị khác, bạn cần phải thêm các ID thiết bị độc nhất của chúng vào danh sách thiết bị. Sau đó bạn có thể chọn các thư mục mà bạn muốn chia sẻ với các thiết bị.\n\
-Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
+    <string name="welcome_text">Syncthing là một ứng dụng đồng bộ hoá tệp mã nguồn mở.
+\nĐể chia sẻ dữ liệu với các thiết bị khác, bạn cần phải thêm các ID thiết bị độc nhất của chúng vào danh sách thiết bị. Sau đó bạn có thể chọn các thư mục mà bạn muốn chia sẻ với các thiết bị.
+\nVui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Quyền bộ nhớ</string>
     <string name="storage_permission_desc">Syncthing cần truy cập bộ nhớ của bạn để đồng bộ hoá tệp.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Quyền vị trí (trong nền)</string>
-    <string name="location_permission_desc">Syncthing có thể được thiết lập để chỉ đồng bộ hoá khi được kết nối đến các mạng Wi-Fi được chọn. Để làm vậy, nó cần tra cứu SSID của mạng Wi-Fi hiện được kết nối, và cả khi ứng dụng đã được đóng. Do đó nó yêu cầu quyền truy cập vị trí trong nền. Thông tin này không được sử dụng để tra cứu vị trí của bạn. Và thông tin duy nhất được lưu trữ đó là mạng Wi-Fi bạn chọn để thêm vào danh sách này theo cách thủ công - không có dữ liệu người dùng nào khác được lưu trữ.\n\nNếu bạn muốn sử dụng tính năng này, hãy nhấn nút ở trên để cấp quyền được yêu cầu cho Syncthing. Nếu không thì bạn có thể bỏ qua bước này.</string>
+    <string name="location_permission_desc">Syncthing có thể được thiết lập để chỉ đồng bộ hoá khi được kết nối đến các mạng Wi-Fi được chọn. Để làm vậy, nó cần tra cứu SSID của mạng Wi-Fi hiện được kết nối, và cả khi ứng dụng đã được đóng. Do đó nó yêu cầu quyền truy cập vị trí trong nền. Thông tin này không được sử dụng để tra cứu vị trí của bạn. Và thông tin duy nhất được lưu trữ đó là mạng Wi-Fi bạn chọn để thêm vào danh sách này theo cách thủ công - không có dữ liệu người dùng nào khác được lưu trữ.
+\n
+\nNếu bạn muốn sử dụng tính năng này, hãy nhấn nút ở trên để cấp quyền được yêu cầu cho Syncthing. Nếu không thì bạn có thể bỏ qua bước này.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Quay lại</string>
@@ -39,7 +41,9 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Gửi ID thiết bị đến</string>
     <string name="usage_reporting_dialog_title">Cho phép báo cáo sử dụng ẩn danh\?</string>
-    <string name="usage_reporting_dialog_description">Báo cáo sử dụng đã mã hoá sẽ được gửi đi hằng ngày. Nó được dùng để theo dõi các nền tảng phổ biến, kích cỡ thư mục và phiên bản ứng dụng. Nếu bộ dữ liệu đã báo cáo có thay đổi gì, bạn sẽ được nhắc lại bằng hộp thoại này.\n\nThống kê tổng hợp được đăng công khai tại https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Báo cáo sử dụng đã mã hoá sẽ được gửi đi hằng ngày. Nó được dùng để theo dõi các nền tảng phổ biến, kích cỡ thư mục và phiên bản ứng dụng. Nếu bộ dữ liệu đã báo cáo có thay đổi gì, bạn sẽ được nhắc lại bằng hộp thoại này.
+\n
+\nThống kê tổng hợp được đăng công khai tại https://data.syncthing.net.</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
     <string name="open_website">Mở trang web</string>
@@ -47,7 +51,9 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="device_rejected">Thiết bị \"%1$s\" muốn kết nối</string>
     <string name="folder_rejected">Thiết bị \"%1$s\" muốn chia sẻ thư mục \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Tối ưu hoá pin</string>
-    <string name="dialog_disable_battery_optimization_message">Android có thể sẽ dừng việc đồng bộ hoá sau một khoảng thòi gian. Để ngăn chặn việc này, hãy tắt tối ưu hoá pin.\n\nMột số thiết bị có thêm cả các ứng dụng dừng tiến trình được cài sẵn. Bạn cũng nên thêm Syncthing vào danh sách loại trừ của chúng.</string>
+    <string name="dialog_disable_battery_optimization_message">Android có thể sẽ dừng việc đồng bộ hoá sau một khoảng thòi gian. Để ngăn chặn việc này, hãy tắt tối ưu hoá pin.
+\n
+\nMột số thiết bị có thêm cả các ứng dụng dừng tiến trình được cài sẵn. Bạn cũng nên thêm Syncthing vào danh sách loại trừ của chúng.</string>
     <string name="dialog_disable_battery_optimization_later">Để sau</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Không hiện lại</string>
     <string name="dialog_disable_battery_optimization_turn_off">Tắt cho Syncthing</string>
@@ -303,7 +309,9 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="use_legacy_hashing_title">Sử dụng hash cũ</string>
     <string name="use_legacy_hashing_summary">Buộc Syncthing sử dụng gói hash cũ vì mục đích tương thích</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Có chắc là bạn muốn xuất cấu hình\? Các tập tin hiện thời sẽ bị ghi đè.\n\nCẢNH BÁO! Các ứng dụng khác có thể đọc được khoá riêng tư từ vị trí sao lưu và dùng nó để tải về/chỉnh sửa các tập tin đã đồng bộ.</string>
+    <string name="dialog_confirm_export">Có chắc là bạn muốn xuất cấu hình\? Các tập tin hiện thời sẽ bị ghi đè.
+\n
+\nCẢNH BÁO! Các ứng dụng khác có thể đọc được khoá riêng tư từ vị trí sao lưu và dùng nó để tải về/chỉnh sửa các tập tin đã đồng bộ.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Có chắc là bạn muốn nhập cấu hình mới\? Các tập tin hiện tại sẽ bị chép đè lên.</string>
     <!--Toast shown after config was successfully exported-->
@@ -322,16 +330,14 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="st_reset_database_title">Cài lại CSDL</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Hành động này chỉ nên được thực hiện dựa trên khuyến cáo từ nhóm hỗ trợ của chúng tôi.
-\nBạn có chắc bạn muốn xoá cơ sở dữ liệu của Syncthing không\?
-</string>
+\nBạn có chắc bạn muốn xoá cơ sở dữ liệu của Syncthing không\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Cài lại thành công CSDL của Syncthing</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Đặt lại mục lục delta</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Hành động này chỉ nên được thực hiện dựa trên khuyến cáo từ nhóm hỗ trợ của chúng tôi.
-\nBạn có chắc bạn muốn xoá mục lục delta của Syncthing không\?
-</string>
+\nBạn có chắc bạn muốn xoá mục lục delta của Syncthing không\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Đặt lại mục lục delta của Syncthing thành công</string>
     <string name="category_about">Thông tin về</string>
@@ -521,7 +527,9 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="keep_versions_description">Số các phiên bản cũ được giữ cho mỗi tệp.</string>
     <string name="simple_file_versioning_description">Các tệp được di chuyển đến các phiên bản được đánh dấu ngày trong một thư mục .stversions khi được Syncthing thay thế hoặc xoá.</string>
     <string name="trashcan_versioning_description">Các tệp được di chuyển đến một thư mục .stversions khi được Syncthing thay thế hoặc xoá.</string>
-    <string name="staggered_versioning_description">Các tệp được di chuyển đến các phiên bản được đánh dấu ngày trong một thư mục .stversions khi được Syncthing thay thế hoặc xoá. Các phiên bản được tự động xoá nếu chúng cũ hơn tuổi thọ tối đa hoặc vượt quá số tệp được cho phép trong một khoảng thời gian.\n\nCác khoảng thời gian sau được sử dụng: trong giờ đầu tiên một phiên bản được giữ lại mỗi 30 giây, trong ngày đầu tiên một phiên bản được giữ lại mỗi 1 tiếng, trong 30 ngày đầu tiên một phiên bản được giữ lại mỗi ngày, cho đến tuổi thọ tối đa mà một phiên bản được giữ lại mỗi tuần.</string>
+    <string name="staggered_versioning_description">Các tệp được di chuyển đến các phiên bản được đánh dấu ngày trong một thư mục .stversions khi được Syncthing thay thế hoặc xoá. Các phiên bản được tự động xoá nếu chúng cũ hơn tuổi thọ tối đa hoặc vượt quá số tệp được cho phép trong một khoảng thời gian.
+\n
+\nCác khoảng thời gian sau được sử dụng: trong giờ đầu tiên một phiên bản được giữ lại mỗi 30 giây, trong ngày đầu tiên một phiên bản được giữ lại mỗi 1 tiếng, trong 30 ngày đầu tiên một phiên bản được giữ lại mỗi ngày, cho đến tuổi thọ tối đa mà một phiên bản được giữ lại mỗi tuần.</string>
     <string name="maximum_age_description">Thời gian tối đa để giữ một phiên bản (tính theo ngày, đặt là 0 để giữ lại các phiên bản mãi mãi).</string>
     <string name="versions_path_description">Đường dẫn nơi các phiên bản nên được lưu trữ (để trống để chọn thư mục .stversions mặc định trong thư mục dùng chung).</string>
     <string name="cleanout_after_description">Số ngày để giữ lại các tệp trong thùng rác. Không có nghĩa là mãi mãi.</string>
@@ -534,7 +542,8 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
     <string name="type_external">Kiểu: Ngoài</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Dọn dẹp sau: %1$s</string>
-    <string name="staggered_versioning_info">Tuổi thọ tối đa: %1$d\nĐường dẫn phiên bản: %2$s</string>
+    <string name="staggered_versioning_info">Tuổi thọ tối đa: %1$d
+\nĐường dẫn phiên bản: %2$s</string>
     <string name="external_versioning_info">Lệnh: %1$s</string>
     <string name="simple_versioning_info">Giữ các phiên bản: %1$s</string>
     <string name="show_device_id">Hiện ID thiết bị</string>

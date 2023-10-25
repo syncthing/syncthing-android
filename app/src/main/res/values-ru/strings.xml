@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Введение</string>
-    <string name="welcome_text">Syncthing — это приложение с открытым исходным кодом для синхронизации файлов.\n
-Чтобы синхронизировать данные с другими устройствами, добавьте их уникальные идентификаторы в список устройств. Затем вы сможете выбрать, какие папки с какими устройствами синхронизировать.\n
-Пожалуйста, сообщайте о возникших проблемах через GitHub.</string>
+    <string name="welcome_text">Syncthing — это приложение с открытым исходным кодом для синхронизации файлов.
+\nЧтобы синхронизировать данные с другими устройствами, добавьте их уникальные идентификаторы в список устройств. Затем вы сможете выбрать, какие папки с какими устройствами синхронизировать.
+\nПожалуйста, сообщайте о возникших проблемах через GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Использование хранилища</string>
     <string name="storage_permission_desc">Syncthing необходим доступ к вашему хранилищу для синхронизации файлов.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Определение местоположения (в фоне)</string>
-    <string name="location_permission_desc">Вы можете настроить Syncthing, чтобы синхронизация велась только в выбранных сетях Wi-Fi. Для поиска сетей, и только для этого, приложению требуется доступ к местоположению. Никакая другая информация о локации устройства не собирается и не сохраняется.\n\nЕсли вы хотите использовать эту функцию, нажмите кнопку выше и дайте Syncthing разрешение. Или просто пропустите этот шаг.</string>
+    <string name="location_permission_desc">Вы можете настроить Syncthing, чтобы синхронизация велась только в выбранных сетях Wi-Fi. Для поиска сетей, и только для этого, приложению требуется доступ к местоположению. Никакая другая информация о локации устройства не собирается и не сохраняется.
+\n
+\nЕсли вы хотите использовать эту функцию, нажмите кнопку выше и дайте Syncthing разрешение. Или просто пропустите этот шаг.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Назад</string>
@@ -39,7 +41,9 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Отправить ID устройства</string>
     <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику\?</string>
-    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, этот диалог появится вновь.\n\nОбобщенная статистика доступна всем на https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, этот диалог появится вновь.
+\n
+\nОбобщенная статистика доступна всем на https://data.syncthing.net.</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="open_website">Открыть сайт</string>
@@ -47,7 +51,9 @@
     <string name="device_rejected">Устройство «%1$s» хочет подключиться</string>
     <string name="folder_rejected">Устройство «%1$s» хочет поделиться папкой «%2$s»</string>
     <string name="dialog_disable_battery_optimization_title">Оптимизация батареи</string>
-    <string name="dialog_disable_battery_optimization_message">Android может остановить синхронизацию через определенное время. Чтобы избежать этого, отключите оптимизацию батареи.\n\nТакже, если на вашем устройстве установлена программа для автоматического завершения приложений, внесите Syncthing в список ее исключений.</string>
+    <string name="dialog_disable_battery_optimization_message">Android может остановить синхронизацию через определенное время. Чтобы избежать этого, отключите оптимизацию батареи.
+\n
+\nТакже, если на вашем устройстве установлена программа для автоматического завершения приложений, внесите Syncthing в список ее исключений.</string>
     <string name="dialog_disable_battery_optimization_later">Позже</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Больше не показывать</string>
     <string name="dialog_disable_battery_optimization_turn_off">Отключить для Syncthing</string>
@@ -306,7 +312,9 @@
     <string name="use_legacy_hashing_title">Использовать старый метод хеширования</string>
     <string name="use_legacy_hashing_summary">Принудительно использовать старый метод в целях совместимости</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию\? Существующие файлы будут перезаписаны.\n\nВНИМАНИЕ! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы скачать или изменить синхронизируемые файлы.</string>
+    <string name="dialog_confirm_export">Вы точно хотите экспортировать конфигурацию\? Существующие файлы будут перезаписаны.
+\n
+\nВНИМАНИЕ! Другие приложения могут иметь возможность считать приватный ключ из резервной копии и использовать его, чтобы скачать или изменить синхронизируемые файлы.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Действительно хотите импортировать новую конфигурацию\? Существующие файлы будут перезаписаны.</string>
     <!--Toast shown after config was successfully exported-->
@@ -325,16 +333,14 @@
     <string name="st_reset_database_title">Очистить базу данных</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Это действие должно выполняться только по рекомендации нашей поддержки.
-        \nВы уверены, что хотите очистить базу данных Syncthing\?
-    </string>
+\nВы уверены, что хотите очистить базу данных Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">База данных Syncthing успешно очищена</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Очистить индексы изменений</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Это действие должно выполняться только по рекомендации нашей поддержки.
-\nВы уверены, что хотите очистить индексы Syncthing\?
-</string>
+\nВы уверены, что хотите очистить индексы Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Индексы изменений Syncthing успешно очищены</string>
     <string name="category_about">О программе</string>
@@ -533,7 +539,9 @@
     <string name="keep_versions_description">Количество хранимых версий файла.</string>
     <string name="simple_file_versioning_description">Когда Syncthing изменяет или удаляет файлы, их версии с метками времени помещаются в папку .stversions.</string>
     <string name="trashcan_versioning_description">Когда Syncthing изменяет или удаляет файлы, они помещаются в папку .stversions.</string>
-    <string name="staggered_versioning_description">Когда Syncthing изменяет или удаляет файлы, их версии с метками времени помещаются в папку .stversions. Версии удаляются автоматически, если они существуют дольше максимального срока или превышают разрешённое количество файлов за интервал.\n\nИспользуются следующие интервалы: в первый час версия меняется каждые 30 секунд, в первый день - каждый час, первые 30 дней - каждый день, после, до максимального срока - каждую неделю.</string>
+    <string name="staggered_versioning_description">Когда Syncthing изменяет или удаляет файлы, их версии с метками времени помещаются в папку .stversions. Версии удаляются автоматически, если они существуют дольше максимального срока или превышают разрешённое количество файлов за интервал.
+\n
+\nИспользуются следующие интервалы: в первый час версия меняется каждые 30 секунд, в первый день - каждый час, первые 30 дней - каждый день, после, до максимального срока - каждую неделю.</string>
     <string name="maximum_age_description">Максимальный срок хранения версии (в днях; укажите 0, чтобы хранить вечно).</string>
     <string name="versions_path_description">Путь, где нужно хранить версии (оставьте пустым для папки по умолчанию .stversions внутри общей папки).</string>
     <string name="cleanout_after_description">Количество дней хранения файлов в корзине. Ноль значит навсегда</string>
@@ -546,7 +554,8 @@
     <string name="type_external">Внешнее</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Очистка после: %1$s</string>
-    <string name="staggered_versioning_info">Максимальный срок: %1$d \nПуть к версиям: %2$s</string>
+    <string name="staggered_versioning_info">Максимальный срок: %1$d
+\nПуть к версиям: %2$s</string>
     <string name="external_versioning_info">Команда: %1$s</string>
     <string name="simple_versioning_info">Количество хранимых версий: %1$s</string>
     <string name="show_device_id">Показать ID устройства</string>

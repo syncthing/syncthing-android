@@ -14,9 +14,9 @@
     <!-- Welcome wizard -->
     <!-- Slide 1 -->
     <string name="introduction">Introduction</string>
-    <string name="welcome_text">Syncthing is an open-source file synchronization application.\n\
-To share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.\n\
-Please report any problems you encounter via Github.</string>
+    <string name="welcome_text">Syncthing is an open-source file synchronization application.
+\nTo share data with other devices, you need to add their unique device IDs to the device list. Afterwards you can select which folders to share with which devices.
+\nPlease report any problems you encounter via Github.</string>
 
     <!-- Slide 2 -->
     <string name="storage_permission_title">Storage Permission</string>
@@ -25,11 +25,15 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Slide 3 -->
     <string name="location_permission_title">Location Permission (background)</string>
-    <string name="location_permission_desc">Syncthing can be configured to synchronize on selected Wi-Fi networks only. To do that it needs to look up the SSID of the currently connected Wi-Fi, also when the app is closed. Therefore it requires permission to access the location in the background. This information is not used to look up your location. And the only stored information is the Wi-Fi you manually choose to add to the list - no other user data is stored.\n\n If you want to use this feature, press the button above to grant the required permissions to Syncthing. Otherwise you can skip this step.</string>
+    <string name="location_permission_desc">Syncthing can be configured to synchronize on selected Wi-Fi networks only. To do that it needs to look up the SSID of the currently connected Wi-Fi, also when the app is closed. Therefore it requires permission to access the location in the background. This information is not used to look up your location. And the only stored information is the Wi-Fi you manually choose to add to the list - no other user data is stored.
+\n
+\nIf you want to use this feature, press the button above to grant the required permissions to Syncthing. Otherwise you can skip this step.</string>
 
     <!-- Slide 4 -->
     <string name="api_level_30_title">Upgrade Information</string>
-    <string name="api_level_30_desc">With the latest update syncthing-android is targeting API level 30, which changes the behaviour of Android\'s filesystem. Good news: On Android 11 and newer it is now able to write to an external SD card. Bad news: It may be slower and some paths will be hidden. Due to these hidden paths, the database needs to be reset to prevent data loss. This will cause all your data to be hashed again, but it doesn\'t need to be transferred from remote devices. It also may create conflicts and re-create recently deleted files if you aren\'t fully in sync right now. Depending on how much data you have, this process can be very resource intensive, i.e. take some time and use a lot of battery power.\n\n Please press the button below to reset the database and start Syncthing.</string>
+    <string name="api_level_30_desc">With the latest update syncthing-android is targeting API level 30, which changes the behaviour of Android\'s filesystem. Good news: On Android 11 and newer it is now able to write to an external SD card. Bad news: It may be slower and some paths will be hidden. Due to these hidden paths, the database needs to be reset to prevent data loss. This will cause all your data to be hashed again, but it doesn\'t need to be transferred from remote devices. It also may create conflicts and re-create recently deleted files if you aren\'t fully in sync right now. Depending on how much data you have, this process can be very resource intensive, i.e. take some time and use a lot of battery power.
+\n
+\nPlease press the button below to reset the database and start Syncthing.</string>
 
     <string name="api_level_30_button">Reset database</string>
     <string name="toast_api_level_30_must_reset">You can only continue by clicking the button to reset the database.</string>
@@ -66,7 +70,9 @@ Please report any problems you encounter via Github.</string>
 
     <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting\?</string>
 
-    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.\n\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.
+\n
+\nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
 
     <string name="yes">Yes</string>
 
@@ -81,7 +87,9 @@ Please report any problems you encounter via Github.</string>
     <string name="folder_rejected">Device \"%1$s\" wants to share folder \"%2$s\"</string>
 
     <string name="dialog_disable_battery_optimization_title">Battery Optimization</string>
-    <string name="dialog_disable_battery_optimization_message">Android may stop synchronization after some time. To prevent this, turn off battery optimization.\n\nSome devices have additional task-killing apps preinstalled. You should add Syncthing to their whitelist, as well.</string>
+    <string name="dialog_disable_battery_optimization_message">Android may stop synchronization after some time. To prevent this, turn off battery optimization.
+\n
+\nSome devices have additional task-killing apps preinstalled. You should add Syncthing to their whitelist, as well.</string>
     <string name="dialog_disable_battery_optimization_later">Later</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Don\'t show again</string>
     <string name="dialog_disable_battery_optimization_turn_off">Turn off for Syncthing</string>
@@ -479,7 +487,9 @@ Please report any problems you encounter via Github.</string>
     <string name="use_legacy_hashing_summary">Force Syncthing to use legacy hashing package for compatibility purposes</string>
 
     <!-- Dialog shown before config export -->
-    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.\n\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
+    <string name="dialog_confirm_export">Do you really want to export your configuration? Existing files will be overwritten.
+\n
+\nWARNING! Other applications may be able to read the private key from the backup location and use it to download/modify synchronized files.</string>
 
     <!-- Dialog shown before config import -->
     <string name="dialog_confirm_import">Do you really want to import a new configuration? Existing files will be overwritten.</string>
@@ -508,7 +518,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Syncthing was reset -->
     <string name="st_reset_database_question">This action should only be performed based on a recommendation from our support team.
-        \nAre you sure you want to clear Syncthing\'s database?
+\nAre you sure you want to clear Syncthing\'s database?
     </string>
 
     <!-- Syncthing was reset -->
@@ -519,7 +529,7 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Syncthing was reset -->
     <string name="st_reset_deltas_question">This action should only be performed based on a recommendation from our support team.
-        \nAre you sure you want to clear Syncthing\'s delta indexes?
+\nAre you sure you want to clear Syncthing\'s delta indexes?
     </string>
 
     <!-- Syncthing was reset -->
@@ -798,7 +808,9 @@ Please report any problems you encounter via Github.</string>
     <string name="keep_versions_description">The number of old versions to keep, per file.</string>
     <string name="simple_file_versioning_description">Files are moved to date stamped versions in a .stversions directory when replaced or deleted by Syncthing.</string>
     <string name="trashcan_versioning_description">Files are moved to .stversions directory when replaced or deleted by Syncthing.</string>
-    <string name="staggered_versioning_description">Files are moved to date stamped versions in a .stversions directory when replaced or deleted by Syncthing. Versions are automatically deleted if they are older than the maximum age or exceed the number of files allowed in an interval.\n\nThe following intervals are used: for the first hour a version is kept every 30 seconds, for the first day a version is kept every hour, for the first 30 days a version is kept every day, until the maximum age a version is kept every week.</string>
+    <string name="staggered_versioning_description">Files are moved to date stamped versions in a .stversions directory when replaced or deleted by Syncthing. Versions are automatically deleted if they are older than the maximum age or exceed the number of files allowed in an interval.
+\n
+\nThe following intervals are used: for the first hour a version is kept every 30 seconds, for the first day a version is kept every hour, for the first 30 days a version is kept every day, until the maximum age a version is kept every week.</string>
     <string name="maximum_age_description">The maximum time to keep a version (in days, set to 0 to keep versions forever).</string>
     <string name="versions_path_description">Path where versions should be stored (leave empty for the default .stversions directory in the shared folder).</string>
     <string name="cleanout_after_description">The number of days to keep files in the trash can. Zero means forever</string>
@@ -813,7 +825,8 @@ Please report any problems you encounter via Github.</string>
 
     <!-- Information displayed about the current file versioning configuration in the folder activity -->
     <string name="trashcan_versioning_info">Cleanout after: %1$s</string>
-    <string name="staggered_versioning_info">Maximum Age: %1$d \nVersions Path: %2$s</string>
+    <string name="staggered_versioning_info">Maximum Age: %1$d
+\nVersions Path: %2$s</string>
     <string name="external_versioning_info">Command: %1$s</string>
     <string name="simple_versioning_info">Keep versions: %1$s</string>
     <string name="show_device_id">Show device ID</string>

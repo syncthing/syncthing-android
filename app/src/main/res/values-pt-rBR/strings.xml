@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Introdução</string>
-    <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.\n\
-Para compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará\n\
-Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
+    <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.
+\nPara compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará
+\nPor favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Permissão de Armazenamento</string>
     <string name="storage_permission_desc">Syncthing precisa acessar seu armazenamento para poder sincronizar arquivos.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Permissão de Localização (segundo plano)</string>
-    <string name="location_permission_desc">Syncthing pode ser configurado para sincronizar apenas em redes Wi-Fi selecionadas. Para isso, é necessário verificar o SSID do Wi-Fi conectado no momento, inclusive quando o aplicativo está fechado. Portanto, o aplicativo requer permissão de acesso à localização em segundo plano. Esta informação não é utilizada para acessar a sua localização. A única informação guardada é o Wi-Fi que você escolhe manualmente para adicionar à lista - nenhum outro dado de usuário é armazenado.\n\n Se você deseja usar este recurso, pressione o botão acima para conceder as permissões necessárias ao Syncthing. Caso contrário, você pode pular esta etapa.</string>
+    <string name="location_permission_desc">Syncthing pode ser configurado para sincronizar apenas em redes Wi-Fi selecionadas. Para isso, é necessário verificar o SSID do Wi-Fi conectado no momento, inclusive quando o aplicativo está fechado. Portanto, o aplicativo requer permissão de acesso à localização em segundo plano. Esta informação não é utilizada para acessar a sua localização. A única informação guardada é o Wi-Fi que você escolhe manualmente para adicionar à lista - nenhum outro dado de usuário é armazenado.
+\n
+\nSe você deseja usar este recurso, pressione o botão acima para conceder as permissões necessárias ao Syncthing. Caso contrário, você pode pular esta etapa.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Voltar</string>
@@ -39,7 +41,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID do dispositivo para</string>
     <string name="usage_reporting_dialog_title">Permitir relatório anônimo de uso\?</string>
-    <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.
+\n
+\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="open_website">Abrir site</string>
@@ -47,7 +51,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="device_rejected">O dispositivo \"%1$s\" deseja conectar</string>
     <string name="folder_rejected">O dispositivo \"%1$s\" deseja compartilhar a pasta \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
-    <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização após algum tempo. Para evitar isso, desabilite a otimização de bateria.\n\nAlguns dispositivos possuem aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas de exceções deles.</string>
+    <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização após algum tempo. Para evitar isso, desabilite a otimização de bateria.
+\n
+\nAlguns dispositivos possuem aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas de exceções deles.</string>
     <string name="dialog_disable_battery_optimization_later">Depois</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
     <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
@@ -305,7 +311,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="use_legacy_hashing_title">Usar hashing legado</string>
     <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar hashing legado para fins de compatibilidade</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Quer mesmo exportar a configuração\? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
+    <string name="dialog_confirm_export">Quer mesmo exportar a configuração\? Arquivos existentes serão sobrescritos.
+\n
+\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Quer mesmo importar uma nova configuração\? Arquivos existentes serão sobrescritos.</string>
     <!--Toast shown after config was successfully exported-->
@@ -324,16 +332,14 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="st_reset_database_title">Limpar banco de dados</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Esta ação deve ser executada somente com base em uma recomendação da nossa equipe de suporte.
-\nTem certeza de que deseja limpar o banco de dados do Syncthing\?
-</string>
+\nTem certeza de que deseja limpar o banco de dados do Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">O banco de dados do Syncthing foi limpo com sucesso</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Redefine índices Delta</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Esta ação deve ser executada somente com base em uma recomendação da nossa equipe de suporte.
-\nTem certeza de que deseja limpar os índices delta do Syncthing\?
-</string>
+\nTem certeza de que deseja limpar os índices delta do Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Índices delta do Syncthing reiniciados com sucesso</string>
     <string name="category_about">Sobre</string>
@@ -529,7 +535,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="keep_versions_description">Número de versões antigas de um arquivo a serem mantidas</string>
     <string name="simple_file_versioning_description">Os arquivos são renomeados com suas datas e movidos para o diretório .stversions quando substituídos ou apagados pelo Syncthing.</string>
     <string name="trashcan_versioning_description">Os arquivos são movidos para o diretório .stversions quando substituídos ou apagados pelo Syncthing.</string>
-    <string name="staggered_versioning_description">Arquivos são movidos para versões marcadas em uma pasta .stversions quando substituídos ou apagados pelo Syncthing. As versões são automaticamente apagadas se forem mais antigas que a idade máxima, ou se excederem o número de arquivos permitidos em um intervalo.\n\nOs seguintes intervalos são usados: para a primeira hora, uma versão é mantida a cada 30 segundos, para o primeiro dia, uma versão é mantida a cada hora, para os primeiros 30 dias, uma versão é mantida a cada dia, até a idade máxima onde uma versão é mantida a cada semana.</string>
+    <string name="staggered_versioning_description">Arquivos são movidos para versões marcadas em uma pasta .stversions quando substituídos ou apagados pelo Syncthing. As versões são automaticamente apagadas se forem mais antigas que a idade máxima, ou se excederem o número de arquivos permitidos em um intervalo.
+\n
+\nOs seguintes intervalos são usados: para a primeira hora, uma versão é mantida a cada 30 segundos, para o primeiro dia, uma versão é mantida a cada hora, para os primeiros 30 dias, uma versão é mantida a cada dia, até a idade máxima onde uma versão é mantida a cada semana.</string>
     <string name="maximum_age_description">O número máximo de dias em que uma versão é guardada. (Use 0 para manter para sempre).</string>
     <string name="versions_path_description">Caminho do diretório onde as versões são salvas (deixe em branco para que seja o diretório padrão .stversions dentro da pasta compartilhada).</string>
     <string name="cleanout_after_description">O número de dias em que são mantidos os arquivos da lixeira. Zero significa para sempre.</string>
@@ -542,7 +550,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="type_external">Tipo: Externo</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Limpar após: %1$s</string>
-    <string name="staggered_versioning_info">Idade máxima: %1$d \nCaminho do versionamento: %2$s</string>
+    <string name="staggered_versioning_info">Idade máxima: %1$d
+\nCaminho do versionamento: %2$s</string>
     <string name="external_versioning_info">Comando: %1$s</string>
     <string name="simple_versioning_info">Manter versões: %1$s</string>
     <string name="show_device_id">Mostrar ID</string>

@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Innleiing</string>
-    <string name="welcome_text">Syncthing er ein filsynkroniseringsapp med open kjeldekode.\n\
-For å dela data med andre einingar, må du leggja inn den unike einings-ID-en i einingslista. Etter dette kan du velja kva mapper du vil dele og med kva slags einingar.\n\
-Ver venleg å rapporter problem som måtte oppstå via Github.</string>
+    <string name="welcome_text">Syncthing er ein filsynkroniseringsapp med open kjeldekode.
+\nFor å dela data med andre einingar, må du leggja inn den unike einings-ID-en i einingslista. Etter dette kan du velja kva mapper du vil dele og med kva slags einingar.
+\nVer venleg å rapporter problem som måtte oppstå via Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Lagringsløyve</string>
     <string name="storage_permission_desc">For å få gjort filsynkronisering treng Syncthing løyve til å få tilgang til lagring.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Tilgang til lokasjonsteneste (bakgrunn)</string>
-    <string name="location_permission_desc">Syncthing kan setjast opp til å kun synkronisera på enkelte trådlause nettverk. Får å gjera dette må Syncthing leita opp SSID-en til det trådlause nettverket du er tilknytt, òg når appen er stengt. Vi treng difor løyve til å, i bakgrunnen, henta ut kor du er lokalisert. Denne informasjonen vert ikkje nytta til å leita opp kor du er. Den einaste daten som vert lagra er dei trådlause nettverka som manuelt vel å leggja til lista di - ingen annan data vert lagra.\n\n Om du ynskjer å nytta denne funksjonen, trykk på knappen over for å gje løyvene som Syncthing treng for dette. Om du ynskjer kan du hoppa over dette steget.</string>
+    <string name="location_permission_desc">Syncthing kan setjast opp til å kun synkronisera på enkelte trådlause nettverk. Får å gjera dette må Syncthing leita opp SSID-en til det trådlause nettverket du er tilknytt, òg når appen er stengt. Vi treng difor løyve til å, i bakgrunnen, henta ut kor du er lokalisert. Denne informasjonen vert ikkje nytta til å leita opp kor du er. Den einaste daten som vert lagra er dei trådlause nettverka som manuelt vel å leggja til lista di - ingen annan data vert lagra.
+\n
+\nOm du ynskjer å nytta denne funksjonen, trykk på knappen over for å gje løyvene som Syncthing treng for dette. Om du ynskjer kan du hoppa over dette steget.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Attende</string>
@@ -38,7 +40,9 @@ Ver venleg å rapporter problem som måtte oppstå via Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Send einings-ID til</string>
     <string name="usage_reporting_dialog_title">Tillate anonym rapportering av bruk\?</string>
-    <string name="usage_reporting_dialog_description">Den krypterte rapporten blir send dagleg. Den brukast til å spore felles plattformer. mappestorleikar og app-versjonar. Om dataa som sendast blir endra, blir du spurt på ny.\n\nDei aggregerte statistikkane er offentlege på https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Den krypterte rapporten blir send dagleg. Den brukast til å spore felles plattformer. mappestorleikar og app-versjonar. Om dataa som sendast blir endra, blir du spurt på ny.
+\n
+\nDei aggregerte statistikkane er offentlege på https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>
     <string name="open_website">Opne nettstad</string>
@@ -191,7 +195,9 @@ Ver venleg å rapporter problem som måtte oppstå via Github.</string>
     <!--Toast after entering invalid socks proxy address-->
     <!--Toast after entering invalid http proxy address-->
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Vil du verkeleg eksportere innstillingane\? Eksisterande filer vil verte skrivne over. \n\nÅTVARING: Andre appar kan vere i stand til å lese den private nøkkelen frå tryggingskopien, og bruke den til å laste ned eller endre synkroniserte filer.</string>
+    <string name="dialog_confirm_export">Vil du verkeleg eksportere innstillingane\? Eksisterande filer vil verte skrivne over.
+\n
+\nÅTVARING: Andre appar kan vere i stand til å lese den private nøkkelen frå tryggingskopien, og bruke den til å laste ned eller endre synkroniserte filer.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Vil du verkeleg importere ei ny innstillingsfil\? Eksisterande filer vil verte skrivne over.</string>
     <!--Toast shown after config was successfully exported-->
