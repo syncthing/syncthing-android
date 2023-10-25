@@ -545,4 +545,21 @@
     <string name="browse">閲覧</string>
     <string name="no_sub_folder_is_selected">サブフォルダーが選択されていません</string>
     <string name="share_device_id_chooser">次とデバイス ID を共有</string>
+    <string name="api_level_30_desc"></string>
+    <string name="location_permission_title"></string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="privacy_summary"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
+    <string name="sync_only_wifi_ssids_connect_to_wifi"></string>
+    <string name="dialog_all_files_access_not_supported"></string>
+    <string name="enable_notification_permission"></string>
+    <string name="api_level_30_title"></string>
+    <string name="toast_api_level_30_must_reset"></string>
+    <string name="api_level_30_button"></string>
+    <string name="location_permission_desc"></string>
+    <string name="notification_permission_title"></string>
+    <string name="require_notification_permission_desc"></string>
+    <string name="privacy_title"></string>
 </resources>
