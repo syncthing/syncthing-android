@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Introduzione</string>
-    <string name="welcome_text">Syncthing è un\'applicazione open-source di sincronizzazione file.\n\
-Per condividere i dati con altri dispositivi, è necessario aggiungere il rispettivo ID Dispositivo nell\'elenco dei dispositivi. Successivamente è possibile selezionare quali cartelle condividere con quali dispositivi.\n\
-Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
+    <string name="welcome_text">Syncthing è un\'applicazione open-source di sincronizzazione file.
+\nPer condividere i dati con altri dispositivi, è necessario aggiungere il rispettivo ID Dispositivo nell\'elenco dei dispositivi. Successivamente è possibile selezionare quali cartelle condividere con quali dispositivi.
+\nSi prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Autorizzazione di archiviazione</string>
     <string name="storage_permission_desc">Syncthing deve accedere allo spazio di archiviazione per eseguire la sincronizzazione dei file.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Autorizzazione per la posizione (background)</string>
-    <string name="location_permission_desc">Syncthing può essere configurato per sincronizzarsi solo su reti Wi-Fi selezionate. Per farlo è necessario cercare l\'SSID del Wi-Fi attualmente connesso, anche quando l\'app è chiusa. Pertanto richiede l\'autorizzazione per accedere alla posizione in background. Queste informazioni non vengono utilizzate per cercare la tua posizione. E le uniche informazioni memorizzate sono il Wi-Fi che scegli manualmente di aggiungere all\'elenco: nessun altro dato utente viene memorizzato. \n\n Se desideri utilizzare questa funzione, premi il pulsante in alto per concedere le autorizzazioni richieste a Syncthing. Altrimenti puoi saltare questo passaggio.</string>
+    <string name="location_permission_desc">Syncthing può essere configurato per sincronizzarsi solo su reti Wi-Fi selezionate. Per farlo è necessario cercare l\'SSID del Wi-Fi attualmente connesso, anche quando l\'app è chiusa. Pertanto richiede l\'autorizzazione per accedere alla posizione in background. Queste informazioni non vengono utilizzate per cercare la tua posizione. E le uniche informazioni memorizzate sono il Wi-Fi che scegli manualmente di aggiungere all\'elenco: nessun altro dato utente viene memorizzato.
+\n
+\nSe desideri utilizzare questa funzione, premi il pulsante in alto per concedere le autorizzazioni richieste a Syncthing. Altrimenti puoi saltare questo passaggio.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Indietro</string>
     <string name="cont">Continua</string>
@@ -38,7 +40,9 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Invia ID Dispositivo a</string>
     <string name="usage_reporting_dialog_title">Abilitare Statistiche Anonime di Utilizzo\?</string>
-    <string name="usage_reporting_dialog_description">Quotidianamente il software invia le statistiche di utilizzo in forma criptata. Questi dati riguardano i sistemi operativi utilizzati, le dimensioni delle cartelle e le versioni del software. Se i dati riportati sono cambiati, verrà mostrata di nuovo questa finestra di dialogo.\n\nDati statistici in forma aggregata sono disponibili pubblicamente su https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Quotidianamente il software invia le statistiche di utilizzo in forma criptata. Questi dati riguardano i sistemi operativi utilizzati, le dimensioni delle cartelle e le versioni del software. Se i dati riportati sono cambiati, verrà mostrata di nuovo questa finestra di dialogo.
+\n
+\nDati statistici in forma aggregata sono disponibili pubblicamente su https://data.syncthing.net.</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
     <string name="open_website">Apri sito</string>
@@ -46,7 +50,9 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <string name="device_rejected">Il dispositivo \"%1$s\" vuole connettersi</string>
     <string name="folder_rejected">Il dispositivo \"%1$s\" vuole condividere la cartella \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Ottimizzazione della batteria</string>
-    <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria.\n\nAlcuni dispositivi hanno ulteriori applicazioni preinstallate di interruzione dei processi. Si dovrebbe aggiungere Syncthing alla loro whitelist.</string>
+    <string name="dialog_disable_battery_optimization_message">Android potrebbe interrompere la sincronizzazione dopo qualche tempo. Per evitare questo, spegnere l\'ottimizzazione della batteria.
+\n
+\nAlcuni dispositivi hanno ulteriori applicazioni preinstallate di interruzione dei processi. Si dovrebbe aggiungere Syncthing alla loro whitelist.</string>
     <string name="dialog_disable_battery_optimization_later">Più tardi</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Non mostrare più</string>
     <string name="dialog_disable_battery_optimization_turn_off">Spegnere per Syncthing</string>
@@ -305,7 +311,9 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <string name="use_legacy_hashing_title">Utilizza la funzione di hash precedente</string>
     <string name="use_legacy_hashing_summary">Forza Syncthing ad utilizzare il pacchetto di hash precedente per scopi di compatibilità</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione\? I files esistenti verranno sovrascritti.\n\nATTENZIONE! Le altre applicazioni potrebbero essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
+    <string name="dialog_confirm_export">Vuoi veramente esportare la tua configurazione\? I files esistenti verranno sovrascritti.
+\n
+\nATTENZIONE! Le altre applicazioni potrebbero essere in grado di leggere la chiave privata dalla locazione di backup e usarla per scaricare/modificare i files sincronizzati.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Vuoi realmente importare una nuova configurazione\? I files esistenti verranno sovrascritti.</string>
     <!--Toast shown after config was successfully exported-->
@@ -324,16 +332,14 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <string name="st_reset_database_title">Reset del Database</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Questa azione dovrebbe essere eseguita solo sulla base di una raccomandazione del nostro team di supporto.
-        \nSei sicuro di voler cancellare il database di Syncthing\?
-    </string>
+\nSei sicuro di voler cancellare il database di Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Reset del database di Syncthing riuscito</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Reimposta gli indici Delta</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Questa azione dovrebbe essere eseguita solo sulla base di una raccomandazione del nostro team di supporto.
-        \nSei sicuro di voler cancellare gli indici delta di Syncthing\?
-    </string>
+\nSei sicuro di voler cancellare gli indici delta di Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Ripristinati con successo gli indici delta di Syncthing</string>
     <string name="category_about">Info</string>
@@ -529,7 +535,9 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <string name="keep_versions_description">Il numero di vecchie versioni di mantenere, per ogni file.</string>
     <string name="simple_file_versioning_description">I file vengono spostati con la data di versione in una cartella .stversions quando sostituiti o eliminati da Syncthing.</string>
     <string name="trashcan_versioning_description">I file vengono spostati in una cartella .stversions quando sostituiti o eliminati da Syncthing.</string>
-    <string name="staggered_versioning_description">I file vengono spostati con la data di versione in una cartella .stversions quando sostituiti o eliminati da Syncthing. Le versioni vengono automaticamente eliminate se sono di età superiore all\'età massima o superano il numero di file consentiti in un intervallo.\n\nI seguenti intervalli sono utilizzati: Per la prima ora una versione viene mantenuta ogni 30 secondi, per il primo giorno una versione viene mantenuta ogni ora, per i primi 30 giorni una versione viene mantenuta ogni giorno, fino all\'età massima una versione è mantenuto ogni settimana.</string>
+    <string name="staggered_versioning_description">I file vengono spostati con la data di versione in una cartella .stversions quando sostituiti o eliminati da Syncthing. Le versioni vengono automaticamente eliminate se sono di età superiore all\'età massima o superano il numero di file consentiti in un intervallo.
+\n
+\nI seguenti intervalli sono utilizzati: Per la prima ora una versione viene mantenuta ogni 30 secondi, per il primo giorno una versione viene mantenuta ogni ora, per i primi 30 giorni una versione viene mantenuta ogni giorno, fino all\'età massima una versione è mantenuto ogni settimana.</string>
     <string name="maximum_age_description">Il tempo massimo di mantenimento di una versione (in giorni, imposta su 0 per mantenere le versioni per sempre).</string>
     <string name="versions_path_description">Percorso in cui devono essere conservate le versioni (lasciare vuoto per la directory di default .stversions nella cartella condivisa).</string>
     <string name="cleanout_after_description">Il numero di giorni di mantenimento dei file nel cestino. Zero significa per sempre</string>
@@ -542,7 +550,8 @@ Si prega di segnalare eventuali problemi che si incontrano via Github.</string>
     <string name="type_external">Tipo: Esterno</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Ripulire dopo: %1$s</string>
-    <string name="staggered_versioning_info">Età Massima: %1$d \nPercorso Versioni: %2$s</string>
+    <string name="staggered_versioning_info">Età Massima: %1$d
+\nPercorso Versioni: %2$s</string>
     <string name="external_versioning_info">Comando: %1$s</string>
     <string name="simple_versioning_info">Mantenere versioni: %1$s</string>
     <string name="show_device_id">Mostra ID dispositivo</string>

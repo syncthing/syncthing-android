@@ -7,9 +7,9 @@
     <string name="welcome_title">Bem vindo(a) ao Syncthing for Android</string>
     <!--Welcome wizard-->
     <!--Slide 1-->
-    <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.\n\
-Para compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará\n\
-Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
+    <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.
+\nPara compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará
+\nPor favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
     <!--Slide 2-->
     <!--Slide 3-->
     <!--Generic texts used everywhere-->
@@ -27,13 +27,17 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID do dispositivo para</string>
     <string name="usage_reporting_dialog_title">Permitir relatório anônimo de uso\?</string>
-    <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.\n\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">O relatório de uso é criptografado e enviado diariamente. É utilizado para rastrear plataformas, tamanhos de arquivos e versões da aplicação. Caso o formato dos dados seja alterado, esta caixa de diálogo te avisará.
+\n
+\nAs estatísticas agregadas estão disponíveis publicamente em https://data.syncthing.net.</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="open_website">Abrir site</string>
     <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
     <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
-    <string name="dialog_disable_battery_optimization_message">O Android poder parar a sincronização após algum tempo. Para evitar isto, desabilite a otimização de bateria.\n\nAlguns dispositivos possuem aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas brancas deles.</string>
+    <string name="dialog_disable_battery_optimization_message">O Android poder parar a sincronização após algum tempo. Para evitar isto, desabilite a otimização de bateria.
+\n
+\nAlguns dispositivos possuem aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas brancas deles.</string>
     <string name="dialog_disable_battery_optimization_later">Depois</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
     <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
@@ -235,7 +239,9 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="use_legacy_hashing_title">Usar hashing legado</string>
     <string name="use_legacy_hashing_summary">Forçar o Syncthing a usar hashing legado para fins de compatibilidade</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Quer mesmo exportar a configuração\? Arquivos existentes serão sobrescritos.\n\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
+    <string name="dialog_confirm_export">Quer mesmo exportar a configuração\? Arquivos existentes serão sobrescritos.
+\n
+\nAVISO! Outros aplicativos poderão ler a chave privada do arquivo de backup e usá-la para ler e escrever seus arquivos sincronizados.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Quer mesmo importar uma nova configuração\? Arquivos existentes serão sobrescritos.</string>
     <!--Toast shown after config was successfully exported-->
@@ -429,7 +435,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
     <string name="type_external">Tipo: Externo</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Limpar após: %1$s</string>
-    <string name="staggered_versioning_info">Idade máxima: %1$d \nCaminho do versionamento: %2$s</string>
+    <string name="staggered_versioning_info">Idade máxima: %1$d
+\nCaminho do versionamento: %2$s</string>
     <string name="external_versioning_info">Comando: %1$s</string>
     <string name="simple_versioning_info">Manter versões: %1$s</string>
     <string name="show_device_id">Mostrar ID</string>

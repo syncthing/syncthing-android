@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Pengenalan</string>
-    <string name="welcome_text">Syncthing adalah aplikasi penyelarasan berkas bebas-terbuka.\n\
-Untuk berbagi data dengan perangkat lain, anda perlu menambah ID masing-masing perangkat tersebut pada daftar perangkat. Setelah itu anda bisa memilih folder mana yang akan berbagi dengan perangkat mana.\n\
-Jika ada masalah silakan laporkan lewat Github.</string>
+    <string name="welcome_text">Syncthing adalah aplikasi penyelarasan berkas bebas-terbuka.
+\nUntuk berbagi data dengan perangkat lain, anda perlu menambah ID masing-masing perangkat tersebut pada daftar perangkat. Setelah itu anda bisa memilih folder mana yang akan berbagi dengan perangkat mana.
+\nJika ada masalah silakan laporkan lewat Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Perizinan Penyimpanan</string>
     <string name="storage_permission_desc">Syncthing perlu mengakses penyimpanan Anda untuk melakukan sinkronisasi file.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Izin Lokasi (latar belakang)</string>
-    <string name="location_permission_desc">Sinkronisasi dapat dikonfigurasi untuk menyinkronkan hanya pada jaringan Wi-Fi tertentu. Untuk melakukan itu perlu mencari SSID dari Wi-Fi yang saat ini terhubung, juga ketika aplikasi ditutup. Oleh karena itu diperlukan izin untuk mengakses lokasi di latar belakang. Informasi ini tidak digunakan untuk mencari lokasi Anda. Dan satu-satunya informasi yang tersimpan adalah Wi-Fi yang Anda pilih secara manual untuk ditambahkan ke daftar - tidak ada data pengguna lain yang disimpan.\n\n Jika Anda ingin menggunakan fitur ini, tekan tombol di atas untuk memberikan izin yang diperlukan untuk Menyinkronkan. Jika tidak, Anda dapat melewati langkah ini.</string>
+    <string name="location_permission_desc">Sinkronisasi dapat dikonfigurasi untuk menyinkronkan hanya pada jaringan Wi-Fi tertentu. Untuk melakukan itu perlu mencari SSID dari Wi-Fi yang saat ini terhubung, juga ketika aplikasi ditutup. Oleh karena itu diperlukan izin untuk mengakses lokasi di latar belakang. Informasi ini tidak digunakan untuk mencari lokasi Anda. Dan satu-satunya informasi yang tersimpan adalah Wi-Fi yang Anda pilih secara manual untuk ditambahkan ke daftar - tidak ada data pengguna lain yang disimpan.
+\n
+\nJika Anda ingin menggunakan fitur ini, tekan tombol di atas untuk memberikan izin yang diperlukan untuk Menyinkronkan. Jika tidak, Anda dapat melewati langkah ini.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Kembali</string>
     <string name="cont">Lanjutkan</string>
@@ -32,13 +34,17 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Kirim ID Perangkat ke</string>
     <string name="usage_reporting_dialog_title">Perbolehkan Pelaporan Penggunaan Anonim\?</string>
-    <string name="usage_reporting_dialog_description">Laporan penggunaan terenkripsi dikirim harian. Digunakan untuk melihat jenis platform, ukuran folder dan versi aplikasi. Jika data yang terkirim berubah maka akan muncul dialog ini kembali.\n\nAgregat statistik dipublikasikan di https://data.syncthing.net</string>
+    <string name="usage_reporting_dialog_description">Laporan penggunaan terenkripsi dikirim harian. Digunakan untuk melihat jenis platform, ukuran folder dan versi aplikasi. Jika data yang terkirim berubah maka akan muncul dialog ini kembali.
+\n
+\nAgregat statistik dipublikasikan di https://data.syncthing.net</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="open_website">Buka Situs</string>
     <string name="toast_write_storage_permission_required">Aplikasi ini membutuuhkan kewenangan penulisan storage.</string>
     <string name="dialog_disable_battery_optimization_title">Optimisasi Baterai</string>
-    <string name="dialog_disable_battery_optimization_message">Android mungkin akan menghentikan penyelarasan setelah beberapa waktu. Untuk mencegah hal ini, matikan optimisasi baterai.\n\nBeberapa perangkat mungkin sudah memiliki aplikasi penghentian tugas. Anda juga perlu memasukkan Syncthing pada whitelist aplikasi tersebut.</string>
+    <string name="dialog_disable_battery_optimization_message">Android mungkin akan menghentikan penyelarasan setelah beberapa waktu. Untuk mencegah hal ini, matikan optimisasi baterai.
+\n
+\nBeberapa perangkat mungkin sudah memiliki aplikasi penghentian tugas. Anda juga perlu memasukkan Syncthing pada whitelist aplikasi tersebut.</string>
     <string name="dialog_disable_battery_optimization_later">Nanti</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Jangan tampilkan lagi</string>
     <string name="dialog_disable_battery_optimization_turn_off">Matikan untuk Syncthing</string>
@@ -213,7 +219,9 @@ Jika ada masalah silakan laporkan lewat Github.</string>
     <string name="use_legacy_hashing_title">Gunakan hashing lawas</string>
     <string name="use_legacy_hashing_summary">Paksa Syncthing menggunakan paket hashing lawas untuk kompatibilitas</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Anda yakin ingin mengekspor konfigurasi\? Berkas yang ada akan ditimpa.\n\nPERINGATAN| Aplikasi lain mungkin bisa membaca kunci privat dari lokasi backup dan menggunakannya untuk mengunduh/mengubah berkas terselaraskan.</string>
+    <string name="dialog_confirm_export">Anda yakin ingin mengekspor konfigurasi\? Berkas yang ada akan ditimpa.
+\n
+\nPERINGATAN| Aplikasi lain mungkin bisa membaca kunci privat dari lokasi backup dan menggunakannya untuk mengunduh/mengubah berkas terselaraskan.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Anda yakin ingin mengimpor konfigurasi baru\? Berkas yang ada akan ditimpa.</string>
     <!--Toast shown after config was successfully exported-->

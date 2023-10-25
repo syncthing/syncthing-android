@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Introducere</string>
-    <string name="welcome_text">Syncthing este o aplicație, cu sursă deschisă, de sincronizare a fișierelor.\n\
-Pentru a partaja date cu alte dispozitive, trebuie să le adăugați ID-ul unic de dispozitiv la lista dumneavoastră de dispozitive. După aceea puteți selecta care directoare le veți partaja cu care dispozitive.\n\
-Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.</string>
+    <string name="welcome_text">Syncthing este o aplicație, cu sursă deschisă, de sincronizare a fișierelor.
+\nPentru a partaja date cu alte dispozitive, trebuie să le adăugați ID-ul unic de dispozitiv la lista dumneavoastră de dispozitive. După aceea puteți selecta care directoare le veți partaja cu care dispozitive.
+\nVă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Permisiune acces stocare</string>
     <string name="storage_permission_desc">Syncthing are nevoie să acceseze stocarea pentru a face sincronizarea fișierelor.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Permisiune locație (fundal)</string>
-    <string name="location_permission_desc">Syncthing poate fi configurat pentru a sincroniza numai pe rețelele Wi-Fi selectate. Pentru a face acest lucru, trebuie să caute SSID-ul Wi-Fi-ului conectat în prezent, chiar și atunci când aplicația este închisă. Prin urmare, necesită permisiunea de a accesa locația din fundal. Aceste informații nu sunt utilizate pentru a vă căuta locația. Și singurele informații stocate sunt Wi-Fi-ul pe care îl alegeți manual să îl adăugați la listă - nu sunt stocate alte date de utilizator.\n\n Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunile necesare pentru Syncthing. În caz contrar, puteți sări peste acest pas.</string>
+    <string name="location_permission_desc">Syncthing poate fi configurat pentru a sincroniza numai pe rețelele Wi-Fi selectate. Pentru a face acest lucru, trebuie să caute SSID-ul Wi-Fi-ului conectat în prezent, chiar și atunci când aplicația este închisă. Prin urmare, necesită permisiunea de a accesa locația din fundal. Aceste informații nu sunt utilizate pentru a vă căuta locația. Și singurele informații stocate sunt Wi-Fi-ul pe care îl alegeți manual să îl adăugați la listă - nu sunt stocate alte date de utilizator.
+\n
+\nDacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunile necesare pentru Syncthing. În caz contrar, puteți sări peste acest pas.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Înapoi</string>
     <string name="cont">Continuare</string>
@@ -38,7 +40,9 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Trimite ID-ul dispozitivul prin</string>
     <string name="usage_reporting_dialog_title">Permite trimiterea unui raport de utilizare anonim\?</string>
-    <string name="usage_reporting_dialog_description">Raportul de utilizare este trimis zilnic în mod criptat. Este folosit pentru a urmării platformele comune, mărimile de directoare și versiunile aplicației. Dacă datele raportate se schimbă veți fi întrebat din nou.\n\nStatisticile cumulate sunt disponibile public la https://data.syncthing.net</string>
+    <string name="usage_reporting_dialog_description">Raportul de utilizare este trimis zilnic în mod criptat. Este folosit pentru a urmării platformele comune, mărimile de directoare și versiunile aplicației. Dacă datele raportate se schimbă veți fi întrebat din nou.
+\n
+\nStatisticile cumulate sunt disponibile public la https://data.syncthing.net</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="open_website">Deschide site</string>
@@ -46,7 +50,9 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="device_rejected">Dispozitivul \"%1$s\" dorește să se conecteze</string>
     <string name="folder_rejected">Dispozitivul \"%1$s\" dorește să partajeze directorul \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Optimizare baterie</string>
-    <string name="dialog_disable_battery_optimization_message">Android poate oprii sincronizarea după un timp. Pentru a prevenii asta, opriți optimizarea bateriei.\n\nUnele dispozitive au aplicații adiționale preinstalate care pot oprii aplicațiile. Ar trebui să adăugați Syncthing și în listele lor de excepții.</string>
+    <string name="dialog_disable_battery_optimization_message">Android poate oprii sincronizarea după un timp. Pentru a prevenii asta, opriți optimizarea bateriei.
+\n
+\nUnele dispozitive au aplicații adiționale preinstalate care pot oprii aplicațiile. Ar trebui să adăugați Syncthing și în listele lor de excepții.</string>
     <string name="dialog_disable_battery_optimization_later">Mai târziu</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Nu mai afișa</string>
     <string name="dialog_disable_battery_optimization_turn_off">Închide Syncthing</string>
@@ -305,7 +311,9 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="use_legacy_hashing_title">Folosește modul vechi de hashing</string>
     <string name="use_legacy_hashing_summary">Forțează utilizarea pachetului de hashing vechi din motive de compatibilitate</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Chiar doriți să exportați configurația\? Fișierele existente vor fi suprascrise.\n\nATENȚIE! Alte aplicații vor putea să citească cheia privată din locația copiei de rezervă și să o folosească pentru a descărca/modifica fișierele sincronizate.</string>
+    <string name="dialog_confirm_export">Chiar doriți să exportați configurația\? Fișierele existente vor fi suprascrise.
+\n
+\nATENȚIE! Alte aplicații vor putea să citească cheia privată din locația copiei de rezervă și să o folosească pentru a descărca/modifica fișierele sincronizate.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Chiar doriți să importați o configurație nouă\? Fișierele existente vor fi suprascrise.</string>
     <!--Toast shown after config was successfully exported-->
@@ -324,16 +332,14 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="st_reset_database_title">Resetează baza de date</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Acestă acțiune trebuie realizată numai în baza unei recomandări din partea echipei noastre de asistență.
-        \nSigur doriți să curățați baza de date Syncthing\?
-    </string>
+\nSigur doriți să curățați baza de date Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Baza de date Syncthing a fost resetată cu succes</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Resetare index diferențe</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Acestă acțiune trebuie realizată numai în baza unei recomandări din partea echipei noastre de asistență.
-        \nSigur doriți să curățați indexul diferențelor Syncthing\?
-    </string>
+\nSigur doriți să curățați indexul diferențelor Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Indexul cu diferențe Syncthing a fost resetat cu succes</string>
     <string name="category_about">Despre</string>
@@ -529,8 +535,9 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
     <string name="keep_versions_description">Numărul de versiuni vechi ale fișierelor ce vor fi păstrate, pentru fiecare fișier.</string>
     <string name="simple_file_versioning_description">Fișierele sunt mutate și redenumite după dată în directorul .stversions atunci când sunt înlocuite sau șterse de către Syncthing.</string>
     <string name="trashcan_versioning_description">Fișierele sunt mutate în directorul .stversions atunci când sunt înlocuite sau șterse de către Syncthing.</string>
-    <string name="staggered_versioning_description">Fișierele sunt mutate și redenumite după dată în directorul .stversions 
-atunci când sunt înlocuite sau șterse de către Syncthing. Versiunile sunt șterse automat dacă sunt mai vechi decât vârsta maximă sau dacă au depășit numărul de fișiere permise într-un interval.\n\nUrmătoarele intervale sunt folosite: în prima oră o versiune este păstrată pentru fiecare 30 de secunde, în prima zi o versiune este păstrată pentru fiecare oră, în primele 30 de zile o versiune este păstrată pentru fiecare zi, până la vârsta maximă o versiune este păstrată pentru fiecare săptămână.</string>
+    <string name="staggered_versioning_description">Fișierele sunt mutate și redenumite după dată în directorul .stversions atunci când sunt înlocuite sau șterse de către Syncthing. Versiunile sunt șterse automat dacă sunt mai vechi decât vârsta maximă sau dacă au depășit numărul de fișiere permise într-un interval.
+\n
+\nUrmătoarele intervale sunt folosite: în prima oră o versiune este păstrată pentru fiecare 30 de secunde, în prima zi o versiune este păstrată pentru fiecare oră, în primele 30 de zile o versiune este păstrată pentru fiecare zi, până la vârsta maximă o versiune este păstrată pentru fiecare săptămână.</string>
     <string name="maximum_age_description">Intervalul de timp maxim de păstrat o versiune (în zile, setați la 0 pentru a păstra versiunile pentru totdeauna)</string>
     <string name="versions_path_description">Calea unde versiunile vor fi stocate (lăsați gol pentru a folosi directorul implicit .stversions din directorul partajat)</string>
     <string name="cleanout_after_description">Numărul de zile de păstrat fișiere în coșul de gunoi. Zero înseamna pentru totdeauna</string>
@@ -543,7 +550,8 @@ atunci când sunt înlocuite sau șterse de către Syncthing. Versiunile sunt ș
     <string name="type_external">Tip: Extern</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Curățare după: %1$s</string>
-    <string name="staggered_versioning_info">Vârstă maximă: %1$d \nCale versiuni: %2$s</string>
+    <string name="staggered_versioning_info">Vârstă maximă: %1$d
+\nCale versiuni: %2$s</string>
     <string name="external_versioning_info">Comandă: %1$s</string>
     <string name="simple_versioning_info">Păstrează versiunile: %1$s</string>
     <string name="show_device_id">Arată ID dispozitiv</string>

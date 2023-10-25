@@ -9,8 +9,8 @@
     <!--Slide 1-->
     <string name="introduction">Introducción</string>
     <string name="welcome_text">Syncthing es una aplicación de sincronización de archivos de código abierto.
-Para compartir datos con otros dispositivos, debe agregar sus ID de dispositivos únicos a la lista de dispositivos. Después, puede seleccionar qué carpetas compartir con qué dispositivos.
-Por favor, informe de cualquier problema que encuentre a través de Github.</string>
+\nPara compartir datos con otros dispositivos, debe agregar sus ID de dispositivos únicos a la lista de dispositivos. Después, puede seleccionar qué carpetas compartir con qué dispositivos.
+\nPor favor, informe de cualquier problema que encuentre a través de Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Permiso de almacenamiento</string>
     <string name="storage_permission_desc">Syncthing necesita acceder a su almacenamiento para hacer la sincronización de archivos.</string>
@@ -36,7 +36,9 @@ Por favor, informe de cualquier problema que encuentre a través de Github.</str
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Enviar ID del dispositivo</string>
     <string name="usage_reporting_dialog_title">¿Permitir reportes de uso anónimos\?</string>
-    <string name="usage_reporting_dialog_description">El reporte de uso encriptado es enviado diariamente. Es usado para rastrear plataformas comunes, tamaño de carpetas y versiones de la aplicación. Si se cambia el conjunto de datos reportados, se le presentará este diálogo de nuevo.\n\nLas estadísticas agregadas se encuentran disponibles públicamente en https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">El reporte de uso encriptado es enviado diariamente. Es usado para rastrear plataformas comunes, tamaño de carpetas y versiones de la aplicación. Si se cambia el conjunto de datos reportados, se le presentará este diálogo de nuevo.
+\n
+\nLas estadísticas agregadas se encuentran disponibles públicamente en https://data.syncthing.net.</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="open_website">Abrir sitio web</string>
@@ -45,8 +47,8 @@ Por favor, informe de cualquier problema que encuentre a través de Github.</str
     <string name="folder_rejected">El dispositivo \"%1$s\" quiere compartir la carpeta \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Optimización de la batería</string>
     <string name="dialog_disable_battery_optimization_message">Android puede detener la sincronización después de algún tiempo. Para evitar esto, apague la optimización de la batería.
-
-Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales preinstaladas. También debe agregar Syncthing a su lista blanca.</string>
+\n
+\nAlgunos dispositivos tienen aplicaciones de eliminación de tareas adicionales preinstaladas. También debe agregar Syncthing a su lista blanca.</string>
     <string name="dialog_disable_battery_optimization_later">Después</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
@@ -190,7 +192,9 @@ Algunos dispositivos tienen aplicaciones de eliminación de tareas adicionales p
     <!--Toast after entering invalid socks proxy address-->
     <!--Toast after entering invalid http proxy address-->
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">¿Realmente quiere exportar su configuración\? Los archivos existentes se sobreescribirán.\n\n¡ADVERTENCIA! Otras aplicaciones pudieran leer la llave privada desde la ubicación del respaldo y usarla para descargar/modificar los archivos sincronizados.</string>
+    <string name="dialog_confirm_export">¿Realmente quiere exportar su configuración\? Los archivos existentes se sobreescribirán.
+\n
+\n¡ADVERTENCIA! Otras aplicaciones pudieran leer la llave privada desde la ubicación del respaldo y usarla para descargar/modificar los archivos sincronizados.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">¿Realmente quiere importar una nueva configuración\? Los archivos existentes se sobreescribirán.</string>
     <!--Toast shown after config was successfully exported-->

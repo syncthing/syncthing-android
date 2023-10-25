@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Úvod</string>
-    <string name="welcome_text">Syncthing je synchronizační aplikace s otevřeným zdrojovým kódem.\n\
-Pro sdílení dat s dalšími přístroji je třeba přidat jejich unikátní ID do seznamu. Poté lze určovat, které adresáře jsou sdíleny s kterými přístroji.\n\
-Všechny zaznamenané chyby prosím hlašte přes Github.</string>
+    <string name="welcome_text">Syncthing je synchronizační aplikace s otevřeným zdrojovým kódem.
+\nPro sdílení dat s dalšími přístroji je třeba přidat jejich unikátní ID do seznamu. Poté lze určovat, které adresáře jsou sdíleny s kterými přístroji.
+\nVšechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Oprávnění k úložišti</string>
     <string name="storage_permission_desc">Aby mohlo synchronizovat soubory, Syncthing potřebuje přístup na úložiště.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Oprávnění polohy (v pozadí)</string>
-    <string name="location_permission_desc">Syncthing lze nastavit, aby docházelo k synchronizaci pouze na zvolených Wi-Fi sítích. K tomu potřebuje přístup k informacím o aktuálně připojené Wi-Fi, i pokud je aplikace vypnutá. Je tedy nutné udělit oprávnění. Informace nebudeme používat ke zjišťování Vaší polohy, navíc ukládáme pouze Vámi zadané Wi-Fi.\n\n Pokud si přejete tuto funkci zapnout, udělte oprávnění tlačítkem výše. Jinak je možné tento krok přeskočit.</string>
+    <string name="location_permission_desc">Syncthing lze nastavit, aby docházelo k synchronizaci pouze na zvolených Wi-Fi sítích. K tomu potřebuje přístup k informacím o aktuálně připojené Wi-Fi, i pokud je aplikace vypnutá. Je tedy nutné udělit oprávnění. Informace nebudeme používat ke zjišťování Vaší polohy, navíc ukládáme pouze Vámi zadané Wi-Fi.
+\n
+\nPokud si přejete tuto funkci zapnout, udělte oprávnění tlačítkem výše. Jinak je možné tento krok přeskočit.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Zpět</string>
     <string name="cont">Pokračovat</string>
@@ -38,7 +40,9 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Poslat ID přístroje přes</string>
     <string name="usage_reporting_dialog_title">Povolit anonymní hlášení o používání\?</string>
-    <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.\n\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Zašifrované hlášení o používání je odesíláno denně. Je použito k zjišťování obvyklých platforem, velikosti adresářů a verzi aplikace. Pokud se změní množství odesílaných detailů, budete znovu upozorněni tímto dialogem.
+\n
+\nSouhrnné statistiky jsou veřejně dostupné na https://data.syncthing.net.</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="open_website">Otevřít webovou stránku</string>
@@ -46,7 +50,9 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="device_rejected">Zařízení \"%1$s\" se chce připojit</string>
     <string name="folder_rejected">Zařízení \"%1$s\" chce sdílet adresář \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Optimalizace využití baterie</string>
-    <string name="dialog_disable_battery_optimization_message">Po nějakém čase může Android zastavit synchronizaci. Aby se tak nestalo, vypněte optimalizaci využití baterie.\n\nNa některých zařízeních mohou být také předinstalovány aplikace ukončující úlohy. Měli byste přidat Syncthing do jejich výjimek.</string>
+    <string name="dialog_disable_battery_optimization_message">Po nějakém čase může Android zastavit synchronizaci. Aby se tak nestalo, vypněte optimalizaci využití baterie.
+\n
+\nNa některých zařízeních mohou být také předinstalovány aplikace ukončující úlohy. Měli byste přidat Syncthing do jejich výjimek.</string>
     <string name="dialog_disable_battery_optimization_later">Později</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Znovu neukazovat</string>
     <string name="dialog_disable_battery_optimization_turn_off">Vypnout pro Syncthing</string>
@@ -306,7 +312,9 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="use_legacy_hashing_title">Používat standardní kontrolní součet</string>
     <string name="use_legacy_hashing_summary">Vynutit použití původního hashovacího algoritmu pro lepší kompatibilitu</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci\? Existující soubory budou přepsány.\n\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
+    <string name="dialog_confirm_export">Opravdu chcete exportovat svou konfiguraci\? Existující soubory budou přepsány.
+\n
+\nVAROVÁNÍ! Ostatní aplikace budou moci číst váš soukromý klíč ze zálohy a použít ho ke stahování/úpravám synchronizovaných souborů.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Opravud chcete importovat novou konfiguraci\? Existující soubory budou přepsány.</string>
     <!--Toast shown after config was successfully exported-->
@@ -325,14 +333,14 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="st_reset_database_title">Resetovat databázi</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
-       \nSkutečně chcete vymazat databázi Syncthing\?</string>
+\nSkutečně chcete vymazat databázi Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Databáze aplikace Syncthing úspěšně resetována</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Resetovat rejstříky přírůstků</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Tato akce by měla být provedena pouze na základě doporučení naší podpory.
-       \nSkutečně chcete vymazat delta indexy Syncthing\?</string>
+\nSkutečně chcete vymazat delta indexy Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Delta indexy aplikace Syncthing úspěšně resetovány</string>
     <string name="category_about">O aplikaci</string>
@@ -531,7 +539,9 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="keep_versions_description">Počet udržovaných starších verzí souboru.</string>
     <string name="simple_file_versioning_description">Po nahrazení nebo smazání aplikací Syncthing jsou soubory přesunuty do verzí označených daty ve složce .stversions.</string>
     <string name="trashcan_versioning_description">Po nahrazení nebo smazání aplikací Syncthing jsou soubory přesunuty do složky .stversions.</string>
-    <string name="staggered_versioning_description">Po nahrazení nebo smazání aplikací Syncthing jsou soubory přesunuty do verzí označených daty ve složce .stversions. Verze jsou automaticky smazány, pokud jsou starší než maximální časový limit nebo překročí počet souborů povolených pro interval.\n\nJsou použity následující intervaly: za první hodinu jsou ponechány verze pro každých 30 sekund, za první den jsou ponechány verze pro každou hodinu, za prvních 30 dní jsou ponechány verze pro každý den a do nejvyššího nastaveného stáří jsou ponechány verze pro každý týden.</string>
+    <string name="staggered_versioning_description">Po nahrazení nebo smazání aplikací Syncthing jsou soubory přesunuty do verzí označených daty ve složce .stversions. Verze jsou automaticky smazány, pokud jsou starší než maximální časový limit nebo překročí počet souborů povolených pro interval.
+\n
+\nJsou použity následující intervaly: za první hodinu jsou ponechány verze pro každých 30 sekund, za první den jsou ponechány verze pro každou hodinu, za prvních 30 dní jsou ponechány verze pro každý den a do nejvyššího nastaveného stáří jsou ponechány verze pro každý týden.</string>
     <string name="maximum_age_description">Maximální doba pro zachování verze (dny, zapsáním hodnoty 0 bude ponecháno navždy).</string>
     <string name="versions_path_description">Cesta pro ukládání verzí (ponechte prázdné pro výchozí adresář .stversions ve sdíleném adresáři).</string>
     <string name="cleanout_after_description">Počet dní, po který budou soubory uchovány v koši. Nula znamená navždy.</string>
@@ -544,7 +554,8 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
     <string name="type_external">Typ: Externí</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Vyčistit po: %1$s</string>
-    <string name="staggered_versioning_info">Maximální stáří: %1$d \nCesta k verzím: %2$s</string>
+    <string name="staggered_versioning_info">Maximální stáří: %1$d
+\nCesta k verzím: %2$s</string>
     <string name="external_versioning_info">Příkaz: %1$s</string>
     <string name="simple_versioning_info">Udržovat verze: %1$s</string>
     <string name="show_device_id">Ukázat ID zařízení</string>

@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Въведение</string>
-    <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.\n\
-За да споделите информация с друго устройство е необходимо да добавите уникалния му идентификатор към списъка с устройствата. След това ще можете да изберете кои папки с кои устройства да споделите.\n\
-Ако срещнете проблем докладвайте в Github.</string>
+    <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.
+\nЗа да споделите информация с друго устройство е необходимо да добавите уникалния му идентификатор към списъка с устройствата. След това ще можете да изберете кои папки с кои устройства да споделите.
+\nАко срещнете проблем докладвайте в Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Разрешение за хранилище</string>
     <string name="storage_permission_desc">За да извършва синхронизация Syngthing има нужда от достъп до хранилището.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Достъп до местоположението (във фонов режим)</string>
-    <string name="location_permission_desc">Syncthing може да бъде настроен да работи само в избрани безжични мрежи. За целта е необходимо да бъде проверен идентификатора на свързаната безжична мрежа, включително и докато приложението не работи. Затова е необходимо разрешение за достъп до местоположението във фонов режим. Тази информация не се използва за намиране на местоположението ви. Единствената съхранявана информация е идентификатора на безжичната мрежа, която ръчно сте избрали да добавите в списъка - не се съхраняват други потребителски данни.\n\n Ако искате да използвате тази функция и за да предоставите необходимите разрешения на Syncthing натиснете бутона по-горе. В противен случай можете да пропуснете тази стъпка.</string>
+    <string name="location_permission_desc">Syncthing може да бъде настроен да работи само в избрани безжични мрежи. За целта е необходимо да бъде проверен идентификатора на свързаната безжична мрежа, включително и докато приложението не работи. Затова е необходимо разрешение за достъп до местоположението във фонов режим. Тази информация не се използва за намиране на местоположението ви. Единствената съхранявана информация е идентификатора на безжичната мрежа, която ръчно сте избрали да добавите в списъка - не се съхраняват други потребителски данни.
+\n
+\nАко искате да използвате тази функция и за да предоставите необходимите разрешения на Syncthing натиснете бутона по-горе. В противен случай можете да пропуснете тази стъпка.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Назад</string>
     <string name="cont">Напред</string>
@@ -38,7 +40,9 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Изпращане на идентификатора чрез</string>
     <string name="usage_reporting_dialog_title">Разреши анонимно докладване за употребата на програмата\?</string>
-    <string name="usage_reporting_dialog_description">Криптираният доклад се изпраща ежедневно. Използва се, за отичане на ползваните платформи, размер на папки и версии на приложението. Ако събираните данни се променят, ще бъдете информиран с подобен на този диалог.\n\nОбобщената статистика ще намерите на https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Криптираният доклад се изпраща ежедневно. Използва се, за отичане на ползваните платформи, размер на папки и версии на приложението. Ако събираните данни се променят, ще бъдете информиран с подобен на този диалог.
+\n
+\nОбобщената статистика ще намерите на https://data.syncthing.net.</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="open_website">Отвори уеб сайта</string>
@@ -46,7 +50,9 @@
     <string name="device_rejected">Устройството \"%1$s\" желае да се свърже</string>
     <string name="folder_rejected">Устройството \"%1$s\" желае да сподели папка \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Пестене на батерия</string>
-    <string name="dialog_disable_battery_optimization_message">Android може да спре приложението след определено време. За да предотвратите това, изключете оптимизацията на батерията.\n\nНякои устройства имат допълнителни приложения за спиране на задачи. Трябва да добавите Syncthing и в техния разрешителен списък.</string>
+    <string name="dialog_disable_battery_optimization_message">Android може да спре приложението след определено време. За да предотвратите това, изключете оптимизацията на батерията.
+\n
+\nНякои устройства имат допълнителни приложения за спиране на задачи. Трябва да добавите Syncthing и в техния разрешителен списък.</string>
     <string name="dialog_disable_battery_optimization_later">По-късно</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Без повторно запитване</string>
     <string name="dialog_disable_battery_optimization_turn_off">Изключване за синхронизирането</string>
@@ -304,7 +310,9 @@
     <string name="use_legacy_hashing_title">Стари отпечатъци</string>
     <string name="use_legacy_hashing_summary">Принуждава Syncthing да използва по-стария пакет за отпечатъци с цел съвместимост</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени\? Съществуващите файлове ще бъдат презаписани.\n\nВНИМАНИЕ! Други приложения могат да извлекат частния ключ от изнесения файл, а чрез него да изтеглят и синхронизират файлове.</string>
+    <string name="dialog_confirm_export">Наистина ли желаете настройките да бъдат изнесени\? Съществуващите файлове ще бъдат презаписани.
+\n
+\nВНИМАНИЕ! Други приложения могат да извлекат частния ключ от изнесения файл, а чрез него да изтеглят и синхронизират файлове.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Наистина ли желаете да внесете нови настройки\? Съществуващите файлове ще бъдат презаписани.</string>
     <!--Toast shown after config was successfully exported-->
@@ -323,8 +331,7 @@
     <string name="st_reset_database_title">Нулиране на банка от данни</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Нулирането трябва да се прилага само след препоръка от нашия екип.
-        \nНаистина ли желаете да нулирате банката от данни на Syncthing\?
-    </string>
+\nНаистина ли желаете да нулирате банката от данни на Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Банката от данни на Syncthing е нулирана успешно</string>
     <!--Title for the preference to reset Syncthing indexes-->
@@ -524,7 +531,9 @@
     <string name="keep_versions_description">Броят стари версии, които да бъдат пазени за всеки файл.</string>
     <string name="simple_file_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени, с добавяне на времеви отпечатък, в папка .stversions.</string>
     <string name="trashcan_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени в папка .stversions.</string>
-    <string name="staggered_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени, с добавяне на времеви отпечатък, в папка .stversions. Версиите се изтриват автоматично, ако са по-стари от максималната възраст или надвишават броя на файловете, разрешени в даден времеви интервал.\n\nИзползват се следните интервали: през първия час се пази версия на всеки 30 секунди, през първия ден се пази версия на всеки час, през първите 30 дни се пази версия на всеки ден, а до достигане на максималната възраст се пази версия на всяка седмица.</string>
+    <string name="staggered_versioning_description">При замяна или премахване от Syncthing, файловете биват преместени, с добавяне на времеви отпечатък, в папка .stversions. Версиите се изтриват автоматично, ако са по-стари от максималната възраст или надвишават броя на файловете, разрешени в даден времеви интервал.
+\n
+\nИзползват се следните интервали: през първия час се пази версия на всеки 30 секунди, през първия ден се пази версия на всеки час, през първите 30 дни се пази версия на всеки ден, а до достигане на максималната възраст се пази версия на всяка седмица.</string>
     <string name="maximum_age_description">Максималното време за пазене на версии (в дни, задайте 0 за да пазите всяка версия завинаги).</string>
     <string name="versions_path_description">Пътят, където версиите да бъдат складирани (оставете празно за папката .stversions).</string>
     <string name="cleanout_after_description">Броят дни за запазване на файловете в кошчето. Нула значи завинаги.</string>
@@ -537,7 +546,8 @@
     <string name="type_external">Вид: С външно управление</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Почистване след: %1$s</string>
-    <string name="staggered_versioning_info">Максимална възраст: %1$d \nПът до версиите: %2$s</string>
+    <string name="staggered_versioning_info">Максимална възраст: %1$d
+\nПът до версиите: %2$s</string>
     <string name="external_versioning_info">Команда: %1$s</string>
     <string name="simple_versioning_info">Пази последните: %1$s</string>
     <string name="show_device_id">Идентификатор на устройството</string>

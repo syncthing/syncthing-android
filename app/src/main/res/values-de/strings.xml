@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Einführung</string>
-    <string name="welcome_text">Syncthing ist eine quelloffene Software zur Datensynchronisierung.\n\
-Um Daten mit anderen Geräten zu teilen, musst du deren eindeutige Geräte-IDs in die Geräteliste eintragen.\n\
-Bitte melde alle auftretenden Probleme via GitHub.</string>
+    <string name="welcome_text">Syncthing ist eine quelloffene Software zur Datensynchronisierung.
+\nUm Daten mit anderen Geräten zu teilen, musst du deren eindeutige Geräte-IDs in die Geräteliste eintragen.
+\nBitte melde alle auftretenden Probleme via GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Speicher-Berechtigung</string>
     <string name="storage_permission_desc">Syncthing muss auf den Speicher zugreifen können, um Dateien zu synchronisieren.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Standortberechtigung (Hintergrund)</string>
-    <string name="location_permission_desc">Syncthing kann so konfiguriert werden, dass es sich nur in bestimmten WLAN-Netzen synchronisiert. Um dies tun zu können, muss es die SSID des momentan verbundenen WLAN herausfinden, auch wenn die App geschlossen ist. Dazu benötigt es die Berechtigung zur Abfrage des Standorts im Hintergrund. Diese Informationen werden nicht dazu genutzt nach deinem Standort zu sehen. Und die einzige gespeicherte Information ist das WLAN, dass du ausgewählt hast, um es auf die Liste zu setzen - darüberhinausgehende Benutzerdaten werden nicht gespeichert.\n\n Wenn du diese Funktion nutzen willst, drücke den Knopf oben, um Syncthing die erforderlichen Berechtigungen zu erteilen. Anderenfalls kannst du diesen Schritt überspringen.</string>
+    <string name="location_permission_desc">Syncthing kann so konfiguriert werden, dass es sich nur in bestimmten WLAN-Netzen synchronisiert. Um dies tun zu können, muss es die SSID des momentan verbundenen WLAN herausfinden, auch wenn die App geschlossen ist. Dazu benötigt es die Berechtigung zur Abfrage des Standorts im Hintergrund. Diese Informationen werden nicht dazu genutzt nach deinem Standort zu sehen. Und die einzige gespeicherte Information ist das WLAN, dass du ausgewählt hast, um es auf die Liste zu setzen - darüberhinausgehende Benutzerdaten werden nicht gespeichert.
+\n
+\nWenn du diese Funktion nutzen willst, drücke den Knopf oben, um Syncthing die erforderlichen Berechtigungen zu erteilen. Anderenfalls kannst du diesen Schritt überspringen.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Zurück</string>
     <string name="cont">Weiter</string>
@@ -46,7 +48,9 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="device_rejected">Gerät \"%1$s\" möchte sich verbinden</string>
     <string name="folder_rejected">Gerät \"%1$s\" möchte Ordner \"%2$s\" teilen</string>
     <string name="dialog_disable_battery_optimization_title">Akkulaufzeit-Optimierung</string>
-    <string name="dialog_disable_battery_optimization_message">Android kann die Synchronisation nach einiger Zeit stoppen. Um dies zu verhindern, muss der Energiesparmodus deaktiviert werden.\n\nEinige Geräte haben Apps vorinstalliert, welche Hintergrundaktivitäten unterbinden. Syncthing sollte deshalb auch dort in die Ausnahmeliste eingetragen werden.</string>
+    <string name="dialog_disable_battery_optimization_message">Android kann die Synchronisation nach einiger Zeit stoppen. Um dies zu verhindern, muss der Energiesparmodus deaktiviert werden.
+\n
+\nEinige Geräte haben Apps vorinstalliert, welche Hintergrundaktivitäten unterbinden. Syncthing sollte deshalb auch dort in die Ausnahmeliste eingetragen werden.</string>
     <string name="dialog_disable_battery_optimization_later">Später</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Nicht mehr zeigen.</string>
     <string name="dialog_disable_battery_optimization_turn_off">Für Syncthing abstellen.</string>
@@ -304,7 +308,9 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="use_legacy_hashing_title">Veraltetes Hashing verwenden</string>
     <string name="use_legacy_hashing_summary">Aus Gründen der Abwärtskompatibilität soll Syncthing die alten Hashfunktionen verwenden</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden\? Vorhandene Dateien werden überschrieben.\n\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, synchronisierte Dateien herunterzuladen und zu verändern.</string>
+    <string name="dialog_confirm_export">Soll die Konfiguration wirklich exportiert werden\? Vorhandene Dateien werden überschrieben.
+\n
+\nACHTUNG! Andere Anwendungen können möglicherweise den privaten Schlüssel im Backupverzeichnis lesen und dazu verwenden, synchronisierte Dateien herunterzuladen und zu verändern.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Soll wirklich eine neue Konfiguration importiert werden\? Die vorhandene Konfiguration wird überschrieben.</string>
     <!--Toast shown after config was successfully exported-->
@@ -322,13 +328,15 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_database_title">Datenbank zurücksetzen</string>
     <!--Syncthing was reset-->
-    <string name="st_reset_database_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden. \nBist du sicher, dass du die Syncthing-Datenbank leeren möchtest\?</string>
+    <string name="st_reset_database_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden.
+\nBist du sicher, dass du die Syncthing-Datenbank leeren möchtest\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Datenbank erfolgreich zurückgesetzt</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Änderungsindex zurücksetzen</string>
     <!--Syncthing was reset-->
-    <string name="st_reset_deltas_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden. \nBist du sicher, dass du den Syncthing-Änderungsindex zurück setzen möchtest\?</string>
+    <string name="st_reset_deltas_question">Diese Aktion sollte nur auf Empfehlung des Support-Teams ausgeführt werden.
+\nBist du sicher, dass du den Syncthing-Änderungsindex zurück setzen möchtest\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing-Änderungsindex erfolgreich zurückgesetzt</string>
     <string name="category_about">Über</string>
@@ -521,7 +529,9 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="keep_versions_description">Anzahl der alten Versionen, die von jeder Datei behalten werden sollen.</string>
     <string name="simple_file_versioning_description">Dateien werden mit einem Datumsstempel im Namen versehen und in ein .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden.</string>
     <string name="trashcan_versioning_description">Dateien werden in das .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden.</string>
-    <string name="staggered_versioning_description">Dateien werden mit einem Datumsstempel im Namen versehen und in ein .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden. Alte Dateiversionen werden automatisch gelöscht, wenn sie älter als das angegebene Höchstalter sind oder die angegebene Höchstzahl an Dateien erreicht ist.\n\nEs wird in folgenden Abständen versioniert: In der ersten Stunde wird alle 30 Sekunden eine Version behalten, am ersten Tag eine jede Stunde, in den ersten 30 Tagen eine jeden Tag. Danach wird bis zum angegebenen Höchstalter eine Version pro Woche behalten.</string>
+    <string name="staggered_versioning_description">Dateien werden mit einem Datumsstempel im Namen versehen und in ein .stversions-Verzeichnis verschoben, wenn sie von Syncthing ersetzt oder gelöscht werden. Alte Dateiversionen werden automatisch gelöscht, wenn sie älter als das angegebene Höchstalter sind oder die angegebene Höchstzahl an Dateien erreicht ist.
+\n
+\nEs wird in folgenden Abständen versioniert: In der ersten Stunde wird alle 30 Sekunden eine Version behalten, am ersten Tag eine jede Stunde, in den ersten 30 Tagen eine jeden Tag. Danach wird bis zum angegebenen Höchstalter eine Version pro Woche behalten.</string>
     <string name="maximum_age_description">Die längste Zeit, die alte Versionen vorgehalten werden (in Tagen, 0 um alte Versionen für immer zu behalten).</string>
     <string name="versions_path_description">Pfad, in dem Versionen gespeichert werden sollen (leer lassen, wenn das voreingestellte .stversions-Verzeichnis im freigegebenen Ordner verwendet werden soll).</string>
     <string name="cleanout_after_description">Dauer in Tagen für welche die Dateien aufgehoben werden sollen. 0 bedeutet für immer.</string>
@@ -534,7 +544,8 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
     <string name="type_external">Typ: Extern</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Aufräumen nach: %1$s</string>
-    <string name="staggered_versioning_info">Maximales Alter: %1$d \nVersionspfad: %2$s</string>
+    <string name="staggered_versioning_info">Maximales Alter: %1$d
+\nVersionspfad: %2$s</string>
     <string name="external_versioning_info">Befehl: %1$s</string>
     <string name="simple_versioning_info">Versionen behalten: %1$s</string>
     <string name="show_device_id">Geräte-ID anzeigen</string>

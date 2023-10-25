@@ -8,9 +8,9 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">소개</string>
-    <string name="welcome_text">Syncthing은 오픈소스 파일 동기화 어플리케이션입니다.\n\
-다른 장치들과 데이터를 공유하기 위해서는 기기 목록에 고유 기기 ID를 추가해야 합니다. 그 후에 기기와 공유하는 폴더를 선택할 수 있습니다.\n\
-발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
+    <string name="welcome_text">Syncthing은 오픈소스 파일 동기화 어플리케이션입니다.
+\n다른 장치들과 데이터를 공유하기 위해서는 기기 목록에 고유 기기 ID를 추가해야 합니다. 그 후에 기기와 공유하는 폴더를 선택할 수 있습니다.
+\n발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">저장소 권한</string>
     <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
@@ -36,7 +36,9 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
     <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까\?</string>
-    <string name="usage_reporting_dialog_description">암호화된 사용 보고서는 매일 전송됩니다. 사용 중인 운영체제, 폴더 크기와 응용 프로그램의 버전을 추적하기 위해서입니다. 만일 보고되는 정보가 변경되면 이 알림창이 다시 표시될 예정입니다.\n\n수집된 통계는 https://data.syncthing.net 주소에서 공람할 수 있습니다.</string>
+    <string name="usage_reporting_dialog_description">암호화된 사용 보고서는 매일 전송됩니다. 사용 중인 운영체제, 폴더 크기와 응용 프로그램의 버전을 추적하기 위해서입니다. 만일 보고되는 정보가 변경되면 이 알림창이 다시 표시될 예정입니다.
+\n
+\n수집된 통계는 https://data.syncthing.net 주소에서 공람할 수 있습니다.</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="open_website">홈페이지 열기</string>
@@ -44,7 +46,9 @@
     <string name="device_rejected">\"%1$s\" 장치가 연결을 원하고 있습니다</string>
     <string name="folder_rejected">\"%1$s\" 장치가 \"%2$s\" 폴더를 공유하길 원하고 있습니다</string>
     <string name="dialog_disable_battery_optimization_title">배터리 최적화</string>
-    <string name="dialog_disable_battery_optimization_message">안드로이드 운영체제는 시간이 지나면 동기화를 정지시킬 수도 있습니다. 이를 막기 위해 배터리 최적화 기능을 꺼주시기 바랍니다.\n\n몇몇 기기들은 추가적인 태스크 관리 앱이 선탑재되어 있습니다. 태스크 관리 앱의 신뢰목록에 등록함으로써 역시 문제를 해결하실 수 있습니다.</string>
+    <string name="dialog_disable_battery_optimization_message">안드로이드 운영체제는 시간이 지나면 동기화를 정지시킬 수도 있습니다. 이를 막기 위해 배터리 최적화 기능을 꺼주시기 바랍니다.
+\n
+\n몇몇 기기들은 추가적인 태스크 관리 앱이 선탑재되어 있습니다. 태스크 관리 앱의 신뢰목록에 등록함으로써 역시 문제를 해결하실 수 있습니다.</string>
     <string name="dialog_disable_battery_optimization_later">나중에</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
@@ -270,7 +274,9 @@
     <string name="use_legacy_hashing_title">예전 해시 방식 사용</string>
     <string name="use_legacy_hashing_summary">호환성을 위해 Syncthing이 예전 해시 방식을 사용하도록 합니다.</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.\n\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
+    <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.
+\n
+\n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
     <!--Toast shown after config was successfully exported-->
@@ -470,7 +476,9 @@
     <string name="keep_versions_description">파일별로 유지할 이전 버전의 개수입니다.</string>
     <string name="simple_file_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 날짜가 찍힌 채 .stversions 폴더로 이동됩니다.</string>
     <string name="trashcan_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 .stversions 폴더로 이동됩니다.</string>
-    <string name="staggered_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 .stversions 폴더로 이동됩니다. 최대 보관 기간보다 오래되었거나 간격 내에서 허용되는 파일 개수를 넘긴 버전은 자동으로 삭제됩니다.\n\n다음과 같은 간격이 사용됩니다: 첫 한 시간 동안은 30초마다, 첫 하루 동안은 1시간마다, 첫 30일 동안은 1일마다, 그리고 최대 보관 기간까지는 1주일마다 버전이 보관됩니다.</string>
+    <string name="staggered_versioning_description">Syncthing에 의해 교체 또는 삭제된 파일은 .stversions 폴더로 이동됩니다. 최대 보관 기간보다 오래되었거나 간격 내에서 허용되는 파일 개수를 넘긴 버전은 자동으로 삭제됩니다.
+\n
+\n다음과 같은 간격이 사용됩니다: 첫 한 시간 동안은 30초마다, 첫 하루 동안은 1시간마다, 첫 30일 동안은 1일마다, 그리고 최대 보관 기간까지는 1주일마다 버전이 보관됩니다.</string>
     <string name="maximum_age_description">버전을 보관할 최대 시간입니다(일 단위이며 버전을 영구 보관하려면 0을 입력하십시오).</string>
     <string name="versions_path_description">버전을 보관할 경로입니다(공유 폴더 안의 기본값 .stversions 폴더를 사용하려면 비워 두십시오).</string>
     <string name="cleanout_after_description">휴지통에서 파일을 보관할 일수입니다. 0은 무제한을 의미합니다.</string>
@@ -483,7 +491,8 @@
     <string name="type_external">유형 : 외부</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">다음 기간 후 제거: %1$s</string>
-    <string name="staggered_versioning_info">최대 보관 기간: %1$d \n보관 경로: %2$s</string>
+    <string name="staggered_versioning_info">최대 보관 기간: %1$d
+\n보관 경로: %2$s</string>
     <string name="external_versioning_info">명령: %1$s</string>
     <string name="simple_versioning_info">버전 수: %1$s</string>
     <string name="show_device_id">기기 식별자 보기</string>

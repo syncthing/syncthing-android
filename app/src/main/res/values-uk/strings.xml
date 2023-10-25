@@ -8,15 +8,17 @@
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Вступ</string>
-    <string name="welcome_text">Syncthing - це додаток з відкритим джерельним кодом для синхронізації файлів.\n\
-Щоб поділитися інформацією з іншими пристроями, потрібно додати їх унікальні ідентифікатори (ID) до списку пристроїв. Після цього ви можете обрати, якими теками поділитися з іншими пристроями.\n\
-Будь ласка, повідомляйте про будь-які проблеми, які ви виявите, через Github.</string>
+    <string name="welcome_text">Syncthing - це додаток з відкритим джерельним кодом для синхронізації файлів.
+\nЩоб поділитися інформацією з іншими пристроями, потрібно додати їх унікальні ідентифікатори (ID) до списку пристроїв. Після цього ви можете обрати, якими теками поділитися з іншими пристроями.
+\nБудь ласка, повідомляйте про будь-які проблеми, які ви виявите, через Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Дозвіл на доступ до сховища</string>
     <string name="storage_permission_desc">Syncthing потребує доступу до сховища, щоб виконувати синхронізацію файлів.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Дозвіл розташування (фоново)</string>
-    <string name="location_permission_desc">Syncthing можна налаштувати синхронізувати лише у вибраних мережах Wi-Fi. Для цього потрібно взнати SSID поточного зʼєднання Wi-Fi, навіть при закритій програмі. Тому потрібен фоновий доступ до розташування. Ця інформація не використовується, щоб дізнатися Ваше місцерозташування. Єдина інформація, яка зберігається це Wi-Fi, яку Ви додаєте вручну до списку — інша користувацька інформація не зберігається.\n\n Якщо Ви хочете використовувати цю можливість, натисніть кнопку вище, щоб надати потрібні дозволи для Syncthing. В іншому випадку Ви можете пропустити цей крок.</string>
+    <string name="location_permission_desc">Syncthing можна налаштувати синхронізувати лише у вибраних мережах Wi-Fi. Для цього потрібно взнати SSID поточного зʼєднання Wi-Fi, навіть при закритій програмі. Тому потрібен фоновий доступ до розташування. Ця інформація не використовується, щоб дізнатися Ваше місцерозташування. Єдина інформація, яка зберігається це Wi-Fi, яку Ви додаєте вручну до списку — інша користувацька інформація не зберігається.
+\n
+\nЯкщо Ви хочете використовувати цю можливість, натисніть кнопку вище, щоб надати потрібні дозволи для Syncthing. В іншому випадку Ви можете пропустити цей крок.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Назад</string>
     <string name="cont">Продовжити</string>
@@ -38,7 +40,9 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Надіслати ідентифікатор пристрою на</string>
     <string name="usage_reporting_dialog_title">Дозволити відправку анонімної статистики використання\?</string>
-    <string name="usage_reporting_dialog_description">Зашифрований звіт про використання додатку надсилається щодня. Він використовується для відстеження платформ, розмірів тек та версій додатку. При зміні набору інформації, що надсилається, цей діалог з\'явиться знову.\n\nОб\'єднана статистика загальнодоступна на https://data.syncthing.net.</string>
+    <string name="usage_reporting_dialog_description">Зашифрований звіт про використання додатку надсилається щодня. Він використовується для відстеження платформ, розмірів тек та версій додатку. При зміні набору інформації, що надсилається, цей діалог з\'явиться знову.
+\n
+\nОб\'єднана статистика загальнодоступна на https://data.syncthing.net.</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
     <string name="open_website">Відкрити веб-сайт</string>
@@ -46,7 +50,9 @@
     <string name="device_rejected">Пристрій \"%1$s\" хоче приєднатися</string>
     <string name="folder_rejected">Пристрій \"%1$s\" хоче поділитися текою \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Енергозбереження</string>
-    <string name="dialog_disable_battery_optimization_message">Android може зупинити синхронізацію через деякий час. Щоб цьому запобігти, вимкніть енергозбереження.\n\nДеякі пристрої постачаються з додатками, які припиняють інші процеси. Вам також варто додати Syncthing до їхнього білого списку.</string>
+    <string name="dialog_disable_battery_optimization_message">Android може зупинити синхронізацію через деякий час. Щоб цьому запобігти, вимкніть енергозбереження.
+\n
+\nДеякі пристрої постачаються з додатками, які припиняють інші процеси. Вам також варто додати Syncthing до їхнього білого списку.</string>
     <string name="dialog_disable_battery_optimization_later">Пізніше</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Більше не відображати</string>
     <string name="dialog_disable_battery_optimization_turn_off">Вимкнути для Syncthing</string>
@@ -306,7 +312,9 @@
     <string name="use_legacy_hashing_title">Використовувати застарілий спосіб хешування</string>
     <string name="use_legacy_hashing_summary">Змусити Syncthing використовувати застарілий спосіб хешування з метою забезпечення сумісності</string>
     <!--Dialog shown before config export-->
-    <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування\? Існуючі файли будуть перезаписані.\n\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
+    <string name="dialog_confirm_export">Ви справді хочете експортувати свої налаштування\? Існуючі файли будуть перезаписані.
+\n
+\nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
     <!--Dialog shown before config import-->
     <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування\? Існуючі файли будуть перезаписані.</string>
     <!--Toast shown after config was successfully exported-->
@@ -325,16 +333,14 @@
     <string name="st_reset_database_title">Очистити базу даних</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
-        \nВи впевнені, що хочете очистити базу даних Syncthing\?
-    </string>
+\nВи впевнені, що хочете очистити базу даних Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">База даних Syncthing успішно очищена</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Очистити дельта-індекси</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Цю дію слід виконувати лише на основі рекомендацій нашої служби підтримки.
-        \nВи впевнені, що хочете очистити дельта-індекси Syncthing\?
-    </string>
+\nВи впевнені, що хочете очистити дельта-індекси Syncthing\?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Дельта-індекси Syncthing успішно очищені</string>
     <string name="category_about">Про додаток</string>
@@ -533,7 +539,9 @@
     <string name="keep_versions_description">Кількість попередніх версій до збереження, на кожен файл</string>
     <string name="simple_file_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка.</string>
     <string name="trashcan_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions.</string>
-    <string name="staggered_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка. Версії автоматично видаляються, якщо їх вік перевищує максимальний встановлений або якщо їх кількість перевищує максимально дозволену на певному інтервалі часу.\n\nВикористовуються такі часові інтервали: у першу годину нова версія зберігається кожні 30 секунд, у перший день нова версія зберігається щогодини, у перші 30 днів нова версія зберігається щодня, до максимального часу зберігання нова версія зберігається щотижня.</string>
+    <string name="staggered_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка. Версії автоматично видаляються, якщо їх вік перевищує максимальний встановлений або якщо їх кількість перевищує максимально дозволену на певному інтервалі часу.
+\n
+\nВикористовуються такі часові інтервали: у першу годину нова версія зберігається кожні 30 секунд, у перший день нова версія зберігається щогодини, у перші 30 днів нова версія зберігається щодня, до максимального часу зберігання нова версія зберігається щотижня.</string>
     <string name="maximum_age_description">Максимальний час зберігання версії, дні (встановіть на 0, щоб зберігати версії завжди).</string>
     <string name="versions_path_description">Шлях до теки, де зберігатимуться версії (залиште порожнім, щоб використовувати теку за-замовчуванням .stversions у загальнодоступній теці).</string>
     <string name="cleanout_after_description">Кількість днів, протягом яких видалені файли залишатимуться у Кошику. Нуль означає завжди.</string>
@@ -546,7 +554,8 @@
     <string name="type_external">Тип: Зовнішній</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Очистка після: %1$s</string>
-    <string name="staggered_versioning_info">Максимальний вік: %1$d \nМісце зберігання версій: %2$s</string>
+    <string name="staggered_versioning_info">Максимальний вік: %1$d
+\nМісце зберігання версій: %2$s</string>
     <string name="external_versioning_info">Команда: %1$s</string>
     <string name="simple_versioning_info">Зберігати версій: %1$s</string>
     <string name="show_device_id">Показати ідентифікатор пристрою</string>
