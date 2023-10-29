@@ -823,7 +823,7 @@ Please report any problems you encounter via Github.</string>
     <string name="browse">Browse</string>
     <string name="no_sub_folder_is_selected">No sub folder is selected</string>
     <string name="share_device_id_chooser">Share device ID with</string>
-    <string name="require_notification_permission_desc">Syncthing requires your permission to show you notifications.Those are used to let you know about a new device connecting, or a new folder sharing request.</string>
+    <string name="require_notification_permission_desc">Required to show notifications regarding new device connections, folder sharing requests, etc.</string>
     <string name="notification_permission_title">Notification permission</string>
     <string name="enable_notification_permission">Enable Notification Permission</string>
 
