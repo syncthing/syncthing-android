@@ -12,6 +12,7 @@
 Παρακαλώ αναφέρετε τυχόν προβλήματα που αντιμετωπίσετε μέσω του Github.</string>
   <!--Slide 2-->
   <!--Slide 3-->
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="cont">Συνέχεια</string>
   <string name="finish">Τέλος</string>
@@ -166,7 +167,6 @@
   <string name="category_debug">Αποσφαλμάτωση</string>
   <string name="category_experimental">Πειραματικά</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Συνθήκες εκτέλεσης</string>
   <string name="respect_battery_saving_title">Υπακοή στη ρύθμιση εξοικονόμησης ενέργειας του Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Χρήση προχωρημένου επιλογέα φακέλων</string>

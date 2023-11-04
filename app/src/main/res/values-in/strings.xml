@@ -17,6 +17,7 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Izin Lokasi (latar belakang)</string>
   <string name="location_permission_desc">Sinkronisasi dapat dikonfigurasi untuk menyinkronkan hanya pada jaringan Wi-Fi tertentu. Untuk melakukan itu perlu mencari SSID dari Wi-Fi yang saat ini terhubung, juga ketika aplikasi ditutup. Oleh karena itu diperlukan izin untuk mengakses lokasi di latar belakang. Informasi ini tidak digunakan untuk mencari lokasi Anda. Dan satu-satunya informasi yang tersimpan adalah Wi-Fi yang Anda pilih secara manual untuk ditambahkan ke daftar - tidak ada data pengguna lain yang disimpan.\n\n Jika Anda ingin menggunakan fitur ini, tekan tombol di atas untuk memberikan izin yang diperlukan untuk Menyinkronkan. Jika tidak, Anda dapat melewati langkah ini.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Kembali</string>
   <string name="cont">Lanjutkan</string>
@@ -171,7 +172,6 @@ Jika ada masalah silakan laporkan lewat Github.</string>
   <string name="category_debug">Debug</string>
   <string name="category_experimental">Ujicoba</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Syarat Operasi</string>
   <string name="respect_battery_saving_title">Ikuti pengaturan penghematan baterai Android</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Gunakan Pemilihan Folder tahap lanjut</string>

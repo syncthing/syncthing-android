@@ -17,6 +17,7 @@ Prípadné problémy nahláste cez GitHub.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Prístup k polohe zariadenia (na pozadí)</string>
   <string name="location_permission_desc">Syncthing sa dá nastaviť tak, aby bežal iba na zvolených WiFi sieťach. Rozpoznávanie dostupných WiFi sietí sa považuje za určovanie polohy. V tejto aplikácii sa však informácie o WiFi na určovanie polohy nepoužívajú. Jediný účel prečítania dostupných WiFi sietí je zobrazenie v zozname na výber sietí.\n\n Ak chcete povolenie synchronizácie vymedziť podľa WiFi, povoľte aplikácii Syncthing prístup k polohe zariadenia aj keď je aplikácia neaktívna. Inak môžete tento krok preskočiť.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Späť</string>
   <string name="cont">Pokračovať</string>
@@ -192,7 +193,6 @@ Prípadné problémy nahláste cez GitHub.</string>
   <string name="category_debug">Debug</string>
   <string name="category_experimental">Experiment</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Podmienky synchronizácie</string>
   <string name="run_conditions_summary">Tieto podmienky sa použijú pri určovaní, či má Syncthing synchronizovať súbory.</string>
   <string name="run_on_mobile_data_title">Synchronizovať na mobilných dátach</string>
   <string name="run_on_wifi_title">Synchronizovať na WiFi</string>

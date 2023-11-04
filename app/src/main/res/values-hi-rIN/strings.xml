@@ -14,6 +14,7 @@
   <string name="storage_permission_title">भंडारण की अनुमति</string>
   <string name="storage_permission_desc">फ़ाइल सिंक्रनाइज़ेशन करने के लिए सिंकथिंग को आपके संग्रहण तक पहुंचने की आवश्यकता है।</string>
   <!--Slide 3-->
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">वापस</string>
   <string name="cont">जारी</string>

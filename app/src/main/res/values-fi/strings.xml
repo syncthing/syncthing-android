@@ -12,6 +12,7 @@ Jakaaksesi tietoa toisten laitteiden kanssa, sinun tarvitsee lisätä niiden yks
 Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta.</string>
   <!--Slide 2-->
   <!--Slide 3-->
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Takaisin</string>
   <string name="cont">Jatka</string>
@@ -167,7 +168,6 @@ Ilmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta
   <string name="category_debug">Vianhaku</string>
   <string name="category_experimental">Kokeellinen</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Käyntiehdot</string>
   <string name="respect_battery_saving_title">Noudata Androidin virransäästöasetusta</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Käytä edistynyttä Kansionvalitsinta</string>

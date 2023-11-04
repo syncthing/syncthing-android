@@ -19,6 +19,7 @@ Kérjük, hogy a felmerülő hibákat jelentsd be a GitHub-on.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Földrajzi hely engedély (háttérben)</string>
   <string name="location_permission_desc">A Syncthing beállítható úgy, hogy csak a kiválasztott Wi-Fi hálózatokon szinkronizáljon. Ehhez az alkalmazás bezárásakor is meg kell keresnie az éppen csatlakoztatott Wi-Fi SSID-jét. Ezért engedélyt igényel a helymeghatározáshoz való hozzáféréshez a háttérben. Ezt az információt nem használja fel az Ön tartózkodási helyének megkeresésére. Az egyetlen tárolt információ az a Wi-Fi, amelyet manuálisan választott a listához - más felhasználói adat nem kerül tárolásra.\n\n Ha használni szeretné ezt a funkciót, nyomja meg a fenti gombot a szükséges engedélyek megadásához a Syncthing számára. Ellenkező esetben kihagyhatja ezt a lépést.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Vissza</string>
   <string name="cont">Folytatás</string>
@@ -121,7 +122,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="directory">Mappa</string>
   <!--Setting title and description-->
   <string name="folder_fileWatcher">Figyeli a változásokat</string>
-  <string name="folder_fileWatcherDescription">Megkéri az operációs rendszert, hogy értesítést küldjön, ha a fájlok módosulnak. Kikapcsolt állapotban a ciklikus óránkénti ellenőrzés lép érvénybe.</string>
+  <string name="folder_fileWatcherDescription">Az operációs rendszer értesítést küld, ha a fájlok módosulnak. Kikapcsolt állapotban az óránkénti ellenőrzés lép érvénybe.</string>
   <!--Setting title-->
   <string name="folder_pause">Mappa szüneteltetés</string>
   <!--Setting title-->
@@ -148,7 +149,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <!--Summary shown if we only have readwrite access to the folder path-->
   <string name="folder_path_readwrite">Az Android verziód írási és olvasási hozzáférést ad a Syncthing számára a kiválasztott mappához.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
-  <string name="toast_invalid_folder_selected">Sajnálom. A kiválasztott mappa nem használható. Kérlek válassz egy mappát a belső vagy a külső tárolóból.</string>
+  <string name="toast_invalid_folder_selected">A kiválasztott mappa nem használható. Kérlek válassz egy mappát a belső vagy a külső tárolóból.</string>
   <string name="ignore_patterns">Kihagyási minták</string>
   <string name="create_ignore_file_error">Nem sikerült létrehozni a kihagyási fájlt. Írható a könyvtár?</string>
   <string name="edit_ignore_file_error">Nem található szövegszerkesztő</string>
@@ -172,7 +173,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <!--Setting title-->
   <string name="introducer">Bevezető</string>
   <!--Setting title-->
-  <string name="pause_device">Eszköz szüneteltetés</string>
+  <string name="pause_device">Eszköz szüneteltetése</string>
   <!--ActionBar item-->
   <string name="delete_device">Eszköz törlése</string>
   <string name="add_device">Eszköz hozzáadása</string>
@@ -202,7 +203,6 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="category_debug">Hibakeresés</string>
   <string name="category_experimental">Kísérleti</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Futás feltételei</string>
   <string name="run_conditions_summary">A következő beállításokkal eldöntheted, hogy a Syncthing mikor fusson.</string>
   <string name="run_on_mobile_data_title">Futtatás mobil adatkapcsolaton</string>
   <string name="run_on_mobile_data_summary">Futtatás mikor az eszköz mobil adatkapcsolattal csatlakozik a hálózathoz. Figyelem: Ez nagy mennyiségű adat szinkronizálásakor sok adatot használ fel mobilszolgáltatói keretből.</string>
@@ -218,7 +218,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">A funkció használatához engedélyezni kell a hozzáférést a földrajzi helyhez</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Hozzáférés szükséges</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Az Android 8.1-el kezdve helyzeti hozzáférés szükséges a Wi-Fi hálózat nevének olvasásához. Ezt a funkciót csak akkor használhatod, ha megadod ezt a hozzáférést.</string>
-  <string name="power_source_title">Futtatás amikor az eszköz energiaellátása</string>
+  <string name="power_source_title">Futtatás, amikor az eszköz energiaellátása</string>
   <string-array name="power_source_entries">
     <item>AC tápellátás és akkumulátor.</item>
     <item>AC tápellátás.</item>
@@ -231,7 +231,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="run_in_flight_mode_title">Futtatás amikor az eszköz repülési üzemmódban van</string>
   <string name="run_in_flight_mode_summary">Engedélyezze, ha a készüléknek problémái vannak a kézi Wi-Fi-kapcsolatok felismerésével repülési üzemmódban.</string>
   <string name="service_settings_title">Szolgáltatás beállítások</string>
-  <string name="service_settings_summary">Futtassa a Syncthinget szolgáltatásként. Hozzáad egy állandó értesítést, amivel megakadályozza az Android általi leállítást. Ha bejelöljük ezt az opciót, a Syncthing az operációs rendszer indításakor elindul.</string>
+  <string name="service_settings_summary">A Syncthing szolgáltatásként való futtatása. Hozzáad egy állandó értesítést, amivel megakadályozza az Android általi leállítást. Ha be van jelölve ez az opció, a Syncthing az operációs rendszer indításakor elindul.</string>
   <string name="run_as_background_service">Szolgáltatás automatikus indítása bekapcsoláskor</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Fejlett mappaválasztó használata</string>
@@ -255,7 +255,7 @@ Néhány eszközön extra alkalmazás-leállító alkalmazást telepített fel a
   <string name="preference_theme_option_dark">Sötét</string>
   <string name="pref_language_default">Alapértelmezett nyelv</string>
   <string-array name="folder_types">
-    <item>Küldés és Fogadás</item>
+    <item>Küldés és fogadás</item>
     <item>Csak küldés</item>
     <item>Csak fogadás</item>
   </string-array>
@@ -424,7 +424,7 @@ VIGYÁZAT! Más alkalmazások kiolvashatják a backupból a titkos kulcsot, és 
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">A Syncthing le van tiltva</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Meg akarja változtatni a futási feltételeket?</string>
+  <string name="syncthing_disabled_message">Meg akarod változtatni a futási feltételeket?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Beállítások megváltoztatása</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->

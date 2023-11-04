@@ -16,6 +16,8 @@
   <string name="storage_permission_desc">Syncthing 需要訪問您的存儲以進行文件同步.</string>
   <!--Slide 3-->
   <string name="location_permission_title">位置權限(背景)</string>
+  <string name="location_permission_desc">Syncthing 可以配置為僅在選定的 Wi-Fi 網絡上同步。為此，它需要查找當前連接的 Wi-Fi 的 SSID，在應用程序關閉時也是如此。因此，它需要在後台訪問該位置的權限。此信息不會用於查找您的位置。唯一存儲的信息是您手動選擇添加到列表中的 Wi-Fi - 不會存儲其他用戶數據。\n\n 如果您想使用此功能，請按上面的按鈕向 Syncthing 授予所需的權限。否則您可以跳過此步驟。</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">返回</string>
   <string name="cont">繼續</string>
@@ -29,6 +31,7 @@
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">確認退出APP</string>
+  <string name="dialog_exit_while_running_as_service_message">供您考慮：您將應用程序配置為在啟動時自動啟動。因此，它會監控運行條件並在條件匹配時隨時在後台同步。如果遇到嚴重問題，您應該隻手動退出。否則，請在設置中禁用“啟動時自動啟動”。您想現在退出直到設備重新啟動嗎？</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">增加資料夾</string>
   <!--Title of the "share device id" menu action-->
@@ -111,7 +114,10 @@
   <!--Setting title-->
   <string name="directory">資料夾</string>
   <!--Setting title and description-->
+  <string name="folder_fileWatcher">監控檔案系統變更</string>
+  <string name="folder_fileWatcherDescription">要求操作系統通知文件的更改。如果停用便會回復使用每小時定期掃描。</string>
   <!--Setting title-->
+  <string name="folder_pause">暫停同步資料夾</string>
   <!--Setting title-->
   <string name="devices">裝置</string>
   <!--Setting title-->
@@ -132,8 +138,11 @@
   <string name="folder_path_required">資料夾路徑不得為空</string>
   <string name="dialog_discard_changes">放棄變更？</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">您的系統版本可以給Syncthing提供指定資料夾的閱讀訪問權限</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">您的系統版本可以給Syncthing提供指定資料夾的閱讀訪問權限</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">抱歉。所選擇的資料夾無法使用。請選擇一個位於內部或外部存儲的資料夾。</string>
   <string name="ignore_patterns">忽略樣式</string>
   <string name="create_ignore_file_error">無法建立忽略檔案。資料夾是可寫入的？</string>
   <string name="edit_ignore_file_error">找不到文字編輯器</string>
@@ -157,6 +166,7 @@
   <!--Setting title-->
   <string name="introducer">引入者</string>
   <!--Setting title-->
+  <string name="pause_device">暫停同步設備</string>
   <!--ActionBar item-->
   <string name="delete_device">刪除裝置</string>
   <string name="add_device">增加裝置</string>
@@ -186,16 +196,36 @@
   <string name="category_debug">除錯</string>
   <string name="category_experimental">實驗性</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">執行條件</string>
+  <string name="run_conditions_summary">根據下列選項決定 Syncthing 要在什麼狀況下執行。</string>
   <string name="run_on_mobile_data_title">使用行動網路時執行</string>
+  <string name="run_on_mobile_data_summary">當設備通過移動數據網絡連接時運行。警告：如果您同步大量數據，這可能會消耗您的移動運營商數據計劃中的大量數據。</string>
   <string name="run_on_wifi_title">使用 WiFi 時執行</string>
+  <string name="run_on_wifi_summary">當設備連接到 Wi-Fi 網絡時運行。</string>
+  <string name="run_on_metered_wifi_title">使用計費的 WiFi 時執行</string>
+  <string name="run_on_metered_wifi_summary">當設備連接到流量Wi-Fi 網絡時運行，如熱點或網絡共享（Tethering）。注意：如果你要同步大量數據，此選項會耗費多里你的數據攜套餐。</string>
+  <string name="run_on_whitelisted_wifi_title">連線到特定 WiFi 網路時執行</string>
+  <string name="run_on_whitelisted_wifi_networks">連線到特定 WiFi 網路時執行: %1$s</string>
   <string name="run_on_all_wifi_networks">所有 WiFi 連線都執行</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">請開啟Wi-Fi來選擇網路。</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">請先連接Wi-Fi才能加到列表。</string>
+  <string name="sync_only_wifi_ssids_need_to_grant_location_permission">請先同意 \"位置權限\" 才能使用這個功能。</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要授權</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">從 Android 8.1 開始，需要位置訪問才能讀取 Wi-Fi 的名稱。只有授予此權限，您才能使用此功能。</string>
+  <string name="power_source_title">當設備用以下方式供電時執行</string>
+  <string-array name="power_source_entries">
+    <item>交流電源或電池電量</item>
+    <item>交流電源。</item>
+    <item>電池電量。</item>
+  </string-array>
   <string name="respect_battery_saving_title">遵守 Android 節省電池設定</string>
   <string name="respect_battery_saving_summary">使用省電模式時停用 Syncthing</string>
+  <string name="respect_master_sync_title">使用 Android 的「自動同步」設定</string>
   <string name="respect_master_sync_summary">當快速設置圖塊“自動同步數據”切換為關閉時停用 Syncthing。&lt;br&gt;&lt;br data-mce-bogus="1"&gt;</string>
   <string name="run_in_flight_mode_title">飛航模式時執行</string>
+  <string name="run_in_flight_mode_summary">如果您的設備在飛行模式下無法檢測到手動 Wi-Fi 連接，請啟用。</string>
   <string name="service_settings_title">服務設定</string>
+  <string name="service_settings_summary">將 Syncthing 作為服務運行。添加持久通知以防止其被 Android 終止。選中此選項會在操作系統啟動時啟動 Syncthing。
+ </string>
   <string name="run_as_background_service">開機時自動執行服務</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">使用進階的資料夾選擇器</string>
@@ -215,7 +245,22 @@
   <string name="start_into_web_gui_summary">當開啟應用程式時，打開網頁介面，而不是主螢幕</string>
   <string name="preference_theme_title">主題</string>
   <string name="preference_theme_follow_system">使用系統主題</string>
+  <string name="preference_theme_option_light">淺色</string>
+  <string name="preference_theme_option_dark">深色</string>
   <string name="pref_language_default">預設語言</string>
+  <string-array name="folder_types">
+    <item>發送&amp;收到</item>
+    <item>僅發送</item>
+    <item>僅接收</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>隨機的</item>
+    <item>按字母順序</item>
+    <item>最小的優先</item>
+    <item>最大的優先</item>
+    <item>最舊的優先</item>
+    <item>最新的優先</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>無</item>
     <item>垃圾筒式</item>
@@ -235,14 +280,28 @@
   <string name="usage_reporting">匿名使用資訊回報</string>
   <string name="gui_address">GUI 監聽位址</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">取消忽略的裝置與資料夾</string>
+  <string name="undo_ignored_devices_folders_question">這將撤消之前忽略設備和文件夾的決定。繼續？</string>
+  <string name="undo_ignored_devices_folders_done">取消忽略完成。</string>
   <string name="export_config">匯出設定</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">輸入值無效。請輸入介於 %1$d和%2$d 之間的值</string>
   <!--Experimental options-->
+  <string name="use_proxy">透過代理伺服器連線</string>
+  <string name="do_not_use_proxy">沒有設定代理伺服器</string>
   <string name="keep_wakelock_while_binary_running">當 Syncthing 正在執行時，保持 CPU 清醒</string>
   <string name="keep_wakelock_while_binary_running_summary">如果在電池操作上遇到斷線，使用這個設定。這可能會造成增加電池消耗量。</string>
   <string name="use_tor_title">使用 Tor</string>
+  <string name="use_tor_summary">強制所有流量通過 Tor 以增加隱私。需要 Orbot。禁用代理選項。</string>
+  <string name="socks_proxy_address_title">SOCKS5 代理伺服器</string>
+  <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
   <!--Toast after entering invalid socks proxy address-->
+  <string name="toast_invalid_socks_proxy_address">請按照 “socks5://[IP/HOSTNAME]:[PORT]” 的格式输入代理地址</string>
+  <string name="http_proxy_address_title">HTTP(S) 代理伺服器</string>
+  <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
   <!--Toast after entering invalid http proxy address-->
+  <string name="toast_invalid_http_proxy_address">請點擊“http://[IP/主機名]:[端口]”的格式輸入代理地址
+ </string>
   <string name="use_legacy_hashing_title">使用過時的雜湊</string>
   <string name="use_legacy_hashing_summary">為了相容性，強制 Syncthing 使用過時的雜湊套</string>
   <!--Dialog shown before config export-->
@@ -264,12 +323,17 @@
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">重設資料庫</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">執行這個動作應該只會基於來自我們支援團隊的建議。
+        \n你確定要清除 Syncthing 的資料庫？
+    </string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">成功重設 Syncthing 資料庫</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_deltas_title">重置差異索引</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">該操作只應在服務人員的建議下執行。你確定要清空 Syncthing 的增量搜索嗎？</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">重置 Syncthing 的增量索引成功</string>
   <string name="category_about">關於</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">打開日誌</string>
@@ -289,6 +353,7 @@
   <string name="donate_summary">協助我們支付域名及主機費用</string>
   <!--Menu item linking privacy policy-->
   <string name="privacy_title">隱私政策</string>
+  <string name="privacy_summary">打開syncthing-android的隱私政策，其中包括個人資料的使用(如有的話)，例如位置。</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Syncthing 版本</string>
   <!--Title of the preference showing this app's version name-->
@@ -349,30 +414,39 @@
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing 已經停用</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">您要修改執行條件嗎？</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">更改設定</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">離開</string>
   <!--Reasons for "syncthing disabled" dialog-->
   <string name="syncthing_disabled_reason_heading">原因：</string>
+  <string name="syncthing_disabled_reason_on_battery">設備正在用電池</string>
+  <string name="syncthing_disabled_reason_on_charger">設備充電中</string>
   <string name="syncthing_disabled_reason_powersaving">設備在省電模式下</string>
   <string name="syncthing_disabled_reason_android_sync_disabled">全域同步已停用</string>
   <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">目前的 WiFi SSID 不在允許清單中</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">目前的 WiFi 是計費連線</string>
   <string name="syncthing_disabled_reason_no_network_or_flightmode">沒有網路連線，或是飛航模式已啟用。</string>
   <string name="syncthing_disabled_reason_no_mobile_connection">沒有行動網路連線</string>
   <string name="syncthing_disabled_reason_no_wifi_connection">沒有 WiFi 連線</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">沒有設定在使用 WiFi 或行動網路時連線</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">Syncthing 正在執行</string>
   <string name="syncthing_disabled">Syncthing 已經停用</string>
+  <string name="syncthing_terminated">Syncthing 已終止</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">無法建立設定檔</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">找不到運作需要的重要檔案</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">相機</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
   <string name="default_folder_id">%1$s-photos</string>
   <string name="notification_crash_title">Syncthing 已經當機</string>
   <string name="notification_crash_text">觸碰檢視日誌</string>
+  <string name="notifications_persistent_channel">Syncthing 工作中</string>
+  <string name="notification_persistent_waiting_channel">監控運作狀態</string>
   <string name="notifications_other_channel">其他通知</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -413,11 +487,29 @@
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
   <string name="folder_type">資料夾類型</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">傳送與接收</string>
   <string name="folder_type_sendonly">僅傳送</string>
+  <string name="folder_type_receiveonly">僅接收</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">本資料夾會傳送本地變更至從遠端設備上，也會接收遠端設備的變更。</string>
+  <string name="folder_type_sendonly_description">檔案不接受來自遠端設備的變更，但本地的變更會同步至叢集中的其他設備上。</string>
+  <string name="folder_type_receiveonly_description">文件從集群同步，但本地所做的任何更改都不會發送到其他設備。</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">檔案下載順序</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">隨機</string>
+  <string name="pull_order_type_alphabetic">字母順序</string>
+  <string name="pull_order_type_smallestFirst">細檔案優先</string>
+  <string name="pull_order_type_largestFirst">大檔案優先</string>
+  <string name="pull_order_type_oldestFirst">舊檔案優先</string>
+  <string name="pull_order_type_newestFirst">新檔案優先</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">隨便決定一個檔案下載</string>
+  <string name="pull_order_type_alphabetic_description">按照名稱字母順序下載檔案</string>
+  <string name="pull_order_type_smallestFirst_description">按照佔用空間大小下載檔案，小檔案先下載。</string>
+  <string name="pull_order_type_largestFirst_description">按照占用空間大小下載檔案，大檔案先下載。</string>
+  <string name="pull_order_type_oldestFirst_description">按照編輯時間下載檔案，舊檔案先下載。</string>
+  <string name="pull_order_type_newestFirst_description">按照編輯時間下載檔案，新檔案先下載。</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">最常保留時間</string>
   <string name="clean_out_after">於之後清空</string>

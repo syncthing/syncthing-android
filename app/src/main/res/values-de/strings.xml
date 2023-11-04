@@ -17,6 +17,7 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Standortberechtigung (Hintergrund)</string>
   <string name="location_permission_desc">Syncthing kann so konfiguriert werden, dass es sich nur in bestimmten WLAN-Netzen synchronisiert. Um dies tun zu können, muss es die SSID des momentan verbundenen WLAN herausfinden, auch wenn die App geschlossen ist. Dazu benötigt es die Berechtigung zur Abfrage des Standorts im Hintergrund. Diese Informationen werden nicht dazu genutzt nach deinem Standort zu sehen. Und die einzige gespeicherte Information ist das WLAN, dass du ausgewählt hast, um es auf die Liste zu setzen - darüberhinausgehende Benutzerdaten werden nicht gespeichert.\n\n Wenn du diese Funktion nutzen willst, drücke den Knopf oben, um Syncthing die erforderlichen Berechtigungen zu erteilen. Anderenfalls kannst du diesen Schritt überspringen.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Zurück</string>
   <string name="cont">Weiter</string>
@@ -196,7 +197,6 @@ Bitte melde alle auftretenden Probleme via GitHub.</string>
   <string name="category_debug">Fehleranalyse</string>
   <string name="category_experimental">Experimentell</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Betriebsbedingungen</string>
   <string name="run_conditions_summary">Benutze die folgenden Optionen, um zu entscheiden, wann Syncthing läuft.</string>
   <string name="run_on_mobile_data_title">Bei mobiler Datenverbindung ausführen</string>
   <string name="run_on_mobile_data_summary">Starten, wenn das Gerät über das mobile Datennetzwerk verbunden ist. Warnung: Wenn du große Datenmengen synchronisierst, kann dies einen hohen Verbrauch deines mobilen Datentarifs verursachen.</string>

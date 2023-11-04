@@ -14,9 +14,15 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <!--Slide 2-->
   <string name="storage_permission_title">Permisiune acces stocare</string>
   <string name="storage_permission_desc">Syncthing are nevoie să acceseze stocarea pentru a face sincronizarea fișierelor.</string>
+  <string name="dialog_all_files_access_not_supported">Dispozitivul dvs. nu acceptă accesul la toate fișierele</string>
   <!--Slide 3-->
   <string name="location_permission_title">Permisiune locație (fundal)</string>
   <string name="location_permission_desc">Syncthing poate fi configurat pentru a sincroniza numai pe rețelele Wi-Fi selectate. Pentru a face acest lucru, trebuie să caute SSID-ul Wi-Fi-ului conectat în prezent, chiar și atunci când aplicația este închisă. Prin urmare, necesită permisiunea de a accesa locația din fundal. Aceste informații nu sunt utilizate pentru a vă căuta locația. Și singurele informații stocate sunt Wi-Fi-ul pe care îl alegeți manual să îl adăugați la listă - nu sunt stocate alte date de utilizator.\n\n Dacă doriți să utilizați această caracteristică, apăsați butonul de mai sus pentru a acorda permisiunile necesare pentru Syncthing. În caz contrar, puteți sări peste acest pas.</string>
+  <!--Slide 4-->
+  <string name="api_level_30_title">Informații de actualizare</string>
+  <string name="api_level_30_desc">Cu cea mai recentă actualizare, syncthing-android vizează nivelul API 30, care modifică comportamentul sistemului de fișiere Android. Vești bune: Pe Android 11 și pe cele mai noi, este acum capabil să scrie pe un card SD extern. Vești proaste: Este posibil să fie mai lent și unele căi de acces vor fi ascunse. Din cauza acestor căi ascunse, baza de date trebuie resetată pentru a preveni pierderea de date. Acest lucru va face ca toate datele dvs. să fie hașurate din nou, dar nu este nevoie să fie transferate de pe dispozitive la distanță. De asemenea, este posibil să creeze conflicte și să recreeze fișiere șterse recent dacă nu sunteți complet sincronizat în acest moment. În funcție de cantitatea de date pe care o aveți, acest proces poate fi foarte intensiv în ceea ce privește resursele, adică poate dura ceva timp și poate consuma multă energie din baterie.\n\n Vă rugăm să apăsați butonul de mai jos pentru a reseta baza de date și a porni Syncthing.</string>
+  <string name="api_level_30_button">Resetarea bazei de date</string>
+  <string name="toast_api_level_30_must_reset">Puteți continua doar dacă faceți clic pe butonul de resetare a bazei de date.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Înapoi</string>
   <string name="cont">Continuare</string>
@@ -197,7 +203,7 @@ Vă rugăm să raportați orice problemă întâlniți, prin intermediul GitHub.
   <string name="category_debug">Depanare</string>
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Condiții de rulare</string>
+  <string name="run_conditions_title">Activarea condițiilor de funcționare</string>
   <string name="run_conditions_summary">Folosiți următoarele setări pentru a decide când Syncthing va rula.</string>
   <string name="run_on_mobile_data_title">Rulează prin date mobile</string>
   <string name="run_on_mobile_data_summary">Rulează atunci când dispozitivul este conectat prin date mobile. Avertizare: Aceasta poate consuma mult din datele incluse în contract dacă doriți să sincronizați o cantitate mare de date.</string>
@@ -552,4 +558,7 @@ atunci când sunt înlocuite sau șterse de către Syncthing. Versiunile sunt ș
   <string name="browse">Navighează</string>
   <string name="no_sub_folder_is_selected">Nu este selectat nici un subdirector</string>
   <string name="share_device_id_chooser">Partajează ID dispozitiv cu</string>
+  <string name="require_notification_permission_desc">Necesar pentru a afișa notificări privind noile conexiuni de dispozitive, cererile de partajare a dosarelor etc.</string>
+  <string name="notification_permission_title">Permisiunea de notificare</string>
+  <string name="enable_notification_permission">Activați permisiunea de notificare</string>
 </resources>

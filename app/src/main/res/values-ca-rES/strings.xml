@@ -15,6 +15,9 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="storage_permission_title">Permís d\'emmagatzematge</string>
   <string name="storage_permission_desc">El Syncthing necessita accés a l\'emmagatzematge per poder sincronitzar els arxius</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permís d\'ubicació (de fons)</string>
+  <string name="location_permission_desc">La sincronització es pot configurar per sincronitzar només a les xarxes Wi-Fi seleccionades. Per fer-ho, ha de buscar el SSID de la xarxa Wi-Fi connectada actualment, també quan l\'aplicació està tancada. Per tant, requereix permís per accedir a la ubicació en segon pla. Aquesta informació no s\'utilitza per cercar la vostra ubicació. I l\'única informació emmagatzemada és la Wi-Fi que trieu afegir manualment a la llista; no s\'emmagatzemen altres dades d\'usuari.\n\n Si voleu utilitzar aquesta funció, premeu el botó de dalt per concedir els permisos necessaris per a la sincronització. En cas contrari, podeu ometre aquest pas.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Torna</string>
   <string name="cont">Continua</string>
@@ -194,7 +197,6 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="category_debug">Depuració</string>
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Condicions d\'execució</string>
   <string name="run_conditions_summary">Utilitzeu les següents opcions per decidir quan s\'executarà el Syncthing.</string>
   <string name="run_on_mobile_data_title">Executa amb dades mòbils</string>
   <string name="run_on_mobile_data_summary">Executa quan el dispositiu es connecti a través de la xarxa de dades mòbils. Advertència: Si sincronitzeu gran quantitat de dades podríeu consumir un volum important del pla de dades del vostre operador mòbil.</string>
@@ -206,6 +208,7 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="run_on_whitelisted_wifi_networks">Executa només amb les xarxes Wi-Fi seleccionades: %1$s</string>
   <string name="run_on_all_wifi_networks">Executa amb totes les xarxes Wi-Fi</string>
   <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Enceneu el Wi-Fi per selecionar les xarxes.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Connecteu-vos a una xarxa Wi-Fi per afegir-la a la llista.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Heu de proporcionar el permís d\'UBICACIÓ per poder fer això.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Calen permisos</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir d\'Android 8.1, es necessita el permís d\'ubicació per poder llegir el nom de les xarxes Wi-Fi. Només podreu fer-ho si doneu aquest permís.</string>
@@ -240,6 +243,10 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="preference_language_summary">Canvieu l\'idioma de l\'aplicació</string>
   <string name="start_into_web_gui_title">Inicia amb la interfície web directament</string>
   <string name="start_into_web_gui_summary">Quan s\'inicia la aplicació, obre la interfície web enlloc de la pantalla principal</string>
+  <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Seguiu el sistema</string>
+  <string name="preference_theme_option_light">Clar</string>
+  <string name="preference_theme_option_dark">Fosc</string>
   <string name="pref_language_default">Idioma per defecte</string>
   <string-array name="folder_types">
     <item>Envia i rep</item>
@@ -346,6 +353,8 @@ Ens podeu informar dels problemes que trobeu a través de Github.</string>
   <string name="donate_title">Feu una donació</string>
   <string name="donate_summary">Ajudeu-nos a pagar les despeses de dominis i allotjament</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Política de privadesa</string>
+  <string name="privacy_summary">Obriu la política de privadesa de syncthing-android, que cobreix l\'ús (si n\'hi ha) de dades personals, per exemple la ubicació.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versió del Syncthing</string>
   <!--Title of the preference showing this app's version name-->
