@@ -15,6 +15,7 @@
   <!--Slide 3-->
   <string name="location_permission_title">Kokapen baimena (atzeko planoa)</string>
   <string name="location_permission_desc">Sintetizazioa hautatutako Wi-Fi sareetan soilik sinkronizatzeko konfigura daiteke. Horretarako, unean konektatutako Wi-Fi SSIDa bilatu behar du, aplikazioa itxita dagoenean ere. Hori dela eta, atzealdeko kokapenera sartzeko baimena behar da. Informazio hau ez da zure kokapena bilatzeko erabiltzen. Biltegiratutako informazio bakarra zerrendan eskuz gehitzea aukeratu duzun Wi-Fi da. Ez da beste erabiltzaile daturik gordetzen. \ N \ n Funtzio hau erabili nahi baduzu, sakatu goiko botoia Syncthing-i beharrezko baimenak emateko. Bestela, urrats hau salta dezakezu.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Atzera</string>
   <string name="cont">Jarraitu</string>
@@ -194,7 +195,6 @@
   <string name="category_debug">Arazketa</string>
   <string name="category_experimental">Esperimentala</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Exekutatzeko baldintzak</string>
   <string name="run_conditions_summary">Erabili aukera hauek Syncthing noiz exekutatuko den erabakitzeko.</string>
   <string name="run_on_mobile_data_title">Exekutatu datu mugikorrak erabiliz</string>
   <string name="run_on_mobile_data_summary">Gailua datu mugikorren sarearen bidez konektatuta dagoenean exekutatu. Oharra: horrek operadore mugikorraren datu-planeko datu asko kontsumi ditzake datu-kopuru handiak sinkronizatzen baditu.</string>

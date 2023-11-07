@@ -14,9 +14,16 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <!--Slide 2-->
   <string name="storage_permission_title">Depolama İzni</string>
   <string name="storage_permission_desc">Dosya eşitlemesi yapmak için Syncthing\'in depolama alanınıza erişmesi gerekiyor.</string>
+  <string name="dialog_all_files_access_not_supported">Cihazınız tüm dosyalara erişimi desteklemiyor</string>
   <!--Slide 3-->
   <string name="location_permission_title">Konum İzni (arka plan)</string>
   <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarında eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.\n\n Eğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli izinleri vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
+  <!--Slide 4-->
+  <string name="api_level_30_title">Yükseltme Bilgileri</string>
+  <string name="api_level_30_desc">En son güncellemeyle syncthing-android, Android\'in dosya sisteminin davranışını değiştiren API seviyesi 30\'u hedefliyor. İyi haber: Android 11 ve daha yeni sürümlerde artık harici bir SD karta yazabiliyor. Kötü haber: Daha yavaş olabilir ve bazı yollar gizlenecektir. Bu gizli yollardan dolayı veri kaybını önlemek için veritabanının sıfırlanması gerekir. Bu, tüm verilerinizin tekrar adreslenmesine neden olacak, ancak bunların uzak cihazlardan aktarılmasına gerek yoktur. Ayrıca, şu anda tam olarak eşitlenmiş değilseniz çakışmalara neden olabilir ve yakın zamanda silinen dosyaları yeniden oluşturabilir. Ne kadar veriye sahip olduğunuza bağlı olarak, bu işlem çok kaynak yoğunluğunda olabilir, yani biraz zaman alabilir ve çok fazla pil gücü kullanabilir.\n\n Veritabanını sıfırlamak ve Syncthing\'i başlatmak için lütfen aşağıdaki düğmeye basın.
+</string>
+  <string name="api_level_30_button">Veritabanını sıfırla</string>
+  <string name="toast_api_level_30_must_reset">Veritabanını sıfırlamak için yalnızca düğmeye tıklayarak devam edebilirsiniz.</string>
   <!--Generic texts used everywhere-->
   <string name="back">Geri</string>
   <string name="cont">Devam</string>
@@ -30,7 +37,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
   <string name="dialog_exit_while_running_as_service_title">Uygulamadan çıkmayı onaylayın</string>
-  <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalışma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Sadece ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz?</string>
+  <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalıştırma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Yalnızca ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Klasör Ekle</string>
   <!--Title of the "share device id" menu action-->
@@ -189,14 +196,14 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="web_gui_loading">GKA için bekleniyor</string>
   <!--SettingsFragment-->
   <string name="settings_title">Ayarlar</string>
-  <string name="category_run_conditions">Çalışma Koşulları</string>
+  <string name="category_run_conditions">Çalıştırma Koşulları</string>
   <string name="category_behaviour">Davranış</string>
   <string name="category_syncthing_options">Syncthing Seçenekleri</string>
   <string name="category_backup">Yedekleme</string>
   <string name="category_debug">Hata Ayıklama</string>
   <string name="category_experimental">Deneysel</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Çalışma Koşulları</string>
+  <string name="run_conditions_title">Çalıştırma koşullarını etkinleştir</string>
   <string name="run_conditions_summary">Syncthing\'in ne zaman çalışacağına karar vermek için aşağıdaki seçenekleri kullanın.</string>
   <string name="run_on_mobile_data_title">Mobil veride çalıştır</string>
   <string name="run_on_mobile_data_summary">Cihaz mobil veri ağı üzerinden bağlandığında çalışır. Uyarı: Büyük miktarda veriyi eşitlerseniz bu, mobil operatör veri planınızdan çok fazla veri tüketebilir.</string>
@@ -418,7 +425,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">Syncthing etkisizleştirildi</string>
   <!--Message of the "syncthing disabled" dialog-->
-  <string name="syncthing_disabled_message">Çalışma koşullarını değiştirmek istiyor musunuz?</string>
+  <string name="syncthing_disabled_message">Çalıştırma koşullarını değiştirmek istiyor musunuz?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Ayarları Değiştir</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
@@ -450,7 +457,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="notification_crash_title">Syncthing çöktü</string>
   <string name="notification_crash_text">Günlükleri görüntülemek için tıklayın</string>
   <string name="notifications_persistent_channel">Syncthing etkin</string>
-  <string name="notification_persistent_waiting_channel">Çalışma koşullarını izleme</string>
+  <string name="notification_persistent_waiting_channel">Çalıştırma koşullarını izleme</string>
   <string name="notifications_other_channel">Diğer bildirimler</string>
   <!--RestApi-->
   <!--Title of the notification shown when a restart is needed-->
@@ -547,4 +554,7 @@ Lütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildi
   <string name="browse">Gözat</string>
   <string name="no_sub_folder_is_selected">Alt klasör seçilmedi</string>
   <string name="share_device_id_chooser">Cihaz kimliğini şununla paylaş</string>
+  <string name="require_notification_permission_desc">Yeni cihaz bağlantıları, klasör paylaşım istekleri vb. ile ilgili bildirimlerin gösterilmesi için gereklidir.</string>
+  <string name="notification_permission_title">Bildirim izni</string>
+  <string name="enable_notification_permission">Bildirim İznini etkinleştir</string>
 </resources>

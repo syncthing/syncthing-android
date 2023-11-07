@@ -7,19 +7,31 @@
   <string name="welcome_title">Bem vindo(a) ao Syncthing for Android</string>
   <!--Welcome wizard-->
   <!--Slide 1-->
+  <string name="introduction">Introdução</string>
   <string name="welcome_text">O Syncthing é uma aplicação de código aberto para sincronização de arquivos.\n\
 Para compartilhar dados com outros dispositivos, você precisa adicionar seus identificadores únicos à sua lista de dispositivos. Assim você pode selecionar quais pastas compartilhará\n\
 Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</string>
   <!--Slide 2-->
+  <string name="storage_permission_title">Permissão de Armazenamento</string>
+  <string name="storage_permission_desc">Syncthing precisa acessar seu armazenamento para poder sincronizar arquivos.</string>
   <!--Slide 3-->
+  <string name="location_permission_title">Permissão de Localização (segundo plano)</string>
+  <string name="location_permission_desc">Syncthing pode ser configurado para sincronizar apenas em redes Wi-Fi selecionadas. Para isso, é necessário verificar o SSID do Wi-Fi conectado no momento, inclusive quando o aplicativo está fechado. Portanto, o aplicativo requer permissão de acesso à localização em segundo plano. Esta informação não é utilizada para acessar a sua localização. A única informação guardada é o Wi-Fi que você escolhe manualmente para adicionar à lista - nenhum outro dado de usuário é armazenado.\n\n Se você deseja usar este recurso, pressione o botão acima para conceder as permissões necessárias ao Syncthing. Caso contrário, você pode pular esta etapa.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
+  <string name="back">Voltar</string>
   <string name="cont">Continuar</string>
   <string name="finish">Finalizar</string>
   <string name="generic_example">Exemplo</string>
   <string name="generic_error">Erro</string>
+  <string name="grant_permission">Conceder permissão</string>
+  <string name="permission_granted">Permissão concedida</string>
+  <string name="accept">Aceitar</string>
   <string name="ignore">Ignorar</string>
   <!--MainActivity-->
   <!--Title of the exit app when running as a service confirmation dialog-->
+  <string name="dialog_exit_while_running_as_service_title">Confirmar para sair do app</string>
+  <string name="dialog_exit_while_running_as_service_message">Para sua consideração: Você configurou o aplicativo para iniciar automaticamente na inicialização do sistema. Portanto, ele monitora as condições de execução e sincroniza, a qualquer hora, em segundo plano quando as condições são satisfeitas. Você só deve sair manualmente se encontrar problemas sérios. Caso contrário, desative \'Iniciar automaticamente durante a inicialização do sistema\' nas configurações. Quer sair agora até que o dispositivo reinicie?</string>
   <!--Title of the "add folder" menu action-->
   <string name="add_folder">Adicionar pasta</string>
   <!--Title of the "share device id" menu action-->
@@ -32,8 +44,10 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="no">Não</string>
   <string name="open_website">Abrir site</string>
   <string name="toast_write_storage_permission_required">A permissão de escrita em armazenamento é obrigatória para este aplicativo</string>
+  <string name="device_rejected">O dispositivo \"%1$s\" deseja conectar</string>
+  <string name="folder_rejected">O dispositivo \"%1$s\" deseja compartilhar a pasta \"%2$s\"</string>
   <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
-  <string name="dialog_disable_battery_optimization_message">O Android poder parar a sincronização após algum tempo. Para evitar isto, desabilite a otimização de bateria.\n\nAlguns dispositivos possuem  aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas brancas deles.</string>
+  <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização após algum tempo. Para evitar isso, desabilite a otimização de bateria.\n\nAlguns dispositivos possuem  aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas de exceções deles.</string>
   <string name="dialog_disable_battery_optimization_later">Depois</string>
   <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
   <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
@@ -76,6 +90,11 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Title for current upload rate-->
   <string name="upload_title">Envio</string>
   <!--StatusFragment-->
+  <string name="status_fragment_title">Estado</string>
+  <string name="syncthing_starting">Syncthing está iniciando.</string>
+  <string name="syncthing_running">Syncthing está executando.</string>
+  <string name="syncthing_not_running">Syncthing não está executando.</string>
+  <string name="syncthing_has_crashed">O Syncthing fechou inesperadamente.</string>
   <!--DrawerFragment-->
   <!--Same as download_title with a colon and space appended-->
   <string name="download_title_colon">Recepção:\u0020</string>
@@ -121,8 +140,11 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="folder_path_required">O caminho da pasta não pode ficar vazio</string>
   <string name="dialog_discard_changes">Descartar as alterações?</string>
   <!--Summary shown if we only have readonly access to the folder path-->
+  <string name="folder_path_readonly">Sua versão do Android concede ao Syncthing acesso somente de leitura à pasta selecionada.</string>
   <!--Summary shown if we only have readwrite access to the folder path-->
+  <string name="folder_path_readwrite">Sua versão do Android concede ao Syncthing acesso de leitura e escrita à pasta selecionada.</string>
   <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
+  <string name="toast_invalid_folder_selected">Desculpe. A pasta selecionada não pode ser usada. Por favor, escolha uma pasta localizada no armazenamento interno ou externo.</string>
   <string name="ignore_patterns">Filtros</string>
   <string name="create_ignore_file_error">Não foi possível criar o arquivo de filtros. Este diretório tem permissões de escrita?</string>
   <string name="edit_ignore_file_error">Nenhum editor de texto foi encontrado</string>
@@ -176,10 +198,36 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="category_debug">Depuração</string>
   <string name="category_experimental">Configurações experimentais</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Condições de execução</string>
+  <string name="run_conditions_summary">Use as seguintes opções para decidir quando o Syncthing será executado.</string>
+  <string name="run_on_mobile_data_title">Usar dados móveis</string>
+  <string name="run_on_mobile_data_summary">Executar quando o dispositivo está conectado a uma rede dados móveis. Aviso: Isto poderá consumir uma grande parte do seu plano de dados móveis da sua operadora se você sincronizar grandes quantidades de dados.</string>
+  <string name="run_on_wifi_title">Usar Wi-Fi</string>
+  <string name="run_on_wifi_summary">Executar quando o dispositivo está conectado à uma rede Wi-Fi.</string>
+  <string name="run_on_metered_wifi_title">Usar Wi-Fi limitado</string>
+  <string name="run_on_metered_wifi_summary">Executar quando o dispositivo está conectado a uma rede Wi-Fi limitada, por exemplo: um ponto de acesso ou uma conexão roteada. Aviso: Isto poderá consumir uma grande parte do seu plano de dados móveis da sua operadora se você sincronizar grandes quantidades de dados.</string>
+  <string name="run_on_whitelisted_wifi_title">Executar nas redes Wi-Fi especificadas</string>
+  <string name="run_on_whitelisted_wifi_networks">Executar apenas nas redes Wi-Fi selecionadas: %1$s</string>
+  <string name="run_on_all_wifi_networks">Executar em todas as redes Wi-Fi.</string>
+  <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Por favor, ligue o Wi-Fi para selecionar redes.</string>
+  <string name="sync_only_wifi_ssids_connect_to_wifi">Por favor conecte a uma rede Wi-Fi para adicioná-la à lista.</string>
   <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Você precisa dar permissão de localização para usar esse recurso.</string>
   <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permissão requerida</string>
+  <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">A partir do Android 8.1, é necessário o acesso à localização para poder ler o nome do Wi-Fi. Você pode usar este recurso apenas se conceder esta permissão.</string>
+  <string name="power_source_title">Rodar quando o dispositivo for alimentado por</string>
+  <string-array name="power_source_entries">
+    <item>Carregador e bateria.</item>
+    <item>Carregador.</item>
+    <item>Bateria.</item>
+  </string-array>
   <string name="respect_battery_saving_title">Honrar a configuração de economia de bateria do Android</string>
+  <string name="respect_battery_saving_summary">Desabilitar o Syncthing quando a economia de energia estiver ativa.</string>
+  <string name="respect_master_sync_title">Respeitar a configuração do Android \'Sincronizar dados automaticamente\'</string>
+  <string name="respect_master_sync_summary">Desabilitar o Syncthing quando a configuração rápida do Android \'Sincronizar\' estiver desligada.</string>
+  <string name="run_in_flight_mode_title">Rodar quando o dispositivo estiver no modo avião</string>
+  <string name="run_in_flight_mode_summary">Habilitar se o seu dispositivo tiver problemas ao detectar conexões Wi-Fi manuais durante o modo avião.</string>
+  <string name="service_settings_title">Configuração do serviço</string>
+  <string name="service_settings_summary">Rodar o Syncthing como um serviço. Adiciona uma notificação persistente para prevenir que ele seja terminado pelo Android. Ativar esta opção faz com que o Syncthing inicie durante a inicialização do Android.</string>
+  <string name="run_as_background_service">Iniciar o serviço automaticamente durante a inicialização do sistema</string>
   <!--Preferences - Behaviour-->
   <string name="advanced_folder_picker">Usar seletor de pasta avançado</string>
   <string name="advanced_folder_picker_summary">Selecione qualquer pasta do dispositivo para sincronização</string>
@@ -196,7 +244,24 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="preference_language_summary">Alterar o idioma do aplicativo</string>
   <string name="start_into_web_gui_title">Iniciar diretamente na interface web</string>
   <string name="start_into_web_gui_summary">Quando o app for iniciado, abrir a interface web em vez da tela principal</string>
+  <string name="preference_theme_title">Tema</string>
+  <string name="preference_theme_follow_system">Seguir sistema</string>
+  <string name="preference_theme_option_light">Claro</string>
+  <string name="preference_theme_option_dark">Escuro</string>
   <string name="pref_language_default">Idioma padrão</string>
+  <string-array name="folder_types">
+    <item>Enviar e Receber</item>
+    <item>Apenas Enviar</item>
+    <item>Apenas Receber</item>
+  </string-array>
+  <string-array name="pull_order_types">
+    <item>Aleatória</item>
+    <item>Alfabética</item>
+    <item>Menor Primeiro</item>
+    <item>Maior Primeiro</item>
+    <item>Mais Antigo Primeiro</item>
+    <item>Mais Novo Primeiro</item>
+  </string-array>
   <string-array name="versioning_types">
     <item>Nenhum</item>
     <item>Lixeira</item>
@@ -216,10 +281,15 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="usage_reporting">Relatório anônimo de uso</string>
   <string name="gui_address">Endereços de escuta da interface</string>
   <!--Titles for the preference to undo ignored devices and folders-->
+  <string name="undo_ignored_devices_folders_title">Desfazer ação de ignorar dispositivos e pastas</string>
+  <string name="undo_ignored_devices_folders_question">Isso irá desfazer as decisões prévias de ignorar dispositivos e pastas. Continuar?</string>
+  <string name="undo_ignored_devices_folders_done">As decisões foram desfeitas com sucesso.</string>
   <string name="export_config">Exportar configuração</string>
   <!--Toast after entering invalid integer value-->
+  <string name="invalid_integer_value" tools:ignore="PluralsCandidate">O valor inserido não é válido. Por favor insira um valor entre %1$d e %2$d.</string>
   <!--Experimental options-->
   <string name="use_proxy">Conecte por um proxy</string>
+  <string name="do_not_use_proxy">Proxy não configurado.</string>
   <string name="keep_wakelock_while_binary_running">Manter a CPU acordada</string>
   <string name="keep_wakelock_while_binary_running_summary">Marque esta opção se você observar desconexões inesperadas enquanto a bateria do dispositivo não está sendo carregada. Isto resultará em maior uso da bateria.</string>
   <string name="use_tor_title">Usar Tor</string>
@@ -253,12 +323,19 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_database_title">Limpar banco de dados</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_database_question">Esta ação deve ser executada somente com base em uma recomendação da nossa equipe de suporte.
+\nTem certeza de que deseja limpar o banco de dados do Syncthing?
+</string>
   <!--Syncthing was reset-->
   <string name="st_reset_database_done">O banco de dados do Syncthing foi limpo com sucesso</string>
   <!--Title for the preference to reset Syncthing indexes-->
   <string name="st_reset_deltas_title">Redefine índices Delta</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_question">Esta ação deve ser executada somente com base em uma recomendação da nossa equipe de suporte.
+\nTem certeza de que deseja limpar os índices delta do Syncthing?
+</string>
   <!--Syncthing was reset-->
+  <string name="st_reset_deltas_done">Índices delta do Syncthing reiniciados com sucesso</string>
   <string name="category_about">Sobre</string>
   <!--Settings item that opens the log activity-->
   <string name="open_log">Abrir log</string>
@@ -277,6 +354,8 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="donate_title">Doações</string>
   <string name="donate_summary">Ajude-nos a pagar a manutenção de domínios e servidores</string>
   <!--Menu item linking privacy policy-->
+  <string name="privacy_title">Política de Privacidade</string>
+  <string name="privacy_summary">Abrir a política de privacidade do syncthing-android que cobre a utilização (se existir) de dados pessoais, tais como a localização.</string>
   <!--Title of the preference showing upstream version name-->
   <string name="syncthing_version_title">Versão do Syncthing</string>
   <!--Title of the preference showing this app's version name-->
@@ -343,17 +422,31 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <!--Title of the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_title">O Syncthing está desabilitado</string>
   <!--Message of the "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_message">Deseja alterar as condições de execução?</string>
   <!--Button text on the "syncthing disabled" dialog-->
   <string name="syncthing_disabled_change_settings">Alterar configurações</string>
   <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
   <string name="exit">Sair</string>
   <!--Reasons for "syncthing disabled" dialog-->
+  <string name="syncthing_disabled_reason_heading">Razões:</string>
+  <string name="syncthing_disabled_reason_on_battery">Dispositivo funcionando na bateria</string>
+  <string name="syncthing_disabled_reason_on_charger">Dispositivo ligado no carregador</string>
+  <string name="syncthing_disabled_reason_powersaving">O dispositivo está no modo de economia de energia</string>
+  <string name="syncthing_disabled_reason_android_sync_disabled">Sincronização Global está desativada</string>
+  <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID do WiFi atual não está na lista de exceções</string>
+  <string name="syncthing_disabled_reason_wifi_is_metered">Wi-Fi atual é limitado</string>
+  <string name="syncthing_disabled_reason_no_network_or_flightmode">Sem conexão de rede ou o modo avião está ativado</string>
+  <string name="syncthing_disabled_reason_no_mobile_connection">Não está conectado aos dados móveis</string>
+  <string name="syncthing_disabled_reason_no_wifi_connection">Não conectado ao Wi-Fi</string>
+  <string name="syncthing_disabled_reason_no_allowed_method">Não está configurado para sincronizar por Wi-Fi nem por dados móveis</string>
   <!--Title of the notification shown while syncthing is running and enabled-->
   <string name="syncthing_active">O Syncthing está rodando</string>
   <string name="syncthing_disabled">O Syncthing está desabilitado</string>
+  <string name="syncthing_terminated">O Syncthing foi finalizado</string>
   <!--Toast shown if syncthing failed to create a config-->
   <string name="config_create_failed">Não foi possível criar o arquivo de configuração</string>
   <!--Toast shown if a config file crucial to operation is missing-->
+  <string name="config_file_missing">Um arquivo de configuração crucial para a operação está faltando</string>
   <!--Label of the default folder created of first start (camera folder).-->
   <string name="default_folder_label">Câmera</string>
   <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -400,12 +493,31 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="folder_size_format">%1$s / %2$s</string>
   <string name="appconfig_receiver_background_enabled">Não é possível parar o Syncthing enquanto ele estiver configurado para rodar em segundo plano.</string>
   <!--Titles used in the folder type dialog and folder type button in the folder activity-->
+  <string name="folder_type">Tipo de Pasta</string>
   <!--Displays the current folder type in the folder activity-->
+  <string name="folder_type_sendreceive">Enviar e Receber</string>
   <string name="folder_type_sendonly">Somente envio</string>
+  <string name="folder_type_receiveonly">Apenas Receber</string>
   <!--Folder type dialog descriptions for folder types-->
+  <string name="folder_type_sendreceive_description">A pasta vai simultaneamente enviar e receber alterações de dispositivos remotos.</string>
+  <string name="folder_type_sendonly_description">Arquivos estão protegidos de mudanças feitas em outros dispositivos, mas mudanças feitas neste dispositivo serão enviadas para os demais.</string>
+  <string name="folder_type_receiveonly_description">Arquivos são sincronizados a partir do cluster, mas quaisquer alterações feitas localmente não serão enviadas para os outros dispositivos.</string>
   <!--Titles used in the pull order dialog and pull order button in the folder activity-->
+  <string name="pull_order">Ordem de Download dos Arquivos</string>
   <!--Displays the current pull order type in the Folder activity-->
+  <string name="pull_order_type_random">Aleatória</string>
+  <string name="pull_order_type_alphabetic">Alfabética</string>
+  <string name="pull_order_type_smallestFirst">Menor primeiro</string>
+  <string name="pull_order_type_largestFirst">Maior Primeiro</string>
+  <string name="pull_order_type_oldestFirst">Mais antigo primeiro</string>
+  <string name="pull_order_type_newestFirst">Mais Novo Primeiro</string>
   <!--Pull order dialog descriptions for pull order types-->
+  <string name="pull_order_type_random_description">Descarregar arquivos em ordem aleatória.</string>
+  <string name="pull_order_type_alphabetic_description">Descarregar arquivos em ordem alfabética.</string>
+  <string name="pull_order_type_smallestFirst_description">Descarregar arquivos em ordem de tamanho. Primeiro os menores.</string>
+  <string name="pull_order_type_largestFirst_description">Baixa arquivos ordenados pelo tamanho do arquivo. Maiores primeiro, respectivamente.</string>
+  <string name="pull_order_type_oldestFirst_description">Descarregar arquivos em ordem de data de modificação. Primeiro os mais antigos.</string>
+  <string name="pull_order_type_newestFirst_description">Descarregar arquivos em ordem de data de modificação. Primeiro os mais novos.</string>
   <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
   <string name="maximum_age">Idade máxima</string>
   <string name="clean_out_after">Limpar depois de</string>
@@ -417,6 +529,7 @@ Por favor, nos avise sobre quaisquer problemas que você encontrar via Github.</
   <string name="keep_versions_description">Número de versões antigas de um arquivo a serem mantidas</string>
   <string name="simple_file_versioning_description">Os arquivos são renomeados com suas datas e movidos para o diretório .stversions quando substituídos ou apagados pelo Syncthing.</string>
   <string name="trashcan_versioning_description">Os arquivos são movidos para o diretório .stversions quando substituídos ou apagados pelo Syncthing.</string>
+  <string name="staggered_versioning_description">Arquivos são movidos para versões marcadas em uma pasta .stversions quando substituídos ou apagados pelo Syncthing. As versões são automaticamente apagadas se forem mais antigas que a idade máxima, ou se excederem o número de arquivos permitidos em um intervalo.\n\nOs seguintes intervalos são usados: para a primeira hora, uma versão é mantida a cada 30 segundos, para o primeiro dia, uma versão é mantida a cada hora, para os primeiros 30 dias, uma versão é mantida a cada dia, até a idade máxima onde uma versão é mantida a cada semana.</string>
   <string name="maximum_age_description">O número máximo de dias em que uma versão é guardada. (Use 0 para manter para sempre).</string>
   <string name="versions_path_description">Caminho do diretório onde as versões são salvas (deixe em branco para que seja o diretório padrão .stversions dentro da pasta compartilhada). </string>
   <string name="cleanout_after_description">O número de dias em que são mantidos os arquivos da lixeira. Zero significa para sempre.</string>

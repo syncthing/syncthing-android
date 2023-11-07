@@ -17,6 +17,7 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Oprávnění polohy (v pozadí)</string>
   <string name="location_permission_desc">Syncthing lze nastavit, aby docházelo k synchronizaci pouze na zvolených Wi-Fi sítích. K tomu potřebuje přístup k informacím o aktuálně připojené Wi-Fi, i pokud je aplikace vypnutá. Je tedy nutné udělit oprávnění. Informace nebudeme používat ke zjišťování Vaší polohy, navíc ukládáme pouze Vámi zadané Wi-Fi.\n\n Pokud si přejete tuto funkci zapnout, udělte oprávnění tlačítkem výše. Jinak je možné tento krok přeskočit.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Zpět</string>
   <string name="cont">Pokračovat</string>
@@ -198,7 +199,6 @@ Všechny zaznamenané chyby prosím hlašte přes Github.</string>
   <string name="category_debug">Ladění</string>
   <string name="category_experimental">Experimentální</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Podmínky spuštění</string>
   <string name="run_conditions_summary">Zvolte možnosti, kdy bude Syncthing spuštěn.</string>
   <string name="run_on_mobile_data_title">Spustit na mobilních datech</string>
   <string name="run_on_mobile_data_summary">Spouštět když je zařízení připojené prostřednictvím mobilní datové sítě. Varování: toto může spotřebovat mnoho dat z vašeho tarifu, pokud synchronizujete velká množství dat.</string>

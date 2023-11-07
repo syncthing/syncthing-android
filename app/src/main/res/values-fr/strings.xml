@@ -17,6 +17,7 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <!--Slide 3-->
   <string name="location_permission_title">Autorisation de géolocalisation (tâche de fond) </string>
   <string name="location_permission_desc">Syncthing peut être configuré pour se synchroniser uniquement sur les réseaux Wi-Fi sélectionnés. Pour ce faire, il doit rechercher le SSID du Wi-Fi actuellement connecté, également lorsque l\'application est fermée. Par conséquent, il faut une autorisation pour accéder à la position en arrière-plan. Ces informations ne sont pas utilisées pour rechercher votre position. Et les seules informations stockées sont le Wi-Fi que vous choisissez manuellement d\'ajouter à la liste - aucune autre donnée utilisateur n\'est stockée.\n\n Si vous souhaitez utiliser cette fonctionnalité, appuyez sur le bouton ci-dessus pour accorder les autorisations requises à Syncthing. Sinon, vous pouvez sauter cette étape. </string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Retour</string>
   <string name="cont">Continuer</string>
@@ -197,7 +198,6 @@ S\'il vous plaît, soumettez les problèmes que vous rencontrez via Github.</str
   <string name="category_debug">Debug</string>
   <string name="category_experimental">Expérimental</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Conditions d\'exécution</string>
   <string name="run_conditions_summary">Utilisez les options suivantes pour décider du moment où la synchronisation sera exécutée.</string>
   <string name="run_on_mobile_data_title">Exécuter en données mobiles (3G...)</string>
   <string name="run_on_mobile_data_summary">Exécuter lorsque l\'appareil est connecté via le réseau de données mobile. Attention cela peut consommer beaucoup de données de votre forfait mobile si vous synchronisez de grandes quantités de données.</string>

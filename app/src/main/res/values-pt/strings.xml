@@ -17,6 +17,7 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <!--Slide 3-->
   <string name="location_permission_title">Permissão de localização (em segundo plano)</string>
   <string name="location_permission_desc">O Syncthing pode ser configurado para fazer a sincronização somente quando está em determinadas ligações Wi-Fi. Para isso tem de procurar o SSID da ligação Wi-Fi corrente, até quando a aplicação está fechada. Portanto requer permissões para aceder à localização, em segundo plano. Essa informação não é usada para ver a sua localização. Para além disso, a única informação guardada é a identificação da rede Wi-Fi que adicionar manualmente à lista - não serão guardados quaisquer outros dados do utilizador.\n\nSe quiser usar esta funcionalidade, prima o botão acima para dar as permissões necessárias ao Syncthing. Caso contrário pode saltar este passo.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Retornar</string>
   <string name="cont">Continuar</string>
@@ -197,7 +198,6 @@ Reporte, através do Github, quaisquer problemas que encontre, por favor.</strin
   <string name="category_debug">Depuração</string>
   <string name="category_experimental">Experimental</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Condições de execução</string>
   <string name="run_conditions_summary">Use as opções seguintes para decidir quando o Syncthing vai ser executado.</string>
   <string name="run_on_mobile_data_title">Usar os dados móveis</string>
   <string name="run_on_mobile_data_summary">Correr quando o dispositivo estiver conectado através da rede de dados móveis. Aviso: Isso poderá consumir uma grande parte do plano de dados fornecido pelo seu operador se sincronizar grandes quantidades de dados.</string>

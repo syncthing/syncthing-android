@@ -17,6 +17,7 @@
   <!--Slide 3-->
   <string name="location_permission_title">Определение местоположения (в фоне)</string>
   <string name="location_permission_desc">Вы можете настроить Syncthing, чтобы синхронизация велась только в выбранных сетях Wi-Fi. Для поиска сетей, и только для этого, приложению требуется доступ к местоположению. Никакая другая информация о локации устройства не собирается и не сохраняется.\n\nЕсли вы хотите использовать эту функцию, нажмите кнопку выше и дайте Syncthing разрешение. Или просто пропустите этот шаг.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Продолжить</string>
@@ -198,7 +199,6 @@
   <string name="category_debug">Отладка</string>
   <string name="category_experimental">Экспериментальное</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Условия выполнения</string>
   <string name="run_conditions_summary">Определите условия, когда Syncthing должен работать.</string>
   <string name="run_on_mobile_data_title">Работать на мобильном Интернете</string>
   <string name="run_on_mobile_data_summary">Работать при подключении через мобильную сеть. Внимание! Так вы можете потратить большое количество платного трафика.</string>

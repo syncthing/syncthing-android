@@ -16,6 +16,7 @@
   <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
   <!--Slide 3-->
   <string name="location_permission_title">위치 권한(배경)</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">뒤로</string>
   <string name="cont">계속</string>
@@ -191,7 +192,6 @@
   <string name="category_debug">디버그</string>
   <string name="category_experimental">실험적인 기능</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">실행 조건</string>
   <string name="run_on_mobile_data_title">데이터 사용 시 작동</string>
   <string name="run_on_wifi_title">Wi-Fi 사용 시 작동</string>
   <string name="run_on_wifi_summary">기기가 무선 망에 연결되어 있을 때 작동합니다.</string>

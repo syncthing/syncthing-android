@@ -17,6 +17,7 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Locatierecht (achtergrond)</string>
   <string name="location_permission_desc">Syncthing kan worden ingesteld om alleen via geselecteerde wifi-netwerken te synchroniseren. Om dat te doen, moet het de ssid van het momenteel verbonden wifi-netwerk opzoeken, ook als de app is afgesloten. Syncthing heeft toestemming nodig om op de achtergrond de locatie op te zoeken. Deze informatie wordt niet gebruikt om úw locatie op te zoeken. De enige opgeslagen informatie is het door u gekozen wifi-netwerk om aan de lijst toe te voegen - er worden geen andere gebruikersgegevens opgeslagen.\n\nAls u deze functie wilt gebruiken, drukt u op de knop hierboven om Syncthing de vereiste rechten te verlenen. Anders kunt u deze stap overslaan.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Terug</string>
   <string name="cont">Doorgaan</string>
@@ -196,7 +197,6 @@ Meld eventuele problemen die u tegenkomt op onze GitHub.</string>
   <string name="category_debug">Foutopsporing</string>
   <string name="category_experimental">Experimenteel</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Uitvoervoorwaarden</string>
   <string name="run_conditions_summary">Gebruik de volgende opties om te bepalen wanneer Syncthing synchroniseert.</string>
   <string name="run_on_mobile_data_title">Synchroniseren via mobiel internet</string>
   <string name="run_on_mobile_data_summary">Synchroniseren als het apparaat verbonden is met een mobiele internetverbinding. Waarschuwing: dit kan leiden tot een hoog verbruik - mogelijk brengt uw provider hiervoor kosten in rekening.</string>

@@ -17,6 +17,7 @@
   <!--Slide 3-->
   <string name="location_permission_title">Дозвіл розташування (фоново)</string>
   <string name="location_permission_desc">Syncthing можна налаштувати синхронізувати лише у вибраних мережах Wi-Fi. Для цього потрібно взнати SSID поточного зʼєднання Wi-Fi, навіть при закритій програмі. Тому потрібен фоновий доступ до розташування. Ця інформація не використовується, щоб дізнатися Ваше місцерозташування. Єдина інформація, яка зберігається це Wi-Fi, яку Ви додаєте вручну до списку — інша користувацька інформація не зберігається.\n\n Якщо Ви хочете використовувати цю можливість, натисніть кнопку вище, щоб надати потрібні дозволи для Syncthing. В іншому випадку Ви можете пропустити цей крок.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Назад</string>
   <string name="cont">Продовжити</string>
@@ -198,7 +199,6 @@
   <string name="category_debug">Налагодження</string>
   <string name="category_experimental">Експериментальне</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Умови синхронізації</string>
   <string name="run_conditions_summary">Використовувати наступні параметри для визначення, коли Syncthing працюватиме.</string>
   <string name="run_on_mobile_data_title">Синхронізувати через мобільну мережу</string>
   <string name="run_on_mobile_data_summary">Синхронізувати, коли пристрій підключено до мобільної мережі. Увага: синхронізація великих обсягів інформації може використати значну частину трафіку з вашого мобільного тарифного плану.</string>

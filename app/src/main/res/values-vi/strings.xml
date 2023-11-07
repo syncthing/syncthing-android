@@ -17,6 +17,7 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Quyền vị trí (trong nền)</string>
   <string name="location_permission_desc">Syncthing có thể được thiết lập để chỉ đồng bộ hoá khi được kết nối đến các mạng Wi-Fi được chọn. Để làm vậy, nó cần tra cứu SSID của mạng Wi-Fi hiện được kết nối, và cả khi ứng dụng đã được đóng. Do đó nó yêu cầu quyền truy cập vị trí trong nền. Thông tin này không được sử dụng để tra cứu vị trí của bạn. Và thông tin duy nhất được lưu trữ đó là mạng Wi-Fi bạn chọn để thêm vào danh sách này theo cách thủ công - không có dữ liệu người dùng nào khác được lưu trữ.\n\nNếu bạn muốn sử dụng tính năng này, hãy nhấn nút ở trên để cấp quyền được yêu cầu cho Syncthing. Nếu không thì bạn có thể bỏ qua bước này.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Quay lại</string>
   <string name="cont">Tiếp tục</string>
@@ -195,7 +196,6 @@ Vui lòng báo cáo những vấn đề bạn gặp qua Github.</string>
   <string name="category_debug">Gỡ lỗi</string>
   <string name="category_experimental">Thực nghiệm</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Điều kiện chạy</string>
   <string name="run_conditions_summary">Sử dụng các tuỳ chọn sau để quyết định khi nào Syncthing sẽ chạy.</string>
   <string name="run_on_mobile_data_title">Chạy khi có dữ liệu di động</string>
   <string name="run_on_mobile_data_summary">Chạy khi thiết bị được kết nối qua mạng dữ liệu di động. Cảnh báo: Việc này có thể tiêu tốn rất nhiều dữ liệu trong gói dữ liệu di động của bạn nếu bạn đồng bộ lượng dữ liệu lớn.</string>

@@ -17,6 +17,7 @@ Ver venleg å rapporter problem som måtte oppstå via Github.</string>
   <!--Slide 3-->
   <string name="location_permission_title">Tilgang til lokasjonsteneste (bakgrunn)</string>
   <string name="location_permission_desc">Syncthing kan setjast opp til å kun synkronisera på enkelte trådlause nettverk. Får å gjera dette må Syncthing leita opp SSID-en til det trådlause nettverket du er tilknytt, òg når appen er stengt. Vi treng difor løyve til å, i bakgrunnen, henta ut kor du er lokalisert. Denne informasjonen vert ikkje nytta til å leita opp kor du er. Den einaste daten som vert lagra er dei trådlause nettverka som manuelt vel å leggja til lista di - ingen annan data vert lagra.\n\n Om du ynskjer å nytta denne funksjonen, trykk på knappen over for å gje løyvene som Syncthing treng for dette. Om du ynskjer kan du hoppa over dette steget.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Attende</string>
   <string name="cont">Hald fram</string>

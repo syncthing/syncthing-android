@@ -15,6 +15,7 @@ Por favor, informe de cualquier problema que encuentre a través de Github.</str
   <string name="storage_permission_title">Permiso de almacenamiento</string>
   <string name="storage_permission_desc">Syncthing necesita acceder a su almacenamiento para hacer la sincronización de archivos.</string>
   <!--Slide 3-->
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Retroceder</string>
   <string name="cont">Continuar</string>

@@ -17,6 +17,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Slide 3-->
   <string name="location_permission_title">Tilladelse til lokalisering (baggrund)</string>
   <string name="location_permission_desc">Syncthing kan konfigureres til kun at synkronisere på udvalgte Wi-Fi-netværk. For at gøre det skal den slå SSID\'et for det aktuelt tilsluttede Wi-Fi op, også når appen er lukket. Derfor kræver den tilladelse til at få adgang til placeringen i baggrunden. Disse oplysninger bruges ikke til at slå din placering op. Og de eneste lagrede oplysninger er det Wi-Fi, du manuelt vælger at tilføje til listen - ingen andre brugerdata gemmes. \n\n Hvis du vil bruge denne funktion, skal du trykke på knappen ovenfor for at give Syncthing de nødvendige tilladelser. Ellers kan du springe dette trin over.</string>
+  <!--Slide 4-->
   <!--Generic texts used everywhere-->
   <string name="back">Tilbage</string>
   <string name="cont">Fortsæt</string>
@@ -103,7 +104,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <!--Title for current RAM usage-->
   <string name="ram_usage">RAM forbrug</string>
   <!--Title for announce server status-->
-  <string name="announce_server">Announce Server</string>
+  <string name="announce_server">Announce-server</string>
   <string name="restart">Genstart</string>
   <string name="dialog_confirm_restart">Ønsker du at genstarte Syncthing?</string>
   <!--FolderActivity-->
@@ -184,7 +185,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="toast_root_denied">Fik ikke root-rettigheder</string>
   <!--WebGuiActivity-->
   <!--Title of the web gui activity-->
-  <string name="web_gui_title">Web GUI</string>
+  <string name="web_gui_title">Grafisk brugerflade på web</string>
   <!--Text for WebGuiActivity loading view-->
   <string name="web_gui_loading">Venter på grafisk brugerflade</string>
   <!--SettingsFragment-->
@@ -196,7 +197,6 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="category_debug">Fejlsøgning</string>
   <string name="category_experimental">Eksperimentel</string>
   <!--Preference screen - Run conditions-->
-  <string name="run_conditions_title">Betingelser for kørsel</string>
   <string name="run_conditions_summary">Brug følgende indstillinger til at bestemme, hvornår Syncthing skal køre.</string>
   <string name="run_on_mobile_data_title">Kør på mobildata</string>
   <string name="run_on_mobile_data_summary">Kør, når enheden er forbundet via det mobile datanetværk. Advarsel: Dette kan forbruge meget data fra din mobiloperatørs dataabonnement, hvis du synkroniserer store mængder data.</string>
@@ -223,7 +223,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
   <string name="respect_master_sync_title">Respekter Androids indstillinger for \'Automatisk datasynkronisering\'.</string>
   <string name="respect_master_sync_summary">Deaktiver Syncthing, når knappen \"Automatisk datasynkronisation\" er slået fra.</string>
   <string name="run_in_flight_mode_title">Kør, mens enheden er i flytilstand.</string>
-  <string name="run_in_flight_mode_summary">Aktiver, hvis din enhed har problemer med at registrere manuelle Wi-Fi-forbindelser i flytilstand.</string>
+  <string name="run_in_flight_mode_summary">Aktivér, hvis din enhed har problemer med at registrere manuelle Wi-Fi-forbindelser i flytilstand.</string>
   <string name="service_settings_title">Tjenesteindstilling</string>
   <string name="service_settings_summary">Kør Syncthing som en tjeneste. Tilføjer en vedvarende notifikation for at forhindre, at den bliver afsluttet af Android. Hvis du markerer denne indstilling, starter Syncthing ved opstart af operativsystemet.</string>
   <string name="run_as_background_service">Start tjenesten automatisk ved opstart</string>
@@ -269,14 +269,14 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <item>Ekstern</item>
   </string-array>
   <string name="device_name">Enhedens navn</string>
-  <string name="listen_address">Sync Protocol Listen Addresser</string>
-  <string name="max_recv_kbps">Indgående Rate Limit (KiB/s) </string>
-  <string name="max_send_kbps">Udgående Rate Limit (KiB/s)</string>
+  <string name="listen_address">Sync Protocol Listen-adresser</string>
+  <string name="max_recv_kbps">Indgående hastighedsgrænse (KiB/s) </string>
+  <string name="max_send_kbps">Udgående hastighedsgrænse (KiB/s)</string>
   <string name="global_announce_enabled">Global opdagelse</string>
   <string name="local_announce_enabled">Lokal opdagelse</string>
-  <string name="enable_nat_traversal">Aktiver NAT Traversal</string>
-  <string name="global_announce_server">Global Opdagelses Servere</string>
-  <string name="enable_relaying">Aktiver Relaying</string>
+  <string name="enable_nat_traversal">Aktivér NAT Traversal</string>
+  <string name="global_announce_server">Global Opdagelse-servere</string>
+  <string name="enable_relaying">Aktivér Relaying</string>
   <string name="usage_reporting">Anonym forbrugsrapportering</string>
   <string name="gui_address">GUI Listen Addresser</string>
   <!--Titles for the preference to undo ignored devices and folders-->
@@ -478,7 +478,7 @@ Vær venlig at rapportere ethvert problem, du støder på, via Github. </string>
     <item>TiB/s</item>
   </string-array>
   <!--Possible folder states-->
-  <string name="state_idle">Inaktiv</string>
+  <string name="state_idle">Dvale</string>
   <string name="state_scanning">Scanner</string>
   <string name="state_syncing">Synkroniserer (%1$d%%)</string>
   <string name="state_error">Fejl</string>
