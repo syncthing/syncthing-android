@@ -72,7 +72,6 @@
     <plurals name="files">
         <item quantity="one">%1$d / %2$d soubor</item>
         <item quantity="few">%1$d / %2$d souborů</item>
-        <item quantity="many">%1$d / %2$d souborů</item>
         <item quantity="other">%1$d / %2$d souborů</item>
     </plurals>
     <string name="override_changes">Vynutit změny</string>
@@ -406,14 +405,12 @@
     <plurals name="copy_success_partially">
         <item quantity="one">%1$d soubor zkopírován do složky \"%2$s\", %3$d už existuje</item>
         <item quantity="few">%1$d soubory zkopírovány do složky \"%2$s\", %3$d už existuje</item>
-        <item quantity="many">%1$d souborů zkopírováno do složky \"%2$s\", %3$d už existuje</item>
         <item quantity="other">%1$d souborů zkopírováno do složky \"%2$s\", %3$d už existuje</item>
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
         <item quantity="one">%1$d soubor zkopírován do složky \"%2$s\"</item>
         <item quantity="few">%1$d soubory zkopírovány do složky \"%2$s\"</item>
-        <item quantity="many">%1$d souborů zkopírováno do složky \"%2$s\"</item>
         <item quantity="other">%1$d souborů zkopírováno do složky \"%2$s\"</item>
     </plurals>
     <!--Copy exception toast-->
@@ -423,7 +420,6 @@
     <plurals name="file_name_title">
         <item quantity="one">Název souboru</item>
         <item quantity="few">Názvy souborů</item>
-        <item quantity="many">Seznam souborů</item>
         <item quantity="other">Seznam souborů</item>
     </plurals>
     <!--Sub Folder title-->
@@ -564,4 +560,17 @@
     <string name="browse">Procházet</string>
     <string name="no_sub_folder_is_selected">Není vybrána žádná podsložka</string>
     <string name="share_device_id_chooser">Sdílet ID zařízení s</string>
+    <string name="api_level_30_desc"></string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="run_conditions_title"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
+    <string name="dialog_all_files_access_not_supported"></string>
+    <string name="enable_notification_permission"></string>
+    <string name="api_level_30_title"></string>
+    <string name="toast_api_level_30_must_reset"></string>
+    <string name="api_level_30_button"></string>
+    <string name="notification_permission_title"></string>
+    <string name="require_notification_permission_desc"></string>
 </resources>
