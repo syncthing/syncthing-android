@@ -14,12 +14,19 @@
     <!--Slide 2-->
     <string name="storage_permission_title">Biltegiratzeko baimena</string>
     <string name="storage_permission_desc">Syncthing-ek zure biltegira sartu behar du fitxategiak sinkronizatzeko.</string>
+    <string name="dialog_all_files_access_not_supported">Zure gailuak ez du fitxategi guztiak atzitzea onartzen</string>
     <!--Slide 3-->
     <string name="location_permission_title">Kokapen baimena (atzeko planoa)</string>
     <string name="location_permission_desc">Sintetizazioa hautatutako Wi-Fi sareetan soilik sinkronizatzeko konfigura daiteke. Horretarako, unean konektatutako Wi-Fi SSIDa bilatu behar du, aplikazioa itxita dagoenean ere. Hori dela eta, atzealdeko kokapenera sartzeko baimena behar da. Informazio hau ez da zure kokapena bilatzeko erabiltzen. Biltegiratutako informazio bakarra zerrendan eskuz gehitzea aukeratu duzun Wi-Fi da. Ez da beste erabiltzaile daturik gordetzen.
 \n
 \nFuntzio hau erabili nahi baduzu, sakatu goiko botoia Syncthing-i beharrezko baimenak emateko. Bestela, urrats hau salta dezakezu.</string>
     <!--Slide 4-->
+    <string name="api_level_30_title">Eguneraketa informazioa</string>
+    <string name="api_level_30_desc">Azken eguneraketarekin syncthing-android API 30 mailara zuzenduta dago, Android-en fitxategi-sistemaren portaera aldatzen duena. Berri onak: Android 11 eta berriagoetan orain kanpoko SD txartelean idazteko gai da. Berri txarrak: baliteke motelagoa izatea eta bide batzuk ezkutatuta egongo dira. Ezkutuko bide hauek direla eta, datu-basea berrezarri behar da datuak gal ez daitezen. Horrek zure datu guzttiak berriro zifratuko ditu, baina ez dira urruneko gailuetatik transferitu behar izango. Gatazkak ere sor ditzake eta duela gutxi ezabatu diren fitxategiak berriro sor ditzake une honetan guztiz sinkronizatuta ez bazaude. Daukazun datuen arabera, prozesu honek baliabide asko behar ditu, hau da, denbora pixka bat behar du eta bateria asko erabiltzen du.
+\n
+\nSakatu beheko botoia datu-basea berrezartzeko eta sinkronizatzen hasteko.</string>
+    <string name="api_level_30_button">Berrezarri datu-basea</string>
+    <string name="toast_api_level_30_must_reset">Datu-basea berrezartzeko botoian klik eginez soilik jarraitu dezakezu.</string>
     <!--Generic texts used everywhere-->
     <string name="back">Atzera</string>
     <string name="cont">Jarraitu</string>
@@ -203,6 +210,7 @@
     <string name="category_debug">Arazketa</string>
     <string name="category_experimental">Esperimentala</string>
     <!--Preference screen - Run conditions-->
+    <string name="run_conditions_title">Gaitu exekuzio baldintzak</string>
     <string name="run_conditions_summary">Erabili aukera hauek Syncthing noiz exekutatuko den erabakitzeko.</string>
     <string name="run_on_mobile_data_title">Exekutatu datu mugikorrak erabiliz</string>
     <string name="run_on_mobile_data_summary">Gailua datu mugikorren sarearen bidez konektatuta dagoenean exekutatu. Oharra: horrek operadore mugikorraren datu-planeko datu asko kontsumi ditzake datu-kopuru handiak sinkronizatzen baditu.</string>
@@ -554,4 +562,7 @@
     <string name="browse">Arakatu</string>
     <string name="no_sub_folder_is_selected">Ez da azpikarpetarik aukeratu</string>
     <string name="share_device_id_chooser">Partekatu gailuaren IDa honekin</string>
+    <string name="require_notification_permission_desc">Beharrezkoa da gailuen konexio berriei, karpetak partekatzeko eskaerei eta abarrei buruzko jakinarazpenak erakusteko.</string>
+    <string name="notification_permission_title">Jakinarazpen-baimena</string>
+    <string name="enable_notification_permission">Gaitu jakinarazpen-baimena</string>
 </resources>
