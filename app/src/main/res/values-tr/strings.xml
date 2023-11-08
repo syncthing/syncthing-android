@@ -567,8 +567,4 @@
     <string name="require_notification_permission_desc">Yeni cihaz bağlantıları, klasör paylaşım istekleri vb. ile ilgili bildirimlerin gösterilmesi için gereklidir.</string>
     <string name="notification_permission_title">Bildirim izni</string>
     <string name="enable_notification_permission">Bildirim İznini etkinleştir</string>
-    <string name="issue_tracker_url" translatable="false"></string>
-    <string name="privacy_policy_url" translatable="false"></string>
-    <string name="donate_url" translatable="false"></string>
-    <string name="syncthing_forum_url" translatable="false"></string>
 </resources>

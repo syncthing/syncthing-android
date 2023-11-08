@@ -570,8 +570,4 @@
     <string name="require_notification_permission_desc">Wymagane do wyświetlania powiadomień dotyczących nowych połączeń urządzeń, żądań udostępnienia folderów itp.</string>
     <string name="notification_permission_title">Zezwolenie na powiadomienia</string>
     <string name="enable_notification_permission">Włącz zezwolenie na powiadomienia</string>
-    <string name="issue_tracker_url" translatable="false"></string>
-    <string name="privacy_policy_url" translatable="false"></string>
-    <string name="donate_url" translatable="false"></string>
-    <string name="syncthing_forum_url" translatable="false"></string>
 </resources>
