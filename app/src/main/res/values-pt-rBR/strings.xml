@@ -53,7 +53,7 @@
     <string name="dialog_disable_battery_optimization_title">Otimização de bateria</string>
     <string name="dialog_disable_battery_optimization_message">O Android pode parar a sincronização após algum tempo. Para evitar isso, desabilite a otimização de bateria.
 \n
-\nAlguns dispositivos possuem  aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas de exceções deles.</string>
+\nAlguns dispositivos possuem aplicativos para \"matar\" tarefas. Você também deve adicionar o Syncthing às listas de exceções deles.</string>
     <string name="dialog_disable_battery_optimization_later">Depois</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Não mostrar novamente</string>
     <string name="dialog_disable_battery_optimization_turn_off">Desligar para o Syncthing</string>
@@ -560,4 +560,17 @@
     <string name="browse">Navegar</string>
     <string name="no_sub_folder_is_selected">Nenhuma subpasta selecionada</string>
     <string name="share_device_id_chooser">Compartilhe ID do dispositivo com</string>
+    <string name="api_level_30_desc"></string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="run_conditions_title"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
+    <string name="dialog_all_files_access_not_supported"></string>
+    <string name="enable_notification_permission"></string>
+    <string name="api_level_30_title"></string>
+    <string name="toast_api_level_30_must_reset"></string>
+    <string name="api_level_30_button"></string>
+    <string name="notification_permission_title"></string>
+    <string name="require_notification_permission_desc"></string>
 </resources>
