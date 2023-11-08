@@ -417,7 +417,7 @@
         <item quantity="one">%1$d plik skopiowano do \"%2$s\"</item>
         <item quantity="few">%1$dplików skopiowano do folderu \"%2$s\"</item>
         <item quantity="many">%1$dplików skopiowano do folderu \"%2$s\"</item>
-        <item quantity="other">%1$d pliki skopiowano do folderu \"%2$s\"</item>
+        <item quantity="other">%1$dplików skopiowano do folderu \"%2$s\"</item>
     </plurals>
     <!--Copy exception toast-->
     <string name="copy_exception">Wystąpił błąd podczas udostępniania. Sprawdź dzienniki aplikacji</string>
@@ -570,4 +570,8 @@
     <string name="require_notification_permission_desc">Wymagane do wyświetlania powiadomień dotyczących nowych połączeń urządzeń, żądań udostępnienia folderów itp.</string>
     <string name="notification_permission_title">Zezwolenie na powiadomienia</string>
     <string name="enable_notification_permission">Włącz zezwolenie na powiadomienia</string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
 </resources>
