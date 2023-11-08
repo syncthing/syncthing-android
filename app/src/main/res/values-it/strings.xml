@@ -560,4 +560,17 @@
     <string name="browse">Sfoglia</string>
     <string name="no_sub_folder_is_selected">Nessuna sottocartella selezionata</string>
     <string name="share_device_id_chooser">Condividi ID dispositivo con</string>
+    <string name="api_level_30_desc"></string>
+    <string name="issue_tracker_url" translatable="false"></string>
+    <string name="privacy_policy_url" translatable="false"></string>
+    <string name="donate_url" translatable="false"></string>
+    <string name="run_conditions_title"></string>
+    <string name="syncthing_forum_url" translatable="false"></string>
+    <string name="dialog_all_files_access_not_supported"></string>
+    <string name="enable_notification_permission"></string>
+    <string name="api_level_30_title"></string>
+    <string name="toast_api_level_30_must_reset"></string>
+    <string name="api_level_30_button"></string>
+    <string name="notification_permission_title"></string>
+    <string name="require_notification_permission_desc"></string>
 </resources>
