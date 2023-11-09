@@ -552,4 +552,8 @@
     <string name="browse">Durchsuchen</string>
     <string name="no_sub_folder_is_selected">Kein Unterordner ausgewählt</string>
     <string name="share_device_id_chooser">Geräte-ID teilen mit</string>
+    <string name="run_conditions_title">Betriebsbedingungen benutzen</string>
+    <string name="enable_notification_permission">Berechtigung für Benachrichtigungen erteilen</string>
+    <string name="api_level_30_button">Datenbank zurücksetzen</string>
+    <string name="notification_permission_title">Berechtigung für Benachrichtigungen</string>
 </resources>
