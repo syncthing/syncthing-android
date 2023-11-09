@@ -556,4 +556,5 @@
     <string name="enable_notification_permission">Berechtigung für Benachrichtigungen erteilen</string>
     <string name="api_level_30_button">Datenbank zurücksetzen</string>
     <string name="notification_permission_title">Berechtigung für Benachrichtigungen</string>
+    <string name="dialog_all_files_access_not_supported">Das Gerät unterstützt nicht alle Dateizugriffe</string>
 </resources>
