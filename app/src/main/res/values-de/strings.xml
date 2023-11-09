@@ -41,7 +41,9 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Geräte-ID senden an</string>
     <string name="usage_reporting_dialog_title">Anonymen Nutzungsbericht erlauben\?</string>
-    <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, wirst du erneut um Erlaubnis gefragt. Die gesammelten Statistiken sind unter https://data.syncthing.net zu finden.</string>
+    <string name="usage_reporting_dialog_description">Der verschlüsselte Nutzungsbericht wird täglich versendet. Er wird verwendet, um Statistiken über die genutzten Plattformen, Verzeichnisgrößen und Syncthing-Versionen zu erstellen. Wenn sich der übermittelte Datenumfang ändert, wirst du erneut um Erlaubnis gefragt.
+\n
+\nDie gesammelten Statistiken sind unter https://data.syncthing.net zu finden.</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="open_website">Webseite öffnen</string>
@@ -53,8 +55,8 @@
 \n
 \nEinige Geräte haben Apps vorinstalliert, welche Hintergrundaktivitäten unterbinden. Syncthing sollte deshalb auch dort in die Ausnahmeliste eingetragen werden.</string>
     <string name="dialog_disable_battery_optimization_later">Später</string>
-    <string name="dialog_disable_battery_optimization_dont_show_again">Nicht mehr zeigen.</string>
-    <string name="dialog_disable_battery_optimization_turn_off">Für Syncthing abstellen.</string>
+    <string name="dialog_disable_battery_optimization_dont_show_again">Nicht mehr zeigen</string>
+    <string name="dialog_disable_battery_optimization_turn_off">Für Syncthing abstellen</string>
     <string name="dialog_disable_battery_optimizations_not_supported">Dein Gerät unterstützt das Deaktivieren der Akkulaufzeit-Optimierung nicht</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
@@ -94,10 +96,10 @@
     <string name="upload_title">Hochladen</string>
     <!--StatusFragment-->
     <string name="status_fragment_title">Status</string>
-    <string name="syncthing_starting">Syncthing startet</string>
-    <string name="syncthing_running">Syncthing arbeitet</string>
-    <string name="syncthing_not_running">Syncthing läuft gerade nicht</string>
-    <string name="syncthing_has_crashed">Syncthing ist abgestürzt</string>
+    <string name="syncthing_starting">Syncthing startet.</string>
+    <string name="syncthing_running">Syncthing läuft.</string>
+    <string name="syncthing_not_running">Syncthing läuft gerade nicht.</string>
+    <string name="syncthing_has_crashed">Syncthing ist abgestürzt.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
     <string name="download_title_colon">"Herunterladen: "</string>
@@ -184,7 +186,7 @@
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">QR-Code scannen</string>
     <!--Toast show if we could not get root permissions-->
-    <string name="toast_root_denied">Keine Root-Rechte erteilt.</string>
+    <string name="toast_root_denied">Keine Root-Rechte erteilt</string>
     <!--WebGuiActivity-->
     <!--Title of the web gui activity-->
     <string name="web_gui_title">Weboberfläche</string>
@@ -291,18 +293,18 @@
     <!--Experimental options-->
     <string name="use_proxy">Über einen Proxy verbinden</string>
     <string name="do_not_use_proxy">Kein Proxy eingestellt.</string>
-    <string name="keep_wakelock_while_binary_running">Prozessor wach halten, während Syncthing läuft.</string>
+    <string name="keep_wakelock_while_binary_running">Prozessor wach halten, während Syncthing läuft</string>
     <string name="keep_wakelock_while_binary_running_summary">Nutze diese Einstellung, wenn du unerwartete Verbindungsabbrüche feststellst, während du im Akkubetrieb arbeitest. Das wird zu einem erhöhten Energieverbrauch führen.</string>
     <string name="use_tor_title">Tor benutzen</string>
     <string name="use_tor_summary">Der gesamte Netzwerkverkehr wird zur Erhöhung der Privatsphäre über Tor geleitet. Benötigt Orbot. Deaktiviert die Proxy-Optionen.</string>
     <string name="socks_proxy_address_title">SOCKS5-Proxy</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
     <!--Toast after entering invalid socks proxy address-->
-    <string name="toast_invalid_socks_proxy_address">Die Eingabe entspricht nicht der Form \'socks5://[IP/HOSTNAME]:[PORT]\'.</string>
+    <string name="toast_invalid_socks_proxy_address">Die Eingabe entspricht nicht der Form \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="http_proxy_address_title">HTTP(S)-Proxy</string>
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
-    <string name="toast_invalid_http_proxy_address">Die Eingabe entspricht nicht der Form \'http://[IP/HOSTNAME]:[PORT]\'.</string>
+    <string name="toast_invalid_http_proxy_address">Die Eingabe entspricht nicht der Form \'http://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="use_legacy_hashing_title">Veraltetes Hashing verwenden</string>
     <string name="use_legacy_hashing_summary">Aus Gründen der Abwärtskompatibilität soll Syncthing die alten Hashfunktionen verwenden</string>
     <!--Dialog shown before config export-->
@@ -380,7 +382,7 @@
     <string name="view_android_log">Android-Systemprotokoll einsehen</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Syncthing-Protokoll einsehen</string>
-    <string name="retrieving_logs">Rufe Protokolle ab...</string>
+    <string name="retrieving_logs">Rufe Protokolle ab…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Teilen</string>
     <!--ShareActivity-->
@@ -533,7 +535,7 @@
     <string name="maximum_age_description">Die längste Zeit, die alte Versionen vorgehalten werden (in Tagen, 0 um alte Versionen für immer zu behalten).</string>
     <string name="versions_path_description">Pfad, in dem Versionen gespeichert werden sollen (leer lassen, wenn das voreingestellte .stversions-Verzeichnis im freigegebenen Ordner verwendet werden soll).</string>
     <string name="cleanout_after_description">Dauer in Tagen für welche die Dateien aufgehoben werden sollen. 0 bedeutet für immer.</string>
-    <string name="external_versioning_description">Der erste Kommandozeilenparameter ist der Ordnerpfad und der zweite Parameter ist der relative Pfad innerhalb des Ordners</string>
+    <string name="external_versioning_description">Der erste Kommandozeilenparameter ist der Ordnerpfad und der zweite Parameter ist der relative Pfad innerhalb des Ordners.</string>
     <string name="no_versioning_description">Dateiversionierungstyp auswählen, um Dateiversionierung zu aktivieren.</string>
     <!--Displays the current file versioning type in the Folder activity-->
     <string name="type_simple">Typ: Einfach</string>
@@ -548,7 +550,7 @@
     <string name="simple_versioning_info">Versionen behalten: %1$s</string>
     <string name="show_device_id">Geräte-ID anzeigen</string>
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
-    <string name="could_not_access_deviceid">Kein Zugriff auf die Geräte-ID möglich</string>
+    <string name="could_not_access_deviceid">Kein Zugriff auf die Geräte-ID möglich.</string>
     <string name="browse">Durchsuchen</string>
     <string name="no_sub_folder_is_selected">Kein Unterordner ausgewählt</string>
     <string name="share_device_id_chooser">Geräte-ID teilen mit</string>
@@ -556,5 +558,5 @@
     <string name="enable_notification_permission">Berechtigung für Benachrichtigungen erteilen</string>
     <string name="api_level_30_button">Datenbank zurücksetzen</string>
     <string name="notification_permission_title">Berechtigung für Benachrichtigungen</string>
-    <string name="dialog_all_files_access_not_supported">Dein Gerät unterstützt nicht alle Dateizugriffe</string>
+    <string name="dialog_all_files_access_not_supported">Dein Gerät unterstützt den vollwertigen Dateizugriff nicht</string>
 </resources>
