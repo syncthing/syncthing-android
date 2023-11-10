@@ -13,7 +13,7 @@
 \n请通过 GitHub 报告任何你遇到的问题。</string>
     <!--Slide 2-->
     <string name="storage_permission_title">存储权限</string>
-    <string name="storage_permission_desc">Syncthing 需要获取读写存储设备权限以进行同步操作</string>
+    <string name="storage_permission_desc">Syncthing 需要存储权限以进行同步操作。</string>
     <!--Slide 3-->
     <string name="location_permission_title">位置权限（后台）</string>
     <string name="location_permission_desc">Syncthing 可被配置为仅在所选的 Wi-Fi 网络上进行同步。要做到这一点，它需要查找当前连接Wi-Fi 的 SSID，也需要在应用关闭时这么做。因此，它需要在后台访问位置的权限。此信息不用于查找您的位置。唯一存储的信息是你手动添加到列表中的 Wi-Fi — 不会存储其他用户数据。
@@ -40,10 +40,10 @@
     <string name="share_device_id">分享设备标识</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">发送设备标识至</string>
-    <string name="usage_reporting_dialog_title">允许发送匿名使用报告吗</string>
-    <string name="usage_reporting_dialog_description">每天发送加密过的使用情况报告。它被用来跟踪在何种平台、文件夹大小和应用程序的版本。如果报告所需收集的数据有改变，您将会再次看到本提醒对话框。
+    <string name="usage_reporting_dialog_title">允许发送匿名使用报告吗？</string>
+    <string name="usage_reporting_dialog_description">每天发送加密过的使用情况报告。它被用来跟踪在何种平台使用、文件夹大小和应用程序的版本。如果报告所需收集的数据有改变，您将会再次看到本提醒对话框。
 \n
-\n汇总统计数据公开于 https://data.syncthing.net</string>
+\n汇总统计数据公开于 https://data.syncthing.net。</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="open_website">打开主页</string>
@@ -60,7 +60,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">您的设备不支持禁用电池优化</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">正在加载...</string>
+    <string name="api_loading">正在加…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">正在生成安全密钥。这可能需要一段时间，请稍等。</string>
     <string name="syncthing_loading_slow_message">Syncthing 加载时间过长。使用日志检查是否有错误。</string>
@@ -95,10 +95,10 @@
     <string name="upload_title">上传速度</string>
     <!--StatusFragment-->
     <string name="status_fragment_title">状态</string>
-    <string name="syncthing_starting">正在启动 Syncthing</string>
+    <string name="syncthing_starting">正在启动 Syncthing。</string>
     <string name="syncthing_running">Syncthing 正在运行...</string>
     <string name="syncthing_not_running">Syncthing 未运行...</string>
-    <string name="syncthing_has_crashed">Syncthing 已崩溃</string>
+    <string name="syncthing_has_crashed">Syncthing 已崩溃。</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
     <string name="download_title_colon">"下载： "</string>
@@ -142,9 +142,9 @@
     <string name="folder_path_required">文件夹路径不得为空</string>
     <string name="dialog_discard_changes">放弃所做的更改？</string>
     <!--Summary shown if we only have readonly access to the folder path-->
-    <string name="folder_path_readonly">您的系统版本只能给 Syncthing 提供到指定文件夹的只读访问</string>
+    <string name="folder_path_readonly">您的系统版本仅授予 Syncthing 对指定文件夹的只读访问权。</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
-    <string name="folder_path_readwrite">您的系统版本可以给 Syncthing 提供到指定文件夹的读写访问权限</string>
+    <string name="folder_path_readwrite">您的系统版本授予Syncthing 到指定文件夹的读写访问权限。</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">抱歉。所选文件夹无法使用。请选择一个位于内部或外部存储的文件夹。</string>
     <string name="ignore_patterns">忽略列表</string>
@@ -209,12 +209,12 @@
     <string name="run_on_metered_wifi_summary">当设备连接到计量 Wi-Fi 网络时运行，如热点或网络共享（Tethering）。注意：如果你要同步大量数据，此选项会消耗你数据套餐里很多流量。</string>
     <string name="run_on_whitelisted_wifi_title">在指定 Wi-Fi 网络下运行</string>
     <string name="run_on_whitelisted_wifi_networks">只在指定的 Wi-Fi 网络下运行：%1$s</string>
-    <string name="run_on_all_wifi_networks">在所有 Wi-Fi 连接下运行</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开 Wi-Fi 来选择网络</string>
+    <string name="run_on_all_wifi_networks">在所有 Wi-Fi 网络下运行。</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">请打开 Wi-Fi 来选择网络。</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">要把它加入列表，请连接到一个 Wi-Fi 网络。</string>
-    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">你需要提供位置权限才能使用本功能</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">你需要提供位置权限才能使用本功能。</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要权限</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">从 Android 8.1 开始，需要位置访问权限才能读取 Wi-Fi 的名称。只有你获取了此权限时才能使用此功能。</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">从 Android 8.1 开始，需要位置访问权限才能读取 Wi-Fi 名称。只有你授予此权限时才能使用此功能。</string>
     <string name="power_source_title">处于该设备供电方式时运行</string>
     <string-array name="power_source_entries">
         <item>交流电源或电池电量。</item>
@@ -222,7 +222,7 @@
         <item>电池电量。</item>
     </string-array>
     <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
-    <string name="respect_battery_saving_summary">打开省电模式时禁用 Syncthing</string>
+    <string name="respect_battery_saving_summary">打开省电模式时禁用 Syncthing。</string>
     <string name="respect_master_sync_title">遵从安卓系统“自动同步数据”的设置</string>
     <string name="respect_master_sync_summary">当快速设置图块“自动同步数据”切换为关闭时禁用 Syncthing。</string>
     <string name="run_in_flight_mode_title">在飞行模式下运行</string>
@@ -291,7 +291,7 @@
     <string name="invalid_integer_value" tools:ignore="PluralsCandidate">输入值无效。请输入介于 %1$d 和 %2$d 之间的值。</string>
     <!--Experimental options-->
     <string name="use_proxy">使用代理连接</string>
-    <string name="do_not_use_proxy">未设置代理</string>
+    <string name="do_not_use_proxy">未设置代理。</string>
     <string name="keep_wakelock_while_binary_running">当 Syncthing 正在运行时保持 CPU 唤醒</string>
     <string name="keep_wakelock_while_binary_running_summary">使用此设置如果您在电池上运行时遇到意外的断开连接。这将会导致电量消耗的增加。</string>
     <string name="use_tor_title">使用 Tor</string>
@@ -327,13 +327,15 @@
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_database_title">重置数据库</string>
     <!--Syncthing was reset-->
-    <string name="st_reset_database_question">该操作仅应在服务人员的建议下执行。你确定要清空 Syncthing 的数据库吗？</string>
+    <string name="st_reset_database_question">该操作应仅在支持人员的建议下执行。
+\n你确定要清空 Syncthing 的数据库吗？</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">重置 Syncthing 数据库完成</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">重置增量索引</string>
     <!--Syncthing was reset-->
-    <string name="st_reset_deltas_question">该操作仅应在服务人员的建议下执行。你确定要清空 Syncthing 的增量索引吗？</string>
+    <string name="st_reset_deltas_question">该操作应仅在支持人员的建议下执行。
+\n你确定要清空 Syncthing 的增量索引吗？</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">重置 Syncthing 的增量索引成功</string>
     <string name="category_about">关于</string>
@@ -528,7 +530,7 @@
 \n保留的历史版本会遵循以下条件：最近一小时内的历史版本，更新间隔小于30秒的仅保留一份。最近一天内的历史版本，更新间隔小于一小时的仅保留一份。最近30天内的历史版本，更新间隔小于一天的仅保留一份。距离现在超过30天且小于最长保留时间的，更新间隔小于一周的仅保留一份。</string>
     <string name="maximum_age_description">历史版本保留的最长天数（0 为永久保存）。</string>
     <string name="versions_path_description">历史版本储存路径(留空则会默认存储在共享文件夹中的 .stversions 目录)。</string>
-    <string name="cleanout_after_description">文件保存在回收站的天数。零表示永久。</string>
+    <string name="cleanout_after_description">文件保存在回收站的天数。零表示永久</string>
     <string name="external_versioning_description">命令行的第一个参数是文件夹的路径，第二个参数是文件夹内的相对路径。</string>
     <string name="no_versioning_description">选择要启用的版本控制类型。</string>
     <!--Displays the current file versioning type in the Folder activity-->
@@ -548,4 +550,15 @@
     <string name="browse">浏览</string>
     <string name="no_sub_folder_is_selected">未选中子文件夹</string>
     <string name="share_device_id_chooser">共享设备 ID 与</string>
+    <string name="api_level_30_desc">在最新升级后，syncthing-android 的目标 API 版本是 30，这会改变 Android 文件系统的行为。好消息：在 Android 11 及以上版本中，现在可以写入外部 SD 卡了。坏消息：速度可能斌满，且某些路径会被隐藏。由于这些隐藏的路径，需要重设数据库防止数据损失。这会导致所有数据被重新哈希，但无需从远程设备进行传输。它也可能产生冲突并重新创建最近已删除的文件，如果你尚未处于完全同步状态的话。根据你所拥有的数据多少，此进程可能会耗费相当多的资源，比如需要一段时间并用掉许多电量。
+\n
+\n请按下下方按钮来重置数据库路并启动 Syncthing.</string>
+    <string name="run_conditions_title">启用运行条件</string>
+    <string name="dialog_all_files_access_not_supported">你的设备不支持访问所有文件</string>
+    <string name="enable_notification_permission">启用通知权限</string>
+    <string name="api_level_30_title">升级信息</string>
+    <string name="toast_api_level_30_must_reset">要继续，你只能单击按钮来重置数据库。</string>
+    <string name="api_level_30_button">重设数据库</string>
+    <string name="notification_permission_title">通知权限</string>
+    <string name="require_notification_permission_desc">要显示关于新设备连接、文件夹共享请求等通知，此权限是必需的。</string>
 </resources>
