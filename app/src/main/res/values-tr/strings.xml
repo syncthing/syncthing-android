@@ -54,7 +54,7 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="open_website">Web sitesini aç</string>
-    <string name="toast_write_storage_permission_required">Bu uygulama için depolama yazma izni gerekir.</string>
+    <string name="toast_write_storage_permission_required">Bu uygulama için depolama yazma izni gerekir</string>
     <string name="device_rejected">\"%1$s\" cihazı bağlanmak istiyor</string>
     <string name="folder_rejected">\"%1$s\" cihazı \"%2$s\" klasörünü paylaşmak istiyor</string>
     <string name="dialog_disable_battery_optimization_title">Pil İyileştirme</string>
@@ -67,7 +67,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">Cihazınız pil iyileştirmelerini etkisizleştirmeyi desteklemiyor</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Yükleniyor...</string>
+    <string name="api_loading">Yükleniyor…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Güvenli anahtarlar üretiliyor. Bu birkaç dakika alabilir.</string>
     <string name="syncthing_loading_slow_message">Syncthing yüklenmesi çok uzun sürüyor. Herhangi bir hata olup olmadığını denetlemek için günlükleri kullanın.</string>
@@ -193,7 +193,7 @@
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">QR Kodu Tara</string>
     <!--Toast show if we could not get root permissions-->
-    <string name="toast_root_denied">Root izinleri alınamadı.</string>
+    <string name="toast_root_denied">Root izinleri alınamadı</string>
     <!--WebGuiActivity-->
     <!--Title of the web gui activity-->
     <string name="web_gui_title">Web GKA</string>
@@ -390,7 +390,7 @@
     <string name="view_android_log">Android Günlüğünü Görüntüle</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Syncthing Günlüğünü Görüntüle</string>
-    <string name="retrieving_logs">Günlükler alınıyor...</string>
+    <string name="retrieving_logs">Günlükler alınıyor…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Paylaş</string>
     <!--ShareActivity-->
@@ -542,7 +542,7 @@
 \nŞu aralıklar kullanılır: ilk saat için her 30 saniyede bir sürüm tutulur, ilk gün için her saat bir sürüm tutulur, ilk 30 gün için her gün bir sürüm tutulur, en fazla yaşa kadar her hafta bir sürüm tutulur.</string>
     <string name="maximum_age_description">Bir sürümü tutmak için en fazla süre (gün olarak, sürümleri süresiz tutmak için 0\'a ayarlayın)</string>
     <string name="versions_path_description">Sürümlerin depolanması gereken yol (paylaşılan klasördeki varsayılan .stversions dizini için boş bırakın).</string>
-    <string name="cleanout_after_description">Dosyaları çöp kutusunda tutmak için gün sayısı. Sıfır süresiz demektir.</string>
+    <string name="cleanout_after_description">Dosyaları çöp kutusunda tutmak için gün sayısı. Sıfır süresiz demektir</string>
     <string name="external_versioning_description">İlk komut satırı parametresi klasör yoludur ve ikinci parametre klasördeki göreli yoldur.</string>
     <string name="no_versioning_description">Sürümlendirmeyi etkinleştirmek için bir sürümlendirme türü seçin.</string>
     <!--Displays the current file versioning type in the Folder activity-->
