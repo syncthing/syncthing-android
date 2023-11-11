@@ -1,10 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-//    ext {
-//        ndkVersionShared = '25.2.9519653'
-//
-//    }
     extra.apply {
         // Cannot be called "ndkVersion" as that leads to naming collision
         // Changes to this value must be reflected in `./docker/Dockerfile`
@@ -14,7 +10,7 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
