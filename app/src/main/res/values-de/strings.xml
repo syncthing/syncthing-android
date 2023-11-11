@@ -558,7 +558,7 @@
     <string name="enable_notification_permission">Berechtigung für Benachrichtigungen erteilen</string>
     <string name="api_level_30_button">Datenbank zurücksetzen</string>
     <string name="notification_permission_title">Berechtigung für Benachrichtigungen</string>
-    <string name="dialog_all_files_access_not_supported">Das Gerät unterstützt nicht alle Dateizugriffe</string>
+    <string name="dialog_all_files_access_not_supported">"Das Gerät unterstützt keinen vollständigen  Dateizugriff"</string>
     <string name="api_level_30_desc">Mit dem neuesten Update zielt syncthing-android auf API-Level 30 ab, der das Verhalten des Dateisystems von Android verändert. Die gute Nachricht: Unter Android 11 und neuer ist es nun möglich, auf eine externe SD-Karte zu schreiben. Die schlechte Nachricht: Es kann langsamer sein und einige Pfade werden versteckt. Aufgrund dieser versteckten Pfade muss die Datenbank zurückgesetzt werden, um Datenverluste zu vermeiden. Dies führt dazu, dass alle Daten erneut gehasht werden müssen, aber nicht von externen Geräten übertragen werden müssen. Außerdem kann es zu Konflikten kommen und kürzlich gelöschte Dateien neu erstellen, falls sie noch nicht vollständig synchronisiert wurden. Abhängig von der Datenmenge kann dieser Vorgang sehr ressourcenintensiv sein, d. h. er kann einige Zeit in Anspruch nehmen und viel Batteriestrom verbrauchen.
 \n
 \nBitte unten auf die Schaltfläche drücken, um die Datenbank zurückzusetzen und Syncthing zu starten.</string>
