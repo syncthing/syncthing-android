@@ -60,7 +60,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">Tu dispositivo no permite desactivar las optimizaciones de batería</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Cargando...</string>
+    <string name="api_loading">Cargando…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Generando claves seguras. Esto puede llevar algún tiempo.</string>
     <string name="syncthing_loading_slow_message">A Syncthing le está costando mucho tiempo iniciarse. Usa los registro de depuración para mirar si hay algún error.</string>
@@ -385,7 +385,7 @@
     <string name="view_android_log">Mostrar registro de Android</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Mostrar registro de Syncthing</string>
-    <string name="retrieving_logs">Recuperando los registros...</string>
+    <string name="retrieving_logs">Recuperando los registros…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Compartir</string>
     <!--ShareActivity-->
@@ -416,7 +416,7 @@
     <!--Copy exception toast-->
     <string name="copy_exception">Se ha producido un error durante el uso compartido.</string>
     <!--Copy progress dialog text-->
-    <string name="copy_progress">Compartir archivos...</string>
+    <string name="copy_progress">Compartir archivos…</string>
     <plurals name="file_name_title">
         <item quantity="one">Nombre del archivo</item>
         <item quantity="many">Lista de Archivos</item>

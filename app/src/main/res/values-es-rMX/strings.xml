@@ -53,7 +53,7 @@
     <string name="dialog_disable_battery_optimization_later">Después</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Cargando...</string>
+    <string name="api_loading">Cargando…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Generando llaves seguras. Esto pude tomar algunos minutos.</string>
     <!--FoldersFragment-->

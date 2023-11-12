@@ -67,7 +67,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">Cihazınız pil iyileştirmelerini etkisizleştirmeyi desteklemiyor</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Yükleniyor...</string>
+    <string name="api_loading">Yükleniyor…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Güvenli anahtarlar üretiliyor. Bu birkaç dakika alabilir.</string>
     <string name="syncthing_loading_slow_message">Syncthing yüklenmesi çok uzun sürüyor. Herhangi bir hata olup olmadığını denetlemek için günlükleri kullanın.</string>
@@ -392,7 +392,7 @@
     <string name="view_android_log">Android Günlüğünü Görüntüle</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Syncthing Günlüğünü Görüntüle</string>
-    <string name="retrieving_logs">Günlükler alınıyor...</string>
+    <string name="retrieving_logs">Günlükler alınıyor…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Paylaş</string>
     <!--ShareActivity-->

@@ -67,7 +67,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">Dispozitivul dumneavoastră nu suportă dezactivarea optimizărilor de baterie</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Se încarcă...</string>
+    <string name="api_loading">Se încarcă…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Se generează cheile de securitate. Poate dura câteva minute</string>
     <string name="syncthing_loading_slow_message">Încărcarea Syncthing durează prea mult. Folosiți jurnalele de erori pentru a verifica existenta eventualelor probleme</string>
@@ -393,7 +393,7 @@
     <string name="view_android_log">Vezi jurnal de erori Android</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Vezi jurnal de erori Syncthing</string>
-    <string name="retrieving_logs">Se preia jurnalele de erori...</string>
+    <string name="retrieving_logs">Se preia jurnalele de erori…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Partajează</string>
     <!--ShareActivity-->
@@ -424,7 +424,7 @@
     <!--Copy exception toast-->
     <string name="copy_exception">A survenit o eroare în timpul partajării, verificați jurnalele de erori</string>
     <!--Copy progress dialog text-->
-    <string name="copy_progress">Partajare fișiere...</string>
+    <string name="copy_progress">Partajare fișiere…</string>
     <plurals name="file_name_title">
         <item quantity="one">Nume fișier</item>
         <item quantity="few">Nume fișiere</item>

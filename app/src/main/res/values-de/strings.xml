@@ -382,7 +382,7 @@
     <string name="view_android_log">Android-Systemprotokoll einsehen</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Syncthing-Protokoll einsehen</string>
-    <string name="retrieving_logs">Rufe Protokolle ab...</string>
+    <string name="retrieving_logs">Rufe Protokolle ab…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Teilen</string>
     <!--ShareActivity-->

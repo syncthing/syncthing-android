@@ -384,7 +384,7 @@
     <string name="view_android_log">Mostra el registre de l\'Android</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Mostra el registre del Syncthing</string>
-    <string name="retrieving_logs">Obtenint registres...</string>
+    <string name="retrieving_logs">Obtenint registres…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Comparteix</string>
     <!--ShareActivity-->
