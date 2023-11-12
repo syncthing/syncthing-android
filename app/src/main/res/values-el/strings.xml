@@ -80,8 +80,6 @@
     <string name="download_title_colon">"Λήψη: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Αποστολή: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">Χρήση CPU</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">Χρήση RAM</string>
     <!--Title for announce server status-->

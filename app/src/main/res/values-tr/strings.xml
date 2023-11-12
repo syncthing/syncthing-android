@@ -112,8 +112,6 @@
     <string name="download_title_colon">"İndirme: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Gönderme: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">İşlemci Kullanımı</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">Bellek Kullanımı</string>
     <!--Title for announce server status-->
