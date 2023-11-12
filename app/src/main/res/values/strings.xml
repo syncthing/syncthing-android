@@ -7,11 +7,11 @@
 
     <!-- FirstStartActivity -->
 
-
     <!-- Title for dialog displayed on first start -->
     <string name="welcome_title">Welcome to Syncthing for Android</string>
 
     <!-- Welcome wizard -->
+
     <!-- Slide 1 -->
     <string name="introduction">Introduction</string>
     <string name="welcome_text">Syncthing is an open-source file synchronization application.
@@ -53,8 +53,6 @@
 
     <!-- MainActivity -->
 
-
-
     <!-- Title of the exit app when running as a service confirmation dialog -->
     <string name="dialog_exit_while_running_as_service_title">Confirm to quit app</string>
     <string name="dialog_exit_while_running_as_service_message">For your consideration: You configured the app to start automatically on boot. Therefore it monitors run conditions and syncs at any time in the background when conditions match. You should only quit manually if you run into severe problems. Otherwise, disable \'Start automatically on boot \' in the settings. Would you like to quit now until the device rebooted\?</string>
@@ -69,7 +67,6 @@
     <string name="send_device_id_to">Send Device ID to</string>
 
     <string name="usage_reporting_dialog_title">Allow Anonymous Usage Reporting\?</string>
-
     <string name="usage_reporting_dialog_description">The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.
 \n
 \nThe aggregated statistics are publicly available at https://data.syncthing.net.</string>
@@ -97,7 +94,6 @@
 
     <!-- StateDialogActivity -->
 
-
     <!-- Text for FoldersFragment and DevicesFragment loading view -->
     <string name="api_loading">Loading…</string>
 
@@ -107,7 +103,6 @@
     <string name="syncthing_loading_slow_message">Syncthing is taking very long to load. Use the logs to check for any errors.</string>
 
     <!-- FoldersFragment -->
-
 
     <string name="folders_fragment_title">Folders</string>
 
@@ -127,7 +122,6 @@
     <string name="toast_no_file_manager">No compatible file manager found</string>
 
     <!-- DevicesFragment -->
-
 
     <string name="devices_fragment_title">Devices</string>
 
@@ -156,6 +150,7 @@
     <string name="upload_title">Upload</string>
 
     <!-- StatusFragment -->
+
     <string name="status_fragment_title">Status</string>
     <string name="syncthing_starting">Syncthing is starting.</string>
     <string name="syncthing_running">Syncthing is running.</string>
@@ -164,28 +159,21 @@
 
     <!-- DrawerFragment -->
 
-
     <!-- Same as download_title with a colon and space appended -->
     <string name="download_title_colon">Download:\u0020</string>
-
     <!-- Same as upload_title with a colon and space appended -->
     <string name="upload_title_colon">Upload:\u0020</string>
-
     <!-- Title for current CPU usage -->
     <string name="cpu_usage">CPU Usage</string>
-
     <!-- Title for current RAM usage -->
     <string name="ram_usage">RAM Usage</string>
-
     <!-- Title for announce server status -->
     <string name="announce_server">Announce Server</string>
-
     <string name="restart">Restart</string>
 
     <string name="dialog_confirm_restart">Do you want to restart Syncthing\?</string>
 
     <!-- FolderActivity -->
-
 
     <!-- Setting title -->
     <string name="folder_id">Folder ID</string>
@@ -249,7 +237,6 @@
 
     <!-- DeviceActivity -->
 
-
     <!-- Setting title -->
     <string name="device_id">Device ID</string>
 
@@ -303,7 +290,6 @@
 
     <!-- WebGuiActivity -->
 
-
     <!-- Title of the web gui activity -->
     <string name="web_gui_title">Web GUI</string>
 
@@ -311,7 +297,6 @@
     <string name="web_gui_loading">Waiting for GUI</string>
 
     <!-- SettingsFragment -->
-
 
     <string name="settings_title">Settings</string>
 
@@ -370,16 +355,14 @@
     <string name="run_as_background_service">Start service automatically on boot</string>
 
     <!-- Preferences - Behaviour -->
-    <string name="advanced_folder_picker">Use advanced Folder Picker</string>
 
+    <string name="advanced_folder_picker">Use advanced Folder Picker</string>
     <string name="advanced_folder_picker_summary">Select any folder on the device for syncing</string>
 
     <string name="use_root_title">Run Syncthing as Superuser</string>
-
     <string name="use_root_summary">This is an unstable feature that may cause problems with Syncthing and with your device. If you encounter problems, you may have to reinstall Syncthing.</string>
 
     <string name="notification_type_title">Notification</string>
-
     <string name="notification_type_summary">Choose the notification type</string>
 
     <string-array name="notification_type_entries">
@@ -389,11 +372,9 @@
     </string-array>
 
     <string name="preference_language_title">Language</string>
-
     <string name="preference_language_summary">Change the app language</string>
 
     <string name="start_into_web_gui_title">Start directly into web GUI</string>
-
     <string name="start_into_web_gui_summary">When starting the app, open web GUI instead of the main screen</string>
 
     <string name="preference_theme_title">Theme</string>
@@ -463,11 +444,9 @@
     <string name="do_not_use_proxy">No proxy configured.</string>
 
     <string name="keep_wakelock_while_binary_running">Keep the CPU awake while Syncthing is running</string>
-
     <string name="keep_wakelock_while_binary_running_summary">Use this setting if you experience unexpected disconnects while operating on battery. This will result in increased battery consumption.</string>
 
     <string name="use_tor_title">Use Tor</string>
-
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot. Disables proxy options.</string>
 
     <string name="socks_proxy_address_title">SOCKS5 proxy</string>
@@ -483,7 +462,6 @@
     <string name="toast_invalid_http_proxy_address">Input violates proxy syntax \'http://[IP/HOSTNAME]:[PORT]\'</string>
 
     <string name="use_legacy_hashing_title">Use legacy hashing</string>
-
     <string name="use_legacy_hashing_summary">Force Syncthing to use legacy hashing package for compatibility purposes</string>
 
     <!-- Dialog shown before config export -->
@@ -515,23 +493,17 @@
 
     <!-- Title for the preference to reset Syncthing indexes -->
     <string name="st_reset_database_title">Reset Database</string>
-
     <!-- Syncthing was reset -->
     <string name="st_reset_database_question">This action should only be performed based on a recommendation from our support team.
-\nAre you sure you want to clear Syncthing\'s database?
-    </string>
-
+\nAre you sure you want to clear Syncthing\'s database?</string>
     <!-- Syncthing was reset -->
     <string name="st_reset_database_done">Successfully reset Syncthing\'s database</string>
 
     <!-- Title for the preference to reset Syncthing indexes -->
     <string name="st_reset_deltas_title">Reset Delta Indexes</string>
-
     <!-- Syncthing was reset -->
     <string name="st_reset_deltas_question">This action should only be performed based on a recommendation from our support team.
-\nAre you sure you want to clear Syncthing\'s delta indexes?
-    </string>
-
+\nAre you sure you want to clear Syncthing\'s delta indexes?</string>
     <!-- Syncthing was reset -->
     <string name="st_reset_deltas_done">Successfully reset Syncthing\'s delta indexes</string>
 
@@ -553,19 +525,15 @@
 
     <!-- Settings item that opens issue tracker -->
     <string name="report_issue_title">Report Issue</string>
-
     <!-- Summary for the issue tracker settings item -->
     <string name="report_issue_summary">Open the Syncthing-Android issue tracker</string>
 
     <!-- URL of the issue tracker -->
     <string name="issue_tracker_url" translatable="false">https://github.com/syncthing/syncthing-android/issues</string>
 
-
     <!-- Menu item to donate -->
     <string name="donate_title">Donate</string>
-
     <string name="donate_summary">Help us pay for domains and hosting fees</string>
-
     <string name="donate_url" translatable="false">https://syncthing.net/donations/</string>
 
     <!-- Menu item linking privacy policy -->
@@ -580,7 +548,6 @@
     <string name="app_version_title">Syncthing-Android Version</string>
 
     <!-- FolderPickerAcitivity -->
-
 
     <!-- Activity title -->
     <string name="folder_picker_title">Folder Picker</string>
@@ -601,7 +568,6 @@
 
     <!-- LogActivity -->
 
-
     <string name="syncthing_log_title">Syncthing Log</string>
     <string name="android_log_title">Android Log</string>
 
@@ -617,7 +583,6 @@
     <string name="share_title">Share</string>
 
     <!-- ShareActivity -->
-
 
     <!-- Title of the "share" activity -->
     <string name="share_activity_title">Save to Syncthing</string>
@@ -665,13 +630,10 @@
 
     <!-- SyncthingService -->
 
-
     <!-- Title of the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_title">Syncthing is disabled</string>
-
     <!-- Message of the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_message">Do you want to change the run conditions\?</string>
-
     <!-- Button text on the "syncthing disabled" dialog -->
     <string name="syncthing_disabled_change_settings">Change Settings</string>
 
@@ -711,7 +673,6 @@
     <string name="default_folder_id">%1$s-photos</string>
 
     <string name="notification_crash_title">Syncthing has crashed</string>
-
     <string name="notification_crash_text">Click to view logs</string>
 
     <string name="notifications_persistent_channel">Syncthing active</string>
@@ -719,7 +680,6 @@
     <string name="notifications_other_channel">Other notifications</string>
 
     <!-- RestApi -->
-
 
     <!-- Title of the notification shown when a restart is needed -->
     <string name="restart_title">Restart Needed</string>
