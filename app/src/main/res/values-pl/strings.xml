@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Syncthing</string>
-    <string name="app_description">Otwarta, godna zaufania oraz zdecentralizowana aplikacja do synchronizacji plików.</string>
+    <string name="app_description">Otwartoźródłowa, godna zaufania i zdecentralizowana aplikacja do synchronizacji plików.</string>
     <!--FirstStartActivity-->
     <!--Title for dialog displayed on first start-->
     <string name="welcome_title">Witamy w aplikacji Syncthing dla systemu Android</string>
@@ -44,7 +44,7 @@
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Dodaj folder</string>
     <!--Title of the "share device id" menu action-->
-    <string name="share_device_id">Udostępnij numer ID urządzenia</string>
+    <string name="share_device_id">Udostępnij identyfikator urządzenia</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Wyślij numer ID urządzenia do</string>
     <string name="usage_reporting_dialog_title">Czy chcesz zezwolić na anonimowe statystyki użycia\?</string>
@@ -115,7 +115,7 @@
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Wysyłanie: "</string>
     <!--Title for current RAM usage-->
-    <string name="ram_usage">Użycie pamięci RAM</string>
+    <string name="ram_usage">Użycie pamięci</string>
     <!--Title for announce server status-->
     <string name="announce_server">Serwer ogłoszeniowy</string>
     <string name="restart">Uruchom ponownie</string>
@@ -225,7 +225,7 @@
     <string name="sync_only_wifi_ssids_connect_to_wifi">Podłącz się do sieci Wi-Fi, aby dodać ją do listy.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Musisz przyznać uprawnienia do Lokalizacji by używać tej funkcji.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Wymagane uprawnienie</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Od Androida 8.1 dostęp do lokalizacji jest wymagany by odczytać nazwę sieci Wi-Fi. Możesz używać tej funkcji tylko po przyznaniu uprawnień do Lokalizacji.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Od Androida 8.1 dostęp do lokalizacji jest wymagany, aby odczytać nazwę sieci Wi-Fi. Możesz używać tej funkcji tylko po przyznaniu uprawnień do lokalizacji.</string>
     <string name="power_source_title">Uruchom, gdy urządzenie jest zasilane przez</string>
     <string-array name="power_source_entries">
         <item>Zasilanie sieciowe i bateryjne.</item>
@@ -420,7 +420,7 @@
     <!--Copy exception toast-->
     <string name="copy_exception">Wystąpił błąd podczas udostępniania. Sprawdź dzienniki aplikacji</string>
     <!--Copy progress dialog text-->
-    <string name="copy_progress">Udostępnianie plików...</string>
+    <string name="copy_progress">Udostępnianie plików…</string>
     <plurals name="file_name_title">
         <item quantity="one">Nazwa pliku</item>
         <item quantity="few">Lista plików</item>
@@ -545,9 +545,9 @@
 \nNastępujące interwaly są używane: przez pierwszą godzinę, wersja jest zapisywana przez każde 30 sekund, przez pierwszy dzień wersja jest trzymana co godzinę, przez pierwsze 30 dni wersja jest trzymana z każdego dnia, dopóki maksymalny wiek nie zostanie osiągnięty (sprawdzane co tydzień).</string>
     <string name="maximum_age_description">Maksymalny czas trzymania wersji (w dniach, ustaw 0, aby trzymać je wiecznie).</string>
     <string name="versions_path_description">Ścieżka, gdzie mają być przetrzymywane wersje (pozostaw puste, dla domyślnego folderu .stversions wewnątrz dzielonego).</string>
-    <string name="cleanout_after_description">Liczba dni, przez które mają być trzymane pliki w śmietniku. Zero oznacza, że nie będą w ogóle usuwane.</string>
+    <string name="cleanout_after_description">Liczba dni, przez które mają być trzymane pliki w koszu. Zero oznacza, że nie będą w ogóle usuwane.</string>
     <string name="external_versioning_description">Pierwszy parametr jest ścieżką folderu, drugi to ścieżka relatywna wewnątrz</string>
-    <string name="no_versioning_description">Wybierz typ wersjonowania, by je włączyć</string>
+    <string name="no_versioning_description">Wybierz typ wersjonowania, aby je włączyć.</string>
     <!--Displays the current file versioning type in the Folder activity-->
     <string name="type_simple">Typ: proste</string>
     <string name="type_trashcan">Typ: w koszu</string>
@@ -561,10 +561,10 @@
     <string name="simple_versioning_info">Trzymaj wersje: %1$s</string>
     <string name="show_device_id">Pokaż numer ID urządzenia</string>
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
-    <string name="could_not_access_deviceid">Nie można uzyskać dostępu do ID urządzenia</string>
+    <string name="could_not_access_deviceid">Nie można uzyskać dostępu do identyfikatora urządzenia.</string>
     <string name="browse">Przeglądaj</string>
     <string name="no_sub_folder_is_selected">Żaden podfolder nie został wybrany</string>
-    <string name="share_device_id_chooser">Udostępnij numer ID urządzenia</string>
+    <string name="share_device_id_chooser">Udostępnij identyfikator urządzenia</string>
     <string name="require_notification_permission_desc">Wymagane do wyświetlania powiadomień dotyczących nowych połączeń urządzeń, żądań udostępnienia folderów itp.</string>
     <string name="notification_permission_title">Zezwolenie na powiadomienia</string>
     <string name="enable_notification_permission">Włącz zezwolenie na powiadomienia</string>
