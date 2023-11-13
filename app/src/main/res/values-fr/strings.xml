@@ -385,7 +385,7 @@
     <string name="view_android_log">Voir le journal Android</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Voir le journal Syncthing</string>
-    <string name="retrieving_logs">Récupération des journaux….</string>
+    <string name="retrieving_logs">Récupération des journaux…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Partage</string>
     <!--ShareActivity-->
