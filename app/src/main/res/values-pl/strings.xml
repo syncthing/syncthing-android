@@ -9,8 +9,8 @@
     <!--Slide 1-->
     <string name="introduction">Wprowadzenie</string>
     <string name="welcome_text">Syncthing to otwartoźródłowa aplikacja do synchronizacji plików.
-\nAby udostępnić dane innym urządzeniom musisz dodać ich niepowtarzalne numery ID do listy urządzeń. Następnie możesz wybrać, które foldery z którymi urządzeniami współdzielić.
-\nProsimy zgłaszać wszelkie napotkane błędy za pośrednictwem serwisu Github.</string>
+\nAby udostępnić dane innym urządzeniom, musisz dodać ich unikalne identyfikatory urządzeń do listy urządzeń. Następnie możesz wybrać, które foldery chcesz udostępnić ustalonym urządzeniom.
+\nWszelkie problemy, które napotkasz, prosimy zgłaszać za pośrednictwem serwisu GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Dostęp do plików</string>
     <string name="storage_permission_desc">Syncthing wymaga dostępu do pamięci urządzenia, aby móc synchronizować pliki.</string>
