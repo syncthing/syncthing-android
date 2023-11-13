@@ -7,7 +7,7 @@
     <string name="welcome_title">Android için Syncthing\'e Hoş Geldiniz</string>
     <!--Welcome wizard-->
     <!--Slide 1-->
-    <string name="introduction">Giriş</string>
+    <string name="introduction">Tanıtım</string>
     <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır.
 \nDiğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.
 \nLütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
