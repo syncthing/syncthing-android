@@ -70,8 +70,6 @@
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
     <!--Same as upload_title with a colon and space appended-->
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">CPU භාවිතය</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">RAM භාවිතය</string>
     <!--Title for announce server status-->

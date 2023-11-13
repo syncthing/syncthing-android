@@ -114,8 +114,6 @@
     <string name="download_title_colon">"Pobieranie: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Wysyłanie: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">Użycie procesora</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">Użycie pamięci RAM</string>
     <!--Title for announce server status-->

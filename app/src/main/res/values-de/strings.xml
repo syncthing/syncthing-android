@@ -103,8 +103,6 @@
     <string name="download_title_colon">"Herunterladen: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Hochladen: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">Prozessorauslastung</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">RAM-Auslastung</string>
     <!--Title for announce server status-->

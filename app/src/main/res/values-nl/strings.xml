@@ -105,8 +105,6 @@
     <string name="download_title_colon">"Download: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Upload: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">CPU-gebruik</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">RAM-gebruik</string>
     <!--Title for announce server status-->

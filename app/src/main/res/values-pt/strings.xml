@@ -106,8 +106,6 @@
     <string name="download_title_colon">"Recepção: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Envio: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">Utilização da CPU</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">Utilização da RAM</string>
     <!--Title for announce server status-->

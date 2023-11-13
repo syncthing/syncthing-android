@@ -43,7 +43,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "DrawerFragment";
 
-    private TextView mCpuUsage;
     private TextView mRamUsage;
     private TextView mDownload;
     private TextView mUpload;
@@ -99,7 +98,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         mActivity = (MainActivity) getActivity();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
 
-        mCpuUsage       = view.findViewById(R.id.cpu_usage);
         mRamUsage       = view.findViewById(R.id.ram_usage);
         mDownload       = view.findViewById(R.id.download);
         mUpload         = view.findViewById(R.id.upload);
@@ -178,7 +176,6 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
             return;
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(2);
-        mCpuUsage.setText(percentFormat.format(info.cpuPercent / 100));
         mRamUsage.setText(Util.readableFileSize(mActivity, info.sys));
         int announceTotal = info.discoveryMethods;
         int announceConnected =

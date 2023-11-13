@@ -21,6 +21,7 @@
     <!-- Slide 2 -->
     <string name="storage_permission_title">Storage Permission</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
+    <!-- See https://developer.android.com/training/data-storage/manage-all-files -->
     <string name="dialog_all_files_access_not_supported">Your device does not support all files access</string>
 
     <!-- Slide 3 -->
@@ -163,8 +164,6 @@
     <string name="download_title_colon">"Download: "</string>
     <!-- Same as upload_title with a colon and space appended -->
     <string name="upload_title_colon">"Upload: "</string>
-    <!-- Title for current CPU usage -->
-    <string name="cpu_usage">CPU Usage</string>
     <!-- Title for current RAM usage -->
     <string name="ram_usage">RAM Usage</string>
     <!-- Title for announce server status -->
@@ -646,7 +645,7 @@
     <string name="syncthing_disabled_reason_on_charger">Device is running on charger</string>
     <string name="syncthing_disabled_reason_powersaving">Device is in power-saving mode</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Global Synchronization is disabled</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Current WiFi SSID is not whitelisted</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Current WiFi SSID is not whitelisted or location permissions are restricted</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Current WiFi is metered</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">No network connection or airplane mode enabled</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Not connected to mobile data</string>

@@ -100,8 +100,6 @@
     <string name="download_title_colon">"수신: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"송신: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">CPU 사용량</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">RAM 사용량</string>
     <!--Title for announce server status-->

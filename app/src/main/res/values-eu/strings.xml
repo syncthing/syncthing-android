@@ -112,8 +112,6 @@
     <string name="download_title_colon">"Deskarga: "</string>
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Igo: "</string>
-    <!--Title for current CPU usage-->
-    <string name="cpu_usage">CPU Erabilera</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">RAM erabilera</string>
     <!--Title for announce server status-->
