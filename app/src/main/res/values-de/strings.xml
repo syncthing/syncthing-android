@@ -433,7 +433,7 @@
     <string name="syncthing_disabled_reason_on_charger">Das Gerät wird geladen</string>
     <string name="syncthing_disabled_reason_powersaving">Das Gerät ist im Energiesparmodus</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Globale Synchronisierung ist deaktiviert</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Die SSID des aktuellen WLANs ist nicht auf der Whitelist</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Die SSID des aktuellen WLANs ist nicht auf der Whitelist, oder keine Standortberechtigung erteilt</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Die aktuelle WLAN-Verbindung ist getaktet</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Keine Netzwerkverbindung oder aktiver Flugmodus</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Keine Verbindung zu mobilem Internet</string>
