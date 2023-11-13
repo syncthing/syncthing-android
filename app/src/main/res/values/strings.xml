@@ -21,6 +21,7 @@
     <!-- Slide 2 -->
     <string name="storage_permission_title">Storage Permission</string>
     <string name="storage_permission_desc">Syncthing needs to access your storage to do file synchronization.</string>
+    <!-- See https://developer.android.com/training/data-storage/manage-all-files -->
     <string name="dialog_all_files_access_not_supported">Your device does not support all files access</string>
 
     <!-- Slide 3 -->
