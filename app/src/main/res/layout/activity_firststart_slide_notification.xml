@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingBottom="@dimen/dots_full_height">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:text="@string/enable_notification_permission"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="@dimen/img_width_height"
+            android:layout_height="@dimen/img_width_height"
+            android:contentDescription="@null"
+            android:src="@drawable/baseline_notifications_active_24"
+            android:tint="?attr/colorSecondary"
+            tools:ignore="UseAppTint" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_notification"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/grant_permission"
+            android:drawableStart="@android:drawable/ic_menu_save"
+            android:paddingStart="40dp"
+            android:paddingLeft="40dp"
+            android:paddingEnd="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/grant_permission"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification_permission_title"
+            android:textSize="@dimen/slide_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/desc_marginTop"
+            android:paddingLeft="@dimen/desc_padding"
+            android:paddingRight="@dimen/desc_padding"
+            android:paddingBottom="@dimen/desc_paddingBottom"
+            android:text="@string/require_notification_permission_desc"
+            android:textAlignment="center"
+            android:textSize="@dimen/slide_desc" />
+
+    </LinearLayout>
+
+</ScrollView>

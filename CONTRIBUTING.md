@@ -30,10 +30,10 @@ You can get logs in various ways:
 ## Contributing Translations
 
 All translations are done via
-[Transifex](https://www.transifex.com/projects/p/syncthing-android/). If you
+[Hosted Weblate](https://hosted.weblate.org/projects/syncthing/android/). If you
 wish to contribute to a translation, just head over there and sign up.
 Before every release, the language resources are updated from the
-latest info on Transifex.
+latest info on Weblate.
 
 ## Contributing Code
 

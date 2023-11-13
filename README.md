@@ -29,11 +29,17 @@ Handling feature requests use up the little time that is present to keep the app
 
 # Translations
 
-The project is translated on [Transifex](https://www.transifex.com/projects/p/syncthing-android/).
+The project is translated on [Hosted Weblate](https://hosted.weblate.org/projects/syncthing/android/).
 
 ## Dev
 
-Language mappings are defined in `.tx/config`, with the second code being the one from transifex. Google play supported languages: https://support.google.com/googleplay/android-developer/table/4419860. Android supported languages: https://stackoverflow.com/questions/7973023/what-is-the-list-of-supported-languages-locales-on-android. If a new language is added on transifex that's not supported, add them to `deleteUnsupportedPlayTranslations` in `app/build.gradle`.
+Language codes are usually mapped correctly by Weblate itself.  The supported
+set is different between [Google Play][1] and Android apps.  The latter can be
+deduced by what the [Android core framework itself supports][2].  New languages
+need to be added in the repository first, then appear automatically in Weblate.
+
+[1]: https://support.google.com/googleplay/android-developer/table/4419860
+[2]: https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/res/res/
 
 # Building
 
