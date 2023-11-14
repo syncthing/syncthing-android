@@ -381,12 +381,12 @@
     <string name="select_folder">Wybierz folder</string>
     <string name="create_folder_failed">Nie udało się utworzyć folderu</string>
     <!--LogActivity-->
-    <string name="syncthing_log_title">Dziennik programu</string>
+    <string name="syncthing_log_title">Dziennik aplikacji</string>
     <string name="android_log_title">Dziennik systemu</string>
     <!--Title of the "log android" menu button-->
     <string name="view_android_log">Wyświetl dziennik systemu</string>
     <!--Title of the "log Syncthing" menu button-->
-    <string name="view_syncthing_log">Wyświetl dziennik programu</string>
+    <string name="view_syncthing_log">Wyświetl dziennik aplikacji</string>
     <string name="retrieving_logs">Uzyskiwanie dzienników…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Udostępnij</string>
@@ -457,7 +457,7 @@
     <!--Toast shown if syncthing failed to create a config-->
     <string name="config_create_failed">Nie udało się stworzyć pliku konfiguracyjnego</string>
     <!--Toast shown if a config file crucial to operation is missing-->
-    <string name="config_file_missing">Brak pliku konfiguracyjnego niezbędnego do pracy Syncthing</string>
+    <string name="config_file_missing">Brak pliku konfiguracyjnego niezbędnego do działania</string>
     <!--Label of the default folder created of first start (camera folder).-->
     <string name="default_folder_label">Aparat</string>
     <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
@@ -473,7 +473,7 @@
     <!--Text for positive button in restart dialog-->
     <!--Text for the dismiss button of the restart Activity-->
     <!--Text of the notification shown when a restart is needed-->
-    <string name="restart_notification_text">Proszę kliknąć, aby uruchomić program ponownie</string>
+    <string name="restart_notification_text">Kliknij tutaj, aby uruchomić Syncthing ponownie</string>
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Skopiowano do schowka identyfikator urządzenia</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
@@ -502,7 +502,7 @@
     <string name="status_outofsync">Niezsynchronizowany</string>
     <!--Format string for folder size, eg "500 MiB / 1 GiB"-->
     <string name="folder_size_format">%1$s / %2$s</string>
-    <string name="appconfig_receiver_background_enabled">Zatrzymywanie programu nie jest obsługiwane podczas działania w tle.</string>
+    <string name="appconfig_receiver_background_enabled">Zatrzymywanie Syncthing nie jest obsługiwane podczas działania w tle.</string>
     <!--Titles used in the folder type dialog and folder type button in the folder activity-->
     <string name="folder_type">Typ folderu</string>
     <!--Displays the current folder type in the folder activity-->
