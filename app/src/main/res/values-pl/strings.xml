@@ -40,7 +40,7 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Potwierdź wyjście z aplikacji</string>
-    <string name="dialog_exit_while_running_as_service_message">Dla rozważenia: Aplikacja została skonfigurowana, aby uruchamiać się razem z urządzeniem. Dlatego ciągle monitoruje warunki działania i synchronizuje w tle, gdy warunki są spełnione. Powinieneś wyjść ręcznie, tylko, jeśli powstaną poważne problemy. W przeciwnym wypadku wyłącz \"Uruchom razem z urządzeniem\" w opcjach. Czy chcesz wyjść teraz, dopóki nie zrestartujesz urządzenia?</string>
+    <string name="dialog_exit_while_running_as_service_message">Dla rozważenia: aplikacja została skonfigurowana do uruchamiania się razem z urządzeniem. Dlatego ciągle monitoruje warunki działania i synchronizuje w tle, gdy warunki są spełnione. Wyjść ręcznie należy tylko przy napotkaniu poważnych problemów. W przeciwnym razie wyłącz w ustawieniach opcję „Uruchom razem z urządzeniem”. Czy chcesz wyjść teraz do czasu ponownego uruchomienia urządzenia?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Dodaj folder</string>
     <!--Title of the "share device id" menu action-->
@@ -145,7 +145,7 @@
     <!--Menu item to confirm folder creation-->
     <string name="create">Utwórz</string>
     <!--Dialog shown when attempting to remove a folder-->
-    <string name="remove_folder_confirm">Czy na pewno chcesz usunąć ten folder z aplikacji Syncthing\?</string>
+    <string name="remove_folder_confirm">Usunąć ten folder z Syncthing?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
     <string name="folder_id_required">Identyfikator folderu nie może być pusty</string>
     <!--Toast shown when trying to create a folder with an empty path-->
@@ -338,7 +338,7 @@
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Przywrócono stan początkowy bazy danych</string>
     <!--Title for the preference to reset Syncthing indexes-->
-    <string name="st_reset_deltas_title">Resetuj indeksy różnicowe</string>
+    <string name="st_reset_deltas_title">Zresetuj indeksy różnicowe</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Ta akcja powinna być przeprowadzana tylko w wyniku zalecenia zespołu wsparcia.
 \nCzy na pewno chcesz wyczyścić indeksy różnicowe Syncthing\?</string>
