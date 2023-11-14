@@ -437,7 +437,7 @@
     <string name="syncthing_disabled_reason_on_charger">El dispositivo está funcionando usando el cargador</string>
     <string name="syncthing_disabled_reason_powersaving">El dispositivo está en el modo de ahorro de energía</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">La sincronización global está desactivada</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">La SSID WiFi actual no está en la lista blanca</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">El SSID WiFi actual no está en la lista blanca o los permisos de ubicación están restringidos</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">La WiFi actual es de tarifa limitada</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">No hay conexión de red activa en el modo de vuelo</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">No conectado a una red móvil</string>
@@ -558,4 +558,15 @@
     <string name="browse">Navegar</string>
     <string name="no_sub_folder_is_selected">No se ha seleccionado una subcarpeta</string>
     <string name="share_device_id_chooser">Compartir el id. del dispositivo con</string>
+    <string name="api_level_30_desc">Con la última actualización, syncthing-android alcanza el nivel 30 de la API, que cambia el comportamiento del sistema de archivos de Android. Buenas noticias: En Android 11 y posteriores ahora es capaz de escribir en una tarjeta SD externa. Malas noticias: Puede ser más lento y algunas rutas estarán ocultas. Debido a estas rutas ocultas, es necesario restablecer la base de datos para evitar la pérdida de datos. Esto causará que todos tus datos sean hasheados de nuevo, pero no necesitan ser transferidos desde dispositivos remotos. También puede crear conflictos y volver a crear archivos eliminados recientemente si no estás totalmente sincronizado en este momento. Dependiendo de la cantidad de datos que tengas, este proceso puede consumir muchos recursos, es decir, tardar algún tiempo y consumir mucha batería.
+\n
+\nPor favor, pulse el botón de abajo para restablecer la base de datos y comenzar Syncthing.</string>
+    <string name="run_conditions_title">Habilitar las condiciones de ejecución</string>
+    <string name="dialog_all_files_access_not_supported">Tu dispositivo no admite el acceso a todos los archivos</string>
+    <string name="enable_notification_permission">Activar el permiso de notificación</string>
+    <string name="api_level_30_title">Información sobre la actualización</string>
+    <string name="toast_api_level_30_must_reset">Sólo puede continuar haciendo clic en el botón para restablecer la base de datos.</string>
+    <string name="api_level_30_button">Restablecer la base de datos</string>
+    <string name="notification_permission_title">Permiso de notificación</string>
+    <string name="require_notification_permission_desc">Necesario para mostrar las notificaciones sobre nuevas conexiones en los dispositivos, solicitudes para compartir las carpetas, etc.</string>
 </resources>
