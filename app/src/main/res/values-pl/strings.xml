@@ -162,7 +162,7 @@
     <string name="edit_ignore_file_error">Nie znaleziono edytora tekstu</string>
     <!--DeviceActivity-->
     <!--Setting title-->
-    <string name="device_id">Numer ID urządzenia</string>
+    <string name="device_id">Identyfikator urządzenia</string>
     <!--Setting title-->
     <string name="name">Nazwa</string>
     <!--Setting title-->
@@ -191,7 +191,7 @@
     <!--Dialog shown when attempting to remove a device-->
     <string name="remove_device_confirm">Czy na pewno chcesz usunąć to urządzenie\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
-    <string name="device_id_required">Numer ID urządzenia nie może być pusty</string>
+    <string name="device_id_required">Identyfikator urządzenia nie może być pusty</string>
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">Skanuj kod QR</string>
     <!--Toast show if we could not get root permissions-->
@@ -220,10 +220,10 @@
     <string name="run_on_metered_wifi_summary">Działaj, gdy urządzenie korzysta z taryfowej sieci Wi-Fi, np. hotspotu lub udostępnionego połączenia. Uwaga: może to skutkować znacznym zużyciem transferu, jeżeli synchronizujesz dużo danych.</string>
     <string name="run_on_whitelisted_wifi_title">Działaj na wybranych sieciach Wi-Fi</string>
     <string name="run_on_whitelisted_wifi_networks">Działaj tylko na wybranych sieciach Wi-Fi: %1$s</string>
-    <string name="run_on_all_wifi_networks">Uruchom na wszystkich sieciach Wi-Fi.</string>
+    <string name="run_on_all_wifi_networks">Działaj na wszystkich sieciach Wi-Fi.</string>
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Włącz Wi-Fi dla wybranych sieci.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Podłącz się do sieci Wi-Fi, aby dodać ją do listy.</string>
-    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Musisz przyznać uprawnienia do Lokalizacji, aby używać tej funkcji.</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Musisz przyznać uprawnienia dostępu do lokalizacji, aby używać tej funkcji.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Wymagane uprawnienie</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Od Androida 8.1 dostęp do lokalizacji jest wymagany, aby odczytać nazwę sieci Wi-Fi. Możesz używać tej funkcji tylko po przyznaniu uprawnień do lokalizacji.</string>
     <string name="power_source_title">Uruchom, gdy urządzenie jest zasilane przez</string>
@@ -244,7 +244,7 @@
     <!--Preferences - Behaviour-->
     <string name="advanced_folder_picker">Używaj zaawansowanego wybierania folderów</string>
     <string name="advanced_folder_picker_summary">Wybierz dowolny folder na urządzeniu do synchronizacji</string>
-    <string name="use_root_title">Uruchamiaj Syncthing jako superuser</string>
+    <string name="use_root_title">Uruchamiaj Syncthing jako superużytkownik</string>
     <string name="use_root_summary">To jest niestabilna funkcja, która może sprawiać problemy z Syncthing i urządzeniami. W przypadku napotkania błędów możliwe, że niezbędne będzie przeinstalowanie programu.</string>
     <string name="notification_type_title">Powiadomienie</string>
     <string name="notification_type_summary">Wybierz rodzaj powiadomienia</string>
@@ -287,10 +287,10 @@
     <string name="global_announce_server">Serwery odnajdywania globalnego</string>
     <string name="enable_relaying">Włącz przekazywanie</string>
     <string name="usage_reporting">Anonimowe statystyki użycia</string>
-    <string name="gui_address">Adres nasłuchu GUI</string>
+    <string name="gui_address">Adres nasłuchu interfejsu sieciowego</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Cofnij ignorowanie urządzeń i folderów</string>
-    <string name="undo_ignored_devices_folders_question">To cofnie wcześniejsze decyzje o ignorowaniu urządzeń i folderów. Kontynuować\?</string>
+    <string name="undo_ignored_devices_folders_question">To cofnie wcześniejsze decyzje o ignorowaniu urządzeń i folderów. Kontynuować?</string>
     <string name="undo_ignored_devices_folders_done">Pomyślnie cofnięto decyzje.</string>
     <string name="export_config">Eksportuj ustawienia</string>
     <!--Toast after entering invalid integer value-->
@@ -444,12 +444,12 @@
     <string name="syncthing_disabled_reason_on_charger">Urządzenie działa na ładowarce</string>
     <string name="syncthing_disabled_reason_powersaving">Urządzenie działa w trybie oszczędzania energii</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Globalna synchronizacja jest wyłączona</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Obecny SSID Wi-Fi nie jest na liście</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Bieżącego identyfikatora Wi-Fi SSID nie ma na białej liście lub uprawnienia do lokalizacji są ograniczone</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Obecne Wi-Fi jest na limitowanym połączeniu</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Brak połączenia z siecią lub włączony tryb samolotowy</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Brak połączenia z siecią komórkową</string>
     <string name="syncthing_disabled_reason_no_wifi_connection">Brak połączenia z Wi-Fi</string>
-    <string name="syncthing_disabled_reason_no_allowed_method">Brak konfiguracji do synchronizacji na WiFi albo sieci komórkowej</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Brak konfiguracji do synchronizacji na Wi-Fi albo sieci komórkowej</string>
     <!--Title of the notification shown while syncthing is running and enabled-->
     <string name="syncthing_active">Syncthing jest uruchomiony</string>
     <string name="syncthing_disabled">Syncthing jest wyłączony</string>
@@ -538,8 +538,8 @@
     <string name="command">Polecenie</string>
     <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
     <string name="keep_versions_description">Liczba starszych wersji każdego pliku, które należy zachować.</string>
-    <string name="simple_file_versioning_description">Pliki są przenoszone do oznaczonych datą wersji w folderze .stversions przy modyfikacji lub usuwaniu przez Syncthing.</string>
-    <string name="trashcan_versioning_description">Pliki przenoszone są do folderu .stversions, gdy są zmieniane lub usuwane przez Syncthing.</string>
+    <string name="simple_file_versioning_description">Pliki zmienione lub usunięte przez Syncthing są datowane i przenoszone do katalogu .stversions.</string>
+    <string name="trashcan_versioning_description">Pliki zmienione lub usunięte przez Syncthing są przenoszone do katalogu .stversions.</string>
     <string name="staggered_versioning_description">Pliki są przenoszone do folderu .stversions, oraz dodawana jest do nich data. Dzieje się to, kiedy pliki są zmieniane lub usuwane przez Syncthing. Wersje są automatycznie usuwane, jeśli są starsze niż maksymalny wiek lub przekraczają liczbę plików dopuszczalną w interwale.
 \n
 \nNastępujące interwaly są używane: przez pierwszą godzinę, wersja jest zapisywana przez każde 30 sekund, przez pierwszy dzień wersja jest trzymana co godzinę, przez pierwsze 30 dni wersja jest trzymana z każdego dnia, dopóki maksymalny wiek nie zostanie osiągnięty (sprawdzane co tydzień).</string>
