@@ -429,7 +429,7 @@
     <string name="syncthing_disabled_reason_on_charger">设备正在充电</string>
     <string name="syncthing_disabled_reason_powersaving">设备正在节电模式下运行</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">全局同步已禁用</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">当前 WiFi SSID 未在白名单内</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">当前 WiFi SSID 未在白名单内或位置权限受到限制</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">当前 WiFi 会计费</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">没有网络连接或飞行模式已打开</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">未连接移动数据</string>
