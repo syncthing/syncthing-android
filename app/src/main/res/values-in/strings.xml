@@ -52,7 +52,7 @@
     <string name="dialog_disable_battery_optimizations_not_supported">Perangkat anda tidak mendukung untuk mematikan optimisasi baterai</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Memuat...</string>
+    <string name="api_loading">Memuat…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Membuat kunci aman. Ini mungkin perlu beberapa menit.</string>
     <string name="syncthing_loading_slow_message">Syncthing butuh waktu terlalu lama untuk membuka. Silakan lihat log untuk memeriksa kesalahan.</string>
@@ -279,7 +279,7 @@
     <string name="view_android_log">Lihat Log Android</string>
     <!--Title of the "log Syncthing" menu button-->
     <string name="view_syncthing_log">Lihat Log Syncthing</string>
-    <string name="retrieving_logs">Memuat log...</string>
+    <string name="retrieving_logs">Memuat log…</string>
     <!--Title of the "share log" menu button-->
     <string name="share_title">Bagikan</string>
     <!--ShareActivity-->
@@ -306,7 +306,7 @@
     <!--Copy exception toast-->
     <string name="copy_exception">Ada kesalahan saat berbagi, periksa log aplikasi</string>
     <!--Copy progress dialog text-->
-    <string name="copy_progress">Berbagi berkas...</string>
+    <string name="copy_progress">Berbagi berkas…</string>
     <plurals name="file_name_title">
         <item quantity="other">Daftar Berkas</item>
     </plurals>
