@@ -213,19 +213,19 @@
     <string name="run_on_all_wifi_networks">In allen WLAN-Netzwerken starten.</string>
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Bitte WLAN aktivieren, um ein Netzwerk zu wählen.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Bitte verbinde Dich mit einem W-Lan, um dieses der Liste hinzuzufügen.</string>
-    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bitte gewähre die Standortberechtigung, um diese Funktion nutzen zu können.</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bitte die Standortberechtigung erteilen, um diese Funktion nutzen zu können.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Berechtigung benötigt</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Ab Android 8.1 ist der Standortzugriff erforderlich, um WLAN-Namen ermitteln zu können. Daher kann diese Funktion nur genutzt werden, wenn diese Berechtigung erteilt wird.</string>
-    <string name="power_source_title">Ausführen bei Gerätebetrieb über</string>
+    <string name="power_source_title">Ausführen, wenn Gerät versorgt wird über</string>
     <string-array name="power_source_entries">
         <item>Ladegerät und Akku</item>
         <item>Ladegerät</item>
         <item>Akku</item>
     </string-array>
     <string name="respect_battery_saving_title">Android-Energiesparmodus berücksichtigen</string>
-    <string name="respect_battery_saving_summary">Syncthing bei aktivem Energiesparmodus anhalten.</string>
-    <string name="respect_master_sync_title">\"Autom. Datensynchronisierung\" berücksichtigen</string>
-    <string name="respect_master_sync_summary">Syncthing anhalten, sobald die \"Automatische Datensynchronisierung\" in Android ausgeschaltet wird.</string>
+    <string name="respect_battery_saving_summary">Syncthing anhalten, während der Energiesparmodus aktiv ist.</string>
+    <string name="respect_master_sync_title">„Autom. Datensynchronisierung“ berücksichtigen</string>
+    <string name="respect_master_sync_summary">Stoppt Syncthing sobald die „Automatische Datensynchronisierung“ in Android ausgeschaltet wird.</string>
     <string name="run_in_flight_mode_title">Im Flugmodus ausführen</string>
     <string name="run_in_flight_mode_summary">Durch Aktivieren der Option wird Syncthing auch dann laufen, wenn du offline bist. Aktiviere dies, wenn dein Telefon Probleme beim Erkennen von manuell hergestellten WLAN-Verbindungen im Flugmodus hat.</string>
     <string name="service_settings_title">Diensteinstellung</string>
@@ -294,8 +294,8 @@
     <string name="use_proxy">Über einen Proxy verbinden</string>
     <string name="do_not_use_proxy">Kein Proxy eingestellt.</string>
     <string name="keep_wakelock_while_binary_running">Prozessor wach halten, während Syncthing läuft</string>
-    <string name="keep_wakelock_while_binary_running_summary">Nutze diese Einstellung, wenn du unerwartete Verbindungsabbrüche feststellst, während du im Akkubetrieb arbeitest. Das wird zu einem erhöhten Energieverbrauch führen.</string>
-    <string name="use_tor_title">Tor benutzen</string>
+    <string name="keep_wakelock_while_binary_running_summary">Diese Einstellung sollte verwendet werden, wenn es im Akkubetrieb zu unerwarteten Verbindungsabbrüchen kommt. Dies führt zu einem erhöhten Batterieverbrauch.</string>
+    <string name="use_tor_title">Tor verwenden</string>
     <string name="use_tor_summary">Der gesamte Netzwerkverkehr wird zur Erhöhung der Privatsphäre über Tor geleitet. Benötigt Orbot. Deaktiviert die Proxy-Optionen.</string>
     <string name="socks_proxy_address_title">SOCKS5-Proxy</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
@@ -433,7 +433,7 @@
     <string name="syncthing_disabled_reason_on_charger">Das Gerät wird geladen</string>
     <string name="syncthing_disabled_reason_powersaving">Das Gerät ist im Energiesparmodus</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Globale Synchronisierung ist deaktiviert</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Die SSID des aktuellen WLANs ist nicht auf der Whitelist oder keine Standortberechtigung erteilt</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Die SSID des aktuellen WLANs ist nicht auf der Whitelist oder es wurde keine Standortberechtigung erteilt</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Die aktuelle WLAN-Verbindung ist getaktet</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Keine Netzwerkverbindung oder aktiver Flugmodus</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Keine Verbindung zu mobilem Internet</string>
