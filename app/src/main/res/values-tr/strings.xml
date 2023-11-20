@@ -211,14 +211,14 @@
     <string name="run_conditions_title">Çalıştırma koşullarını etkinleştir</string>
     <string name="run_conditions_summary">Syncthing\'in ne zaman çalışacağına karar vermek için aşağıdaki seçenekleri kullanın.</string>
     <string name="run_on_mobile_data_title">Mobil veride çalıştır</string>
-    <string name="run_on_mobile_data_summary">Cihaz mobil veri ağı üzerinden bağlandığında çalışır. Uyarı: Büyük miktarda veriyi eşitlerseniz bu, mobil operatör veri planınızdan çok fazla veri tüketebilir.</string>
+    <string name="run_on_mobile_data_summary">Cihaz mobil veri ağı üzerinden bağlandığında çalıştır. Uyarı: Büyük miktarda veriyi eşitlerseniz bu, mobil operatör veri planınızdan çok fazla veri tüketebilir.</string>
     <string name="run_on_wifi_title">Kablosuzda (Wi-Fi) çalıştır</string>
-    <string name="run_on_wifi_summary">Cihaz bir kablosuz (Wi-Fi) ağa bağlandığında çalışır.</string>
+    <string name="run_on_wifi_summary">Cihaz bir kablosuz (Wi-Fi) ağa bağlandığında çalıştır.</string>
     <string name="run_on_metered_wifi_title">Tarifeli kablosuzda (Wi-Fi) çalıştır</string>
-    <string name="run_on_metered_wifi_summary">Cihaz, örn. etkin nokta veya bağlı ağ gibi tarifeli bir kablosuz (Wi-Fi) ağa bağlıyken çalışır. Dikkat: Çok fazla veri eşitlerseniz, bu işlem veri planınızın büyük bir bölümünü tüketebilir.</string>
+    <string name="run_on_metered_wifi_summary">Cihaz tarifeli bir kablosuz (Wi-Fi) ağa bağlıyken çalıştır, örn. etkin nokta veya bağlı ağ. Dikkat: Çok fazla veri eşitlerseniz, bu işlem veri planınızın büyük bir bölümünü tüketebilir.</string>
     <string name="run_on_whitelisted_wifi_title">Belirtilen kablosuz (Wi-Fi) ağlarda çalıştır</string>
-    <string name="run_on_whitelisted_wifi_networks">Yalnızca seçilen kablosuz (Wi-Fi) ağlarda çalışır: %1$s</string>
-    <string name="run_on_all_wifi_networks">Tüm kablosuz (Wi-Fi) ağlarda çalışır.</string>
+    <string name="run_on_whitelisted_wifi_networks">Yalnızca seçilen kablosuz (Wi-Fi) ağlarda çalıştır: %1$s</string>
+    <string name="run_on_all_wifi_networks">Tüm kablosuz (Wi-Fi) ağlarda çalıştır.</string>
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağları seçmek için lütfen kablosuzu (Wi-Fi) açın.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Listeye eklemek için lütfen bir kablosuza (Wi-Fi) bağlanın.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bu özelliği kullanmak için KONUM izni vermeniz gerekiyor.</string>
@@ -434,19 +434,19 @@
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Ayarları Değiştir</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
-    <string name="exit">Çıkış</string>
+    <string name="exit">Çık</string>
     <!--Reasons for "syncthing disabled" dialog-->
     <string name="syncthing_disabled_reason_heading">Sebepler:</string>
     <string name="syncthing_disabled_reason_on_battery">Cihaz pille çalışıyor</string>
     <string name="syncthing_disabled_reason_on_charger">Cihaz şarj cihazıyla çalışıyor</string>
     <string name="syncthing_disabled_reason_powersaving">Cihaz güç tasarrufu modunda</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Genel Eşitleme etkisizleştirildi</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Şu anki WiFi SSID\'si beyaz listede değil veya konum izinleri kısıtlanmış</string>
-    <string name="syncthing_disabled_reason_wifi_is_metered">Şu anki WiFi tarifeli</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Şu anki kablosuz (Wi-Fi) SSID\'si beyaz listede değil veya konum izinleri kısıtlanmış</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">Şu anki kablosuz (Wi-Fi) tarifeli</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Ağ bağlantısı yok veya uçak modu etkinleştirildi</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Mobil veriye bağlı değil</string>
-    <string name="syncthing_disabled_reason_no_wifi_connection">WiFi\'ye bağlı değil</string>
-    <string name="syncthing_disabled_reason_no_allowed_method">WiFi ya da mobil veride eşitlemek için yapılandırılmamış</string>
+    <string name="syncthing_disabled_reason_no_wifi_connection">Kablosuza (Wi-Fi) bağlı değil</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Kablosuz (Wi-Fi) ya da mobil veride eşitlemek için yapılandırılmamış</string>
     <!--Title of the notification shown while syncthing is running and enabled-->
     <string name="syncthing_active">Syncthing çalışıyor</string>
     <string name="syncthing_disabled">Syncthing etkisizleştirildi</string>
