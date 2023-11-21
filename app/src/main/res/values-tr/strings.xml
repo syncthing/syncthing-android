@@ -443,7 +443,7 @@
     <string name="syncthing_disabled_reason_android_sync_disabled">Genel Eşitleme etkisizleştirildi</string>
     <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Şu anki kablosuz (Wi-Fi) SSID\'si beyaz listede değil veya konum izinleri kısıtlanmış</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Şu anki kablosuz (Wi-Fi) tarifeli</string>
-    <string name="syncthing_disabled_reason_no_network_or_flightmode">Ağ bağlantısı yok veya uçak modu etkinleştirildi</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">Ağ bağlantısı yok veya uçuş modu etkinleştirildi</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Mobil veriye bağlı değil</string>
     <string name="syncthing_disabled_reason_no_wifi_connection">Kablosuza (Wi-Fi) bağlı değil</string>
     <string name="syncthing_disabled_reason_no_allowed_method">Kablosuz (Wi-Fi) ya da mobil veride eşitlemek için yapılandırılmamış</string>
