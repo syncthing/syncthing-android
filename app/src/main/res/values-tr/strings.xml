@@ -170,11 +170,9 @@
     <!--Setting title-->
     <string name="compression">Sıkıştırma</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Asla</item>
-        <item>Üstveri</item>
-        <item>Her zaman</item>
-    </string-array>
+    <string name="compress_never">Asla</string>
+    <string name="compress_metadata">Üstveri</string>
+    <string name="compress_always">Her zaman</string>
     <!--Setting title-->
     <string name="introducer">Tanıtıcı</string>
     <!--Setting title-->
@@ -225,11 +223,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">İzin gerekli</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1\'den başlayarak, kablosuz (Wi-Fi) adını okuyabilmek için konum erişimi gereklidir. Bu özelliği yalnızca bu izni verirseniz kullanabilirsiniz.</string>
     <string name="power_source_title">Cihaza şununla güç verildiğinde çalıştır</string>
-    <string-array name="power_source_entries">
-        <item>Piriz ve pil gücü.</item>
-        <item>Piriz gücü.</item>
-        <item>Pil gücü.</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">Piriz ve pil gücü.</string>
+    <string name="power_source_ac_power">Piriz gücü.</string>
+    <string name="power_source_battery_power">Pil gücü.</string>
     <string name="respect_battery_saving_title">Android pil tasarrufu ayarına uy</string>
     <string name="respect_battery_saving_summary">Pil tasarrufu etkinse Syncthing\'i etkisizleştirir.</string>
     <string name="respect_master_sync_title">Android \'Verileri otomatik eşitle\' ayarına uy</string>
@@ -246,11 +242,9 @@
     <string name="use_root_summary">Bu, Syncting ve cihazınız ile sorunlara neden olabilen kararsız bir özelliktir. Eğer sorun yaşarsanız, Syncthing\'i yeniden yüklemeniz gerekebilir.</string>
     <string name="notification_type_title">Bildirim</string>
     <string name="notification_type_summary">Bildirim türünü seçin</string>
-    <string-array name="notification_type_entries">
-        <item>Normal</item>
-        <item>Düşük Öncelikli</item>
-        <item>Hiçbiri</item>
-    </string-array>
+    <string name="notification_type_normal">Normal</string>
+    <string name="notification_type_low_priority">Düşük Öncelikli</string>
+    <string name="notification_type_none">Hiçbiri</string>
     <string name="preference_language_title">Dil</string>
     <string name="preference_language_summary">Uygulama dilini değiştirin</string>
     <string name="start_into_web_gui_title">Doğrudan web GKA içinde başlat</string>
@@ -260,26 +254,20 @@
     <string name="preference_theme_option_light">Açık</string>
     <string name="preference_theme_option_dark">Koyu</string>
     <string name="pref_language_default">Varsayılan Dil</string>
-    <string-array name="folder_types">
-        <item>Gönder ve Al</item>
-        <item>Yalnızca Gönder</item>
-        <item>Yalnızca Al</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Rastgele</item>
-        <item>Alfabetik</item>
-        <item>Önce En Küçük Olan</item>
-        <item>Önce En Büyük Olan</item>
-        <item>Önce En Eski Olan</item>
-        <item>Önce En Yeni Olan</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Yok</item>
-        <item>Çöp Kutusu</item>
-        <item>Basit</item>
-        <item>Aşamalı</item>
-        <item>Harici</item>
-    </string-array>
+    <string name="folder_type_send_receive">Gönder ve Al</string>
+    <string name="folder_type_send_only">Yalnızca Gönder</string>
+    <string name="folder_type_receive_only">Yalnızca Al</string>
+    <string name="pull_order_random">Rastgele</string>
+    <string name="pull_order_alphabetic">Alfabetik</string>
+    <string name="pull_order_smallest_first">Önce En Küçük Olan</string>
+    <string name="pull_order_largest_first">Önce En Büyük Olan</string>
+    <string name="pull_order_oldest_first">Önce En Eski Olan</string>
+    <string name="pull_order_newest_first">Önce En Yeni Olan</string>
+    <string name="versioning_type_none">Yok</string>
+    <string name="versioning_type_trashcan">Çöp Kutusu</string>
+    <string name="versioning_type_simple">Basit</string>
+    <string name="versioning_type_staggered">Aşamalı</string>
+    <string name="versioning_type_external">Harici</string>
     <string name="device_name">Cihaz Adı</string>
     <string name="listen_address">Eşitleme Protokolü Dinleme Adresleri</string>
     <string name="max_recv_kbps">Gelen Hız Sınırı (KiB/s)</string>
@@ -474,21 +462,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Cihaz kimliği panoya kopyalandı</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Boşta</string>
     <string name="state_scanning">Taranıyor</string>

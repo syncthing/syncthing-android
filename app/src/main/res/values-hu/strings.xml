@@ -163,11 +163,9 @@
     <!--Setting title-->
     <string name="compression">Tömörítés</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Semmit</item>
-        <item>Csak metaadatot</item>
-        <item>Mindet</item>
-    </string-array>
+    <string name="compress_never">Semmit</string>
+    <string name="compress_metadata">Csak metaadatot</string>
+    <string name="compress_always">Mindet</string>
     <!--Setting title-->
     <string name="introducer">Bevezető</string>
     <!--Setting title-->
@@ -217,11 +215,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Hozzáférés szükséges</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Az Android 8.1-el kezdve helyzeti hozzáférés szükséges a Wi-Fi hálózat nevének olvasásához. Ezt a funkciót csak akkor használhatod, ha megadod ezt a hozzáférést.</string>
     <string name="power_source_title">Futtatás, amikor az eszköz energiaellátása</string>
-    <string-array name="power_source_entries">
-        <item>AC tápellátás és akkumulátor.</item>
-        <item>AC tápellátás.</item>
-        <item>Akkumulátor.</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">AC tápellátás és akkumulátor.</string>
+    <string name="power_source_ac_power">AC tápellátás.</string>
+    <string name="power_source_battery_power">Akkumulátor.</string>
     <string name="respect_battery_saving_title">Az Android akkumulátor-optimalizáció beállításainak tiszteletben tartása</string>
     <string name="respect_battery_saving_summary">Syncthing tiltása, ha az akkumulátor-optimalizáció aktív</string>
     <string name="respect_master_sync_title">Az Android \'Automatikus adat szinkronizálás\' beállítás tiszteletben tartása</string>
@@ -238,11 +234,9 @@
     <string name="use_root_summary">Ez egy kísérleti funkció, amely problémákat okozhat mind a Syncthing, mind az eszközöd számára. Ha ilyenbe ütközöl, előfordulhat, hogy újra kell telepítened az alkalmazást.</string>
     <string name="notification_type_title">Értesítés</string>
     <string name="notification_type_summary">Értesítés típusának kiválasztása</string>
-    <string-array name="notification_type_entries">
-        <item>Normál</item>
-        <item>Alacsony prioritású</item>
-        <item>Semmilyen</item>
-    </string-array>
+    <string name="notification_type_normal">Normál</string>
+    <string name="notification_type_low_priority">Alacsony prioritású</string>
+    <string name="notification_type_none">Semmilyen</string>
     <string name="preference_language_title">Nyelv</string>
     <string name="preference_language_summary">Alkalmazás nyelvének megváltoztatása</string>
     <string name="start_into_web_gui_title">A webes felület legyen a kezdőképernyő</string>
@@ -252,26 +246,20 @@
     <string name="preference_theme_option_light">Világos</string>
     <string name="preference_theme_option_dark">Sötét</string>
     <string name="pref_language_default">Alapértelmezett nyelv</string>
-    <string-array name="folder_types">
-        <item>Küldés és fogadás</item>
-        <item>Csak küldés</item>
-        <item>Csak fogadás</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Véletlen</item>
-        <item>Betűrendben</item>
-        <item>Kisebb előbb</item>
-        <item>Nagyobb előbb</item>
-        <item>Régebbi előbb</item>
-        <item>Újabb előbb</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Kikapcsolva</item>
-        <item>Lomtár</item>
-        <item>Egyszerű</item>
-        <item>Lépcsőzetes</item>
-        <item>Külső</item>
-    </string-array>
+    <string name="folder_type_send_receive">Küldés és fogadás</string>
+    <string name="folder_type_send_only">Csak küldés</string>
+    <string name="folder_type_receive_only">Csak fogadás</string>
+    <string name="pull_order_random">Véletlen</string>
+    <string name="pull_order_alphabetic">Betűrendben</string>
+    <string name="pull_order_smallest_first">Kisebb előbb</string>
+    <string name="pull_order_largest_first">Nagyobb előbb</string>
+    <string name="pull_order_oldest_first">Régebbi előbb</string>
+    <string name="pull_order_newest_first">Újabb előbb</string>
+    <string name="versioning_type_none">Kikapcsolva</string>
+    <string name="versioning_type_trashcan">Lomtár</string>
+    <string name="versioning_type_simple">Egyszerű</string>
+    <string name="versioning_type_staggered">Lépcsőzetes</string>
+    <string name="versioning_type_external">Külső</string>
     <string name="device_name">Eszköz neve</string>
     <string name="listen_address">IP cím a szinkronizáláshoz</string>
     <string name="max_recv_kbps">Max letöltési sebesség (KiB/s)</string>
@@ -466,21 +454,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Az eszközazonosító a vágólapra másolva</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Tétlen</string>
     <string name="state_scanning">Vizsgálat</string>

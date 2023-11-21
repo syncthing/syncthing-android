@@ -156,11 +156,9 @@
     <!--Setting title-->
     <string name="compression">압축</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>하지 않음</item>
-        <item>메타데이터</item>
-        <item>항상</item>
-    </string-array>
+    <string name="compress_never">하지 않음</string>
+    <string name="compress_metadata">메타데이터</string>
+    <string name="compress_always">항상</string>
     <!--Setting title-->
     <string name="introducer">소개자</string>
     <!--Setting title-->
@@ -208,11 +206,9 @@
     <string name="use_root_summary">이 기능은 불안정하며 Syncthing과 기기에 문제를 일으킬 수 있습니다. 문제가 발생한 경우 Syncthing을 재설치 해야 할 수도 있습니다.</string>
     <string name="notification_type_title">알림</string>
     <string name="notification_type_summary">알림 유형을 선택하십시오</string>
-    <string-array name="notification_type_entries">
-        <item>일반</item>
-        <item>우선 순위 낮음</item>
-        <item>사용 안 함</item>
-    </string-array>
+    <string name="notification_type_normal">일반</string>
+    <string name="notification_type_low_priority">우선 순위 낮음</string>
+    <string name="notification_type_none">사용 안 함</string>
     <string name="preference_language_title">언어</string>
     <string name="preference_language_summary">앱 언어 변경</string>
     <string name="start_into_web_gui_title">웹 GUI로 바로 시작</string>
@@ -222,26 +218,20 @@
     <string name="preference_theme_option_light">밝은 색</string>
     <string name="preference_theme_option_dark">어두운 색</string>
     <string name="pref_language_default">기본 언어</string>
-    <string-array name="folder_types">
-        <item>송수신</item>
-        <item>송신 전용</item>
-        <item>수신 전용</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>무작위</item>
-        <item>가나다순</item>
-        <item>작은 파일 순</item>
-        <item>큰 파일 순</item>
-        <item>오랜 파일 순</item>
-        <item>최신 파일 순</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>없음</item>
-        <item>휴지통</item>
-        <item>단순</item>
-        <item>시차체</item>
-        <item>외부</item>
-    </string-array>
+    <string name="folder_type_send_receive">송수신</string>
+    <string name="folder_type_send_only">송신 전용</string>
+    <string name="folder_type_receive_only">수신 전용</string>
+    <string name="pull_order_random">무작위</string>
+    <string name="pull_order_alphabetic">가나다순</string>
+    <string name="pull_order_smallest_first">작은 파일 순</string>
+    <string name="pull_order_largest_first">큰 파일 순</string>
+    <string name="pull_order_oldest_first">오랜 파일 순</string>
+    <string name="pull_order_newest_first">최신 파일 순</string>
+    <string name="versioning_type_none">없음</string>
+    <string name="versioning_type_trashcan">휴지통</string>
+    <string name="versioning_type_simple">단순</string>
+    <string name="versioning_type_staggered">시차체</string>
+    <string name="versioning_type_external">외부</string>
     <string name="device_name">기기명</string>
     <string name="listen_address">동기화 규약 대기 주소</string>
     <string name="max_recv_kbps">수신 속도 제한 (KiB/s)</string>
@@ -411,21 +401,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">기기 ID가 클립보드에 복사되었습니다</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">대기</string>
     <string name="state_scanning">스캔 중</string>

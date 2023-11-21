@@ -162,11 +162,9 @@
     <!--Setting title-->
     <string name="compression">压缩</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>从不</item>
-        <item>元数据</item>
-        <item>总是</item>
-    </string-array>
+    <string name="compress_never">从不</string>
+    <string name="compress_metadata">元数据</string>
+    <string name="compress_always">总是</string>
     <!--Setting title-->
     <string name="introducer">介绍人</string>
     <!--Setting title-->
@@ -216,11 +214,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">需要权限</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">从Android 8.1开始，读取Wi-Fi名称需要获取位置权限。只有授予此权限，才能使用此功能。</string>
     <string name="power_source_title">处于该设备供电方式时运行</string>
-    <string-array name="power_source_entries">
-        <item>交流电源或电池电量。</item>
-        <item>交流电源。</item>
-        <item>电池电量。</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">交流电源或电池电量。</string>
+    <string name="power_source_ac_power">交流电源。</string>
+    <string name="power_source_battery_power">电池电量。</string>
     <string name="respect_battery_saving_title">遵循 Android 电池省电模式设置</string>
     <string name="respect_battery_saving_summary">省电模式启动时禁用 Syncthing。</string>
     <string name="respect_master_sync_title">遵从安卓系统“自动同步数据”的设置</string>
@@ -237,11 +233,9 @@
     <string name="use_root_summary">该项功能不稳定，可能导致您的设备和 Syncthing 出问题。如果遇到了问题，您可能要重新安装 Syncthing。</string>
     <string name="notification_type_title">通知</string>
     <string name="notification_type_summary">选择通知类型</string>
-    <string-array name="notification_type_entries">
-        <item>常规</item>
-        <item>低优先级</item>
-        <item>隐藏</item>
-    </string-array>
+    <string name="notification_type_normal">常规</string>
+    <string name="notification_type_low_priority">低优先级</string>
+    <string name="notification_type_none">隐藏</string>
     <string name="preference_language_title">语言</string>
     <string name="preference_language_summary">更改应用语言</string>
     <string name="start_into_web_gui_title">启动直接进入 Web GUI</string>
@@ -251,26 +245,20 @@
     <string name="preference_theme_option_light">浅色</string>
     <string name="preference_theme_option_dark">深色</string>
     <string name="pref_language_default">默认语言</string>
-    <string-array name="folder_types">
-        <item>发送和接收</item>
-        <item>仅发送</item>
-        <item>仅接收</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>随机</item>
-        <item>字母</item>
-        <item>最小优先</item>
-        <item>最大优先</item>
-        <item>最旧优先</item>
-        <item>最新优先</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>无</item>
-        <item>垃圾桶</item>
-        <item>简单</item>
-        <item>交错</item>
-        <item>外部</item>
-    </string-array>
+    <string name="folder_type_send_receive">发送和接收</string>
+    <string name="folder_type_send_only">仅发送</string>
+    <string name="folder_type_receive_only">仅接收</string>
+    <string name="pull_order_random">随机</string>
+    <string name="pull_order_alphabetic">字母</string>
+    <string name="pull_order_smallest_first">最小优先</string>
+    <string name="pull_order_largest_first">最大优先</string>
+    <string name="pull_order_oldest_first">最旧优先</string>
+    <string name="pull_order_newest_first">最新优先</string>
+    <string name="versioning_type_none">无</string>
+    <string name="versioning_type_trashcan">垃圾桶</string>
+    <string name="versioning_type_simple">简单</string>
+    <string name="versioning_type_staggered">交错</string>
+    <string name="versioning_type_external">外部</string>
     <string name="device_name">设备名称</string>
     <string name="listen_address">同步协议监听地址</string>
     <string name="max_recv_kbps">下载限速（KiB/s）</string>
@@ -462,21 +450,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">设备标识已复制到剪贴板</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">空闲</string>
     <string name="state_scanning">正在扫描</string>

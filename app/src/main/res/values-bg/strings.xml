@@ -163,11 +163,9 @@
     <!--Setting title-->
     <string name="compression">Компресиране</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Изключено</item>
-        <item>Само мета информацията</item>
-        <item>Всички данни</item>
-    </string-array>
+    <string name="compress_never">Изключено</string>
+    <string name="compress_metadata">Само мета информацията</string>
+    <string name="compress_always">Всички данни</string>
     <!--Setting title-->
     <string name="introducer">Може да предлага други устройства</string>
     <!--Setting title-->
@@ -217,11 +215,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Необходимо е резрешение</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">От Android 8.1 нататък се изисква достъп до местоположението, за да бъде прочетен идентификатора на безжичната мрежа. Можете да използвате тази възможност само ако сте предоставили това разрешение.</string>
     <string name="power_source_title">Работи при захранване от</string>
-    <string-array name="power_source_entries">
-        <item>Батерия или зарядно.</item>
-        <item>Зарядно.</item>
-        <item>Батерия.</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">Батерия или зарядно.</string>
+    <string name="power_source_ac_power">Зарядно.</string>
+    <string name="power_source_battery_power">Батерия.</string>
     <string name="respect_battery_saving_title">Ползване на настройката за пестене на батерия от Андроид</string>
     <string name="respect_battery_saving_summary">Спира Syncthing при включен режим за пестене на батерия.</string>
     <string name="respect_master_sync_title">Ползване на настройката за синхр. на данни от Андроид</string>
@@ -238,11 +234,9 @@
     <string name="use_root_summary">Може да предизвика разнообразни проблеми със Syncthing и като цяло с устройството. При възникване на проблем може да се наложи преинсталиране на Syncthing.</string>
     <string name="notification_type_title">Известия</string>
     <string name="notification_type_summary">Изберете тип известия</string>
-    <string-array name="notification_type_entries">
-        <item>Нормални</item>
-        <item>С нисък приоритет</item>
-        <item>Без известия</item>
-    </string-array>
+    <string name="notification_type_normal">Нормални</string>
+    <string name="notification_type_low_priority">С нисък приоритет</string>
+    <string name="notification_type_none">Без известия</string>
     <string name="preference_language_title">Език</string>
     <string name="preference_language_summary">Смяна на езика на приложението</string>
     <string name="start_into_web_gui_title">Стартиране на уеб интерфейса</string>
@@ -252,26 +246,20 @@
     <string name="preference_theme_option_light">Светла</string>
     <string name="preference_theme_option_dark">Тъмна</string>
     <string name="pref_language_default">Стандартен език</string>
-    <string-array name="folder_types">
-        <item>Изпращане и получаване</item>
-        <item>Само изпращане</item>
-        <item>Само получаване</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Произволен</item>
-        <item>Азбучен ред</item>
-        <item>Първо най-малките</item>
-        <item> Първо най-големите</item>
-        <item>Първо най-старите</item>
-        <item>Първо най-новите</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Без</item>
-        <item>„Кошче за боклук“</item>
-        <item>Обикновени</item>
-        <item>Разпределени</item>
-        <item>Външно управление</item>
-    </string-array>
+    <string name="folder_type_send_receive">Изпращане и получаване</string>
+    <string name="folder_type_send_only">Само изпращане</string>
+    <string name="folder_type_receive_only">Само получаване</string>
+    <string name="pull_order_random">Произволен</string>
+    <string name="pull_order_alphabetic">Азбучен ред</string>
+    <string name="pull_order_smallest_first">Първо най-малките</string>
+    <string name="pull_order_largest_first"> Първо най-големите</string>
+    <string name="pull_order_oldest_first">Първо най-старите</string>
+    <string name="pull_order_newest_first">Първо най-новите</string>
+    <string name="versioning_type_none">Без</string>
+    <string name="versioning_type_trashcan">„Кошче за боклук“</string>
+    <string name="versioning_type_simple">Обикновени</string>
+    <string name="versioning_type_staggered">Разпределени</string>
+    <string name="versioning_type_external">Външно управление</string>
     <string name="device_name">Име на устройството</string>
     <string name="listen_address">Адрес за слушане на синхронизиращия протокол</string>
     <string name="max_recv_kbps">Ограничаване на скорост при изтегляне (KiB/s)</string>
@@ -466,21 +454,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Идентификаторът на устройството е копиран в клипборда</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">В готовност</string>
     <string name="state_scanning">Сканиране</string>

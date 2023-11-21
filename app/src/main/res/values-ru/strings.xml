@@ -165,11 +165,9 @@
     <!--Setting title-->
     <string name="compression">Сжатие</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Никогда</item>
-        <item>Метаданные</item>
-        <item>Всегда</item>
-    </string-array>
+    <string name="compress_never">Никогда</string>
+    <string name="compress_metadata">Метаданные</string>
+    <string name="compress_always">Всегда</string>
     <!--Setting title-->
     <string name="introducer">Рекомендатель</string>
     <!--Setting title-->
@@ -219,11 +217,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Требуется разрешение</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Начиная с Android 8.1, требуется доступ к местоположению, чтобы искать сети Wi-Fi. Пожалуйста, разрешите приложению этот доступ.</string>
     <string name="power_source_title">Работать при питании</string>
-    <string-array name="power_source_entries">
-        <item>От сети и батареи</item>
-        <item>От сети</item>
-        <item>От батареи</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">От сети и батареи</string>
+    <string name="power_source_ac_power">От сети</string>
+    <string name="power_source_battery_power">От батареи</string>
     <string name="respect_battery_saving_title">Учитывать настройки энергосбережения Android</string>
     <string name="respect_battery_saving_summary">Отключить Syncthing в режиме энергосбережения</string>
     <string name="respect_master_sync_title">Учитывать системную настройку автосинхронизации</string>
@@ -240,11 +236,9 @@
     <string name="use_root_summary">Это нестабильная опция, которая может вызвать проблемы и с Syncthing, и с вашим устройством. Если вы столкнётесь с проблемами, переустановите Syncthing.</string>
     <string name="notification_type_title">Уведомление</string>
     <string name="notification_type_summary">Выбор метода уведомления</string>
-    <string-array name="notification_type_entries">
-        <item>Нормально</item>
-        <item>Низкий</item>
-        <item>Никогда</item>
-    </string-array>
+    <string name="notification_type_normal">Нормально</string>
+    <string name="notification_type_low_priority">Низкий</string>
+    <string name="notification_type_none">Никогда</string>
     <string name="preference_language_title">Язык</string>
     <string name="preference_language_summary">Изменить язык приложения</string>
     <string name="start_into_web_gui_title">Использовать веб-интерфейс при старте</string>
@@ -254,26 +248,20 @@
     <string name="preference_theme_option_light">Светлая</string>
     <string name="preference_theme_option_dark">Тёмная</string>
     <string name="pref_language_default">Язык по умолчанию</string>
-    <string-array name="folder_types">
-        <item>Отправка и приём</item>
-        <item>Только отправка</item>
-        <item>Только приём</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Случайно</item>
-        <item>По алфавиту</item>
-        <item>Сначала маленькие</item>
-        <item>Сначала большие</item>
-        <item>Сначала старые</item>
-        <item>Сначала новые</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Отключить</item>
-        <item>Корзина</item>
-        <item>Простое</item>
-        <item>Ступенчатое</item>
-        <item>Внешнее</item>
-    </string-array>
+    <string name="folder_type_send_receive">Отправка и приём</string>
+    <string name="folder_type_send_only">Только отправка</string>
+    <string name="folder_type_receive_only">Только приём</string>
+    <string name="pull_order_random">Случайно</string>
+    <string name="pull_order_alphabetic">По алфавиту</string>
+    <string name="pull_order_smallest_first">Сначала маленькие</string>
+    <string name="pull_order_largest_first">Сначала большие</string>
+    <string name="pull_order_oldest_first">Сначала старые</string>
+    <string name="pull_order_newest_first">Сначала новые</string>
+    <string name="versioning_type_none">Отключить</string>
+    <string name="versioning_type_trashcan">Корзина</string>
+    <string name="versioning_type_simple">Простое</string>
+    <string name="versioning_type_staggered">Ступенчатое</string>
+    <string name="versioning_type_external">Внешнее</string>
     <string name="device_name">Имя устройства</string>
     <string name="listen_address">Прослушиваемые адреса для синхронизации</string>
     <string name="max_recv_kbps">Лимит скачивания (КиБ/с)</string>
@@ -474,21 +462,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">ID устройства скопирован в буфер обмена</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>Б</item>
-        <item>КиБ</item>
-        <item>МиБ</item>
-        <item>ГиБ</item>
-        <item>ТиБ</item>
-    </string-array>
+    <string name="file_size_unit_B">Б</string>
+    <string name="file_size_unit_KiB">КиБ</string>
+    <string name="file_size_unit_MiB">МиБ</string>
+    <string name="file_size_unit_GiB">ГиБ</string>
+    <string name="file_size_unit_TiB">ТиБ</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>Б/с</item>
-        <item>КиБ/с</item>
-        <item>МиБ/с</item>
-        <item>ГиБ/с</item>
-        <item>ТиБ/с</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">Б/с</string>
+    <string name="transfer_rate_unit_KiB_s">КиБ/с</string>
+    <string name="transfer_rate_unit_MiB_s">МиБ/с</string>
+    <string name="transfer_rate_unit_GiB_s">ГиБ/с</string>
+    <string name="transfer_rate_unit_TiB_s">ТиБ/с</string>
     <!--Possible folder states-->
     <string name="state_idle">Бездействие</string>
     <string name="state_scanning">Сканирование</string>
