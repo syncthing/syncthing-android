@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Syncthing</string>
-    <string name="app_description">개방적이고 믿을 수 있는 분산형 파일 동기화 응용 프로그램</string>
+    <string name="app_description">믿을 수 있는 오픈소스 분산형 파일 동기화 애플리케이션</string>
     <!--FirstStartActivity-->
     <!--Title for dialog displayed on first start-->
     <string name="welcome_title">Android용 Syncthing에 어서 오십시오</string>
@@ -53,7 +53,7 @@
     <string name="dialog_disable_battery_optimization_later">나중에</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
-    <string name="dialog_disable_battery_optimizations_not_supported">기기가 배터리 최적화 비활성화를 지원하지 않습니다.</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">이 기기는 배터리 최적화 비활성화를 지원하지 않습니다</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
     <string name="api_loading">로드 중…</string>
@@ -132,7 +132,7 @@
     <!--Dialog shown when attempting to remove a folder-->
     <string name="remove_folder_confirm">이 폴더를 정말로 Syncthing에서 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
-    <string name="folder_id_required">폴더 ID는 공백으로 둘 수 없습니다.</string>
+    <string name="folder_id_required">폴더 식별자는 공백으로 둘 수 없습니다.</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
     <string name="dialog_discard_changes">설정 변경을 취소합니까\?</string>
@@ -175,7 +175,7 @@
     <!--Dialog shown when attempting to remove a device-->
     <string name="remove_device_confirm">이 기기를 정말로 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
-    <string name="device_id_required">기기명을 공백으로 둘 수 없습니다.</string>
+    <string name="device_id_required">기기 식별자는 공백으로 둘 수 없습니다</string>
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">QR 코드 스캔</string>
     <!--Toast show if we could not get root permissions-->
@@ -216,7 +216,7 @@
     <string name="preference_language_title">언어</string>
     <string name="preference_language_summary">앱 언어 변경</string>
     <string name="start_into_web_gui_title">웹 GUI로 바로 시작</string>
-    <string name="start_into_web_gui_summary">앱을 시작할 때 기본 화면 대신 웹 GUI로 엽니다.</string>
+    <string name="start_into_web_gui_summary">애플리케이션을 실행할 때 기본 화면 대신 웹 GUI 열기</string>
     <string name="preference_theme_title">테마</string>
     <string name="preference_theme_follow_system">운영 체제에 따름</string>
     <string name="preference_theme_option_light">밝은 색</string>
@@ -270,13 +270,13 @@
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
     <string name="use_legacy_hashing_title">예전 해시 방식 사용</string>
-    <string name="use_legacy_hashing_summary">호환성을 위해 Syncthing이 예전 해시 방식을 사용하도록 합니다.</string>
+    <string name="use_legacy_hashing_summary">호환성을 위해 예전 해시 방식 사용 강제</string>
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">정말로 설정을 내보내시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.
 \n
 \n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까\? 현재 존재하는 파일이 덮어쓰기됩니다.`</string>
+    <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 기존 파일이 덮어쓰입니다.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
     <string name="import_config">설정 불러오기</string>
@@ -358,7 +358,7 @@
     <string name="nothing_share">공유 할 것이 없음</string>
     <!--Copy success toast partially-->
     <plurals name="copy_success_partially">
-        <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사 되었습니다, %3$d는 이미 존재 합니다.</item>
+        <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사되었습니다. %3$d는 이미 존재합니다.</item>
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
@@ -499,4 +499,7 @@
     <string name="browse">탐색</string>
     <string name="no_sub_folder_is_selected">하위 폴더가 선택되지 않았습니다</string>
     <string name="share_device_id_chooser">기기 식별자 공유</string>
+    <string name="run_conditions_title">실행 조건 활성화</string>
+    <string name="api_level_30_title">업그레이드 정보</string>
+    <string name="api_level_30_button">데이터베이스 초기화</string>
 </resources>
