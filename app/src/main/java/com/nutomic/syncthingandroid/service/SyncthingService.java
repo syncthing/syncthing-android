@@ -692,8 +692,7 @@ public class SyncthingService extends Service {
         File publicKey = new File(Constants.EXPORT_PATH, Constants.PUBLIC_KEY_FILE);
         File httpsCert = new File(Constants.EXPORT_PATH, Constants.HTTPS_CERT_FILE);
         File httpsKey = new File(Constants.EXPORT_PATH, Constants.HTTPS_KEY_FILE);
-        if (!config.exists() || !privateKey.exists() || !publicKey.exists() || !httpsCert.exists()
-                || !httpsKey.exists())
+        if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
         shutdown(State.INIT, () -> {
             try {
