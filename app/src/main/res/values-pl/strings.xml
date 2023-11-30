@@ -172,11 +172,9 @@
     <!--Setting title-->
     <string name="compression">Kompresja</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Nigdy</item>
-        <item>Metadane</item>
-        <item>Zawsze</item>
-    </string-array>
+    <string name="compress_never">Nigdy</string>
+    <string name="compress_metadata">Metadane</string>
+    <string name="compress_always">Zawsze</string>
     <!--Setting title-->
     <string name="introducer">Wprowadzający</string>
     <!--Setting title-->
@@ -227,11 +225,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Wymagane uprawnienie</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Od Androida 8.1 dostęp do lokalizacji jest wymagany, aby odczytać nazwę sieci Wi-Fi. Możesz używać tej funkcji tylko po przyznaniu uprawnień do lokalizacji.</string>
     <string name="power_source_title">Uruchom, gdy urządzenie jest zasilane przez</string>
-    <string-array name="power_source_entries">
-        <item>Zasilanie sieciowe i bateryjne.</item>
-        <item>Zasilanie sieciowe.</item>
-        <item>Zasilanie bateryjne.</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">Zasilanie sieciowe i bateryjne.</string>
+    <string name="power_source_ac_power">Zasilanie sieciowe.</string>
+    <string name="power_source_battery_power">Zasilanie bateryjne.</string>
     <string name="respect_battery_saving_title">Uszanuj ustawienia oszczędzania baterii systemu Android</string>
     <string name="respect_battery_saving_summary">Wyłącz Syncthing, gdy aktywne jest oszczędzanie baterii.</string>
     <string name="respect_master_sync_title">Uszanuj ustawienie „Automatyczna synchronizacja danych” systemu Android</string>
@@ -257,26 +253,20 @@
     <string name="preference_theme_option_light">Jasny</string>
     <string name="preference_theme_option_dark">Ciemny</string>
     <string name="pref_language_default">Domyślny język</string>
-    <string-array name="folder_types">
-        <item>Wyślij i odbierz</item>
-        <item>Tylko wyślij</item>
-        <item>Tylko odbierz</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Losowo</item>
-        <item>Alfabetycznie</item>
-        <item>Od najmniejszych</item>
-        <item>Od największych</item>
-        <item>Od najstarszych</item>
-        <item>Od najnowszych</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Brak</item>
-        <item>Kosz</item>
-        <item>Proste</item>
-        <item>Rozbudowane</item>
-        <item>Zewnętrzne</item>
-    </string-array>
+    <string name="folder_type_send_receive">Wyślij i odbierz</string>
+    <string name="folder_type_send_only">Tylko wyślij</string>
+    <string name="folder_type_receive_only">Tylko odbierz</string>
+    <string name="pull_order_random">Losowo</string>
+    <string name="pull_order_alphabetic">Alfabetycznie</string>
+    <string name="pull_order_smallest_first">Od najmniejszych</string>
+    <string name="pull_order_largest_first">Od największych</string>
+    <string name="pull_order_oldest_first">Od najstarszych</string>
+    <string name="pull_order_newest_first">Od najnowszych</string>
+    <string name="versioning_type_none">Brak</string>
+    <string name="versioning_type_trashcan">Kosz</string>
+    <string name="versioning_type_simple">Proste</string>
+    <string name="versioning_type_staggered">Rozbudowane</string>
+    <string name="versioning_type_external">Zewnętrzne</string>
     <string name="device_name">Nazwa urządzenia</string>
     <string name="listen_address">Adres nasłuchu protokołu synchronizacji</string>
     <string name="max_recv_kbps">Ograniczenie prędkości pobierania (KiB/s)</string>
@@ -477,21 +467,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Skopiowano do schowka identyfikator urządzenia</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Bezczynny</string>
     <string name="state_scanning">Skanowanie</string>

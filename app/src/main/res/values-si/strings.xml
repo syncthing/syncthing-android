@@ -110,11 +110,9 @@
     <string name="current_address">වත්මන් ලිපිනය</string>
     <!--Setting title-->
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>කවදාවත්</item>
-        <item>පාරදත්ත</item>
-        <item>සැමවිට</item>
-    </string-array>
+    <string name="compress_never">කවදාවත්</string>
+    <string name="compress_metadata">පාරදත්ත</string>
+    <string name="compress_always">සැමවිට</string>
     <!--Setting title-->
     <!--Setting title-->
     <!--ActionBar item-->
