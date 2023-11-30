@@ -84,7 +84,7 @@
     </plurals>
     <string name="override_changes">Nadpisz zmiany</string>
     <string name="open_file_manager">Otwórz menedżer plików</string>
-    <string name="toast_no_file_manager">Nie znaleziono kompatybilnego menadżera plików</string>
+    <string name="toast_no_file_manager">Nie znaleziono kompatybilnego menedżera plików</string>
     <!--DevicesFragment-->
     <string name="devices_fragment_title">Urządzenia</string>
     <!--Shown if no devices exist-->
@@ -554,7 +554,7 @@
     <string name="require_notification_permission_desc">Wymagane do wyświetlania powiadomień dotyczących nowych połączeń urządzeń, żądań udostępnienia folderów itp.</string>
     <string name="notification_permission_title">Zezwolenie na powiadomienia</string>
     <string name="enable_notification_permission">Włącz zezwolenie na powiadomienia</string>
-    <string name="notification_type_normal">Normalny</string>
+    <string name="notification_type_normal">Normalne</string>
     <string name="notification_type_none">Brak</string>
     <string name="notification_type_low_priority">Niski priorytet</string>
 </resources>
