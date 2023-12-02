@@ -699,10 +699,16 @@ public class SyncthingService extends Service {
                 Files.copy(config, Constants.getConfigFile(this));
                 Files.copy(privateKey, Constants.getPrivateKeyFile(this));
                 Files.copy(publicKey, Constants.getPublicKeyFile(this));
-                Files.copy(httpsCert, Constants.getHttpsCertFile(this));
-                Files.copy(httpsKey, Constants.getHttpsKeyFile(this));
             } catch (IOException e) {
                 Log.w(TAG, "Failed to import config", e);
+            }
+            if (httpsCert.exists() && httpsKey.exists()) {
+                try {
+                    Files.copy(httpsCert, Constants.getHttpsCertFile(this));
+                    Files.copy(httpsKey, Constants.getHttpsKeyFile(this));
+                } catch (IOException e) {
+                    Log.w(TAG, "Failed to import HTTPS config files", e);
+                }
             }
             launchStartupTask();
         });
