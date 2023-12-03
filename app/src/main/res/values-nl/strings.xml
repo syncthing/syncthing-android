@@ -9,13 +9,13 @@
     <!--Slide 1-->
     <string name="introduction">Introductie</string>
     <string name="welcome_text">Syncthing is een opensource-bestandssynchronisatie-app.
-\nOm gegevens met andere apparaten te delen, dien je hun unieke apparaat-id\'s aan de apparatenlijst toe te voegen. Daarna kun je selecteren welke mappen je met welke apparaten wilt delen.
+\nOm gegevens met andere apparaten te delen, moet je hun unieke apparaat-id\'s aan de apparatenlijst toevoegen. Daarna kun je selecteren welke mappen je met welke apparaten wilt delen.
 \nMeld eventuele problemen die je tegenkomt op onze GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Opslagmachtiging</string>
     <string name="storage_permission_desc">Syncthing heeft toegang nodig tot jouw opslag om bestandssynchronisatie uit te voeren.</string>
     <!--Slide 3-->
-    <string name="location_permission_title">Locatierecht (achtergrond)</string>
+    <string name="location_permission_title">Locatiemachtiging (achtergrond)</string>
     <string name="location_permission_desc">Syncthing kan worden ingesteld om alleen via geselecteerde wifi-netwerken te synchroniseren. Om dat te doen, moet het de ssid van het momenteel verbonden wifi-netwerk opzoeken, ook als de app is afgesloten. Daarom heeft Syncthing toestemming nodig om op de achtergrond de locatie op te vragen. Deze informatie wordt niet gebruikt om jóuw locatie te verkrijgen. De enige opgeslagen informatie is het door jou gekozen wifi-netwerk om aan de lijst toe te voegen - er worden geen andere gebruikersgegevens opgeslagen.
 \n
 \nAls je deze functie wilt gebruiken, druk dan op de knop hierboven om Syncthing de vereiste rechten te verlenen. Anders kun je deze stap overslaan.</string>
@@ -33,7 +33,7 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Bevestigen om app af te sluiten</string>
-    <string name="dialog_exit_while_running_as_service_message">Ter overweging: je hebt de app zo ingesteld dat deze automatisch opstart. Hierdoor bewaakt het continu op de achtergrond de uitvoeringsvoorwaarden en synchroniseert het zodra deze voorwaarden van toepassing zijn. Je dient alleen handmatig te stoppen als je ernstige problemen ondervindt. Je kunt automatisch opstarten uitschakelen in de instellingen. Wil je stoppen totdat het apparaat opnieuw wordt opgestart?</string>
+    <string name="dialog_exit_while_running_as_service_message">Ter overweging: je hebt de app zo ingesteld dat deze automatisch opstart. Hierdoor bewaakt hij continu op de achtergrond de uitvoeringsvoorwaarden en synchroniseert hij zodra deze voorwaarden van toepassing zijn. Je moet alleen handmatig stoppen als je ernstige problemen ondervindt. Je kunt automatisch opstarten uitschakelen in de instellingen. Wil je stoppen totdat het apparaat opnieuw wordt opgestart?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Map toevoegen</string>
     <!--Title of the "share device id" menu action-->
@@ -41,28 +41,28 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Apparaat-id versturen naar</string>
     <string name="usage_reporting_dialog_title">Anonieme gebruiksrapportage toestaan\?</string>
-    <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden en gebruikt om veelgebruikte platformen, mapgroottes en appversies bij te houden. Als de gerapporteerde dataset gewijzigd wordt, wordt dit venster opnieuw getoond.
+    <string name="usage_reporting_dialog_description">Het versleutelde gebruiksrapport wordt dagelijks verzonden en gebruikt om veelgebruikte platformen, mapgroottes en appversies bij te houden. Als de gerapporteerde gegevensset gewijzigd wordt, wordt dit venster opnieuw getoond.
 \n
 \nDe verzamelde statistieken zijn openbaar in te zien op https://data.syncthing.net.</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="open_website">Website openen</string>
     <string name="toast_write_storage_permission_required">Deze app heeft toestemming nodig om weg te schrijven naar opslag</string>
-    <string name="device_rejected">Het apparaat, \"%1$s\", wil verbinden</string>
-    <string name="folder_rejected">Het apparaat, \"%1$s\", wil de map \"%2$s\" delen</string>
-    <string name="dialog_disable_battery_optimization_title">Accu-optimalisatie</string>
-    <string name="dialog_disable_battery_optimization_message">Android kan de synchronisatie na enige tijd stoppen. Schakelt accu-optimalisatie uit om dit te voorkomen.
+    <string name="device_rejected">Het apparaat \"%1$s\" wil verbinden</string>
+    <string name="folder_rejected">Het apparaat \"%1$s\" wil de map \"%2$s\" delen</string>
+    <string name="dialog_disable_battery_optimization_title">Batterij-optimalisatie</string>
+    <string name="dialog_disable_battery_optimization_message">Android kan de synchronisatie na enige tijd stoppen. Schakel batterij-optimalisatie uit om dit te voorkomen.
 \n
 \nOp sommige apparaten zijn aanvullende apps voor het beëindigen van taken voorgeïnstalleerd - voeg Syncthing ook toe aan hun witte lijst.</string>
     <string name="dialog_disable_battery_optimization_later">Later</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Niet meer tonen</string>
     <string name="dialog_disable_battery_optimization_turn_off">Uitschakelen voor Syncthing</string>
-    <string name="dialog_disable_battery_optimizations_not_supported">Uw apparaat biedt geen ondersteuning voor het uitschakelen van accu-optimalisatie</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">Uw apparaat biedt geen ondersteuning voor het uitschakelen van batterij-optimalisatie</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
-    <string name="api_loading">Bezig met laden…</string>
+    <string name="api_loading">Laden…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
-    <string name="web_gui_creating_key">Bezig met genereren van veilige sleutels - dit kan enkele minuten duren.</string>
+    <string name="web_gui_creating_key">Genereren van veilige sleutels - dit kan enkele minuten duren.</string>
     <string name="syncthing_loading_slow_message">Het laden van Syncthing duurt erg lang. Gebruik de logboeken om te controleren op eventuele fouten.</string>
     <!--FoldersFragment-->
     <string name="folders_fragment_title">Mappen</string>
@@ -120,7 +120,7 @@
     <string name="directory">Map</string>
     <!--Setting title and description-->
     <string name="folder_fileWatcher">Wijzigingen bijhouden</string>
-    <string name="folder_fileWatcherDescription">Vraagt het besturingssysteem wijzigingen aan bestanden te melden. Schakel uit om elk uur te scannen.</string>
+    <string name="folder_fileWatcherDescription">Vraagt het besturingssysteem wijzigingen aan bestanden te melden. Wanneer uitgeschakeld, wordt elk uur gescand.</string>
     <!--Setting title-->
     <string name="folder_pause">Map tijdelijk uitsluiten</string>
     <!--Setting title-->
@@ -143,9 +143,9 @@
     <string name="folder_path_required">Geef het pad naar een map op</string>
     <string name="dialog_discard_changes">Wil je deze wijzigingen verwerpen?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
-    <string name="folder_path_readonly">Uw Android-versie geeft Syncthing alleen de mogelijkheid om de geselecteerde map uit te lezen.</string>
+    <string name="folder_path_readonly">Je Android-versie geeft Syncthing alleen leestoegang tot de geselecteerde map.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
-    <string name="folder_path_readwrite">Uw Android-versie geeft Syncthing de mogelijkheid om de geselecteerde map uit te lezen en te beschrijven.</string>
+    <string name="folder_path_readwrite">Je Android-versie geeft Syncthing lees- en schrijftoegang tot de geselecteerde map.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">De geselecteerde map kan niet worden gebruikt. Selecteer een map op de interne of externe opslag.</string>
     <string name="ignore_patterns">Negeerpatronen</string>
@@ -163,11 +163,9 @@
     <!--Setting title-->
     <string name="compression">Compressie</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Nooit</item>
-        <item>Metagegevens</item>
-        <item>Altijd</item>
-    </string-array>
+    <string name="compress_never">Nooit</string>
+    <string name="compress_metadata">Metagegevens</string>
+    <string name="compress_always">Altijd</string>
     <!--Setting title-->
     <string name="introducer">Introductie-apparaat</string>
     <!--Setting title-->
@@ -182,16 +180,16 @@
     <!--Dialog shown when attempting to remove a device-->
     <string name="remove_device_confirm">Weet je zeker dat je dit apparaat wilt verwijderen?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
-    <string name="device_id_required">Voer een apparaat-id in</string>
+    <string name="device_id_required">De apparaat-ID mag niet leeg zijn</string>
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">QR-code scannen</string>
     <!--Toast show if we could not get root permissions-->
-    <string name="toast_root_denied">Geen roottoegang</string>
+    <string name="toast_root_denied">Geen roottoegang verkregen</string>
     <!--WebGuiActivity-->
     <!--Title of the web gui activity-->
-    <string name="web_gui_title">Webomgeving</string>
+    <string name="web_gui_title">Web-GUI</string>
     <!--Text for WebGuiActivity loading view-->
-    <string name="web_gui_loading">Bezig met wachten op gebruikersomgeving</string>
+    <string name="web_gui_loading">Wachten op GUI</string>
     <!--SettingsFragment-->
     <string name="settings_title">Instellingen</string>
     <string name="category_run_conditions">Uitvoervoorwaarden</string>
@@ -201,90 +199,84 @@
     <string name="category_debug">Foutopsporing</string>
     <string name="category_experimental">Experimenteel</string>
     <!--Preference screen - Run conditions-->
-    <string name="run_conditions_summary">Gebruik de volgende opties om te bepalen wanneer Syncthing synchroniseert.</string>
-    <string name="run_on_mobile_data_title">Synchroniseren via mobiel internet</string>
-    <string name="run_on_mobile_data_summary">Synchroniseer als het apparaat verbonden is met een mobiele internetverbinding. Waarschuwing: dit kan leiden tot een hoog verbruik - mogelijk brengt je provider hiervoor kosten in rekening.</string>
-    <string name="run_on_wifi_title">Synchroniseren via wifi</string>
-    <string name="run_on_wifi_summary">Synchroniseren als het apparaat verbonden is met een wifi-netwerk.</string>
-    <string name="run_on_metered_wifi_title">Synchroniseren via beperkt wifi-netwerk</string>
-    <string name="run_on_metered_wifi_summary">Synchroniseer als het apparaat verbonden is met een beperkt wifi-netwerk, zoals een hotspot of tethering. Let op: dit kan leiden tot een hoog verbruik - mogelijk brengt je provider hiervoor kosten in rekening.</string>
-    <string name="run_on_whitelisted_wifi_title">Synchroniseren via bepaalde wifi-netwerken</string>
-    <string name="run_on_whitelisted_wifi_networks">Alleen synchroniseren via bepaalde wifi-netwerken: %1$s</string>
-    <string name="run_on_all_wifi_networks">Synchroniseren via alle wifi-netwerken.</string>
+    <string name="run_conditions_summary">Gebruik de volgende opties om te bepalen wanneer Syncthing wordt uitgevoerd.</string>
+    <string name="run_on_mobile_data_title">Uitvoeren via mobiel internet</string>
+    <string name="run_on_mobile_data_summary">Uitvoeren wanneer het apparaat is verbonden via het mobiele datanetwerk. Waarschuwing: Dit kan veel gegevens verbruiken van het data-abonnement van je mobiele provider als je grote hoeveelheden gegevens synchroniseert.</string>
+    <string name="run_on_wifi_title">Uitvoeren via wifi</string>
+    <string name="run_on_wifi_summary">Uitvoeren wanneer het apparaat is verbonden met een Wi-Fi-netwerk.</string>
+    <string name="run_on_metered_wifi_title">Uitvoeren via beperkt wifi-netwerk</string>
+    <string name="run_on_metered_wifi_summary">Uitvoeren wanneer het apparaat is verbonden met een beperkt wifi-netwerk, bijvoorbeeld een hotspot of een gekoppeld netwerk. Let op: dit kan een groot deel van je data-abonnement in beslag nemen als je veel gegevens synchroniseert.</string>
+    <string name="run_on_whitelisted_wifi_title">Uitvoeren via bepaalde wifi-netwerken</string>
+    <string name="run_on_whitelisted_wifi_networks">Alleen uitvoeren op geselecteerde Wi-Fi-netwerken: %1$s</string>
+    <string name="run_on_all_wifi_networks">Uitvoeren via alle wifi-netwerken.</string>
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Schakel wifi in om netwerken te selecteren.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Verbind met een wifi-netwerk om het aan de lijst toe te voegen.</string>
-    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Verleen het LOCATIE-recht om deze functie te gebruiken.</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Je moet LOCATIEtoestemming geven om deze functie te gebruiken.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Rechten vereist</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Sinds Android 8.1 is locatietoestemming benodigd om de naam van het wifi-netwerk uit te lezen. Je kunt deze functie alleen gebruiken als je deze toestemming verleent.</string>
-    <string name="power_source_title">Synchroniseren als apparaat draait op</string>
-    <string name="respect_battery_saving_title">Systeeminstellingen gebruiken</string>
-    <string name="respect_battery_saving_summary">Schakel Syncthing uit als accubesparing is ingeschakeld.</string>
-    <string name="respect_master_sync_title">Systeeminstellingen gebruiken</string>
-    <string name="respect_master_sync_summary">Schakel Syncthing uit als de snelle-instellingentegel \'Gegevenssynchronisatie\' is uitgeschakeld.</string>
-    <string name="run_in_flight_mode_title">Synchroniseren tijdens vliegtuigmodus</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Sinds Android 8.1 is locatietoestemming nodig om de naam van het wifi-netwerk uit te lezen. Je kunt deze functie alleen gebruiken als je deze toestemming verleent.</string>
+    <string name="power_source_title">Uitvoeren wanneer apparaat wordt gevoed door</string>
+    <string name="respect_battery_saving_title">Android-instelling voor batterijbesparing respecteren</string>
+    <string name="respect_battery_saving_summary">Syncthing uitschakelen als accubesparing is ingeschakeld.</string>
+    <string name="respect_master_sync_title">Android-instelling voor \'gegevenssynchronisatie\' respecteren</string>
+    <string name="respect_master_sync_summary">Syncthing uitschakelen als de snelle-instellingentegel \'Gegevenssynchronisatie\' is uitgeschakeld.</string>
+    <string name="run_in_flight_mode_title">Uitvoeren tijdens vliegtuigmodus</string>
     <string name="run_in_flight_mode_summary">Schakel dit in als jouw apparaat problemen ondervindt bij het handmatig opvragen van wifi-verbindingen tijdens de vliegtuigmodus.</string>
-    <string name="service_settings_title">Dienstinstelling</string>
-    <string name="service_settings_summary">Voer Syncthing uit als een dienst. Hierdoor wordt een permanente melding toegevoegd zodat Android de dienst niet beëindigt en wordt Syncthing automatisch opgestart.</string>
-    <string name="run_as_background_service">Automatisch opstarten</string>
+    <string name="service_settings_title">Service-instelling</string>
+    <string name="service_settings_summary">Voer Syncthing uit als een service. Hierdoor wordt een permanente melding toegevoegd zodat Android de service niet beëindigt en wordt Syncthing automatisch opgestart.</string>
+    <string name="run_as_background_service">Service automatisch starten bij opstarten</string>
     <!--Preferences - Behaviour-->
     <string name="advanced_folder_picker">Geavanceerde mapkiezer gebruiken</string>
     <string name="advanced_folder_picker_summary">Kies een te synchroniseren map</string>
     <string name="use_root_title">Syncthing uitvoeren als rootgebruiker</string>
-    <string name="use_root_summary">Dit is een instabiele functie die problemen kan veroorzaken met Syncthing en jouw apparaat. Als je problemen ervaart, dien je Syncthing opnieuw te installeren.</string>
+    <string name="use_root_summary">Dit is een instabiele functie die problemen kan veroorzaken met Syncthing en jouw apparaat. Als je problemen ervaart, moet je Syncthing opnieuw installeren.</string>
     <string name="notification_type_title">Melding</string>
-    <string name="notification_type_summary">Kies het soort melding</string>
-    <string-array name="notification_type_entries">
-        <item>Normaal</item>
-        <item>Lage prioriteit</item>
-        <item>Geen</item>
-    </string-array>
+    <string name="notification_type_summary">Soort melding kiezen</string>
+    <string name="notification_type_normal">Normaal</string>
+    <string name="notification_type_low_priority">Lage prioriteit</string>
+    <string name="notification_type_none">Geen</string>
     <string name="preference_language_title">Taal</string>
-    <string name="preference_language_summary">Wijzig de taal van de app</string>
-    <string name="start_into_web_gui_title">Rechtstreeks opstarten in webomgeving</string>
+    <string name="preference_language_summary">Taal van de app wijzigen</string>
+    <string name="start_into_web_gui_title">Rechtstreeks opstarten in web-GUI</string>
     <string name="start_into_web_gui_summary">Open de webomgeving in plaats van het hoofdvenster bij het opstarten van de app</string>
     <string name="preference_theme_title">Thema</string>
     <string name="preference_theme_follow_system">Systeeminstellingen volgen</string>
     <string name="preference_theme_option_light">Licht</string>
     <string name="preference_theme_option_dark">Donker</string>
     <string name="pref_language_default">Standaardtaal</string>
-    <string-array name="pull_order_types">
-        <item>Willekeurig</item>
-        <item>Alfabetisch</item>
-        <item>Kleinste eerst</item>
-        <item>Grootste eerst</item>
-        <item>Oudste eerst</item>
-        <item>Nieuwste eerst</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Geen</item>
-        <item>Prullenbak</item>
-        <item>Eenvoudig</item>
-        <item>Gespreid</item>
-        <item>Extern</item>
-    </string-array>
+    <string name="pull_order_random">Willekeurig</string>
+    <string name="pull_order_alphabetic">Alfabetisch</string>
+    <string name="pull_order_smallest_first">Kleinste eerst</string>
+    <string name="pull_order_largest_first">Grootste eerst</string>
+    <string name="pull_order_oldest_first">Oudste eerst</string>
+    <string name="pull_order_newest_first">Nieuwste eerst</string>
+    <string name="versioning_type_none">Geen</string>
+    <string name="versioning_type_trashcan">Prullenbak</string>
+    <string name="versioning_type_simple">Eenvoudig</string>
+    <string name="versioning_type_staggered">Gespreid</string>
+    <string name="versioning_type_external">Extern</string>
     <string name="device_name">Apparaatnaam</string>
     <string name="listen_address">Luisteradressen voor synchronisatieprotocol</string>
     <string name="max_recv_kbps">Inkomende snelheidslimiet (KiB/s)</string>
     <string name="max_send_kbps">Uitgaande snelheidslimiet (KiB/s)</string>
-    <string name="global_announce_enabled">Globale detectie</string>
-    <string name="local_announce_enabled">Lokale detectie</string>
+    <string name="global_announce_enabled">Globale ontdekking</string>
+    <string name="local_announce_enabled">Lokale ontdekking</string>
     <string name="enable_nat_traversal">NAT-traversal inschakelen</string>
     <string name="global_announce_server">Globale detectieservers</string>
     <string name="enable_relaying">Relay inschakelen</string>
-    <string name="usage_reporting">Anoniem gebruiksrapportage</string>
+    <string name="usage_reporting">Anonieme gebruiksrapportage</string>
     <string name="gui_address">GUI-luisteradressen</string>
     <!--Titles for the preference to undo ignored devices and folders-->
-    <string name="undo_ignored_devices_folders_title">Genegeerde apparaten en mappen herstellen</string>
+    <string name="undo_ignored_devices_folders_title">Negeren van apparaten en mappen ongedaan maken</string>
     <string name="undo_ignored_devices_folders_question">Hierdoor worden alle genegeerde apparaten en mappen niet meer genegeerd. Wilt u doorgaan\?</string>
-    <string name="undo_ignored_devices_folders_done">Herstellen voltooid.</string>
+    <string name="undo_ignored_devices_folders_done">Beslissingen met succes ongedaan gemaakt.</string>
     <string name="export_config">Instellingen exporteren</string>
     <!--Toast after entering invalid integer value-->
     <string name="invalid_integer_value" tools:ignore="PluralsCandidate">U heeft een ongeldige waarde ingevoerd. Voer een waarde in tussen %1$d en %2$d.</string>
     <!--Experimental options-->
     <string name="use_proxy">Verbinden via proxy</string>
     <string name="do_not_use_proxy">Geen proxy ingesteld.</string>
-    <string name="keep_wakelock_while_binary_running">CPU niet in slaapstand zetten als Syncthing wordt uitgevoerd</string>
-    <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als de verbinding onverwacht wordt verbroken tijdens het werken op accu. Dit leidt tot een verhoogd accuverbruik.</string>
+    <string name="keep_wakelock_while_binary_running">CPU wakker houden terwijl Syncthing wordt uitgevoerd</string>
+    <string name="keep_wakelock_while_binary_running_summary">Gebruik deze instelling als de verbinding onverwacht wordt verbroken tijdens het werken op accu. Dit leidt tot een verhoogd batterijverbruik.</string>
     <string name="use_tor_title">Tor gebruiken</string>
     <string name="use_tor_summary">Stuur alle verkeer via Tor voor verhoogde privacy. Hiervoor is Orbot vereist. Alle proxy-opties worden uitgeschakeld.</string>
     <string name="socks_proxy_address_title">SOCKS5-proxy</string>
@@ -296,7 +288,7 @@
     <!--Toast after entering invalid http proxy address-->
     <string name="toast_invalid_http_proxy_address">U heeft een onjuiste proxysyntax opgegeven \'http://[IP/HOSTNAAM]:[POORT]\'</string>
     <string name="use_legacy_hashing_title">Verouderde hashing gebruiken</string>
-    <string name="use_legacy_hashing_summary">Dwing Syncthing om het verouderd hashingpakket te gebruiken om compatibiliteitsredenen</string>
+    <string name="use_legacy_hashing_summary">Syncthing forceren om het verouderd hashingpakket te gebruiken om compatibiliteitsredenen</string>
     <!--Dialog shown before config export-->
     <string name="dialog_confirm_export">Weet je zeker dat je de instellingen wilt exporteren? Bestaande bestanden worden overschreven.
 \n
@@ -316,12 +308,12 @@
     <!--Toast after entering invalid STTRACE params-->
     <string name="toast_invalid_environment_variables">Deze waarde is geen geldige omgevingsvariabele</string>
     <!--Title for the preference to reset Syncthing indexes-->
-    <string name="st_reset_database_title">Databank opnieuw instellen</string>
+    <string name="st_reset_database_title">Database resetten</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Voer deze actie alléén uit als ons ondersteuningsteam dit aanraadt.
 \nWeet je zeker dat je de database van Syncthing wil wissen?</string>
     <!--Syncthing was reset-->
-    <string name="st_reset_database_done">De databank is opnieuw ingesteld</string>
+    <string name="st_reset_database_done">De database is gereset</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Delta-indexen opnieuw instellen</string>
     <!--Syncthing was reset-->
@@ -357,7 +349,7 @@
     <!--Activity title-->
     <string name="folder_picker_title">Mapkiezer</string>
     <!--Toast shown on devices with kitkat or higher-->
-    <string name="kitkat_external_storage_warning">Waarschuwing: uw Android-versie staat synchroniseren naar externe opslagapparaten niet toe</string>
+    <string name="kitkat_external_storage_warning">Waarschuwing: je Android-versie staat synchroniseren naar externe opslagapparaten niet toe</string>
     <!--ListView empty text-->
     <string name="directory_empty">De map is leeg</string>
     <!--Menu item to create folder on the file system-->
@@ -419,13 +411,13 @@
     <string name="exit">Afsluiten</string>
     <!--Reasons for "syncthing disabled" dialog-->
     <string name="syncthing_disabled_reason_heading">Redenen:</string>
-    <string name="syncthing_disabled_reason_on_battery">Het apparaat draait op de accu</string>
-    <string name="syncthing_disabled_reason_on_charger">He apparaat draait op netstroom</string>
-    <string name="syncthing_disabled_reason_powersaving">Het apparaat is in accubeparingsmodus</string>
+    <string name="syncthing_disabled_reason_on_battery">Apparaat werkt op batterij</string>
+    <string name="syncthing_disabled_reason_on_charger">Apparaat werkt op lader</string>
+    <string name="syncthing_disabled_reason_powersaving">Apparaat is in batterijbeparingsmodus</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Globale synchronisatie is uitgeschakeld</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">De huidige wifi-ssid staat niet op de witte lijst</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">De huidige wifi-ssid staat niet op de witte lijst of de locatietoestemmingen zijn beperkt</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Het huidige wifi-netwerk is beperkt</string>
-    <string name="syncthing_disabled_reason_no_network_or_flightmode">Geen internetverbinding, of vliegtuigmodus is ingeschakeld</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">Geen internetverbinding of vliegtuigmodus is ingeschakeld</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Niet verbonden met mobiel internet</string>
     <string name="syncthing_disabled_reason_no_wifi_connection">Niet verbonden met wifi</string>
     <string name="syncthing_disabled_reason_no_allowed_method">Niet ingesteld om te synchroniseren via wifi of mobiel internet</string>
@@ -448,7 +440,7 @@
     <string name="notifications_other_channel">Overige meldingen</string>
     <!--RestApi-->
     <!--Title of the notification shown when a restart is needed-->
-    <string name="restart_title">Herstart vereist</string>
+    <string name="restart_title">Herstart nodig</string>
     <!--Text for positive button in restart dialog-->
     <!--Text for the dismiss button of the restart Activity-->
     <!--Text of the notification shown when a restart is needed-->
@@ -456,21 +448,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">De apparaat-id is gekopieerd naar het klembord</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Inactief</string>
     <string name="state_scanning">Bezig met scannen</string>
@@ -544,14 +532,15 @@
     <string name="browse">Bladeren</string>
     <string name="no_sub_folder_is_selected">Geen onderliggende map geselecteerd</string>
     <string name="share_device_id_chooser">Apparaat-id delen met</string>
-    <string name="api_level_30_desc">Met de nieuwste update richt syncthing-android zich op API niveau 30 wat het gedrag van Androids bestandssysteem verandert. Goed nieuws: Op Android 11 en nieuwer is syncthing nu in staat om op een externe SD kaart te schrijven. Slecht nieuws: Het kan langzamer zijn en sommige paden zullen verborgen zijn. Door deze verborgen paden, moet de database opnieuw worden opgebouwd om dataverlies te voorkomen. Hierbij worden al je bestanden opnieuw gehasht. Ze hoeven niet opnieuw te worden gesynchroniseert van andere apparaten. Het proces kan ook conflicten creëren en onlangs gewiste bestanden terug brengen als dit apparaat nu niet volledig gesynchroniseerd is. Afhankelijk van hoeveel bestanden je hebt, kan dit proces zeer intensief zijn, veel tijd kosten en veel batterijkracht kosten.
+    <string name="api_level_30_desc">Met de nieuwste update richt syncthing-android zich op API niveau 30 wat het gedrag van Androids bestandssysteem verandert. Goed nieuws: Op Android 11 en nieuwer is syncthing nu in staat om op een externe sd-kaart te schrijven. Slecht nieuws: Het kan langzamer zijn en sommige paden zullen verborgen zijn. Door deze verborgen paden, moet de database opnieuw worden opgebouwd om dataverlies te voorkomen. Hierbij worden al je bestanden opnieuw gehasht. Ze hoeven niet opnieuw te worden gesynchroniseerd van andere apparaten. Het proces kan ook conflicten creëren en onlangs gewiste bestanden terug brengen als dit apparaat nu niet volledig gesynchroniseerd is. Afhankelijk van hoeveel bestanden je hebt, kan dit proces zeer intensief zijn, veel tijd kosten en veel batterij-energie kosten.
 \n
 \nDruk op de knop hieronder om de database opnieuw op te bouwen en Syncthing te starten.</string>
-    <string name="run_conditions_title">Uitvoer condities aanzetten</string>
-    <string name="enable_notification_permission">Activeer toestemming voor meldingen</string>
-    <string name="api_level_30_title">Upgrade informatie</string>
-    <string name="toast_api_level_30_must_reset">Je kunt alleen doorgaan met op de knop drukken om de database opnieuw op te bouwen.</string>
-    <string name="api_level_30_button">Bouw database opnieuw</string>
-    <string name="notification_permission_title">Melding toestemming</string>
+    <string name="run_conditions_title">Uitvoervoorwaarden inschakelen</string>
+    <string name="enable_notification_permission">Toestemming voor meldingen inschakelen</string>
+    <string name="api_level_30_title">Informatie over upgrade</string>
+    <string name="toast_api_level_30_must_reset">Je kunt alleen doorgaan door op de knop drukken om de database opnieuw op te bouwen.</string>
+    <string name="api_level_30_button">Database opnieuw opbouwen</string>
+    <string name="notification_permission_title">Toestemming voor meldingen</string>
     <string name="require_notification_permission_desc">Verplicht voor het tonen van meldingen over nieuwe apparaatverbindingen, deelverzoeken, enz.</string>
+    <string name="dialog_all_files_access_not_supported">Je apparaat ondersteunt geen toegang tot alle bestanden</string>
 </resources>

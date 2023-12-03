@@ -139,11 +139,9 @@
     <!--Setting title-->
     <string name="compression">Kompresi</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Jangan</item>
-        <item>Metadata</item>
-        <item>Selalu</item>
-    </string-array>
+    <string name="compress_never">Jangan</string>
+    <string name="compress_metadata">Metadata</string>
+    <string name="compress_always">Selalu</string>
     <!--Setting title-->
     <string name="introducer">Pengenalan</string>
     <!--Setting title-->
@@ -184,11 +182,9 @@
     <string name="use_root_summary">Ini merupakan fitur belum stabik yang mungkin menyebabkan masalah pada Syncthing dan perangkat anda. Jika menemui masalah, anda mungkin harus memasang ulang Syncthing.</string>
     <string name="notification_type_title">Notifikasi</string>
     <string name="notification_type_summary">Pilih jenis notifikasi</string>
-    <string-array name="notification_type_entries">
-        <item>Normal</item>
-        <item>Prioritas Rendah</item>
-        <item>Tidak Ada</item>
-    </string-array>
+    <string name="notification_type_normal">Normal</string>
+    <string name="notification_type_low_priority">Prioritas Rendah</string>
+    <string name="notification_type_none">Tidak Ada</string>
     <string name="preference_language_title">Bahasa</string>
     <string name="preference_language_summary">Ganti bahasa dalam aplikasi</string>
     <string name="start_into_web_gui_title">Mulai dengan web GUI</string>

@@ -164,11 +164,9 @@
     <!--Setting title-->
     <string name="compression">Compresión</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Nunca</item>
-        <item>Metadatos</item>
-        <item>Siempre</item>
-    </string-array>
+    <string name="compress_never">Nunca</string>
+    <string name="compress_metadata">Metadatos</string>
+    <string name="compress_always">Siempre</string>
     <!--Setting title-->
     <string name="introducer">Introductor</string>
     <!--Setting title-->
@@ -218,11 +216,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permiso requerido</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Comenzando con Android 8.1, el acceso a la ubicación es necesario para leer el nombre de la red Wi-Fi. Sólo puedes usar esta característica si das permiso.</string>
     <string name="power_source_title">Ejecutar cuando el dispositivo esta alimentado mediante</string>
-    <string-array name="power_source_entries">
-        <item>CA y batería.</item>
-        <item>CA por cable. </item>
-        <item>Batería.</item>
-    </string-array>
+    <string name="power_source_ac_and_battery_power">CA y batería.</string>
+    <string name="power_source_ac_power">CA por cable. </string>
+    <string name="power_source_battery_power">Batería.</string>
     <string name="respect_battery_saving_title">Respetar la configuración de ahorro de batería</string>
     <string name="respect_battery_saving_summary">Desactivar Syncthing si se activa el ahorro de batería de Android.</string>
     <string name="respect_master_sync_title">Respetar el ajuste \'Auto-sincronizar datos\' de Android</string>
@@ -239,11 +235,9 @@
     <string name="use_root_summary">Esta es una característica inestable que podría causar problemas con Syncthing y con tu dispositivo. Si aparecieran problemas podrías tener que reinstalar Syncthing.</string>
     <string name="notification_type_title">Notificación</string>
     <string name="notification_type_summary">Elige el tipo de notificación</string>
-    <string-array name="notification_type_entries">
-        <item>Normal</item>
-        <item>Baja prioridad</item>
-        <item>Ninguna</item>
-    </string-array>
+    <string name="notification_type_normal">Normal</string>
+    <string name="notification_type_low_priority">Baja prioridad</string>
+    <string name="notification_type_none">Ninguna</string>
     <string name="preference_language_title">Idioma</string>
     <string name="preference_language_summary">Cambiar el idioma de la aplicación</string>
     <string name="start_into_web_gui_title">Iniciar directamente en la interfaz web</string>
@@ -253,26 +247,20 @@
     <string name="preference_theme_option_light">Claro</string>
     <string name="preference_theme_option_dark">Oscuro</string>
     <string name="pref_language_default">Idioma predeterminado</string>
-    <string-array name="folder_types">
-        <item>Enviar y recibir</item>
-        <item>Solo enviar</item>
-        <item>Solo recibir</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Aleatorio</item>
-        <item>Alfabético</item>
-        <item>El más pequeño primero</item>
-        <item>El más grande primero</item>
-        <item>El más antiguo primero</item>
-        <item>El más reciente primero</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Ninguno</item>
-        <item>Papelera de Reciclaje</item>
-        <item>Simple</item>
-        <item>Escalonado</item>
-        <item>Externo</item>
-    </string-array>
+    <string name="folder_type_send_receive">Enviar y recibir</string>
+    <string name="folder_type_send_only">Solo enviar</string>
+    <string name="folder_type_receive_only">Solo recibir</string>
+    <string name="pull_order_random">Aleatorio</string>
+    <string name="pull_order_alphabetic">Alfabético</string>
+    <string name="pull_order_smallest_first">El más pequeño primero</string>
+    <string name="pull_order_largest_first">El más grande primero</string>
+    <string name="pull_order_oldest_first">El más antiguo primero</string>
+    <string name="pull_order_newest_first">El más reciente primero</string>
+    <string name="versioning_type_none">Ninguno</string>
+    <string name="versioning_type_trashcan">Papelera de Reciclaje</string>
+    <string name="versioning_type_simple">Simple</string>
+    <string name="versioning_type_staggered">Escalonado</string>
+    <string name="versioning_type_external">Externo</string>
     <string name="device_name">Nombre del dispositivo</string>
     <string name="listen_address">Direcciones de escucha del protocolo de sincronización</string>
     <string name="max_recv_kbps">Límite de tráfico de entrada (KiB/s)</string>
@@ -470,21 +458,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Id. del dispositivo copiado al portapapeles</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Inactivo</string>
     <string name="state_scanning">Escaneando</string>

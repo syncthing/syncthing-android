@@ -17,7 +17,7 @@
     <string name="dialog_all_files_access_not_supported">Cihazınız tüm dosyalara erişimi desteklemiyor</string>
     <!--Slide 3-->
     <string name="location_permission_title">Konum İzni (arka plan)</string>
-    <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarında eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.
+    <string name="location_permission_desc">Syncthing, yalnızca seçilen kablosuz (Wi-Fi) ağlarda eşitlemek için yapılandırılabilir. Bunu yapmak için uygulama kapalıyken de o anda bağlı olan kablosuzun (Wi-Fi) SSID\'sine bakması gerekir. Bu nedenle, arka planda konuma erişmek için izin gerektirir. Bu bilgiler konumunuzu aramak için kullanılmaz. Ve depolanan tek bilgi, listeye el ile eklemeyi seçtiğiniz kablosuz (Wi-Fi) bağlantıdır - başka hiçbir kullanıcı verisi depolanmaz.
 \n
 \nEğer bu özelliği kullanmak istiyorsanız, Syncthing\'e gerekli izinleri vermek için yukarıdaki düğmeye basın. Aksi takdirde bu adımı atlayabilirsiniz.</string>
     <!--Slide 4-->
@@ -42,12 +42,12 @@
     <string name="dialog_exit_while_running_as_service_title">Uygulamadan çıkmayı onaylayın</string>
     <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalıştırma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Yalnızca ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz\?</string>
     <!--Title of the "add folder" menu action-->
-    <string name="add_folder">Klasör Ekle</string>
+    <string name="add_folder">Klasör Ekleme</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Cihaz Kimliğini Paylaş</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Cihaz kimliğini şuna gönder</string>
-    <string name="usage_reporting_dialog_title">İsimsiz Kullanım Raporlamaya İzin Verilsin Mi\?</string>
+    <string name="usage_reporting_dialog_title">İsimsiz Kullanım Bildirmeye İzin Verilsin Mi?</string>
     <string name="usage_reporting_dialog_description">Şifreli kullanım raporu günlük olarak yollanır. Yaygın platformları, klasör boyutlarını ve uygulama sürümlerini izlemek için kullanılır. Eğer bildirilen veri kümesi değişirse, bu ileti öğesi aracılığıyla tekrar sorulacaktır.
 \n
 \nToplanan istatistikler https://data.syncthing.net adresinde herkese açıktır.</string>
@@ -61,7 +61,7 @@
     <string name="dialog_disable_battery_optimization_message">Android bir süre sonra eşitlemeyi durdurabilir. Bunu önlemek için pil iyileştirmesini kapatın.
 \n
 \nBazı cihazlarda önceden yüklenmiş ek görev sonlandırma uygulamaları vardır. Beyaz listelerine de Syncthing\'i eklemelisiniz.</string>
-    <string name="dialog_disable_battery_optimization_later">Daha sonra sor</string>
+    <string name="dialog_disable_battery_optimization_later">Daha sonra</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Bir daha gösterme</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing için kapat</string>
     <string name="dialog_disable_battery_optimizations_not_supported">Cihazınız pil iyileştirmelerini etkisizleştirmeyi desteklemiyor</string>
@@ -92,7 +92,7 @@
     <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
     <string name="device_syncing">Eşitleniyor (%%%1$d)</string>
     <!--Indicates that there is no connection to the device-->
-    <string name="device_disconnected">Bağlantı Kesildi</string>
+    <string name="device_disconnected">Bağlantı kesildi</string>
     <!--Indicates that the device is paused and does not sync-->
     <string name="device_paused">Duraklatıldı</string>
     <!--Indicates that the device connection is unknown-->
@@ -129,11 +129,11 @@
     <string name="folder_fileWatcher">Değişiklikleri izle</string>
     <string name="folder_fileWatcherDescription">İşletim sisteminden dosyalardaki değişiklikler hakkında bildirimde bulunmasını ister. Eğer etkisizleştirilirse, düzenli saatlik taramalara geri döner.</string>
     <!--Setting title-->
-    <string name="folder_pause">Klasörü duraklat</string>
+    <string name="folder_pause">Klasörü Duraklat</string>
     <!--Setting title-->
     <string name="devices">Cihazlar</string>
     <!--Setting title-->
-    <string name="keep_versions">Sürümleri tut</string>
+    <string name="keep_versions">Sürümleri Tut</string>
     <!--Setting title-->
     <string name="delete_folder">Klasörü Sil</string>
     <!--Title for FolderSettingsFragment in create mode-->
@@ -148,7 +148,7 @@
     <string name="folder_id_required">Klasör kimliği boş olmamak zorundadır</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">Klasör yolu boş olmamak zorundadır</string>
-    <string name="dialog_discard_changes">Değişiklikler yoksayılsın mı\?</string>
+    <string name="dialog_discard_changes">Değişiklikleriniz yoksayılsın mı?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Android sürümünüz, Syncthing\'e seçilen klasöre yalnızca salt okunur erişimi verir.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
@@ -162,7 +162,7 @@
     <!--Setting title-->
     <string name="device_id">Cihaz Kimliği</string>
     <!--Setting title-->
-    <string name="name">Adı</string>
+    <string name="name">Ad</string>
     <!--Setting title-->
     <string name="addresses">Adresler</string>
     <!--Setting title-->
@@ -170,15 +170,13 @@
     <!--Setting title-->
     <string name="compression">Sıkıştırma</string>
     <!--Strings representing compression options-->
-    <string-array name="compress_entries">
-        <item>Asla</item>
-        <item>Üstveri</item>
-        <item>Her zaman</item>
-    </string-array>
+    <string name="compress_never">Asla</string>
+    <string name="compress_metadata">Üstveri</string>
+    <string name="compress_always">Her zaman</string>
     <!--Setting title-->
     <string name="introducer">Tanıtıcı</string>
     <!--Setting title-->
-    <string name="pause_device">Cihazı duraklat</string>
+    <string name="pause_device">Cihazı Duraklat</string>
     <!--ActionBar item-->
     <string name="delete_device">Cihazı Sil</string>
     <string name="add_device">Cihaz Ekle</string>
@@ -211,25 +209,23 @@
     <string name="run_conditions_title">Çalıştırma koşullarını etkinleştir</string>
     <string name="run_conditions_summary">Syncthing\'in ne zaman çalışacağına karar vermek için aşağıdaki seçenekleri kullanın.</string>
     <string name="run_on_mobile_data_title">Mobil veride çalıştır</string>
-    <string name="run_on_mobile_data_summary">Cihaz mobil veri ağı üzerinden bağlandığında çalışır. Uyarı: Büyük miktarda veriyi eşitlerseniz bu, mobil operatör veri planınızdan çok fazla veri tüketebilir.</string>
+    <string name="run_on_mobile_data_summary">Cihaz mobil veri ağı üzerinden bağlandığında çalıştır. Uyarı: Büyük miktarda veriyi eşitlerseniz bu, mobil operatör veri planınızdan çok fazla veri tüketebilir.</string>
     <string name="run_on_wifi_title">Kablosuzda (Wi-Fi) çalıştır</string>
-    <string name="run_on_wifi_summary">Cihaz bir kablosuz (Wi-Fi) ağına bağlandığında çalışır.</string>
+    <string name="run_on_wifi_summary">Cihaz bir kablosuz (Wi-Fi) ağa bağlandığında çalıştır.</string>
     <string name="run_on_metered_wifi_title">Tarifeli kablosuzda (Wi-Fi) çalıştır</string>
-    <string name="run_on_metered_wifi_summary">Cihaz, örn. etkin nokta veya bağlı ağ gibi tarifeli bir kablosuz (Wi-Fi) ağına bağlıyken çalışır. Dikkat: Çok fazla veri eşitlerseniz, bu işlem veri planınızın büyük bir bölümünü tüketebilir.</string>
+    <string name="run_on_metered_wifi_summary">Cihaz tarifeli bir kablosuz (Wi-Fi) ağa bağlıyken çalıştır, örn. etkin nokta veya bağlı ağ. Dikkat: Çok fazla veri eşitlerseniz, bu işlem veri planınızın büyük bir bölümünü tüketebilir.</string>
     <string name="run_on_whitelisted_wifi_title">Belirtilen kablosuz (Wi-Fi) ağlarda çalıştır</string>
-    <string name="run_on_whitelisted_wifi_networks">Yalnızca seçilen kablosuz (Wi-Fi) ağlarda çalışır: %1$s</string>
-    <string name="run_on_all_wifi_networks">Tüm kablosuz (Wi-Fi) ağlarda çalışır.</string>
+    <string name="run_on_whitelisted_wifi_networks">Yalnızca seçilen kablosuz (Wi-Fi) ağlarda çalıştır: %1$s</string>
+    <string name="run_on_all_wifi_networks">Tüm kablosuz (Wi-Fi) ağlarda çalıştır.</string>
     <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Ağları seçmek için lütfen kablosuzu (Wi-Fi) açın.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Listeye eklemek için lütfen bir kablosuza (Wi-Fi) bağlanın.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Bu özelliği kullanmak için KONUM izni vermeniz gerekiyor.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">İzin gerekli</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1\'den başlayarak, kablosuz (Wi-Fi) adını okuyabilmek için konum erişimi gereklidir. Bu özelliği yalnızca bu izni verirseniz kullanabilirsiniz.</string>
-    <string name="power_source_title">Cihaz şununla beslendiğinde çalıştır</string>
-    <string-array name="power_source_entries">
-        <item>Piriz ve pil gücü.</item>
-        <item>Piriz gücü.</item>
-        <item>Pil gücü.</item>
-    </string-array>
+    <string name="power_source_title">Cihaza şununla güç verildiğinde çalıştır</string>
+    <string name="power_source_ac_and_battery_power">Piriz ve pil gücü.</string>
+    <string name="power_source_ac_power">Piriz gücü.</string>
+    <string name="power_source_battery_power">Pil gücü.</string>
     <string name="respect_battery_saving_title">Android pil tasarrufu ayarına uy</string>
     <string name="respect_battery_saving_summary">Pil tasarrufu etkinse Syncthing\'i etkisizleştirir.</string>
     <string name="respect_master_sync_title">Android \'Verileri otomatik eşitle\' ayarına uy</string>
@@ -246,11 +242,9 @@
     <string name="use_root_summary">Bu, Syncting ve cihazınız ile sorunlara neden olabilen kararsız bir özelliktir. Eğer sorun yaşarsanız, Syncthing\'i yeniden yüklemeniz gerekebilir.</string>
     <string name="notification_type_title">Bildirim</string>
     <string name="notification_type_summary">Bildirim türünü seçin</string>
-    <string-array name="notification_type_entries">
-        <item>Normal</item>
-        <item>Düşük Öncelikli</item>
-        <item>Hiçbiri</item>
-    </string-array>
+    <string name="notification_type_normal">Normal</string>
+    <string name="notification_type_low_priority">Düşük Öncelikli</string>
+    <string name="notification_type_none">Hiçbiri</string>
     <string name="preference_language_title">Dil</string>
     <string name="preference_language_summary">Uygulama dilini değiştirin</string>
     <string name="start_into_web_gui_title">Doğrudan web GKA içinde başlat</string>
@@ -260,26 +254,20 @@
     <string name="preference_theme_option_light">Açık</string>
     <string name="preference_theme_option_dark">Koyu</string>
     <string name="pref_language_default">Varsayılan Dil</string>
-    <string-array name="folder_types">
-        <item>Gönder ve Al</item>
-        <item>Yalnızca Gönder</item>
-        <item>Yalnızca Al</item>
-    </string-array>
-    <string-array name="pull_order_types">
-        <item>Rastgele</item>
-        <item>Alfabetik</item>
-        <item>Önce En Küçük Olan</item>
-        <item>Önce En Büyük Olan</item>
-        <item>Önce En Eski Olan</item>
-        <item>Önce En Yeni Olan</item>
-    </string-array>
-    <string-array name="versioning_types">
-        <item>Yok</item>
-        <item>Çöp Kutusu</item>
-        <item>Basit</item>
-        <item>Aşamalı</item>
-        <item>Harici</item>
-    </string-array>
+    <string name="folder_type_send_receive">Gönder ve Al</string>
+    <string name="folder_type_send_only">Yalnızca Gönder</string>
+    <string name="folder_type_receive_only">Yalnızca Al</string>
+    <string name="pull_order_random">Rastgele</string>
+    <string name="pull_order_alphabetic">Alfabetik</string>
+    <string name="pull_order_smallest_first">Önce En Küçük Olan</string>
+    <string name="pull_order_largest_first">Önce En Büyük Olan</string>
+    <string name="pull_order_oldest_first">Önce En Eski Olan</string>
+    <string name="pull_order_newest_first">Önce En Yeni Olan</string>
+    <string name="versioning_type_none">Yok</string>
+    <string name="versioning_type_trashcan">Çöp Kutusu</string>
+    <string name="versioning_type_simple">Basit</string>
+    <string name="versioning_type_staggered">Aşamalı</string>
+    <string name="versioning_type_external">Harici</string>
     <string name="device_name">Cihaz Adı</string>
     <string name="listen_address">Eşitleme Protokolü Dinleme Adresleri</string>
     <string name="max_recv_kbps">Gelen Hız Sınırı (KiB/s)</string>
@@ -434,19 +422,19 @@
     <!--Button text on the "syncthing disabled" dialog-->
     <string name="syncthing_disabled_change_settings">Ayarları Değiştir</string>
     <!--Button text on the "syncthing disabled" dialog, used as menu item to stop syncthing service if "always_run_in_background" is true-->
-    <string name="exit">Çıkış</string>
+    <string name="exit">Çık</string>
     <!--Reasons for "syncthing disabled" dialog-->
     <string name="syncthing_disabled_reason_heading">Sebepler:</string>
     <string name="syncthing_disabled_reason_on_battery">Cihaz pille çalışıyor</string>
     <string name="syncthing_disabled_reason_on_charger">Cihaz şarj cihazıyla çalışıyor</string>
     <string name="syncthing_disabled_reason_powersaving">Cihaz güç tasarrufu modunda</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Genel Eşitleme etkisizleştirildi</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Şu anki WiFi SSID\'si beyaz listede değil veya konum izinleri kısıtlanmış</string>
-    <string name="syncthing_disabled_reason_wifi_is_metered">Şu anki WiFi tarifeli</string>
-    <string name="syncthing_disabled_reason_no_network_or_flightmode">Ağ bağlantısı yok veya uçak modu etkinleştirildi</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Şu anki kablosuz (Wi-Fi) SSID\'si beyaz listede değil veya konum izinleri kısıtlanmış</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">Şu anki kablosuz (Wi-Fi) tarifeli</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">Ağ bağlantısı yok veya uçuş modu etkinleştirildi</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Mobil veriye bağlı değil</string>
-    <string name="syncthing_disabled_reason_no_wifi_connection">WiFi\'ye bağlı değil</string>
-    <string name="syncthing_disabled_reason_no_allowed_method">WiFi ya da mobil veride eşitlemek için yapılandırılmamış</string>
+    <string name="syncthing_disabled_reason_no_wifi_connection">Kablosuza (Wi-Fi) bağlı değil</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">Kablosuz (Wi-Fi) ya da mobil veride eşitlemek için yapılandırılmamış</string>
     <!--Title of the notification shown while syncthing is running and enabled-->
     <string name="syncthing_active">Syncthing çalışıyor</string>
     <string name="syncthing_disabled">Syncthing etkisizleştirildi</string>
@@ -474,21 +462,17 @@
     <!--Shown when a device ID is copied to the clipboard-->
     <string name="device_id_copied_to_clipboard">Cihaz kimliği panoya kopyalandı</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
-    <string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="file_size_unit_B">B</string>
+    <string name="file_size_unit_KiB">KiB</string>
+    <string name="file_size_unit_MiB">MiB</string>
+    <string name="file_size_unit_GiB">GiB</string>
+    <string name="file_size_unit_TiB">TiB</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string-array name="transfer_rate_units">
-        <item>B/s</item>
-        <item>KiB/s</item>
-        <item>MiB/s</item>
-        <item>GiB/s</item>
-        <item>TiB/s</item>
-    </string-array>
+    <string name="transfer_rate_unit_B_s">B/s</string>
+    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
+    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
+    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
+    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
     <!--Possible folder states-->
     <string name="state_idle">Boşta</string>
     <string name="state_scanning">Taranıyor</string>
