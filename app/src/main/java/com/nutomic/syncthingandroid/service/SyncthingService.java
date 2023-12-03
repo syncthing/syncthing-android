@@ -672,6 +672,10 @@ public class SyncthingService extends Service {
                     new File(Constants.EXPORT_PATH, Constants.PRIVATE_KEY_FILE));
             Files.copy(Constants.getPublicKeyFile(this),
                     new File(Constants.EXPORT_PATH, Constants.PUBLIC_KEY_FILE));
+            Files.copy(Constants.getHttpsCertFile(this),
+                    new File(Constants.EXPORT_PATH, Constants.HTTPS_CERT_FILE));
+            Files.copy(Constants.getHttpsKeyFile(this),
+                    new File(Constants.EXPORT_PATH, Constants.HTTPS_KEY_FILE));
         } catch (IOException e) {
             Log.w(TAG, "Failed to export config", e);
         }
@@ -686,6 +690,8 @@ public class SyncthingService extends Service {
         File config = new File(Constants.EXPORT_PATH, Constants.CONFIG_FILE);
         File privateKey = new File(Constants.EXPORT_PATH, Constants.PRIVATE_KEY_FILE);
         File publicKey = new File(Constants.EXPORT_PATH, Constants.PUBLIC_KEY_FILE);
+        File httpsCert = new File(Constants.EXPORT_PATH, Constants.HTTPS_CERT_FILE);
+        File httpsKey = new File(Constants.EXPORT_PATH, Constants.HTTPS_KEY_FILE);
         if (!config.exists() || !privateKey.exists() || !publicKey.exists())
             return false;
         shutdown(State.INIT, () -> {
@@ -695,6 +701,14 @@ public class SyncthingService extends Service {
                 Files.copy(publicKey, Constants.getPublicKeyFile(this));
             } catch (IOException e) {
                 Log.w(TAG, "Failed to import config", e);
+            }
+            if (httpsCert.exists() && httpsKey.exists()) {
+                try {
+                    Files.copy(httpsCert, Constants.getHttpsCertFile(this));
+                    Files.copy(httpsKey, Constants.getHttpsKeyFile(this));
+                } catch (IOException e) {
+                    Log.w(TAG, "Failed to import HTTPS config files", e);
+                }
             }
             launchStartupTask();
         });
