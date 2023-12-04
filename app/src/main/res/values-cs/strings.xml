@@ -223,7 +223,7 @@
     <string name="respect_battery_saving_title">Dodržovat nastavení úspory baterie z Androidu</string>
     <string name="respect_battery_saving_summary">Vypnout Syncthing pokud je aktivní šetření energie.</string>
     <string name="respect_master_sync_title">Dodržovat nastavení automatické synchronizace dat z Androidu</string>
-    <string name="respect_master_sync_summary">Zakázat Syncthing, pokud je vypnutá dlaždice rychlého nastavení \'Automaticky synchronizovat data.\'</string>
+    <string name="respect_master_sync_summary">Zakázat Syncthing, pokud je vypnutá dlaždice rychlého nastavení ‚Automaticky synchronizovat data‘.</string>
     <string name="run_in_flight_mode_title">Spouštět když je zařízení v režimu Letadlo</string>
     <string name="run_in_flight_mode_summary">Zapněte pokud vaše zařízení má problémy se zjišťováním ručně provedených Wi-Fi připojení v režimu Letadlo.</string>
     <string name="service_settings_title">Nastavení služby</string>
@@ -348,7 +348,7 @@
     <string name="donate_summary">Pomozte nám platit za domény a hostingové poplatky</string>
     <!--Menu item linking privacy policy-->
     <string name="privacy_title">Zásady ochrany osobních údajů</string>
-    <string name="privacy_summary">Otevřít politiku soukromí syncthing-android, která zahrnuje užití případných osobních údajů (např. polohy.)</string>
+    <string name="privacy_summary">Otevřít politiku soukromí syncthing-android, která zahrnuje užití případných osobních údajů (např. polohy).</string>
     <!--Title of the preference showing upstream version name-->
     <string name="syncthing_version_title">Verze Syncthing</string>
     <!--Title of the preference showing this app's version name-->
@@ -504,7 +504,7 @@
     <string name="pull_order_type_oldestFirst">Nejstarší první</string>
     <string name="pull_order_type_newestFirst">Nejnovější první</string>
     <!--Pull order dialog descriptions for pull order types-->
-    <string name="pull_order_type_random_description">Stahovat soubory v náhodném pořadí</string>
+    <string name="pull_order_type_random_description">Stahovat soubory v náhodném pořadí.</string>
     <string name="pull_order_type_alphabetic_description">Stahovat soubory v pořadí jejich názvů podle abecedy.</string>
     <string name="pull_order_type_smallestFirst_description">Stahovat soubory v pořadí podle jejich velikost. Nejmenší soubory jako první.</string>
     <string name="pull_order_type_largestFirst_description">Stahovat soubory od největších po nejmenší.</string>
@@ -528,7 +528,7 @@
     <string name="versions_path_description">Cesta pro ukládání verzí (ponechte prázdné pro výchozí adresář .stversions ve sdíleném adresáři).</string>
     <string name="cleanout_after_description">Počet dní, po který budou soubory uchovány v koši. Nula znamená navždy.</string>
     <string name="external_versioning_description">První parametr příkazové řádky je cesta k adresáři, druhý je relativní cesta v témže adresáři.</string>
-    <string name="no_versioning_description">Pro povolení verzování vyberte jeho typ</string>
+    <string name="no_versioning_description">Pro povolení verzování vyberte jeho typ.</string>
     <!--Displays the current file versioning type in the Folder activity-->
     <string name="type_simple">Typ: Jednoduché</string>
     <string name="type_trashcan">Typ: Koš</string>
