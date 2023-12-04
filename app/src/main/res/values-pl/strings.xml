@@ -402,10 +402,10 @@
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
-        <item quantity="one">%1$d plik skopiowano do \"%2$s\"</item>
-        <item quantity="few">%1$dplików skopiowano do folderu \"%2$s\"</item>
-        <item quantity="many">%1$dplików skopiowano do folderu \"%2$s\"</item>
-        <item quantity="other">%1$d pliki skopiowano do folderu \"%2$s\"</item>
+        <item quantity="one">%1$d plik skopiowano do folderu \"%2$s\"</item>
+        <item quantity="few">%1$d pliki skopiowano do folderu \"%2$s\"</item>
+        <item quantity="many">%1$d plików skopiowano do folderu \"%2$s\"</item>
+        <item quantity="other">%1$d plików skopiowano do folderu \"%2$s\"</item>
     </plurals>
     <!--Copy exception toast-->
     <string name="copy_exception">Wystąpił błąd podczas udostępniania. Sprawdź dzienniki aplikacji</string>
