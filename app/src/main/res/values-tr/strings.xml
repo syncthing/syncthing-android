@@ -40,9 +40,9 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Uygulamadan çıkmayı onaylayın</string>
-    <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalıştırma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Yalnızca ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz\?</string>
+    <string name="dialog_exit_while_running_as_service_message">Değerlendirmeniz için: Uygulamayı açılışta otomatik olarak başlayacak şekilde yapılandırdınız. Bu nedenle, çalıştırma koşullarını izler ve koşullar eşleştiğinde arka planda herhangi bir zamanda eşitlenir. Yalnızca ciddi sorunlarla karşılaşırsanız el ile çıkmalısınız. Aksi takdirde, ayarlarda \'Açılışta otomatik başlat\' seçeneğini etkisizleştirin. Cihaz yeniden başlatılıncaya kadar şimdi çıkmak ister misiniz?</string>
     <!--Title of the "add folder" menu action-->
-    <string name="add_folder">Klasör Ekleme</string>
+    <string name="add_folder">Klasör Ekle</string>
     <!--Title of the "share device id" menu action-->
     <string name="share_device_id">Cihaz Kimliğini Paylaş</string>
     <!--Shown in the chooser dialog when sharing a Device ID-->
@@ -281,7 +281,7 @@
     <string name="gui_address">GKA Dinleme Adresleri</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Yoksayılan cihazları ve klasörleri geri al</string>
-    <string name="undo_ignored_devices_folders_question">Bu, cihazları ve klasörleri yoksayan önceki kararları geri alacak. Devam edilsin mi\?</string>
+    <string name="undo_ignored_devices_folders_question">Bu, cihazları ve klasörleri yoksayan önceki kararları geri alacak. Devam edilsin mi?</string>
     <string name="undo_ignored_devices_folders_done">Kararlar başarılı olarak geri alındı.</string>
     <string name="export_config">Yapılandırmayı Dışa Aktar</string>
     <!--Toast after entering invalid integer value-->
@@ -325,14 +325,14 @@
     <string name="st_reset_database_title">Veritabanını Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-\nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz\?</string>
+\nSyncthing\'in veritabanını temizlemek istediğinize emin misiniz?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_database_done">Syncthing\'in veritabanı başarılı olarak sıfırlandı</string>
     <!--Title for the preference to reset Syncthing indexes-->
     <string name="st_reset_deltas_title">Delta İndekslerini Sıfırla</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_question">Bu eylem yalnızca destek ekibimizin önerisine dayanarak yapılmalıdır.
-\nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz\?</string>
+\nSyncthing\'in delta indekslerini temizlemek istediğinize emin misiniz?</string>
     <!--Syncthing was reset-->
     <string name="st_reset_deltas_done">Syncthing\'in delta indeksleri başarılı olarak sıfırlandı</string>
     <string name="category_about">Hakkında</string>
