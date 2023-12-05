@@ -25,6 +25,12 @@ public class SyncthingApp extends Application {
 
         new Languages(this).setLanguage(this);
 
+        if (BuildConfig.DEBUG) {
+            setStrictMode();
+        }
+    }
+
+    private void setStrictMode() {
         // Set VM policy to avoid crash when sending folder URI to file manager.
         StrictMode.VmPolicy policy = new StrictMode.VmPolicy.Builder()
                 .detectAll()
