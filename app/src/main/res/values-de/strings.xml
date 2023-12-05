@@ -63,7 +63,7 @@
     <string name="api_loading">Ladevorgang…</string>
     <!--Shown instead of web_gui_loading if the key does not exist and has to be created-->
     <string name="web_gui_creating_key">Geheimschlüssel werden generiert. Dies kann einige Minuten dauern.</string>
-    <string name="syncthing_loading_slow_message">Syncthing lädt ungewöhnlich lange. Bitte die Logs auf Fehler überprüfen.</string>
+    <string name="syncthing_loading_slow_message">Syncthing lädt ungewöhnlich lange. Bitte die Protokolle auf Fehler überprüfen.</string>
     <!--FoldersFragment-->
     <string name="folders_fragment_title">Ordner</string>
     <!--Shown if no folders exist-->
