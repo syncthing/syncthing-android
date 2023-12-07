@@ -81,7 +81,6 @@ public class FolderActivity extends SyncthingActivity
     private static final String IGNORE_FILE_NAME = ".stignore";
 
     private Folder mFolder;
-    // Contains SAF readwrite access URI on API level >= Build.VERSION_CODES.LOLLIPOP (21)
     private Uri mFolderUri = null;
     // Indicates the result of the write test to mFolder.path on dialog init or after a path change.
     Boolean mCanWriteToPath = false;
@@ -216,12 +215,6 @@ public class FolderActivity extends SyncthingActivity
      */
     @SuppressLint("InlinedAPI")
     private void onPathViewClick() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            startActivityForResult(FolderPickerActivity.createIntent(this, mFolder.path, null),
-                FolderPickerActivity.DIRECTORY_REQUEST_CODE);
-            return;
-        }
-
         // This has to be android.net.Uri as it implements a Parcelable.
         android.net.Uri externalFilesDirUri = FileUtils.getExternalFilesDirUri(FolderActivity.this);
 
@@ -460,8 +453,7 @@ public class FolderActivity extends SyncthingActivity
                             .show();
                     return true;
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                    mFolderUri != null) {
+                if (mFolderUri != null) {
                     /**
                      * Normally, syncthing takes care of creating the ".stfolder" marker.
                      * This fails on newer android versions if the syncthing binary only has
@@ -516,7 +508,6 @@ public class FolderActivity extends SyncthingActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK && requestCode == CHOOSE_FOLDER_REQUEST) {
-            // This result case only occurs on API level >= Build.VERSION_CODES.LOLLIPOP (21)
             mFolderUri = data.getData();
             if (mFolderUri == null) {
                 return;
