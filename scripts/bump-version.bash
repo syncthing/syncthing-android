@@ -8,7 +8,7 @@ if ! git diff-index --exit-code --quiet HEAD; then
 fi
 
 NEW_VERSION_NAME=$1
-OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle" | awk '{print $2}')
+OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle.kts" | awk '{print $3}')
 if [[ -z ${NEW_VERSION_NAME} ]]
 then
     echo "New version name is empty. Please set a new version. Current version: $OLD_VERSION_NAME"
@@ -45,13 +45,13 @@ echo "
 Updating Version
 -----------------------------
 "
-OLD_VERSION_CODE=$(grep "versionCode" "app/build.gradle" -m 1 | awk '{print $2}')
+OLD_VERSION_CODE=$(grep "versionCode" "app/build.gradle.kts" -m 1 | awk '{print $3}')
 NEW_VERSION_CODE=$(($OLD_VERSION_CODE + 1))
-sed -i -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" "app/build.gradle"
+sed -i -e "s/versionCode = $OLD_VERSION_CODE/versionCode = $NEW_VERSION_CODE/" "app/build.gradle.kts"
 
-OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle" | awk '{print $2}')
-sed -i -e "s/$OLD_VERSION_NAME/\"$1\"/" "app/build.gradle"
-git add "app/build.gradle" $CHANGELOG
+OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle.kts" | awk '{print $3}')
+sed -i -e "s/$OLD_VERSION_NAME/\"$1\"/" "app/build.gradle.kts"
+git add "app/build.gradle.kts" $CHANGELOG
 git commit -m "Bumped version to $NEW_VERSION_NAME"
 git tag -a ${NEW_VERSION_NAME} -m "
 $NEW_VERSION_NAME
