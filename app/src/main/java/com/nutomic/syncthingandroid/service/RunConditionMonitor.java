@@ -294,28 +294,13 @@ public class RunConditionMonitor {
      * Functions for run condition information retrieval.
      */
     private boolean isCharging() {
-        // API level >= 21
-        return isCharging_API17();
-    }
-
-    @TargetApi(16)
-    private boolean isCharging_API16() {
-        Intent batteryIntent = mContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        return status == BatteryManager.BATTERY_STATUS_CHARGING ||
-            status == BatteryManager.BATTERY_STATUS_FULL;
-    }
-
-    @TargetApi(17)
-    private boolean isCharging_API17() {
         Intent intent = mContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         return plugged == BatteryManager.BATTERY_PLUGGED_AC ||
-            plugged == BatteryManager.BATTERY_PLUGGED_USB ||
-            plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+                plugged == BatteryManager.BATTERY_PLUGGED_USB ||
+                plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
     }
 
-    @TargetApi(21)
     private boolean isPowerSaving() {
         PowerManager powerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         if (powerManager == null) {
