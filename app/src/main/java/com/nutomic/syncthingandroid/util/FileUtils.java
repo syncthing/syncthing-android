@@ -33,7 +33,6 @@ public class FileUtils {
     private static final String HOME_VOLUME_NAME = "home";
 
     @Nullable
-    @TargetApi(21)
     public static String getAbsolutePathFromSAFUri(Context context, @Nullable final Uri safResultUri) {
         Uri treeUri = DocumentsContract.buildDocumentUriUsingTree(safResultUri,
             DocumentsContract.getTreeDocumentId(safResultUri));
@@ -123,8 +122,6 @@ public class FileUtils {
         return null;
     }
 
-    @SuppressLint("ObsoleteSdkInt")
-    @TargetApi(21)
     private static String volumeToPath(Object storageVolumeElement, Class<?> storageVolumeClazz) throws Exception {
         try {
             // >= API level 30
@@ -146,7 +143,6 @@ public class FileUtils {
      * This is crucial to assist the user finding a writeable folder
      * to use syncthing's two way sync feature.
      */
-    @TargetApi(19)
     public static android.net.Uri getExternalFilesDirUri(Context context) {
         try {
             /**
