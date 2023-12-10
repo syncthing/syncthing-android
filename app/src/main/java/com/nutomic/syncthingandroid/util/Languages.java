@@ -66,7 +66,6 @@ public final class Languages {
      * or different than the current system-wide locale.  The preference is cleared
      * if the language matches the system-wide locale or "System Default" is chosen.
      */
-    @TargetApi(17)
     public void setLanguage(Context context) {
         String language = mPreferences.getString(PREFERENCE_LANGUAGE, null);
         Locale locale;
@@ -89,11 +88,7 @@ public final class Languages {
 
         final Resources resources = context.getResources();
         Configuration config = resources.getConfiguration();
-        if (Build.VERSION.SDK_INT >= 17) {
-            config.setLocale(locale);
-        } else {
-            config.locale = locale;
-        }
+        config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
