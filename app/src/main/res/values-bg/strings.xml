@@ -56,7 +56,7 @@
 \nНякои устройства имат допълнителни приложения за спиране на задачи. Трябва да добавите Syncthing и в техния разрешителен списък.</string>
     <string name="dialog_disable_battery_optimization_later">По-късно</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Без повторно запитване</string>
-    <string name="dialog_disable_battery_optimization_turn_off">Изключване за синхронизирането</string>
+    <string name="dialog_disable_battery_optimization_turn_off">Изключване за Syncthing</string>
     <string name="dialog_disable_battery_optimizations_not_supported">Устройството не поддържа изключване на оптимизирането на батерията</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
