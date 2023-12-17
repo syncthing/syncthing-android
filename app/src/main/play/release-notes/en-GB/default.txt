@@ -1,2 +1,2 @@
-* Update Syncthing to v1.27.0-rc.2: https://github.com/syncthing/syncthing/releases/tag/v1.27.0-rc.2
-* App changelog: https://github.com/syncthing/syncthing-android/releases/tag/1.27.0-rc.2
+* Update Syncthing to v1.27.1: https://github.com/syncthing/syncthing/releases/tag/v1.27.1
+* App changelog: https://github.com/syncthing/syncthing-android/releases/tag/1.27.1
