@@ -543,4 +543,10 @@
     <string name="notification_permission_title">Toestemming voor meldingen</string>
     <string name="require_notification_permission_desc">Verplicht voor het tonen van meldingen over nieuwe apparaatverbindingen, deelverzoeken, enz.</string>
     <string name="dialog_all_files_access_not_supported">Je apparaat ondersteunt geen toegang tot alle bestanden</string>
+    <string name="folder_type_send_only">Alleen verzenden</string>
+    <string name="folder_type_receive_only">Alleen ontvangen</string>
+    <string name="power_source_ac_and_battery_power">Net- en batterijvoeding.</string>
+    <string name="folder_type_send_receive">Verzenden en ontvangen</string>
+    <string name="power_source_ac_power">Netvoeding.</string>
+    <string name="power_source_battery_power">Batterijvoeding.</string>
 </resources>
