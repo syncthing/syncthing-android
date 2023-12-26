@@ -2,6 +2,11 @@
 
 set -e
 
+if ! git diff-index --exit-code --quiet HEAD; then
+    echo "Bumping version aka cutting a release must happen on a clean git workspace"
+    exit 1
+fi
+
 NEW_VERSION_NAME=$1
 OLD_VERSION_NAME=$(grep "versionName" "app/build.gradle" | awk '{print $2}')
 if [[ -z ${NEW_VERSION_NAME} ]]
