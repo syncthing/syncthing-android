@@ -49,7 +49,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(System.getenv("SYNCTHING_RELEASE_STORE_FILE"))
+            storeFile = System.getenv("SYNCTHING_RELEASE_STORE_FILE")?.let(::file)
             storePassword = System.getenv("SIGNING_PASSWORD")
             keyAlias = System.getenv("SYNCTHING_RELEASE_KEY_ALIAS")
             keyPassword = System.getenv("SIGNING_PASSWORD")
