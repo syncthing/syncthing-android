@@ -47,11 +47,11 @@ def fail(message, *args, **kwargs):
 
 
 def get_min_sdk(project_dir):
-    with open(os.path.join(project_dir, 'app', 'build.gradle')) as file_handle:
+    with open(os.path.join(project_dir, 'app', 'build.gradle.kts')) as file_handle:
         for line in file_handle:
             tokens = list(filter(None, line.split()))
-            if len(tokens) == 2 and tokens[0] == 'minSdkVersion':
-                return int(tokens[1])
+            if len(tokens) == 3 and tokens[0] == 'minSdk':
+                return int(tokens[2])
 
     fail('Failed to find minSdkVersion')
 
