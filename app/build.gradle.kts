@@ -65,7 +65,9 @@ android {
             isMinifyEnabled = false
         }
         getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.runCatching { getByName("release") }
+                .getOrNull()
+                .takeIf { it?.storeFile != null }
         }
     }
 
