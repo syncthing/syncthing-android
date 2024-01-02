@@ -25,13 +25,10 @@ public class SyncthingApp extends Application {
 
         new Languages(this).setLanguage(this);
 
-        if (BuildConfig.DEBUG) {
-            setStrictMode();
-        }
-    }
-
-    private void setStrictMode() {
-        // Set VM policy to avoid crash when sending folder URI to file manager.
+        // The main point here is to use a VM policy without
+        // `detectFileUriExposure`, as that leads to exceptions when e.g.
+        // opening the ignores file. And it's enabled by default.
+        // We might want to disable `detectAll` and `penaltyLog` on release (non-RC) builds too.
         StrictMode.VmPolicy policy = new StrictMode.VmPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
