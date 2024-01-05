@@ -160,7 +160,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_device);
+        setContentView(R.layout.activity_device);
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         registerOnServiceConnectedListener(this::onServiceConnected);
