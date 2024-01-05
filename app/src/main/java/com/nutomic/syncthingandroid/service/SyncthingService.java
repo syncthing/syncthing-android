@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import android.util.Log;
 
-import com.android.PRNGFixes;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
@@ -195,7 +194,6 @@ public class SyncthingService extends Service {
     public void onCreate() {
         Log.v(TAG, "onCreate");
         super.onCreate();
-        PRNGFixes.apply();
         ((SyncthingApp) getApplication()).component().inject(this);
         mHandler = new Handler();
 
