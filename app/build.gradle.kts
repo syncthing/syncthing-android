@@ -1,3 +1,5 @@
+import org.gradle.configurationcache.extensions.capitalized
+
 plugins {
     id("com.android.application")
     id("com.github.ben-manes.versions")
@@ -107,4 +109,12 @@ tasks.register<Delete>("deleteUnsupportedPlayTranslations") {
         "src/main/play/listings/nn/",
         "src/main/play/listings/ta/",
     )
+}
+
+project.afterEvaluate {
+    android.buildTypes.forEach {
+        tasks.named("merge${it.name.capitalized()}JniLibFolders") {
+            dependsOn(":syncthing:buildNative")
+        }
+    }
 }
