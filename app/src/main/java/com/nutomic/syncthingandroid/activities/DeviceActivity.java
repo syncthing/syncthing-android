@@ -1,5 +1,12 @@
 package com.nutomic.syncthingandroid.activities;
 
+import static android.text.TextUtils.isEmpty;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
+import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
+import static com.nutomic.syncthingandroid.util.Compression.METADATA;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,13 +22,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.materialswitch.MaterialSwitch;
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ActivityDeviceBinding;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -33,13 +39,6 @@ import com.nutomic.syncthingandroid.util.Util;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static android.text.TextUtils.isEmpty;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
-import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
-import static com.nutomic.syncthingandroid.util.Compression.METADATA;
 
 /**
  * Shows device details and allows changing them.
@@ -65,27 +64,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     private Device mDevice;
 
-    private View mIdContainer;
-
-    private EditText mIdView;
-
-    private View mQrButton;
-
-    private EditText mNameView;
-
-    private EditText mAddressesView;
-
-    private TextView mCurrentAddressView;
-
-    private TextView mCompressionValueView;
-
-    private MaterialSwitch mIntroducerView;
-
-    private MaterialSwitch mDevicePaused;
-
-    private TextView mSyncthingVersionView;
-
-    private View mCompressionContainer;
+    private ActivityDeviceBinding binding;
 
     private boolean mIsCreateMode;
 
@@ -105,7 +84,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
                 mDeviceNeedsToUpdate = true;
 
                 mDevice.compression = compression.getValue(DeviceActivity.this);
-                mCompressionValueView.setText(compression.getTitle(DeviceActivity.this));
+                binding.compressionValue.setText(compression.getTitle(DeviceActivity.this));
             }
         }
     };
@@ -160,26 +139,15 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device);
+        binding = ActivityDeviceBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         registerOnServiceConnectedListener(this::onServiceConnected);
         setTitle(mIsCreateMode ? R.string.add_device : R.string.edit_device);
 
-        mIdContainer = findViewById(R.id.idContainer);
-        mIdView = findViewById(R.id.id);
-        mQrButton = findViewById(R.id.qrButton);
-        mNameView = findViewById(R.id.name);
-        mAddressesView = findViewById(R.id.addresses);
-        mCurrentAddressView = findViewById(R.id.currentAddress);
-        mCompressionContainer = findViewById(R.id.compressionContainer);
-        mCompressionValueView = findViewById(R.id.compressionValue);
-        mIntroducerView = findViewById(R.id.introducer);
-        mDevicePaused = findViewById(R.id.devicePause);
-        mSyncthingVersionView = findViewById(R.id.syncthingVersion);
-
-        mQrButton.setOnClickListener(this);
-        mCompressionContainer.setOnClickListener(this);
+        binding.qrButton.setOnClickListener(this);
+        binding.compressionContainer.setOnClickListener(this);
 
         if (savedInstanceState != null){
             if (mDevice == null) {
@@ -221,9 +189,9 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
-        mIdView.removeTextChangedListener(mIdTextWatcher);
-        mNameView.removeTextChangedListener(mNameTextWatcher);
-        mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
+        binding.id.removeTextChangedListener(mIdTextWatcher);
+        binding.name.removeTextChangedListener(mNameTextWatcher);
+        binding.addresses.removeTextChangedListener(mAddressesTextWatcher);
     }
 
     @Override
@@ -270,12 +238,12 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
      * version/address changes.
      */
     private void onReceiveConnections(Connections connections) {
-        boolean viewsExist = mSyncthingVersionView != null && mCurrentAddressView != null;
+        boolean viewsExist = binding.syncthingVersion != null && binding.currentAddress != null;
         if (viewsExist && connections.connections.containsKey(mDevice.deviceID)) {
-            mCurrentAddressView.setVisibility(VISIBLE);
-            mSyncthingVersionView.setVisibility(VISIBLE);
-            mCurrentAddressView.setText(connections.connections.get(mDevice.deviceID).address);
-            mSyncthingVersionView.setText(connections.connections.get(mDevice.deviceID).clientVersion);
+            binding.currentAddress.setVisibility(VISIBLE);
+            binding.syncthingVersion.setVisibility(VISIBLE);
+            binding.currentAddress.setText(connections.connections.get(mDevice.deviceID).address);
+            binding.syncthingVersion.setText(connections.connections.get(mDevice.deviceID).clientVersion);
         }
     }
 
@@ -307,26 +275,26 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     }
 
     private void updateViewsAndSetListeners() {
-        mIdView.removeTextChangedListener(mIdTextWatcher);
-        mNameView.removeTextChangedListener(mNameTextWatcher);
-        mAddressesView.removeTextChangedListener(mAddressesTextWatcher);
-        mIntroducerView.setOnCheckedChangeListener(null);
-        mDevicePaused.setOnCheckedChangeListener(null);
+        binding.id.removeTextChangedListener(mIdTextWatcher);
+        binding.name.removeTextChangedListener(mNameTextWatcher);
+        binding.addresses.removeTextChangedListener(mAddressesTextWatcher);
+        binding.introducer.setOnCheckedChangeListener(null);
+        binding.devicePause.setOnCheckedChangeListener(null);
 
         // Update views
-        mIdView.setText(mDevice.deviceID);
-        mNameView.setText(mDevice.name);
-        mAddressesView.setText(displayableAddresses());
-        mCompressionValueView.setText(Compression.fromValue(this, mDevice.compression).getTitle(this));
-        mIntroducerView.setChecked(mDevice.introducer);
-        mDevicePaused.setChecked(mDevice.paused);
+        binding.id.setText(mDevice.deviceID);
+        binding.name.setText(mDevice.name);
+        binding.addresses.setText(displayableAddresses());
+        binding.compressionValue.setText(Compression.fromValue(this, mDevice.compression).getTitle(this));
+        binding.introducer.setChecked(mDevice.introducer);
+        binding.devicePause.setChecked(mDevice.paused);
 
         // Keep state updated
-        mIdView.addTextChangedListener(mIdTextWatcher);
-        mNameView.addTextChangedListener(mNameTextWatcher);
-        mAddressesView.addTextChangedListener(mAddressesTextWatcher);
-        mIntroducerView.setOnCheckedChangeListener(mCheckedListener);
-        mDevicePaused.setOnCheckedChangeListener(mCheckedListener);
+        binding.id.addTextChangedListener(mIdTextWatcher);
+        binding.name.addTextChangedListener(mNameTextWatcher);
+        binding.addresses.addTextChangedListener(mAddressesTextWatcher);
+        binding.introducer.setOnCheckedChangeListener(mCheckedListener);
+        binding.devicePause.setOnCheckedChangeListener(mCheckedListener);
     }
 
     @Override
@@ -399,7 +367,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
                 String scanResult = intent.getStringExtra(QRScannerActivity.QR_RESULT_ARG);
                 if (scanResult != null) {
                     mDevice.deviceID = scanResult;
-                    mIdView.setText(mDevice.deviceID);
+                    binding.id.setText(mDevice.deviceID);
                 }
             }
         }
@@ -419,11 +387,11 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Drawable dr = ContextCompat.getDrawable(this, R.drawable.ic_content_copy_24dp);
-        mIdView.setCompoundDrawablesWithIntrinsicBounds(null, null, dr, null);
-        mIdView.setEnabled(false);
-        mQrButton.setVisibility(GONE);
+        binding.id.setCompoundDrawablesWithIntrinsicBounds(null, null, dr, null);
+        binding.id.setEnabled(false);
+        binding.qrButton.setVisibility(GONE);
 
-        mIdContainer.setOnClickListener(this);
+        binding.idContainer.setOnClickListener(this);
     }
 
     /**
@@ -450,12 +418,12 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (v.equals(mCompressionContainer)) {
+        if (v.equals(binding.compressionContainer)) {
             showCompressionDialog();
-        } else if (v.equals(mQrButton)){
+        } else if (v.equals(binding.qrButton)){
             Intent qrIntent = QRScannerActivity.intent(this);
             startActivityForResult(qrIntent, QR_SCAN_REQUEST_CODE);
-        } else if (v.equals(mIdContainer)) {
+        } else if (v.equals(binding.idContainer)) {
             Util.copyDeviceId(this, mDevice.deviceID);
         }
     }
