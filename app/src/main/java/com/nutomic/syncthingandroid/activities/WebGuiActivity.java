@@ -77,13 +77,6 @@ public class WebGuiActivity extends StateDialogActivity
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             try {
-                int sdk = android.os.Build.VERSION.SDK_INT;
-                if (sdk < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                    // The mX509Certificate field is not available for ICS- devices
-                    Log.w(TAG, "Skipping certificate check for devices <ICS");
-                    handler.proceed();
-                    return;
-                }
                 // Use reflection to access the private mX509Certificate field of SslCertificate
                 SslCertificate sslCert = error.getCertificate();
                 Field f = sslCert.getClass().getDeclaredField("mX509Certificate");
@@ -252,11 +245,6 @@ public class WebGuiActivity extends StateDialogActivity
      */
     @SuppressLint("PrivateApi")
     public static boolean setWebViewProxy(Context appContext, String host, int port, String exclusionList) {
-        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            // Not supported on android version lower than KitKat.
-            return false;
-        }
-
         Properties properties = System.getProperties();
         properties.setProperty("http.proxyHost", host);
         properties.setProperty("http.proxyPort", Integer.toString(port));
@@ -282,11 +270,7 @@ public class WebGuiActivity extends StateDialogActivity
                         Intent intent = new Intent(Proxy.PROXY_CHANGE_ACTION);
 
                         String CLASS_NAME;
-                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                            CLASS_NAME = "android.net.ProxyProperties";
-                        } else {
-                            CLASS_NAME = "android.net.ProxyInfo";
-                        }
+                        CLASS_NAME = "android.net.ProxyInfo";
                         Class cls = Class.forName(CLASS_NAME);
                         Constructor constructor = cls.getConstructor(String.class, Integer.TYPE, String.class);
                         constructor.setAccessible(true);
