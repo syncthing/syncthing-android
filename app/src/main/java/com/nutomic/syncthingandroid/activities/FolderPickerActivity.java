@@ -104,7 +104,7 @@ public class FolderPickerActivity extends SyncthingActivity
         }
 
         Boolean prefUseRoot = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !prefUseRoot) {
+        if (!prefUseRoot) {
             Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
                     .show();
         }
@@ -118,10 +118,8 @@ public class FolderPickerActivity extends SyncthingActivity
     @SuppressLint("NewApi")
     private void populateRoots() {
         ArrayList<File> roots = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
-            roots.remove(getExternalFilesDir(null));
-        }
+        roots.addAll(Arrays.asList(getExternalFilesDirs(null)));
+        roots.remove(getExternalFilesDir(null));
 
         String rootDir = getIntent().getStringExtra(EXTRA_ROOT_DIRECTORY);
         if (getIntent().hasExtra(EXTRA_ROOT_DIRECTORY) && !TextUtils.isEmpty(rootDir)) {
@@ -132,9 +130,7 @@ public class FolderPickerActivity extends SyncthingActivity
             roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
             roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
             roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
-            }
+            roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
             // Add paths that might not be accessible to Syncthing.
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
