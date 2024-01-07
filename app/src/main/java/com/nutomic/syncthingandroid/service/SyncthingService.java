@@ -1,17 +1,14 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Handler;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 
-import com.android.PRNGFixes;
+import androidx.annotation.Nullable;
+
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
@@ -24,11 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.inject.Inject;
@@ -195,7 +189,6 @@ public class SyncthingService extends Service {
     public void onCreate() {
         Log.v(TAG, "onCreate");
         super.onCreate();
-        PRNGFixes.apply();
         ((SyncthingApp) getApplication()).component().inject(this);
         mHandler = new Handler();
 
