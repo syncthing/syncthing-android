@@ -172,4 +172,14 @@
     <!--Displays the current file versioning type in the Folder activity-->
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+    <string name="location_permission_desc">يمكن تخصيص Syncthing ليعمل على الشبكات اللاسلكية المصطفاة فقط. لنتمكن من فعل هذا نحتاج للوصول لعنوان SSID الخاص بالشبكة المتصلة، وإن كان التطبيق مغلقا. لهذا يجب منح التطبيق الإذن لقراءة الموقع أثناء عمله في الخلفية. لا تُستخدم هذه المعلومات لتتبع موقعك. ولا تُسجل غير الشبكات التي تختارها بنفسك - لا تُجمع معلومات إضافية عن المستخدم.
+\n
+\nإذا أردت استخدام هذه الخاصية، اضغط الزِّر أعلاه لإعطاء Syncthing الصلاحيات اللازمة. يمكنك تخطي هذه الخطوة إذا شئت.</string>
+    <string name="welcome_text">Syncthing تطبيق حُر المصدر لمزامنة الملفات.
+\nلمشاركة البيانات مع الأجهزة الأخرى، ستحتاج لإضافة مُعرِّفاتهم الخاصة لسِجِلِّ الأجهزة. بعد ذلك، يمكنك اختيار المجلدات التي تود مشاركتها مع كل جهاز في السجل.
+\nنرجو إبلاغنا عن أي أعطال تواجهها من خلال متتبع المشاكل الخاص بنا على Github.</string>
+    <string name="welcome_title">مرحبا بك في Syncthing على نظام أندرويد</string>
+    <string name="introduction">مقدمة</string>
+    <string name="api_level_30_title">معلومات التحديث</string>
+    <string name="app_description">تطبيق حُر، موثوق، محلي الإدارة.</string>
 </resources>
