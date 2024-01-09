@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.FragmentFolderBinding;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.Constants;
@@ -85,20 +86,7 @@ public class FolderActivity extends SyncthingActivity
     // Indicates the result of the write test to mFolder.path on dialog init or after a path change.
     Boolean mCanWriteToPath = false;
 
-    private EditText mLabelView;
-    private EditText mIdView;
-    private TextView mPathView;
-    private TextView mAccessExplanationView;
-    private TextView mFolderTypeView;
-    private TextView mFolderTypeDescriptionView;
-    private MaterialSwitch mFolderFileWatcher;
-    private MaterialSwitch mFolderPaused;
-    private ViewGroup mDevicesContainer;
-    private TextView mPullOrderTypeView;
-    private TextView mPullOrderDescriptionView;
-    private TextView mVersioningDescriptionView;
-    private TextView mVersioningTypeView;
-    private TextView mEditIgnores;
+    private FragmentFolderBinding binding;
 
     private boolean mIsCreateMode;
     private boolean mFolderNeedsToUpdate = false;
@@ -111,9 +99,9 @@ public class FolderActivity extends SyncthingActivity
     private final TextWatcher mTextWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
-            mFolder.label        = mLabelView.getText().toString();
-            mFolder.id           = mIdView.getText().toString();
-            // mPathView must not be handled here as it's handled by {@link onActivityResult}
+            mFolder.label        = binding.label.getText().toString();
+            mFolder.id           = binding.id.getText().toString();
+            // binding.directoryTextView must not be handled here as it's handled by {@link onActivityResult}
             mFolderNeedsToUpdate = true;
         }
     };
@@ -147,33 +135,19 @@ public class FolderActivity extends SyncthingActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_folder);
+        binding = FragmentFolderBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         mIsCreateMode = getIntent().getBooleanExtra(EXTRA_IS_CREATE, false);
         setTitle(mIsCreateMode ? R.string.create_folder : R.string.edit_folder);
         registerOnServiceConnectedListener(this);
 
-        mLabelView = findViewById(R.id.label);
-        mIdView = findViewById(R.id.id);
-        mPathView = findViewById(R.id.directoryTextView);
-        mAccessExplanationView = findViewById(R.id.accessExplanationView);
-        mFolderTypeView = findViewById(R.id.folderType);
-        mFolderTypeDescriptionView = findViewById(R.id.folderTypeDescription);
-        mFolderFileWatcher = findViewById(R.id.fileWatcher);
-        mFolderPaused = findViewById(R.id.folderPause);
-        mPullOrderTypeView = findViewById(R.id.pullOrderType);
-        mPullOrderDescriptionView = findViewById(R.id.pullOrderDescription);
-        mVersioningDescriptionView = findViewById(R.id.versioningDescription);
-        mVersioningTypeView = findViewById(R.id.versioningType);
-        mDevicesContainer = findViewById(R.id.devicesContainer);
-        mEditIgnores = findViewById(R.id.edit_ignores);
-
-        mPathView.setOnClickListener(view -> onPathViewClick());
+        binding.directoryTextView.setOnClickListener(view -> onPathViewClick());
 
         findViewById(R.id.folderTypeContainer).setOnClickListener(v -> showFolderTypeDialog());
         findViewById(R.id.pullOrderContainer).setOnClickListener(v -> showPullOrderDialog());
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
-        mEditIgnores.setOnClickListener(v -> editIgnores());
+        binding.editIgnores.setOnClickListener(v -> editIgnores());
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -186,15 +160,15 @@ public class FolderActivity extends SyncthingActivity
                 initFolder();
             }
             // Open keyboard on label view in edit mode.
-            mLabelView.requestFocus();
-            mEditIgnores.setEnabled(false);
+            binding.label.requestFocus();
+            binding.editIgnores.setEnabled(false);
         }
         else {
             // Prepare edit mode.
-            mIdView.clearFocus();
-            mIdView.setFocusable(false);
-            mIdView.setEnabled(false);
-            mPathView.setEnabled(false);
+            binding.id.clearFocus();
+            binding.id.setFocusable(false);
+            binding.id.setEnabled(false);
+            binding.directoryTextView.setEnabled(false);
         }
 
         if (savedInstanceState != null){
@@ -211,7 +185,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     /**
-     * Invoked after user clicked on the {@link mPathView} label.
+     * Invoked after user clicked on the directoryTextView label.
      */
     @SuppressLint("InlinedAPI")
     private void onPathViewClick() {
@@ -312,8 +286,8 @@ public class FolderActivity extends SyncthingActivity
             syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
-        mLabelView.removeTextChangedListener(mTextWatcher);
-        mIdView.removeTextChangedListener(mTextWatcher);
+        binding.label.removeTextChangedListener(mTextWatcher);
+        binding.id.removeTextChangedListener(mTextWatcher);
     }
 
     @Override
@@ -395,22 +369,22 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void updateViewsAndSetListeners() {
-        mLabelView.removeTextChangedListener(mTextWatcher);
-        mIdView.removeTextChangedListener(mTextWatcher);
-        mFolderFileWatcher.setOnCheckedChangeListener(null);
-        mFolderPaused.setOnCheckedChangeListener(null);
+        binding.label.removeTextChangedListener(mTextWatcher);
+        binding.id.removeTextChangedListener(mTextWatcher);
+        binding.fileWatcher.setOnCheckedChangeListener(null);
+        binding.folderPause.setOnCheckedChangeListener(null);
 
         // Update views
-        mLabelView.setText(mFolder.label);
-        mIdView.setText(mFolder.id);
+        binding.label.setText(mFolder.label);
+        binding.id.setText(mFolder.id);
         updateFolderTypeDescription();
         updatePullOrderDescription();
         updateVersioningDescription();
-        mFolderFileWatcher.setChecked(mFolder.fsWatcherEnabled);
-        mFolderPaused.setChecked(mFolder.paused);
+        binding.fileWatcher.setChecked(mFolder.fsWatcherEnabled);
+        binding.folderPause.setChecked(mFolder.paused);
         List<Device> devicesList = getApi().getDevices(false);
 
-        mDevicesContainer.removeAllViews();
+        binding.devicesContainer.removeAllViews();
         if (devicesList.isEmpty()) {
             addEmptyDeviceListView();
         } else {
@@ -420,10 +394,10 @@ public class FolderActivity extends SyncthingActivity
         }
 
         // Keep state updated
-        mLabelView.addTextChangedListener(mTextWatcher);
-        mIdView.addTextChangedListener(mTextWatcher);
-        mFolderFileWatcher.setOnCheckedChangeListener(mCheckedListener);
-        mFolderPaused.setOnCheckedChangeListener(mCheckedListener);
+        binding.label.addTextChangedListener(mTextWatcher);
+        binding.id.addTextChangedListener(mTextWatcher);
+        binding.fileWatcher.setOnCheckedChangeListener(mCheckedListener);
+        binding.folderPause.setOnCheckedChangeListener(mCheckedListener);
     }
 
     @Override
@@ -552,7 +526,7 @@ public class FolderActivity extends SyncthingActivity
      * Prerequisite: mFolder.path must be non-empty
      */
     private void checkWriteAndUpdateUI() {
-        mPathView.setText(mFolder.path);
+        binding.directoryTextView.setText(mFolder.path);
         if (TextUtils.isEmpty(mFolder.path)) {
             return;
         }
@@ -564,9 +538,9 @@ public class FolderActivity extends SyncthingActivity
          */
         mCanWriteToPath = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
         if (mCanWriteToPath) {
-            mAccessExplanationView.setText(R.string.folder_path_readwrite);
-            mFolderTypeView.setEnabled(true);
-            mEditIgnores.setEnabled(true);
+            binding.accessExplanationView.setText(R.string.folder_path_readwrite);
+            binding.folderType.setEnabled(true);
+            binding.editIgnores.setEnabled(true);
             if (mIsCreateMode) {
                 /**
                  * Suggest folder type FOLDER_TYPE_SEND_RECEIVE for folders to be created
@@ -579,9 +553,9 @@ public class FolderActivity extends SyncthingActivity
             }
         } else {
             // Force "sendonly" folder.
-            mAccessExplanationView.setText(R.string.folder_path_readonly);
-            mFolderTypeView.setEnabled(false);
-            mEditIgnores.setEnabled(false);
+            binding.accessExplanationView.setText(R.string.folder_path_readonly);
+            binding.folderType.setEnabled(false);
+            binding.editIgnores.setEnabled(false);
             mFolder.type = Constants.FOLDER_TYPE_SEND_ONLY;
             updateFolderTypeDescription();
         }
@@ -626,15 +600,15 @@ public class FolderActivity extends SyncthingActivity
         int contentInset = getResources().getDimensionPixelOffset(R.dimen.abc_action_bar_content_inset_material);
         setMarginStart(params, dividerInset);
         setMarginEnd(params, contentInset);
-        TextView emptyView = new TextView(mDevicesContainer.getContext());
+        TextView emptyView = new TextView(binding.devicesContainer.getContext());
         emptyView.setGravity(CENTER_VERTICAL);
         emptyView.setText(R.string.devices_list_empty);
-        mDevicesContainer.addView(emptyView, params);
+        binding.devicesContainer.addView(emptyView, params);
     }
 
     private void addDeviceViewAndSetListener(Device device, LayoutInflater inflater) {
-        inflater.inflate(R.layout.item_device_form, mDevicesContainer);
-        MaterialSwitch deviceView = (MaterialSwitch) mDevicesContainer.getChildAt(mDevicesContainer.getChildCount()-1);
+        inflater.inflate(R.layout.item_device_form, binding.devicesContainer);
+        MaterialSwitch deviceView = (MaterialSwitch) binding.devicesContainer.getChildAt(binding.devicesContainer.getChildCount()-1);
         deviceView.setOnCheckedChangeListener(null);
         deviceView.setChecked(mFolder.getDevice(device.deviceID) != null);
         deviceView.setText(device.getDisplayName());
@@ -721,8 +695,8 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void setFolderTypeDescription(String type, String description) {
-        mFolderTypeView.setText(type);
-        mFolderTypeDescriptionView.setText(description);
+        binding.folderType.setText(type);
+        binding.folderTypeDescription.setText(description);
     }
 
     private void updatePullOrderDescription() {
@@ -765,8 +739,8 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void setPullOrderDescription(String type, String description) {
-        mPullOrderTypeView.setText(type);
-        mPullOrderDescriptionView.setText(description);
+        binding.pullOrderType.setText(type);
+        binding.pullOrderDescription.setText(description);
     }
 
     private void updateVersioningDescription() {
@@ -801,7 +775,7 @@ public class FolderActivity extends SyncthingActivity
     }
 
     private void setVersioningDescription(String type, String description) {
-        mVersioningTypeView.setText(type);
-        mVersioningDescriptionView.setText(description);
+        binding.versioningType.setText(type);
+        binding.versioningDescription.setText(description);
     }
 }
