@@ -31,13 +31,13 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.databinding.ActivityFirstStartBinding;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
@@ -69,12 +69,10 @@ public class FirstStartActivity extends Activity {
     private static Slide[] slides = Slide.values();
     private static String TAG = "FirstStartActivity";
 
-    private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
-    private LinearLayout mDotsLayout;
     private TextView[] mDots;
-    private Button mBackButton;
-    private Button mNextButton;
+
+    private ActivityFirstStartBinding binding;
 
     @Inject
     SharedPreferences mPreferences;
@@ -95,13 +93,10 @@ public class FirstStartActivity extends Activity {
         }
 
         // Show first start welcome wizard UI.
-        setContentView(R.layout.activity_first_start);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mDotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        mBackButton = (Button) findViewById(R.id.btn_back);
-        mNextButton = (Button) findViewById(R.id.btn_next);
+        binding = ActivityFirstStartBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        mViewPager.setOnTouchListener(new OnTouchListener() {
+        binding.viewPager.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // Consume the event to prevent swiping through the slides.
@@ -115,17 +110,17 @@ public class FirstStartActivity extends Activity {
         setActiveBottomDot(0);
 
         mViewPagerAdapter = new ViewPagerAdapter();
-        mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.addOnPageChangeListener(mViewPagerPageChangeListener);
+        binding.viewPager.setAdapter(mViewPagerAdapter);
+        binding.viewPager.addOnPageChangeListener(mViewPagerPageChangeListener);
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBtnBackClick();
             }
         });
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBtnNextClick();
@@ -139,12 +134,12 @@ public class FirstStartActivity extends Activity {
     }
 
     public void onBtnBackClick() {
-        int current = mViewPager.getCurrentItem() - 1;
+        int current = binding.viewPager.getCurrentItem() - 1;
         if (current >= 0) {
             // Move to previous slider.
-            mViewPager.setCurrentItem(current);
+            binding.viewPager.setCurrentItem(current);
             if (current == 0) {
-                mBackButton.setVisibility(View.GONE);
+                binding.btnBack.setVisibility(View.GONE);
             }
         }
     }
@@ -171,11 +166,11 @@ public class FirstStartActivity extends Activity {
                 break;
         }
 
-        int next = mViewPager.getCurrentItem() + 1;
+        int next = binding.viewPager.getCurrentItem() + 1;
         while (next < slides.length) {
             if (!shouldSkipSlide(slides[next])) {
-                mViewPager.setCurrentItem(next);
-                mBackButton.setVisibility(View.VISIBLE);
+                binding.viewPager.setCurrentItem(next);
+                binding.btnBack.setVisibility(View.VISIBLE);
                 break;
             }
             next++;
@@ -231,7 +226,7 @@ public class FirstStartActivity extends Activity {
     }
 
     private Slide currentSlide() {
-        return slides[mViewPager.getCurrentItem()];
+        return slides[binding.viewPager.getCurrentItem()];
     }
 
     private boolean shouldSkipSlide(Slide slide) {
@@ -259,7 +254,7 @@ public class FirstStartActivity extends Activity {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDotsLayout.addView(mDots[i]);
+            binding.layoutDots.addView(mDots[i]);
         }
     }
 
@@ -280,7 +275,7 @@ public class FirstStartActivity extends Activity {
             setActiveBottomDot(position);
 
             // Change the next button text from next to finish on last slide.
-            mNextButton.setText(getString((position == slides.length - 1) ? R.string.finish : R.string.cont));
+            binding.btnNext.setText(getString((position == slides.length - 1) ? R.string.finish : R.string.cont));
         }
 
         @Override
