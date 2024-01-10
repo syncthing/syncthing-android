@@ -346,7 +346,7 @@
     <string name="donate_summary">Hilf uns die Domain- und Hostinggebühren zu zahlen</string>
     <!--Menu item linking privacy policy-->
     <string name="privacy_title">Datenschutzrichtlinie</string>
-    <string name="privacy_summary">Öffne die Datenschuzrichtlinie für syncthing-android, in der die Nutzung personenbezogener Daten erklärt werden, sofern diese gesammelt werden (z.B. Standort).</string>
+    <string name="privacy_summary">Öffne die Datenschutzrichtlinie für syncthing-android, in der die Nutzung personenbezogener Daten erklärt wird, sofern diese gesammelt werden (z.B. Standort).</string>
     <!--Title of the preference showing upstream version name-->
     <string name="syncthing_version_title">Syncthing-Version</string>
     <!--Title of the preference showing this app's version name-->
