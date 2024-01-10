@@ -542,4 +542,15 @@
     <string name="browse">Procurar</string>
     <string name="no_sub_folder_is_selected">Não foi seleccionada uma sub-pasta</string>
     <string name="share_device_id_chooser">Partilhar ID do dispositivo com</string>
+    <string name="api_level_30_title">Informação da actualização</string>
+    <string name="api_level_30_desc">Com a última actualização o syncthing-android aponta para a API de nível 30, que muda o comportamento do sistema de ficheiros do Android. Boas notícias: No Android 11 e posterior é permitido escrever num cartão SD externo. Más notícias: Poderá ser mais lento e alguns caminhos estarão escondidos. Por causa desses caminhos escondidos, a base de dados tem que ser reiniciada para evitar a perda de dados. Isso irá fazer com que seja calculado o hash de todos os seus dados novamente, mas os dados não terão de ser transferidos de dispositivos remotos. Também poderá criar conflitos e recriar ficheiros que tinham sido apagados recentemente se não tiver a sincronia completa neste momento. Dependendo da quantidade de dados que tem, este processo pode consumir muitos recursos, ou seja, vai levar algum tempo e consumir muita carga da bateria.
+\n
+\nCarregue no botão abaixo para reiniciar a base de dados e iniciar o Syncthing.</string>
+    <string name="dialog_all_files_access_not_supported">O seu dispositivo não suporta o acesso a todos os ficheiros</string>
+    <string name="api_level_30_button">Reiniciar base de dados</string>
+    <string name="toast_api_level_30_must_reset">Só pode continuar se clicar neste botão para reiniciar a base de dados.</string>
+    <string name="require_notification_permission_desc">É necessário para mostrar notificações relativas às ligações com dispositivos novos, pedidos de partilha de pastas, etc.</string>
+    <string name="notification_permission_title">Permissão de notificação</string>
+    <string name="enable_notification_permission">Habilitar permissão de notificação</string>
+    <string name="run_conditions_title">Habilitar condições de execução</string>
 </resources>
