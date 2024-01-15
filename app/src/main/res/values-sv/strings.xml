@@ -421,7 +421,7 @@
     <string name="syncthing_disabled_reason_on_charger">Enheten körs på laddaren</string>
     <string name="syncthing_disabled_reason_powersaving">Enheten är i energisparläge</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Global synkronisering är inaktiverad</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Nuvarande WiFi SSID är inte vitlistad</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Aktuellt WiFi SSID är inte vitlistat eller platsbehörigheter är begränsade</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Nuvarande Wi-Fi är uppmätt</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Ingen nätverksanslutning eller flygplansläge aktiverat</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Inte ansluten till mobildata</string>
@@ -538,4 +538,15 @@
     <string name="browse">Bläddra</string>
     <string name="no_sub_folder_is_selected">Ingen undermapp är vald</string>
     <string name="share_device_id_chooser">Dela enhets-ID med</string>
+    <string name="run_conditions_title">Aktivera körförhållanden</string>
+    <string name="dialog_all_files_access_not_supported">Din enhet stöder inte all filåtkomst</string>
+    <string name="api_level_30_desc">Med den senaste uppdateringen är syncthing-android inriktad på API-nivå 30, vilket förändrar beteendet hos Androids filsystem. Goda nyheter: På Android 11 och nyare går det nu att skriva till ett externt SD-kort. Dåliga nyheter: Det kan vara långsammare och vissa sökvägar kommer att vara dolda. På grund av dessa dolda sökvägar måste databasen återställas för att förhindra dataförlust. Detta gör att all din data hashas igen, men den behöver inte överföras från fjärrenheter. Det kan också skapa konflikter och återskapa nyligen borttagna filer om du inte är helt synkroniserad just nu. Beroende på hur mycket data du har kan denna process vara mycket resurskrävande, d.v.s. ta lite tid och använda mycket batterikraft.
+\n
+\nTryck på knappen nedan för att återställa databasen och starta Syncthing.</string>
+    <string name="api_level_30_button">Återställ databas</string>
+    <string name="api_level_30_title">Uppgraderingsinformation</string>
+    <string name="toast_api_level_30_must_reset">Du kan bara fortsätta genom att klicka på knappen för att återställa databasen.</string>
+    <string name="require_notification_permission_desc">Krävs för att visa aviseringar om nya enhetsanslutningar, förfrågningar om mappdelning, etc.</string>
+    <string name="notification_permission_title">Aviseringsbehörighet</string>
+    <string name="enable_notification_permission">Aktivera meddelandebehörighet</string>
 </resources>
