@@ -18,7 +18,7 @@
     <string name="location_permission_title">Определение местоположения (в фоне)</string>
     <string name="location_permission_desc">Вы можете настроить Syncthing, чтобы синхронизация велась только в выбранных сетях Wi-Fi. Для поиска сетей, и только для этого, приложению требуется доступ к местоположению. Никакая другая информация о локации устройства не собирается и не сохраняется.
 \n
-\nЕсли вы хотите использовать эту функцию, нажмите кнопку выше и дайте Syncthing разрешение. Или просто пропустите этот шаг.</string>
+\nЕсли вы хотите использовать эту функцию, нажмите на кнопку выше и дайте Syncthing разрешение. Или просто пропустите этот шаг.</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">Назад</string>
@@ -26,7 +26,7 @@
     <string name="finish">Завершить</string>
     <string name="generic_example">Пример</string>
     <string name="generic_error">Ошибка</string>
-    <string name="grant_permission">Разрешить</string>
+    <string name="grant_permission">Выдать доступ</string>
     <string name="permission_granted">Доступ получен</string>
     <string name="accept">Принять</string>
     <string name="ignore">Игнорировать</string>
@@ -41,7 +41,7 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Отправить ID устройства</string>
     <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику\?</string>
-    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания платформ, размеров папок и версий программы. Если отправляемые данные изменятся, этот диалог появится вновь.
+    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания платформ, размеров папок и версий программы. Если набор собираемых данных изменится, этот диалог появится вновь.
 \n
 \nОбобщенная статистика доступна всем на https://data.syncthing.net.</string>
     <string name="yes">Да</string>
@@ -83,11 +83,11 @@
     <!--Shown if no devices exist-->
     <string name="devices_list_empty">Устройства не найдены</string>
     <!--Indicates that a folder is fully synced to the local device-->
-    <string name="device_up_to_date">Обновлено</string>
+    <string name="device_up_to_date">В актуальном состоянии</string>
     <!--Indicates that the device is currently syncing. Parameter is sync percentage-->
     <string name="device_syncing">Синхронизация (%1$d%%)</string>
     <!--Indicates that there is no connection to the device-->
-    <string name="device_disconnected">Отсоединено</string>
+    <string name="device_disconnected">Нет соединения</string>
     <!--Indicates that the device is paused and does not sync-->
     <string name="device_paused">Приостановлено</string>
     <!--Indicates that the device connection is unknown-->
@@ -108,7 +108,7 @@
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Отдача: "</string>
     <!--Title for current RAM usage-->
-    <string name="ram_usage">Использование ОЗУ</string>
+    <string name="ram_usage">Использование памяти</string>
     <!--Title for announce server status-->
     <string name="announce_server">Сервер анонсов</string>
     <string name="restart">Перезапустить</string>
@@ -194,14 +194,14 @@
     <string name="web_gui_loading">Ожидание GUI</string>
     <!--SettingsFragment-->
     <string name="settings_title">Настройки</string>
-    <string name="category_run_conditions">Условия выполнения</string>
+    <string name="category_run_conditions">Режимы работы</string>
     <string name="category_behaviour">Поведение</string>
     <string name="category_syncthing_options">Опции устройства</string>
     <string name="category_backup">Резервная копия</string>
     <string name="category_debug">Отладка</string>
     <string name="category_experimental">Экспериментальное</string>
     <!--Preference screen - Run conditions-->
-    <string name="run_conditions_summary">Определите условия, когда Syncthing должен работать.</string>
+    <string name="run_conditions_summary">Выберите режимы работы Syncthing.</string>
     <string name="run_on_mobile_data_title">Работать на мобильном Интернете</string>
     <string name="run_on_mobile_data_summary">Работать при подключении через мобильную сеть. Внимание! Так вы можете потратить большое количество платного трафика.</string>
     <string name="run_on_wifi_title">Работать на Wi-Fi</string>
@@ -215,13 +215,13 @@
     <string name="sync_only_wifi_ssids_connect_to_wifi">Подключитесь к сети Wi-Fi, чтобы добавить её в список.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Вы должны разрешить определение местоположения для использования данной функции.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Требуется разрешение</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Начиная с Android 8.1, требуется доступ к местоположению, чтобы искать сети Wi-Fi. Пожалуйста, разрешите приложению этот доступ.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Начиная с Android 8.1, для чтения имени сети WiFi требуется разрешение позиционирования. Вы можете пользоваться данной функцией только если разрешите позиционирование.</string>
     <string name="power_source_title">Работать при питании</string>
-    <string name="power_source_ac_and_battery_power">От сети и батареи</string>
-    <string name="power_source_ac_power">От сети</string>
-    <string name="power_source_battery_power">От батареи</string>
+    <string name="power_source_ac_and_battery_power">От сети и батареи.</string>
+    <string name="power_source_ac_power">От сети.</string>
+    <string name="power_source_battery_power">От батареи.</string>
     <string name="respect_battery_saving_title">Учитывать настройки энергосбережения Android</string>
-    <string name="respect_battery_saving_summary">Отключить Syncthing в режиме энергосбережения</string>
+    <string name="respect_battery_saving_summary">Отключить Syncthing в режиме энергосбережения.</string>
     <string name="respect_master_sync_title">Учитывать системную настройку автосинхронизации</string>
     <string name="respect_master_sync_summary">Отключить Syncthing, когда системная настройка автосинхронизации выключена.</string>
     <string name="run_in_flight_mode_title">Работать в режиме полёта</string>
@@ -268,21 +268,21 @@
     <string name="max_send_kbps">Лимит отдачи (КиБ/с)</string>
     <string name="global_announce_enabled">Глобальное обнаружение</string>
     <string name="local_announce_enabled">Локальное обнаружение</string>
-    <string name="enable_nat_traversal">Включить обход NAT</string>
+    <string name="enable_nat_traversal">Использовать обход NAT</string>
     <string name="global_announce_server">Серверы глобального обнаружения</string>
-    <string name="enable_relaying">Включить релеи</string>
+    <string name="enable_relaying">Использовать ретрансляторы</string>
     <string name="usage_reporting">Анонимные отчеты</string>
     <string name="gui_address">Адрес GUI</string>
     <!--Titles for the preference to undo ignored devices and folders-->
     <string name="undo_ignored_devices_folders_title">Отменить игнорирование устройств и папок</string>
     <string name="undo_ignored_devices_folders_question">Вы отменяете игнорирование устройств и папок. Продолжить\?</string>
-    <string name="undo_ignored_devices_folders_done">Успешно отменено</string>
+    <string name="undo_ignored_devices_folders_done">Успешно отменено.</string>
     <string name="export_config">Экспорт настроек</string>
     <!--Toast after entering invalid integer value-->
     <string name="invalid_integer_value" tools:ignore="PluralsCandidate">Введите число меньше %1$d и больше %2$d.</string>
     <!--Experimental options-->
     <string name="use_proxy">Подсоединиться через прокси</string>
-    <string name="do_not_use_proxy">Прокси не настроены</string>
+    <string name="do_not_use_proxy">Прокси не настроены.</string>
     <string name="keep_wakelock_while_binary_running">Поддерживать ЦП в активном состоянии при работе Syncthing</string>
     <string name="keep_wakelock_while_binary_running_summary">Используйте эту опцию, если у вас происходят потери соединения при работе от батареи. Эта опция увеличит расход заряда батареи.</string>
     <string name="use_tor_title">Использовать Tor</string>
@@ -546,4 +546,15 @@
     <string name="browse">Обзор</string>
     <string name="no_sub_folder_is_selected">Подпапка не выбрана</string>
     <string name="share_device_id_chooser">Поделиться ID устройства</string>
+    <string name="run_conditions_title">Включить режимы работы</string>
+    <string name="api_level_30_desc">После последнего обновления, syncthing-android собирается с целевым уровнем API 30, который меняет поведение файловой системы Android. Хорошая новость: Если у вас Android 11 или новее, то вы сможете записывать данные на SD-карту. Плохая новость: такая запись может быть медленнее, а некоторые пути будут скрыты. Из-за этих скрытых путей, база данных должна быть сброшена, чтобы предотвратить потерю данных. Это приведет к тому, что все ваши данные будут снова хешированы, но их не нужно будет передавать с удаленных устройств. Если в этот момент вы не полностью синхронизированы, то они также могут создавать конфликты и воссоздавать недавно удаленные файлы. В зависимости от того, сколько у вас данных, этот процесс может быть очень ресурсоемким, то есть он займёт некоторое время и будет использовать много энергии от аккумулятора.
+\n
+\nНажмите кнопку ниже, чтобы сбросить базу данных и запустить Syncthing.</string>
+    <string name="notification_permission_title">Разрешение отправки уведомлений</string>
+    <string name="enable_notification_permission">Включить разрешение отправки уведомлений</string>
+    <string name="dialog_all_files_access_not_supported">Ваше устройство не поддерживает доступ ко всем файлам</string>
+    <string name="toast_api_level_30_must_reset">Вы можете продолжить, только нажав кнопку сброса базы данных.</string>
+    <string name="api_level_30_button">Сбросить базу данных</string>
+    <string name="api_level_30_title">Информация о обновлении</string>
+    <string name="require_notification_permission_desc">Требуется для отображения уведомлений о новых подключениях устройств, запросов на совместное использование папок и т.д.</string>
 </resources>

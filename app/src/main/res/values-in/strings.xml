@@ -7,12 +7,12 @@
     <string name="welcome_title">Selamat Datang di Syncthing untuk Android</string>
     <!--Welcome wizard-->
     <!--Slide 1-->
-    <string name="introduction">Pengenalan</string>
+    <string name="introduction">Pendahuluan</string>
     <string name="welcome_text">Syncthing adalah aplikasi penyelarasan berkas bebas-terbuka.
 \nUntuk berbagi data dengan perangkat lain, anda perlu menambah ID masing-masing perangkat tersebut pada daftar perangkat. Setelah itu anda bisa memilih folder mana yang akan berbagi dengan perangkat mana.
 \nJika ada masalah silakan laporkan lewat Github.</string>
     <!--Slide 2-->
-    <string name="storage_permission_title">Perizinan Penyimpanan</string>
+    <string name="storage_permission_title">Izin Penyimpanan</string>
     <string name="storage_permission_desc">Syncthing perlu mengakses penyimpanan Anda untuk melakukan sinkronisasi file.</string>
     <!--Slide 3-->
     <string name="location_permission_title">Izin Lokasi (latar belakang)</string>
@@ -347,4 +347,6 @@
     <!--Displays the current file versioning type in the Folder activity-->
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+    <string name="dialog_all_files_access_not_supported">Perangkat Anda tidak mendukung semua akses file</string>
+    <string name="api_level_30_title">Informasi Peningkatan</string>
 </resources>
