@@ -9,7 +9,7 @@ import sys
 PLATFORM_DIRS = {
     'Windows': 'windows-x86_64',
     'Linux': 'linux-x86_64',
-    'Darwin': 'darwin-x86-64',
+    'Darwin': 'darwin-x86_64',
 }
 
 # The values here must correspond with those in ../docker/prebuild.sh
