@@ -2,6 +2,7 @@ package com.nutomic.syncthingandroid.service;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -145,16 +146,22 @@ public class RestApi {
      */
     private Completion mCompletion = new Completion();
 
-    @Inject NotificationHandler mNotificationHandler;
+    private NotificationHandler mNotificationHandler;
 
-    public RestApi(Context context, URL url, String apiKey, OnApiAvailableListener apiListener,
-                   OnConfigChangedListener configListener) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public RestApi(
+            Context context,
+            URL url,
+            String apiKey,
+            OnApiAvailableListener apiListener,
+            OnConfigChangedListener configListener,
+            NotificationHandler notificationHandler
+    ) {
         mContext = context;
         mUrl = url;
         mApiKey = apiKey;
         mOnApiAvailableListener = apiListener;
         mOnConfigChangedListener = configListener;
+        mNotificationHandler = notificationHandler;
     }
 
     public interface OnApiAvailableListener {

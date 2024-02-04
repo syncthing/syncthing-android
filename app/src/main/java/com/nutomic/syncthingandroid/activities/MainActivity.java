@@ -1,10 +1,9 @@
 package com.nutomic.syncthingandroid.activities;
 
+import static java.lang.Math.min;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -20,20 +19,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.provider.Settings;
-
-import com.google.android.material.color.DynamicColors;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -45,14 +32,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import com.annimon.stream.function.Consumer;
+import com.google.android.material.tabs.TabLayout;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
-import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
@@ -64,13 +58,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import static java.lang.Math.min;
+import dagger.hilt.android.AndroidEntryPoint;
 
 /**
  * Shows {@link FolderListFragment} and
  * {@link DeviceListFragment} in different tabs, and
  * {@link DrawerFragment} in the navigation drawer.
  */
+@AndroidEntryPoint
 public class MainActivity extends StateDialogActivity
         implements SyncthingService.OnServiceStateChangeListener {
 
@@ -219,7 +214,6 @@ public class MainActivity extends StateDialogActivity
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SyncthingApp) getApplication()).component().inject(this);
 
         setContentView(R.layout.activity_main);
         mDrawerLayout = findViewById(R.id.drawer_layout);

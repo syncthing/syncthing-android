@@ -1,18 +1,15 @@
 package com.nutomic.syncthingandroid.util;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.text.TextUtils;
 
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.SyncthingApp;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,8 +18,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import javax.inject.Inject;
 
 /**
  * Based on https://gitlab.com/fdroid/fdroidclient/blob/master/app/src/main/java/org/fdroid/fdroid/Languages.java
@@ -34,15 +29,18 @@ public final class Languages {
     private static final Locale DEFAULT_LOCALE;
     public static final String PREFERENCE_LANGUAGE = "pref_current_language";
 
-    @Inject SharedPreferences mPreferences;
+    private SharedPreferences mPreferences;
     private static Map<String, String> mAvailableLanguages;
 
     static {
         DEFAULT_LOCALE = Locale.getDefault();
     }
 
-    public Languages(Context context) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public Languages(
+            Context context,
+            SharedPreferences preferences
+    ) {
+        mPreferences = preferences;
         Map<String, String> tmpMap = new TreeMap<>();
         List<Locale> locales = Arrays.asList(LOCALES_TO_TEST);
         // Capitalize language names

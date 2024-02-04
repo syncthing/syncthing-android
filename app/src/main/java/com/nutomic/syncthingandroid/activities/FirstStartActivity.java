@@ -1,8 +1,8 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,17 +10,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.Manifest;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -34,21 +26,30 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.ComponentActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.databinding.ActivityFirstStartBinding;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
 
-import java.io.File;
-
 import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 
 import javax.inject.Inject;
 
-public class FirstStartActivity extends Activity {
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class FirstStartActivity extends ComponentActivity {
 
     private enum Slide {
 
@@ -81,7 +82,6 @@ public class FirstStartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SyncthingApp) getApplication()).component().inject(this);
 
         /**
          * Recheck storage permission. If it has been revoked after the user

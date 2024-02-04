@@ -46,7 +46,7 @@ public class RunConditionMonitor {
     private static final String POWER_SOURCE_CHARGER = "ac_power";
     private static final String POWER_SOURCE_BATTERY = "battery_power";
 
-    private @Nullable Object mSyncStatusObserverHandle = null;
+    private @Nullable Object mSyncStatusObserverHandle;
     private final SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
         @Override
         public void onStatusChanged(int which) {
@@ -59,7 +59,7 @@ public class RunConditionMonitor {
     }
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
+    private SharedPreferences mPreferences;
     private ReceiverManager mReceiverManager;
 
     /**
@@ -72,11 +72,15 @@ public class RunConditionMonitor {
      */
     private RunConditionCheckResult lastRunConditionCheckResult;
 
-    public RunConditionMonitor(Context context, OnRunConditionChangedListener listener) {
+    public RunConditionMonitor(
+            Context context,
+            OnRunConditionChangedListener listener,
+            SharedPreferences preferences
+    ) {
         Log.v(TAG, "Created new instance");
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
         mContext = context;
         mOnRunConditionChangedListener = listener;
+        mPreferences = preferences;
 
         /**
          * Register broadcast receivers.

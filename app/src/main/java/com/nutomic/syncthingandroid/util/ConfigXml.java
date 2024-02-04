@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,16 +19,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
@@ -39,6 +35,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 /**
  * Provides direct access to the config.xml file in the file system.
@@ -54,19 +52,31 @@ public class ConfigXml {
     private static final int FOLDER_ID_APPENDIX_LENGTH = 4;
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
+
+    @Inject
+    SharedPreferences mPreferences;
+
+    @Inject
+    NotificationHandler notificationHandler;
 
     private final File mConfigFile;
 
     private Document mConfig;
 
-    public ConfigXml(Context context) throws OpenConfigException {
+    public ConfigXml(
+            @ApplicationContext Context context
+    ) throws OpenConfigException {
         mContext = context;
         mConfigFile = Constants.getConfigFile(mContext);
         boolean isFirstStart = !mConfigFile.exists();
         if (isFirstStart) {
             Log.i(TAG, "App started for the first time. Generating keys and config.");
-            new SyncthingRunnable(context, SyncthingRunnable.Command.generate).run();
+            new SyncthingRunnable(
+                    context,
+                    SyncthingRunnable.Command.generate,
+                    mPreferences,
+                    notificationHandler
+            ).run();
         }
 
         readConfig();
@@ -75,7 +85,12 @@ public class ConfigXml {
             boolean changed = false;
 
             Log.i(TAG, "Starting syncthing to retrieve local device id.");
-            String logOutput = new SyncthingRunnable(context, SyncthingRunnable.Command.deviceid).run(true);
+            String logOutput = new SyncthingRunnable(
+                    context,
+                    SyncthingRunnable.Command.deviceid,
+                    mPreferences,
+                    notificationHandler
+            ).run(true);
             String localDeviceID = logOutput.replace("\n", "");
             // Verify local device ID is correctly formatted.
             if (localDeviceID.matches("^([A-Z0-9]{7}-){7}[A-Z0-9]{7}$")) {
