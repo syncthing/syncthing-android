@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Spinner;
-import com.nutomic.syncthingandroid.R;
-
+import com.nutomic.syncthingandroid.databinding.ActivityPullorderDialogBinding;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +15,8 @@ public class PullOrderDialogActivity extends ThemedAppCompatActivity {
     public static final String EXTRA_RESULT_PULL_ORDER = "com.nutomic.syncthinandroid.activities.PullOrderDialogActivity.EXTRA_RESULT_PULL_ORDER";
 
     private String selectedType;
+
+    private ActivityPullorderDialogBinding binding;
 
     private static final List<String> mTypes = Arrays.asList(
         "random",
@@ -31,7 +30,8 @@ public class PullOrderDialogActivity extends ThemedAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_pullorder_dialog);
+        binding = ActivityPullorderDialogBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         if (savedInstanceState == null) {
             selectedType = getIntent().getStringExtra(EXTRA_PULL_ORDER);
         }
@@ -40,8 +40,7 @@ public class PullOrderDialogActivity extends ThemedAppCompatActivity {
     }
 
     private void initiateFinishBtn() {
-        Button finishBtn = findViewById(R.id.finish_btn);
-        finishBtn.setOnClickListener(v -> {
+        binding.finishBtn.setOnClickListener(v -> {
             saveConfiguration();
             finish();
         });
@@ -54,9 +53,8 @@ public class PullOrderDialogActivity extends ThemedAppCompatActivity {
     }
 
     private void initiateSpinner() {
-        Spinner pullOrderTypeSpinner = findViewById(R.id.pullOrderTypeSpinner);
-        pullOrderTypeSpinner.setSelection(mTypes.indexOf(selectedType));
-        pullOrderTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.pullOrderTypeSpinner.setSelection(mTypes.indexOf(selectedType));
+        binding.pullOrderTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != mTypes.indexOf(selectedType)) {
