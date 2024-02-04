@@ -1,5 +1,7 @@
 package com.nutomic.syncthingandroid.activities;
 
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
+
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -15,14 +17,13 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ActivityShareBinding;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Util;
@@ -38,8 +39,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
 
 /**
  * Shares incoming files to syncthing folders.
@@ -58,6 +57,8 @@ public class ShareActivity extends StateDialogActivity
     private TextView mSubDirectoryTextView;
 
     private Spinner mFoldersSpinner;
+
+    private ActivityShareBinding binding;
 
     @Override
     public void onServiceStateChange(SyncthingService.State currentState) {
@@ -81,9 +82,8 @@ public class ShareActivity extends StateDialogActivity
                 this, android.R.layout.simple_spinner_item, folders);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = findViewById(R.id.folders);
-        sItems.setAdapter(adapter);
-        sItems.setSelection(folderIndex);
+        binding.folders.setAdapter(adapter);
+        binding.folders.setSelection(folderIndex);
     }
 
     @Override
@@ -102,17 +102,12 @@ public class ShareActivity extends StateDialogActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share);
+        binding = ActivityShareBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         getWindow().setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         registerOnServiceConnectedListener(this);
-
-        Button mShareButton = findViewById(R.id.share_button);
-        Button mCancelButton = findViewById(R.id.cancel_button);
-        Button browseButton = findViewById(R.id.browse_button);
-        EditText mShareName = findViewById(R.id.name);
-        TextView mShareTitle = findViewById(R.id.namesTitle);
 
         mSubDirectoryTextView = findViewById(R.id.sub_directory_Textview);
         mFoldersSpinner = findViewById(R.id.folders);
@@ -143,16 +138,16 @@ public class ShareActivity extends StateDialogActivity
             files.put(sourceUri, displayName);
         }
 
-        mShareName.setText(TextUtils.join("\n", files.values()));
+        binding.name.setText(TextUtils.join("\n", files.values()));
         if (files.size() > 1) {
-            mShareName.setFocusable(false);
-            mShareName.setKeyListener(null);
+            binding.name.setFocusable(false);
+            binding.name.setKeyListener(null);
         }
-        mShareTitle.setText(getResources().getQuantityString(R.plurals.file_name_title,
+        binding.namesTitle.setText(getResources().getQuantityString(R.plurals.file_name_title,
                 files.size() > 1 ? 2 : 1));
-        mShareButton.setOnClickListener(view -> {
+        binding.shareButton.setOnClickListener(view -> {
             if (files.size() == 1)
-                files.entrySet().iterator().next().setValue(mShareName.getText().toString());
+                files.entrySet().iterator().next().setValue(binding.name.getText().toString());
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
             File directory = new File(folder.path, getSavedSubDirectory());
             CopyFilesTask mCopyFilesTask = new CopyFilesTask(this, files, folder, directory);
@@ -171,7 +166,7 @@ public class ShareActivity extends StateDialogActivity
             }
         });
 
-        browseButton.setOnClickListener(view -> {
+        binding.browseButton.setOnClickListener(view -> {
             Folder folder = (Folder) mFoldersSpinner.getSelectedItem();
             File initialDirectory = new File(folder.path, getSavedSubDirectory());
             startActivityForResult(FolderPickerActivity.createIntent(getApplicationContext(),
@@ -179,7 +174,7 @@ public class ShareActivity extends StateDialogActivity
                     FolderPickerActivity.DIRECTORY_REQUEST_CODE);
         });
 
-        mCancelButton.setOnClickListener(view -> finish());
+        binding.cancelButton.setOnClickListener(view -> finish());
         mSubDirectoryTextView.setText(getSavedSubDirectory());
     }
 
