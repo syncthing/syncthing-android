@@ -1,11 +1,11 @@
-Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.
+सिन्थिंग मालिकाना सिंक और क्लाउड सेवाओं को कुछ खुली, भरोसेमंद और विकेंद्रीकृत सेवाओं से बदल देता है। आपका डेटा केवल आपका डेटा है और आप यह चुनने के पात्र हैं कि इसे कहाँ संग्रहीत किया जाता है, यदि इसे किसी तीसरे पक्ष के साथ साझा किया जाता है और इसे इंटरनेट पर कैसे प्रसारित किया जाता है।
 
-Website: https://syncthing.net/
+वेबसाइट: https://syncthing.net/
 
-Source code: https://github.com/syncthing/syncthing-android
+स्रोत कोड: https://github.com/syncthing/syncthing-android
 
-Forum: https://forum.syncthing.net/
+फोरम: https://forum.syncthing.net/
 
-Issues: https://github.com/syncthing/syncthing-android/issues
+मुद्दे: https://github.com/syncthing/syncthing-android/issues
 
-Privacy-policy: https://syncthing.net/android-privacy-policy
+गोपनीयता-नीति: https://syncthing.net/android-privacy-policy
