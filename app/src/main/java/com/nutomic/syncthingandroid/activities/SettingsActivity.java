@@ -27,6 +27,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.model.Config;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Options;
@@ -103,7 +104,10 @@ public class SettingsActivity extends SyncthingActivity {
         private static final String KEY_ST_RESET_DELTAS = "st_reset_deltas";
 
         @Inject NotificationHandler mNotificationHandler;
-        @Inject SharedPreferences mPreferences;
+
+        @Inject
+        @DefaultSharedPreferences
+        SharedPreferences mPreferences;
 
         private PreferenceGroup    mCategoryRunConditions;
         private CheckBoxPreference mRunConditions;
