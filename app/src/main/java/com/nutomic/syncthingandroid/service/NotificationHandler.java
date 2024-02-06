@@ -18,6 +18,7 @@ import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.activities.LogActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService.State;
 
@@ -37,7 +38,6 @@ public class NotificationHandler {
     private static final String CHANNEL_PERSISTENT_WAITING = "03_syncthing_persistent_waiting";
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
     private final NotificationManager mNotificationManager;
     private final NotificationChannel mPersistentChannel;
     private final NotificationChannel mPersistentChannelWaiting;
@@ -45,6 +45,10 @@ public class NotificationHandler {
 
     private Boolean lastStartForegroundService = false;
     private Boolean appShutdownInProgress = false;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     public NotificationHandler(Context context) {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);

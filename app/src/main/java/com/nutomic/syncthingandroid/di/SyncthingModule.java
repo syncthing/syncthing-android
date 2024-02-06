@@ -22,6 +22,7 @@ public class SyncthingModule {
 
     @Provides
     @Singleton
+    @DefaultSharedPreferences
     public SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(mApp);
     }

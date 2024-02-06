@@ -49,6 +49,7 @@ import android.widget.Toast;
 import com.annimon.stream.function.Consumer;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.fragments.DeviceListFragment;
 import com.nutomic.syncthingandroid.fragments.DrawerFragment;
 import com.nutomic.syncthingandroid.fragments.FolderListFragment;
@@ -102,7 +103,10 @@ public class MainActivity extends StateDialogActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout          mDrawerLayout;
-    @Inject SharedPreferences mPreferences;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     /**
      * Handles various dialogs based on current state.

@@ -13,6 +13,7 @@ import android.text.TextUtils;
 
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +35,10 @@ public final class Languages {
     private static final Locale DEFAULT_LOCALE;
     public static final String PREFERENCE_LANGUAGE = "pref_current_language";
 
-    @Inject SharedPreferences mPreferences;
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
+
     private static Map<String, String> mAvailableLanguages;
 
     static {
