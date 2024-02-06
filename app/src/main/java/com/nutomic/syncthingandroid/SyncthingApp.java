@@ -4,6 +4,9 @@ import android.app.Application;
 import android.os.StrictMode;
 
 import com.google.android.material.color.DynamicColors;
+import com.nutomic.syncthingandroid.di.DaggerComponent;
+import com.nutomic.syncthingandroid.di.DaggerDaggerComponent;
+import com.nutomic.syncthingandroid.di.SyncthingModule;
 import com.nutomic.syncthingandroid.util.Languages;
 
 import javax.inject.Inject;
