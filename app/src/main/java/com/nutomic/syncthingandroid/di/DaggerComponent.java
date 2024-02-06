@@ -1,5 +1,6 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.di;
 
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
