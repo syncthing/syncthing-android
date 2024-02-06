@@ -28,9 +28,11 @@ import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.databinding.ActivityDeviceBinding;
 import com.nutomic.syncthingandroid.model.Connections;
 import com.nutomic.syncthingandroid.model.Device;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.Compression;
 import com.nutomic.syncthingandroid.util.TextWatcherAdapter;
@@ -39,6 +41,8 @@ import com.nutomic.syncthingandroid.util.Util;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Shows device details and allows changing them.
@@ -136,9 +140,13 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         }
     };
 
+    @Inject
+    NotificationHandler mNotificationHandler;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SyncthingApp) getApplication()).component().inject(this);
         binding = ActivityDeviceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -186,7 +194,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         super.onDestroy();
         SyncthingService syncthingService = getService();
         if (syncthingService != null) {
-            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+            mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         binding.id.removeTextChangedListener(mIdTextWatcher);
@@ -227,7 +235,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private void onServiceConnected() {
         Log.v(TAG, "onServiceConnected");
         SyncthingService syncthingService = (SyncthingService) getService();
-        syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         syncthingService.registerOnServiceStateChangeListener(this::onServiceStateChange);
     }
 

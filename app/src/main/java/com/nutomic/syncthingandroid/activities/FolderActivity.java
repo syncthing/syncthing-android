@@ -27,10 +27,12 @@ import android.widget.Toast;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.databinding.FragmentFolderBinding;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.util.FileUtils;
@@ -50,6 +52,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.nutomic.syncthingandroid.service.SyncthingService.State.ACTIVE;
+
+import javax.inject.Inject;
 
 /**
  * Shows folder details and allows changing them.
@@ -132,9 +136,13 @@ public class FolderActivity extends SyncthingActivity
         }
     };
 
+    @Inject
+    NotificationHandler mNotificationHandler;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SyncthingApp) getApplication()).component().inject(this);
         binding = FragmentFolderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -283,7 +291,7 @@ public class FolderActivity extends SyncthingActivity
         super.onDestroy();
         SyncthingService syncthingService = getService();
         if (syncthingService != null) {
-            syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+            mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
             syncthingService.unregisterOnServiceStateChangeListener(this::onServiceStateChange);
         }
         binding.label.removeTextChangedListener(mTextWatcher);
@@ -320,7 +328,7 @@ public class FolderActivity extends SyncthingActivity
     public void onServiceConnected() {
         Log.v(TAG, "onServiceConnected");
         SyncthingService syncthingService = (SyncthingService) getService();
-        syncthingService.getNotificationHandler().cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
+        mNotificationHandler.cancelConsentNotification(getIntent().getIntExtra(EXTRA_NOTIFICATION_ID, 0));
         syncthingService.registerOnServiceStateChangeListener(this);
     }
 

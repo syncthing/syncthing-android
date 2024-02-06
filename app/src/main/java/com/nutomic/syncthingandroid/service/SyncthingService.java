@@ -653,10 +653,6 @@ public class SyncthingService extends Service {
         return mCurrentCheckResult.get();
     }
 
-    public NotificationHandler getNotificationHandler() {
-        return mNotificationHandler;
-    }
-
     /**
      * Exports the local config and keys to {@link Constants#EXPORT_PATH}.
      */
