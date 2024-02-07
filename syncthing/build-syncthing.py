@@ -95,6 +95,12 @@ for target in BUILD_TARGETS:
         'CGO_ENABLED': '1',
     })
 
+    subprocess.check_call(
+        ['go', 'version'],
+        env=environ, cwd=syncthing_dir)
+    subprocess.check_call(
+        ['go', 'run', 'build.go', 'version'],
+        env=environ, cwd=syncthing_dir)
     cc = os.path.join(
         get_ndk_home(), "toolchains", "llvm", "prebuilt",
         PLATFORM_DIRS[platform.system()], "bin",
