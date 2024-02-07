@@ -6,16 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.nutomic.syncthingandroid.SyncthingApp;
-import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.Constants;
+import com.nutomic.syncthingandroid.service.NotificationHandler;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
 /**
  * Broadcast-receiver to control and configure Syncthing remotely.
  */
+@AndroidEntryPoint
 public class AppConfigReceiver extends BroadcastReceiver {
 
     /**
@@ -33,8 +36,7 @@ public class AppConfigReceiver extends BroadcastReceiver {
     @Inject NotificationHandler mNotificationHandler;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public void onReceive(@ApplicationContext Context context, Intent intent) {
         switch (intent.getAction()) {
             case ACTION_START:
                 BootReceiver.startServiceCompat(context);

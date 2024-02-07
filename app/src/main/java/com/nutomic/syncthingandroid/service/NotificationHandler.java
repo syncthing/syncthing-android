@@ -1,6 +1,5 @@
 package com.nutomic.syncthingandroid.service;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,19 +8,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import androidx.annotation.StringRes;
-import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
+import androidx.annotation.StringRes;
+import androidx.core.app.NotificationCompat;
+
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.activities.LogActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
-import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService.State;
 
 import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
 
 public class NotificationHandler {
 
@@ -37,7 +38,7 @@ public class NotificationHandler {
     private static final String CHANNEL_PERSISTENT_WAITING = "03_syncthing_persistent_waiting";
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
+    private SharedPreferences mPreferences;
     private final NotificationManager mNotificationManager;
     private final NotificationChannel mPersistentChannel;
     private final NotificationChannel mPersistentChannelWaiting;
@@ -46,9 +47,12 @@ public class NotificationHandler {
     private Boolean lastStartForegroundService = false;
     private Boolean appShutdownInProgress = false;
 
-    public NotificationHandler(Context context) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public NotificationHandler(
+            @ApplicationContext Context context,
+            SharedPreferences preferences
+    ) {
         mContext = context;
+        mPreferences = preferences;
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -1,5 +1,6 @@
 package com.nutomic.syncthingandroid.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -45,12 +46,17 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import eu.chainfire.libsuperuser.Shell;
 
+@AndroidEntryPoint
 public class SettingsActivity extends SyncthingActivity {
 
     public static final String EXTRA_OPEN_SUB_PREF_SCREEN =
             "com.nutomic.syncthingandroid.activities.SettingsActivity.OPEN_SUB_PREF_SCREEN";
+
+    @Inject NotificationHandler mNotificationHandler;
+    @Inject SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,7 @@ public class SettingsActivity extends SyncthingActivity {
         setContentView(R.layout.activity_preferences);
         setTitle(R.string.settings_title);
 
-        SettingsFragment settingsFragment = new SettingsFragment();
+        SettingsFragment settingsFragment = new SettingsFragment(mNotificationHandler, mPreferences);
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_OPEN_SUB_PREF_SCREEN, getIntent().getStringExtra(EXTRA_OPEN_SUB_PREF_SCREEN));
         settingsFragment.setArguments(bundle);
@@ -90,6 +96,7 @@ public class SettingsActivity extends SyncthingActivity {
         }
     }
 
+    @SuppressLint("ValidFragment")
     public static class SettingsFragment extends PreferenceFragment
             implements SyncthingActivity.OnServiceConnectedListener,
             SyncthingService.OnServiceStateChangeListener, Preference.OnPreferenceChangeListener,
@@ -102,8 +109,8 @@ public class SettingsActivity extends SyncthingActivity {
         private static final String KEY_ST_RESET_DATABASE = "st_reset_database";
         private static final String KEY_ST_RESET_DELTAS = "st_reset_deltas";
 
-        @Inject NotificationHandler mNotificationHandler;
-        @Inject SharedPreferences mPreferences;
+        private NotificationHandler mNotificationHandler;
+        private SharedPreferences mPreferences;
 
         private PreferenceGroup    mCategoryRunConditions;
         private CheckBoxPreference mRunConditions;
@@ -147,6 +154,16 @@ public class SettingsActivity extends SyncthingActivity {
 
         private Boolean mPendingConfig = false;
 
+        @SuppressLint("ValidFragment")
+        public SettingsFragment(
+            NotificationHandler NotificationHandler,
+            SharedPreferences preferences
+        ) {
+            super();
+            mNotificationHandler = NotificationHandler;
+            mPreferences = preferences;
+        }
+
         /**
          * Indicates if run conditions were changed and need to be
          * re-evaluated when the user leaves the preferences screen.
@@ -156,7 +173,6 @@ public class SettingsActivity extends SyncthingActivity {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            ((SyncthingApp) getActivity().getApplication()).component().inject(this);
             ((SyncthingActivity) getActivity()).registerOnServiceConnectedListener(this);
         }
 
@@ -193,7 +209,7 @@ public class SettingsActivity extends SyncthingActivity {
             if (Build.VERSION.SDK_INT >= 24) {
                 categoryBehaviour.removePreference(languagePref);
             } else {
-                Languages languages = new Languages(getActivity());
+                Languages languages = new Languages(getActivity(), mPreferences);
                 languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
                 languagePref.setEntries(languages.getAllNames());
                 languagePref.setEntryValues(languages.getSupportedLocales());

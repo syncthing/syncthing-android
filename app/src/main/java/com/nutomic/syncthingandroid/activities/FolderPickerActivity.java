@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -30,7 +29,6 @@ import android.widget.Toast;
 
 import com.google.common.collect.Sets;
 import com.nutomic.syncthingandroid.R;
-import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
@@ -85,8 +83,6 @@ public class FolderPickerActivity extends SyncthingActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SyncthingApp) getApplication()).component().inject(this);
-
         setContentView(R.layout.activity_folder_picker);
         mListView = findViewById(android.R.id.list);
         mListView.setOnItemClickListener(this);

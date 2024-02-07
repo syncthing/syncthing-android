@@ -56,9 +56,9 @@ public class SyncthingRunnable implements Runnable {
     private final File mSyncthingBinary;
     private String[] mCommand;
     private final File mLogFile;
-    @Inject SharedPreferences mPreferences;
+    private SharedPreferences mPreferences;
     private final boolean mUseRoot;
-    @Inject NotificationHandler mNotificationHandler;
+    private NotificationHandler mNotificationHandler;
 
     public enum Command {
         deviceid,           // Output the device ID to the command line.
@@ -73,11 +73,17 @@ public class SyncthingRunnable implements Runnable {
      *
      * @param command Which type of Syncthing command to execute.
      */
-    public SyncthingRunnable(Context context, Command command) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public SyncthingRunnable(
+            Context context,
+            Command command,
+            SharedPreferences preferences,
+            NotificationHandler notificationHandler
+    ) {
         mContext = context;
         mSyncthingBinary = Constants.getSyncthingBinary(mContext);
         mLogFile = Constants.getLogFile(mContext);
+        mPreferences = preferences;
+        mNotificationHandler = notificationHandler;
 
         // Get preferences relevant to starting syncthing core.
         mUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false) && Shell.SU.available();

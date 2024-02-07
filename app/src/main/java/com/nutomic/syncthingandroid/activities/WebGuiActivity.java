@@ -50,9 +50,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * Holds a WebView that shows the web ui of the local syncthing instance.
  */
+@AndroidEntryPoint
 public class WebGuiActivity extends StateDialogActivity
         implements SyncthingService.OnServiceStateChangeListener {
 
@@ -64,7 +69,8 @@ public class WebGuiActivity extends StateDialogActivity
 
     private X509Certificate mCaCert;
 
-    private ConfigXml mConfig;
+    @Inject
+    ConfigXml mConfig;
 
     /**
      * Hides the loading screen and shows the WebView once it is fully loaded.
@@ -128,7 +134,6 @@ public class WebGuiActivity extends StateDialogActivity
         setContentView(R.layout.activity_web_gui);
 
         mLoadingView = findViewById(R.id.loading);
-        mConfig = new ConfigXml(this);
         loadCaCert();
 
         mWebView = findViewById(R.id.webview);

@@ -27,9 +27,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import hilt_aggregated_deps._dagger_hilt_android_internal_lifecycle_HiltWrapper_DefaultViewModelFactories_ActivityModule;
+
 /**
  * Holds the native syncthing instance and provides an API to access it.
  */
+@AndroidEntryPoint
 public class SyncthingService extends Service {
 
     private static final String TAG = "SyncthingService";
@@ -144,7 +148,6 @@ public class SyncthingService extends Service {
     private State mCurrentState = State.DISABLED;
     private AtomicReference<RunConditionCheckResult> mCurrentCheckResult = new AtomicReference<>(RunConditionCheckResult.SHOULD_RUN);
 
-    private ConfigXml mConfig;
     private @Nullable PollWebGuiAvailableTask mPollWebGuiAvailableTask = null;
     private @Nullable RestApi mApi = null;
     private @Nullable EventProcessor mEventProcessor = null;
@@ -160,6 +163,7 @@ public class SyncthingService extends Service {
 
     @Inject NotificationHandler mNotificationHandler;
     @Inject SharedPreferences mPreferences;
+    @Inject ConfigXml mConfig;
 
     /**
      * Object that must be locked upon accessing mCurrentState
@@ -189,7 +193,6 @@ public class SyncthingService extends Service {
     public void onCreate() {
         Log.v(TAG, "onCreate");
         super.onCreate();
-        ((SyncthingApp) getApplication()).component().inject(this);
         mHandler = new Handler();
 
         /**
@@ -238,7 +241,11 @@ public class SyncthingService extends Service {
              * run/terminate syncthing. After initial run conditions are collected
              * the first decision is sent to {@link onUpdatedShouldRunDecision}.
              */
-            mRunConditionMonitor = new RunConditionMonitor(SyncthingService.this, this::onUpdatedShouldRunDecision);
+            mRunConditionMonitor = new RunConditionMonitor(
+                    SyncthingService.this,
+                    this::onUpdatedShouldRunDecision,
+                    mPreferences
+            );
         }
         mNotificationHandler.updatePersistentNotification(this);
 
@@ -249,12 +256,22 @@ public class SyncthingService extends Service {
             shutdown(State.INIT, () -> launchStartupTask());
         } else if (ACTION_RESET_DATABASE.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
-                new SyncthingRunnable(this, SyncthingRunnable.Command.resetdatabase).run();
+                new SyncthingRunnable(
+                        this,
+                        SyncthingRunnable.Command.resetdatabase,
+                        mPreferences,
+                        mNotificationHandler
+                ).run();
                 launchStartupTask();
             });
         } else if (ACTION_RESET_DELTAS.equals(intent.getAction())) {
             shutdown(State.INIT, () -> {
-                new SyncthingRunnable(this, SyncthingRunnable.Command.resetdeltas).run();
+                new SyncthingRunnable(
+                        this,
+                        SyncthingRunnable.Command.resetdeltas,
+                        mPreferences,
+                        mNotificationHandler
+                ).run();
                 launchStartupTask();
             });
         } else if (ACTION_REFRESH_NETWORK_INFO.equals(intent.getAction())) {
@@ -365,7 +382,8 @@ public class SyncthingService extends Service {
                  return null;
              }
              try {
-                 syncthingService.mConfig = new ConfigXml(syncthingService);
+                 // TODO: 04.02.2024 check if needed after all
+//                 syncthingService.mConfig = new ConfigXml(syncthingService);
                  syncthingService.mConfig.updateIfNeeded();
              } catch (ConfigXml.OpenConfigException e) {
                  syncthingService.mNotificationHandler.showCrashedNotification(R.string.config_create_failed, true);
@@ -392,8 +410,14 @@ public class SyncthingService extends Service {
       */
      private void onStartupTaskCompleteListener() {
          if (mApi == null) {
-             mApi = new RestApi(this, mConfig.getWebGuiUrl(), mConfig.getApiKey(),
-                                 this::onApiAvailable, () -> onServiceStateChange(mCurrentState));
+             mApi = new RestApi(
+                     this,
+                     mConfig.getWebGuiUrl(),
+                     mConfig.getApiKey(),
+                     this::onApiAvailable,
+                     () -> onServiceStateChange(mCurrentState),
+                     mNotificationHandler
+             );
              Log.i(TAG, "Web GUI will be available at " + mConfig.getWebGuiUrl());
          }
 
@@ -402,7 +426,12 @@ public class SyncthingService extends Service {
              Log.e(TAG, "onStartupTaskCompleteListener: Syncthing binary lifecycle violated");
              return;
          }
-         mSyncthingRunnable = new SyncthingRunnable(this, SyncthingRunnable.Command.main);
+         mSyncthingRunnable = new SyncthingRunnable(
+                 this,
+                 SyncthingRunnable.Command.main,
+                 mPreferences,
+                 mNotificationHandler
+         );
          mSyncthingRunnableThread = new Thread(mSyncthingRunnable);
          mSyncthingRunnableThread.start();
 
@@ -456,7 +485,12 @@ public class SyncthingService extends Service {
         }
 
         if (mEventProcessor == null) {
-            mEventProcessor = new EventProcessor(SyncthingService.this, mApi);
+            mEventProcessor = new EventProcessor(
+                    SyncthingService.this,
+                    mApi,
+                    mPreferences,
+                    mNotificationHandler
+            );
             mEventProcessor.start();
         }
     }

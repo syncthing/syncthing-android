@@ -63,10 +63,16 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
     @Inject SharedPreferences mPreferences;
     @Inject NotificationHandler mNotificationHandler;
 
-    public EventProcessor(Context context, RestApi api) {
-        ((SyncthingApp) context.getApplicationContext()).component().inject(this);
+    public EventProcessor(
+            Context context,
+            RestApi api,
+            SharedPreferences preferences,
+            NotificationHandler notificationHandler
+    ) {
         mContext = context;
         mApi = api;
+        mPreferences = preferences;
+        mNotificationHandler = notificationHandler;
     }
 
     @Override

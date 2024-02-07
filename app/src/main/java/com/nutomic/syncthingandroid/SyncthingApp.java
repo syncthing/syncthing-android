@@ -1,6 +1,7 @@
 package com.nutomic.syncthingandroid;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 
 import com.google.android.material.color.DynamicColors;
@@ -8,9 +9,14 @@ import com.nutomic.syncthingandroid.util.Languages;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.HiltAndroidApp;
+
+@HiltAndroidApp
 public class SyncthingApp extends Application {
 
-    @Inject DaggerComponent mComponent;
+    // temporarily here
+    @Inject
+    SharedPreferences mSharedPreferences;
 
     @Override
     public void onCreate() {
@@ -18,12 +24,7 @@ public class SyncthingApp extends Application {
 
         super.onCreate();
 
-        DaggerDaggerComponent.builder()
-                .syncthingModule(new SyncthingModule(this))
-                .build()
-                .inject(this);
-
-        new Languages(this).setLanguage(this);
+        new Languages(this, mSharedPreferences).setLanguage(this);
 
         // The main point here is to use a VM policy without
         // `detectFileUriExposure`, as that leads to exceptions when e.g.
@@ -36,7 +37,4 @@ public class SyncthingApp extends Application {
         StrictMode.setVmPolicy(policy);
     }
 
-    public DaggerComponent component() {
-        return mComponent;
-    }
 }

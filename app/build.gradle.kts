@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("com.github.ben-manes.versions")
     id("com.github.triplet.play") version "3.7.0"
+    id("com.google.dagger.hilt.android")
 }
 
 dependencies {
@@ -21,9 +22,11 @@ dependencies {
     }
     implementation("com.google.zxing:core:3.4.1")
 
+    // dagger
+    implementation("com.google.dagger:hilt-android:2.49")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.49")
+
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("com.google.dagger:dagger:2.49")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.49")
     androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation("androidx.annotation:annotation:1.2.0")
 }
