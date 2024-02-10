@@ -6,19 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
-import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ActivityQrScannerBinding;
 
 import java.util.List;
 
@@ -33,17 +29,16 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
 
     private final int RC_HANDLE_CAMERA_PERM = 888;
 
-    private DecoratedBarcodeView barcodeView;
+    private ActivityQrScannerBinding binding;
 
     // region === Activity Lifecycle ===
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_qr_scanner);
+        binding = ActivityQrScannerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        this.barcodeView = findViewById(R.id.bar_code_scanner_view);
-
-        findViewById(R.id.cancel_button).setOnClickListener(view -> {
+        binding.cancelButton.setOnClickListener(view -> {
             finishScanning();
         });
 
@@ -98,12 +93,12 @@ public class QRScannerActivity extends ThemedAppCompatActivity implements Barcod
     }
 
     private void startScanner() {
-        this.barcodeView.resume();
-        this.barcodeView.decodeSingle(this);
+        binding.barCodeScannerView.resume();
+        binding.barCodeScannerView.decodeSingle(this);
     }
 
     private void finishScanning() {
-        this.barcodeView.pause();
+        binding.barCodeScannerView.pause();
         finish();
     }
     // endregion
