@@ -3,13 +3,12 @@ package com.nutomic.syncthingandroid.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Spinner;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ActivityVersioningDialogBinding;
 import com.nutomic.syncthingandroid.fragments.dialog.ExternalVersioningFragment;
 import com.nutomic.syncthingandroid.fragments.dialog.NoVersioningFragment;
 import com.nutomic.syncthingandroid.fragments.dialog.SimpleVersioningFragment;
@@ -27,10 +26,13 @@ public class VersioningDialogActivity extends ThemedAppCompatActivity {
 
     private Bundle mArguments;
 
+    private ActivityVersioningDialogBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_versioning_dialog);
+        binding = ActivityVersioningDialogBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (savedInstanceState != null) {
             mArguments = savedInstanceState.getBundle("arguments");
@@ -44,8 +46,7 @@ public class VersioningDialogActivity extends ThemedAppCompatActivity {
     }
 
     private void initiateFinishBtn() {
-        Button finishBtn = findViewById(R.id.finish_btn);
-        finishBtn.setOnClickListener(v -> {
+        binding.finishBtn.setOnClickListener(v -> {
             saveConfiguration();
             finish();
         });
@@ -58,9 +59,8 @@ public class VersioningDialogActivity extends ThemedAppCompatActivity {
     }
 
     private void initiateSpinner() {
-        Spinner versioningTypeSpinner = findViewById(R.id.versioningTypeSpinner);
-        versioningTypeSpinner.setSelection(mTypes.indexOf(getIntent().getExtras().getString("type")));
-        versioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.versioningTypeSpinner.setSelection(mTypes.indexOf(getIntent().getExtras().getString("type")));
+        binding.versioningTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != mTypes.indexOf(getIntent().getExtras().getString("type"))) {

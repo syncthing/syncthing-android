@@ -6,10 +6,10 @@ import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Proxy;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.net.http.SslError;
-import android.net.Proxy;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -18,13 +18,13 @@ import android.util.ArrayMap;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.databinding.ActivityWebGuiBinding;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingService;
 import com.nutomic.syncthingandroid.service.SyncthingServiceBinder;
@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -58,13 +57,11 @@ public class WebGuiActivity extends StateDialogActivity
 
     private static final String TAG = "WebGuiActivity";
 
-    private WebView mWebView;
-
-    private View mLoadingView;
-
     private X509Certificate mCaCert;
 
     private ConfigXml mConfig;
+
+    private ActivityWebGuiBinding binding;
 
     /**
      * Hides the loading screen and shows the WebView once it is fully loaded.
@@ -110,8 +107,8 @@ public class WebGuiActivity extends StateDialogActivity
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            mWebView.setVisibility(View.VISIBLE);
-            mLoadingView.setVisibility(View.GONE);
+            binding.webview.setVisibility(View.VISIBLE);
+            binding.loading.setVisibility(View.GONE);
         }
     };
 
@@ -124,18 +121,16 @@ public class WebGuiActivity extends StateDialogActivity
     @SuppressLint("SetJavaScriptEnabled")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityWebGuiBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setContentView(R.layout.activity_web_gui);
-
-        mLoadingView = findViewById(R.id.loading);
         mConfig = new ConfigXml(this);
         loadCaCert();
 
-        mWebView = findViewById(R.id.webview);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setDomStorageEnabled(true);
-        mWebView.setWebViewClient(mWebViewClient);
-        mWebView.clearCache(true);
+        binding.webview.getSettings().setJavaScriptEnabled(true);
+        binding.webview.getSettings().setDomStorageEnabled(true);
+        binding.webview.setWebViewClient(mWebViewClient);
+        binding.webview.clearCache(true);
 
         // SyncthingService needs to be started from this activity as the user
         // can directly launch this activity from the recent activity switcher.
@@ -158,26 +153,26 @@ public class WebGuiActivity extends StateDialogActivity
     public void onServiceStateChange(SyncthingService.State newState) {
         Log.v(TAG, "onServiceStateChange(" + newState + ")");
         if (newState == SyncthingService.State.ACTIVE) {
-            if (mWebView == null) {
+            if (binding.webview == null) {
                 Log.v(TAG, "onWebGuiAvailable: Skipped event due to mWebView == null");
                 return;
             }
-            if (mWebView.getUrl() == null) {
-                mWebView.stopLoading();
-                setWebViewProxy(mWebView.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
+            if (binding.webview.getUrl() == null) {
+                binding.webview.stopLoading();
+                setWebViewProxy(binding.webview.getContext().getApplicationContext(), "", 0, "localhost|0.0.0.0|127.*|[::1]");
                 String credentials = mConfig.getUserName() + ":" + mConfig.getApiKey();
                 String b64Credentials = Base64.encodeToString(credentials.getBytes(UTF_8), Base64.NO_WRAP);
                 Map<String,String> headers = new HashMap<>();
                 headers.put("Authorization", "Basic " + b64Credentials);
-                mWebView.loadUrl(getService().getWebGuiUrl().toString(), headers);
+                binding.webview.loadUrl(getService().getWebGuiUrl().toString(), headers);
             }
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (mWebView.canGoBack()) {
-            mWebView.goBack();
+        if (binding.webview.canGoBack()) {
+            binding.webview.goBack();
         } else {
             finish();
             super.onBackPressed();
@@ -186,16 +181,16 @@ public class WebGuiActivity extends StateDialogActivity
 
     @Override
     public void onPause() {
-        mWebView.onPause();
-        mWebView.pauseTimers();
+        binding.webview.onPause();
+        binding.webview.pauseTimers();
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mWebView.resumeTimers();
-        mWebView.onResume();
+        binding.webview.resumeTimers();
+        binding.webview.onResume();
     }
 
     @Override
@@ -204,8 +199,7 @@ public class WebGuiActivity extends StateDialogActivity
         if (mSyncthingService != null) {
             mSyncthingService.unregisterOnServiceStateChangeListener(this);
         }
-        mWebView.destroy();
-        mWebView = null;
+        binding.webview.destroy();
         super.onDestroy();
     }
 
