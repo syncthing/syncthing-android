@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.documentfile.provider.DocumentFile;
+
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -537,6 +539,10 @@ public class FolderActivity extends SyncthingActivity
          * Access level readwrite: folder can be configured "sendonly" or "sendreceive".
          */
         mCanWriteToPath = Util.nativeBinaryCanWriteToPath(FolderActivity.this, mFolder.path);
+        if(!mCanWriteToPath){
+           final File externalStorageDirectory = Environment.getExternalStorageDirectory();
+           mCanWriteToPath = Util.nativeBinaryCanWriteToPath2(externalStorageDirectory, mFolder.path);
+        }
         if (mCanWriteToPath) {
             binding.accessExplanationView.setText(R.string.folder_path_readwrite);
             binding.folderType.setEnabled(true);
