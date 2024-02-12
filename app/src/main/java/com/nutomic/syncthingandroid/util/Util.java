@@ -185,7 +185,6 @@ public class Util {
         final String normalizedPath = absoluteFolderPath.replaceFirst("^~", externalStorageDir.getAbsolutePath());
 
         // Write permission test file
-        //final String touchFilePath = normalizedPath + "/" + TOUCH_FILE_NAME;
         File touchFile = new File(normalizedPath, TOUCH_FILE_NAME);
         final String touchFilePath = touchFile.getAbsolutePath();
         try{
