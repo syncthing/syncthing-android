@@ -175,7 +175,7 @@ public class Util {
      * Returns if the syncthing binary would be able to write a file into
      * the given folder given the configured access level.
      *
-     * This uses the Android-native File SDK
+     * This uses the Android-native File API
      */
     public static Boolean nativeBinaryCanWriteToPath2(File externalStorageDir, String absoluteFolderPath) {
         final String TOUCH_FILE_NAME = ".stwritetest";
