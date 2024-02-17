@@ -175,19 +175,19 @@ public class Util {
      * Returns if the syncthing binary would be able to write a file into
      * the given folder given the configured access level.
      *
-     * This uses the Android-native File API
+     * This uses the Android-native File API.
      */
     public static Boolean nativeBinaryCanWriteToPath2(File externalStorageDir, String absoluteFolderPath) {
         final String TOUCH_FILE_NAME = ".stwritetest";
 
-        // normalize path replacing ~ with external storage directory
-        // this is consistent with what $HOME is set to in SyncthingRunnable
+        // Normalize path replacing ~ with external storage directory.
+        // This is consistent with what $HOME is set to in SyncthingRunnable.
         final String normalizedPath = absoluteFolderPath.replaceFirst("^~", externalStorageDir.getAbsolutePath());
 
-        // Write permission test file
+        // Write permission test file.
         File touchFile = new File(normalizedPath, TOUCH_FILE_NAME);
         final String touchFilePath = touchFile.getAbsolutePath();
-        try{
+        try {
             Boolean fileCreated = touchFile.createNewFile();
             Log.d(TAG, String.format("%s createNewFile result %b", touchFilePath, fileCreated));
             Boolean fileDeleted = touchFile.delete();
@@ -272,5 +272,4 @@ public class Util {
     {
         return new MaterialAlertDialogBuilder(context);
     }
-
 }
