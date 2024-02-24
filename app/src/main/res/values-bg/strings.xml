@@ -4,13 +4,13 @@
     <string name="app_description">Отворено и заслужаващо доверие приложение за нецентрализирано синхронизиране на файлове.</string>
     <!--FirstStartActivity-->
     <!--Title for dialog displayed on first start-->
-    <string name="welcome_title">Добре дошли от Syncthing за Андроид</string>
+    <string name="welcome_title">Добре дошли при Syncthing за Андроид</string>
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">Въведение</string>
-    <string name="welcome_text">Syncthing е приложение с отворен код, за синхронизиране на файлове.
+    <string name="welcome_text">Syncthing е приложение за синхронизиране на файлове с отворен код.
 \nЗа да споделите информация с друго устройство е необходимо да добавите уникалния му идентификатор към списъка с устройствата. След това ще можете да изберете кои папки с кои устройства да споделите.
-\nАко срещнете проблем докладвайте в Github.</string>
+\nАко срещнете проблем го споделете в Github.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Разрешение за хранилище</string>
     <string name="storage_permission_desc">За да извършва синхронизация Syngthing има нужда от достъп до хранилището.</string>
@@ -213,7 +213,7 @@
     <string name="sync_only_wifi_ssids_connect_to_wifi">За да добавите безжична мрежа се свържете към нея.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">За да използвате тази възможност, трябва да разрешите достъп до МЕСТОПОЛОЖЕНИЕТО.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Необходимо е резрешение</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">От Android 8.1 нататък се изисква достъп до местоположението, за да бъде прочетен идентификатора на безжичната мрежа. Можете да използвате тази възможност само ако сте предоставили това разрешение.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1 и по-нов изисква достъп до местоположението, за да бъде прочетен идентификатора на безжичната мрежа. Можете да използвате тази възможност само ако сте предоставили това разрешение.</string>
     <string name="power_source_title">Работи при захранване от</string>
     <string name="power_source_ac_and_battery_power">Батерия или зарядно.</string>
     <string name="power_source_ac_power">Зарядно.</string>
@@ -421,7 +421,7 @@
     <string name="syncthing_disabled_reason_on_charger">Устройството е на зарядно</string>
     <string name="syncthing_disabled_reason_powersaving">Устройството е в режим на пестене на енергия</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Синхронизирането на устройството е изключено</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Името на текущата безжична мрежа не е разрешен</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Името на текущата безжична мрежа не е разрешено или липсва достъп до местоположението</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Трафикът на текущата безжична мрежа се измерва</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Няма връзка или е включен самолетен режим</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Устройството не е свързано чрез мобилни данни</string>
@@ -452,7 +452,7 @@
     <!--Text of the notification shown when a restart is needed-->
     <string name="restart_notification_text">Натиснете за рестартиране на Syncthing</string>
     <!--Shown when a device ID is copied to the clipboard-->
-    <string name="device_id_copied_to_clipboard">Идентификаторът на устройството е копиран в клипборда</string>
+    <string name="device_id_copied_to_clipboard">Идентификаторът на устройството е копиран</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
     <string name="file_size_unit_B">B</string>
     <string name="file_size_unit_KiB">KiB</string>
@@ -538,4 +538,15 @@
     <string name="browse">Разглеждане</string>
     <string name="no_sub_folder_is_selected">Не е избрана подпапка</string>
     <string name="share_device_id_chooser">Споделяне идентификатора на устройството чрез</string>
+    <string name="dialog_all_files_access_not_supported">Устройството не поддържа достъп до всички файлове</string>
+    <string name="api_level_30_button">Нулиране на базата</string>
+    <string name="api_level_30_title">Информация относто обновяване</string>
+    <string name="toast_api_level_30_must_reset">Можете да продължите само след натискане на бутона за нулиране на базата.</string>
+    <string name="require_notification_permission_desc">Необходимо за да се показва свързване с устройства, заявки за споделяне на папки и т.н.</string>
+    <string name="notification_permission_title">Права за известия</string>
+    <string name="enable_notification_permission">Даване на право за известия</string>
+    <string name="api_level_30_desc">С последното обновяване syncthing-android започва да използва ППИ на Андроид ниво 30, което променя поведението на файловата система. Добрата новина: Андроид 11 и по-нов може да записва на външна карта с памет (SD). Лошата новина: записването може да бъде по-бавно и някои пътища ще бъдат скрити. Поради тези скрити пътища, хранилището трябва да бъде нулирано, за да се предотврати загуба на данни. Това ще доведе до повторно снемане на отпечатъци на всички данни, но те няма да бъдат прехвърляни от отдалечени устройства. Също така може да създаде конфликти и да възстанови неотдавна изтрити файлове, ако в момента не са напълно синхронизирани. В зависимост от количеството данни, процесът може да бъде ресурсоемък, т.е. може да отнеме време и да изразходва много батерия.
+\n
+\nЗа нулиране на хранилището и стартиране на Syncthing натиснете бутона.</string>
+    <string name="run_conditions_title">Спазване на условията за работа</string>
 </resources>

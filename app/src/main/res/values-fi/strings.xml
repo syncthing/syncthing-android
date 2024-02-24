@@ -367,4 +367,21 @@
     <string name="show_device_id">Näytä laitteen tunnus</string>
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
     <string name="browse">Selaa</string>
+    <string name="dialog_all_files_access_not_supported">Laitteesi ei tue kaikkien tiedostojen käyttöä</string>
+    <string name="storage_permission_title">Tallennustilan lupa</string>
+    <string name="device_rejected">Laite \"%1$s\" haluaa muodostaa yhteyden</string>
+    <string name="storage_permission_desc">Syncthing on käytettävä tallennustilaa tiedostojen synkronointia varten.</string>
+    <string name="accept">Hyväksy</string>
+    <string name="folder_rejected">Laite \"%1$s\" haluaa jakaa kansion \"%2$s\"</string>
+    <string name="permission_granted">Lupa myönnetty</string>
+    <string name="pause_device">Keskeytä laite</string>
+    <string name="pull_order_random">satunnainen</string>
+    <string name="location_permission_title">Sijaintilupa (tausta)</string>
+    <string name="folder_pause">Keskeytä kansio</string>
+    <string name="folder_type_send_receive">Lähetä ja vastaanota</string>
+    <string name="pull_order_alphabetic">Aakkosellinen</string>
+    <string name="pull_order_smallest_first">Pienin ensin</string>
+    <string name="pull_order_largest_first">Suurin ensin</string>
+    <string name="pull_order_oldest_first">Vanhin ensin</string>
+    <string name="pull_order_newest_first">Uusin ensin</string>
 </resources>
