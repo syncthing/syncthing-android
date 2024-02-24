@@ -1,6 +1,6 @@
 FROM eclipse-temurin:11-jdk-jammy
 
-ENV GO_VERSION 1.21.6
+ENV GO_VERSION 1.22.0
 
 # Can be found scrolling down on this page:
 # https://developer.android.com/studio/index.html#command-tools
