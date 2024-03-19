@@ -10,7 +10,7 @@
     <string name="introduction">Pendahuluan</string>
     <string name="welcome_text">Syncthing adalah aplikasi penyelarasan berkas bebas-terbuka.
 \nUntuk berbagi data dengan perangkat lain, anda perlu menambah ID masing-masing perangkat tersebut pada daftar perangkat. Setelah itu anda bisa memilih folder mana yang akan berbagi dengan perangkat mana.
-\nJika ada masalah silakan laporkan lewat Github.</string>
+\nJika ada masalah silakan laporkan lewat GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Izin Penyimpanan</string>
     <string name="storage_permission_desc">Syncthing perlu mengakses penyimpanan Anda untuk melakukan sinkronisasi file.</string>

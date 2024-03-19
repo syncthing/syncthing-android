@@ -10,7 +10,7 @@
     <string name="introduction">Úvod</string>
     <string name="welcome_text">Syncthing je synchronizační aplikace s otevřeným zdrojovým kódem.
 \nPro sdílení dat s dalšími přístroji je třeba přidat jejich unikátní ID do seznamu. Poté lze určovat, které adresáře jsou sdíleny s kterými přístroji.
-\nVšechny zaznamenané chyby prosím hlašte přes Github.</string>
+\nVšechny zaznamenané chyby prosím hlašte přes GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Oprávnění k úložišti</string>
     <string name="storage_permission_desc">Aby mohlo synchronizovat soubory, Syncthing potřebuje přístup na úložiště.</string>

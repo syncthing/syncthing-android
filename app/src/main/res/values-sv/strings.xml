@@ -10,7 +10,7 @@
     <string name="introduction">Introduktion</string>
     <string name="welcome_text">Syncthing är en filsynkroniseringsapplikation med öppen källkod.
 \nFör att dela data med andra enheter måste du lägga till deras unika enhets-ID i enhetslistan. Efteråt kan du välja vilka mappar som ska delas med vilka enheter.
-\nRapportera eventuella problem du stöter på via Github.</string>
+\nRapportera eventuella problem du stöter på via GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Lagringsbehörighet</string>
     <string name="storage_permission_desc">Syncthing behöver komma åt ditt lagringsutrymme för att utföra filsynkronisering.</string>

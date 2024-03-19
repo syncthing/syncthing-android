@@ -9,7 +9,7 @@
     <!--Slide 1-->
     <string name="welcome_text">Syncthing on avoimen lähdekoodin tiedostojensynkronointisovellus.
 \nJakaaksesi tietoa toisten laitteiden kanssa, sinun tarvitsee lisätä niiden yksilölliset laitetunnukset laiteluetteloon. Myöhemmin voit valita, mitkä kansiot jaetaan minkä laitteiden kanssa.
-\nIlmoitathan ystävällisesti kaikista havaitsemistasi ongelmista Githubin kautta.</string>
+\nIlmoitathan ystävällisesti kaikista havaitsemistasi ongelmista GitHubin kautta.</string>
     <!--Slide 2-->
     <!--Slide 3-->
     <!--Slide 4-->
