@@ -10,7 +10,7 @@
     <string name="introduction">Innleiing</string>
     <string name="welcome_text">Syncthing er ein filsynkroniseringsapp med open kjeldekode.
 \nFor å dela data med andre einingar, må du leggja inn den unike einings-ID-en i einingslista. Etter dette kan du velja kva mapper du vil dele og med kva slags einingar.
-\nVer venleg å rapporter problem som måtte oppstå via Github.</string>
+\nVer venleg å rapporter problem som måtte oppstå via GitHub.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Lagringsløyve</string>
     <string name="storage_permission_desc">For å få gjort filsynkronisering treng Syncthing løyve til å få tilgang til lagring.</string>

@@ -10,7 +10,7 @@
     <string name="introduction">Sarrera</string>
     <string name="welcome_text">Syncthing iturri irekiko fitxategiak sinkronizatzeko aplikazio bat da.
 \nDatuak beste dispositibo batzuekin partekatzeko, gailuen zerrendari gailuen identifikatzaile bakarrak gehitu behar dizkiozu. Ondoren, aukeratu zer karpeta partekatuko dituzun zein gailurekin.
-\nMesedez, adierazi Github bidez aurkitzen duzun edozein arazoren berri.</string>
+\nMesedez, adierazi GitHub bidez aurkitzen duzun edozein arazoren berri.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Biltegiratzeko baimena</string>
     <string name="storage_permission_desc">Syncthing-ek zure biltegira sartu behar du fitxategiak sinkronizatzeko.</string>

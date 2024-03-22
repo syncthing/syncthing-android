@@ -10,7 +10,7 @@
     <string name="introduction">Tanıtım</string>
     <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır.
 \nDiğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.
-\nLütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
+\nLütfen karşılaştığınız herhangi bir sorunu GitHub aracılığıyla bildirin.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Depolama İzni</string>
     <string name="storage_permission_desc">Dosya eşitlemesi yapmak için Syncthing\'in depolama alanınıza erişmesi gerekiyor.</string>
