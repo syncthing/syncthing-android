@@ -1,8 +1,9 @@
-package com.nutomic.syncthingandroid;
+package com.nutomic.syncthingandroid.di;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.service.NotificationHandler;
 
 import javax.inject.Singleton;
@@ -21,6 +22,7 @@ public class SyncthingModule {
 
     @Provides
     @Singleton
+    @DefaultSharedPreferences
     public SharedPreferences getPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(mApp);
     }

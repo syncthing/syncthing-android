@@ -38,6 +38,7 @@ import com.google.android.material.color.MaterialColors;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.databinding.ActivityFirstStartBinding;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.PermissionUtil;
 import com.nutomic.syncthingandroid.util.Util;
@@ -75,6 +76,7 @@ public class FirstStartActivity extends Activity {
     private ActivityFirstStartBinding binding;
 
     @Inject
+    @DefaultSharedPreferences
     SharedPreferences mPreferences;
 
     @SuppressLint("ClickableViewAccessibility")

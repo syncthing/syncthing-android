@@ -14,6 +14,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.util.Util;
 
@@ -56,9 +57,12 @@ public class SyncthingRunnable implements Runnable {
     private final File mSyncthingBinary;
     private String[] mCommand;
     private final File mLogFile;
-    @Inject SharedPreferences mPreferences;
     private final boolean mUseRoot;
     @Inject NotificationHandler mNotificationHandler;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     public enum Command {
         deviceid,           // Output the device ID to the command line.

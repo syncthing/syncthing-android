@@ -21,6 +21,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.activities.DeviceActivity;
 import com.nutomic.syncthingandroid.activities.FolderActivity;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.model.CompletionInfo;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Event;
@@ -60,8 +61,11 @@ public class EventProcessor implements  Runnable, RestApi.OnReceiveEventListener
 
     private final Context mContext;
     private final RestApi mApi;
-    @Inject SharedPreferences mPreferences;
     @Inject NotificationHandler mNotificationHandler;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     public EventProcessor(Context context, RestApi api) {
         ((SyncthingApp) context.getApplicationContext()).component().inject(this);

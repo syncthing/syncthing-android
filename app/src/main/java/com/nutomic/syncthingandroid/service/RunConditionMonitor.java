@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.SyncthingApp;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.model.RunConditionCheckResult;
 
 import java.util.ArrayList;
@@ -59,8 +60,11 @@ public class RunConditionMonitor {
     }
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
     private ReceiverManager mReceiverManager;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     /**
      * Sending callback notifications through {@link OnRunConditionChangedListener} is enabled if not null.

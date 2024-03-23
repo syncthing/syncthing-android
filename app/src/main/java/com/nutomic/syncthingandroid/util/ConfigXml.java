@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.di.DefaultSharedPreferences;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.SyncthingRunnable;
 
@@ -54,7 +55,10 @@ public class ConfigXml {
     private static final int FOLDER_ID_APPENDIX_LENGTH = 4;
 
     private final Context mContext;
-    @Inject SharedPreferences mPreferences;
+
+    @Inject
+    @DefaultSharedPreferences
+    SharedPreferences mPreferences;
 
     private final File mConfigFile;
 
