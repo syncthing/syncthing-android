@@ -223,8 +223,8 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">İzin gerekli</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1\'den başlayarak, kablosuz (Wi-Fi) adını okuyabilmek için konum erişimi gereklidir. Bu özelliği yalnızca bu izni verirseniz kullanabilirsiniz.</string>
     <string name="power_source_title">Cihaza şununla güç verildiğinde çalıştır</string>
-    <string name="power_source_ac_and_battery_power">Piriz ve pil gücü.</string>
-    <string name="power_source_ac_power">Piriz gücü.</string>
+    <string name="power_source_ac_and_battery_power">Priz ve pil gücü.</string>
+    <string name="power_source_ac_power">Priz gücü.</string>
     <string name="power_source_battery_power">Pil gücü.</string>
     <string name="respect_battery_saving_title">Android pil tasarrufu ayarına uy</string>
     <string name="respect_battery_saving_summary">Pil tasarrufu etkinse Syncthing\'i etkisizleştirir.</string>
