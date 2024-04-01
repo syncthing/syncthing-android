@@ -10,7 +10,7 @@
     <string name="introduction">介紹</string>
     <string name="welcome_text">Syncthing 是一個開放原始碼的檔案同步應用程式。
 \n在其他裝置間分享資料，你需要加入裝置的唯一識別碼到裝置清單中。之後，你可以選擇資料夾分享給哪些裝置。
-\n請把你遇到的問題回報到 Github 上。</string>
+\n請把你遇到的問題回報到 GitHub 上。</string>
     <!--Slide 2-->
     <string name="storage_permission_title">儲存權限</string>
     <string name="storage_permission_desc">Syncthing 需要訪問您的存儲以進行文件同步.</string>

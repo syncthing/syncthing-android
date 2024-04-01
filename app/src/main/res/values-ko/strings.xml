@@ -10,7 +10,7 @@
     <string name="introduction">소개</string>
     <string name="welcome_text">Syncthing은 오픈소스 파일 동기화 어플리케이션입니다.
 \n다른 장치들과 데이터를 공유하기 위해서는 기기 목록에 고유 기기 ID를 추가해야 합니다. 그 후에 기기와 공유하는 폴더를 선택할 수 있습니다.
-\n발생한 문제는 무엇이든 Github를 통해 알려주시기 바랍니다.</string>
+\n발생한 문제는 무엇이든 GitHub를 통해 알려주시기 바랍니다.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">저장소 권한</string>
     <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>

@@ -10,7 +10,7 @@
     <string name="introduction">Tanıtım</string>
     <string name="welcome_text">Syncthing bir açık kaynaklı dosya eşitleme uygulamasıdır.
 \nDiğer cihazlarla veri paylaşmak için onların benzersiz cihaz kimliklerini cihaz listesine eklemeniz gerekir. Daha sonra hangi klasörlerin hangi cihazlarla paylaşılacağını seçebilirsiniz.
-\nLütfen karşılaştığınız herhangi bir sorunu Github aracılığıyla bildirin.</string>
+\nLütfen karşılaştığınız herhangi bir sorunu GitHub aracılığıyla bildirin.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">Depolama İzni</string>
     <string name="storage_permission_desc">Dosya eşitlemesi yapmak için Syncthing\'in depolama alanınıza erişmesi gerekiyor.</string>
@@ -223,8 +223,8 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">İzin gerekli</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1\'den başlayarak, kablosuz (Wi-Fi) adını okuyabilmek için konum erişimi gereklidir. Bu özelliği yalnızca bu izni verirseniz kullanabilirsiniz.</string>
     <string name="power_source_title">Cihaza şununla güç verildiğinde çalıştır</string>
-    <string name="power_source_ac_and_battery_power">Piriz ve pil gücü.</string>
-    <string name="power_source_ac_power">Piriz gücü.</string>
+    <string name="power_source_ac_and_battery_power">Priz ve pil gücü.</string>
+    <string name="power_source_ac_power">Priz gücü.</string>
     <string name="power_source_battery_power">Pil gücü.</string>
     <string name="respect_battery_saving_title">Android pil tasarrufu ayarına uy</string>
     <string name="respect_battery_saving_summary">Pil tasarrufu etkinse Syncthing\'i etkisizleştirir.</string>
