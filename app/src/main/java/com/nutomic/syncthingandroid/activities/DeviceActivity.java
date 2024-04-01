@@ -57,7 +57,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
     private static final String TAG = "DeviceSettingsFragment";
     private static final String IS_SHOWING_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
     private static final String IS_SHOWING_COMPRESSION_DIALOG = "COMPRESSION_FOLDER_DIALOG_STATE";
-    private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOW_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final int QR_SCAN_REQUEST_CODE = 777;
 
     private static final List<String> DYNAMIC_ADDRESS = Collections.singletonList("dynamic");
@@ -170,7 +170,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
             showCompressionDialog();
         }
 
-        if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+        if (savedInstanceState.getBoolean(IS_SHOW_DELETE_DIALOG)){
             showDeleteDialog();
         }
 
@@ -220,7 +220,7 @@ public class DeviceActivity extends SyncthingActivity implements View.OnClickLis
         outState.putBoolean(IS_SHOWING_COMPRESSION_DIALOG, mCompressionDialog != null && mCompressionDialog.isShowing());
         Util.dismissDialogSafe(mCompressionDialog, this);
 
-        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
+        outState.putBoolean(IS_SHOW_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
         Util.dismissDialogSafe(mDeleteDialog, this);
     }
 

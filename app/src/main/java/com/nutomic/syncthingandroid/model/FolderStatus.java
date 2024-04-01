@@ -27,4 +27,12 @@ public class FolderStatus {
     public long version;
     public String error;
     public String watchError;
+
+    public boolean isNeedsItems() {
+        return needFiles + needDirectories + needSymlinks + needDeletes > 0;
+    }
+
+    public boolean isOutOfSync() {
+        return state.equals("idle") && isNeedsItems();
+    }
 }

@@ -13,6 +13,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.activities.FolderActivity;
 import com.nutomic.syncthingandroid.activities.SyncthingActivity;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -101,9 +102,14 @@ public class FolderListFragment extends ListFragment implements SyncthingService
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Folder folder = mAdapter.getItem(i);
+        FolderStatus folderStatus = mAdapter.getLocalFolderStatus(folder.id);
+        boolean overridableChanges = folder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY)
+            && folderStatus.isOutOfSync();
         Intent intent = new Intent(getActivity(), FolderActivity.class)
                 .putExtra(FolderActivity.EXTRA_IS_CREATE, false)
-                .putExtra(FolderActivity.EXTRA_FOLDER_ID, mAdapter.getItem(i).id);
+                .putExtra(FolderActivity.EXTRA_FOLDER_ID, mAdapter.getItem(i).id)
+                .putExtra(FolderActivity.EXTRA_FOLDER_OVERRIDABLE_CHANGES, overridableChanges);
         startActivity(intent);
     }
 
