@@ -268,7 +268,6 @@ public class SettingsActivity extends SyncthingActivity {
             mHttpProxyAddress.setOnPreferenceChangeListener(this);
 
             /* Initialize summaries */
-            mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             screen.findPreference(Constants.PREF_POWER_SOURCE).setSummary(mPowerSource.getEntry());
             String wifiSsidSummary = TextUtils.join(", ", mPreferences.getStringSet(Constants.PREF_WIFI_SSID_WHITELIST, new HashSet<>()));
             screen.findPreference(Constants.PREF_WIFI_SSID_WHITELIST).setSummary(TextUtils.isEmpty(wifiSsidSummary) ?

@@ -5,6 +5,7 @@ import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HI
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.common.io.Files;
 import com.nutomic.syncthingandroid.R;
+import com.nutomic.syncthingandroid.SyncthingApp;
 import com.nutomic.syncthingandroid.databinding.ActivityShareBinding;
 import com.nutomic.syncthingandroid.model.Folder;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -39,6 +41,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 /**
  * Shares incoming files to syncthing folders.
@@ -60,6 +64,9 @@ public class ShareActivity extends StateDialogActivity
 
     private ActivityShareBinding binding;
 
+    @Inject
+    SharedPreferences mPreferences;
+
     @Override
     public void onServiceStateChange(SyncthingService.State currentState) {
         if (currentState != SyncthingService.State.ACTIVE || getApi() == null)
@@ -69,8 +76,7 @@ public class ShareActivity extends StateDialogActivity
 
         // Get the index of the previously selected folder.
         int folderIndex = 0;
-        String savedFolderId = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, "");
+        String savedFolderId = mPreferences.getString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, "");
         for (Folder folder : folders) {
             if (folder.id.equals(savedFolderId)) {
                 folderIndex = folders.indexOf(folder);
@@ -102,6 +108,7 @@ public class ShareActivity extends StateDialogActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SyncthingApp) getApplication()).component().inject(this);
         binding = ActivityShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -266,8 +273,7 @@ public class ShareActivity extends StateDialogActivity
         String savedSubDirectory = "";
 
         if (selectedFolder != null) {
-            savedSubDirectory = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getString(PREF_FOLDER_SAVED_SUBDIRECTORY + selectedFolder.id, "");
+            savedSubDirectory = mPreferences.getString(PREF_FOLDER_SAVED_SUBDIRECTORY + selectedFolder.id, "");
         }
 
         return savedSubDirectory;
@@ -362,7 +368,7 @@ public class ShareActivity extends StateDialogActivity
         super.onPause();
         if (mFoldersSpinner.getSelectedItem() != null) {
             Folder selectedFolder = (Folder) mFoldersSpinner.getSelectedItem();
-            PreferenceManager.getDefaultSharedPreferences(this).edit()
+            mPreferences.edit()
                     .putString(PREF_PREVIOUSLY_SELECTED_SYNCTHING_FOLDER, selectedFolder.id)
                     .apply();
         }
@@ -379,7 +385,7 @@ public class ShareActivity extends StateDialogActivity
             subDirectory = subDirectory.replace(folderDirectory, "");
             mSubDirectoryTextView.setText(subDirectory);
 
-            PreferenceManager.getDefaultSharedPreferences(this)
+            mPreferences
                     .edit().putString(PREF_FOLDER_SAVED_SUBDIRECTORY + selectedFolder.id, subDirectory)
                     .apply();
         }

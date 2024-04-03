@@ -240,7 +240,7 @@ public class FirstStartActivity extends Activity {
             case API_LEVEL_30:
                 // Skip if running as root, as that circumvents any Android FS restrictions.
                 return upgradedToApiLevel30()
-                        || PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+                        || mPreferences.getBoolean(Constants.PREF_USE_ROOT, false);
             case NOTIFICATION:
                 return isNotificationPermissionGranted();
 
