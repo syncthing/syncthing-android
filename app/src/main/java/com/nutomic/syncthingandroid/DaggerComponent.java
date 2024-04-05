@@ -4,6 +4,8 @@ import com.nutomic.syncthingandroid.activities.FirstStartActivity;
 import com.nutomic.syncthingandroid.activities.FolderPickerActivity;
 import com.nutomic.syncthingandroid.activities.MainActivity;
 import com.nutomic.syncthingandroid.activities.SettingsActivity;
+import com.nutomic.syncthingandroid.activities.ShareActivity;
+import com.nutomic.syncthingandroid.activities.ThemedAppCompatActivity;
 import com.nutomic.syncthingandroid.receiver.AppConfigReceiver;
 import com.nutomic.syncthingandroid.service.RunConditionMonitor;
 import com.nutomic.syncthingandroid.service.EventProcessor;
@@ -34,4 +36,6 @@ public interface DaggerComponent {
     void inject(AppConfigReceiver appConfigReceiver);
     void inject(RestApi restApi);
     void inject(SettingsActivity.SettingsFragment fragment);
+    void inject(ShareActivity activity);
+    void inject(ThemedAppCompatActivity activity);
 }

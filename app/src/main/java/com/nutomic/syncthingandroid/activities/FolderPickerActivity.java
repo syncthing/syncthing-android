@@ -6,11 +6,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -42,6 +41,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
+import javax.inject.Inject;
+
 /**
  * Activity that allows selecting a directory in the local file system.
  */
@@ -67,6 +68,9 @@ public class FolderPickerActivity extends SyncthingActivity
      * Location of null means that the list of roots is displayed.
      */
     private File mLocation;
+
+    @Inject
+    SharedPreferences mPreferences;
 
     public static Intent createIntent(Context context, String initialDirectory, @Nullable String rootDirectory) {
         Intent intent = new Intent(context, FolderPickerActivity.class);
@@ -103,7 +107,7 @@ public class FolderPickerActivity extends SyncthingActivity
             displayRoot();
         }
 
-        Boolean prefUseRoot = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.PREF_USE_ROOT, false);
+        Boolean prefUseRoot = mPreferences.getBoolean(Constants.PREF_USE_ROOT, false);
         if (!prefUseRoot) {
             Toast.makeText(this, R.string.kitkat_external_storage_warning, Toast.LENGTH_LONG)
                     .show();
@@ -133,8 +137,7 @@ public class FolderPickerActivity extends SyncthingActivity
             roots.add(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
             // Add paths that might not be accessible to Syncthing.
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            if (sp.getBoolean("advanced_folder_picker", false)) {
+            if (mPreferences.getBoolean("advanced_folder_picker", false)) {
                 Collections.addAll(roots, new File("/storage/").listFiles());
                 roots.add(new File("/"));
             }
