@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Syncthing</string>
-    <string name="app_description">Додаток для вікритої, надійної та децентралізованої синхронізації файлів.</string>
+    <string name="app_description">Відкритий, надійний додаток для децентралізованої синхронізації файлів.</string>
     <!--FirstStartActivity-->
     <!--Title for dialog displayed on first start-->
     <string name="welcome_title">Вітаємо в Syncthing для Android</string>
@@ -75,7 +75,7 @@
         <item quantity="many">%1$d / %2$d файлів</item>
         <item quantity="other">%1$d / %2$d файлів</item>
     </plurals>
-    <string name="override_changes">Перезаписати зміни</string>
+    <string name="override_changes">Перезапиши зміни</string>
     <string name="open_file_manager">Відкрити файловий менеджер</string>
     <string name="toast_no_file_manager">Не знайдено сумісного файлового менеджера</string>
     <!--DevicesFragment-->
@@ -97,10 +97,10 @@
     <!--Title for current upload rate-->
     <string name="upload_title">Вивантаження</string>
     <!--StatusFragment-->
-    <string name="status_fragment_title">Статус</string>
+    <string name="status_fragment_title">Стан</string>
     <string name="syncthing_starting">Syncthing запускається.</string>
     <string name="syncthing_running">Syncthing працює.</string>
-    <string name="syncthing_not_running">Syncthing не працює.</string>
+    <string name="syncthing_not_running">Syncthing не запущено.</string>
     <string name="syncthing_has_crashed">Syncthing впав.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
@@ -108,7 +108,7 @@
     <!--Same as upload_title with a colon and space appended-->
     <string name="upload_title_colon">"Вивантаження: "</string>
     <!--Title for current RAM usage-->
-    <string name="ram_usage">Використання ОЗП</string>
+    <string name="ram_usage">Використання пам\'яті</string>
     <!--Title for announce server status-->
     <string name="announce_server">Сервер-оповіщувач</string>
     <string name="restart">Перезапуск</string>
@@ -121,7 +121,7 @@
     <!--Setting title-->
     <string name="directory">Каталог</string>
     <!--Setting title and description-->
-    <string name="folder_fileWatcher">Відстеження змін</string>
+    <string name="folder_fileWatcher">Відстежувати зміни</string>
     <string name="folder_fileWatcherDescription">Просить операційну систему повідомляти про зміни у файлах. Якщо вимкнено, повертається до періодичного погодинного сканування.</string>
     <!--Setting title-->
     <string name="folder_pause">Призупинити теку</string>
@@ -217,9 +217,9 @@
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Потрібен дозвіл</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Починаючи з Android 8.1, доступ до місцерозташування необхідний для визначення імені мережі Wi-Fi. Ви можете використовувати цю функцію лише після надання такого дозволу.</string>
     <string name="power_source_title">Синхронізувати, коли пристрій живиться від</string>
-    <string name="power_source_ac_and_battery_power">зарядного пристрою і батареї</string>
-    <string name="power_source_ac_power">зарядного пристрою</string>
-    <string name="power_source_battery_power">батареї</string>
+    <string name="power_source_ac_and_battery_power">Живлення від мережі та батареї.</string>
+    <string name="power_source_ac_power">Живлення від мережі.</string>
+    <string name="power_source_battery_power">Живлення від батареї.</string>
     <string name="respect_battery_saving_title">Відповідно до системних налаштувань енергозбереження</string>
     <string name="respect_battery_saving_summary">Вимкнути Syncthing, якщо увімкнено енергозбереження.</string>
     <string name="respect_master_sync_title">Відповідно до системних налаштувань автоматичної синхронізації</string>
@@ -266,7 +266,7 @@
     <string name="listen_address">Адреси прослуховування протоколу синхронізації</string>
     <string name="max_recv_kbps">Обмеження пропускної здатності при завантаженні (кіБ/с)</string>
     <string name="max_send_kbps">Обмеження пропускної здатності при вивантаженні (кіБ/с)</string>
-    <string name="global_announce_enabled">Глобальне взаємне виявлення</string>
+    <string name="global_announce_enabled">Глобальний пошук</string>
     <string name="local_announce_enabled">Локальне взаємне виявлення</string>
     <string name="enable_nat_traversal">Увімкнути обхід NAT</string>
     <string name="global_announce_server">Сервери глобального взаємного виявлення</string>
@@ -302,14 +302,14 @@
 \n
 \nУВАГА! Інші додатки можуть прочитати приватний ключ з файлу резервної копії і використати його для завантаження / зміни синхронізованих файлів.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування\? Існуючі файли будуть перезаписані.</string>
+    <string name="dialog_confirm_import">Ви справді бажаєте імпортувати нові налаштування? Існуючі файли буде перезаписано.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">Налаштування експортовано в %1$s</string>
     <string name="import_config">Імпортувати налаштування</string>
     <!--Toast shown after config was successfully imported-->
     <string name="config_imported_successful">Налаштування імпортовано</string>
     <!--Toast shown after config was successfully imported-->
-    <string name="config_import_failed">Не вдалося імпортувати налаштування. Переконайтеся, що файли лежать у %1$s.</string>
+    <string name="config_import_failed">Не вдалося імпортувати налаштування. Переконайтеся, що файли знаходяться у %1$s</string>
     <!--Title for the preference to set STTRACE parameters-->
     <string name="sttrace_title">Налаштування STTRACE</string>
     <string name="environment_variables">Змінні оточення</string>
@@ -403,7 +403,7 @@
         <item quantity="other">%1$d файлів скопійовано в теку \"%2$s\"</item>
     </plurals>
     <!--Copy exception toast-->
-    <string name="copy_exception">Під час надання доступу сталася помилка. За інформацією зверніться до журналів додатку.</string>
+    <string name="copy_exception">Під час надання доступу сталася помилка, деталі шукайте у журналі додатку</string>
     <!--Copy progress dialog text-->
     <string name="copy_progress">Спільний доступ до файлів…</string>
     <plurals name="file_name_title">
@@ -429,7 +429,7 @@
     <string name="syncthing_disabled_reason_on_charger">Пристрій працює від зарядного пристрою</string>
     <string name="syncthing_disabled_reason_powersaving">Пристрій у режимі енергозбереження</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Глобальна синхронізація вимкнена</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Поточна назва (SSID) мережі WiFi не у білому списку</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Поточної назви SSID мережі WiFi немає у білому списку або відсутній дозвіл на інформацію про розташування</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Поточна мережа WiFi є тарифікованою</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Відсутня мережа або увімкнений режим польоту</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Не підключено до мобільної мережі</string>
@@ -518,7 +518,7 @@
     <string name="versions_path">Шлях до версій</string>
     <string name="command">Команда</string>
     <!--File versioning dialog descriptions for file versioning types and file versioning configuration options.-->
-    <string name="keep_versions_description">Кількість попередніх версій до збереження, на кожен файл</string>
+    <string name="keep_versions_description">Кількість попередніх версій для збереження, для кожного файлу.</string>
     <string name="simple_file_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка.</string>
     <string name="trashcan_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions.</string>
     <string name="staggered_versioning_description">Коли Syncthing замінює або видаляє файли, вони переміщуються у теку .stversions і до їх назви додається часова мітка. Версії автоматично видаляються, якщо їх вік перевищує максимальний встановлений або якщо їх кількість перевищує максимально дозволену на певному інтервалі часу.
@@ -526,7 +526,7 @@
 \nВикористовуються такі часові інтервали: у першу годину нова версія зберігається кожні 30 секунд, у перший день нова версія зберігається щогодини, у перші 30 днів нова версія зберігається щодня, до максимального часу зберігання нова версія зберігається щотижня.</string>
     <string name="maximum_age_description">Максимальний час зберігання версії, дні (встановіть на 0, щоб зберігати версії завжди).</string>
     <string name="versions_path_description">Шлях до теки, де зберігатимуться версії (залиште порожнім, щоб використовувати теку за-замовчуванням .stversions у загальнодоступній теці).</string>
-    <string name="cleanout_after_description">Кількість днів, протягом яких видалені файли залишатимуться у Кошику. Нуль означає завжди.</string>
+    <string name="cleanout_after_description">Кількість днів, протягом яких видалені файли залишатимуться у Кошику. Нуль означає завжди</string>
     <string name="external_versioning_description">Перший параметр командної строки - це шлях до теки, другий параметр - відносний шлях у теці.</string>
     <string name="no_versioning_description">Оберіть тип версіонування, щоб його увімкнути.</string>
     <!--Displays the current file versioning type in the Folder activity-->
@@ -547,4 +547,14 @@
     <string name="no_sub_folder_is_selected">Підтеку не вибрано</string>
     <string name="share_device_id_chooser">Поділитися ідентифікатором пристрою з</string>
     <string name="dialog_all_files_access_not_supported">Ваш пристрій не підтримує доступ до всіх файлів</string>
+    <string name="run_conditions_title">Увімкнути умови запуску</string>
+    <string name="api_level_30_button">Скинути базу даних</string>
+    <string name="api_level_30_title">Інформація про оновлення</string>
+    <string name="toast_api_level_30_must_reset">Продовження можливе лише після натиснення кнопки скидання бази даних.</string>
+    <string name="require_notification_permission_desc">Вимагається для повідомлення про з\'єднання від нових пристроїв, запити на доступ на папки, і т.п.</string>
+    <string name="api_level_30_desc">У останньому оновлення syncthing-android сумісний з API рівня 30, яке змінює поведінку файлової системи Android. Гарні новини: починаючи з Android 11 є можливість запису на зовнішню SD карту. Погані новини: це може діяти повільніше і деякі шляхи будуть приховані. Через ці недоступні шляхи, база даних має бути синута аби уникнути втрати даних. Це призведе до поновного хешування ваших даних, але їх не потрібно передавати з віддаленого пристрою. Це також може призвести до конфліктів та заново створити нещодавно видалені файли у випадку, якщо дані ще не повністю синхронізовано. В залежності від обсягу ваших даних, цей процес може потребувати дуже багато ресурсів, тобто зайняти довгий час та значно використати заряд батареї.
+\n
+\nНатисни кнопку нижче аби скинути базу даних та запустити Syncthing.</string>
+    <string name="notification_permission_title">Дозвід на повідомлення</string>
+    <string name="enable_notification_permission">Дозволити повідомлення</string>
 </resources>
