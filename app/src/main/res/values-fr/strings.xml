@@ -103,9 +103,9 @@
     <string name="syncthing_has_crashed">Syncthing s\'est vautré.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
-    <string name="download_title_colon">"Réception  : "</string>
+    <string name="download_title_colon">"Réception : "</string>
     <!--Same as upload_title with a colon and space appended-->
-    <string name="upload_title_colon">"Émission : "</string>
+    <string name="upload_title_colon">"Émission : "</string>
     <!--Title for current RAM usage-->
     <string name="ram_usage">Utilisation de la RAM</string>
     <!--Title for announce server status-->
@@ -210,11 +210,11 @@
     <string name="run_on_whitelisted_wifi_title">Exécuter sur les réseaux Wi-Fi spécifiés</string>
     <string name="run_on_whitelisted_wifi_networks">Exécuter uniquement sur certains réseaux Wi-Fi : %1$s</string>
     <string name="run_on_all_wifi_networks">Exécuter sur tous les réseaux Wi-Fi.</string>
-    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le Wi-Fi pour sélectionner les réseaux.</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">Veuillez activer le Wi-Fi pour sélectionner un réseau.</string>
     <string name="sync_only_wifi_ssids_connect_to_wifi">Veuillez vous connecter à un réseau Wi-Fi pour l\'ajouter à la liste.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Vous devez accorder la permission LOCALISATION pour utiliser cette fonctionnalité.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Permission requise</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">À partir d\'Android 8.1, il est nécessaire d\'accéder à la localisation pour lire le nom du Wi-Fi. Vous pouvez utiliser cette fonction uniquement si vous accordez cette autorisation.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">À partir d\'Android 8.1, l\'accès à la localisation est nécessaire pour pouvoir lire le nom du WiFi. Vous pouvez utiliser cette fonctionnalité uniquement si vous accordez cette autorisation.</string>
     <string name="power_source_title">Exécuter quand l\'appareil est alimenté par</string>
     <string name="power_source_ac_and_battery_power">Chargeur et batterie.</string>
     <string name="power_source_ac_power">Chargeur.</string>
@@ -258,7 +258,7 @@
     <string name="pull_order_newest_first">Plus récents d\'abord</string>
     <string name="versioning_type_none">Aucun</string>
     <string name="versioning_type_trashcan">Corbeille</string>
-    <string name="versioning_type_simple">Simple</string>
+    <string name="versioning_type_simple">Suivi simplifié</string>
     <string name="versioning_type_staggered">Décalé</string>
     <string name="versioning_type_external">Externe</string>
     <string name="device_name">Nom de l\'appareil</string>
@@ -289,11 +289,11 @@
     <string name="socks_proxy_address_title">Proxy SOCKS5</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
     <!--Toast after entering invalid socks proxy address-->
-    <string name="toast_invalid_socks_proxy_address">L\'entrée ne respecte pas la syntaxe du proxy \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
+    <string name="toast_invalid_socks_proxy_address">L\'entrée ne respecte pas la syntaxe du mandataire \'socks5://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="http_proxy_address_title">Proxy HTTP(S)</string>
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
-    <string name="toast_invalid_http_proxy_address">L\'entrée ne respecte pas la syntaxe du proxy \'http://[IP/HOSTNAME]:[PORT]\'</string>
+    <string name="toast_invalid_http_proxy_address">L\'entrée ne respecte pas la syntaxe du mandataire \'http://[IP/HOSTNAME]:[PORT]\'</string>
     <string name="use_legacy_hashing_title">Utiliser le hachage habituel</string>
     <string name="use_legacy_hashing_summary">Force Syncthing à utiliser le hachage d\'origine pour des raisons de compatibilité</string>
     <!--Dialog shown before config export-->
@@ -356,7 +356,7 @@
     <!--Activity title-->
     <string name="folder_picker_title">Sélection du répertoire</string>
     <!--Toast shown on devices with kitkat or higher-->
-    <string name="kitkat_external_storage_warning">Attention: votre version Android n\'autorise pas la synchronisation avec des périphériques de stockages externes</string>
+    <string name="kitkat_external_storage_warning">Attention : votre version Android n\'autorise pas la synchronisation avec des périphériques de stockages externes</string>
     <!--ListView empty text-->
     <string name="directory_empty">Le répertoire est vide</string>
     <!--Menu item to create folder on the file system-->
@@ -434,7 +434,7 @@
     <!--Title of the notification shown while syncthing is running and enabled-->
     <string name="syncthing_active">Syncthing fonctionne</string>
     <string name="syncthing_disabled">Syncthing est désactivé</string>
-    <string name="syncthing_terminated">Syncthing va s\'arrêter</string>
+    <string name="syncthing_terminated">Syncthing est arrêté</string>
     <!--Toast shown if syncthing failed to create a config-->
     <string name="config_create_failed">Echec de création du fichier de configuration</string>
     <!--Toast shown if a config file crucial to operation is missing-->
@@ -526,9 +526,9 @@
     <string name="external_versioning_description">Le premier paramètre de ligne de commande est le chemin du répertoire partagé, et le second est le chemin relatif dans le répertoire.</string>
     <string name="no_versioning_description">Choisir un type d\'archivage pour activer l\'archivage.</string>
     <!--Displays the current file versioning type in the Folder activity-->
-    <string name="type_simple">Type : Simple</string>
+    <string name="type_simple">Type : Suivi simple</string>
     <string name="type_trashcan">Type : Corbeille</string>
-    <string name="type_staggered">Type : Décalé</string>
+    <string name="type_staggered">Type : Échelonné</string>
     <string name="type_external">Type : Externe</string>
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <string name="trashcan_versioning_info">Nettoyer après : %1$s</string>
