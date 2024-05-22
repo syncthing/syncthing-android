@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Syncthing</string>
-    <string name="app_description">믿을 수 있는 오픈소스 분산형 파일 동기화 애플리케이션</string>
+    <string name="app_description">개방적이고 신뢰할 수 있는 분산형 파일 동기화 응용프로그램.</string>
     <!--FirstStartActivity-->
     <!--Title for dialog displayed on first start-->
-    <string name="welcome_title">Android용 Syncthing에 어서 오십시오</string>
+    <string name="welcome_title">Android용 Syncthing에 어서오세요</string>
     <!--Welcome wizard-->
     <!--Slide 1-->
     <string name="introduction">소개</string>
@@ -13,23 +13,23 @@
 \n발생한 문제는 무엇이든 GitHub를 통해 알려주시기 바랍니다.</string>
     <!--Slide 2-->
     <string name="storage_permission_title">저장소 권한</string>
-    <string name="storage_permission_desc">Syncthing의 파일 동기화를 사용하려면 저장소 권한이 필요합니다.</string>
+    <string name="storage_permission_desc">Syncthing이 파일 동기화를 하기 위해서는 사용자의 저장소에 접근해야 합니다.</string>
     <!--Slide 3-->
     <string name="location_permission_title">위치 권한(배경)</string>
     <!--Slide 4-->
     <!--Generic texts used everywhere-->
     <string name="back">뒤로</string>
-    <string name="cont">계속</string>
+    <string name="cont">계속하기</string>
     <string name="finish">완료</string>
-    <string name="generic_example">예제</string>
+    <string name="generic_example">예시</string>
     <string name="generic_error">오류</string>
     <string name="grant_permission">권한 부여</string>
-    <string name="permission_granted">권한 부여됨</string>
-    <string name="accept">승인</string>
+    <string name="permission_granted">권한이 부여됨</string>
+    <string name="accept">허용</string>
     <string name="ignore">무시</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
-    <string name="dialog_exit_while_running_as_service_title">앱 종료 확인</string>
+    <string name="dialog_exit_while_running_as_service_title">앱을 종료하려면 확인하세요</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">폴더 추가</string>
     <!--Title of the "share device id" menu action-->
@@ -53,7 +53,7 @@
     <string name="dialog_disable_battery_optimization_later">나중에</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">다시 보지 않기</string>
     <string name="dialog_disable_battery_optimization_turn_off">Syncthing을 위해서 끄기</string>
-    <string name="dialog_disable_battery_optimizations_not_supported">이 기기는 배터리 최적화 비활성화를 지원하지 않습니다</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">사용자의 기기는 배터리 최적화를 비활성화하는 것을 지원하지 않습니다</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
     <string name="api_loading">로드 중…</string>
@@ -488,4 +488,5 @@
     <string name="run_conditions_title">실행 조건 활성화</string>
     <string name="api_level_30_title">업그레이드 정보</string>
     <string name="api_level_30_button">데이터베이스 초기화</string>
+    <string name="dialog_all_files_access_not_supported">사용자의 장치는 모든 파일에 대한 접근을 지원하지 않습니다</string>
 </resources>
