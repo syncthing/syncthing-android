@@ -199,7 +199,7 @@
     <string name="category_experimental">实验性</string>
     <!--Preference screen - Run conditions-->
     <string name="run_conditions_summary">下方选项将控制 Syncthing 何时运行。</string>
-    <string name="run_on_mobile_data_title">在移动数据下运行</string>
+    <string name="run_on_mobile_data_title">允许用移动数据运行</string>
     <string name="run_on_mobile_data_summary">当设备通过移动数据网络连接时运行。警告：如果你要同步大量数据，此选项会消耗掉你移动运营商数据套餐里的很多流量。</string>
     <string name="run_on_wifi_title">在 Wi-Fi 下运行</string>
     <string name="run_on_wifi_summary">当设备连接到 Wi-Fi 网络时运行。</string>
