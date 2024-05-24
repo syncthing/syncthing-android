@@ -37,15 +37,15 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">다음으로 기기 ID 보내기</string>
     <string name="usage_reporting_dialog_title">익명 사용 보고서 전송을 허용하시겠습니까\?</string>
-    <string name="usage_reporting_dialog_description">암호화된 사용 보고서는 매일 전송됩니다. 사용 중인 운영체제, 폴더 크기와 응용 프로그램의 버전을 추적하기 위해서입니다. 만일 보고되는 정보가 변경되면 이 알림창이 다시 표시될 예정입니다.
+    <string name="usage_reporting_dialog_description">암호화된 사용량 보고서가 매일 전송됩니다. 이 보고서는 일반적인 플랫폼, 폴더 크기 및 응용 프로그램 버전을 추적하는 데 사용됩니다. 보고된 데이터 셋이 변경되면 이 대화 상자가 다시 표시됩니다.
 \n
-\n수집된 통계는 https://data.syncthing.net 주소에서 공람할 수 있습니다.</string>
+\n수집된 통계는 https://data.syncthing.net에서 공개적으로 이용할 수 있습니다.</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
-    <string name="open_website">홈페이지 열기</string>
-    <string name="toast_write_storage_permission_required">스토리지 쓰기 권한이 필요합니다</string>
-    <string name="device_rejected">\"%1$s\" 장치가 연결을 원하고 있습니다</string>
-    <string name="folder_rejected">\"%1$s\" 장치가 \"%2$s\" 폴더를 공유하길 원하고 있습니다</string>
+    <string name="open_website">웹사이트 열기</string>
+    <string name="toast_write_storage_permission_required">저장소 쓰기 권한이 필요합니다</string>
+    <string name="device_rejected">기기 \"%1$s\"가 연결을 요청합니다</string>
+    <string name="folder_rejected">기기 \"%1$s\"가 폴더 \"%2$s\"를 공유하려고 합니다</string>
     <string name="dialog_disable_battery_optimization_title">배터리 최적화</string>
     <string name="dialog_disable_battery_optimization_message">안드로이드 운영체제는 시간이 지나면 동기화를 정지시킬 수도 있습니다. 이를 막기 위해 배터리 최적화 기능을 꺼주시기 바랍니다.
 \n
@@ -68,8 +68,8 @@
     <plurals name="files">
         <item quantity="other">%1$d / %2$d 파일</item>
     </plurals>
-    <string name="override_changes">변경 항목 덮어쓰기</string>
-    <string name="open_file_manager">파일 탐색기 열기</string>
+    <string name="override_changes">변경 사항 덮어쓰기</string>
+    <string name="open_file_manager">파일 관리자 실행</string>
     <string name="toast_no_file_manager">호환되는 파일 탐색기를 찾을 수 없습니다</string>
     <!--DevicesFragment-->
     <string name="devices_fragment_title">기기</string>
