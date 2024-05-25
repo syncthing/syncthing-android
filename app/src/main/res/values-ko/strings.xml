@@ -29,7 +29,7 @@
     <string name="ignore">무시</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
-    <string name="dialog_exit_while_running_as_service_title">앱을 종료하려면 확인하세요</string>
+    <string name="dialog_exit_while_running_as_service_title">응용 프로그램을 종료하려면 확인하세요</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">폴더 추가</string>
     <!--Title of the "share device id" menu action-->
@@ -82,7 +82,7 @@
     <!--Indicates that there is no connection to the device-->
     <string name="device_disconnected">연결 끊김</string>
     <!--Indicates that the device is paused and does not sync-->
-    <string name="device_paused">일시 중지됨</string>
+    <string name="device_paused">일시정지</string>
     <!--Indicates that the device connection is unknown-->
     <string name="device_state_unknown">알 수 없음</string>
     <!--Title for current download rate-->
@@ -92,9 +92,9 @@
     <!--StatusFragment-->
     <string name="status_fragment_title">상태</string>
     <string name="syncthing_starting">Syncthing이 시작 중입니다.</string>
-    <string name="syncthing_running">Syncthing이 실행 중입니다.</string>
-    <string name="syncthing_not_running">Syncthing이 중지됐습니다.</string>
-    <string name="syncthing_has_crashed">Syncthing이 강제 종료됐습니다.</string>
+    <string name="syncthing_running">Syncthing이 실행중입니다.</string>
+    <string name="syncthing_not_running">Syncthing이 실행중이 아닙니다.</string>
+    <string name="syncthing_has_crashed">Syncthing이 중단되었습니다.</string>
     <!--DrawerFragment-->
     <!--Same as download_title with a colon and space appended-->
     <string name="download_title_colon">"수신: "</string>
@@ -114,7 +114,7 @@
     <!--Setting title-->
     <string name="directory">디렉토리</string>
     <!--Setting title and description-->
-    <string name="folder_fileWatcher">변경 항목 감시</string>
+    <string name="folder_fileWatcher">변경 사항 확인</string>
     <!--Setting title-->
     <string name="folder_pause">폴더 일시 중지</string>
     <!--Setting title-->
