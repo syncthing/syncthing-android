@@ -116,7 +116,7 @@
     <!--Setting title and description-->
     <string name="folder_fileWatcher">변경 사항 확인</string>
     <!--Setting title-->
-    <string name="folder_pause">폴더 일시 중지</string>
+    <string name="folder_pause">폴더 일시 정지</string>
     <!--Setting title-->
     <string name="devices">기기</string>
     <!--Setting title-->
@@ -162,7 +162,7 @@
     <!--Setting title-->
     <string name="introducer">소개자</string>
     <!--Setting title-->
-    <string name="pause_device">기기 일시 중지</string>
+    <string name="pause_device">기기 일시정지</string>
     <!--ActionBar item-->
     <string name="delete_device">기기 삭제</string>
     <string name="add_device">기기 추가</string>
@@ -489,4 +489,5 @@
     <string name="api_level_30_title">업그레이드 정보</string>
     <string name="api_level_30_button">데이터베이스 초기화</string>
     <string name="dialog_all_files_access_not_supported">사용자의 장치는 모든 파일에 대한 접근을 지원하지 않습니다</string>
+    <string name="folder_fileWatcherDescription">운영 체제에 파일 변경 사항을 알리도록 요청합니다. 이 기능이 비활성화되면 매시간 주기적인 스캔을 수행합니다.</string>
 </resources>
