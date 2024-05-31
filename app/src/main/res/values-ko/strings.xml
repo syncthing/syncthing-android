@@ -222,11 +222,11 @@
     <string name="folder_type_send_only">송신 전용</string>
     <string name="folder_type_receive_only">수신 전용</string>
     <string name="pull_order_random">무작위</string>
-    <string name="pull_order_alphabetic">가나다순</string>
-    <string name="pull_order_smallest_first">작은 파일 순</string>
-    <string name="pull_order_largest_first">큰 파일 순</string>
-    <string name="pull_order_oldest_first">오랜 파일 순</string>
-    <string name="pull_order_newest_first">최신 파일 순</string>
+    <string name="pull_order_alphabetic">사전순</string>
+    <string name="pull_order_smallest_first">오름차순</string>
+    <string name="pull_order_largest_first">내림차순</string>
+    <string name="pull_order_oldest_first">오래된 순</string>
+    <string name="pull_order_newest_first">최신순</string>
     <string name="versioning_type_none">없음</string>
     <string name="versioning_type_trashcan">휴지통</string>
     <string name="versioning_type_simple">단순</string>
@@ -244,19 +244,19 @@
     <string name="usage_reporting">익명 사용 보고</string>
     <string name="gui_address">GUI 대기 주소</string>
     <!--Titles for the preference to undo ignored devices and folders-->
-    <string name="undo_ignored_devices_folders_title">기기 및 폴더의 무시 취소</string>
+    <string name="undo_ignored_devices_folders_title">기기 및 폴더 무시 취소</string>
     <string name="export_config">설정 내보내기</string>
     <!--Toast after entering invalid integer value-->
     <!--Experimental options-->
-    <string name="use_proxy">프록시를 통해 연결하기</string>
-    <string name="do_not_use_proxy">프록시가 설정되어 있지 않습니다.</string>
+    <string name="use_proxy">프록시를 통해 연결</string>
+    <string name="do_not_use_proxy">프록시가 구성되지 않았습니다.</string>
     <string name="keep_wakelock_while_binary_running">Syncthing이 실행 중일 때 CPU를 깨어 있는 상태로 두기</string>
     <string name="keep_wakelock_while_binary_running_summary">만약 배터리로 사용중 예상하지 못한 접속 끊김이 발생 했다면 이 설정을 사용합니다. 이 기능은 배터리 소비를 늘립니다.</string>
     <string name="use_tor_title">Tor 사용</string>
     <string name="socks_proxy_address_title">SOCKS5 프록시</string>
     <string name="socks_proxy_address_example">socks5://192.168.0.1:1080</string>
     <!--Toast after entering invalid socks proxy address-->
-    <string name="http_proxy_address_title">HTTP(S) 프록시</string>
+    <string name="http_proxy_address_title">HTTP(S) 프록시\"</string>
     <string name="http_proxy_address_example">http://192.168.0.1:8080</string>
     <!--Toast after entering invalid http proxy address-->
     <string name="use_legacy_hashing_title">예전 해시 방식 사용</string>
@@ -494,4 +494,10 @@
     <string name="run_on_metered_wifi_title">미터 와이파이에서 실행</string>
     <string name="run_conditions_summary">Syncthing을 언제 실행할 지 결정하려면 다음 옵션을 사용하세요.</string>
     <string name="run_on_metered_wifi_summary">기기가 미터 와이파이 네트워크(예: 핫스팟 또는 테더링 네트워크)에 연결되었을 때 실행합니다. 주의: 많은 양의 데이터를 동기화할 경우 데이터 요금제의 상당 부분을 소모할 수 있습니다.</string>
+    <string name="undo_ignored_devices_folders_question">이 작업은 이전의 기기 및 폴더 무시 설정을 취소합니다. 계속하시겠습니까?</string>
+    <string name="invalid_integer_value" tools:ignore="PluralsCandidate">입력값이 유효하지 않습니다. %1$d과 %2$d 사이의 값을 입력해주세요.</string>
+    <string name="use_tor_summary">개인 정보 보호를 위해 모든 트래픽을 Tor를 통하도록 강제합니다. Orbot이 필요합니다. 프록시 옵션을 비활성화합니다.</string>
+    <string name="toast_invalid_socks_proxy_address">입력이 프록시 문법 \'socks5://[IP/호스트이름]:[포트]\'를 위반합니다</string>
+    <string name="toast_invalid_http_proxy_address">입력이 프록시 문법 \'http://[IP/호스트명]:[포트]\'를 위반합니다</string>
+    <string name="undo_ignored_devices_folders_done">설정이 성공적으로 취소되었습니다.</string>
 </resources>
