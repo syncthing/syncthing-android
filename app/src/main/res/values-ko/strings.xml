@@ -132,14 +132,14 @@
     <!--Dialog shown when attempting to remove a folder-->
     <string name="remove_folder_confirm">이 폴더를 정말로 Syncthing에서 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a folder with an empty ID-->
-    <string name="folder_id_required">폴더 식별자는 공백으로 둘 수 없습니다.</string>
+    <string name="folder_id_required">폴더 식별자는 공백으로 둘 수 없습니다</string>
     <!--Toast shown when trying to create a folder with an empty path-->
     <string name="folder_path_required">폴더 경로를 공백으로 둘 수 없습니다</string>
     <string name="dialog_discard_changes">설정 변경을 취소합니까\?</string>
     <!--Summary shown if we only have readonly access to the folder path-->
-    <string name="folder_path_readonly">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 쓰기 전용 권한만을 Syncthing에 부여해 줍니다.</string>
+    <string name="folder_path_readonly">사용자가 사용 중인 Android 버전은 Syncthing이 선택한 폴더에 대한 읽기 전용 접근 권한만 부여합니다.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
-    <string name="folder_path_readwrite">사용 중인 안드로이드 버전이 선택된 폴더에 대해서는 읽기 및 쓰기 권한을 Syncthing에 부여 해줍니다.</string>
+    <string name="folder_path_readwrite">사용자가 사용 중인 Android 버전은 Syncthing이 선택한 폴더에 대한 읽기 및 쓰기 접근 권한을 부여합니다.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="ignore_patterns">무시 양식</string>
     <string name="create_ignore_file_error">무시 파일을 생성하지 못했습니다. 해당 디렉터리에 쓰기 권한이 있습니까\?</string>
@@ -236,7 +236,7 @@
     <string name="listen_address">동기화 규약 대기 주소</string>
     <string name="max_recv_kbps">수신 속도 제한 (KiB/s)</string>
     <string name="max_send_kbps">송신 속도 제한 (KiB/s)</string>
-    <string name="global_announce_enabled">외부 탐지</string>
+    <string name="global_announce_enabled">전역 탐지</string>
     <string name="local_announce_enabled">내부 탐지</string>
     <string name="enable_nat_traversal">NAT 통과 활성화</string>
     <string name="global_announce_server">외부 탐지 서버</string>
@@ -266,7 +266,7 @@
 \n
 \n경고! 다른 애플리케이션이 백업 경로에 저장된 비밀 키를 읽어들여, 동기화 중인 파일을 다운로드하거나 수정하는 데 사용할 수도 있습니다.</string>
     <!--Dialog shown before config import-->
-    <string name="dialog_confirm_import">새로운 설정을 불러오시겠습니까? 기존 파일이 덮어쓰입니다.</string>
+    <string name="dialog_confirm_import">정말 새로운 설정을 불러오시겠습니까? 기존 파일을 덮어씁니다.</string>
     <!--Toast shown after config was successfully exported-->
     <string name="config_export_successful">설정을 %1$s 로 내보내기했습니다</string>
     <string name="import_config">설정 불러오기</string>
@@ -355,7 +355,7 @@
         <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사 되었습니다</item>
     </plurals>
     <!--Copy exception toast-->
-    <string name="copy_exception">공유 중 오류가 발생했습니다. 어플리케이션 기록을 확인하십시오</string>
+    <string name="copy_exception">공유 중 오류가 발생했으니 응용 프로그램 기록을 확인하십시오</string>
     <!--Copy progress dialog text-->
     <string name="copy_progress">파일 공유 중…</string>
     <plurals name="file_name_title">
@@ -380,14 +380,14 @@
     <string name="syncthing_disabled">Syncthing이 비활성화되었습니다</string>
     <string name="syncthing_terminated">Syncthing이 종료되었습니다</string>
     <!--Toast shown if syncthing failed to create a config-->
-    <string name="config_create_failed">구성 파일을 만드는데 실패 했습니다.</string>
+    <string name="config_create_failed">설정 파일 생성 실패</string>
     <!--Toast shown if a config file crucial to operation is missing-->
     <string name="config_file_missing">작동에 필수적인 설정 파일이 존재하지 않습니다</string>
     <!--Label of the default folder created of first start (camera folder).-->
     <string name="default_folder_label">카메라</string>
     <!--ID of the default folder created on first start (camera folder). Must only contain 'a-z0-9_-'. Parameter is the device name-->
     <string name="default_folder_id">%1$s-사진</string>
-    <string name="notification_crash_title">Syncthing이 충돌하였습니다.</string>
+    <string name="notification_crash_title">Syncthing이 충돌하였습니다</string>
     <string name="notification_crash_text">클릭해서 로그 보기</string>
     <string name="notifications_persistent_channel">Syncthing 작동 중</string>
     <string name="notifications_other_channel">기타 알림</string>
@@ -402,16 +402,16 @@
     <string name="device_id_copied_to_clipboard">기기 ID가 클립보드에 복사되었습니다</string>
     <!--Strings representing units for file sizes, from smallest to largest-->
     <string name="file_size_unit_B">B</string>
-    <string name="file_size_unit_KiB">KiB</string>
-    <string name="file_size_unit_MiB">MiB</string>
-    <string name="file_size_unit_GiB">GiB</string>
-    <string name="file_size_unit_TiB">TiB</string>
+    <string name="file_size_unit_KiB">키비바이트</string>
+    <string name="file_size_unit_MiB">메비바이트</string>
+    <string name="file_size_unit_GiB">기비바이트</string>
+    <string name="file_size_unit_TiB">테비바이트</string>
     <!--Strings representing units for transfer rates, from smallest to largest-->
-    <string name="transfer_rate_unit_B_s">B/s</string>
-    <string name="transfer_rate_unit_KiB_s">KiB/s</string>
-    <string name="transfer_rate_unit_MiB_s">MiB/s</string>
-    <string name="transfer_rate_unit_GiB_s">GiB/s</string>
-    <string name="transfer_rate_unit_TiB_s">TiB/s</string>
+    <string name="transfer_rate_unit_B_s">초당 바이트</string>
+    <string name="transfer_rate_unit_KiB_s">초당 키비바이트</string>
+    <string name="transfer_rate_unit_MiB_s">초당 메비바이트</string>
+    <string name="transfer_rate_unit_GiB_s">초당 기비바이트</string>
+    <string name="transfer_rate_unit_TiB_s">초당 테비바이트</string>
     <!--Possible folder states-->
     <string name="state_idle">대기</string>
     <string name="state_scanning">스캔 중</string>
@@ -465,7 +465,7 @@
 \n다음과 같은 간격이 사용됩니다: 첫 한 시간 동안은 30초마다, 첫 하루 동안은 1시간마다, 첫 30일 동안은 1일마다, 그리고 최대 보관 기간까지는 1주일마다 버전이 보관됩니다.</string>
     <string name="maximum_age_description">버전을 보관할 최대 시간입니다(일 단위이며 버전을 영구 보관하려면 0을 입력하십시오).</string>
     <string name="versions_path_description">버전을 보관할 경로입니다(공유 폴더 안의 기본값 .stversions 폴더를 사용하려면 비워 두십시오).</string>
-    <string name="cleanout_after_description">휴지통에서 파일을 보관할 일수입니다. 0은 무제한을 의미합니다.</string>
+    <string name="cleanout_after_description">휴지통에서 파일을 보관할 일수입니다. 0은 영구 보관을 의미합니다</string>
     <string name="external_versioning_description">첫 번째 명령 줄 매개 변수는 폴더 경로이고 두 번째 매개 변수는 폴더의 상대 경로입니다.</string>
     <string name="no_versioning_description">버전 관리를 사용하려면 버전 유형을 선택하십시오.</string>
     <!--Displays the current file versioning type in the Folder activity-->
@@ -500,4 +500,49 @@
     <string name="toast_invalid_socks_proxy_address">입력이 프록시 문법 \'socks5://[IP/호스트이름]:[포트]\'를 위반합니다</string>
     <string name="toast_invalid_http_proxy_address">입력이 프록시 문법 \'http://[IP/호스트명]:[포트]\'를 위반합니다</string>
     <string name="undo_ignored_devices_folders_done">설정이 성공적으로 취소되었습니다.</string>
+    <string name="notification_persistent_waiting_channel">실행 조건 모니터링 중</string>
+    <string name="location_permission_desc">Syncthing은 선택된 Wi-Fi 네트워크에서만 동기화되도록 설정할 수 있습니다. 이를 위해서는 현재 연결된 Wi-Fi의 SSID를 조회해야 하며, 앱이 닫혀 있을 때도 필요합니다. 따라서 백그라운드 상태에서도 위치에 접근할 수 있는 권한이 필요합니다. 이 정보는 사용자의 위치를 조회하는 데 사용되지 않습니다. 사용자가 수동으로 목록에 추가하도록 선택한 Wi-Fi 정보만 저장하며, 다른 사용자 데이터는 저장되지 않습니다.
+\n
+\n이 기능을 사용하려면 위 버튼을 눌러 Syncthing에 필요한 권한을 부여하십시오. 아니면 이 단계를 건너뛸 수 있습니다.</string>
+    <string name="api_level_30_desc">최신 업데이트로 syncthing-android가 API 수준 30을 타게팅하여 Android 파일 시스템의 동작이 변경되었습니다. 좋은 소식은 Android 11 이상에서는 이제 외부 SD 카드를 쓸 수 있다는 것입니다. 나쁜 소식은 속도가 느려질 수 있고 일부 경로가 숨겨질 수 있다는 점입니다. 이러한 숨겨진 경로로 인해 데이터 손실을 방지하기 위해서는 데이터베이스를 재설정해야 합니다. 이로 인해 모든 데이터를 다시 해시해야 하지만 원격 기기에서 데이터를 전송할 필요는 없습니다. 또한, 현재 완전히 동기화되지 않은 경우 충돌이 발생하거나 최근에 삭제된 파일이 다시 생성될 수 있습니다. 데이터 양에 따라 이 과정은 매우 많은 자원을 소모할 수 있으며, 시간이 걸리고 많은 배터리 전력을 사용할 수 있습니다.
+\n
+\n아래 버튼을 눌러 데이터베이스를 재설정하고 Syncthing을 시작하세요.</string>
+    <string name="dialog_exit_while_running_as_service_message">참고하세요: 사용자가 이 응용 프로그램을 부팅 시 자동으로 시작하도록 설정했습니다. 따라서 이 응용 프로그램은 실행 조건을 모니터링하고 조건이 맞으면 언제든지 백그라운드에서 동기화를 수행합니다. 심각한 문제가 발생한 경우에만 수동으로 종료해야 합니다. 그렇지 않으면 설정에서 \'부팅 시 자동 시작\'을 비활성화하세요. 기기를 재부팅하기 전까지 종료하시겠습니까?</string>
+    <string name="sync_only_wifi_ssids_wifi_turn_on_wifi">네트워크를 선택하려면 Wi-Fi를 켜 주세요.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Android 8.1부터는 Wi-Fi 이름을 읽으려면 위치 접근 권한이 필요합니다. 이 권한을 부여해야만 이 기능을 사용할 수 있습니다.</string>
+    <string name="power_source_title">기기가 다음으로 구동될 때 실행</string>
+    <string name="run_in_flight_mode_summary">기기가 비행 모드 중 수동 Wi-Fi 연결을 감지하는 데 문제가 있는 경우 이 옵션을 활성화하세요.</string>
+    <string name="run_as_background_service">부팅 시 서비스 자동 시작</string>
+    <string name="st_reset_deltas_question">이 작업은 당사 지원 팀의 권장에 따라 수행해야 합니다.
+\nSyncthing의 델타 인덱스를 정말로 초기화하시겠습니까?</string>
+    <string name="service_settings_summary">Syncthing을 서비스로 실행합니다. Android에서 종료되지 않도록 지속적인 알림을 추가합니다. 이 옵션을 선택하면 운영 체제 시작 시 Syncthing이 시작됩니다.</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">현재 WiFi SSID가 화이트리스트에 없거나 위치 권한이 제한되어 있습니다</string>
+    <string name="toast_api_level_30_must_reset">데이터베이스를 재설정하는 버튼을 클릭해야만 계속할 수 있습니다.</string>
+    <string name="privacy_title">개인정보 처리방침</string>
+    <string name="privacy_summary">위치와 같은 개인적인 정보 사용이 있을 경우에 대한 내용을 다루는 syncthing-android의 개인정보 처리방침을 엽니다.</string>
+    <string name="syncthing_disabled_reason_wifi_is_metered">현재 WiFi는 유료입니다</string>
+    <string name="syncthing_disabled_reason_no_network_or_flightmode">네트워크 연결이 안되어있거나 비행기 모드가 작동 중입니다</string>
+    <string name="notification_permission_title">알림 권한</string>
+    <string name="require_notification_permission_desc">새 기기 연결, 폴더 공유 요청 등에 대한 알림을 표시하려면 필요합니다.</string>
+    <string name="respect_master_sync_title">Android \'데이터 자동 동기화\' 설정 따르기</string>
+    <string name="sync_only_wifi_ssids_connect_to_wifi">목록에 추가하려면 Wi-Fi에 연결해 주세요.</string>
+    <string name="syncthing_disabled_reason_no_allowed_method">WiFi나 모바일 데이터에서 동기화하도록 설정되지 않음</string>
+    <string name="enable_notification_permission">알림 권한 활성화</string>
+    <string name="st_reset_database_question">이 작업은 당사 지원 팀의 권장에 따라 수행해야 합니다.
+\nSyncthing의 데이터베이스를 정말로 초기화하시겠습니까?</string>
+    <string name="run_on_whitelisted_wifi_networks">선택한 Wi-Fi 네트워크에서만 실행: %1$s</string>
+    <string name="sync_only_wifi_ssids_need_to_grant_location_permission">이 기능을 사용하려면 위치 권한을 부여해야 합니다.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">권한 필요</string>
+    <string name="power_source_ac_and_battery_power">AC 전원 및 배터리 전원.</string>
+    <string name="power_source_ac_power">AC 전원.</string>
+    <string name="power_source_battery_power">배터리 전원.</string>
+    <string name="respect_battery_saving_summary">배터리 절약 모드가 활성화된 경우 Syncthing 비활성화.</string>
+    <string name="respect_master_sync_summary">빠른 설정 타일에서 \'데이터 자동 동기화\'가 꺼져 있을 때 Syncthing을 비활성화합니다.</string>
+    <string name="run_in_flight_mode_title">기기가 비행 모드일 때 실행</string>
+    <string name="syncthing_disabled_message">실행 조건을 변경하시겠습니까?</string>
+    <string name="syncthing_disabled_reason_on_battery">기기가 기본상태로 작동 중</string>
+    <string name="syncthing_disabled_reason_on_charger">기기가 충전상태로 작동 중</string>
+    <string name="syncthing_disabled_reason_powersaving">기기가 절전상태로 작동 중</string>
+    <string name="syncthing_disabled_reason_android_sync_disabled">전역 동기화가 비활성화 됨</string>
+    <string name="toast_invalid_folder_selected">죄송합니다. 선택한 폴더는 사용할 수 없습니다. 내부 또는 외부 저장소에 있는 폴더를 선택해 주세요.</string>
 </resources>
