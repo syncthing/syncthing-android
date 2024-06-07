@@ -195,7 +195,7 @@
     <string name="run_on_mobile_data_title">모바일 데이터 사용 시 작동</string>
     <string name="run_on_wifi_title">와이파이에서 실행</string>
     <string name="run_on_wifi_summary">기기가 무선 망에 연결되어 있을 때 작동합니다.</string>
-    <string name="run_on_whitelisted_wifi_title">특정한 Wi-Fi 사용 시 작동</string>
+    <string name="run_on_whitelisted_wifi_title">지정된 Wi-Fi 네트워크에서 실행</string>
     <string name="run_on_all_wifi_networks">모든 Wi-Fi 사용 시 작동</string>
     <string name="respect_battery_saving_title">안드로이드 배터리 절약 설정 우선</string>
     <string name="service_settings_title">서비스 설정</string>
@@ -218,7 +218,7 @@
     <string name="preference_theme_option_light">밝은 색</string>
     <string name="preference_theme_option_dark">어두운 색</string>
     <string name="pref_language_default">기본 언어</string>
-    <string name="folder_type_send_receive">송수신</string>
+    <string name="folder_type_send_receive">송신 &amp; 수신</string>
     <string name="folder_type_send_only">송신 전용</string>
     <string name="folder_type_receive_only">수신 전용</string>
     <string name="pull_order_random">무작위</string>
