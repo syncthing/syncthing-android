@@ -440,15 +440,15 @@
     <string name="pull_order_type_alphabetic">가나다순</string>
     <string name="pull_order_type_smallestFirst">작은 파일 순</string>
     <string name="pull_order_type_largestFirst">큰 파일 순</string>
-    <string name="pull_order_type_oldestFirst">오랜 파일 순</string>
-    <string name="pull_order_type_newestFirst">최신 파일 순</string>
+    <string name="pull_order_type_oldestFirst">오래된 순</string>
+    <string name="pull_order_type_newestFirst">최신 순</string>
     <!--Pull order dialog descriptions for pull order types-->
-    <string name="pull_order_type_random_description">파일을 무작위 순서로 수신합니다.</string>
-    <string name="pull_order_type_alphabetic_description">파일을 이름에 따른 가나다 순서로 수신합니다.</string>
-    <string name="pull_order_type_smallestFirst_description">파일을 크기에 따른 순서로 수신합니다. 가장 작은 파일이 먼저입니다.</string>
-    <string name="pull_order_type_largestFirst_description">파일을 크기에 따른 순서로 수신합니다. 가장 큰 파일이 먼저입니다.</string>
-    <string name="pull_order_type_oldestFirst_description">파일을 수정 시간에 따른 순서로 수신합니다. 가장 오랜 파일이 먼저입니다.</string>
-    <string name="pull_order_type_newestFirst_description">파일을 수정 시간에 따른 순서로 수신합니다. 가장 최신 파일이 먼저입니다.</string>
+    <string name="pull_order_type_random_description">파일을 무작위 순서로 가져오기.</string>
+    <string name="pull_order_type_alphabetic_description">파일 이름을 알파벳 순서로 가져오기.</string>
+    <string name="pull_order_type_smallestFirst_description">파일을 크기 순으로 가져오기. 가장 작은 것부터 가져옵니다.</string>
+    <string name="pull_order_type_largestFirst_description">파일을 크기 순으로 가져오기. 가장 큰 것부터 가져옵니다.</string>
+    <string name="pull_order_type_oldestFirst_description">파일을 수정 시간 순으로 가져오기. 가장 오래된 것부터 가져옵니다.</string>
+    <string name="pull_order_type_newestFirst_description">파일을 수정 시간 순으로 가져오기. 가장 최근의 것부터 가져옵니다.</string>
     <!--Titles used in the file versioning dialog and file versioning button in the folder activity-->
     <string name="maximum_age">최대 보관 기간</string>
     <string name="clean_out_after">보관 기간</string>
