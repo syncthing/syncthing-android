@@ -542,4 +542,8 @@
     <string name="browse">Navegar</string>
     <string name="no_sub_folder_is_selected">Nenhuma subpasta selecionada</string>
     <string name="share_device_id_chooser">Compartilhe ID do dispositivo com</string>
+    <string name="dialog_all_files_access_not_supported">Seu dispositivo não suporta acesso a todos os arquivos</string>
+    <string name="api_level_30_desc">Com a última atualização, o syncthing-android está usando a API nível 30, que altera o comportamento do sistema de arquivos do Android. Boas notícias: No Android 11 e mais novos, agora é possível utilizar cartões SD externos. Más notícias: Pode ser mais lento e algumas pastas estarão ocultas. Devido estas pastas ocultas, o banco de dados necessita ser reiniciado para prevenir perda de dados. Isto irá causar todos os seus dados terem seus hashes recalculados, mas não será necessário ser transferido de dispositivos remotos. Isto pode criar conflitos e recriar arquivos recentemente apagados caso você não esteja sincronizado no momento. Dependendo de quantos dados você possui, este processo pode usar muitos recursos, ou seja, demorar e usar bastante bateria.
+\n
+\nPor favor pressione o botão abaixo para reiniciar o banco de dados e iniciar o Syncthing.</string>
 </resources>
