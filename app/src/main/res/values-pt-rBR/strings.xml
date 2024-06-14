@@ -547,4 +547,5 @@
 \n
 \nPor favor pressione o botão abaixo para reiniciar o banco de dados e iniciar o Syncthing.</string>
     <string name="api_level_30_title">Informação de Upgrade</string>
+    <string name="api_level_30_button">Reiniciar banco de dados</string>
 </resources>
