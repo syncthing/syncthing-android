@@ -173,7 +173,7 @@
     <!--Dialog shown when attempting to remove a device-->
     <string name="remove_device_confirm">이 기기를 정말로 제거하시겠습니까\?</string>
     <!--Toast shown when trying to create a device with an empty ID-->
-    <string name="device_id_required">기기 식별자는 공백으로 둘 수 없습니다</string>
+    <string name="device_id_required">기기명을 공백으로 둘 수 없습니다</string>
     <!--Content description for device ID qr code icon-->
     <string name="scan_qr_code_description">QR 코드 스캔</string>
     <!--Toast show if we could not get root permissions-->
@@ -288,7 +288,7 @@
     <string name="st_reset_deltas_title">델타 인덱스 초기화</string>
     <!--Syncthing was reset-->
     <!--Syncthing was reset-->
-    <string name="st_reset_deltas_done">Syncthing의 델타 인덱스 초기화에 성공했습니다.</string>
+    <string name="st_reset_deltas_done">Syncthing의 델타 인덱스 초기화에 성공했습니다</string>
     <string name="category_about">정보</string>
     <!--Settings item that opens the log activity-->
     <string name="open_log">로그 열기</string>
@@ -348,7 +348,9 @@
     <string name="nothing_share">공유 할 것이 없음</string>
     <!--Copy success toast partially-->
     <plurals name="copy_success_partially">
-        <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사되었습니다. %3$d는 이미 존재합니다.</item>
+        <item quantity="other">%1$d 파일이 \"%2$s\" 폴더로 복사 되었습니다, %3$d는 이미 존재합니다
+\n
+\n%1$d 파일들이 \"%2$s\" 폴더로 복사 되었습니다, %3$d는 이미 존재합니다</item>
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
@@ -389,7 +391,7 @@
     <string name="default_folder_id">%1$s-사진</string>
     <string name="notification_crash_title">Syncthing이 충돌하였습니다</string>
     <string name="notification_crash_text">클릭해서 로그 보기</string>
-    <string name="notifications_persistent_channel">Syncthing 활성화</string>
+    <string name="notifications_persistent_channel">Syncthing 작동 중</string>
     <string name="notifications_other_channel">기타 알림</string>
     <!--RestApi-->
     <!--Title of the notification shown when a restart is needed-->
