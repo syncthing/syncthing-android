@@ -95,8 +95,8 @@
     <string name="upload_title">上傳</string>
     <!--StatusFragment-->
     <string name="status_fragment_title">狀態</string>
-    <string name="syncthing_starting">Syncthing 正在啟動…</string>
-    <string name="syncthing_running">Syncthing 執行中…</string>
+    <string name="syncthing_starting">Syncthing 正在啟動。</string>
+    <string name="syncthing_running">Syncthing 執行中。</string>
     <string name="syncthing_not_running">Syncthing 未執行。</string>
     <string name="syncthing_has_crashed">Syncthing 當掉了…</string>
     <!--DrawerFragment-->
