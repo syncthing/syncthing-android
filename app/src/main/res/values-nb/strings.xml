@@ -214,7 +214,7 @@
     <!--Activity title-->
     <string name="folder_picker_title">Mappe-velger</string>
     <!--Toast shown on devices with kitkat or higher-->
-    <string name="kitkat_external_storage_warning">Advarsel: Din versjon av Android tillater ikke synkronisering til eksterne lagringsenheter.</string>
+    <string name="kitkat_external_storage_warning">Advarsel: Din versjon av Android tillater ikke synkronisering til eksterne lagringsenheter</string>
     <!--ListView empty text-->
     <string name="directory_empty">Katalogen er tom</string>
     <!--Menu item to create folder on the file system-->
@@ -302,4 +302,60 @@
     <!--Displays the current file versioning type in the Folder activity-->
     <!--Information displayed about the current file versioning configuration in the folder activity-->
     <!--error message if the deviceID/QRCode dialog for some reason cannot be displayed.-->
+<string name="dialog_discard_changes">Angre dine endringer?</string>
+    <string name="folder_path_readonly">Din Android-versjon gir kun Syncthing lesetilgang til den valgte mappen.</string>
+    <string name="folder_path_readwrite">Din Android-versjon gir Syncthing lese- og skrivetilgang til den valgte mappen.</string>
+    <string name="category_debug">Feilsøking</string>
+    <string name="share_device_id_chooser">Del enhets ID med</string>
+    <string name="browse">Bla gjennom</string>
+    <string name="notification_permission_title">Varslingsrettigheter</string>
+    <string name="enable_notification_permission">Aktiver varslingsrettigheter</string>
+    <string name="dialog_all_files_access_not_supported">Din enhet støtter ikke tilgang til alle filer</string>
+    <string name="ignore">Ignorer</string>
+    <string name="no_sub_folder_is_selected">Ingen undermappe er valgt</string>
+    <string name="introduction">Introduksjon</string>
+    <string name="storage_permission_title">Lagringstillatelse</string>
+    <string name="storage_permission_desc">Syncthing må få tilgang til lagringsplassen din for å gjøre filsynkronisering.</string>
+    <string name="api_level_30_title">Oppgraderingsinformasjon</string>
+    <string name="back">Tilbake</string>
+    <string name="cont">Fortsett</string>
+    <string name="toast_api_level_30_must_reset">Du kan bare fortsette ved å klikke på knappen for å nullstille databasen.</string>
+    <string name="finish">Fullfør</string>
+    <string name="generic_example">Eksempel</string>
+    <string name="grant_permission">Gi tilgang</string>
+    <string name="permission_granted">Tilgang gitt</string>
+    <string name="dialog_exit_while_running_as_service_title">Bekreft å avslutte appen</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">Din enheten støtter ikke deaktivering av batterioptimaliseringer</string>
+    <string name="device_rejected">Enhet \"%1$s\" ønsker å koble seg til</string>
+    <string name="folder_rejected">Enhet \"%1$s\" ønsker å dele mappe \"%2$s\"</string>
+    <string name="dialog_disable_battery_optimization_title">Batteri optimalisering</string>
+    <string name="dialog_disable_battery_optimization_dont_show_again">Ikke vis igjen</string>
+    <string name="dialog_disable_battery_optimization_turn_off">Slå av for Syncthing</string>
+    <string name="syncthing_loading_slow_message">Syncthing bruker veldig lang tid på å laste. Bruk loggene til å sjekke etter feil.</string>
+    <plurals name="files">
+        <item quantity="one">%1$d / %2$d Fil</item>
+        <item quantity="other">%1$d / %2$d Filer</item>
+    </plurals>
+    <string name="override_changes">Overstyre endringer</string>
+    <string name="open_file_manager">Åpne filbehandler</string>
+    <string name="device_paused">Midlertidig stanset</string>
+    <string name="toast_no_file_manager">Ingen kompatibel filutforsker funnet</string>
+    <string name="status_fragment_title">Status</string>
+    <string name="syncthing_starting">Syncthing har startet.</string>
+    <string name="syncthing_running">Syncthing kjører.</string>
+    <string name="syncthing_not_running">Syncthing kjører ikke.</string>
+    <string name="syncthing_has_crashed">Syncthing har krasjet.</string>
+    <string name="folder_fileWatcher">Overvåk for endringer</string>
+    <string name="folder_fileWatcherDescription">Ber operativsystemet varsle om endringer i filer. Hvis deaktiveres, går det tilbake til periodiske, timesvis skanninger.</string>
+    <string name="ignore_patterns">Ignorer mønstre</string>
+    <string name="create_ignore_file_error">Klarte ikke å opprette ignorér-filen. Er mappen skrivbar?</string>
+    <string name="edit_ignore_file_error">Ingen tekstbehandler funnet</string>
+    <string name="toast_invalid_folder_selected">Beklager. Den valgte mappen kan ikke brukes. Vennligst velg en mappe som ligger på intern- eller ekstern lagring.</string>
+    <string name="pause_device">Sett enhet på pause</string>
+    <string name="category_behaviour">Oppførsel</string>
+    <string name="category_run_conditions">Kjør betingelser</string>
+    <string name="folder_pause">Sett mappe på pause</string>
+    <string name="api_level_30_button">Nullstill database</string>
+    <string name="accept">Godta</string>
+    <string name="category_backup">Sikkerhetskopi</string>
 </resources>
