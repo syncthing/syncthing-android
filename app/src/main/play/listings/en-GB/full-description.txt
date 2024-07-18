@@ -1,4 +1,6 @@
-Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.
+Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the internet.
+
+You can select any directory, including the user data directory itself, to let Syncthing sync the files there (subject to restrictions by Android and your device's vendor). That's why this app requests the permission to access all files. This allows you to keep all the data you need and create on your phone in sync with another of your devices (computer, another phone, etc.). This can serve many use cases, it's all up to you. Typically it can be used to manage files from that other device (e.g. restructure or delete files), as a step (!) to back up your (app) data (you need a dedicated backup program to actually secure your data on a synced device) or to help with migrating to a new device (just set up Syncthing there as well, and your data gets synced to that new device).
 
 Website: https://syncthing.net/
 
