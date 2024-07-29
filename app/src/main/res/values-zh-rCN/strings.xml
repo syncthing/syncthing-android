@@ -534,7 +534,7 @@
     <string name="browse">浏览</string>
     <string name="no_sub_folder_is_selected">未选中子文件夹</string>
     <string name="share_device_id_chooser">共享设备 ID 与</string>
-    <string name="api_level_30_desc">在最新升级后，syncthing-android 的目标 API 版本是 30，这会改变 Android 文件系统的行为。好消息：在 Android 11 及以上版本中，现在可以写入外部 SD 卡了。坏消息：速度可能斌满，且某些路径会被隐藏。由于这些隐藏的路径，需要重设数据库防止数据损失。这会导致所有数据被重新哈希，但无需从远程设备进行传输。它也可能产生冲突并重新创建最近已删除的文件，如果你尚未处于完全同步状态的话。根据你所拥有的数据多少，此进程可能会耗费相当多的资源，比如需要一段时间并用掉许多电量。
+    <string name="api_level_30_desc">在最新升级后，syncthing-android 的目标 API 版本是 30，这会改变 Android 文件系统的行为。好消息：在 Android 11 及以上版本中，现在可以写入外部 SD 卡了。坏消息：速度可能变慢，且某些路径会被隐藏。由于这些隐藏的路径，需要重设数据库防止数据损失。这会导致所有数据被重新哈希，但无需从远程设备进行传输。它也可能产生冲突并重新创建最近已删除的文件，如果你尚未处于完全同步状态的话。根据你所拥有的数据多少，此进程可能会耗费相当多的资源，比如需要一段时间并用掉许多电量。
 \n
 \n请按下下方按钮来重置数据库路并启动 Syncthing.</string>
     <string name="run_conditions_title">启用运行条件</string>
