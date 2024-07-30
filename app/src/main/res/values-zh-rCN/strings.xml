@@ -107,7 +107,7 @@
     <!--Title for current RAM usage-->
     <string name="ram_usage">内存使用</string>
     <!--Title for announce server status-->
-    <string name="announce_server">宣告服务器</string>
+    <string name="announce_server">Announce服务器</string>
     <string name="restart">重启</string>
     <string name="dialog_confirm_restart">您想要重启 Syncthing 吗？</string>
     <!--FolderActivity-->
@@ -542,7 +542,7 @@
     <string name="enable_notification_permission">启用通知权限</string>
     <string name="api_level_30_title">升级信息</string>
     <string name="toast_api_level_30_must_reset">要继续，你只能单击按钮来重置数据库。</string>
-    <string name="api_level_30_button">重设数据库</string>
+    <string name="api_level_30_button">重置数据库</string>
     <string name="notification_permission_title">通知权限</string>
     <string name="require_notification_permission_desc">要显示关于新设备连接、文件夹共享请求等通知，此权限是必需的。</string>
 </resources>
