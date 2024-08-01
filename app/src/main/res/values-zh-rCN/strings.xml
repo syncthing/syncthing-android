@@ -48,7 +48,7 @@
     <string name="no">否</string>
     <string name="open_website">打开主页</string>
     <string name="toast_write_storage_permission_required">本应用需要写存储的权限</string>
-    <string name="device_rejected">设备“%1$s”想要连接</string>
+    <string name="device_rejected">设备 \"%1$s\" 请求连接</string>
     <string name="folder_rejected">设备“%1$s”希望分享目录“%2$s”</string>
     <string name="dialog_disable_battery_optimization_title">电池优化</string>
     <string name="dialog_disable_battery_optimization_message">Android 可能会在一段时间后停止同步。为防这种情况，请关闭电池优化。
@@ -107,7 +107,7 @@
     <!--Title for current RAM usage-->
     <string name="ram_usage">内存使用</string>
     <!--Title for announce server status-->
-    <string name="announce_server">宣告服务器</string>
+    <string name="announce_server">Announce服务器</string>
     <string name="restart">重启</string>
     <string name="dialog_confirm_restart">您想要重启 Syncthing 吗？</string>
     <!--FolderActivity-->
@@ -199,7 +199,7 @@
     <string name="category_experimental">实验性</string>
     <!--Preference screen - Run conditions-->
     <string name="run_conditions_summary">下方选项将控制 Syncthing 何时运行。</string>
-    <string name="run_on_mobile_data_title">在移动数据下运行</string>
+    <string name="run_on_mobile_data_title">允许用移动数据运行</string>
     <string name="run_on_mobile_data_summary">当设备通过移动数据网络连接时运行。警告：如果你要同步大量数据，此选项会消耗掉你移动运营商数据套餐里的很多流量。</string>
     <string name="run_on_wifi_title">在 Wi-Fi 下运行</string>
     <string name="run_on_wifi_summary">当设备连接到 Wi-Fi 网络时运行。</string>
@@ -542,7 +542,7 @@
     <string name="enable_notification_permission">启用通知权限</string>
     <string name="api_level_30_title">升级信息</string>
     <string name="toast_api_level_30_must_reset">要继续，你只能单击按钮来重置数据库。</string>
-    <string name="api_level_30_button">重设数据库</string>
+    <string name="api_level_30_button">重置数据库</string>
     <string name="notification_permission_title">通知权限</string>
     <string name="require_notification_permission_desc">要显示关于新设备连接、文件夹共享请求等通知，此权限是必需的。</string>
 </resources>
