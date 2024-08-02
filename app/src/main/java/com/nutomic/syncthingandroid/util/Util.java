@@ -7,7 +7,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -169,6 +168,38 @@ public class Util {
             // This is very unlikely to happen, so we have less error handling.
             Log.i(TAG, "Failed to remove test file");
         }
+        return true;
+    }
+
+    /**
+     * Returns if the syncthing binary would be able to write a file into
+     * the given folder given the configured access level.
+     *
+     * This uses the Android-native File API.
+     */
+    public static Boolean nativeBinaryCanWriteToPath2(File externalStorageDir, String absoluteFolderPath) {
+        final String TOUCH_FILE_NAME = ".stwritetest";
+
+        // Normalize path replacing ~ with external storage directory.
+        // This is consistent with what $HOME is set to in SyncthingRunnable.
+        final String normalizedPath = absoluteFolderPath.replaceFirst("^~", externalStorageDir.getAbsolutePath());
+
+        // Write permission test file.
+        File touchFile = new File(normalizedPath, TOUCH_FILE_NAME);
+        final String touchFilePath = touchFile.getAbsolutePath();
+        try {
+            Boolean fileCreated = touchFile.createNewFile();
+            Log.d(TAG, String.format("%s createNewFile result %b", touchFilePath, fileCreated));
+            Boolean fileDeleted = touchFile.delete();
+            Log.d(TAG, String.format("%s delete result %b", touchFilePath, fileDeleted));
+        } catch (IOException e) {
+            Log.e(TAG, String.format("Failed to write test file '%s'", touchFilePath), e);
+            return false;
+        }
+
+        // Detected we have write permission.
+        Log.i(TAG, String.format("Successfully wrote test file '%s'", touchFile));
+
         return true;
     }
 
