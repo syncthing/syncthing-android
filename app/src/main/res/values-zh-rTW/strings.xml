@@ -32,7 +32,7 @@
     <string name="ignore">忽略</string>
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
-    <string name="dialog_exit_while_running_as_service_title">確定要離開嗎？</string>
+    <string name="dialog_exit_while_running_as_service_title">確認退出應用程式</string>
     <string name="dialog_exit_while_running_as_service_message">給你參考 : 你設定開機時自動啟動。因此程式會在後台監控可執行已同步的條件。你應該只在遇到嚴重問題時才手動退出程式。否則請禁用\'啟動時自動啟動\'。你要退出程式直到重開機嗎\?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">增加資料夾</string>
@@ -74,7 +74,7 @@
     </plurals>
     <string name="override_changes">覆蓋變更</string>
     <string name="open_file_manager">開啟檔案總管</string>
-    <string name="toast_no_file_manager">沒有找到相容的檔案管理員。</string>
+    <string name="toast_no_file_manager">找不到相容的檔案管理員</string>
     <!--DevicesFragment-->
     <string name="devices_fragment_title">裝置</string>
     <!--Shown if no devices exist-->
@@ -417,7 +417,7 @@
     <string name="syncthing_disabled_reason_on_charger">設備充電中</string>
     <string name="syncthing_disabled_reason_powersaving">設備在省電模式下</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">全域同步已停用</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">目前的 WiFi SSID 不在允許清單中</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">目前的 WiFi SSID 未列入允許清單或位置權限受到限制</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">目前的 WiFi 是計費連線</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">沒有網路連線，或是飛航模式已啟用。</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">沒有行動網路連線</string>
@@ -535,4 +535,11 @@
     <string name="no_sub_folder_is_selected">無子資料夾被選擇</string>
     <string name="share_device_id_chooser">分享裝置識別代碼</string>
     <string name="dialog_all_files_access_not_supported">您的裝置不支援「管理所有檔案」的特殊權限</string>
+    <string name="run_conditions_title">啟用執行條件</string>
+    <string name="require_notification_permission_desc">需要顯示有關新裝置連線、資料夾共杗請求等的通知。</string>
+    <string name="enable_notification_permission">啟用通知權限</string>
+    <string name="api_level_30_title">升級資訊</string>
+    <string name="api_level_30_button">重置資料庫</string>
+    <string name="toast_api_level_30_must_reset">你只能夠點擊按鈕來重置資料庫以繼續。</string>
+    <string name="notification_permission_title">通知權限</string>
 </resources>
