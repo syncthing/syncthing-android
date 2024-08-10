@@ -542,4 +542,7 @@
     <string name="api_level_30_button">重置資料庫</string>
     <string name="toast_api_level_30_must_reset">你只能夠點擊按鈕來重置資料庫以繼續。</string>
     <string name="notification_permission_title">通知權限</string>
+    <string name="api_level_30_desc">隨著最新的更新，Syncthing Android 現在支援 API Level 30，這將改變 Android 檔案系統的行為。好消息是：在 Android 11 及更新的版本中，它可以寫入外部 SD 卡。壞消息是：速度可能會變慢，且某些路徑會被隱藏。由於這些隱藏的路徑，資料庫需要重置以防止資料遺失。這將導致所有資料重新進行雜湊計算，但不會從遠端裝置傳輸資料。然而，如果您目前未完全同步，這可能會產生衝突，並重新建立出最近刪除的檔案。根據您擁有的資料量，此過程可能會非常消耗資源，也就是說，會花費一些時間並耗費大量電力。
+\n
+\n請按下面的按鈕來重置資料庫並啟動 Syncthing。</string>
 </resources>
