@@ -425,7 +425,7 @@
     <string name="syncthing_disabled_reason_on_charger">Dispositivo ligado no carregador</string>
     <string name="syncthing_disabled_reason_powersaving">O dispositivo está no modo de economia de energia</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Sincronização Global está desativada</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID do WiFi atual não está na lista de exceções</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID do WiFi atual não está na lista de exceções ou as permissões de localização estão restritas</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Wi-Fi atual é limitado</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Sem conexão de rede ou o modo avião está ativado</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Não está conectado aos dados móveis</string>
@@ -542,4 +542,15 @@
     <string name="browse">Navegar</string>
     <string name="no_sub_folder_is_selected">Nenhuma subpasta selecionada</string>
     <string name="share_device_id_chooser">Compartilhe ID do dispositivo com</string>
+    <string name="dialog_all_files_access_not_supported">Seu dispositivo não suporta acesso a todos os arquivos</string>
+    <string name="api_level_30_desc">Com a última atualização, o syncthing-android está usando a API nível 30, que altera o comportamento do sistema de arquivos do Android. Boas notícias: No Android 11 e mais novos, agora é possível utilizar cartões SD externos. Más notícias: Pode ser mais lento e algumas pastas estarão ocultas. Devido estas pastas ocultas, o banco de dados necessita ser reiniciado para prevenir perda de dados. Isto irá causar todos os seus dados terem seus hashes recalculados, mas não será necessário ser transferido de dispositivos remotos. Isto pode criar conflitos e recriar arquivos recentemente apagados caso você não esteja sincronizado no momento. Dependendo de quantos dados você possui, este processo pode usar muitos recursos, ou seja, demorar e usar bastante bateria.
+\n
+\nPor favor pressione o botão abaixo para redefinir o banco de dados e iniciar o Syncthing.</string>
+    <string name="api_level_30_title">Informação de Upgrade</string>
+    <string name="api_level_30_button">Redefinir banco de dados</string>
+    <string name="require_notification_permission_desc">Necessário para mostrar notificações sobre novas conexões de dispositivos, solicitações de compartilhamento de pasta, etc.</string>
+    <string name="notification_permission_title">Permissão de notificação</string>
+    <string name="toast_api_level_30_must_reset">Você só pode continuar clicando no botão para redefinir o banco de dados.</string>
+    <string name="run_conditions_title">Ativar condições de execução</string>
+    <string name="enable_notification_permission">Ativar a Permissão de Notificação</string>
 </resources>
