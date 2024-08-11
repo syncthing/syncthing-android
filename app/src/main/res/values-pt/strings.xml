@@ -425,7 +425,7 @@
     <string name="syncthing_disabled_reason_on_charger">O dispositivo está a ser alimentado pelo carregador</string>
     <string name="syncthing_disabled_reason_powersaving">O dispositivo está no modo de poupança de energia</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">A sincronização global está desactivada</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID WiFi actual não está na lista autorizada</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">O SSID do WiFi atual não está na lista de exceções ou as permissões de localização estão restritas</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">O WiFi actual é de consumo limitado</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Não está activa uma ligação à rede ou modo de avião</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Não está ligado a dados móveis</string>

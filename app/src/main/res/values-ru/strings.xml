@@ -33,7 +33,7 @@
     <!--MainActivity-->
     <!--Title of the exit app when running as a service confirmation dialog-->
     <string name="dialog_exit_while_running_as_service_title">Подтвердите выход</string>
-    <string name="dialog_exit_while_running_as_service_message">Вы включили автозапуск приложения при загрузке устройства. Обычно приложение проверяет условия в фоне и запускается, если условия выполняются. Выключать приложение вручную следует только в случае возникновения проблем. Вы точно хотите выключить приложение до следующей перезагрузки\?</string>
+    <string name="dialog_exit_while_running_as_service_message">На заметку: Вы настроили приложение на автоматический запуск при загрузке. Поэтому оно отслеживает условия работы и синхронизируется в любое время в фоновом режиме, если условия совпадают. Вы должны завершать работу вручную только в случае возникновения серьезных проблем. В противном случае отключите \"Запускать автоматически при загрузке\" в настройках. Хотите завершить работу до перезагрузки устройства?</string>
     <!--Title of the "add folder" menu action-->
     <string name="add_folder">Добавить папку</string>
     <!--Title of the "share device id" menu action-->
@@ -41,7 +41,7 @@
     <!--Shown in the chooser dialog when sharing a Device ID-->
     <string name="send_device_id_to">Отправить ID устройства</string>
     <string name="usage_reporting_dialog_title">Разрешить отправлять анонимную статистику\?</string>
-    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания платформ, размеров папок и версий программы. Если набор собираемых данных изменится, этот диалог появится вновь.
+    <string name="usage_reporting_dialog_description">Зашифрованный отчет об использовании отправляется ежедневно. Используется для отслеживания используемых платформ, размеров папок и версий программы. Если набор собираемых данных изменится, этот диалог появится вновь.
 \n
 \nОбобщенная статистика доступна всем на https://data.syncthing.net.</string>
     <string name="yes">Да</string>
@@ -75,7 +75,7 @@
         <item quantity="many">%1$d / %2$d файлов</item>
         <item quantity="other">%1$d / %2$d файла</item>
     </plurals>
-    <string name="override_changes">Перезаписывать изменения</string>
+    <string name="override_changes">Отменить изменения</string>
     <string name="open_file_manager">Открыть файловый менеджер</string>
     <string name="toast_no_file_manager">Не найдено совместимого файлового менеджера</string>
     <!--DevicesFragment-->
@@ -147,7 +147,7 @@
     <!--Summary shown if we only have readonly access to the folder path-->
     <string name="folder_path_readonly">Версия вашего Android позволяет Syncthing только читать файлы в выбранной папке.</string>
     <!--Summary shown if we only have readwrite access to the folder path-->
-    <string name="folder_path_readwrite">Версия вашего Android позволяет Syncthing читать и писать файлы в выбранной папке.</string>
+    <string name="folder_path_readwrite">Ваша версия Android даёт разрешение Syncthing на чтение и запись в указанной папке.</string>
     <!--Toast shown if the user selected an invalid location for a new syncthing folder-->
     <string name="toast_invalid_folder_selected">К сожалению, выбранная папка не может быть использована. Пожалуйста, выберите папку во внутреннем или внешнем хранилищах.</string>
     <string name="ignore_patterns">Шаблоны игнорирования</string>

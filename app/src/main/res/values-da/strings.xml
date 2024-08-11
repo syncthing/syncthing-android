@@ -47,7 +47,7 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="open_website">Åbn hjemmeside</string>
-    <string name="toast_write_storage_permission_required">Denne app kræver tilladelse til at skrive på lagerplads.</string>
+    <string name="toast_write_storage_permission_required">Denne app kræver tilladelse til at skrive på lagerplads</string>
     <string name="device_rejected">Enheden \"%1$s\" ønsker at oprette forbindelse</string>
     <string name="folder_rejected">Enheden \"%1$s\" ønsker at dele mappen \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Batterioptimering</string>
@@ -57,7 +57,7 @@
     <string name="dialog_disable_battery_optimization_later">Senere</string>
     <string name="dialog_disable_battery_optimization_dont_show_again">Vis ikke igen</string>
     <string name="dialog_disable_battery_optimization_turn_off">Sluk for Syncthing</string>
-    <string name="dialog_disable_battery_optimizations_not_supported">Din enhed understøtter ikke at slå batterioptimeringer fra.</string>
+    <string name="dialog_disable_battery_optimizations_not_supported">Din enhed understøtter ikke at slå batterioptimeringer fra</string>
     <!--StateDialogActivity-->
     <!--Text for FoldersFragment and DevicesFragment loading view-->
     <string name="api_loading">Indlæser…</string>
@@ -213,16 +213,16 @@
     <string name="sync_only_wifi_ssids_connect_to_wifi">Opret forbindelse til et Wi-Fi for at tilføje det til listen.</string>
     <string name="sync_only_wifi_ssids_need_to_grant_location_permission">Du skal give placeringstilladelse til at bruge denne funktion.</string>
     <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_title">Tilladelse påkrævet</string>
-    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Fra og med Android 8.1 er det nødvendigt med lokationsadgang for at kunne læse Wi-Fi-navnet. Du kan kun bruge denne funktion, hvis du giver denne tilladelse.</string>
+    <string name="sync_only_wifi_ssids_location_permission_rejected_dialog_content">Fra og med Android 8.1 er det nødvendigt med placeringsadgang for at kunne læse Wi-Fi-navnet. Du kan kun bruge denne funktion, hvis du giver denne tilladelse.</string>
     <string name="power_source_title">Kør, når enheden får strøm fra</string>
-    <string name="power_source_ac_and_battery_power">Vekselstrøm og batteri</string>
-    <string name="power_source_ac_power">Vekselstrøm</string>
-    <string name="power_source_battery_power">Batteri</string>
+    <string name="power_source_ac_and_battery_power">Vekselstrøm og batteri.</string>
+    <string name="power_source_ac_power">Vekselstrøm.</string>
+    <string name="power_source_battery_power">Batteri.</string>
     <string name="respect_battery_saving_title">Respekter Androids indstillinger for batteribesparelse</string>
     <string name="respect_battery_saving_summary">Deaktiver Syncthing, hvis batteribesparelse er aktiv.</string>
-    <string name="respect_master_sync_title">Respekter Androids indstillinger for \'Automatisk datasynkronisering\'.</string>
+    <string name="respect_master_sync_title">Respekter Androids indstillinger for \'Automatisk datasynkronisering\'</string>
     <string name="respect_master_sync_summary">Deaktiver Syncthing, når knappen \"Automatisk datasynkronisation\" er slået fra.</string>
-    <string name="run_in_flight_mode_title">Kør, mens enheden er i flytilstand.</string>
+    <string name="run_in_flight_mode_title">Kør, mens enheden er i flytilstand</string>
     <string name="run_in_flight_mode_summary">Aktivér, hvis din enhed har problemer med at registrere manuelle Wi-Fi-forbindelser i flytilstand.</string>
     <string name="service_settings_title">Tjenesteindstilling</string>
     <string name="service_settings_summary">Kør Syncthing som en tjeneste. Tilføjer en vedvarende notifikation for at forhindre, at den bliver afsluttet af Android. Hvis du markerer denne indstilling, starter Syncthing ved opstart af operativsystemet.</string>
@@ -393,7 +393,7 @@
     </plurals>
     <!--Copy success toast-->
     <plurals name="copy_success">
-        <item quantity="one">%1$d filer kopieret til mappen \"%2$s\"</item>
+        <item quantity="one">%1$d fil kopieret til mappen \"%2$s\"</item>
         <item quantity="other">%1$d filer kopieret til mappen \"%2$s\"</item>
     </plurals>
     <!--Copy exception toast-->
@@ -421,7 +421,7 @@
     <string name="syncthing_disabled_reason_on_charger">Enheden er tilsluttet oplader</string>
     <string name="syncthing_disabled_reason_powersaving">Enheden er i strømbesparende tilstand</string>
     <string name="syncthing_disabled_reason_android_sync_disabled">Global synkronisering er deaktiveret</string>
-    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Det aktuelle WiFi-SSID er ikke whitelistet</string>
+    <string name="syncthing_disabled_reason_wifi_ssid_not_whitelisted">Det aktuelle WiFi-SSID er ikke whitelistet eller placeringstilladelser er begrænset</string>
     <string name="syncthing_disabled_reason_wifi_is_metered">Det nuværende Wi-Fi er forbrugsafregnet</string>
     <string name="syncthing_disabled_reason_no_network_or_flightmode">Ingen netværksforbindelse eller flytilstand aktiveret</string>
     <string name="syncthing_disabled_reason_no_mobile_connection">Ikke tilsluttet til mobildata</string>
@@ -481,7 +481,7 @@
     <!--Displays the current folder type in the folder activity-->
     <string name="folder_type_sendreceive">Send &amp; modtag</string>
     <string name="folder_type_sendonly">Send kun</string>
-    <string name="folder_type_receiveonly">Modtag kun.</string>
+    <string name="folder_type_receiveonly">Modtag kun</string>
     <!--Folder type dialog descriptions for folder types-->
     <string name="folder_type_sendreceive_description">Mappen vil både sende ændringer til og modtage ændringer fra eksterne enheder.</string>
     <string name="folder_type_sendonly_description">Filer er beskyttet mod ændringer, der foretages på andre enheder, men ændringer, der foretages på denne enhed, sendes til resten af klyngen.</string>
@@ -518,7 +518,7 @@
 \nDe følgende intervaller anvendes: I den første time opbevares en version hvert 30. sekund, den første dag opbevares en version hver time, de første 30 dage opbevares en version hver dag, indtil den maksimale alder opbevares en version hver uge.</string>
     <string name="maximum_age_description">Den maksimale tid at beholde en version (i dage, sæt til 0 for at beholde for altid).</string>
     <string name="versions_path_description">Sti, hvor versioner skal gemmes (lad være tomt for at bruge den normale .stversions-mappe i den delte mappe).</string>
-    <string name="cleanout_after_description">Antallet af dage til at beholde filer i skraldespanden. Nul betyder for altid.</string>
+    <string name="cleanout_after_description">Antallet af dage til at beholde filer i skraldespanden. Nul betyder for altid</string>
     <string name="external_versioning_description">Det første kommandolinjeparameter er mappe-stien og det andet parameter er den relative sti i mappen.</string>
     <string name="no_versioning_description">Vælg en versioneringstype for at aktivere versionering.</string>
     <!--Displays the current file versioning type in the Folder activity-->
@@ -538,4 +538,15 @@
     <string name="browse">Gennemse</string>
     <string name="no_sub_folder_is_selected">Der er ikke valgt nogen undermappe</string>
     <string name="share_device_id_chooser">Del enheds-ID med</string>
+    <string name="dialog_all_files_access_not_supported">Din enhed understøtter ikke adgang til alle filer</string>
+    <string name="api_level_30_button">Nulstil database</string>
+    <string name="toast_api_level_30_must_reset">Du kan kun fortsætte ved at klikke på knappen for at nulstille databasen.</string>
+    <string name="notification_permission_title">Notifikationstilladelse</string>
+    <string name="enable_notification_permission">Aktivér notifikationstilladelse</string>
+    <string name="run_conditions_title">Aktivér kørselsbetingelser</string>
+    <string name="api_level_30_title">Information om opgradering</string>
+    <string name="api_level_30_desc">Med den seneste opdatering er syncthing-android rettet mod API-niveau 30, som ændrer adfærden i Androids filsystem. Det er en god nyhed: På Android 11 og nyere er det nu muligt at skrive til et eksternt SD-kort. Dårlige nyheder: Det kan være langsommere, og nogle stier vil være skjulte. På grund af disse skjulte stier skal databasen nulstilles for at forhindre datatab. Det betyder, at alle dine data skal hashes igen, men de behøver ikke at blive overført fra eksterne enheder. Det kan også skabe konflikter og genskabe nyligt slettede filer, hvis du ikke er helt synkroniseret lige nu. Afhængigt af hvor mange data du har, kan denne proces være meget ressourcekrævende, dvs. tage noget tid og bruge en masse batteristrøm..
+\n
+\nTryk på knappen nedenfor for at nulstille databasen og starte Syncthing.</string>
+    <string name="require_notification_permission_desc">Nødvendigt for at vise notifikationer om nye enhedsforbindelser, anmodninger om mappedeling osv.</string>
 </resources>

@@ -1,4 +1,4 @@
-Syncthing 是开源、分布式且值得信赖的同步服务。它为取代专有的云同步服务而生。你的数据尽在您的掌握之中并且可以选择数据存储的位置。例如与第三方共享及如何在互联网中传送。
+Syncthing 用开放且值得信赖的去中心化服务取代了专有的同步和云服务。您的数据只是您的数据，您有权选择将其存储在何处，是否与第三方共享，以及如何通过互联网传输。
 
 主页：https://syncthing.net/
 
@@ -6,6 +6,6 @@ Syncthing 是开源、分布式且值得信赖的同步服务。它为取代专�
 
 论坛：https://forum.syncthing.net/
 
-问题回报：https://github.com/syncthing/syncthing-android/issues
+问题反馈：https://github.com/syncthing/syncthing-android/issues
 
 隐私政策：https://syncthing.net/android-privacy-policy
