@@ -45,7 +45,9 @@ jobs:
           echo '${{ secrets.SIGNING_KEYSTORE_JKS_BASE64 }}' | base64 -d > "$SYNCTHING_RELEASE_STORE_FILE"
           echo '${{ secrets.GOOGLE_PLAY_SECRETS_BASE64 }}' | base64 -d > "$SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE"
           java -version
-          ./gradlew --no-daemon buildNative lint assembleRelease bundleRelease publishReleaseBundle
+          # TODO: Readd publishReleaseBundle if google play works again, or
+          # remove everything related to publishing to google play.
+          ./gradlew --no-daemon buildNative lint assembleRelease bundleRelease
           rm "$SYNCTHING_RELEASE_STORE_FILE" "$SYNCTHING_RELEASE_PLAY_ACCOUNT_CONFIG_FILE"
 
           echo '${{ secrets.GNUPG_SIGNING_KEY_BASE64 }}' | base64 -d | gpg --import
