@@ -1,4 +1,6 @@
-Syncthing reemplaza los servicios de sincronización propietarios y en la nube con algo abierto, de confianza y descentralizado. Tus datos son solo tuyos, y mereces elegir dónde se almacenarán, si se compartirán con algún tercero, y cómo serán transmitidos a través de Internet.
+Syncthing sustituye los servicios propietarios de sincronización y en la nube por algo abierto, fiable y descentralizado. Sus datos son solo suyos y usted merece elegir dónde se almacenan, si se comparten con terceros y cómo se transmiten por Internet.
+
+Puede seleccionar cualquier directorio, incluyendo el propio directorio de datos del usuario, para permitir que Syncthing sincronice los archivos (sujeto a restricciones en Android y del proveedor de su dispositivo). Es por eso que esta aplicación solicita el permiso para acceder a todos los archivos. Esto le permite mantener todos los datos que necesita y los sincroniza con sus dispositivos (computadora, otro teléfono, etc.). Esto puede muchas utilidades, todo depende de ti. Por lo general, se puede utilizar para gestionar los archivos de ese otro dispositivo (por ejemplo, reestructurar o eliminar archivos), como un paso (!) para realizar copias de seguridad de sus datos (aplicación) (necesita un programa de copia de seguridad dedicado para asegurar realmente sus datos en un dispositivo) o para ayudar con la migración a un nuevo dispositivo (solo tiene que configurar Syncthing, y sus datos se sincronizan con ese nuevo dispositivo).
 
 Página web: https://syncthing.net/
 
