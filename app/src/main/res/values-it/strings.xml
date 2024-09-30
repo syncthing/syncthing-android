@@ -550,7 +550,7 @@
     <string name="api_level_30_desc">Con l\'aggiornamento più recente syncthing-android ha come target il livello di API 30, che comporta delle modifiche al comportamento del filesystem Android. La buona notizia è che su Android 11 e più recenti è ora possibile accedere in scrittura alla SD esterna. La brutta notizia è che potrebbe essere più lento e alcuni path nascosti. A causa di questi path nascosti, il database necessita di essere resettato per prevenire perdite di dati. Questo implica che dovrà essere ricalcolato l\'hash dei dati, ma non sarà necessario scaricare dati dai dispositivi remoti. Potrebbero verificarsi dei conflitti e alcuni file recentemente eliminati potrebbero essere ricreati, se in questo momento non si è perfettamente allineati. In base alla quantità di dati in gioco, il processo potrebbe essere pesante, cioè potrebbe richiedere tempo e incidere sulla batteria.
 \n
 \nCliccare sul pulsante qui sotto per svuotare il database e avviare Syncthing.</string>
-    <string name="dialog_all_files_access_not_supported">Questo dispositivo non supporta l\'accesso a tutti i file</string>
+    <string name="dialog_all_files_access_not_supported">Il tuo dispositivo non supporta l\'accesso a tutti i file</string>
     <string name="run_conditions_title">Attiva le condizioni di esecuzione</string>
     <string name="notification_permission_title">Permesso di inviare notifiche</string>
 </resources>
