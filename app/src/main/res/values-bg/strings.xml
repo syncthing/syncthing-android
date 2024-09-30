@@ -48,7 +48,7 @@
     <string name="no">Не</string>
     <string name="open_website">Отвори уеб сайта</string>
     <string name="toast_write_storage_permission_required">Приложението изисква права за записване в хранилището на данни</string>
-    <string name="device_rejected">Устройството \"%1$s\" желае да се свърже</string>
+    <string name="device_rejected">Устройството „%1$s“ желае да се свърже</string>
     <string name="folder_rejected">Устройството \"%1$s\" желае да сподели папка \"%2$s\"</string>
     <string name="dialog_disable_battery_optimization_title">Пестене на батерия</string>
     <string name="dialog_disable_battery_optimization_message">Android може да спре приложението след определено време. За да предотвратите това, изключете оптимизацията на батерията.
