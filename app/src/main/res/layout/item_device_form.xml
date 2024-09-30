@@ -6,5 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/material_divider_inset"
     android:layout_marginStart="@dimen/material_divider_inset"
+    android:paddingEnd="@dimen/abc_action_bar_content_inset_material"
     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
     tools:ignore="RtlHardcoded,RtlSymmetry" />
