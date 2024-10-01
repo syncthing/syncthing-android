@@ -116,7 +116,9 @@
         <item quantity="other">%1$d / %2$d Files</item>
     </plurals>
 
-    <string name="override_changes">Override changes</string>
+    <string name="override_changes">Override Changes</string>
+    <string name="override_changes_description">When configured as \"Send Only\" and changes have been made remotely, you may click here to overwrite the folder content on other devices.</string>
+    <string name="override_changes_are_you_sure"><b>Warning!</b>\n\nThe folder content on other devices will be overwritten to become identical with this device. Files not present here will be deleted on other devices.\n\nAre you sure you want to continue?</string>
 
     <string name="open_file_manager">Open file manager</string>
 
