@@ -1,5 +1,7 @@
 Syncthing ersätter proprietära synkroniserings- och molntjänster med något öppet, pålitligt och decentraliserat. Dina data är endast dina data och du förtjänar att välja var dessa lagras, om den delas med en tredje part och hur dessa överförs över Internet.
 
+Du kan välja vilken mapp som helst, inklusive själva användardatamappen, för att låta Syncthing synkronisera filerna där (med förbehåll för begränsningar av Android och din enhets leverantör). Det är därför den här appen begär tillstånd att komma åt alla filer. Detta gör att du kan hålla all data du behöver och skapa på din telefon synkroniserad med en annan av dina enheter (dator, en annan telefon, etc.). Detta kan tjäna många användningsfall, allt är upp till dig. Vanligtvis kan den användas för att hantera filer från den andra enheten (t.ex. omstrukturera eller ta bort filer), som ett steg (!) för att säkerhetskopiera dina (app)data (du behöver ett dedikerat säkerhetskopieringsprogram för att faktiskt säkra dina data på en synkroniserad enhet ) eller för att hjälpa till med migreringen till en ny enhet (ställ bara in Syncthing där också, så synkroniseras dina data till den nya enheten).
+
 Webbplats: https://syncthing.net/
 
 Källkod: https://github.com/syncthing/syncthing-android
