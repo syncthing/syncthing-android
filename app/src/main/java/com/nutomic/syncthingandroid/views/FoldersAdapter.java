@@ -59,13 +59,6 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         Folder folder = getItem(position);
         binding.label.setText(TextUtils.isEmpty(folder.label) ? folder.id : folder.label);
         binding.directory.setText(folder.path);
-        binding.override.setOnClickListener(v -> {
-            // Send "Override changes" through our service to the REST API.
-            Intent intent = new Intent(mContext, SyncthingService.class)
-                    .putExtra(SyncthingService.EXTRA_FOLDER_ID, folder.id);
-            intent.setAction(SyncthingService.ACTION_OVERRIDE_CHANGES);
-            mContext.startService(intent);
-        });
         binding.openFolder.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(new File(folder.path)), "resource/folder");
@@ -94,17 +87,12 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         FolderStatus folderStatus = mLocalFolderStatuses.get(folder.id);
         if (folderStatus == null) {
             binding.items.setVisibility(GONE);
-            binding.override.setVisibility(GONE);
             binding.size.setVisibility(GONE);
             setTextOrHide(binding.invalid, folder.invalid);
             return;
         }
 
-        long neededItems = folderStatus.needFiles + folderStatus.needDirectories + folderStatus.needSymlinks + folderStatus.needDeletes;
-        boolean outOfSync = folderStatus.state.equals("idle") && neededItems > 0;
-        boolean overrideButtonVisible = folder.type.equals(Constants.FOLDER_TYPE_SEND_ONLY) && outOfSync;
-        binding.override.setVisibility(overrideButtonVisible ? VISIBLE : GONE);
-        if (outOfSync) {
+        if (folderStatus.isOutOfSync()) {
             binding.state.setText(mContext.getString(R.string.status_outofsync));
             binding.state.setTextColor(ContextCompat.getColor(mContext, R.color.text_red));
         } else {
@@ -172,6 +160,10 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
         }
     }
 
+    public FolderStatus getLocalFolderStatus(String folderId) {
+        return mLocalFolderStatuses.get(folderId);
+    }
+
     private void onReceiveFolderStatus(String folderId, FolderStatus folderStatus) {
         mLocalFolderStatuses.put(folderId, folderStatus);
         notifyDataSetChanged();
@@ -185,5 +177,4 @@ public class FoldersAdapter extends ArrayAdapter<Folder> {
             view.setVisibility(VISIBLE);
         }
     }
-
 }
