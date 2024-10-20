@@ -1,3 +1,20 @@
+# Discontinued
+
+This app is discontinued. The last release on Github and F-Droid will happen
+with the December 2024 Syncthing version. Interactions (issues, PRs) are limited
+now, and the entire repo will be archived after the last release. Thus all
+contributions are preserved for any future (re)use. The forum is still open for
+discussions and questions. I would kindly ask you to refrain from trying to
+challenge the decision or asking "why-type" questions - I wont engage with them.
+
+The reason is a combination of Google making Play publishing something between
+hard and impossible and no active maintenance. The app saw no significant
+development for a long time and without Play releases I do no longer see enough
+benefit and/or have enough motivation to keep up the ongoing maintenance an app
+requires even without doing much, if any, changes.
+
+Thanks a lot to everyone who ever contributed to this app!
+
 # syncthing-android
 
 [![License: MPLv2](https://img.shields.io/badge/License-MPLv2-blue.svg)](https://opensource.org/licenses/MPL-2.0)
@@ -5,26 +22,6 @@
 A wrapper of [Syncthing](https://github.com/syncthing/syncthing) for Android.
 
 <img src="app/src/main/play/listings/en-GB/graphics/phone-screenshots/screenshot_phone_1.png" alt="screenshot 1" width="200" /> <img src="app/src/main/play/listings/en-GB/graphics/phone-screenshots/screenshot_phone_2.png" alt="screenshot 2" width="200" /> <img src="app/src/main/play/listings/en-GB/graphics/phone-screenshots/screenshot_phone_3.png" alt="screenshot 3" width="200" />
-
-[<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80">](https://play.google.com/store/apps/details?id=com.nutomic.syncthingandroid) [<img alt="Get it on F-Droid" src="https://f-droid.org/badge/get-it-on.png" height="80">](https://f-droid.org/app/com.nutomic.syncthingandroid)
-
-# Status: "Maintenance mode" - Co-maintainers welcome
-
-tl;dr: The app is still kept up to date, and contributions are still welcome -
-however even reviews for those can take a long time. Co-maintainers are very
-welcome - get in touch if you are interested.
-
-No-one is dedicating significant time into development or reviews. It's still
-kept up to date with Syncthing, Android and dependencies under the wider
-Syncthing project umbrella on a best effort basis. Contributions are reviewed,
-however available time for that is scarce so it will take a while. And obviously it
-depends both on the size/clarity of the change and (admittedly subjective)
-relevance of it - chance of successful and speedier reviews is higher if your
-change is targeted and small.
-
-## No feature request taken (feature contributions case-by-case)
-
-Handling feature requests use up the little time that is present to keep the app up-to-date, and there is no feature development happening. So unless you are opening a feature request to discuss your own contribution before jumping into coding, the request will be closed directly with some template answer pointing at this section.
 
 # Translations
 
