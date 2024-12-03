@@ -1,4 +1,3 @@
-* Update Syncthing to v1.28.0: https://github.com/syncthing/syncthing/releases/tag/v1.28.0
-* App changelog: https://github.com/syncthing/syncthing-android/releases/tag/1.28.0
+* Update Syncthing to v1.28.1: https://github.com/syncthing/syncthing/releases/tag/v1.28.1
 
-Still no releases on google play, see https://github.com/syncthing/syncthing-android/issues/2064
+This is the last release of this app - see readme.
