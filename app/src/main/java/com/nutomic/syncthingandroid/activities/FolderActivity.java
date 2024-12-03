@@ -30,6 +30,7 @@ import com.nutomic.syncthingandroid.R;
 import com.nutomic.syncthingandroid.databinding.FragmentFolderBinding;
 import com.nutomic.syncthingandroid.model.Device;
 import com.nutomic.syncthingandroid.model.Folder;
+import com.nutomic.syncthingandroid.model.FolderStatus;
 import com.nutomic.syncthingandroid.service.Constants;
 import com.nutomic.syncthingandroid.service.RestApi;
 import com.nutomic.syncthingandroid.service.SyncthingService;
@@ -65,13 +66,16 @@ public class FolderActivity extends SyncthingActivity
             "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_ID";
     public static final String EXTRA_FOLDER_LABEL =
             "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_LABEL";
+    public static final String EXTRA_FOLDER_OVERRIDABLE_CHANGES =
+            "com.nutomic.syncthingandroid.activities.FolderActivity.FOLDER_OVERRIDABLE_CHANGES";
     public static final String EXTRA_DEVICE_ID =
             "com.nutomic.syncthingandroid.activities.FolderActivity.DEVICE_ID";
 
     private static final String TAG = "FolderActivity";
 
-    private static final String IS_SHOWING_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOW_DELETE_DIALOG = "DELETE_FOLDER_DIALOG_STATE";
     private static final String IS_SHOW_DISCARD_DIALOG = "DISCARD_FOLDER_DIALOG_STATE";
+    private static final String IS_SHOW_OVERRIDE_CHANGES_DIALOG = "OVERRIDE_REMOTES_DIALOG_STATE";
 
     private static final int FILE_VERSIONING_DIALOG_REQUEST = 3454;
     private static final int PULL_ORDER_DIALOG_REQUEST = 3455;
@@ -93,6 +97,7 @@ public class FolderActivity extends SyncthingActivity
 
     private Dialog mDeleteDialog;
     private Dialog mDiscardDialog;
+    private Dialog mOverrideChangesDialog;
 
     private Folder.Versioning mVersioning;
 
@@ -148,6 +153,7 @@ public class FolderActivity extends SyncthingActivity
         findViewById(R.id.pullOrderContainer).setOnClickListener(v -> showPullOrderDialog());
         findViewById(R.id.versioningContainer).setOnClickListener(v -> showVersioningDialog());
         binding.editIgnores.setOnClickListener(v -> editIgnores());
+        binding.overrideChangesContainer.setOnClickListener(v -> showOverrideChangesDialog());
 
         if (mIsCreateMode) {
             if (savedInstanceState != null) {
@@ -162,6 +168,7 @@ public class FolderActivity extends SyncthingActivity
             // Open keyboard on label view in edit mode.
             binding.label.requestFocus();
             binding.editIgnores.setEnabled(false);
+            setOverrideChangesContainerEnabled(false);
         }
         else {
             // Prepare edit mode.
@@ -169,19 +176,31 @@ public class FolderActivity extends SyncthingActivity
             binding.id.setFocusable(false);
             binding.id.setEnabled(false);
             binding.directoryTextView.setEnabled(false);
+
+            // overridable remotes button
+            setOverrideChangesContainerEnabled(
+                getIntent().getBooleanExtra(EXTRA_FOLDER_OVERRIDABLE_CHANGES, false)
+            );
         }
 
         if (savedInstanceState != null){
-            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+            if (savedInstanceState.getBoolean(IS_SHOW_DELETE_DIALOG)){
                 showDeleteDialog();
             }
         }
 
         if (savedInstanceState != null){
-            if (savedInstanceState.getBoolean(IS_SHOWING_DELETE_DIALOG)){
+            if (savedInstanceState.getBoolean(IS_SHOW_DELETE_DIALOG)){
                 showDeleteDialog();
             }
         }
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean(IS_SHOW_OVERRIDE_CHANGES_DIALOG)){
+                showOverrideChangesDialog();
+            }
+        }
+
     }
 
     /**
@@ -304,12 +323,18 @@ public class FolderActivity extends SyncthingActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(IS_SHOWING_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
+        outState.putBoolean(IS_SHOW_DELETE_DIALOG, mDeleteDialog != null && mDeleteDialog.isShowing());
         Util.dismissDialogSafe(mDeleteDialog, this);
+
+        outState.putBoolean(IS_SHOW_OVERRIDE_CHANGES_DIALOG, mOverrideChangesDialog != null && mOverrideChangesDialog.isShowing());
+        Util.dismissDialogSafe(mOverrideChangesDialog, this);
 
         if (mIsCreateMode){
             outState.putBoolean(IS_SHOW_DISCARD_DIALOG, mDiscardDialog != null && mDiscardDialog.isShowing());
             Util.dismissDialogSafe(mDiscardDialog, this);
+
+            outState.putBoolean(IS_SHOW_OVERRIDE_CHANGES_DIALOG, mOverrideChangesDialog != null && mOverrideChangesDialog.isShowing());
+            Util.dismissDialogSafe(mOverrideChangesDialog, this);
         }
     }
 
@@ -777,5 +802,34 @@ public class FolderActivity extends SyncthingActivity
     private void setVersioningDescription(String type, String description) {
         binding.versioningType.setText(type);
         binding.versioningDescription.setText(description);
+    }
+
+    private void setOverrideChangesContainerEnabled(boolean state) {
+        binding.overrideChangesContainer.setEnabled(state);
+        for ( int i = 0; i < binding.overrideChangesContainer.getChildCount(); i++ ) {
+            binding.overrideChangesContainer.getChildAt(i).setEnabled(state);
+        }
+    }
+
+    private void showOverrideChangesDialog(){
+        mOverrideChangesDialog = createOverrideChangesDialog();
+        mOverrideChangesDialog.show();
+    }
+
+    private Dialog createOverrideChangesDialog(){
+        return Util.getAlertDialogBuilder(this)
+                .setIcon(R.drawable.outline_arrow_circle_up_24)
+                .setTitle(R.string.override_changes)
+                .setMessage(R.string.override_changes_are_you_sure)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                    RestApi restApi = getApi();
+                    if (restApi != null) {
+                        restApi.overrideChanges(mFolder.id);
+                        mFolderNeedsToUpdate = true;
+                    }
+                    finish();
+                })
+                .create();
     }
 }
